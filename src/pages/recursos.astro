@@ -1,0 +1,147 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const resources = [
+  {
+    title: "Héroe Agenda: Sobrenaturales y Arcanos",
+    description: "Expansión para el juego de rol español de superhéroes por antonomasia. Descubre los secretos de la magia y lo oculto.",
+    link: "https://suseyaediciones.com/producto/heroe-agenda-sobrenaturales-y-arcanos/",
+    type: "Suplemento",
+    icon: "📚"
+  },
+  {
+    title: "Hoja de Personaje Oficial",
+    description: "Descarga la hoja de personaje en PDF rellenable para tus partidas.",
+    link: "#",
+    type: "Descarga",
+    icon: "📄"
+  },
+  {
+    title: "Kit de Iniciación",
+    description: "Todo lo que necesitas para empezar a jugar: reglas básicas y una aventura lista para usar.",
+    link: "#",
+    type: "Descarga",
+    icon: "🎲"
+  }
+];
+---
+
+<Layout title="Recursos">
+  <section class="resources-page">
+    <h1 class="page-title">Recursos y Descargas</h1>
+    <p class="intro-text">Material oficial para enriquecer tus partidas de Superheroes INC.</p>
+    
+    <div class="resources-list">
+      {resources.map(resource => (
+        <div class="resource-item">
+          <div class="resource-icon">{resource.icon}</div>
+          <div class="resource-content">
+            <div class="resource-header">
+              <h2>{resource.title}</h2>
+              <span class="resource-type">{resource.type}</span>
+            </div>
+            <p>{resource.description}</p>
+            <a href={resource.link} target="_blank" rel="noopener noreferrer" class="comic-button">
+              {resource.link === '#' ? 'Próximamente' : 'ACCEDER'}
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .resources-page {
+    padding: 2rem 0;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .page-title {
+    font-size: 3.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: var(--color-secondary);
+    text-shadow: 3px 3px 0px var(--color-primary);
+  }
+
+  .intro-text {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 3rem;
+  }
+
+  .resources-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .resource-item {
+    display: flex;
+    gap: 2rem;
+    background: white;
+    border: 4px solid var(--color-secondary);
+    padding: 2rem;
+    box-shadow: 8px 8px 0px var(--color-secondary);
+    transition: transform 0.2s;
+  }
+
+  .resource-item:hover {
+    transform: translateX(-5px);
+  }
+
+  .resource-icon {
+    font-size: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 100px;
+  }
+
+  .resource-content {
+    flex-grow: 1;
+  }
+
+  .resource-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+  }
+
+  .resource-header h2 {
+    font-size: 1.8rem;
+    margin: 0;
+    color: var(--color-secondary);
+  }
+
+  .resource-type {
+    background: var(--color-secondary);
+    color: white;
+    padding: 0.2rem 0.8rem;
+    font-family: var(--font-comic);
+    font-size: 0.9rem;
+    transform: rotate(-2deg);
+  }
+
+  .resource-content p {
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 600px) {
+    .resource-item {
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+    }
+    
+    .resource-header {
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+  }
+</style>

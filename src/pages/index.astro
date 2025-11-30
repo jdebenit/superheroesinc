@@ -1,0 +1,153 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ComicCard from "../components/ComicCard";
+
+import { getCollection } from "astro:content";
+
+// Fetch latest blog posts
+const allPosts = await getCollection("blog");
+const sortedPosts = allPosts.sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+const latestPosts = sortedPosts.slice(0, 4);
+
+const news = latestPosts.map((post) => ({
+  title: post.data.title,
+  excerpt: post.data.description,
+  date: post.data.pubDate.toLocaleDateString("es-ES", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  }),
+  link: `/blog/${post.slug}`,
+}));
+---
+
+<Layout
+  title="Inicio"
+  description="Superheroes INC. Tercera Edición - El juego de rol definitivo de superhéroes. Crea tu héroe, únete a organizaciones legendarias y vive aventuras épicas en un universo de poderes extraordinarios."
+  keywords="superheroes inc, juego de rol superhéroes, rol superhéroes, tercera edición, manual superhéroes, personajes superhéroes, organizaciones superhéroes"
+>
+  <section class="hero-container">
+    <div
+      class="text-center p-8 max-w-4xl mx-auto border-4 border-double border-secondary bg-white shadow-lg transform rotate-1 relative"
+    >
+      {/* Paper clip visual */}
+      <div
+        class="absolute -top-6 left-1/2 transform -translate-x-1/2 w-16 h-8 border-t-4 border-l-4 border-r-4 border-gray-400 rounded-t-full"
+      >
+      </div>
+
+      <div class="mb-6">
+        <span
+          class="bg-secondary text-white px-4 py-1 text-sm font-mono uppercase tracking-widest"
+        >
+          DOCUMENTO DE ACCESO RESTRINGIDO
+        </span>
+      </div>
+
+      <h1
+        class="text-6xl md:text-8xl font-bold mb-6 text-secondary border-b-4 border-secondary pb-4 inline-block"
+        style="font-family: var(--font-heading); letter-spacing: -0.05em;"
+      >
+        SUPERHEROES INC.
+      </h1>
+
+      <div class="mb-8 relative">
+        <p
+          class="text-xl md:text-2xl max-w-2xl mx-auto font-mono leading-relaxed"
+          style="font-family: var(--font-body);"
+        >
+          <span class="bg-black text-black select-none mr-2">REDACTED</span>
+          La Tercera Edición del juego de rol de superhéroes por antonomasia.
+          <span class="bg-black text-black select-none ml-2">DATA</span>
+        </p>
+
+        {/* Stamp over text */}
+        <div
+          class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-4 border-primary text-primary px-8 py-2 text-4xl font-bold uppercase opacity-30 rotate-12 pointer-events-none whitespace-nowrap"
+          style="font-family: var(--font-display);"
+        >
+          DESCLASIFICADO
+        </div>
+      </div>
+
+      <div class="flex justify-center gap-4">
+        <a href="/lore" class="comic-button inline-block">
+          ACCEDER AL ARCHIVO
+        </a>
+      </div>
+
+      <div class="mt-8 text-xs font-mono text-gray-500">
+        AUTORIZACIÓN: NIVEL OMEGA // FECHA: 27-NOV-2025
+      </div>
+    </div>
+  </section>
+
+  <section class="news-section">
+    <h2 class="section-title">Últimas Noticias</h2>
+    <div class="news-grid">
+      {news.map((item) => <ComicCard {...item} client:visible />)}
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero-container {
+    padding: var(--spacing-2xl) var(--spacing-lg);
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .news-section {
+    padding: var(--spacing-2xl) var(--spacing-lg);
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-size: var(--text-4xl);
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+    color: var(--color-secondary);
+    position: relative;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-bottom: 2px solid var(--color-secondary);
+    display: inline-block;
+    padding-bottom: 0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .section-title::before {
+    content: "///";
+    margin-right: 1rem;
+    color: var(--color-primary);
+  }
+
+  .section-title::after {
+    content: "///";
+    margin-left: 1rem;
+    color: var(--color-primary);
+  }
+
+  .news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-xl);
+  }
+
+  @media (max-width: 768px) {
+    .section-title {
+      font-size: var(--text-4xl);
+    }
+
+    .news-grid {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-lg);
+    }
+  }
+</style>

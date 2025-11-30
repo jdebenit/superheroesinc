@@ -1,0 +1,235 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const characters = (await getCollection("characters")).sort((a, b) =>
+  (a.data.alias || a.data.name).localeCompare(b.data.alias || b.data.name),
+);
+---
+
+<Layout
+  title="Personajes"
+  description="Galería completa de personajes de Superheroes INC. Descubre héroes, villanos y antihéroes del universo. Explora sus poderes, historias y afiliaciones."
+  keywords="personajes superheroes inc, héroes, villanos, poderes, galería personajes, euroman, kamikaze, arkham"
+>
+  <section class="characters-page">
+    <h1 class="page-title">Galería de Personajes</h1>
+    <p class="intro-text">
+      Conoce a los héroes y villanos que pueblan el universo de Superheroes INC.
+    </p>
+
+    {
+      characters.length > 0 ? (
+        <div class="characters-grid">
+          {characters.map((char) => (
+            <a href={`/personajes/${char.slug}`} class="character-card">
+              <div class="card-inner">
+                <div class="card-front">
+                  {char.data.image ? (
+                    <img
+                      src={char.data.image}
+                      alt={char.data.alias || char.data.name}
+                      class="char-image"
+                    />
+                  ) : (
+                    <div class="placeholder-image">?</div>
+                  )}
+                  <h2 class="char-name">{char.data.alias || char.data.name}</h2>
+                </div>
+                <div class="card-back">
+                  <h3>{char.data.name}</h3>
+                  <p class="char-desc">
+                    {char.data.description.slice(0, 150)}
+                    {char.data.description.length > 150 ? "..." : ""}
+                  </p>
+                  {char.data.source && (
+                    <p class="char-source">{char.data.source}</p>
+                  )}
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <p class="empty-message">
+          La base de datos de personajes está actualizándose...
+        </p>
+      )
+    }
+  </section>
+</Layout>
+
+<style>
+  .characters-page {
+    padding: var(--spacing-2xl) var(--spacing-lg);
+    text-align: center;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .page-title {
+    font-size: var(--text-5xl);
+    font-weight: 800;
+    margin-bottom: var(--spacing-md);
+    color: var(--color-secondary);
+  }
+
+  .intro-text {
+    font-size: var(--text-xl);
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-2xl);
+  }
+
+  .characters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: var(--spacing-xl);
+  }
+
+  .character-card {
+    background-color: transparent;
+    height: 400px;
+    perspective: 1000px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    box-shadow: var(--shadow-md);
+  }
+
+  .character-card:hover .card-inner {
+    transform: rotateY(180deg);
+  }
+
+  .card-front,
+  .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border: 3px solid var(--color-secondary);
+    background: white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .card-front {
+    color: black;
+  }
+
+  .card-back {
+    background-color: var(--color-secondary);
+    color: white;
+    transform: rotateY(180deg);
+    padding: var(--spacing-lg);
+    justify-content: center;
+    align-items: center;
+  }
+
+  .char-image {
+    width: 100%;
+    height: 85%;
+    object-fit: cover;
+    border-bottom: 3px solid var(--color-secondary);
+  }
+
+  .placeholder-image {
+    width: 100%;
+    height: 85%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+    font-family: var(--font-display);
+    color: white;
+    border-bottom: 3px solid var(--color-secondary);
+  }
+
+  .char-name {
+    font-family: var(--font-heading);
+    font-size: var(--text-xl);
+    font-weight: 800;
+    margin: auto;
+    padding: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  .card-back h3 {
+    font-size: var(--text-2xl);
+    font-weight: 800;
+    margin-bottom: var(--spacing-md);
+    color: var(--color-primary);
+  }
+
+  .char-desc {
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-md);
+    flex-grow: 1;
+  }
+
+  .char-source {
+    font-size: var(--text-xs);
+    color: rgba(255, 255, 255, 0.7);
+    font-style: italic;
+    margin-top: auto;
+  }
+
+  .empty-message {
+    font-size: var(--text-xl);
+    color: var(--color-text-light);
+    padding: var(--spacing-2xl);
+  }
+
+    .characters-grid {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: var(--spacing-lg);
+    }
+
+    .character-card {
+      height: 350px;
+    }
+  }
+
+  /* Declassified Styles */
+  .card-front::before {
+    content: "CONFIDENCIAL";
+    position: absolute;
+    top: 10px;
+    left: -30px;
+    background: var(--color-primary);
+    color: white;
+    font-size: 0.6rem;
+    padding: 2px 30px;
+    transform: rotate(-45deg);
+    z-index: 10;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+
+  .card-back::after {
+    content: "TOP SECRET";
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    border: 2px solid var(--color-primary);
+    color: var(--color-primary);
+    font-size: 1rem;
+    padding: 0.2rem 0.5rem;
+    transform: rotate(-10deg);
+    opacity: 0.5;
+    font-weight: bold;
+    font-family: var(--font-display);
+  }

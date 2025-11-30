@@ -1,0 +1,60 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ComicCard from "../../components/ComicCard";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog")).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<Layout
+	title="Blog"
+	description="Noticias, actualizaciones y artículos sobre Superheroes INC. Mantente al día con las últimas novedades del juego de rol de superhéroes."
+	keywords="superheroes inc blog, noticias superhéroes, actualizaciones juego rol, artículos superhéroes"
+>
+	<section class="blog-container">
+		<h1 class="page-title">Noticias y Actualizaciones</h1>
+
+		<div class="posts-grid">
+			{
+				posts.map((post) => (
+					<ComicCard
+						title={post.data.title}
+						excerpt={post.data.description}
+						date={post.data.pubDate.toLocaleDateString("es-ES", {
+							year: "numeric",
+							month: "long",
+							day: "numeric",
+						})}
+						image={post.data.image}
+						link={`/blog/${post.slug}`}
+						client:visible
+					/>
+				))
+			}
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.blog-container {
+		padding: 2rem 0;
+		max-width: 1400px;
+		margin: 0 auto;
+	}
+
+	.page-title {
+		font-size: 3rem;
+		text-align: center;
+		margin-bottom: 3rem;
+		color: var(--color-secondary);
+		text-shadow: 2px 2px 0px var(--color-primary);
+	}
+
+	.posts-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+		gap: 2rem;
+	}
+</style>

@@ -1,0 +1,297 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+    const loreEntries = await getCollection("lore");
+    const organizations = loreEntries.filter(
+        (entry) => entry.data.category === "organizaciones",
+    );
+
+    return organizations.map((entry) => ({
+        params: { slug: entry.slug },
+        props: { entry },
+    }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+// Get all organizations for navigation
+const allOrgs = (await getCollection("lore"))
+    .filter((e) => e.data.category === "organizaciones")
+    .sort((a, b) => a.data.title.localeCompare(b.data.title));
+
+const currentIndex = allOrgs.findIndex((org) => org.slug === entry.slug);
+const prevOrg = currentIndex > 0 ? allOrgs[currentIndex - 1] : null;
+const nextOrg =
+    currentIndex < allOrgs.length - 1 ? allOrgs[currentIndex + 1] : null;
+---
+
+<Layout
+    title={entry.data.title}
+    description={entry.data.description}
+    keywords={`${entry.data.title}, organización, superheroes inc, ${entry.data.source || ""}`}
+>
+    <article class="organization-detail">
+        <div class="breadcrumb">
+            <a href="/organizaciones">← Volver a Organizaciones</a>
+        </div>
+
+        <div class="content-grid">
+            <aside class="sidebar">
+                <div class="org-metadata">
+                    <div class="metadata-item">
+                        <span class="label">Fuente:</span>
+                        <span class="value">{entry.data.source}</span>
+                    </div>
+                    {
+                        entry.data.updatedDate && (
+                            <div class="metadata-item">
+                                <span class="label">Actualizado:</span>
+                                <time class="value">
+                                    {new Date(
+                                        entry.data.updatedDate,
+                                    ).toLocaleDateString("es-ES", {
+                                        year: "numeric",
+                                        month: "long",
+                                        day: "numeric",
+                                    })}
+                                </time>
+                            </div>
+                        )
+                    }
+                </div>
+
+                <nav class="org-navigation">
+                    {
+                        prevOrg && (
+                            <a
+                                href={`/organizaciones/${prevOrg.slug}`}
+                                class="nav-link prev"
+                            >
+                                <span class="nav-label">← Anterior</span>
+                                <span class="nav-title">
+                                    {prevOrg.data.title}
+                                </span>
+                            </a>
+                        )
+                    }
+                    {
+                        nextOrg && (
+                            <a
+                                href={`/organizaciones/${nextOrg.slug}`}
+                                class="nav-link next"
+                            >
+                                <span class="nav-label">Siguiente →</span>
+                                <span class="nav-title">
+                                    {nextOrg.data.title}
+                                </span>
+                            </a>
+                        )
+                    }
+                </nav>
+            </aside>
+
+            <main class="main-content">
+                <header class="org-header">
+                    <h1>{entry.data.title}</h1>
+                </header>
+
+                <div class="org-content">
+                    <Content />
+                </div>
+            </main>
+        </div>
+    </article>
+</Layout>
+
+<style>
+    .organization-detail {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: var(--spacing-2xl) var(--spacing-lg);
+    }
+
+    .breadcrumb {
+        margin-bottom: var(--spacing-xl);
+    }
+
+    .breadcrumb a {
+        color: var(--color-text-light);
+        text-decoration: none;
+        font-size: var(--text-sm);
+        font-weight: 600;
+        transition: color 0.2s ease;
+    }
+
+    .breadcrumb a:hover {
+        color: var(--color-primary);
+    }
+
+    .content-grid {
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        gap: var(--spacing-2xl);
+        align-items: start;
+    }
+
+    .sidebar {
+        position: sticky;
+        top: 100px;
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-xl);
+        padding-right: var(--spacing-lg);
+        border-right: 1px solid var(--color-border);
+    }
+
+    .org-header {
+        margin-bottom: var(--spacing-xl);
+        padding-bottom: var(--spacing-lg);
+        border-bottom: 3px solid var(--color-primary);
+    }
+
+    .org-header h1 {
+        font-size: var(--text-5xl);
+        font-weight: 800;
+        color: var(--color-secondary);
+        line-height: 1.1;
+        text-transform: uppercase;
+    }
+
+    .org-metadata {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-lg);
+    }
+
+    .metadata-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .label {
+        font-size: var(--text-xs);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-weight: 700;
+        color: var(--color-accent);
+    }
+
+    .value {
+        font-size: var(--text-sm);
+        color: var(--color-text);
+        font-weight: 600;
+    }
+
+    .org-content {
+        font-size: var(--text-lg);
+        line-height: 1.8;
+        color: var(--color-text);
+    }
+
+    .org-content :global(p) {
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .org-content :global(h2) {
+        font-size: var(--text-2xl);
+        margin-top: var(--spacing-xl);
+        margin-bottom: var(--spacing-md);
+        color: var(--color-secondary);
+        border-bottom: 2px solid var(--color-border);
+        padding-bottom: 0.5rem;
+    }
+
+    .org-content :global(h3) {
+        font-size: var(--text-xl);
+        margin-top: var(--spacing-lg);
+        margin-bottom: var(--spacing-sm);
+        color: var(--color-secondary);
+    }
+
+    .org-navigation {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+
+    .nav-link {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        padding: var(--spacing-md);
+        border: 1px solid var(--color-border);
+        border-radius: 8px;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        background: var(--color-background-alt);
+    }
+
+    .nav-link:hover {
+        border-color: var(--color-primary);
+        transform: translateX(4px);
+    }
+
+    .nav-label {
+        font-size: var(--text-xs);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-weight: 700;
+        color: var(--color-accent);
+    }
+
+    .nav-title {
+        font-size: var(--text-sm);
+        font-weight: 600;
+        color: var(--color-secondary);
+    }
+
+    .nav-link:hover .nav-title {
+        color: var(--color-primary);
+    }
+
+    @media (max-width: 1024px) {
+        .content-grid {
+            grid-template-columns: 1fr;
+            gap: var(--spacing-xl);
+        }
+
+        .sidebar {
+            position: static;
+            border-right: none;
+            border-bottom: 1px solid var(--color-border);
+            padding-right: 0;
+            padding-bottom: var(--spacing-xl);
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .org-navigation {
+            flex-direction: row;
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .nav-link {
+            flex: 1;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .org-header h1 {
+            font-size: var(--text-3xl);
+        }
+
+        .sidebar {
+            flex-direction: column;
+        }
+
+        .org-navigation {
+            flex-direction: column;
+        }
+    }
+</style>

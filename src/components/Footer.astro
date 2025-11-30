@@ -1,0 +1,32 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container">
+    <p>&copy; {year} Superheroes INC. Todos los derechos reservados.</p>
+    <p>Web oficial de la Tercera Edición.</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background-color: var(--color-secondary);
+    color: white;
+    padding: 2rem 0;
+    text-align: center;
+    border-top: 4px solid var(--color-primary);
+    margin-top: auto;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  p {
+    margin: 0.5rem 0;
+    font-family: var(--font-body);
+  }
+</style>

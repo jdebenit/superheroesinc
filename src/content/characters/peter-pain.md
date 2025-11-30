@@ -1,0 +1,11 @@
+---
+name: "Peter Pain"
+description: "Integrante alterado de PSYKOSIS con capacidades físicas por encima de la media metahumana y rol de agilidad principal del grupo."
+source: "Héroe Agenda: Sobrenaturales y Arcanos"
+updatedDate: 2025-11-26
+powers:
+  - "Volar"
+  - "Supervelocidad"
+---
+
+Integrante alterado de **PSYKOSIS** con capacidades físicas por encima de la media metahumana y rol de agilidad principal del grupo.

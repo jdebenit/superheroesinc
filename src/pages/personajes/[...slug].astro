@@ -1,0 +1,363 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+    const characters = await getCollection("characters");
+
+    return characters.map((entry) => ({
+        params: { slug: entry.slug },
+        props: { entry },
+    }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+// Get all characters for navigation
+const allChars = (await getCollection("characters")).sort((a, b) =>
+    (a.data.alias || a.data.name).localeCompare(b.data.alias || b.data.name),
+);
+
+const currentIndex = allChars.findIndex((char) => char.slug === entry.slug);
+const prevChar = currentIndex > 0 ? allChars[currentIndex - 1] : null;
+const nextChar =
+    currentIndex < allChars.length - 1 ? allChars[currentIndex + 1] : null;
+
+const characterKeywords = [
+    entry.data.alias || entry.data.name,
+    entry.data.name,
+    ...(entry.data.powers || []),
+    "superheroes inc",
+    "personaje",
+]
+    .filter(Boolean)
+    .join(", ");
+---
+
+<Layout
+    title={entry.data.alias || entry.data.name}
+    description={entry.data.description}
+    keywords={characterKeywords}
+    image={entry.data.image}
+>
+    <article class="character-detail">
+        <div class="breadcrumb">
+            <a href="/personajes">← Volver a Personajes</a>
+        </div>
+
+        <div class="content-grid">
+            <aside class="sidebar">
+                {
+                    entry.data.image && (
+                        <div class="char-image-container">
+                            <img
+                                src={entry.data.image}
+                                alt={entry.data.alias || entry.data.name}
+                                class="char-image"
+                            />
+                        </div>
+                    )
+                }
+
+                <div class="char-metadata">
+                    {
+                        entry.data.source && (
+                            <div class="metadata-item">
+                                <span class="label">Fuente:</span>
+                                <span class="value">{entry.data.source}</span>
+                            </div>
+                        )
+                    }
+                    {
+                        entry.data.updatedDate && (
+                            <div class="metadata-item">
+                                <span class="label">Actualizado:</span>
+                                <time class="value">
+                                    {new Date(
+                                        entry.data.updatedDate,
+                                    ).toLocaleDateString("es-ES", {
+                                        year: "numeric",
+                                        month: "long",
+                                        day: "numeric",
+                                    })}
+                                </time>
+                            </div>
+                        )
+                    }
+                </div>
+
+                {
+                    entry.data.powers && entry.data.powers.length > 0 && (
+                        <div class="powers-section">
+                            <h2>Poderes y Capacidades</h2>
+                            <ul class="powers-list">
+                                {entry.data.powers.map((power) => (
+                                    <li>{power}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    )
+                }
+
+                <nav class="char-navigation">
+                    {
+                        prevChar && (
+                            <a
+                                href={`/personajes/${prevChar.slug}`}
+                                class="nav-link prev"
+                            >
+                                <span class="nav-label">← Anterior</span>
+                                <span class="nav-title">
+                                    {prevChar.data.alias || prevChar.data.name}
+                                </span>
+                            </a>
+                        )
+                    }
+                    {
+                        nextChar && (
+                            <a
+                                href={`/personajes/${nextChar.slug}`}
+                                class="nav-link next"
+                            >
+                                <span class="nav-label">Siguiente →</span>
+                                <span class="nav-title">
+                                    {nextChar.data.alias || nextChar.data.name}
+                                </span>
+                            </a>
+                        )
+                    }
+                </nav>
+            </aside>
+
+            <main class="main-content">
+                <header class="char-header">
+                    <h1>{entry.data.alias || entry.data.name}</h1>
+                    {
+                        entry.data.alias &&
+                            entry.data.name !== entry.data.alias && (
+                                <p class="real-name">{entry.data.name}</p>
+                            )
+                    }
+                </header>
+
+                <div class="char-content">
+                    <Content />
+                </div>
+            </main>
+        </div>
+    </article>
+</Layout>
+
+<style>
+    .character-detail {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: var(--spacing-2xl) var(--spacing-lg);
+    }
+
+    .breadcrumb {
+        margin-bottom: var(--spacing-xl);
+    }
+
+    .breadcrumb a {
+        color: var(--color-text-light);
+        text-decoration: none;
+        font-size: var(--text-sm);
+        font-weight: 600;
+        transition: color 0.2s ease;
+    }
+
+    .breadcrumb a:hover {
+        color: var(--color-primary);
+    }
+
+    .content-grid {
+        display: grid;
+        grid-template-columns: 350px 1fr;
+        gap: var(--spacing-2xl);
+        align-items: start;
+    }
+
+    .sidebar {
+        position: sticky;
+        top: 100px;
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-xl);
+    }
+
+    .char-image-container {
+        border: 4px solid var(--color-secondary);
+        box-shadow: 8px 8px 0px var(--color-secondary);
+        overflow: hidden;
+        border-radius: 4px;
+    }
+
+    .char-image {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .char-header {
+        margin-bottom: var(--spacing-xl);
+        padding-bottom: var(--spacing-lg);
+        border-bottom: 3px solid var(--color-primary);
+    }
+
+    .char-header h1 {
+        font-size: var(--text-5xl);
+        font-weight: 800;
+        margin-bottom: var(--spacing-xs);
+        color: var(--color-secondary);
+        line-height: 1.1;
+        text-transform: uppercase;
+    }
+
+    .real-name {
+        font-size: var(--text-2xl);
+        color: var(--color-text-light);
+        font-style: italic;
+        font-family: var(--font-comic);
+    }
+
+    .char-metadata {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-md);
+        padding: var(--spacing-md);
+        background: var(--color-background-alt);
+        border-radius: 8px;
+    }
+
+    .metadata-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .label {
+        font-size: var(--text-xs);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-weight: 700;
+        color: var(--color-accent);
+    }
+
+    .value {
+        font-size: var(--text-sm);
+        color: var(--color-text);
+        font-weight: 600;
+    }
+
+    .char-content {
+        font-size: var(--text-lg);
+        line-height: 1.8;
+        color: var(--color-text);
+    }
+
+    .char-content :global(p) {
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .powers-section {
+        padding: var(--spacing-lg);
+        background: var(--color-background-alt);
+        border-left: 4px solid var(--color-primary);
+        border-radius: 4px;
+    }
+
+    .powers-section h2 {
+        font-size: var(--text-xl);
+        margin-bottom: var(--spacing-md);
+        color: var(--color-secondary);
+        text-transform: uppercase;
+        font-weight: 700;
+    }
+
+    .powers-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .powers-list li {
+        padding: 0.5rem 0;
+        padding-left: 1.5rem;
+        position: relative;
+        font-weight: 500;
+    }
+
+    .powers-list li::before {
+        content: "⚡";
+        position: absolute;
+        left: 0;
+        color: var(--color-primary);
+    }
+
+    .char-navigation {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+
+    .nav-link {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        padding: var(--spacing-md);
+        border: 1px solid var(--color-border);
+        border-radius: 8px;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        background: white;
+    }
+
+    .nav-link:hover {
+        border-color: var(--color-primary);
+        transform: translateX(4px);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .nav-label {
+        font-size: var(--text-xs);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-weight: 700;
+        color: var(--color-accent);
+    }
+
+    .nav-title {
+        font-size: var(--text-sm);
+        font-weight: 600;
+        color: var(--color-secondary);
+    }
+
+    .nav-link:hover .nav-title {
+        color: var(--color-primary);
+    }
+
+    @media (max-width: 1024px) {
+        .content-grid {
+            grid-template-columns: 1fr;
+            gap: var(--spacing-xl);
+        }
+
+        .sidebar {
+            position: static;
+            order: 2;
+        }
+
+        .char-image-container {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .char-header h1 {
+            font-size: var(--text-3xl);
+        }
+    }
+</style>

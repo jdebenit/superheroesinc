@@ -1,0 +1,47 @@
+---
+import { getCollection } from "astro:content";
+import LoreCategoryLayout from "../../../components/LoreCategoryLayout.astro";
+
+export async function getStaticPaths() {
+  return [
+    {
+      params: { category: "localizaciones" },
+      props: {
+        title: "Localizaciones",
+        description:
+          "Lugares emblemáticos del mundo de Superheroes INC. Desde las calles de Nueva York hasta bases secretas en la Antártida.",
+      },
+    },
+    {
+      params: { category: "organizaciones" },
+      props: {
+        title: "Organizaciones",
+        description:
+          "Agencias, corporaciones y sectas que mueven los hilos del mundo.",
+      },
+    },
+    {
+      params: { category: "grupos" },
+      props: {
+        title: "Grupos",
+        description:
+          "Equipos de superhéroes y villanos que luchan por sus ideales.",
+      },
+    },
+  ];
+}
+
+const { category } = Astro.params;
+const { title, description } = Astro.props;
+
+const items = (await getCollection("lore"))
+  .filter((item) => item.data.category === category)
+  .sort((a, b) => a.data.title.localeCompare(b.data.title));
+---
+
+<LoreCategoryLayout
+  title={title}
+  description={description}
+  items={items}
+  basePath={`/lore/${category}`}
+/>
