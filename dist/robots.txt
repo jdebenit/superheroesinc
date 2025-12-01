@@ -1,8 +1,0 @@
-User-agent: *
-Allow: /
-
-# Sitemap
-Sitemap: https://www.superheroes-inc.es/sitemap-index.xml
-
-# Disallow search index
-Disallow: /search-index.json
