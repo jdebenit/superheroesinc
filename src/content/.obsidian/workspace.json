@@ -11,10 +11,14 @@
             "id": "4afafab5ecfe6865",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "characters/la-naga.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "Nueva pestaña"
+              "title": "la-naga"
             }
           }
         ]
