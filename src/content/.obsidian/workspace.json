@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "characters/la-naga.md",
+                "file": "lore/localizaciones/valdoria.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "la-naga"
+              "title": "valdoria"
             }
           }
         ]
@@ -185,8 +185,9 @@
   },
   "active": "4afafab5ecfe6865",
   "lastOpenFiles": [
-    "blog/nueva-web.md",
+    "characters/la-naga.md",
     "lore/organizaciones/la-orden-de-las-nagas.md",
+    "blog/nueva-web.md",
     "blog/nuevos-contenidos.md",
     "lore/localizaciones/valdoria.md",
     "lore/localizaciones/tierra-zero.md",
@@ -210,7 +211,6 @@
     "lore/los-irregulares.md",
     "lore/organizaciones/fdm.md",
     "lore/organizaciones/cosmo.md",
-    "lore/organizaciones/comision-omega.md",
     "lore/grupos",
     "lore/organizaciones",
     "lore/localizaciones",

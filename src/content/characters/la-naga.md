@@ -2,7 +2,7 @@
 name: Asha de Cindraor
 alias: La Naga
 description: "Asha de Cindraor nació en una poderosa familia mágica de Valdoria, pero sin magia alguna. Rechazada por su linaje, fue enviada a la Orden de las Nagas, donde descubrió su verdadera fuerza: el dominio del Kundalini, una energía interna ajena a la magia tradicional. Tras años de disciplina regresó a casa, solo para ser traicionada y arrojada al Pozo del Destierro. El portal la llevó a Tierra Zero, donde ahora sobrevive, aprende y busca un nuevo propósito en un mundo que no entiende, pero donde su equilibrio sigue intacto."
-source: Web
+source: Partida Oficial
 updatedDate: 2025-11-26
 ---
 ## Transfondo
