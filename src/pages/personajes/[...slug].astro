@@ -110,6 +110,17 @@ const characterKeywords = [
                     )
                 }
 
+                {
+                    rpgData && (
+                        <a href="#character-sheet" class="rpg-link">
+                            <span class="rpg-icon">🎲</span>
+                            <span class="rpg-label">
+                                Ver Ficha de Personaje
+                            </span>
+                        </a>
+                    )
+                }
+
                 <nav class="char-navigation">
                     {
                         prevChar && (
@@ -306,6 +317,38 @@ const characterKeywords = [
         position: absolute;
         left: 0;
         color: var(--color-primary);
+    }
+
+    .rpg-link {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: var(--spacing-md);
+        background: var(--color-secondary);
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
+        margin-bottom: var(--spacing-md);
+    }
+
+    .rpg-link:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+        background: var(--color-primary-dark);
+    }
+
+    .rpg-icon {
+        font-size: 1.5rem;
+    }
+
+    .rpg-label {
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: var(--text-sm);
+        letter-spacing: 0.05em;
     }
 
     .char-navigation {

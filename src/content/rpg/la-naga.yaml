@@ -49,7 +49,7 @@ attributes:
     Apariencia: 101
     Voluntad: 102
 skills:
-  cost: 7
+  cost: 0
   items:
     - "Acechar y discrección (AGI+PER)/2: 110+20%"
     - "Combate cuerpo a cuerpo (AGI+PER)/2: 110%"

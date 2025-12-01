@@ -42,7 +42,7 @@ Con aliados desarrolla camaradería lenta pero sólida: comparte técnicas, corr
 > *   **Influenciar:** una frase corta que desarma emocionalmente o impone calma inmediata.
 
 ## Transfondo
-Asha nació en [[Valdoria (Terra)]] llevando un nombre que, según muchos, nunca debió ser suyo: Asha de Cindraor.
+Asha nació en [Valdoria](/lore/localizaciones/valdoria) llevando un nombre que, según muchos, nunca debió ser suyo: Asha de Cindraor.
 
 Los Cindraor siempre habían presumido de un linaje antiguo, prestigioso y profundamente ligado a la magia. Cada generación daba lugar a magos brillantes, ritualistas temidos y custodios de secretos que dormían bajo sellos milenarios. La magia corría por sus venas como si fuera parte de su sangre.
 
