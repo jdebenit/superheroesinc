@@ -11,14 +11,10 @@
             "id": "4afafab5ecfe6865",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "lore/carbonari.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "carbonari"
+              "title": "Nueva pestaña"
             }
           }
         ]
