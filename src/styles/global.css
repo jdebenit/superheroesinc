@@ -157,13 +157,18 @@ a:hover {
 
 .stamp-top-secret {
   position: fixed;
-  top: 1rem;
+  top: 5rem;
   right: 1rem;
   font-size: 1.5rem;
+  font-family: var(--font-display);
+  color: var(--color-primary);
   border: 4px double var(--color-primary);
   padding: 0.5rem 1rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.1em;
   transform: rotate(15deg);
-  z-index: 9999;
+  z-index: 10;
   pointer-events: none;
   background-color: var(--color-background);
   opacity: 0.95;
@@ -178,7 +183,6 @@ a:hover {
 
 .redacted:hover {
   color: white;
-  /* Easter egg: hover to see redacted text */
   cursor: help;
 }
 
