@@ -1,0 +1,386 @@
+---
+interface Props {
+    rpg: {
+        origin?: { cost: number; items: (string | Record<string, string[]>)[] };
+        attributes?: { cost: number; values: Record<string, number> };
+        skills?: { cost: number; items: (string | Record<string, string[]>)[] };
+        specialskills?: {
+            cost: number;
+            items: (string | Record<string, string[]>)[];
+        };
+        background?: {
+            cost: number;
+            items: (string | Record<string, string[]>)[];
+        };
+        equipment?: {
+            cost: number;
+            items: (string | Record<string, string[]>)[];
+        };
+        totalCost?: number;
+        level?: number;
+        other?: string[];
+    };
+}
+
+const { rpg } = Astro.props;
+---
+
+<div class="character-sheet">
+    <div class="sheet-header">
+        <h3>Ficha de Personaje</h3>
+        <div class="header-stats">
+            {rpg.level && <span class="level-badge">Nivel {rpg.level}</span>}
+            {
+                rpg.totalCost && (
+                    <span class="total-cost">Total PCs: {rpg.totalCost}</span>
+                )
+            }
+        </div>
+    </div>
+
+    <div class="sheet-grid">
+        {
+            rpg.origin && (
+                <div class="sheet-section origin">
+                    <div class="section-header">
+                        <h4>Origen</h4>
+                        <span class="cost">({rpg.origin.cost} PCs)</span>
+                    </div>
+                    <ul>
+                        {rpg.origin.items.map((item) =>
+                            typeof item === "string" ? (
+                                <li>{item}</li>
+                            ) : (
+                                Object.entries(item).map(([key, subItems]) => (
+                                    <li>
+                                        <strong>{key}</strong>
+                                        <ul>
+                                            {subItems.map((sub) => (
+                                                <li>{sub}</li>
+                                            ))}
+                                        </ul>
+                                    </li>
+                                ))
+                            ),
+                        )}
+                    </ul>
+                </div>
+            )
+        }
+
+        {
+            rpg.other && (
+                <div class="sheet-section other">
+                    <div class="section-header">
+                        <h4>Datos de Combate</h4>
+                    </div>
+                    <ul>
+                        {rpg.other.map((item) => (
+                            <li>{item}</li>
+                        ))}
+                    </ul>
+                </div>
+            )
+        }
+
+        {
+            rpg.attributes && (
+                <div class="sheet-section attributes">
+                    <div class="section-header">
+                        <h4>Características</h4>
+                        <span class="cost">({rpg.attributes.cost} PCs)</span>
+                    </div>
+                    <div class="attr-grid">
+                        {Object.entries(rpg.attributes.values).map(
+                            ([key, value]) => (
+                                <div class="attr-item">
+                                    <span class="attr-label">{key}</span>
+                                    <span class="attr-value">{value}</span>
+                                </div>
+                            ),
+                        )}
+                    </div>
+                </div>
+            )
+        }
+
+        {
+            rpg.skills && (
+                <div class="sheet-section skills">
+                    <div class="section-header">
+                        <h4>Habilidades</h4>
+                        <span class="cost">({rpg.skills.cost} PCs)</span>
+                    </div>
+                    <ul>
+                        {rpg.skills.items.map((item) =>
+                            typeof item === "string" ? (
+                                <li>{item}</li>
+                            ) : (
+                                Object.entries(item).map(([key, subItems]) => (
+                                    <li>
+                                        <strong>{key}</strong>
+                                        <ul>
+                                            {subItems.map((sub) => (
+                                                <li>{sub}</li>
+                                            ))}
+                                        </ul>
+                                    </li>
+                                ))
+                            ),
+                        )}
+                    </ul>
+                </div>
+            )
+        }
+
+        {
+            rpg.specialskills && (
+                <div class="sheet-section special-skills">
+                    <div class="section-header">
+                        <h4>Habilidades Especiales</h4>
+                        <span class="cost">({rpg.specialskills.cost} PCs)</span>
+                    </div>
+                    <ul>
+                        {rpg.specialskills.items.map((item) =>
+                            typeof item === "string" ? (
+                                <li>{item}</li>
+                            ) : (
+                                Object.entries(item).map(([key, subItems]) => (
+                                    <li>
+                                        <strong>{key}</strong>
+                                        <ul>
+                                            {subItems.map((sub) => (
+                                                <li>{sub}</li>
+                                            ))}
+                                        </ul>
+                                    </li>
+                                ))
+                            ),
+                        )}
+                    </ul>
+                </div>
+            )
+        }
+
+        {
+            rpg.background && (
+                <div class="sheet-section background">
+                    <div class="section-header">
+                        <h4>Historial</h4>
+                        <span class="cost">({rpg.background.cost} PCs)</span>
+                    </div>
+                    <ul>
+                        {rpg.background.items.map((item) =>
+                            typeof item === "string" ? (
+                                <li>{item}</li>
+                            ) : (
+                                Object.entries(item).map(([key, subItems]) => (
+                                    <li>
+                                        <strong>{key}</strong>
+                                        <ul>
+                                            {subItems.map((sub) => (
+                                                <li>{sub}</li>
+                                            ))}
+                                        </ul>
+                                    </li>
+                                ))
+                            ),
+                        )}
+                    </ul>
+                </div>
+            )
+        }
+
+        {
+            rpg.equipment && (
+                <div class="sheet-section equipment">
+                    <div class="section-header">
+                        <h4>Equipamiento</h4>
+                        <span class="cost">({rpg.equipment.cost} PCs)</span>
+                    </div>
+                    <ul>
+                        {rpg.equipment.items.map((item) =>
+                            typeof item === "string" ? (
+                                <li>{item}</li>
+                            ) : (
+                                Object.entries(item).map(([key, subItems]) => (
+                                    <li>
+                                        <strong>{key}</strong>
+                                        <ul>
+                                            {subItems.map((sub) => (
+                                                <li>{sub}</li>
+                                            ))}
+                                        </ul>
+                                    </li>
+                                ))
+                            ),
+                        )}
+                    </ul>
+                </div>
+            )
+        }
+    </div>
+</div>
+
+<style>
+    .character-sheet {
+        background-color: #f9f7f1;
+        border: 1px solid #d3d0c2;
+        padding: 2rem;
+        margin: 2rem 0;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+        font-family: var(--font-body);
+        position: relative;
+    }
+
+    .character-sheet::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: repeating-linear-gradient(
+            45deg,
+            var(--color-primary),
+            var(--color-primary) 10px,
+            transparent 10px,
+            transparent 20px
+        );
+        opacity: 0.5;
+    }
+
+    .sheet-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px solid var(--color-secondary);
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.5rem;
+    }
+
+    .sheet-header h3 {
+        margin: 0;
+        font-size: 1.5rem;
+        color: var(--color-primary-dark);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .header-stats {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+    }
+
+    .level-badge {
+        background: var(--color-primary);
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 2px;
+        font-weight: bold;
+        font-family: var(--font-display);
+        text-transform: uppercase;
+    }
+
+    .total-cost {
+        font-weight: bold;
+        font-family: var(--font-display);
+        background: var(--color-secondary);
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 2px;
+    }
+
+    .sheet-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+        .sheet-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        .sheet-section.attributes,
+        .sheet-section.equipment {
+            grid-column: span 2;
+        }
+    }
+
+    .sheet-section {
+        background: rgba(255, 255, 255, 0.5);
+        padding: 1rem;
+        border: 1px dashed #ccc;
+    }
+
+    .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.25rem;
+    }
+
+    .section-header h4 {
+        margin: 0;
+        color: var(--color-secondary);
+        font-size: 1.1rem;
+    }
+
+    .cost {
+        font-size: 0.9rem;
+        color: #666;
+        font-family: var(--font-display);
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    li {
+        margin-bottom: 0.5rem;
+        padding-left: 1.2rem;
+        position: relative;
+    }
+
+    li::before {
+        content: "•";
+        color: var(--color-primary);
+        position: absolute;
+        left: 0;
+        font-weight: bold;
+    }
+
+    .attr-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 1rem;
+    }
+
+    .attr-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid #ddd;
+        padding: 0.5rem;
+        background: white;
+    }
+
+    .attr-label {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        color: #666;
+        margin-bottom: 0.25rem;
+    }
+
+    .attr-value {
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: var(--color-primary-dark);
+        font-family: var(--font-display);
+    }
+</style>

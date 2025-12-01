@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { getCollection } from "astro:content";
+import { getCollection, getEntry } from "astro:content";
+import CharacterSheet from "../../components/CharacterSheet.astro";
 
 export async function getStaticPaths() {
     const characters = await getCollection("characters");
@@ -13,6 +14,15 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
+
+// Fetch RPG data if available
+let rpgData = null;
+if (entry.data.rpgId) {
+    const rpgEntry = await getEntry("rpg", entry.data.rpgId);
+    if (rpgEntry) {
+        rpgData = rpgEntry.data;
+    }
+}
 
 // Get all characters for navigation
 const allChars = (await getCollection("characters")).sort((a, b) =>
@@ -144,6 +154,8 @@ const characterKeywords = [
                 <div class="char-content">
                     <Content />
                 </div>
+
+                {rpgData && <CharacterSheet rpg={rpgData} />}
             </main>
         </div>
     </article>

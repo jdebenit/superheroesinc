@@ -1,10 +1,46 @@
 ---
 name: Asha de Cindraor
 alias: La Naga
-description: "Asha de Cindraor nació en una poderosa familia mágica de Valdoria, pero sin magia alguna. Rechazada por su linaje, fue enviada a la Orden de las Nagas, donde descubrió su verdadera fuerza: el dominio del Kundalini, una energía interna ajena a la magia tradicional. Tras años de disciplina regresó a casa, solo para ser traicionada y arrojada al Pozo del Destierro. El portal la llevó a Tierra Zero, donde ahora sobrevive, aprende y busca un nuevo propósito en un mundo que no entiende, pero donde su equilibrio sigue intacto."
-source: Partida Oficial
-updatedDate: 2025-11-26
+description: Asha es una mujer alta, esbelta y de movimientos fluidos, marcada por años de disciplina física y mental. Su piel cálida refleja la luz con un matiz dorado, y su largo cabello moreno cae como una cortina oscura que acompaña cada gesto. Sus ojos verde esmeralda son intensos y expresivos, capaces de leer tensiones y emociones con una precisión inquietante.
+source: Ficha de Personaje (75 PCs)
+updatedDate: 2025-12-01
+image: /personajes/la-naga-tierra-zero.png
+rpgId: la-naga
 ---
+
+## Descripción
+
+Asha es una mujer alta, esbelta y de movimientos fluidos, marcada por años de disciplina física y mental. Su piel cálida refleja la luz con un matiz dorado, y su largo cabello moreno cae como una cortina oscura que acompaña cada gesto. Sus ojos verde esmeralda son intensos y expresivos, capaces de leer tensiones y emociones con una precisión inquietante. Su rostro sereno rara vez muestra grandes emociones, pero cuando sonríe lo hace con sinceridad suave y contenida.
+
+Su cuerpo se mueve con absoluta precisión y silencio, como si respondiera a un ritmo interno constante. Incluso en quietud transmite equilibrio, firmeza y una calma profunda que desconcierta a quienes la observan.
+
+Al activar su Kundalini, un efecto sutil recorre su cuerpo: la respiración se vuelve más profunda, su columna realiza un movimiento ondulante y una vibración interna asciende desde la base de la espalda hasta la nuca, tensando su piel como si una serpiente invisible se deslizara bajo ella. Sus ojos adquieren un brillo intenso, y el aire alrededor parece contener la respiración por un instante. No es magia: es pura energía vital despierta.
+
+## Interpretando a Asha
+
+Asha es tranquila, serena y observadora. Habla poco y escucha más. Cada gesto está medido; cada palabra, escogida. No responde desde la rabia ni la impulsividad: respira, observa y actúa desde el equilibrio.
+
+Lee a las personas por su respiración, postura y ritmo emocional. No juzga de inmediato: entiende primero. En combate se mueve con fluidez y precisión, sin furia, sin caos, sin desperdiciar movimiento. Su autocontrol es férreo.
+
+Aunque es reservada, no es fría. Tiene una empatía silenciosa y un sentido natural de protección hacia otros. Su seriedad puede generar momentos cómicos: interpreta bromas literalmente o responde con calma absoluta a situaciones absurdas. Esto no la ridiculiza: la humaniza.
+
+Con aliados desarrolla camaradería lenta pero sólida: comparte técnicas, corrige respiraciones, se preocupa por su bienestar y se interpone sin pensar entre ellos y el peligro.
+
+> [!NOTE]
+> **Nota para el Guionista: Uso del Chi (Kundalini)**
+>
+> El Chi de Asha no es magia. Es el límite absoluto de su control corporal, emocional y energético.
+> Cuando activa su Kundalini puede:
+>
+> **Regla clave**
+> Multiplicar x10 el daño físico o multiplicar x10 el efecto de una habilidad general.
+>
+> **Ejemplos narrativos**
+> *   **Acechar:** movimiento completamente inaudible, prácticamente invisible.
+> *   **Saltar/Trepar:** saltos y ascensos cercanos a lo sobrehumano.
+> *   **Investigar / Percepción:** lectura corporal tan precisa que anticipa acciones.
+> *   **Influenciar:** una frase corta que desarma emocionalmente o impone calma inmediata.
+
 ## Transfondo
 Asha nació en [[Valdoria (Terra)]] llevando un nombre que, según muchos, nunca debió ser suyo: Asha de Cindraor.
 
@@ -292,4 +328,3 @@ Una Naga no se apresura.
 Una Naga no se venga.  
 Una Naga avanza porque respira.  
 Y Asha sigue respirando.
-
