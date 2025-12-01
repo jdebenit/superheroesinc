@@ -2,7 +2,7 @@
 name: Asha de Cindraor
 alias: La Naga
 description: Asha es una mujer alta, esbelta y de movimientos fluidos, marcada por años de disciplina física y mental. Su piel cálida refleja la luz con un matiz dorado, y su largo cabello moreno cae como una cortina oscura que acompaña cada gesto. Sus ojos verde esmeralda son intensos y expresivos, capaces de leer tensiones y emociones con una precisión inquietante.
-source: Ficha de Personaje (75 PCs)
+source: Partida Oficial
 updatedDate: 2025-12-01
 image: /personajes/la-naga-tierra-zero.png
 rpgId: la-naga
