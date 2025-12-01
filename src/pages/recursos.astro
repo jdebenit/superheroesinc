@@ -1,52 +1,74 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 
 const resources = [
   {
     title: "Héroe Agenda: Sobrenaturales y Arcanos",
-    description: "Expansión para el juego de rol español de superhéroes por antonomasia. Descubre los secretos de la magia y lo oculto.",
+    description:
+      "Expansión para el juego de rol español de superhéroes por antonomasia. Descubre los secretos de la magia y lo oculto.",
     link: "https://suseyaediciones.com/producto/heroe-agenda-sobrenaturales-y-arcanos/",
     type: "Suplemento",
-    icon: "📚"
+    icon: "📚",
   },
   {
     title: "Hoja de Personaje Oficial",
-    description: "Descarga la hoja de personaje en PDF rellenable para tus partidas.",
-    link: "#",
+    description:
+      "Descarga la hoja de personaje en PDF rellenable para tus partidas.",
+    link: "https://suseyaediciones.com/wp-content/uploads/2024/06/Fichas-de-Superheroes-Inc-3a.pdf",
     type: "Descarga",
-    icon: "📄"
+    icon: "📄",
   },
   {
+    title: "Superheroes INC. Tercera Edición",
+    description:
+      "Descarga la hoja de personaje en PDF rellenable para tus partidas.",
+    link: "https://suseyaediciones.com/producto/superheroes-inc-3a/",
+    type: "Libro básico",
+    icon: "📚",
+  },
+];
+const oldresources = [
+  {
     title: "Kit de Iniciación",
-    description: "Todo lo que necesitas para empezar a jugar: reglas básicas y una aventura lista para usar.",
+    description:
+      "Todo lo que necesitas para empezar a jugar: reglas básicas y una aventura lista para usar.",
     link: "#",
     type: "Descarga",
-    icon: "🎲"
-  }
+    icon: "🎲",
+  },
 ];
 ---
 
 <Layout title="Recursos">
   <section class="resources-page">
     <h1 class="page-title">Recursos y Descargas</h1>
-    <p class="intro-text">Material oficial para enriquecer tus partidas de Superheroes INC.</p>
-    
+    <p class="intro-text">
+      Material oficial para enriquecer tus partidas de Superheroes INC.
+    </p>
+
     <div class="resources-list">
-      {resources.map(resource => (
-        <div class="resource-item">
-          <div class="resource-icon">{resource.icon}</div>
-          <div class="resource-content">
-            <div class="resource-header">
-              <h2>{resource.title}</h2>
-              <span class="resource-type">{resource.type}</span>
+      {
+        resources.map((resource) => (
+          <div class="resource-item">
+            <div class="resource-icon">{resource.icon}</div>
+            <div class="resource-content">
+              <div class="resource-header">
+                <h2>{resource.title}</h2>
+                <span class="resource-type">{resource.type}</span>
+              </div>
+              <p>{resource.description}</p>
+              <a
+                href={resource.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="comic-button"
+              >
+                {resource.link === "#" ? "Próximamente" : "ACCEDER"}
+              </a>
             </div>
-            <p>{resource.description}</p>
-            <a href={resource.link} target="_blank" rel="noopener noreferrer" class="comic-button">
-              {resource.link === '#' ? 'Próximamente' : 'ACCEDER'}
-            </a>
           </div>
-        </div>
-      ))}
+        ))
+      }
     </div>
   </section>
 </Layout>
@@ -137,7 +159,7 @@ const resources = [
       gap: 1rem;
       text-align: center;
     }
-    
+
     .resource-header {
       flex-direction: column;
       align-items: center;
