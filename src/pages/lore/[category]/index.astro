@@ -28,6 +28,27 @@ export async function getStaticPaths() {
           "Equipos de superhéroes y villanos que luchan por sus ideales.",
       },
     },
+    {
+      params: { category: "eventos" },
+      props: {
+        title: "Eventos",
+        description: "Eventos relevantes en la historia de Superheroes INC.",
+      },
+    },
+    {
+      params: { category: "criaturas" },
+      props: {
+        title: "Criaturas",
+        description: "Criaturas que pueblan el multiverso.",
+      },
+    },
+    {
+      params: { category: "entidades" },
+      props: {
+        title: "Entidades",
+        description: "Entidades que rigen la manifestacion.",
+      },
+    },
   ];
 }
 
