@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
+import Schema from "../components/SEO/Schema.astro";
 
 interface Props {
 	title: string;
@@ -87,6 +88,15 @@ const fullTitle = `${title} | Superheroes INC.`;
 		<meta name="googlebot" content="index, follow" />
 		<meta name="language" content="Spanish" />
 		<meta name="revisit-after" content="7 days" />
+
+		<Schema
+			title={title}
+			description={description}
+			image={image}
+			type={type === "article" ? "article" : "website"}
+			publishDate={publishedTime}
+			author={author}
+		/>
 	</head>
 	<body>
 		<div class="stamp-top-secret">TOP SECRET</div>

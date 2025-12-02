@@ -1,0 +1,139 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+    title="404 - Archivo No Encontrado"
+    description="El archivo que buscas no existe o ha sido eliminado."
+>
+    <div class="error-container">
+        <div class="file-folder">
+            <div class="folder-tab">EXPEDIENTE #404</div>
+            <div class="folder-content">
+                <h1>ARCHIVO NO ENCONTRADO</h1>
+                <div class="stamp">DENEGADO</div>
+                <p>
+                    El recurso solicitado no se encuentra en la base de datos de
+                    Superheroes INC. Es posible que haya sido clasificado,
+                    eliminado o que nunca existiera.
+                </p>
+                <p>
+                    Por favor, regrese a la <a href="/">página principal</a> o contacte
+                    con su oficial superior.
+                </p>
+                <div class="redacted-lines">
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</Layout>
+
+<style>
+    .error-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 60vh;
+        padding: 2rem;
+    }
+
+    .file-folder {
+        background-color: #f0e6d2;
+        width: 100%;
+        max-width: 600px;
+        border-radius: 5px;
+        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+        position: relative;
+        border: 1px solid #d3c6a8;
+    }
+
+    .folder-tab {
+        position: absolute;
+        top: -30px;
+        left: 0;
+        background-color: #f0e6d2;
+        padding: 5px 20px;
+        border-radius: 5px 5px 0 0;
+        font-weight: bold;
+        color: #5d4037;
+        border: 1px solid #d3c6a8;
+        border-bottom: none;
+    }
+
+    .folder-content {
+        padding: 3rem;
+        text-align: center;
+        position: relative;
+        background-image: linear-gradient(
+            rgba(0, 0, 0, 0.02) 1px,
+            transparent 1px
+        );
+        background-size: 100% 2rem;
+    }
+
+    h1 {
+        font-family: "Courier New", monospace;
+        color: #333;
+        margin-bottom: 2rem;
+        font-size: 2rem;
+    }
+
+    .stamp {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(-15deg);
+        font-size: 4rem;
+        font-weight: 900;
+        color: rgba(180, 0, 0, 0.3);
+        border: 5px solid rgba(180, 0, 0, 0.3);
+        padding: 0.5rem 2rem;
+        text-transform: uppercase;
+        pointer-events: none;
+        user-select: none;
+    }
+
+    p {
+        font-family: "Courier New", monospace;
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+    }
+
+    a {
+        color: #b71c1c;
+        font-weight: bold;
+        text-decoration: none;
+        border-bottom: 2px solid #b71c1c;
+    }
+
+    a:hover {
+        background-color: rgba(183, 28, 28, 0.1);
+    }
+
+    .redacted-lines {
+        margin-top: 3rem;
+    }
+
+    .line {
+        height: 12px;
+        background-color: #333;
+        margin-bottom: 10px;
+        opacity: 0.8;
+    }
+
+    .line:nth-child(1) {
+        width: 80%;
+        margin-left: 10%;
+    }
+    .line:nth-child(2) {
+        width: 90%;
+        margin-left: 5%;
+    }
+    .line:nth-child(3) {
+        width: 60%;
+        margin-left: 20%;
+    }
+</style>

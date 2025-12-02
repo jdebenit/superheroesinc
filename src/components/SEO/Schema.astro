@@ -1,0 +1,102 @@
+---
+interface Props {
+    title: string;
+    description: string;
+    image?: string;
+    type?: "website" | "article" | "profile";
+    publishDate?: string;
+    author?: string;
+}
+
+const {
+    title,
+    description,
+    image,
+    type = "website",
+    publishDate,
+    author = "Superheroes INC.",
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const siteUrl = Astro.site?.toString();
+
+let schema: any = {
+    "@context": "https://schema.org",
+    "@graph": [],
+};
+
+// WebSite Schema
+schema["@graph"].push({
+    "@type": "WebSite",
+    "@id": `${siteUrl}#website`,
+    url: siteUrl,
+    name: "Superheroes INC.",
+    description:
+        "Base de datos y recursos para el juego de rol Superheroes INC.",
+    publisher: {
+        "@type": "Organization",
+        name: "Superheroes INC.",
+        logo: {
+            "@type": "ImageObject",
+            url: `${siteUrl}logo_SHI.png`,
+        },
+    },
+});
+
+// WebPage Schema
+schema["@graph"].push({
+    "@type": "WebPage",
+    "@id": `${canonicalURL}#webpage`,
+    url: canonicalURL,
+    name: title,
+    description: description,
+    isPartOf: {
+        "@id": `${siteUrl}#website`,
+    },
+    inLanguage: "es-ES",
+    datePublished: publishDate,
+    primaryImageOfPage: image
+        ? {
+              "@type": "ImageObject",
+              url: new URL(image, Astro.site).toString(),
+          }
+        : undefined,
+});
+
+// Article Schema (if type is article)
+if (type === "article") {
+    schema["@graph"].push({
+        "@type": "Article",
+        "@id": `${canonicalURL}#article`,
+        isPartOf: {
+            "@id": `${canonicalURL}#webpage`,
+        },
+        headline: title,
+        datePublished: publishDate,
+        author: {
+            "@type": "Person",
+            name: author,
+        },
+        publisher: {
+            "@id": `${siteUrl}#website`,
+        },
+        image: image ? new URL(image, Astro.site).toString() : undefined,
+    });
+}
+
+// Profile/Character Schema (custom logic for characters)
+if (type === "profile") {
+    schema["@graph"].push({
+        "@type": "Person",
+        "@id": `${canonicalURL}#person`,
+        name: title,
+        description: description,
+        image: image ? new URL(image, Astro.site).toString() : undefined,
+        mainEntityOfPage: {
+            "@id": `${canonicalURL}#webpage`,
+        },
+    });
+}
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
