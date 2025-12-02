@@ -8,7 +8,7 @@ updatedDate: 2025-11-26
 
 La **Legión Sangrienta** es una organización formada por individuos peligrosos, marginados o rechazados, reunidos bajo el liderazgo carismático y manipulador de [Julián Provencio](/personajes/julian-provencio). A diferencia de otros grupos que seleccionan a sus miembros por poder o especialización, Provencio escoge a personas rotas, humilladas o frustradas, unificándolas bajo un relato de *“recuperar el lugar que les fue negado”*. Su fuerza nace, precisamente, de esa rabia compartida.
 
-![Símbolo de la Legión Sangrienta](https://via.placeholder.com/800x400?text=Legion+Sangrienta)
+![Legión Sangrienta](/lore/legion-sangrienta.png)
 
 ## Modus Operandi
 

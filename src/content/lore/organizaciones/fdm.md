@@ -10,6 +10,8 @@ La **Fundación Divina Mundial (FDM)** es una organización religiosa y diplomá
 
 La fundación funciona como una *tapadera mundana* para una misión mucho más profunda: **garantizar que las almas de los devotos fallecidos sigan alimentando los reinos de cada panteón**, manteniéndolos alejados de una intervención directa en el mundo humano. Esta labor secreta es esencial para evitar conflictos entre dioses y para preservar la paz.
 
+![Fundación Divina Mundial](/lore/fdm.png)
+
 ## Dirección y Estructura
 
 La organización está dirigida por **Mónica Martín García**, una influyente empresaria española que en realidad es **Kigala**, diosa sumeria de la magia y la muerte bajo forma mortal.  

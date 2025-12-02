@@ -6,6 +6,7 @@ updatedDate: 2025-11-26
 powers:
   - "Volar"
   - "Supervelocidad"
+image: "/personajes/peter-pain.png"
 ---
 
 Integrante alterado de **PSYKOSIS** con capacidades físicas por encima de la media metahumana y rol de agilidad principal del grupo.

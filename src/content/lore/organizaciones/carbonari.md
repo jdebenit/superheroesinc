@@ -10,7 +10,7 @@ Los **Carbonari** son una antigua sociedad secreta italiana transformada, con el
 
 Su hermetismo es absoluto. Los miembros capturados aparecen con **la mente completamente borrada**, sin lenguaje ni identidad, lo que demuestra una sofisticación extrema en sus métodos de control interno.
 
-![Símbolo de los Carbonari](https://via.placeholder.com/800x400?text=Carbonari)
+![Símbolo de los Carbonari](/lore/carbonari.png)
 
 ## Modus Operandi
 

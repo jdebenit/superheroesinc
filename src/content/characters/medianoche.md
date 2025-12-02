@@ -3,6 +3,7 @@ name: "Medianoche"
 description: "Operadora de Cazadores de Sombras, con capacidad confirmada de teletransportación."
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-11-26
+image: /personajes/medianoche.png
 powers:
   - "Teletransportación"
 ---

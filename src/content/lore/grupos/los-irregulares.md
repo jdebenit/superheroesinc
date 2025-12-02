@@ -12,7 +12,7 @@ El GOM 28 se concibió como una solución excepcional: un equipo formado por met
 
 No son policías, ni reciben salario. Su cometido es trabajar para la sociedad en una suerte de “segunda oportunidad obligatoria”, reduciendo sanciones o sentencias a cambio de su labor.
 
-![GOM 28 - Los Irregulares](https://via.placeholder.com/800x400?text=Los+Irregulares)
+![GOM 28 - Los Irregulares](/lore/los-irregulares.png)
 
 ## Naturaleza del Equipo
 

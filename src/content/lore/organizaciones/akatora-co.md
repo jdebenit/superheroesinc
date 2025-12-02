@@ -10,7 +10,7 @@ updatedDate: 2025-11-26
 
 En la actualidad, Akatora destaca por su capacidad para producir **equipamiento táctico no letal** de alta calidad para gobiernos, fuerzas de seguridad y organizaciones privadas. Su catálogo está diseñado para maximizar la operatividad en entornos urbanos sin violar tratados internacionales sobre armamento, lo que la ha convertido en una empresa extremadamente rentable… y difícil de fiscalizar.
 
-![Akatora Co.](https://via.placeholder.com/800x400?text=Akatora+Co.)
+![Akatora Co.](/lore/akatora.png)
 
 ## Historia y Evolución
 

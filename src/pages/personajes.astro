@@ -32,7 +32,12 @@ const characters = (await getCollection("characters")).sort((a, b) =>
                       class="char-image"
                     />
                   ) : (
-                    <div class="placeholder-image">?</div>
+                    <div class="placeholder-image classified-container">
+                      <div class="classified-content">
+                        <span class="classified-stamp">CLASIFICADO</span>
+                        <span class="classified-sub">SOLO OJOS AUTORIZADOS</span>
+                      </div>
+                    </div>
                   )}
                   <h2 class="char-name">{char.data.alias || char.data.name}</h2>
                 </div>
@@ -146,14 +151,52 @@ const characters = (await getCollection("characters")).sort((a, b) =>
   .placeholder-image {
     width: 100%;
     height: 85%;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 5rem;
-    font-family: var(--font-display);
-    color: white;
     border-bottom: 3px solid var(--color-secondary);
+  }
+
+  .classified-container {
+    background-color: #f0e6d2;
+    background-image: 
+      linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px);
+    background-size: 20px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .classified-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 4px dashed #8b0000;
+    padding: 1rem;
+    transform: rotate(-5deg);
+    opacity: 0.8;
+  }
+
+  .classified-stamp {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #8b0000;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: 3px solid #8b0000;
+    padding: 0.2rem 1rem;
+    margin-bottom: 0.5rem;
+    background-color: rgba(139, 0, 0, 0.1);
+  }
+
+  .classified-sub {
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: #8b0000;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 1px;
   }
 
   .char-name {

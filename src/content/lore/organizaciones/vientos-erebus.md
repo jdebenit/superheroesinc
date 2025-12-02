@@ -16,7 +16,7 @@ Aunque no existe documentación extensa sobre su estructura, jerarquía o miembr
 
 Su actividad conocida es discreta, pero lo suficientemente significativa como para figurar en el mismo registro que organizaciones como la Alianza, la Corte Itinerante o los Carbonari.
 
-![Vientos de Erebus](https://via.placeholder.com/800x400?text=Vientos+de+Erebus)
+![Vientos de Erebus](/lore/vientos-de-erebus.png)
 
 ## Naturaleza y Enfoque
 
