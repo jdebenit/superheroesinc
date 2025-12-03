@@ -27,33 +27,44 @@ const loreCollection = defineCollection({
 const rpgCollection = defineCollection({
     type: 'data',
     schema: z.object({
-        totalCost: z.number().optional(),
-        level: z.number().optional(),
+        totalCost: z.union([z.number(), z.string()]).optional(),
+        level: z.union([z.number(), z.string()]).optional(),
         origin: z.object({
-            cost: z.number(),
-            items: z.array(z.union([z.string(), z.record(z.string(), z.array(z.string()))]))
+            cost: z.union([z.number(), z.string()]),
+            items: z.array(z.any())
         }).optional(),
         other: z.array(z.string()).optional(),
         attributes: z.object({
-            cost: z.number(),
-            values: z.record(z.string(), z.number())
+            cost: z.union([z.number(), z.string()]),
+            values: z.record(z.string(), z.union([z.number(), z.string()]))
         }).optional(),
         skills: z.object({
-            cost: z.number(),
-            items: z.array(z.union([z.string(), z.record(z.string(), z.array(z.string()))]))
+            cost: z.union([z.number(), z.string()]),
+            items: z.array(z.any())
         }).optional(),
         specialskills: z.object({
-            cost: z.number(),
-            items: z.array(z.union([z.string(), z.record(z.string(), z.array(z.string()))]))
+            cost: z.union([z.number(), z.string()]),
+            items: z.array(z.any())
         }).optional(),
         background: z.object({
-            cost: z.number(),
-            items: z.array(z.union([z.string(), z.record(z.string(), z.array(z.string()))]))
+            cost: z.union([z.number(), z.string()]),
+            items: z.array(z.any())
         }).optional(),
         equipment: z.object({
-            cost: z.number(),
-            items: z.array(z.union([z.string(), z.record(z.string(), z.array(z.string()))]))
+            cost: z.union([z.number(), z.string()]),
+            items: z.array(z.any())
         }).optional(),
+        powers: z.object({
+            cost: z.union([z.number(), z.string()]),
+            items: z.array(z.any())
+        }).optional(),
+        weapons: z.object({
+            cost: z.union([z.number(), z.string()]),
+            items: z.array(z.any())
+        }).optional(),
+        combatstats: z.array(z.string()).optional(),
+        otherstats: z.array(z.string()).optional(),
+        notes: z.union([z.string(), z.array(z.string())]).optional(),
     }),
 });
 

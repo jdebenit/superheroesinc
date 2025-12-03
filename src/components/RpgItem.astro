@@ -1,0 +1,144 @@
+---
+interface Props {
+    item: any;
+}
+
+const { item } = Astro.props;
+---
+
+{
+    typeof item === "string" ? (
+        item.includes(":") ? (
+            <li class="item-with-dots">
+                <span class="item-key">{item.split(":")[0]}</span>
+                <span class="item-dots" />
+                <span class="item-value">
+                    {item.split(":").slice(1).join(":")}
+                </span>
+            </li>
+        ) : item.includes(" - ") ? (
+            <li class="item-with-dots">
+                <span class="item-key">{item.split(" - ")[0]}</span>
+                <span class="item-dots" />
+                <span class="item-value">
+                    {item.split(" - ").slice(1).join(" - ")}
+                </span>
+            </li>
+        ) : (
+            <li>{item}</li>
+        )
+    ) : item.name ? (
+        <li class="structured-item">
+            <div class="item-header">
+                <span class="item-name">
+                    {item.name}
+                    {item.rank && <span class="item-rank">[{item.rank}]</span>}
+                </span>
+                {item.value && (
+                    <>
+                        <span class="item-dots" />
+                        <span class="item-val">{item.value}</span>
+                    </>
+                )}
+            </div>
+            {item.notes && <div class="item-notes">{item.notes}</div>}
+            {item.description && (
+                <div class="item-notes">{item.description}</div>
+            )}
+            {item.effect && <div class="item-notes">Efecto: {item.effect}</div>}
+        </li>
+    ) : (
+        Object.entries(item).map(([key, value]) => (
+            <li>
+                <strong>{key}</strong>
+                {Array.isArray(value) && value.length > 0 && (
+                    <ul>
+                        {value.map((sub: any) => (
+                            <li>{sub}</li>
+                        ))}
+                    </ul>
+                )}
+            </li>
+        ))
+    )
+}
+
+<style>
+    .item-with-dots {
+        display: flex;
+        align-items: baseline;
+        width: 100%;
+        padding-left: 0 !important; /* Override default li padding */
+    }
+
+    .item-with-dots::before {
+        content: none !important; /* Remove default bullet */
+    }
+
+    .item-key {
+        font-weight: 600;
+        color: var(--color-text);
+        white-space: nowrap;
+        padding-right: 0.5rem;
+    }
+
+    .item-dots {
+        flex: 1;
+        border-bottom: 2px dotted #ccc;
+        margin: 0 0.5rem;
+        position: relative;
+        top: -4px;
+        opacity: 0.5;
+    }
+
+    .item-value {
+        font-weight: 700;
+        color: var(--color-primary-dark);
+        font-family: var(--font-display);
+    }
+
+    .structured-item {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding-left: 0 !important;
+        margin-bottom: 0.75rem !important;
+    }
+
+    .structured-item::before {
+        content: none !important;
+    }
+
+    .item-header {
+        display: flex;
+        align-items: baseline;
+        width: 100%;
+    }
+
+    .item-name {
+        font-weight: 700;
+        color: var(--color-text);
+        padding-right: 0.5rem;
+    }
+
+    .item-val {
+        font-weight: 700;
+        color: var(--color-primary-dark);
+        font-family: var(--font-display);
+    }
+
+    .item-notes {
+        font-size: 0.9em;
+        color: #666;
+        margin-top: 0.25rem;
+        padding-left: 0.5rem;
+        border-left: 2px solid var(--color-primary-light, #ddd);
+    }
+
+    .item-rank {
+        font-weight: normal;
+        font-size: 0.9em;
+        color: #666;
+        margin-left: 0.5rem;
+    }
+</style>

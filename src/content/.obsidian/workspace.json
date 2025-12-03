@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "characters/la-naga.md",
+                "file": "characters/aescotan.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "la-naga"
+              "title": "aescotan"
             }
           }
         ]
@@ -183,11 +183,13 @@
       "bases:Crear nueva base": false
     }
   },
-  "active": "4afafab5ecfe6865",
+  "active": "2bf133c1830a0ce8",
   "lastOpenFiles": [
+    "rpg/aescotan.yaml",
+    "lore/localizaciones/nigalion.md",
+    "characters/la-naga.md",
     "characters/euroman-ii.md",
     "characters/euroman.md",
-    "characters/la-naga.md",
     "rpg/la-naga.yaml",
     "rpg",
     "characters/la-luz-cadollo.md",
@@ -198,7 +200,6 @@
     "blog/nuevos-contenidos.md",
     "lore/localizaciones/tierra-zero.md",
     "lore/localizaciones/terra.md",
-    "lore/localizaciones/nigalion.md",
     "lore/organizaciones/zelig.md",
     "lore/organizaciones/vientos-erebus.md",
     "lore/organizaciones/superheroes-inc.md",
@@ -212,7 +213,6 @@
     "lore/organizaciones/humans.md",
     "lore/organizaciones/hermandad-aria.md",
     "lore/organizaciones/frente-liberacion-mutante.md",
-    "lore/grupos/euroforce.md",
     "lore/grupos",
     "lore/organizaciones",
     "lore/localizaciones",

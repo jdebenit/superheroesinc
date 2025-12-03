@@ -1,0 +1,79 @@
+totalCost: "?"
+level: 10
+origin:
+  cost: "?"
+  items:
+    - "Demonio":
+combatstats:
+  - "Acciones por asalto: 4"
+  - "Iniciativa y Reflejos: 55"
+  - "Puntos de Vida: 290"
+  - "Equilibrio Mental: 75"
+otherstats:
+  - "Inconsciencia: 29"
+  - "Recuperación: 40 PV/h"
+  - "Resistencia a gases y venenos: 66%"
+  - "Resistencia a prejuicios: 100%"
+  - "Modificador de fuerza: 1d100+100"
+  - "Peso Levantado: 100 Toneladas"
+  - "Daño absorbido físico: 150"
+  - "Daño absorbido mental: 400"
+  - "Modificador de impacto: 40"
+  - "Modificador Psionico: -25"
+  - "Parada Fisica: 50"
+  - "Parada mental: 91"
+  - "Salto (alto / largo): 518m/1555m"
+attributes:
+  cost: "?"
+  values:
+    Fuerza: 200
+    Constitución: 200
+    Agilidad: 140
+    Inteligencia: 75
+    Percepción: 80
+    Apariencia: 30
+    Voluntad: 60
+powers:
+  cost: "?"
+  items:
+    - name: "Volar"
+      rank: Bajo(01)
+      value: "70%"
+      notes: "Usa sus alas"
+    - name: "Ataque Especial:Arma Natural Garras"
+      rank: Medio(21)
+      notes: "Daño 2d10+15+Mod. Fue."
+    - name: "Incremento Vital"
+      rank: Bajo(01)
+    - name: "Invulnerabilidad: Poderes Psíquicos"
+      rank: Alto(81)
+skills:
+  cost: 0
+  items:
+    - "Acechar y discrección (AGI+PER)/2: 110%"
+    - "Combate cuerpo a cuerpo (AGI+PER)/2: 110%"
+    - "Conocimientos generales (INT/3): 25%"
+    - "Esconderse (AGI+PER)/4: 55%"
+    - "Idea (INT)/2: 37%"
+    - "Influencia (INT+APA)/2: 52%"
+    - "Idioma nativo - Naglo (INT): 75%"
+    - "Investigar (INT+PER)/3: 51%"
+    - "Lanzar (FUE+PER)/4: 140%"
+    - "Primeros auxilios (INT)/2: 37%"
+    - "Suerte (PER+VOL)/4: 35%"
+    - "Trepar y Saltar (AGI): 140%"
+specialskills:
+  cost: "?"
+  items:
+    - "Otro Idioma - Inglés: 55%"
+    - "Otro Idioma - Español: 55%"
+    - "Otro Idioma - Frances: 55%"
+    - "Otro Idioma - Árabe: 45%"
+    - "Otro Idioma - Chino: 35%"
+    - "Arma Especial - Garras: 113%"
+weapons:
+  cost: 0
+  items:
+    - name: "Garras"
+      value: "113%"
+      notes: "Daño 2d10+15+Mod. Fue."

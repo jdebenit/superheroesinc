@@ -20,11 +20,12 @@ origin:
       - "+20 Influencia"
       - "+20 Otro Idioma"
       - "Puede repetir una tirada fallida de resistencia a prejuicios"
-other:
+combatstats:
   - "Acciones por asalto: 3+1"
-  - "Iniciativa/Reflejos: 75"
+  - "Iniciativa y Reflejos: 75"
   - "Puntos de Vida: 60"
   - "Equilibrio Mental: 102"
+otherstats:
   - "Inconsciencia: 6"
   - "Recuperación: 2 PV/h"
   - "Resistencia a gases y venenos: 35%"
@@ -66,8 +67,8 @@ skills:
 specialskills:
   cost: 7
   items:
-    - "Otro Idioma (Requisito): 34+20%"
-    - "Artes Marciales con Chi (Requisito): 73%"
+    - "Otro Idioma (Req.): 34+20%"
+    - "Artes Marciales con Chi (Req.): 73%"
     - "Concentración: 54%"
     - "Arma Especial: Khopesh: 73%"
     - "Arma Especial: Sheng Biao: 73%"
@@ -83,10 +84,22 @@ background:
     - "Identidad desconocida"
     - "Resistencia a prejuicios -20"
 equipment:
-  cost: 4
+  cost: 2
   items:
-    - "Khopesh de Tamahagane - Con Chi: ignora el DA físico del objetivo"
-    - "Sheng Biao"
-    - "Tiara Mental: reduce daño por ataques mentales al 10%"
-    - "Amuleto de Velocidad: +1 acción de combate"
-    - "Botas de Lert: duplica su capacidad de salto"
+    - name: "Tiara Mental"
+      notes: "Reduce daño por ataques mentales al 10%"
+    - name: "Amuleto de Velocidad"
+      notes: "+1 acción de combate"
+    - name: "Botas de Lert"
+      notes: "Duplica su capacidad de salto"
+weapons:
+  cost: 2
+  items:
+    - name: "Khopesh de Tamahagane"
+      value: "73%"
+      notes: "Con Chi: ignora el DA físico del objetivo"
+    - name: "Sheng Biao"
+      value: "73%"
+notes:
+  - "Cuando usa su chi en su cuerpo este adquiere un brillo verdoso"
+  - "El Khopesh se ilumina al colpear cuando esta cargado con chi"

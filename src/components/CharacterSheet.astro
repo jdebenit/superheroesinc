@@ -1,28 +1,47 @@
 ---
 interface Props {
     rpg: {
-        origin?: { cost: number; items: (string | Record<string, string[]>)[] };
-        attributes?: { cost: number; values: Record<string, number> };
-        skills?: { cost: number; items: (string | Record<string, string[]>)[] };
+        origin?: { cost: number | string; items: any[] };
+        attributes?: {
+            cost: number | string;
+            values: Record<string, number | string>;
+        };
+        skills?: { cost: number | string; items: any[] };
         specialskills?: {
-            cost: number;
-            items: (string | Record<string, string[]>)[];
+            cost: number | string;
+            items: any[];
+        };
+        powers?: {
+            cost: number | string;
+            items: any[];
         };
         background?: {
-            cost: number;
-            items: (string | Record<string, string[]>)[];
+            cost: number | string;
+            items: any[];
         };
         equipment?: {
-            cost: number;
-            items: (string | Record<string, string[]>)[];
+            cost: number | string;
+            items: any[];
         };
-        totalCost?: number;
-        level?: number;
+        weapons?: {
+            cost: number | string;
+            items: any[];
+        };
+        combatstats?: string[];
+        otherstats?: string[];
+        notes?: string | string[];
+        totalCost?: number | string;
+        level?: number | string;
         other?: string[];
     };
 }
 
+import RpgItem from "./RpgItem.astro";
+
 const { rpg } = Astro.props;
+
+const combatStats = rpg.combatstats || [];
+const otherStats = rpg.otherstats || rpg.other || [];
 ---
 
 <div class="character-sheet" id="character-sheet">
@@ -40,6 +59,29 @@ const { rpg } = Astro.props;
 
     <div class="sheet-grid">
         {
+            combatStats.length > 0 && (
+                <div class="sheet-section combat-section">
+                    <div class="section-header">
+                        <h4>Resumen de Combate</h4>
+                    </div>
+                    <div class="combat-grid">
+                        {combatStats.map((item) => {
+                            const [label, value] = item
+                                .split(":")
+                                .map((s) => s.trim());
+                            return (
+                                <div class="combat-stat-box">
+                                    <span class="stat-label">{label}</span>
+                                    <span class="stat-value">{value}</span>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+            )
+        }
+
+        {
             rpg.origin && (
                 <div class="sheet-section origin">
                     <div class="section-header">
@@ -47,36 +89,23 @@ const { rpg } = Astro.props;
                         <span class="cost">({rpg.origin.cost} PCs)</span>
                     </div>
                     <ul>
-                        {rpg.origin.items.map((item) =>
-                            typeof item === "string" ? (
-                                <li>{item}</li>
-                            ) : (
-                                Object.entries(item).map(([key, subItems]) => (
-                                    <li>
-                                        <strong>{key}</strong>
-                                        <ul>
-                                            {subItems.map((sub) => (
-                                                <li>{sub}</li>
-                                            ))}
-                                        </ul>
-                                    </li>
-                                ))
-                            ),
-                        )}
+                        {rpg.origin.items.map((item) => (
+                            <RpgItem item={item} />
+                        ))}
                     </ul>
                 </div>
             )
         }
 
         {
-            rpg.other && (
+            otherStats.length > 0 && (
                 <div class="sheet-section other">
                     <div class="section-header">
                         <h4>Datos de Combate</h4>
                     </div>
                     <ul>
-                        {rpg.other.map((item) => (
-                            <li>{item}</li>
+                        {otherStats.map((item) => (
+                            <RpgItem item={item} />
                         ))}
                     </ul>
                 </div>
@@ -105,6 +134,38 @@ const { rpg } = Astro.props;
         }
 
         {
+            rpg.powers && (
+                <div class="sheet-section powers">
+                    <div class="section-header">
+                        <h4>Poderes</h4>
+                        <span class="cost">({rpg.powers.cost} PCs)</span>
+                    </div>
+                    <ul>
+                        {rpg.powers.items.map((item) => (
+                            <RpgItem item={item} />
+                        ))}
+                    </ul>
+                </div>
+            )
+        }
+
+        {
+            rpg.weapons && (
+                <div class="sheet-section weapons">
+                    <div class="section-header">
+                        <h4>Armas</h4>
+                        <span class="cost">({rpg.weapons.cost} PCs)</span>
+                    </div>
+                    <ul>
+                        {rpg.weapons.items.map((item) => (
+                            <RpgItem item={item} />
+                        ))}
+                    </ul>
+                </div>
+            )
+        }
+
+        {
             rpg.skills && (
                 <div class="sheet-section skills">
                     <div class="section-header">
@@ -112,22 +173,9 @@ const { rpg } = Astro.props;
                         <span class="cost">({rpg.skills.cost} PCs)</span>
                     </div>
                     <ul>
-                        {rpg.skills.items.map((item) =>
-                            typeof item === "string" ? (
-                                <li>{item}</li>
-                            ) : (
-                                Object.entries(item).map(([key, subItems]) => (
-                                    <li>
-                                        <strong>{key}</strong>
-                                        <ul>
-                                            {subItems.map((sub) => (
-                                                <li>{sub}</li>
-                                            ))}
-                                        </ul>
-                                    </li>
-                                ))
-                            ),
-                        )}
+                        {rpg.skills.items.map((item) => (
+                            <RpgItem item={item} />
+                        ))}
                     </ul>
                 </div>
             )
@@ -141,22 +189,9 @@ const { rpg } = Astro.props;
                         <span class="cost">({rpg.specialskills.cost} PCs)</span>
                     </div>
                     <ul>
-                        {rpg.specialskills.items.map((item) =>
-                            typeof item === "string" ? (
-                                <li>{item}</li>
-                            ) : (
-                                Object.entries(item).map(([key, subItems]) => (
-                                    <li>
-                                        <strong>{key}</strong>
-                                        <ul>
-                                            {subItems.map((sub) => (
-                                                <li>{sub}</li>
-                                            ))}
-                                        </ul>
-                                    </li>
-                                ))
-                            ),
-                        )}
+                        {rpg.specialskills.items.map((item) => (
+                            <RpgItem item={item} />
+                        ))}
                     </ul>
                 </div>
             )
@@ -170,22 +205,9 @@ const { rpg } = Astro.props;
                         <span class="cost">({rpg.background.cost} PCs)</span>
                     </div>
                     <ul>
-                        {rpg.background.items.map((item) =>
-                            typeof item === "string" ? (
-                                <li>{item}</li>
-                            ) : (
-                                Object.entries(item).map(([key, subItems]) => (
-                                    <li>
-                                        <strong>{key}</strong>
-                                        <ul>
-                                            {subItems.map((sub) => (
-                                                <li>{sub}</li>
-                                            ))}
-                                        </ul>
-                                    </li>
-                                ))
-                            ),
-                        )}
+                        {rpg.background.items.map((item) => (
+                            <RpgItem item={item} />
+                        ))}
                     </ul>
                 </div>
             )
@@ -199,23 +221,31 @@ const { rpg } = Astro.props;
                         <span class="cost">({rpg.equipment.cost} PCs)</span>
                     </div>
                     <ul>
-                        {rpg.equipment.items.map((item) =>
-                            typeof item === "string" ? (
-                                <li>{item}</li>
-                            ) : (
-                                Object.entries(item).map(([key, subItems]) => (
-                                    <li>
-                                        <strong>{key}</strong>
-                                        <ul>
-                                            {subItems.map((sub) => (
-                                                <li>{sub}</li>
-                                            ))}
-                                        </ul>
-                                    </li>
-                                ))
-                            ),
-                        )}
+                        {rpg.equipment.items.map((item) => (
+                            <RpgItem item={item} />
+                        ))}
                     </ul>
+                </div>
+            )
+        }
+
+        {
+            rpg.notes && (
+                <div class="sheet-section notes">
+                    <div class="section-header">
+                        <h4>Notas</h4>
+                    </div>
+                    <div class="notes-content">
+                        {Array.isArray(rpg.notes) ? (
+                            <ul>
+                                {rpg.notes.map((note) => (
+                                    <li>{note}</li>
+                                ))}
+                            </ul>
+                        ) : (
+                            <p>{rpg.notes}</p>
+                        )}
+                    </div>
                 </div>
             )
         }
@@ -292,19 +322,54 @@ const { rpg } = Astro.props;
         border-radius: 2px;
     }
 
+    .combat-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: space-between;
+    }
+
+    .combat-stat-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex: 1;
+        min-width: 120px;
+        border: 1px solid #e0e0e0;
+        padding: 0.5rem;
+        background: white;
+        border-radius: 4px;
+    }
+
+    .combat-stat-box .stat-label {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        color: #666;
+        text-align: center;
+        margin-bottom: 0.25rem;
+    }
+
+    .combat-stat-box .stat-value {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: var(--color-primary-dark);
+        font-family: var(--font-display);
+    }
+
     .sheet-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 2rem;
+        column-count: 1;
+        column-gap: 2rem;
     }
 
     @media (min-width: 768px) {
         .sheet-grid {
-            grid-template-columns: repeat(2, 1fr);
+            column-count: 2;
         }
-        .sheet-section.attributes,
-        .sheet-section.equipment {
-            grid-column: span 2;
+
+        .sheet-section.powers,
+        .sheet-section.combat-section {
+            column-span: all;
+            margin-top: 2rem;
         }
     }
 
@@ -312,6 +377,8 @@ const { rpg } = Astro.props;
         background: rgba(255, 255, 255, 0.5);
         padding: 1rem;
         border: 1px dashed #ccc;
+        break-inside: avoid;
+        margin-bottom: 2rem;
     }
 
     .section-header {
