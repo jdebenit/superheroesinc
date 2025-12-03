@@ -1,0 +1,117 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const anexos = [
+    {
+        title: "Documentos Clasificados",
+        description: "Archivos recuperados de operaciones anteriores.",
+        icon: "📂",
+        link: "/anexos/anexo_shi.png",
+    },
+    {
+        title: "Mapas de Operaciones",
+        description: "Cartografía detallada de las zonas de conflicto.",
+        icon: "🗺️",
+        link: "/anexos/Paraiso_actualidad.jpg",
+    },
+];
+---
+
+<Layout
+    title="Anexos SHI"
+    description="Anexos y material adicional para Superheroes INC."
+>
+    <section class="anexos-page">
+        <h1 class="page-title">Anexos SHI</h1>
+        <p class="intro-text">
+            Material suplementario y documentación extendida para tus misiones.
+        </p>
+
+        <div class="anexos-grid">
+            {
+                anexos.map((item) => (
+                    <div class="anexo-item">
+                        <div class="anexo-icon">{item.icon}</div>
+                        <div class="anexo-content">
+                            <h2>{item.title}</h2>
+                            <p>{item.description}</p>
+                            <a href={item.link} class="comic-button small">
+                                VER ARCHIVO
+                            </a>
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
+    </section>
+</Layout>
+
+<style>
+    .anexos-page {
+        padding: 2rem 1rem;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .page-title {
+        font-size: 3.5rem;
+        text-align: center;
+        margin-bottom: 1rem;
+        color: var(--color-secondary);
+        text-shadow: 3px 3px 0px var(--color-primary);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .intro-text {
+        text-align: center;
+        font-size: 1.2rem;
+        margin-bottom: 3rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .anexos-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+
+    .anexo-item {
+        background: white;
+        border: 3px solid var(--color-secondary);
+        padding: 2rem;
+        box-shadow: 6px 6px 0px var(--color-primary);
+        transition: transform 0.2s;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .anexo-item:hover {
+        transform: translateY(-5px);
+    }
+
+    .anexo-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+
+    .anexo-content h2 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--color-secondary);
+    }
+
+    .anexo-content p {
+        margin-bottom: 1.5rem;
+        color: #666;
+    }
+
+    .comic-button.small {
+        padding: 0.5rem 1.5rem;
+        font-size: 0.9rem;
+    }
+</style>
