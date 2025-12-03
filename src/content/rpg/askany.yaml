@@ -46,11 +46,6 @@ attributes:
     Percepción: 130
     Apariencia: 40
     Voluntad: 171
-powers:
-  cost: "?"
-  items:
-    - name: "Superinteligencia"
-    - name: "Supervoluntad"
 spells:
   cost: "?"
   items:
@@ -66,6 +61,11 @@ spells:
       rank: "Rango 4" 
     - name: "Abrir Portales"
       rank: "Rango 4"
+powers:
+  cost: "?"
+  items:
+    - name: "Superinteligencia"
+    - name: "Supervoluntad"
 skills:
   cost: 0
   items:
