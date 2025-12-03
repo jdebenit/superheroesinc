@@ -6,47 +6,25 @@ source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-11-26
 ---
 
-**Los Irregulares**, oficialmente **GOM 28 (Grupo Operativo Metahumano de Madrid)**, fueron creados por el gobierno español como respuesta al aumento de la delincuencia metahumana tras la desaparición de Euroforce y otros supergrupos que antes protegían la capital.
+El Grupo Operativo Metahumano de Madrid (GOM 28) fue creado en respuesta a la creciente delincuencia metahumana que azotaba la capital española tras la desaparición de Euroforce y otros grupos de superhéroes que antaño mantenían el orden. Con la ciudad enfrentando un aumento significativo en actividades criminales relacionadas con metahumanos, el gobierno decidió actuar de manera drástica. Así, se aprobó la creación de Grupos Operativos de Metahumanos en las principales ciudades del país, con Madrid como foco inicial.
 
-El GOM 28 se concibió como una solución excepcional: un equipo formado por metahumanos que, sin ser grandes criminales, habían causado incidentes graves, daños colaterales o habían actuado de forma imprudente. En lugar de cárcel o multas desorbitadas, se les ofreció una alternativa: **servicio comunitario metahumano** bajo estricta supervisión.
+## Origen y Propósito
 
-No son policías, ni reciben salario. Su cometido es trabajar para la sociedad en una suerte de “segunda oportunidad obligatoria”, reduciendo sanciones o sentencias a cambio de su labor.
+El GOM 28, conocido coloquialmente como "Los Irregulares", se convirtió en una solución controvertida. Formado por metahumanos que, si bien no habían cometido grandes crímenes, debían rendir cuentas a la sociedad por diversos incidentes. Estos incidentes iban desde destrozos masivos durante enfrentamientos con criminales, hasta allanamientos ilegales o la entrega de villanos en condiciones deplorables.
+
+## Servicio Comunitario
+
+Los miembros del GOM 28 no eran policías, eran individuos obligados a servir en este equipo como una forma de redimir sus acciones y reducir sus sentencias o multas. Era, en esencia, un programa de servicio comunitario a gran escala para aquellos cuyas habilidades sobrehumanas los colocaban en una categoría aparte de los ciudadanos comunes.
+
+El gobierno, consciente de las posibles resistencias, especialmente de los sindicatos policiales, tomó precauciones. Los GOM no estarían formalmente integrados en las fuerzas policiales, sino que serían unidades supervisadas por la policía. Esta distinción permitía que los sindicatos no pudieran oponerse, ya que estos metahumanos no ocuparían puestos de agentes, ni recibirían un salario. En su lugar, los miembros del GOM 28 "trabajaban" para saldar su deuda con la sociedad, cumpliendo con un mandato de servicio que les permitía reducir su tiempo de servicio social o evitar más sanciones legales.
+
+## Bajo Vigilancia
+
+Bajo la supervisión del inspector Juan Castro, el GOM 28 se estableció como una fuerza irregular, pero efectiva, en la lucha contra el crimen metahumano en Madrid. A pesar de sus orígenes como un grupo de inadaptados forzados a trabajar juntos, los Irregulares pronto comenzaron a demostrar su valía, usando sus habilidades para proteger a la ciudad, aunque siempre bajo la sombra de su complicado pasado y la constante vigilancia de las autoridades.
+
+El equipo ha experimentado numerosos cambios en su alineación a lo largo del tiempo, una muestra de la naturaleza inestable y dinámica de su composición. Figuras como Corredor Nocturno, Impacto, Cenizo, Mortal y Ondina han sido miembros destacados durante largos periodos, dejando su huella en el grupo.
 
 ![GOM 28 - Los Irregulares](/lore/los-irregulares.png)
 
-## Naturaleza del Equipo
-
-El grupo no forma parte de la policía, lo que evitó conflictos sindicales. Aun así, actúan bajo supervisión directa y constante de la autoridad.
-
-El responsable de dirigir sus operaciones es el **inspector Juan Castro**, quien coordina misiones, vigila su conducta y mantiene al equipo operando… en la medida de lo posible.
-
-Aunque nacieron como un grupo de inadaptados obligados a cooperar, rápidamente demostraron ser una fuerza **irregular pero sorprendentemente eficaz**.
-
 > “No son héroes. Son una segunda oportunidad con piernas.”  
 > — *Inspector Juan Castro*
-
-## Miembros Destacados
-
-A lo largo de su actividad han pasado varios metahumanos, pero los más representativos son:
-
-### **Reina Mona** — Semidiosa / Artista Marcial (Chi)
-Combatiente extraordinaria, experta en artes marciales y canalización de Chi. Es el pilar ofensivo del equipo y uno de sus miembros más temibles.
-
-### **Vanadio** — Tecnoarmadura
-Operativo equipado con una armadura pesada dotada de sensores, sistemas ofensivos y resistencia extrema. Especialista técnico y apoyo de combate.
-
-### **Sombra** — Maga / Artista Marcial
-Híbrida entre magia y técnicas físicas, ideal para operaciones encubiertas y misiones urbanas. Versátil y peligrosa.
-
-## Rol en Madrid
-
-Los Irregulares actúan como:
-
-- primera respuesta ante incidentes metahumanos,  
-- apoyo a la policía en operaciones de riesgo,  
-- contención de superseres descontrolados,  
-- fuerza operativa especializada en caos urbano.
-
-Temidos, criticados y vigilados… pero necesarios.  
-El GOM 28 es una pieza fundamental en el frágil equilibrio de seguridad metahumana de Madrid.
-

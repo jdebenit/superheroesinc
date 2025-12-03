@@ -22,7 +22,7 @@ origin:
       - "Puede repetir una tirada fallida de resistencia a prejuicios"
 combatstats:
   - "Acciones por asalto: 3+1"
-  - "Iniciativa y Reflejos: 75"
+  - "Iniciativa y Reflejos: 55+20"
   - "Puntos de Vida: 60"
   - "Equilibrio Mental: 102"
 otherstats:

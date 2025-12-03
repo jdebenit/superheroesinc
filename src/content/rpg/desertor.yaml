@@ -1,0 +1,130 @@
+totalCost: "?"
+level: 5
+origin:
+  cost: "?"
+  items:
+    - "Vigilante":
+      - "Disponibilidad de armamento a dificultad reducida"
+      - "Recarga rápida"
+      - "Recuerdos dolorosos"
+      - "Voluntad férrea"
+    - "Artista Marcial con Chi":
+      - "+20 Acechar/Discreción"
+      - "+20 Saltar/Trepar"
+      - "+30 Mod. de Impacto"
+      - "Acceso al uso del Chi"
+    - "Vengador":
+      - "+20 habilidad a elección"
+      - "-20 tiradas de EQM con violencia contra mujeres"
+combatstats:
+  - "Acciones por asalto: 3+1"
+  - "Iniciativa y Reflejos: 50+20"
+  - "Puntos de Vida: 80"
+  - "Equilibrio Mental: 65"
+otherstats:
+  - "Inconsciencia: 8"
+  - "Recuperación: 1 PV/h"
+  - "Resistencia a gases y venenos: 33%"
+  - "Resistencia a prejuicios: 30%"
+  - "Modificador de fuerza: 1d10"
+  - "Peso Levantado: 500Kg"
+  - "Daño absorbido físico: 0 (45)"
+  - "Daño absorbido mental: 0 (45)"
+  - "Modificador de impacto: 30"
+  - "Modificador Psionico: 25"
+  - "Parada Fisica: 25+20"
+  - "Parada mental: 50"
+  - "Salto (alto / largo): 10m/3,3m"
+attributes:
+  cost: "?"
+  values:
+    Fuerza: 100
+    Constitución: 100
+    Agilidad: 100
+    Inteligencia: 91
+    Percepción: 100
+    Apariencia: 59
+    Voluntad: 100
+skills:
+  cost: "?"
+  items:
+    - name: "Acechar/Discrección"
+      math: "(AGI+PER)/2"
+      value: "100+20+50%"
+    - name: "Comb. cuerpo a cuerpo"
+      math: "(AGI+PER)/2"
+      value: "100%"
+    - name: "Conocimientos generales"
+      math: "(INT/3)"
+      value: "30%"
+    - name: "Esconderse"
+      math: "(AGI+PER)/4"
+      value: "50%"
+    - name: "Idea"
+      math: "(INT)/2"
+      value: "45%"
+    - name: "Influencia"
+      math: "(INT+APA)/2"
+      value: "75%"
+    - name: "Idioma nativo"
+      math: "(INT)"
+      value: "91%"
+    - name: "Investigar"
+      math: "(INT+PER)/3"
+      value: "63%"
+    - name: "Lanzar"
+      math: "(FUE+PER)/4"
+      value: "100%"
+    - name: "Primeros auxilios"
+      math: "(INT)/2"
+      value: "45%"
+    - name: "Suerte"
+      math: "(PER+VOL)/4"
+      value: "50%"
+    - name: "Trepar y Saltar"
+      math: "(AGI)"
+      value: "100+20%"
+specialskills:
+  cost: "?"
+  items:
+    - name: "Artes Marciales: Occidental medieval"
+      value: "79+20%"
+    - name: "Otro Idiomas: Italiano"
+      value: "30%"
+    - name: "Armas blancas"
+      value: "66%"
+    - name: "Arma especial: Cuchillos arr."
+      value: "66%"
+    - name: "Supervivencia: Bajos fondos"
+      value: "61%"
+    - name: "Conducir moto"
+      value: "50%"
+    - name: "Cerrajería"
+      value: "41%"
+    - name: "Rastrear"
+      value: "45%"
+    - name: "Magia (sin EM)"
+      value: "55%"
+    - name: "Otro Idioma - Atlante"
+      value: "201%"
+    - name: "Otro Idioma - Reptiliano"
+      value: "70%"
+    - name: "Pilotar aeronave"
+      value: "65%"
+    - name: "Comp. / Comun."
+      value: "70%"
+equipment:
+  cost: "?"
+  items:
+    - name: "Traje místico" 
+      notes: "+45 DA Física y mental"
+    - name: "Amuleto mágico"
+      notes: "+50 a acechar/discrección"
+    - name: "Amuleto de Velocidad"
+      notes: "+1 acción de combate"
+weapons:
+  cost: "?"
+  items:
+    - name: "Mandoble mágico"
+      value: "66%"
+      notes: "Puede elegir no matar con el y solo deja inconsciente al objetivo. Daño 4d10+65+Mod Fue."
