@@ -3,6 +3,7 @@ import "../styles/global.css";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import Schema from "../components/SEO/Schema.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
 
 interface Props {
 	title: string;
@@ -101,6 +102,7 @@ const fullTitle = `${title} | Superheroes INC.`;
 	<body>
 		<div class="stamp-top-secret">TOP SECRET</div>
 		<Navbar />
+		<Breadcrumbs />
 		<main>
 			<slot />
 		</main>

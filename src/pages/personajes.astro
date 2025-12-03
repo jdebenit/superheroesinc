@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
 
 const characters = (await getCollection("characters")).sort((a, b) =>
   (a.data.alias || a.data.name).localeCompare(b.data.alias || b.data.name),
@@ -26,10 +27,12 @@ const characters = (await getCollection("characters")).sort((a, b) =>
               <div class="card-inner">
                 <div class="card-front">
                   {char.data.image ? (
-                    <img
+                    <Image
                       src={char.data.image}
                       alt={char.data.alias || char.data.name}
                       class="char-image"
+                      width={400}
+                      height={340}
                     />
                   ) : (
                     <div class="placeholder-image classified-container">
