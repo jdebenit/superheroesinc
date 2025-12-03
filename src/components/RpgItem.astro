@@ -1,114 +1,122 @@
 ---
-interface Props {
-    item: any;
+interface StructuredItem {
+    name: string;
+    value?: string | number;
+    notes?: string;
+    rank?: string;
+    math?: string;
+    description?: string;
+    effect?: string;
 }
 
-const { item } = Astro.props;
+interface Props {
+    item: string | StructuredItem | Record<string, any>;
+    level?: number;
+}
+
+const { item, level = 1 } = Astro.props;
+
+let name = "";
+let value: string | number | undefined;
+let notes: string | undefined;
+let rank: string | undefined;
+let math: string | undefined;
+let description: string | undefined;
+let effect: string | undefined;
+let subItems: any[] = [];
+let isStructured = false;
+
+if (typeof item === "string") {
+    if (item.includes(":")) {
+        const parts = item.split(":");
+        name = parts[0].trim();
+        value = parts.slice(1).join(":").trim();
+    } else if (item.includes(" - ")) {
+        const parts = item.split(" - ");
+        name = parts[0].trim();
+        value = parts.slice(1).join(" - ").trim();
+    } else {
+        name = item;
+    }
+} else if (typeof item === "object" && item !== null) {
+    if ("name" in item) {
+        isStructured = true;
+        const structItem = item as StructuredItem;
+        name = structItem.name;
+        value = structItem.value;
+        notes = structItem.notes;
+        rank = structItem.rank;
+        math = structItem.math;
+        description = structItem.description;
+        effect = structItem.effect;
+    } else {
+        const entries = Object.entries(item);
+        if (entries.length > 0) {
+            name = entries[0][0];
+            const val = entries[0][1];
+            if (Array.isArray(val)) {
+                subItems = val;
+            } else if (val !== null && val !== undefined) {
+                value = String(val);
+            }
+        }
+    }
+}
 ---
 
-{
-    typeof item === "string" ? (
-        item.includes(":") ? (
-            <li class="item-with-dots">
-                <span class="item-key">{item.split(":")[0]}</span>
-                <span class="item-dots" />
-                <span class="item-value">
-                    {item.split(":").slice(1).join(":")}
-                </span>
-            </li>
-        ) : item.includes(" - ") ? (
-            <li class="item-with-dots">
-                <span class="item-key">{item.split(" - ")[0]}</span>
-                <span class="item-dots" />
-                <span class="item-value">
-                    {item.split(" - ").slice(1).join(" - ")}
-                </span>
-            </li>
-        ) : (
-            <li>{item}</li>
-        )
-    ) : item.name ? (
-        <li class="structured-item">
-            <div class="item-header">
-                <span class="item-name">
-                    {item.name}
-                    {item.rank && <span class="item-rank">[{item.rank}]</span>}
-                </span>
-                {item.value && (
-                    <>
-                        <span class="item-dots" />
-                        <span class="item-val">{item.value}</span>
-                    </>
-                )}
+<li
+    class:list={[
+        {
+            "structured-item": isStructured,
+            "has-bullet": level > 1,
+            "has-children": subItems.length > 0,
+        },
+    ]}
+>
+    <div class="item-header">
+        <span class="item-name">
+            {name}
+            {rank && <span class="item-rank">[{rank}]</span>}
+            {math && <span class="item-math">{math}</span>}
+        </span>
+        <span class="item-dots"></span>
+        <span class="item-value">{value}</span>
+    </div>
+    {
+        notes && (
+            <div class="item-notes">
+                <small>{notes}</small>
             </div>
-            {item.notes && <div class="item-notes">{item.notes}</div>}
-            {item.description && (
-                <div class="item-notes">{item.description}</div>
-            )}
-            {item.effect && <div class="item-notes">Efecto: {item.effect}</div>}
-        </li>
-    ) : (
-        Object.entries(item).map(([key, value]) => (
-            <li>
-                <strong>{key}</strong>
-                {Array.isArray(value) && value.length > 0 && (
-                    <ul>
-                        {value.map((sub: any) => (
-                            <li>{sub}</li>
-                        ))}
-                    </ul>
-                )}
-            </li>
-        ))
-    )
-}
+        )
+    }
+    {
+        description && (
+            <div class="item-description">
+                <small>{description}</small>
+            </div>
+        )
+    }
+    {
+        effect && (
+            <div class="item-effect">
+                <small>
+                    <strong>Efecto:</strong> {effect}
+                </small>
+            </div>
+        )
+    }
+    {
+        subItems.length > 0 && (
+            <ul>
+                {subItems.map((sub) => (
+                    <Astro.self item={sub} level={level + 1} />
+                ))}
+            </ul>
+        )
+    }
+</li>
 
 <style>
-    .item-with-dots {
-        display: flex;
-        align-items: baseline;
-        width: 100%;
-        padding-left: 0 !important; /* Override default li padding */
-    }
-
-    .item-with-dots::before {
-        content: none !important; /* Remove default bullet */
-    }
-
-    .item-key {
-        font-weight: 600;
-        color: var(--color-text);
-        white-space: nowrap;
-        padding-right: 0.5rem;
-    }
-
-    .item-dots {
-        flex: 1;
-        border-bottom: 2px dotted #ccc;
-        margin: 0 0.5rem;
-        position: relative;
-        top: -4px;
-        opacity: 0.5;
-    }
-
-    .item-value {
-        font-weight: 700;
-        color: var(--color-primary-dark);
-        font-family: var(--font-display);
-    }
-
-    .structured-item {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        padding-left: 0 !important;
-        margin-bottom: 0.75rem !important;
-    }
-
-    .structured-item::before {
-        content: none !important;
-    }
-
     .item-header {
         display: flex;
         align-items: baseline;
@@ -116,29 +124,78 @@ const { item } = Astro.props;
     }
 
     .item-name {
-        font-weight: 700;
         color: var(--color-text);
         padding-right: 0.5rem;
     }
 
-    .item-val {
-        font-weight: 700;
-        color: var(--color-primary-dark);
-        font-family: var(--font-display);
+    /* Style for parent items (like Origin categories) */
+    li.has-children > .item-header .item-name {
+        color: var(--color-primary);
+        font-weight: bold;
     }
 
-    .item-notes {
-        font-size: 0.9em;
+    .item-dots {
+        flex-grow: 1;
+        border-bottom: 1px dotted #ccc;
+        margin: 0 0.5rem;
+        position: relative;
+        top: -4px;
+        min-width: 20px;
+    }
+
+    .item-value {
+        font-weight: bold;
+        font-family: var(--font-display);
+        color: var(--color-primary);
+        white-space: nowrap;
+    }
+
+    .item-notes,
+    .item-description,
+    .item-effect {
+        margin-left: 1rem;
         color: #666;
-        margin-top: 0.25rem;
-        padding-left: 0.5rem;
-        border-left: 2px solid var(--color-primary-light, #ddd);
+        font-style: italic;
+        line-height: 1.2;
+        margin-top: 0.2rem;
     }
 
     .item-rank {
-        font-weight: normal;
-        font-size: 0.9em;
+        font-size: 0.85em;
         color: #666;
-        margin-left: 0.5rem;
+        margin-left: 0.5ch;
+    }
+
+    .item-math {
+        font-size: 0.7em;
+        color: #999;
+        margin-left: 0.5ch;
+        font-family: monospace;
+        vertical-align: middle;
+    }
+
+    li {
+        margin-bottom: 0.5rem;
+        position: relative;
+        list-style: none;
+    }
+
+    li.has-bullet {
+        padding-left: 1.2rem;
+    }
+
+    li.has-bullet::before {
+        content: "•";
+        color: var(--color-primary);
+        position: absolute;
+        left: 0;
+        font-weight: bold;
+    }
+
+    /* Styles for nested lists */
+    ul {
+        margin-top: 0.25rem;
+        margin-bottom: 0.5rem;
+        padding: 0;
     }
 </style>

@@ -58,6 +58,10 @@ const rpgCollection = defineCollection({
             cost: z.union([z.number(), z.string()]),
             items: z.array(z.any())
         }).optional(),
+        spells: z.object({
+            cost: z.union([z.number(), z.string()]),
+            items: z.array(z.any())
+        }).optional(),
         weapons: z.object({
             cost: z.union([z.number(), z.string()]),
             items: z.array(z.any())

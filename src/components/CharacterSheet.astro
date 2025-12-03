@@ -15,6 +15,10 @@ interface Props {
             cost: number | string;
             items: any[];
         };
+        spells?: {
+            cost: number | string;
+            items: any[];
+        };
         background?: {
             cost: number | string;
             items: any[];
@@ -142,6 +146,22 @@ const otherStats = rpg.otherstats || rpg.other || [];
                     </div>
                     <ul>
                         {rpg.powers.items.map((item) => (
+                            <RpgItem item={item} />
+                        ))}
+                    </ul>
+                </div>
+            )
+        }
+
+        {
+            rpg.spells && (
+                <div class="sheet-section spells">
+                    <div class="section-header">
+                        <h4>Hechizos</h4>
+                        <span class="cost">({rpg.spells.cost} PCs)</span>
+                    </div>
+                    <ul class="rpg-list">
+                        {rpg.spells.items.map((item) => (
                             <RpgItem item={item} />
                         ))}
                     </ul>
