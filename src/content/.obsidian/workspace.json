@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "blog/lanzamiento.md",
+                "file": "lore/organizaciones/cosmo.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "lanzamiento"
+              "title": "cosmo"
             }
           }
         ]
@@ -185,6 +185,7 @@
   },
   "active": "4afafab5ecfe6865",
   "lastOpenFiles": [
+    "blog/lanzamiento.md",
     "characters/estrella.md",
     "characters/virgilio.md",
     "characters/vanadio.md",
@@ -216,7 +217,6 @@
     "rpg",
     "characters/la-luz-cadollo.md",
     "characters/asha.md",
-    "lore/localizaciones/valdoria.md",
     "lore/grupos",
     "lore/organizaciones",
     "lore/localizaciones",

@@ -10,9 +10,7 @@ El **C.O.S.M.O.** —Committee for Outer-Space Meta-Operations— es el organism
 
 Mientras el CISS vigila la seguridad global en la Tierra, C.O.S.M.O. opera como su **homólogo extraplanetario**, enfrentando riesgos que van desde naves hostiles y entidades cósmicas hasta artefactos alienígenas o anomalías dimensionales en órbita.
 
-![Estación Égida — Sede de COSMO](https://via.placeholder.com/800x400?text=EGIDA+COSMO)
-
-## Función y Mandato
+## Función y mandato
 
 C.O.S.M.O. actúa como **primera línea de defensa** frente a cualquier amenaza procedente del espacio exterior. Entre sus competencias se encuentran:
 
@@ -23,7 +21,6 @@ C.O.S.M.O. actúa como **primera línea de defensa** frente a cualquier amenaza 
 - Evaluación de **riesgos dimensionales** y fenómenos cósmicos.  
 
 Además, C.O.S.M.O. es un punto de encuentro entre representantes humanos y **miembros de otras naciones extraterrestres**, como los guímoran.  
-:contentReference[oaicite:0]{index=0}
 
 > “La amenaza puede venir de más allá de nuestras fronteras… o de más allá de nuestros cielos.”  
 > — *Informe preliminar de COSMO ante la ONU.*
@@ -38,9 +35,8 @@ La organización opera desde **La Égida**, un satélite artificial de alta tecn
 - Sistemas defensivos orbitales de última generación.  
 
 Es uno de los enclaves más seguros y secretos del mundo.  
-:contentReference[oaicite:1]{index=1}
 
-## Gobierno Interno
+## Gobierno interno
 
 Aunque sus integrantes representan a numerosos países, C.O.S.M.O. posee su propia estructura interna:
 
@@ -49,11 +45,5 @@ Aunque sus integrantes representan a numerosos países, C.O.S.M.O. posee su prop
 - **Tres consejeros**  
 
 Este consejo directivo se renueva cada **4 años** en votación internacional.  
-:contentReference[oaicite:2]{index=2}
 
-## Grupos Dependientes
-
-### **IRIS** — International Rampart Initiative of Space
-
-IRIS es la **in**
 
