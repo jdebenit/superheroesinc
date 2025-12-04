@@ -14,142 +14,6 @@ const links = [
 
 <header class="navbar">
   <div class="container">
-    <a href="/" class="logo">
-      <Image
-        src="/logo_SHI.png"
-        alt="Superheroes INC Logo"
-        class="logo-img"
-        width={60}
-        height={60}
-      />
-      <span class="security-level">NIVEL 7</span>
-    </a>
-
-    <div class="nav-right">
-      <div class="search-wrapper">
-        <Search client:load />
-      </div>
-
-      <nav>
-        <ul class="nav-links">
-          {
-            links.map((link) => (
-              <li>
-                <a href={link.href} class="nav-link">
-                  [{link.name.toUpperCase()}]
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </nav>
-    </div>
-  </div>
-</header>
-
-<style>
-  .navbar {
-    background-color: var(--color-background);
-    color: var(--color-secondary);
-    padding: 0.5rem 0;
-    border-bottom: 2px solid var(--color-secondary);
-    border-top: 4px solid var(--color-secondary);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: var(--shadow-md);
-  }
-
-  .container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 2rem;
-  }
-
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    text-decoration: none;
-  }
-
-  .logo-img {
-    height: 60px;
-    width: auto;
-    filter: grayscale(100%) contrast(120%); /* Document style */
-    transition: filter 0.3s ease;
-  }
-
-  .logo:hover .logo-img {
-    filter: none; /* Color on hover */
-  }
-
-  .security-level {
-    font-size: 0.8rem;
-    border: 1px solid var(--color-primary);
-    color: var(--color-primary);
-    padding: 0.1rem 0.5rem;
-    letter-spacing: 0.1em;
-    transform: rotate(-2deg);
-  }
-
-  .nav-right {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    flex: 1;
-    justify-content: flex-end;
-  }
-
-  .search-wrapper {
-    max-width: 300px;
-    flex: 1;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 1.5rem;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    white-space: nowrap;
-  }
-
-  .nav-link {
-    color: var(--color-secondary);
-    text-decoration: none;
-    font-family: var(--font-heading);
-    font-size: 0.9rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    transition: all 0.2s;
-    position: relative;
-  }
-
-  .nav-link:hover {
-    color: var(--color-primary);
-```
----
-import Search from "../components/Search";
-import { Image } from "astro:assets";
-
-const links = [
-  { name: "Inicio", href: "/" },
-  { name: "Blog", href: "/blog" },
-  { name: "Archivo del Lore", href: "/lore" },
-  { name: "Personajes", href: "/personajes" },
-  { name: "Recursos", href: "/recursos" },
-  { name: "Anexos", href: "/anexos-shi" },
-];
----
-
-<header class="navbar">
-  <div class="container">
     <div class="nav-header">
       <a href="/" class="logo">
         <Image
@@ -189,15 +53,31 @@ const links = [
 </header>
 
 <script>
-  const menuToggle = document.querySelector('.menu-toggle');
-  const navContent = document.querySelector('.nav-content');
+  document.addEventListener("DOMContentLoaded", () => {
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navContent = document.querySelector(".nav-content");
 
-  if (menuToggle && navContent) {
-    menuToggle.addEventListener('click', () => {
-      menuToggle.classList.toggle('active');
-      navContent.classList.toggle('active');
-    });
-  }
+    if (menuToggle && navContent) {
+      menuToggle.addEventListener("click", (e) => {
+        e.stopPropagation();
+        menuToggle.classList.toggle("active");
+        navContent.classList.toggle("active");
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener("click", (event) => {
+        const target = event.target as HTMLElement;
+        if (
+          !navContent.contains(target) &&
+          !menuToggle.contains(target) &&
+          navContent.classList.contains("active")
+        ) {
+          menuToggle.classList.remove("active");
+          navContent.classList.remove("active");
+        }
+      });
+    }
+  });
 </script>
 
 <style>
@@ -316,7 +196,7 @@ const links = [
 
   .hamburger::before,
   .hamburger::after {
-    content: '';
+    content: "";
     position: absolute;
     width: 24px;
     height: 2px;
@@ -325,13 +205,26 @@ const links = [
     transition: all 0.3s;
   }
 
-  .hamburger::before { top: -8px; }
-  .hamburger::after { top: 8px; }
+  .hamburger::before {
+    top: -8px;
+  }
+  .hamburger::after {
+    top: 8px;
+  }
 
-  .menu-toggle.active .hamburger { background: transparent; }
-  .menu-toggle.active .hamburger::before { top: 0; transform: rotate(45deg); }
-  .menu-toggle.active .hamburger::after { top: 0; transform: rotate(-45deg); }
+  .menu-toggle.active .hamburger {
+    background: transparent;
+  }
+  .menu-toggle.active .hamburger::before {
+    top: 0;
+    transform: rotate(45deg);
+  }
+  .menu-toggle.active .hamburger::after {
+    top: 0;
+    transform: rotate(-45deg);
+  }
 
+  /* Mobile Styles */
   @media (max-width: 1024px) {
     .container {
       flex-direction: column;
@@ -343,20 +236,27 @@ const links = [
     .nav-header {
       width: 100%;
       padding: 0.5rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     .menu-toggle {
-      display: block;
+      display: block; /* Ensure it's visible */
+      z-index: 101; /* Ensure it's clickable */
     }
 
     .nav-content {
-      display: none;
+      display: none; /* Hidden by default */
       flex-direction: column;
       width: 100%;
       padding-bottom: 1rem;
       gap: 1rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+      margin-top: 0.5rem;
     }
 
+    /* When active class is added by JS */
     .nav-content.active {
       display: flex;
     }
@@ -364,7 +264,8 @@ const links = [
     .search-wrapper {
       width: 100%;
       max-width: 100%;
-      order: -1; /* Search at top of menu */
+      order: -1;
+      margin-top: 1rem;
     }
 
     .nav-links {
@@ -376,7 +277,7 @@ const links = [
     .nav-links li {
       width: 100%;
       text-align: center;
-      border-bottom: 1px solid rgba(0,0,0,0.05);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     }
 
     .nav-link {
@@ -386,4 +287,3 @@ const links = [
     }
   }
 </style>
-```
