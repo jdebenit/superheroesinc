@@ -1,3 +1,6 @@
+/* Import Google Fonts - Courier Prime is excellent for this look */
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
 :root {
   /* Declassified Files Palette */
   --color-primary: #c41e3a;

@@ -38,7 +38,9 @@ const characters = (await getCollection("characters")).sort((a, b) =>
                     <div class="placeholder-image classified-container">
                       <div class="classified-content">
                         <span class="classified-stamp">CLASIFICADO</span>
-                        <span class="classified-sub">SOLO OJOS AUTORIZADOS</span>
+                        <span class="classified-sub">
+                          SOLO OJOS AUTORIZADOS
+                        </span>
                       </div>
                     </div>
                   )}
@@ -162,9 +164,8 @@ const characters = (await getCollection("characters")).sort((a, b) =>
 
   .classified-container {
     background-color: #f0e6d2;
-    background-image: 
-      linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
     background-size: 20px 20px;
     position: relative;
     overflow: hidden;
@@ -185,7 +186,7 @@ const characters = (await getCollection("characters")).sort((a, b) =>
     font-size: 2rem;
     font-weight: 900;
     color: #8b0000;
-    font-family: 'Courier New', monospace;
+    font-family: "Courier New", monospace;
     letter-spacing: 2px;
     text-transform: uppercase;
     border: 3px solid #8b0000;
@@ -198,7 +199,7 @@ const characters = (await getCollection("characters")).sort((a, b) =>
     font-size: 0.8rem;
     font-weight: bold;
     color: #8b0000;
-    font-family: 'Courier New', monospace;
+    font-family: "Courier New", monospace;
     letter-spacing: 1px;
   }
 
@@ -239,6 +240,7 @@ const characters = (await getCollection("characters")).sort((a, b) =>
     padding: var(--spacing-2xl);
   }
 
+  @media (max-width: 768px) {
     .characters-grid {
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
       gap: var(--spacing-lg);
@@ -279,3 +281,4 @@ const characters = (await getCollection("characters")).sort((a, b) =>
     font-weight: bold;
     font-family: var(--font-display);
   }
+</style>
