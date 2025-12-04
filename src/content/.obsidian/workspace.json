@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "lore/eventos/la-tecnoguerra.md",
+                "file": "lore/entidades/equidad.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "la-tecnoguerra"
+              "title": "equidad"
             }
           }
         ]
@@ -185,8 +185,12 @@
   },
   "active": "4afafab5ecfe6865",
   "lastOpenFiles": [
-    "lore/grupos/euroforce.md",
+    "lore/entidades/unidad.md",
+    "lore/entidades/equidad.md",
+    "lore/entidades/entropia.md",
     "lore/eventos/la-tecnoguerra.md",
+    "lore/grupos/euroforce.md",
+    "lore/grupos/la-legion-sangrienta.md",
     "lore/eventos/Sin título.md",
     "lore/eventos/Tecnoguerra.md",
     "lore/organizaciones/road-reapers.md",
@@ -213,10 +217,6 @@
     "blog/nueva-web.md",
     "blog/nuevos-contenidos.md",
     "lore/localizaciones/tierra-zero.md",
-    "lore/localizaciones/terra.md",
-    "lore/organizaciones/zelig.md",
-    "lore/organizaciones/vientos-erebus.md",
-    "lore/organizaciones/superheroes-inc.md",
     "lore/grupos",
     "lore/organizaciones",
     "lore/localizaciones",

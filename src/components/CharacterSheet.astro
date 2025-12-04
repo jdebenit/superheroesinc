@@ -308,6 +308,13 @@ const otherStats = rpg.otherstats || rpg.other || [];
         position: relative;
     }
 
+    @media (max-width: 768px) {
+        .character-sheet {
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+    }
+
     .character-sheet::before {
         content: "";
         position: absolute;
@@ -379,7 +386,9 @@ const otherStats = rpg.otherstats || rpg.other || [];
         flex-direction: column;
         align-items: center;
         flex: 1;
-        min-width: 120px;
+        align-items: center;
+        flex: 1;
+        min-width: 100px;
         border: 1px solid #e0e0e0;
         padding: 0.5rem;
         background: white;
@@ -406,7 +415,7 @@ const otherStats = rpg.otherstats || rpg.other || [];
         column-gap: 2rem;
     }
 
-    @media (min-width: 768px) {
+    @media (min-width: 1024px) {
         .sheet-grid {
             column-count: 2;
         }
@@ -424,6 +433,7 @@ const otherStats = rpg.otherstats || rpg.other || [];
         border: 1px dashed #ccc;
         break-inside: avoid;
         margin-bottom: 2rem;
+        overflow-wrap: break-word;
     }
 
     .section-header {
@@ -469,7 +479,7 @@ const otherStats = rpg.otherstats || rpg.other || [];
 
     .attr-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
         gap: 1rem;
     }
 
