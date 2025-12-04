@@ -1,9 +1,11 @@
 ---
-title: "Superhéroes INC inaugura su nueva web oficial"
+title: Superhéroes INC inaugura su nueva web oficial
 pubDate: 2025-11-26
-description: "lanzamiento de la nueva web de **Superhéroes INC**"
-author: "Jorge Francisco de Benito Montoya"
-tags: ["noticias", "lanzamiento"]
+description: lanzamiento de la nueva web de Superhéroes INC
+author: Jorge Francisco de Benito Montoya
+tags:
+  - noticias
+  - lanzamiento
 ---
 
 # Superhéroes INC inaugura su nueva web oficial

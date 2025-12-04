@@ -10,7 +10,7 @@ interface ComicCardProps {
 
 const ComicCard: React.FC<ComicCardProps> = ({ title, excerpt, date, image, link }) => {
     return (
-        <a href={link} className="block group h-full">
+        <a href={link} className="block group h-full" style={{ textDecoration: 'none' }}>
             <article className="paper-card h-full flex flex-col transition-all transform hover:-translate-y-1 hover:shadow-lg relative bg-white border border-[#d3d0c2]">
                 {/* Paper clip visual */}
                 <div className="absolute -top-3 left-8 w-4 h-10 border-2 border-gray-400 rounded-full z-10 bg-transparent"></div>
@@ -25,12 +25,12 @@ const ComicCard: React.FC<ComicCardProps> = ({ title, excerpt, date, image, link
                 )}
 
                 <div className="flex-grow flex flex-col relative">
-                    <div className="flex justify-between items-start mb-2 border-b border-dashed border-gray-300 pb-2">
-                        <time className="text-xs font-mono text-gray-500 uppercase">FECHA: {date}</time>
-                        <span className="text-xs font-mono text-primary uppercase font-bold">CLASIFICADO</span>
+                    <div className="flex justify-between items-center mb-4 border-b border-dashed border-gray-300 pb-2 w-full gap-4">
+                        <time className="text-xs font-mono text-gray-500 uppercase whitespace-nowrap">FECHA: {date}</time>
+                        <span className="text-xs font-mono text-primary uppercase font-bold border border-primary px-1 tracking-wider">CLASIFICADO</span>
                     </div>
 
-                    <h3 className="text-xl font-bold mb-3 leading-tight group-hover:text-primary transition-colors uppercase" style={{ fontFamily: 'var(--font-heading)' }}>
+                    <h3 className="text-xl font-bold mb-3 leading-tight text-secondary group-hover:text-primary transition-colors uppercase" style={{ fontFamily: 'var(--font-heading)' }}>
                         {title}
                     </h3>
 

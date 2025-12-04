@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "characters/estrella.md",
+                "file": "blog/lanzamiento.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "estrella"
+              "title": "lanzamiento"
             }
           }
         ]
@@ -185,6 +185,7 @@
   },
   "active": "4afafab5ecfe6865",
   "lastOpenFiles": [
+    "characters/estrella.md",
     "characters/virgilio.md",
     "characters/vanadio.md",
     "lore/localizaciones/paraiso.md",
@@ -216,7 +217,6 @@
     "characters/la-luz-cadollo.md",
     "characters/asha.md",
     "lore/localizaciones/valdoria.md",
-    "lore/organizaciones/la-orden-de-las-nagas.md",
     "lore/grupos",
     "lore/organizaciones",
     "lore/localizaciones",
