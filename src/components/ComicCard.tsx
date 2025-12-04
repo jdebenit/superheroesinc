@@ -25,9 +25,13 @@ const ComicCard: React.FC<ComicCardProps> = ({ title, excerpt, date, image, link
                 )}
 
                 <div className="flex-grow flex flex-col relative">
-                    <div className="flex justify-between items-center mb-4 border-b border-dashed border-gray-300 pb-2 w-full gap-4">
+                    <div className="flex justify-between items-center mb-4 border-b border-dashed border-gray-300 pb-2 w-full">
                         <time className="text-xs font-mono text-gray-500 uppercase whitespace-nowrap">FECHA: {date}</time>
-                        <span className="text-xs font-mono text-primary uppercase font-bold border border-primary px-1 tracking-wider">CLASIFICADO</span>
+                    </div>
+
+                    {/* Classified Stamp */}
+                    <div className="absolute top-0 right-0 transform rotate-12 border-2 border-red-700 text-red-700 px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest opacity-80 pointer-events-none mix-blend-multiply" style={{ fontFamily: 'var(--font-display)' }}>
+                        CLASIFICADO
                     </div>
 
                     <h3 className="text-xl font-bold mb-3 leading-tight text-secondary group-hover:text-primary transition-colors uppercase" style={{ fontFamily: 'var(--font-heading)' }}>
