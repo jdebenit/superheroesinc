@@ -30,7 +30,17 @@ const ComicCard: React.FC<ComicCardProps> = ({ title, excerpt, date, image, link
                     </div>
 
                     {/* Classified Stamp */}
-                    <div className="absolute top-0 right-0 transform rotate-12 border-2 border-red-700 text-red-700 px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest opacity-80 pointer-events-none mix-blend-multiply" style={{ fontFamily: 'var(--font-display)' }}>
+                    {/* Classified Stamp */}
+                    <div className="stamp-classified" style={{
+                        position: 'absolute',
+                        top: '-5px',
+                        right: '-5px',
+                        fontSize: '10px',
+                        padding: '2px 8px',
+                        transform: 'rotate(12deg)',
+                        zIndex: 10,
+                        pointerEvents: 'none'
+                    }}>
                         CLASIFICADO
                     </div>
 
