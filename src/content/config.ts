@@ -17,7 +17,7 @@ const loreCollection = defineCollection({
     schema: z.object({
         title: z.string(),
         description: z.string(),
-        category: z.enum(['localizaciones', 'organizaciones', 'grupos']),
+        category: z.enum(['localizaciones', 'organizaciones', 'grupos', 'eventos', 'criaturas', 'entidades']),
         image: z.string().optional(),
         source: z.string().optional(),
         updatedDate: z.date().optional(),

@@ -2,6 +2,7 @@
 .astro/
 # build
 .dist/
+dist/
 
 # dependencies
 node_modules/

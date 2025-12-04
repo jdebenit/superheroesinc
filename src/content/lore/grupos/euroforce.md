@@ -5,7 +5,6 @@ category: "grupos"
 source: "Superhéroes INC. Tercera Edición"
 updatedDate: 2025-11-26
 ---
-
 **Euroforce** fue el **supergrupo oficial de la Unión Europea**, la élite metahumana del continente y el símbolo de cooperación internacional tras el auge de los superseres. Durante años actuaron como primera línea en crisis globales, enfrentamientos interdimensionales y amenazas que superaban la capacidad de cualquier nación europea por separado.
 
 Su popularidad se extendió más allá de las fronteras de la UE, y su biopic *EuroForce* llegó a convertirse en una de las películas más taquilleras de la historia.

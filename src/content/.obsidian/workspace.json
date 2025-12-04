@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "lore/grupos/los-irregulares.md",
+                "file": "lore/eventos/la-tecnoguerra.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "los-irregulares"
+              "title": "la-tecnoguerra"
             }
           }
         ]
@@ -185,6 +185,15 @@
   },
   "active": "4afafab5ecfe6865",
   "lastOpenFiles": [
+    "lore/grupos/euroforce.md",
+    "lore/eventos/la-tecnoguerra.md",
+    "lore/eventos/Sin título.md",
+    "lore/eventos/Tecnoguerra.md",
+    "lore/organizaciones/road-reapers.md",
+    "lore/eventos",
+    "characters/jefe-motero-road-reapers.md",
+    "characters/motero-road-reapers.md",
+    "lore/grupos/los-irregulares.md",
     "characters/desertor.md",
     "characters/aescotan.md",
     "characters/askany.md",
@@ -208,14 +217,6 @@
     "lore/organizaciones/zelig.md",
     "lore/organizaciones/vientos-erebus.md",
     "lore/organizaciones/superheroes-inc.md",
-    "lore/organizaciones/sombras-dragon.md",
-    "lore/organizaciones/akatora-co.md",
-    "lore/organizaciones/american-bureau-post-humans.md",
-    "lore/organizaciones/la-alianza.md",
-    "lore/organizaciones/zortek.md",
-    "lore/organizaciones/tecnored.md",
-    "lore/organizaciones/idess.md",
-    "lore/organizaciones/humans.md",
     "lore/grupos",
     "lore/organizaciones",
     "lore/localizaciones",
