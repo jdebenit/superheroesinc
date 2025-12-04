@@ -5,6 +5,7 @@ source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-11-26
 image: "/personajes/desertor.png"
 rpgId: "desertor"
+category: principales
 ---
 
 Alfredo Betanzos nació en una familia de clase media en Madrid, y desde temprana edad mostró una notable destreza con la espada. Sin embargo, su vida cambió radicalmente durante su adolescencia debido a una tragedia que marcaría su destino para siempre.

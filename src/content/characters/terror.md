@@ -4,6 +4,7 @@ description: "Integrante de PSYKOSIS armado con una guadaña energizada. Present
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-11-26
 image: "/personajes/terror.png"
+category: principales
 powers:
   - "Cambio de la densidad"
   - "Volar"

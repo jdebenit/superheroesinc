@@ -4,6 +4,7 @@ description: "Operadora de Cazadores de Sombras, con capacidad confirmada de tel
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-11-26
 image: /personajes/medianoche.png
+category: principales
 powers:
   - "Teletransportación"
 ---

@@ -1,34 +1,35 @@
 ---
 interface Props {
     rpg: {
-        origin?: { cost: number | string; items: any[] };
+        name?: string;
+        origin?: { cost?: number | string; items: any[] };
         attributes?: {
-            cost: number | string;
+            cost?: number | string;
             values: Record<string, number | string>;
         };
-        skills?: { cost: number | string; items: any[] };
+        skills?: { cost?: number | string; items: any[] };
         specialskills?: {
-            cost: number | string;
+            cost?: number | string;
             items: any[];
         };
         powers?: {
-            cost: number | string;
+            cost?: number | string;
             items: any[];
         };
         spells?: {
-            cost: number | string;
+            cost?: number | string;
             items: any[];
         };
         background?: {
-            cost: number | string;
+            cost?: number | string;
             items: any[];
         };
         equipment?: {
-            cost: number | string;
+            cost?: number | string;
             items: any[];
         };
         weapons?: {
-            cost: number | string;
+            cost?: number | string;
             items: any[];
         };
         combatstats?: string[];
@@ -50,7 +51,7 @@ const otherStats = rpg.otherstats || rpg.other || [];
 
 <div class="character-sheet" id="character-sheet">
     <div class="sheet-header">
-        <h3>Ficha de Personaje</h3>
+        <h3>{rpg.name || "Ficha de Personaje"}</h3>
         <div class="header-stats">
             {rpg.level && <span class="level-badge">Nivel {rpg.level}</span>}
             {
@@ -90,7 +91,9 @@ const otherStats = rpg.otherstats || rpg.other || [];
                 <div class="sheet-section origin">
                     <div class="section-header">
                         <h4>Origen</h4>
-                        <span class="cost">({rpg.origin.cost} PCs)</span>
+                        {rpg.origin.cost && (
+                            <span class="cost">({rpg.origin.cost} PCs)</span>
+                        )}
                     </div>
                     <ul>
                         {rpg.origin.items.map((item) => (
@@ -121,7 +124,11 @@ const otherStats = rpg.otherstats || rpg.other || [];
                 <div class="sheet-section attributes">
                     <div class="section-header">
                         <h4>Características</h4>
-                        <span class="cost">({rpg.attributes.cost} PCs)</span>
+                        {rpg.attributes.cost && (
+                            <span class="cost">
+                                ({rpg.attributes.cost} PCs)
+                            </span>
+                        )}
                     </div>
                     <div class="attr-grid">
                         {Object.entries(rpg.attributes.values).map(
@@ -142,7 +149,9 @@ const otherStats = rpg.otherstats || rpg.other || [];
                 <div class="sheet-section powers">
                     <div class="section-header">
                         <h4>Poderes</h4>
-                        <span class="cost">({rpg.powers.cost} PCs)</span>
+                        {rpg.powers.cost && (
+                            <span class="cost">({rpg.powers.cost} PCs)</span>
+                        )}
                     </div>
                     <ul>
                         {rpg.powers.items.map((item) => (
@@ -158,7 +167,9 @@ const otherStats = rpg.otherstats || rpg.other || [];
                 <div class="sheet-section spells">
                     <div class="section-header">
                         <h4>Hechizos</h4>
-                        <span class="cost">({rpg.spells.cost} PCs)</span>
+                        {rpg.spells.cost && (
+                            <span class="cost">({rpg.spells.cost} PCs)</span>
+                        )}
                     </div>
                     <ul class="rpg-list">
                         {rpg.spells.items.map((item) => (
@@ -174,7 +185,9 @@ const otherStats = rpg.otherstats || rpg.other || [];
                 <div class="sheet-section weapons">
                     <div class="section-header">
                         <h4>Armas</h4>
-                        <span class="cost">({rpg.weapons.cost} PCs)</span>
+                        {rpg.weapons.cost && (
+                            <span class="cost">({rpg.weapons.cost} PCs)</span>
+                        )}
                     </div>
                     <ul>
                         {rpg.weapons.items.map((item) => (
@@ -190,7 +203,9 @@ const otherStats = rpg.otherstats || rpg.other || [];
                 <div class="sheet-section skills">
                     <div class="section-header">
                         <h4>Habilidades</h4>
-                        <span class="cost">({rpg.skills.cost} PCs)</span>
+                        {rpg.skills.cost && (
+                            <span class="cost">({rpg.skills.cost} PCs)</span>
+                        )}
                     </div>
                     <ul>
                         {rpg.skills.items.map((item) => (
@@ -206,7 +221,11 @@ const otherStats = rpg.otherstats || rpg.other || [];
                 <div class="sheet-section special-skills">
                     <div class="section-header">
                         <h4>Habilidades Especiales</h4>
-                        <span class="cost">({rpg.specialskills.cost} PCs)</span>
+                        {rpg.specialskills.cost && (
+                            <span class="cost">
+                                ({rpg.specialskills.cost} PCs)
+                            </span>
+                        )}
                     </div>
                     <ul>
                         {rpg.specialskills.items.map((item) => (
@@ -222,7 +241,11 @@ const otherStats = rpg.otherstats || rpg.other || [];
                 <div class="sheet-section background">
                     <div class="section-header">
                         <h4>Historial</h4>
-                        <span class="cost">({rpg.background.cost} PCs)</span>
+                        {rpg.background.cost && (
+                            <span class="cost">
+                                ({rpg.background.cost} PCs)
+                            </span>
+                        )}
                     </div>
                     <ul>
                         {rpg.background.items.map((item) => (
@@ -238,7 +261,9 @@ const otherStats = rpg.otherstats || rpg.other || [];
                 <div class="sheet-section equipment">
                     <div class="section-header">
                         <h4>Equipamiento</h4>
-                        <span class="cost">({rpg.equipment.cost} PCs)</span>
+                        {rpg.equipment.cost && (
+                            <span class="cost">({rpg.equipment.cost} PCs)</span>
+                        )}
                     </div>
                     <ul>
                         {rpg.equipment.items.map((item) => (

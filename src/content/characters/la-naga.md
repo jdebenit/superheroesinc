@@ -6,6 +6,7 @@ source: Partida Oficial
 updatedDate: 2025-12-01
 image: /personajes/la-naga-tierra-zero.png
 rpgId: la-naga
+category: principales
 ---
 
 ## Descripción

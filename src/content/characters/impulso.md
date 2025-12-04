@@ -4,6 +4,7 @@ description: "Miembro de Triángulo Mortal. Operador de tipo 'elfo mental' con c
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-11-26
 image: "/personajes/impulso.png"
+category: principales
 ---
 
 Miembro de **Triángulo Mortal**. Operador de tipo "elfo mental" con capacidades de telequinesis, generación de campos de fuerza y telepatía de amplio espectro. Actúa como coordinadora psíquica y táctica del grupo.

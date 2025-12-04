@@ -162,6 +162,17 @@ const characterKeywords = [
                     }
                 </header>
 
+                {
+                    rpgData && (
+                        <a href="#character-sheet" class="rpg-link mobile-only">
+                            <span class="rpg-icon">🎲</span>
+                            <span class="rpg-label">
+                                Ver Ficha de Personaje
+                            </span>
+                        </a>
+                    )
+                }
+
                 <div class="char-content">
                     <Content />
                 </div>
@@ -393,6 +404,10 @@ const characterKeywords = [
         color: var(--color-primary);
     }
 
+    .mobile-only {
+        display: none;
+    }
+
     @media (max-width: 1024px) {
         .content-grid {
             grid-template-columns: 1fr;
@@ -402,6 +417,14 @@ const characterKeywords = [
         .sidebar {
             position: static;
             order: 2;
+        }
+
+        .sidebar .rpg-link {
+            display: none;
+        }
+
+        .mobile-only {
+            display: flex;
         }
 
         .char-image-container {

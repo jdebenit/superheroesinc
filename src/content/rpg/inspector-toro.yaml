@@ -1,7 +1,7 @@
-totalCost: "?"
+
 level: 4
 origin:
-  cost: "?"
+
   items:
     - "Minotauro":
       - "+30 a Armas Blancas"
@@ -25,7 +25,7 @@ otherstats:
   - "Parada mental: 70"
   - "Salto (alto / largo): 26m/80m"
 attributes:
-  cost: "?"
+
   values:
     Fuerza: 155
     Constitución: 165
@@ -74,7 +74,7 @@ skills:
       math: "(AGI)"
       value: "88%"
 specialskills:
-  cost: "?"
+
   items:
     - name: "Conducir coche"
       value: "53%"
@@ -90,12 +90,12 @@ specialskills:
       value: "76%"
       notes: "Daño 2d10+20+Mod.Fue"
 equipment:
-  cost: "?"
+
   items:
     - name: "Chaleco Antibalas"
       notes: "+20 DA Físico en pecho y abdomen"
 weapons:
-  cost: "?"
+
   items:
     - name: "Escopeta POW E9"
       value: "80%"

@@ -6,6 +6,7 @@ source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-11-26
 image: "/personajes/toro.png"
 rpgId: inspector-toro
+category: principales
 ---
 
 Inspector Juan Castro, conocido entre sus compañeros despectivamente como Toro, es un oficial de la Policía Nacional española con una apariencia imponente que refleja su origen metahumano. De aspecto similar a un minotauro, Juan posee una fuerza sobrehumana, una gran resistencia, y un par de pitones bien afilados. Durante mucho tiempo se pensó que su condición era el resultado de una mutación genética, recientes eventos relacionados con el Inframundo han hecho que Juan comience a cuestionar la verdadera naturaleza de su ascendencia, sugiriendo que sus orígenes podrían estar ligados a algo mucho más ajeno a nuestro mundo.

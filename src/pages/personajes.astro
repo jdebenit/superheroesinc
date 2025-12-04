@@ -20,47 +20,177 @@ const characters = (await getCollection("characters")).sort((a, b) =>
     </p>
 
     {
-      characters.length > 0 ? (
-        <div class="characters-grid">
-          {characters.map((char) => (
-            <a href={`/personajes/${char.slug}`} class="character-card">
-              <div class="card-inner">
-                <div class="card-front">
-                  {char.data.image ? (
-                    <Image
-                      src={char.data.image}
-                      alt={char.data.alias || char.data.name}
-                      class="char-image"
-                      width={400}
-                      height={340}
-                    />
-                  ) : (
-                    <div class="placeholder-image classified-container">
-                      <div class="classified-content">
-                        <span class="classified-stamp">CLASIFICADO</span>
-                        <span class="classified-sub">
-                          SOLO OJOS AUTORIZADOS
-                        </span>
-                      </div>
+      characters.filter((c) => c.data.category === "principales").length >
+        0 && (
+        <div class="category-section">
+          <h2 class="category-title">Personajes Principales</h2>
+          <p class="category-intro">
+            Protagonistas centrales de las tramas actuales. Sus decisiones
+            mueven el mundo, salvarlo o destruirlo.
+          </p>
+          <div class="characters-grid">
+            {characters
+              .filter((c) => c.data.category === "principales")
+              .map((char) => (
+                <a href={`/personajes/${char.slug}`} class="character-card">
+                  <div class="card-inner">
+                    <div class="card-front">
+                      {char.data.image ? (
+                        <Image
+                          src={char.data.image}
+                          alt={char.data.alias || char.data.name}
+                          class="char-image"
+                          width={400}
+                          height={340}
+                        />
+                      ) : (
+                        <div class="placeholder-image classified-container">
+                          <div class="classified-content">
+                            <span class="classified-stamp">CLASIFICADO</span>
+                            <span class="classified-sub">
+                              SOLO OJOS AUTORIZADOS
+                            </span>
+                          </div>
+                        </div>
+                      )}
+                      <h2 class="char-name">
+                        {char.data.alias || char.data.name}
+                      </h2>
                     </div>
-                  )}
-                  <h2 class="char-name">{char.data.alias || char.data.name}</h2>
-                </div>
-                <div class="card-back">
-                  <h3>{char.data.name}</h3>
-                  <p class="char-desc">
-                    {char.data.description.slice(0, 150)}
-                    {char.data.description.length > 150 ? "..." : ""}
-                  </p>
-                  {char.data.source && (
-                    <p class="char-source">{char.data.source}</p>
-                  )}
-                </div>
-              </div>
-            </a>
-          ))}
+                    <div class="card-back">
+                      <h3>{char.data.name}</h3>
+                      <p class="char-desc">
+                        {char.data.description.slice(0, 150)}
+                        {char.data.description.length > 150 ? "..." : ""}
+                      </p>
+                      {char.data.source && (
+                        <p class="char-source">{char.data.source}</p>
+                      )}
+                    </div>
+                  </div>
+                </a>
+              ))}
+          </div>
         </div>
-      ) : (
+      )
+    }
+
+    {
+      characters.filter(
+        (c) => c.data.category === "secundarios" || !c.data.category,
+      ).length > 0 && (
+        <div class="category-section">
+          <h2 class="category-title">Personajes Secundarios</h2>
+          <p class="category-intro">
+            Aliados, rivales, personajes menos relevantes o inactivos y figuras
+            clave que dan vida al universo.
+          </p>
+          <div class="characters-grid">
+            {characters
+              .filter(
+                (c) => c.data.category === "secundarios" || !c.data.category,
+              )
+              .map((char) => (
+                <a href={`/personajes/${char.slug}`} class="character-card">
+                  <div class="card-inner">
+                    <div class="card-front">
+                      {char.data.image ? (
+                        <Image
+                          src={char.data.image}
+                          alt={char.data.alias || char.data.name}
+                          class="char-image"
+                          width={400}
+                          height={340}
+                        />
+                      ) : (
+                        <div class="placeholder-image classified-container">
+                          <div class="classified-content">
+                            <span class="classified-stamp">CLASIFICADO</span>
+                            <span class="classified-sub">
+                              SOLO OJOS AUTORIZADOS
+                            </span>
+                          </div>
+                        </div>
+                      )}
+                      <h2 class="char-name">
+                        {char.data.alias || char.data.name}
+                      </h2>
+                    </div>
+                    <div class="card-back">
+                      <h3>{char.data.name}</h3>
+                      <p class="char-desc">
+                        {char.data.description.slice(0, 150)}
+                        {char.data.description.length > 150 ? "..." : ""}
+                      </p>
+                      {char.data.source && (
+                        <p class="char-source">{char.data.source}</p>
+                      )}
+                    </div>
+                  </div>
+                </a>
+              ))}
+          </div>
+        </div>
+      )
+    }
+
+    {
+      characters.filter((c) => c.data.category === "genericos").length > 0 && (
+        <div class="category-section">
+          <h2 class="category-title">Personajes Genéricos</h2>
+          <p class="category-intro">
+            Arquetipos y fuerzas comunes que pueblan las calles y
+            organizaciones.
+          </p>
+          <div class="characters-grid">
+            {characters
+              .filter((c) => c.data.category === "genericos")
+              .map((char) => (
+                <a href={`/personajes/${char.slug}`} class="character-card">
+                  <div class="card-inner">
+                    <div class="card-front">
+                      {char.data.image ? (
+                        <Image
+                          src={char.data.image}
+                          alt={char.data.alias || char.data.name}
+                          class="char-image"
+                          width={400}
+                          height={340}
+                        />
+                      ) : (
+                        <div class="placeholder-image classified-container">
+                          <div class="classified-content">
+                            <span class="classified-stamp">CLASIFICADO</span>
+                            <span class="classified-sub">
+                              SOLO OJOS AUTORIZADOS
+                            </span>
+                          </div>
+                        </div>
+                      )}
+                      <h2 class="char-name">
+                        {char.data.alias || char.data.name}
+                      </h2>
+                    </div>
+                    <div class="card-back">
+                      <h3>{char.data.name}</h3>
+                      <p class="char-desc">
+                        {char.data.description.slice(0, 150)}
+                        {char.data.description.length > 150 ? "..." : ""}
+                      </p>
+                      {char.data.source && (
+                        <p class="char-source">{char.data.source}</p>
+                      )}
+                    </div>
+                  </div>
+                </a>
+              ))}
+          </div>
+        </div>
+      )
+    }
+
+    {
+      characters.length === 0 && (
         <p class="empty-message">
           La base de datos de personajes está actualizándose...
         </p>
@@ -88,6 +218,38 @@ const characters = (await getCollection("characters")).sort((a, b) =>
     font-size: var(--text-xl);
     color: var(--color-text-light);
     margin-bottom: var(--spacing-2xl);
+  }
+
+  .category-section {
+    margin-top: 6rem; /* Increased spacing */
+    padding-top: 2rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1); /* Visual separator */
+    margin-bottom: var(--spacing-3xl);
+  }
+
+  .category-section:first-of-type {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+  }
+
+  .category-title {
+    font-size: var(--text-3xl);
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+    text-transform: uppercase;
+    border-bottom: 2px solid var(--color-secondary);
+    padding-bottom: 0.5rem;
+    display: inline-block;
+  }
+
+  .category-intro {
+    font-size: var(--text-lg);
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-xl);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .characters-grid {

@@ -1,3 +1,5 @@
+name: "La Naga"
+icon: icons/la-naga-icon.png
 totalCost: 70
 level: 1
 origin:
@@ -133,9 +135,11 @@ weapons:
   items:
     - name: "Khopesh de Tamahagane"
       value: "73%"
-      notes: "Con Chi: ignora el DA físico del objetivo"
+      notes: "Daño 3d10+30+Mod Fue. Cargado de chi ignora el DA físico del objetivo"
     - name: "Sheng Biao"
       value: "73%"
+      notes: "Daño 2d6+20+Mod Fue."
 notes:
   - "Cuando usa su chi en su cuerpo este adquiere un brillo verdoso"
   - "El Khopesh se ilumina al colpear cuando esta cargado con chi"
+  - "Suele usar el Sheng Biao como ayuda para moverse entre azoteas y zonas elevadas"

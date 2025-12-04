@@ -4,6 +4,7 @@ description: "Integrante de PSYKOSIS con funciones de choque. Presenta elevadas 
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-11-26
 image: "/personajes/chainsaw.png"
+category: principales
 ---
 
 Integrante de **PSYKOSIS** con funciones de choque. Presenta elevadas cotas de fuerza física, resistencia, empatía y capacidad de dominación mental. Utiliza una motosierra de un metal similar al bronce como arma principal.

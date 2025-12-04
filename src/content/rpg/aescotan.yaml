@@ -1,7 +1,7 @@
-totalCost: "?"
+
 level: 10
 origin:
-  cost: "?"
+
   items:
     - "Demonio":
 combatstats:
@@ -24,7 +24,7 @@ otherstats:
   - "Parada mental: 91"
   - "Salto (alto / largo): 518m/1555m"
 attributes:
-  cost: "?"
+
   values:
     Fuerza: 200
     Constitución: 200
@@ -34,7 +34,7 @@ attributes:
     Apariencia: 30
     Voluntad: 60
 powers:
-  cost: "?"
+
   items:
     - name: "Volar"
       rank: Bajo(01)
@@ -87,7 +87,7 @@ skills:
       math: "(AGI)"
       value: "140%"
 specialskills:
-  cost: "?"
+
   items:
     - name: "Otro Idioma - Inglés"
       math: "(INT/3)"

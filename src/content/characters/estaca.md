@@ -4,6 +4,7 @@ description: "Fuerza de choque de la Legión Sangrienta. Combatiente brutal, res
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-11-30
 image: "/personajes/estaca.png"
+category: principales
 ---
 
 **Estaca** es uno de los miembros más peligrosos y reconocibles de la **Legión Sangrienta**, actuando como su principal **fuerza de choque**. Su papel dentro del grupo es directo: abrir brecha, absorber daño, intimidar y ejecutar la violencia necesaria para que la Legión cumpla los planes de **Julián Provencio**, su líder.
