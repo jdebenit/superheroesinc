@@ -10,7 +10,7 @@ interface ComicCardProps {
 
 const ComicCard: React.FC<ComicCardProps> = ({ title, excerpt, date, image, link }) => {
     return (
-        <a href={link} className="block group h-full" style={{ textDecoration: 'none' }}>
+        <a href={link} className="block group h-full" style={{ textDecoration: 'none', backgroundColor: 'transparent' }}>
             <article className="paper-card h-full flex flex-col transition-all transform hover:-translate-y-1 hover:shadow-lg relative bg-white border border-[#d3d0c2]">
                 {/* Paper clip visual */}
                 <div className="absolute -top-3 left-8 w-4 h-10 border-2 border-gray-400 rounded-full z-10 bg-transparent"></div>
