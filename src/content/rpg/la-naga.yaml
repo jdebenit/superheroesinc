@@ -52,7 +52,6 @@ attributes:
     Apariencia: 101
     Voluntad: 102
 skills:
-  cost: 0
   items:
     - name: "Acechar/Discrección"
       math: "(AGI+PER)/2"

@@ -1,8 +1,6 @@
 name: "Desertor"
-
 level: 5
 origin:
-
   items:
     - "Vigilante":
       - "Disponibilidad de armamento a dificultad reducida"
@@ -37,7 +35,6 @@ otherstats:
   - "Parada mental: 50"
   - "Salto (alto / largo): 10m/3,3m"
 attributes:
-
   values:
     Fuerza: 100
     Constitución: 100
@@ -47,7 +44,6 @@ attributes:
     Apariencia: 59
     Voluntad: 100
 skills:
-
   items:
     - name: "Acechar/Discrección"
       math: "(AGI+PER)/2"
@@ -74,7 +70,7 @@ skills:
       math: "(INT+PER)/3"
       value: "63%"
     - name: "Lanzar"
-      math: "(FUE+PER)/4"
+      math: "(FUE+PER)/2"
       value: "100%"
     - name: "Primeros auxilios"
       math: "(INT)/2"
@@ -86,7 +82,6 @@ skills:
       math: "(AGI)"
       value: "100+20%"
 specialskills:
-
   items:
     - name: "Artes Marciales: Occidental medieval"
       value: "79+20%"
@@ -115,7 +110,6 @@ specialskills:
     - name: "Comp. / Comun."
       value: "70%"
 equipment:
-
   items:
     - name: "Traje místico" 
       notes: "+45 DA Física y mental"
@@ -124,7 +118,6 @@ equipment:
     - name: "Amuleto de Velocidad"
       notes: "+1 acción de combate"
 weapons:
-
   items:
     - name: "Mandoble mágico"
       value: "66%"
