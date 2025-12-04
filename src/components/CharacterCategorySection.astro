@@ -1,0 +1,286 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+    title: string;
+    intro: string;
+    characters: any[];
+}
+
+const { title, intro, characters } = Astro.props;
+---
+
+<div class="category-section">
+    <h2 class="category-title">{title}</h2>
+    <p class="category-intro">{intro}</p>
+    <div class="characters-grid">
+        {
+            characters.map((char) => (
+                <a href={`/personajes/${char.slug}`} class="character-card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            {char.data.image ? (
+                                <Image
+                                    src={char.data.image}
+                                    alt={char.data.alias || char.data.name}
+                                    class="char-image"
+                                    width={400}
+                                    height={340}
+                                />
+                            ) : (
+                                <div class="placeholder-image classified-container">
+                                    <div class="classified-content">
+                                        <span class="classified-stamp">
+                                            CLASIFICADO
+                                        </span>
+                                        <span class="classified-sub">
+                                            SOLO OJOS AUTORIZADOS
+                                        </span>
+                                    </div>
+                                </div>
+                            )}
+                            <h2 class="char-name">
+                                {char.data.alias || char.data.name}
+                            </h2>
+                        </div>
+                        <div class="card-back">
+                            <h3>{char.data.name}</h3>
+                            <p class="char-desc">
+                                {char.data.description.slice(0, 150)}
+                                {char.data.description.length > 150
+                                    ? "..."
+                                    : ""}
+                            </p>
+                            {char.data.source && (
+                                <p class="char-source">{char.data.source}</p>
+                            )}
+                        </div>
+                    </div>
+                </a>
+            ))
+        }
+    </div>
+</div>
+
+<style>
+    .category-section {
+        margin-top: 6rem; /* Increased spacing */
+        padding-top: 2rem;
+        border-top: 1px solid rgba(0, 0, 0, 0.1); /* Visual separator */
+        margin-bottom: var(--spacing-3xl);
+    }
+
+    /* Remove top border/margin for the first section if needed, 
+     but since this component is used multiple times, 
+     we might handle the first-child in the parent or keep it here 
+     if we can detect it (CSS :first-of-type selector in parent is better) 
+  */
+
+    .category-title {
+        font-size: var(--text-3xl);
+        color: var(--color-primary);
+        margin-bottom: var(--spacing-sm);
+        text-transform: uppercase;
+        border-bottom: 2px solid var(--color-secondary);
+        padding-bottom: 0.5rem;
+        display: inline-block;
+    }
+
+    .category-intro {
+        font-size: var(--text-lg);
+        color: var(--color-text-light);
+        margin-bottom: var(--spacing-xl);
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .characters-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: var(--spacing-xl);
+    }
+
+    .character-card {
+        background-color: transparent;
+        height: 400px;
+        perspective: 1000px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transition: transform 0.6s;
+        transform-style: preserve-3d;
+        box-shadow: var(--shadow-md);
+    }
+
+    .character-card:hover .card-inner {
+        transform: rotateY(180deg);
+    }
+
+    .card-front,
+    .card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        border: 3px solid var(--color-secondary);
+        background: white;
+        display: flex;
+        flex-direction: column;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .card-front {
+        color: black;
+    }
+
+    .card-back {
+        background-color: var(--color-secondary);
+        color: white;
+        transform: rotateY(180deg);
+        padding: var(--spacing-lg);
+        justify-content: center;
+        align-items: center;
+    }
+
+    .char-image {
+        width: 100%;
+        height: 85%;
+        object-fit: cover;
+        border-bottom: 3px solid var(--color-secondary);
+    }
+
+    .placeholder-image {
+        width: 100%;
+        height: 85%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-bottom: 3px solid var(--color-secondary);
+    }
+
+    .classified-container {
+        background-color: #f0e6d2;
+        background-image: linear-gradient(
+                rgba(0, 0, 0, 0.05) 1px,
+                transparent 1px
+            ),
+            linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+        background-size: 20px 20px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .classified-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: 4px dashed #8b0000;
+        padding: 1rem;
+        transform: rotate(-5deg);
+        opacity: 0.8;
+    }
+
+    .classified-stamp {
+        font-size: 2rem;
+        font-weight: 900;
+        color: #8b0000;
+        font-family: "Courier New", monospace;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        border: 3px solid #8b0000;
+        padding: 0.2rem 1rem;
+        margin-bottom: 0.5rem;
+        background-color: rgba(139, 0, 0, 0.1);
+    }
+
+    .classified-sub {
+        font-size: 0.8rem;
+        font-weight: bold;
+        color: #8b0000;
+        font-family: "Courier New", monospace;
+        letter-spacing: 1px;
+    }
+
+    .char-name {
+        font-family: var(--font-heading);
+        font-size: var(--text-xl);
+        font-weight: 800;
+        margin: auto;
+        padding: 0.5rem;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+    }
+
+    .card-back h3 {
+        font-size: var(--text-2xl);
+        font-weight: 800;
+        margin-bottom: var(--spacing-md);
+        color: var(--color-primary);
+    }
+
+    .char-desc {
+        font-size: var(--text-sm);
+        line-height: 1.6;
+        margin-bottom: var(--spacing-md);
+        flex-grow: 1;
+    }
+
+    .char-source {
+        font-size: var(--text-xs);
+        color: rgba(255, 255, 255, 0.7);
+        font-style: italic;
+        margin-top: auto;
+    }
+
+    @media (max-width: 768px) {
+        .characters-grid {
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .character-card {
+            height: 350px;
+        }
+    }
+
+    /* Declassified Styles */
+    .card-front::before {
+        content: "CONFIDENCIAL";
+        position: absolute;
+        top: 10px;
+        left: -30px;
+        background: var(--color-primary);
+        color: white;
+        font-size: 0.6rem;
+        padding: 2px 30px;
+        transform: rotate(-45deg);
+        z-index: 10;
+        font-weight: bold;
+        letter-spacing: 1px;
+    }
+
+    .card-back::after {
+        content: "TOP SECRET";
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        border: 2px solid var(--color-primary);
+        color: var(--color-primary);
+        font-size: 1rem;
+        padding: 0.2rem 0.5rem;
+        transform: rotate(-10deg);
+        opacity: 0.5;
+        font-weight: bold;
+        font-family: var(--font-display);
+    }
+</style>
