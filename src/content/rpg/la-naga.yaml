@@ -40,7 +40,7 @@ otherstats:
   - "Modificador Psionico: 30"
   - "Parada Fisica: 50+10"
   - "Parada mental: 75"
-  - "Salto (alto / largo): 11m/3,6m (x2)"
+  - "Salto (alto / largo): 3,6m/11m (x2)"
 attributes:
   cost: 50
   values:

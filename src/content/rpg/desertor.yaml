@@ -33,7 +33,7 @@ otherstats:
   - "Modificador Psionico: 25"
   - "Parada Fisica: 25+20"
   - "Parada mental: 50"
-  - "Salto (alto / largo): 10m/3,3m"
+  - "Salto (alto / largo): 3,3m/10m"
 attributes:
   values:
     Fuerza: 100

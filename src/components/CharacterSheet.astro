@@ -37,6 +37,10 @@ interface Props {
         notes?: string | string[];
         totalCost?: number | string;
         level?: number | string;
+        techmodules?: {
+            cost?: number | string;
+            items: any[];
+        };
         other?: string[];
     };
 }
@@ -249,6 +253,26 @@ const otherStats = rpg.otherstats || rpg.other || [];
                     </div>
                     <ul>
                         {rpg.background.items.map((item) => (
+                            <RpgItem item={item} />
+                        ))}
+                    </ul>
+                </div>
+            )
+        }
+
+        {
+            rpg.techmodules && (
+                <div class="sheet-section techmodules">
+                    <div class="section-header">
+                        <h4>Módulos Tecnológicos</h4>
+                        {rpg.techmodules.cost && (
+                            <span class="cost">
+                                ({rpg.techmodules.cost} PCs)
+                            </span>
+                        )}
+                    </div>
+                    <ul>
+                        {rpg.techmodules.items.map((item) => (
                             <RpgItem item={item} />
                         ))}
                     </ul>

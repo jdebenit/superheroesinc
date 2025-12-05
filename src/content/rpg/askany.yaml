@@ -1,8 +1,6 @@
 name: "Hijo de Isis"
-
 level: 2
 origin:
-
   items:
     - "Semidios":
       - "No necesita foco para usar sus poderes"
@@ -38,7 +36,6 @@ otherstats:
   - "Parada mental: 100"
   - "Salto (alto / largo): 3.3m/100m"
 attributes:
-
   values:
     Fuerza: 40
     Constitución: 80
@@ -48,7 +45,6 @@ attributes:
     Apariencia: 40
     Voluntad: 171
 spells:
-
   items:
     - name: "Escudos Místicos"
       rank: "Rango 5"
@@ -63,12 +59,10 @@ spells:
     - name: "Abrir Portales"
       rank: "Rango 4"
 powers:
-
   items:
     - name: "Superinteligencia"
     - name: "Supervoluntad"
 skills:
-  cost: 0
   items:
     - name: "Acechar/Discrección"
       math: "(AGI+PER)/2"
@@ -107,7 +101,6 @@ skills:
       math: "(AGI)"
       value: "101%"
 specialskills:
-
   items:
     - name: "Magia"
       value: "128%"
@@ -120,4 +113,3 @@ specialskills:
     - name: "Mitología"
       math: "(INT/3)"
       value: "47%"
-

@@ -67,6 +67,10 @@ const rpgCollection = defineCollection({
             cost: z.union([z.number(), z.string()]).optional(),
             items: z.array(z.any())
         }).optional(),
+        techmodules: z.object({
+            cost: z.union([z.number(), z.string()]).optional(),
+            items: z.array(z.any())
+        }).optional(),
         combatstats: z.array(z.string()).optional(),
         otherstats: z.array(z.string()).optional(),
         notes: z.union([z.string(), z.array(z.string())]).optional(),
