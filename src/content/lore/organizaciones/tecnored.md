@@ -19,8 +19,7 @@ En el año **2000**, tras una serie de tragedias y la desestabilización del pan
 - con armaduras de alta tecnología,  
 - producidas por empresas privadas como **Zortek** e **IDESS**.
 
-Su misión:  
-**reemplazar a los superhéroes** y garantizar la defensa uniforme en toda la UE.
+Su misión es **reemplazar a los superhéroes** y garantizar la defensa uniforme en toda la UE.
 
 Durante más de 10 años, TecnoRED desplegó **una treintena de Grupos Operativos de Asalto** (GOA), patrullando las principales ciudades europeas.
 

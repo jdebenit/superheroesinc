@@ -70,6 +70,5 @@ Zortek es recordada como:
 - una empresa cuyos avances salvaron miles de vidas…  
 - …pero cuya tecnología también facilitó la mayor catástrofe metahumana de Europa.
 
-Su nombre permanece ligado para siempre a la dualidad de la tecnología aplicada a superseres:  
-**progreso y destrucción** bajo un mismo sello.
+Su nombre permanece ligado para siempre a la dualidad de la tecnología aplicada a superseres, **progreso y destrucción** bajo un mismo sello.
 

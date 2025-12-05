@@ -6,11 +6,9 @@ source: "Superhéroes INC. Tercera Edición"
 updatedDate: 2025-11-27
 ---
 
-El **CISS** —Consejo Internacional de Superseguridad— es el organismo de la ONU encargado de coordinar, supervisar y regular la actividad metahumana a escala global. Su creación, en marzo de 2013, respondió a una necesidad evidente: los conflictos metahumanos ya no eran incidentes aislados, sino amenazas que afectaban simultáneamente a varios países y dimensiones.
+El **CISS** —Consejo Internacional de Superseguridad— es el organismo de la ONU encargado de coordinar, supervisar y regular la actividad metahumana a escala global. Su creación, en marzo de 2013, respondió a una necesidad evidente, los conflictos metahumanos ya no eran incidentes aislados, sino amenazas que afectaban simultáneamente a varios países y dimensiones.
 
 El CISS opera como una **estructura diplomático-militar**, capaz de emitir protocolos internacionales, coordinar fuerzas de intervención y mediar entre naciones cuando aparecen superterroristas, incidentes dimensionales o poderes que superan las capacidades de cualquier estado individual.
-
-![Sede del CISS en la ONU](https://via.placeholder.com/800x400?text=CISS)
 
 ## Mandato y Funciones
 

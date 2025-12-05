@@ -5,7 +5,7 @@ category: "localizaciones"
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-11-26
 ---
-**Nigalión** es una realidad paralela formada casi por completo de **energía oscura**. A diferencia de otros reinos como Avalon o la Isla del Verano, Nigalión representa la vertiente más peligrosa y destructiva del Multiverso: un plano inestable donde la magia se expresa como **oscuridad viva**, entropía, locura y poder desatado.
+**Nigalión** es una realidad paralela formada casi por completo de **energía oscura**. A diferencia de otros reinos como Avalon o la Isla del Verano, Nigalión representa la vertiente más peligrosa y destructiva del Multiverso, un plano inestable donde la magia se expresa como **oscuridad viva**, entropía, locura y poder desatado.
 
 Para La Alianza y la comunidad arcana, Nigalión es **la mayor amenaza interdimensional conocida**, origen de entidades malignas que buscan atravesar los santuarios de la Tierra Zero para extender su influencia.
 

@@ -29,8 +29,7 @@ La joya de su política es la **apertura humanitaria**:
 Paraíso acoge a cualquier mutante (y a otros tipos de metahumanos) que huya de persecución racial o política. En sus costas, decir “bienvenido” no es un trámite; es una promesa.
 ## Los Arcángeles: el corazón militar-humanitario
 
-La antigua fuerza paramilitar de Dante, **Los Arcontes**, fue transformada por Orfeo en un cuerpo muy distinto:  
-**Los Arcángeles**, un ejército de paz formado por mutantes que ayudan en crisis internacionales, desastres naturales y operaciones de rescate.  
+La antigua fuerza paramilitar de Dante, **Los Arcontes**, fue transformada por Orfeo en un cuerpo muy distinto.  **Los Arcángeles**, un ejército de paz formado por mutantes que ayudan en crisis internacionales, desastres naturales y operaciones de rescate.  
 
 Los Arcángeles son famosos, respetados y activos en todo el planeta e incluso más allá. Paraíso los considera su orgullo nacional, y casi cualquier mutante con capacidades de combate puede unirse a ellos si lo desea.
 

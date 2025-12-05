@@ -27,10 +27,10 @@ Finalmente, la ley fue enmendada y Juan fue aceptado en la Policía Nacional. Su
 
 Se ganó el respeto de sus compañeros, aunque no sin enfrentar la resistencia del sindicato policial, que temía que su éxito abriera la puerta a más metahumanos en la fuerza. Lo apodaron "el Toro" a sus espaldas, pero Juan afrontaba la situación con humor, incluso poniendo música del Fari mientras patrullaba para aligerar el ambiente.
 
-Su estilo policial es de la vieja escuela: mucha calle, confidentes en los bajos fondos y una presencia física que suele disuadir a los criminales antes de que sea necesario el uso de la fuerza. Sin embargo, cuando la violencia es inevitable, Juan es una fuerza de la naturaleza, capaz de embestir puertas blindadas o detener vehículos en marcha con sus propias manos.
+Su estilo policial es de la vieja escuela, mucha calle y una presencia física que suele disuadir a los criminales antes de que sea necesario el uso de la fuerza. Sin embargo, cuando la violencia es inevitable, Juan es una fuerza de la naturaleza, capaz de embestir puertas blindadas o detener vehículos en marcha con sus propias manos.
 
 ## Los Irregulares
 
 Su integridad y su capacidad para liderar lo llevaron a ser seleccionado para supervisar el primer Grupo Operativo de Metahumanos (GOM 28). En este rol, Juan se convirtió en el enlace entre la Policía Nacional y los "Irregulares". Al ser supervisor del equipo, Juan se encarga de decidir qué casos deben investigar, manteniendo un equilibrio entre el cumplimiento de la ley y la necesidad de proteger a la ciudadanía de amenazas metahumanas.
 
-Y aunque no debería implicarse demasiado con esos tipos con mallas y mascaras, Juan no duda en unirse al campo de batalla cuando es necesario, luchando junto a los Irregulares y demostrando que sigue siendo un defensor de aquellos que no pueden defenderse por sí solos. Su relación con el equipo es compleja: es su jefe, su niñera y, a menudo, su única defensa contra la burocracia que busca desmantelarlos.
+Y aunque no debería implicarse demasiado con esos tipos con mallas y mascaras, Juan no duda en unirse al campo de batalla cuando es necesario, luchando junto a los Irregulares y demostrando que sigue siendo un defensor de aquellos que no pueden defenderse por sí solos. Su relación con el equipo es compleja, es su jefe, su niñera y, a menudo, su única defensa contra la burocracia que busca desmantelarlos.

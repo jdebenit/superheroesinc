@@ -52,18 +52,18 @@ Muchas de estas razas tienen versiones o paralelos de personajes de Tierra Zero.
 
 El mundo cuenta con sus propios supergrupos y antagonistas, equivalentes a los de Tierra Zero pero adaptados al paradigma mágico:
 
-### **Héroes destacados**
+### Héroes destacados
 
 - **Campeones del Reino** – análogo medieval a los Campeones de Europa.  
 - **Caballeros de la Unión** – defensores de la América de Terra.  
 - **Fuerza Elemental** – versión terrana del supergrupo homónimo, liderado por *Estrella* en esta realidad.
 
-### **Villanos notables**
+### Villanos notables
 
 - **Dragón Oscuro** – guardián chino temido por su poder.  
 - **Eridani Rex** – tirano del Reino de Transjantán.  
 - **Geb**, dios egipcio enloquecido que gobierna el Imperio Egipcio.  
-- **Los Condenados**, equivalentes a la Legión Sangrienta o Psykosis.  
+- **Los Condenados**, equivalentes a la Legión Sangrienta y Psykosis.  
 - **Los Disidentes**, similares a los Irregulares pero al servicio de Eridani Rex.
 
 ## Relación con Tierra Zero

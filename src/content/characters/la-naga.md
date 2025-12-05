@@ -1,7 +1,7 @@
 ---
 name: Asha de Cindraor
 alias: La Naga
-description: Asha es una mujer alta, esbelta y de movimientos fluidos, marcada por años de disciplina física y mental. Su piel cálida refleja la luz con un matiz dorado, y su largo cabello moreno cae como una cortina oscura que acompaña cada gesto. Sus ojos verde esmeralda son intensos y expresivos, capaces de leer tensiones y emociones con una precisión inquietante.
+description: Guerrera formada en la ancestral Orden de las Nagas, Asha transformó la ausencia de magia que marcó su infancia en Valdoria en una fuerza interior única. Tras años de disciplina aprendiendo a dominar la Kundalini, fue traicionada por su linaje y desterrada a Tierra Zero.
 source: Partida Oficial
 updatedDate: 2025-12-01
 image: /personajes/la-naga-tierra-zero.png
@@ -15,19 +15,18 @@ Asha es una mujer alta, esbelta y de movimientos fluidos, marcada por años de d
 
 Su cuerpo se mueve con absoluta precisión y silencio, como si respondiera a un ritmo interno constante. Incluso en quietud transmite equilibrio, firmeza y una calma profunda que desconcierta a quienes la observan.
 
-Al activar su Kundalini, un efecto sutil recorre su cuerpo: la respiración se vuelve más profunda, su columna realiza un movimiento ondulante y una vibración interna asciende desde la base de la espalda hasta la nuca, tensando su piel como si una serpiente invisible se deslizara bajo ella. Sus ojos adquieren un brillo intenso, y el aire alrededor parece contener la respiración por un instante. No es magia: es pura energía vital despierta.
+Al activar su Kundalini, un efecto sutil recorre su cuerpo, la respiración se vuelve más profunda, su columna realiza un movimiento ondulante y una vibración interna asciende desde la base de la espalda hasta la nuca, tensando su piel como si una serpiente invisible se deslizara bajo ella. Sus ojos adquieren un brillo intenso, y el aire alrededor parece contener la respiración por un instante. No es magia, es pura energía vital despierta.
 
 ## Interpretando a Asha
 
-Asha es tranquila, serena y observadora. Habla poco y escucha más. Cada gesto está medido; cada palabra, escogida. No responde desde la rabia ni la impulsividad: respira, observa y actúa desde el equilibrio.
+Asha es tranquila, serena y observadora. Habla poco y escucha más. Cada gesto está medido; cada palabra, escogida. No responde desde la rabia ni la impulsividad, respira, observa y actúa desde el equilibrio.
 
-Lee a las personas por su respiración, postura y ritmo emocional. No juzga de inmediato: entiende primero. En combate se mueve con fluidez y precisión, sin furia, sin caos, sin desperdiciar movimiento. Su autocontrol es férreo.
+Lee a las personas por su respiración, postura y ritmo emocional. No juzga de inmediato, entiende primero. En combate se mueve con fluidez y precisión, sin furia, sin caos, sin desperdiciar movimiento. Su autocontrol es férreo.
 
-Aunque es reservada, no es fría. Tiene una empatía silenciosa y un sentido natural de protección hacia otros. Su seriedad puede generar momentos cómicos: interpreta bromas literalmente o responde con calma absoluta a situaciones absurdas. Esto no la ridiculiza: la humaniza.
+Aunque es reservada, no es fría. Tiene una empatía silenciosa y un sentido natural de protección hacia otros. Su seriedad puede generar momentos cómicos, interpreta bromas literalmente o responde con calma absoluta a situaciones absurdas. Esto no la ridiculiza la hace mas humana.
 
-Con aliados desarrolla camaradería lenta pero sólida: comparte técnicas, corrige respiraciones, se preocupa por su bienestar y se interpone sin pensar entre ellos y el peligro.
+Con aliados desarrolla camaradería lenta pero sólida, comparte técnicas, corrige respiraciones, se preocupa por su bienestar y se interpone sin pensar entre ellos y el peligro.
 
-> [!NOTE]
 > **Nota para el Guionista: Uso del Chi (Kundalini)**
 >
 > El Chi de Asha no es magia. Es el límite absoluto de su control corporal, emocional y energético.
@@ -43,7 +42,7 @@ Con aliados desarrolla camaradería lenta pero sólida: comparte técnicas, corr
 > *   **Influenciar:** una frase corta que desarma emocionalmente o impone calma inmediata.
 
 ## Transfondo
-Asha nació en [Valdoria](/lore/localizaciones/valdoria) llevando un nombre que, según muchos, nunca debió ser suyo: Asha de Cindraor.
+Asha nació en [Valdoria](/lore/localizaciones/valdoria) llevando un nombre que, según muchos, nunca debió ser suyo, Asha de Cindraor.
 
 Los Cindraor siempre habían presumido de un linaje antiguo, prestigioso y profundamente ligado a la magia. Cada generación daba lugar a magos brillantes, ritualistas temidos y custodios de secretos que dormían bajo sellos milenarios. La magia corría por sus venas como si fuera parte de su sangre.
 
@@ -88,13 +87,13 @@ Abandonó Valdoria sin despedidas ni lágrimas. En la Torre Cindraor había sido
 Cuando llegó a las Tierras Profundas de Kish’var, lo primero que notó fue el silencio. No era un silencio vacío, sino uno lleno de respiraciones antiguas. El Bosque de Seshara no la acogió con calidez, pero tampoco con rechazo. La midió, la sopesó y la aceptó con la misma neutralidad con la que un árbol acepta la lluvia o la sequía.
 ### El entrenamiento sin palabras
 Las Nagas no la recibieron con ceremonias ni con desprecio.  
-La observaron como a cualquier recién llegada: un cuerpo que respira, un ritmo interno, un impulso que podía quebrarse o transformarse.
+La observaron como a cualquier recién llegada, un cuerpo que respira, un ritmo interno, un impulso que podía quebrarse o transformarse.
 
 Allí no había magia, ni linajes, ni maestros que recompensaran o castigaran.  
 Solo había prácticas, respiraciones, movimientos y una disciplina que atravesaba el cuerpo entero.  
 Un equilibrio que había que buscar cada día.
 
-Asha llegó convencida de que estaba vacía. Las instructoras vieron algo distinto: una joven desordenada por dentro, pero con espacio para algo más.
+Asha llegó convencida de que estaba vacía. Las instructoras vieron algo distinto, una joven desordenada por dentro, pero con espacio para algo más.
 ### Lo que despertó
 Mientras otras niñas repetían ejercicios con obediencia mecánica, Asha imitaba los movimientos ondulantes que veía en las columnas del bosque. Había una serpiente interna en ella, aunque aún no sabía nombrarla.
 
@@ -190,16 +189,9 @@ Y en Valdoria, donde el orden arcano es sagrado, romper un equilibrio siempre at
 _La caída de un linaje y la caída de una hija_
 
 Los atacantes entraron sin dejar rastro.  
-Conocían cada pasillo, cada turno de guardia, cada trampa mágica. Para cualquier mago aquello habría sido imposible. Para Asha, la explicación era clara: **el enemigo estaba dentro**.
+Conocían cada pasillo, cada turno de guardia, cada trampa mágica. Para cualquier mago aquello habría sido imposible. Para Asha, la explicación era clara, **el enemigo estaba dentro**.
 
-Las runas de vigilancia no fallaron por casualidad.  
-Las protecciones estaban autenticadas con sellos familiares, y alguien había usado uno para suspender temporalmente los círculos de defensa y crear la ilusión de normalidad.
-
-Asha reconoció el patrón al instante:  
-era el mismo sello que su madrastra utilizaba para revisar los archivos del Tesoro.
-
-Los atacantes no activaron una sola alarma mágica porque, técnicamente, las puertas les habían sido abiertas desde dentro.  
-Solo la vigilancia silenciosa de Asha impidió una catástrofe mayor.
+Las runas de vigilancia no fallaron por casualidad.  Las protecciones estaban autenticadas con sellos familiares, y alguien había usado uno para suspender temporalmente los círculos de defensa y crear la ilusión de normalidad. Asha reconoció el patrón al instante, era el mismo sello que su madrastra utilizaba para revisar los archivos del Tesoro. Los atacantes no activaron una sola alarma mágica porque, técnicamente, las puertas les habían sido abiertas desde dentro.  Solo la vigilancia silenciosa de Asha impidió una catástrofe mayor.
 
 Su cuerpo reaccionó sin pensamiento.  
 La respiración serpentina despertó cada músculo.  
@@ -212,13 +204,7 @@ Era un golpe.
 
 Un golpe destinado a quebrar a la casa Cindraor… y a ella con ella.
 
-Su padre murió protegiendo un cofre lleno de pactos antiguos.  
-Asha sintió cómo su vida se apagaba. Por un instante, el impulso quiso dominarla; la serpiente interna quiso ascender con furia.
-
-Recordó entonces la Doma del Impulso y se aferró a ella.
-
-Pero el golpe final llegó de donde siempre lo sospechó.  
-Desde dentro de su propia casa.
+Su padre murió protegiendo un cofre lleno de pactos antiguos.  Asha sintió cómo su vida se apagaba. Por un instante, el impulso quiso dominarla; la serpiente interna quiso ascender con furia. Recordó entonces la Doma del Impulso y se aferró a ella. Pero el golpe final llegó de donde siempre lo sospechó.  Desde dentro de su propia casa.
 
 Cayó inconsciente.
 #### El juicio que nunca fue juicio
@@ -248,7 +234,7 @@ La madrastra no buscaba quitarse de encima a una bastarda.
 Buscaba eliminar a la única persona capaz de ver la verdad tras su máscara.
 ### La sentencia
 La ley impedía ejecutar a una noble.  
-Así que eligieron la salida más cómoda: **enviarla al Pozo del Destierro**.  
+Así que eligieron la salida más cómoda, **enviarla al Pozo del Destierro**.  
 Un portal del que nadie regresaba y que se tragaba cualquier escándalo sin dejar rastro.
 
 La madrastra no sonrió.  
@@ -310,7 +296,7 @@ La detuvieron.
 
 Pasó dos noches entre rejas, respirando con cuidado para no arrancar el metal de pura desesperación.
 
-El juez, saturado por las detenciones de Halloween, decidió dejarla libre con varios cargos menores: agresión, resistencia, daños materiales y una acusación que la acompañaría más veces de las que deseaba recordar, “obstrucción involuntaria de una operación policial”.
+El juez, saturado por las detenciones de Halloween, decidió dejarla libre con varios cargos menores, agresión, resistencia, daños materiales y una acusación que la acompañaría más veces de las que deseaba recordar, “obstrucción involuntaria de una operación policial”.
 
 Salió sin nombre, sin hogar y sin mundo.
 

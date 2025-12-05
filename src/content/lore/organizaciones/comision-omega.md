@@ -10,8 +10,6 @@ La **Comisión Omega** es una organización **privada, hermética y envuelta en 
 
 Aunque actualmente aparece como **“en cese temporal”**, persiste la duda de si la organización realmente ha detenido sus actividades o simplemente ha regresado a la clandestinidad más absoluta.
 
-![Símbolo no oficial de la Comisión Omega](https://via.placeholder.com/800x400?text=Comision+Omega)
-
 ## Naturaleza y Propósito
 
 La Comisión Omega funcionó como un **centro de inteligencia paralela**, recopilando datos sobre metahumanos, eventos anómalos y operaciones secretas de distintos gobiernos y corporaciones.  
@@ -24,7 +22,6 @@ Entre sus áreas de actuación conocidas:
 
 > "Los siguientes documentos conforman una heterogénea mezcolanza de informes procedentes de IDESS, Superheroes Inc., **la Comisión Omega**…"  
 > — *Nota manuscrita de Euroman*  
-> :contentReference[oaicite:0]{index=0}
 
 ## Actividad Conocida
 
@@ -42,7 +39,6 @@ En los registros modernos aparece como:
 
 - **Dependencia:** Organización privada y secreta  
 - **Estatus:** *Aparentemente en cese temporal*  
-  :contentReference[oaicite:1]{index=1}
 
 El término “aparentemente” ha generado numerosas especulaciones, ya que la naturaleza de la Comisión Omega implica que su inactividad también podría ser una **cortina de humo**.
 

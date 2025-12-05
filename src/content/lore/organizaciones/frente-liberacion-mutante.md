@@ -8,7 +8,7 @@ updatedDate: 2025-11-30
 
 El **Frente de Liberación Mutante** fue el primer gran movimiento mundial organizado por y para mutantes. Surgió como respuesta a décadas —e incluso siglos— de persecución, discriminación y violencia institucional contra individuos con rasgos mutantes. Su nacimiento coincidió con la aparición pública del activista pacifista **Edgar Columbus**, cuya figura inspiró a millones.
 
-El Frente se consolidó como una red transnacional que conectaba colectivos locales, activistas, familias desplazadas y comunidades clandestinas. No era una organización militar ni un grupo paramilitar: su fuerza residía en la **movilización social**, las marchas, el apoyo legal y la defensa organizada de mutantes perseguidos.
+El Frente se consolidó como una red transnacional que conectaba colectivos locales, activistas, familias desplazadas y comunidades clandestinas. No era una organización militar ni un grupo paramilitar, su fuerza residía en la **movilización social**, las marchas, el apoyo legal y la defensa organizada de mutantes perseguidos.
 
 ## Origen y Motivación
 

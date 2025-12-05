@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "blog/nueva-web.md",
+                "file": "lore/organizaciones/zortek.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "nueva-web"
+              "title": "zortek"
             }
           }
         ]
@@ -53,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "\":\"",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -74,7 +74,8 @@
               "title": "Marcadores"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -185,37 +186,37 @@
   },
   "active": "5e96c9c7b02ae103",
   "lastOpenFiles": [
-    "characters/kamikaze.md",
-    "characters/alice.md",
-    "lore/organizaciones/cosmo.md",
-    "rpg/alice.yaml",
-    "blog/lanzamiento.md",
-    "characters/estrella.md",
-    "characters/virgilio.md",
-    "characters/vanadio.md",
-    "lore/localizaciones/paraiso.md",
-    "lore/localizaciones/nigalion.md",
-    "lore/entidades/equidad.md",
+    "lore/organizaciones/vientos-erebus.md",
+    "lore/localizaciones/valdoria.md",
     "lore/entidades/unidad.md",
-    "lore/entidades/entropia.md",
-    "lore/eventos/la-tecnoguerra.md",
-    "lore/grupos/euroforce.md",
-    "lore/grupos/la-legion-sangrienta.md",
-    "lore/eventos/Sin título.md",
-    "lore/eventos/Tecnoguerra.md",
+    "characters/terror.md",
+    "lore/localizaciones/terra.md",
+    "characters/termodinamo.md",
+    "lore/organizaciones/tecnored.md",
+    "lore/organizaciones/superheroes-inc.md",
     "lore/organizaciones/road-reapers.md",
-    "lore/eventos",
-    "characters/jefe-motero-road-reapers.md",
+    "characters/pesanta.md",
+    "lore/localizaciones/paraiso.md",
+    "blog/nueva-web.md",
+    "lore/localizaciones/nigalion.md",
     "characters/motero-road-reapers.md",
-    "lore/grupos/los-irregulares.md",
-    "characters/desertor.md",
-    "characters/aescotan.md",
-    "characters/askany.md",
+    "characters/medianoche.md",
+    "lore/eventos/la-tecnoguerra.md",
+    "lore/organizaciones/la-orden-de-las-nagas.md",
+    "characters/la-naga.md",
+    "characters/la-luz-cadollo.md",
+    "lore/grupos/la-legion-sangrienta.md",
+    "characters/la-bruja-verca.md",
+    "lore/organizaciones/la-alianza.md",
+    "characters/inspector-toro.md",
+    "lore/organizaciones/idess.md",
+    "lore/organizaciones/frente-liberacion-mutante.md",
+    "lore/organizaciones/fdm.md",
+    "rpg/alice.yaml",
+    "lore/eventos",
     "rpg/askany.yaml",
     "rpg/inspector-toro.yaml",
     "rpg/aescotan.yaml",
-    "characters/la-naga.md",
-    "characters/euroman-ii.md",
     "rpg/la-naga.yaml",
     "rpg",
     "lore/grupos",

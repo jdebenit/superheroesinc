@@ -18,7 +18,7 @@ Su sede principal en Madrid —las **Torres IDESS**— incluía instalaciones p�
 - Se extendió por toda Europa gracias a agresivas campañas mediáticas.  
 - Convenció a familias de que sus hijos metahumanos “necesitaban ayuda”.
 
-La realidad era mucho más oscura: la mayoría de metahumanos que entraban en IDESS **desaparecían**; solo unos pocos regresaban… completamente **lobotomizados**.
+La realidad era mucho más oscura, la mayoría de metahumanos que entraban en IDESS **desaparecían**; solo unos pocos regresaban… completamente **lobotomizados**.
 
 ## Actividades Reales
 

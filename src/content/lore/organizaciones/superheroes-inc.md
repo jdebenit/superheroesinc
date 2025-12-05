@@ -10,8 +10,6 @@ updatedDate: 2025-11-26
 
 Su prestigio proviene de su capacidad para actuar **rápido, de forma profesional y con protocolos fiables**, incluso ante amenazas que superan la estructura de cualquier gobierno. Aunque la agencia ha atravesado altibajos, polémicas y reestructuraciones, sigue siendo un elemento fundamental del panorama superhumano moderno.
 
-![Superhéroes INC](https://via.placeholder.com/800x400?text=Superheroes+INC)
-
 ## Naturaleza y Función
 
 Superhéroes INC no es un supergrupo, sino una **agencia privada de servicios metahumanos**, con un modelo similar al de una empresa de seguridad, pero adaptada al complejo ecosistema de superseres.

@@ -40,13 +40,9 @@ En varias ocasiones han actuado como **contrapeso** a organizaciones tecnológic
 
 ## Enemigos y Conflictos
 
-La Alianza tiene numerosos adversarios, pero ninguno más persistente que:
-
-### **Los Carbonari**
-Organización clandestina especializada en robar artefactos mágicos y manipular fuerzas arcanas. Sus intereses chocan de manera constante con La Alianza, provocando guerras ocultas que rara vez salen a la luz pública.
+La Alianza tiene numerosos adversarios, pero ninguno más persistente que Los Carbonari
 
 Otros rivales frecuentes:
-
 - grupos superterroristas con acceso a magia oscura,  
 - sectas dimensionales,  
 - cultos de dioses hostiles,  

@@ -7,7 +7,7 @@ image: "/personajes/estaca.png"
 category: principales
 ---
 
-**Estaca** es uno de los miembros más peligrosos y reconocibles de la **Legión Sangrienta**, actuando como su principal **fuerza de choque**. Su papel dentro del grupo es directo: abrir brecha, absorber daño, intimidar y ejecutar la violencia necesaria para que la Legión cumpla los planes de **Julián Provencio**, su líder.
+**Estaca** es uno de los miembros más peligrosos y reconocibles de la **Legión Sangrienta**, actuando como su principal **fuerza de choque**. Su papel dentro del grupo es directo, abrir brecha, absorber daño, intimidar y ejecutar la violencia necesaria para que la Legión cumpla los planes de **Julián Provencio**, su líder.
 
 Su nombre no es un apodo estilizado, sino una declaración de intenciones: Estaca es contundente, inflexible y mortal en distancias cortas.
 
