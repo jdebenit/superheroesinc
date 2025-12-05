@@ -16,7 +16,7 @@ origin:
     - "Guardian":
       - "El poder lo tiene la espada. Por ahora no se ha manifestado."
     - "Cyborg":
-      - "Espacio para 1 módulo [Ocupado], localizado en El tecnoimplante dle ojo."
+      - "Espacio para 1 módulo [Ocupado], localizado en El tecnoimplante del ojo."
 combatstats:
   - "Acciones por asalto: 3"
   - "Iniciativa y Reflejos: 52+20"
