@@ -5,9 +5,6 @@ description: "Primeras actualizaciones de contenido en la web de Superhéroes IN
 author: "Jorge Francisco de Benito Montoya"
 tags: ["noticias", "actualización", "lore"]
 ---
-
-# Comienza la incorporación de nuevas organizaciones, grupos y localizaciones al Lore Oficial
-
 La web de **Superhéroes INC** inicia hoy una nueva fase con la incorporación de las primeras **organizaciones, grupos y localizaciones** al repositorio oficial del universo.  
 Este es el primer paso de un proceso continuo que ampliará y actualizará el lore de forma progresiva, respetando las fuentes originales y añadiendo material procedente de campañas, suplementos y documentos internos.
 

@@ -7,8 +7,6 @@ tags:
   - noticias
   - lanzamiento
 ---
-
-# Superhéroes INC inaugura su nueva web oficial
 Nos complace anunciar el lanzamiento de la nueva web de **Superhéroes INC**, un espacio pensado para consolidar, ampliar y hacer accesible todo el universo del juego. Este proyecto marca el inicio de una etapa donde el lore, la documentación y el crecimiento creativo tendrán un lugar central y actualizado.
 
 Superhéroes INC siempre ha contado con una comunidad activa, capaz de generar ideas, personajes y tramas de manera constante. Sin embargo, transformar ese contenido en material editorial requiere tiempo, ilustraciones, maquetación y un proceso de preparación que no siempre avanza al ritmo que nos gustaría. Mientras tanto, el mundo sigue expandiéndose en partidas, campañas y proyectos personales.

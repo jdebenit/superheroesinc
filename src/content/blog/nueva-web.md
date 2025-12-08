@@ -5,9 +5,6 @@ description: "Superhéroes INC presenta la arquitectura tecnológica de su nueva
 author: "Jorge Francisco de Benito Montoya"
 tags: ["noticias", "tecnología", "desarrollo", "web"]
 ---
-
-# Una nueva web construida con Astro, React y Markdown
-
 La nueva web de **Superhéroes INC** no solo inaugura una etapa de expansión del lore y de organización del contenido. También representa un salto técnico importante.  
 Hemos optado por una arquitectura moderna, rápida y eficiente basada en **Astro**, **React** y **Markdown**, que garantiza flexibilidad en el desarrollo y una experiencia fluida para los visitantes.
 
