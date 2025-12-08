@@ -13,7 +13,8 @@ origin:
       - "+20 Mod. de Impacto"
       - "Cuando se usan dos armas blancas, la segunda meno reduce su percontaje solo en un tercio al igual que la primera mano."
     - "Dotado":
-      - "Potencia de energía mágica 168"
+      - "Potencia de energía mágica 101"
+      - "Ejecuta sus poderes con VOL/2"
 combatstats:
   - "Acciones por asalto: 3"
   - "Iniciativa y Reflejos: 65"
@@ -48,6 +49,10 @@ powers:
       notes: "Solo olfato y gusto"
     - name: "Superconstitución"
     - name: "Superagilidad"
+spells:
+  items:
+    - name: "Escantar objetos"
+      rank: "Rango 6"
 skills:
   items:
     - name: "Acechar/Discrección"
