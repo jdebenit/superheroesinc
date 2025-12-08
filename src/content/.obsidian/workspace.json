@@ -11,10 +11,14 @@
             "id": "7667722d785a870c",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "lore/grupos/psykosis.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "Nueva pestaña"
+              "title": "psykosis"
             }
           }
         ]
@@ -181,14 +185,18 @@
   },
   "active": "7667722d785a870c",
   "lastOpenFiles": [
+    "rpg/arkham.yaml",
+    "rpg/philipe-de-herblay copy.yaml",
+    "lore/grupos/los-irregulares.md",
+    "lore/grupos/psykosis.md",
+    "lore/grupos/Psycosys.md",
+    "lore/grupos/cazadores-de-sombras.md",
     "rpg/philipe-de-herblay.yaml",
     "characters/philipe-herblay.md",
     "lore/grupos/la-legion-sangrienta.md",
-    "lore/grupos/cazadores-de-sombras.md",
     "rpg/medianoche.yaml",
     "rpg/la-naga copy.yaml",
     "lore/grupos/euroforce.md",
-    "lore/grupos/los-irregulares.md",
     "characters/medianoche.md",
     "characters/centurion.md",
     "characters/jade.md",
@@ -210,12 +218,8 @@
     "blog/nueva-web.md",
     "lore/localizaciones/nigalion.md",
     "characters/motero-road-reapers.md",
-    "lore/eventos/la-tecnoguerra.md",
-    "lore/organizaciones/la-orden-de-las-nagas.md",
     "rpg/alice.yaml",
     "lore/eventos",
-    "rpg/askany.yaml",
-    "rpg/inspector-toro.yaml",
-    "rpg/aescotan.yaml"
+    "rpg/askany.yaml"
   ]
 }

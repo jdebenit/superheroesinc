@@ -86,7 +86,6 @@ skills:
       math: "(AGI)"
       value: "102%"
 specialskills:
-  cost: 7
   items:
     - name: "Otro Idioma - Latin"
       math: "(INT/3)"
