@@ -1,0 +1,94 @@
+name: "Peter Pain"
+level: 4
+origin:
+  items:
+    - "Alterado":
+      - "Con secuelas de perdida de apariencia, locura..."
+combatstats:
+  - "Acciones por asalto: 6"
+  - "Iniciativa y Reflejos: 70"
+  - "Puntos de Vida: 60"
+  - "Equilibrio Mental: 30"
+otherstats:
+  - "Inconsciencia: 6"
+  - "Recuperación: 1 PV/h"
+  - "Resistencia a gases y venenos: 21%"
+  - "Resistencia a prejuicios: 100%"
+  - "Modificador de fuerza: 1d4"
+  - "Peso Levantado: 60 Kg."
+  - "Daño absorbido físico: 0"
+  - "Daño absorbido mental: 0"
+  - "Modificador de impacto: 100"
+  - "Modificador Psionico: -10"
+  - "Parada Fisica: 80"
+  - "Parada mental: 0"
+  - "Salto (alto / largo): 16m/50m"
+attributes:
+  values:
+    Fuerza: 60
+    Constitución: 65
+    Agilidad: 200
+    Inteligencia: 7735
+    Percepción: 80
+    Apariencia: 55
+    Voluntad: 65
+powers:
+  items:
+    - name: "Incremento Vital"
+      rank: Bajo(01)
+    - name: "Superagilidad"
+    - name: "Volar"
+      value: "100%"
+      rank: Alto(81)
+skills:
+  items:
+    - name: "Acechar/Discrección"
+      math: "(AGI+PER)/2"
+      value: "140%"
+    - name: "Comb. cuerpo a cuerpo"
+      math: "(AGI+PER)/2"
+      value: "140%"
+    - name: "Conocimientos generales"
+      math: "(INT/3)"
+      value: "24%"
+    - name: "Esconderse"
+      math: "(AGI+PER)/4"
+      value: "70%"
+    - name: "Idea"
+      math: "(INT)/2"
+      value: "36%"
+    - name: "Influencia"
+      math: "(INT+APA)/2"
+      value: "54%"
+    - name: "Idioma nativo"
+      math: "(INT)"
+      value: "73%"
+    - name: "Investigar"
+      math: "(INT+PER)/3"
+      value: "51%"
+    - name: "Lanzar"
+      math: "(FUE+PER)/2"
+      value: "70%"
+    - name: "Primeros auxilios"
+      math: "(INT)/2"
+      value: "36%"
+    - name: "Suerte"
+      math: "(PER+VOL)/4"
+      value: "36%"
+    - name: "Trepar y Saltar"
+      math: "(AGI)"
+      value: "200%"
+specialskills:
+  items:
+    - name: "Arma especial - mangual"
+      value: "53%"
+    - name: "Armas blancas"
+      value: "113%"
+weapons:
+  items:
+    - name: "Mangual de bronce Cthoniano"
+      value: "53%"
+      notes: "Daño 3d10+20+Mod Fue. Cuando golpea con el, la victima debe realizar una tirada de Equilibrio Mental, si falla perdera 1d10 puntos de EQM debido al trauma."
+    - name: "Cuchillos"
+      value: "113%"
+      notes: "Daño 2d6+25+Mod Fue."

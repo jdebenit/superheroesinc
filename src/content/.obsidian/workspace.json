@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "characters/chainsaw.md",
+                "file": "characters/peter-pain.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "chainsaw"
+              "title": "peter-pain"
             }
           }
         ]
@@ -185,6 +185,10 @@
   },
   "active": "7f5a5c4b42f63760",
   "lastOpenFiles": [
+    "rpg/peter-pain.yaml",
+    "rpg/peter-painyaml",
+    "rpg/peter-pain-yaml",
+    "characters/chainsaw.md",
     "rpg/chainsaw.yaml",
     "rpg/philipe-de-herblay copy.yaml",
     "characters/centurion.md",
@@ -206,7 +210,6 @@
     "characters/jade.md",
     "rpg/centurion.yaml",
     "rpg/jade copy.yaml",
-    "rpg/jade.yaml",
     "lore/organizaciones/zortek.md",
     "lore/organizaciones/vientos-erebus.md",
     "lore/localizaciones/valdoria.md",
@@ -217,9 +220,6 @@
     "lore/organizaciones/superheroes-inc.md",
     "lore/organizaciones/road-reapers.md",
     "characters/pesanta.md",
-    "lore/localizaciones/paraiso.md",
-    "blog/nueva-web.md",
-    "rpg/alice.yaml",
-    "lore/eventos"
+    "lore/localizaciones/paraiso.md"
   ]
 }
