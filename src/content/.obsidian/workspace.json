@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "lore/organizaciones/zortek.md",
+                "file": "characters/centurion.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "zortek"
+              "title": "centurion"
             }
           }
         ]
@@ -74,8 +74,7 @@
               "title": "Marcadores"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -186,6 +185,14 @@
   },
   "active": "5e96c9c7b02ae103",
   "lastOpenFiles": [
+    "characters/jade.md",
+    "rpg/centurion.yaml",
+    "rpg/jade copy.yaml",
+    "rpg/jade.yaml",
+    "characters/philipe-herblay.md",
+    "characters/medianoche.md",
+    "characters/centurion.md",
+    "lore/organizaciones/zortek.md",
     "lore/organizaciones/vientos-erebus.md",
     "lore/localizaciones/valdoria.md",
     "lore/entidades/unidad.md",
@@ -200,27 +207,18 @@
     "blog/nueva-web.md",
     "lore/localizaciones/nigalion.md",
     "characters/motero-road-reapers.md",
-    "characters/medianoche.md",
     "lore/eventos/la-tecnoguerra.md",
     "lore/organizaciones/la-orden-de-las-nagas.md",
     "characters/la-naga.md",
     "characters/la-luz-cadollo.md",
     "lore/grupos/la-legion-sangrienta.md",
     "characters/la-bruja-verca.md",
-    "lore/organizaciones/la-alianza.md",
-    "characters/inspector-toro.md",
-    "lore/organizaciones/idess.md",
-    "lore/organizaciones/frente-liberacion-mutante.md",
-    "lore/organizaciones/fdm.md",
     "rpg/alice.yaml",
     "lore/eventos",
     "rpg/askany.yaml",
     "rpg/inspector-toro.yaml",
     "rpg/aescotan.yaml",
     "rpg/la-naga.yaml",
-    "rpg",
-    "lore/grupos",
-    "lore/organizaciones",
-    "lore/localizaciones"
+    "rpg"
   ]
 }
