@@ -7,6 +7,9 @@ origin:
   items:
     - "Terrana":
       - "Ajena (sin magia)"
+      - "-10 a la habilidad de “Conocimientos"
+      - "-15 al uso de cualquier aparato tecnológico."
+      - "-25 al uso de armas cortas, armas largas y armas militares."
     - "Vigilante":
       - "Disponibilidad de armamento a dificultad reducida"
       - "Recarga rápida"

@@ -2,13 +2,11 @@
 name: Medianoche
 description: Medianoche nació en secreto dentro del Nexo de Terra y fue criada por una orden que la protegía, portando en su piel un mapa mágico capaz de abrir el paso entre mundos.
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
-updatedDate: 2025-11-26
+updatedDate: 2025-12-08
 image: /personajes/medianoche.png
 category: principales
-powers:
-  - Teletransportación
+rpgId: medianoche
 ---
-
 Medianoche, nacida en Terra, creció en las sombras de la clandestinidad debido a las circunstancias de su nacimiento. Vino al mundo dentro del Nexo de Terra mientras su madre huía de un ataque. Desde ese mismo instante fue criada en secreto, pues su familia y la orden de sacerdotes que la protegían sabían que su vida y su destino estaban en peligro. El ritual que la consagró como sacerdotisa, en el que recibió el tatuaje mágico, se realizó bajo el más absoluto sigilo. El mapa tatuado en su piel era una llave capaz de abrir el paso a todos los lugares, esferas y tiempos.
 
 A pesar de la protección de su entorno, el poder de Medianoche no pasó desapercibido. Cada vez que utilizaba su habilidad, la energía liberada era percibida por seres que anhelaban ese poder. Su magia, impregnada de la esencia del Nexo, atraía a entidades oscuras que buscaban apoderarse de aquello que ella poseía. Estos seres se convirtieron en una amenaza constante, poniendo en peligro tanto a Medianoche como a quienes la rodeaban.
