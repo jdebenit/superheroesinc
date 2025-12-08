@@ -87,7 +87,7 @@ skills:
       math: "(INT+PER)/3"
       value: "68%"
     - name: "Lanzar"
-      math: "(FUE+PER)/4"
+      math: "(FUE+PER)/2"
       value: "85%"
     - name: "Primeros auxilios"
       math: "(INT)/2"

@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "characters/centurion.md",
+                "file": "characters/chainsaw.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "centurion"
+              "title": "chainsaw"
             }
           }
         ]
@@ -185,12 +185,14 @@
   },
   "active": "7f5a5c4b42f63760",
   "lastOpenFiles": [
+    "rpg/chainsaw.yaml",
+    "rpg/philipe-de-herblay copy.yaml",
+    "characters/centurion.md",
     "lore/entidades/demencia.md",
     "lore/entidades/demenci.md",
     "lore/entidades/unidad.md",
     "lore/grupos/psykosis.md",
     "rpg/arkham.yaml",
-    "rpg/philipe-de-herblay copy.yaml",
     "lore/grupos/los-irregulares.md",
     "lore/grupos/Psycosys.md",
     "lore/grupos/cazadores-de-sombras.md",
@@ -201,7 +203,6 @@
     "rpg/la-naga copy.yaml",
     "lore/grupos/euroforce.md",
     "characters/medianoche.md",
-    "characters/centurion.md",
     "characters/jade.md",
     "rpg/centurion.yaml",
     "rpg/jade copy.yaml",
@@ -218,7 +219,6 @@
     "characters/pesanta.md",
     "lore/localizaciones/paraiso.md",
     "blog/nueva-web.md",
-    "lore/localizaciones/nigalion.md",
     "rpg/alice.yaml",
     "lore/eventos"
   ]
