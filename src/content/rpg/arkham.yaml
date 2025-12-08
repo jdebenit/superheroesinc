@@ -51,7 +51,7 @@ spells:
     - name: "Revivir muertos"
       rank: "Rango 5"
     - name: "Animar objetos"
-      rank: "Rango 14"
+      rank: "Rango 4"
     - name: "Metamorfosis oscura"
       rank: "Rango 4"
 powers:
