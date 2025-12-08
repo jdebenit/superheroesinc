@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "characters/peter-pain.md",
+                "file": "lore/grupos/las-siete-torres.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "peter-pain"
+              "title": "las-siete-torres"
             }
           }
         ]
@@ -185,41 +185,41 @@
   },
   "active": "7f5a5c4b42f63760",
   "lastOpenFiles": [
+    "rpg/cu-chulainn.yaml",
+    "rpg/medianoche copy.yaml",
+    "lore/grupos/la-legion-sangrienta.md",
+    "lore/grupos/las-siete-torres.md",
+    "characters/peter-pain.md",
+    "characters/arkham.md",
+    "characters/terror.md",
+    "characters/chainsaw.md",
+    "lore/grupos/psykosis.md",
     "rpg/terror.yaml",
     "rpg/peter-pain copy.yaml",
     "rpg/peter-pain.yaml",
     "rpg/peter-painyaml",
     "rpg/peter-pain-yaml",
-    "characters/chainsaw.md",
     "rpg/chainsaw.yaml",
     "rpg/philipe-de-herblay copy.yaml",
     "characters/centurion.md",
     "lore/entidades/demencia.md",
     "lore/entidades/demenci.md",
     "lore/entidades/unidad.md",
-    "lore/grupos/psykosis.md",
     "rpg/arkham.yaml",
     "lore/grupos/los-irregulares.md",
     "lore/grupos/Psycosys.md",
     "lore/grupos/cazadores-de-sombras.md",
     "rpg/philipe-de-herblay.yaml",
     "characters/philipe-herblay.md",
-    "lore/grupos/la-legion-sangrienta.md",
-    "rpg/medianoche.yaml",
-    "rpg/la-naga copy.yaml",
     "lore/grupos/euroforce.md",
     "characters/medianoche.md",
     "characters/jade.md",
     "lore/organizaciones/zortek.md",
     "lore/organizaciones/vientos-erebus.md",
     "lore/localizaciones/valdoria.md",
-    "characters/terror.md",
     "lore/localizaciones/terra.md",
     "characters/termodinamo.md",
     "lore/organizaciones/tecnored.md",
-    "lore/organizaciones/superheroes-inc.md",
-    "lore/organizaciones/road-reapers.md",
-    "characters/pesanta.md",
-    "lore/localizaciones/paraiso.md"
+    "lore/organizaciones/superheroes-inc.md"
   ]
 }
