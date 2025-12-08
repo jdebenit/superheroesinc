@@ -5,14 +5,14 @@ category: localizaciones
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-08
 ---
-> **“Entre sombras de eternidad,  
+> Entre sombras de eternidad,  
 > Cronópolis se alza,  
 > ciudad de horas sin fin,  
 > donde el tiempo juega y se desliza.
 > Torre en la niebla,  
 > ruido de eras en susurro,  
 > los pasos resuenan en lo incierto,  
-> como ecos en un sueño sin final.”
+> como ecos en un sueño sin final.
 > 
 > Quin-Jao Sen
 
