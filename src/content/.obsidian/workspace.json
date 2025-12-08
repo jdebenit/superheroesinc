@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "lore/grupos/psykosis.md",
+                "file": "lore/entidades/demencia.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "psykosis"
+              "title": "demencia"
             }
           }
         ]
@@ -185,10 +185,13 @@
   },
   "active": "7667722d785a870c",
   "lastOpenFiles": [
+    "lore/entidades/demenci.md",
+    "lore/entidades/demencia.md",
+    "lore/entidades/unidad.md",
+    "lore/grupos/psykosis.md",
     "rpg/arkham.yaml",
     "rpg/philipe-de-herblay copy.yaml",
     "lore/grupos/los-irregulares.md",
-    "lore/grupos/psykosis.md",
     "lore/grupos/Psycosys.md",
     "lore/grupos/cazadores-de-sombras.md",
     "rpg/philipe-de-herblay.yaml",
@@ -206,7 +209,6 @@
     "lore/organizaciones/zortek.md",
     "lore/organizaciones/vientos-erebus.md",
     "lore/localizaciones/valdoria.md",
-    "lore/entidades/unidad.md",
     "characters/terror.md",
     "lore/localizaciones/terra.md",
     "characters/termodinamo.md",
@@ -217,9 +219,7 @@
     "lore/localizaciones/paraiso.md",
     "blog/nueva-web.md",
     "lore/localizaciones/nigalion.md",
-    "characters/motero-road-reapers.md",
     "rpg/alice.yaml",
-    "lore/eventos",
-    "rpg/askany.yaml"
+    "lore/eventos"
   ]
 }
