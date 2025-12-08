@@ -1,6 +1,6 @@
 ---
 title: La Legión Sangrienta
-description: Orden religiosa guerrera muy antigua, con prácticas violentas y ritualistas.
+description: Grupo de inadaptados cuyos objetivos no estan demasiado claros
 category: grupos
 source: "Superhéroes INC. Tercera Edición / Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-04

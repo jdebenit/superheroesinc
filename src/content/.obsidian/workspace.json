@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "4717f10ac63418d7",
+        "id": "408b20205c1cd198",
         "type": "tabs",
         "children": [
           {
-            "id": "31abfe6d6e97e424",
+            "id": "7667722d785a870c",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "lore/grupos/cazadores-de-sombras.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "cazadores-de-sombras"
+              "title": "Nueva pestaña"
             }
           }
         ]
@@ -183,13 +179,15 @@
       "bases:Crear nueva base": false
     }
   },
-  "active": "31abfe6d6e97e424",
+  "active": "7667722d785a870c",
   "lastOpenFiles": [
+    "rpg/philipe-de-herblay.yaml",
+    "characters/philipe-herblay.md",
+    "lore/grupos/la-legion-sangrienta.md",
+    "lore/grupos/cazadores-de-sombras.md",
     "rpg/medianoche.yaml",
     "rpg/la-naga copy.yaml",
-    "lore/grupos/la-legion-sangrienta.md",
     "lore/grupos/euroforce.md",
-    "lore/grupos/cazadores-de-sombras.md",
     "lore/grupos/los-irregulares.md",
     "characters/medianoche.md",
     "characters/centurion.md",
@@ -197,7 +195,6 @@
     "rpg/centurion.yaml",
     "rpg/jade copy.yaml",
     "rpg/jade.yaml",
-    "characters/philipe-herblay.md",
     "lore/organizaciones/zortek.md",
     "lore/organizaciones/vientos-erebus.md",
     "lore/localizaciones/valdoria.md",
@@ -219,7 +216,6 @@
     "lore/eventos",
     "rpg/askany.yaml",
     "rpg/inspector-toro.yaml",
-    "rpg/aescotan.yaml",
-    "rpg/la-naga.yaml"
+    "rpg/aescotan.yaml"
   ]
 }

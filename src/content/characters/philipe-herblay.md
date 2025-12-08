@@ -5,10 +5,11 @@ source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-11-26
 image: /personajes/herblay.png
 category: principales
+rpgId: philipe-de-herblay
 ---
 
-"Un buen vino y una conversación amena arreglan casi cualquier problema".  
-Philippe negociando con Legba.
+> Un buen vino y una conversación amena arreglan casi cualquier problema.  
+> Philippe negociando con Legba.
 
 Philippe de Herblay es un mago de ascendencia noble que se ha unido recientemente a los Cazadores de Sombras. Nacido en el siglo XX en el seno de una familia aristocrática de linaje mágico, creció en un entorno de sofisticación y tradición, con un profundo vínculo con sus raíces esotéricas. Desde joven mostró una aptitud excepcional para la magia, destacando en el estudio de los espíritus y en la visión del pasado a través de su bastón mágico. Esta reliquia familiar le permite revelar secretos ocultos de la historia, convirtiéndose en una herramienta invaluable para su linaje.
 
