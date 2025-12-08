@@ -1,6 +1,6 @@
 ---
-name: "Dave, el Arquitecto"
-alias: "Dave"
+name: "Dave"
+alias: "El Arquitecto"
 description: "Responsable de Logística en la Corte Itinerante. Asociado al diseño, mantenimiento y adaptación de la infraestructura de la organización."
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-11-26

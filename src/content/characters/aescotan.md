@@ -6,6 +6,7 @@ source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-11-26
 rpgId: aescotan
 category: principales
+image: /personajes/aescotan.png
 ---
 
 Aescotan no es un simple demonio, es una institución en sí mismo dentro de la burocracia infernal. Conocido como el "Señor del No Tiempo", sirve como el brazo ejecutor de la **Corte Itinerante**, una entidad transdimensional encargada de arbitrar y asegurar el cumplimiento de pactos entre mortales y entidades sobrenaturales.
