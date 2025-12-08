@@ -59,6 +59,17 @@ const characterKeywords = [
         <div class="content-grid">
             <aside class="sidebar">
                 {
+                    rpgData && (
+                        <a href="#character-sheet" class="rpg-link">
+                            <span class="rpg-icon">🎲</span>
+                            <span class="rpg-label">
+                                Ver Ficha de Personaje
+                            </span>
+                        </a>
+                    )
+                }
+
+                {
                     entry.data.image && (
                         <div class="char-image-container">
                             <img
@@ -107,17 +118,6 @@ const characterKeywords = [
                                 ))}
                             </ul>
                         </div>
-                    )
-                }
-
-                {
-                    rpgData && (
-                        <a href="#character-sheet" class="rpg-link">
-                            <span class="rpg-icon">🎲</span>
-                            <span class="rpg-label">
-                                Ver Ficha de Personaje
-                            </span>
-                        </a>
                     )
                 }
 
