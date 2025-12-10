@@ -1,0 +1,306 @@
+---
+// Component for selecting replay view mode
+---
+
+<div class="replay-mode-selector">
+    <div class="mode-label">Modo de vista:</div>
+    <div class="mode-buttons">
+        <button class="mode-btn active" data-mode="completo">
+            <span class="mode-icon">📖</span>
+            <span class="mode-name">Completo</span>
+        </button>
+        <button class="mode-btn" data-mode="novela">
+            <span class="mode-icon">🎭</span>
+            <span class="mode-name">Novela</span>
+        </button>
+        <button class="mode-btn" data-mode="mesa">
+            <span class="mode-icon">🎲</span>
+            <span class="mode-name">Mesa</span>
+        </button>
+        <button class="mode-btn" data-mode="reglas">
+            <span class="mode-icon">📐</span>
+            <span class="mode-name">Reglas</span>
+        </button>
+    </div>
+</div>
+
+<style>
+    .replay-mode-selector {
+        background: var(--color-background-alt);
+        border-radius: 8px;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        position: sticky;
+        top: 80px;
+        z-index: 10;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .mode-label {
+        font-weight: 700;
+        font-size: 0.875rem;
+        color: var(--color-secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .mode-buttons {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.5rem;
+    }
+
+    .mode-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.25rem;
+        padding: 0.75rem 0.5rem;
+        background: white;
+        border: 2px solid var(--color-border);
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-family: var(--font-comic);
+    }
+
+    .mode-btn:hover {
+        border-color: var(--color-primary);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .mode-btn.active {
+        background: var(--color-primary);
+        border-color: var(--color-primary);
+        color: white;
+    }
+
+    .mode-icon {
+        font-size: 1.5rem;
+    }
+
+    .mode-name {
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    @media (max-width: 768px) {
+        .replay-mode-selector {
+            position: sticky;
+            top: 60px;
+            padding: 0.75rem;
+        }
+
+        .mode-buttons {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .mode-btn {
+            padding: 0.5rem;
+        }
+
+        .mode-icon {
+            font-size: 1.25rem;
+        }
+
+        .mode-name {
+            font-size: 0.7rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .mode-label {
+            font-size: 0.75rem;
+        }
+
+        .mode-buttons {
+            gap: 0.375rem;
+        }
+    }
+</style>
+
+<script>
+    // Client-side script for mode switching and content detection
+    document.addEventListener("DOMContentLoaded", () => {
+        console.log("=== ReplayModeSelector: DOMContentLoaded fired ===");
+
+        const buttons = document.querySelectorAll(".mode-btn");
+        const replayContent = document.querySelector(".lore-text");
+
+        if (!replayContent) {
+            console.error("ERROR: .lore-text element not found!");
+            return;
+        }
+
+        const category = replayContent.getAttribute("data-category");
+        console.log("Page category:", category);
+
+        // Only process if this is an actual-plays page
+        if (category !== "actual-plays") {
+            console.log("Not an actual-plays page, skipping");
+            return;
+        }
+
+        // STEP 1: Process content to add data-type attributes
+        console.log("=== STEP 1: Processing replay content ===");
+        const paragraphs = replayContent.querySelectorAll("p");
+        console.log(`Found ${paragraphs.length} paragraphs`);
+
+        let taggedCount = 0;
+        const tagCounts = {};
+
+        paragraphs.forEach((p, index) => {
+            const text = p.textContent.trim();
+            let dataType = null;
+
+            if (text.startsWith("NARR:")) {
+                dataType = "narr";
+            } else if (text.startsWith("CHAR[") || text.startsWith("CHAR:")) {
+                dataType = "char";
+            } else if (
+                text.startsWith("PLAYER[") ||
+                text.startsWith("PLAYER:")
+            ) {
+                dataType = "player";
+            } else if (text.startsWith("GM:")) {
+                dataType = "gm";
+            } else if (text.startsWith("ROLL[") || text.startsWith("ROLL:")) {
+                dataType = "roll";
+            } else if (text.startsWith("RULE[") || text.startsWith("RULE:")) {
+                dataType = "rule";
+            } else if (text.startsWith("META:")) {
+                dataType = "meta";
+            }
+
+            if (dataType) {
+                p.setAttribute("data-type", dataType);
+                taggedCount++;
+                tagCounts[dataType] = (tagCounts[dataType] || 0) + 1;
+
+                if (index < 3) {
+                    console.log(
+                        `  [${index}] Tagged '${dataType}': ${text.substring(0, 40)}...`,
+                    );
+                }
+            }
+        });
+
+        console.log(`Tagged ${taggedCount} / ${paragraphs.length} paragraphs`);
+        console.log("Tag distribution:", tagCounts);
+
+        // STEP 2: Setup mode switching
+        console.log("=== STEP 2: Setting up mode switching ===");
+
+        // Load saved mode from localStorage
+        const savedMode = localStorage.getItem("replayViewMode") || "completo";
+        setMode(savedMode);
+
+        buttons.forEach((button) => {
+            button.addEventListener("click", () => {
+                const mode = button.dataset.mode;
+                setMode(mode);
+                localStorage.setItem("replayViewMode", mode);
+            });
+        });
+
+        function setMode(mode) {
+            // Update active button
+            buttons.forEach((btn) => {
+                btn.classList.toggle("active", btn.dataset.mode === mode);
+            });
+
+            // Update content visibility
+            if (replayContent) {
+                replayContent.className = `lore-text mode-${mode}`;
+                console.log(`Mode changed to: ${mode}`);
+                console.log(`Content class: ${replayContent.className}`);
+
+                // Count visible paragraphs
+                const allP = replayContent.querySelectorAll("p");
+
+                // DEBUG: Check if paragraphs have data-type
+                const withDataType = Array.from(allP).filter((p) =>
+                    p.hasAttribute("data-type"),
+                );
+                console.log(
+                    `Paragraphs with data-type: ${withDataType.length} / ${allP.length}`,
+                );
+                if (withDataType.length > 0) {
+                    console.log(
+                        "Sample data-types:",
+                        withDataType
+                            .slice(0, 3)
+                            .map((p) => p.getAttribute("data-type"))
+                            .join(", "),
+                    );
+                }
+
+                const visibleP = Array.from(allP).filter((p) => {
+                    const style = window.getComputedStyle(p);
+                    return style.display !== "none";
+                });
+                console.log(
+                    `Visible paragraphs: ${visibleP.length} / ${allP.length}`,
+                );
+
+                // DEBUG: Check CSS for a paragraph that should be hidden
+                if (mode !== "completo" && withDataType.length > 0) {
+                    const shouldBeHidden = Array.from(allP).find((p) => {
+                        const type = p.getAttribute("data-type");
+                        if (mode === "novela")
+                            return [
+                                "player",
+                                "gm",
+                                "roll",
+                                "rule",
+                                "meta",
+                            ].includes(type);
+                        if (mode === "mesa")
+                            return ["roll", "rule", "meta"].includes(type);
+                        if (mode === "reglas")
+                            return ["char", "player", "gm", "meta"].includes(
+                                type,
+                            );
+                        return false;
+                    });
+
+                    if (shouldBeHidden) {
+                        const computedStyle =
+                            window.getComputedStyle(shouldBeHidden);
+                        console.log("DEBUG: Paragraph that should be hidden:");
+                        console.log(
+                            "  data-type:",
+                            shouldBeHidden.getAttribute("data-type"),
+                        );
+                        console.log("  display:", computedStyle.display);
+                        console.log("  visibility:", computedStyle.visibility);
+                        console.log("  classes:", shouldBeHidden.className);
+                        console.log(
+                            "  parent classes:",
+                            shouldBeHidden.parentElement?.className,
+                        );
+                    }
+                }
+
+                // Debug: show first few visible paragraphs
+                if (visibleP.length < allP.length) {
+                    console.log("Sample visible paragraphs:");
+                    visibleP.slice(0, 3).forEach((p, i) => {
+                        console.log(
+                            `  ${i}: ${p.getAttribute("data-type")} - ${p.textContent.substring(0, 40)}...`,
+                        );
+                    });
+                }
+            } else {
+                console.error("Replay content element not found!");
+            }
+        }
+
+        console.log("=== Setup complete ===");
+    });
+</script>

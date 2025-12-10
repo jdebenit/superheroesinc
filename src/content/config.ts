@@ -17,10 +17,34 @@ const loreCollection = defineCollection({
     schema: z.object({
         title: z.string(),
         description: z.string(),
-        category: z.enum(['localizaciones', 'organizaciones', 'grupos', 'eventos', 'criaturas', 'entidades']),
+        category: z.enum(['localizaciones', 'organizaciones', 'grupos', 'eventos', 'criaturas', 'entidades', 'actual-plays']),
         image: z.string().optional(),
         source: z.string().optional(),
         updatedDate: z.date().optional(),
+        // Reference to RPG data
+        rpgId: z.string().optional(),
+        // Actual Play specific fields
+        type: z.string().optional(),
+        system: z.string().optional(),
+        arc: z.string().optional(),
+        session: z.number().optional(),
+        datePlayed: z.date().optional(),
+        gm: z.string().optional(),
+        players: z.array(z.object({
+            name: z.string(),
+            character: z.string(),
+            rpgId: z.string().optional(),
+            icon: z.string().optional(),
+            color: z.string().optional(),
+        })).optional(),
+        npcs: z.array(z.object({
+            name: z.string(),
+            rpgId: z.string().optional(),
+            icon: z.string().optional(),
+            color: z.string().optional(),
+        })).optional(),
+        tags: z.array(z.string()).optional(),
+        summary: z.string().optional(),
     }),
 });
 

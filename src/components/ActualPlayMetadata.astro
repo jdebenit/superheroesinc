@@ -1,0 +1,293 @@
+---
+interface Props {
+    item: any;
+}
+
+const { item } = Astro.props;
+---
+
+<div class="actual-play-metadata">
+    <div class="session-info">
+        <div class="session-header">
+            <span class="session-label">Sesión {item.data.session}</span>
+            {item.data.arc && <span class="arc-badge">{item.data.arc}</span>}
+        </div>
+        <div class="session-details">
+            <div class="detail-item">
+                <span class="detail-label">Sistema:</span>
+                <span class="detail-value">{item.data.system}</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Director:</span>
+                <span class="detail-value">{item.data.gm}</span>
+            </div>
+            {
+                item.data.datePlayed && (
+                    <div class="detail-item">
+                        <span class="detail-label">Fecha:</span>
+                        <time class="detail-value">
+                            {new Date(item.data.datePlayed).toLocaleDateString(
+                                "es-ES",
+                                {
+                                    year: "numeric",
+                                    month: "long",
+                                    day: "numeric",
+                                },
+                            )}
+                        </time>
+                    </div>
+                )
+            }
+        </div>
+    </div>
+
+    {
+        item.data.players && item.data.players.length > 0 && (
+            <div class="participants-section">
+                <h3 class="participants-title">Jugadores</h3>
+                <div class="participants-grid">
+                    {item.data.players.map((player: any) => (
+                        <div
+                            class="participant-card"
+                            style={`border-left: 4px solid ${player.color || "#666"}`}
+                        >
+                            {player.icon && (
+                                <img
+                                    src={player.icon}
+                                    alt={player.character}
+                                    class="participant-icon"
+                                />
+                            )}
+                            <div class="participant-info">
+                                <div
+                                    class="participant-character"
+                                    style={`color: ${player.color || "#666"}`}
+                                >
+                                    {player.character}
+                                </div>
+                                <div class="participant-player">
+                                    {player.name}
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        )
+    }
+
+    {
+        item.data.npcs && item.data.npcs.length > 0 && (
+            <div class="participants-section">
+                <h3 class="participants-title">NPCs</h3>
+                <div class="participants-grid">
+                    {item.data.npcs.map((npc: any) => (
+                        <div
+                            class="participant-card"
+                            style={`border-left: 4px solid ${npc.color || "#888"}`}
+                        >
+                            {npc.icon && (
+                                <img
+                                    src={npc.icon}
+                                    alt={npc.name}
+                                    class="participant-icon"
+                                />
+                            )}
+                            <div class="participant-info">
+                                <div
+                                    class="participant-character"
+                                    style={`color: ${npc.color || "#888"}`}
+                                >
+                                    {npc.name}
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        )
+    }
+
+    {
+        item.data.tags && item.data.tags.length > 0 && (
+            <div class="tags-section">
+                {item.data.tags.map((tag: string) => (
+                    <span class="tag">{tag}</span>
+                ))}
+            </div>
+        )
+    }
+</div>
+
+<style>
+    .actual-play-metadata {
+        background: var(--color-background-alt);
+        border-radius: 8px;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+
+    .session-info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .session-header {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .session-label {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--color-primary);
+        font-family: var(--font-comic);
+    }
+
+    .arc-badge {
+        background: var(--color-secondary);
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        align-self: flex-start;
+    }
+
+    .session-details {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .detail-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .detail-label {
+        font-weight: 700;
+        color: var(--color-accent);
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .detail-value {
+        color: var(--color-text);
+        font-size: 0.875rem;
+    }
+
+    .participants-section {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .participants-title {
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--color-secondary);
+        font-family: var(--font-comic);
+        margin: 0;
+    }
+
+    .participants-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .participant-card {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: white;
+        padding: 0.5rem;
+        border-radius: 4px;
+        transition: transform 0.2s ease;
+    }
+
+    .participant-card:hover {
+        transform: translateX(2px);
+    }
+
+    .participant-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        object-fit: cover;
+        flex-shrink: 0;
+    }
+
+    .participant-info {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .participant-character {
+        font-weight: 700;
+        font-size: 0.875rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 1.2;
+    }
+
+    .participant-player {
+        font-size: 0.75rem;
+        color: #666;
+        line-height: 1.2;
+    }
+
+    .tags-section {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.375rem;
+        padding-top: 0.75rem;
+        border-top: 1px solid var(--color-border);
+    }
+
+    .tag {
+        background: var(--color-primary);
+        color: white;
+        padding: 0.25rem 0.5rem;
+        border-radius: 12px;
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: lowercase;
+    }
+
+    @media (max-width: 1024px) {
+        .actual-play-metadata {
+            padding: 1.5rem;
+        }
+
+        .session-header {
+            flex-direction: row;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .session-label {
+            font-size: 1.5rem;
+        }
+
+        .participants-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .participant-card:hover {
+            transform: translateY(-2px);
+        }
+    }
+</style>

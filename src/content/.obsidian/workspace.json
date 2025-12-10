@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "380644d09d7780c3",
+        "id": "2217aaa1496f8771",
         "type": "tabs",
         "children": [
           {
-            "id": "8907d89da2841270",
+            "id": "a5df247d3ac6a66e",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "lore/localizaciones/cronopolis.md",
+                "file": "lore/criaturas/leon-rojo.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "cronopolis"
+              "title": "leon-rojo"
             }
           }
         ]
@@ -183,13 +183,16 @@
       "bases:Crear nueva base": false
     }
   },
-  "active": "8907d89da2841270",
+  "active": "a5df247d3ac6a66e",
   "lastOpenFiles": [
-    "2025-11-26.md",
-    "lore/localizaciones/cronopolis.md",
-    "lore/localizaciones/terra.md",
+    "rpg/leon-rojo.yaml",
+    "lore/actual-plays/emergencia-puente-pisuerga.md",
+    "lore/localizaciones/valladolid.md",
     "lore/localizaciones/Sin título.md",
     "lore/localizaciones/valdoria.md",
+    "lore/localizaciones/cronopolis.md",
+    "2025-11-26.md",
+    "lore/localizaciones/terra.md",
     "lore/grupos/las-siete-torres.md",
     "rpg/jefe-motero-road-reapers.yaml",
     "rpg/motero-road-reapers copy.yaml",
@@ -217,9 +220,6 @@
     "characters/philipe-herblay.md",
     "lore/grupos/euroforce.md",
     "characters/medianoche.md",
-    "characters/jade.md",
-    "lore/organizaciones/zortek.md",
-    "lore/organizaciones/vientos-erebus.md",
-    "characters/termodinamo.md"
+    "characters/jade.md"
   ]
 }

@@ -1,0 +1,55 @@
+name: "León de Nemea"
+level: 6
+combatstats:
+  - "Acciones por asalto: 2"
+  - "Iniciativa y Reflejos: 45"
+  - "Puntos de Vida: 140"
+  - "Equilibrio Mental: 30"
+otherstats:
+  - "Inconsciencia: 14"
+  - "Recuperación: 80 PV/h"
+  - "Modificador de fuerza: 1d100+30"
+  - "Peso Levantado: 20 Toneladas"
+  - "Daño absorbido físico: 80"
+  - "Daño absorbido mental: 0"
+  - "Modificador de impacto: 25"
+  - "Parada Fisica: 20"
+  - "Salto (alto / largo): 12m/40m"
+attributes:
+  values:
+    Fuerza: 130
+    Constitución: 140
+    Agilidad: 90
+    Inteligencia: 30
+    Percepción: 100
+    Apariencia: 60
+    Voluntad: 60
+skills:
+  items:
+    - name: "Acechar/Discrección"
+      math: "(AGI+PER)/2"
+      value: "95%"
+    - name: "Comb. cuerpo a cuerpo"
+      math: "(AGI+PER)/2"
+      value: "95%"
+    - name: "Esconderse"
+      math: "(AGI+PER)/4"
+      value: "47%"
+    - name: "Saltar y Trepar"
+      math: "(AGI)"
+      value: "90%"
+powers:
+  items:
+    - name: "Superfuerza"
+      rank: "Alto(70)"
+    - name: "Superconstitución"
+      rank: "Alto(70)"
+    - name: "Invulnerabilidad: Física"
+      rank: "Alto(80)"
+      notes: "Su piel es impenetrable a armas convencionales"
+    - name: "Garras y Colmillos"
+      notes: "Daño 2d10+25+Mod Fue"
+notes:
+  - "El León de Nemea es una bestia mitológica de fuerza y resistencia sobrehumanas"
+  - "Su piel dorada es prácticamente impenetrable, lo que lo hace inmune a la mayoría de las armas"
+  - "Solo puede ser herido por armas mágicas o de materiales especiales"

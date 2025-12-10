@@ -1,6 +1,9 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, getEntry } from "astro:content";
 import Layout from "../../../layouts/Layout.astro";
+import CharacterSheet from "../../../components/CharacterSheet.astro";
+import ActualPlayMetadata from "../../../components/ActualPlayMetadata.astro";
+import ReplayModeSelector from "../../../components/ReplayModeSelector.astro";
 
 export async function getStaticPaths() {
   const items = await getCollection("lore");
@@ -16,6 +19,19 @@ export async function getStaticPaths() {
 
 const item = Astro.props;
 const { Content } = await item.render();
+
+// Fetch RPG data if rpgId is present
+let rpgData = null;
+if (item.data.rpgId) {
+  try {
+    const rpgEntry = await getEntry("rpg", item.data.rpgId);
+    if (rpgEntry) {
+      rpgData = rpgEntry.data;
+    }
+  } catch (error) {
+    console.error(`Failed to load RPG data for ${item.data.rpgId}:`, error);
+  }
+}
 ---
 
 <Layout title={item.data.title}>
@@ -29,6 +45,15 @@ const { Content } = await item.render();
     <div class="content-grid">
       <aside class="sidebar">
         {
+          rpgData && (
+            <a href="#character-sheet" class="rpg-link">
+              <span class="rpg-icon">🎲</span>
+              <span class="rpg-label">Ver Ficha de Personaje</span>
+            </a>
+          )
+        }
+
+        {
           item.data.image && (
             <div class="lore-image-container">
               <img
@@ -40,30 +65,35 @@ const { Content } = await item.render();
           )
         }
 
-        <div class="lore-metadata">
-          {
-            item.data.source && (
-              <div class="metadata-item">
-                <span class="label">Fuente:</span>
-                <span class="value">{item.data.source}</span>
-              </div>
-            )
-          }
-          {
-            item.data.updatedDate && (
-              <div class="metadata-item">
-                <span class="label">Actualizado:</span>
-                <time class="value">
-                  {new Date(item.data.updatedDate).toLocaleDateString("es-ES", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                </time>
-              </div>
-            )
-          }
-        </div>
+        {
+          item.data.category === "actual-plays" ? (
+            <ActualPlayMetadata item={item} />
+          ) : (
+            <div class="lore-metadata">
+              {item.data.source && (
+                <div class="metadata-item">
+                  <span class="label">Fuente:</span>
+                  <span class="value">{item.data.source}</span>
+                </div>
+              )}
+              {item.data.updatedDate && (
+                <div class="metadata-item">
+                  <span class="label">Actualizado:</span>
+                  <time class="value">
+                    {new Date(item.data.updatedDate).toLocaleDateString(
+                      "es-ES",
+                      {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      },
+                    )}
+                  </time>
+                </div>
+              )}
+            </div>
+          )
+        }
       </aside>
 
       <main class="main-content">
@@ -71,9 +101,22 @@ const { Content } = await item.render();
           <h1 class="lore-title">{item.data.title}</h1>
         </header>
 
-        <div class="lore-text">
+        {
+          rpgData && (
+            <a href="#character-sheet" class="rpg-link mobile-only">
+              <span class="rpg-icon">🎲</span>
+              <span class="rpg-label">Ver Ficha de Personaje</span>
+            </a>
+          )
+        }
+
+        {item.data.category === "actual-plays" && <ReplayModeSelector />}
+
+        <div class="lore-text" data-category={item.data.category}>
           <Content />
         </div>
+
+        {rpgData && <CharacterSheet rpg={rpgData} />}
       </main>
     </div>
   </article>
@@ -258,6 +301,167 @@ const { Content } = await item.render();
     margin-bottom: 0.5rem;
   }
 
+  /* Actual Play Replay Script Styles */
+  .lore-text :global(p:has(> strong)) {
+    margin: 0.75rem 0;
+  }
+
+  /* NARR - Narrative text */
+  .lore-text :global(p) {
+    line-height: 1.8;
+  }
+
+  /* Scene markers */
+  .lore-text :global(h2) {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 3px solid var(--color-secondary);
+  }
+
+  /* @scene and @location markers - style as code */
+  .lore-text :global(p:has(code)) {
+    font-size: 0.9rem;
+    color: #666;
+    font-style: italic;
+  }
+
+  /* Replay Mode Filtering - Based on data-type attributes */
+  /* Using :global() to ensure styles apply to dynamically rendered content */
+  
+  /* Mode: Novela - Show only NARR and CHAR */
+  :global(.lore-text.mode-novela p[data-type="player"]),
+  :global(.lore-text.mode-novela p[data-type="gm"]),
+  :global(.lore-text.mode-novela p[data-type="roll"]),
+  :global(.lore-text.mode-novela p[data-type="rule"]),
+  :global(.lore-text.mode-novela p[data-type="meta"]) {
+    display: none !important;
+  }
+
+  /* Mode: Mesa - Show NARR, CHAR, PLAYER, GM */
+  :global(.lore-text.mode-mesa p[data-type="roll"]),
+  :global(.lore-text.mode-mesa p[data-type="rule"]),
+  :global(.lore-text.mode-mesa p[data-type="meta"]) {
+    display: none !important;
+  }
+
+  /* Mode: Reglas - Show NARR, ROLL, RULE */
+  :global(.lore-text.mode-reglas p[data-type="char"]),
+  :global(.lore-text.mode-reglas p[data-type="player"]),
+  :global(.lore-text.mode-reglas p[data-type="gm"]),
+  :global(.lore-text.mode-reglas p[data-type="meta"]) {
+    display: none !important;
+  }
+
+  /* Mode: Completo - Show everything (default) */
+  :global(.lore-text.mode-completo p) {
+    display: block;
+  }
+
+  /* Visual styling for different content types */
+  :global(.lore-text p[data-type]) {
+    padding: 0.5rem 0;
+    margin: 0.5rem 0;
+  }
+
+  :global(.lore-text p[data-type="narr"] strong:first-child) {
+    color: #555;
+    font-style: italic;
+  }
+
+  :global(.lore-text p[data-type="char"] strong:first-child) {
+    color: var(--color-primary);
+  }
+
+  :global(.lore-text p[data-type="player"]) {
+    background: rgba(102, 204, 255, 0.1);
+    padding: 0.5rem;
+    border-left: 3px solid #66ccff;
+  }
+
+  :global(.lore-text p[data-type="player"] strong:first-child) {
+    color: #0088cc;
+  }
+
+  :global(.lore-text p[data-type="gm"]) {
+    background: rgba(136, 204, 102, 0.1);
+    padding: 0.5rem;
+    border-left: 3px solid #88cc66;
+  }
+
+  :global(.lore-text p[data-type="gm"] strong:first-child) {
+    color: #558833;
+  }
+
+  :global(.lore-text p[data-type="roll"]) {
+    background: rgba(255, 153, 51, 0.1);
+    padding: 0.5rem;
+    border-left: 3px solid #ff9933;
+    font-family: monospace;
+  }
+
+  :global(.lore-text p[data-type="roll"] strong:first-child) {
+    color: #cc6600;
+  }
+
+  :global(.lore-text p[data-type="rule"]) {
+    background: rgba(153, 102, 204, 0.1);
+    padding: 0.5rem;
+    border-left: 3px solid #9966cc;
+    font-size: 0.9rem;
+  }
+
+  :global(.lore-text p[data-type="rule"] strong:first-child) {
+    color: #663399;
+  }
+
+  :global(.lore-text p[data-type="meta"]) {
+    background: rgba(150, 150, 150, 0.1);
+    padding: 0.5rem;
+    border-left: 3px solid #999;
+    font-style: italic;
+    font-size: 0.9rem;
+  }
+
+  :global(.lore-text p[data-type="meta"] strong:first-child) {
+    color: #666;
+  }
+
+  .rpg-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: var(--spacing-md);
+    background: var(--color-secondary);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .rpg-link:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    background: var(--color-primary-dark);
+  }
+
+  .rpg-icon {
+    font-size: 1.5rem;
+  }
+
+  .rpg-label {
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: var(--text-sm);
+    letter-spacing: 0.05em;
+  }
+
+  .mobile-only {
+    display: none;
+  }
+
   @media (max-width: 1024px) {
     .content-grid {
       grid-template-columns: 1fr;
@@ -267,6 +471,14 @@ const { Content } = await item.render();
     .sidebar {
       position: static;
       order: 2;
+    }
+
+    .sidebar .rpg-link {
+      display: none;
+    }
+
+    .mobile-only {
+      display: flex;
     }
 
     .lore-image-container {
@@ -279,5 +491,4 @@ const { Content } = await item.render();
     .lore-title {
       font-size: 2.5rem;
     }
-  }
 </style>

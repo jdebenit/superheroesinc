@@ -49,6 +49,14 @@ export async function getStaticPaths() {
         description: "Entidades que rigen la manifestacion.",
       },
     },
+    {
+      params: { category: "actual-plays" },
+      props: {
+        title: "Actual Plays",
+        description:
+          "Sesiones de juego documentadas en formato SHI Replay Script.",
+      },
+    },
   ];
 }
 
