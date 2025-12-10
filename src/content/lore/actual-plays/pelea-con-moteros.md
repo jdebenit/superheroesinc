@@ -89,6 +89,8 @@ PLAYER[La Naga]: Me lanzo con impulso para apartarlo del borde.
 ROLL[Motero]: USO DE PODER; 1d100 → 82; FALLO.
 GM: Calculas mal el ángulo. Apartas a un civil, pero sales despedido contra la barandilla.
 
+META: Espero que guste
+
 NARR: Motero rueda por el suelo dejando un reguero de chispas.
 
 PLAYER[La Naga]: Intento estabilizar el camión con gravedad.

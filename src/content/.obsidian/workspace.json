@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "2217aaa1496f8771",
+        "id": "23274341364fce64",
         "type": "tabs",
         "children": [
           {
-            "id": "a5df247d3ac6a66e",
+            "id": "de0c9a00ca60842c",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "lore/criaturas/leon-rojo.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "leon-rojo"
+              "title": "Nueva pestaña"
             }
           }
         ]
@@ -183,9 +179,10 @@
       "bases:Crear nueva base": false
     }
   },
-  "active": "a5df247d3ac6a66e",
+  "active": "de0c9a00ca60842c",
   "lastOpenFiles": [
     "lore/actual-plays/pelea-con-moteros.md",
+    "lore/criaturas/leon-rojo.md",
     "rpg/leon-rojo.yaml",
     "lore/actual-plays/emergencia-puente-pisuerga.md",
     "lore/localizaciones/valladolid.md",
@@ -219,7 +216,6 @@
     "lore/grupos/cazadores-de-sombras.md",
     "characters/philipe-herblay.md",
     "lore/grupos/euroforce.md",
-    "characters/medianoche.md",
-    "characters/jade.md"
+    "characters/medianoche.md"
   ]
 }

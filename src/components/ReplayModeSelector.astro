@@ -1,8 +1,29 @@
 ---
 // Component for selecting replay view mode
+interface Props {
+    players?: Array<{
+        name: string;
+        character: string;
+        icon?: string;
+        color?: string;
+    }>;
+    npcs?: Array<{
+        name: string;
+        icon?: string;
+        color?: string;
+    }>;
+}
+
+const { players = [], npcs = [] } = Astro.props;
+
+// Serialize character data for client-side use
+const characterData = JSON.stringify({
+    players,
+    npcs,
+});
 ---
 
-<div class="replay-mode-selector">
+<div class="replay-mode-selector" data-characters={characterData}>
     <div class="mode-label">Modo de vista:</div>
     <div class="mode-buttons">
         <button class="mode-btn active" data-mode="completo">
@@ -148,8 +169,67 @@
 
         // STEP 1: Process content to add data-type attributes
         console.log("=== STEP 1: Processing replay content ===");
-        const paragraphs = replayContent.querySelectorAll("p");
+        let paragraphs = replayContent.querySelectorAll("p");
         console.log(`Found ${paragraphs.length} paragraphs`);
+
+        // STEP 1.1: Split paragraphs that contain multiple tags
+        console.log("=== STEP 1.1: Splitting multi-tag paragraphs ===");
+        const tagPattern = /(NARR:|CHAR\[|PLAYER\[|GM:|ROLL\[|RULE\[|META:)/g;
+
+        paragraphs.forEach((p) => {
+            const html = p.innerHTML;
+            const matches = html.match(tagPattern);
+
+            if (matches && matches.length > 1) {
+                // This paragraph has multiple tags, split it
+                console.log("Splitting paragraph with", matches.length, "tags");
+
+                // Split by tag patterns
+                const parts = html.split(
+                    /(NARR:|CHAR\[[^\]]+\]:|PLAYER\[[^\]]+\]:|GM:|ROLL\[[^\]]+\]:|RULE\[[^\]]+\]:|META:)/,
+                );
+
+                const newParagraphs = [];
+                let currentContent = "";
+
+                for (let i = 0; i < parts.length; i++) {
+                    const part = parts[i];
+
+                    if (
+                        part.match(
+                            /^(NARR:|CHAR\[|PLAYER\[|GM:|ROLL\[|RULE\[|META:)/,
+                        )
+                    ) {
+                        // This is a tag
+                        if (currentContent.trim()) {
+                            newParagraphs.push(currentContent.trim());
+                        }
+                        currentContent = part;
+                    } else if (part.trim()) {
+                        currentContent += part;
+                    }
+                }
+
+                if (currentContent.trim()) {
+                    newParagraphs.push(currentContent.trim());
+                }
+
+                // Replace the original paragraph with new ones
+                if (newParagraphs.length > 1) {
+                    const fragment = document.createDocumentFragment();
+                    newParagraphs.forEach((content) => {
+                        const newP = document.createElement("p");
+                        newP.innerHTML = content;
+                        fragment.appendChild(newP);
+                    });
+                    p.replaceWith(fragment);
+                }
+            }
+        });
+
+        // Re-query paragraphs after splitting
+        paragraphs = replayContent.querySelectorAll("p");
+        console.log(`After splitting: ${paragraphs.length} paragraphs`);
 
         let taggedCount = 0;
         const tagCounts = {};
@@ -192,6 +272,86 @@
 
         console.log(`Tagged ${taggedCount} / ${paragraphs.length} paragraphs`);
         console.log("Tag distribution:", tagCounts);
+
+        // STEP 1.5: Add character icons to CHAR dialogues
+        console.log("=== STEP 1.5: Adding character icons ===");
+        const selector = document.querySelector(".replay-mode-selector");
+        const charactersJson = selector?.getAttribute("data-characters");
+
+        if (charactersJson) {
+            try {
+                const { players, npcs } = JSON.parse(charactersJson);
+                const allCharacters = [...players, ...npcs];
+                console.log(
+                    "Character data loaded:",
+                    allCharacters.length,
+                    "characters",
+                );
+
+                // Process CHAR paragraphs to add icons
+                paragraphs.forEach((p) => {
+                    if (p.getAttribute("data-type") === "char") {
+                        const text = p.textContent.trim();
+                        const match = text.match(/^CHAR\[([^\]]+)\]:/);
+
+                        if (match) {
+                            const charName = match[1].trim();
+
+                            // Find character in players or NPCs
+                            const character = allCharacters.find(
+                                (c) =>
+                                    c.character === charName ||
+                                    c.name === charName,
+                            );
+
+                            if (character) {
+                                // Create icon element
+                                const iconSpan = document.createElement("span");
+                                iconSpan.className = "char-icon";
+
+                                if (character.icon) {
+                                    const img = document.createElement("img");
+                                    img.src = character.icon;
+                                    img.alt =
+                                        character.character || character.name;
+                                    img.className = "char-avatar";
+                                    iconSpan.appendChild(img);
+                                }
+
+                                const nameSpan = document.createElement("span");
+                                nameSpan.className = "char-name";
+                                nameSpan.textContent =
+                                    character.character || character.name;
+                                if (character.color) {
+                                    nameSpan.style.color = character.color;
+                                }
+                                iconSpan.appendChild(nameSpan);
+
+                                // Insert at the beginning of the paragraph
+                                p.insertBefore(iconSpan, p.firstChild);
+
+                                // Hide the original CHAR[name]: tag
+                                const firstChild = p.childNodes[1]; // After icon
+                                if (
+                                    firstChild &&
+                                    firstChild.nodeType === Node.TEXT_NODE
+                                ) {
+                                    firstChild.textContent =
+                                        firstChild.textContent.replace(
+                                            /^CHAR\[[^\]]+\]:\s*/,
+                                            "",
+                                        );
+                                }
+                            }
+                        }
+                    }
+                });
+
+                console.log("Character icons added");
+            } catch (e) {
+                console.error("Error parsing character data:", e);
+            }
+        }
 
         // STEP 2: Setup mode switching
         console.log("=== STEP 2: Setting up mode switching ===");
