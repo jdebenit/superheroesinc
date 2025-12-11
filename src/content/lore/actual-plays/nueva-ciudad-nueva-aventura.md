@@ -156,7 +156,7 @@ ROLL[La Naga]: Lanzar 105% - 30 = 75%; 1d100 → 41; ÉXITO.
 
 GM: Estás teniendo suerte hoy.
 
-NARR: El jefe levanta el arma, pero antes de apretar el gatillo, Asha agarra el cuerpo inconsciente de su compañera y se lolanza, impactando contra él. Ambos caen al suelo y el arma rebota lejos de su alcance.
+NARR: El jefe levanta el arma, pero antes de apretar el gatillo, Asha agarra a su compañera inconsciente y la lanza, impactando contra él. Ambos caen al suelo y el arma rebota lejos de su alcance.
 
 ---
 
