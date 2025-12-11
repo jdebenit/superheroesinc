@@ -29,6 +29,8 @@ npcs:
     color: "#AA99FF"
   - name: "Agente del policia"
     color: "blue"
+  - name: "Agente Cortes"
+    color: "brown"
 tags: ["aprende a jugar"]
 ---
 
@@ -49,9 +51,9 @@ GM: Pues ya sabes cómo va esto: tirada de Acechar/Discrección, sin modificador
 
 ROLL[La Naga]: Tengo Acechar 130%; 1d100 → 24; ÉXITO.
 
-META: Solo hubiera fallado con una pifia, un 01. Podría haberse tratado como acción automática, pero así calentamos los dados.
-
 RULE[SHI-p285]: Resolución de acciones, Libro SHI 3ª Edición, página 285.
+
+META: Solo hubiera fallado con una pifia, un 01. Podría haberse tratado como acción automática, pero así calentamos los dados.
 
 NARR: Al acercarse, Asha distingue a tres moteros armados. Dos llevan cadenas, y el tercero empuña una de esas armas de pólvora que ha visto en los “espejos que muestran imágenes” de este mundo. Dos intentan meter a una mujer por la fuerza en la parte trasera de un vehículo metálico.
 
@@ -102,7 +104,7 @@ META: Es recomendable anotar la iniciativa en un papel para no liarse.
 
 GM: Empieza La Naga, después el motero, luego su jefe y por último la motera.
 
-PLAYER[La Naga]: Tengo 3 acciones más una de combate por mi amuleto mágico. Uso la de combate para intentar tumbar al que golpeé antes. Apunto a la cabeza.
+PLAYER[La Naga]: Por asalto dispongo de 3 acciones más una de combate por mi amuleto mágico. Uso la de combate para intentar tumbar al que golpeé antes. Apunto a la cabeza.
 
 ROLL[La Naga]: Artes Marciales 73 - parada 22 = 51%; -30 por apuntar a la cabeza; 1d100 → 07; ÉXITO.
 
@@ -120,7 +122,7 @@ META: Con secuaces suele ser más dinámico dejarlos inconscientes y reservar at
 
 NARR: La lucha estalla con velocidad. La Naga propina un golpe directo a la cabeza del motero, que cae redondo al suelo incapaz de mantenerse consciente.
 
-PLAYER[La Naga]: Uso otra acción para colocarme a la espalda de la motera y usarla como cobertura por si el jefe dispara. Luego la golpeo también en la cabeza.
+PLAYER[La Naga]: Uso otra acción para colocarme a la espalda de la motera y usarla como cobertura por si el jefe dispara. Luego con otra acción la golpeo también en la cabeza.
 
 ROLL[La Naga]: Artes Marciales 73 - parada 22 + 70 por estar de espaldas = 121%; -30 apuntado a cabeza; 1d100 → 12; ÉXITO CRÍTICO.
 
@@ -140,7 +142,7 @@ CHAR[La Naga]: "Tu vestimenta parece cómoda para el combate y discreta… Neces
 
 PLAYER[La Naga]: Mantengo la última acción en reserva para ver qué hace el jefe.
 
-PLAYER[Jefe Moteros]: Desenvaina la pistola para disparar.
+PLAYER[Jefe Moteros]: Desenfunda la pistola para disparar.
 
 PLAYER[La Naga]: Uso mi acción reservada para lanzarle a la motera inconsciente, intentando que pierda el arma.
 
@@ -160,12 +162,18 @@ NARR: El jefe levanta el arma, pero antes de apretar el gatillo, el cuerpo incon
 
 ## Sirenas en la noche  
 @scene: 3  
-@location: [Valladolid](/lore/localizaciones/valladolid) - Calle del polígono San Cristóbal  
+@location: [Valladolid](/lore/localizaciones/valladolid) - En medio de una operación encubierta  
 
 NARR: Un estruendo significa que algo más ocurre. Varios agentes de policía salen de un edificio cercano, seguidos por el eco de las sirenas.
 
 CHAR[Agente del policia]: "¡Policía Nacional! ¡Todos al suelo!"
 
-NARR: Asha y los moteros son detenidos. Parece que se ha entrometido en una operación encubierta sin saberlo. Quizás la próxima vez debería prestar más atención al entorno….
+CHAR[Jefe Moteros]: "Agente Cortes... gracias por salvarnos de esta pirada salida de una feria medieval."
 
-PLAYER[La Naga]: Ajjj… Lo único que ronda ahora la cabeza de Asha es conseguir una ropa como la de la motera para no llamar tanto la atención.
+CHAR[Agente Cortes]: "¡Callate!, leedles sus derechos y a la cosplayer de Juego de Tronos tambien."
+
+NARR: Asha y los moteros son detenidos. Parece que se ha entrometido en una operación encubierta sin saberlo. Quizás la próxima vez Asha debería prestar más atención al entorno….
+
+PLAYER[La Naga]: Ajjj… Lo único que ronda ahora la cabeza de Asha es conseguir una ropa como la de la motera para no llamar tanto la atención. Y el Agente Cortes este le puede acabar siendo un interes amoroso...
+
+GM: Como te gusta liarlo todo.
