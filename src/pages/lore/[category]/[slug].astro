@@ -330,6 +330,30 @@ if (item.data.rpgId) {
     font-style: italic;
   }
 
+  /* Hide META: and NARR: labels */
+  .lore-text :global(p) {
+    position: relative;
+  }
+
+  /* Style for paragraphs starting with META: */
+  .lore-text :global(p:has(+ p):not(:has(strong)):not(:has(code)):not(:has(a))) {
+    /* This will be refined with JavaScript for better detection */
+  }
+
+  /* META content styling - italicized and slightly muted */
+  .lore-text :global(.meta-content) {
+    font-style: italic;
+    color: #666;
+    font-size: 0.95em;
+    display: block;
+    margin: 0.5rem 0;
+  }
+
+  /* NARR content styling - hidden by default */
+  .lore-text :global(.narr-content) {
+    display: none;
+  }
+
   /* Replay Mode Filtering - Based on data-type attributes */
   /* Using :global() to ensure styles apply to dynamically rendered content */
   
@@ -342,18 +366,16 @@ if (item.data.rpgId) {
     display: none !important;
   }
 
-  /* Mode: Mesa - Show NARR, CHAR, PLAYER, GM */
-  :global(.lore-text.mode-mesa p[data-type="roll"]),
+  /* Mode: Mesa - Show NARR, CHAR, PLAYER, GM, ROLL */
   :global(.lore-text.mode-mesa p[data-type="rule"]),
   :global(.lore-text.mode-mesa p[data-type="meta"]) {
     display: none !important;
   }
 
-  /* Mode: Reglas - Show NARR, ROLL, RULE */
+  /* Mode: Reglas - Show NARR, ROLL, RULE, META */
   :global(.lore-text.mode-reglas p[data-type="char"]),
   :global(.lore-text.mode-reglas p[data-type="player"]),
-  :global(.lore-text.mode-reglas p[data-type="gm"]),
-  :global(.lore-text.mode-reglas p[data-type="meta"]) {
+  :global(.lore-text.mode-reglas p[data-type="gm"]) {
     display: none !important;
   }
 
@@ -474,6 +496,18 @@ if (item.data.rpgId) {
     font-size: 0.85rem;
     font-weight: 700;
     color: #9966cc;
+  }
+
+  /* META paragraph styling */
+  :global(.lore-text p[data-type="meta"]) {
+    font-style: italic;
+    color: #666;
+    font-size: 0.95em;
+    background: rgba(255, 235, 205, 0.3);
+    padding: 0.5rem 0.75rem;
+    border-left: 3px solid #ff9800;
+    border-radius: 4px;
+    margin: 0.75rem 0;
   }
 
   :global(.lore-text p[data-type="player"]) {

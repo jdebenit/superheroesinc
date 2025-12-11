@@ -436,7 +436,7 @@ const characterData = JSON.stringify({
 
                             const bookSpan = document.createElement("span");
                             bookSpan.className = "book-icon";
-                            bookSpan.textContent = "📖";
+                            bookSpan.textContent = "📐";
                             iconSpan.appendChild(bookSpan);
 
                             const refSpan = document.createElement("span");
@@ -478,6 +478,28 @@ const characterData = JSON.stringify({
                                 firstChild.textContent =
                                     firstChild.textContent.replace(
                                         /^NARR:\s*/,
+                                        "",
+                                    );
+                            }
+                        }
+                    }
+                });
+
+                // Process META paragraphs to hide the tag
+                paragraphs.forEach((p) => {
+                    if (p.getAttribute("data-type") === "meta") {
+                        const text = p.textContent.trim();
+                        if (text.startsWith("META:")) {
+                            // Hide the META: tag
+                            const firstChild = p.firstChild;
+                            if (
+                                firstChild &&
+                                firstChild.nodeType === Node.TEXT_NODE &&
+                                firstChild.textContent
+                            ) {
+                                firstChild.textContent =
+                                    firstChild.textContent.replace(
+                                        /^META:\s*/,
                                         "",
                                     );
                             }
