@@ -288,13 +288,31 @@ const characterData = JSON.stringify({
                     "characters",
                 );
 
-                // Process CHAR paragraphs to add icons
+                // Process CHAR, PLAYER, and ROLL paragraphs to add icons
                 paragraphs.forEach((p) => {
-                    if (p.getAttribute("data-type") === "char") {
-                        const text = p.textContent.trim();
-                        const match = text.match(/^CHAR\[([^\]]+)\]:/);
+                    const dataType = p.getAttribute("data-type");
 
-                        if (match) {
+                    if (
+                        dataType === "char" ||
+                        dataType === "player" ||
+                        dataType === "roll"
+                    ) {
+                        const text = p.textContent.trim();
+                        let match = null;
+                        let tagPattern = null;
+
+                        if (dataType === "char") {
+                            match = text.match(/^CHAR\[([^\]]+)\]:/);
+                            tagPattern = /^CHAR\[[^\]]+\]:\s*/;
+                        } else if (dataType === "player") {
+                            match = text.match(/^PLAYER\[([^\]]+)\]:/);
+                            tagPattern = /^PLAYER\[[^\]]+\]:\s*/;
+                        } else if (dataType === "roll") {
+                            match = text.match(/^ROLL\[([^\]]+)\]:/);
+                            tagPattern = /^ROLL\[[^\]]+\]:\s*/;
+                        }
+
+                        if (match && tagPattern) {
                             const charName = match[1].trim();
 
                             // Find character in players or NPCs
@@ -307,9 +325,23 @@ const characterData = JSON.stringify({
                             if (character) {
                                 // Create icon element
                                 const iconSpan = document.createElement("span");
-                                iconSpan.className = "char-icon";
+                                iconSpan.className =
+                                    dataType === "char"
+                                        ? "char-icon"
+                                        : "player-icon";
 
-                                if (character.icon) {
+                                // For ROLL, use dice emoji instead of character icon
+                                if (dataType === "roll") {
+                                    const diceSpan =
+                                        document.createElement("span");
+                                    diceSpan.className = "dice-icon";
+                                    diceSpan.textContent = "🎲";
+                                    iconSpan.appendChild(diceSpan);
+                                } else if (
+                                    dataType === "char" &&
+                                    character.icon
+                                ) {
+                                    // For CHAR, show character icon if available
                                     const img = document.createElement("img");
                                     img.src = character.icon;
                                     img.alt =
@@ -317,11 +349,25 @@ const characterData = JSON.stringify({
                                     img.className = "char-avatar";
                                     iconSpan.appendChild(img);
                                 }
+                                // For PLAYER, no icon
 
                                 const nameSpan = document.createElement("span");
-                                nameSpan.className = "char-name";
-                                nameSpan.textContent =
-                                    character.character || character.name;
+                                nameSpan.className =
+                                    dataType === "char"
+                                        ? "char-name"
+                                        : "player-name";
+
+                                // For PLAYER and ROLL, show player name; for CHAR, show character name
+                                if (
+                                    dataType === "player" ||
+                                    dataType === "roll"
+                                ) {
+                                    nameSpan.textContent = character.name; // Player name
+                                } else {
+                                    nameSpan.textContent =
+                                        character.character || character.name; // Character name
+                                }
+
                                 if (character.color) {
                                     nameSpan.style.color = character.color;
                                 }
@@ -330,18 +376,110 @@ const characterData = JSON.stringify({
                                 // Insert at the beginning of the paragraph
                                 p.insertBefore(iconSpan, p.firstChild);
 
-                                // Hide the original CHAR[name]: tag
+                                // Hide the original tag
                                 const firstChild = p.childNodes[1]; // After icon
                                 if (
                                     firstChild &&
-                                    firstChild.nodeType === Node.TEXT_NODE
+                                    firstChild.nodeType === Node.TEXT_NODE &&
+                                    firstChild.textContent
                                 ) {
                                     firstChild.textContent =
                                         firstChild.textContent.replace(
-                                            /^CHAR\[[^\]]+\]:\s*/,
+                                            tagPattern,
                                             "",
                                         );
                                 }
+                            }
+                        }
+                    }
+                });
+
+                // Process GM paragraphs to add "Guionista" label
+                paragraphs.forEach((p) => {
+                    if (p.getAttribute("data-type") === "gm") {
+                        const text = p.textContent.trim();
+                        if (text.startsWith("GM:")) {
+                            const labelSpan = document.createElement("span");
+                            labelSpan.className = "gm-label";
+                            labelSpan.textContent = "Guionista";
+
+                            p.insertBefore(labelSpan, p.firstChild);
+
+                            // Hide the original GM: tag
+                            const firstChild = p.childNodes[1];
+                            if (
+                                firstChild &&
+                                firstChild.nodeType === Node.TEXT_NODE &&
+                                firstChild.textContent
+                            ) {
+                                firstChild.textContent =
+                                    firstChild.textContent.replace(
+                                        /^GM:\s*/,
+                                        "",
+                                    );
+                            }
+                        }
+                    }
+                });
+
+                // Process RULE paragraphs to add book icon
+                paragraphs.forEach((p) => {
+                    if (p.getAttribute("data-type") === "rule") {
+                        const text = p.textContent.trim();
+                        const match = text.match(/^RULE\[([^\]]+)\]:/);
+
+                        if (match) {
+                            const ruleRef = match[1].trim();
+
+                            const iconSpan = document.createElement("span");
+                            iconSpan.className = "rule-icon";
+
+                            const bookSpan = document.createElement("span");
+                            bookSpan.className = "book-icon";
+                            bookSpan.textContent = "📖";
+                            iconSpan.appendChild(bookSpan);
+
+                            const refSpan = document.createElement("span");
+                            refSpan.className = "rule-ref";
+                            refSpan.textContent = ruleRef;
+                            iconSpan.appendChild(refSpan);
+
+                            p.insertBefore(iconSpan, p.firstChild);
+
+                            // Hide the original RULE[ref]: tag
+                            const firstChild = p.childNodes[1];
+                            if (
+                                firstChild &&
+                                firstChild.nodeType === Node.TEXT_NODE &&
+                                firstChild.textContent
+                            ) {
+                                firstChild.textContent =
+                                    firstChild.textContent.replace(
+                                        /^RULE\[[^\]]+\]:\s*/,
+                                        "",
+                                    );
+                            }
+                        }
+                    }
+                });
+
+                // Process NARR paragraphs to hide the tag
+                paragraphs.forEach((p) => {
+                    if (p.getAttribute("data-type") === "narr") {
+                        const text = p.textContent.trim();
+                        if (text.startsWith("NARR:")) {
+                            // Hide the NARR: tag
+                            const firstChild = p.firstChild;
+                            if (
+                                firstChild &&
+                                firstChild.nodeType === Node.TEXT_NODE &&
+                                firstChild.textContent
+                            ) {
+                                firstChild.textContent =
+                                    firstChild.textContent.replace(
+                                        /^NARR:\s*/,
+                                        "",
+                                    );
                             }
                         }
                     }

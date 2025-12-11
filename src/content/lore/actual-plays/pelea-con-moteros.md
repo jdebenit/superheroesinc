@@ -28,7 +28,7 @@ npcs:
     icon: "/icons/jefe-moteros.png"
     color: "#AA99FF"
 tags: ["actual play", "replay", "metahumanos", "aprende a jugar"]
-summary: "Un accidente metahumano en el Puente Mayor de Valladolid reúne por primera vez a La Naga, Motero y Jefe Motero, obligándolos a actuar como héroes improvisados."
+summary: "Un accidente metahumano en el Puente Mayor de Valladolid reúne por primera vez a La Naga, Motero y Jefe Moteros, obligándolos a actuar como héroes improvisados."
 ---
 
 # Introducción
@@ -45,14 +45,17 @@ NARR: La noche es húmeda y estrecha en el Barrio Azul. La Naga avanza con la es
 GM: Inicio de turno. La Naga actúa primero. Estás a tres metros del objetivo.
 
 CHAR[La Naga]: "No escaparás otra vez. Entrégate."
+
 PLAYER[La Naga]: Le ataco con la espada, tengo 80 % en combate.
 
 ROLL[La Naga]: ATAQUE; 1d100 → 24; ÉXITO.
+
 GM: La parada del villano es 50. Superas su defensa por más de 25 puntos.
 
 RULE[L2-p16]: Mecánica de ataque y parada, Libro 2, página 16.
 
 PLAYER[La Naga]: Tiro daño: 3d10+50 → 9,7,4 → Total 70.
+
 GM: Tenía 40 PV restantes. Lo dejas a 0 y lo incapacitas por completo.
 
 NARR: La espada describe un arco plateado. El villano intenta retroceder, pero sus fuerzas fallan. En un instante, cae al suelo mientras un dispositivo cae de su mano y muere con un chisporroteo eléctrico.
@@ -69,14 +72,16 @@ NARR: La lluvia empieza a caer. La Naga respira hondo y se aleja, sin saber que 
 
 NARR: El tráfico está detenido. Un camión de combustible atraviesa la calzada. Delante de él, un cráter humeante marca el asfalto.
 
-GM: Motero llega corriendo desde el extremo sur. Jefe Motero observa desde la parte alta de una farola doblada.
+GM: Motero llega corriendo desde el extremo sur. Jefe Moteros observa desde la parte alta de una farola doblada.
 
 CHAR[Motero]: "Genial, yo solo venía a por tabaco."
 
-CHAR[Jefe Motero]: "La estructura del puente está cediendo en dos puntos."
+CHAR[Jefe Moteros]: "La estructura del puente está cediendo en dos puntos."
+
 GM: Quiero analizar rápidamente puntos de tensión.
 
-ROLL[Jefe Motero]: PERCEPCIÓN ESTRUCTURAL; 1d100 → 18; ÉXITO.
+ROLL[Jefe Moteros]: PERCEPCIÓN ESTRUCTURAL; 1d100 → 18; ÉXITO.
+
 GM: Detectas que el camión está a punto de deslizarse y arrastrar dos coches.
 
 RULE[L1-p45]: Análisis de entorno, Libro 1, página 45.
@@ -84,9 +89,11 @@ RULE[L1-p45]: Análisis de entorno, Libro 1, página 45.
 NARR: El camión gime. La calzada cruje.
 
 CHAR[Motera]: "ALÉJENSE… NO… QUIERO… HACER… DAÑO…"
+
 PLAYER[La Naga]: Me lanzo con impulso para apartarlo del borde.
 
 ROLL[Motero]: USO DE PODER; 1d100 → 82; FALLO.
+
 GM: Calculas mal el ángulo. Apartas a un civil, pero sales despedido contra la barandilla.
 
 META: Espero que guste
@@ -94,6 +101,7 @@ META: Espero que guste
 NARR: Motero rueda por el suelo dejando un reguero de chispas.
 
 PLAYER[La Naga]: Intento estabilizar el camión con gravedad.
+
 ROLL[La Naga]: MANIPULACIÓN GRAVITATORIA; 1d100 → 21; ÉXITO.
 
 GM: El camión queda suspendido unos centímetros, estabilizado.
@@ -103,6 +111,7 @@ RULE[L3-p10]: Poderes gravitacionales, Libro 3, página 10.
 NARR: La Motera rompe el lateral del camión y cae al suelo, golpeando el asfalto con placas óseas fracturadas.
 
 CHAR[La Naga]: "Caballeros… o trabajamos juntos, o esto se hunde ahora."
+
 PLAYER[La Naga]: Me acerco para mediar.
 
 NARR: El puente cruje. Sirenas. Luces. Tres desconocidos se miran por primera vez con destino compartido.
@@ -110,6 +119,7 @@ NARR: El puente cruje. Sirenas. Luces. Tres desconocidos se miran por primera ve
 CHAR[Motera]: "No… quería… esto…"
 
 ROLL[La Naga]: EMPATÍA; 1d100 → 63; FALLO.
+
 GM: La Motera entra en pánico, salta por el borde y cae al río.
 
 NARR: Un silencio espeso cubre el puente. El agua se cierra sobre la Motera mientras la policía corta la zona.

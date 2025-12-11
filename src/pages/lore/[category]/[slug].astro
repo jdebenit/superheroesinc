@@ -342,8 +342,7 @@ if (item.data.rpgId) {
     display: none !important;
   }
 
-  /* Mode: Mesa - Show NARR, CHAR, PLAYER, GM */
-  :global(.lore-text.mode-mesa p[data-type="roll"]),
+  /* Mode: Mesa - Show NARR, CHAR, PLAYER, GM, ROLL */
   :global(.lore-text.mode-mesa p[data-type="rule"]),
   :global(.lore-text.mode-mesa p[data-type="meta"]) {
     display: none !important;
@@ -412,11 +411,77 @@ if (item.data.rpgId) {
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
+  
+  /* Player icon styling (same as char-icon) */
+  :global(.player-icon) {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0;
+    background: transparent;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  
+  :global(.player-avatar) {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  :global(.player-name) {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  /* Dice icon for ROLL */
+  :global(.dice-icon) {
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+  
+  /* GM label styling */
+  :global(.gm-label) {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #88cc66;
+    flex-shrink: 0;
+  }
+  
+  /* Rule icon styling */
+  :global(.rule-icon) {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0;
+    background: transparent;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  
+  :global(.book-icon) {
+    font-size: 1.2rem;
+    line-height: 1;
+  }
+  
+  :global(.rule-ref) {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #9966cc;
+  }
 
   :global(.lore-text p[data-type="player"]) {
     background: rgba(102, 204, 255, 0.1);
-    padding: 0.5rem;
+    padding: 0.5rem 0.75rem;
     border-left: 3px solid #66ccff;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
 
   :global(.lore-text p[data-type="player"] strong:first-child) {
@@ -425,8 +490,11 @@ if (item.data.rpgId) {
 
   :global(.lore-text p[data-type="gm"]) {
     background: rgba(136, 204, 102, 0.1);
-    padding: 0.5rem;
+    padding: 0.5rem 0.75rem;
     border-left: 3px solid #88cc66;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
 
   :global(.lore-text p[data-type="gm"] strong:first-child) {
@@ -435,9 +503,12 @@ if (item.data.rpgId) {
 
   :global(.lore-text p[data-type="roll"]) {
     background: rgba(255, 153, 51, 0.1);
-    padding: 0.5rem;
+    padding: 0.5rem 0.75rem;
     border-left: 3px solid #ff9933;
     font-family: monospace;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
 
   :global(.lore-text p[data-type="roll"] strong:first-child) {
@@ -446,9 +517,12 @@ if (item.data.rpgId) {
 
   :global(.lore-text p[data-type="rule"]) {
     background: rgba(153, 102, 204, 0.1);
-    padding: 0.5rem;
+    padding: 0.5rem 0.75rem;
     border-left: 3px solid #9966cc;
     font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
 
   :global(.lore-text p[data-type="rule"] strong:first-child) {
