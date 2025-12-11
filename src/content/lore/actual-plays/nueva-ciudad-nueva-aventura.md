@@ -35,7 +35,7 @@ tags: ["aprende a jugar"]
 ---
 
 # Introducción
-NARR: [Asha de Cindraor](/lore/personajes/la-naga) acaba de llegar a Valladolid, exiliada de su mundo. Tras llamar la atención un par de veces por su atuendo medieval y sus armas, decide dejar todo su equipo en el campamento para dar un paseo, conocer la ciudad y buscar ropa más discreta.
+NARR: [Asha de Cindraor](/personajes/la-naga) acaba de llegar a Valladolid, exiliada de su mundo. Tras llamar la atención un par de veces por su atuendo medieval y sus armas, decide dejar todo su equipo en el campamento para dar un paseo, conocer la ciudad y buscar ropa más discreta.
 
 ---
 
