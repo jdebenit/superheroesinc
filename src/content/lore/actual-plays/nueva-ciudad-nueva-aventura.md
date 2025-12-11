@@ -174,6 +174,6 @@ CHAR[Agente Cortes]: "¡Callate!, leedles sus derechos y a la cosplayer de Juego
 
 NARR: Asha y los moteros son detenidos. Parece que se ha entrometido en una operación encubierta sin saberlo. Quizás la próxima vez Asha debería prestar más atención al entorno….
 
-PLAYER[La Naga]: Ajjj… Lo único que ronda ahora la cabeza de Asha es conseguir una ropa como la de la motera para no llamar tanto la atención. Y el Agente Cortes este le puede acabar siendo un interes amoroso...
+PLAYER[La Naga]: Ajjj… Lo único que ronda ahora la cabeza de Asha es conseguir una ropa como la de la motera para no llamar tanto la atención. Y el Agente Cortes puede acabar siendo un interes amoroso...
 
 GM: Como te gusta liarlo todo.
