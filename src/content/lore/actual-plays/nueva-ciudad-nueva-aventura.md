@@ -27,7 +27,7 @@ npcs:
     rpgId: "Jefe Moteros"
     icon: "/icons/jefe-moteros.png"
     color: "#AA99FF"
-  - name: "Agente del policia"
+  - name: "Agente de policia"
     color: "blue"
   - name: "Subinspector Cortes"
     color: "brown"
@@ -166,7 +166,9 @@ NARR: El jefe levanta el arma, pero antes de apretar el gatillo, el cuerpo incon
 
 NARR: Un estruendo significa que algo más ocurre. Varios agentes de policía salen de un edificio cercano, seguidos por el eco de las sirenas.
 
-CHAR[Agente del policia]: "¡Policía Nacional! ¡Todos al suelo!"
+CHAR[Agente de policia]: "¡Policía Nacional! ¡Todos al suelo!"
+
+PLAYER[La Naga]: Pues no he tenido tanta suerte :D.
 
 CHAR[Jefe Moteros]: "Agente Cortes... gracias por salvarnos de esta pirada salida de una feria medieval."
 
