@@ -342,16 +342,18 @@ if (item.data.rpgId) {
     display: none !important;
   }
 
-  /* Mode: Mesa - Show NARR, CHAR, PLAYER, GM, ROLL */
+  /* Mode: Mesa - Show NARR, CHAR, PLAYER, GM */
+  :global(.lore-text.mode-mesa p[data-type="roll"]),
   :global(.lore-text.mode-mesa p[data-type="rule"]),
   :global(.lore-text.mode-mesa p[data-type="meta"]) {
     display: none !important;
   }
 
-  /* Mode: Reglas - Show NARR, ROLL, RULE, META */
+  /* Mode: Reglas - Show NARR, ROLL, RULE */
   :global(.lore-text.mode-reglas p[data-type="char"]),
   :global(.lore-text.mode-reglas p[data-type="player"]),
-  :global(.lore-text.mode-reglas p[data-type="gm"]) {
+  :global(.lore-text.mode-reglas p[data-type="gm"]),
+  :global(.lore-text.mode-reglas p[data-type="meta"]) {
     display: none !important;
   }
 

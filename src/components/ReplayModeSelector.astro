@@ -485,28 +485,6 @@ const characterData = JSON.stringify({
                     }
                 });
 
-                // Process META paragraphs to hide the tag
-                paragraphs.forEach((p) => {
-                    if (p.getAttribute("data-type") === "meta") {
-                        const text = p.textContent.trim();
-                        if (text.startsWith("META:")) {
-                            // Hide the META: tag
-                            const firstChild = p.firstChild;
-                            if (
-                                firstChild &&
-                                firstChild.nodeType === Node.TEXT_NODE &&
-                                firstChild.textContent
-                            ) {
-                                firstChild.textContent =
-                                    firstChild.textContent.replace(
-                                        /^META:\s*/,
-                                        "",
-                                    );
-                            }
-                        }
-                    }
-                });
-
                 console.log("Character icons added");
             } catch (e) {
                 console.error("Error parsing character data:", e);
