@@ -1,9 +1,12 @@
 ---
+import CharacterSheet from "./CharacterSheet.astro";
+
 interface Props {
     item: any;
+    rpgDataMap?: Record<string, any>;
 }
 
-const { item } = Astro.props;
+const { item, rpgDataMap = {} } = Astro.props;
 ---
 
 <div class="actual-play-metadata">
@@ -46,31 +49,82 @@ const { item } = Astro.props;
             <div class="participants-section">
                 <h3 class="participants-title">Jugadores</h3>
                 <div class="participants-grid">
-                    {item.data.players.map((player: any) => (
-                        <div
-                            class="participant-card"
-                            style={`border-left: 4px solid ${player.color || "#666"}`}
-                        >
-                            {player.icon && (
-                                <img
-                                    src={player.icon}
-                                    alt={player.character}
-                                    class="participant-icon"
-                                />
-                            )}
-                            <div class="participant-info">
+                    {item.data.players.map((player: any) => {
+                        const hasRpg = player.rpgId && rpgDataMap[player.rpgId];
+                        return (
+                            <>
                                 <div
-                                    class="participant-character"
-                                    style={`color: ${player.color || "#666"}`}
+                                    class={`participant-card ${hasRpg ? "clickable" : ""}`}
+                                    style={`border-left: 4px solid ${player.color || "#666"}`}
+                                    onclick={
+                                        hasRpg
+                                            ? `document.getElementById('dialog-${player.rpgId}').showModal()`
+                                            : undefined
+                                    }
                                 >
-                                    {player.character}
+                                    {player.icon && (
+                                        <img
+                                            src={player.icon}
+                                            alt={player.character}
+                                            class="participant-icon"
+                                        />
+                                    )}
+                                    <div class="participant-info">
+                                        <div
+                                            class="participant-character"
+                                            style={`color: ${player.color || "#666"}`}
+                                        >
+                                            {player.character}
+                                        </div>
+                                        <div class="participant-player">
+                                            {player.name}
+                                        </div>
+                                    </div>
+                                    {hasRpg && (
+                                        <span
+                                            class="view-sheet-icon"
+                                            title="Ver ficha"
+                                        >
+                                            👁️
+                                        </span>
+                                    )}
                                 </div>
-                                <div class="participant-player">
-                                    {player.name}
-                                </div>
-                            </div>
-                        </div>
-                    ))}
+                                {hasRpg && (
+                                    <dialog
+                                        id={`dialog-${player.rpgId}`}
+                                        class="character-dialog"
+                                    >
+                                        <div class="dialog-content">
+                                            <div class="dialog-header">
+                                                <div class="header-info">
+                                                    <img
+                                                        src={player.icon}
+                                                        class="dialog-icon"
+                                                    />
+                                                    <span class="dialog-title">
+                                                        {player.character}
+                                                    </span>
+                                                </div>
+                                                <button
+                                                    class="close-btn"
+                                                    onclick={`document.getElementById('dialog-${player.rpgId}').close()`}
+                                                >
+                                                    ✕
+                                                </button>
+                                            </div>
+                                            <div class="dialog-body">
+                                                <CharacterSheet
+                                                    rpg={
+                                                        rpgDataMap[player.rpgId]
+                                                    }
+                                                />
+                                            </div>
+                                        </div>
+                                    </dialog>
+                                )}
+                            </>
+                        );
+                    })}
                 </div>
             </div>
         )
@@ -81,28 +135,84 @@ const { item } = Astro.props;
             <div class="participants-section">
                 <h3 class="participants-title">NPCs</h3>
                 <div class="participants-grid">
-                    {item.data.npcs.map((npc: any) => (
-                        <div
-                            class="participant-card"
-                            style={`border-left: 4px solid ${npc.color || "#888"}`}
-                        >
-                            {npc.icon && (
-                                <img
-                                    src={npc.icon}
-                                    alt={npc.name}
-                                    class="participant-icon"
-                                />
-                            )}
-                            <div class="participant-info">
+                    {item.data.npcs.map((npc: any) => {
+                        const hasRpg = npc.rpgId && rpgDataMap[npc.rpgId];
+                        return (
+                            <>
                                 <div
-                                    class="participant-character"
-                                    style={`color: ${npc.color || "#888"}`}
+                                    class={`participant-card ${hasRpg ? "clickable" : ""}`}
+                                    style={`border-left: 4px solid ${npc.color || "#888"}`}
+                                    onclick={
+                                        hasRpg
+                                            ? `document.getElementById('dialog-${npc.rpgId}').showModal()`
+                                            : undefined
+                                    }
                                 >
-                                    {npc.name}
+                                    {npc.icon && (
+                                        <img
+                                            src={npc.icon}
+                                            alt={npc.name}
+                                            class="participant-icon"
+                                        />
+                                    )}
+                                    <div class="participant-info">
+                                        <div
+                                            class="participant-character"
+                                            style={`color: ${npc.color || "#888"}`}
+                                        >
+                                            {npc.name}
+                                        </div>
+                                        <div class="participant-info-row">
+                                            {hasRpg && (
+                                                <span class="rpg-badge">
+                                                    RPG
+                                                </span>
+                                            )}
+                                        </div>
+                                    </div>
+                                    {hasRpg && (
+                                        <span
+                                            class="view-sheet-icon"
+                                            title="Ver ficha"
+                                        >
+                                            👁️
+                                        </span>
+                                    )}
                                 </div>
-                            </div>
-                        </div>
-                    ))}
+                                {hasRpg && (
+                                    <dialog
+                                        id={`dialog-${npc.rpgId}`}
+                                        class="character-dialog"
+                                    >
+                                        <div class="dialog-content">
+                                            <div class="dialog-header">
+                                                <div class="header-info">
+                                                    <img
+                                                        src={npc.icon}
+                                                        class="dialog-icon"
+                                                    />
+                                                    <span class="dialog-title">
+                                                        {npc.name}
+                                                    </span>
+                                                </div>
+                                                <button
+                                                    class="close-btn"
+                                                    onclick={`document.getElementById('dialog-${npc.rpgId}').close()`}
+                                                >
+                                                    ✕
+                                                </button>
+                                            </div>
+                                            <div class="dialog-body">
+                                                <CharacterSheet
+                                                    rpg={rpgDataMap[npc.rpgId]}
+                                                />
+                                            </div>
+                                        </div>
+                                    </dialog>
+                                )}
+                            </>
+                        );
+                    })}
                 </div>
             </div>
         )
@@ -289,5 +399,137 @@ const { item } = Astro.props;
         .participant-card:hover {
             transform: translateY(-2px);
         }
+    }
+
+    /* Interactive Features */
+    .participant-card.clickable {
+        cursor: pointer;
+        position: relative;
+    }
+
+    .participant-card.clickable:hover {
+        background: #f0f7ff;
+        border-color: var(--color-primary) !important;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .view-sheet-icon {
+        opacity: 0;
+        transition: opacity 0.2s;
+        font-size: 1.2rem;
+    }
+
+    .participant-card:hover .view-sheet-icon {
+        opacity: 1;
+    }
+
+    .participant-info-row {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .rpg-badge {
+        font-size: 0.65rem;
+        background: var(--color-secondary);
+        color: white;
+        padding: 1px 4px;
+        border-radius: 3px;
+        font-weight: bold;
+    }
+
+    /* Dialog/Modal Styles */
+    .character-dialog {
+        padding: 0;
+        border: none;
+        border-radius: 12px;
+        background: transparent;
+        max-width: 90vw;
+        max-height: 90vh;
+        width: 800px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    }
+
+    .character-dialog::backdrop {
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(3px);
+    }
+
+    .dialog-content {
+        background: #f9f7f1; /* Match character sheet bg */
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        max-height: 90vh;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .dialog-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 1.5rem;
+        background: white;
+        border-bottom: 2px solid var(--color-secondary);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+
+    .header-info {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .dialog-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid var(--color-primary);
+    }
+
+    .dialog-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--color-primary-dark);
+        font-family: var(--font-comic);
+        text-transform: uppercase;
+    }
+
+    .close-btn {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #666;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+    }
+
+    .close-btn:hover {
+        background: #eee;
+        color: var(--color-primary);
+        transform: rotate(90deg);
+    }
+
+    .dialog-body {
+        overflow-y: auto;
+        padding: 1rem;
+        flex: 1;
+    }
+
+    /* Hide the CharacterSheet default margin/shadow when inside modal */
+    .dialog-body :global(.character-sheet) {
+        margin: 0;
+        box-shadow: none;
+        border: none;
     }
 </style>

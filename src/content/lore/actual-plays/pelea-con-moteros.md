@@ -27,6 +27,8 @@ npcs:
     rpgId: "Jefe Moteros"
     icon: "/icons/jefe-moteros.png"
     color: "#AA99FF"
+  - name: "Agente del CISS"
+    color: "blue"
 tags: ["actual play", "replay", "metahumanos", "aprende a jugar"]
 summary: "Un accidente metahumano en el Puente Mayor de Valladolid reúne por primera vez a La Naga, Motero y Jefe Moteros, obligándolos a actuar como héroes improvisados."
 ---

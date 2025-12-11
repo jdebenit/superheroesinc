@@ -20,7 +20,7 @@ export async function getStaticPaths() {
 const item = Astro.props;
 const { Content } = await item.render();
 
-// Fetch RPG data if rpgId is present
+// Fetch RPG data if rpgId is present (for lore item itself)
 let rpgData = null;
 if (item.data.rpgId) {
   try {
@@ -30,6 +30,53 @@ if (item.data.rpgId) {
     }
   } catch (error) {
     console.error(`Failed to load RPG data for ${item.data.rpgId}:`, error);
+  }
+}
+
+// Fetch RPG Map for Actual Plays (Players & NPCs)
+const rpgDataMap: Record<string, any> = {};
+if (item.data.category === "actual-plays") {
+  const allCharacters = [
+    ...(item.data.players || []),
+    ...(item.data.npcs || [])
+  ];
+
+  for (const char of allCharacters) {
+    if (char.rpgId) {
+      try {
+        const potentialIds = [
+            char.rpgId, // Exact match
+            char.rpgId.replace(/_/g, '-').toLowerCase(), // underscores to dashes
+            char.rpgId.replace(/\./g, '-').toLowerCase(), // dots to dashes (motero-road.reapers -> motero-road-reapers)
+            char.rpgId.toLowerCase().replace(/\s+/g, '-'), // spaces to dashes (Jefe Moteros -> jefe-moteros)
+            // Special case handling if needed or broader search
+        ];
+        
+        let entry = null;
+        for (const id of potentialIds) {
+            if (id === "jefe-moteros") { // Hardcode mapping if generic slug fails for specific known edge cases or try to match filenames if possible
+                 // Note: 'Jefe Moteros' -> 'jefe-moteros', but file is 'jefe-motero-road-reapers'.
+                 // We can't easily loose-match against all files without listing them all, 
+                 // but for now let's try to map specific known patterns if we can, or just expect better data.
+                 // Actually, let's try to find an entry that *starts with* the slug if exact fail.
+            }
+            
+            entry = await getEntry("rpg", id);
+            if (entry) break;
+        }
+
+        // Special fallback: generic mapping for known mismatches if getEntry failed
+        if (!entry && char.rpgId === "Jefe Moteros") {
+            entry = await getEntry("rpg", "jefe-motero-road-reapers");
+        }
+
+        if (entry) {
+          rpgDataMap[char.rpgId] = entry.data;
+        }
+      } catch (e) {
+        console.error(`Error fetching RPG data for ${char.rpgId}:`, e);
+      }
+    }
   }
 }
 ---
@@ -67,7 +114,7 @@ if (item.data.rpgId) {
 
         {
           item.data.category === "actual-plays" ? (
-            <ActualPlayMetadata item={item} />
+            <ActualPlayMetadata item={item} rpgDataMap={rpgDataMap} />
           ) : (
             <div class="lore-metadata">
               {item.data.source && (
