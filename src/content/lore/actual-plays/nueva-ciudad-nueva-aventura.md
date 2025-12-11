@@ -29,7 +29,7 @@ npcs:
     color: "#AA99FF"
   - name: "Agente del policia"
     color: "blue"
-  - name: "Agente Cortes"
+  - name: "Subinspector Cortes"
     color: "brown"
 tags: ["aprende a jugar"]
 ---
@@ -170,10 +170,10 @@ CHAR[Agente del policia]: "¡Policía Nacional! ¡Todos al suelo!"
 
 CHAR[Jefe Moteros]: "Agente Cortes... gracias por salvarnos de esta pirada salida de una feria medieval."
 
-CHAR[Agente Cortes]: "¡Callate!, leedles sus derechos y a la cosplayer de Juego de Tronos tambien."
+CHAR[Subinspector Cortes]: "¡Callate!, leedles sus derechos y a la cosplayer de Juego de Tronos tambien."
 
 NARR: Asha y los moteros son detenidos. Parece que se ha entrometido en una operación encubierta sin saberlo. Quizás la próxima vez Asha debería prestar más atención al entorno….
 
-PLAYER[La Naga]: Ajjj… Lo único que ronda ahora la cabeza de Asha es conseguir una ropa como la de la motera para no llamar tanto la atención. Y el Agente Cortes puede acabar siendo un interes amoroso...
+PLAYER[La Naga]: Ajjj… Lo único que ronda ahora la cabeza de Asha es conseguir una ropa como la de la motera para no llamar tanto la atención. Y el Subinspector Cortes puede acabar siendo un interes amoroso...
 
 GM: Como te gusta liarlo todo.
