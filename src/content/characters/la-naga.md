@@ -294,6 +294,8 @@ La policía llegó entre sirenas.
 La encontraron rodeada de cuerpos y motos, sin documentos ni explicación posible.  
 La detuvieron.
 
+[Actual Play: Nueva Ciudad, Nueva Aventura](/lore/actual-plays/nueva-ciudad-nueva-aventura)
+
 Pasó dos noches entre rejas, respirando con cuidado para no arrancar el metal de pura desesperación.
 
 El juez, saturado por las detenciones de Halloween, decidió dejarla libre con varios cargos menores, agresión, resistencia, daños materiales y una acusación que la acompañaría más veces de las que deseaba recordar, “obstrucción involuntaria de una operación policial”.
