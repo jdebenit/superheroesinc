@@ -510,6 +510,64 @@ if (item.data.rpgId) {
     margin: 0.75rem 0;
   }
 
+  /* Scene and Location badges */
+  :global(.scene-badge),
+  :global(.location-badge) {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin: 0.5rem 0;
+  }
+
+  :global(.scene-badge) {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+  }
+
+  :global(.location-badge) {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    box-shadow: 0 2px 8px rgba(245, 87, 108, 0.3);
+  }
+
+  :global(.scene-icon),
+  :global(.location-icon) {
+    font-size: 1.2rem;
+    line-height: 1;
+  }
+
+  :global(.scene-label),
+  :global(.location-label) {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  :global(p[data-type="scene-marker"]),
+  :global(p[data-type="location-marker"]) {
+    margin: 0.75rem 0;
+    padding: 0;
+  }
+
+  /* Scene and Location container for inline display */
+  :global(.scene-location-container) {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  :global(.location-inline) {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.25rem;
+    font-size: 0.9rem;
+  }
+
   :global(.lore-text p[data-type="player"]) {
     background: rgba(102, 204, 255, 0.1);
     padding: 0.5rem 0.75rem;

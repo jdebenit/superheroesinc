@@ -507,6 +507,177 @@ const characterData = JSON.stringify({
                     }
                 });
 
+                // Process @scene and @location markers
+                console.log("=== Processing @scene and @location markers ===");
+
+                // FIRST: Split paragraphs that contain both @scene and @location
+                const paragraphsArray = Array.from(paragraphs);
+                paragraphsArray.forEach((p) => {
+                    const html = p.innerHTML;
+                    // Check if paragraph contains both markers
+                    if (
+                        html.includes("@scene:") &&
+                        html.includes("@location:")
+                    ) {
+                        console.log(
+                            "Found paragraph with both markers, splitting...",
+                        );
+                        // Split by <br> or <br/> or <br />
+                        const parts = html.split(/<br\s*\/?>/);
+
+                        if (parts.length > 1) {
+                            // Create new paragraphs for each part
+                            const fragment = document.createDocumentFragment();
+                            parts.forEach((part) => {
+                                if (part.trim()) {
+                                    const newP = document.createElement("p");
+                                    newP.innerHTML = part.trim();
+                                    fragment.appendChild(newP);
+                                }
+                            });
+                            p.replaceWith(fragment);
+                        }
+                    }
+                });
+
+                // Re-query paragraphs after splitting
+                paragraphs = replayContent.querySelectorAll("p");
+                console.log(
+                    `After splitting scene/location: ${paragraphs.length} paragraphs`,
+                );
+
+                // NOW process the markers
+                paragraphs.forEach((p) => {
+                    const text = p.textContent.trim();
+                    const htmlContent = p.innerHTML.trim();
+
+                    // Debug: log first 100 chars of each paragraph
+                    if (
+                        htmlContent.includes("@scene") ||
+                        htmlContent.includes("@location")
+                    ) {
+                        console.log(
+                            "Found marker paragraph:",
+                            htmlContent.substring(0, 100),
+                        );
+                    }
+
+                    // Process @scene markers
+                    if (text.startsWith("@scene:")) {
+                        console.log("Processing @scene marker");
+                        const sceneMatch = text.match(/@scene:\s*(\d+)/);
+                        if (sceneMatch) {
+                            const sceneNumber = sceneMatch[1];
+
+                            // Create badge
+                            const badge = document.createElement("span");
+                            badge.className = "scene-badge";
+
+                            const icon = document.createElement("span");
+                            icon.className = "scene-icon";
+                            icon.textContent = "🎬";
+                            badge.appendChild(icon);
+
+                            const label = document.createElement("span");
+                            label.className = "scene-label";
+                            label.textContent = `Escena ${sceneNumber}`;
+                            badge.appendChild(label);
+
+                            // Check if next sibling is a location marker
+                            const nextP = p.nextElementSibling;
+                            let locationElement = null;
+
+                            if (
+                                nextP &&
+                                nextP.innerHTML.trim().startsWith("@location:")
+                            ) {
+                                console.log(
+                                    "Found location marker right after scene",
+                                );
+                                const locationMatch =
+                                    nextP.innerHTML.match(/@location:\s*(.+)/);
+                                if (locationMatch) {
+                                    let locationContent =
+                                        locationMatch[1].trim();
+
+                                    // Create location element
+                                    locationElement =
+                                        document.createElement("span");
+                                    locationElement.className =
+                                        "location-inline";
+
+                                    const locationLabel =
+                                        document.createElement("strong");
+                                    locationLabel.textContent =
+                                        "Localización: ";
+                                    locationLabel.style.color = "#f5576c";
+
+                                    const contentSpan =
+                                        document.createElement("span");
+                                    contentSpan.innerHTML = locationContent;
+
+                                    locationElement.appendChild(locationLabel);
+                                    locationElement.appendChild(contentSpan);
+
+                                    // Mark next paragraph for removal
+                                    nextP.setAttribute("data-remove", "true");
+                                }
+                            }
+
+                            // Create container for scene and location
+                            const container = document.createElement("div");
+                            container.className = "scene-location-container";
+                            container.appendChild(badge);
+
+                            if (locationElement) {
+                                container.appendChild(locationElement);
+                            }
+
+                            // Replace paragraph content
+                            p.innerHTML = "";
+                            p.appendChild(container);
+                            p.setAttribute("data-type", "scene-marker");
+                            console.log(
+                                "Scene badge created for scene",
+                                sceneNumber,
+                            );
+                        }
+                    }
+
+                    // Process standalone @location markers (not already processed with scene)
+                    if (
+                        htmlContent.startsWith("@location:") &&
+                        !p.hasAttribute("data-remove")
+                    ) {
+                        console.log("Processing standalone @location marker");
+                        const locationMatch =
+                            htmlContent.match(/@location:\s*(.+)/);
+                        if (locationMatch) {
+                            let locationContent = locationMatch[1].trim();
+
+                            // Create bold "Localización" label
+                            const label = document.createElement("strong");
+                            label.textContent = "Localización: ";
+                            label.style.color = "#f5576c";
+
+                            // Create a span to hold the location content (with links)
+                            const contentSpan = document.createElement("span");
+                            contentSpan.innerHTML = locationContent;
+
+                            // Replace paragraph content
+                            p.innerHTML = "";
+                            p.appendChild(label);
+                            p.appendChild(contentSpan);
+                            p.setAttribute("data-type", "location-marker");
+                            console.log("Standalone location label created");
+                        }
+                    }
+                });
+
+                // Remove paragraphs marked for removal
+                replayContent
+                    .querySelectorAll('p[data-remove="true"]')
+                    .forEach((p) => p.remove());
                 console.log("Character icons added");
             } catch (e) {
                 console.error("Error parsing character data:", e);

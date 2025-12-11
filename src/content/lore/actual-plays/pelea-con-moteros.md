@@ -34,9 +34,7 @@ summary: "Un accidente metahumano en el Puente Mayor de Valladolid reúne por pr
 # Introducción
 NARR: Valladolid duerme bajo un cielo frío de invierno cuando un ruido metálico, gutural y violento corta el silencio del Puente Mayor. Tres futuros héroes, aún desconocidos entre sí, están a punto de cruzar sus destinos.
 
----
-
-## Escena 1 — Sombras en el Callejón  
+## Sombras en el Callejón  
 @scene: 1  
 @location: [Valladolid](/lore/localizaciones/valladolid) - Callejón del Barrio Azul  
 
@@ -64,9 +62,7 @@ RULE[L1-p32]: Exceso de daño narrativo, Libro 1, página 32.
 
 NARR: La lluvia empieza a caer. La Naga respira hondo y se aleja, sin saber que ese cadáver tiene relación con lo que ocurrirá minutos después en el Puente Mayor.
 
----
-
-## Escena 2 — El Puente Revienta  
+## El Puente Revienta  
 @scene: 2  
 @location: Valladolid - Puente Mayor sobre el Pisuerga  
 
