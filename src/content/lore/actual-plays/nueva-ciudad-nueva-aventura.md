@@ -138,7 +138,7 @@ RULE[SHI-p310]: Inconsciencia y muerte, Libro SHI 3ª Edición, página 310.
 
 NARR: La Naga se desliza detrás de la motera y la golpea con precisión quirúrgica. La mujer se desploma al instante. Liberada, la víctima huye sin mirar atrás.
 
-CHAR[La Naga]: "Tu vestimenta parece cómoda para el combate y discreta… Necesito algo parecido."
+CHAR[La Naga]: "Tu vestimenta parece cómoda para el combate y discreta… Necesito algo parecido.", mirando a su adversaria inconsciente.
 
 PLAYER[La Naga]: Mantengo la última acción en reserva para ver qué hace el jefe.
 
