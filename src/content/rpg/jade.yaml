@@ -4,6 +4,7 @@ origin:
   items:
     - "Maldita":
       - "Porta el tatuaje de rosa negra, condenada a una existencia de caza eterna contra criaturas sobrenaturales."
+      - "+20 a la parada mental"
 combatstats:
   - "Acciones por asalto: 3"
   - "Iniciativa y Reflejos: 56"
@@ -21,7 +22,7 @@ otherstats:
   - "Modificador de impacto: 10"
   - "Modificador Psionico: 25"
   - "Parada Fisica: 30"
-  - "Parada mental: 70"
+  - "Parada mental: 50+20"
   - "Salto (alto / largo): 3,6m/11m"
 attributes:
   values:

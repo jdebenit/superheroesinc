@@ -3,8 +3,8 @@ level: 4
 origin:
   items:
     - "Semidemonio":
-      - "Humano en apariencia."
       - "Sin límite en su percepción e intelecto."
+      - "+20 a la parada mental"
 combatstats:
   - "Acciones por asalto: 2"
   - "Iniciativa y Reflejos: 46"
@@ -22,7 +22,7 @@ otherstats:
   - "Modificador de impacto: 0"
   - "Modificador Psionico: 25"
   - "Parada Fisica: 21/41"
-  - "Parada mental: 70"
+  - "Parada mental: 50+20"
   - "Salto (alto / largo): 2,5m/7,5m"
 attributes:
   values:

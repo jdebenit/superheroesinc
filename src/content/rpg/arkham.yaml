@@ -4,6 +4,7 @@ origin:
   items:
     - "Mago":
       - "Energía mágica por vinculo con Demencia"
+      - "+20 a la parada mental"
     - "Alterado":
       - "Perdida de equilibro mental en su transformación y perdida de apariencia"
 combatstats:
@@ -23,7 +24,7 @@ otherstats:
   - "Modificador de impacto: 0"
   - "Modificador Psionico: 10"
   - "Parada Fisica: 19"
-  - "Parada mental: 45"
+  - "Parada mental: 25+20"
   - "Salto (alto / largo): 2,3m/7m"
 attributes:
   values:

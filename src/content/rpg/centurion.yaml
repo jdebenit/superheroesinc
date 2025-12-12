@@ -4,6 +4,7 @@ origin:
   items:
     - "Maldito":
       - "Condenado a recorrer la Tierra hasta que sus buenas obras lete rediman."
+      - "+20 a la parada mental"
     - "Vigilante":
       - "Disponibilidad de armamento a dificultad reducida"
       - "Recarga rápida"
@@ -29,7 +30,7 @@ otherstats:
   - "Modificador de impacto: 20"
   - "Modificador Psionico: 25"
   - "Parada Fisica: 23"
-  - "Parada mental: 70"
+  - "Parada mental: 50+20"
   - "Salto (alto / largo): 3,1m/9,5m"
 attributes:
   values:

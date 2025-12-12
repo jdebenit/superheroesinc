@@ -15,6 +15,7 @@ origin:
     - "Dotado":
       - "Potencia de energía mágica 101"
       - "Ejecuta sus poderes con VOL/2"
+      - "+20 a la parada mental"
 combatstats:
   - "Acciones por asalto: 3"
   - "Iniciativa y Reflejos: 65"
@@ -32,7 +33,7 @@ otherstats:
   - "Modificador de impacto: 50"
   - "Modificador Psionico: 505"
   - "Parada Fisica: 40"
-  - "Parada mental: 95"
+  - "Parada mental: 75+20"
   - "Salto (alto / largo): 4,8m/14m"
 attributes:
   values:

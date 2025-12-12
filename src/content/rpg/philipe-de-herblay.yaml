@@ -4,6 +4,7 @@ origin:
   items:
     - "Mago":
       - "Energía mágica por legado familiar 296"
+      - "+20 a la parada mental"
     - "Guardian":
       - "Porta el baston familiar de los Herblay"
 combatstats:
@@ -23,7 +24,7 @@ otherstats:
   - "Modificador de impacto: 0"
   - "Modificador Psionico: 25"
   - "Parada Fisica: 22"
-  - "Parada mental: 70"
+  - "Parada mental: 50+20"
   - "Salto (alto / largo): 2,6m/8m"
 attributes:
   values:

@@ -10,6 +10,7 @@ origin:
       - "-10 a la habilidad de “Conocimientos"
       - "-15 al uso de cualquier aparato tecnológico."
       - "-25 al uso de armas cortas, armas largas y armas militares."
+      - "+20 a la parada mental"
     - "Vigilante":
       - "Disponibilidad de armamento a dificultad reducida"
       - "Recarga rápida"
@@ -42,7 +43,7 @@ otherstats:
   - "Modificador de impacto: 30+10"
   - "Modificador Psionico: 30"
   - "Parada Fisica: 50+10"
-  - "Parada mental: 75"
+  - "Parada mental: 55+20"
   - "Salto (alto / largo): 3,6m/11m (x2)"
 attributes:
   cost: 50

@@ -7,6 +7,7 @@ origin:
       - "-10 a la habilidad de “Conocimientos"
       - "-15 al uso de cualquier aparato tecnológico."
       - "-25 al uso de armas cortas, armas largas y armas militares."
+      - "+20 a la parada mental"
     - "Dotada":
       - "Potencia de energía mágica 168"
 combatstats:
@@ -26,7 +27,7 @@ otherstats:
   - "Modificador de impacto: 2"
   - "Modificador Psionico: 35"
   - "Parada Fisica: 30"
-  - "Parada mental: 90"
+  - "Parada mental: 60+20"
   - "Salto (alto / largo): 3,4m/10,2m"
 attributes:
   values:
