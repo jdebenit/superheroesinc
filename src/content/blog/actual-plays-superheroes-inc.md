@@ -16,7 +16,7 @@ Un Actual Play es una partida real. No es teoría, no es un ejemplo abstracto, n
 
 Un Actual Play es una crónica de una sesión. En él se muestra lo que sucede en la ficción, lo que comentan los jugadores, cómo responde el Guionista y cómo intervienen las reglas del sistema. La idea no es solo contar una historia, sino enseñar cómo se vive y se juega Superhéroes INC desde dentro.
 
-Para que esto funcione bien, usamos un formato propio llamado [SHI Replay Script](/blog/guia-escritura-shi-rplay-script). Es un formato sencillo que separa la narración, las decisiones de los jugadores, las intervenciones del Guionista, las tiradas y las reglas. Al leerlo queda claro de inmediato qué está pasando en la mesa y qué está pasando en la historia.
+Para que esto funcione bien, usamos un formato propio llamado [SHI Replay Script](/blog/guia-escritura-shi-replay-script). Es un formato sencillo que separa la narración, las decisiones de los jugadores, las intervenciones del Guionista, las tiradas y las reglas. Al leerlo queda claro de inmediato qué está pasando en la mesa y qué está pasando en la historia.
 
 ## Por qué son importantes en Superhéroes INC
 

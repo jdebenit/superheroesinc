@@ -4,6 +4,7 @@ origin:
   items:
     - "Semidios":
       - "No necesita foco para usar sus poderes"
+      - "+25 Parada mental"
     - "Mago":
       - "Energia Mágica: 442"
     - "Vigilante":
@@ -33,7 +34,7 @@ otherstats:
   - "Modificador de impacto: 21"
   - "Modificador Psionico: 40"
   - "Parada Fisica: 30"
-  - "Parada mental: 100"
+  - "Parada mental: 75+25"
   - "Salto (alto / largo): 3.3m/100m"
 attributes:
   values:

@@ -6,9 +6,9 @@ source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-11-26
 ---
 
-La **Fundación Divina Mundial (FDM)** es una organización religiosa y diplomática creada en **2006** por iniciativa de la diosa **Kigala**, con el apoyo de la mayoría de los panteones divinos. Su propósito principal es **mantener el equilibrio entre los dioses y los mortales**, preservando la estabilidad de los Reinos Divinos y evitando que estos se precipiten hacia la Tierra Zero.
+La **Fundación Divina Mundial (FDM)** es una organización religiosa y diplomática creada en **2006** por iniciativa de la diosa [Kigala](/personajes/kigala), con el apoyo de la mayoría de los panteones divinos. Su propósito principal es **mantener el equilibrio entre los dioses y los mortales**, preservando la estabilidad de los Reinos Divinos y evitando que estos se precipiten hacia la Tierra Zero.
 
-La fundación funciona como una *tapadera mundana* para una misión mucho más profunda,  **garantizar que las almas de los devotos fallecidos sigan alimentando los reinos de cada panteón**, manteniéndolos alejados de una intervención directa en el mundo humano. Esta labor secreta es esencial para evitar conflictos entre dioses y para preservar la paz.
+La fundación funciona como una *tapadera mundana* para una misión mucho más profunda, **garantizar que las almas de los devotos fallecidos sigan alimentando los reinos de cada panteón**, manteniéndolos alejados de una intervención directa en el mundo humano. Esta labor secreta es esencial para evitar conflictos entre dioses y para preservar la paz.
 
 ![Fundación Divina Mundial](/lore/fdm.png)
 
