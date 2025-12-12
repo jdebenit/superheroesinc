@@ -1,0 +1,97 @@
+name: "Impulso"
+level: 5
+origin:
+  items:
+    - "Elfo Mental":
+      - "+20 Parada mental"
+combatstats:
+  - "Acciones por asalto: 4"
+  - "Iniciativa y Reflejos: 55"
+  - "Puntos de Vida: 80"
+  - "Equilibrio Mental: 85"
+otherstats:
+  - "Inconsciencia: 8"
+  - "Recuperación: 1 PV/h"
+  - "Resistencia a gases y venenos: 20%"
+  - "Resistencia a prejuicios: 50%"
+  - "Modificador de fuerza: 1d4"
+  - "Peso Levantado: 40Kg"
+  - "Daño absorbido físico: 0"
+  - "Daño absorbido mental: 150"
+  - "Modificador de impacto: 40"
+  - "Modificador Psionico: 25"
+  - "Parada Fisica: 50"
+  - "Parada mental: 50+20+100"
+  - "Salto (alto / largo): 5,1m/15m"
+attributes:
+  values:
+    Fuerza: 40
+    Constitución: 60
+    Agilidad: 140
+    Inteligencia: 100
+    Percepción: 83
+    Apariencia: 105
+    Voluntad: 92
+powers:
+  items:
+    - name: "Telequinesis"
+      value: "93%"
+      rank: Medio(21)
+    - name: "Campos de fuerza"
+      value: "92%"
+      rank: Bajo(01)
+      notes: "Telequinetico"
+    - name: "Telepatia"
+      value: "95%"
+      rank: Cosmico(100)
+skills:
+  items:
+    - name: "Acechar/Discrección"
+      math: "(AGI+PER)/2"
+      value: "111%"
+    - name: "Comb. cuerpo a cuerpo"
+      math: "(AGI+PER)/2"
+      value: "111%"
+    - name: "Conocimientos generales"
+      math: "(INT/3)"
+      value: "33%"
+    - name: "Esconderse"
+      math: "(AGI+PER)/4"
+      value: "55%"
+    - name: "Idea"
+      math: "(INT)/2"
+      value: "50%"
+    - name: "Influencia"
+      math: "(INT+APA)/2"
+      value: "102%"
+    - name: "Idioma nativo - Asgardiano"
+      math: "(INT)"
+      value: "100%"
+    - name: "Investigar"
+      math: "(INT+PER)/3"
+      value: "61%"
+    - name: "Lanzar"
+      math: "(FUE+PER)/2"
+      value: "61%"
+    - name: "Primeros auxilios"
+      math: "(INT)/2"
+      value: "50%"
+    - name: "Suerte"
+      math: "(PER+VOL)/4"
+      value: "43%"
+    - name: "Trepar y Saltar"
+      math: "(AGI)"
+      value: "140%"
+specialskills:
+  items:
+    - name: "Ciencias ocultas"
+      math: "(INT/3)"
+      value: "73%"
+    - name: "Robar"
+      value: "80%"
+    - name: "Historia"
+      math: "(INT/3)"
+      value: "43%"
+    - name: "Inglés"
+      math: "(INT/3)"
+      value: "80%"
