@@ -54,4 +54,4 @@ Otro de sus cometidos es asignar estratégicamente a los nuevos miembros a los d
  - [La Luz de Cadollo](/personajes/la-luz-de-cadollo)
  - [Hecsani](/personajes/hecsani)
  - [La Torre Jocar](/personajes/la-torre-jocar)
- - El seductor
+ - [El Seductor](/personajes/el-seductor)

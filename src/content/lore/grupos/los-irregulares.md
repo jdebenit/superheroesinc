@@ -26,5 +26,14 @@ El equipo ha experimentado numerosos cambios en su alineación a lo largo del ti
 
 ![GOM 28 - Los Irregulares](/lore/los-irregulares.png)
 
-> “No son héroes. Son una segunda oportunidad con piernas.”  
+> “No son héroes. Son una segunda oportunidad con patas.”  
 > — *Inspector Juan Castro*
+
+## Miembros actuales
+
+- [Desertor](/personajes/desertor.md)
+- [Reina Mona](/personajes/reina-mona.md)
+- [Sombra](/personajes/sombra.md)
+- [Vanadio](/personajes/vanadio.md)
+- [Hijo de Isis](/personajes/askany.md)
+- [Inspector Toro](/personajes/inspector-toro.md)
