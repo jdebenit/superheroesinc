@@ -11,7 +11,7 @@ rpgId: corredor-nocturno
 
 Lucas siempre fue un solitario. Se sentía más cómodo entre árboles, senderos y animales que rodeado de gente. El trato humano le resultaba incómodo, innecesario. Quizá por eso acabó trabajando como guarda forestal. El sueldo era bajo, pero le permitía pasar los días donde quería, vigilando el bosque y siguiendo rastros que casi nadie más veía.
 
-Su vida era tranquila hasta el día en que sorprendió a un grupo de personas vertiendo un líquido extraño en un riachuelo apartado. No parecía un accidente ni un descuido. Algo en su color y en la forma en que actuaban le puso en alerta. Se acercó para pedir explicaciones y no llegó a terminar la frase. Lo golpearon sin previo aviso y se lo llevaron a la fuerza.
+Su vida era tranquila hasta el día en que sorprendió a un grupo de personas vertiendo un líquido extraño en un riachuelo apartado. No parecía un accidente ni un descuido. Algo en su color, aroma y en la forma en que actuaban le puso en alerta. Se acercó para pedir explicaciones y no llegó a terminar la frase. Lo golpearon sin previo aviso y se lo llevaron a la fuerza.
 
 No sabe cuánto tiempo estuvo desaparecido. Sus recuerdos de aquel periodo son fragmentos inconexos. Pasillos blancos, luces demasiado intensas, instrumental médico, voces que hablaban de él como si no estuviera presente. Tiene claro que era un laboratorio moderno y que los experimentos a los que fue sometido lo cambiaron para siempre. Le otorgaron capacidades sobrehumanas y, gracias a ellas, logró escapar cuando encontró una oportunidad.
 
