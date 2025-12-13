@@ -17,14 +17,14 @@ No sabe cuánto tiempo estuvo desaparecido. Sus recuerdos de aquel periodo son f
 
 La ciudad lo recibió como un entorno hostil. Estaba desorientado, agotado y saturado por el ruido constante. Cuando un agente de policía intentó interrogarlo, reaccionó por puro instinto. Lo golpeó y huyó sin pensar. Desde ese momento pasó a ser un fugitivo, buscado por agresión a un agente y relacionado con varios incidentes difíciles de explicar.
 
-Durante semanas vivió oculto, moviéndose entre parques, solares abandonados y zonas industriales. Patrullaba de noche como antes recorría el bosque, observando desde la distancia y actuando solo cuando veía una injusticia clara. Aquella forma de actuar llamó la atención del Inspector Toro.
+Durante semanas vivió oculto, moviéndose entre parques, solares abandonados y zonas industriales. Patrullaba de noche como antes recorría el bosque, observando desde la distancia y actuando solo cuando veía una injusticia clara. Aquella forma de actuar llamó la atención del [Inspector Toro](/personajes/inspector-toro).
 
-Toro llevaba tiempo siguiendo un patrón extraño. Informes dispersos, testigos nerviosos y escenas en las que alguien había intervenido con una precisión poco habitual. En lugar de ver a Lucas como una amenaza, vio a alguien fuera de lugar. Alguien asustado y empujado al límite.
+[Juan Castro](/personajes/inspector-toro) llevaba tiempo siguiendo un patrón extraño. Informes dispersos, testigos nerviosos y escenas en las que alguien había intervenido con una precisión poco habitual. En lugar de ver a Lucas como una amenaza, vio a alguien fuera de lugar. Alguien asustado y empujado al límite.
 
 El encuentro no fue violento. Toro lo localizó en un entorno natural a las afueras de la ciudad, un terreno donde Lucas se movía con seguridad. No sacó el arma. Habló. Le ofreció una salida y la posibilidad de dejar de huir.
 
-A través de Toro, Lucas entró en contacto con el GOM 28. Allí entendieron pronto que no era un criminal, sino la consecuencia de algo que debía investigarse. Le ofrecieron protección legal, ayuda para controlar sus habilidades y una identidad funcional. A cambio, tendría que colaborar.
+A través de Toro, Lucas entró en contacto con el [GOM 28](/lore/grupos/los-irregulares). Allí entendieron pronto que no era un criminal, sino la consecuencia de algo que debía investigarse. Le ofrecieron protección legal, ayuda para controlar sus habilidades y una identidad funcional. A cambio, tendría que colaborar.
 
 La reintegración fue lenta. Lucas desconfiaba de despachos, órdenes y estructuras cerradas. Pero el GOM 28 le dio algo que reconocía. Una misión clara y un territorio que proteger. Aprendió a trabajar en equipo y a intervenir solo cuando era necesario.
 
-Hoy forma parte del GOM 28 como operativo de campo. Sigue siendo reservado y prefiere el silencio a las palabras largas, pero ya no está solo.
+Hoy forma parte del [GOM 28](/lore/grupos/los-irregulares) como operativo de campo. Sigue siendo reservado y prefiere el silencio a las palabras largas, pero ya no está solo.
