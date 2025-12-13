@@ -3,7 +3,7 @@ title: La Corte Itinerante
 description: Grupo de inadaptados cuyos objetivos no estan demasiado claros
 category: grupos
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
-updatedDate: 2025-12-04
+updatedDate: 2025-12-13
 ---
 
 —Oye, esa trampa es algo pequeña.
