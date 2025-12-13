@@ -6,11 +6,13 @@ source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-13
 ---
 
-—Oye, esa trampa es algo pequeña.
-—Da igual el tamaño, siempre que provoque dolor.
-—Eso dijo ella.
+> Aescotan: "Oye, esa trampa es algo pequeña."
+>
+> El Arquitecto: "Da igual el tamaño, siempre que provoque dolor."
+>
+> Aescotan: "Eso dijo ella."
 
-Tras la llegada de Nigalión a la Tierra, una horda de entidades, demonios y criaturas de pesadilla logró escapar a través del portal antes de su cierre definitivo. Aunque ahora habitan nuestro mundo, permanecen ocultos, moviéndose entre sombras y márgenes, esperando el momento adecuado para actuar. Según antiguas profecías, la apertura del portal marcaba el inicio del regreso de las reinas de Nigalión, y estas criaturas existen con un único propósito, facilitar su llegada o servirlas cuando finalmente pisen la Tierra.
+Tras la llegada de [Nigalión](/lore/localizaciones/nigalion) a la Tierra, una horda de entidades, demonios y criaturas de pesadilla logró escapar a través del portal antes de su cierre definitivo. Aunque ahora habitan nuestro mundo, permanecen ocultos, moviéndose entre sombras y márgenes, esperando el momento adecuado para actuar. Según antiguas profecías, la apertura del portal marcaba el inicio del regreso de las reinas de Nigalión, y estas criaturas existen con un único propósito, facilitar su llegada o servirlas cuando finalmente pisen la Tierra.
 
 Así nació la Corte Itinerante.
 
