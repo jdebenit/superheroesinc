@@ -2,7 +2,7 @@
 name: "Motero Road Reapers"
 description: "Miembro estándar de la banda de moteros Road Reapers. Suelen ir armados y son agresivos."
 category: "genericos"
-source: Partida Oficial
+source: Partida Oficial - La Sombra del enroque
 updatedDate: 2025-12-04
 image: /lore/road-reapers.png
 rpgId: motero-road-reapers

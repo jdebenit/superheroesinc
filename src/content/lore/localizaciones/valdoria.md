@@ -2,7 +2,7 @@
 title: Valdoria (Terra)
 description: Ciudad humana situada en la Llanura Dorada, referente arcano y político del Reino de Iberia en Terra.
 category: localizaciones
-source: Partida Oficial
+source: Partida Oficial - La Sombra del enroque
 updatedDate: 2025-11-26
 ---
 _Crisol de sabiduría, orgullo y silencios._

@@ -2,7 +2,7 @@
 title: La Orden de las Nágas
 description: Hermandad ancestral surgida del linaje de los Serpentes Primordiales, dedicada a custodiar el equilibrio energético de Terra.
 category: organizaciones
-source: Partida Oficial
+source: Partida Oficial - La Sombra del enroque
 updatedDate: 2025-11-27
 ---
 La Orden de las Nagas es una de las tradiciones marciales más antiguas y respetadas de Terra. Su historia no comienza en templos ni linajes nobles, sino en un tiempo en que el mundo aún estaba formándose y la vida buscaba su equilibrio entre caos y estabilidad.

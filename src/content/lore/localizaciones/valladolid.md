@@ -2,7 +2,7 @@
 title: Valladolid
 description: Ciudad española situada en la Comunidad de Castilla y León
 category: localizaciones
-source: Partida Oficial
+source: Partida Oficial - La Sombra del enroque
 updatedDate: 2025-12-10
 ---
 # Valladolid en Superhéroes INC

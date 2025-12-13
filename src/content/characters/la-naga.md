@@ -2,7 +2,7 @@
 name: Asha de Cindraor
 alias: La Naga
 description: Guerrera formada en la ancestral Orden de las Nagas, Asha transformó la ausencia de magia que marcó su infancia en Valdoria en una fuerza interior única. Tras años de disciplina aprendiendo a dominar la Kundalini, fue traicionada por su linaje y desterrada a Tierra Zero.
-source: Partida Oficial
+source: Partida Oficial - La Sombra del enroque
 updatedDate: 2025-12-01
 image: /personajes/la-naga-tierra-zero.png
 rpgId: la-naga

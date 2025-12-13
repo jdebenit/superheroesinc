@@ -2,7 +2,7 @@
 name: Jefe Motero Road Reapers
 description: Miembro con rango de la banda de moteros Road Reapers.
 category: genericos
-source: Partida Oficial
+source: Partida Oficial - La Sombra del enroque
 image: /lore/road-reapers.png
 updatedDate: 2025-12-04
 rpgId: jefe-motero-road-reapers
