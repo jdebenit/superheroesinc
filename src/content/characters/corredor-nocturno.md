@@ -2,7 +2,7 @@
 alias: Corredor Nocturno
 name: Lucas
 description: Un guardia forestal que se convierte en un fugitivo tras ser sometido a experimentos, y acaba siendo incorporado a los Irregulares.
-source: "Héroe Agenda: Sobrenaturales y Arcanos"
+source: "Aportaciones de fans"
 updatedDate: 2025-12-13
 image: /personajes/corredor-nocturno.png
 category: principales
