@@ -1,0 +1,95 @@
+name: "Estaca"
+level: 3
+origin:
+  items:
+    - "Vampiro":
+      - "Necesita, 20 PVs de sangre al día. Si no lo obtienen 2d10 de PV no recuperables hasta que se vuelva a alimentar"
+      - "Si esta hambriento -20 a tiradas de EQM y Voluntad"
+      - "+20 a la parada física"
+combatstats:
+  - "Acciones por asalto: 4"
+  - "Iniciativa y Reflejos: 63"
+  - "Puntos de Vida: 75"
+  - "Equilibrio Mental: 50"
+otherstats:
+  - "Inconsciencia: 7"
+  - "Recuperación: 2 PV/h"
+  - "Resistencia a gases y venenos: 36%"
+  - "Resistencia a prejuicios: 83%"
+  - "Modificador de fuerza: 3d10+6"
+  - "Peso Levantado: 8 Toneladas"
+  - "Daño absorbido físico: 15"
+  - "Daño absorbido mental: 0"
+  - "Modificador de impacto: 35"
+  - "Modificador Psionico: 10"
+  - "Parada Fisica: 50"
+  - "Parada mental: 25+20"
+  - "Salto (alto / largo): 10m/30m"
+attributes:
+  values:
+    Fuerza: 110
+    Constitución: 110
+    Agilidad: 135
+    Inteligencia: 75
+    Percepción: 120
+    Apariencia: 70
+    Voluntad: 85
+powers:
+  items:
+    - name: "Absorcion de vida"
+      value: "115%"
+      rank: Medio(21)
+      notes: "Su mordisco le alimenta y absorbe la vida de sus victimas"
+    - name: "Invulnerabilidad: Penalizadores especie"
+      rank: Alto(81)
+      notes: "Las penalizaciones de los vampiros no le aplican a excepcion de su sed de sangre que no la controla y aún necesita alimentarse"
+skills:
+  items:
+    - name: "Acechar/Discrección"
+      math: "(AGI+PER)/2"
+      value: "127%"
+    - name: "Comb. cuerpo a cuerpo"
+      math: "(AGI+PER)/2"
+      value: "127%"
+    - name: "Conocimientos generales"
+      math: "(INT/3)"
+      value: "25%"
+    - name: "Esconderse"
+      math: "(AGI+PER)/4"
+      value: "63%"
+    - name: "Idea"
+      math: "(INT)/2"
+      value: "37%"
+    - name: "Influencia"
+      math: "(INT+APA)/2"
+      value: "80%"
+    - name: "Idioma nativo - Castellano"
+      math: "(INT)"
+      value: "75%"
+    - name: "Investigar"
+      math: "(INT+PER)/3"
+      value: "65%"
+    - name: "Lanzar"
+      math: "(FUE+PER)/2"
+      value: "76%"
+    - name: "Primeros auxilios"
+      math: "(INT)/2"
+      value: "37%"
+    - name: "Suerte"
+      math: "(PER+VOL)/4"
+      value: "51%"
+    - name: "Trepar y Saltar"
+      math: "(AGI)"
+      value: "1352"
+specialskills:
+  items:
+    - name: "Armas blancas"
+      math: "(AGIxPER)/3"
+      value: "105%"
+    - name: "Computadora/Comunicaciones"
+      math: "(INT)/2"
+      value: "47%"
+    - name: "Rastrear"
+      value: "58%"
+    - name: "Conducir motocicleta"
+      value: "48"

@@ -22,7 +22,7 @@ El gobierno, consciente de las posibles resistencias, especialmente de los sindi
 
 Bajo la supervisión del inspector Juan Castro, el GOM 28 se estableció como una fuerza irregular, pero efectiva, en la lucha contra el crimen metahumano en Madrid. A pesar de sus orígenes como un grupo de inadaptados forzados a trabajar juntos, los Irregulares pronto comenzaron a demostrar su valía, usando sus habilidades para proteger a la ciudad, aunque siempre bajo la sombra de su complicado pasado y la constante vigilancia de las autoridades.
 
-El equipo ha experimentado numerosos cambios en su alineación a lo largo del tiempo, una muestra de la naturaleza inestable y dinámica de su composición. Figuras como Corredor Nocturno, Impacto, Cenizo, Mortal y Ondina han sido miembros destacados durante largos periodos, dejando su huella en el grupo.
+El equipo ha experimentado numerosos cambios en su alineación a lo largo del tiempo, una muestra de la naturaleza inestable y dinámica de su composición. Figuras como [Corredor Nocturno](/personajes/corredor-nocturno.md), Impacto, Cenizo, Mortal y Ondina han sido miembros destacados durante largos periodos, dejando su huella en el grupo.
 
 ![GOM 28 - Los Irregulares](/lore/los-irregulares.png)
 

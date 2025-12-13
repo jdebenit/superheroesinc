@@ -2,7 +2,7 @@
 title: La Legión Sangrienta
 description: Grupo de inadaptados cuyos objetivos no estan demasiado claros
 category: grupos
-source: "Superhéroes INC. Tercera Edición / Héroe Agenda: Sobrenaturales y Arcanos"
+source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-04
 ---
 
@@ -20,8 +20,4 @@ Sus acciones son ambiguas, pueden realizar ataques violentos contra bandas rival
 
 La Legión Sangrienta opera desde las sombras, sin una base conocida y sin una bandera que los defina. Su paradero actual es un misterio, y ninguna agencia ni supergrupo ha conseguido localizarlos desde hace meses. Para unos, es una señal de que se están reorganizando. Para otros, una advertencia de que su próximo movimiento será decisivo.
 
-
 > "No somos villanos. Somos la consecuencia de vuestra indiferencia." — *Manifiesto encontrado en una guarida abandonada.*
-
-
-
