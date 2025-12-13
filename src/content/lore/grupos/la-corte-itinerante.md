@@ -1,6 +1,6 @@
 ---
 title: La Corte Itinerante
-description: Grupo de inadaptados cuyos objetivos no estan demasiado claros
+description: La Corte Itinerante es una organización infernal estructurada como una corporación, formada por demonios, entidades y humanos poseídos, que opera en las sombras para sembrar el caos y preparar la llegada de las reinas de Nigalión a la Tierra.
 category: grupos
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-13
