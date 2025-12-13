@@ -21,3 +21,11 @@ Sus acciones son ambiguas, pueden realizar ataques violentos contra bandas rival
 La Legión Sangrienta opera desde las sombras, sin una base conocida y sin una bandera que los defina. Su paradero actual es un misterio, y ninguna agencia ni supergrupo ha conseguido localizarlos desde hace meses. Para unos, es una señal de que se están reorganizando. Para otros, una advertencia de que su próximo movimiento será decisivo.
 
 > "No somos villanos. Somos la consecuencia de vuestra indiferencia." — *Manifiesto encontrado en una guarida abandonada.*
+
+## Miembros
+
+- [Julián Provencio](/personajes/julian-provencio)
+- [Little Red Wolf](/personajes/little-red-wolf)
+- [Shiafo](/personajes/shiafo)
+- [Estaca](/personajes/estaca)
+- [Pesanta](/personajes/pesanta)
