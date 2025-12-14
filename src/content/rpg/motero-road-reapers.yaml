@@ -6,7 +6,7 @@ combatstats:
   - "Puntos de Vida: 35"
   - "Equilibrio Mental: 60"
 otherstats:
-  - "Inconsciencia: 63"
+  - "Inconsciencia: 3"
   - "Recuperación: 1 PV/h"
   - "Resistencia a gases y venenos: 23%"
   - "Resistencia a prejuicios: 60%"

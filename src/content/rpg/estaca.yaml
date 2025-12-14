@@ -80,7 +80,7 @@ skills:
       value: "51%"
     - name: "Trepar y Saltar"
       math: "(AGI)"
-      value: "1352"
+      value: "135"
 specialskills:
   items:
     - name: "Armas blancas"

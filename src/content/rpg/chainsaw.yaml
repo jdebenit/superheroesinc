@@ -84,7 +84,7 @@ skills:
       value: "37%"
     - name: "Suerte"
       math: "(PER+VOL)/4"
-      value: "5389%"
+      value: "38%"
     - name: "Trepar y Saltar"
       math: "(AGI)"
       value: "78%"
