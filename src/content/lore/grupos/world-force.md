@@ -34,7 +34,7 @@ Termodinamo - Rusia
 Kalimat - Marruecos
 Sai - Japón
 Balanza - Brasil Nación Tes-Khar
-Coraza - Paraíso (Desaparecido)
+Coraza - Paraíso
 
 La composición del equipo se encuentra actualmente en revisión
 
