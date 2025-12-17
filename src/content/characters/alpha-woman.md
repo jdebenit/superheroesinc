@@ -1,6 +1,6 @@
 ---
 name: Nerea Acebes
-alias: Alfa Woman
+alias: Alpha Woman
 description: Liberada, el primer arquetipo de guerrera de la historia de la humanidad y mas alla..
 source: Partida Oficial - Ecos de guerra
 updatedDate: 2025-12-17
