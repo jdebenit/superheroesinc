@@ -13,7 +13,7 @@ Así nació Antiheroes Ltd., un grupo de metahumanos contratados directamente po
 
 Antiheroes Ltd. opera en la sombra, sin reconocimiento oficial y sin necesidad de justificación pública. Sus miembros comparten un origen común, al menos en lo que se conoce, y han sido seleccionados no por su carisma, sino por su eficacia, su frialdad operativa y su capacidad para enfrentarse a otros metahumanos sin dudar cuando la situación lo exige.
 
-El liderazgo operativo recae en Servicio de Limpieza, un profesional metódico y pragmático que coordina las intervenciones sobre el terreno. Sin embargo, las órdenes reales provienen de María Benavente, antigua heroína conocida como Inercia y actual responsable directa del grupo dentro de Superheroes INC. Su implicación garantiza que cada misión responde a intereses estratégicos muy concretos, aunque no siempre transparentes.
+El liderazgo operativo recae en [Servicio de Limpieza](/personajes/servicio-de-limpieza), un profesional metódico y pragmático que coordina las intervenciones sobre el terreno. Sin embargo, las órdenes reales provienen de María Benavente, antigua heroína conocida como Inercia y actual responsable directa del grupo dentro de Superheroes INC. Su implicación garantiza que cada misión responde a intereses estratégicos muy concretos, aunque no siempre transparentes.
 
 La base de operaciones del equipo no es de dominio público. Se cree que se encuentra en algún punto de las Islas Baleares, aunque su localización exacta permanece clasificada incluso para muchos empleados de la propia corporación.
 
