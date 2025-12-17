@@ -28,6 +28,7 @@ npcs:
     icon: "/icons/jefe-moteros.png"
     color: "#AA99FF"
   - name: "Agente de policia"
+    rpgId: "agente-de-policia"
     color: "blue"
   - name: "Subinspector Cortes"
     color: "brown"

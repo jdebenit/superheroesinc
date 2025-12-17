@@ -1,0 +1,83 @@
+name: "Agente de Policia"
+combatstats:
+  - "Acciones por asalto: 2"
+  - "Iniciativa y Reflejos: 39"
+  - "Puntos de Vida: 65"
+  - "Equilibrio Mental: 70"
+otherstats:
+  - "Inconsciencia: 6"
+  - "Recuperación: 1 PV/h"
+  - "Resistencia a gases y venenos: 26%"
+  - "Resistencia a prejuicios: 20%"
+  - "Modificador de fuerza: 1d6"
+  - "Peso Levantado: 160 Kg."
+  - "Daño absorbido físico: 0 (20)"
+  - "Daño absorbido mental: 0"
+  - "Modificador de impacto: 0"
+  - "Modificador Psionico: 0"
+  - "Parada Fisica: 19"
+  - "Parada mental: 10"
+  - "Salto (alto / largo): 2,3m/6,9m"
+attributes:
+  values:
+    Fuerza: 80
+    Constitución: 80
+    Agilidad: 76
+    Inteligencia: 70
+    Percepción: 80
+    Apariencia: 65
+    Voluntad: 78
+skills:
+  items:
+    - name: "Acechar/Discrección"
+      math: "(AGI+PER)/2"
+      value: "78%"
+    - name: "Comb. cuerpo a cuerpo"
+      math: "(AGI+PER)/2"
+      value: "78%"
+    - name: "Conocimientos generales"
+      math: "(INT/3)"
+      value: "23%"
+    - name: "Esconderse"
+      math: "(AGI+PER)/4"
+      value: "39%"
+    - name: "Idea"
+      math: "(INT)/2"
+      value: "35%"
+    - name: "Influencia"
+      math: "(INT+APA)/2"
+      value: "67%"
+    - name: "Idioma nativo"
+      math: "(INT)"
+      value: "70%"
+    - name: "Investigar"
+      math: "(INT+PER)/3"
+      value: "50%"
+    - name: "Lanzar"
+      math: "(FUE+PER)/2"
+      value: "80%"
+    - name: "Primeros auxilios"
+      math: "(INT)/2"
+      value: "35%"
+    - name: "Suerte"
+      math: "(PER+VOL)/4"
+      value: "39%"
+    - name: "Trepar y Saltar"
+      math: "(AGI)"
+      value: "76%"
+specialskills:
+  items:
+    - name: "Armas cortas"
+      value: "80%"
+    - name: "Armas largas"
+      value: "60%"
+    - name: "Conducir coche"
+      value: "80%"
+weapons:
+  items:
+    - name: "Pistola media"
+      value: "80%"
+      notes: "Daño 2d10 Pot 8 - DxA 2 - Car. 15"
+    - name: "Rifle medio"
+      value: "60%"
+      notes: "Daño 2d10x2 Pot 24 - DxA 1 - Car. 20"
