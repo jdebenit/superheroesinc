@@ -1,0 +1,110 @@
+name: "Alpha Woman"
+totalCost: 70+8
+level: 3
+origin:
+  items:
+    - "Liberada":
+      - "Liberada alineada con Entropía (FUE)"
+      - "Conocimiento de las esferas (CON)"
+      - "Comprensión de la senda: Magia"
+      - "+20 a la parada mental"
+    - "Vigilante":
+      - "Disponibilidad de armamento a dificultad reducida"
+      - "Recarga rápida"
+      - "Recuerdos dolorosos"
+      - "Voluntad férrea"
+    - "Fanático":
+      - "+20 Habilidad a elección"
+      - "+20 Mod. de Impacto"
+      - "-20 a las tiradas de EQM cuando alguien se vaya a irse de rositas sin un buen golpe"
+    - "Manipulador":
+      - "+20 Idea"
+      - "+20 Influencia"
+      - "+20 Otro Idioma"
+      - "Puede repetir una tirada fallida de resistencia a prejuicios"
+combatstats:
+  - "Acciones por asalto: 3"
+  - "Iniciativa y Reflejos: 44"
+  - "Puntos de Vida: 71"
+  - "Equilibrio Mental: 60"
+otherstats:
+  - "Inconsciencia: 7"
+  - "Recuperación: 4 PV/h"
+  - "Resistencia a gases y venenos: 37%"
+  - "Resistencia a prejuicios: 50%"
+  - "Modificador de fuerza: 1d100+20"
+  - "Peso Levantado: 20 Toneladas"
+  - "Daño absorbido físico: 30 (70)"
+  - "Daño absorbido mental: 0"
+  - "Modificador de impacto: 20"
+  - "Modificador Psionico: 30"
+  - "Parada Fisica: 22"
+  - "Parada mental: 50+20"
+  - "Salto (alto / largo): 6m/18,2m"
+attributes:
+  values:
+    Fuerza: 120
+    Constitución: 111
+    Agilidad: 91
+    Inteligencia: 60
+    Percepción: 88
+    Apariencia: 741
+    Voluntad: 91
+skills:
+  items:
+    - name: "Acechar/Discrección"
+      math: "(AGI+PER)/2"
+      value: "89%"
+    - name: "Comb. cuerpo a cuerpo"
+      math: "(AGI+PER)/2"
+      value: "109%"
+    - name: "Conocimientos generales"
+      math: "(INT/3)"
+      value: "20%"
+    - name: "Esconderse"
+      math: "(AGI+PER)/4"
+      value: "44%"
+    - name: "Idea"
+      math: "(INT)/2"
+      value: "30+20%"
+    - name: "Influencia"
+      math: "(INT+APA)/2"
+      value: "67+20%"
+    - name: "Idioma nativo"
+      math: "(INT)"
+      value: "60%"
+    - name: "Investigar"
+      math: "(INT+PER)/3"
+      value: "49%"
+    - name: "Lanzar"
+      math: "(FUE+PER)/2"
+      value: "104%"
+    - name: "Primeros auxilios"
+      math: "(INT)/2"
+      value: "30%"
+    - name: "Suerte"
+      math: "(PER+VOL)/4"
+      value: "47%"
+    - name: "Trepar y Saltar"
+      math: "(AGI)"
+      value: "91%"
+specialskills:
+  items:
+    - name: "Otro Idioma - Inglés"
+      value: "20+20%"
+    - name: "Historía"
+      value: "20+20%"
+    - name: "Conducir Vehículo: coche"
+      value: "37%"
+    - name: "Quimica"
+      value: "20%"
+    - name: "Mágia"
+      value: "74%"
+background:
+  items:
+    - "Trabajo medio/bajo: secretaria"
+    - "Solitaria"
+equipment:
+  items:
+    - name: "Traje de Kevlar"
+      notes: "+ 40 al daño absorbido físico"
