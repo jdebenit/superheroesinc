@@ -1,0 +1,185 @@
+{
+  "name": "Arkham",
+  "level": 7,
+  "origin": {
+    "items": [
+      {
+        "Mago": [
+          "Energía mágica por vinculo con Demencia",
+          "+20 a la parada mental"
+        ]
+      },
+      {
+        "Alterado": [
+          "Perdida de equilibro mental en su transformación y perdida de apariencia"
+        ]
+      }
+    ]
+  },
+  "combatstats": [
+    "Acciones por asalto: 2",
+    "Iniciativa y Reflejos: 43",
+    "Puntos de Vida: 95",
+    "Equilibrio Mental: 10"
+  ],
+  "otherstats": [
+    "Inconsciencia: 9",
+    "Recuperación: 1 PV/h",
+    "Resistencia a gases y venenos: 33%",
+    "Resistencia a prejuicios: 100%",
+    "Modificador de fuerza: 1d4",
+    "Peso Levantado: 73Kg",
+    "Daño absorbido físico: 0",
+    "Daño absorbido mental: 40",
+    "Modificador de impacto: 0",
+    "Modificador Psionico: 10",
+    "Parada Fisica: 19",
+    "Parada mental: 25+20",
+    "Salto (alto / largo): 2,3m/7m"
+  ],
+  "attributes": {
+    "values": {
+      "Fuerza": 73,
+      "Constitución": 99,
+      "Agilidad": 77,
+      "Inteligencia": 107,
+      "Percepción": 98,
+      "Apariencia": 33,
+      "Voluntad": 90
+    }
+  },
+  "spells": {
+    "items": [
+      {
+        "name": "Abrir portales",
+        "rank": "Rango 5"
+      },
+      {
+        "name": "Escudos místicos",
+        "rank": "Rango 10"
+      },
+      {
+        "name": "Proyeccicón astral",
+        "rank": "Rango 1"
+      },
+      {
+        "name": "Crear ilusiones",
+        "rank": "Rango 5"
+      },
+      {
+        "name": "Percepción mágica",
+        "rank": "Rango 1"
+      },
+      {
+        "name": "Pseudo Psi",
+        "rank": "Rango 4"
+      },
+      {
+        "name": "Revivir muertos",
+        "rank": "Rango 5"
+      },
+      {
+        "name": "Animar objetos",
+        "rank": "Rango 4"
+      },
+      {
+        "name": "Metamorfosis oscura",
+        "rank": "Rango 4"
+      }
+    ]
+  },
+  "powers": {
+    "items": [
+      {
+        "name": "Empatia mental",
+        "value": "145%",
+        "rank": "Cosmico(100)"
+      },
+      {
+        "name": "Superinteligencia"
+      }
+    ]
+  },
+  "skills": {
+    "items": [
+      {
+        "name": "Acechar/Discrección",
+        "math": "(AGI+PER)/2",
+        "value": "87%"
+      },
+      {
+        "name": "Comb. cuerpo a cuerpo",
+        "math": "(AGI+PER)/2",
+        "value": "87%"
+      },
+      {
+        "name": "Conocimientos generales",
+        "math": "(INT/3)",
+        "value": "60%"
+      },
+      {
+        "name": "Esconderse",
+        "math": "(AGI+PER)/4",
+        "value": "43%"
+      },
+      {
+        "name": "Idea",
+        "math": "(INT)/2",
+        "value": "53%"
+      },
+      {
+        "name": "Influencia",
+        "math": "(INT+APA)/2",
+        "value": "70%"
+      },
+      {
+        "name": "Idioma nativo",
+        "math": "(INT)",
+        "value": "97%"
+      },
+      {
+        "name": "Investigar",
+        "math": "(INT+PER)/3",
+        "value": "68%"
+      },
+      {
+        "name": "Lanzar",
+        "math": "(FUE+PER)/2",
+        "value": "85%"
+      },
+      {
+        "name": "Primeros auxilios",
+        "math": "(INT)/2",
+        "value": "53%"
+      },
+      {
+        "name": "Suerte",
+        "math": "(PER+VOL)/4",
+        "value": "47%"
+      },
+      {
+        "name": "Trepar y Saltar",
+        "math": "(AGI)",
+        "value": "77%"
+      }
+    ]
+  },
+  "specialskills": {
+    "items": [
+      {
+        "name": "Psicologia",
+        "math": "(INT/3)",
+        "value": "75%"
+      },
+      {
+        "name": "Magia",
+        "value": "102%"
+      },
+      {
+        "name": "Ciencias ocultas",
+        "math": "(INT/3)",
+        "value": "75%"
+      }
+    ]
+  }
+}

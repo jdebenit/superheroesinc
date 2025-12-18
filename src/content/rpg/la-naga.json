@@ -1,0 +1,229 @@
+{
+  "name": "La Naga",
+  "icon": "icons/la-naga-icon.png",
+  "totalCost": 70,
+  "level": 1,
+  "origin": {
+    "cost": 17,
+    "items": [
+      {
+        "Terrana": [
+          "Ajena (sin magia)",
+          "-10 a la habilidad de “Conocimientos",
+          "-15 al uso de cualquier aparato tecnológico.",
+          "-25 al uso de armas cortas, armas largas y armas militares.",
+          "+20 a la parada mental"
+        ]
+      },
+      {
+        "Vigilante": [
+          "Disponibilidad de armamento a dificultad reducida",
+          "Recarga rápida",
+          "Recuerdos dolorosos",
+          "Voluntad férrea"
+        ]
+      },
+      {
+        "Artista Marcial con Chi": [
+          "+20 Acechar/Discreción",
+          "+20 Saltar/Trepar",
+          "+30 Mod. de Impacto",
+          "Acceso al uso del Chi"
+        ]
+      },
+      {
+        "Manipulador": [
+          "+20 Idea",
+          "+20 Influencia",
+          "+20 Otro Idioma",
+          "Puede repetir una tirada fallida de resistencia a prejuicios"
+        ]
+      }
+    ]
+  },
+  "combatstats": [
+    "Acciones por asalto: 3+1",
+    "Iniciativa y Reflejos: 55+20",
+    "Puntos de Vida: 60",
+    "Equilibrio Mental: 102"
+  ],
+  "otherstats": [
+    "Inconsciencia: 6",
+    "Recuperación: 2 PV/h",
+    "Resistencia a gases y venenos: 35%",
+    "Resistencia a prejuicios: 30%",
+    "Modificador de fuerza: 1d10",
+    "Peso Levantado: 500Kg",
+    "Daño absorbido físico: 15",
+    "Daño absorbido mental: 40",
+    "Modificador de impacto: 30+10",
+    "Modificador Psionico: 30",
+    "Parada Fisica: 50+10",
+    "Parada mental: 55+20",
+    "Salto (alto / largo): 3,6m/11m (x2)"
+  ],
+  "attributes": {
+    "cost": 50,
+    "values": {
+      "Fuerza": 100,
+      "Constitución": 105,
+      "Agilidad": 110,
+      "Inteligencia": 102,
+      "Percepción": 110,
+      "Apariencia": 101,
+      "Voluntad": 102
+    }
+  },
+  "skills": {
+    "items": [
+      {
+        "name": "Acechar/Discrección",
+        "math": "(AGI+PER)/2",
+        "value": "110+20%"
+      },
+      {
+        "name": "Comb. cuerpo a cuerpo",
+        "math": "(AGI+PER)/2",
+        "value": "110%"
+      },
+      {
+        "name": "Conocimientos generales",
+        "math": "(INT/3)",
+        "value": "34-10%"
+      },
+      {
+        "name": "Esconderse",
+        "math": "(AGI+PER)/4",
+        "value": "55%"
+      },
+      {
+        "name": "Idea",
+        "math": "(INT)/2",
+        "value": "51+20%"
+      },
+      {
+        "name": "Influencia",
+        "math": "(INT+APA)/2",
+        "value": "101+20%"
+      },
+      {
+        "name": "Idioma nativo",
+        "math": "(INT)",
+        "value": "102%"
+      },
+      {
+        "name": "Investigar",
+        "math": "(INT+PER)/3",
+        "value": "70%"
+      },
+      {
+        "name": "Lanzar",
+        "math": "(FUE+PER)/2",
+        "value": "105%"
+      },
+      {
+        "name": "Primeros auxilios",
+        "math": "(INT)/2",
+        "value": "51%"
+      },
+      {
+        "name": "Suerte",
+        "math": "(PER+VOL)/4",
+        "value": "53%"
+      },
+      {
+        "name": "Trepar y Saltar",
+        "math": "(AGI)",
+        "value": "110+20%"
+      }
+    ]
+  },
+  "specialskills": {
+    "cost": 7,
+    "items": [
+      {
+        "name": "Otro Idioma (Req) - Inglés",
+        "math": "(INT/3)",
+        "value": "34+20%"
+      },
+      {
+        "name": "Artes Marciales (Req.)",
+        "math": "(2xPER)/3",
+        "value": "73%"
+      },
+      {
+        "name": "Concentración",
+        "value": "54%"
+      },
+      {
+        "name": "Arma Especial: Khopesh",
+        "value": "73%"
+      },
+      {
+        "name": "Arma Especial: Sheng Biao",
+        "value": "73%"
+      },
+      {
+        "name": "Armas Blancas",
+        "math": "(AGI+PER)/3",
+        "value": "73%"
+      },
+      {
+        "name": "Rastrear",
+        "value": "53%"
+      },
+      {
+        "name": "Supervivencia (Bosque)",
+        "math": "INT/2",
+        "value": "51%"
+      }
+    ]
+  },
+  "background": {
+    "cost": -8,
+    "items": [
+      "Vagabundo",
+      "Solitario",
+      "Con antecedentes penales",
+      "Identidad desconocida",
+      "Resistencia a prejuicios -20"
+    ]
+  },
+  "equipment": {
+    "cost": 2,
+    "items": [
+      {
+        "name": "Tiara Mental",
+        "notes": "Reduce daño por ataques mentales al 10%"
+      },
+      {
+        "name": "Amuleto de Velocidad",
+        "notes": "+1 acción de combate"
+      },
+      {
+        "name": "Botas de Lert",
+        "notes": "Duplica su capacidad de salto"
+      }
+    ]
+  },
+  "weapons": {
+    "cost": 2,
+    "items": [
+      {
+        "name": "Khopesh de Tamahagane",
+        "value": "73%",
+        "notes": "Daño 3d10+30+Mod Fue. Cargado de chi ignora el DA físico del objetivo"
+      },
+      {
+        "name": "Sheng Biao",
+        "value": "73%",
+        "notes": "Daño 2d6+20+Mod Fue."
+      }
+    ]
+  },
+  "notes": [
+    "Cuando usa su chi en su cuerpo este adquiere un brillo verdoso",
+    "El Khopesh se ilumina al colpear cuando esta cargado con chi",
+    "Suele usar el Sheng Biao como ayuda para moverse entre azoteas y zonas elevadas"
+  ]
+}

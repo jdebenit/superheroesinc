@@ -1,0 +1,192 @@
+{
+  "name": "Hijo de Isis",
+  "level": 2,
+  "origin": {
+    "items": [
+      {
+        "Semidios": [
+          "No necesita foco para usar sus poderes",
+          "+25 Parada mental"
+        ]
+      },
+      {
+        "Mago": [
+          "Energia Mágica: 442"
+        ]
+      },
+      {
+        "Vigilante": [
+          "Disponibilidad de armamento a dificultad reducida",
+          "Recarga rápida",
+          "Recuerdos dolorosos",
+          "Voluntad férrea"
+        ]
+      },
+      {
+        "Manipulador": [
+          "+20 Idea",
+          "+20 Influencia",
+          "+20 Otro Idioma",
+          "Puede repetir una tirada fallida de resistencia a prejuicios"
+        ]
+      }
+    ]
+  },
+  "combatstats": [
+    "Acciones por asalto: 3",
+    "Iniciativa y Reflejos: 67",
+    "Puntos de Vida: 40",
+    "Equilibrio Mental: 141"
+  ],
+  "otherstats": [
+    "Inconsciencia: 4",
+    "Recuperación: 1 PV/h",
+    "Resistencia a gases y venenos: 26%",
+    "Resistencia a prejuicios: 10%",
+    "Modificador de fuerza: 1d4",
+    "Peso Levantado: 40Kg",
+    "Daño absorbido físico: 0",
+    "Daño absorbido mental: 60",
+    "Modificador de impacto: 21",
+    "Modificador Psionico: 40",
+    "Parada Fisica: 30",
+    "Parada mental: 75+25",
+    "Salto (alto / largo): 3.3m/100m"
+  ],
+  "attributes": {
+    "values": {
+      "Fuerza": 40,
+      "Constitución": 80,
+      "Agilidad": 101,
+      "Inteligencia": 141,
+      "Percepción": 130,
+      "Apariencia": 40,
+      "Voluntad": 171
+    }
+  },
+  "spells": {
+    "items": [
+      {
+        "name": "Escudos Místicos",
+        "rank": "Rango 5"
+      },
+      {
+        "name": "Invocar Elemento (clima)",
+        "rank": "Rango 4"
+      },
+      {
+        "name": "Curación",
+        "rank": "Rango 2"
+      },
+      {
+        "name": "Pseudo Psi",
+        "rank": "Rango 4"
+      },
+      {
+        "name": "Paralizar",
+        "rank": "Rango 4"
+      },
+      {
+        "name": "Abrir Portales",
+        "rank": "Rango 4"
+      }
+    ]
+  },
+  "powers": {
+    "items": [
+      {
+        "name": "Superinteligencia"
+      },
+      {
+        "name": "Supervoluntad"
+      }
+    ]
+  },
+  "skills": {
+    "items": [
+      {
+        "name": "Acechar/Discrección",
+        "math": "(AGI+PER)/2",
+        "value": "115%"
+      },
+      {
+        "name": "Comb. cuerpo a cuerpo",
+        "math": "(AGI+PER)/2",
+        "value": "115%"
+      },
+      {
+        "name": "Conocimientos generales",
+        "math": "(INT/3)",
+        "value": "47%"
+      },
+      {
+        "name": "Esconderse",
+        "math": "(AGI+PER)/4",
+        "value": "57%"
+      },
+      {
+        "name": "Idea",
+        "math": "(INT)/2",
+        "value": "70+20%"
+      },
+      {
+        "name": "Influencia",
+        "math": "(INT+APA)/2",
+        "value": "90+20%"
+      },
+      {
+        "name": "Idioma nativo - Egipcio",
+        "math": "(INT)",
+        "value": "141%"
+      },
+      {
+        "name": "Investigar",
+        "math": "(INT+PER)/3",
+        "value": "90%"
+      },
+      {
+        "name": "Lanzar",
+        "math": "(FUE+PER)/2",
+        "value": "85%"
+      },
+      {
+        "name": "Primeros auxilios",
+        "math": "(INT)/2",
+        "value": "70%"
+      },
+      {
+        "name": "Suerte",
+        "math": "(PER+VOL)/4",
+        "value": "75%"
+      },
+      {
+        "name": "Trepar y Saltar",
+        "math": "(AGI)",
+        "value": "101%"
+      }
+    ]
+  },
+  "specialskills": {
+    "items": [
+      {
+        "name": "Magia",
+        "value": "128%"
+      },
+      {
+        "name": "Otro Idioma - Español",
+        "math": "(INT/3)",
+        "value": "47+20%"
+      },
+      {
+        "name": "Historia",
+        "math": "(INT/3)",
+        "value": "47%"
+      },
+      {
+        "name": "Mitología",
+        "math": "(INT/3)",
+        "value": "47%"
+      }
+    ]
+  }
+}

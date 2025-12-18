@@ -1,0 +1,169 @@
+{
+  "name": "Corredor Nocturno",
+  "level": 3,
+  "origin": {
+    "items": [
+      {
+        "Alterado": [
+          "Desplazamiento social"
+        ]
+      },
+      {
+        "Vigilante": [
+          "Disponibilidad de armamento a dificultad reducida",
+          "Recarga rápida",
+          "Recuerdos dolorosos",
+          "Voluntad férrea"
+        ]
+      },
+      {
+        "Vengador": [
+          "+20 habilidad a elección",
+          "-20 tiradas de EQM daños al medio ambiente"
+        ]
+      }
+    ]
+  },
+  "combatstats": [
+    "Acciones por asalto: 4",
+    "Iniciativa y Reflejos: 60",
+    "Puntos de Vida: 50",
+    "Equilibrio Mental: 70"
+  ],
+  "otherstats": [
+    "Inconsciencia: 5",
+    "Recuperación: 1 PV/h",
+    "Resistencia a gases y venenos: 33%",
+    "Resistencia a prejuicios: 20%",
+    "Modificador de fuerza: 1d10",
+    "Peso Levantado: 500Kg",
+    "Daño absorbido físico: 0 (100)",
+    "Daño absorbido mental: 40",
+    "Modificador de impacto: 40+20",
+    "Modificador Psionico: 25",
+    "Parada Fisica: 50",
+    "Parada mental: 50",
+    "Salto (alto / largo): 5,3m/16m"
+  ],
+  "attributes": {
+    "values": {
+      "Fuerza": 100,
+      "Constitución": 100,
+      "Agilidad": 140,
+      "Inteligencia": 101,
+      "Percepción": 100,
+      "Apariencia": 49,
+      "Voluntad": 100
+    }
+  },
+  "powers": {
+    "items": [
+      {
+        "name": "Superinteligencia"
+      },
+      {
+        "name": "Supervelocidad",
+        "value": "140%"
+      },
+      {
+        "name": "Control de la energía cinetica",
+        "value": "70%",
+        "rank": "Elevado(41)",
+        "notes": "No intercambia energias"
+      },
+      {
+        "name": "Campo de fuerza: Automatico",
+        "value": "41%",
+        "rank": "Elevado(41)",
+        "notes": "Solo se activa en supervelocidad"
+      }
+    ]
+  },
+  "skills": {
+    "items": [
+      {
+        "name": "Acechar/Discrección",
+        "math": "(AGI+PER)/2",
+        "value": "120%"
+      },
+      {
+        "name": "Comb. cuerpo a cuerpo",
+        "math": "(AGI+PER)/2",
+        "value": "120%"
+      },
+      {
+        "name": "Conocimientos generales",
+        "math": "(INT/3)",
+        "value": "33%"
+      },
+      {
+        "name": "Esconderse",
+        "math": "(AGI+PER)/4",
+        "value": "60%"
+      },
+      {
+        "name": "Idea",
+        "math": "(INT)/2",
+        "value": "50%"
+      },
+      {
+        "name": "Influencia",
+        "math": "(INT+APA)/2",
+        "value": "74%"
+      },
+      {
+        "name": "Idioma nativo - Castellano",
+        "math": "(INT)",
+        "value": "100%"
+      },
+      {
+        "name": "Investigar",
+        "math": "(INT+PER)/3",
+        "value": "67%"
+      },
+      {
+        "name": "Lanzar",
+        "math": "(FUE+PER)/2",
+        "value": "100%"
+      },
+      {
+        "name": "Primeros auxilios",
+        "math": "(INT)/2",
+        "value": "50%"
+      },
+      {
+        "name": "Suerte",
+        "math": "(PER+VOL)/4",
+        "value": "50%"
+      },
+      {
+        "name": "Trepar y Saltar",
+        "math": "(AGI)",
+        "value": "140%"
+      }
+    ]
+  },
+  "specialskills": {
+    "items": [
+      {
+        "name": "Mecanica",
+        "math": "(INT/2)",
+        "value": "66%"
+      },
+      {
+        "name": "Arrma Especial: Cuchillas de plasma",
+        "math": "(2xPER)/3",
+        "value": "66%"
+      }
+    ]
+  },
+  "weapons": {
+    "items": [
+      {
+        "name": "Cuchillas de plasma",
+        "value": "66%",
+        "notes": "Daño 1d100+100."
+      }
+    ]
+  }
+}

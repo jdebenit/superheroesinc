@@ -1,0 +1,159 @@
+{
+  "name": "Chainsaw",
+  "level": 6,
+  "origin": {
+    "items": [
+      {
+        "Alterado": [
+          "Con secuelas de perdida de apariencia, locura..."
+        ]
+      },
+      {
+        "Guardian": [
+          "Motosierra de bronce cthoniano, le otorga gran fuerza y resistencia cuando la empuña."
+        ]
+      }
+    ]
+  },
+  "combatstats": [
+    "Acciones por asalto: 2",
+    "Iniciativa y Reflejos: 39",
+    "Puntos de Vida: 200",
+    "Equilibrio Mental: 19"
+  ],
+  "otherstats": [
+    "Inconsciencia: 20",
+    "Recuperación: 30 PV/h",
+    "Resistencia a gases y venenos: 60%",
+    "Resistencia a prejuicios: 100%",
+    "Modificador de fuerza: 1d100+65",
+    "Peso Levantado: 65 Toneladas",
+    "Daño absorbido físico: 120",
+    "Daño absorbido mental: 0",
+    "Modificador de impacto: 0",
+    "Modificador Psionico: 0",
+    "Parada Fisica: 19",
+    "Parada mental: 10",
+    "Salto (alto / largo): 47,2m/141,8m"
+  ],
+  "attributes": {
+    "values": {
+      "Fuerza": 165,
+      "Constitución": 180,
+      "Agilidad": 78,
+      "Inteligencia": 75,
+      "Percepción": 80,
+      "Apariencia": 30,
+      "Voluntad": 75
+    }
+  },
+  "powers": {
+    "items": [
+      {
+        "name": "Incremento Vital",
+        "rank": "Bajo(01)"
+      },
+      {
+        "name": "Superfuerza",
+        "notes": "Cuando empuña la motosierra"
+      },
+      {
+        "name": "Superconstitución",
+        "notes": "Cuando empuña la motosierra"
+      },
+      {
+        "name": "Empatia mental",
+        "value": "85%",
+        "rank": "Elevado(41)",
+        "notes": "Solo puede provocar terror"
+      },
+      {
+        "name": "Dominación mental",
+        "value": "85%",
+        "rank": "Alto(81)",
+        "notes": "Solo puede ordenar a sus victimas que queden paralizadas"
+      }
+    ]
+  },
+  "skills": {
+    "items": [
+      {
+        "name": "Acechar/Discrección",
+        "math": "(AGI+PER)/2",
+        "value": "122%"
+      },
+      {
+        "name": "Comb. cuerpo a cuerpo",
+        "math": "(AGI+PER)/2",
+        "value": "122%"
+      },
+      {
+        "name": "Conocimientos generales",
+        "math": "(INT/3)",
+        "value": "25%"
+      },
+      {
+        "name": "Esconderse",
+        "math": "(AGI+PER)/4",
+        "value": "61%"
+      },
+      {
+        "name": "Idea",
+        "math": "(INT)/2",
+        "value": "37%"
+      },
+      {
+        "name": "Influencia",
+        "math": "(INT+APA)/2",
+        "value": "52%"
+      },
+      {
+        "name": "Idioma nativo",
+        "math": "(INT)",
+        "value": "75%"
+      },
+      {
+        "name": "Investigar",
+        "math": "(INT+PER)/3",
+        "value": "51%"
+      },
+      {
+        "name": "Lanzar",
+        "math": "(FUE+PER)/2",
+        "value": "122%"
+      },
+      {
+        "name": "Primeros auxilios",
+        "math": "(INT)/2",
+        "value": "37%"
+      },
+      {
+        "name": "Suerte",
+        "math": "(PER+VOL)/4",
+        "value": "38%"
+      },
+      {
+        "name": "Trepar y Saltar",
+        "math": "(AGI)",
+        "value": "78%"
+      }
+    ]
+  },
+  "specialskills": {
+    "items": [
+      {
+        "name": "Arma especial - motosierra",
+        "value": "90%"
+      }
+    ]
+  },
+  "weapons": {
+    "items": [
+      {
+        "name": "Motosierra de bronce cthoniano",
+        "value": "90%",
+        "notes": "Daño 3d10+20+Mod Fue. Cuando golpea con ella, la victima debe realizar una tirada de Equilibrio Mental, si falla perdera 1d10 puntos de EQM debido al trauma. "
+      }
+    ]
+  }
+}

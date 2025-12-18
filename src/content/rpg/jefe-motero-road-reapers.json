@@ -1,0 +1,134 @@
+{
+  "name": "Jefe Motero Road Reapers",
+  "level": 3,
+  "combatstats": [
+    "Acciones por asalto: 1",
+    "Iniciativa y Reflejos: 40",
+    "Puntos de Vida: 60",
+    "Equilibrio Mental: 80"
+  ],
+  "otherstats": [
+    "Inconsciencia: 6",
+    "Recuperación: 1 PV/h",
+    "Resistencia a gases y venenos: 33%",
+    "Resistencia a prejuicios: 60%",
+    "Modificador de fuerza: 1d8",
+    "Peso Levantado: 297Kg",
+    "Daño absorbido físico: 0",
+    "Daño absorbido mental: 0",
+    "Modificador de impacto: 0",
+    "Modificador Psionico: -10",
+    "Parada Fisica: 18",
+    "Parada mental: 0",
+    "Salto (alto / largo): 2m/6m"
+  ],
+  "attributes": {
+    "values": {
+      "Fuerza": 99,
+      "Constitución": 100,
+      "Agilidad": 72,
+      "Inteligencia": 80,
+      "Percepción": 88,
+      "Apariencia": 70,
+      "Voluntad": 70
+    }
+  },
+  "skills": {
+    "items": [
+      {
+        "name": "Acechar/Discrección",
+        "math": "(AGI+PER)/2",
+        "value": "80%"
+      },
+      {
+        "name": "Comb. cuerpo a cuerpo",
+        "math": "(AGI+PER)/2",
+        "value": "90%"
+      },
+      {
+        "name": "Conocimientos generales",
+        "math": "(INT/3)",
+        "value": "26%"
+      },
+      {
+        "name": "Esconderse",
+        "math": "(AGI+PER)/4",
+        "value": "40%"
+      },
+      {
+        "name": "Idea",
+        "math": "(INT)/2",
+        "value": "40%"
+      },
+      {
+        "name": "Influencia",
+        "math": "(INT+APA)/2",
+        "value": "85%"
+      },
+      {
+        "name": "Idioma nativo",
+        "math": "(INT)",
+        "value": "80%"
+      },
+      {
+        "name": "Investigar",
+        "math": "(INT+PER)/3",
+        "value": "66%"
+      },
+      {
+        "name": "Lanzar",
+        "math": "(FUE+PER)/2",
+        "value": "93%"
+      },
+      {
+        "name": "Primeros auxilios",
+        "math": "(INT)/2",
+        "value": "40%"
+      },
+      {
+        "name": "Suerte",
+        "math": "(PER+VOL)/4",
+        "value": "39%"
+      },
+      {
+        "name": "Trepar y Saltar",
+        "math": "(AGI)",
+        "value": "72%\""
+      }
+    ]
+  },
+  "specialskills": {
+    "items": [
+      {
+        "name": "Arma especial: cadenas",
+        "value": "58%"
+      },
+      {
+        "name": "Conducir motocicleta",
+        "value": "62%"
+      },
+      {
+        "name": "Armas cortas",
+        "value": "68%"
+      },
+      {
+        "name": "Supervivencia - Bajos fondos",
+        "value": "40%"
+      }
+    ]
+  },
+  "weapons": {
+    "items": [
+      {
+        "name": "Cadenas",
+        "value": "58%",
+        "notes": "Daño 2d6+20+Mod Fue"
+      },
+      {
+        "name": "Revolver medio",
+        "value": "58%",
+        "notes": "Daño 1d10x2 - Pot 16 - DxA 1 - Car 6"
+      }
+    ]
+  }
+}
