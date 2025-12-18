@@ -66,7 +66,8 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
         subtypes: {
             "Atlante": ["Herencia atlante", "Resistencia acuática"],
             "Tes-khar": ["Fisiología alienígena"],
-            "Thals": ["Poderes psíquicos avanzados"]
+            "Thals": ["Poderes psíquicos avanzados"],
+            "Híbridos de humano y no-humano": ["algo", "algo", "algo"]
         }
     },
     "Origen Tecnológico": {

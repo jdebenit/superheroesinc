@@ -34,6 +34,25 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
         voluntad: { base: 40, originMod: 0, specialtyMod: 0, powerMod: 0 }
     });
 
+    // Estado para guardar la característica elegida para el bonus fijo (ej: Heraldo Cósmico)
+    const [chosenBonusCharacteristic, setChosenBonusCharacteristic] = useState<string | null>(null);
+
+
+    // Detectar si algún origen tiene característica elegible
+    const hasChoosableCharacteristic = () => {
+        if (!data.origin || !data.origin.items || data.origin.items.length === 0) {
+            return null;
+        }
+
+        for (const item of data.origin.items) {
+            const originName = Object.keys(item)[0];
+            const modifierData = ORIGIN_CHARACTERISTIC_MODIFIERS[originName];
+            if (modifierData && modifierData.choosableCharacteristic) {
+                return modifierData.choosableCharacteristic;
+            }
+        }
+        return null;
+    };
 
     const calculateOriginModifiers = () => {
         const modifiers: { [key: string]: number } = {
@@ -50,7 +69,7 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
             return modifiers;
         }
 
-        // Sumar todos los modificadores de los orígenes seleccionados por cada característica
+        // Tomar el MÁXIMO de los modificadores (no sumar) para cada característica
         data.origin.items.forEach((item: any) => {
             const originName = Object.keys(item)[0];
             const modifierData = ORIGIN_CHARACTERISTIC_MODIFIERS[originName];
@@ -59,9 +78,18 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
                     const charMod = modifierData[charId as keyof typeof modifierData];
                     // Verificar que charMod es un CharacteristicModifier y no distributablePoints
                     if (charMod && typeof charMod === 'object' && 'modifier' in charMod && charMod.modifier) {
-                        modifiers[charId] += charMod.modifier;
+                        // Tomar el MAYOR modificador, no sumar
+                        modifiers[charId] = Math.max(modifiers[charId], charMod.modifier);
                     }
                 });
+
+                // Si tiene choosableCharacteristic y hay una característica elegida, añadir el bonus
+                if (modifierData.choosableCharacteristic && chosenBonusCharacteristic) {
+                    modifiers[chosenBonusCharacteristic] = Math.max(
+                        modifiers[chosenBonusCharacteristic],
+                        modifierData.choosableCharacteristic.bonus
+                    );
+                }
             }
         });
 
@@ -73,9 +101,10 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
             return { min: 40, max: 100 };
         }
 
-        // Tomar el máximo de todos los límites para esta característica específica
+        // Tomar el máximo de max y el mínimo de min para esta característica
         let maxLimit = 100;
-        const minLimit = 40;
+        let minLimit = 40;  // Por defecto 40
+        let hasSpecificMin = false;
 
         data.origin.items.forEach((item: any) => {
             const originName = Object.keys(item)[0];
@@ -83,8 +112,19 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
             if (modifierData) {
                 const charMod = modifierData[charId as keyof typeof modifierData];
                 // Verificar que charMod es un CharacteristicModifier
-                if (charMod && typeof charMod === 'object' && 'max' in charMod && charMod.max && charMod.max > maxLimit) {
-                    maxLimit = charMod.max;
+                if (charMod && typeof charMod === 'object' && 'max' in charMod) {
+                    if (charMod.max && charMod.max > maxLimit) {
+                        maxLimit = charMod.max;
+                    }
+                    // Si tiene un min definido, tomar el MENOR (no el mayor)
+                    if (charMod.min !== undefined) {
+                        if (!hasSpecificMin) {
+                            minLimit = charMod.min;
+                            hasSpecificMin = true;
+                        } else if (charMod.min < minLimit) {
+                            minLimit = charMod.min;
+                        }
+                    }
                 }
             }
         });
@@ -115,25 +155,53 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
         data.origin.items.forEach((item: any) => {
             const originName = Object.keys(item)[0];
             const modifierData = ORIGIN_CHARACTERISTIC_MODIFIERS[originName];
-            if (modifierData && modifierData.distributablePoints) {
-                totalAvailable += modifierData.distributablePoints;
+            if (modifierData) {
+                // Puntos distribuibles normales
+                if (modifierData.distributablePoints) {
+                    totalAvailable += modifierData.distributablePoints;
+                }
+                // Puntos distribuibles de choosableCharacteristic
+                if (modifierData.choosableCharacteristic && modifierData.choosableCharacteristic.distributablePoints) {
+                    totalAvailable += modifierData.choosableCharacteristic.distributablePoints;
+                }
             }
         });
 
-        // Calcular puntos usados
+        // Calcular puntos usados (excluyendo el bonus fijo de choosableCharacteristic)
         let used = 0;
+        const choosable = hasChoosableCharacteristic();
         Object.keys(characteristics).forEach(charId => {
-            used += characteristics[charId].originMod;
+            // Si esta característica tiene el bonus fijo, no contar ese bonus en los puntos usados
+            if (choosable && charId === chosenBonusCharacteristic) {
+                used += Math.max(0, characteristics[charId].originMod - choosable.bonus);
+            } else {
+                used += characteristics[charId].originMod;
+            }
         });
 
         return { total: totalAvailable, used, remaining: totalAvailable - used };
     };
 
-    // Actualizar modificadores de origen cuando cambian los orígenes
+    // Actualizar modificadores de origen cuando cambian los orígenes o la característica elegida
     // Solo auto-calcula para orígenes SIN puntos distribuibles
     useEffect(() => {
-        if (hasDistributablePoints()) {
-            // No auto-calcular, el usuario distribuirá manualmente
+        if (hasDistributablePoints() || hasChoosableCharacteristic()) {
+            // No auto-calcular si hay puntos distribuibles o característica elegible
+            // Pero sí aplicar el bonus fijo si hay una característica elegida
+            if (hasChoosableCharacteristic() && chosenBonusCharacteristic) {
+                const originMods = calculateOriginModifiers();
+
+                setCharacteristics(prev => {
+                    const updated = { ...prev };
+                    Object.keys(updated).forEach(key => {
+                        updated[key] = {
+                            ...updated[key],
+                            originMod: originMods[key] || 0
+                        };
+                    });
+                    return updated;
+                });
+            }
             return;
         }
 
@@ -149,15 +217,15 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
             });
             return updated;
         });
-    }, [data.origin]);
+    }, [data.origin, chosenBonusCharacteristic]);
 
     const handleCharacteristicChange = (charId: string, field: string, value: string) => {
         const numValue = parseInt(value) || 0;
         const limits = calculateLimits(charId);
 
-        // Para el modificador de origen, el mínimo es 0, no el límite de la característica
-        const minValue = field === 'originMod' ? 0 : limits.min;
-        let clampedValue = Math.max(minValue, Math.min(limits.max, numValue));
+        // NO aplicamos el límite mínimo - es solo informativo
+        // Solo validamos que sea >= 0 y <= max
+        let clampedValue = Math.max(0, Math.min(limits.max, numValue));
 
         // Si estamos editando el modificador de origen y hay puntos distribuibles
         if (field === 'originMod' && isDistributableMode) {
@@ -225,8 +293,9 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
         return c.base + c.originMod + c.specialtyMod + c.powerMod;
     };
 
-    const isDistributableMode = hasDistributablePoints();
+    const isDistributableMode = hasDistributablePoints() || hasChoosableCharacteristic();
     const pointsInfo = isDistributableMode ? getDistributablePointsInfo() : null;
+    const choosableInfo = hasChoosableCharacteristic();
 
     return (
         <div style={{ padding: '2rem' }}>
@@ -238,6 +307,66 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
                     ? 'Distribuye los puntos de origen entre las características. Cada característica puede tener límites diferentes.'
                     : 'Define las características base y sus modificadores. Los modificadores de origen se calculan automáticamente según los orígenes seleccionados. Cada característica puede tener límites diferentes.'}
             </p>
+
+            {/* Choosable Characteristic Selector */}
+            {choosableInfo && (
+                <div style={{
+                    marginBottom: '2rem',
+                    padding: '1.5rem',
+                    backgroundColor: '#fef3c7',
+                    border: '3px solid #f59e0b',
+                    borderRadius: '12px'
+                }}>
+                    <h3 style={{
+                        fontSize: '1.125rem',
+                        fontWeight: 'bold',
+                        marginBottom: '1rem',
+                        color: '#92400e'
+                    }}>
+                        ⭐ Elige la característica para el bonus de +{choosableInfo.bonus}
+                    </h3>
+                    <div style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
+                        gap: '0.75rem'
+                    }}>
+                        {CHARACTERISTICS.map(char => (
+                            <button
+                                key={char.id}
+                                onClick={() => setChosenBonusCharacteristic(char.id)}
+                                style={{
+                                    padding: '0.75rem 1rem',
+                                    fontSize: '1rem',
+                                    fontWeight: 'bold',
+                                    borderRadius: '8px',
+                                    border: chosenBonusCharacteristic === char.id
+                                        ? '3px solid #16a34a'
+                                        : '2px solid #d1d5db',
+                                    backgroundColor: chosenBonusCharacteristic === char.id
+                                        ? '#dcfce7'
+                                        : 'white',
+                                    color: chosenBonusCharacteristic === char.id
+                                        ? '#166534'
+                                        : '#4b5563',
+                                    cursor: 'pointer',
+                                    transition: 'all 0.2s'
+                                }}
+                            >
+                                {char.name} {chosenBonusCharacteristic === char.id && '✓'}
+                            </button>
+                        ))}
+                    </div>
+                    {choosableInfo.distributablePoints && (
+                        <p style={{
+                            marginTop: '0.75rem',
+                            fontSize: '0.875rem',
+                            color: '#92400e'
+                        }}>
+                            Además, puedes distribuir {choosableInfo.distributablePoints} puntos adicionales entre todas las características.
+                        </p>
+                    )}
+                </div>
+            )}
 
             {/* Distributable Points Counter */}
             {isDistributableMode && pointsInfo && (
@@ -323,11 +452,14 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
                                         {total}
                                     </div>
                                     <div style={{
-                                        fontSize: '0.875rem',
+                                        fontSize: '0.75rem',
                                         color: '#6b7280',
-                                        fontWeight: 'bold'
+                                        fontWeight: 'bold',
+                                        textAlign: 'center',
+                                        lineHeight: '1.2'
                                     }}>
-                                        / {charLimits.max}
+                                        <div style={{ color: '#dc2626' }}>Min: {charLimits.min}</div>
+                                        <div style={{ color: '#16a34a' }}>Max: {charLimits.max}</div>
                                     </div>
                                 </div>
                             </div>

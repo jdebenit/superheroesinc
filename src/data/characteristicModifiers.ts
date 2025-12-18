@@ -5,12 +5,18 @@
 
 export interface CharacteristicModifier {
     modifier: number;
+    min?: number;  // Mínimo informativo (por defecto 40 si no se especifica)
     max: number;
 }
 
 export interface OriginCharacteristicModifiers {
     // Si tiene distributablePoints, el usuario puede distribuir esos puntos libremente
     distributablePoints?: number;
+    // Si tiene choosableCharacteristic, el usuario elige una característica para aplicar el bonus fijo
+    choosableCharacteristic?: {
+        bonus: number;  // Bonus fijo que se aplica a la característica elegida
+        distributablePoints?: number;  // Puntos adicionales que se pueden distribuir
+    };
     // Modificadores fijos por característica
     fuerza?: CharacteristicModifier;
     constitucion?: CharacteristicModifier;
@@ -22,14 +28,14 @@ export interface OriginCharacteristicModifiers {
 }
 
 // Helper para aplicar el mismo modificador a todas las características
-const allCharacteristics = (modifier: number, max: number): OriginCharacteristicModifiers => ({
-    fuerza: { modifier, max },
-    constitucion: { modifier, max },
-    agilidad: { modifier, max },
-    inteligencia: { modifier, max },
-    percepcion: { modifier, max },
-    apariencia: { modifier, max },
-    voluntad: { modifier, max }
+const allCharacteristics = (modifier: number, max: number, min?: number): OriginCharacteristicModifiers => ({
+    fuerza: { modifier, max, min },
+    constitucion: { modifier, max, min },
+    agilidad: { modifier, max, min },
+    inteligencia: { modifier, max, min },
+    percepcion: { modifier, max, min },
+    apariencia: { modifier, max, min },
+    voluntad: { modifier, max, min }
 });
 
 export const ORIGIN_CHARACTERISTIC_MODIFIERS: { [key: string]: OriginCharacteristicModifiers } = {
@@ -64,7 +70,19 @@ export const ORIGIN_CHARACTERISTIC_MODIFIERS: { [key: string]: OriginCharacteris
         apariencia: { modifier: 0, max: 200 },
         voluntad: { modifier: 0, max: 200 }
     },
-    "Heraldo Cósmico": allCharacteristics(60, 160),
+    "Heraldo Cósmico": {
+        choosableCharacteristic: {
+            bonus: 100,
+            distributablePoints: 100
+        },
+        fuerza: { modifier: 0, max: 200 },
+        constitucion: { modifier: 0, max: 200 },
+        agilidad: { modifier: 0, max: 200 },
+        inteligencia: { modifier: 0, max: 200 },
+        percepcion: { modifier: 0, max: 200 },
+        apariencia: { modifier: 0, max: 200 },
+        voluntad: { modifier: 0, max: 200 }
+    },
 
     // Sobrenatural
     "Maldito": allCharacteristics(20, 120),
@@ -75,11 +93,27 @@ export const ORIGIN_CHARACTERISTIC_MODIFIERS: { [key: string]: OriginCharacteris
     // Arcano
     "Mago": allCharacteristics(10, 110),
     "Dotado": allCharacteristics(15, 115),
-    "Terrano": allCharacteristics(10, 110),
+    "Terrano": allCharacteristics(10, 110, 50),  // Terranos tienen mínimo 50
 
     // Parahumano
-    "Atlante": allCharacteristics(30, 130),
-    "Tes-khar": allCharacteristics(35, 135),
+    "Atlante": {
+        fuerza: { modifier: 20, max: 120 },
+        constitucion: { modifier: 60, max: 160 },
+        agilidad: { modifier: 40, max: 140 },
+        inteligencia: { modifier: 60, max: 160 },
+        percepcion: { modifier: 30, max: 130 },
+        apariencia: { modifier: 30, max: 120 },
+        voluntad: { modifier: 0, max: 100 },
+    },
+    "Tes-khar": {
+        fuerza: { modifier: 20, max: 120 },
+        constitucion: { modifier: 30, max: 160 },
+        agilidad: { modifier: 40, max: 140 },
+        inteligencia: { modifier: 0, max: 100 },
+        percepcion: { modifier: 20, max: 120 },
+        apariencia: { modifier: 0, max: 90, min: 30 },
+        voluntad: { modifier: 0, max: 90 },
+    },
     "Thals": allCharacteristics(25, 125),
 
     // Tecnológico
