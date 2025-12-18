@@ -1,0 +1,19 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import CharacterWizard from "../../components/wizard/CharacterWizard";
+---
+
+<Layout title="Generador de Fichas">
+    <section class="max-w-7xl mx-auto py-8">
+        <CharacterWizard client:only="react" />
+
+        <div class="text-center mt-8">
+            <a
+                href="/recursos"
+                class="inline-block bg-black text-white font-bold py-2 px-4 hover:bg-gray-800 transition-colors"
+            >
+                ← Volver a Recursos
+            </a>
+        </div>
+    </section>
+</Layout>
