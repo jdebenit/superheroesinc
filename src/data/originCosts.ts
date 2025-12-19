@@ -31,10 +31,13 @@ export const ORIGIN_COSTS: { [key: string]: OriginCosts } = {
     "Sobrenatural": {
         base: 0,
         subtypes: {
-            "Maldito": 8,
-            "Vampiro": 12,
-            "Hombre Lobo": 10,
-            "Semidemonio": 15
+            "Vampiro": 16,
+            "Hombre Lobo": 16,
+            "Semidemonio": 25,
+            "Poseido": 15,
+            "Ente": 30,
+            "Maldito": 5,
+            "Liberado": 15
         }
     },
 
@@ -42,9 +45,21 @@ export const ORIGIN_COSTS: { [key: string]: OriginCosts } = {
     "Arcano": {
         base: 0,
         subtypes: {
-            "Mago": 8,
-            "Dotado": 10,
-            "Terrano": 8
+            "Mago": 30,
+            "Terrano": 14,
+            "Dotado": 15,
+            "Elfo": 10,
+            "Hada": 8,
+            "Centauro": 14,
+            "Minotauro": 11,
+            "Enano": 10,
+            "Gigante": 7,
+            "Troll": 7,
+            "Grifo": 8,
+            "Hidra": 9,
+            "Medusa": 12,
+            "Esfinge": 10,
+            "Híbrido mitológico": 5
         }
     },
 

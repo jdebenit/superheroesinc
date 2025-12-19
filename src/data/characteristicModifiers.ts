@@ -95,7 +95,16 @@ export const ORIGIN_CHARACTERISTIC_MODIFIERS: { [key: string]: OriginCharacteris
 
     // Sobrenatural
     "Maldito": allCharacteristics(0, 100),
-    "Vampiro": allCharacteristics(30, 130),
+    "Ente": allCharacteristics(0, 200),
+    "Vampiro": {
+        fuerza: { modifier: 12, max: 112 },
+        constitucion: { modifier: 30, max: 130 },
+        agilidad: { modifier: 40, max: 140 },
+        inteligencia: { modifier: 0, max: 100 },
+        percepcion: { modifier: 30, max: 130 },
+        apariencia: { modifier: 0, max: 100 },
+        voluntad: { modifier: 0, max: 100 },
+    },
     "Hombre Lobo": allCharacteristics(25, 125),
     "Semidemonio": {
         fuerza: { modifier: 0, max: 100 },

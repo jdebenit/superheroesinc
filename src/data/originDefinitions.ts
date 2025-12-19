@@ -39,13 +39,16 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
     "Sobrenatural": {
         name: "Sobrenatural",
         subtypes: {
+            "Vampiro": ["algo", "algo", "algo"],
+            "Hombre Lobo": ["algo", "algo", "algo"],
+            "Semidemonio": ["algo", "algo", "algo"],
+            "Poseido": ["algo", "algo", "algo"],
+            "Ente": ["algo", "algo", "algo"],
             "Maldito": [
                 "Condenado a recorrer la Tierra hasta que sus buenas obras le rediman.",
                 "+20 a la parada mental"
             ],
-            "Vampiro": ["algo", "algo", "algo"],
-            "Hombre Lobo": ["algo", "algo", "algo"],
-            "Semidemonio": ["algo", "algo", "algo"]
+            "Liberado": ["algo", "algo", "algo"]
         }
     },
     "Arcano": {
@@ -59,7 +62,19 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
                 "-15 al uso de cualquier aparato tecnológico",
                 "-25 al uso de armas cortas, armas largas y armas militares",
                 "+20 a la parada mental"
-            ]
+            ],
+            "Elfo": ["algo", "algo", "algo"],
+            "Hada": ["algo", "algo", "algo"],
+            "Centauro": ["algo", "algo", "algo"],
+            "Minotauro": ["algo", "algo", "algo"],
+            "Enano": ["algo", "algo", "algo"],
+            "Gigante": ["algo", "algo", "algo"],
+            "Troll": ["algo", "algo", "algo"],
+            "Grifo": ["algo", "algo", "algo"],
+            "Hidra": ["algo", "algo", "algo"],
+            "Medusa": ["algo", "algo", "algo"],
+            "Esfinge": ["algo", "algo", "algo"],
+            "Híbrido mitológico": ["algo", "algo", "algo"],
         }
     },
     "Parahumano": {
