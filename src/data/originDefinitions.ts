@@ -17,6 +17,7 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
         name: "Origen Divino",
         subtypes: {
             "Dios": ["Poder divino", "+20 a la parada mental"],
+            "Dios menor": ["Poder divino", "+20 a la parada mental"],
             "Semidios": ["Herencia divina", "+10 a la parada mental"]
         }
     },
@@ -97,16 +98,14 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
                 "+20 habilidad a elección",
                 "-20 tiradas de EQM daños al medio ambiente"
             ],
-            "Vigilante Base": [
-                "Disponibilidad de armamento a dificultad reducida",
-                "Recarga rápida",
-                "Recuerdos dolorosos",
-                "Voluntad férrea"
-            ]
         }
     },
-    "Origen Múltiple": {
-        name: "Origen Múltiple",
-        defaultEffects: ["Permite múltiples orígenes"]
+    "Origen Mutante": {
+        name: "Origen Mutante",
+        subtypes: {
+            "Psíquico": ["algo"],
+            "Energético": ["algo"],
+            "Físico": ["algo"]
+        }
     }
 };

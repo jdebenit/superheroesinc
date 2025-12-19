@@ -37,7 +37,31 @@ export default function CharacterPreview({ character }: CharacterPreviewProps) {
         <>
             <button
                 onClick={openModal}
-                className="fixed bottom-8 right-8 z-40 bg-blue-600 text-white px-6 py-4 rounded-lg shadow-2xl font-bold text-lg hover:bg-blue-700 transition-all hover:scale-105 border-4 border-blue-800"
+                style={{
+                    padding: '1rem 1.5rem',
+                    fontSize: '1.125rem',
+                    fontWeight: 'bold',
+                    borderRadius: '12px',
+                    border: '4px solid #1e40af',
+                    backgroundColor: '#2563eb',
+                    color: 'white',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease',
+                    boxShadow: '4px 4px 0px #1e40af, 0 10px 20px rgba(37, 99, 235, 0.3)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.05em'
+                }}
+                onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                    e.currentTarget.style.boxShadow = '6px 6px 0px #1e40af, 0 15px 30px rgba(37, 99, 235, 0.4)';
+                }}
+                onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.boxShadow = '4px 4px 0px #1e40af, 0 10px 20px rgba(37, 99, 235, 0.3)';
+                }}
             >
                 📋 Previsualizar Ficha
             </button>

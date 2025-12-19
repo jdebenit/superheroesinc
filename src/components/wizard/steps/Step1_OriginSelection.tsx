@@ -15,7 +15,7 @@ const ORIGINS = [
     { id: 'arcanos', name: 'Arcano', logo: '/logos/arcanos.png', categoryKey: 'Origen Arcano' },
     { id: 'parahumanos', name: 'Parahumano', logo: '/logos/parahumanos.png', categoryKey: 'Origen Parahumano' },
     { id: 'tecnologicos', name: 'Tecnológico', logo: '/logos/tecnologicos.png', categoryKey: 'Origen Tecnológico' },
-    { id: 'mutantes', name: 'Mutante', logo: '/logos/mutantes.png', categoryKey: 'Origen Múltiple' },
+    { id: 'mutantes', name: 'Mutante', logo: '/logos/mutantes.png', categoryKey: 'Origen Mutante' },
     { id: 'vigilantes', name: 'Vigilante', logo: '/logos/vigilantes.png', categoryKey: 'Origen Vigilante' }
 ];
 
@@ -75,11 +75,9 @@ export default function Step1_OriginSelection({ data, onChange }: Step1Props) {
 
             // Si tiene subtipos seleccionados
             if (category.subtypes && subtypes[id] && subtypes[id].length > 0) {
-                // Crear un item por cada subtipo seleccionado
-                return subtypes[id].map(subtypeName => {
-                    const effects = category.subtypes![subtypeName] || [];
-                    return { [subtypeName]: effects };
-                });
+                // Guardar como: { "Vigilante": ["Fanático", "Vengador"] }
+                // No crear items separados por subtipo
+                return { [origin.name]: subtypes[id] };
             }
 
             // Si no tiene subtipos, usa los efectos por defecto
@@ -89,7 +87,7 @@ export default function Step1_OriginSelection({ data, onChange }: Step1Props) {
 
             // Si tiene subtipos pero no se ha seleccionado ninguno
             return null;
-        }).filter(Boolean).flat();
+        }).filter(Boolean);
 
         onChange({
             ...data,

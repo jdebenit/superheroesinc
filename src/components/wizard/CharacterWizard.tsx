@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import CharacterPreview from './CharacterPreview';
 import Step1_OriginSelection from './steps/Step1_OriginSelection';
 import Step2_Characteristics from './steps/Step2_Characteristics';
+import { calculateOriginCost } from '../../data/originCosts.ts';
 
 const STEPS = [
     { id: 1, name: 'Origen', icon: '🎭' },
@@ -47,6 +48,13 @@ const initialCharacterState = {
 export default function CharacterWizard() {
     const [currentStep, setCurrentStep] = useState(1);
     const [character, setCharacter] = useState(initialCharacterState);
+
+    // Calcular coste total en PCs
+    const totalPCs = useMemo(() => {
+        const originCost = calculateOriginCost(character.origin?.items || []);
+        // TODO: Añadir costes de otros pasos cuando estén implementados
+        return originCost;
+    }, [character]);
 
     const handleNext = () => {
         if (currentStep < 6) {
@@ -96,9 +104,24 @@ export default function CharacterWizard() {
                 <h1 style={{ fontSize: '3rem', fontWeight: '900', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
                     Generador de Fichas
                 </h1>
-                <p style={{ fontSize: '1.25rem', color: '#666' }}>
+                <p style={{ fontSize: '1.25rem', color: '#666', marginBottom: '1rem' }}>
                     Crea tu personaje paso a paso
                 </p>
+
+                {/* PC Counter */}
+                <div style={{
+                    display: 'inline-block',
+                    padding: '0.75rem 2rem',
+                    backgroundColor: '#fef3c7',
+                    border: '3px solid #f59e0b',
+                    borderRadius: '12px',
+                    fontSize: '1.25rem',
+                    fontWeight: 'bold',
+                    color: '#92400e',
+                    boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
+                }}>
+                    💰 Puntos de Creación: <span style={{ color: '#dc2626', fontSize: '1.5rem' }}>{totalPCs}</span>
+                </div>
             </div>
 
             {/* Step Navigation */}
@@ -257,8 +280,15 @@ export default function CharacterWizard() {
                 </button>
             </div>
 
-            {/* Preview Button */}
-            <CharacterPreview character={character} />
+            {/* Preview Button - Centered below navigation */}
+            <div style={{
+                display: 'flex',
+                justifyContent: 'center',
+                marginTop: '2rem',
+                paddingBottom: '2rem'
+            }}>
+                <CharacterPreview character={character} />
+            </div>
         </div>
     );
 }
