@@ -9,7 +9,7 @@ export interface OriginCosts {
 
 export const ORIGIN_COSTS: { [key: string]: OriginCosts } = {
     // Divino
-    "Origen Divino": {
+    "Divino": {
         base: 0,
         subtypes: {
             "Dios menor": 25,
@@ -19,7 +19,7 @@ export const ORIGIN_COSTS: { [key: string]: OriginCosts } = {
     },
 
     // Cósmico
-    "Origen Cósmico": {
+    "Cósmico": {
         base: 0,
         subtypes: {
             "Avatar Cósmico": 40,
@@ -28,7 +28,7 @@ export const ORIGIN_COSTS: { [key: string]: OriginCosts } = {
     },
 
     // Sobrenatural
-    "Origen Sobrenatural": {
+    "Sobrenatural": {
         base: 0,
         subtypes: {
             "Maldito": 8,
@@ -39,7 +39,7 @@ export const ORIGIN_COSTS: { [key: string]: OriginCosts } = {
     },
 
     // Arcano
-    "Origen Arcano": {
+    "Arcano": {
         base: 0,
         subtypes: {
             "Mago": 8,
@@ -49,7 +49,7 @@ export const ORIGIN_COSTS: { [key: string]: OriginCosts } = {
     },
 
     // Parahumano
-    "Origen Parahumano": {
+    "Parahumano": {
         base: 0,
         subtypes: {
             "Atlante": 12,
@@ -60,7 +60,7 @@ export const ORIGIN_COSTS: { [key: string]: OriginCosts } = {
     },
 
     // Tecnológico
-    "Origen Tecnológico": {
+    "Tecnológico": {
         base: 0,
         subtypes: {
             "Tecnoarmadura": 5,
@@ -74,9 +74,20 @@ export const ORIGIN_COSTS: { [key: string]: OriginCosts } = {
     "Vigilante": {
         base: 1,  // Ser vigilante cuesta 1 PC base
         subtypes: {
-            "Fanático": 3,
+            "Acrobata": 2,
+            "Arquero": 2,
+            "Cazador": 2,
+            "Espadachin": 2,
+            "Fanático": 2,
+            "Vengador": 2,
+            "Justiciero": 2,
+            "Francotirador": 2,
             "Manipulador": 2,
-            "Vengador": 2
+            "Mente Maestra": 2,
+            "Militar": 2,
+            "Pistolero": 2,
+            "Artista Marcial": 2,
+            "Artista Marcial con Chi": 2
         }
     },
 

@@ -7,16 +7,16 @@ interface Step1Props {
 }
 
 const ORIGINS = [
-    { id: 'divinos', name: 'Divino', logo: '/logos/divinos.png', categoryKey: 'Origen Divino' },
-    { id: 'cosmicos', name: 'Cósmico', logo: '/logos/cosmicos.png', categoryKey: 'Origen Cósmico' },
-    { id: 'guardianes', name: 'Guardián', logo: '/logos/guardianes.png', categoryKey: 'Origen Guardian' },
-    { id: 'alterados', name: 'Alterado', logo: '/logos/alterados.png', categoryKey: 'Origen Alterado' },
-    { id: 'sobrenaturales', name: 'Sobrenatural', logo: '/logos/sobrenaturales.png', categoryKey: 'Origen Sobrenatural' },
-    { id: 'arcanos', name: 'Arcano', logo: '/logos/arcanos.png', categoryKey: 'Origen Arcano' },
-    { id: 'parahumanos', name: 'Parahumano', logo: '/logos/parahumanos.png', categoryKey: 'Origen Parahumano' },
-    { id: 'tecnologicos', name: 'Tecnológico', logo: '/logos/tecnologicos.png', categoryKey: 'Origen Tecnológico' },
-    { id: 'mutantes', name: 'Mutante', logo: '/logos/mutantes.png', categoryKey: 'Origen Mutante' },
-    { id: 'vigilantes', name: 'Vigilante', logo: '/logos/vigilantes.png', categoryKey: 'Origen Vigilante' }
+    { id: 'divinos', name: 'Divino', logo: '/logos/divinos.png', categoryKey: 'Divino' },
+    { id: 'cosmicos', name: 'Cósmico', logo: '/logos/cosmicos.png', categoryKey: 'Cósmico' },
+    { id: 'guardianes', name: 'Guardián', logo: '/logos/guardianes.png', categoryKey: 'Guardian' },
+    { id: 'alterados', name: 'Alterado', logo: '/logos/alterados.png', categoryKey: 'Alterado' },
+    { id: 'sobrenaturales', name: 'Sobrenatural', logo: '/logos/sobrenaturales.png', categoryKey: 'Sobrenatural' },
+    { id: 'arcanos', name: 'Arcano', logo: '/logos/arcanos.png', categoryKey: 'Arcano' },
+    { id: 'parahumanos', name: 'Parahumano', logo: '/logos/parahumanos.png', categoryKey: 'Parahumano' },
+    { id: 'tecnologicos', name: 'Tecnológico', logo: '/logos/tecnologicos.png', categoryKey: 'Tecnológico' },
+    { id: 'mutantes', name: 'Mutante', logo: '/logos/mutantes.png', categoryKey: 'Mutante' },
+    { id: 'vigilantes', name: 'Vigilante', logo: '/logos/vigilantes.png', categoryKey: 'Vigilante' }
 ];
 
 export default function Step1_OriginSelection({ data, onChange }: Step1Props) {

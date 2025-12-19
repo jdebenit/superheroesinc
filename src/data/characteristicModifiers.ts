@@ -41,8 +41,17 @@ const allCharacteristics = (modifier: number, max: number, min?: number): Origin
 export const ORIGIN_CHARACTERISTIC_MODIFIERS: { [key: string]: OriginCharacteristicModifiers } = {
     // Divino
     "Dios": {
-        fuerza: { modifier: 100, max: 200 },
-        constitucion: { modifier: 100, max: 200 },
+        fuerza: { modifier: 100, max: 200, min: 100 },
+        constitucion: { modifier: 100, max: 200, min: 100 },
+        agilidad: { modifier: 0, max: 100 },
+        inteligencia: { modifier: 0, max: 100 },
+        percepcion: { modifier: 0, max: 100 },
+        apariencia: { modifier: 0, max: 100 },
+        voluntad: { modifier: 0, max: 100 }
+    },
+    "Dios menor": {
+        fuerza: { modifier: 100, max: 200, min: 100 },
+        constitucion: { modifier: 100, max: 200, min: 100 },
         agilidad: { modifier: 0, max: 100 },
         inteligencia: { modifier: 0, max: 100 },
         percepcion: { modifier: 0, max: 100 },
@@ -50,10 +59,10 @@ export const ORIGIN_CHARACTERISTIC_MODIFIERS: { [key: string]: OriginCharacteris
         voluntad: { modifier: 0, max: 100 }
     },
     "Semidios": {
-        fuerza: { modifier: 60, max: 200 },
-        constitucion: { modifier: 60, max: 200 },
-        agilidad: { modifier: 30, max: 130 },
-        inteligencia: { modifier: 30, max: 130 },
+        fuerza: { modifier: 60, max: 200, min: 60 },
+        constitucion: { modifier: 60, max: 200, min: 60 },
+        agilidad: { modifier: 30, max: 130, min: 30 },
+        inteligencia: { modifier: 30, max: 130, min: 30 },
         percepcion: { modifier: 0, max: 100 },
         apariencia: { modifier: 0, max: 100 },
         voluntad: { modifier: 0, max: 100 }
@@ -85,24 +94,32 @@ export const ORIGIN_CHARACTERISTIC_MODIFIERS: { [key: string]: OriginCharacteris
     },
 
     // Sobrenatural
-    "Maldito": allCharacteristics(20, 120),
+    "Maldito": allCharacteristics(0, 100),
     "Vampiro": allCharacteristics(30, 130),
     "Hombre Lobo": allCharacteristics(25, 125),
-    "Semidemonio": allCharacteristics(40, 140),
+    "Semidemonio": {
+        fuerza: { modifier: 0, max: 100 },
+        constitucion: { modifier: 0, max: 100 },
+        agilidad: { modifier: 0, max: 100 },
+        inteligencia: { modifier: 0, max: 200 },
+        percepcion: { modifier: 0, max: 200 },
+        apariencia: { modifier: 0, max: 100 },
+        voluntad: { modifier: 0, max: 100 },
+    },
 
     // Arcano
-    "Mago": allCharacteristics(10, 110),
+    "Mago": allCharacteristics(0, 100),
     "Dotado": allCharacteristics(15, 115),
     "Terrano": allCharacteristics(10, 110, 50),  // Terranos tienen mínimo 50
 
     // Parahumano
     "Atlante": {
-        fuerza: { modifier: 20, max: 120 },
-        constitucion: { modifier: 60, max: 160 },
-        agilidad: { modifier: 40, max: 140 },
-        inteligencia: { modifier: 60, max: 160 },
-        percepcion: { modifier: 30, max: 130 },
-        apariencia: { modifier: 30, max: 120 },
+        fuerza: { modifier: 20, max: 120, min: 60 },
+        constitucion: { modifier: 60, max: 160, min: 60 },
+        agilidad: { modifier: 40, max: 140, min: 40 },
+        inteligencia: { modifier: 60, max: 160, min: 60 },
+        percepcion: { modifier: 30, max: 130, min: 30 },
+        apariencia: { modifier: 30, max: 120, min: 30 },
         voluntad: { modifier: 0, max: 100 },
     },
     "Tes-khar": {
@@ -123,13 +140,111 @@ export const ORIGIN_CHARACTERISTIC_MODIFIERS: { [key: string]: OriginCharacteris
     "Inventor": allCharacteristics(0, 100),
 
     // Vigilante - Especializaciones
+    "Acróbata": allCharacteristics(0, 100),
+    "Arquero": allCharacteristics(0, 100),
+    "Cazador": allCharacteristics(0, 100),
+    "Espadachín": allCharacteristics(0, 100),
+    "Espía / Ladrón": allCharacteristics(0, 100),
     "Fanático": allCharacteristics(0, 100),
-    "Manipulador": allCharacteristics(0, 100),
+    "Justiciero": allCharacteristics(0, 100),
     "Vengador": allCharacteristics(0, 100),
-    "Vigilante Base": allCharacteristics(0, 100),
+    "Francotirador": allCharacteristics(0, 100),
+    "Mente Maestra": allCharacteristics(0, 100),
+    "Manipulador": allCharacteristics(0, 100),
+    "Militar": allCharacteristics(0, 100),
+    "Pistolero": allCharacteristics(0, 100),
+    "Artista marcial": allCharacteristics(0, 100),
+    "Artista marcial con chi": allCharacteristics(0, 100),
 
     // Orígenes sin subtipos
-    "Guardián": allCharacteristics(10, 110),
-    "Alterado": allCharacteristics(15, 115),
-    "Mutante": allCharacteristics(20, 120)
+    "Guardián": allCharacteristics(0, 100),
+    "Alterado": allCharacteristics(0, 100),
+    "Mutante": allCharacteristics(0, 100)
+};
+
+/**
+ * Modificadores de especialidad por subtipo de Vigilante
+ * Estos se aplican al campo specialtyMod en Step2
+ */
+export interface SpecialtyCharacteristicModifiers {
+    distributablePoints?: number;  // Puntos para distribuir libremente
+    allowedCharacteristics?: string[];  // Características donde se pueden distribuir los puntos (si no se especifica, todas)
+    fuerza?: number;
+    constitucion?: number;
+    agilidad?: number;
+    inteligencia?: number;
+    percepcion?: number;
+    apariencia?: number;
+    voluntad?: number;
+}
+
+export const VIGILANTE_SPECIALTY_MODIFIERS: { [key: string]: SpecialtyCharacteristicModifiers } = {
+    // Especialidades físicas
+    "Acrobata": {
+        agilidad: 40,
+        percepcion: 20
+    },
+    "Arquero": {
+        percepcion: 40,
+        agilidad: 320
+    },
+    "Cazador": {
+        percepcion: 30,
+        agilidad: 15
+    },
+    "Espadachin": {
+        agilidad: 35,
+        percepcion: 30
+    },
+    "Artista Marcial": {
+        agilidad: 50,
+        percepcion: 50
+    },
+    "Artista Marcial con Chi": {
+        agilidad: 50,
+        percepcion: 50
+    },
+
+    // Especialidades tácticas
+    "Militar": {
+        distributablePoints: 50  // 50 puntos para distribuir
+    },
+    "Francotirador": {
+        percepcion: 35,
+        agilidad: 15
+    },
+    "Pistolero": {
+        agilidad: 30,
+        percepcion: 20
+    },
+
+    // Especialidades mentales/sociales
+    "Manipulador": {
+        inteligencia: 30,
+        apariencia: 30
+    },
+    "Mente Maestra": {
+        inteligencia: 50,
+    },
+
+    // Especialidades equilibradas
+    "Fanático": {
+        distributablePoints: 20,
+        agilidad: 30,
+        percepcion: 30,
+        voluntad: 10
+    },
+    "Vengador": {
+        distributablePoints: 20,
+        allowedCharacteristics: ['fuerza', 'constitucion', 'agilidad', 'percepcion'],
+        agilidad: 30,
+        percepcion: 30,
+        voluntad: 10
+    },
+    "Justiciero": {
+        distributablePoints: 20,
+        agilidad: 30,
+        percepcion: 30,
+        voluntad: 10
+    }
 };

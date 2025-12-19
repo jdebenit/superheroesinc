@@ -7,10 +7,10 @@ import { calculateOriginCost } from '../../data/originCosts.ts';
 const STEPS = [
     { id: 1, name: 'Origen', icon: '🎭' },
     { id: 2, name: 'Características', icon: '💪' },
-    { id: 3, name: 'Poderes', icon: '⚡' },
+    { id: 3, name: 'Especial', icon: '⚡' },
     { id: 4, name: 'Habilidades', icon: '🎯' },
     { id: 5, name: 'Trasfondo', icon: '📖' },
-    { id: 6, name: 'Especiales', icon: '⭐' }
+    { id: 6, name: 'Detalles', icon: '⭐' }
 ];
 
 const initialCharacterState = {

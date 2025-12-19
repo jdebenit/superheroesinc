@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ORIGIN_CHARACTERISTIC_MODIFIERS } from '../../../data/characteristicModifiers';
+import { ORIGIN_CHARACTERISTIC_MODIFIERS, VIGILANTE_SPECIALTY_MODIFIERS } from '../../../data/characteristicModifiers';
 
 interface Step2Props {
     data: any;
@@ -46,9 +46,22 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
 
         for (const item of data.origin.items) {
             const originName = Object.keys(item)[0];
+            const subtypes = item[originName] || [];
+
+            // Verificar el origen base
             const modifierData = ORIGIN_CHARACTERISTIC_MODIFIERS[originName];
             if (modifierData && modifierData.choosableCharacteristic) {
                 return modifierData.choosableCharacteristic;
+            }
+
+            // Verificar subtipos (ej: Heraldo Cósmico)
+            if (Array.isArray(subtypes) && subtypes.length > 0) {
+                for (const subtype of subtypes) {
+                    const subtypeData = ORIGIN_CHARACTERISTIC_MODIFIERS[subtype];
+                    if (subtypeData && subtypeData.choosableCharacteristic) {
+                        return subtypeData.choosableCharacteristic;
+                    }
+                }
             }
         }
         return null;
@@ -72,6 +85,9 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
         // Tomar el MÁXIMO de los modificadores (no sumar) para cada característica
         data.origin.items.forEach((item: any) => {
             const originName = Object.keys(item)[0];
+            const subtypes = item[originName] || [];
+
+            // Verificar el origen base
             const modifierData = ORIGIN_CHARACTERISTIC_MODIFIERS[originName];
             if (modifierData) {
                 Object.keys(modifiers).forEach(charId => {
@@ -91,8 +107,88 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
                     );
                 }
             }
+
+            // Verificar subtipos (ej: Heraldo Cósmico, Avatar Cósmico)
+            if (Array.isArray(subtypes) && subtypes.length > 0) {
+                subtypes.forEach((subtype: string) => {
+                    const subtypeData = ORIGIN_CHARACTERISTIC_MODIFIERS[subtype];
+                    if (subtypeData) {
+                        Object.keys(modifiers).forEach(charId => {
+                            const charMod = subtypeData[charId as keyof typeof subtypeData];
+                            if (charMod && typeof charMod === 'object' && 'modifier' in charMod && charMod.modifier) {
+                                modifiers[charId] = Math.max(modifiers[charId], charMod.modifier);
+                            }
+                        });
+
+                        // Si el subtipo tiene choosableCharacteristic y hay una característica elegida
+                        if (subtypeData.choosableCharacteristic && chosenBonusCharacteristic) {
+                            modifiers[chosenBonusCharacteristic] = Math.max(
+                                modifiers[chosenBonusCharacteristic],
+                                subtypeData.choosableCharacteristic.bonus
+                            );
+                        }
+                    }
+                });
+            }
         });
 
+        return modifiers;
+    };
+
+    // Calcular modificadores de especialidad (Vigilante)
+    const calculateSpecialtyModifiers = () => {
+        const modifiers: { [key: string]: number } = {
+            fuerza: 0,
+            constitucion: 0,
+            agilidad: 0,
+            inteligencia: 0,
+            percepcion: 0,
+            apariencia: 0,
+            voluntad: 0
+        };
+
+        if (!data.origin || !data.origin.items || data.origin.items.length === 0) {
+            return modifiers;
+        }
+
+        // Buscar si hay un Vigilante con subtipos seleccionados
+        data.origin.items.forEach((item: any) => {
+            const originName = Object.keys(item)[0];
+            const subtypes = item[originName] || [];
+
+            console.log("Checking origin for specialty mods:", originName, "subtypes:", subtypes);
+
+            // Si es Vigilante y tiene subtipos
+            if (originName === "Vigilante" && subtypes.length > 0) {
+                console.log("Found Vigilante with specialties:", subtypes);
+                subtypes.forEach((specialty: string) => {
+                    const specialtyMods = VIGILANTE_SPECIALTY_MODIFIERS[specialty];
+                    console.log(`Specialty ${specialty} mods:`, specialtyMods);
+                    if (specialtyMods) {
+                        // Si no tiene distributablePoints, aplicar modificadores fijos
+                        if (!specialtyMods.distributablePoints) {
+                            Object.keys(modifiers).forEach(charId => {
+                                const mod = specialtyMods[charId as keyof typeof specialtyMods];
+                                if (typeof mod === 'number') {
+                                    // Usar el MÁXIMO, no sumar
+                                    modifiers[charId] = Math.max(modifiers[charId], mod);
+                                }
+                            });
+                        } else {
+                            // Si tiene distributablePoints Y modificadores fijos, aplicar los fijos
+                            Object.keys(modifiers).forEach(charId => {
+                                const mod = specialtyMods[charId as keyof typeof specialtyMods];
+                                if (typeof mod === 'number') {
+                                    modifiers[charId] = Math.max(modifiers[charId], mod);
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+        });
+
+        console.log("Final specialty modifiers:", modifiers);
         return modifiers;
     };
 
@@ -108,6 +204,9 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
 
         data.origin.items.forEach((item: any) => {
             const originName = Object.keys(item)[0];
+            const subtypes = item[originName] || [];
+
+            // Verificar el origen base
             const modifierData = ORIGIN_CHARACTERISTIC_MODIFIERS[originName];
             if (modifierData) {
                 const charMod = modifierData[charId as keyof typeof modifierData];
@@ -127,10 +226,35 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
                     }
                 }
             }
+
+            // Verificar subtipos (ej: Heraldo Cósmico, Avatar Cósmico)
+            if (Array.isArray(subtypes) && subtypes.length > 0) {
+                subtypes.forEach((subtype: string) => {
+                    const subtypeData = ORIGIN_CHARACTERISTIC_MODIFIERS[subtype];
+                    if (subtypeData) {
+                        const charMod = subtypeData[charId as keyof typeof subtypeData];
+                        if (charMod && typeof charMod === 'object' && 'max' in charMod) {
+                            if (charMod.max && charMod.max > maxLimit) {
+                                maxLimit = charMod.max;
+                            }
+                            if (charMod.min !== undefined) {
+                                if (!hasSpecificMin) {
+                                    minLimit = charMod.min;
+                                    hasSpecificMin = true;
+                                } else if (charMod.min < minLimit) {
+                                    minLimit = charMod.min;
+                                }
+                            }
+                        }
+                    }
+                });
+            }
         });
 
         return { min: minLimit, max: maxLimit };
     };
+
+    // Detectar si algún origen tiene puntos distribuibles
 
     // Detectar si algún origen tiene puntos distribuibles
     const hasDistributablePoints = () => {
@@ -140,8 +264,23 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
 
         return data.origin.items.some((item: any) => {
             const originName = Object.keys(item)[0];
+            const subtypes = item[originName] || [];
+
+            // Primero verificar si el origen base tiene distributablePoints
             const modifierData = ORIGIN_CHARACTERISTIC_MODIFIERS[originName];
-            return modifierData && modifierData.distributablePoints !== undefined;
+            if (modifierData && modifierData.distributablePoints !== undefined) {
+                return true;
+            }
+
+            // Si no, verificar si algún subtipo tiene distributablePoints
+            if (Array.isArray(subtypes) && subtypes.length > 0) {
+                return subtypes.some((subtype: string) => {
+                    const subtypeData = ORIGIN_CHARACTERISTIC_MODIFIERS[subtype];
+                    return subtypeData && subtypeData.distributablePoints !== undefined;
+                });
+            }
+
+            return false;
         });
     };
 
@@ -154,6 +293,9 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
 
         data.origin.items.forEach((item: any) => {
             const originName = Object.keys(item)[0];
+            const subtypes = item[originName] || [];
+
+            // Verificar el origen base
             const modifierData = ORIGIN_CHARACTERISTIC_MODIFIERS[originName];
             if (modifierData) {
                 // Puntos distribuibles normales
@@ -164,6 +306,21 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
                 if (modifierData.choosableCharacteristic && modifierData.choosableCharacteristic.distributablePoints) {
                     totalAvailable += modifierData.choosableCharacteristic.distributablePoints;
                 }
+            }
+
+            // Verificar subtipos (ej: Avatar Cósmico, Heraldo Cósmico)
+            if (Array.isArray(subtypes) && subtypes.length > 0) {
+                subtypes.forEach((subtype: string) => {
+                    const subtypeData = ORIGIN_CHARACTERISTIC_MODIFIERS[subtype];
+                    if (subtypeData) {
+                        if (subtypeData.distributablePoints) {
+                            totalAvailable += subtypeData.distributablePoints;
+                        }
+                        if (subtypeData.choosableCharacteristic && subtypeData.choosableCharacteristic.distributablePoints) {
+                            totalAvailable += subtypeData.choosableCharacteristic.distributablePoints;
+                        }
+                    }
+                });
             }
         });
 
@@ -182,21 +339,123 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
         return { total: totalAvailable, used, remaining: totalAvailable - used };
     };
 
-    // Actualizar modificadores de origen cuando cambian los orígenes o la característica elegida
+    // Detectar si hay puntos distribuibles de ESPECIALIDAD
+    const hasSpecialtyDistributablePoints = () => {
+        if (!data.origin || !data.origin.items || data.origin.items.length === 0) {
+            return false;
+        }
+
+        for (const item of data.origin.items) {
+            const originName = Object.keys(item)[0];
+            const subtypes = item[originName] || [];
+
+            if (originName === "Vigilante" && subtypes.length > 0) {
+                for (const specialty of subtypes) {
+                    const specialtyMods = VIGILANTE_SPECIALTY_MODIFIERS[specialty];
+                    if (specialtyMods && specialtyMods.distributablePoints) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    };
+
+    // Obtener info de puntos distribuibles de especialidad
+    const getSpecialtyDistributablePointsInfo = () => {
+        let totalAvailable = 0;
+        if (!data.origin || !data.origin.items || data.origin.items.length === 0) {
+            return { total: 0, used: 0, remaining: 0 };
+        }
+
+        // Calcular total disponible
+        data.origin.items.forEach((item: any) => {
+            const originName = Object.keys(item)[0];
+            const subtypes = item[originName] || [];
+
+            if (originName === "Vigilante" && subtypes.length > 0) {
+                subtypes.forEach((specialty: string) => {
+                    const specialtyMods = VIGILANTE_SPECIALTY_MODIFIERS[specialty];
+                    if (specialtyMods && specialtyMods.distributablePoints) {
+                        totalAvailable += specialtyMods.distributablePoints;
+                    }
+                });
+            }
+        });
+
+        // Calcular puntos usados (excluyendo modificadores fijos)
+        let used = 0;
+        const fixedMods = calculateSpecialtyModifiers();
+        Object.keys(characteristics).forEach(charId => {
+            const currentMod = characteristics[charId].specialtyMod;
+            const fixedMod = fixedMods[charId] || 0;
+            used += Math.max(0, currentMod - fixedMod);
+        });
+
+        return { total: totalAvailable, used, remaining: totalAvailable - used };
+    };
+
+    // Obtener características permitidas para distribución de puntos de especialidad
+    const getSpecialtyAllowedCharacteristics = (): string[] | null => {
+        if (!data.origin || !data.origin.items || data.origin.items.length === 0) {
+            return null;
+        }
+
+        let allowedChars: string[] | null = null;
+
+        data.origin.items.forEach((item: any) => {
+            const originName = Object.keys(item)[0];
+            const subtypes = item[originName] || [];
+
+            if (originName === "Vigilante" && subtypes.length > 0) {
+                subtypes.forEach((specialty: string) => {
+                    const specialtyMods = VIGILANTE_SPECIALTY_MODIFIERS[specialty];
+                    if (specialtyMods && specialtyMods.distributablePoints && specialtyMods.allowedCharacteristics) {
+                        // Si ya hay restricciones, hacer intersección
+                        if (allowedChars === null) {
+                            allowedChars = [...specialtyMods.allowedCharacteristics];
+                        } else {
+                            // Intersección: solo las que están en ambas listas
+                            allowedChars = allowedChars.filter(char =>
+                                specialtyMods.allowedCharacteristics!.includes(char)
+                            );
+                        }
+                    }
+                });
+            }
+        });
+
+        return allowedChars;
+    };
+
+    // Actualizar modificadores de origen y especialidad cuando cambian los orígenes o la característica elegida
     // Solo auto-calcula para orígenes SIN puntos distribuibles
     useEffect(() => {
-        if (hasDistributablePoints() || hasChoosableCharacteristic()) {
-            // No auto-calcular si hay puntos distribuibles o característica elegible
-            // Pero sí aplicar el bonus fijo si hay una característica elegida
-            if (hasChoosableCharacteristic() && chosenBonusCharacteristic) {
-                const originMods = calculateOriginModifiers();
+        const originMods = calculateOriginModifiers();
+        const specialtyMods = calculateSpecialtyModifiers();
 
+        if (hasDistributablePoints() || hasChoosableCharacteristic()) {
+            // Si hay puntos distribuibles o característica elegible, solo aplicar si está elegida
+            if (hasChoosableCharacteristic() && chosenBonusCharacteristic) {
                 setCharacteristics(prev => {
                     const updated = { ...prev };
                     Object.keys(updated).forEach(key => {
                         updated[key] = {
                             ...updated[key],
-                            originMod: originMods[key] || 0
+                            originMod: originMods[key] || 0,
+                            specialtyMod: specialtyMods[key] || 0
+                        };
+                    });
+                    return updated;
+                });
+            } else {
+                // Si no hay característica elegida, solo aplicar specialty mods
+                setCharacteristics(prev => {
+                    const updated = { ...prev };
+                    Object.keys(updated).forEach(key => {
+                        updated[key] = {
+                            ...updated[key],
+                            specialtyMod: specialtyMods[key] || 0
                         };
                     });
                     return updated;
@@ -205,14 +464,14 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
             return;
         }
 
-        const originMods = calculateOriginModifiers();
-
+        // Si no hay puntos distribuibles ni choosable, aplicar ambos automáticamente
         setCharacteristics(prev => {
             const updated = { ...prev };
             Object.keys(updated).forEach(key => {
                 updated[key] = {
                     ...updated[key],
-                    originMod: originMods[key] || 0
+                    originMod: originMods[key] || 0,
+                    specialtyMod: specialtyMods[key] || 0
                 };
             });
             return updated;
@@ -226,6 +485,37 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
         // NO aplicamos el límite mínimo - es solo informativo
         // Solo validamos que sea >= 0 y <= max
         let clampedValue = Math.max(0, Math.min(limits.max, numValue));
+
+        // Si estamos editando el modificador de especialidad
+        if (field === 'specialtyMod' && hasSpecialtyDistributablePoints()) {
+            const allowedChars = getSpecialtyAllowedCharacteristics();
+
+            // Si hay restricciones y esta característica NO está permitida, no permitir edición
+            if (allowedChars && !allowedChars.includes(charId)) {
+                // No permitir cambios, mantener el valor fijo
+                return;
+            }
+
+            const specialtyInfo = getSpecialtyDistributablePointsInfo();
+            const currentSpecialtyMod = characteristics[charId].specialtyMod;
+            const fixedMods = calculateSpecialtyModifiers();
+            const fixedMod = fixedMods[charId] || 0;
+
+            // El valor no puede ser menor que el modificador fijo
+            if (clampedValue < fixedMod) {
+                clampedValue = fixedMod;
+            }
+
+            // Calcular cuántos puntos usaríamos con este nuevo valor
+            const newManualPoints = Math.max(0, clampedValue - fixedMod);
+            const currentManualPoints = Math.max(0, currentSpecialtyMod - fixedMod);
+            const pointsDiff = newManualPoints - currentManualPoints;
+
+            // Si excedería los puntos disponibles, no permitir
+            if (specialtyInfo.remaining - pointsDiff < 0) {
+                return;
+            }
+        }
 
         // Si estamos editando el modificador de origen y hay puntos distribuibles
         if (field === 'originMod' && isDistributableMode) {
@@ -296,6 +586,7 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
     const isDistributableMode = hasDistributablePoints() || hasChoosableCharacteristic();
     const pointsInfo = isDistributableMode ? getDistributablePointsInfo() : null;
     const choosableInfo = hasChoosableCharacteristic();
+    const specialtyPointsInfo = hasSpecialtyDistributablePoints() ? getSpecialtyDistributablePointsInfo() : null;
 
     return (
         <div style={{ padding: '2rem' }}>
@@ -387,6 +678,33 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
                     }}>
                         ({pointsInfo.remaining >= 0 ? `${pointsInfo.remaining} restantes` : `${Math.abs(pointsInfo.remaining)} excedido`})
                     </span>
+                </div>
+            )}
+
+            {/* Specialty Distributable Points Counter */}
+            {specialtyPointsInfo && (
+                <div style={{
+                    display: 'inline-block',
+                    padding: '1rem 2rem',
+                    backgroundColor: specialtyPointsInfo.remaining >= 0 ? '#dbeafe' : '#fee2e2',
+                    border: `3px solid ${specialtyPointsInfo.remaining >= 0 ? '#3b82f6' : '#dc2626'}`,
+                    borderRadius: '12px',
+                    marginLeft: '1rem',
+                    fontSize: '1.125rem',
+                    fontWeight: 'bold',
+                    color: specialtyPointsInfo.remaining >= 0 ? '#1e40af' : '#dc2626'
+                }}>
+                    ⚡ Puntos Especialidad: {specialtyPointsInfo.used}/{specialtyPointsInfo.total}
+                    {(() => {
+                        const allowedChars = getSpecialtyAllowedCharacteristics();
+                        if (allowedChars) {
+                            const charNames = allowedChars.map(id =>
+                                CHARACTERISTICS.find(c => c.id === id)?.abbr
+                            ).filter(Boolean).join(', ');
+                            return <span style={{ fontSize: '0.875rem', marginLeft: '0.5rem' }}>({charNames})</span>;
+                        }
+                        return null;
+                    })()}
                 </div>
             )}
 
@@ -542,12 +860,37 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
                                         marginBottom: '0.5rem'
                                     }}>
                                         Mod. Especialidad
+                                        {(() => {
+                                            const allowedChars = getSpecialtyAllowedCharacteristics();
+                                            if (allowedChars && !allowedChars.includes(char.id)) {
+                                                return <span style={{ color: '#dc2626', marginLeft: '0.5rem' }}>🔒</span>;
+                                            }
+                                            return null;
+                                        })()}
                                     </label>
                                     <input
                                         type="number"
                                         min="0"
                                         max="200"
                                         value={c.specialtyMod}
+                                        readOnly={(() => {
+                                            // Si no hay puntos de especialidad, hacer read-only
+                                            if (!specialtyPointsInfo && c.specialtyMod === 0) {
+                                                return true;
+                                            }
+                                            // Si hay restricciones y esta característica no está permitida
+                                            const allowedChars = getSpecialtyAllowedCharacteristics();
+                                            return allowedChars ? !allowedChars.includes(char.id) : false;
+                                        })()}
+                                        disabled={(() => {
+                                            // Si no hay puntos de especialidad, deshabilitar
+                                            if (!specialtyPointsInfo && c.specialtyMod === 0) {
+                                                return true;
+                                            }
+                                            // Si hay restricciones y esta característica no está permitida
+                                            const allowedChars = getSpecialtyAllowedCharacteristics();
+                                            return allowedChars ? !allowedChars.includes(char.id) : false;
+                                        })()}
                                         onChange={(e) => handleCharacteristicChange(char.id, 'specialtyMod', e.target.value)}
                                         style={{
                                             width: '100%',
