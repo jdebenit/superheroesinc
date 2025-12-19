@@ -324,15 +324,23 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
             }
         });
 
-        // Calcular puntos usados (excluyendo el bonus fijo de choosableCharacteristic)
+        // Calcular puntos usados (excluyendo el bonus fijo de choosableCharacteristic Y los modificadores automáticos)
         let used = 0;
         const choosable = hasChoosableCharacteristic();
+        const autoMods = calculateOriginModifiers(); // Calcular los modificadores automáticos
+
         Object.keys(characteristics).forEach(charId => {
-            // Si esta característica tiene el bonus fijo, no contar ese bonus en los puntos usados
+            const currentOriginMod = characteristics[charId].originMod;
+            const autoMod = autoMods[charId] || 0;
+
+            // Restar los modificadores automáticos para obtener solo los puntos distribuidos manualmente
+            const manualPoints = currentOriginMod - autoMod;
+
+            // Si esta característica tiene el bonus fijo de choosable, también restarlo
             if (choosable && charId === chosenBonusCharacteristic) {
-                used += Math.max(0, characteristics[charId].originMod - choosable.bonus);
+                used += Math.max(0, manualPoints);
             } else {
-                used += characteristics[charId].originMod;
+                used += Math.max(0, manualPoints);
             }
         });
 
@@ -449,12 +457,13 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
                     return updated;
                 });
             } else {
-                // Si no hay característica elegida, solo aplicar specialty mods
+                // Si no hay característica elegida, aplicar specialty mods y origin mods fijos
                 setCharacteristics(prev => {
                     const updated = { ...prev };
                     Object.keys(updated).forEach(key => {
                         updated[key] = {
                             ...updated[key],
+                            originMod: originMods[key] || 0,  // Aplicar también origin mods
                             specialtyMod: specialtyMods[key] || 0
                         };
                     });
