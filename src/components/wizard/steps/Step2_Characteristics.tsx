@@ -923,7 +923,7 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
                                         color: '#4b5563',
                                         marginBottom: '0.5rem'
                                     }}>
-                                        Mod. Poder
+                                        Mod. Otros
                                     </label>
                                     <input
                                         type="number"
