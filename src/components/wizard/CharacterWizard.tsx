@@ -7,7 +7,7 @@ import Step4_GeneralSkills from './steps/Step4_GeneralSkills';
 import Step5_Background from './steps/Step5_Background';
 import Step6_SpecialSkills from './steps/Step6_SpecialSkills';
 import { calculateOriginCost } from '../../data/originCosts.ts';
-import { calculateCreationPoints } from '../../utils/characterCalculations';
+import { calculateCreationPoints, calculateGeneralSkillValues } from '../../utils/characterCalculations';
 
 const STEPS = [
     { id: 1, name: 'Origen', icon: '🎭' },
@@ -53,7 +53,11 @@ const initialCharacterState = {
             voluntad: { base: 40, originMod: 0, specialtyMod: 0, powerMod: 0 }
         }
     },
-    skills: { items: [] },
+    skills: {
+        items: [],
+        generalManualMods: {},
+        manualBases: {}
+    },
     specialskills: { items: [] },
     background: { items: [] },
     equipment: { items: [] }
@@ -75,6 +79,17 @@ export default function CharacterWizard() {
         if (character.attributes?.breakdown) {
             const { totalPC } = calculateCreationPoints(character.attributes.breakdown, character.origin?.items || []);
             total += totalPC;
+        }
+
+        // 3. Coste de incremento de Bases en Habilidades Generales
+        if (character.attributes?.values) {
+            const { totalPC: skillsPC } = calculateGeneralSkillValues(
+                character.attributes.values,
+                character.origin?.items || [],
+                character.skills?.generalManualMods || {},
+                character.skills?.manualBases || {}
+            );
+            total += skillsPC;
         }
 
         // TODO: Añadir costes de otros pasos cuando estén implementados

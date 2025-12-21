@@ -118,7 +118,7 @@ export const ORIGIN_CHARACTERISTIC_MODIFIERS: { [key: string]: OriginCharacteris
 
     // Arcano
     "Mago": allCharacteristics(0, 100),
-    "Dotado": allCharacteristics(15, 115),
+    "Dotado": allCharacteristics(0, 100),
     "Terrano": allCharacteristics(10, 110, 50),  // Terranos tienen mínimo 50
 
     // Parahumano

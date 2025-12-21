@@ -11,14 +11,18 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
     const [manualMods, setManualMods] = useState<{ [key: string]: number }>(
         data.skills?.generalManualMods || {}
     );
+    const [manualBases, setManualBases] = useState<{ [key: string]: number }>(
+        data.skills?.manualBases || {}
+    );
 
     // Calculate skills on every render based on current props and local state
     // This ensures that if characteristics change elsewhere, this updates.
     // However, saving to 'data' needs to happen efficiently.
-    const skillValues = calculateGeneralSkillValues(
+    const { skills: skillValues } = calculateGeneralSkillValues(
         data.attributes.values, // { Fuerza: 50, ... }
         data.origin?.items || [],
-        manualMods
+        manualMods,
+        manualBases
     );
 
     // Save to parent whenever manualMods changes, OR we should save the derived values?
@@ -46,12 +50,14 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
 
         const newSkillsData = {
             generalManualMods: manualMods,
+            manualBases: manualBases,
             items: items // Update the flat list for the sheet
         };
 
         // Simple check to avoid loop: stringify comparison?
         if (JSON.stringify(data.skills?.items) !== JSON.stringify(items) ||
-            JSON.stringify(data.skills?.generalManualMods) !== JSON.stringify(manualMods)) {
+            JSON.stringify(data.skills?.generalManualMods) !== JSON.stringify(manualMods) ||
+            JSON.stringify(data.skills?.manualBases) !== JSON.stringify(manualBases)) {
             onChange({
                 ...data,
                 skills: {
@@ -60,7 +66,7 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
                 }
             });
         }
-    }, [manualMods, data.attributes.values, data.origin?.items]); // Dependencies that affect calculation
+    }, [manualMods, manualBases, data.attributes.values, data.origin?.items]); // Dependencies that affect calculation
 
     const handleModChange = (skillId: string, value: string) => {
         const num = parseInt(value) || 0;
@@ -68,6 +74,16 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
             ...prev,
             [skillId]: num
         }));
+    };
+
+    const handleBaseChange = (skillId: string, value: string, minLimit: number) => {
+        const num = parseInt(value) || 0;
+        if (num >= minLimit) {
+            setManualBases(prev => ({
+                ...prev,
+                [skillId]: num
+            }));
+        }
     };
 
     return (
@@ -112,7 +128,29 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
                                         {skill.formulaText}
                                     </td>
                                     <td style={{ padding: '0.75rem', textAlign: 'center', color: '#4b5563' }}>
-                                        {val.base}
+                                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2px' }}>
+                                            <input
+                                                type="number"
+                                                value={val.base}
+                                                min={val.minBase}
+                                                onChange={(e) => {
+                                                    handleBaseChange(skill.id, e.target.value, val.minBase)
+                                                }}
+                                                style={{
+                                                    width: '50px',
+                                                    padding: '0.25rem',
+                                                    border: val.pcCost > 0 ? '2px solid #f59e0b' : '1px solid #d1d5db',
+                                                    borderRadius: '4px',
+                                                    textAlign: 'center',
+                                                    fontWeight: 'bold'
+                                                }}
+                                            />
+                                            {val.pcCost > 0 && (
+                                                <span style={{ fontSize: '0.75rem', color: '#b45309' }}>
+                                                    {val.pcCost.toFixed(1)} PC
+                                                </span>
+                                            )}
+                                        </div>
                                     </td>
                                     <td style={{ padding: '0.75rem', textAlign: 'center', color: val.originMod ? '#2563eb' : '#9ca3af', fontWeight: val.originMod ? 'bold' : 'normal' }}>
                                         {val.originMod > 0 ? `+${val.originMod}` : val.originMod || '-'}

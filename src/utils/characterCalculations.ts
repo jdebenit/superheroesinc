@@ -370,24 +370,55 @@ export function calculateCreationPoints(
 export function calculateGeneralSkillValues(
     characteristics: { [key: string]: number },
     origins: any[],
-    manualMods: { [key: string]: number } = {}
+    manualMods: { [key: string]: number } = {},
+    manualBases: { [key: string]: number } = {}
 ) {
     // 1. Normalize characteristics keys to lowercase
-    const stats: { [key: string]: number } = {};
-    Object.keys(characteristics).forEach(key => {
-        // Remove accents? formulas use "constitucion", "percepcion".
-        // Input might satisfy "Constitución".
-        // Helper to normalize: lowercase + remove accents
-        const normalizedKey = key.toLowerCase()
-            .normalize("NFD").replace(/[\u0300-\u036f]/g, ""); // Remove accents
-        stats[normalizedKey] = characteristics[key];
-    });
+    // 1. Normalize characteristics keys to lowercase
+    const stats: { [key: string]: number } = {
+        fuerza: 0,
+        constitucion: 0,
+        agilidad: 0,
+        inteligencia: 0,
+        percepcion: 0,
+        apariencia: 0,
+        voluntad: 0
+    };
+    if (characteristics) {
+        Object.keys(characteristics).forEach(key => {
+            const normalizedKey = key.toLowerCase()
+                .normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            stats[normalizedKey] = characteristics[key] || 0;
+        });
+    }
 
-    const skills: { [key: string]: { base: number; originMod: number; specialtyMod: number; otherMod: number; total: number } } = {};
+    const skills: { [key: string]: { base: number; minBase: number; originMod: number; specialtyMod: number; otherMod: number; total: number; pcCost: number } } = {};
+    let totalPC = 0;
 
     GENERAL_SKILLS.forEach(skill => {
         // 1. Base Calculation
-        const base = Math.floor(skill.formula(stats));
+        let calculatedBase = 0;
+        try {
+            calculatedBase = Math.floor(skill.formula(stats)) || 0;
+        } catch (e) {
+            console.error(`Error calculating base for ${skill.id}`, e);
+            calculatedBase = 0;
+        }
+
+        let base = calculatedBase;
+        let pcCost = 0;
+
+        // Manual Base logic
+        if (manualBases[skill.id] !== undefined) {
+            if (manualBases[skill.id] >= calculatedBase) {
+                base = manualBases[skill.id];
+                pcCost = (base - calculatedBase) * 0.1;
+            } else {
+                base = calculatedBase;
+            }
+        }
+
+        totalPC += pcCost;
 
         // 2. Origin/Specialty Modifiers extraction
         let originMod = 0;
@@ -445,12 +476,14 @@ export function calculateGeneralSkillValues(
 
         skills[skill.id] = {
             base,
+            minBase: calculatedBase,
             originMod,
             specialtyMod,
             otherMod,
-            total: base + originMod + specialtyMod + otherMod
+            total: base + originMod + specialtyMod + otherMod,
+            pcCost
         };
     });
 
-    return skills;
+    return { skills, totalPC };
 }
