@@ -120,6 +120,10 @@ export default function Step1_OriginSelection({ data, onChange }: Step1Props) {
                 {ORIGINS.map((origin) => {
                     const isSelected = selectedOrigins.includes(origin.id);
                     const category = getOriginCategory(origin.id);
+
+                    // Filter disabled origins
+                    if (category?.disabled) return null;
+
                     const hasSubtypes = category?.subtypes && Object.keys(category.subtypes).length > 0;
 
                     return (
@@ -211,46 +215,48 @@ export default function Step1_OriginSelection({ data, onChange }: Step1Props) {
                                             <span style={{ fontSize: '0.65rem', color: '#9ca3af', marginLeft: '0.5rem' }}>(solo uno)</span>
                                         }
                                     </span>
-                                    {Object.keys(category!.subtypes!).map(subtype => {
-                                        const isSingleSelection = origin.id === 'divinos' || origin.id === 'cosmicos' || origin.id === 'parahumanos';
-                                        const isChecked = selectedSubtypes[origin.id]?.includes(subtype) || false;
-                                        const isSelected = isSingleSelection ? (selectedSubtypes[origin.id]?.[0] === subtype) : isChecked;
+                                    {Object.keys(category!.subtypes!)
+                                        .filter(subtype => !category?.disabledSubtypes?.includes(subtype))
+                                        .map(subtype => {
+                                            const isSingleSelection = origin.id === 'divinos' || origin.id === 'cosmicos' || origin.id === 'parahumanos';
+                                            const isChecked = selectedSubtypes[origin.id]?.includes(subtype) || false;
+                                            const isSelected = isSingleSelection ? (selectedSubtypes[origin.id]?.[0] === subtype) : isChecked;
 
-                                        return (
-                                            <label
-                                                key={subtype}
-                                                style={{
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                    gap: '0.5rem',
-                                                    cursor: 'pointer',
-                                                    padding: '0.5rem',
-                                                    borderRadius: '4px',
-                                                    backgroundColor: isSelected ? '#dbeafe' : 'transparent',
-                                                    transition: 'background-color 0.2s'
-                                                }}
-                                            >
-                                                <input
-                                                    type={isSingleSelection ? 'radio' : 'checkbox'}
-                                                    name={isSingleSelection ? `origin-${origin.id}` : undefined}
-                                                    checked={isSelected}
-                                                    onChange={() => handleToggleSubtype(origin.id, subtype)}
+                                            return (
+                                                <label
+                                                    key={subtype}
                                                     style={{
-                                                        width: '18px',
-                                                        height: '18px',
-                                                        cursor: 'pointer'
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        gap: '0.5rem',
+                                                        cursor: 'pointer',
+                                                        padding: '0.5rem',
+                                                        borderRadius: '4px',
+                                                        backgroundColor: isSelected ? '#dbeafe' : 'transparent',
+                                                        transition: 'background-color 0.2s'
                                                     }}
-                                                />
-                                                <span style={{
-                                                    fontSize: '0.875rem',
-                                                    fontWeight: isSelected ? 'bold' : 'normal',
-                                                    color: isSelected ? '#1e40af' : '#4b5563'
-                                                }}>
-                                                    {subtype}
-                                                </span>
-                                            </label>
-                                        );
-                                    })}
+                                                >
+                                                    <input
+                                                        type={isSingleSelection ? 'radio' : 'checkbox'}
+                                                        name={isSingleSelection ? `origin-${origin.id}` : undefined}
+                                                        checked={isSelected}
+                                                        onChange={() => handleToggleSubtype(origin.id, subtype)}
+                                                        style={{
+                                                            width: '18px',
+                                                            height: '18px',
+                                                            cursor: 'pointer'
+                                                        }}
+                                                    />
+                                                    <span style={{
+                                                        fontSize: '0.875rem',
+                                                        fontWeight: isSelected ? 'bold' : 'normal',
+                                                        color: isSelected ? '#1e40af' : '#4b5563'
+                                                    }}>
+                                                        {subtype}
+                                                    </span>
+                                                </label>
+                                            );
+                                        })}
                                 </div>
                             )}
                         </div>

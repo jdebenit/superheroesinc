@@ -10,11 +10,14 @@ export interface OriginCategory {
     name: string;
     subtypes?: { [key: string]: string[] };
     defaultEffects?: string[];
+    disabled?: boolean;
+    disabledSubtypes?: string[];
 }
 
 export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
     "Divino": {
         name: "Divino",
+        disabledSubtypes: ["Dios"],
         subtypes: {
             "Dios": ["Poder divino", "+20 a la parada mental"],
             "Dios menor": ["Poder divino", "+20 a la parada mental"],
@@ -88,6 +91,7 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
     },
     "Tecnológico": {
         name: "Tecnológico",
+        disabled: true,
         subtypes: {
             "Tecnoarmadura": ["Armadura tecnológica avanzada", "Sistemas integrados"],
             "Cyborg": ["Mejoras cibernéticas", "Interface neural"],
