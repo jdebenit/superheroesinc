@@ -317,3 +317,24 @@ export function calculateSpecialtyAllowedCharacteristics(origins: any[]): string
 
     return Array.from(allowedSet);
 }
+
+/**
+ * Calcula los Puntos de Creación (PC) generados por las características
+ * Fórmula: (Base + Mod. Otros) / 10
+ */
+export function calculateCreationPoints(characteristics: { [key: string]: { base: number; powerMod: number } }): { pcValues: { [key: string]: number }; totalPC: number } {
+    const pcValues: { [key: string]: number } = {};
+    let totalPC = 0;
+
+    Object.keys(characteristics).forEach(charId => {
+        const char = characteristics[charId];
+        if (char) {
+            // Calcular puntos individuales con decimales
+            const pc = (char.base + char.powerMod) / 10;
+            pcValues[charId] = pc;
+            totalPC += pc;
+        }
+    });
+
+    return { pcValues, totalPC };
+}

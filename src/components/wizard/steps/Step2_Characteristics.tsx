@@ -25,7 +25,8 @@ import {
     calculateSpecialtyModifiers,
     hasSpecialtyDistributablePoints,
     getSpecialtyDistributablePointsInfo,
-    calculateSpecialtyAllowedCharacteristics
+    calculateSpecialtyAllowedCharacteristics,
+    calculateCreationPoints
 } from '../../../utils/characterCalculations';
 
 export default function Step2_Characteristics({ data, onChange }: Step2Props) {
@@ -36,14 +37,20 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
             specialtyMod: number;
             powerMod: number;
         }
-    }>({
-        fuerza: { base: 40, originMod: 0, specialtyMod: 0, powerMod: 0 },
-        constitucion: { base: 40, originMod: 0, specialtyMod: 0, powerMod: 0 },
-        agilidad: { base: 40, originMod: 0, specialtyMod: 0, powerMod: 0 },
-        inteligencia: { base: 40, originMod: 0, specialtyMod: 0, powerMod: 0 },
-        percepcion: { base: 40, originMod: 0, specialtyMod: 0, powerMod: 0 },
-        apariencia: { base: 40, originMod: 0, specialtyMod: 0, powerMod: 0 },
-        voluntad: { base: 40, originMod: 0, specialtyMod: 0, powerMod: 0 }
+    }>(() => {
+        // Recuperar estado previo si existe
+        if (data.attributes?.breakdown) {
+            return data.attributes.breakdown;
+        }
+        return {
+            fuerza: { base: 40, originMod: 0, specialtyMod: 0, powerMod: 0 },
+            constitucion: { base: 40, originMod: 0, specialtyMod: 0, powerMod: 0 },
+            agilidad: { base: 40, originMod: 0, specialtyMod: 0, powerMod: 0 },
+            inteligencia: { base: 40, originMod: 0, specialtyMod: 0, powerMod: 0 },
+            percepcion: { base: 40, originMod: 0, specialtyMod: 0, powerMod: 0 },
+            apariencia: { base: 40, originMod: 0, specialtyMod: 0, powerMod: 0 },
+            voluntad: { base: 40, originMod: 0, specialtyMod: 0, powerMod: 0 }
+        };
     });
 
     // Estado para guardar la característica elegida para el bonus fijo (ej: Heraldo Cósmico)
@@ -216,7 +223,8 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
         onChange({
             ...data,
             attributes: {
-                values
+                values,
+                breakdown: chars
             }
         });
     };
@@ -231,6 +239,7 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
     const pointsInfo = isDistributableMode ? getDistributablePointsInfo(origins, characteristics, chosenBonusCharacteristic) : null;
     const choosableInfo = hasChoosableCharacteristic(origins);
     const specialtyPointsInfo = hasSpecialtyDistributablePoints(origins) ? getSpecialtyDistributablePointsInfo(origins, characteristics) : null;
+    const { pcValues } = calculateCreationPoints(characteristics);
 
     return (
         <div style={{ padding: '2rem' }}>
@@ -351,6 +360,8 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
                     })()}
                 </div>
             )}
+
+
 
             {/* Characteristics Grid */}
             <div style={{
@@ -592,6 +603,9 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
                                 fontFamily: 'monospace'
                             }}>
                                 {c.base} + {c.originMod} + {c.specialtyMod} + {c.powerMod} = <strong style={{ color: '#2563eb' }}>{total}</strong>
+                                <div style={{ marginTop: '0.25rem', color: '#7e22ce', fontWeight: 'bold' }}>
+                                    Genera: {pcValues[char.id].toFixed(1)} PC
+                                </div>
                             </div>
                         </div>
                     );

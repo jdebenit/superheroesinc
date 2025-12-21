@@ -3,6 +3,7 @@ import CharacterPreview from './CharacterPreview';
 import Step1_OriginSelection from './steps/Step1_OriginSelection';
 import Step2_Characteristics from './steps/Step2_Characteristics';
 import { calculateOriginCost } from '../../data/originCosts.ts';
+import { calculateCreationPoints } from '../../utils/characterCalculations';
 
 const STEPS = [
     { id: 1, name: 'Origen', icon: '🎭' },
@@ -30,13 +31,22 @@ const initialCharacterState = {
     ],
     attributes: {
         values: {
-            "Fuerza": 50,
-            "Constitución": 50,
-            "Agilidad": 50,
-            "Inteligencia": 50,
-            "Percepción": 50,
-            "Apariencia": 50,
-            "Voluntad": 50
+            "Fuerza": 40,
+            "Constitución": 40,
+            "Agilidad": 40,
+            "Inteligencia": 40,
+            "Percepción": 40,
+            "Apariencia": 40,
+            "Voluntad": 40
+        },
+        breakdown: {
+            fuerza: { base: 40, originMod: 0, specialtyMod: 0, powerMod: 0 },
+            constitucion: { base: 40, originMod: 0, specialtyMod: 0, powerMod: 0 },
+            agilidad: { base: 40, originMod: 0, specialtyMod: 0, powerMod: 0 },
+            inteligencia: { base: 40, originMod: 0, specialtyMod: 0, powerMod: 0 },
+            percepcion: { base: 40, originMod: 0, specialtyMod: 0, powerMod: 0 },
+            apariencia: { base: 40, originMod: 0, specialtyMod: 0, powerMod: 0 },
+            voluntad: { base: 40, originMod: 0, specialtyMod: 0, powerMod: 0 }
         }
     },
     skills: { items: [] },
@@ -51,9 +61,20 @@ export default function CharacterWizard() {
 
     // Calcular coste total en PCs
     const totalPCs = useMemo(() => {
+        let total = 0;
+
+        // 1. Coste de Origen
         const originCost = calculateOriginCost(character.origin?.items || []);
+        total += originCost;
+
+        // 2. PCs generados por características (Base + Mods)
+        if (character.attributes?.breakdown) {
+            const { totalPC } = calculateCreationPoints(character.attributes.breakdown);
+            total += totalPC;
+        }
+
         // TODO: Añadir costes de otros pasos cuando estén implementados
-        return originCost;
+        return total.toFixed(1); // Devolver con decimales
     }, [character]);
 
     const handleNext = () => {
@@ -108,19 +129,31 @@ export default function CharacterWizard() {
                     Crea tu personaje paso a paso
                 </p>
 
-                {/* PC Counter */}
+                {/* Header Controls: PC Counter + Preview */}
                 <div style={{
-                    display: 'inline-block',
-                    padding: '0.75rem 2rem',
-                    backgroundColor: '#fef3c7',
-                    border: '3px solid #f59e0b',
-                    borderRadius: '12px',
-                    fontSize: '1.25rem',
-                    fontWeight: 'bold',
-                    color: '#92400e',
-                    boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    gap: '1.5rem',
+                    flexWrap: 'wrap'
                 }}>
-                    💰 Puntos de Creación: <span style={{ color: '#dc2626', fontSize: '1.5rem' }}>{totalPCs}</span>
+                    {/* PC Counter */}
+                    <div style={{
+                        display: 'inline-block',
+                        padding: '0.75rem 2rem',
+                        backgroundColor: '#fef3c7',
+                        border: '3px solid #f59e0b',
+                        borderRadius: '12px',
+                        fontSize: '1.25rem',
+                        fontWeight: 'bold',
+                        color: '#92400e',
+                        boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
+                    }}>
+                        💰 Puntos de Creación: <span style={{ color: '#dc2626', fontSize: '1.5rem' }}>{totalPCs}</span>
+                    </div>
+
+                    {/* Preview Button */}
+                    <CharacterPreview character={character} />
                 </div>
             </div>
 
@@ -280,15 +313,7 @@ export default function CharacterWizard() {
                 </button>
             </div>
 
-            {/* Preview Button - Centered below navigation */}
-            <div style={{
-                display: 'flex',
-                justifyContent: 'center',
-                marginTop: '2rem',
-                paddingBottom: '2rem'
-            }}>
-                <CharacterPreview character={character} />
-            </div>
+
         </div>
     );
 }
