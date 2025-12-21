@@ -2,6 +2,10 @@ import React, { useState, useMemo } from 'react';
 import CharacterPreview from './CharacterPreview';
 import Step1_OriginSelection from './steps/Step1_OriginSelection';
 import Step2_Characteristics from './steps/Step2_Characteristics';
+import Step3_Powers from './steps/Step3_Powers';
+import Step4_GeneralSkills from './steps/Step4_GeneralSkills';
+import Step5_Background from './steps/Step5_Background';
+import Step6_SpecialSkills from './steps/Step6_SpecialSkills';
 import { calculateOriginCost } from '../../data/originCosts.ts';
 import { calculateCreationPoints } from '../../utils/characterCalculations';
 
@@ -104,6 +108,22 @@ export default function CharacterWizard() {
 
         if (currentStep === 2) {
             return <Step2_Characteristics data={character} onChange={updateCharacter} />;
+        }
+
+        if (currentStep === 3) {
+            return <Step3_Powers data={character} onChange={updateCharacter} />;
+        }
+
+        if (currentStep === 4) {
+            return <Step4_GeneralSkills data={character} onChange={updateCharacter} />;
+        }
+
+        if (currentStep === 5) {
+            return <Step5_Background data={character} onChange={updateCharacter} />;
+        }
+
+        if (currentStep === 6) {
+            return <Step6_SpecialSkills data={character} onChange={updateCharacter} />;
         }
 
         return (

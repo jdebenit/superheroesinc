@@ -1,4 +1,6 @@
 import { ORIGIN_CHARACTERISTIC_MODIFIERS } from '../data/characteristicModifiers';
+import { ORIGIN_CATEGORIES } from '../data/originDefinitions';
+import { GENERAL_SKILLS, type GeneralSkillDefinition } from '../data/generalSkills';
 
 /**
  * Helper para iterar sobre orígenes y subtipos
@@ -360,4 +362,95 @@ export function calculateCreationPoints(
     });
 
     return { pcValues, totalPC };
+}
+
+/**
+ * Calcula el desglose de habilidades generales
+ */
+export function calculateGeneralSkillValues(
+    characteristics: { [key: string]: number },
+    origins: any[],
+    manualMods: { [key: string]: number } = {}
+) {
+    // 1. Normalize characteristics keys to lowercase
+    const stats: { [key: string]: number } = {};
+    Object.keys(characteristics).forEach(key => {
+        // Remove accents? formulas use "constitucion", "percepcion".
+        // Input might satisfy "Constitución".
+        // Helper to normalize: lowercase + remove accents
+        const normalizedKey = key.toLowerCase()
+            .normalize("NFD").replace(/[\u0300-\u036f]/g, ""); // Remove accents
+        stats[normalizedKey] = characteristics[key];
+    });
+
+    const skills: { [key: string]: { base: number; originMod: number; specialtyMod: number; otherMod: number; total: number } } = {};
+
+    GENERAL_SKILLS.forEach(skill => {
+        // 1. Base Calculation
+        const base = Math.floor(skill.formula(stats));
+
+        // 2. Origin/Specialty Modifiers extraction
+        let originMod = 0;
+        let specialtyMod = 0;
+
+        if (origins && origins.length > 0) {
+            origins.forEach(item => {
+                const originName = Object.keys(item)[0];
+                const content = item[originName] as string[];
+
+                const category = ORIGIN_CATEGORIES[originName];
+                if (!category) return;
+
+                const subtypeKeys = category.subtypes ? Object.keys(category.subtypes) : [];
+
+                content.forEach((entry: string) => {
+                    let effects: string[] = [];
+                    // Check if entry is a known subtype
+                    if (subtypeKeys.includes(entry)) {
+                        effects = category.subtypes![entry];
+                    } else {
+                        // Assume entry is the effect itself
+                        effects = [entry];
+                    }
+
+                    effects.forEach(effect => {
+                        // Simple Regex to find bonuses: "+20 Idea" or "+10 a la habilidad de Esconderse"
+                        // Case insensitive
+                        // Look for the skill name in the effect string
+                        if (effect.toLowerCase().includes(skill.name.toLowerCase()) ||
+                            (skill.id === 'acechar' && effect.toLowerCase().includes('acechar')) || // Handle slash names if needed
+                            (skill.id === 'idea' && effect.toLowerCase().includes('idea'))
+                        ) {
+                            const match = effect.match(/([+-])\s*(\d+)/);
+                            if (match) {
+                                const sign = match[1] === '-' ? -1 : 1;
+                                const val = parseInt(match[2]) * sign;
+
+                                // Distinguish Origin vs Specialty
+                                // "Vigilante" subtypes are typically considered Specialties
+                                // Others are Subtypes (Origin Mod)
+                                if (originName === 'Vigilante') {
+                                    specialtyMod += val;
+                                } else {
+                                    originMod += val;
+                                }
+                            }
+                        }
+                    });
+                });
+            });
+        }
+
+        const otherMod = manualMods[skill.id] || 0;
+
+        skills[skill.id] = {
+            base,
+            originMod,
+            specialtyMod,
+            otherMod,
+            total: base + originMod + specialtyMod + otherMod
+        };
+    });
+
+    return skills;
 }
