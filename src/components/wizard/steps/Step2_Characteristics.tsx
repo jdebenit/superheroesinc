@@ -239,7 +239,7 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
     const pointsInfo = isDistributableMode ? getDistributablePointsInfo(origins, characteristics, chosenBonusCharacteristic) : null;
     const choosableInfo = hasChoosableCharacteristic(origins);
     const specialtyPointsInfo = hasSpecialtyDistributablePoints(origins) ? getSpecialtyDistributablePointsInfo(origins, characteristics) : null;
-    const { pcValues } = calculateCreationPoints(characteristics);
+    const { pcValues } = calculateCreationPoints(characteristics, origins);
 
     return (
         <div style={{ padding: '2rem' }}>

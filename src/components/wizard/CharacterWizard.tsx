@@ -69,7 +69,7 @@ export default function CharacterWizard() {
 
         // 2. PCs generados por características (Base + Mods)
         if (character.attributes?.breakdown) {
-            const { totalPC } = calculateCreationPoints(character.attributes.breakdown);
+            const { totalPC } = calculateCreationPoints(character.attributes.breakdown, character.origin?.items || []);
             total += totalPC;
         }
 
