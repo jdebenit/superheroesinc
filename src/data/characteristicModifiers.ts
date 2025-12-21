@@ -195,7 +195,7 @@ export const VIGILANTE_SPECIALTY_MODIFIERS: { [key: string]: SpecialtyCharacteri
     },
     "Arquero": {
         percepcion: 40,
-        agilidad: 320
+        agilidad: 32
     },
     "Cazador": {
         percepcion: 30,
@@ -239,6 +239,7 @@ export const VIGILANTE_SPECIALTY_MODIFIERS: { [key: string]: SpecialtyCharacteri
     // Especialidades equilibradas
     "Fanático": {
         distributablePoints: 20,
+        allowedCharacteristics: ['fuerza', 'constitucion', 'agilidad', 'percepcion'],
         agilidad: 30,
         percepcion: 30,
         voluntad: 10
@@ -252,6 +253,7 @@ export const VIGILANTE_SPECIALTY_MODIFIERS: { [key: string]: SpecialtyCharacteri
     },
     "Justiciero": {
         distributablePoints: 20,
+        allowedCharacteristics: ['fuerza', 'constitucion', 'agilidad', 'percepcion'],
         agilidad: 30,
         percepcion: 30,
         voluntad: 10
