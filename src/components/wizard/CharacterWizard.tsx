@@ -153,7 +153,7 @@ export default function CharacterWizard() {
                     </div>
 
                     {/* Preview Button */}
-                    <CharacterPreview character={character} />
+                    <CharacterPreview character={character} totalPCs={totalPCs} />
                 </div>
             </div>
 

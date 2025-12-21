@@ -2,9 +2,10 @@ import React, { useRef, useEffect } from 'react';
 
 interface CharacterPreviewProps {
     character: any;
+    totalPCs?: number | string;
 }
 
-export default function CharacterPreview({ character }: CharacterPreviewProps) {
+export default function CharacterPreview({ character, totalPCs }: CharacterPreviewProps) {
     const dialogRef = useRef<HTMLDialogElement>(null);
 
     const openModal = () => {
@@ -90,7 +91,9 @@ export default function CharacterPreview({ character }: CharacterPreviewProps) {
                                 <h3>{character.name || "Nuevo Personaje"}</h3>
                                 <div className="header-stats">
                                     {character.level && <span className="level-badge">Nivel {character.level}</span>}
-                                    {character.totalCost && <span className="total-cost">Total PCs: {character.totalCost}</span>}
+                                    {(totalPCs || character.totalCost) && (
+                                        <span className="total-cost">Total PCs: {totalPCs || character.totalCost}</span>
+                                    )}
                                 </div>
                             </div>
 
@@ -236,6 +239,7 @@ export default function CharacterPreview({ character }: CharacterPreviewProps) {
                         max-height: 90vh;
                         width: 800px;
                         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+                        text-align: left;
                     }
                     .character-dialog::backdrop {
                         background: rgba(0, 0, 0, 0.5);
