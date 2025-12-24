@@ -89,6 +89,14 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                         <div className="character-sheet">
                             <div className="sheet-header">
                                 <h3>{character.name || "Nuevo Personaje"}</h3>
+                                {character.alias && <h4 style={{ margin: '0 0 1rem 0', color: '#4b5563', fontSize: '1.25rem', fontStyle: 'italic' }}>"{character.alias}"</h4>}
+
+                                {character.notes && (
+                                    <div className="character-notes" style={{ margin: '1rem 0', padding: '1rem', backgroundColor: '#f9fafb', borderRadius: '8px', fontSize: '0.9rem', color: '#374151', fontStyle: 'italic', borderLeft: '4px solid #cbd5e1' }}>
+                                        {character.notes}
+                                    </div>
+                                )}
+
                                 <div className="header-stats">
                                     {character.level && <span className="level-badge">Nivel {character.level}</span>}
                                     {(totalPCs || character.totalCost) && (
@@ -114,6 +122,26 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                     </div>
                                                 );
                                             })}
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* Weapons */}
+                                {character.weapons && character.weapons.items.length > 0 && (
+                                    <div className="sheet-section weapons">
+                                        <div className="section-header">
+                                            <h4>Armas</h4>
+                                        </div>
+                                        <div className="weapons-grid" style={{ display: 'grid', gap: '0.5rem' }}>
+                                            {character.weapons.items.map((item: any, i: number) => (
+                                                <div key={i} className="weapon-item" style={{ padding: '0.5rem', backgroundColor: '#fef2f2', border: '1px solid #fecaca', borderRadius: '6px' }}>
+                                                    <div style={{ fontWeight: 'bold', color: '#b91c1c' }}>{item.name}</div>
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.9rem', marginTop: '0.25rem' }}>
+                                                        <span style={{ fontWeight: 'bold' }}>Daño: {item.damage || '-'}</span>
+                                                        <span style={{ color: '#666', fontStyle: 'italic' }}>{item.notes}</span>
+                                                    </div>
+                                                </div>
+                                            ))}
                                         </div>
                                     </div>
                                 )}
@@ -222,21 +250,6 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                         <ul>
                                             {character.background.items.map((item: string, i: number) => (
                                                 <li key={i}>{item}</li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                )}
-
-                                {/* Special Skills */}
-                                {character.specialskills && character.specialskills.items.length > 0 && (
-                                    <div className="sheet-section special-skills">
-                                        <div className="section-header">
-                                            <h4>Habilidades Especiales</h4>
-                                            {character.specialskills.cost && <span className="cost">({character.specialskills.cost} PCs)</span>}
-                                        </div>
-                                        <ul>
-                                            {character.specialskills.items.map((item: any, i: number) => (
-                                                <li key={i}>{item.name}: {item.value}</li>
                                             ))}
                                         </ul>
                                     </div>

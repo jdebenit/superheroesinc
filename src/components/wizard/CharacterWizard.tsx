@@ -5,7 +5,7 @@ import Step2_Characteristics from './steps/Step2_Characteristics';
 import Step3_Powers from './steps/Step3_Powers';
 import Step4_GeneralSkills from './steps/Step4_GeneralSkills';
 import Step5_Background from './steps/Step5_Background';
-import Step6_SpecialSkills from './steps/Step6_SpecialSkills';
+import Step6_Details from './steps/Step6_Details';
 import { calculateOriginCost } from '../../data/originCosts.ts';
 import { calculateCreationPoints, calculateGeneralSkillValues, calculateSpecialSkillsPCWithInt } from '../../utils/characterCalculations';
 
@@ -20,6 +20,8 @@ const STEPS = [
 
 const initialCharacterState = {
     name: "Nuevo Personaje",
+    alias: "",
+    notes: "",
     totalCost: "50+0",
     level: 1,
     origin: { items: [] },
@@ -64,7 +66,8 @@ const initialCharacterState = {
     },
     specialskills: { items: [] },
     background: { items: [] },
-    equipment: { items: [] }
+    equipment: { items: [] },
+    weapons: { items: [] }
 };
 
 export default function CharacterWizard() {
@@ -127,7 +130,7 @@ export default function CharacterWizard() {
     };
 
     const updateCharacter = (updates: any) => {
-        setCharacter(updates);
+        setCharacter(prev => ({ ...prev, ...updates }));
     };
 
     const renderStepContent = () => {
@@ -152,7 +155,7 @@ export default function CharacterWizard() {
         }
 
         if (currentStep === 6) {
-            return <Step6_SpecialSkills data={character} onChange={updateCharacter} />;
+            return <Step6_Details data={character} onChange={updateCharacter} />;
         }
 
         return (
