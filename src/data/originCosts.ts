@@ -67,10 +67,9 @@ export const ORIGIN_COSTS: { [key: string]: OriginCosts } = {
     "Parahumano": {
         base: 0,
         subtypes: {
-            "Atlante": 12,
+            "Atlante": 35,
             "Tes-khar": 15,
             "Thals": 10,
-            "Híbridos de humano y no-humano": 8
         }
     },
 
@@ -79,9 +78,12 @@ export const ORIGIN_COSTS: { [key: string]: OriginCosts } = {
         base: 0,
         subtypes: {
             "Tecnoarmadura": 5,
-            "Cyborg": 8,
-            "Exoesqueleto Energético": 6,
-            "Inventor": 3
+            "Exoesqueleto Energético": 4,
+            "Cyborg": 5,
+            "I.A.": 5,
+            "Robot gigante": 5,
+            "Tecnovehículo": 4,
+            "Inventor o forjador": 4
         }
     },
 
@@ -90,19 +92,18 @@ export const ORIGIN_COSTS: { [key: string]: OriginCosts } = {
         base: 1,  // Ser vigilante cuesta 1 PC base
         subtypes: {
             "Acrobata": 2,
-            "Arquero": 2,
-            "Cazador": 2,
-            "Espadachin": 2,
-            "Fanático": 2,
-            "Vengador": 2,
-            "Justiciero": 2,
-            "Francotirador": 2,
+            "Arquero": 3,
+            "Cazador": 3,
+            "Espadachin": 3,
+            "Espia/Ladrón": 2,
+            "Fánatico/Vengador": 3,
+            "Francotirador": 3,
             "Manipulador": 2,
             "Mente Maestra": 2,
-            "Militar": 2,
-            "Pistolero": 2,
-            "Artista Marcial": 2,
-            "Artista Marcial con Chi": 2
+            "Militar": 3,
+            "Pistolero": 3,
+            "Artista Marcial": 4,
+            "Artista Marcial con Chi": 5
         }
     },
 

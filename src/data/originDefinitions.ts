@@ -26,6 +26,7 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
     },
     "Cósmico": {
         name: "Cósmico",
+        disabledSubtypes: ["Heraldo Cósmico"],
         subtypes: {
             "Avatar Cósmico": ["Poder cósmico ilimitado", "Energía cósmica"],
             "Heraldo Cósmico": ["Heraldo de entidad cósmica", "Poder cósmico otorgado"]
@@ -41,6 +42,7 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
     },
     "Sobrenatural": {
         name: "Sobrenatural",
+        disabledSubtypes: ["Hombre Lobo"],
         subtypes: {
             "Vampiro": ["algo", "algo", "algo"],
             "Hombre Lobo": ["algo", "algo", "algo"],
@@ -85,8 +87,7 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
         subtypes: {
             "Atlante": ["Herencia atlante", "Resistencia acuática"],
             "Tes-khar": ["Fisiología alienígena"],
-            "Thals": ["Poderes psíquicos avanzados"],
-            "Híbridos de humano y no-humano": ["algo", "algo", "algo"]
+            "Thals": ["Poderes psíquicos avanzados"]
         }
     },
     "Tecnológico": {
@@ -94,9 +95,12 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
         disabled: true,
         subtypes: {
             "Tecnoarmadura": ["Armadura tecnológica avanzada", "Sistemas integrados"],
-            "Cyborg": ["Mejoras cibernéticas", "Interface neural"],
-            "Exoesqueleto Energético": ["Exoesqueleto de energía", "Protección energética"],
-            "Inventor": ["Genio tecnológico", "Acceso a tecnología avanzada"]
+            "Exoesqueleto Energético": ["Armadura tecnológica avanzada", "Sistemas integrados"],
+            "Cyborg": ["algo", "algo", "algo"],
+            "I.A.": ["algo", "algo", "algo"],
+            "Robot gigante": ["algo", "algo", "algo"],
+            "Tecnovehículo": ["algo", "algo", "algo"],
+            "Inventor o forjador": ["algo", "algo", "algo"]
         }
     },
     "Vigilante": {
@@ -122,15 +126,15 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
                 "+20 Mod. de Impacto",
                 "-20 a las tiradas de EQM cuando alguien se vaya a irse de rositas sin un buen golpe"
             ],
+            "Espia/Ladrón": [
+                "+20 habilidad a elección",
+                "-20 tiradas de EQM daños al medio ambiente"
+            ],
             "Fanático": [
                 "+20 habilidad a elección",
                 "-20 tiradas de EQM daños al medio ambiente"
             ],
-            "Vengador": [
-                "+20 habilidad a elección",
-                "-20 tiradas de EQM daños al medio ambiente"
-            ],
-            "Justiciero": [
+            "Fánatico/Vengador": [
                 "+20 habilidad a elección",
                 "-20 tiradas de EQM daños al medio ambiente"
             ],
@@ -171,7 +175,10 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
         subtypes: {
             "Psíquico": ["algo"],
             "Energético": ["algo"],
-            "Físico": ["algo"]
+            "Físico": ["algo"],
+            "Psíquico/Energético": ["algo"],
+            "Energético/Físico": ["algo"],
+            "Psíquico/Físico": ["algo"]
         }
     }
 };

@@ -105,7 +105,7 @@ export const ORIGIN_CHARACTERISTIC_MODIFIERS: { [key: string]: OriginCharacteris
         apariencia: { modifier: 0, max: 100 },
         voluntad: { modifier: 0, max: 100 },
     },
-    "Hombre Lobo": allCharacteristics(25, 125),
+    "Hombre Lobo": allCharacteristics(0, 100),
     "Semidemonio": {
         fuerza: { modifier: 0, max: 100 },
         constitucion: { modifier: 0, max: 100 },
@@ -140,23 +140,21 @@ export const ORIGIN_CHARACTERISTIC_MODIFIERS: { [key: string]: OriginCharacteris
         apariencia: { modifier: 0, max: 90, min: 30 },
         voluntad: { modifier: 0, max: 90 },
     },
-    "Thals": allCharacteristics(25, 125),
+    "Thals": allCharacteristics(0, 100),
 
     // Tecnológico
     "Tecnoarmadura": allCharacteristics(0, 100),
-    "Cyborg": allCharacteristics(20, 120),
-    "Exoesqueleto Energético": allCharacteristics(15, 115),
-    "Inventor": allCharacteristics(0, 100),
+    "Cyborg": allCharacteristics(0, 100),
+    "Exoesqueleto Energético": allCharacteristics(0, 100),
+    "Inventor o forjador": allCharacteristics(0, 100),
 
     // Vigilante - Especializaciones
     "Acróbata": allCharacteristics(0, 100),
     "Arquero": allCharacteristics(0, 100),
     "Cazador": allCharacteristics(0, 100),
     "Espadachín": allCharacteristics(0, 100),
-    "Espía / Ladrón": allCharacteristics(0, 100),
-    "Fanático": allCharacteristics(0, 100),
-    "Justiciero": allCharacteristics(0, 100),
-    "Vengador": allCharacteristics(0, 100),
+    "Espía/Ladrón": allCharacteristics(0, 100),
+    "Fanático/Vengador": allCharacteristics(0, 100),
     "Francotirador": allCharacteristics(0, 100),
     "Mente Maestra": allCharacteristics(0, 100),
     "Manipulador": allCharacteristics(0, 100),
