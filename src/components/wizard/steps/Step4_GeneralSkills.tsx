@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { GENERAL_SKILLS } from '../../../data/generalSkills';
 import { SPECIAL_SKILLS, SKILL_CATEGORIES, getSkillsByCategory } from '../../../data/specialSkills';
-import { calculateGeneralSkillValues, calculateSpecialSkillsPC } from '../../../utils/characterCalculations';
+import { calculateGeneralSkillValues, calculateSpecialSkillsPCWithInt } from '../../../utils/characterCalculations';
 import { getFreeSkillsForOrigins } from '../../../data/freeOriginSkills';
+import { getRequiredSkillsForOrigins } from '../../../data/requiredSpecialtySkills';
 
 interface Step4Props {
     data: any;
@@ -17,11 +18,11 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
         data.skills?.manualBases || {}
     );
 
-    // Special skills - NEW STRUCTURE
-    const [selectedSkills, setSelectedSkills] = useState<{ [skillId: string]: { isFree: boolean; manualMods: number } }>(
+    // Special skills - with isRequired flag
+    const [selectedSkills, setSelectedSkills] = useState<{ [skillId: string]: { isFree: boolean; isRequired: boolean; manualMods: number } }>(
         data.skills?.selected || {}
     );
-    const [specifiedSkills, setSpecifiedSkills] = useState<{ [uniqueId: string]: { skillId: string; specification: string; isFree: boolean; manualMods: number } }>(
+    const [specifiedSkills, setSpecifiedSkills] = useState<{ [uniqueId: string]: { skillId: string; specification: string; isFree: boolean; isRequired: boolean; manualMods: number } }>(
         data.skills?.specified || {}
     );
 
@@ -34,14 +35,18 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
     );
 
     // Calculate special skills PC cost
-    const specialSkillsPC = calculateSpecialSkillsPC(
+    const specialSkillsPC = calculateSpecialSkillsPCWithInt(
         selectedSkills,
         specifiedSkills,
-        data.origin?.items || []
+        data.origin?.items || [],
+        data.attributes?.values || {}
     );
 
     // Get free skills from origin
     const freeSkillIds = getFreeSkillsForOrigins(data.origin?.items || []);
+
+    // Get required skills from Vigilante specialties
+    const requiredSkillIds = getRequiredSkillsForOrigins(data.origin?.items || []);
 
     // Auto-add free skills from origin
     useEffect(() => {
@@ -51,7 +56,7 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
 
             freeSkillIds.forEach(skillId => {
                 if (!newSelected[skillId]) {
-                    newSelected[skillId] = { isFree: true, manualMods: 0 };
+                    newSelected[skillId] = { isFree: true, isRequired: false, manualMods: 0 };
                     hasChanges = true;
                 }
             });
@@ -61,6 +66,46 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
             }
         }
     }, [freeSkillIds.join(',')]);
+
+    // Auto-add required skills from Vigilante specialties
+    useEffect(() => {
+        if (requiredSkillIds.length > 0) {
+            const newSelected = { ...selectedSkills };
+            const newSpecified = { ...specifiedSkills };
+            let hasChanges = false;
+
+            requiredSkillIds.forEach(skillId => {
+                const skillDef = SPECIAL_SKILLS.find(s => s.id === skillId);
+
+                if (skillDef?.requiresSpecification) {
+                    // For parametrizable skills (like 'otro_idioma'), add an empty instance
+                    const existingInstances = Object.values(newSpecified).filter(s => s.skillId === skillId);
+                    if (existingInstances.length === 0) {
+                        const uniqueId = `${skillId}_required_${Date.now()}`;
+                        newSpecified[uniqueId] = {
+                            skillId,
+                            specification: '',
+                            isFree: false,
+                            isRequired: true,
+                            manualMods: 0
+                        };
+                        hasChanges = true;
+                    }
+                } else {
+                    // For standard skills
+                    if (!newSelected[skillId]) {
+                        newSelected[skillId] = { isFree: false, isRequired: true, manualMods: 0 };
+                        hasChanges = true;
+                    }
+                }
+            });
+
+            if (hasChanges) {
+                setSelectedSkills(newSelected);
+                setSpecifiedSkills(newSpecified);
+            }
+        }
+    }, [requiredSkillIds.join(',')]);
 
     // Save to parent whenever data changes
     useEffect(() => {
@@ -153,7 +198,7 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
     const handleAddSkill = (skillId: string) => {
         setSelectedSkills(prev => ({
             ...prev,
-            [skillId]: { isFree: false, manualMods: 0 }
+            [skillId]: { isFree: false, isRequired: false, manualMods: 0 }
         }));
     };
 
@@ -173,6 +218,7 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
                 skillId,
                 specification: '',
                 isFree: false,
+                isRequired: false,
                 manualMods: 0
             }
         }));
@@ -312,7 +358,7 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
                         Habilidades Seleccionadas: {specialSkillsPC.totalSkills}
                     </span>
                     <span style={{ fontSize: '1.125rem' }}>
-                        ({specialSkillsPC.freeSkills} gratuitas, {specialSkillsPC.paidSkills} pagadas)
+                        ({specialSkillsPC.freeSkills} gratuitas {specialSkillsPC.intBonusSkills > 0 && <span style={{ color: '#059669', fontSize: '0.9em' }}>[+{specialSkillsPC.intBonusSkills} INT]</span>}, {specialSkillsPC.paidSkills} pagadas)
                     </span>
                     <span style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#3b82f6' }}>
                         Total: {specialSkillsPC.totalPC} PC
@@ -354,13 +400,13 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
                                 <span style={{ fontSize: '0.875rem', color: '#6b7280', fontFamily: 'monospace' }}>
                                     {skillDef.formulaText}
                                 </span>
-                                <span style={{ fontSize: '0.875rem', fontWeight: 'bold', color: skillData.isFree ? '#10b981' : '#f59e0b' }}>
-                                    {skillData.isFree ? 'GRATIS' : '1 PC'}
+                                <span style={{ fontSize: '0.875rem', fontWeight: 'bold', color: skillData.isFree ? '#10b981' : (skillData.isRequired ? '#f59e0b' : '#f59e0b') }}>
+                                    {skillData.isFree ? 'GRATIS' : (skillData.isRequired ? 'OBLIGATORIA (1 PC)' : '1 PC')}
                                 </span>
                                 <span style={{ fontWeight: 'bold', color: '#059669', minWidth: '60px', textAlign: 'center' }}>
                                     {total}%
                                 </span>
-                                {!skillData.isFree && (
+                                {!skillData.isFree && !skillData.isRequired && (
                                     <button
                                         onClick={() => handleRemoveSkill(skillId)}
                                         style={{
@@ -378,6 +424,11 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
                                 {skillData.isFree && (
                                     <span style={{ fontSize: '0.75rem', color: '#6b7280', fontStyle: 'italic' }}>
                                         (Origen)
+                                    </span>
+                                )}
+                                {skillData.isRequired && (
+                                    <span style={{ fontSize: '0.75rem', color: '#6b7280', fontStyle: 'italic' }}>
+                                        (Especialidad)
                                     </span>
                                 )}
                             </div>
@@ -417,25 +468,32 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
                                 <span style={{ fontSize: '0.875rem', color: '#6b7280', fontFamily: 'monospace' }}>
                                     {skillDef.formulaText}
                                 </span>
-                                <span style={{ fontSize: '0.875rem', fontWeight: 'bold', color: spec.isFree ? '#10b981' : '#f59e0b' }}>
-                                    {spec.isFree ? 'GRATIS' : '1 PC'}
+                                <span style={{ fontSize: '0.875rem', fontWeight: 'bold', color: spec.isFree ? '#10b981' : (spec.isRequired ? '#f59e0b' : '#f59e0b') }}>
+                                    {spec.isFree ? 'GRATIS' : (spec.isRequired ? 'OBLIGATORIA (1 PC)' : '1 PC')}
                                 </span>
                                 <span style={{ fontWeight: 'bold', color: '#059669', minWidth: '60px', textAlign: 'center' }}>
                                     {total}%
                                 </span>
-                                <button
-                                    onClick={() => handleRemoveSpecifiedSkill(uniqueId)}
-                                    style={{
-                                        padding: '0.25rem 0.5rem',
-                                        backgroundColor: '#ef4444',
-                                        color: 'white',
-                                        border: 'none',
-                                        borderRadius: '4px',
-                                        cursor: 'pointer'
-                                    }}
-                                >
-                                    × Eliminar
-                                </button>
+                                {!spec.isRequired && (
+                                    <button
+                                        onClick={() => handleRemoveSpecifiedSkill(uniqueId)}
+                                        style={{
+                                            padding: '0.25rem 0.5rem',
+                                            backgroundColor: '#ef4444',
+                                            color: 'white',
+                                            border: 'none',
+                                            borderRadius: '4px',
+                                            cursor: 'pointer'
+                                        }}
+                                    >
+                                        × Eliminar
+                                    </button>
+                                )}
+                                {spec.isRequired && (
+                                    <span style={{ fontSize: '0.75rem', color: '#6b7280', fontStyle: 'italic' }}>
+                                        (Especialidad)
+                                    </span>
+                                )}
                             </div>
                         );
                     })}

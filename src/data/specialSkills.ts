@@ -61,6 +61,14 @@ export const SPECIAL_SKILLS: SpecialSkillDefinition[] = [
         formulaText: '(INT+AGI)/4',
         description: 'Detectar, desarmar y crear trampas'
     },
+    {
+        id: 'artes_marciales',
+        name: 'Artes Marciales',
+        category: 'combat',
+        formula: (stats) => (stats['agilidad'] + stats['fuerza']) / 4,
+        formulaText: '(AGI+FUE)/4',
+        description: 'Combate cuerpo a cuerpo sin armas'
+    },
 
     // ==========================================
     // CONOCIMIENTO

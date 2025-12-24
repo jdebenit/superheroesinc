@@ -7,7 +7,7 @@ import Step4_GeneralSkills from './steps/Step4_GeneralSkills';
 import Step5_Background from './steps/Step5_Background';
 import Step6_SpecialSkills from './steps/Step6_SpecialSkills';
 import { calculateOriginCost } from '../../data/originCosts.ts';
-import { calculateCreationPoints, calculateGeneralSkillValues, calculateSpecialSkillsPC } from '../../utils/characterCalculations';
+import { calculateCreationPoints, calculateGeneralSkillValues, calculateSpecialSkillsPCWithInt } from '../../utils/characterCalculations';
 
 const STEPS = [
     { id: 1, name: 'Origen', icon: '🎭' },
@@ -97,10 +97,12 @@ export default function CharacterWizard() {
         }
 
         // 4. Coste de Habilidades Especiales Seleccionadas
-        const specialSkillsPC = calculateSpecialSkillsPC(
+        // 4. Coste de Habilidades Especiales Seleccionadas
+        const specialSkillsPC = calculateSpecialSkillsPCWithInt(
             character.skills?.selected || {},
             character.skills?.specified || {},
-            character.origin?.items || []
+            character.origin?.items || [],
+            character.attributes?.values || {}
         );
         total += specialSkillsPC.totalPC;
 
