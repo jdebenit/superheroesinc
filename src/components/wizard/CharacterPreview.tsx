@@ -176,6 +176,42 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                     </div>
                                 )}
 
+                                {/* General Skills */}
+                                {character.skills && character.skills.generalItems && character.skills.generalItems.length > 0 && (
+                                    <div className="sheet-section skills-general">
+                                        <div className="section-header">
+                                            <h4>Habilidades Generales</h4>
+                                        </div>
+                                        <ul>
+                                            {character.skills.generalItems.map((item: any, i: number) => (
+                                                <li key={i}>
+                                                    <strong>{item.name}</strong>
+                                                    {item.math && <span style={{ color: '#6b7280', fontSize: '0.875rem', marginLeft: '0.5rem' }}>({item.math})</span>}
+                                                    : {item.value}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                )}
+
+                                {/* Learning Skills (Special Skills) */}
+                                {character.skills && character.skills.specialItems && character.skills.specialItems.length > 0 && (
+                                    <div className="sheet-section skills-learning">
+                                        <div className="section-header">
+                                            <h4>Habilidades de Aprendizaje</h4>
+                                        </div>
+                                        <ul>
+                                            {character.skills.specialItems.map((item: any, i: number) => (
+                                                <li key={i}>
+                                                    <strong>{item.name}</strong>
+                                                    {item.math && <span style={{ color: '#6b7280', fontSize: '0.875rem', marginLeft: '0.5rem' }}>({item.math})</span>}
+                                                    : {item.value}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                )}
+
                                 {/* Background */}
                                 {character.background && character.background.items.length > 0 && (
                                     <div className="sheet-section background">

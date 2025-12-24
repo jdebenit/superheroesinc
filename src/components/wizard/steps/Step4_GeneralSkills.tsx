@@ -100,19 +100,22 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
             };
         });
 
-        // Combine all items
-        const allItems = [...generalItems, ...specialStandardItems, ...specialSpecifiedItems];
+        // Combine special skills (standard + specified)
+        const allSpecialItems = [...specialStandardItems, ...specialSpecifiedItems];
 
         const newSkillsData = {
             generalManualMods: manualMods,
             manualBases: manualBases,
             selected: selectedSkills,
             specified: specifiedSkills,
-            items: allItems
+            generalItems: generalItems,        // Habilidades generales
+            specialItems: allSpecialItems,     // Habilidades de aprendizaje
+            items: [...generalItems, ...allSpecialItems]  // Todas juntas (para compatibilidad)
         };
 
         // Simple check to avoid loop
-        if (JSON.stringify(data.skills?.items) !== JSON.stringify(allItems) ||
+        if (JSON.stringify(data.skills?.generalItems) !== JSON.stringify(generalItems) ||
+            JSON.stringify(data.skills?.specialItems) !== JSON.stringify(allSpecialItems) ||
             JSON.stringify(data.skills?.generalManualMods) !== JSON.stringify(manualMods) ||
             JSON.stringify(data.skills?.manualBases) !== JSON.stringify(manualBases) ||
             JSON.stringify(data.skills?.selected) !== JSON.stringify(selectedSkills) ||

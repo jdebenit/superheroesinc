@@ -55,6 +55,8 @@ const initialCharacterState = {
     },
     skills: {
         items: [],
+        generalItems: [],
+        specialItems: [],
         generalManualMods: {},
         manualBases: {},
         selected: {},
