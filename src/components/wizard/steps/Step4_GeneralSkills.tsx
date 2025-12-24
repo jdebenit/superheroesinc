@@ -93,7 +93,7 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
             </h2>
             <p style={{ fontSize: '1.125rem', color: '#666', marginBottom: '2rem' }}>
                 Estas habilidades las poseen todos los personajes. Se calculan en base a tus características y orígenes.
-                Puedes añadir modificadores adicionales (por equipo, ventajas, etc.) en la columna "Otros".
+                Puedes añadir modificadores adicionales (por equipo, poderes, etc.) en la columna "Otros".
             </p>
 
             <div style={{

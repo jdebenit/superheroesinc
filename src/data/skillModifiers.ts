@@ -44,21 +44,57 @@ export const ORIGIN_SKILL_MODIFIERS: OriginSkillModifiers = {
     // ==========================================
     // VIGILANTE - ESPECIALIDADES
     // ==========================================
+    "Acrobata": [
+        { skillId: 'trepar', value: 20 },
+        { skillId: 'suerte', value: 20 }
+    ],
+
+    "Arquero": [
+        { skillId: 'acechar', value: 20 }
+    ],
+
     "Artista Marcial": [
-        {
-            skillId: 'acechar',
-            value: 20,
-            description: 'Entrenamiento en movimiento sigiloso'
-        },
-        {
-            skillId: 'trepar',
-            value: 20,
-            description: 'Agilidad y equilibrio mejorados'
-        }
+        { skillId: 'acechar', value: 20 },
+        { skillId: 'trepar', value: 20 }
+    ],
+
+    "Artista Marcial con Chi": [
+        { skillId: 'acechar', value: 20 },
+        { skillId: 'trepar', value: 20 }
+    ],
+
+    "Cazador": [
+        { skillId: 'acechar', value: 20 },
+        { skillId: 'investigar', value: 20 }
+    ],
+
+    "Espadachín": [
+        { skillId: 'combate', value: 20 }
+    ],
+
+    "Espia/Ladrón": [
+        { skillId: 'esconderse', value: 20 },
+        { skillId: 'acechar', value: 20 }
+    ],
+
+    "Francotirador": [
+        { skillId: 'esconderse', value: 20 },
+        { skillId: 'acechar', value: 20 }
     ],
 
     "Manipulador": [
         { skillId: 'idea', value: 20 },
         { skillId: 'influencia', value: 20 }
+    ],
+
+    "Mente maestra": [
+        { skillId: 'investigar', value: 20 },
+        { skillId: 'conocimientos', value: 20 },
+        { skillId: 'idea', value: 20 },
+        { skillId: 'acechar', value: 20 },
+    ],
+
+    "Militar": [
+        { skillId: 'combate', value: 20 }
     ]
 };
