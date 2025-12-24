@@ -7,7 +7,7 @@ import Step4_GeneralSkills from './steps/Step4_GeneralSkills';
 import Step5_Background from './steps/Step5_Background';
 import Step6_SpecialSkills from './steps/Step6_SpecialSkills';
 import { calculateOriginCost } from '../../data/originCosts.ts';
-import { calculateCreationPoints, calculateGeneralSkillValues } from '../../utils/characterCalculations';
+import { calculateCreationPoints, calculateGeneralSkillValues, calculateSpecialSkillsPC } from '../../utils/characterCalculations';
 
 const STEPS = [
     { id: 1, name: 'Origen', icon: '🎭' },
@@ -56,7 +56,9 @@ const initialCharacterState = {
     skills: {
         items: [],
         generalManualMods: {},
-        manualBases: {}
+        manualBases: {},
+        selected: {},
+        specified: {}
     },
     specialskills: { items: [] },
     background: { items: [] },
@@ -91,6 +93,14 @@ export default function CharacterWizard() {
             );
             total += skillsPC;
         }
+
+        // 4. Coste de Habilidades Especiales Seleccionadas
+        const specialSkillsPC = calculateSpecialSkillsPC(
+            character.skills?.selected || {},
+            character.skills?.specified || {},
+            character.origin?.items || []
+        );
+        total += specialSkillsPC.totalPC;
 
         // TODO: Añadir costes de otros pasos cuando estén implementados
         return total.toFixed(1); // Devolver con decimales

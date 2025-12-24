@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { GENERAL_SKILLS } from '../../../data/generalSkills';
-import { calculateGeneralSkillValues } from '../../../utils/characterCalculations';
+import { SPECIAL_SKILLS, SKILL_CATEGORIES, getSkillsByCategory } from '../../../data/specialSkills';
+import { calculateGeneralSkillValues, calculateSpecialSkillsPC } from '../../../utils/characterCalculations';
+import { getFreeSkillsForOrigins } from '../../../data/freeOriginSkills';
 
 interface Step4Props {
     data: any;
@@ -15,49 +17,106 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
         data.skills?.manualBases || {}
     );
 
-    // Calculate skills on every render based on current props and local state
-    // This ensures that if characteristics change elsewhere, this updates.
-    // However, saving to 'data' needs to happen efficiently.
+    // Special skills - NEW STRUCTURE
+    const [selectedSkills, setSelectedSkills] = useState<{ [skillId: string]: { isFree: boolean; manualMods: number } }>(
+        data.skills?.selected || {}
+    );
+    const [specifiedSkills, setSpecifiedSkills] = useState<{ [uniqueId: string]: { skillId: string; specification: string; isFree: boolean; manualMods: number } }>(
+        data.skills?.specified || {}
+    );
+
+    // Calculate general skills
     const { skills: skillValues } = calculateGeneralSkillValues(
-        data.attributes.values, // { Fuerza: 50, ... }
+        data.attributes.values,
         data.origin?.items || [],
         manualMods,
         manualBases
     );
 
-    // Save to parent whenever manualMods changes, OR we should save the derived values?
-    // We should probably save the breakdown for persistence
+    // Calculate special skills PC cost
+    const specialSkillsPC = calculateSpecialSkillsPC(
+        selectedSkills,
+        specifiedSkills,
+        data.origin?.items || []
+    );
+
+    // Get free skills from origin
+    const freeSkillIds = getFreeSkillsForOrigins(data.origin?.items || []);
+
+    // Auto-add free skills from origin
     useEffect(() => {
-        const items = Object.keys(skillValues).map(key => {
+        if (freeSkillIds.length > 0) {
+            const newSelected = { ...selectedSkills };
+            let hasChanges = false;
+
+            freeSkillIds.forEach(skillId => {
+                if (!newSelected[skillId]) {
+                    newSelected[skillId] = { isFree: true, manualMods: 0 };
+                    hasChanges = true;
+                }
+            });
+
+            if (hasChanges) {
+                setSelectedSkills(newSelected);
+            }
+        }
+    }, [freeSkillIds.join(',')]);
+
+    // Save to parent whenever data changes
+    useEffect(() => {
+        // General skills items
+        const generalItems = Object.keys(skillValues).map(key => {
             const skillDef = GENERAL_SKILLS.find(s => s.id === key);
             const val = skillValues[key];
             return {
                 name: skillDef?.name || key,
                 math: skillDef?.formulaText || '',
-                value: `${val.total}%` // Format as "75%"
+                value: `${val.total}%`
             };
         });
 
-        // Avoid infinite loop: only update if changed?
-        // Actually, we can just update on blur or manual change.
-        // But for "Preview" to work immediately, we need to update 'data'.
-        // Doing it in useEffect might cause loop if onChange triggers re-render of this component.
-        // We better update 'data' only when manualMods change or when mounting if empty.
+        // Special skills items - only selected ones
+        const specialStandardItems = Object.keys(selectedSkills).map(skillId => {
+            const skillDef = SPECIAL_SKILLS.find(s => s.id === skillId);
+            const base = skillDef?.formula ? Math.floor(skillDef.formula(data.attributes.values || {})) : 0;
+            const total = base + (selectedSkills[skillId].manualMods || 0);
+            return {
+                name: skillDef?.name || skillId,
+                math: skillDef?.formulaText || '',
+                value: `${total}%`
+            };
+        });
 
-        // Let's rely on manual update for manualMods. 
-        // For the "items" list, we might want to update it when leaving step or on change?
-        // Updating 'data' on every render is bad.
+        // Special skills items - specified
+        const specialSpecifiedItems = Object.keys(specifiedSkills).map(uniqueId => {
+            const spec = specifiedSkills[uniqueId];
+            const skillDef = SPECIAL_SKILLS.find(s => s.id === spec.skillId);
+            const base = skillDef?.formula ? Math.floor(skillDef.formula(data.attributes.values || {})) : 0;
+            const total = base + (spec.manualMods || 0);
+            return {
+                name: `${skillDef?.name}: ${spec.specification}`,
+                math: skillDef?.formulaText || '',
+                value: `${total}%`
+            };
+        });
+
+        // Combine all items
+        const allItems = [...generalItems, ...specialStandardItems, ...specialSpecifiedItems];
 
         const newSkillsData = {
             generalManualMods: manualMods,
             manualBases: manualBases,
-            items: items // Update the flat list for the sheet
+            selected: selectedSkills,
+            specified: specifiedSkills,
+            items: allItems
         };
 
-        // Simple check to avoid loop: stringify comparison?
-        if (JSON.stringify(data.skills?.items) !== JSON.stringify(items) ||
+        // Simple check to avoid loop
+        if (JSON.stringify(data.skills?.items) !== JSON.stringify(allItems) ||
             JSON.stringify(data.skills?.generalManualMods) !== JSON.stringify(manualMods) ||
-            JSON.stringify(data.skills?.manualBases) !== JSON.stringify(manualBases)) {
+            JSON.stringify(data.skills?.manualBases) !== JSON.stringify(manualBases) ||
+            JSON.stringify(data.skills?.selected) !== JSON.stringify(selectedSkills) ||
+            JSON.stringify(data.skills?.specified) !== JSON.stringify(specifiedSkills)) {
             onChange({
                 ...data,
                 skills: {
@@ -66,8 +125,9 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
                 }
             });
         }
-    }, [manualMods, manualBases, data.attributes.values, data.origin?.items]); // Dependencies that affect calculation
+    }, [manualMods, manualBases, selectedSkills, specifiedSkills, data.attributes.values, data.origin?.items]);
 
+    // Handlers for general skills
     const handleModChange = (skillId: string, value: string) => {
         const num = parseInt(value) || 0;
         setManualMods(prev => ({
@@ -86,14 +146,60 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
         }
     };
 
+    // Handlers for special skills
+    const handleAddSkill = (skillId: string) => {
+        setSelectedSkills(prev => ({
+            ...prev,
+            [skillId]: { isFree: false, manualMods: 0 }
+        }));
+    };
+
+    const handleRemoveSkill = (skillId: string) => {
+        setSelectedSkills(prev => {
+            const newSkills = { ...prev };
+            delete newSkills[skillId];
+            return newSkills;
+        });
+    };
+
+    const handleAddSpecifiedSkill = (skillId: string) => {
+        const uniqueId = `${skillId}_${Date.now()}`;
+        setSpecifiedSkills(prev => ({
+            ...prev,
+            [uniqueId]: {
+                skillId,
+                specification: '',
+                isFree: false,
+                manualMods: 0
+            }
+        }));
+    };
+
+    const handleSpecificationChange = (uniqueId: string, specification: string) => {
+        setSpecifiedSkills(prev => ({
+            ...prev,
+            [uniqueId]: { ...prev[uniqueId], specification }
+        }));
+    };
+
+    const handleRemoveSpecifiedSkill = (uniqueId: string) => {
+        setSpecifiedSkills(prev => {
+            const newSkills = { ...prev };
+            delete newSkills[uniqueId];
+            return newSkills;
+        });
+    };
+
+    const skillsByCategory = getSkillsByCategory();
+
     return (
         <div style={{ padding: '2rem' }}>
+            {/* GENERAL SKILLS SECTION */}
             <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem' }}>
                 Habilidades Generales
             </h2>
             <p style={{ fontSize: '1.125rem', color: '#666', marginBottom: '2rem' }}>
                 Estas habilidades las poseen todos los personajes. Se calculan en base a tus características y orígenes.
-                Puedes añadir modificadores adicionales (por equipo, poderes, etc.) en la columna "Otros".
             </p>
 
             <div style={{
@@ -101,7 +207,8 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
                 borderRadius: '12px',
                 boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
                 overflow: 'hidden',
-                border: '1px solid #e5e7eb'
+                border: '1px solid #e5e7eb',
+                marginBottom: '3rem'
             }}>
                 <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                     <thead style={{ backgroundColor: '#f9fafb', borderBottom: '2px solid #e5e7eb' }}>
@@ -133,9 +240,7 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
                                                 type="number"
                                                 value={val.base}
                                                 min={val.minBase}
-                                                onChange={(e) => {
-                                                    handleBaseChange(skill.id, e.target.value, val.minBase)
-                                                }}
+                                                onChange={(e) => handleBaseChange(skill.id, e.target.value, val.minBase)}
                                                 style={{
                                                     width: '50px',
                                                     padding: '0.25rem',
@@ -182,6 +287,271 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
                     </tbody>
                 </table>
             </div>
+
+            {/* SPECIAL SKILLS SECTION */}
+            <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+                Habilidades Especiales
+            </h2>
+            <p style={{ fontSize: '1.125rem', color: '#666', marginBottom: '1rem' }}>
+                Selecciona las habilidades especiales que tu personaje ha aprendido. Cada habilidad cuesta <strong>1 PC</strong> (0.5 PC para Liberado).
+            </p>
+
+            {/* PC Counter */}
+            <div style={{
+                backgroundColor: '#f0f9ff',
+                border: '2px solid #3b82f6',
+                borderRadius: '8px',
+                padding: '1rem',
+                marginBottom: '2rem'
+            }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ fontSize: '1.125rem', fontWeight: 'bold' }}>
+                        Habilidades Seleccionadas: {specialSkillsPC.totalSkills}
+                    </span>
+                    <span style={{ fontSize: '1.125rem' }}>
+                        ({specialSkillsPC.freeSkills} gratuitas, {specialSkillsPC.paidSkills} pagadas)
+                    </span>
+                    <span style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#3b82f6' }}>
+                        Total: {specialSkillsPC.totalPC} PC
+                    </span>
+                </div>
+            </div>
+
+            {/* Selected Skills */}
+            {(Object.keys(selectedSkills).length > 0 || Object.keys(specifiedSkills).length > 0) && (
+                <div style={{
+                    backgroundColor: '#f0fdf4',
+                    borderRadius: '12px',
+                    padding: '1.5rem',
+                    marginBottom: '2rem',
+                    border: '2px solid #10b981'
+                }}>
+                    <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem', color: '#059669' }}>
+                        ✓ Habilidades Seleccionadas
+                    </h3>
+
+                    {Object.entries(selectedSkills).map(([skillId, skillData]) => {
+                        const skillDef = SPECIAL_SKILLS.find(s => s.id === skillId);
+                        if (!skillDef) return null;
+
+                        const base = skillDef.formula ? Math.floor(skillDef.formula(data.attributes.values || {})) : 0;
+                        const total = base + (skillData.manualMods || 0);
+
+                        return (
+                            <div key={skillId} style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '1rem',
+                                padding: '0.75rem',
+                                backgroundColor: 'white',
+                                borderRadius: '6px',
+                                marginBottom: '0.5rem'
+                            }}>
+                                <span style={{ flex: 1, fontWeight: 'bold' }}>{skillDef.name}</span>
+                                <span style={{ fontSize: '0.875rem', color: '#6b7280', fontFamily: 'monospace' }}>
+                                    {skillDef.formulaText}
+                                </span>
+                                <span style={{ fontSize: '0.875rem', fontWeight: 'bold', color: skillData.isFree ? '#10b981' : '#f59e0b' }}>
+                                    {skillData.isFree ? 'GRATIS' : '1 PC'}
+                                </span>
+                                <span style={{ fontWeight: 'bold', color: '#059669', minWidth: '60px', textAlign: 'center' }}>
+                                    {total}%
+                                </span>
+                                {!skillData.isFree && (
+                                    <button
+                                        onClick={() => handleRemoveSkill(skillId)}
+                                        style={{
+                                            padding: '0.25rem 0.5rem',
+                                            backgroundColor: '#ef4444',
+                                            color: 'white',
+                                            border: 'none',
+                                            borderRadius: '4px',
+                                            cursor: 'pointer'
+                                        }}
+                                    >
+                                        × Eliminar
+                                    </button>
+                                )}
+                                {skillData.isFree && (
+                                    <span style={{ fontSize: '0.75rem', color: '#6b7280', fontStyle: 'italic' }}>
+                                        (Origen)
+                                    </span>
+                                )}
+                            </div>
+                        );
+                    })}
+
+                    {Object.entries(specifiedSkills).map(([uniqueId, spec]) => {
+                        const skillDef = SPECIAL_SKILLS.find(s => s.id === spec.skillId);
+                        if (!skillDef) return null;
+
+                        const base = skillDef.formula ? Math.floor(skillDef.formula(data.attributes.values || {})) : 0;
+                        const total = base + (spec.manualMods || 0);
+
+                        return (
+                            <div key={uniqueId} style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '1rem',
+                                padding: '0.75rem',
+                                backgroundColor: 'white',
+                                borderRadius: '6px',
+                                marginBottom: '0.5rem'
+                            }}>
+                                <input
+                                    type="text"
+                                    value={spec.specification}
+                                    onChange={(e) => handleSpecificationChange(uniqueId, e.target.value)}
+                                    placeholder={`${skillDef.name}: ${skillDef.specificationPlaceholder}`}
+                                    style={{
+                                        flex: 1,
+                                        padding: '0.5rem',
+                                        border: '1px solid #d1d5db',
+                                        borderRadius: '6px',
+                                        fontWeight: 'bold'
+                                    }}
+                                />
+                                <span style={{ fontSize: '0.875rem', color: '#6b7280', fontFamily: 'monospace' }}>
+                                    {skillDef.formulaText}
+                                </span>
+                                <span style={{ fontSize: '0.875rem', fontWeight: 'bold', color: spec.isFree ? '#10b981' : '#f59e0b' }}>
+                                    {spec.isFree ? 'GRATIS' : '1 PC'}
+                                </span>
+                                <span style={{ fontWeight: 'bold', color: '#059669', minWidth: '60px', textAlign: 'center' }}>
+                                    {total}%
+                                </span>
+                                <button
+                                    onClick={() => handleRemoveSpecifiedSkill(uniqueId)}
+                                    style={{
+                                        padding: '0.25rem 0.5rem',
+                                        backgroundColor: '#ef4444',
+                                        color: 'white',
+                                        border: 'none',
+                                        borderRadius: '4px',
+                                        cursor: 'pointer'
+                                    }}
+                                >
+                                    × Eliminar
+                                </button>
+                            </div>
+                        );
+                    })}
+                </div>
+            )}
+
+            {/* Available Skills by Category */}
+            <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem', color: '#374151' }}>
+                Habilidades Disponibles
+            </h3>
+
+            {Object.entries(skillsByCategory).map(([category, skills]) => (
+                <div key={category} style={{ marginBottom: '2rem' }}>
+                    <h4 style={{
+                        fontSize: '1.25rem',
+                        fontWeight: 'bold',
+                        marginBottom: '0.75rem',
+                        color: '#374151',
+                        borderBottom: '2px solid #e5e7eb',
+                        paddingBottom: '0.5rem'
+                    }}>
+                        {SKILL_CATEGORIES[category as keyof typeof SKILL_CATEGORIES]}
+                    </h4>
+
+                    <div style={{
+                        backgroundColor: 'white',
+                        borderRadius: '12px',
+                        boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                        padding: '1rem',
+                        border: '1px solid #e5e7eb'
+                    }}>
+                        {skills.map(skill => {
+                            const isSelected = selectedSkills[skill.id] !== undefined;
+                            const isParametrizable = skill.requiresSpecification;
+
+                            if (isParametrizable) {
+                                return (
+                                    <div key={skill.id} style={{
+                                        padding: '0.75rem',
+                                        borderBottom: '1px solid #e5e7eb',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '1rem'
+                                    }}>
+                                        <div style={{ flex: 1 }}>
+                                            <strong>{skill.name}</strong>
+                                            {skill.description && (
+                                                <span style={{ fontSize: '0.875rem', color: '#6b7280', marginLeft: '0.5rem' }}>
+                                                    ({skill.description})
+                                                </span>
+                                            )}
+                                        </div>
+                                        <span style={{ fontSize: '0.875rem', color: '#6b7280', fontFamily: 'monospace' }}>
+                                            {skill.formulaText}
+                                        </span>
+                                        <button
+                                            onClick={() => handleAddSpecifiedSkill(skill.id)}
+                                            style={{
+                                                padding: '0.5rem 1rem',
+                                                backgroundColor: '#10b981',
+                                                color: 'white',
+                                                border: 'none',
+                                                borderRadius: '6px',
+                                                cursor: 'pointer',
+                                                fontWeight: 'bold'
+                                            }}
+                                        >
+                                            + Añadir (1 PC)
+                                        </button>
+                                    </div>
+                                );
+                            } else {
+                                return (
+                                    <div key={skill.id} style={{
+                                        padding: '0.75rem',
+                                        borderBottom: '1px solid #e5e7eb',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '1rem',
+                                        opacity: isSelected ? 0.5 : 1
+                                    }}>
+                                        <div style={{ flex: 1 }}>
+                                            <strong>{skill.name}</strong>
+                                            {skill.description && (
+                                                <span style={{ fontSize: '0.875rem', color: '#6b7280', marginLeft: '0.5rem' }}>
+                                                    ({skill.description})
+                                                </span>
+                                            )}
+                                        </div>
+                                        <span style={{ fontSize: '0.875rem', color: '#6b7280', fontFamily: 'monospace' }}>
+                                            {skill.formulaText}
+                                        </span>
+                                        {!isSelected ? (
+                                            <button
+                                                onClick={() => handleAddSkill(skill.id)}
+                                                style={{
+                                                    padding: '0.5rem 1rem',
+                                                    backgroundColor: '#10b981',
+                                                    color: 'white',
+                                                    border: 'none',
+                                                    borderRadius: '6px',
+                                                    cursor: 'pointer',
+                                                    fontWeight: 'bold'
+                                                }}
+                                            >
+                                                + Añadir (1 PC)
+                                            </button>
+                                        ) : (
+                                            <span style={{ fontSize: '0.875rem', color: '#10b981', fontWeight: 'bold' }}>
+                                                ✓ Seleccionada
+                                            </span>
+                                        )}
+                                    </div>
+                                );
+                            }
+                        })}
+                    </div>
+                </div>
+            ))}
         </div>
     );
 }
