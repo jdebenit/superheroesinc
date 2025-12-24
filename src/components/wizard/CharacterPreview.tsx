@@ -91,12 +91,6 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                 <h3>{character.name || "Nuevo Personaje"}</h3>
                                 {character.alias && <h4 style={{ margin: '0 0 1rem 0', color: '#4b5563', fontSize: '1.25rem', fontStyle: 'italic' }}>"{character.alias}"</h4>}
 
-                                {character.notes && (
-                                    <div className="character-notes" style={{ margin: '1rem 0', padding: '1rem', backgroundColor: '#f9fafb', borderRadius: '8px', fontSize: '0.9rem', color: '#374151', fontStyle: 'italic', borderLeft: '4px solid #cbd5e1' }}>
-                                        {character.notes}
-                                    </div>
-                                )}
-
                                 <div className="header-stats">
                                     {character.level && <span className="level-badge">Nivel {character.level}</span>}
                                     {(totalPCs || character.totalCost) && (
@@ -270,6 +264,18 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                 </li>
                                             ))}
                                         </ul>
+                                    </div>
+                                )}
+
+                                {/* Notes */}
+                                {character.notes && (
+                                    <div className="sheet-section notes">
+                                        <div className="section-header">
+                                            <h4>Notas y Descripción</h4>
+                                        </div>
+                                        <div style={{ whiteSpace: 'pre-wrap', fontStyle: 'italic', color: '#4b5563', fontSize: '0.95rem', lineHeight: '1.5' }}>
+                                            {character.notes}
+                                        </div>
                                     </div>
                                 )}
                             </div>
