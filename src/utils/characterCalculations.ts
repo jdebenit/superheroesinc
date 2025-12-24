@@ -1,6 +1,7 @@
 import { ORIGIN_CHARACTERISTIC_MODIFIERS } from '../data/characteristicModifiers';
 import { ORIGIN_CATEGORIES } from '../data/originDefinitions';
 import { GENERAL_SKILLS, type GeneralSkillDefinition } from '../data/generalSkills';
+import { ORIGIN_SKILL_MODIFIERS } from '../data/skillModifiers';
 
 /**
  * Helper para iterar sobre orígenes y subtipos
@@ -429,45 +430,36 @@ export function calculateGeneralSkillValues(
                 const originName = Object.keys(item)[0];
                 const content = item[originName] as string[];
 
-                const category = ORIGIN_CATEGORIES[originName];
-                if (!category) return;
-
-                const subtypeKeys = category.subtypes ? Object.keys(category.subtypes) : [];
-
-                content.forEach((entry: string) => {
-                    let effects: string[] = [];
-                    // Check if entry is a known subtype
-                    if (subtypeKeys.includes(entry)) {
-                        effects = category.subtypes![entry];
-                    } else {
-                        // Assume entry is the effect itself
-                        effects = [entry];
-                    }
-
-                    effects.forEach(effect => {
-                        // Simple Regex to find bonuses: "+20 Idea" or "+10 a la habilidad de Esconderse"
-                        // Case insensitive
-                        // Look for the skill name in the effect string
-                        if (effect.toLowerCase().includes(skill.name.toLowerCase()) ||
-                            (skill.id === 'acechar' && effect.toLowerCase().includes('acechar')) || // Handle slash names if needed
-                            (skill.id === 'idea' && effect.toLowerCase().includes('idea'))
-                        ) {
-                            const match = effect.match(/([+-])\s*(\d+)/);
-                            if (match) {
-                                const sign = match[1] === '-' ? -1 : 1;
-                                const val = parseInt(match[2]) * sign;
-
-                                // Distinguish Origin vs Specialty
-                                // "Vigilante" subtypes are typically considered Specialties
-                                // Others are Subtypes (Origin Mod)
-                                if (originName === 'Vigilante') {
-                                    specialtyMod += val;
-                                } else {
-                                    originMod += val;
-                                }
+                // Check if this origin has skill modifiers
+                const originSkillMods = ORIGIN_SKILL_MODIFIERS[originName];
+                if (originSkillMods) {
+                    originSkillMods.forEach(mod => {
+                        if (mod.skillId === skill.id) {
+                            // Determine if this is a Vigilante specialty or regular origin
+                            if (originName === 'Vigilante') {
+                                specialtyMod += mod.value;
+                            } else {
+                                originMod += mod.value;
                             }
                         }
                     });
+                }
+
+                // Also check subtypes/specialties
+                content.forEach(subtype => {
+                    const subtypeSkillMods = ORIGIN_SKILL_MODIFIERS[subtype];
+                    if (subtypeSkillMods) {
+                        subtypeSkillMods.forEach(mod => {
+                            if (mod.skillId === skill.id) {
+                                // Vigilante subtypes are specialties, others are origin mods
+                                if (originName === 'Vigilante') {
+                                    specialtyMod += mod.value;
+                                } else {
+                                    originMod += mod.value;
+                                }
+                            }
+                        });
+                    }
                 });
             });
         }

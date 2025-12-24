@@ -63,9 +63,7 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
             "Dotado": ["algo", "algo", "algo"],
             "Terrano": [
                 "Energía mágica por el vinculo con terra",
-                "-10 a la habilidad de Conocimientos",
-                "-15 al uso de cualquier aparato tecnológico",
-                "-25 al uso de armas cortas, armas largas y armas militares",
+                "Desconexión de la tecnología moderna",
                 "+20 a la parada mental"
             ],
             "Elfo": ["algo", "algo", "algo"],
@@ -143,9 +141,6 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
                 "-20 tiradas de EQM daños al medio ambiente"
             ],
             "Manipulador": [
-                "+20 Idea",
-                "+20 Influencia",
-                "+20 Otro Idioma",
                 "Puede repetir una tirada fallida de resistencia a prejuicios"
             ],
             "Mente Maestra": [
@@ -161,7 +156,6 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
                 "-20 tiradas de EQM daños al medio ambiente"
             ],
             "Artista Marcial": [
-                "+20 habilidad a elección",
                 "-20 tiradas de EQM daños al medio ambiente"
             ],
             "Artista Marcial con Chi": [
