@@ -114,6 +114,35 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
         });
     }, [data.origin, chosenBonusCharacteristic]);
 
+    // Sincronizar cambios con el estado del padre (data)
+    // Esto asegura que si los modificadores cambian automáticamente (por origen/especialidad),
+    // el total se actualice en el objeto data principal.
+    useEffect(() => {
+        const values: { [key: string]: number } = {};
+        let changed = false;
+
+        CHARACTERISTICS.forEach(char => {
+            const c = characteristics[char.id];
+            const total = c.base + c.originMod + c.specialtyMod + c.powerMod;
+            values[char.name] = total;
+
+            // Verificar si el valor ha cambiado respecto a lo que tiene el padre
+            if (data.attributes?.values?.[char.name] !== total) {
+                changed = true;
+            }
+        });
+
+        if (changed) {
+            onChange({
+                ...data,
+                attributes: {
+                    values,
+                    breakdown: characteristics
+                }
+            });
+        }
+    }, [characteristics, data.attributes]);
+
     const handleCharacteristicChange = (charId: string, field: string, value: string) => {
         const numValue = parseInt(value) || 0;
         const origins = data.origin?.items || [];

@@ -132,6 +132,16 @@ export const SPECIAL_SKILLS: SpecialSkillDefinition[] = [
     // TÉCNICAS
     // ==========================================
     {
+        id: 'artesania',
+        name: 'Artesanía',
+        requiresSpecification: true,
+        specificationLabel: 'Disciplina',
+        specificationPlaceholder: 'Ej: Herreria, carpintería, sastreria...',
+        category: 'technical',
+        formula: (stats) => stats['percepcion'] / 2,
+        formulaText: 'PER/2'
+    },
+    {
         id: 'cerrajeria',
         name: 'Cerrajería',
         category: 'technical',
@@ -178,6 +188,16 @@ export const SPECIAL_SKILLS: SpecialSkillDefinition[] = [
     // SOCIAL
     // ==========================================
     {
+        id: 'interpretar',
+        name: 'Interpretar',
+        requiresSpecification: true,
+        specificationLabel: 'Especialidad',
+        specificationPlaceholder: 'Ej: Drama, música, danza...',
+        category: 'social',
+        formula: (stats) => (stats['apariencia'] + stats['percepcion']) / 3,
+        formulaText: '(APR+PER)/3'
+    },
+    {
         id: 'otro_idioma',
         name: 'Otro idioma',
         requiresSpecification: true,
@@ -218,6 +238,14 @@ export const SPECIAL_SKILLS: SpecialSkillDefinition[] = [
         formulaText: 'AGI/2',
     },
     {
+        id: 'rastrear',
+        name: 'Rastrear',
+        category: 'other',
+        formula: (stats) => (stats['inteligencia'] + stats['percepcion']) / 4,
+        formulaText: '(INT+PER)/4',
+        description: 'Seguir huellas, encontrar pistas'
+    },
+    {
         id: 'supervivencia',
         name: 'Supervivencia',
         requiresSpecification: true,
@@ -228,13 +256,16 @@ export const SPECIAL_SKILLS: SpecialSkillDefinition[] = [
         formulaText: 'INT/2',
     },
     {
-        id: 'rastrear',
-        name: 'Rastrear',
+        id: 'trato_animal',
+        name: 'Trato animal',
+        requiresSpecification: true,
+        specificationLabel: 'Clase de animal',
+        specificationPlaceholder: 'Ej: Aves rapaces, animales de trabajo...',
         category: 'other',
-        formula: (stats) => (stats['inteligencia'] + stats['percepcion']) / 4,
-        formulaText: '(INT+PER)/4',
-        description: 'Seguir huellas, encontrar pistas'
+        formula: (stats) => (stats['voluntad'] + stats['inteligencia']) / 4,
+        formulaText: '(VOL+INT)/4',
     },
+
 
     // ==========================================
     // EXCLUSIVAS
@@ -254,6 +285,22 @@ export const SPECIAL_SKILLS: SpecialSkillDefinition[] = [
         formula: (stats) => (stats['agilidad'] + stats['percepcion']) / 3,
         formulaText: '(AGI+PER)/3',
         description: 'Combate cuerpo a cuerpo sin armas'
+    },
+    {
+        id: 'artesania_arcana',
+        name: 'Artesania Arcana',
+        category: 'exclusive',
+        formula: (stats) => (stats['inteligencia'] + stats['percepcion']) / 3,
+        formulaText: '(INT+PER)/3',
+        description: 'Impresión de voluntad en objetos'
+    },
+    {
+        id: 'contemplacion',
+        name: 'Contemplación',
+        category: 'exclusive',
+        formula: (stats) => stats['voluntad'] / 2,
+        formulaText: 'VOL/2',
+        description: 'Centrar su voluntad en una canalización de hechizo o de chi'
     },
     {
         id: 'forjador_artefactos',

@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { calculateDerivedStats } from '../../../utils/characterCalculations';
 
 interface Step6Props {
     data: {
+        attributes: { values: { [key: string]: number } };
+        origin?: any; // To pass origins if needed in future
         name: string;
         alias: string;
         profession?: string;
@@ -9,6 +12,10 @@ interface Step6Props {
         notes: string;
         equipment: { items: any[] };
         weapons: { items: any[] };
+        skills?: any;
+        // We'll update combat/other stats in data directly if we want to save them
+        combatstats?: string[];
+        otherstats?: string[];
     };
     onChange: (updates: any) => void;
 }
@@ -17,6 +24,47 @@ export default function Step6_Details({ data, onChange }: Step6Props) {
     const updateField = (field: string, value: string) => {
         onChange({ [field]: value });
     };
+
+    // Calculate derived stats on mount or when attributes change
+    useEffect(() => {
+        const stats = calculateDerivedStats(data.attributes.values, data.origin?.items, data.skills);
+
+        // Format as strings for the output JSON
+        const combatStatsList = [
+            `Acciones por asalto: ${stats.combat.acciones}`,
+            `Iniciativa y Reflejos: ${stats.combat.iniciativa}`,
+            `Puntos de Vida: ${stats.combat.pv}`,
+            `Equilibrio Mental: ${stats.combat.equilibrio}`
+        ];
+
+        const otherStatsList = [
+            `Inconsciencia: ${stats.other.inconsciencia}`,
+            `Recuperación: ${stats.other.recuperacion}`,
+            `Resistencia a gases y venenos: ${stats.other.resistenciaGases}`,
+            `Modificador de fuerza: ${stats.other.modFuerza}`,
+            `Peso Levantado: ${stats.other.pesoLevantado}`,
+            `Daño absorbido físico: ${stats.other.daAbsorbidoFisico}`,
+            `Daño absorbido mental: ${stats.other.daAbsorbidoMental}`,
+            `Modificador de impacto: ${stats.other.modImpacto}`,
+            `Modificador Psionico: ${stats.other.modPsionico}`,
+            `Parada Fisica: ${stats.other.paradaFisica}`,
+            `Parada mental: ${stats.other.paradaMental}`,
+            `Salto (alto / largo): ${stats.other.salto}`
+        ];
+
+        // Trigger onChange only if different to avoid loop (simple comparison)
+        const currentCombat = JSON.stringify(data.combatstats);
+        const newCombat = JSON.stringify(combatStatsList);
+        const currentOther = JSON.stringify(data.otherstats);
+        const newOther = JSON.stringify(otherStatsList);
+
+        if (currentCombat !== newCombat || currentOther !== newOther) {
+            onChange({
+                combatstats: combatStatsList,
+                otherstats: otherStatsList
+            });
+        }
+    }, [data.attributes.values, data.origin?.items, data.skills]);
 
     // --- EQUIPO ---
     const addEquipment = () => {
@@ -184,6 +232,60 @@ export default function Step6_Details({ data, onChange }: Step6Props) {
                         style={{ ...inputStyle, minHeight: '120px', resize: 'vertical' }}
                         placeholder="Describe la apariencia, personalidad, trasfondo breve..."
                     />
+                </div>
+            </div>
+
+            {/* COMBAT STATS SECTION */}
+            <div style={sectionStyle}>
+                <h3 style={{ ...titleStyle, color: '#dc2626', borderBottomColor: '#fecaca' }}>
+                    ⚔️ Estadísticas de Combate
+                </h3>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
+                    {data.combatstats?.map((stat, index) => {
+                        const [label, val] = stat.split(': ');
+                        return (
+                            <div key={index} style={{
+                                backgroundColor: '#fef2f2',
+                                padding: '1rem',
+                                borderRadius: '8px',
+                                border: '1px solid #fee2e2'
+                            }}>
+                                <span style={{ display: 'block', fontSize: '0.8rem', color: '#991b1b', fontWeight: 'bold', textTransform: 'uppercase' }}>
+                                    {label}
+                                </span>
+                                <span style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#dc2626' }}>
+                                    {val || '-'}
+                                </span>
+                            </div>
+                        );
+                    })}
+                </div>
+            </div>
+
+            {/* OTHER STATS SECTION */}
+            <div style={sectionStyle}>
+                <h3 style={{ ...titleStyle, color: '#7c3aed', borderBottomColor: '#ddd6fe' }}>
+                    🧠 Otras Estadísticas
+                </h3>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
+                    {data.otherstats?.map((stat, index) => {
+                        const [label, val] = stat.split(': ');
+                        return (
+                            <div key={index} style={{
+                                backgroundColor: '#f5f3ff',
+                                padding: '1rem',
+                                borderRadius: '8px',
+                                border: '1px solid #ede9fe'
+                            }}>
+                                <span style={{ display: 'block', fontSize: '0.8rem', color: '#5b21b6', fontWeight: 'bold', textTransform: 'uppercase' }}>
+                                    {label}
+                                </span>
+                                <span style={{ fontSize: '1.1rem', fontWeight: 'bold', color: '#7c3aed' }}>
+                                    {val || '-'}
+                                </span>
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
 
