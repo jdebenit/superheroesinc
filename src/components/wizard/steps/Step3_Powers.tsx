@@ -24,7 +24,7 @@ export default function Step3_Powers({ data, onChange }: Step3Props) {
                 <ul className="text-left max-w-md mx-auto mt-4 space-y-2 text-sm text-gray-600">
                     <li>• <strong>Arcano:</strong> Selección de hechizos</li>
                     <li>• <strong>Tecnológico:</strong> Tech-modules y dispositivos</li>
-                    <li>• <strong>Otros:</strong> Superpoderes y habilidades especiales</li>
+                    <li>• <strong>Otros:</strong> Superpoderes y especiales</li>
                     <li>• <strong>Vigilante:</strong> Este paso se salta automáticamente</li>
                 </ul>
             </div>

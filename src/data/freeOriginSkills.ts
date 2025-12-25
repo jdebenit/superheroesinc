@@ -1,7 +1,7 @@
 /**
- * Habilidades especiales gratuitas otorgadas por orígenes
+ * habilidades de aprendizaje gratuitas otorgadas por orígenes
  * 
- * Algunos orígenes otorgan habilidades especiales sin coste de PC.
+ * Algunos orígenes otorgan habilidades de aprendizaje sin coste de PC.
  * Estas habilidades se añaden automáticamente al seleccionar el origen.
  */
 
@@ -15,7 +15,7 @@ export interface FreeOriginSkills {
 export const FREE_ORIGIN_SKILLS: FreeOriginSkills = {
     // Parahumano
     "Tes-khar": ['trampas', 'farmacologia'],
-
+    "Mago": ['magia'],
     // Añadir más orígenes según sea necesario
     // Ejemplo:
     // "Atlante": ['conducir'], // Si Atlante diera Conducir gratis

@@ -339,10 +339,10 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
 
             {/* SPECIAL SKILLS SECTION */}
             <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem' }}>
-                Habilidades Especiales
+                Habilidades de Aprendizaje
             </h2>
             <p style={{ fontSize: '1.125rem', color: '#666', marginBottom: '1rem' }}>
-                Selecciona las habilidades especiales que tu personaje ha aprendido. Cada habilidad cuesta <strong>1 PC</strong> (0.5 PC para Liberado).
+                Selecciona las habilidades que tu personaje ha aprendido. Cada habilidad cuesta <strong>1 PC</strong> (0.5 PC para Liberado).
             </p>
 
             {/* PC Counter */}

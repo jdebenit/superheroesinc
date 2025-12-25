@@ -1,7 +1,7 @@
 /**
- * Definiciones de Habilidades Especiales para Superheroes INC.
+ * Definiciones de habilidades de aprendizaje para Superheroes INC.
  * 
- * Las habilidades especiales son más específicas que las generales y algunas
+ * Las habilidades de aprendizaje son más específicas que las generales y algunas
  * requieren especificación adicional (ej: Otro idioma: Inglés)
  */
 
@@ -14,7 +14,7 @@ export interface SpecialSkillDefinition {
     description?: string;
     formula?: (stats: { [key: string]: number }) => number;
     formulaText?: string;
-    category: 'combat' | 'technical' | 'knowledge' | 'social' | 'other';
+    category: 'combat' | 'technical' | 'knowledge' | 'social' | 'other' | 'exclusive';
 }
 
 export const SPECIAL_SKILLS: SpecialSkillDefinition[] = [
@@ -22,67 +22,75 @@ export const SPECIAL_SKILLS: SpecialSkillDefinition[] = [
     // COMBATE
     // ==========================================
     {
+        id: 'arcos',
+        name: 'Arcos / Ballestas',
+        category: 'combat',
+        formula: (stats) => (2 * stats['percepcion']) / 3,
+        formulaText: '(2xPER)/3',
+        description: 'Arcos, Ballestas'
+    },
+    {
         id: 'armas_cortas',
         name: 'Armas cortas',
         category: 'combat',
-        formula: (stats) => stats['agilidad'] / 4,
-        formulaText: 'AGI/4',
-        description: 'Pistolas, revólveres, subfusiles'
+        formula: (stats) => (2 * stats['percepcion']) / 3,
+        formulaText: '(2xPER)/3',
+        description: 'Pistolas, revólveres'
     },
     {
         id: 'armas_largas',
         name: 'Armas largas',
         category: 'combat',
-        formula: (stats) => stats['percepcion'] / 4,
-        formulaText: 'PER/4',
-        description: 'Rifles, escopetas, arcos'
+        formula: (stats) => (2 * stats['percepcion']) / 3,
+        formulaText: '(2xPER)/3',
+        description: 'Rifles, escopetas, subfusiles'
     },
     {
         id: 'armas_militares',
         name: 'Armas militares',
         category: 'combat',
-        formula: (stats) => stats['percepcion'] / 5,
-        formulaText: 'PER/5',
-        description: 'Armas pesadas, explosivos, artillería'
+        formula: (stats) => stats['percepcion'] / 3,
+        formulaText: 'PER/3',
+        description: 'Armas pesadas, artillería'
     },
     {
         id: 'armas_blancas',
         name: 'Armas blancas',
         category: 'combat',
-        formula: (stats) => (stats['agilidad'] + stats['percepcion']) / 4,
-        formulaText: '(AGI+PER)/4',
+        formula: (stats) => (stats['agilidad'] + stats['percepcion']) / 3,
+        formulaText: '(AGI+PER)/3',
         description: 'Espadas, cuchillos, hachas'
+    },
+    {
+        id: 'arma_especial',
+        name: 'Arma Especial',
+        requiresSpecification: true,
+        specificationLabel: 'Arma',
+        specificationPlaceholder: 'Ej: Escudo, Cerbatana, Látigo...',
+        category: 'combat',
+        formula: (stats) => (2 * stats['percepcion']) / 3,
+        formulaText: '(2xPER)/3',
+    },
+    {
+        id: 'explosivos',
+        name: 'Explosivos',
+        category: 'combat',
+        formula: (stats) => stats['inteligencia'] / 2,
+        formulaText: 'INT)/2',
+        description: 'Manipular y crear explosivos'
     },
     {
         id: 'trampas',
         name: 'Trampas',
         category: 'combat',
-        formula: (stats) => (stats['inteligencia'] + stats['agilidad']) / 4,
-        formulaText: '(INT+AGI)/4',
+        formula: (stats) => stats['inteligencia'] / 2,
+        formulaText: 'INT)/2',
         description: 'Detectar, desarmar y crear trampas'
-    },
-    {
-        id: 'artes_marciales',
-        name: 'Artes Marciales',
-        category: 'combat',
-        formula: (stats) => (stats['agilidad'] + stats['fuerza']) / 4,
-        formulaText: '(AGI+FUE)/4',
-        description: 'Combate cuerpo a cuerpo sin armas'
     },
 
     // ==========================================
     // CONOCIMIENTO
     // ==========================================
-    {
-        id: 'otro_idioma',
-        name: 'Otro idioma',
-        requiresSpecification: true,
-        specificationLabel: 'Idioma',
-        specificationPlaceholder: 'Ej: Inglés, Francés, Alemán...',
-        category: 'knowledge',
-        formula: (stats) => stats['inteligencia'] / 2,
-        formulaText: 'INT/2'
-    },
     {
         id: 'ciencia',
         name: 'Ciencia',
@@ -94,75 +102,75 @@ export const SPECIAL_SKILLS: SpecialSkillDefinition[] = [
         formulaText: 'INT/3'
     },
     {
-        id: 'arte',
-        name: 'Arte',
-        requiresSpecification: true,
-        specificationLabel: 'Disciplina artística',
-        specificationPlaceholder: 'Ej: Pintura, Escultura, Música...',
-        category: 'knowledge',
-        formula: (stats) => (stats['inteligencia'] + stats['agilidad']) / 4,
-        formulaText: '(INT+AGI)/4'
-    },
-    {
         id: 'farmacologia',
         name: 'Farmacología',
         category: 'knowledge',
-        formula: (stats) => stats['inteligencia'] / 3,
-        formulaText: 'INT/3',
+        formula: (stats) => stats['inteligencia'] / 2,
+        formulaText: 'INT/2',
         description: 'Conocimiento de drogas, venenos y medicamentos'
     },
     {
-        id: 'oficio',
-        name: 'Oficio',
+        id: 'medicina',
+        name: 'Medicina',
+        category: 'knowledge',
+        formula: (stats) => stats['inteligencia'] / 3,
+        formulaText: 'INT/3',
+        description: 'Medicina general'
+    },
+    {
+        id: 'especialidad',
+        name: 'Medicina Especialidad',
         requiresSpecification: true,
-        specificationLabel: 'Tipo de oficio',
-        specificationPlaceholder: 'Ej: Carpintería, Herrería, Mecánica...',
-        category: 'technical',
-        formula: (stats) => (stats['inteligencia'] + stats['agilidad']) / 4,
-        formulaText: '(INT+AGI)/4'
+        specificationLabel: 'Campo médico',
+        specificationPlaceholder: 'Ej: Cirugía, Oncologia, Inmunología...',
+        category: 'knowledge',
+        formula: (stats) => stats['inteligencia'] / 3,
+        formulaText: 'INT/3',
     },
 
     // ==========================================
     // TÉCNICAS
     // ==========================================
     {
+        id: 'cerrajeria',
+        name: 'Cerrajería',
+        category: 'technical',
+        formula: (stats) => stats['inteligencia'] / 2,
+        formulaText: 'INT/2',
+        description: 'Cerraduras electronicas, alarmas, cierres laser'
+    },
+    {
+        id: 'cibernetica',
+        name: 'Cibernética',
+        category: 'technical',
+        formula: (stats) => stats['inteligencia'] / 2,
+        formulaText: 'INT/2',
+        description: 'Creación y reparación de sistemas informático-electronico muy complejos'
+    },
+    {
         id: 'conducir',
         name: 'Conducir',
+        requiresSpecification: true,
+        specificationLabel: 'Vehiculo',
+        specificationPlaceholder: 'Ej: Coche, moto, avion, barco...',
         category: 'technical',
-        formula: (stats) => (stats['agilidad'] + stats['percepcion']) / 4,
-        formulaText: '(AGI+PER)/4',
-        description: 'Vehículos terrestres'
+        formula: (stats) => (stats['inteligencia'] + stats['percepcion']) / 4,
+        formulaText: '(INT+PER)/4',
     },
     {
-        id: 'pilotar',
-        name: 'Pilotar',
+        id: 'computadoras',
+        name: 'Computadoras / Comunicaciones',
         category: 'technical',
-        formula: (stats) => (stats['agilidad'] + stats['percepcion']) / 5,
-        formulaText: '(AGI+PER)/5',
-        description: 'Aeronaves, helicópteros'
-    },
-    {
-        id: 'informatica',
-        name: 'Informática',
-        category: 'technical',
-        formula: (stats) => stats['inteligencia'] / 3,
-        formulaText: 'INT/3',
+        formula: (stats) => stats['inteligencia'] / 2,
+        formulaText: 'INT/2',
         description: 'Programación, hacking, sistemas'
-    },
-    {
-        id: 'electronica',
-        name: 'Electrónica',
-        category: 'technical',
-        formula: (stats) => stats['inteligencia'] / 4,
-        formulaText: 'INT/4',
-        description: 'Reparación y diseño de dispositivos electrónicos'
     },
     {
         id: 'mecanica',
         name: 'Mecánica',
         category: 'technical',
-        formula: (stats) => stats['inteligencia'] / 4,
-        formulaText: 'INT/4',
+        formula: (stats) => stats['inteligencia'] / 2,
+        formulaText: 'INT/2',
         description: 'Reparación y mantenimiento de maquinaria'
     },
 
@@ -170,65 +178,107 @@ export const SPECIAL_SKILLS: SpecialSkillDefinition[] = [
     // SOCIAL
     // ==========================================
     {
-        id: 'callejeo',
-        name: 'Callejeo',
+        id: 'otro_idioma',
+        name: 'Otro idioma',
+        requiresSpecification: true,
+        specificationLabel: 'Idioma',
+        specificationPlaceholder: 'Ej: Inglés, Francés, Alemán...',
         category: 'social',
-        formula: (stats) => (stats['inteligencia'] + stats['apariencia']) / 4,
-        formulaText: '(INT+APA)/4',
-        description: 'Contactos, rumores, información de la calle'
+        formula: (stats) => stats['inteligencia'] / 3,
+        formulaText: 'INT/3'
     },
     {
-        id: 'etiqueta',
-        name: 'Etiqueta',
+        id: 'robar',
+        name: 'Robar',
         category: 'social',
-        formula: (stats) => (stats['inteligencia'] + stats['apariencia']) / 4,
-        formulaText: '(INT+APA)/4',
-        description: 'Protocolo, buenos modales, alta sociedad'
-    },
-    {
-        id: 'intimidar',
-        name: 'Intimidar',
-        category: 'social',
-        formula: (stats) => (stats['fuerza'] + stats['voluntad']) / 4,
-        formulaText: '(FUE+VOL)/4',
-        description: 'Amenazas, coerción'
-    },
-    {
-        id: 'persuasion',
-        name: 'Persuasión',
-        category: 'social',
-        formula: (stats) => (stats['inteligencia'] + stats['apariencia']) / 3,
-        formulaText: '(INT+APA)/3',
-        description: 'Convencer, negociar, seducir'
+        formula: (stats) => stats['agilidad'] / 3,
+        formulaText: 'AGI/2',
+        description: 'Sustraer objetos sin que el propietario lo detecte'
     },
 
     // ==========================================
     // OTRAS
     // ==========================================
     {
-        id: 'medicina',
-        name: 'Medicina',
-        category: 'knowledge',
-        formula: (stats) => stats['inteligencia'] / 3,
-        formulaText: 'INT/3',
-        description: 'Diagnóstico, cirugía, tratamiento médico'
+        id: 'nadar',
+        name: 'Nadar / Bucear',
+        category: 'other',
+        formula: (stats) => (stats['fuerza'] + stats['agilidad']) / 2,
+        formulaText: '(FUE+AGI)/2',
+        description: 'Nadar y bucear'
+    },
+    {
+        id: 'montar',
+        name: 'Montar Animal',
+        requiresSpecification: true,
+        specificationLabel: 'Animal',
+        specificationPlaceholder: 'Ej: Caballo, Camello, Grifo...',
+        category: 'other',
+        formula: (stats) => stats['agilidad'] / 2,
+        formulaText: 'AGI/2',
     },
     {
         id: 'supervivencia',
         name: 'Supervivencia',
+        requiresSpecification: true,
+        specificationLabel: 'Entorno',
+        specificationPlaceholder: 'Ej: Bosque, Bajos fondos...',
         category: 'other',
-        formula: (stats) => (stats['inteligencia'] + stats['percepcion']) / 4,
-        formulaText: '(INT+PER)/4',
-        description: 'Orientación, caza, refugio en la naturaleza'
+        formula: (stats) => stats['inteligencia'] / 2,
+        formulaText: 'INT/2',
     },
     {
         id: 'rastrear',
         name: 'Rastrear',
         category: 'other',
-        formula: (stats) => stats['percepcion'] / 3,
-        formulaText: 'PER/3',
+        formula: (stats) => (stats['inteligencia'] + stats['percepcion']) / 4,
+        formulaText: '(INT+PER)/4',
         description: 'Seguir huellas, encontrar pistas'
-    }
+    },
+
+    // ==========================================
+    // EXCLUSIVAS
+    // ==========================================
+    {
+        id: 'magia',
+        name: 'Magia',
+        category: 'exclusive',
+        formula: (stats) => (stats['inteligencia'] + stats['percepcion']) / 2,
+        formulaText: '(INT+PER)/2',
+        description: 'Capacidad para lanzar hechizos'
+    },
+    {
+        id: 'artes_marciales',
+        name: 'Artes Marciales',
+        category: 'exclusive',
+        formula: (stats) => (stats['agilidad'] + stats['percepcion']) / 3,
+        formulaText: '(AGI+PER)/3',
+        description: 'Combate cuerpo a cuerpo sin armas'
+    },
+    {
+        id: 'forjador_artefactos',
+        name: 'Forjador de Artefactos',
+        category: 'exclusive',
+        formula: (stats) => (stats['inteligencia'] + stats['voluntad']) / 3,
+        formulaText: '(INT+VOL)/3',
+        description: 'Creación y reparación de artefactos'
+    },
+    {
+        id: 'sistemas_armamento',
+        name: 'Sistemas de Armamento',
+        category: 'exclusive',
+        formula: (stats) => stats['percepcion'] / 2,
+        formulaText: 'PER/2',
+        description: 'Permite operar armas en tecnoarmaduras, tecnoimplantes y tecnovehiculos'
+    },
+    {
+        id: 'tecnoarmadura',
+        name: 'Tecnoarmadura / Tecnovehiculo',
+        category: 'exclusive',
+        formula: (stats) => (stats['inteligencia'] + stats['percepcion']) / 3,
+        formulaText: '(INT+PER)/3',
+        description: 'Manejo de tecnoarmaduras de combate y tecnovehiculos'
+    },
 ];
 
 // Helper para obtener categorías únicas
@@ -237,7 +287,8 @@ export const SKILL_CATEGORIES = {
     technical: 'Técnicas',
     knowledge: 'Conocimiento',
     social: 'Social',
-    other: 'Otras'
+    other: 'Otras',
+    exlusive: 'Exclusivas'
 } as const;
 
 // Helper para agrupar habilidades por categoría

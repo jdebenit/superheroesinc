@@ -482,7 +482,7 @@ export function calculateGeneralSkillValues(
 }
 
 /**
- * Calcula el desglose de habilidades especiales
+ * Calcula el desglose de habilidades de aprendizaje
  * Similar a calculateGeneralSkillValues pero maneja habilidades parametrizables
  */
 export function calculateSpecialSkillValues(
@@ -677,7 +677,7 @@ export function calculateSpecialSkillValues(
 }
 
 /**
- * Calcula el coste en PC de las habilidades especiales seleccionadas
+ * Calcula el coste en PC de las habilidades de aprendizaje seleccionadas
  * - Cada habilidad cuesta 1 PC (0.5 PC para origen "Liberado")
  * - Las habilidades gratuitas de origen no cuestan PC
  */
@@ -731,7 +731,7 @@ export function calculateSpecialSkillsPC(
 }
 
 /**
- * Calcula el coste en PC de las habilidades especiales seleccionadas (V2 con Bonus INT)
+ * Calcula el coste en PC de las habilidades de aprendizaje seleccionadas (V2 con Bonus INT)
  * - Cada habilidad cuesta 1 PC (0.5 PC para origen "Liberado")
  * - Las habilidades gratuitas de origen no cuestan PC
  * - La Inteligencia otorga habilidades gratuitas extra (101-120: 1, 121-140: 2, 141-160: 3, 161+: 4)

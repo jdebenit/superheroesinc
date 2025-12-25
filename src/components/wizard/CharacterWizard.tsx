@@ -104,8 +104,8 @@ export default function CharacterWizard() {
             total += skillsPC;
         }
 
-        // 4. Coste de Habilidades Especiales Seleccionadas
-        // 4. Coste de Habilidades Especiales Seleccionadas
+        // 4. Coste de Habilidades de aprendizaje Seleccionadas
+        // 4. Coste de Habilidades de aprendizaje Seleccionadas
         const specialSkillsPC = calculateSpecialSkillsPCWithInt(
             character.skills?.selected || {},
             character.skills?.specified || {},

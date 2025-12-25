@@ -411,7 +411,7 @@ export default function CharacterGenerator() {
                         </div>
 
                         <div>
-                            <h3 className="font-bold text-xl mb-2 bg-purple-300 p-1 inline-block">Habilidades Especiales</h3>
+                            <h3 className="font-bold text-xl mb-2 bg-purple-300 p-1 inline-block">Habilidades de Aprendizaje</h3>
                             <div className="space-y-2">
                                 {character.specialskills.items.map((skill, i) => (
                                     <div key={i} className="flex gap-2 border-b pb-2">

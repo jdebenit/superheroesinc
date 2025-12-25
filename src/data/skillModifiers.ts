@@ -85,7 +85,7 @@ export const ORIGIN_SKILL_MODIFIERS: OriginSkillModifiers = {
     "Manipulador": [
         { skillId: 'idea', value: 20 },
         { skillId: 'influencia', value: 20 },
-        { skillId: 'otro_idioma', value: 20, description: 'Aplica a todos los idiomas' }
+        { skillId: 'otro_idioma', value: 20, description: 'Aplica a un idioma especifico' }
     ],
 
     "Mente maestra": [
@@ -103,16 +103,16 @@ export const ORIGIN_SKILL_MODIFIERS: OriginSkillModifiers = {
         { skillId: 'acechar', value: 20 }
     ],
 
-    // ==========================================
-    // MODIFICADORES PARA HABILIDADES ESPECIALES
-    // ==========================================
+    // =============================================
+    // MODIFICADORES PARA HABILIDADES DE APRENDIZAJE
+    // =============================================
 
     // Terrano tiene penalizaciones con armas y tecnología
     "Terrano_special": [
         { skillId: 'armas_cortas', value: -25, description: 'Rechazo a armas de fuego' },
         { skillId: 'armas_largas', value: -25, description: 'Rechazo a armas de fuego' },
         { skillId: 'armas_militares', value: -25, description: 'Rechazo a armas de fuego' },
-        { skillId: 'informatica', value: -15, description: 'Desconexión tecnológica' },
-        { skillId: 'electronica', value: -15, description: 'Desconexión tecnológica' }
+        { skillId: 'computadoras', value: -15, description: 'Desconexión tecnológica' },
+        { skillId: 'cibernetica', value: -15, description: 'Desconexión tecnológica' }
     ]
 };
