@@ -236,7 +236,7 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                 )}
 
                                 {/* History & Background Section */}
-                                {(character.background?.items?.length > 0 || character.economicStatus || character.legalStatus || character.socialStatus || character.prejudiceResistance) && (
+                                {(character.background?.items?.length > 0 || character.economicStatus || character.legalStatus || character.socialStatus || character.prejudiceResistance || character.profession || character.sexualIdentity) && (
                                     <div className="sheet-section background">
                                         <div className="section-header">
                                             <h4>Historial</h4>
@@ -245,8 +245,20 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
 
                                             {/* Status Grid */}
-                                            {(character.economicStatus || character.legalStatus || character.socialStatus) && (
+                                            {(character.economicStatus || character.legalStatus || character.socialStatus || character.profession || character.sexualIdentity) && (
                                                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', paddingBottom: '1rem', borderBottom: '1px solid #e5e7eb' }}>
+                                                    {character.profession && (
+                                                        <div>
+                                                            <span style={{ display: 'block', fontSize: '0.75rem', color: '#6b7280', fontWeight: 'bold' }}>PROFESIÓN</span>
+                                                            <span style={{ fontSize: '0.9rem', color: '#1f2937' }}>{character.profession}</span>
+                                                        </div>
+                                                    )}
+                                                    {character.sexualIdentity && (
+                                                        <div>
+                                                            <span style={{ display: 'block', fontSize: '0.75rem', color: '#6b7280', fontWeight: 'bold' }}>IDENTIDAD SEXUAL</span>
+                                                            <span style={{ fontSize: '0.9rem', color: '#1f2937' }}>{character.sexualIdentity}</span>
+                                                        </div>
+                                                    )}
                                                     {character.economicStatus && (
                                                         <div>
                                                             <span style={{ display: 'block', fontSize: '0.75rem', color: '#6b7280', fontWeight: 'bold' }}>POSICIÓN ECONÓMICA</span>

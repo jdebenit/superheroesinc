@@ -4,6 +4,8 @@ interface Step6Props {
     data: {
         name: string;
         alias: string;
+        profession?: string;
+        sexualIdentity?: string;
         notes: string;
         equipment: { items: any[] };
         weapons: { items: any[] };
@@ -152,8 +154,8 @@ export default function Step6_Details({ data, onChange }: Step6Props) {
                         />
                     </div>
                 </div>
-                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginBottom: '1.5rem' }}>
-                     <div>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginBottom: '1.5rem' }}>
+                    <div>
                         <label style={labelStyle}>Profesión</label>
                         <input
                             type="text"
