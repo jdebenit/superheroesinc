@@ -40,6 +40,9 @@ export const ORIGIN_SKILL_MODIFIERS: OriginSkillModifiers = {
             description: 'Desconexión de la tecnología y conocimiento moderno'
         }
     ],
+    "Minotauro": [
+        { skillId: 'armas_blancas', value: 20 },
+    ],
 
     // ==========================================
     // VIGILANTE - ESPECIALIDADES
@@ -50,7 +53,8 @@ export const ORIGIN_SKILL_MODIFIERS: OriginSkillModifiers = {
     ],
 
     "Arquero": [
-        { skillId: 'acechar', value: 20 }
+        { skillId: 'acechar', value: 20 },
+        { skillId: 'arcos', value: 20 }
     ],
 
     "Artista Marcial": [
@@ -69,7 +73,8 @@ export const ORIGIN_SKILL_MODIFIERS: OriginSkillModifiers = {
     ],
 
     "Espadachín": [
-        { skillId: 'combate', value: 20 }
+        { skillId: 'combate', value: 20 },
+        { skillId: 'armas_blancas', value: 20 }
     ],
 
     "Espia/Ladrón": [
@@ -92,7 +97,7 @@ export const ORIGIN_SKILL_MODIFIERS: OriginSkillModifiers = {
         { skillId: 'investigar', value: 20 },
         { skillId: 'conocimientos', value: 20 },
         { skillId: 'idea', value: 20 },
-        { skillId: 'acechar', value: 20 },
+        { skillId: 'computadoras', value: 20 },
     ],
 
     "Militar": [

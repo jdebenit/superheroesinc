@@ -94,7 +94,7 @@ export const ORIGIN_COSTS: { [key: string]: OriginCosts } = {
             "Acrobata": 2,
             "Arquero": 3,
             "Cazador": 3,
-            "Espadachin": 3,
+            "Espadachín": 3,
             "Espia/Ladrón": 2,
             "Fánatico/Vengador": 3,
             "Francotirador": 3,

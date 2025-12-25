@@ -41,7 +41,7 @@ export default function Step1_OriginSelection({ data, onChange }: Step1Props) {
     };
 
     const handleToggleSubtype = (originId: string, subtype: string) => {
-        const isSingleSelection = originId === 'divinos' || originId === 'cosmicos' || originId === 'parahumanos';
+        const isSingleSelection = originId === 'divinos' || originId === 'cosmicos' || originId === 'parahumanos' || originId === 'mutantes';
 
         if (isSingleSelection) {
             // Para orígenes de selección única, reemplazar la selección
@@ -120,16 +120,17 @@ export default function Step1_OriginSelection({ data, onChange }: Step1Props) {
                 {ORIGINS.map((origin) => {
                     const isSelected = selectedOrigins.includes(origin.id);
                     const category = getOriginCategory(origin.id);
-
-                    // Filter disabled origins
-                    if (category?.disabled) return null;
+                    const isDisabled = category?.disabled;
 
                     const hasSubtypes = category?.subtypes && Object.keys(category.subtypes).length > 0;
+
+                    if (!category) return null;
 
                     return (
                         <div key={origin.id} style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                             <button
-                                onClick={() => handleToggleOrigin(origin.id)}
+                                onClick={() => !isDisabled && handleToggleOrigin(origin.id)}
+                                disabled={isDisabled}
                                 style={{
                                     display: 'flex',
                                     flexDirection: 'column',
@@ -137,11 +138,12 @@ export default function Step1_OriginSelection({ data, onChange }: Step1Props) {
                                     gap: '1rem',
                                     padding: '1.5rem',
                                     border: '4px solid',
-                                    borderColor: isSelected ? '#2563eb' : '#e5e7eb',
+                                    borderColor: isDisabled ? '#e5e7eb' : (isSelected ? '#2563eb' : '#e5e7eb'),
                                     borderRadius: '12px',
-                                    backgroundColor: isSelected ? '#eff6ff' : 'white',
-                                    cursor: 'pointer',
+                                    backgroundColor: isDisabled ? '#f3f4f6' : (isSelected ? '#eff6ff' : 'white'),
+                                    cursor: isDisabled ? 'not-allowed' : 'pointer',
                                     transition: 'all 0.3s ease',
+                                    opacity: isDisabled ? 0.6 : 1,
                                     boxShadow: isSelected ? '0 4px 12px rgba(37, 99, 235, 0.3)' : '0 2px 4px rgba(0, 0, 0, 0.1)',
                                     transform: isSelected ? 'scale(1.05)' : 'scale(1)',
                                     position: 'relative'
@@ -211,14 +213,14 @@ export default function Step1_OriginSelection({ data, onChange }: Step1Props) {
                                         marginBottom: '0.25rem'
                                     }}>
                                         {origin.id === 'vigilantes' ? 'Especializaciones:' : 'Tipos:'}
-                                        {(origin.id === 'divinos' || origin.id === 'cosmicos' || origin.id === 'parahumanos') &&
+                                        {(origin.id === 'divinos' || origin.id === 'cosmicos' || origin.id === 'parahumanos' || origin.id === 'mutantes') &&
                                             <span style={{ fontSize: '0.65rem', color: '#9ca3af', marginLeft: '0.5rem' }}>(solo uno)</span>
                                         }
                                     </span>
                                     {Object.keys(category!.subtypes!)
                                         .filter(subtype => !category?.disabledSubtypes?.includes(subtype))
                                         .map(subtype => {
-                                            const isSingleSelection = origin.id === 'divinos' || origin.id === 'cosmicos' || origin.id === 'parahumanos';
+                                            const isSingleSelection = origin.id === 'divinos' || origin.id === 'cosmicos' || origin.id === 'parahumanos' || origin.id === 'mutantes';
                                             const isChecked = selectedSubtypes[origin.id]?.includes(subtype) || false;
                                             const isSelected = isSingleSelection ? (selectedSubtypes[origin.id]?.[0] === subtype) : isChecked;
 

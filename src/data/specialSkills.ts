@@ -288,7 +288,7 @@ export const SKILL_CATEGORIES = {
     knowledge: 'Conocimiento',
     social: 'Social',
     other: 'Otras',
-    exlusive: 'Exclusivas'
+    exclusive: 'Exclusivas'
 } as const;
 
 // Helper para agrupar habilidades por categoría

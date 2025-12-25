@@ -186,7 +186,6 @@ export interface SpecialtyCharacteristicModifiers {
 }
 
 export const VIGILANTE_SPECIALTY_MODIFIERS: { [key: string]: SpecialtyCharacteristicModifiers } = {
-    // Especialidades físicas
     "Acrobata": {
         agilidad: 40,
         percepcion: 20
@@ -203,6 +202,10 @@ export const VIGILANTE_SPECIALTY_MODIFIERS: { [key: string]: SpecialtyCharacteri
         agilidad: 35,
         percepcion: 30
     },
+    "Espia/Ladrón": {
+        agilidad: 35,
+        percepcion: 30
+    },
     "Artista Marcial": {
         agilidad: 50,
         percepcion: 50
@@ -211,8 +214,6 @@ export const VIGILANTE_SPECIALTY_MODIFIERS: { [key: string]: SpecialtyCharacteri
         agilidad: 50,
         percepcion: 50
     },
-
-    // Especialidades tácticas
     "Militar": {
         distributablePoints: 50  // 50 puntos para distribuir
     },
@@ -224,8 +225,6 @@ export const VIGILANTE_SPECIALTY_MODIFIERS: { [key: string]: SpecialtyCharacteri
         agilidad: 30,
         percepcion: 20
     },
-
-    // Especialidades mentales/sociales
     "Manipulador": {
         inteligencia: 30,
         apariencia: 30
@@ -233,27 +232,11 @@ export const VIGILANTE_SPECIALTY_MODIFIERS: { [key: string]: SpecialtyCharacteri
     "Mente Maestra": {
         inteligencia: 50,
     },
-
-    // Especialidades equilibradas
-    "Fanático": {
+    "Fanático/Vengador": {
         distributablePoints: 20,
         allowedCharacteristics: ['fuerza', 'constitucion', 'agilidad', 'percepcion'],
         agilidad: 30,
         percepcion: 30,
         voluntad: 10
     },
-    "Vengador": {
-        distributablePoints: 20,
-        allowedCharacteristics: ['fuerza', 'constitucion', 'agilidad', 'percepcion'],
-        agilidad: 30,
-        percepcion: 30,
-        voluntad: 10
-    },
-    "Justiciero": {
-        distributablePoints: 20,
-        allowedCharacteristics: ['fuerza', 'constitucion', 'agilidad', 'percepcion'],
-        agilidad: 30,
-        percepcion: 30,
-        voluntad: 10
-    }
 };

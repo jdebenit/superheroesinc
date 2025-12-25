@@ -119,7 +119,7 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
                 "+20 Mod. de Impacto",
                 "-20 a las tiradas de EQM cuando alguien se vaya a irse de rositas sin un buen golpe"
             ],
-            "Espadachin": [
+            "Espadachín": [
                 "+20 Habilidad a elección",
                 "+20 Mod. de Impacto",
                 "-20 a las tiradas de EQM cuando alguien se vaya a irse de rositas sin un buen golpe"
