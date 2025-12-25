@@ -235,63 +235,71 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                     </div>
                                 )}
 
-                                {/* Background */}
-                                {character.background && character.background.items.length > 0 && (
+                                {/* History & Background Section */}
+                                {(character.background?.items?.length > 0 || character.economicStatus || character.legalStatus || character.socialStatus || character.prejudiceResistance) && (
                                     <div className="sheet-section background">
                                         <div className="section-header">
                                             <h4>Historial</h4>
-                                            {character.background.cost && <span className="cost">({character.background.cost} PCs)</span>}
                                         </div>
-                                        <ul>
-                                            {character.background.items.map((item: string, i: number) => (
-                                                <li key={i}>{item}</li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                )}
 
+                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
 
-
-                                {/* Advanced Background */}
-                                {(character.economicStatus || character.legalStatus || character.socialStatus) && (
-                                    <div className="sheet-section advanced-background">
-                                        <div className="section-header">
-                                            <h4>Estatus y Sociedad</h4>
-                                        </div>
-                                        <div style={{ display: 'grid', gap: '0.5rem', fontSize: '0.9rem' }}>
-                                            {character.economicStatus && (
-                                                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                                    <span style={{ fontWeight: 'bold' }}>Economía:</span>
-                                                    <span>{ECONOMIC_STATUS.find(e => e.id === character.economicStatus)?.label}</span>
+                                            {/* Status Grid */}
+                                            {(character.economicStatus || character.legalStatus || character.socialStatus) && (
+                                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', paddingBottom: '1rem', borderBottom: '1px solid #e5e7eb' }}>
+                                                    {character.economicStatus && (
+                                                        <div>
+                                                            <span style={{ display: 'block', fontSize: '0.75rem', color: '#6b7280', fontWeight: 'bold' }}>POSICIÓN ECONÓMICA</span>
+                                                            <span style={{ fontSize: '0.9rem', color: '#1f2937' }}>{ECONOMIC_STATUS.find(e => e.id === character.economicStatus)?.label}</span>
+                                                        </div>
+                                                    )}
+                                                    {character.legalStatus && (
+                                                        <div>
+                                                            <span style={{ display: 'block', fontSize: '0.75rem', color: '#6b7280', fontWeight: 'bold' }}>SITUACIÓN LEGAL</span>
+                                                            <span style={{ fontSize: '0.9rem', color: '#1f2937' }}>{LEGAL_STATUS.find(l => l.id === character.legalStatus)?.label}</span>
+                                                        </div>
+                                                    )}
+                                                    {character.socialStatus && (
+                                                        <div>
+                                                            <span style={{ display: 'block', fontSize: '0.75rem', color: '#6b7280', fontWeight: 'bold' }}>POSICIÓN SOCIAL</span>
+                                                            <span style={{ fontSize: '0.9rem', color: '#1f2937' }}>{SOCIAL_STATUS.find(s => s.id === character.socialStatus)?.label}</span>
+                                                        </div>
+                                                    )}
                                                 </div>
                                             )}
-                                            {character.legalStatus && (
-                                                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                                    <span style={{ fontWeight: 'bold' }}>Legal:</span>
-                                                    <span>{LEGAL_STATUS.find(l => l.id === character.legalStatus)?.label}</span>
-                                                </div>
-                                            )}
-                                            {character.socialStatus && (
-                                                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                                    <span style={{ fontWeight: 'bold' }}>Social:</span>
-                                                    <span>{SOCIAL_STATUS.find(s => s.id === character.socialStatus)?.label}</span>
-                                                </div>
-                                            )}
-                                        </div>
-                                    </div>
-                                )}
 
-                                {/* Prejudice Resistance */}
-                                {character.prejudiceResistance && (
-                                    <div className="sheet-section resistance">
-                                        <div className="section-header">
-                                            <h4>Resistencia a Prejuicios</h4>
-                                            <span className="cost">
-                                                ({((character.prejudiceResistance - 50) * 0.1).toFixed(1)} PCs)
-                                            </span>
-                                        </div>
-                                        <div style={{ fontSize: '1.2rem', fontWeight: 'bold', padding: '0.5rem 0' }}>
-                                            Valor: {character.prejudiceResistance}%
+                                            {/* Background Items */}
+                                            {character.background?.items?.length > 0 && (
+                                                <div>
+                                                    <span style={{ display: 'block', fontSize: '0.75rem', color: '#6b7280', fontWeight: 'bold', marginBottom: '0.5rem' }}>NOTAS DE TRASFONDO</span>
+                                                    <ul style={{ margin: 0, paddingLeft: '1.2rem', color: '#374151', fontSize: '0.9rem' }}>
+                                                        {character.background.items.map((item: string, i: number) => (
+                                                            <li key={i}>{item}</li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                            )}
+
+                                            {/* Prejudice Resistance */}
+                                            {character.prejudiceResistance && (
+                                                <div style={{
+                                                    display: 'flex',
+                                                    justifyContent: 'space-between',
+                                                    alignItems: 'center',
+                                                    backgroundColor: '#eff6ff',
+                                                    padding: '0.75rem',
+                                                    borderRadius: '6px',
+                                                    border: '1px solid #bfdbfe'
+                                                }}>
+                                                    <div>
+                                                        <span style={{ display: 'block', fontSize: '0.75rem', color: '#1e40af', fontWeight: 'bold' }}>RESISTENCIA A PREJUICIOS</span>
+                                                        <span style={{ fontSize: '1.1rem', fontWeight: 'bold', color: '#1e3a8a' }}>{character.prejudiceResistance}%</span>
+                                                    </div>
+                                                    <span style={{ fontSize: '0.85rem', color: '#3b82f6', fontWeight: 'bold' }}>
+                                                        ({((character.prejudiceResistance - 50) * 0.1).toFixed(1)} PCs)
+                                                    </span>
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
                                 )}
