@@ -737,14 +737,27 @@ export function calculateSpecialSkillsPC(
  * - La Inteligencia otorga habilidades gratuitas extra (101-120: 1, 121-140: 2, 141-160: 3, 161+: 4)
  */
 export function calculateSpecialSkillsPCWithInt(
-    selectedSkills: { [skillId: string]: { isFree: boolean } } = {},
-    specifiedSkills: { [uniqueId: string]: { isFree: boolean } } = {},
+    selectedSkills: { [skillId: string]: { isFree: boolean; manualBases?: number } } = {},
+    specifiedSkills: { [uniqueId: string]: { skillId: string; isFree: boolean; manualBases?: number; specification?: string } } = {},
     origins: any[] = [],
     attributes: { [key: string]: number } = {}
 ): { totalSkills: number; freeSkills: number; paidSkills: number; intBonusSkills: number; totalPC: number } {
     let totalSkills = 0;
     let freeSkillsByOrigin = 0;
     let potentiallyPaidSkills = 0;
+    let baseIncreaseCost = 0;
+
+    // Normalize stats for base calculation
+    const stats: { [key: string]: number } = {
+        fuerza: 0, constitucion: 0, agilidad: 0, inteligencia: 0,
+        percepcion: 0, apariencia: 0, voluntad: 0
+    };
+    if (attributes) {
+        Object.keys(attributes).forEach(key => {
+            const normalizedKey = key.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            stats[normalizedKey] = attributes[key] || 0;
+        });
+    }
 
     // 1. Detectar si es Liberado (0.5 PC por habilidad)
     let isLiberado = false;
@@ -761,12 +774,23 @@ export function calculateSpecialSkillsPCWithInt(
     const costPerSkill = isLiberado ? 0.5 : 1.0;
 
     // 2. Contar habilidades estándar
-    Object.values(selectedSkills).forEach(skill => {
+    Object.entries(selectedSkills).forEach(([skillId, skill]) => {
         totalSkills++;
         if (skill.isFree) {
             freeSkillsByOrigin++;
         } else {
             potentiallyPaidSkills++;
+        }
+
+        // Calculate Base Cost
+        if (skill.manualBases) {
+            const skillDef = SPECIAL_SKILLS.find(s => s.id === skillId);
+            if (skillDef?.formula) {
+                const calculatedBase = Math.floor(skillDef.formula(stats)) || 0;
+                if (skill.manualBases > calculatedBase) {
+                    baseIncreaseCost += (skill.manualBases - calculatedBase) * 0.1;
+                }
+            }
         }
     });
 
@@ -777,6 +801,17 @@ export function calculateSpecialSkillsPCWithInt(
             freeSkillsByOrigin++;
         } else {
             potentiallyPaidSkills++;
+        }
+
+        // Calculate Base Cost
+        if (skill.manualBases) {
+            const skillDef = SPECIAL_SKILLS.find(s => s.id === skill.skillId);
+            if (skillDef?.formula) {
+                const calculatedBase = Math.floor(skillDef.formula(stats)) || 0;
+                if (skill.manualBases > calculatedBase) {
+                    baseIncreaseCost += (skill.manualBases - calculatedBase) * 0.1;
+                }
+            }
         }
     });
 
@@ -791,7 +826,7 @@ export function calculateSpecialSkillsPCWithInt(
 
     // 5. Aplicar bonificación a las habilidades pagadas
     const paidSkills = Math.max(0, potentiallyPaidSkills - intBonusSkills);
-    const totalPC = paidSkills * costPerSkill;
+    const totalPC = (paidSkills * costPerSkill) + baseIncreaseCost;
 
     // Total habilidades gratuitas (Origen + Bonus INT usado)
     const bonusUsed = Math.min(potentiallyPaidSkills, intBonusSkills);
