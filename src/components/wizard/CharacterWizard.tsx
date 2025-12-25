@@ -8,6 +8,7 @@ import Step5_Background from './steps/Step5_Background';
 import Step6_Details from './steps/Step6_Details';
 import { calculateOriginCost } from '../../data/originCosts.ts';
 import { calculateCreationPoints, calculateGeneralSkillValues, calculateSpecialSkillsPCWithInt } from '../../utils/characterCalculations';
+import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS } from '../../data/backgroundTables';
 
 const STEPS = [
     { id: 1, name: 'Origen', icon: '🎭' },
@@ -66,6 +67,10 @@ const initialCharacterState = {
     },
     specialskills: { items: [] },
     background: { items: [] },
+    prejudiceResistance: 50,
+    economicStatus: 'clase_media',
+    legalStatus: 'sin_antecedentes',
+    socialStatus: 'anonimo',
     equipment: { items: [] },
     weapons: { items: [] }
 };
@@ -109,7 +114,18 @@ export default function CharacterWizard() {
         );
         total += specialSkillsPC.totalPC;
 
-        // TODO: Añadir costes de otros pasos cuando estén implementados
+        // 5. Coste de Resistencia a Prejuicios
+        // (Valor - 50) * 0.1
+        const prejudiceCost = ((character.prejudiceResistance || 50) - 50) * 0.1;
+        total += prejudiceCost;
+
+        // 6. Coste de Estatus (Económico, Legal, Social)
+        const economicCost = ECONOMIC_STATUS.find(e => e.id === character.economicStatus)?.cost || 0;
+        const legalCost = LEGAL_STATUS.find(l => l.id === character.legalStatus)?.cost || 0;
+        const socialCost = SOCIAL_STATUS.find(s => s.id === character.socialStatus)?.cost || 0;
+
+        total += economicCost + legalCost + socialCost;
+
         return total.toFixed(1); // Devolver con decimales
     }, [character]);
 

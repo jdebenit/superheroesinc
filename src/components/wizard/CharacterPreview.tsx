@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS } from '../../data/backgroundTables';
 
 interface CharacterPreviewProps {
     character: any;
@@ -246,6 +247,52 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                 <li key={i}>{item}</li>
                                             ))}
                                         </ul>
+                                    </div>
+                                )}
+
+
+
+                                {/* Advanced Background */}
+                                {(character.economicStatus || character.legalStatus || character.socialStatus) && (
+                                    <div className="sheet-section advanced-background">
+                                        <div className="section-header">
+                                            <h4>Estatus y Sociedad</h4>
+                                        </div>
+                                        <div style={{ display: 'grid', gap: '0.5rem', fontSize: '0.9rem' }}>
+                                            {character.economicStatus && (
+                                                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                                    <span style={{ fontWeight: 'bold' }}>Economía:</span>
+                                                    <span>{ECONOMIC_STATUS.find(e => e.id === character.economicStatus)?.label}</span>
+                                                </div>
+                                            )}
+                                            {character.legalStatus && (
+                                                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                                    <span style={{ fontWeight: 'bold' }}>Legal:</span>
+                                                    <span>{LEGAL_STATUS.find(l => l.id === character.legalStatus)?.label}</span>
+                                                </div>
+                                            )}
+                                            {character.socialStatus && (
+                                                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                                    <span style={{ fontWeight: 'bold' }}>Social:</span>
+                                                    <span>{SOCIAL_STATUS.find(s => s.id === character.socialStatus)?.label}</span>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* Prejudice Resistance */}
+                                {character.prejudiceResistance && (
+                                    <div className="sheet-section resistance">
+                                        <div className="section-header">
+                                            <h4>Resistencia a Prejuicios</h4>
+                                            <span className="cost">
+                                                ({((character.prejudiceResistance - 50) * 0.1).toFixed(1)} PCs)
+                                            </span>
+                                        </div>
+                                        <div style={{ fontSize: '1.2rem', fontWeight: 'bold', padding: '0.5rem 0' }}>
+                                            Valor: {character.prejudiceResistance}%
+                                        </div>
                                     </div>
                                 )}
 
