@@ -130,7 +130,7 @@ export default function Step6_Details({ data, onChange }: Step6Props) {
             {/* IDENTITY SECTION */}
             <div style={sectionStyle}>
                 <h3 style={titleStyle}>👤 Identidad</h3>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginBottom: '1.5rem' }}>
                     <div>
                         <label style={labelStyle}>Nombre del Personaje</label>
                         <input
@@ -149,6 +149,28 @@ export default function Step6_Details({ data, onChange }: Step6Props) {
                             onChange={(e) => updateField('alias', e.target.value)}
                             style={inputStyle}
                             placeholder="Ej: Prototype"
+                        />
+                    </div>
+                </div>
+                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginBottom: '1.5rem' }}>
+                     <div>
+                        <label style={labelStyle}>Profesión</label>
+                        <input
+                            type="text"
+                            value={data.profession || ''}
+                            onChange={(e) => updateField('profession', e.target.value)}
+                            style={inputStyle}
+                            placeholder="Ej: Periodista, Mecánico..."
+                        />
+                    </div>
+                    <div>
+                        <label style={labelStyle}>Identidad Sexual</label>
+                        <input
+                            type="text"
+                            value={data.sexualIdentity || ''}
+                            onChange={(e) => updateField('sexualIdentity', e.target.value)}
+                            style={inputStyle}
+                            placeholder="Ej: Heterosexual, Bisexual..."
                         />
                     </div>
                 </div>
