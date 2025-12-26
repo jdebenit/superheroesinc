@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { POWERS, type Power, type PowerType } from '../data/powers';
 
-const ORIGINS = ["Todos", "Mutante", "Guardian", "Vampírico", "Cósmico", "Divino", "Thals", "Sobrenatural"];
+const ORIGINS = ["Todos", "Alterado", "Mutante", "Guardian", "Vampírico", "Cósmico", "Divino", "Thals", "Sobrenatural"];
 const POWER_TYPES = ["Todos", "Físico", "Psíquico", "Energético"];
 
 export default function PowerList() {
