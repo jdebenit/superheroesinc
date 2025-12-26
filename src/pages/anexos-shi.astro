@@ -3,14 +3,16 @@ import Layout from "../layouts/Layout.astro";
 
 const anexos = [
     {
-        title: "Documentos Clasificados",
-        description: "Archivos recuperados de operaciones anteriores.",
+        title: "Bienvenidos a Paraiso - Documentos Clasificados",
+        description: "Mapa de base de operaciones.",
+        source: "Superheroes INC. Tercera Edición",
         icon: "📂",
         link: "/anexos/anexo_shi.png",
     },
     {
-        title: "Mapas de Operaciones",
-        description: "Cartografía detallada de las zonas de conflicto.",
+        title: "Bienvenidos a Paraiso - Mapas de Operaciones",
+        source: "Superheroes INC. Tercera Edición",
+        description: "Cartografía detallada de la zona de conflicto.",
         icon: "🗺️",
         link: "/anexos/Paraiso_actualidad.jpg",
     },
@@ -60,7 +62,6 @@ const anexos = [
 
     .page-title {
         font-size: 3.5rem;
-        text-align: center;
         margin-bottom: 1rem;
         color: var(--color-secondary);
         text-shadow: 3px 3px 0px var(--color-primary);
@@ -69,10 +70,9 @@ const anexos = [
     }
 
     .intro-text {
-        text-align: center;
         font-size: 1.2rem;
         margin-bottom: 3rem;
-        max-width: 600px;
+        max-width: 1000px;
         margin-left: auto;
         margin-right: auto;
     }
