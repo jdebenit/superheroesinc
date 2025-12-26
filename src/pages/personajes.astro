@@ -70,7 +70,6 @@ const characters = (await getCollection("characters")).sort((a, b) =>
 <style>
   .characters-page {
     padding: var(--spacing-2xl) var(--spacing-lg);
-    text-align: center;
     max-width: 1400px;
     margin: 0 auto;
   }
@@ -78,8 +77,10 @@ const characters = (await getCollection("characters")).sort((a, b) =>
   .page-title {
     font-size: var(--text-5xl);
     font-weight: 800;
+    text-align: center;
     margin-bottom: var(--spacing-md);
     color: var(--color-secondary);
+    text-shadow: 3px 3px 0px var(--color-primary);
   }
 
   .intro-text {
