@@ -150,7 +150,7 @@ export default function PowerList() {
             <table className="range-table info-table">
               <thead>
                 <tr>
-                  <th>1d100</th>
+                  <th>Valor</th>
                   <th>Coste (PC)</th>
                   <th>Rango</th>
                 </tr>
