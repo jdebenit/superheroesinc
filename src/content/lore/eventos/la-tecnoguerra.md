@@ -1,6 +1,6 @@
 ---
 title: La TecnoGuerra
-description: Supergrupo oficial de la Unión Europea, formado por algunos de los héroes más poderosos del continente. Fue disuelto tras la TecnoGuerra.
+description: La TecnoGuerra fue el mayor colapso tecnológico y militar de la historia reciente de Europa.
 category: eventos
 source: Superhéroes INC. Tercera Edición
 updatedDate: 2025-12-04
