@@ -101,9 +101,12 @@ const fullTitle = `${title} | Superheroes INC.`;
 	</head>
 	<body>
 		<div class="stamp-top-secret">TOP SECRET</div>
+		<a href="#main-content" class="skip-link"
+			>Saltar al contenido principal</a
+		>
 		<Navbar />
 		<Breadcrumbs />
-		<main>
+		<main id="main-content">
 			<slot />
 		</main>
 		<Footer />
@@ -120,5 +123,20 @@ const fullTitle = `${title} | Superheroes INC.`;
 	main {
 		min-height: 80vh;
 		padding: 2rem 0;
+	}
+
+	.skip-link {
+		position: absolute;
+		top: -40px;
+		left: 0;
+		background: var(--color-primary);
+		color: white;
+		padding: 8px;
+		z-index: 100;
+		transition: top 0.3s;
+	}
+
+	.skip-link:focus {
+		top: 0;
 	}
 </style>

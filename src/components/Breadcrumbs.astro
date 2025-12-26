@@ -5,13 +5,15 @@ const parts = [
         label: "Inicio",
         href: "/",
         "aria-label": "Ir a la página de inicio",
-        "aria-current": undefined,
+        "aria-current": undefined as "page" | undefined,
     },
     ...paths.map((part, i) => ({
         label: part.replace(/-/g, " ").toUpperCase(),
         href: `/${paths.slice(0, i + 1).join("/")}`,
         "aria-label": undefined,
-        "aria-current": i === paths.length - 1 ? "page" : undefined,
+        "aria-current": (i === paths.length - 1 ? "page" : undefined) as
+            | "page"
+            | undefined,
     })),
 ];
 ---
@@ -36,6 +38,23 @@ const parts = [
         }
     </ol>
 </nav>
+
+<script
+    type="application/ld+json"
+    set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: parts.map((part, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            name: part.label,
+            item:
+                index < parts.length - 1
+                    ? new URL(part.href, Astro.site)
+                    : undefined,
+        })),
+    })}
+/>
 
 <style>
     .breadcrumbs {

@@ -1,6 +1,6 @@
 ---
 title: El Vigilante no es un atajo
-pubDate: 2025-12-26
+pubDate: 2025-12-25
 description: El Vigilante no es un origen para ganar características, es una decisión para cargar con consecuencias.
 author: Jorge Francisco de Benito Montoya
 tags:
