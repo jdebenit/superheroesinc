@@ -15,7 +15,7 @@ const resources = [
     description:
       "Expansión para el juego de rol español de superhéroes por antonomasia. Descubre los secretos de la magia y lo oculto.",
     link: "https://suseyaediciones.com/producto/heroe-agenda-sobrenaturales-y-arcanos/",
-    type: "Suplemento",
+    type: "Libro oficial",
     icon: "📚",
   },
   {
@@ -37,7 +37,7 @@ const resources = [
     title: "Superheroes INC. Tercera Edición",
     description: "Libro básico para jugar Superheroes INC.",
     link: "https://suseyaediciones.com/producto/superheroes-inc-3a/",
-    type: "Libro básico",
+    type: "Libro oficial",
     icon: "📚",
   },
 ];
@@ -68,10 +68,21 @@ const oldresources = [
       Material oficial para enriquecer tus partidas de Superheroes INC.
     </p>
 
+    <div class="filters">
+      <button class="filter-btn active" data-filter="all">Todos</button>
+      {
+        [...new Set(resources.map((r) => r.type))].map((type) => (
+          <button class="filter-btn" data-filter={type}>
+            {type}
+          </button>
+        ))
+      }
+    </div>
+
     <div class="resources-list">
       {
         resources.map((resource) => (
-          <div class="resource-item">
+          <div class="resource-item" data-type={resource.type}>
             <div class="resource-icon">{resource.icon}</div>
             <div class="resource-content">
               <div class="resource-header">
@@ -95,6 +106,31 @@ const oldresources = [
   </section>
 </Layout>
 
+<script>
+  const filterBtns = document.querySelectorAll(".filter-btn");
+  const resourceItems = document.querySelectorAll(".resource-item");
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      // Remove active class from all buttons
+      filterBtns.forEach((b) => b.classList.remove("active"));
+      // Add active class to clicked button
+      btn.classList.add("active");
+
+      const filterValue = btn.getAttribute("data-filter");
+
+      resourceItems.forEach((item) => {
+        const itemType = item.getAttribute("data-type");
+        if (filterValue === "all" || filterValue === itemType) {
+          (item as HTMLElement).style.display = "flex";
+        } else {
+          (item as HTMLElement).style.display = "none";
+        }
+      });
+    });
+  });
+</script>
+
 <style>
   .resources-page {
     padding: 2rem 0;
@@ -116,6 +152,33 @@ const oldresources = [
     margin-bottom: 3rem;
   }
 
+  .filters {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    background: transparent;
+    border: 2px solid var(--color-secondary);
+    padding: 0.5rem 1.5rem;
+    font-family: var(--font-comic);
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--color-text);
+  }
+
+  .filter-btn:hover,
+  .filter-btn.active {
+    background: var(--color-secondary);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 4px 4px 0px var(--color-primary);
+  }
+
   .resources-list {
     display: flex;
     flex-direction: column;
@@ -130,6 +193,10 @@ const oldresources = [
     padding: 2rem;
     box-shadow: 8px 8px 0px var(--color-secondary);
     transition: transform 0.2s;
+  }
+
+  .resource-item[style*="display: none"] {
+    display: none !important;
   }
 
   .resource-item:hover {
