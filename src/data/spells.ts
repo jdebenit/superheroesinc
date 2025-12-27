@@ -71,7 +71,7 @@ export const SPELLS: Spell[] = [
         name: "Curación",
         cost: "50",
         requirements: "No especificado",
-        maxRank: 1,
+        maxRank: 5,
         hasRequirements: false
     },
     {
@@ -79,7 +79,7 @@ export const SPELLS: Spell[] = [
         name: "Encantar Objetos",
         cost: "50",
         requirements: "No especificado",
-        maxRank: 1,
+        maxRank: 10,
         hasRequirements: false
     },
     {
@@ -95,7 +95,7 @@ export const SPELLS: Spell[] = [
         name: "Escudos Místicos",
         cost: "25",
         requirements: "No especificado",
-        maxRank: 1,
+        maxRank: 10,
         hasRequirements: false
     },
     {
@@ -135,7 +135,7 @@ export const SPELLS: Spell[] = [
         name: "Invocar Espíritu Totémico",
         cost: "35",
         requirements: "No especificado",
-        maxRank: 1,
+        maxRank: 10,
         hasRequirements: false
     },
     {
@@ -143,7 +143,7 @@ export const SPELLS: Spell[] = [
         name: "Levitar",
         cost: "25",
         requirements: "No especificado",
-        maxRank: 1,
+        maxRank: 5,
         hasRequirements: false
     },
     {
@@ -167,7 +167,7 @@ export const SPELLS: Spell[] = [
         name: "Metamorfosis Oscura",
         cost: "85",
         requirements: "No especificado",
-        maxRank: 1,
+        maxRank: 5,
         hasRequirements: false
     },
     {
@@ -199,7 +199,7 @@ export const SPELLS: Spell[] = [
         name: "Proyección de Energía Mágica",
         cost: "25",
         requirements: "No especificado",
-        maxRank: 1,
+        maxRank: 10,
         hasRequirements: false
     },
     {
@@ -207,7 +207,7 @@ export const SPELLS: Spell[] = [
         name: "Proyección del Cuerpo Astral",
         cost: "75",
         requirements: "No especificado",
-        maxRank: 1,
+        maxRank: 5,
         hasRequirements: false
     },
     {
@@ -215,7 +215,7 @@ export const SPELLS: Spell[] = [
         name: "Pseudo Psi",
         cost: "35",
         requirements: "No especificado",
-        maxRank: 1,
+        maxRank: 4,
         hasRequirements: false
     },
     {
