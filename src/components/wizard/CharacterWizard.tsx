@@ -9,6 +9,7 @@ import Step6_Details from './steps/Step6_Details';
 import { calculateOriginCost } from '../../data/originCosts.ts';
 import { calculateCreationPoints, calculateGeneralSkillValues, calculateSpecialSkillsPCWithInt } from '../../utils/characterCalculations';
 import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS } from '../../data/backgroundTables';
+import { SPELLS } from '../../data/spells';
 
 const STEPS = [
     { id: 1, name: 'Origen', icon: '🎭' },
@@ -72,7 +73,8 @@ const initialCharacterState = {
     legalStatus: 'sin_antecedentes',
     socialStatus: 'anonimo',
     equipment: { items: [] },
-    weapons: { items: [] }
+    weapons: { items: [] },
+    spells: { selected: [] }
 };
 
 export default function CharacterWizard() {
@@ -125,6 +127,25 @@ export default function CharacterWizard() {
         const socialCost = SOCIAL_STATUS.find(s => s.id === character.socialStatus)?.cost || 0;
 
         total += economicCost + legalCost + socialCost;
+
+        // 7. Coste de Exceso de Magia (EM)
+        // Por cada 1 punto de EM que se pase del total disponible: +0.1 PC
+        const int = character.attributes?.values?.['Inteligencia'] || 0;
+        const per = character.attributes?.values?.['Percepción'] || 0;
+        const vol = character.attributes?.values?.['Voluntad'] || 0;
+        const maxEM = int + per + vol;
+
+        const selectedMsgIds = character.spells?.selected || [];
+        // Need to fetch spell costs. Since SPELLS is not in scope, I need to import it.
+        // Assuming SPELLS is imported at the top.
+        const spellCost = selectedMsgIds.reduce((acc: number, id: string) => {
+            const s = SPELLS.find((sp: any) => sp.id === id);
+            return acc + (s ? (parseInt(s.cost, 10) || 0) : 0);
+        }, 0);
+
+        if (spellCost > maxEM) {
+            total += (spellCost - maxEM) * 0.1;
+        }
 
         return total.toFixed(1); // Devolver con decimales
     }, [character]);

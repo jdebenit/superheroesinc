@@ -31,9 +31,9 @@ const getCharacteristicValue = (data: any, charName: string) => {
 };
 
 const calculateEM = (data: any) => {
-    const int = getCharacteristicValue(data, 'Inteligencia');
-    const per = getCharacteristicValue(data, 'Percepción');
-    const vol = getCharacteristicValue(data, 'Voluntad');
+    const int = Number(getCharacteristicValue(data, 'Inteligencia')) || 0;
+    const per = Number(getCharacteristicValue(data, 'Percepción')) || 0;
+    const vol = Number(getCharacteristicValue(data, 'Voluntad')) || 0;
     return int + per + vol;
 };
 
@@ -170,10 +170,6 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                     <div className="p-6 border-b-4 border-gray-800 bg-white flex flex-col md:flex-row justify-between items-center gap-4">
 
                         <div className="flex flex-col sm:flex-row items-center gap-4">
-                            <div className="flex -space-x-4">
-                                {isGuardian && <img src={ORIGIN_ICONS['Guardián']} alt="Guardian" className="w-16 h-16 object-contain z-10 rounded-full border-2 border-white bg-blue-100" />}
-                                {isAlterado && <img src={ORIGIN_ICONS['Alterado']} alt="Alterado" className="w-16 h-16 object-contain z-0 rounded-full border-2 border-white bg-purple-100" />}
-                            </div>
                             <div>
                                 <h3 className="text-2xl font-black text-gray-800 uppercase italic font-comic text-center sm:text-left">Poderes Especiales</h3>
                                 <p className="text-sm font-bold text-gray-400 text-center sm:text-left">Habilidades de origen</p>
@@ -194,40 +190,124 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                         </div>
                     </div>
 
-                    <div className="p-6 bg-gray-100/50">
+                    <div style={{
+                        backgroundColor: 'white',
+                        borderRadius: '12px',
+                        boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                        overflow: 'hidden',
+                        border: '1px solid #e5e7eb',
+                        marginBottom: '3rem'
+                    }}>
                         {selectedPowers.length > 0 ? (
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                {selectedPowers.map((selection, idx) => {
-                                    const p = POWERS.find(power => power.id === selection.id);
-                                    if (!p) return null;
+                            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                                <thead style={{ backgroundColor: '#f9fafb', borderBottom: '2px solid #e5e7eb' }}>
+                                    <tr>
+                                        <th style={{ padding: '1rem', textAlign: 'left', color: '#374151' }}>Poder</th>
+                                        <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>PCs</th>
+                                        <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Tipo</th>
+                                        <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Origen</th>
+                                        <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {selectedPowers.map((selection, idx) => {
+                                        const p = POWERS.find(power => power.id === selection.id);
+                                        if (!p) return null;
+                                        const isEven = idx % 2 === 0;
 
-                                    return (
-                                        <div key={`${selection.id}-${selection.origin}-${idx}`} className="bg-white p-4 rounded-lg border-2 border-gray-300 shadow-sm flex flex-col gap-2 group hover:border-gray-500 transition-colors">
-                                            <div className="flex justify-between items-start">
-                                                <span className="font-bold text-gray-800 text-lg group-hover:text-black font-comic leading-tight">{p.name}</span>
-                                                <span className="text-xs bg-gray-200 text-gray-700 px-2 py-1 rounded font-mono font-bold border border-gray-300 ml-2 whitespace-nowrap">
-                                                    {p.formula} PC
-                                                </span>
-                                            </div>
-
-                                            <div className="flex gap-1 flex-wrap mt-1">
-                                                {selection.origin === 'Guardian' && (
-                                                    <span className="text-[10px] uppercase font-black tracking-wider bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full border border-blue-200">
-                                                        Guardián
-                                                    </span>
-                                                )}
-                                                {selection.origin === 'Alterado' && (
-                                                    <span className="text-[10px] uppercase font-black tracking-wider bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full border border-purple-200">
-                                                        Alterado
-                                                    </span>
-                                                )}
-                                            </div>
-                                        </div>
-                                    );
-                                })}
-                            </div>
+                                        return (
+                                            <tr key={`${selection.id}-${selection.origin}-${idx}`} style={{ backgroundColor: isEven ? 'white' : '#f9fafb' }}>
+                                                <td style={{ padding: '1rem', fontWeight: 'bold', color: '#1f2937' }}>
+                                                    {p.name}
+                                                </td>
+                                                <td style={{ padding: '0.75rem', textAlign: 'center', color: '#6b7280', fontSize: '0.875rem', fontFamily: 'monospace' }}>
+                                                    {p.formula}
+                                                </td>
+                                                <td style={{ padding: '0.75rem', textAlign: 'center' }}>
+                                                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px', justifyContent: 'center' }}>
+                                                        {p.types.map(t => (
+                                                            <span key={t} style={{
+                                                                fontSize: '10px',
+                                                                textTransform: 'uppercase',
+                                                                fontWeight: 'bold',
+                                                                backgroundColor: '#eef2ff',
+                                                                color: '#4f46e5',
+                                                                padding: '2px 8px',
+                                                                borderRadius: '4px',
+                                                                border: '1px solid #e0e7ff'
+                                                            }}>
+                                                                {t}
+                                                            </span>
+                                                        ))}
+                                                    </div>
+                                                </td>
+                                                <td style={{ padding: '0.75rem', textAlign: 'center' }}>
+                                                    {selection.origin === 'Guardian' && (
+                                                        <span style={{
+                                                            fontSize: '10px',
+                                                            textTransform: 'uppercase',
+                                                            fontWeight: '900',
+                                                            letterSpacing: '0.05em',
+                                                            backgroundColor: '#dbeafe',
+                                                            color: '#1d4ed8',
+                                                            padding: '2px 8px',
+                                                            borderRadius: '9999px',
+                                                            border: '1px solid #bfdbfe'
+                                                        }}>
+                                                            Guardián
+                                                        </span>
+                                                    )}
+                                                    {selection.origin === 'Alterado' && (
+                                                        <span style={{
+                                                            fontSize: '10px',
+                                                            textTransform: 'uppercase',
+                                                            fontWeight: '900',
+                                                            letterSpacing: '0.05em',
+                                                            backgroundColor: '#f3e8ff',
+                                                            color: '#7e22ce',
+                                                            padding: '2px 8px',
+                                                            borderRadius: '9999px',
+                                                            border: '1px solid #e9d5ff'
+                                                        }}>
+                                                            Alterado
+                                                        </span>
+                                                    )}
+                                                </td>
+                                                <td style={{ padding: '0.75rem', textAlign: 'center' }}>
+                                                    <button
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            const newSelected = [...selectedPowers];
+                                                            newSelected.splice(idx, 1);
+                                                            updatePowers(newSelected);
+                                                        }}
+                                                        style={{
+                                                            color: '#ef4444',
+                                                            padding: '8px',
+                                                            borderRadius: '9999px',
+                                                            border: 'none',
+                                                            background: 'transparent',
+                                                            cursor: 'pointer',
+                                                            display: 'inline-flex',
+                                                            alignItems: 'center',
+                                                            justifyContent: 'center'
+                                                        }}
+                                                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#fef2f2'}
+                                                        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+                                                        title="Eliminar poder"
+                                                    >
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                                            <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                                                        </svg>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        );
+                                    })}
+                                </tbody>
+                            </table>
                         ) : (
-                            <div className="text-center py-8 text-gray-400 font-bold italic border-2 border-dashed border-gray-300 rounded-lg">
+                            <div style={{ textAlign: 'center', padding: '3rem', color: '#9ca3af', fontWeight: 'bold', fontStyle: 'italic' }}>
                                 No hay poderes seleccionados
                             </div>
                         )}
@@ -242,42 +322,148 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                     <div className="bg-indigo-50 border-4 border-indigo-600 rounded-xl overflow-hidden shadow-[8px_8px_0px_#4f46e5]">
                         <div className="p-6 border-b-4 border-indigo-600 bg-white flex flex-col sm:flex-row justify-between items-center gap-4">
                             <div className="flex items-center gap-4">
-                                <img src={ORIGIN_ICONS['Arcano']} alt="Arcano" className="w-16 h-16 object-contain" />
                                 <div>
-                                    <h3 className="text-2xl font-black text-indigo-900 uppercase italic font-comic">Artes Mágicas</h3>
+                                    <h3 className="text-2xl font-black text-indigo-900 uppercase italic font-comic">Magia</h3>
                                     <p className="text-sm font-bold text-indigo-400">Canalización de Energía</p>
                                 </div>
                             </div>
-
-                            <div className="flex items-center gap-3 bg-indigo-50 px-4 py-2 rounded-lg border-2 border-indigo-100">
-                                <span className="text-xs font-black text-indigo-500 uppercase tracking-wider">Reserva de Energía (EM)</span>
-                                <span className="text-2xl font-black text-indigo-700">{calculateEM(data)}</span>
-                            </div>
+                            {/* Old EM display removed */}
                         </div>
 
                         <div className="p-6 bg-indigo-50/50">
-                            <div className="mb-6">
-                                <button onClick={openSpellModal} className="w-full sm:w-auto pixel-button bg-indigo-600 text-white hover:bg-indigo-700">
-                                    + Abrir Libro de Hechizos
+                            <div style={{
+                                marginBottom: '1.5rem',
+                                display: 'flex',
+                                flexDirection: 'row',
+                                gap: '1rem',
+                                alignItems: 'flex-start'
+                            }}>
+                                <button onClick={openSpellModal} className="pixel-button bg-indigo-600 text-white hover:bg-indigo-700 whitespace-nowrap px-4 py-2">
+                                    + Abrir Lista de Hechizos
                                 </button>
+
+                                {/* Counter Box - Step 4 Style */}
+                                <div style={{
+                                    backgroundColor: '#eef2ff',
+                                    border: '2px solid #6366f1',
+                                    borderRadius: '8px',
+                                    padding: '1rem',
+                                    flex: 1
+                                }}>
+                                    {(() => {
+                                        const totalCost = selectedSpells.reduce((acc, s) => acc + (parseInt(s.cost, 10) || 0), 0);
+                                        const maxEM = calculateEM(data);
+                                        const isOver = totalCost > maxEM;
+                                        const extraPC = isOver ? ((totalCost - maxEM) * 0.1).toFixed(1) : '0.0';
+
+                                        return (
+                                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+                                                <span style={{ fontSize: '1.125rem', fontWeight: 'bold' }}>
+                                                    Uso de Energía Mágica
+                                                </span>
+                                                <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
+                                                    <span style={{ fontSize: '1.125rem' }}>
+                                                        <span style={{ fontSize: '1.5rem', fontWeight: 'bold', color: isOver ? '#ef4444' : '#6366f1' }}>
+                                                            {totalCost}
+                                                        </span>
+                                                        <span style={{ color: '#9ca3af', margin: '0 0.25rem' }}>/</span>
+                                                        <span style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#4b5563' }}>
+                                                            {maxEM}
+                                                        </span>
+                                                        <span style={{ fontSize: '0.875rem', color: '#6366f1', marginLeft: '0.25rem', fontWeight: 'bold' }}>
+                                                            EM
+                                                        </span>
+                                                    </span>
+                                                    {isOver && (
+                                                        <span style={{ fontSize: '1.125rem', fontWeight: 'bold', color: '#ef4444' }}>
+                                                            Coste Extra: +{extraPC} PC
+                                                        </span>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        );
+                                    })()}
+                                </div>
                             </div>
 
                             {selectedSpells.length > 0 ? (
-                                <div className="grid grid-cols-1 gap-3">
-                                    {selectedSpells.map(s => (
-                                        <div key={s.id} className="bg-white p-4 rounded-lg border-2 border-indigo-200 shadow-sm flex flex-col sm:flex-row justify-between sm:items-center gap-3 group hover:border-indigo-400 transition-colors">
-                                            <div className="flex flex-col">
-                                                <span className="font-bold text-gray-800 text-lg group-hover:text-indigo-700 font-comic">{s.name}</span>
-                                                <span className="text-xs text-gray-500 font-semibold">{s.requirements !== "No especificado" ? `Req: ${s.requirements}` : "Sin requisitos previos"}</span>
-                                            </div>
-                                            <span className="text-sm font-bold bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full whitespace-nowrap border border-indigo-200">
-                                                Coste: {s.cost}
-                                            </span>
-                                        </div>
-                                    ))}
+                                <div style={{
+                                    backgroundColor: 'white',
+                                    borderRadius: '12px',
+                                    boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                                    overflow: 'hidden',
+                                    border: '1px solid #e5e7eb',
+                                    marginTop: '1.5rem'
+                                }}>
+                                    <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                                        <thead style={{ backgroundColor: '#f9fafb', borderBottom: '2px solid #e5e7eb' }}>
+                                            <tr>
+                                                <th style={{ padding: '1rem', textAlign: 'left', color: '#374151' }}>Hechizo</th>
+                                                <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Coste</th>
+                                                <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Requisitos</th>
+                                                <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {selectedSpells.map((s, idx) => {
+                                                const isEven = idx % 2 === 0;
+                                                return (
+                                                    <tr key={s.id} style={{ backgroundColor: isEven ? 'white' : '#f9fafb' }}>
+                                                        <td style={{ padding: '1rem', fontWeight: 'bold', color: '#1f2937' }}>
+                                                            {s.name}
+                                                        </td>
+                                                        <td style={{ padding: '0.75rem', textAlign: 'center' }}>
+                                                            <span style={{
+                                                                fontSize: '0.875rem',
+                                                                fontWeight: 'bold',
+                                                                backgroundColor: '#eef2ff',
+                                                                color: '#4f46e5',
+                                                                padding: '4px 12px',
+                                                                borderRadius: '9999px',
+                                                                border: '1px solid #e0e7ff',
+                                                                display: 'inline-block'
+                                                            }}>
+                                                                {s.cost}
+                                                            </span>
+                                                        </td>
+                                                        <td style={{ padding: '0.75rem', textAlign: 'center', color: '#6b7280', fontSize: '0.875rem' }}>
+                                                            {s.requirements !== "No especificado" ? s.requirements : <span style={{ color: '#9ca3af', fontStyle: 'italic' }}>-</span>}
+                                                        </td>
+                                                        <td style={{ padding: '0.75rem', textAlign: 'center' }}>
+                                                            <button
+                                                                onClick={(e) => {
+                                                                    e.stopPropagation();
+                                                                    const newIds = selectedSpellIds.filter(id => id !== s.id);
+                                                                    updateSpells(newIds);
+                                                                }}
+                                                                style={{
+                                                                    color: '#ef4444',
+                                                                    padding: '8px',
+                                                                    borderRadius: '9999px',
+                                                                    border: 'none',
+                                                                    background: 'transparent',
+                                                                    cursor: 'pointer',
+                                                                    display: 'inline-flex',
+                                                                    alignItems: 'center',
+                                                                    justifyContent: 'center'
+                                                                }}
+                                                                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#fef2f2'}
+                                                                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+                                                                title="Olvidar hechizo"
+                                                            >
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                                                    <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                                                                </svg>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                );
+                                            })}
+                                        </tbody>
+                                    </table>
                                 </div>
                             ) : (
-                                <div className="text-center py-8 text-indigo-300 font-bold italic border-2 border-dashed border-indigo-200 rounded-lg">
+                                <div style={{ textAlign: 'center', padding: '3rem', color: '#9ca3af', fontWeight: 'bold', fontStyle: 'italic' }}>
                                     No hay hechizos memorizados
                                 </div>
                             )}
