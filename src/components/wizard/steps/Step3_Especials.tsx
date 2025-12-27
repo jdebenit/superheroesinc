@@ -12,6 +12,7 @@ interface SelectedPower {
     origin: string;
     rank: number; // 1-100, adds 0.1 PC per unit
     powerMod?: number; // For powers with characteristics, max total 200
+    skillValue?: number; // Input for skill calculation base
 }
 
 // Helpers for data access
@@ -42,6 +43,28 @@ const calculateEM = (data: any, divisor: number = 1) => {
     const con = isSemidemonio ? (Number(getCharacteristicValue(data, 'Constitución')) || 0) : 0;
 
     return Math.floor((int + per + vol + con) / divisor);
+};
+
+const calculateSkillBase = (data: any, formula: string): number => {
+    if (!formula) return 0;
+
+    // Map abbreviations to full names
+    const getVal = (abbr: string) => {
+        const map: Record<string, string> = {
+            'FUE': 'Fuerza', 'AGI': 'Agilidad', 'CON': 'Constitución',
+            'INT': 'Inteligencia', 'PER': 'Percepción', 'VOL': 'Voluntad', 'APA': 'Apariencia'
+        };
+        return getCharacteristicValue(data, map[abbr] || '');
+    };
+
+    try {
+        // Replace abbreviations with values
+        const evalFormula = formula.replace(/[A-Z]{3}/g, (match) => getVal(match).toString());
+        // Safe evaluation of simple math formula
+        return Math.floor(new Function('return ' + evalFormula)());
+    } catch (e) {
+        return 0;
+    }
 };
 
 const getRankLevel = (rank: number): string => {
@@ -153,6 +176,14 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
         const updated = selectedPowers.map(p =>
             p.id === powerId && p.origin === origin
                 ? { ...p, powerMod: newMod }
+                : p
+        );
+        updatePowers(updated);
+    };
+    const updatePowerSkillValue = (powerId: string, origin: string, newValue: number) => {
+        const updated = selectedPowers.map(p =>
+            p.id === powerId && p.origin === origin
+                ? { ...p, skillValue: newValue }
                 : p
         );
         updatePowers(updated);
@@ -279,7 +310,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                                     <tr>
                                         <th style={{ padding: '1rem', textAlign: 'left', color: '#374151' }}>Poder</th>
                                         <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Base / Rango / PCs</th>
-                                        <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Tipo</th>
+                                        <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Base Hab.</th>
                                         <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Origen</th>
                                         <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Acciones</th>
                                     </tr>
@@ -301,27 +332,56 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                                                             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.875rem', fontFamily: 'monospace' }}>
                                                                 <span style={{ color: '#6b7280', fontWeight: 'bold' }}>{p.cost}</span>
                                                                 <span style={{ color: '#9ca3af' }}>+</span>
-                                                                <input
-                                                                    type="number"
-                                                                    min="1"
-                                                                    max="100"
-                                                                    value={selection.rank}
-                                                                    onChange={(e) => updatePowerRank(selection.id, selection.origin, parseInt(e.target.value, 10))}
-                                                                    style={{
-                                                                        width: '50px',
-                                                                        padding: '0.25rem',
-                                                                        border: '1px solid #d1d5db',
-                                                                        borderRadius: '4px',
-                                                                        textAlign: 'center',
-                                                                        fontSize: '0.875rem',
-                                                                        fontWeight: 'bold',
-                                                                        color: '#4f46e5'
-                                                                    }}
-                                                                />
+                                                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                                                    <input
+                                                                        type="number"
+                                                                        min="1"
+                                                                        max="100"
+                                                                        value={selection.rank}
+                                                                        onChange={(e) => updatePowerRank(selection.id, selection.origin, parseInt(e.target.value, 10))}
+                                                                        style={{
+                                                                            width: '50px',
+                                                                            padding: '0.25rem',
+                                                                            border: '1px solid #d1d5db',
+                                                                            borderRadius: '4px',
+                                                                            textAlign: 'center',
+                                                                            fontSize: '0.875rem',
+                                                                            fontWeight: 'bold',
+                                                                            color: '#4f46e5'
+                                                                        }}
+                                                                    />
+                                                                    <span style={{ fontSize: '0.65rem', color: '#6b7280' }}>Rango</span>
+                                                                </div>
                                                                 <span style={{ color: '#9ca3af' }}>/10</span>
+
+                                                                {(() => {
+                                                                    const minVal = p.skillCalc ? calculateSkillBase(data, p.skillCalc) : 0;
+                                                                    const currentVal = selection.skillValue || minVal;
+                                                                    const extraPoints = Math.max(0, currentVal - minVal);
+
+                                                                    if (extraPoints > 0) {
+                                                                        return (
+                                                                            <>
+                                                                                <span style={{ color: '#9ca3af' }}>+</span>
+                                                                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                                                                    <span style={{ fontWeight: 'bold', color: '#d97706' }}>{extraPoints}</span>
+                                                                                    <span style={{ fontSize: '0.65rem', color: '#6b7280' }}>Hab.</span>
+                                                                                </div>
+                                                                                <span style={{ color: '#9ca3af' }}>/10</span>
+                                                                            </>
+                                                                        );
+                                                                    }
+                                                                    return null;
+                                                                })()}
+
                                                                 <span style={{ color: '#9ca3af' }}>=</span>
                                                                 <span style={{ color: '#4f46e5', fontWeight: 'bold' }}>
-                                                                    {(p.cost + (selection.rank / 10)).toFixed(1)}
+                                                                    {(() => {
+                                                                        const minVal = p.skillCalc ? calculateSkillBase(data, p.skillCalc) : 0;
+                                                                        const currentVal = selection.skillValue || minVal;
+                                                                        const extraCost = Math.max(0, currentVal - minVal) * 0.1;
+                                                                        return (p.cost + (selection.rank / 10) + extraCost).toFixed(1);
+                                                                    })()}
                                                                 </span>
                                                                 <span style={{ color: '#6b7280' }}>PCs</span>
                                                             </div>
@@ -413,22 +473,39 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                                                     )}
                                                 </td>
                                                 <td style={{ padding: '0.75rem', textAlign: 'center' }}>
-                                                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px', justifyContent: 'center' }}>
-                                                        {p.types.map(t => (
-                                                            <span key={t} style={{
-                                                                fontSize: '10px',
-                                                                textTransform: 'uppercase',
-                                                                fontWeight: 'bold',
-                                                                backgroundColor: '#eef2ff',
-                                                                color: '#4f46e5',
-                                                                padding: '2px 8px',
-                                                                borderRadius: '4px',
-                                                                border: '1px solid #e0e7ff'
-                                                            }}>
-                                                                {t}
-                                                            </span>
-                                                        ))}
-                                                    </div>
+                                                    {p.skillCalc ? (
+                                                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem' }}>
+                                                            {(() => {
+                                                                const minVal = calculateSkillBase(data, p.skillCalc);
+                                                                return (
+                                                                    <>
+                                                                        <input
+                                                                            type="number"
+                                                                            min={minVal}
+                                                                            value={selection.skillValue || minVal}
+                                                                            onChange={(e) => {
+                                                                                const val = parseInt(e.target.value) || 0;
+                                                                                // Ensure value is at least the calculation base
+                                                                                updatePowerSkillValue(selection.id, selection.origin, Math.max(minVal, val));
+                                                                            }}
+                                                                            style={{
+                                                                                width: '60px',
+                                                                                textAlign: 'center',
+                                                                                padding: '0.25rem',
+                                                                                border: '1px solid #d1d5db',
+                                                                                borderRadius: '4px'
+                                                                            }}
+                                                                        />
+                                                                        <span style={{ fontSize: '0.65rem', color: '#9ca3af', fontFamily: 'monospace' }}>
+                                                                            {p.skillCalc} ({minVal})
+                                                                        </span>
+                                                                    </>
+                                                                );
+                                                            })()}
+                                                        </div>
+                                                    ) : (
+                                                        <span style={{ color: '#9ca3af', fontSize: '0.875rem' }}>N/A</span>
+                                                    )}
                                                 </td>
                                                 <td style={{ padding: '0.75rem', textAlign: 'center' }}>
                                                     {selection.origin === 'Guardian' && (

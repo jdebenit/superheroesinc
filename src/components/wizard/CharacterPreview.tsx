@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS } from '../../data/backgroundTables';
+import { SPELLS } from '../../data/spells';
 
 interface CharacterPreviewProps {
     character: any;
@@ -330,6 +331,47 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                     {item.notes && <span>: {item.notes}</span>}
                                                 </li>
                                             ))}
+                                        </ul>
+                                    </div>
+                                )}
+
+                                {/* Spells / Artes Mágicas */}
+                                {character.spells?.selected && character.spells.selected.length > 0 && (
+                                    <div className="sheet-section spells">
+                                        <div className="section-header">
+                                            <h4>Artes Mágicas</h4>
+                                        </div>
+                                        <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                                            {character.spells.selected.map((spell: any, idx: number) => {
+                                                const spellData = SPELLS.find(s => s.id === spell.id);
+                                                if (!spellData) return null;
+
+                                                const maxRank = spellData.maxRank || 1;
+                                                const rankDisplay = spell.rank > maxRank
+                                                    ? `Maestría (${spell.rank})`
+                                                    : `Rango ${spell.rank}`;
+
+                                                return (
+                                                    <li key={`${spell.id}-${idx}`} style={{
+                                                        padding: '0.5rem',
+                                                        borderBottom: '1px solid #e5e7eb',
+                                                        display: 'flex',
+                                                        justifyContent: 'space-between',
+                                                        alignItems: 'center'
+                                                    }}>
+                                                        <span style={{ fontWeight: 'bold', color: '#4f46e5' }}>
+                                                            {spellData.name}
+                                                        </span>
+                                                        <span style={{
+                                                            fontSize: '0.875rem',
+                                                            color: spell.rank > maxRank ? '#a855f7' : '#6b7280',
+                                                            fontWeight: spell.rank > maxRank ? 'bold' : 'normal'
+                                                        }}>
+                                                            {rankDisplay}
+                                                        </span>
+                                                    </li>
+                                                );
+                                            })}
                                         </ul>
                                     </div>
                                 )}

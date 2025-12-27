@@ -178,6 +178,33 @@ export default function CharacterWizard() {
                 // Powers without characteristics: rank cost
                 const rank = power.rank || 1;
                 cost += rank * 0.1;
+
+                // SKILL VALUE COST
+                if (powerData.skillCalc && power.skillValue) {
+                    const getVal = (abbr: string) => {
+                        const map: Record<string, number> = {
+                            'FUE': character.attributes?.values?.['Fuerza'] || 0,
+                            'AGI': character.attributes?.values?.['Agilidad'] || 0,
+                            'CON': character.attributes?.values?.['Constitución'] || 0,
+                            'INT': character.attributes?.values?.['Inteligencia'] || 0,
+                            'PER': character.attributes?.values?.['Percepción'] || 0,
+                            'VOL': character.attributes?.values?.['Voluntad'] || 0,
+                            'APA': character.attributes?.values?.['Apariencia'] || 0
+                        };
+                        return map[abbr] || 0;
+                    };
+
+                    try {
+                        const evalFormula = powerData.skillCalc.replace(/[A-Z]{3}/g, (match: string) => getVal(match).toString());
+                        const minVal = Math.floor(new Function('return ' + evalFormula)());
+
+                        if (power.skillValue > minVal) {
+                            cost += (power.skillValue - minVal) * 0.1;
+                        }
+                    } catch (e) {
+                        // Ignore calculation errors
+                    }
+                }
             } else {
                 // Powers with characteristics: powerMod / 10
                 const powerMod = power.powerMod || 0;
