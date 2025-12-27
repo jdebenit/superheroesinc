@@ -183,11 +183,12 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     const isMago = hasSubtype(data, 'Arcano', 'Mago');
     const isDotado = hasSubtype(data, 'Arcano', 'Dotado');
     const isHibrido = hasSubtype(data, 'Arcano', 'Híbrido mitológico');
+    const isTerrano = hasSubtype(data, 'Arcano', 'Terrano');
 
     // EM Formula state
     const emFormula = data.spells?.emFormula || { divisor: 4, pcCost: 0 };
-    const hasEMFormula = !isMago && (isDotado || isHibrido);
-    const hasEM = isMago || isDotado || isHibrido; // Show section for all magic users
+    const hasEMFormula = !isMago && (isDotado || isHibrido || isTerrano);
+    const hasEM = isMago || isDotado || isHibrido || isTerrano; // Show section for all magic users
     const canSelectSpells = hasEM && emFormula.divisor !== 0; // Only allow spell selection if divisor > 0
 
     // Spells - enrich with full spell data and rank
@@ -410,17 +411,23 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                                     >
                                         {isDotado && (
                                             <>
-                                                <option value="2-8">(PER+INT+VOL)/2 → +8 PCs</option>
-                                                <option value="3-3">(PER+INT+VOL)/3 → +3 PCs</option>
-                                                <option value="4-0">(PER+INT+VOL)/4 → +0 PCs</option>
+                                                <option value="2-8">Dotado: (PER+INT+VOL)/2 → +8 PCs</option>
+                                                <option value="3-3">Dotado: (PER+INT+VOL)/3 → +3 PCs</option>
+                                                <option value="4-0">Dotado: (PER+INT+VOL)/4 → +0 PCs</option>
                                             </>
                                         )}
-                                        {isHibrido && !isDotado && (
+                                        {isHibrido && (
                                             <>
-                                                <option value="2-15">(PER+INT+VOL)/2 → +15 PCs</option>
-                                                <option value="3-10">(PER+INT+VOL)/3 → +10 PCs</option>
-                                                <option value="4-7">(PER+INT+VOL)/4 → +7 PCs</option>
-                                                <option value="0-0">No EM</option>
+                                                <option value="2-15">Híbrido: (PER+INT+VOL)/2 → +15 PCs</option>
+                                                <option value="3-10">Híbrido: (PER+INT+VOL)/3 → +10 PCs</option>
+                                                <option value="4-7">Híbrido: (PER+INT+VOL)/4 → +7 PCs</option>
+                                                <option value="0-0">Híbrido: No EM</option>
+                                            </>
+                                        )}
+                                        {isTerrano && (
+                                            <>
+                                                <option value="4-0">Terrano: (PER+INT+VOL)/4 → +0 PCs</option>
+                                                <option value="0--5">Terrano: No EM → -5 PCs</option>
                                             </>
                                         )}
                                     </select>
@@ -443,63 +450,66 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                                     + Abrir Lista de Hechizos
                                 </button>
 
-                                {/* Counter Box - Step 4 Style */}
-                                <div style={{
-                                    backgroundColor: '#eef2ff',
-                                    border: '2px solid #6366f1',
-                                    borderRadius: '8px',
-                                    padding: '1rem',
-                                    flex: 1
-                                }}>
-                                    {(() => {
-                                        const totalCost = selectedSpells.reduce((acc, s) => {
-                                            const baseCost = parseInt(s.cost, 10) || 0;
-                                            // Maestría uses maxRank + 2 as multiplier
-                                            const effectiveRank = s.rank;
-                                            return acc + (baseCost * effectiveRank);
-                                        }, 0);
-                                        const maxEM = calculateEM(data, isMago ? 1 : emFormula.divisor);
-                                        const isOver = totalCost > maxEM;
-                                        const extraPC = isOver ? ((totalCost - maxEM) * 0.1).toFixed(1) : '0.0';
 
-                                        // Build formula display
-                                        const isSemidemonio = hasSubtype(data, 'Sobrenatural', 'Semidemonio');
-                                        const divisor = isMago ? 1 : emFormula.divisor;
-                                        let formulaText = isSemidemonio ? '(PER+INT+VOL+CON)' : '(PER+INT+VOL)';
-                                        if (divisor > 1) {
-                                            formulaText += `/${divisor}`;
-                                        }
+                                {/* Counter Box - Step 4 Style - Only show if EM is available */}
+                                {emFormula.divisor !== 0 && (
+                                    <div style={{
+                                        backgroundColor: '#eef2ff',
+                                        border: '2px solid #6366f1',
+                                        borderRadius: '8px',
+                                        padding: '1rem',
+                                        flex: 1
+                                    }}>
+                                        {(() => {
+                                            const totalCost = selectedSpells.reduce((acc, s) => {
+                                                const baseCost = parseInt(s.cost, 10) || 0;
+                                                // Maestría uses maxRank + 2 as multiplier
+                                                const effectiveRank = s.rank;
+                                                return acc + (baseCost * effectiveRank);
+                                            }, 0);
+                                            const maxEM = calculateEM(data, isMago ? 1 : emFormula.divisor);
+                                            const isOver = totalCost > maxEM;
+                                            const extraPC = isOver ? ((totalCost - maxEM) * 0.1).toFixed(1) : '0.0';
 
-                                        return (
-                                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
-                                                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
-                                                    <span style={{ fontSize: '1rem' }}>
-                                                        Energía Mágica: {formulaText}
-                                                    </span>
+                                            // Build formula display
+                                            const isSemidemonio = hasSubtype(data, 'Sobrenatural', 'Semidemonio');
+                                            const divisor = isMago ? 1 : emFormula.divisor;
+                                            let formulaText = isSemidemonio ? '(PER+INT+VOL+CON)' : '(PER+INT+VOL)';
+                                            if (divisor > 1) {
+                                                formulaText += `/${divisor}`;
+                                            }
+
+                                            return (
+                                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+                                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                                                        <span style={{ fontSize: '1rem' }}>
+                                                            Energía Mágica: {formulaText}
+                                                        </span>
+                                                    </div>
+                                                    <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
+                                                        <span style={{ fontSize: '1.125rem' }}>
+                                                            <span style={{ fontSize: '1.5rem', fontWeight: 'bold', color: isOver ? '#ef4444' : '#6366f1' }}>
+                                                                {totalCost}
+                                                            </span>
+                                                            <span style={{ color: '#9ca3af', margin: '0 0.25rem' }}>/</span>
+                                                            <span style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#4b5563' }}>
+                                                                {maxEM}
+                                                            </span>
+                                                            <span style={{ fontSize: '0.875rem', color: '#6366f1', marginLeft: '0.25rem', fontWeight: 'bold' }}>
+                                                                EM
+                                                            </span>
+                                                        </span>
+                                                        {isOver && (
+                                                            <span style={{ fontSize: '1.125rem', fontWeight: 'bold', color: '#ef4444' }}>
+                                                                Coste Extra: +{extraPC} PC
+                                                            </span>
+                                                        )}
+                                                    </div>
                                                 </div>
-                                                <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-                                                    <span style={{ fontSize: '1.125rem' }}>
-                                                        <span style={{ fontSize: '1.5rem', fontWeight: 'bold', color: isOver ? '#ef4444' : '#6366f1' }}>
-                                                            {totalCost}
-                                                        </span>
-                                                        <span style={{ color: '#9ca3af', margin: '0 0.25rem' }}>/</span>
-                                                        <span style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#4b5563' }}>
-                                                            {maxEM}
-                                                        </span>
-                                                        <span style={{ fontSize: '0.875rem', color: '#6366f1', marginLeft: '0.25rem', fontWeight: 'bold' }}>
-                                                            EM
-                                                        </span>
-                                                    </span>
-                                                    {isOver && (
-                                                        <span style={{ fontSize: '1.125rem', fontWeight: 'bold', color: '#ef4444' }}>
-                                                            Coste Extra: +{extraPC} PC
-                                                        </span>
-                                                    )}
-                                                </div>
-                                            </div>
-                                        );
-                                    })()}
-                                </div>
+                                            );
+                                        })()}
+                                    </div>
+                                )}
                             </div>
 
                             {selectedSpells.length > 0 ? (
