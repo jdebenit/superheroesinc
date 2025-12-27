@@ -174,7 +174,7 @@ export default function PowerList() {
             <div key={power.name} className="power-card">
               <h3>{power.name}</h3>
               <div className="power-details">
-                <span className="power-cost">PC: {power.cost}</span>
+                <span className="power-cost">PC: {power.formula}</span>
                 <div className="power-tags">
                   <div className="power-types">
                     {power.types.map(type => (
@@ -206,7 +206,7 @@ export default function PowerList() {
               {filteredPowers.map((power) => (
                 <tr key={power.name}>
                   <td className="col-name">{power.name}</td>
-                  <td className="col-cost">{power.cost}</td>
+                  <td className="col-cost">{power.formula}</td>
                   <td className="col-types">
                     <div className="table-types">
                       {power.types.map(type => (
