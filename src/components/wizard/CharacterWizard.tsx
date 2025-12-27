@@ -10,6 +10,7 @@ import { calculateOriginCost } from '../../data/originCosts.ts';
 import { calculateCreationPoints, calculateGeneralSkillValues, calculateSpecialSkillsPCWithInt } from '../../utils/characterCalculations';
 import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS } from '../../data/backgroundTables';
 import { SPELLS } from '../../data/spells';
+import { POWERS } from '../../data/powers';
 
 const STEPS = [
     { id: 1, name: 'Origen', icon: '🎭' },
@@ -159,9 +160,28 @@ export default function CharacterWizard() {
             total += (spellCost - maxEM) * 0.1;
         }
 
-        // 8. EM Formula Cost (for Dotado/Híbrido)
+        // 8. EM Formula Cost (for Dotado/Híbrido/Terrano)
         const emFormulaCost = character.spells?.emFormula?.pcCost || 0;
         total += emFormulaCost;
+
+        // 9. Power Costs (Base + Rank)
+        const selectedPowers = character.powers?.selected || [];
+        const powerCost = selectedPowers.reduce((acc: number, power: any) => {
+            const powerData = POWERS.find((p: any) => p.id === power.id);
+            if (!powerData) return acc;
+
+            // Base cost
+            let cost = powerData.cost;
+
+            // Rank cost (only for powers without characteristics)
+            if (!powerData.characteristic) {
+                const rank = power.rank || 1;
+                cost += rank * 0.1;
+            }
+
+            return acc + cost;
+        }, 0);
+        total += powerCost;
 
         return total.toFixed(1); // Devolver con decimales
     }, [character]);

@@ -10,6 +10,7 @@ interface Step3Props {
 interface SelectedPower {
     id: string;
     origin: string;
+    rank: number; // 1-100, adds 0.1 PC per unit
 }
 
 // Helpers for data access
@@ -40,6 +41,14 @@ const calculateEM = (data: any, divisor: number = 1) => {
     const con = isSemidemonio ? (Number(getCharacteristicValue(data, 'Constitución')) || 0) : 0;
 
     return Math.floor((int + per + vol + con) / divisor);
+};
+
+const getRankLevel = (rank: number): string => {
+    if (rank <= 20) return 'Bajo';
+    if (rank <= 40) return 'Medio';
+    if (rank <= 70) return 'Elevado';
+    if (rank <= 95) return 'Alto';
+    return 'Cósmico';
 };
 
 const POWER_TYPES = ["Todos", "Físico", "Psíquico", "Energético"];
@@ -124,10 +133,19 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
             newSelected = [...selectedPowers];
             newSelected.splice(existingIndex, 1);
         } else {
-            // Add
-            newSelected = [...selectedPowers, { id: powerId, origin: modalOriginFilter }];
+            // Add with default rank 1
+            newSelected = [...selectedPowers, { id: powerId, origin: modalOriginFilter, rank: 1 }];
         }
         updatePowers(newSelected);
+    };
+
+    const updatePowerRank = (powerId: string, origin: string, newRank: number) => {
+        const updated = selectedPowers.map(p =>
+            p.id === powerId && p.origin === origin
+                ? { ...p, rank: Math.max(1, Math.min(100, newRank)) } // Clamp between 1-100
+                : p
+        );
+        updatePowers(updated);
     };
 
     const toggleSpellSelection = (id: string) => {
@@ -200,7 +218,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     return (
         <div className="space-y-8 p-6 max-w-5xl mx-auto">
             <h2 className="text-3xl font-black mb-8 uppercase text-center font-comic tracking-wide text-gray-800">
-                Poderes y Habilidades
+                Poderes y Habilidades Especiales
             </h2>
 
             {!isGuardian && !isAlterado && !hasEM && (
@@ -220,7 +238,6 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                         <div className="flex flex-col sm:flex-row items-center gap-4">
                             <div>
                                 <h3 className="text-2xl font-black text-gray-800 uppercase italic font-comic text-center sm:text-left">Poderes Especiales</h3>
-                                <p className="text-sm font-bold text-gray-400 text-center sm:text-left">Habilidades de origen</p>
                             </div>
                         </div>
 
@@ -251,7 +268,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                                 <thead style={{ backgroundColor: '#f9fafb', borderBottom: '2px solid #e5e7eb' }}>
                                     <tr>
                                         <th style={{ padding: '1rem', textAlign: 'left', color: '#374151' }}>Poder</th>
-                                        <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>PCs</th>
+                                        <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Base / Rango / PCs</th>
                                         <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Tipo</th>
                                         <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Origen</th>
                                         <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Acciones</th>
@@ -268,8 +285,45 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                                                 <td style={{ padding: '1rem', fontWeight: 'bold', color: '#1f2937' }}>
                                                     {p.name}
                                                 </td>
-                                                <td style={{ padding: '0.75rem', textAlign: 'center', color: '#6b7280', fontSize: '0.875rem', fontFamily: 'monospace' }}>
-                                                    {p.formula}
+                                                <td style={{ padding: '0.75rem', textAlign: 'center' }}>
+                                                    {!p.characteristic ? (
+                                                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
+                                                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.875rem', fontFamily: 'monospace' }}>
+                                                                <span style={{ color: '#6b7280', fontWeight: 'bold' }}>{p.cost}</span>
+                                                                <span style={{ color: '#9ca3af' }}>+</span>
+                                                                <input
+                                                                    type="number"
+                                                                    min="1"
+                                                                    max="100"
+                                                                    value={selection.rank}
+                                                                    onChange={(e) => updatePowerRank(selection.id, selection.origin, parseInt(e.target.value, 10))}
+                                                                    style={{
+                                                                        width: '50px',
+                                                                        padding: '0.25rem',
+                                                                        border: '1px solid #d1d5db',
+                                                                        borderRadius: '4px',
+                                                                        textAlign: 'center',
+                                                                        fontSize: '0.875rem',
+                                                                        fontWeight: 'bold',
+                                                                        color: '#4f46e5'
+                                                                    }}
+                                                                />
+                                                                <span style={{ color: '#9ca3af' }}>/10</span>
+                                                                <span style={{ color: '#9ca3af' }}>=</span>
+                                                                <span style={{ color: '#4f46e5', fontWeight: 'bold' }}>
+                                                                    {(p.cost + (selection.rank / 10)).toFixed(1)}
+                                                                </span>
+                                                                <span style={{ color: '#6b7280' }}>PCs</span>
+                                                            </div>
+                                                            <span style={{ fontSize: '0.75rem', color: '#6b7280', fontWeight: 'bold' }}>
+                                                                {getRankLevel(selection.rank)}
+                                                            </span>
+                                                        </div>
+                                                    ) : (
+                                                        <span style={{ fontSize: '0.875rem', color: '#6b7280', fontFamily: 'monospace', fontWeight: 'bold' }}>
+                                                            {p.cost} PCs
+                                                        </span>
+                                                    )}
                                                 </td>
                                                 <td style={{ padding: '0.75rem', textAlign: 'center' }}>
                                                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px', justifyContent: 'center' }}>
@@ -372,7 +426,6 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                             <div className="flex items-center gap-4">
                                 <div>
                                     <h3 className="text-2xl font-black text-indigo-900 uppercase italic font-comic">Magia</h3>
-                                    <p className="text-sm font-bold text-indigo-400">Canalización de Energía</p>
                                 </div>
                             </div>
                             {/* Old EM display removed */}
