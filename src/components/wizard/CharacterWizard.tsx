@@ -135,12 +135,13 @@ export default function CharacterWizard() {
         const vol = character.attributes?.values?.['Voluntad'] || 0;
         const maxEM = int + per + vol;
 
-        const selectedMsgIds = character.spells?.selected || [];
-        // Need to fetch spell costs. Since SPELLS is not in scope, I need to import it.
-        // Assuming SPELLS is imported at the top.
-        const spellCost = selectedMsgIds.reduce((acc: number, id: string) => {
-            const s = SPELLS.find((sp: any) => sp.id === id);
-            return acc + (s ? (parseInt(s.cost, 10) || 0) : 0);
+        const selectedSpells = character.spells?.selected || [];
+        // Spells are now objects with { id, rank }
+        const spellCost = selectedSpells.reduce((acc: number, spell: any) => {
+            const s = SPELLS.find((sp: any) => sp.id === spell.id);
+            const baseCost = s ? (parseInt(s.cost, 10) || 0) : 0;
+            const rank = spell.rank || 1;
+            return acc + (baseCost * rank);
         }, 0);
 
         if (spellCost > maxEM) {
@@ -212,7 +213,7 @@ export default function CharacterWizard() {
             {/* Header */}
             <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
                 <h1 style={{ fontSize: '3rem', fontWeight: '900', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
-                    Generador de Fichas
+                    Generador de Fichas (Alpha 0.0.9)
                 </h1>
                 <p style={{ fontSize: '1.25rem', color: '#666', marginBottom: '1rem' }}>
                     Crea tu personaje paso a paso

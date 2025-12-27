@@ -66,14 +66,18 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
         return data.powers.selected.filter((p: any) => typeof p === 'object' && p.id && p.origin);
     }, [data.powers?.selected]);
 
-    const selectedSpellIds: string[] = data.spells?.selected || [];
+    // Spells are now stored as objects { id, rank }
+    const selectedSpellsWithRank: Array<{ id: string, rank: number }> = useMemo(() => {
+        if (!Array.isArray(data.spells?.selected)) return [];
+        return data.spells.selected.filter((s: any) => typeof s === 'object' && s.id && s.rank);
+    }, [data.spells?.selected]);
 
     const updatePowers = (newSelected: SelectedPower[]) => {
         onChange({ ...data, powers: { ...data.powers, selected: newSelected } });
     };
 
-    const updateSpells = (newIds: string[]) => {
-        onChange({ ...data, spells: { ...data.spells, selected: newIds } });
+    const updateSpells = (newSelected: Array<{ id: string, rank: number }>) => {
+        onChange({ ...data, spells: { ...data.spells, selected: newSelected } });
     };
 
     const openPowerModal = (originContext: string) => {
@@ -110,8 +114,25 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     };
 
     const toggleSpellSelection = (id: string) => {
-        const newSet = selectedSpellIds.includes(id) ? selectedSpellIds.filter(s => s !== id) : [...selectedSpellIds, id];
-        updateSpells(newSet);
+        const existingIndex = selectedSpellsWithRank.findIndex(s => s.id === id);
+        let newSelected: Array<{ id: string, rank: number }>;
+
+        if (existingIndex >= 0) {
+            // Remove
+            newSelected = [...selectedSpellsWithRank];
+            newSelected.splice(existingIndex, 1);
+        } else {
+            // Add with rank 1
+            newSelected = [...selectedSpellsWithRank, { id, rank: 1 }];
+        }
+        updateSpells(newSelected);
+    };
+
+    const updateSpellRank = (id: string, rank: number) => {
+        const newSelected = selectedSpellsWithRank.map(s =>
+            s.id === id ? { ...s, rank } : s
+        );
+        updateSpells(newSelected);
     };
 
     // Filter items for the modal
@@ -146,8 +167,11 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     const isDotado = hasSubtype(data, 'Arcano', 'Dotado');
     const hasEM = isMago || isDotado;
 
-    // Spells
-    const selectedSpells = SPELLS.filter(s => selectedSpellIds.includes(s.id));
+    // Spells - enrich with full spell data and rank
+    const selectedSpells = selectedSpellsWithRank.map(sw => {
+        const spell = SPELLS.find(s => s.id === sw.id);
+        return spell ? { ...spell, rank: sw.rank } : null;
+    }).filter((s): s is (Spell & { rank: number }) => s !== null);
 
     return (
         <div className="space-y-8 p-6 max-w-5xl mx-auto">
@@ -351,7 +375,10 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                                     flex: 1
                                 }}>
                                     {(() => {
-                                        const totalCost = selectedSpells.reduce((acc, s) => acc + (parseInt(s.cost, 10) || 0), 0);
+                                        const totalCost = selectedSpells.reduce((acc, s) => {
+                                            const baseCost = parseInt(s.cost, 10) || 0;
+                                            return acc + (baseCost * s.rank);
+                                        }, 0);
                                         const maxEM = calculateEM(data);
                                         const isOver = totalCost > maxEM;
                                         const extraPC = isOver ? ((totalCost - maxEM) * 0.1).toFixed(1) : '0.0';
@@ -399,6 +426,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                                         <thead style={{ backgroundColor: '#f9fafb', borderBottom: '2px solid #e5e7eb' }}>
                                             <tr>
                                                 <th style={{ padding: '1rem', textAlign: 'left', color: '#374151' }}>Hechizo</th>
+                                                <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Rango</th>
                                                 <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Coste</th>
                                                 <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Requisitos</th>
                                                 <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Acciones</th>
@@ -407,10 +435,33 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                                         <tbody>
                                             {selectedSpells.map((s, idx) => {
                                                 const isEven = idx % 2 === 0;
+                                                const baseCost = parseInt(s.cost, 10) || 0;
+                                                const totalCost = baseCost * s.rank;
+
                                                 return (
                                                     <tr key={s.id} style={{ backgroundColor: isEven ? 'white' : '#f9fafb' }}>
                                                         <td style={{ padding: '1rem', fontWeight: 'bold', color: '#1f2937' }}>
                                                             {s.name}
+                                                        </td>
+                                                        <td style={{ padding: '0.75rem', textAlign: 'center' }}>
+                                                            <select
+                                                                value={s.rank}
+                                                                onChange={(e) => updateSpellRank(s.id, parseInt(e.target.value, 10))}
+                                                                style={{
+                                                                    padding: '0.5rem',
+                                                                    border: '1px solid #d1d5db',
+                                                                    borderRadius: '6px',
+                                                                    backgroundColor: 'white',
+                                                                    fontSize: '0.875rem',
+                                                                    fontWeight: 'bold',
+                                                                    color: '#4f46e5',
+                                                                    cursor: 'pointer'
+                                                                }}
+                                                            >
+                                                                {Array.from({ length: s.maxRank }, (_, i) => i + 1).map(rank => (
+                                                                    <option key={rank} value={rank}>{rank}</option>
+                                                                ))}
+                                                            </select>
                                                         </td>
                                                         <td style={{ padding: '0.75rem', textAlign: 'center' }}>
                                                             <span style={{
@@ -423,7 +474,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                                                                 border: '1px solid #e0e7ff',
                                                                 display: 'inline-block'
                                                             }}>
-                                                                {s.cost}
+                                                                {baseCost} × {s.rank} = {totalCost} EM
                                                             </span>
                                                         </td>
                                                         <td style={{ padding: '0.75rem', textAlign: 'center', color: '#6b7280', fontSize: '0.875rem' }}>
@@ -433,8 +484,8 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                                                             <button
                                                                 onClick={(e) => {
                                                                     e.stopPropagation();
-                                                                    const newIds = selectedSpellIds.filter(id => id !== s.id);
-                                                                    updateSpells(newIds);
+                                                                    const newSelected = selectedSpellsWithRank.filter(spell => spell.id !== s.id);
+                                                                    updateSpells(newSelected);
                                                                 }}
                                                                 style={{
                                                                     color: '#ef4444',
@@ -542,7 +593,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                                             if (modalType === 'powers') {
                                                 isSelected = selectedPowers.some(p => p.id === item.id && p.origin === modalOriginFilter);
                                             } else {
-                                                isSelected = selectedSpellIds.includes(item.id);
+                                                isSelected = selectedSpellsWithRank.some(s => s.id === item.id);
                                             }
 
                                             return (
@@ -596,7 +647,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                                                     if (modalType === 'powers') {
                                                         isSelected = selectedPowers.some(p => p.id === item.id && p.origin === modalOriginFilter);
                                                     } else {
-                                                        isSelected = selectedSpellIds.includes(item.id);
+                                                        isSelected = selectedSpellsWithRank.some(s => s.id === item.id);
                                                     }
 
                                                     return (

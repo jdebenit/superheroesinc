@@ -15,7 +15,7 @@ export const SPELLS: Spell[] = [
         name: "Abrir Portales",
         cost: "35",
         requirements: "No especificado",
-        maxRank: 1,
+        maxRank: 5,
         hasRequirements: false
     },
     {
@@ -23,7 +23,7 @@ export const SPELLS: Spell[] = [
         name: "Anular Conjuros",
         cost: "100",
         requirements: "No especificado",
-        maxRank: 1,
+        maxRank: 10,
         hasRequirements: false
     },
     {
@@ -39,7 +39,7 @@ export const SPELLS: Spell[] = [
         name: "Consumir energía mágica",
         cost: "85",
         requirements: "Rango 1 en Envejecimiento acelerado y rango 5 en Controlar espíritu.",
-        maxRank: 1,
+        maxRank: 5,
         hasRequirements: true
     },
     {
@@ -47,7 +47,7 @@ export const SPELLS: Spell[] = [
         name: "Controlar Espíritu",
         cost: "65",
         requirements: "No especificado",
-        maxRank: 1,
+        maxRank: 5,
         hasRequirements: false
     },
     {
@@ -55,7 +55,7 @@ export const SPELLS: Spell[] = [
         name: "Crear Ilusiones",
         cost: "25",
         requirements: "No especificado",
-        maxRank: 1,
+        maxRank: 5,
         hasRequirements: false
     },
     {
