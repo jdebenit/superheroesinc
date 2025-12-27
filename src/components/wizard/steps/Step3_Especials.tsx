@@ -30,11 +30,16 @@ const getCharacteristicValue = (data: any, charName: string) => {
     return data.attributes?.values?.[charName] || 0;
 };
 
-const calculateEM = (data: any) => {
+const calculateEM = (data: any, divisor: number = 1) => {
     const int = Number(getCharacteristicValue(data, 'Inteligencia')) || 0;
     const per = Number(getCharacteristicValue(data, 'Percepción')) || 0;
     const vol = Number(getCharacteristicValue(data, 'Voluntad')) || 0;
-    return int + per + vol;
+
+    // If Semidemonio, add CON to the formula
+    const isSemidemonio = hasSubtype(data, 'Sobrenatural', 'Semidemonio');
+    const con = isSemidemonio ? (Number(getCharacteristicValue(data, 'Constitución')) || 0) : 0;
+
+    return Math.floor((int + per + vol + con) / divisor);
 };
 
 const POWER_TYPES = ["Todos", "Físico", "Psíquico", "Energético"];
@@ -78,6 +83,18 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
 
     const updateSpells = (newSelected: Array<{ id: string, rank: number }>) => {
         onChange({ ...data, spells: { ...data.spells, selected: newSelected } });
+    };
+
+    const updateEMFormula = (divisor: number, pcCost: number) => {
+        onChange({
+            ...data,
+            spells: {
+                ...data.spells,
+                emFormula: { divisor, pcCost },
+                // If "No EM" selected (divisor 0), clear spells
+                selected: divisor === 0 ? [] : data.spells.selected
+            }
+        });
     };
 
     const openPowerModal = (originContext: string) => {
@@ -165,7 +182,13 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     const isAlterado = hasOrigin(data, 'Alterado');
     const isMago = hasSubtype(data, 'Arcano', 'Mago');
     const isDotado = hasSubtype(data, 'Arcano', 'Dotado');
-    const hasEM = isMago || isDotado;
+    const isHibrido = hasSubtype(data, 'Arcano', 'Híbrido mitológico');
+
+    // EM Formula state
+    const emFormula = data.spells?.emFormula || { divisor: 4, pcCost: 0 };
+    const hasEMFormula = !isMago && (isDotado || isHibrido);
+    const hasEM = isMago || isDotado || isHibrido; // Show section for all magic users
+    const canSelectSpells = hasEM && emFormula.divisor !== 0; // Only allow spell selection if divisor > 0
 
     // Spells - enrich with full spell data and rank
     const selectedSpells = selectedSpellsWithRank.map(sw => {
@@ -355,6 +378,55 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                         </div>
 
                         <div className="p-6 bg-indigo-50/50">
+                            {/* EM Formula Selector (for Dotado/Híbrido, not Mago) */}
+                            {hasEMFormula && (
+                                <div style={{ marginBottom: '1.5rem' }}>
+                                    <label style={{
+                                        display: 'block',
+                                        fontSize: '0.875rem',
+                                        fontWeight: 'bold',
+                                        color: '#4f46e5',
+                                        marginBottom: '0.5rem'
+                                    }}>
+                                        Fórmula de Energía Mágica
+                                    </label>
+                                    <select
+                                        value={`${emFormula.divisor}-${emFormula.pcCost}`}
+                                        onChange={(e) => {
+                                            const [divisor, pcCost] = e.target.value.split('-').map(Number);
+                                            updateEMFormula(divisor, pcCost);
+                                        }}
+                                        style={{
+                                            width: '100%',
+                                            padding: '0.75rem',
+                                            border: '2px solid #6366f1',
+                                            borderRadius: '8px',
+                                            backgroundColor: 'white',
+                                            fontSize: '0.875rem',
+                                            fontWeight: 'bold',
+                                            color: '#4f46e5',
+                                            cursor: 'pointer'
+                                        }}
+                                    >
+                                        {isDotado && (
+                                            <>
+                                                <option value="2-8">(PER+INT+VOL)/2 → +8 PCs</option>
+                                                <option value="3-3">(PER+INT+VOL)/3 → +3 PCs</option>
+                                                <option value="4-0">(PER+INT+VOL)/4 → +0 PCs</option>
+                                            </>
+                                        )}
+                                        {isHibrido && !isDotado && (
+                                            <>
+                                                <option value="2-15">(PER+INT+VOL)/2 → +15 PCs</option>
+                                                <option value="3-10">(PER+INT+VOL)/3 → +10 PCs</option>
+                                                <option value="4-7">(PER+INT+VOL)/4 → +7 PCs</option>
+                                                <option value="0-0">No EM</option>
+                                            </>
+                                        )}
+                                    </select>
+                                </div>
+                            )}
+
                             <div style={{
                                 marginBottom: '1.5rem',
                                 display: 'flex',
@@ -362,7 +434,12 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                                 gap: '1rem',
                                 alignItems: 'flex-start'
                             }}>
-                                <button onClick={openSpellModal} className="pixel-button bg-indigo-600 text-white hover:bg-indigo-700 whitespace-nowrap px-4 py-2">
+                                <button
+                                    onClick={openSpellModal}
+                                    disabled={emFormula.divisor === 0}
+                                    className="pixel-button bg-indigo-600 text-white hover:bg-indigo-700 whitespace-nowrap px-4 py-2"
+                                    style={{ opacity: emFormula.divisor === 0 ? 0.5 : 1, cursor: emFormula.divisor === 0 ? 'not-allowed' : 'pointer' }}
+                                >
                                     + Abrir Lista de Hechizos
                                 </button>
 
@@ -381,15 +458,25 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                                             const effectiveRank = s.rank;
                                             return acc + (baseCost * effectiveRank);
                                         }, 0);
-                                        const maxEM = calculateEM(data);
+                                        const maxEM = calculateEM(data, isMago ? 1 : emFormula.divisor);
                                         const isOver = totalCost > maxEM;
                                         const extraPC = isOver ? ((totalCost - maxEM) * 0.1).toFixed(1) : '0.0';
 
+                                        // Build formula display
+                                        const isSemidemonio = hasSubtype(data, 'Sobrenatural', 'Semidemonio');
+                                        const divisor = isMago ? 1 : emFormula.divisor;
+                                        let formulaText = isSemidemonio ? '(PER+INT+VOL+CON)' : '(PER+INT+VOL)';
+                                        if (divisor > 1) {
+                                            formulaText += `/${divisor}`;
+                                        }
+
                                         return (
                                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
-                                                <span style={{ fontSize: '1.125rem', fontWeight: 'bold' }}>
-                                                    Uso de Energía Mágica
-                                                </span>
+                                                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                                                    <span style={{ fontSize: '1rem' }}>
+                                                        Energía Mágica: {formulaText}
+                                                    </span>
+                                                </div>
                                                 <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
                                                     <span style={{ fontSize: '1.125rem' }}>
                                                         <span style={{ fontSize: '1.5rem', fontWeight: 'bold', color: isOver ? '#ef4444' : '#6366f1' }}>

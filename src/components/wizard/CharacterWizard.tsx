@@ -74,7 +74,10 @@ const initialCharacterState = {
     socialStatus: 'anonimo',
     equipment: { items: [] },
     weapons: { items: [] },
-    spells: { selected: [] }
+    spells: {
+        selected: [],
+        emFormula: { divisor: 4, pcCost: 0 } // Default for Dotado/Híbrido
+    }
 };
 
 export default function CharacterWizard() {
@@ -133,7 +136,15 @@ export default function CharacterWizard() {
         const int = character.attributes?.values?.['Inteligencia'] || 0;
         const per = character.attributes?.values?.['Percepción'] || 0;
         const vol = character.attributes?.values?.['Voluntad'] || 0;
-        const maxEM = int + per + vol;
+
+        // If Semidemonio, add CON to the formula
+        const isSemidemonio = character.origin?.items?.some((o: any) =>
+            o.category === 'Sobrenatural' && o.subtype === 'Semidemonio'
+        );
+        const con = isSemidemonio ? (character.attributes?.values?.['Constitución'] || 0) : 0;
+
+        const emDivisor = character.spells?.emFormula?.divisor || 1;
+        const maxEM = Math.floor((int + per + vol + con) / emDivisor);
 
         const selectedSpells = character.spells?.selected || [];
         // Spells are now objects with { id, rank }
@@ -147,6 +158,10 @@ export default function CharacterWizard() {
         if (spellCost > maxEM) {
             total += (spellCost - maxEM) * 0.1;
         }
+
+        // 8. EM Formula Cost (for Dotado/Híbrido)
+        const emFormulaCost = character.spells?.emFormula?.pcCost || 0;
+        total += emFormulaCost;
 
         return total.toFixed(1); // Devolver con decimales
     }, [character]);
