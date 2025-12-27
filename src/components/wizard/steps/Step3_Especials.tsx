@@ -377,7 +377,9 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                                     {(() => {
                                         const totalCost = selectedSpells.reduce((acc, s) => {
                                             const baseCost = parseInt(s.cost, 10) || 0;
-                                            return acc + (baseCost * s.rank);
+                                            // Maestría uses maxRank + 2 as multiplier
+                                            const effectiveRank = s.rank;
+                                            return acc + (baseCost * effectiveRank);
                                         }, 0);
                                         const maxEM = calculateEM(data);
                                         const isOver = totalCost > maxEM;
@@ -436,7 +438,10 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                                             {selectedSpells.map((s, idx) => {
                                                 const isEven = idx % 2 === 0;
                                                 const baseCost = parseInt(s.cost, 10) || 0;
-                                                const totalCost = baseCost * s.rank;
+                                                const maestriaValue = s.maxRank + 2;
+                                                const isMaestria = s.rank === maestriaValue;
+                                                const effectiveRank = isMaestria ? maestriaValue : s.rank;
+                                                const totalCost = baseCost * effectiveRank;
 
                                                 return (
                                                     <tr key={s.id} style={{ backgroundColor: isEven ? 'white' : '#f9fafb' }}>
@@ -461,20 +466,21 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                                                                 {Array.from({ length: s.maxRank }, (_, i) => i + 1).map(rank => (
                                                                     <option key={rank} value={rank}>{rank}</option>
                                                                 ))}
+                                                                <option key="maestria" value={s.maxRank + 2}>Maestría</option>
                                                             </select>
                                                         </td>
                                                         <td style={{ padding: '0.75rem', textAlign: 'center' }}>
                                                             <span style={{
                                                                 fontSize: '0.875rem',
                                                                 fontWeight: 'bold',
-                                                                backgroundColor: '#eef2ff',
-                                                                color: '#4f46e5',
+                                                                backgroundColor: isMaestria ? '#f3e8ff' : '#eef2ff',
+                                                                color: isMaestria ? '#7c3aed' : '#4f46e5',
                                                                 padding: '4px 12px',
                                                                 borderRadius: '9999px',
-                                                                border: '1px solid #e0e7ff',
+                                                                border: isMaestria ? '1px solid #ddd6fe' : '1px solid #e0e7ff',
                                                                 display: 'inline-block'
                                                             }}>
-                                                                {baseCost} × {s.rank} = {totalCost} EM
+                                                                {baseCost} × {isMaestria ? `${maestriaValue} (M)` : effectiveRank} = {totalCost} EM
                                                             </span>
                                                         </td>
                                                         <td style={{ padding: '0.75rem', textAlign: 'center', color: '#6b7280', fontSize: '0.875rem' }}>
