@@ -164,7 +164,7 @@ export default function CharacterWizard() {
         const emFormulaCost = character.spells?.emFormula?.pcCost || 0;
         total += emFormulaCost;
 
-        // 9. Power Costs (Base + Rank)
+        // 9. Power Costs (Base + Rank/PowerMod)
         const selectedPowers = character.powers?.selected || [];
         const powerCost = selectedPowers.reduce((acc: number, power: any) => {
             const powerData = POWERS.find((p: any) => p.id === power.id);
@@ -173,10 +173,15 @@ export default function CharacterWizard() {
             // Base cost
             let cost = powerData.cost;
 
-            // Rank cost (only for powers without characteristics)
+            // Additional cost based on power type
             if (!powerData.characteristic) {
+                // Powers without characteristics: rank cost
                 const rank = power.rank || 1;
                 cost += rank * 0.1;
+            } else {
+                // Powers with characteristics: powerMod / 10
+                const powerMod = power.powerMod || 0;
+                cost += powerMod / 10;
             }
 
             return acc + cost;

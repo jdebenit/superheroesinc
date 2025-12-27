@@ -11,6 +11,7 @@ interface SelectedPower {
     id: string;
     origin: string;
     rank: number; // 1-100, adds 0.1 PC per unit
+    powerMod?: number; // For powers with characteristics, max total 200
 }
 
 // Helpers for data access
@@ -143,6 +144,15 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
         const updated = selectedPowers.map(p =>
             p.id === powerId && p.origin === origin
                 ? { ...p, rank: Math.max(1, Math.min(100, newRank)) } // Clamp between 1-100
+                : p
+        );
+        updatePowers(updated);
+    };
+
+    const updatePowerMod = (powerId: string, origin: string, newMod: number) => {
+        const updated = selectedPowers.map(p =>
+            p.id === powerId && p.origin === origin
+                ? { ...p, powerMod: newMod }
                 : p
         );
         updatePowers(updated);
@@ -320,9 +330,86 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                                                             </span>
                                                         </div>
                                                     ) : (
-                                                        <span style={{ fontSize: '0.875rem', color: '#6b7280', fontFamily: 'monospace', fontWeight: 'bold' }}>
-                                                            {p.cost} PCs
-                                                        </span>
+                                                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
+                                                            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', fontSize: '0.875rem', fontFamily: 'monospace' }}>
+                                                                {/* Characteristic Value */}
+                                                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem' }}>
+                                                                    <span style={{ color: '#6b7280', fontWeight: 'bold' }}>
+                                                                        {getCharacteristicValue(data, p.characteristic === 'FUE' ? 'Fuerza' :
+                                                                            p.characteristic === 'AGI' ? 'Agilidad' :
+                                                                                p.characteristic === 'CON' ? 'Constitución' :
+                                                                                    p.characteristic === 'INT' ? 'Inteligencia' :
+                                                                                        p.characteristic === 'PER' ? 'Percepción' :
+                                                                                            p.characteristic === 'VOL' ? 'Voluntad' : 'Apariencia')}
+                                                                    </span>
+                                                                    <span style={{ fontSize: '0.65rem', color: '#9ca3af' }}>
+                                                                        {p.characteristic}
+                                                                    </span>
+                                                                </div>
+
+                                                                <span style={{ color: '#9ca3af', paddingTop: '0.25rem' }}>+</span>
+
+                                                                {/* Power Mod Input */}
+                                                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem' }}>
+                                                                    <input
+                                                                        type="number"
+                                                                        min="0"
+                                                                        max="200"
+                                                                        value={selection.powerMod || 0}
+                                                                        onChange={(e) => {
+                                                                            const charValue = getCharacteristicValue(data, p.characteristic === 'FUE' ? 'Fuerza' :
+                                                                                p.characteristic === 'AGI' ? 'Agilidad' :
+                                                                                    p.characteristic === 'CON' ? 'Constitución' :
+                                                                                        p.characteristic === 'INT' ? 'Inteligencia' :
+                                                                                            p.characteristic === 'PER' ? 'Percepción' :
+                                                                                                p.characteristic === 'VOL' ? 'Voluntad' : 'Apariencia');
+                                                                            const newMod = parseInt(e.target.value, 10) || 0;
+                                                                            const total = charValue + newMod;
+                                                                            // Limit total to 200
+                                                                            if (total <= 200) {
+                                                                                updatePowerMod(selection.id, selection.origin, newMod);
+                                                                            }
+                                                                        }}
+                                                                        style={{
+                                                                            width: '50px',
+                                                                            padding: '0.25rem',
+                                                                            border: '1px solid #d1d5db',
+                                                                            borderRadius: '4px',
+                                                                            textAlign: 'center',
+                                                                            fontSize: '0.875rem',
+                                                                            fontWeight: 'bold',
+                                                                            color: '#10b981'
+                                                                        }}
+                                                                    />
+                                                                    <span style={{ fontSize: '0.65rem', color: '#9ca3af' }}>
+                                                                        Mod. Poder
+                                                                    </span>
+                                                                </div>
+
+                                                                <span style={{ color: '#9ca3af', paddingTop: '0.25rem' }}>=</span>
+
+                                                                {/* Total */}
+                                                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem' }}>
+                                                                    <span style={{ color: '#10b981', fontWeight: 'bold' }}>
+                                                                        {(() => {
+                                                                            const charValue = getCharacteristicValue(data, p.characteristic === 'FUE' ? 'Fuerza' :
+                                                                                p.characteristic === 'AGI' ? 'Agilidad' :
+                                                                                    p.characteristic === 'CON' ? 'Constitución' :
+                                                                                        p.characteristic === 'INT' ? 'Inteligencia' :
+                                                                                            p.characteristic === 'PER' ? 'Percepción' :
+                                                                                                p.characteristic === 'VOL' ? 'Voluntad' : 'Apariencia');
+                                                                            return charValue + (selection.powerMod || 0);
+                                                                        })()}
+                                                                    </span>
+                                                                    <span style={{ fontSize: '0.65rem', color: '#9ca3af' }}>
+                                                                        Total
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <span style={{ fontSize: '0.75rem', color: '#6b7280', fontFamily: 'monospace' }}>
+                                                                {p.cost} + {((selection.powerMod || 0) / 10).toFixed(1)} = {(p.cost + ((selection.powerMod || 0) / 10)).toFixed(1)} PCs
+                                                            </span>
+                                                        </div>
                                                     )}
                                                 </td>
                                                 <td style={{ padding: '0.75rem', textAlign: 'center' }}>
