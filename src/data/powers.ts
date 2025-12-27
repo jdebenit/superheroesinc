@@ -1,9 +1,11 @@
 export type PowerType = "Físico" | "Psíquico" | "Energético";
+export type PowerCharacteristic = "AGI" | "CON" | "INT" | "PER" | "FUE" | "APA" | "VOL";
 
 export interface Power {
     id: string;
     name: string;
     cost: string;
+    characteristic?: PowerCharacteristic;
     types: PowerType[];
     origins: string[];
 }
@@ -321,6 +323,7 @@ export const POWERS: Power[] = [
         id: "superagilidad",
         name: "Superagilidad",
         cost: "(AGI Final - AGI Inicial)/10",
+        characteristic: "AGI",
         types: ["Físico"],
         origins: ["Alterado", "Mutante", "Guardian", "Cósmico", "Divino", "Sobrenatural"]
     },
@@ -328,6 +331,7 @@ export const POWERS: Power[] = [
         id: "superapariencia",
         name: "Superapariencia",
         cost: "(APA Final - APA Inicial)/10",
+        characteristic: "APA",
         types: ["Físico"],
         origins: ["Alterado", "Mutante", "Cósmico", "Divino", "Sobrenatural"]
     },
@@ -335,6 +339,7 @@ export const POWERS: Power[] = [
         id: "superconstitucion",
         name: "Superconstitución",
         cost: "(CON Final - CON Inicial)/10",
+        characteristic: "CON",
         types: ["Físico"],
         origins: ["Alterado", "Mutante", "Guardian", "Cósmico", "Sobrenatural"]
     },
@@ -342,6 +347,7 @@ export const POWERS: Power[] = [
         id: "superfuerza",
         name: "Superfuerza",
         cost: "(FUE Final - FUE Inicial)/10",
+        characteristic: "FUE",
         types: ["Físico"],
         origins: ["Alterado", "Mutante", "Guardian", "Cósmico", "Sobrenatural"]
     },
@@ -356,6 +362,7 @@ export const POWERS: Power[] = [
         id: "superinteligencia",
         name: "Superinteligencia",
         cost: "(INT Final - INT Inicial)/10",
+        characteristic: "INT",
         types: ["Psíquico"],
         origins: ["Alterado", "Mutante", "Cósmico", "Divino"]
     },
@@ -363,6 +370,7 @@ export const POWERS: Power[] = [
         id: "superpercepcion",
         name: "Superpercepción",
         cost: "(PER Final - PER Inicial)/10",
+        characteristic: "PER",
         types: ["Físico"],
         origins: ["Alterado", "Mutante", "Guardian", "Cósmico", "Divino"]
     },
@@ -370,6 +378,7 @@ export const POWERS: Power[] = [
         id: "supervelocidad",
         name: "Supervelocidad",
         cost: "5+((AGI Final - AGI Inicial)/10)",
+        characteristic: "AGI",
         types: ["Físico"],
         origins: ["Alterado", "Mutante", "Guardian", "Cósmico", "Divino"]
     },
@@ -377,6 +386,7 @@ export const POWERS: Power[] = [
         id: "supervoluntad",
         name: "Supervoluntad",
         cost: "(VOL Final - VOL Inicial)/10",
+        characteristic: "VOL",
         types: ["Psíquico"],
         origins: ["Sobrenatural"]
     },

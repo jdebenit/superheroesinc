@@ -36,20 +36,27 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
             originMod: number;
             specialtyMod: number;
             powerMod: number;
+            otherMod: number;
         }
     }>(() => {
         // Recuperar estado previo si existe
         if (data.attributes?.breakdown) {
-            return data.attributes.breakdown;
+            const restored = { ...data.attributes.breakdown };
+            Object.keys(restored).forEach(key => {
+                if (typeof restored[key].otherMod !== 'number') {
+                    restored[key].otherMod = 0;
+                }
+            });
+            return restored;
         }
         return {
-            fuerza: { base: 40, originMod: 0, specialtyMod: 0, powerMod: 0 },
-            constitucion: { base: 40, originMod: 0, specialtyMod: 0, powerMod: 0 },
-            agilidad: { base: 40, originMod: 0, specialtyMod: 0, powerMod: 0 },
-            inteligencia: { base: 40, originMod: 0, specialtyMod: 0, powerMod: 0 },
-            percepcion: { base: 40, originMod: 0, specialtyMod: 0, powerMod: 0 },
-            apariencia: { base: 40, originMod: 0, specialtyMod: 0, powerMod: 0 },
-            voluntad: { base: 40, originMod: 0, specialtyMod: 0, powerMod: 0 }
+            fuerza: { base: 40, originMod: 0, specialtyMod: 0, powerMod: 0, otherMod: 0 },
+            constitucion: { base: 40, originMod: 0, specialtyMod: 0, powerMod: 0, otherMod: 0 },
+            agilidad: { base: 40, originMod: 0, specialtyMod: 0, powerMod: 0, otherMod: 0 },
+            inteligencia: { base: 40, originMod: 0, specialtyMod: 0, powerMod: 0, otherMod: 0 },
+            percepcion: { base: 40, originMod: 0, specialtyMod: 0, powerMod: 0, otherMod: 0 },
+            apariencia: { base: 40, originMod: 0, specialtyMod: 0, powerMod: 0, otherMod: 0 },
+            voluntad: { base: 40, originMod: 0, specialtyMod: 0, powerMod: 0, otherMod: 0 }
         };
     });
 
@@ -57,20 +64,16 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
     const [chosenBonusCharacteristic, setChosenBonusCharacteristic] = useState<string | null>(null);
 
     // Actualizar modificadores de origen y especialidad cuando cambian los orígenes o la característica elegida
-    // Solo auto-calcula para orígenes SIN puntos distribuibles
     useEffect(() => {
         const origins = data.origin?.items || [];
-        // Calcular modificadores usando las utilidades
         const originMods = calculateOriginModifiers(origins, chosenBonusCharacteristic);
         const specialtyMods = calculateSpecialtyModifiers(origins);
 
-        // Verificar condiciones usando utilidades
         const hasDistributable = hasDistributablePoints(origins);
         const choosable = hasChoosableCharacteristic(origins);
         const isDistributable = hasDistributable || !!choosable;
 
         if (isDistributable) {
-            // Si hay puntos distribuibles o característica elegible, solo aplicar si está elegida
             if (choosable && chosenBonusCharacteristic) {
                 setCharacteristics(prev => {
                     const updated = { ...prev };
@@ -84,13 +87,12 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
                     return updated;
                 });
             } else {
-                // Si no hay característica elegida, aplicar specialty mods y origin mods fijos
                 setCharacteristics(prev => {
                     const updated = { ...prev };
                     Object.keys(updated).forEach(key => {
                         updated[key] = {
                             ...updated[key],
-                            originMod: originMods[key] || 0,  // Aplicar también origin mods
+                            originMod: originMods[key] || 0,
                             specialtyMod: specialtyMods[key] || 0
                         };
                     });
@@ -100,7 +102,6 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
             return;
         }
 
-        // Si no hay puntos distribuibles ni choosable, aplicar ambos automáticamente
         setCharacteristics(prev => {
             const updated = { ...prev };
             Object.keys(updated).forEach(key => {
@@ -114,19 +115,44 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
         });
     }, [data.origin, chosenBonusCharacteristic]);
 
-    // Sincronizar cambios con el estado del padre (data)
-    // Esto asegura que si los modificadores cambian automáticamente (por origen/especialidad),
-    // el total se actualice en el objeto data principal.
+    // Update internal state when props data changes
+    useEffect(() => {
+        if (data.attributes?.breakdown) {
+            setCharacteristics(prev => {
+                const newState = { ...prev };
+                let hasChanges = false;
+
+                Object.keys(data.attributes.breakdown).forEach(key => {
+                    if (newState[key].powerMod !== data.attributes.breakdown[key].powerMod) {
+                        newState[key] = {
+                            ...newState[key],
+                            powerMod: data.attributes.breakdown[key].powerMod || 0
+                        };
+                        hasChanges = true;
+                    }
+                    if (typeof data.attributes.breakdown[key].otherMod === 'number' && newState[key].otherMod !== data.attributes.breakdown[key].otherMod) {
+                        newState[key] = {
+                            ...newState[key],
+                            otherMod: data.attributes.breakdown[key].otherMod || 0
+                        };
+                        hasChanges = true;
+                    }
+                });
+
+                return hasChanges ? newState : prev;
+            });
+        }
+    }, [data.attributes?.breakdown]);
+
     useEffect(() => {
         const values: { [key: string]: number } = {};
         let changed = false;
 
         CHARACTERISTICS.forEach(char => {
             const c = characteristics[char.id];
-            const total = c.base + c.originMod + c.specialtyMod + c.powerMod;
+            const total = c.base + c.originMod + c.specialtyMod + c.powerMod + (c.otherMod || 0);
             values[char.name] = total;
 
-            // Verificar si el valor ha cambiado respecto a lo que tiene el padre
             if (data.attributes?.values?.[char.name] !== total) {
                 changed = true;
             }
@@ -146,86 +172,70 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
     const handleCharacteristicChange = (charId: string, field: string, value: string) => {
         const numValue = parseInt(value) || 0;
         const origins = data.origin?.items || [];
-        const limits = calculateLimits(origins, charId);
 
-        // NO aplicamos el límite mínimo - es solo informativo
-        // Solo validamos que sea >= 0 y <= max
+        // Determine limits: override if powerMod > 0
+        const defaultLimits = calculateLimits(origins, charId);
+        const hasPowerMod = characteristics[charId].powerMod > 0;
+        const limits = {
+            min: defaultLimits.min,
+            max: hasPowerMod ? 200 : defaultLimits.max
+        };
+
+        // Validate max
         let clampedValue = Math.max(0, Math.min(limits.max, numValue));
 
         const hasSpecialtyPoints = hasSpecialtyDistributablePoints(origins);
 
-        // Si estamos editando el modificador de especialidad
         if (field === 'specialtyMod' && hasSpecialtyPoints) {
             const allowedChars = calculateSpecialtyAllowedCharacteristics(origins);
-
-            // Si hay restricciones y esta característica NO está permitida, no permitir edición
-            if (allowedChars && !allowedChars.includes(charId)) {
-                // No permitir cambios, mantener el valor fijo
-                return;
-            }
+            if (allowedChars && !allowedChars.includes(charId)) return;
 
             const specialtyInfo = getSpecialtyDistributablePointsInfo(origins, characteristics);
             const currentSpecialtyMod = characteristics[charId].specialtyMod;
             const fixedMods = calculateSpecialtyModifiers(origins);
             const fixedMod = fixedMods[charId] || 0;
 
-            // El valor no puede ser menor que el modificador fijo
-            if (clampedValue < fixedMod) {
-                clampedValue = fixedMod;
-            }
+            if (clampedValue < fixedMod) clampedValue = fixedMod;
 
-            // Calcular cuántos puntos usaríamos con este nuevo valor
             const newManualPoints = Math.max(0, clampedValue - fixedMod);
             const currentManualPoints = Math.max(0, currentSpecialtyMod - fixedMod);
             const pointsDiff = newManualPoints - currentManualPoints;
 
-            // Si excedería los puntos disponibles, no permitir
-            if (specialtyInfo.remaining - pointsDiff < 0) {
-                return;
-            }
+            if (specialtyInfo.remaining - pointsDiff < 0) return;
         }
 
         const isDistributableMode = hasDistributablePoints(origins) || !!hasChoosableCharacteristic(origins);
 
-        // Si estamos editando el modificador de origen y hay puntos distribuibles
         if (field === 'originMod' && isDistributableMode) {
-            // Calcular el mínimo permitido (modificadores fijos de origen)
             const fixedOriginMods = calculateOriginModifiers(origins, chosenBonusCharacteristic);
             const minAllowed = fixedOriginMods[charId] || 0;
-
-            // No permitir bajar del modificador fijo
-            if (clampedValue < minAllowed) {
-                clampedValue = minAllowed;
-            }
+            if (clampedValue < minAllowed) clampedValue = minAllowed;
 
             const pointsInfo = getDistributablePointsInfo(origins, characteristics, chosenBonusCharacteristic);
-
-            // Calcular cuántos puntos usaríamos con este nuevo valor
             const currentOriginMod = characteristics[charId].originMod;
             const difference = clampedValue - currentOriginMod;
             const newTotal = pointsInfo.used + difference;
 
-            // Si excedería el total, limitar al máximo permitido
             if (newTotal > pointsInfo.total) {
                 clampedValue = currentOriginMod + (pointsInfo.total - pointsInfo.used);
             }
         }
 
-        // Verificar que el total no exceda el límite máximo
         const currentChar = characteristics[charId];
         const projectedTotal =
             (field === 'base' ? clampedValue : currentChar.base) +
             (field === 'originMod' ? clampedValue : currentChar.originMod) +
             (field === 'specialtyMod' ? clampedValue : currentChar.specialtyMod) +
-            (field === 'powerMod' ? clampedValue : currentChar.powerMod);
+            (field === 'powerMod' ? clampedValue : currentChar.powerMod) +
+            (field === 'otherMod' ? clampedValue : (currentChar.otherMod || 0));
 
-        // Si el total excede el máximo, reducir el valor que se está editando
         if (projectedTotal > limits.max) {
             const otherValues =
                 (field !== 'base' ? currentChar.base : 0) +
                 (field !== 'originMod' ? currentChar.originMod : 0) +
                 (field !== 'specialtyMod' ? currentChar.specialtyMod : 0) +
-                (field !== 'powerMod' ? currentChar.powerMod : 0);
+                (field !== 'powerMod' ? currentChar.powerMod : 0) +
+                (field !== 'otherMod' ? (currentChar.otherMod || 0) : 0);
             clampedValue = Math.max(0, limits.max - otherValues);
         }
 
@@ -246,7 +256,7 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
 
         CHARACTERISTICS.forEach(char => {
             const c = chars[char.id];
-            values[char.name] = c.base + c.originMod + c.specialtyMod + c.powerMod;
+            values[char.name] = c.base + c.originMod + c.specialtyMod + c.powerMod + (c.otherMod || 0);
         });
 
         onChange({
@@ -260,7 +270,7 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
 
     const getTotal = (charId: string) => {
         const c = characteristics[charId];
-        return c.base + c.originMod + c.specialtyMod + c.powerMod;
+        return c.base + c.originMod + c.specialtyMod + c.powerMod + (c.otherMod || 0);
     };
 
     const origins = data.origin?.items || [];
@@ -277,11 +287,10 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
             </h2>
             <p style={{ fontSize: '1.125rem', color: '#666', marginBottom: '1rem' }}>
                 {isDistributableMode
-                    ? 'Distribuye los puntos de origen entre las características. Cada característica puede tener límites diferentes.'
-                    : 'Define las características base y sus modificadores. Los modificadores de origen se calculan automáticamente según los orígenes seleccionados. Cada característica puede tener límites diferentes.'}
+                    ? 'Distribuye los puntos de origen entre las características.'
+                    : 'Define las características base y sus modificadores.'}
             </p>
 
-            {/* Choosable Characteristic Selector */}
             {choosableInfo && (
                 <div style={{
                     marginBottom: '2rem',
@@ -329,70 +338,46 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
                             </button>
                         ))}
                     </div>
-                    {choosableInfo.distributablePoints && (
-                        <p style={{
-                            marginTop: '0.75rem',
-                            fontSize: '0.875rem',
-                            color: '#92400e'
-                        }}>
-                            Además, puedes distribuir {choosableInfo.distributablePoints} puntos adicionales entre todas las características.
-                        </p>
-                    )}
                 </div>
             )}
 
-            {/* Distributable Points Counter */}
-            {isDistributableMode && pointsInfo && (
-                <div style={{
-                    display: 'inline-block',
-                    padding: '1rem 2rem',
-                    backgroundColor: pointsInfo.remaining >= 0 ? '#dbeafe' : '#fee2e2',
-                    border: `3px solid ${pointsInfo.remaining >= 0 ? '#2563eb' : '#dc2626'}`,
-                    borderRadius: '12px',
-                    marginBottom: '2rem',
-                    fontSize: '1.125rem',
-                    fontWeight: 'bold'
-                }}>
-                    📊 Puntos de Origen: {pointsInfo.used}/{pointsInfo.total}
-                    <span style={{
-                        marginLeft: '1rem',
-                        color: pointsInfo.remaining >= 0 ? '#16a34a' : '#dc2626'
+            <div className="flex gap-4 mb-8">
+                {isDistributableMode && pointsInfo && (
+                    <div style={{
+                        display: 'inline-block',
+                        padding: '1rem 2rem',
+                        backgroundColor: pointsInfo.remaining >= 0 ? '#dbeafe' : '#fee2e2',
+                        border: `3px solid ${pointsInfo.remaining >= 0 ? '#2563eb' : '#dc2626'}`,
+                        borderRadius: '12px',
+                        fontSize: '1.125rem',
+                        fontWeight: 'bold'
                     }}>
-                        ({pointsInfo.remaining >= 0 ? `${pointsInfo.remaining} restantes` : `${Math.abs(pointsInfo.remaining)} excedido`})
-                    </span>
-                </div>
-            )}
+                        📊 Puntos de Origen: {pointsInfo.used}/{pointsInfo.total}
+                        <span style={{
+                            marginLeft: '1rem',
+                            color: pointsInfo.remaining >= 0 ? '#16a34a' : '#dc2626'
+                        }}>
+                            ({pointsInfo.remaining >= 0 ? `${pointsInfo.remaining} restantes` : `${Math.abs(pointsInfo.remaining)} excedido`})
+                        </span>
+                    </div>
+                )}
 
-            {/* Specialty Distributable Points Counter */}
-            {specialtyPointsInfo && (
-                <div style={{
-                    display: 'inline-block',
-                    padding: '1rem 2rem',
-                    backgroundColor: specialtyPointsInfo.remaining >= 0 ? '#dbeafe' : '#fee2e2',
-                    border: `3px solid ${specialtyPointsInfo.remaining >= 0 ? '#3b82f6' : '#dc2626'}`,
-                    borderRadius: '12px',
-                    marginLeft: '1rem',
-                    fontSize: '1.125rem',
-                    fontWeight: 'bold',
-                    color: specialtyPointsInfo.remaining >= 0 ? '#1e40af' : '#dc2626'
-                }}>
-                    ⚡ Puntos Especialidad: {specialtyPointsInfo.used}/{specialtyPointsInfo.total}
-                    {(() => {
-                        const allowedChars = calculateSpecialtyAllowedCharacteristics(origins);
-                        if (allowedChars) {
-                            const charNames = allowedChars.map(id =>
-                                CHARACTERISTICS.find(c => c.id === id)?.abbr
-                            ).filter(Boolean).join(', ');
-                            return <span style={{ fontSize: '0.875rem', marginLeft: '0.5rem' }}>({charNames})</span>;
-                        }
-                        return null;
-                    })()}
-                </div>
-            )}
+                {specialtyPointsInfo && (
+                    <div style={{
+                        display: 'inline-block',
+                        padding: '1rem 2rem',
+                        backgroundColor: specialtyPointsInfo.remaining >= 0 ? '#dbeafe' : '#fee2e2',
+                        border: `3px solid ${specialtyPointsInfo.remaining >= 0 ? '#3b82f6' : '#dc2626'}`,
+                        borderRadius: '12px',
+                        fontSize: '1.125rem',
+                        fontWeight: 'bold',
+                        color: specialtyPointsInfo.remaining >= 0 ? '#1e40af' : '#dc2626'
+                    }}>
+                        ⚡ Puntos Especialidad: {specialtyPointsInfo.used}/{specialtyPointsInfo.total}
+                    </div>
+                )}
+            </div>
 
-
-
-            {/* Characteristics Grid */}
             <div style={{
                 display: 'grid',
                 gap: '1.5rem',
@@ -401,7 +386,14 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
                 {CHARACTERISTICS.map((char) => {
                     const total = getTotal(char.id);
                     const c = characteristics[char.id];
-                    const charLimits = calculateLimits(origins, char.id);
+
+                    // Limit Override Logic in Render
+                    const defaultLimits = calculateLimits(origins, char.id);
+                    const hasPowerMod = c.powerMod > 0;
+                    const charLimits = {
+                        min: defaultLimits.min,
+                        max: hasPowerMod ? 200 : defaultLimits.max
+                    };
 
                     return (
                         <div
@@ -414,7 +406,6 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
                                 boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
                             }}
                         >
-                            {/* Header */}
                             <div style={{
                                 display: 'flex',
                                 justifyContent: 'space-between',
@@ -461,18 +452,18 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
                                         lineHeight: '1.2'
                                     }}>
                                         <div style={{ color: '#dc2626' }}>Min: {charLimits.min}</div>
-                                        <div style={{ color: '#16a34a' }}>Max: {charLimits.max}</div>
+                                        <div style={{ color: hasPowerMod ? '#9333ea' : '#16a34a' }}>
+                                            Max: {charLimits.max} {hasPowerMod && '⚡'}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
-                            {/* Inputs Grid */}
                             <div style={{
                                 display: 'grid',
-                                gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
+                                gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
                                 gap: '1rem'
                             }}>
-                                {/* Base */}
                                 <div>
                                     <label style={{
                                         display: 'block',
@@ -486,7 +477,7 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
                                     <input
                                         type="number"
                                         min="0"
-                                        max="200"
+                                        max="200" // Always allow typing up to 200, but logic clamps
                                         value={c.base}
                                         onChange={(e) => handleCharacteristicChange(char.id, 'base', e.target.value)}
                                         style={{
@@ -501,7 +492,6 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
                                     />
                                 </div>
 
-                                {/* Origin Modifier - Editable in distributable mode */}
                                 <div>
                                     <label style={{
                                         display: 'block',
@@ -534,7 +524,6 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
                                     />
                                 </div>
 
-                                {/* Specialty Modifier */}
                                 <div>
                                     <label style={{
                                         display: 'block',
@@ -558,20 +547,12 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
                                         max="200"
                                         value={c.specialtyMod}
                                         readOnly={(() => {
-                                            // Si no hay puntos de especialidad, hacer read-only (incluso si hay mod fijo)
-                                            if (!specialtyPointsInfo) {
-                                                return true;
-                                            }
-                                            // Si hay restricciones y esta característica no está permitida
+                                            if (!specialtyPointsInfo) return true;
                                             const allowedChars = calculateSpecialtyAllowedCharacteristics(origins);
                                             return allowedChars ? !allowedChars.includes(char.id) : false;
                                         })()}
                                         disabled={(() => {
-                                            // Si no hay puntos de especialidad, deshabilitar (incluso si hay mod fijo)
-                                            if (!specialtyPointsInfo) {
-                                                return true;
-                                            }
-                                            // Si hay restricciones y esta característica no está permitida
+                                            if (!specialtyPointsInfo) return true;
                                             const allowedChars = calculateSpecialtyAllowedCharacteristics(origins);
                                             return allowedChars ? !allowedChars.includes(char.id) : false;
                                         })()}
@@ -589,7 +570,37 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
                                     />
                                 </div>
 
-                                {/* Power Modifier */}
+                                <div>
+                                    <label style={{
+                                        display: 'block',
+                                        fontSize: '0.875rem',
+                                        fontWeight: 'bold',
+                                        color: '#4b5563',
+                                        marginBottom: '0.5rem'
+                                    }}>
+                                        Mod. Poder
+                                    </label>
+                                    <input
+                                        type="number"
+                                        min="0"
+                                        max="200"
+                                        value={c.powerMod}
+                                        readOnly={true}
+                                        style={{
+                                            width: '100%',
+                                            padding: '0.75rem',
+                                            fontSize: '1rem',
+                                            border: '2px solid #e5e7eb',
+                                            borderRadius: '8px',
+                                            textAlign: 'center',
+                                            fontWeight: 'bold',
+                                            backgroundColor: '#f3f4f6',
+                                            color: '#374151',
+                                            cursor: 'default'
+                                        }}
+                                    />
+                                </div>
+
                                 <div>
                                     <label style={{
                                         display: 'block',
@@ -602,10 +613,10 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
                                     </label>
                                     <input
                                         type="number"
-                                        min="0"
+                                        min="-200"
                                         max="200"
-                                        value={c.powerMod}
-                                        onChange={(e) => handleCharacteristicChange(char.id, 'powerMod', e.target.value)}
+                                        value={c.otherMod || 0}
+                                        onChange={(e) => handleCharacteristicChange(char.id, 'otherMod', e.target.value)}
                                         style={{
                                             width: '100%',
                                             padding: '0.75rem',
@@ -620,7 +631,6 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
                                 </div>
                             </div>
 
-                            {/* Formula */}
                             <div style={{
                                 marginTop: '1rem',
                                 padding: '0.75rem',
@@ -631,7 +641,7 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
                                 textAlign: 'center',
                                 fontFamily: 'monospace'
                             }}>
-                                {c.base} + {c.originMod} + {c.specialtyMod} + {c.powerMod} = <strong style={{ color: '#2563eb' }}>{total}</strong>
+                                {c.base} + {c.originMod} + {c.specialtyMod} + {c.powerMod} + {c.otherMod || 0} = <strong style={{ color: '#2563eb' }}>{total}</strong>
                                 <div style={{ marginTop: '0.25rem', color: '#7e22ce', fontWeight: 'bold' }}>
                                     Genera: {pcValues[char.id].toFixed(1)} PC
                                 </div>
@@ -641,7 +651,6 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
                 })}
             </div>
 
-            {/* Summary */}
             <div style={{
                 marginTop: '2rem',
                 padding: '1.5rem',
