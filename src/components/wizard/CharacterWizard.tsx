@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import CharacterPreview from './CharacterPreview';
 import Step1_OriginSelection from './steps/Step1_OriginSelection';
 import Step2_Characteristics from './steps/Step2_Characteristics';
-import Step3_Powers from './steps/Step3_Powers';
+import Step3_Especials from './steps/Step3_Especials';
 import Step4_GeneralSkills from './steps/Step4_GeneralSkills';
 import Step5_Background from './steps/Step5_Background';
 import Step6_Details from './steps/Step6_Details';
@@ -159,7 +159,7 @@ export default function CharacterWizard() {
         }
 
         if (currentStep === 3) {
-            return <Step3_Powers data={character} onChange={updateCharacter} />;
+            return <Step3_Especials data={character} onChange={updateCharacter} />;
         }
 
         if (currentStep === 4) {
