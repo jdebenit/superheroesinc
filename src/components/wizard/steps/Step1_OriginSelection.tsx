@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ORIGIN_CATEGORIES } from '../../../data/originDefinitions';
 
 interface Step1Props {
@@ -22,6 +22,30 @@ const ORIGINS = [
 export default function Step1_OriginSelection({ data, onChange }: Step1Props) {
     const [selectedOrigins, setSelectedOrigins] = useState<string[]>([]);
     const [selectedSubtypes, setSelectedSubtypes] = useState<{ [originId: string]: string[] }>({});
+
+    // Initialize state from data.origin.items when component mounts or data changes
+    useEffect(() => {
+        if (data.origin?.items && data.origin.items.length > 0) {
+            const origins: string[] = [];
+            const subtypes: { [originId: string]: string[] } = {};
+
+            data.origin.items.forEach((item: any) => {
+                const originName = Object.keys(item)[0];
+                const origin = ORIGINS.find(o => o.name === originName);
+
+                if (origin) {
+                    origins.push(origin.id);
+                    const subtypeList = item[originName];
+                    if (Array.isArray(subtypeList) && subtypeList.length > 0) {
+                        subtypes[origin.id] = subtypeList;
+                    }
+                }
+            });
+
+            setSelectedOrigins(origins);
+            setSelectedSubtypes(subtypes);
+        }
+    }, []); // Only run on mount to avoid overwriting user changes
 
     const handleToggleOrigin = (originId: string) => {
         const newSelection = selectedOrigins.includes(originId)

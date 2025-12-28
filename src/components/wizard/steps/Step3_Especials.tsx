@@ -281,9 +281,9 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
             {!isGuardian && !isAlterado && !hasEM && (
                 <div className="text-center py-12 border-4 border-dashed border-gray-300 rounded-xl bg-gray-50">
                     <p className="text-xl text-gray-500 font-bold">
-                        No has seleccionado ningún origen que requiera configuración de poderes especial en este paso.
+                        No has seleccionado ningún origen que actualmente tenga habilitado este paso. Recuerda es una Alpha.
                     </p>
-                    <p className="text-gray-400 mt-2 font-comic">(Guardián, Alterado o Arcano)</p>
+                    <p className="text-gray-400 mt-2 font-comic">Prueba con Guardián, Alterado o Arcano</p>
                 </div>
             )}
 

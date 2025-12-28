@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import CharacterPreview from './CharacterPreview';
 import Step1_OriginSelection from './steps/Step1_OriginSelection';
 import Step2_Characteristics from './steps/Step2_Characteristics';
@@ -78,12 +78,37 @@ const initialCharacterState = {
     spells: {
         selected: [],
         emFormula: { divisor: 4, pcCost: 0 } // Default for Dotado/Híbrido
+    },
+    powers: {
+        selected: []
     }
 };
 
 export default function CharacterWizard() {
     const [currentStep, setCurrentStep] = useState(1);
-    const [character, setCharacter] = useState(initialCharacterState);
+
+    // Load character from sessionStorage on mount, or use initial state
+    const [character, setCharacter] = useState(() => {
+        if (typeof window !== 'undefined') {
+            const saved = sessionStorage.getItem('characterWizardState');
+            if (saved) {
+                try {
+                    return JSON.parse(saved);
+                } catch (e) {
+                    console.error('Error loading character from sessionStorage:', e);
+                }
+            }
+        }
+        return initialCharacterState;
+    });
+
+    // Save character to sessionStorage whenever it changes
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            sessionStorage.setItem('characterWizardState', JSON.stringify(character));
+        }
+    }, [character]);
+
 
     // Calcular coste total en PCs
     const totalPCs = useMemo(() => {
@@ -234,6 +259,22 @@ export default function CharacterWizard() {
         setCurrentStep(stepId);
     };
 
+    const handleReset = () => {
+        if (confirm('¿Estás seguro de que quieres reiniciar toda la creación del personaje? Esta acción no se puede deshacer.')) {
+            setCharacter(initialCharacterState);
+            setCurrentStep(1);
+            // Clear sessionStorage
+            if (typeof window !== 'undefined') {
+                sessionStorage.removeItem('characterWizardState');
+            }
+        }
+    };
+
+    const handleConfiguration = () => {
+        // TODO: Implement configuration modal
+        alert('Configuración - Próximamente');
+    };
+
     const updateCharacter = (updates: any) => {
         setCharacter(prev => ({ ...prev, ...updates }));
     };
@@ -286,7 +327,7 @@ export default function CharacterWizard() {
                     Crea tu personaje paso a paso
                 </p>
 
-                {/* Header Controls: PC Counter + Preview */}
+                {/* Header Controls: PC Counter + Preview + Config + Reset */}
                 <div style={{
                     display: 'flex',
                     justifyContent: 'center',
@@ -299,18 +340,66 @@ export default function CharacterWizard() {
                         display: 'inline-block',
                         padding: '0.75rem 2rem',
                         backgroundColor: '#fef3c7',
-                        border: '3px solid #f59e0b',
-                        borderRadius: '12px',
-                        fontSize: '1.25rem',
+                        border: 'none',
+                        borderRadius: '8px',
+                        fontSize: '1rem',
                         fontWeight: 'bold',
                         color: '#92400e',
                         boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
                     }}>
-                        💰 Puntos de Creación: <span style={{ color: '#dc2626', fontSize: '1.5rem' }}>{totalPCs}</span>
+                        Puntos de Creación: <span style={{ color: '#dc2626', fontSize: '1rem' }}>{totalPCs}</span>
                     </div>
 
                     {/* Preview Button */}
                     <CharacterPreview character={character} totalPCs={totalPCs} />
+
+                    {/* Configuration Button */}
+                    <button
+                        onClick={handleConfiguration}
+                        style={{
+                            padding: '0.75rem 1.5rem',
+                            backgroundColor: '#6366f1',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '8px',
+                            fontSize: '1rem',
+                            fontWeight: 'bold',
+                            cursor: 'pointer',
+                            boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                            transition: 'all 0.2s',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '0.5rem'
+                        }}
+                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#4f46e5'}
+                        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#6366f1'}
+                    >
+                        ⚙️ Configuración
+                    </button>
+
+                    {/* Reset Button */}
+                    <button
+                        onClick={handleReset}
+                        style={{
+                            padding: '0.75rem 1.5rem',
+                            backgroundColor: '#ef4444',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '8px',
+                            fontSize: '1rem',
+                            fontWeight: 'bold',
+                            cursor: 'pointer',
+                            boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                            transition: 'all 0.2s',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '0.5rem'
+                        }}
+                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#dc2626'}
+                        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#ef4444'}
+                    >
+                        🔄 Reiniciar
+                    </button>
                 </div>
             </div>
 
