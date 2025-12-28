@@ -87,25 +87,33 @@ const initialCharacterState = {
 export default function CharacterWizard() {
     const [currentStep, setCurrentStep] = useState(1);
 
-    // Load character from sessionStorage on mount, or use initial state
+    // Load character from localStorage on mount, or use initial state
     const [character, setCharacter] = useState(() => {
         if (typeof window !== 'undefined') {
-            const saved = sessionStorage.getItem('characterWizardState');
-            if (saved) {
-                try {
-                    return JSON.parse(saved);
-                } catch (e) {
-                    console.error('Error loading character from sessionStorage:', e);
+            try {
+                const saved = localStorage.getItem('characterWizardState');
+                if (saved) {
+                    const parsed = JSON.parse(saved);
+                    console.log('✅ Loaded character from localStorage:', parsed);
+                    return parsed;
                 }
+            } catch (e) {
+                console.error('❌ Error loading character from localStorage:', e);
             }
         }
+        console.log('🆕 Using initial character state');
         return initialCharacterState;
     });
 
-    // Save character to sessionStorage whenever it changes
+    // Save character to localStorage whenever it changes
     useEffect(() => {
         if (typeof window !== 'undefined') {
-            sessionStorage.setItem('characterWizardState', JSON.stringify(character));
+            try {
+                localStorage.setItem('characterWizardState', JSON.stringify(character));
+                console.log('💾 Saved character to localStorage');
+            } catch (e) {
+                console.error('❌ Error saving to localStorage:', e);
+            }
         }
     }, [character]);
 
@@ -263,9 +271,10 @@ export default function CharacterWizard() {
         if (confirm('¿Estás seguro de que quieres reiniciar toda la creación del personaje? Esta acción no se puede deshacer.')) {
             setCharacter(initialCharacterState);
             setCurrentStep(1);
-            // Clear sessionStorage
+            // Clear localStorage
             if (typeof window !== 'undefined') {
-                sessionStorage.removeItem('characterWizardState');
+                localStorage.removeItem('characterWizardState');
+                console.log('🗑️ Cleared localStorage');
             }
         }
     };
