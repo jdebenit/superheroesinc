@@ -35,7 +35,8 @@ export function calculateCreationPoints(
             }
 
             // Calcular puntos individuales con decimales y aplicador multiplicador
-            const pc = ((char.base + char.powerMod) / 10) * costMultiplier;
+            // NOTE: powerMod is NOT included here because it's already charged in the power cost
+            const pc = (char.base / 10) * costMultiplier;
             pcValues[charId] = pc;
             totalPC += pc;
         }
