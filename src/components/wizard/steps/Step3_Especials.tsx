@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { POWERS, type Power } from '../../../data/powers';
+import { POWERS, type Power, type PowerType } from '../../../data/powers';
 import { SPELLS, type Spell } from '../../../data/spells';
 
 interface Step3Props {
@@ -89,6 +89,29 @@ const getRankLevel = (rank: number): string => {
     if (rank <= 70) return 'Elevado';
     if (rank <= 95) return 'Alto';
     return 'Cósmico';
+};
+
+const getMutantPowerTypes = (data: any): PowerType[] => {
+    const mutantOrigin = data.origin?.items?.find((item: any) =>
+        Object.keys(item)[0] === 'Mutante'
+    );
+
+    if (!mutantOrigin) return [];
+
+    const subtypes = mutantOrigin['Mutante'];
+    if (!Array.isArray(subtypes) || subtypes.length === 0) return [];
+
+    const subtype = subtypes[0]; // El primer subtipo seleccionado
+
+    // Mapear subtipo a tipos de poderes
+    if (subtype === 'Psíquico') return ['Psíquico'];
+    if (subtype === 'Energético') return ['Energético'];
+    if (subtype === 'Físico') return ['Físico'];
+    if (subtype === 'Psíquico/Energético') return ['Psíquico', 'Energético'];
+    if (subtype === 'Energético/Físico') return ['Energético', 'Físico'];
+    if (subtype === 'Psíquico/Físico') return ['Psíquico', 'Físico'];
+
+    return [];
 };
 
 const POWER_TYPES = ["Todos", "Físico", "Psíquico", "Energético"];
@@ -237,6 +260,14 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                 // Must belong to the origin context 
                 if (modalOriginFilter && !p.origins.includes(modalOriginFilter)) return false;
 
+                // Special filtering for Mutant powers by type
+                if (modalOriginFilter === 'Mutante') {
+                    const allowedTypes = getMutantPowerTypes(data);
+                    if (allowedTypes.length > 0 && !p.types.some(t => allowedTypes.includes(t))) {
+                        return false;
+                    }
+                }
+
                 if (selectedTypeFilter !== "Todos" && !p.types.includes(selectedTypeFilter as any)) {
                     return false;
                 }
@@ -250,7 +281,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
             });
         }
         return [];
-    }, [modalType, modalOriginFilter, searchTerm, selectedTypeFilter]);
+    }, [modalType, modalOriginFilter, searchTerm, selectedTypeFilter, data]);
 
     // Derived State for Display
     const isGuardian = hasOrigin(data, 'Guardián');
@@ -265,6 +296,8 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     const isSemidemonio = hasSubtype(data, 'Sobrenatural', 'Semidemonio');
     const isThals = hasOrigin(data, 'Thals');
     const isDivino = hasOrigin(data, 'Divino'); // Any Divine subtype
+    const isCosmico = hasOrigin(data, 'Cósmico');
+    const isMutante = hasOrigin(data, 'Mutante');
 
     // EM Formula state
     const emFormula = data.spells?.emFormula || { divisor: 4, pcCost: 0 };
@@ -284,17 +317,17 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                 Poderes y Habilidades Especiales
             </h2>
 
-            {!isGuardian && !isAlterado && !hasEM && !isVampiro && !isSemidemonio && !isThals && !isDivino && (
+            {!isGuardian && !isAlterado && !hasEM && !isVampiro && !isSemidemonio && !isThals && !isDivino && !isCosmico && !isMutante && (
                 <div className="text-center py-12 border-4 border-dashed border-gray-300 rounded-xl bg-gray-50">
                     <p className="text-xl text-gray-500 font-bold">
                         No has seleccionado ningún origen que actualmente tenga habilitado este paso. Recuerda es una Alpha.
                     </p>
-                    <p className="text-gray-400 mt-2 font-comic">Prueba con Guardián, Alterado, Arcano, Sobrenatural, Thals o Divino</p>
+                    <p className="text-gray-400 mt-2 font-comic">Prueba con Guardián, Alterado, Arcano, Sobrenatural, Thals, Divino, Cósmico o Mutante</p>
                 </div>
             )}
 
-            {/* UNIFIED POWERS SECTION (Guardian, Alterado, Vampírico, Sobrenatural, Thals, Divino, Terrano, Dotado) */}
-            {(isGuardian || isAlterado || isVampiro || isSemidemonio || isThals || isDivino || isTerrano || isDotado) && (
+            {/* UNIFIED POWERS SECTION (Guardian, Alterado, Vampírico, Sobrenatural, Thals, Divino, Terrano, Dotado, Cósmico, Mutante) */}
+            {(isGuardian || isAlterado || isVampiro || isSemidemonio || isThals || isDivino || isTerrano || isDotado || isCosmico || isMutante) && (
                 <div className="bg-gray-50 border-4 border-gray-800 rounded-xl overflow-hidden shadow-[8px_8px_0px_rgba(0,0,0,0.8)]">
                     <div className="p-6 border-b-4 border-gray-800 bg-white flex flex-col md:flex-row justify-between items-center gap-4">
 
@@ -343,6 +376,16 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                             {isDotado && (
                                 <button onClick={() => openPowerModal('Sobrenatural')} className="pixel-button bg-amber-600 text-white hover:bg-amber-700 text-sm flex items-center gap-2">
                                     <span>+</span> Dotado (Sobrenatural)
+                                </button>
+                            )}
+                            {isCosmico && (
+                                <button onClick={() => openPowerModal('Cósmico')} className="pixel-button bg-indigo-600 text-white hover:bg-indigo-700 text-sm flex items-center gap-2">
+                                    <span>+</span> Cósmico
+                                </button>
+                            )}
+                            {isMutante && (
+                                <button onClick={() => openPowerModal('Mutante')} className="pixel-button bg-pink-600 text-white hover:bg-pink-700 text-sm flex items-center gap-2">
+                                    <span>+</span> Mutante
                                 </button>
                             )}
                         </div>
@@ -648,6 +691,36 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                                                             border: '1px solid #fde68a'
                                                         }}>
                                                             Divino
+                                                        </span>
+                                                    )}
+                                                    {selection.origin === 'Cósmico' && (
+                                                        <span style={{
+                                                            fontSize: '10px',
+                                                            textTransform: 'uppercase',
+                                                            fontWeight: '900',
+                                                            letterSpacing: '0.05em',
+                                                            backgroundColor: '#e0e7ff',
+                                                            color: '#4338ca',
+                                                            padding: '2px 8px',
+                                                            borderRadius: '9999px',
+                                                            border: '1px solid #c7d2fe'
+                                                        }}>
+                                                            Cósmico
+                                                        </span>
+                                                    )}
+                                                    {selection.origin === 'Mutante' && (
+                                                        <span style={{
+                                                            fontSize: '10px',
+                                                            textTransform: 'uppercase',
+                                                            fontWeight: '900',
+                                                            letterSpacing: '0.05em',
+                                                            backgroundColor: '#fce7f3',
+                                                            color: '#be123c',
+                                                            padding: '2px 8px',
+                                                            borderRadius: '9999px',
+                                                            border: '1px solid #fbcfe8'
+                                                        }}>
+                                                            Mutante
                                                         </span>
                                                     )}
                                                 </td>
