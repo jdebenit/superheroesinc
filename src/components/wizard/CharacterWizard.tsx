@@ -392,8 +392,14 @@ export default function CharacterWizard() {
                             alignItems: 'center',
                             gap: '0.5rem'
                         }}
-                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#4f46e5'}
-                        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#6366f1'}
+                        onMouseEnter={(e) => {
+                            e.currentTarget.style.transform = 'translateY(-2px)';
+                            e.currentTarget.style.backgroundColor = '#4f46e5';
+                        }}
+                        onMouseLeave={(e) => {
+                            e.currentTarget.style.transform = 'translateY(0)';
+                            e.currentTarget.style.backgroundColor = '#6366f1'
+                        }}
                     >
                         ⚙️ Configuración
                     </button>

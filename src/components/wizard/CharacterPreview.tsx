@@ -42,21 +42,19 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
             <button
                 onClick={openModal}
                 style={{
-                    padding: '1rem 1.5rem',
-                    fontSize: '1.125rem',
-                    fontWeight: 'bold',
-                    borderRadius: '12px',
-                    border: '4px solid #1e40af',
+                    padding: '0.75rem 1.5rem',
                     backgroundColor: '#2563eb',
                     color: 'white',
+                    border: 'none',
+                    borderRadius: '8px',
+                    fontSize: '1rem',
+                    fontWeight: 'bold',
                     cursor: 'pointer',
-                    transition: 'all 0.2s ease',
-                    boxShadow: '4px 4px 0px #1e40af, 0 10px 20px rgba(37, 99, 235, 0.3)',
+                    boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                    transition: 'all 0.2s',
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '0.5rem',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05em'
+                    gap: '0.5rem'
                 }}
                 onMouseEnter={(e) => {
                     e.currentTarget.style.transform = 'translateY(-2px)';
