@@ -70,7 +70,7 @@ export default function Step6_Details({ data, onChange }: Step6Props) {
     const addEquipment = () => {
         onChange({
             equipment: {
-                items: [...(data.equipment?.items || []), { name: "Nuevo equipo", notes: "" }]
+                items: [...(data.equipment?.items || []), { name: "Nuevo equipo", notes: "", cost: 0 }]
             }
         });
     };
@@ -91,7 +91,7 @@ export default function Step6_Details({ data, onChange }: Step6Props) {
     const addWeapon = () => {
         onChange({
             weapons: {
-                items: [...(data.weapons?.items || []), { name: "Nueva arma", damage: "", notes: "" }]
+                items: [...(data.weapons?.items || []), { name: "Nueva arma", damage: "", notes: "", cost: 0 }]
             }
         });
     };
@@ -298,7 +298,7 @@ export default function Step6_Details({ data, onChange }: Step6Props) {
                     {data.weapons?.items?.map((item, index) => (
                         <div key={index} style={{
                             display: 'grid',
-                            gridTemplateColumns: '2fr 1fr 2fr auto',
+                            gridTemplateColumns: '2fr 1fr 2fr 100px auto',
                             gap: '1rem',
                             alignItems: 'start',
                             padding: '1rem',
@@ -334,6 +334,17 @@ export default function Step6_Details({ data, onChange }: Step6Props) {
                                     onChange={(e) => updateWeapon(index, 'notes', e.target.value)}
                                     style={{ ...inputStyle, marginBottom: 0 }}
                                     placeholder="Alcance, Munición..."
+                                />
+                            </div>
+                            <div>
+                                <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Coste (PCs)</label>
+                                <input
+                                    type="number"
+                                    min="0"
+                                    value={item.cost || 0}
+                                    onChange={(e) => updateWeapon(index, 'cost', Math.max(0, parseInt(e.target.value) || 0).toString())}
+                                    style={{ ...inputStyle, marginBottom: 0 }}
+                                    placeholder="0"
                                 />
                             </div>
                             <button
@@ -377,32 +388,50 @@ export default function Step6_Details({ data, onChange }: Step6Props) {
                     {data.equipment?.items?.map((item, index) => (
                         <div key={index} style={{
                             display: 'grid',
-                            gridTemplateColumns: '1fr 2fr auto',
+                            gridTemplateColumns: '1fr 2fr 100px auto',
                             gap: '1rem',
-                            alignItems: 'center',
+                            alignItems: 'start',
                             padding: '0.75rem',
                             backgroundColor: '#fffbeb',
                             border: '1px solid #fef3c7',
                             borderRadius: '8px'
                         }}>
-                            <input
-                                type="text"
-                                value={item.name}
-                                onChange={(e) => updateEquipment(index, 'name', e.target.value)}
-                                style={{ ...inputStyle, marginBottom: 0 }}
-                                placeholder="Nombre del objeto"
-                            />
-                            <input
-                                type="text"
-                                value={item.notes || ''}
-                                onChange={(e) => updateEquipment(index, 'notes', e.target.value)}
-                                style={{ ...inputStyle, marginBottom: 0 }}
-                                placeholder="Descripción o efectos"
-                            />
+                            <div>
+                                <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Nombre</label>
+                                <input
+                                    type="text"
+                                    value={item.name}
+                                    onChange={(e) => updateEquipment(index, 'name', e.target.value)}
+                                    style={{ ...inputStyle, marginBottom: 0 }}
+                                    placeholder="Nombre del objeto"
+                                />
+                            </div>
+                            <div>
+                                <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Descripción / Efectos</label>
+                                <input
+                                    type="text"
+                                    value={item.notes || ''}
+                                    onChange={(e) => updateEquipment(index, 'notes', e.target.value)}
+                                    style={{ ...inputStyle, marginBottom: 0 }}
+                                    placeholder="Descripción o efectos"
+                                />
+                            </div>
+                            <div>
+                                <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Coste (PCs)</label>
+                                <input
+                                    type="number"
+                                    min="0"
+                                    value={item.cost || 0}
+                                    onChange={(e) => updateEquipment(index, 'cost', Math.max(0, parseInt(e.target.value) || 0).toString())}
+                                    style={{ ...inputStyle, marginBottom: 0 }}
+                                    placeholder="0"
+                                />
+                            </div>
                             <button
                                 onClick={() => removeEquipment(index)}
                                 style={{
                                     ...buttonStyle,
+                                    marginTop: '1.5rem',
                                     backgroundColor: '#d97706',
                                     color: 'white'
                                 }}

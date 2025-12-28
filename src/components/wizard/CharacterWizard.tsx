@@ -248,6 +248,18 @@ export default function CharacterWizard() {
         }, 0);
         total += powerCost;
 
+        // 10. Equipment Costs
+        const equipmentCost = (character.equipment?.items || []).reduce((acc: number, item: any) => {
+            return acc + (parseInt(item.cost) || 0);
+        }, 0);
+        total += equipmentCost;
+
+        // 11. Weapons Costs
+        const weaponsCost = (character.weapons?.items || []).reduce((acc: number, item: any) => {
+            return acc + (parseInt(item.cost) || 0);
+        }, 0);
+        total += weaponsCost;
+
         return total.toFixed(1); // Devolver con decimales
     }, [character]);
 
