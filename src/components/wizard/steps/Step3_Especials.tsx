@@ -260,6 +260,12 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     const isHibrido = hasSubtype(data, 'Arcano', 'Híbrido mitológico');
     const isTerrano = hasSubtype(data, 'Arcano', 'Terrano');
 
+    // New origin-specific power access
+    const isVampiro = hasSubtype(data, 'Sobrenatural', 'Vampiro');
+    const isSemidemonio = hasSubtype(data, 'Sobrenatural', 'Semidemonio');
+    const isThals = hasOrigin(data, 'Thals');
+    const isDivino = hasOrigin(data, 'Divino'); // Any Divine subtype
+
     // EM Formula state
     const emFormula = data.spells?.emFormula || { divisor: 4, pcCost: 0 };
     const hasEMFormula = !isMago && (isDotado || isHibrido || isTerrano);
@@ -278,17 +284,17 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                 Poderes y Habilidades Especiales
             </h2>
 
-            {!isGuardian && !isAlterado && !hasEM && (
+            {!isGuardian && !isAlterado && !hasEM && !isVampiro && !isSemidemonio && !isThals && !isDivino && (
                 <div className="text-center py-12 border-4 border-dashed border-gray-300 rounded-xl bg-gray-50">
                     <p className="text-xl text-gray-500 font-bold">
                         No has seleccionado ningún origen que actualmente tenga habilitado este paso. Recuerda es una Alpha.
                     </p>
-                    <p className="text-gray-400 mt-2 font-comic">Prueba con Guardián, Alterado o Arcano</p>
+                    <p className="text-gray-400 mt-2 font-comic">Prueba con Guardián, Alterado, Arcano, Sobrenatural, Thals o Divino</p>
                 </div>
             )}
 
-            {/* UNIFIED POWERS SECTION (Guardian & Alterado) */}
-            {(isGuardian || isAlterado) && (
+            {/* UNIFIED POWERS SECTION (Guardian, Alterado, Vampírico, Sobrenatural, Thals, Divino, Terrano, Dotado) */}
+            {(isGuardian || isAlterado || isVampiro || isSemidemonio || isThals || isDivino || isTerrano || isDotado) && (
                 <div className="bg-gray-50 border-4 border-gray-800 rounded-xl overflow-hidden shadow-[8px_8px_0px_rgba(0,0,0,0.8)]">
                     <div className="p-6 border-b-4 border-gray-800 bg-white flex flex-col md:flex-row justify-between items-center gap-4">
 
@@ -307,6 +313,36 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                             {isAlterado && (
                                 <button onClick={() => openPowerModal('Alterado')} className="pixel-button bg-purple-600 text-white hover:bg-purple-700 text-sm flex items-center gap-2">
                                     <span>+</span> Alterado
+                                </button>
+                            )}
+                            {isVampiro && (
+                                <button onClick={() => openPowerModal('Vampírico')} className="pixel-button bg-red-700 text-white hover:bg-red-800 text-sm flex items-center gap-2">
+                                    <span>+</span> Vampírico
+                                </button>
+                            )}
+                            {isSemidemonio && (
+                                <button onClick={() => openPowerModal('Sobrenatural')} className="pixel-button bg-orange-600 text-white hover:bg-orange-700 text-sm flex items-center gap-2">
+                                    <span>+</span> Sobrenatural
+                                </button>
+                            )}
+                            {isThals && (
+                                <button onClick={() => openPowerModal('Thals')} className="pixel-button bg-teal-600 text-white hover:bg-teal-700 text-sm flex items-center gap-2">
+                                    <span>+</span> Thals
+                                </button>
+                            )}
+                            {isDivino && (
+                                <button onClick={() => openPowerModal('Divino')} className="pixel-button bg-yellow-500 text-white hover:bg-yellow-600 text-sm flex items-center gap-2">
+                                    <span>+</span> Divino
+                                </button>
+                            )}
+                            {isTerrano && (
+                                <button onClick={() => openPowerModal('Guardian')} className="pixel-button bg-emerald-600 text-white hover:bg-emerald-700 text-sm flex items-center gap-2">
+                                    <span>+</span> Terrano (Guardian)
+                                </button>
+                            )}
+                            {isDotado && (
+                                <button onClick={() => openPowerModal('Sobrenatural')} className="pixel-button bg-amber-600 text-white hover:bg-amber-700 text-sm flex items-center gap-2">
+                                    <span>+</span> Dotado (Sobrenatural)
                                 </button>
                             )}
                         </div>
@@ -552,6 +588,66 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                                                             border: '1px solid #e9d5ff'
                                                         }}>
                                                             Alterado
+                                                        </span>
+                                                    )}
+                                                    {selection.origin === 'Vampírico' && (
+                                                        <span style={{
+                                                            fontSize: '10px',
+                                                            textTransform: 'uppercase',
+                                                            fontWeight: '900',
+                                                            letterSpacing: '0.05em',
+                                                            backgroundColor: '#fee2e2',
+                                                            color: '#991b1b',
+                                                            padding: '2px 8px',
+                                                            borderRadius: '9999px',
+                                                            border: '1px solid #fecaca'
+                                                        }}>
+                                                            Vampírico
+                                                        </span>
+                                                    )}
+                                                    {selection.origin === 'Sobrenatural' && (
+                                                        <span style={{
+                                                            fontSize: '10px',
+                                                            textTransform: 'uppercase',
+                                                            fontWeight: '900',
+                                                            letterSpacing: '0.05em',
+                                                            backgroundColor: '#ffedd5',
+                                                            color: '#c2410c',
+                                                            padding: '2px 8px',
+                                                            borderRadius: '9999px',
+                                                            border: '1px solid #fed7aa'
+                                                        }}>
+                                                            Sobrenatural
+                                                        </span>
+                                                    )}
+                                                    {selection.origin === 'Thals' && (
+                                                        <span style={{
+                                                            fontSize: '10px',
+                                                            textTransform: 'uppercase',
+                                                            fontWeight: '900',
+                                                            letterSpacing: '0.05em',
+                                                            backgroundColor: '#ccfbf1',
+                                                            color: '#115e59',
+                                                            padding: '2px 8px',
+                                                            borderRadius: '9999px',
+                                                            border: '1px solid #99f6e4'
+                                                        }}>
+                                                            Thals
+                                                        </span>
+                                                    )}
+                                                    {selection.origin === 'Divino' && (
+                                                        <span style={{
+                                                            fontSize: '10px',
+                                                            textTransform: 'uppercase',
+                                                            fontWeight: '900',
+                                                            letterSpacing: '0.05em',
+                                                            backgroundColor: '#fef3c7',
+                                                            color: '#92400e',
+                                                            padding: '2px 8px',
+                                                            borderRadius: '9999px',
+                                                            border: '1px solid #fde68a'
+                                                        }}>
+                                                            Divino
                                                         </span>
                                                     )}
                                                 </td>

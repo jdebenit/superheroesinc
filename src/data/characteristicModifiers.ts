@@ -118,7 +118,15 @@ export const ORIGIN_CHARACTERISTIC_MODIFIERS: { [key: string]: OriginCharacteris
 
     // Arcano
     "Mago": allCharacteristics(0, 100),
-    "Dotado": allCharacteristics(0, 100),
+    "Dotado": {
+        fuerza: { modifier: 0, max: 100 },
+        constitucion: { modifier: 0, max: 100 },
+        agilidad: { modifier: 0, max: 100 },
+        inteligencia: { modifier: 0, max: 100 },
+        percepcion: { modifier: 0, max: 100 },
+        apariencia: { modifier: 0, max: 100 },
+        voluntad: { modifier: 0, max: 200 },
+    },
     "Terrano": allCharacteristics(10, 110, 50),  // Terranos tienen mínimo 50
 
     // Parahumano
@@ -132,13 +140,13 @@ export const ORIGIN_CHARACTERISTIC_MODIFIERS: { [key: string]: OriginCharacteris
         voluntad: { modifier: 0, max: 100 },
     },
     "Tes-khar": {
-        fuerza: { modifier: 20, max: 120 },
-        constitucion: { modifier: 30, max: 160 },
-        agilidad: { modifier: 40, max: 140 },
-        inteligencia: { modifier: 0, max: 100 },
-        percepcion: { modifier: 20, max: 120 },
+        fuerza: { modifier: 20, max: 120, min: 100 },
+        constitucion: { modifier: 30, max: 130, min: 100 },
+        agilidad: { modifier: 40, max: 140, min: 100 },
+        inteligencia: { modifier: 0, max: 100, min: 40 },
+        percepcion: { modifier: 20, max: 120, min: 100 },
         apariencia: { modifier: 0, max: 90, min: 30 },
-        voluntad: { modifier: 0, max: 90 },
+        voluntad: { modifier: 0, max: 100, min: 40 },
     },
     "Thals": allCharacteristics(0, 100),
 
@@ -191,19 +199,19 @@ export const VIGILANTE_SPECIALTY_MODIFIERS: { [key: string]: SpecialtyCharacteri
         percepcion: 20
     },
     "Arquero": {
-        percepcion: 40,
-        agilidad: 32
+        percepcion: 30,
+        agilidad: 30
     },
     "Cazador": {
         percepcion: 30,
-        agilidad: 15
+        agilidad: 30
     },
     "Espadachin": {
-        agilidad: 35,
+        agilidad: 30,
         percepcion: 30
     },
     "Espia/Ladrón": {
-        agilidad: 35,
+        agilidad: 30,
         percepcion: 30
     },
     "Artista Marcial": {
@@ -215,11 +223,12 @@ export const VIGILANTE_SPECIALTY_MODIFIERS: { [key: string]: SpecialtyCharacteri
         percepcion: 50
     },
     "Militar": {
-        distributablePoints: 50  // 50 puntos para distribuir
+        agilidad: 30,
+        percepcion: 30
     },
     "Francotirador": {
-        percepcion: 35,
-        agilidad: 15
+        percepcion: 40,
+        agilidad: 20
     },
     "Pistolero": {
         agilidad: 30,

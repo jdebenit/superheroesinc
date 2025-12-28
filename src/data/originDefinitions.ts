@@ -17,7 +17,6 @@ export interface OriginCategory {
 export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
     "Divino": {
         name: "Divino",
-        disabledSubtypes: ["Dios"],
         subtypes: {
             "Dios": ["Poder divino", "+20 a la parada mental"],
             "Dios menor": ["Poder divino", "+20 a la parada mental"],
@@ -26,7 +25,6 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
     },
     "Cósmico": {
         name: "Cósmico",
-        disabledSubtypes: ["Heraldo Cósmico"],
         subtypes: {
             "Avatar Cósmico": ["Poder cósmico ilimitado", "Energía cósmica"],
             "Heraldo Cósmico": ["Heraldo de entidad cósmica", "Poder cósmico otorgado"]
@@ -58,6 +56,7 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
     },
     "Arcano": {
         name: "Arcano",
+        disabledSubtypes: ["Elfo", "Hada", "Centauro", "Minotauro", "Enano", "Gigante", "Troll", "Grifo", "Hidra", "Medusa", "Esfinge"],
         subtypes: {
             "Mago": ["Conocimiento arcano", "Comprensión de la senda: Magia", "+20 a la parada mental"],
             "Dotado": ["algo", "algo", "algo"],
@@ -128,11 +127,7 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
                 "+20 habilidad a elección",
                 "-20 tiradas de EQM daños al medio ambiente"
             ],
-            "Fanático": [
-                "+20 habilidad a elección",
-                "-20 tiradas de EQM daños al medio ambiente"
-            ],
-            "Fánatico/Vengador": [
+            "Fanático/Vengador": [
                 "+20 habilidad a elección",
                 "-20 tiradas de EQM daños al medio ambiente"
             ],
