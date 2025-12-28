@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ORIGIN_CHARACTERISTIC_MODIFIERS, VIGILANTE_SPECIALTY_MODIFIERS } from '../../../data/characteristicModifiers';
+import { POWERS } from '../../../data/powers';
 
 interface Step2Props {
     data: any;
@@ -115,7 +116,53 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
         });
     }, [data.origin, chosenBonusCharacteristic]);
 
-    // Update internal state when props data changes
+    // Update power modifiers from selected powers
+    useEffect(() => {
+        const selectedPowers = data.powers?.selected || [];
+        const powerMods: { [key: string]: number } = {};
+
+        // Calculate total mods per characteristic
+        selectedPowers.forEach((p: any) => {
+            const powerData = POWERS.find(pd => pd.id === p.id);
+            if (powerData?.characteristic) {
+                const charMap: Record<string, string> = {
+                    'FUE': 'fuerza',
+                    'AGI': 'agilidad',
+                    'CON': 'constitucion',
+                    'INT': 'inteligencia',
+                    'PER': 'percepcion',
+                    'APA': 'apariencia',
+                    'VOL': 'voluntad'
+                };
+                const charId = charMap[powerData.characteristic];
+                if (charId) {
+                    const mod = Number(p.powerMod) || 0;
+                    powerMods[charId] = (powerMods[charId] || 0) + mod;
+                }
+            }
+        });
+
+        // Update state if different
+        setCharacteristics(prev => {
+            let hasChanges = false;
+            const updated = { ...prev };
+
+            Object.keys(updated).forEach(key => {
+                const currentMod = updated[key].powerMod;
+                const newMod = powerMods[key] || 0;
+
+                if (currentMod !== newMod) {
+                    updated[key] = { ...updated[key], powerMod: newMod };
+                    hasChanges = true;
+                }
+            });
+
+            return hasChanges ? updated : prev;
+        });
+
+    }, [JSON.stringify(data.powers?.selected)]);
+
+    // Update internal state when props data changes (but NOT powerMod - that's calculated from powers)
     useEffect(() => {
         if (data.attributes?.breakdown) {
             setCharacteristics(prev => {
@@ -123,13 +170,7 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
                 let hasChanges = false;
 
                 Object.keys(data.attributes.breakdown).forEach(key => {
-                    if (newState[key].powerMod !== data.attributes.breakdown[key].powerMod) {
-                        newState[key] = {
-                            ...newState[key],
-                            powerMod: data.attributes.breakdown[key].powerMod || 0
-                        };
-                        hasChanges = true;
-                    }
+                    // Only sync otherMod, NOT powerMod (powerMod is calculated from data.powers.selected)
                     if (typeof data.attributes.breakdown[key].otherMod === 'number' && newState[key].otherMod !== data.attributes.breakdown[key].otherMod) {
                         newState[key] = {
                             ...newState[key],

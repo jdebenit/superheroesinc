@@ -7,7 +7,7 @@ export interface Power {
     formula: string;
     cost: number;
     characteristic?: PowerCharacteristic;
-    options?: boolean;
+    options?: string;
     skillCalc?: string;
     types: PowerType[];
     origins: string[];
@@ -30,6 +30,7 @@ export const POWERS: Power[] = [
         cost: 5,
         skillCalc: "CON",
         types: ["Energético"],
+        options: "Ejm tipo de energia y habilidad",
         origins: ["Alterado", "Mutante", "Guardian", "Vampírico", "Sobrenatural"]
     },
     {
@@ -451,7 +452,7 @@ export const POWERS: Power[] = [
         name: "Superhabilidad",
         formula: "5+(Rango/10)",
         cost: 5,
-        options: true,
+        options: "Habilidad",
         types: ["Físico"],
         origins: ["Alterado", "Mutante", "Vampírico", "Sobrenatural"]
     },

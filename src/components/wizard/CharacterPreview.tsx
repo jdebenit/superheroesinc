@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS } from '../../data/backgroundTables';
 import { SPELLS } from '../../data/spells';
+import { POWERS } from '../../data/powers';
 
 interface CharacterPreviewProps {
     character: any;
@@ -331,6 +332,67 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                     {item.notes && <span>: {item.notes}</span>}
                                                 </li>
                                             ))}
+                                        </ul>
+                                    </div>
+                                )}
+
+                                {/* Powers / Poderes Especiales */}
+                                {character.powers?.selected && character.powers.selected.length > 0 && (
+                                    <div className="sheet-section powers">
+                                        <div className="section-header">
+                                            <h4>Poderes Especiales</h4>
+                                        </div>
+                                        <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                                            {character.powers.selected.map((power: any, idx: number) => {
+                                                const powerData = POWERS.find(p => p.id === power.id);
+                                                if (!powerData) return null;
+
+                                                const getRankLevel = (rank: number) => {
+                                                    if (rank <= 20) return 'Bajo';
+                                                    if (rank <= 40) return 'Medio';
+                                                    if (rank <= 70) return 'Elevado';
+                                                    if (rank <= 95) return 'Alto';
+                                                    return 'Cósmico';
+                                                };
+
+                                                return (
+                                                    <li key={`${power.id}-${idx}`} style={{
+                                                        padding: '0.5rem',
+                                                        borderBottom: '1px solid #e5e7eb',
+                                                        display: 'flex',
+                                                        justifyContent: 'space-between',
+                                                        alignItems: 'center',
+                                                        flexWrap: 'wrap'
+                                                    }}>
+                                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                                            <span style={{ fontWeight: 'bold', color: '#059669' }}>
+                                                                {powerData.name}
+                                                            </span>
+                                                            <span style={{ fontSize: '0.75rem', backgroundColor: '#ecfdf5', color: '#059669', padding: '2px 6px', borderRadius: '4px' }}>
+                                                                {power.origin}
+                                                            </span>
+                                                        </div>
+
+                                                        <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', fontSize: '0.875rem' }}>
+                                                            {!powerData.characteristic ? (
+                                                                <span style={{ color: '#6b7280' }}>
+                                                                    Rango {power.rank} <span style={{ fontSize: '0.75rem', color: '#9ca3af' }}>({getRankLevel(power.rank)})</span>
+                                                                </span>
+                                                            ) : (
+                                                                <span style={{ color: '#6b7280' }}>
+                                                                    Mod: +{power.powerMod || 0}
+                                                                </span>
+                                                            )}
+
+                                                            {power.skillValue && (
+                                                                <span style={{ color: '#d97706', fontWeight: '500' }}>
+                                                                    Base Hab: {power.skillValue}
+                                                                </span>
+                                                            )}
+                                                        </div>
+                                                    </li>
+                                                );
+                                            })}
                                         </ul>
                                     </div>
                                 )}

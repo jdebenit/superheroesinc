@@ -33,16 +33,32 @@ const getCharacteristicValue = (data: any, charName: string) => {
     return data.attributes?.values?.[charName] || 0;
 };
 
-const calculateEM = (data: any, divisor: number = 1) => {
-    const int = Number(getCharacteristicValue(data, 'Inteligencia')) || 0;
-    const per = Number(getCharacteristicValue(data, 'Percepción')) || 0;
-    const vol = Number(getCharacteristicValue(data, 'Voluntad')) || 0;
+const calculateEM = (data: any, selectedPowers: any[] = [], divisor: number = 1) => {
+    let int = Number(getCharacteristicValue(data, 'Inteligencia')) || 0;
+    let per = Number(getCharacteristicValue(data, 'Percepción')) || 0;
+    let vol = Number(getCharacteristicValue(data, 'Voluntad')) || 0;
+    let con = Number(getCharacteristicValue(data, 'Constitución')) || 0;
+
+    // Apply power modifiers
+    if (selectedPowers) {
+        selectedPowers.forEach(p => {
+            const powerData = POWERS.find(power => power.id === p.id);
+            if (powerData?.characteristic && p.powerMod) {
+                switch (powerData.characteristic) {
+                    case 'INT': int += p.powerMod; break;
+                    case 'PER': per += p.powerMod; break;
+                    case 'VOL': vol += p.powerMod; break;
+                    case 'CON': con += p.powerMod; break;
+                }
+            }
+        });
+    }
 
     // If Semidemonio, add CON to the formula
     const isSemidemonio = hasSubtype(data, 'Sobrenatural', 'Semidemonio');
-    const con = isSemidemonio ? (Number(getCharacteristicValue(data, 'Constitución')) || 0) : 0;
+    const conVal = isSemidemonio ? con : 0;
 
-    return Math.floor((int + per + vol + con) / divisor);
+    return Math.floor((int + per + vol + conVal) / divisor);
 };
 
 const calculateSkillBase = (data: any, formula: string): number => {
@@ -684,7 +700,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                                                 const effectiveRank = s.rank;
                                                 return acc + (baseCost * effectiveRank);
                                             }, 0);
-                                            const maxEM = calculateEM(data, isMago ? 1 : emFormula.divisor);
+                                            const maxEM = calculateEM(data, selectedPowers, isMago ? 1 : emFormula.divisor);
                                             const isOver = totalCost > maxEM;
                                             const extraPC = isOver ? ((totalCost - maxEM) * 0.1).toFixed(1) : '0.0';
 
