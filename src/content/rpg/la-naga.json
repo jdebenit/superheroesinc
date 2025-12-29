@@ -51,7 +51,6 @@
     "Inconsciencia: 6",
     "Recuperación: 2 PV/h",
     "Resistencia a gases y venenos: 35%",
-    "Resistencia a prejuicios: 30%",
     "Modificador de fuerza: 1d10",
     "Peso Levantado: 500Kg",
     "Daño absorbido físico: 15",
@@ -181,12 +180,13 @@
   },
   "background": {
     "cost": -8,
+    "prejudiceResistance": 30,
+    "economicStatus": "mendigo",
+    "legalStatus": "con_antecedentes",
+    "socialStatus": "anonimo",
     "items": [
-      "Vagabundo",
       "Solitario",
-      "Con antecedentes penales",
-      "Identidad desconocida",
-      "Resistencia a prejuicios -20"
+      "Identidad desconocida"
     ]
   },
   "equipment": {

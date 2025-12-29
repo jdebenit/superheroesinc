@@ -7,7 +7,7 @@ export interface Power {
     formula: string;
     cost: number;
     characteristic?: PowerCharacteristic;
-    options?: string;
+    options?: string[];
     skillCalc?: string;
     types: PowerType[];
     origins: string[];
@@ -28,9 +28,8 @@ export const POWERS: Power[] = [
         name: "Absorción de energía",
         formula: "5+(Rango/10)",
         cost: 5,
-        skillCalc: "CON",
         types: ["Energético"],
-        options: "Ejm tipo de energia y habilidad",
+        options: ["Ejm tipo de energia y habilidad"],
         origins: ["Alterado", "Mutante", "Guardian", "Vampírico", "Sobrenatural"]
     },
     {
@@ -38,7 +37,7 @@ export const POWERS: Power[] = [
         name: "Absorción de poderes",
         formula: "10+(Rango/10)",
         cost: 10,
-        skillCalc: "VOL",
+        skillCalc: "CON/2",
         types: ["Energético"],
         origins: ["Alterado", "Mutante", "Vampírico"]
     },
@@ -47,7 +46,7 @@ export const POWERS: Power[] = [
         name: "Absorción de vida",
         formula: "5+(Rango/10)",
         cost: 5,
-        skillCalc: "CON",
+        skillCalc: "(PER+CON)/2",
         types: ["Energético"],
         origins: ["Alterado", "Mutante", "Cósmico", "Divino", "Sobrenatural"]
     },
@@ -56,7 +55,7 @@ export const POWERS: Power[] = [
         name: "Agresión psiónica",
         formula: "8+(Rango/10)",
         cost: 8,
-        skillCalc: "VOL",
+        skillCalc: "(VOL+INT)/2",
         types: ["Psíquico"],
         origins: ["Alterado", "Mutante", "Guardian", "Vampírico", "Thals"]
     },
@@ -65,7 +64,7 @@ export const POWERS: Power[] = [
         name: "Anulación de poderes",
         formula: "7+(Rango/10)",
         cost: 7,
-        skillCalc: "VOL",
+        skillCalc: "CON/2",
         types: ["Energético"],
         origins: ["Alterado", "Mutante", "Guardian", "Sobrenatural"]
     },
@@ -74,7 +73,7 @@ export const POWERS: Power[] = [
         name: "Ataque especial",
         formula: "5+(Rango/10)",
         cost: 5,
-        skillCalc: "(FUE+AGI)/2",
+        options: ["Arma Natural"],
         types: ["Físico"],
         origins: ["Alterado", "Mutante", "Sobrenatural"]
     },
@@ -83,7 +82,6 @@ export const POWERS: Power[] = [
         name: "Blindaje natural",
         formula: "10+(Rango/10)",
         cost: 10,
-        skillCalc: "CON",
         types: ["Físico"],
         origins: ["Alterado", "Mutante", "Sobrenatural"]
     },
@@ -92,7 +90,7 @@ export const POWERS: Power[] = [
         name: "Cambio de estado",
         formula: "5+(Rango/10)",
         cost: 5,
-        skillCalc: "CON",
+        skillCalc: "(VOL+CON)/2",
         types: ["Físico"],
         origins: ["Alterado", "Mutante", "Vampírico", "Sobrenatural"]
     },
@@ -101,7 +99,7 @@ export const POWERS: Power[] = [
         name: "Cambio de la densidad",
         formula: "6+(Rango/10)",
         cost: 6,
-        skillCalc: "CON",
+        skillCalc: "CON/2",
         types: ["Energético"],
         origins: ["Alterado", "Mutante", "Guardian"]
     },
@@ -110,7 +108,6 @@ export const POWERS: Power[] = [
         name: "Cambio de tamaño",
         formula: "5+(Rango/10)",
         cost: 5,
-        skillCalc: "CON",
         types: ["Físico"],
         origins: ["Alterado", "Mutante", "Guardian", "Sobrenatural"]
     },
@@ -120,7 +117,7 @@ export const POWERS: Power[] = [
         formula: "5+(Rango/10)",
         cost: 5,
         skillCalc: "VOL",
-        types: ["Energético", "Físico", "Psíquico"],
+        types: ["Energético", "Psíquico"],
         origins: ["Alterado", "Mutante", "Guardian", "Thals"]
     },
     {
@@ -128,7 +125,7 @@ export const POWERS: Power[] = [
         name: "Congelación",
         formula: "5+(Rango/10)",
         cost: 5,
-        skillCalc: "INT",
+        skillCalc: "PER/2",
         types: ["Energético"],
         origins: ["Alterado", "Mutante", "Guardian", "Cósmico", "Divino", "Sobrenatural"]
     },
@@ -137,7 +134,8 @@ export const POWERS: Power[] = [
         name: "Control de energía",
         formula: "5+(Rango/10)",
         cost: 5,
-        skillCalc: "INT",
+        skillCalc: "VOL/2",
+        options: ["Control de energía", "Control de energía", "Control de energía"],
         types: ["Energético"],
         origins: ["Alterado", "Mutante", "Guardian"]
     },
@@ -146,7 +144,7 @@ export const POWERS: Power[] = [
         name: "Control de la geodinámica",
         formula: "7+(Rango/10)",
         cost: 7,
-        skillCalc: "INT",
+        skillCalc: "(CON+PER)/2",
         types: ["Energético"],
         origins: ["Alterado", "Mutante", "Guardian", "Cósmico", "Divino"]
     },
@@ -155,7 +153,7 @@ export const POWERS: Power[] = [
         name: "Control de la probabilidad",
         formula: "5+(Rango/10)",
         cost: 5,
-        skillCalc: "INT",
+        skillCalc: "(VOL+PER)/2",
         types: ["Energético"],
         origins: ["Alterado", "Mutante"]
     },
@@ -164,7 +162,7 @@ export const POWERS: Power[] = [
         name: "Control de la vegetación",
         formula: "5+(Rango/10)",
         cost: 5,
-        skillCalc: "INT",
+        skillCalc: "PER/2",
         types: ["Energético"],
         origins: ["Alterado", "Mutante", "Guardian", "Cósmico", "Divino"]
     },
@@ -173,7 +171,7 @@ export const POWERS: Power[] = [
         name: "Control de moléculas ajenas",
         formula: "6+(Rango/10)",
         cost: 6,
-        skillCalc: "INT",
+        skillCalc: "PER/2",
         types: ["Energético"],
         origins: ["Alterado", "Mutante", "Guardian"]
     },
@@ -182,7 +180,7 @@ export const POWERS: Power[] = [
         name: "Control del agua",
         formula: "5+(Rango/10)",
         cost: 5,
-        skillCalc: "INT",
+        skillCalc: "(PER+AGI)/3",
         types: ["Energético"],
         origins: ["Alterado", "Mutante", "Guardian", "Cósmico", "Divino"]
     },
@@ -191,7 +189,7 @@ export const POWERS: Power[] = [
         name: "Control del clima",
         formula: "7+(Rango/10)",
         cost: 7,
-        skillCalc: "INT",
+        skillCalc: "(PER+VOL)/2",
         types: ["Energético"],
         origins: ["Alterado", "Mutante", "Guardian", "Cósmico", "Divino"]
     },
@@ -200,7 +198,7 @@ export const POWERS: Power[] = [
         name: "Control del fuego",
         formula: "6+(Rango/10)",
         cost: 6,
-        skillCalc: "INT",
+        skillCalc: "(PER+INT)/2",
         types: ["Energético"],
         origins: ["Alterado", "Mutante", "Guardian", "Cósmico", "Divino", "Sobrenatural"]
     },
@@ -209,7 +207,7 @@ export const POWERS: Power[] = [
         name: "Control del organismo",
         formula: "6+(Rango/10)",
         cost: 6,
-        skillCalc: "CON",
+        skillCalc: "(VOL+PER)/4",
         types: ["Energético"],
         origins: ["Alterado", "Mutante"]
     },
@@ -218,7 +216,7 @@ export const POWERS: Power[] = [
         name: "Conversión de materia",
         formula: "5+(Rango/10)",
         cost: 5,
-        skillCalc: "INT",
+        skillCalc: "VOL/2",
         types: ["Energético"],
         origins: ["Sobrenatural"]
     },
@@ -227,7 +225,7 @@ export const POWERS: Power[] = [
         name: "Dominación mental",
         formula: "5+(Rango/10)",
         cost: 5,
-        skillCalc: "VOL",
+        skillCalc: "(VOL+INT)/2",
         types: ["Psíquico"],
         origins: ["Alterado", "Mutante", "Guardian", "Vampírico", "Thals"]
     },
@@ -254,7 +252,7 @@ export const POWERS: Power[] = [
         name: "Emisión de energía",
         formula: "5+(Rango/10)",
         cost: 5,
-        skillCalc: "INT",
+        skillCalc: "PER/2",
         types: ["Energético"],
         origins: ["Alterado", "Mutante", "Guardian", "Cósmico", "Divino", "Sobrenatural"]
     },
@@ -263,7 +261,7 @@ export const POWERS: Power[] = [
         name: "Empatía animal",
         formula: "4+(Rango/10)",
         cost: 4,
-        skillCalc: "VOL",
+        skillCalc: "PER/2",
         types: ["Psíquico"],
         origins: ["Alterado", "Mutante", "Guardian", "Vampírico", "Cósmico", "Divino", "Sobrenatural"]
     },
@@ -272,7 +270,7 @@ export const POWERS: Power[] = [
         name: "Empatía mental",
         formula: "5+(Rango/10)",
         cost: 5,
-        skillCalc: "PER",
+        skillCalc: "(VOL+INT)/2",
         types: ["Psíquico"],
         origins: ["Alterado", "Mutante", "Vampírico", "Thals"]
     },
@@ -281,7 +279,7 @@ export const POWERS: Power[] = [
         name: "Empatía tecnológica",
         formula: "5+(Rango/10)",
         cost: 5,
-        skillCalc: "INT",
+        skillCalc: "PER/2",
         types: ["Psíquico"],
         origins: ["Alterado", "Mutante"]
     },
@@ -290,7 +288,7 @@ export const POWERS: Power[] = [
         name: "Explosividad",
         formula: "5+(Rango/10)",
         cost: 5,
-        skillCalc: "INT",
+        skillCalc: "CON",
         types: ["Energético"],
         origins: ["Alterado", "Mutante", "Guardian"]
     },
@@ -299,7 +297,7 @@ export const POWERS: Power[] = [
         name: "Furia",
         formula: "7+(Rango/10)",
         cost: 7,
-        skillCalc: "CON",
+        skillCalc: "CON/2",
         types: ["Físico"],
         origins: ["Sobrenatural"]
     },
@@ -308,7 +306,7 @@ export const POWERS: Power[] = [
         name: "Fusión",
         formula: "5+(Rango/10)",
         cost: 5,
-        skillCalc: "CON",
+        skillCalc: "(CON+FUE)/2",
         types: ["Energético"],
         origins: ["Alterado", "Mutante", "Guardian"]
     },
@@ -326,7 +324,6 @@ export const POWERS: Power[] = [
         name: "Incremento vital",
         formula: "5+(Rango/10)",
         cost: 5,
-        skillCalc: "CON",
         types: ["Físico"],
         origins: ["Alterado", "Mutante", "Sobrenatural"]
     },
@@ -335,7 +332,7 @@ export const POWERS: Power[] = [
         name: "Invisibilidad",
         formula: "5+(Rango/10)",
         cost: 5,
-        skillCalc: "INT",
+        skillCalc: "CON/2",
         types: ["Energético"],
         origins: ["Alterado", "Mutante", "Guardian", "Vampírico"]
     },
@@ -344,7 +341,7 @@ export const POWERS: Power[] = [
         name: "Invulnerabilidad",
         formula: "4+(Rango/10)",
         cost: 4,
-        skillCalc: "CON",
+        options: ["CON", "AGI", "INT", "PER"],
         types: ["Energético"],
         origins: ["Alterado", "Mutante", "Guardian", "Vampírico", "Cósmico", "Divino", "Sobrenatural"]
     },
@@ -353,7 +350,8 @@ export const POWERS: Power[] = [
         name: "Multiformidad",
         formula: "5+(Rango/10)",
         cost: 5,
-        skillCalc: "CON",
+        options: ["CON", "AGI", "INT", "PER"],
+        skillCalc: "(AGI+CON)/2",
         types: ["Físico"],
         origins: ["Alterado", "Mutante", "Guardian", "Vampírico", "Sobrenatural"]
     },
@@ -362,7 +360,7 @@ export const POWERS: Power[] = [
         name: "Plasticidad",
         formula: "5+(Rango/10)",
         cost: 5,
-        skillCalc: "AGI",
+        skillCalc: "CON/2",
         types: ["Físico"],
         origins: ["Alterado", "Mutante", "Sobrenatural"]
     },
@@ -371,7 +369,7 @@ export const POWERS: Power[] = [
         name: "Polilocación",
         formula: "5+(Rango/10)",
         cost: 5,
-        skillCalc: "AGI",
+        skillCalc: "CON/2",
         types: ["Físico"],
         origins: ["Alterado", "Mutante", "Sobrenatural"]
     },
@@ -380,7 +378,7 @@ export const POWERS: Power[] = [
         name: "Postcognición",
         formula: "5+(Rango/10)",
         cost: 5,
-        skillCalc: "PER",
+        skillCalc: "PER/2",
         types: ["Psíquico"],
         origins: ["Alterado", "Mutante", "Vampírico", "Sobrenatural"]
     },
@@ -389,7 +387,7 @@ export const POWERS: Power[] = [
         name: "Potenciar",
         formula: "7+(Rango/10)",
         cost: 7,
-        skillCalc: "VOL",
+        skillCalc: "PER/2",
         types: ["Energético"],
         origins: ["Sobrenatural"]
     },
@@ -398,7 +396,7 @@ export const POWERS: Power[] = [
         name: "Precognición",
         formula: "5+(Rango/10)",
         cost: 5,
-        skillCalc: "PER",
+        skillCalc: "PER/2",
         types: ["Psíquico"],
         origins: ["Alterado", "Mutante", "Sobrenatural"]
     },
@@ -407,7 +405,6 @@ export const POWERS: Power[] = [
         name: "Regeneración de tejidos",
         formula: "5+(Rango/10)",
         cost: 5,
-        skillCalc: "CON",
         types: ["Físico"],
         origins: ["Alterado", "Mutante", "Vampírico", "Sobrenatural"]
     },
@@ -452,8 +449,8 @@ export const POWERS: Power[] = [
         name: "Superhabilidad",
         formula: "5+(Rango/10)",
         cost: 5,
-        options: "Habilidad",
-        types: ["Físico"],
+        options: ["Habilidad"],
+        types: ["Físico", "Psíquico"],
         origins: ["Alterado", "Mutante", "Vampírico", "Sobrenatural"]
     },
     {
@@ -497,7 +494,7 @@ export const POWERS: Power[] = [
         name: "Telepatía",
         formula: "5+(Rango/10)",
         cost: 5,
-        skillCalc: "INT",
+        skillCalc: "(INT+VOL)2)",
         types: ["Psíquico"],
         origins: ["Alterado", "Mutante", "Guardian", "Vampírico", "Thals"]
     },
@@ -506,7 +503,7 @@ export const POWERS: Power[] = [
         name: "Teleportación",
         formula: "5+(Rango/10)",
         cost: 5,
-        skillCalc: "INT",
+        skillCalc: "PER/2",
         types: ["Energético"],
         origins: ["Alterado", "Mutante", "Guardian", "Cósmico", "Divino", "Sobrenatural"]
     },
@@ -515,7 +512,7 @@ export const POWERS: Power[] = [
         name: "Telequinesis",
         formula: "7+(Rango/10)",
         cost: 7,
-        skillCalc: "VOL",
+        skillCalc: "PER",
         types: ["Psíquico"],
         origins: ["Alterado", "Mutante", "Guardian", "Vampírico", "Thals"]
     },
@@ -524,16 +521,16 @@ export const POWERS: Power[] = [
         name: "Traducción de lenguas",
         formula: "5+(Rango/10)",
         cost: 5,
-        skillCalc: "INT",
+        skillCalc: "(PER+INT)/2",
         types: ["Psíquico"],
         origins: ["Alterado", "Mutante", "Guardian", "Cósmico"]
     },
     {
         id: "vincular",
         name: "Vincular",
-        formula: "4+(Rango/10)",
-        cost: 4,
-        skillCalc: "VOL",
+        formula: "6+(Rango/10)",
+        cost: 6,
+        skillCalc: "(VOL+PER)/3",
         types: ["Energético"],
         origins: ["Sobrenatural"]
     },
@@ -542,7 +539,7 @@ export const POWERS: Power[] = [
         name: "Volar",
         formula: "3+(Rango/10)",
         cost: 3,
-        skillCalc: "AGI",
+        skillCalc: "AGI/2",
         types: ["Psíquico", "Físico", "Energético"],
         origins: ["Alterado", "Mutante", "Guardian", "Vampírico", "Divino", "Sobrenatural"]
     }

@@ -148,17 +148,56 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                             <h4>Origen</h4>
                                             {character.origin.cost && <span className="cost">({character.origin.cost} PCs)</span>}
                                         </div>
-                                        <ul>
+                                        <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                                             {character.origin.items.map((item: any, i: number) => {
                                                 const name = Object.keys(item)[0];
                                                 const details = item[name];
                                                 return (
-                                                    <li key={i}>
-                                                        <strong>{name}</strong>
-                                                        <ul>
-                                                            {details.map((detail: string, j: number) => (
-                                                                <li key={j}>{detail}</li>
-                                                            ))}
+                                                    <li key={i} style={{ marginBottom: '0.75rem' }}>
+                                                        <div style={{ fontWeight: 'bold', color: '#8B4513', marginBottom: '0.25rem' }}>
+                                                            {name}
+                                                        </div>
+                                                        <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                                                            {details.map((detail: string, j: number) => {
+                                                                // Parse detail if it contains a colon
+                                                                const parts = detail.includes(':') ? detail.split(':').map(s => s.trim()) : [detail];
+                                                                const detailName = parts[0];
+                                                                const detailValue = parts.length > 1 ? parts.slice(1).join(':') : undefined;
+
+                                                                return (
+                                                                    <li key={j} style={{
+                                                                        marginBottom: '0.25rem',
+                                                                        paddingLeft: '1.2rem',
+                                                                        position: 'relative'
+                                                                    }}>
+                                                                        <span style={{
+                                                                            content: '•',
+                                                                            color: '#d32f2f',
+                                                                            position: 'absolute',
+                                                                            left: 0,
+                                                                            fontWeight: 'bold'
+                                                                        }}>•</span>
+                                                                        {detailValue ? (
+                                                                            <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
+                                                                                <span style={{ paddingRight: '0.5rem' }}>{detailName}</span>
+                                                                                <span style={{
+                                                                                    flexGrow: 1,
+                                                                                    borderBottom: '1px dotted #ccc',
+                                                                                    margin: '0 0.5rem',
+                                                                                    position: 'relative',
+                                                                                    top: '-4px',
+                                                                                    minWidth: '20px'
+                                                                                }}></span>
+                                                                                <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>
+                                                                                    {detailValue}
+                                                                                </span>
+                                                                            </div>
+                                                                        ) : (
+                                                                            <span>{detail}</span>
+                                                                        )}
+                                                                    </li>
+                                                                );
+                                                            })}
                                                         </ul>
                                                     </li>
                                                 );
@@ -205,12 +244,33 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                         <div className="section-header">
                                             <h4>Habilidades Generales</h4>
                                         </div>
-                                        <ul>
+                                        <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                                             {character.skills.generalItems.map((item: any, i: number) => (
-                                                <li key={i}>
-                                                    <strong>{item.name}</strong>
-                                                    {item.math && <span style={{ color: '#6b7280', fontSize: '0.875rem', marginLeft: '0.5rem' }}>({item.math})</span>}
-                                                    : {item.value}
+                                                <li key={i} style={{ marginBottom: '0.5rem', paddingLeft: '1.2rem', position: 'relative' }}>
+                                                    <span style={{
+                                                        content: '•',
+                                                        color: '#d32f2f',
+                                                        position: 'absolute',
+                                                        left: 0,
+                                                        fontWeight: 'bold'
+                                                    }}>•</span>
+                                                    <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
+                                                        <span style={{ paddingRight: '0.5rem' }}>
+                                                            {item.name}
+                                                            {item.math && <span style={{ fontSize: '0.7em', color: '#999', marginLeft: '0.5ch', fontFamily: 'monospace' }}>{item.math}</span>}
+                                                        </span>
+                                                        <span style={{
+                                                            flexGrow: 1,
+                                                            borderBottom: '1px dotted #ccc',
+                                                            margin: '0 0.5rem',
+                                                            position: 'relative',
+                                                            top: '-4px',
+                                                            minWidth: '20px'
+                                                        }}></span>
+                                                        <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>
+                                                            {item.value}
+                                                        </span>
+                                                    </div>
                                                 </li>
                                             ))}
                                         </ul>
@@ -223,12 +283,33 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                         <div className="section-header">
                                             <h4>Habilidades de Aprendizaje</h4>
                                         </div>
-                                        <ul>
+                                        <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                                             {character.skills.specialItems.map((item: any, i: number) => (
-                                                <li key={i}>
-                                                    <strong>{item.name}</strong>
-                                                    {item.math && <span style={{ color: '#6b7280', fontSize: '0.875rem', marginLeft: '0.5rem' }}>({item.math})</span>}
-                                                    : {item.value}
+                                                <li key={i} style={{ marginBottom: '0.5rem', paddingLeft: '1.2rem', position: 'relative' }}>
+                                                    <span style={{
+                                                        content: '•',
+                                                        color: '#d32f2f',
+                                                        position: 'absolute',
+                                                        left: 0,
+                                                        fontWeight: 'bold'
+                                                    }}>•</span>
+                                                    <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
+                                                        <span style={{ paddingRight: '0.5rem' }}>
+                                                            {item.name}
+                                                            {item.math && <span style={{ fontSize: '0.7em', color: '#999', marginLeft: '0.5ch', fontFamily: 'monospace' }}>{item.math}</span>}
+                                                        </span>
+                                                        <span style={{
+                                                            flexGrow: 1,
+                                                            borderBottom: '1px dotted #ccc',
+                                                            margin: '0 0.5rem',
+                                                            position: 'relative',
+                                                            top: '-4px',
+                                                            minWidth: '20px'
+                                                        }}></span>
+                                                        <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>
+                                                            {item.value}
+                                                        </span>
+                                                    </div>
                                                 </li>
                                             ))}
                                         </ul>
@@ -355,39 +436,51 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
 
                                                 return (
                                                     <li key={`${power.id}-${idx}`} style={{
-                                                        padding: '0.5rem',
+                                                        marginBottom: '0.75rem',
+                                                        paddingLeft: '1.2rem',
+                                                        position: 'relative',
                                                         borderBottom: '1px solid #e5e7eb',
-                                                        display: 'flex',
-                                                        justifyContent: 'space-between',
-                                                        alignItems: 'center',
-                                                        flexWrap: 'wrap'
+                                                        paddingBottom: '0.5rem'
                                                     }}>
-                                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                                            <span style={{ fontWeight: 'bold', color: '#059669' }}>
-                                                                {powerData.name}
+                                                        <span style={{
+                                                            content: '•',
+                                                            color: '#d32f2f',
+                                                            position: 'absolute',
+                                                            left: 0,
+                                                            fontWeight: 'bold'
+                                                        }}>•</span>
+
+                                                        <div style={{ display: 'flex', alignItems: 'baseline', width: '100%', marginBottom: '0.25rem' }}>
+                                                            <span style={{ paddingRight: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                                                <span style={{ fontWeight: 'bold', color: '#059669' }}>{powerData.name}</span>
+                                                                <span style={{ fontSize: '0.75rem', backgroundColor: '#ecfdf5', color: '#059669', padding: '2px 6px', borderRadius: '4px' }}>
+                                                                    {power.origin}
+                                                                </span>
                                                             </span>
-                                                            <span style={{ fontSize: '0.75rem', backgroundColor: '#ecfdf5', color: '#059669', padding: '2px 6px', borderRadius: '4px' }}>
-                                                                {power.origin}
+                                                            <span style={{
+                                                                flexGrow: 1,
+                                                                borderBottom: '1px dotted #ccc',
+                                                                margin: '0 0.5rem',
+                                                                position: 'relative',
+                                                                top: '-4px',
+                                                                minWidth: '20px'
+                                                            }}></span>
+                                                            <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap', fontSize: '0.875rem' }}>
+                                                                {!powerData.characteristic ? (
+                                                                    <>
+                                                                        Rango {power.rank} <span style={{ fontSize: '0.75rem', color: '#9ca3af' }}>({getRankLevel(power.rank)})</span>
+                                                                    </>
+                                                                ) : (
+                                                                    <>Mod: +{power.powerMod || 0}</>
+                                                                )}
                                                             </span>
                                                         </div>
 
-                                                        <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', fontSize: '0.875rem' }}>
-                                                            {!powerData.characteristic ? (
-                                                                <span style={{ color: '#6b7280' }}>
-                                                                    Rango {power.rank} <span style={{ fontSize: '0.75rem', color: '#9ca3af' }}>({getRankLevel(power.rank)})</span>
-                                                                </span>
-                                                            ) : (
-                                                                <span style={{ color: '#6b7280' }}>
-                                                                    Mod: +{power.powerMod || 0}
-                                                                </span>
-                                                            )}
-
-                                                            {power.skillValue && (
-                                                                <span style={{ color: '#d97706', fontWeight: '500' }}>
-                                                                    Base Hab: {power.skillValue}
-                                                                </span>
-                                                            )}
-                                                        </div>
+                                                        {power.skillValue && (
+                                                            <div style={{ fontSize: '0.85rem', color: '#d97706', fontWeight: '500', marginLeft: '0rem' }}>
+                                                                Base Hab: {power.skillValue}
+                                                            </div>
+                                                        )}
                                                     </li>
                                                 );
                                             })}
@@ -413,22 +506,38 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
 
                                                 return (
                                                     <li key={`${spell.id}-${idx}`} style={{
-                                                        padding: '0.5rem',
-                                                        borderBottom: '1px solid #e5e7eb',
-                                                        display: 'flex',
-                                                        justifyContent: 'space-between',
-                                                        alignItems: 'center'
+                                                        marginBottom: '0.5rem',
+                                                        paddingLeft: '1.2rem',
+                                                        position: 'relative'
                                                     }}>
-                                                        <span style={{ fontWeight: 'bold', color: '#4f46e5' }}>
-                                                            {spellData.name}
-                                                        </span>
                                                         <span style={{
-                                                            fontSize: '0.875rem',
-                                                            color: spell.rank > maxRank ? '#a855f7' : '#6b7280',
-                                                            fontWeight: spell.rank > maxRank ? 'bold' : 'normal'
-                                                        }}>
-                                                            {rankDisplay}
-                                                        </span>
+                                                            content: '•',
+                                                            color: '#d32f2f',
+                                                            position: 'absolute',
+                                                            left: 0,
+                                                            fontWeight: 'bold'
+                                                        }}>•</span>
+                                                        <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
+                                                            <span style={{ paddingRight: '0.5rem', fontWeight: 'bold', color: '#4f46e5' }}>
+                                                                {spellData.name}
+                                                            </span>
+                                                            <span style={{
+                                                                flexGrow: 1,
+                                                                borderBottom: '1px dotted #ccc',
+                                                                margin: '0 0.5rem',
+                                                                position: 'relative',
+                                                                top: '-4px',
+                                                                minWidth: '20px'
+                                                            }}></span>
+                                                            <span style={{
+                                                                fontSize: '0.875rem',
+                                                                color: spell.rank > maxRank ? '#a855f7' : '#8B4513',
+                                                                fontWeight: spell.rank > maxRank ? 'bold' : 'normal',
+                                                                whiteSpace: 'nowrap'
+                                                            }}>
+                                                                {rankDisplay}
+                                                            </span>
+                                                        </div>
                                                     </li>
                                                 );
                                             })}
