@@ -102,84 +102,42 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
     },
     "Vigilante": {
         name: "Vigilante",
+        defaultEffects: [
+            "Disponibilidad de armamento a dificultad reducida",
+            "Recarga rápida",
+            "Recuerdos dolorosos",
+            "Voluntad férrea"
+        ],
         subtypes: {
-            "Acrobata": [
-                "Disponibilidad de armamento a dificultad reducida",
-                "Recarga rápida",
-                "Recuerdos dolorosos",
-                "Voluntad férrea"
-            ],
+            "Acrobata": [],
             "Arquero": [
-                "Disponibilidad de armamento a dificultad reducida",
-                "Recarga rápida",
-                "Recuerdos dolorosos",
-                "Voluntad férrea"
+                "Solo tarda un asalto en apuntar con un arco."
             ],
-            "Cazador": [
-                "Disponibilidad de armamento a dificultad reducida",
-                "Recarga rápida",
-                "Recuerdos dolorosos",
-                "Voluntad férrea"
-            ],
+            "Cazador": [],
             "Espadachín": [
-                "Disponibilidad de armamento a dificultad reducida",
-                "Recarga rápida",
-                "Recuerdos dolorosos",
-                "Voluntad férrea"
+                "Cuando usa dos armas blancas, la segunda mano reduce su porcentaje en un tercio al igual que la primera mano."
             ],
-            "Espia/Ladrón": [
-                "Disponibilidad de armamento a dificultad reducida",
-                "Recarga rápida",
-                "Recuerdos dolorosos",
-                "Voluntad férrea"
-            ],
+            "Espia/Ladrón": [],
             "Fanático/Vengador": [
-                "Disponibilidad de armamento a dificultad reducida",
-                "Recarga rápida",
-                "Recuerdos dolorosos",
-                "Voluntad férrea"
+                "-20 a las tiradas de EQM cuando traten sobre su obsesion o venganza"
             ],
             "Francotirador": [
-                "Disponibilidad de armamento a dificultad reducida",
-                "Recarga rápida",
-                "Recuerdos dolorosos",
-                "Voluntad férrea"
+                "Solo tarda un asalto en apuntar con un arma larga."
             ],
             "Manipulador": [
-                "Disponibilidad de armamento a dificultad reducida",
-                "Recarga rápida",
-                "Recuerdos dolorosos",
-                "Voluntad férrea"
+                "Puede repetir una tirada fallida de resistencia a prejuicios"
             ],
-            "Mente Maestra": [
-                "Disponibilidad de armamento a dificultad reducida",
-                "Recarga rápida",
-                "Recuerdos dolorosos",
-                "Voluntad férrea"
-            ],
-            "Militar": [
-                "Disponibilidad de armamento a dificultad reducida",
-                "Recarga rápida",
-                "Recuerdos dolorosos",
-                "Voluntad férrea"
-            ],
+            "Mente Maestra": [],
+            "Militar": [],
             "Pistolero": [
-                "Disponibilidad de armamento a dificultad reducida",
-                "Recarga rápida",
-                "Recuerdos dolorosos",
-                "Voluntad férrea"
+                "Cuando usa dos armas cortas, la segunda mano reduce su porcentaje en un tercio al igual que la primera mano."
             ],
             "Artista Marcial": [
-                "Disponibilidad de armamento a dificultad reducida",
-                "Recarga rápida",
-                "Recuerdos dolorosos",
-                "Voluntad férrea"
+                "Tiene que quedar patente en el historial que un clan o varios maestros le adiestraron durante gran parte de su vida."
             ],
             "Artista Marcial con Chi": [
-                "Disponibilidad de armamento a dificultad reducida",
-                "Recarga rápida",
-                "Recuerdos dolorosos",
-                "Voluntad férrea"
+                "Tiene que quedar patente en el historial que un clan o varios maestros le adiestraron durante gran parte de su vida.",
+                "Acceso al uso del chi"
             ],
         }
     },
