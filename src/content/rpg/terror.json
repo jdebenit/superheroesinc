@@ -20,7 +20,6 @@
     "Inconsciencia: 9",
     "Recuperación: 1 PV/h",
     "Resistencia a gases y venenos: 26%",
-    "Resistencia a prejuicios: 100%",
     "Modificador de fuerza: 1d4",
     "Peso Levantado: 65 Kg.",
     "Daño absorbido físico: 0",
@@ -141,5 +140,9 @@
         "notes": "El dañó que hace la guadaña al golpear, tanto corpórea como intangible es el  causado por el daño de su emisión de energía mágica 1d100+50"
       }
     ]
+  },
+  "background": {
+    "items": [],
+    "prejudiceResistance": 100
   }
 }

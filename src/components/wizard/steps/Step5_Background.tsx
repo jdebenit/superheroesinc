@@ -1,5 +1,5 @@
 import React from 'react';
-import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS } from '../../../data/backgroundTables';
+import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS, FRIENDS_AND_ASSOCIATES } from '../../../data/backgroundTables';
 
 interface Step5Props {
     data: {
@@ -9,6 +9,7 @@ interface Step5Props {
             economicStatus?: string;
             legalStatus?: string;
             socialStatus?: string;
+            friendsAndAssociates?: string;
         };
     };
     onChange: (updates: any) => void;
@@ -22,6 +23,7 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
     const currentEconomic = ECONOMIC_STATUS.find(e => e.id === data.background?.economicStatus) || ECONOMIC_STATUS[3];
     const currentLegal = LEGAL_STATUS.find(l => l.id === data.background?.legalStatus) || LEGAL_STATUS[0];
     const currentSocial = SOCIAL_STATUS.find(s => s.id === data.background?.socialStatus) || SOCIAL_STATUS[2];
+    const currentFriends = FRIENDS_AND_ASSOCIATES.find(f => f.id === data.background?.friendsAndAssociates) || FRIENDS_AND_ASSOCIATES[2];
 
     const addBackgroundItem = () => {
         onChange({
@@ -224,6 +226,7 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
                     {renderStatusSelect("Posición Económica", ECONOMIC_STATUS, data.background?.economicStatus, 'economicStatus', currentEconomic)}
                     {renderStatusSelect("Situación Legal", LEGAL_STATUS, data.background?.legalStatus, 'legalStatus', currentLegal)}
                     {renderStatusSelect("Posición Social", SOCIAL_STATUS, data.background?.socialStatus, 'socialStatus', currentSocial)}
+                    {renderStatusSelect("Amistades y allegados", FRIENDS_AND_ASSOCIATES, data.background?.friendsAndAssociates, 'friendsAndAssociates', currentFriends)}
                 </div>
             </div>
 
@@ -282,11 +285,10 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
             }}>
                 <p style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>💡 Ejemplos de trasfondo:</p>
                 <ul style={{ margin: 0, paddingLeft: '1.2rem', listStyleType: 'disc' }}>
-                    <li>Trabajo alto: Ejecutivo de empresa</li>
-                    <li>Trabajo medio: Profesor universitario</li>
-                    <li>Trabajo bajo: Taxista</li>
-                    <li>Solitario / Sociable</li>
-                    <li>Familia numerosa / Huérfano</li>
+                    <li>Personalida secreta: no mantiene / Opuesta a la real</li>
+                    <li>Depresivo / Frio</li>
+                    <li>Infancia feliz / Criado en la calle</li>
+                    <li>Sus padres viven / Huérfano</li>
                 </ul>
             </div>
         </div>

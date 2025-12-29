@@ -71,9 +71,16 @@ const rpgCollection = defineCollection({
             cost: z.union([z.number(), z.string()]).optional(),
             items: z.array(z.any())
         }).optional(),
+        profession: z.string().optional(),
+        sexualIdentity: z.string().optional(),
         background: z.object({
             cost: z.union([z.number(), z.string()]).optional(),
-            items: z.array(z.any())
+            items: z.array(z.any()),
+            prejudiceResistance: z.number().optional(),
+            economicStatus: z.string().optional(),
+            legalStatus: z.string().optional(),
+            socialStatus: z.string().optional(),
+            friendsAndAssociates: z.string().optional(),
         }).optional(),
         equipment: z.object({
             cost: z.union([z.number(), z.string()]).optional(),

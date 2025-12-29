@@ -111,5 +111,9 @@
         "value": "60%"
       }
     ]
+  },
+  "background": {
+    "items": [],
+    "prejudiceResistance": 30
   }
 }

@@ -27,6 +27,7 @@ interface Props {
             economicStatus?: string;
             legalStatus?: string;
             socialStatus?: string;
+            friendsAndAssociates?: string;
         };
         equipment?: {
             cost?: number | string;
@@ -56,6 +57,7 @@ import {
     ECONOMIC_STATUS,
     LEGAL_STATUS,
     SOCIAL_STATUS,
+    FRIENDS_AND_ASSOCIATES,
 } from "../data/backgroundTables";
 
 const { rpg } = Astro.props;
@@ -268,6 +270,7 @@ const otherStats = rpg.otherstats || rpg.other || [];
                         {(rpg.background?.economicStatus ||
                             rpg.background?.legalStatus ||
                             rpg.background?.socialStatus ||
+                            rpg.background?.friendsAndAssociates ||
                             rpg.profession ||
                             rpg.sexualIdentity) && (
                             <div class="status-grid">
@@ -301,9 +304,9 @@ const otherStats = rpg.otherstats || rpg.other || [];
                                                 (e) =>
                                                     e.id ===
                                                     rpg.background
-                                                        .economicStatus,
+                                                        ?.economicStatus,
                                             )?.label ||
-                                                rpg.background.economicStatus}
+                                                rpg.background?.economicStatus}
                                         </span>
                                     </div>
                                 )}
@@ -316,9 +319,9 @@ const otherStats = rpg.otherstats || rpg.other || [];
                                             {LEGAL_STATUS.find(
                                                 (l) =>
                                                     l.id ===
-                                                    rpg.background.legalStatus,
+                                                    rpg.background?.legalStatus,
                                             )?.label ||
-                                                rpg.background.legalStatus}
+                                                rpg.background?.legalStatus}
                                         </span>
                                     </div>
                                 )}
@@ -331,9 +334,27 @@ const otherStats = rpg.otherstats || rpg.other || [];
                                             {SOCIAL_STATUS.find(
                                                 (s) =>
                                                     s.id ===
-                                                    rpg.background.socialStatus,
+                                                    rpg.background
+                                                        ?.socialStatus,
                                             )?.label ||
-                                                rpg.background.socialStatus}
+                                                rpg.background?.socialStatus}
+                                        </span>
+                                    </div>
+                                )}
+                                {rpg.background?.friendsAndAssociates && (
+                                    <div class="status-item">
+                                        <span class="status-label">
+                                            AMISTADES Y ALLEGADOS
+                                        </span>
+                                        <span class="status-value">
+                                            {FRIENDS_AND_ASSOCIATES.find(
+                                                (f) =>
+                                                    f.id ===
+                                                    rpg.background
+                                                        ?.friendsAndAssociates,
+                                            )?.label ||
+                                                rpg.background
+                                                    ?.friendsAndAssociates}
                                         </span>
                                     </div>
                                 )}

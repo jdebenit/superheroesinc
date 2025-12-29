@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS } from '../../data/backgroundTables';
+import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS, FRIENDS_AND_ASSOCIATES } from '../../data/backgroundTables';
 import { SPELLS } from '../../data/spells';
 import { POWERS } from '../../data/powers';
 
@@ -326,7 +326,7 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
 
                                             {/* Status Grid */}
-                                            {(character.background?.economicStatus || character.background?.legalStatus || character.background?.socialStatus || character.profession || character.sexualIdentity) && (
+                                            {(character.background?.economicStatus || character.background?.legalStatus || character.background?.socialStatus || character.background?.friendsAndAssociates || character.profession || character.sexualIdentity) && (
                                                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', paddingBottom: '1rem', borderBottom: '1px solid #e5e7eb' }}>
                                                     {character.profession && (
                                                         <div>
@@ -356,6 +356,12 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                         <div>
                                                             <span style={{ display: 'block', fontSize: '0.75rem', color: '#6b7280', fontWeight: 'bold' }}>POSICIÓN SOCIAL</span>
                                                             <span style={{ fontSize: '0.9rem', color: '#1f2937' }}>{SOCIAL_STATUS.find(s => s.id === character.background.socialStatus)?.label}</span>
+                                                        </div>
+                                                    )}
+                                                    {character.background?.friendsAndAssociates && (
+                                                        <div>
+                                                            <span style={{ display: 'block', fontSize: '0.75rem', color: '#6b7280', fontWeight: 'bold' }}>AMISTADES Y ALLEGADOS</span>
+                                                            <span style={{ fontSize: '0.9rem', color: '#1f2937' }}>{FRIENDS_AND_ASSOCIATES.find(f => f.id === character.background.friendsAndAssociates)?.label}</span>
                                                         </div>
                                                     )}
                                                 </div>

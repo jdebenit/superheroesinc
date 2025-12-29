@@ -8,7 +8,7 @@ import Step5_Background from './steps/Step5_Background';
 import Step6_Details from './steps/Step6_Details';
 import { calculateOriginCost } from '../../data/originCosts.ts';
 import { calculateCreationPoints, calculateGeneralSkillValues, calculateSpecialSkillsPCWithInt } from '../../utils/characterCalculations';
-import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS } from '../../data/backgroundTables';
+import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS, FRIENDS_AND_ASSOCIATES } from '../../data/backgroundTables';
 import { SPELLS } from '../../data/spells';
 import { POWERS } from '../../data/powers';
 
@@ -73,7 +73,8 @@ const initialCharacterState = {
         prejudiceResistance: 50,
         economicStatus: 'clase_media',
         legalStatus: 'sin_antecedentes',
-        socialStatus: 'anonimo'
+        socialStatus: 'anonimo',
+        friendsAndAssociates: 'conocido'
     },
     equipment: { items: [] },
     weapons: { items: [] },
@@ -199,8 +200,9 @@ export default function CharacterWizard() {
         const economicCost = ECONOMIC_STATUS.find(e => e.id === character.background?.economicStatus)?.cost || 0;
         const legalCost = LEGAL_STATUS.find(l => l.id === character.background?.legalStatus)?.cost || 0;
         const socialCost = SOCIAL_STATUS.find(s => s.id === character.background?.socialStatus)?.cost || 0;
+        const friendsCost = FRIENDS_AND_ASSOCIATES.find(f => f.id === character.background?.friendsAndAssociates)?.cost || 0;
 
-        total += economicCost + legalCost + socialCost;
+        total += economicCost + legalCost + socialCost + friendsCost;
 
         // 7. Coste de Exceso de Magia (EM)
         // Por cada 1 punto de EM que se pase del total disponible: +0.1 PC

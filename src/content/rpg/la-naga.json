@@ -184,8 +184,8 @@
     "economicStatus": "mendigo",
     "legalStatus": "con_antecedentes",
     "socialStatus": "anonimo",
+    "friendsAndAssociates": "solitario",
     "items": [
-      "Solitario",
       "Identidad desconocida"
     ]
   },

@@ -123,3 +123,42 @@ export const SOCIAL_STATUS: BackgroundOption[] = [
         description: 'Héroe reconocido y avalado por instituciones gubernamentales.'
     }
 ];
+
+export const FRIENDS_AND_ASSOCIATES: BackgroundOption[] = [
+    {
+        id: 'solitario',
+        label: 'Solitario',
+        cost: -2,
+        description: 'Es un tipo solitario. No se relaciona con la familia ni tiene amigos.'
+    },
+    {
+        id: 'solo_familia',
+        label: 'Solo familia',
+        cost: -1,
+        description: 'Tan solo su familia directa cuenta con él.'
+    },
+    {
+        id: 'conocido',
+        label: 'Conocido',
+        cost: 0,
+        description: 'Algún conocido, pero no se fía especialmente.'
+    },
+    {
+        id: 'grupo_reducido',
+        label: 'Grupo reducido',
+        cost: 1,
+        description: 'Tiene un grupo reducido de amigos (1d4) en los que confía y que lo apoyan.'
+    },
+    {
+        id: 'lazos_todos',
+        label: 'Lazos con todos',
+        cost: 2,
+        description: 'Mantiene lazos de amistad con todos aquellos a los que les ha unido algo especial, y puede recibir ayuda de ellos.'
+    },
+    {
+        id: 'conocido_poderoso',
+        label: 'Conocido poderoso',
+        cost: 3,
+        description: 'Conocido poderoso. Le apoyará debido a alguna deuda pendiente, o a un vínculo fuerte entre ellos.'
+    }
+];
