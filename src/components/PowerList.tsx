@@ -198,7 +198,7 @@ export default function PowerList() {
             <thead>
               <tr>
                 <th>Poder</th>
-                <th>Coste (PC)</th>
+                <th>PCs</th>
                 <th>Tipo</th>
                 <th>Orígenes</th>
                 <th>Valor</th>

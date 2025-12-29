@@ -23,6 +23,10 @@ interface Props {
         background?: {
             cost?: number | string;
             items: any[];
+            prejudiceResistance?: number;
+            economicStatus?: string;
+            legalStatus?: string;
+            socialStatus?: string;
         };
         equipment?: {
             cost?: number | string;
@@ -42,10 +46,17 @@ interface Props {
             items: any[];
         };
         other?: string[];
+        profession?: string;
+        sexualIdentity?: string;
     };
 }
 
 import RpgItem from "./RpgItem.astro";
+import {
+    ECONOMIC_STATUS,
+    LEGAL_STATUS,
+    SOCIAL_STATUS,
+} from "../data/backgroundTables";
 
 const { rpg } = Astro.props;
 
@@ -241,21 +252,135 @@ const otherStats = rpg.otherstats || rpg.other || [];
         }
 
         {
-            rpg.background && (
+            (rpg.background || rpg.profession || rpg.sexualIdentity) && (
                 <div class="sheet-section background">
                     <div class="section-header">
                         <h4>Historial</h4>
-                        {rpg.background.cost && (
+                        {rpg.background?.cost && (
                             <span class="cost">
                                 ({rpg.background.cost} PCs)
                             </span>
                         )}
                     </div>
-                    <ul>
-                        {rpg.background.items.map((item) => (
-                            <RpgItem item={item} />
-                        ))}
-                    </ul>
+
+                    <div class="background-content">
+                        {/* Status Grid */}
+                        {(rpg.background?.economicStatus ||
+                            rpg.background?.legalStatus ||
+                            rpg.background?.socialStatus ||
+                            rpg.profession ||
+                            rpg.sexualIdentity) && (
+                            <div class="status-grid">
+                                {rpg.profession && (
+                                    <div class="status-item">
+                                        <span class="status-label">
+                                            PROFESIÓN
+                                        </span>
+                                        <span class="status-value">
+                                            {rpg.profession}
+                                        </span>
+                                    </div>
+                                )}
+                                {rpg.sexualIdentity && (
+                                    <div class="status-item">
+                                        <span class="status-label">
+                                            IDENTIDAD SEXUAL
+                                        </span>
+                                        <span class="status-value">
+                                            {rpg.sexualIdentity}
+                                        </span>
+                                    </div>
+                                )}
+                                {rpg.background?.economicStatus && (
+                                    <div class="status-item">
+                                        <span class="status-label">
+                                            POSICIÓN ECONÓMICA
+                                        </span>
+                                        <span class="status-value">
+                                            {ECONOMIC_STATUS.find(
+                                                (e) =>
+                                                    e.id ===
+                                                    rpg.background
+                                                        .economicStatus,
+                                            )?.label ||
+                                                rpg.background.economicStatus}
+                                        </span>
+                                    </div>
+                                )}
+                                {rpg.background?.legalStatus && (
+                                    <div class="status-item">
+                                        <span class="status-label">
+                                            SITUACIÓN LEGAL
+                                        </span>
+                                        <span class="status-value">
+                                            {LEGAL_STATUS.find(
+                                                (l) =>
+                                                    l.id ===
+                                                    rpg.background.legalStatus,
+                                            )?.label ||
+                                                rpg.background.legalStatus}
+                                        </span>
+                                    </div>
+                                )}
+                                {rpg.background?.socialStatus && (
+                                    <div class="status-item">
+                                        <span class="status-label">
+                                            POSICIÓN SOCIAL
+                                        </span>
+                                        <span class="status-value">
+                                            {SOCIAL_STATUS.find(
+                                                (s) =>
+                                                    s.id ===
+                                                    rpg.background.socialStatus,
+                                            )?.label ||
+                                                rpg.background.socialStatus}
+                                        </span>
+                                    </div>
+                                )}
+                            </div>
+                        )}
+
+                        {/* Background Items */}
+                        {rpg.background?.items &&
+                            rpg.background.items.length > 0 && (
+                                <div class="background-items">
+                                    <span
+                                        class="status-label"
+                                        style="display: block; margin-bottom: 0.5rem;"
+                                    >
+                                        NOTAS DE TRASFONDO
+                                    </span>
+                                    <ul>
+                                        {rpg.background.items.map((item) => (
+                                            <RpgItem item={item} />
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
+
+                        {/* Prejudice Resistance */}
+                        {rpg.background?.prejudiceResistance && (
+                            <div class="prejudice-box">
+                                <div>
+                                    <span class="prejudice-label">
+                                        RESISTENCIA A PREJUICIOS
+                                    </span>
+                                    <span class="prejudice-value">
+                                        {rpg.background.prejudiceResistance}%
+                                    </span>
+                                </div>
+                                <span class="prejudice-cost">
+                                    (
+                                    {(
+                                        (rpg.background.prejudiceResistance -
+                                            50) *
+                                        0.1
+                                    ).toFixed(1)}{" "}
+                                    PCs)
+                                </span>
+                            </div>
+                        )}
+                    </div>
                 </div>
             )
         }
@@ -528,5 +653,75 @@ const otherStats = rpg.otherstats || rpg.other || [];
         font-weight: bold;
         color: var(--color-primary-dark);
         font-family: var(--font-display);
+    }
+
+    /* Background Section Styles */
+    .background-content {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .status-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    @media (max-width: 640px) {
+        .status-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .status-item {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .status-label {
+        display: block;
+        font-size: 0.75rem;
+        color: #6b7280;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .status-value {
+        font-size: 0.9rem;
+        color: #1f2937;
+    }
+
+    .prejudice-box {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #eff6ff;
+        padding: 0.75rem;
+        border-radius: 6px;
+        border: 1px solid #bfdbfe;
+    }
+
+    .prejudice-label {
+        display: block;
+        font-size: 0.75rem;
+        color: #1e40af;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .prejudice-value {
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: #1e3a8a;
+        font-family: var(--font-display);
+    }
+
+    .prejudice-cost {
+        font-size: 0.85rem;
+        color: #3b82f6;
+        font-weight: bold;
     }
 </style>

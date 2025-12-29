@@ -108,6 +108,7 @@ export const POWERS: Power[] = [
         name: "Cambio de tamaño",
         formula: "5+(Rango/10)",
         cost: 5,
+        skillCalc: "CON",
         types: ["Físico"],
         origins: ["Alterado", "Mutante", "Guardian", "Sobrenatural"]
     },
@@ -476,6 +477,7 @@ export const POWERS: Power[] = [
         name: "Supervelocidad",
         formula: "5+((AGI Final - AGI Inicial)/10)",
         cost: 5,
+        skillCalc: "AGI",
         characteristic: "AGI",
         types: ["Físico"],
         origins: ["Alterado", "Mutante", "Guardian", "Cósmico", "Divino"]
