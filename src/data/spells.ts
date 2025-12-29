@@ -19,11 +19,19 @@ export const SPELLS: Spell[] = [
         hasRequirements: false
     },
     {
+        id: "animar_objetos",
+        name: "Animar Objetos",
+        cost: "75",
+        requirements: "No especificado",
+        maxRank: 5,
+        hasRequirements: false
+    },
+    {
         id: "anular_conjuros",
         name: "Anular Conjuros",
         cost: "100",
         requirements: "No especificado",
-        maxRank: 10,
+        maxRank: 6,
         hasRequirements: false
     },
     {
@@ -63,7 +71,7 @@ export const SPELLS: Spell[] = [
         name: "Crear realidad periférica",
         cost: "75",
         requirements: "Maestría en Escudos místicos y rango 5 en Abrir portales.",
-        maxRank: 1,
+        maxRank: 5,
         hasRequirements: true
     },
     {
@@ -103,7 +111,7 @@ export const SPELLS: Spell[] = [
         name: "Inmaterializar cuerpo",
         cost: "25",
         requirements: "Al menos rango 3 en Proyección Astral.",
-        maxRank: 1,
+        maxRank: 5,
         hasRequirements: true
     },
     {
@@ -111,7 +119,7 @@ export const SPELLS: Spell[] = [
         name: "Invocar Animales",
         cost: "35",
         requirements: "No especificado",
-        maxRank: 1,
+        maxRank: 7,
         hasRequirements: false
     },
     {
@@ -119,7 +127,7 @@ export const SPELLS: Spell[] = [
         name: "Invocar Elemento",
         cost: "50",
         requirements: "No especificado",
-        maxRank: 1,
+        maxRank: 4,
         hasRequirements: false
     },
     {
@@ -127,7 +135,7 @@ export const SPELLS: Spell[] = [
         name: "Invocar Espíritu",
         cost: "35",
         requirements: "No especificado",
-        maxRank: 1,
+        maxRank: 4,
         hasRequirements: false
     },
     {
@@ -135,7 +143,7 @@ export const SPELLS: Spell[] = [
         name: "Invocar Espíritu Totémico",
         cost: "35",
         requirements: "No especificado",
-        maxRank: 10,
+        maxRank: 8,
         hasRequirements: false
     },
     {
@@ -151,7 +159,7 @@ export const SPELLS: Spell[] = [
         name: "Liberar retoños",
         cost: "60",
         requirements: "Al menos rango 1 en Transformación de materiales o rango 2 en Animar objetos.",
-        maxRank: 1,
+        maxRank: 5,
         hasRequirements: true
     },
     {
@@ -159,7 +167,7 @@ export const SPELLS: Spell[] = [
         name: "Maldecir",
         cost: "80",
         requirements: "Al menos rango 4 en Metamorfosis Oscura y rango 9 en Encantar Objetos.",
-        maxRank: 1,
+        maxRank: 7,
         hasRequirements: true
     },
     {
@@ -167,7 +175,7 @@ export const SPELLS: Spell[] = [
         name: "Metamorfosis Oscura",
         cost: "85",
         requirements: "No especificado",
-        maxRank: 5,
+        maxRank: 4,
         hasRequirements: false
     },
     {
@@ -183,7 +191,7 @@ export const SPELLS: Spell[] = [
         name: "Percepción Mágica",
         cost: "35",
         requirements: "No especificado",
-        maxRank: 1,
+        maxRank: 5,
         hasRequirements: false
     },
     {
@@ -223,7 +231,7 @@ export const SPELLS: Spell[] = [
         name: "Revivir Muertos",
         cost: "75",
         requirements: "No especificado",
-        maxRank: 1,
+        maxRank: 5,
         hasRequirements: false
     },
     {
@@ -247,7 +255,7 @@ export const SPELLS: Spell[] = [
         name: "Viajar en el Tiempo",
         cost: "150",
         requirements: "Se necesita tener al menos Maestría en Abrir Portales. Además para arcanos que no tengan una vinculación con el Cronos Supremo serán necesarios tener todos conjuros del libro básico al máximo rango para poder aprender a dominar este hechizo.",
-        maxRank: 1,
+        maxRank: 4,
         hasRequirements: true
     }
 ];
