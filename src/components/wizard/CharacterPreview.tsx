@@ -485,7 +485,7 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                 {character.powers?.selected && character.powers.selected.length > 0 && (
                                     <div className="sheet-section powers">
                                         <div className="section-header">
-                                            <h4>Poderes Especiales</h4>
+                                            <h4>Poderes</h4>
                                         </div>
                                         <ul className="no-bullets-list" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                                             {character.powers.selected.map((power: any, idx: number) => {
@@ -546,7 +546,7 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                 {character.spells?.selected && character.spells.selected.length > 0 && (
                                     <div className="sheet-section spells">
                                         <div className="section-header">
-                                            <h4>Artes Mágicas</h4>
+                                            <h4>Hechizos</h4>
                                         </div>
                                         <ul className="no-bullets-list" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                                             {character.spells.selected.map((spell: any, idx: number) => {
