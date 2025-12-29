@@ -18,10 +18,15 @@ export interface RequiredSpecialtySkills {
 export const REQUIRED_SPECIALTY_SKILLS: RequiredSpecialtySkills = {
     "Artista Marcial": ['artes_marciales'],
     "Artista Marcial con Chi": ['artes_marciales'],
-    "Pistolero": ['armas_cortas'],
+    "Arquero": ['arcos'],
+    "Cazador": ['trampas', 'rastrear'],
     "Espadachín": ['armas_blancas'],
+    "Espía/Ladrón": ['robar'],
+    "Francotirador": ['armas_largas'],
     "Manipulador": ['otro_idioma'],  // Parametrizable - se añadirá una instancia vacía
-    "Mente maestra": ['informatica']
+    "Mente Maestra": ['computadoras'],
+    "Militar": ['armas_militares'],
+    "Pistolero": ['armas_cortas'],
 };
 
 /**
