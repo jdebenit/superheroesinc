@@ -487,7 +487,7 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                         <div className="section-header">
                                             <h4>Poderes Especiales</h4>
                                         </div>
-                                        <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                                        <ul className="no-bullets-list" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                                             {character.powers.selected.map((power: any, idx: number) => {
                                                 const powerData = POWERS.find(p => p.id === power.id);
                                                 if (!powerData) return null;
@@ -502,24 +502,15 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
 
                                                 return (
                                                     <li key={`${power.id}-${idx}`} style={{
+                                                        listStyle: 'none',
                                                         marginBottom: '0.75rem',
-                                                        paddingLeft: '1.2rem',
-                                                        position: 'relative',
                                                         borderBottom: '1px solid #e5e7eb',
                                                         paddingBottom: '0.5rem'
                                                     }}>
-                                                        <span style={{
-                                                            content: '•',
-                                                            color: '#d32f2f',
-                                                            position: 'absolute',
-                                                            left: 0,
-                                                            fontWeight: 'bold'
-                                                        }}>•</span>
 
                                                         <div style={{ display: 'flex', alignItems: 'baseline', width: '100%', marginBottom: '0.25rem' }}>
-                                                            <span style={{ paddingRight: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                                            <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                                                                 <span style={{ fontWeight: 'bold', color: '#059669' }}>{powerData.name}</span>
-
                                                             </span>
                                                             <span style={{
                                                                 flexGrow: 1,
@@ -557,7 +548,7 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                         <div className="section-header">
                                             <h4>Artes Mágicas</h4>
                                         </div>
-                                        <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                                        <ul className="no-bullets-list" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                                             {character.spells.selected.map((spell: any, idx: number) => {
                                                 const spellData = SPELLS.find(s => s.id === spell.id);
                                                 if (!spellData) return null;
@@ -569,19 +560,11 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
 
                                                 return (
                                                     <li key={`${spell.id}-${idx}`} style={{
-                                                        marginBottom: '0.5rem',
-                                                        paddingLeft: '1.2rem',
-                                                        position: 'relative'
+                                                        listStyle: 'none',
+                                                        marginBottom: '0.5rem'
                                                     }}>
-                                                        <span style={{
-                                                            content: '•',
-                                                            color: '#d32f2f',
-                                                            position: 'absolute',
-                                                            left: 0,
-                                                            fontWeight: 'bold'
-                                                        }}>•</span>
                                                         <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
-                                                            <span style={{ paddingRight: '0.5rem', fontWeight: 'bold', color: '#4f46e5' }}>
+                                                            <span style={{ fontWeight: 'bold', color: '#4f46e5' }}>
                                                                 {spellData.name}
                                                             </span>
                                                             <span style={{
@@ -626,6 +609,19 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
 
                 <style dangerouslySetInnerHTML={{
                     __html: `
+                    /* Force remove bullets and ALL spacing from specific lists */
+                    .no-bullets-list, .no-bullets-list li {
+                        list-style-type: none !important;
+                        list-style: none !important;
+                        padding-left: 0 !important;
+                        margin-left: 0 !important;
+                        padding-inline-start: 0 !important;
+                    }
+                    .no-bullets-list li::before {
+                        content: none !important;
+                        display: none !important;
+                    }
+                    
                     .character-dialog {
                         padding: 0;
                         border: none;
