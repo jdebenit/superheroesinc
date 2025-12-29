@@ -333,21 +333,23 @@ export default function Step1_OriginSelection({ data, onChange }: Step1Props) {
                                     }}>
                                         {origin?.name}
                                     </span>
-                                    {subtypes.map(subtype => (
-                                        <span
-                                            key={subtype}
-                                            style={{
-                                                padding: '0.5rem 1rem',
-                                                backgroundColor: '#60a5fa',
-                                                color: 'white',
-                                                borderRadius: '9999px',
-                                                fontSize: '0.875rem',
-                                                fontWeight: 'bold'
-                                            }}
-                                        >
-                                            {subtype}
-                                        </span>
-                                    ))}
+                                    {subtypes
+                                        .filter(subtype => !category?.defaultEffects?.includes(subtype))
+                                        .map(subtype => (
+                                            <span
+                                                key={subtype}
+                                                style={{
+                                                    padding: '0.5rem 1rem',
+                                                    backgroundColor: '#60a5fa',
+                                                    color: 'white',
+                                                    borderRadius: '9999px',
+                                                    fontSize: '0.875rem',
+                                                    fontWeight: 'bold'
+                                                }}
+                                            >
+                                                {subtype}
+                                            </span>
+                                        ))}
                                     {hasSubtypes && subtypes.length === 0 && (
                                         <span style={{
                                             fontSize: '0.875rem',
