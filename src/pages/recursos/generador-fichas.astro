@@ -3,17 +3,74 @@ import Layout from "../../layouts/Layout.astro";
 import CharacterWizard from "../../components/wizard/CharacterWizard";
 ---
 
-<Layout title="Generador de Fichas">
-    <section class="max-w-7xl mx-auto py-8">
-        <CharacterWizard client:only="react" />
+<Layout title="Generador de Fichas - Superheroes INC.">
+    <section class="wizard-page">
+        <div class="header">
+            <h1 class="page-title">Generador de Personajes</h1>
+            <p class="intro-text">
+                Crea tu personaje paso a paso, define su origen, características
+                y habilidades para comenzar tu aventura.
+            </p>
+            <a href="/recursos" class="back-link">← Volver a Recursos</a>
+        </div>
 
-        <div class="text-center mt-8">
-            <a
-                href="/recursos"
-                class="inline-block bg-black text-white font-bold py-2 px-4 hover:bg-gray-800 transition-colors"
-            >
-                ← Volver a Recursos
-            </a>
+        <div class="wizard-container">
+            <CharacterWizard client:only="react" />
         </div>
     </section>
 </Layout>
+
+<style>
+    .wizard-page {
+        padding: 2rem 1rem;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .header {
+        margin-bottom: 2rem;
+    }
+
+    .page-title {
+        font-size: 3rem;
+        color: var(--color-secondary);
+        text-shadow: 3px 3px 0px var(--color-primary);
+        margin-bottom: 1rem;
+    }
+
+    .intro-text {
+        font-size: 1.2rem;
+        max-width: 800px;
+        margin-bottom: 1.5rem;
+    }
+
+    .back-link {
+        display: inline-block;
+        color: var(--color-secondary);
+        font-weight: bold;
+        text-decoration: none;
+        border-bottom: 2px solid transparent;
+        transition: border-color 0.2s;
+        margin-bottom: 1rem;
+    }
+
+    .back-link:hover {
+        border-bottom-color: var(--color-secondary);
+    }
+
+    /* Remove specific container styling if Wizard has its own, 
+       but keep layout structure */
+    .wizard-container {
+        /* Optional wrapper styles */
+    }
+
+    @media (max-width: 600px) {
+        .wizard-page {
+            padding: 1rem;
+        }
+
+        .page-title {
+            font-size: 2rem;
+        }
+    }
+</style>
