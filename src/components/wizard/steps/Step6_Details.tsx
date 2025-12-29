@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { calculateDerivedStats } from '../../../utils/characterCalculations';
+import { GENERAL_SKILLS } from '../../../data/generalSkills';
+import { SPECIAL_SKILLS } from '../../../data/specialSkills';
 
 interface Step6Props {
     data: {
@@ -157,6 +159,11 @@ export default function Step6_Details({ data, onChange }: Step6Props) {
         transition: 'background-color 0.2s'
     };
 
+    const weaponSkills = [
+        ...GENERAL_SKILLS.filter(s => ['combate', 'lanzar'].includes(s.id)),
+        ...SPECIAL_SKILLS.filter(s => s.category === 'combat')
+    ];
+
     return (
         <div style={{ padding: '1rem', maxWidth: '1000px', margin: '0 auto' }}>
 
@@ -298,8 +305,8 @@ export default function Step6_Details({ data, onChange }: Step6Props) {
                     {data.weapons?.items?.map((item, index) => (
                         <div key={index} style={{
                             display: 'grid',
-                            gridTemplateColumns: '2fr 1fr 2fr 100px auto',
-                            gap: '1rem',
+                            gridTemplateColumns: '1.5fr 1.5fr 1fr 1.5fr 80px auto',
+                            gap: '0.5rem',
                             alignItems: 'start',
                             padding: '1rem',
                             backgroundColor: '#fef2f2',
@@ -315,6 +322,21 @@ export default function Step6_Details({ data, onChange }: Step6Props) {
                                     style={{ ...inputStyle, marginBottom: 0 }}
                                     placeholder="Nombre del arma"
                                 />
+                            </div>
+                            <div>
+                                <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Habilidad</label>
+                                <select
+                                    value={item.skillId || ''}
+                                    onChange={(e) => updateWeapon(index, 'skillId', e.target.value)}
+                                    style={{ ...inputStyle, marginBottom: 0, paddingRight: '2rem' }}
+                                >
+                                    <option value="">Seleccionar...</option>
+                                    {weaponSkills.map(skill => (
+                                        <option key={skill.id} value={skill.id}>
+                                            {skill.name}
+                                        </option>
+                                    ))}
+                                </select>
                             </div>
                             <div>
                                 <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Daño</label>
