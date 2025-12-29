@@ -591,6 +591,27 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                     </div>
                                 )}
 
+                                {/* Traumas (Vigilante) */}
+                                {character.traumas && Object.keys(character.traumas).length > 0 && (
+                                    <div className="sheet-section traumas">
+                                        <div className="section-header">
+                                            <h4>Traumas</h4>
+                                        </div>
+                                        <ul className="no-bullets-list" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                                            {Object.entries(character.traumas).map(([specialty, trauma]: [string, any], idx: number) => (
+                                                <li key={idx} style={{ marginBottom: '1rem' }}>
+                                                    <div style={{ fontWeight: 'bold', color: '#991b1b', textTransform: 'uppercase', fontSize: '0.875rem', marginBottom: '0.25rem' }}>
+                                                        {specialty}
+                                                    </div>
+                                                    <div style={{ fontStyle: 'italic', color: '#4b5563', fontSize: '0.95rem', lineHeight: '1.4', paddingLeft: '0.5rem', borderLeft: '3px solid #fee2e2' }}>
+                                                        "{trauma}"
+                                                    </div>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                )}
+
                                 {/* Notes */}
                                 {character.notes && (
                                     <div className="sheet-section notes">

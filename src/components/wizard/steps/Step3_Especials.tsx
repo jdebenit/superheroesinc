@@ -298,6 +298,25 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     const isDivino = hasOrigin(data, 'Divino'); // Any Divine subtype
     const isCosmico = hasOrigin(data, 'Cósmico');
     const isMutante = hasOrigin(data, 'Mutante');
+    const isVigilante = hasOrigin(data, 'Vigilante');
+
+    // Get Vigilante specialties
+    const vigilanteSpecialties = useMemo(() => {
+        if (!isVigilante) return [];
+        const vigItem = data.origin?.items?.find((item: any) => Object.keys(item)[0] === 'Vigilante');
+        if (!vigItem) return [];
+        return vigItem['Vigilante'] || [];
+    }, [data.origin, isVigilante]);
+
+    const updateTrauma = (specialty: string, text: string) => {
+        onChange({
+            ...data,
+            traumas: {
+                ...data.traumas,
+                [specialty]: text
+            }
+        });
+    };
 
     // EM Formula state
     const emFormula = data.spells?.emFormula || { divisor: 4, pcCost: 0 };
@@ -317,454 +336,492 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                 Poderes y Habilidades Especiales
             </h2>
 
-            {!isGuardian && !isAlterado && !hasEM && !isVampiro && !isSemidemonio && !isThals && !isDivino && !isCosmico && !isMutante && (
-                <div className="text-center py-12 border-4 border-dashed border-gray-300 rounded-xl bg-gray-50">
-                    <p className="text-xl text-gray-500 font-bold">
-                        No has seleccionado ningún origen que actualmente tenga habilitado este paso. Recuerda es una Alpha.
-                    </p>
-                    <p className="text-gray-400 mt-2 font-comic">Prueba con Guardián, Alterado, Arcano, Sobrenatural, Thals, Divino, Cósmico o Mutante</p>
-                </div>
-            )}
+
+
+            {
+                !isGuardian && !isAlterado && !hasEM && !isVampiro && !isSemidemonio && !isThals && !isDivino && !isCosmico && !isMutante && !isVigilante && (
+                    <div className="text-center py-12 border-4 border-dashed border-gray-300 rounded-xl bg-gray-50">
+                        <p className="text-xl text-gray-500 font-bold">
+                            No has seleccionado ningún origen que actualmente tenga habilitado este paso. Recuerda es una Alpha.
+                        </p>
+                        <p className="text-gray-400 mt-2 font-comic">Prueba con Guardián, Alterado, Arcano, Sobrenatural, Thals, Divino, Cósmico o Mutante</p>
+                    </div>
+                )
+            }
+
+            {/* VIGILANTE TRAUMAS SECTION */}
+            {
+                isVigilante && vigilanteSpecialties.length > 0 && (
+                    <div className="bg-red-50 border-4 border-red-900 rounded-xl overflow-hidden shadow-[8px_8px_0px_rgba(0,0,0,0.8)] mb-8">
+                        <div className="p-6 border-b-4 border-red-900 bg-white">
+                            <h3 className="text-2xl font-black text-red-900 uppercase italic font-comic">Traumas del Vigilante</h3>
+                            <p className="text-gray-600 mt-2">
+                                Como Vigilante, cada especialidad proviene de un trauma profundo. Describe el evento trágico que te llevó a desarrollar estas habilidades.
+                            </p>
+                        </div>
+                        <div className="p-6 bg-red-50/50 space-y-6">
+                            {vigilanteSpecialties.map((specialty: string) => (
+                                <div key={specialty} className="bg-white p-6 rounded-xl border-2 border-red-200 shadow-sm hover:shadow-md transition-shadow">
+                                    <div className="flex flex-col gap-3">
+                                        <label className="text-lg font-black text-red-900 uppercase font-comic tracking-wide flex items-center gap-2">
+                                            <span className="w-2 h-8 bg-red-600 rounded-full inline-block"></span>
+                                            Trauma: {specialty}
+                                        </label>
+                                        <textarea
+                                            value={data.traumas?.[specialty] || ''}
+                                            onChange={(e) => updateTrauma(specialty, e.target.value)}
+                                            placeholder={`Describe el trauma que te convirtió en ${specialty}...`}
+                                            className="w-full h-32 p-4 border-2 border-red-200 rounded-lg focus:border-red-600 focus:outline-none focus:ring-4 focus:ring-red-100 resize-y font-comic text-gray-700 text-lg leading-relaxed placeholder-red-200 block"
+                                            style={{ minWidth: '100%', maxWidth: '100%' }}
+                                        />
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )
+            }
 
             {/* UNIFIED POWERS SECTION (Guardian, Alterado, Vampírico, Sobrenatural, Thals, Divino, Terrano, Dotado, Cósmico, Mutante) */}
-            {(isGuardian || isAlterado || isVampiro || isSemidemonio || isThals || isDivino || isTerrano || isDotado || isCosmico || isMutante) && (
-                <div className="bg-gray-50 border-4 border-gray-800 rounded-xl overflow-hidden shadow-[8px_8px_0px_rgba(0,0,0,0.8)]">
-                    <div className="p-6 border-b-4 border-gray-800 bg-white flex flex-col md:flex-row justify-between items-center gap-4">
+            {
+                (isGuardian || isAlterado || isVampiro || isSemidemonio || isThals || isDivino || isTerrano || isDotado || isCosmico || isMutante) && (
+                    <div className="bg-gray-50 border-4 border-gray-800 rounded-xl overflow-hidden shadow-[8px_8px_0px_rgba(0,0,0,0.8)]">
+                        <div className="p-6 border-b-4 border-gray-800 bg-white flex flex-col md:flex-row justify-between items-center gap-4">
 
-                        <div className="flex flex-col sm:flex-row items-center gap-4">
-                            <div>
-                                <h3 className="text-2xl font-black text-gray-800 uppercase italic font-comic text-center sm:text-left">Poderes Especiales</h3>
+                            <div className="flex flex-col sm:flex-row items-center gap-4">
+                                <div>
+                                    <h3 className="text-2xl font-black text-gray-800 uppercase italic font-comic text-center sm:text-left">Poderes Especiales</h3>
+                                </div>
+                            </div>
+
+                            <div className="flex flex-wrap gap-2 justify-center">
+                                {isGuardian && (
+                                    <button onClick={() => openPowerModal('Guardian')} className="pixel-button bg-blue-600 text-white hover:bg-blue-700 text-sm flex items-center gap-2">
+                                        <span>+</span> Guardián
+                                    </button>
+                                )}
+                                {isAlterado && (
+                                    <button onClick={() => openPowerModal('Alterado')} className="pixel-button bg-purple-600 text-white hover:bg-purple-700 text-sm flex items-center gap-2">
+                                        <span>+</span> Alterado
+                                    </button>
+                                )}
+                                {isVampiro && (
+                                    <button onClick={() => openPowerModal('Vampírico')} className="pixel-button bg-red-700 text-white hover:bg-red-800 text-sm flex items-center gap-2">
+                                        <span>+</span> Vampírico
+                                    </button>
+                                )}
+                                {isSemidemonio && (
+                                    <button onClick={() => openPowerModal('Sobrenatural')} className="pixel-button bg-orange-600 text-white hover:bg-orange-700 text-sm flex items-center gap-2">
+                                        <span>+</span> Sobrenatural
+                                    </button>
+                                )}
+                                {isThals && (
+                                    <button onClick={() => openPowerModal('Thals')} className="pixel-button bg-teal-600 text-white hover:bg-teal-700 text-sm flex items-center gap-2">
+                                        <span>+</span> Thals
+                                    </button>
+                                )}
+                                {isDivino && (
+                                    <button onClick={() => openPowerModal('Divino')} className="pixel-button bg-yellow-500 text-white hover:bg-yellow-600 text-sm flex items-center gap-2">
+                                        <span>+</span> Divino
+                                    </button>
+                                )}
+                                {isTerrano && (
+                                    <button onClick={() => openPowerModal('Guardian')} className="pixel-button bg-emerald-600 text-white hover:bg-emerald-700 text-sm flex items-center gap-2">
+                                        <span>+</span> Terrano (Guardian)
+                                    </button>
+                                )}
+                                {isDotado && (
+                                    <button onClick={() => openPowerModal('Sobrenatural')} className="pixel-button bg-amber-600 text-white hover:bg-amber-700 text-sm flex items-center gap-2">
+                                        <span>+</span> Dotado (Sobrenatural)
+                                    </button>
+                                )}
+                                {isCosmico && (
+                                    <button onClick={() => openPowerModal('Cósmico')} className="pixel-button bg-indigo-600 text-white hover:bg-indigo-700 text-sm flex items-center gap-2">
+                                        <span>+</span> Cósmico
+                                    </button>
+                                )}
+                                {isMutante && (
+                                    <button onClick={() => openPowerModal('Mutante')} className="pixel-button bg-pink-600 text-white hover:bg-pink-700 text-sm flex items-center gap-2">
+                                        <span>+</span> Mutante
+                                    </button>
+                                )}
                             </div>
                         </div>
 
-                        <div className="flex flex-wrap gap-2 justify-center">
-                            {isGuardian && (
-                                <button onClick={() => openPowerModal('Guardian')} className="pixel-button bg-blue-600 text-white hover:bg-blue-700 text-sm flex items-center gap-2">
-                                    <span>+</span> Guardián
-                                </button>
-                            )}
-                            {isAlterado && (
-                                <button onClick={() => openPowerModal('Alterado')} className="pixel-button bg-purple-600 text-white hover:bg-purple-700 text-sm flex items-center gap-2">
-                                    <span>+</span> Alterado
-                                </button>
-                            )}
-                            {isVampiro && (
-                                <button onClick={() => openPowerModal('Vampírico')} className="pixel-button bg-red-700 text-white hover:bg-red-800 text-sm flex items-center gap-2">
-                                    <span>+</span> Vampírico
-                                </button>
-                            )}
-                            {isSemidemonio && (
-                                <button onClick={() => openPowerModal('Sobrenatural')} className="pixel-button bg-orange-600 text-white hover:bg-orange-700 text-sm flex items-center gap-2">
-                                    <span>+</span> Sobrenatural
-                                </button>
-                            )}
-                            {isThals && (
-                                <button onClick={() => openPowerModal('Thals')} className="pixel-button bg-teal-600 text-white hover:bg-teal-700 text-sm flex items-center gap-2">
-                                    <span>+</span> Thals
-                                </button>
-                            )}
-                            {isDivino && (
-                                <button onClick={() => openPowerModal('Divino')} className="pixel-button bg-yellow-500 text-white hover:bg-yellow-600 text-sm flex items-center gap-2">
-                                    <span>+</span> Divino
-                                </button>
-                            )}
-                            {isTerrano && (
-                                <button onClick={() => openPowerModal('Guardian')} className="pixel-button bg-emerald-600 text-white hover:bg-emerald-700 text-sm flex items-center gap-2">
-                                    <span>+</span> Terrano (Guardian)
-                                </button>
-                            )}
-                            {isDotado && (
-                                <button onClick={() => openPowerModal('Sobrenatural')} className="pixel-button bg-amber-600 text-white hover:bg-amber-700 text-sm flex items-center gap-2">
-                                    <span>+</span> Dotado (Sobrenatural)
-                                </button>
-                            )}
-                            {isCosmico && (
-                                <button onClick={() => openPowerModal('Cósmico')} className="pixel-button bg-indigo-600 text-white hover:bg-indigo-700 text-sm flex items-center gap-2">
-                                    <span>+</span> Cósmico
-                                </button>
-                            )}
-                            {isMutante && (
-                                <button onClick={() => openPowerModal('Mutante')} className="pixel-button bg-pink-600 text-white hover:bg-pink-700 text-sm flex items-center gap-2">
-                                    <span>+</span> Mutante
-                                </button>
-                            )}
-                        </div>
-                    </div>
+                        <div style={{
+                            backgroundColor: 'white',
+                            borderRadius: '12px',
+                            boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                            overflow: 'hidden',
+                            border: '1px solid #e5e7eb',
+                            marginBottom: '3rem'
+                        }}>
+                            {selectedPowers.length > 0 ? (
+                                <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                                    <thead style={{ backgroundColor: '#f9fafb', borderBottom: '2px solid #e5e7eb' }}>
+                                        <tr>
+                                            <th style={{ padding: '1rem', textAlign: 'left', color: '#374151' }}>Poder</th>
+                                            <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Base / Rango / PCs</th>
+                                            <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Base Hab.</th>
+                                            <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Origen</th>
+                                            <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {selectedPowers.map((selection, idx) => {
+                                            const p = POWERS.find(power => power.id === selection.id);
+                                            if (!p) return null;
+                                            const isEven = idx % 2 === 0;
 
-                    <div style={{
-                        backgroundColor: 'white',
-                        borderRadius: '12px',
-                        boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-                        overflow: 'hidden',
-                        border: '1px solid #e5e7eb',
-                        marginBottom: '3rem'
-                    }}>
-                        {selectedPowers.length > 0 ? (
-                            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                                <thead style={{ backgroundColor: '#f9fafb', borderBottom: '2px solid #e5e7eb' }}>
-                                    <tr>
-                                        <th style={{ padding: '1rem', textAlign: 'left', color: '#374151' }}>Poder</th>
-                                        <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Base / Rango / PCs</th>
-                                        <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Base Hab.</th>
-                                        <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Origen</th>
-                                        <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {selectedPowers.map((selection, idx) => {
-                                        const p = POWERS.find(power => power.id === selection.id);
-                                        if (!p) return null;
-                                        const isEven = idx % 2 === 0;
+                                            return (
+                                                <tr key={`${selection.id}-${selection.origin}-${idx}`} style={{ backgroundColor: isEven ? 'white' : '#f9fafb' }}>
+                                                    <td style={{ padding: '1rem', fontWeight: 'bold', color: '#1f2937' }}>
+                                                        {p.name}
+                                                    </td>
+                                                    <td style={{ padding: '0.75rem', textAlign: 'center' }}>
+                                                        {!p.characteristic ? (
+                                                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
+                                                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.875rem', fontFamily: 'monospace' }}>
+                                                                    <span style={{ color: '#6b7280', fontWeight: 'bold' }}>{p.cost}</span>
+                                                                    <span style={{ color: '#9ca3af' }}>+</span>
+                                                                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                                                        <input
+                                                                            type="number"
+                                                                            min="1"
+                                                                            max="100"
+                                                                            value={selection.rank}
+                                                                            onChange={(e) => updatePowerRank(selection.id, selection.origin, parseInt(e.target.value, 10))}
+                                                                            style={{
+                                                                                width: '50px',
+                                                                                padding: '0.25rem',
+                                                                                border: '1px solid #d1d5db',
+                                                                                borderRadius: '4px',
+                                                                                textAlign: 'center',
+                                                                                fontSize: '0.875rem',
+                                                                                fontWeight: 'bold',
+                                                                                color: '#4f46e5'
+                                                                            }}
+                                                                        />
+                                                                        <span style={{ fontSize: '0.65rem', color: '#6b7280' }}>Rango</span>
+                                                                    </div>
+                                                                    <span style={{ color: '#9ca3af' }}>/10</span>
 
-                                        return (
-                                            <tr key={`${selection.id}-${selection.origin}-${idx}`} style={{ backgroundColor: isEven ? 'white' : '#f9fafb' }}>
-                                                <td style={{ padding: '1rem', fontWeight: 'bold', color: '#1f2937' }}>
-                                                    {p.name}
-                                                </td>
-                                                <td style={{ padding: '0.75rem', textAlign: 'center' }}>
-                                                    {!p.characteristic ? (
-                                                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
-                                                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.875rem', fontFamily: 'monospace' }}>
-                                                                <span style={{ color: '#6b7280', fontWeight: 'bold' }}>{p.cost}</span>
-                                                                <span style={{ color: '#9ca3af' }}>+</span>
-                                                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                                                    <input
-                                                                        type="number"
-                                                                        min="1"
-                                                                        max="100"
-                                                                        value={selection.rank}
-                                                                        onChange={(e) => updatePowerRank(selection.id, selection.origin, parseInt(e.target.value, 10))}
-                                                                        style={{
-                                                                            width: '50px',
-                                                                            padding: '0.25rem',
-                                                                            border: '1px solid #d1d5db',
-                                                                            borderRadius: '4px',
-                                                                            textAlign: 'center',
-                                                                            fontSize: '0.875rem',
-                                                                            fontWeight: 'bold',
-                                                                            color: '#4f46e5'
-                                                                        }}
-                                                                    />
-                                                                    <span style={{ fontSize: '0.65rem', color: '#6b7280' }}>Rango</span>
-                                                                </div>
-                                                                <span style={{ color: '#9ca3af' }}>/10</span>
-
-                                                                {(() => {
-                                                                    const minVal = p.skillCalc ? calculateSkillBase(data, p.skillCalc) : 0;
-                                                                    const currentVal = selection.skillValue || minVal;
-                                                                    const extraPoints = Math.max(0, currentVal - minVal);
-
-                                                                    if (extraPoints > 0) {
-                                                                        return (
-                                                                            <>
-                                                                                <span style={{ color: '#9ca3af' }}>+</span>
-                                                                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                                                                    <span style={{ fontWeight: 'bold', color: '#d97706' }}>{extraPoints}</span>
-                                                                                    <span style={{ fontSize: '0.65rem', color: '#6b7280' }}>Hab.</span>
-                                                                                </div>
-                                                                                <span style={{ color: '#9ca3af' }}>/10</span>
-                                                                            </>
-                                                                        );
-                                                                    }
-                                                                    return null;
-                                                                })()}
-
-                                                                <span style={{ color: '#9ca3af' }}>=</span>
-                                                                <span style={{ color: '#4f46e5', fontWeight: 'bold' }}>
                                                                     {(() => {
                                                                         const minVal = p.skillCalc ? calculateSkillBase(data, p.skillCalc) : 0;
                                                                         const currentVal = selection.skillValue || minVal;
-                                                                        const extraCost = Math.max(0, currentVal - minVal) * 0.1;
-                                                                        return (p.cost + (selection.rank / 10) + extraCost).toFixed(1);
+                                                                        const extraPoints = Math.max(0, currentVal - minVal);
+
+                                                                        if (extraPoints > 0) {
+                                                                            return (
+                                                                                <>
+                                                                                    <span style={{ color: '#9ca3af' }}>+</span>
+                                                                                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                                                                        <span style={{ fontWeight: 'bold', color: '#d97706' }}>{extraPoints}</span>
+                                                                                        <span style={{ fontSize: '0.65rem', color: '#6b7280' }}>Hab.</span>
+                                                                                    </div>
+                                                                                    <span style={{ color: '#9ca3af' }}>/10</span>
+                                                                                </>
+                                                                            );
+                                                                        }
+                                                                        return null;
                                                                     })()}
-                                                                </span>
-                                                                <span style={{ color: '#6b7280' }}>PCs</span>
-                                                            </div>
-                                                            <span style={{ fontSize: '0.75rem', color: '#6b7280', fontWeight: 'bold' }}>
-                                                                {getRankLevel(selection.rank)}
-                                                            </span>
-                                                        </div>
-                                                    ) : (
-                                                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
-                                                            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', fontSize: '0.875rem', fontFamily: 'monospace' }}>
-                                                                {/* Characteristic Value */}
-                                                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem' }}>
-                                                                    <span style={{ color: '#6b7280', fontWeight: 'bold' }}>
-                                                                        {getCharacteristicValue(data, p.characteristic === 'FUE' ? 'Fuerza' :
-                                                                            p.characteristic === 'AGI' ? 'Agilidad' :
-                                                                                p.characteristic === 'CON' ? 'Constitución' :
-                                                                                    p.characteristic === 'INT' ? 'Inteligencia' :
-                                                                                        p.characteristic === 'PER' ? 'Percepción' :
-                                                                                            p.characteristic === 'VOL' ? 'Voluntad' : 'Apariencia')}
-                                                                    </span>
-                                                                    <span style={{ fontSize: '0.65rem', color: '#9ca3af' }}>
-                                                                        {p.characteristic}
-                                                                    </span>
-                                                                </div>
 
-                                                                <span style={{ color: '#9ca3af', paddingTop: '0.25rem' }}>+</span>
-
-                                                                {/* Power Mod Input */}
-                                                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem' }}>
-                                                                    <input
-                                                                        type="number"
-                                                                        min="0"
-                                                                        max="200"
-                                                                        value={selection.powerMod || 0}
-                                                                        onChange={(e) => {
-                                                                            const charValue = getCharacteristicValue(data, p.characteristic === 'FUE' ? 'Fuerza' :
-                                                                                p.characteristic === 'AGI' ? 'Agilidad' :
-                                                                                    p.characteristic === 'CON' ? 'Constitución' :
-                                                                                        p.characteristic === 'INT' ? 'Inteligencia' :
-                                                                                            p.characteristic === 'PER' ? 'Percepción' :
-                                                                                                p.characteristic === 'VOL' ? 'Voluntad' : 'Apariencia');
-                                                                            const newMod = parseInt(e.target.value, 10) || 0;
-                                                                            const total = charValue + newMod;
-                                                                            // Limit total to 200
-                                                                            if (total <= 200) {
-                                                                                updatePowerMod(selection.id, selection.origin, newMod);
-                                                                            }
-                                                                        }}
-                                                                        style={{
-                                                                            width: '50px',
-                                                                            padding: '0.25rem',
-                                                                            border: '1px solid #d1d5db',
-                                                                            borderRadius: '4px',
-                                                                            textAlign: 'center',
-                                                                            fontSize: '0.875rem',
-                                                                            fontWeight: 'bold',
-                                                                            color: '#10b981'
-                                                                        }}
-                                                                    />
-                                                                    <span style={{ fontSize: '0.65rem', color: '#9ca3af' }}>
-                                                                        Mod. Poder
-                                                                    </span>
-                                                                </div>
-
-                                                                <span style={{ color: '#9ca3af', paddingTop: '0.25rem' }}>=</span>
-
-                                                                {/* Total */}
-                                                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem' }}>
-                                                                    <span style={{ color: '#10b981', fontWeight: 'bold' }}>
+                                                                    <span style={{ color: '#9ca3af' }}>=</span>
+                                                                    <span style={{ color: '#4f46e5', fontWeight: 'bold' }}>
                                                                         {(() => {
-                                                                            const charValue = getCharacteristicValue(data, p.characteristic === 'FUE' ? 'Fuerza' :
-                                                                                p.characteristic === 'AGI' ? 'Agilidad' :
-                                                                                    p.characteristic === 'CON' ? 'Constitución' :
-                                                                                        p.characteristic === 'INT' ? 'Inteligencia' :
-                                                                                            p.characteristic === 'PER' ? 'Percepción' :
-                                                                                                p.characteristic === 'VOL' ? 'Voluntad' : 'Apariencia');
-                                                                            return charValue + (selection.powerMod || 0);
+                                                                            const minVal = p.skillCalc ? calculateSkillBase(data, p.skillCalc) : 0;
+                                                                            const currentVal = selection.skillValue || minVal;
+                                                                            const extraCost = Math.max(0, currentVal - minVal) * 0.1;
+                                                                            return (p.cost + (selection.rank / 10) + extraCost).toFixed(1);
                                                                         })()}
                                                                     </span>
-                                                                    <span style={{ fontSize: '0.65rem', color: '#9ca3af' }}>
-                                                                        Total
-                                                                    </span>
+                                                                    <span style={{ color: '#6b7280' }}>PCs</span>
                                                                 </div>
+                                                                <span style={{ fontSize: '0.75rem', color: '#6b7280', fontWeight: 'bold' }}>
+                                                                    {getRankLevel(selection.rank)}
+                                                                </span>
                                                             </div>
-                                                            <span style={{ fontSize: '0.75rem', color: '#6b7280', fontFamily: 'monospace' }}>
-                                                                {p.cost} + {((selection.powerMod || 0) / 10).toFixed(1)} = {(p.cost + ((selection.powerMod || 0) / 10)).toFixed(1)} PCs
-                                                            </span>
-                                                        </div>
-                                                    )}
-                                                </td>
-                                                <td style={{ padding: '0.75rem', textAlign: 'center' }}>
-                                                    {p.skillCalc ? (
-                                                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem' }}>
-                                                            {(() => {
-                                                                const minVal = calculateSkillBase(data, p.skillCalc);
-                                                                return (
-                                                                    <>
+                                                        ) : (
+                                                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
+                                                                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', fontSize: '0.875rem', fontFamily: 'monospace' }}>
+                                                                    {/* Characteristic Value */}
+                                                                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem' }}>
+                                                                        <span style={{ color: '#6b7280', fontWeight: 'bold' }}>
+                                                                            {getCharacteristicValue(data, p.characteristic === 'FUE' ? 'Fuerza' :
+                                                                                p.characteristic === 'AGI' ? 'Agilidad' :
+                                                                                    p.characteristic === 'CON' ? 'Constitución' :
+                                                                                        p.characteristic === 'INT' ? 'Inteligencia' :
+                                                                                            p.characteristic === 'PER' ? 'Percepción' :
+                                                                                                p.characteristic === 'VOL' ? 'Voluntad' : 'Apariencia')}
+                                                                        </span>
+                                                                        <span style={{ fontSize: '0.65rem', color: '#9ca3af' }}>
+                                                                            {p.characteristic}
+                                                                        </span>
+                                                                    </div>
+
+                                                                    <span style={{ color: '#9ca3af', paddingTop: '0.25rem' }}>+</span>
+
+                                                                    {/* Power Mod Input */}
+                                                                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem' }}>
                                                                         <input
                                                                             type="number"
-                                                                            min={minVal}
-                                                                            value={selection.skillValue || minVal}
+                                                                            min="0"
+                                                                            max="200"
+                                                                            value={selection.powerMod || 0}
                                                                             onChange={(e) => {
-                                                                                const val = parseInt(e.target.value) || 0;
-                                                                                // Ensure value is at least the calculation base
-                                                                                updatePowerSkillValue(selection.id, selection.origin, Math.max(minVal, val));
+                                                                                const charValue = getCharacteristicValue(data, p.characteristic === 'FUE' ? 'Fuerza' :
+                                                                                    p.characteristic === 'AGI' ? 'Agilidad' :
+                                                                                        p.characteristic === 'CON' ? 'Constitución' :
+                                                                                            p.characteristic === 'INT' ? 'Inteligencia' :
+                                                                                                p.characteristic === 'PER' ? 'Percepción' :
+                                                                                                    p.characteristic === 'VOL' ? 'Voluntad' : 'Apariencia');
+                                                                                const newMod = parseInt(e.target.value, 10) || 0;
+                                                                                const total = charValue + newMod;
+                                                                                // Limit total to 200
+                                                                                if (total <= 200) {
+                                                                                    updatePowerMod(selection.id, selection.origin, newMod);
+                                                                                }
                                                                             }}
                                                                             style={{
-                                                                                width: '60px',
-                                                                                textAlign: 'center',
+                                                                                width: '50px',
                                                                                 padding: '0.25rem',
                                                                                 border: '1px solid #d1d5db',
-                                                                                borderRadius: '4px'
+                                                                                borderRadius: '4px',
+                                                                                textAlign: 'center',
+                                                                                fontSize: '0.875rem',
+                                                                                fontWeight: 'bold',
+                                                                                color: '#10b981'
                                                                             }}
                                                                         />
-                                                                        <span style={{ fontSize: '0.65rem', color: '#9ca3af', fontFamily: 'monospace' }}>
-                                                                            {p.skillCalc} ({minVal})
+                                                                        <span style={{ fontSize: '0.65rem', color: '#9ca3af' }}>
+                                                                            Mod. Poder
                                                                         </span>
-                                                                    </>
-                                                                );
-                                                            })()}
-                                                        </div>
-                                                    ) : (
-                                                        <span style={{ color: '#9ca3af', fontSize: '0.875rem' }}>N/A</span>
-                                                    )}
-                                                </td>
-                                                <td style={{ padding: '0.75rem', textAlign: 'center' }}>
-                                                    {selection.origin === 'Guardian' && (
-                                                        <span style={{
-                                                            fontSize: '10px',
-                                                            textTransform: 'uppercase',
-                                                            fontWeight: '900',
-                                                            letterSpacing: '0.05em',
-                                                            backgroundColor: '#dbeafe',
-                                                            color: '#1d4ed8',
-                                                            padding: '2px 8px',
-                                                            borderRadius: '9999px',
-                                                            border: '1px solid #bfdbfe'
-                                                        }}>
-                                                            Guardián
-                                                        </span>
-                                                    )}
-                                                    {selection.origin === 'Alterado' && (
-                                                        <span style={{
-                                                            fontSize: '10px',
-                                                            textTransform: 'uppercase',
-                                                            fontWeight: '900',
-                                                            letterSpacing: '0.05em',
-                                                            backgroundColor: '#f3e8ff',
-                                                            color: '#7e22ce',
-                                                            padding: '2px 8px',
-                                                            borderRadius: '9999px',
-                                                            border: '1px solid #e9d5ff'
-                                                        }}>
-                                                            Alterado
-                                                        </span>
-                                                    )}
-                                                    {selection.origin === 'Vampírico' && (
-                                                        <span style={{
-                                                            fontSize: '10px',
-                                                            textTransform: 'uppercase',
-                                                            fontWeight: '900',
-                                                            letterSpacing: '0.05em',
-                                                            backgroundColor: '#fee2e2',
-                                                            color: '#991b1b',
-                                                            padding: '2px 8px',
-                                                            borderRadius: '9999px',
-                                                            border: '1px solid #fecaca'
-                                                        }}>
-                                                            Vampírico
-                                                        </span>
-                                                    )}
-                                                    {selection.origin === 'Sobrenatural' && (
-                                                        <span style={{
-                                                            fontSize: '10px',
-                                                            textTransform: 'uppercase',
-                                                            fontWeight: '900',
-                                                            letterSpacing: '0.05em',
-                                                            backgroundColor: '#ffedd5',
-                                                            color: '#c2410c',
-                                                            padding: '2px 8px',
-                                                            borderRadius: '9999px',
-                                                            border: '1px solid #fed7aa'
-                                                        }}>
-                                                            Sobrenatural
-                                                        </span>
-                                                    )}
-                                                    {selection.origin === 'Thals' && (
-                                                        <span style={{
-                                                            fontSize: '10px',
-                                                            textTransform: 'uppercase',
-                                                            fontWeight: '900',
-                                                            letterSpacing: '0.05em',
-                                                            backgroundColor: '#ccfbf1',
-                                                            color: '#115e59',
-                                                            padding: '2px 8px',
-                                                            borderRadius: '9999px',
-                                                            border: '1px solid #99f6e4'
-                                                        }}>
-                                                            Thals
-                                                        </span>
-                                                    )}
-                                                    {selection.origin === 'Divino' && (
-                                                        <span style={{
-                                                            fontSize: '10px',
-                                                            textTransform: 'uppercase',
-                                                            fontWeight: '900',
-                                                            letterSpacing: '0.05em',
-                                                            backgroundColor: '#fef3c7',
-                                                            color: '#92400e',
-                                                            padding: '2px 8px',
-                                                            borderRadius: '9999px',
-                                                            border: '1px solid #fde68a'
-                                                        }}>
-                                                            Divino
-                                                        </span>
-                                                    )}
-                                                    {selection.origin === 'Cósmico' && (
-                                                        <span style={{
-                                                            fontSize: '10px',
-                                                            textTransform: 'uppercase',
-                                                            fontWeight: '900',
-                                                            letterSpacing: '0.05em',
-                                                            backgroundColor: '#e0e7ff',
-                                                            color: '#4338ca',
-                                                            padding: '2px 8px',
-                                                            borderRadius: '9999px',
-                                                            border: '1px solid #c7d2fe'
-                                                        }}>
-                                                            Cósmico
-                                                        </span>
-                                                    )}
-                                                    {selection.origin === 'Mutante' && (
-                                                        <span style={{
-                                                            fontSize: '10px',
-                                                            textTransform: 'uppercase',
-                                                            fontWeight: '900',
-                                                            letterSpacing: '0.05em',
-                                                            backgroundColor: '#fce7f3',
-                                                            color: '#be123c',
-                                                            padding: '2px 8px',
-                                                            borderRadius: '9999px',
-                                                            border: '1px solid #fbcfe8'
-                                                        }}>
-                                                            Mutante
-                                                        </span>
-                                                    )}
-                                                </td>
-                                                <td style={{ padding: '0.75rem', textAlign: 'center' }}>
-                                                    <button
-                                                        onClick={(e) => {
-                                                            e.stopPropagation();
-                                                            const newSelected = [...selectedPowers];
-                                                            newSelected.splice(idx, 1);
-                                                            updatePowers(newSelected);
-                                                        }}
-                                                        style={{
-                                                            color: '#ef4444',
-                                                            padding: '8px',
-                                                            borderRadius: '9999px',
-                                                            border: 'none',
-                                                            background: 'transparent',
-                                                            cursor: 'pointer',
-                                                            display: 'inline-flex',
-                                                            alignItems: 'center',
-                                                            justifyContent: 'center'
-                                                        }}
-                                                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#fef2f2'}
-                                                        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
-                                                        title="Eliminar poder"
-                                                    >
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-                                                            <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                                                        </svg>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        );
-                                    })}
-                                </tbody>
-                            </table>
-                        ) : (
-                            <div style={{ textAlign: 'center', padding: '3rem', color: '#9ca3af', fontWeight: 'bold', fontStyle: 'italic' }}>
-                                No hay poderes seleccionados
-                            </div>
-                        )}
+                                                                    </div>
+
+                                                                    <span style={{ color: '#9ca3af', paddingTop: '0.25rem' }}>=</span>
+
+                                                                    {/* Total */}
+                                                                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem' }}>
+                                                                        <span style={{ color: '#10b981', fontWeight: 'bold' }}>
+                                                                            {(() => {
+                                                                                const charValue = getCharacteristicValue(data, p.characteristic === 'FUE' ? 'Fuerza' :
+                                                                                    p.characteristic === 'AGI' ? 'Agilidad' :
+                                                                                        p.characteristic === 'CON' ? 'Constitución' :
+                                                                                            p.characteristic === 'INT' ? 'Inteligencia' :
+                                                                                                p.characteristic === 'PER' ? 'Percepción' :
+                                                                                                    p.characteristic === 'VOL' ? 'Voluntad' : 'Apariencia');
+                                                                                return charValue + (selection.powerMod || 0);
+                                                                            })()}
+                                                                        </span>
+                                                                        <span style={{ fontSize: '0.65rem', color: '#9ca3af' }}>
+                                                                            Total
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <span style={{ fontSize: '0.75rem', color: '#6b7280', fontFamily: 'monospace' }}>
+                                                                    {p.cost} + {((selection.powerMod || 0) / 10).toFixed(1)} = {(p.cost + ((selection.powerMod || 0) / 10)).toFixed(1)} PCs
+                                                                </span>
+                                                            </div>
+                                                        )}
+                                                    </td>
+                                                    <td style={{ padding: '0.75rem', textAlign: 'center' }}>
+                                                        {p.skillCalc ? (
+                                                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem' }}>
+                                                                {(() => {
+                                                                    const minVal = calculateSkillBase(data, p.skillCalc);
+                                                                    return (
+                                                                        <>
+                                                                            <input
+                                                                                type="number"
+                                                                                min={minVal}
+                                                                                value={selection.skillValue || minVal}
+                                                                                onChange={(e) => {
+                                                                                    const val = parseInt(e.target.value) || 0;
+                                                                                    // Ensure value is at least the calculation base
+                                                                                    updatePowerSkillValue(selection.id, selection.origin, Math.max(minVal, val));
+                                                                                }}
+                                                                                style={{
+                                                                                    width: '60px',
+                                                                                    textAlign: 'center',
+                                                                                    padding: '0.25rem',
+                                                                                    border: '1px solid #d1d5db',
+                                                                                    borderRadius: '4px'
+                                                                                }}
+                                                                            />
+                                                                            <span style={{ fontSize: '0.65rem', color: '#9ca3af', fontFamily: 'monospace' }}>
+                                                                                {p.skillCalc} ({minVal})
+                                                                            </span>
+                                                                        </>
+                                                                    );
+                                                                })()}
+                                                            </div>
+                                                        ) : (
+                                                            <span style={{ color: '#9ca3af', fontSize: '0.875rem' }}>N/A</span>
+                                                        )}
+                                                    </td>
+                                                    <td style={{ padding: '0.75rem', textAlign: 'center' }}>
+                                                        {selection.origin === 'Guardian' && (
+                                                            <span style={{
+                                                                fontSize: '10px',
+                                                                textTransform: 'uppercase',
+                                                                fontWeight: '900',
+                                                                letterSpacing: '0.05em',
+                                                                backgroundColor: '#dbeafe',
+                                                                color: '#1d4ed8',
+                                                                padding: '2px 8px',
+                                                                borderRadius: '9999px',
+                                                                border: '1px solid #bfdbfe'
+                                                            }}>
+                                                                Guardián
+                                                            </span>
+                                                        )}
+                                                        {selection.origin === 'Alterado' && (
+                                                            <span style={{
+                                                                fontSize: '10px',
+                                                                textTransform: 'uppercase',
+                                                                fontWeight: '900',
+                                                                letterSpacing: '0.05em',
+                                                                backgroundColor: '#f3e8ff',
+                                                                color: '#7e22ce',
+                                                                padding: '2px 8px',
+                                                                borderRadius: '9999px',
+                                                                border: '1px solid #e9d5ff'
+                                                            }}>
+                                                                Alterado
+                                                            </span>
+                                                        )}
+                                                        {selection.origin === 'Vampírico' && (
+                                                            <span style={{
+                                                                fontSize: '10px',
+                                                                textTransform: 'uppercase',
+                                                                fontWeight: '900',
+                                                                letterSpacing: '0.05em',
+                                                                backgroundColor: '#fee2e2',
+                                                                color: '#991b1b',
+                                                                padding: '2px 8px',
+                                                                borderRadius: '9999px',
+                                                                border: '1px solid #fecaca'
+                                                            }}>
+                                                                Vampírico
+                                                            </span>
+                                                        )}
+                                                        {selection.origin === 'Sobrenatural' && (
+                                                            <span style={{
+                                                                fontSize: '10px',
+                                                                textTransform: 'uppercase',
+                                                                fontWeight: '900',
+                                                                letterSpacing: '0.05em',
+                                                                backgroundColor: '#ffedd5',
+                                                                color: '#c2410c',
+                                                                padding: '2px 8px',
+                                                                borderRadius: '9999px',
+                                                                border: '1px solid #fed7aa'
+                                                            }}>
+                                                                Sobrenatural
+                                                            </span>
+                                                        )}
+                                                        {selection.origin === 'Thals' && (
+                                                            <span style={{
+                                                                fontSize: '10px',
+                                                                textTransform: 'uppercase',
+                                                                fontWeight: '900',
+                                                                letterSpacing: '0.05em',
+                                                                backgroundColor: '#ccfbf1',
+                                                                color: '#115e59',
+                                                                padding: '2px 8px',
+                                                                borderRadius: '9999px',
+                                                                border: '1px solid #99f6e4'
+                                                            }}>
+                                                                Thals
+                                                            </span>
+                                                        )}
+                                                        {selection.origin === 'Divino' && (
+                                                            <span style={{
+                                                                fontSize: '10px',
+                                                                textTransform: 'uppercase',
+                                                                fontWeight: '900',
+                                                                letterSpacing: '0.05em',
+                                                                backgroundColor: '#fef3c7',
+                                                                color: '#92400e',
+                                                                padding: '2px 8px',
+                                                                borderRadius: '9999px',
+                                                                border: '1px solid #fde68a'
+                                                            }}>
+                                                                Divino
+                                                            </span>
+                                                        )}
+                                                        {selection.origin === 'Cósmico' && (
+                                                            <span style={{
+                                                                fontSize: '10px',
+                                                                textTransform: 'uppercase',
+                                                                fontWeight: '900',
+                                                                letterSpacing: '0.05em',
+                                                                backgroundColor: '#e0e7ff',
+                                                                color: '#4338ca',
+                                                                padding: '2px 8px',
+                                                                borderRadius: '9999px',
+                                                                border: '1px solid #c7d2fe'
+                                                            }}>
+                                                                Cósmico
+                                                            </span>
+                                                        )}
+                                                        {selection.origin === 'Mutante' && (
+                                                            <span style={{
+                                                                fontSize: '10px',
+                                                                textTransform: 'uppercase',
+                                                                fontWeight: '900',
+                                                                letterSpacing: '0.05em',
+                                                                backgroundColor: '#fce7f3',
+                                                                color: '#be123c',
+                                                                padding: '2px 8px',
+                                                                borderRadius: '9999px',
+                                                                border: '1px solid #fbcfe8'
+                                                            }}>
+                                                                Mutante
+                                                            </span>
+                                                        )}
+                                                    </td>
+                                                    <td style={{ padding: '0.75rem', textAlign: 'center' }}>
+                                                        <button
+                                                            onClick={(e) => {
+                                                                e.stopPropagation();
+                                                                const newSelected = [...selectedPowers];
+                                                                newSelected.splice(idx, 1);
+                                                                updatePowers(newSelected);
+                                                            }}
+                                                            style={{
+                                                                color: '#ef4444',
+                                                                padding: '8px',
+                                                                borderRadius: '9999px',
+                                                                border: 'none',
+                                                                background: 'transparent',
+                                                                cursor: 'pointer',
+                                                                display: 'inline-flex',
+                                                                alignItems: 'center',
+                                                                justifyContent: 'center'
+                                                            }}
+                                                            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#fef2f2'}
+                                                            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+                                                            title="Eliminar poder"
+                                                        >
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                                                <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                                                            </svg>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            );
+                                        })}
+                                    </tbody>
+                                </table>
+                            ) : (
+                                <div style={{ textAlign: 'center', padding: '3rem', color: '#9ca3af', fontWeight: 'bold', fontStyle: 'italic' }}>
+                                    No hay poderes seleccionados
+                                </div>
+                            )}
+                        </div>
                     </div>
-                </div>
-            )
+                )
             }
 
             {/* MAGIC SECTION (Mago & Dotado) */}
