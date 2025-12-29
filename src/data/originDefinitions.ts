@@ -18,73 +18,73 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
     "Divino": {
         name: "Divino",
         subtypes: {
-            "Dios": ["Poder divino", "+20 a la parada mental"],
-            "Dios menor": ["Poder divino", "+20 a la parada mental"],
-            "Semidios": ["Herencia divina", "+10 a la parada mental"]
+            "Dios": ["Acceso a lista de poderes divinos", "+25 a la parada mental"],
+            "Dios menor": ["Acceso a lista de poderes divinos", "+25 a la parada mental"],
+            "Semidios": ["Acceso a lista de poderes divinos", "+25 a la parada mental"]
         }
     },
     "Cósmico": {
         name: "Cósmico",
         subtypes: {
-            "Avatar Cósmico": ["Poder cósmico ilimitado", "Energía cósmica"],
-            "Heraldo Cósmico": ["Heraldo de entidad cósmica", "Poder cósmico otorgado"]
+            "Avatar Cósmico": ["Acceso a lista de poderes cósmicos", "+25 a la parada mental"],
+            "Heraldo Cósmico": ["Acceso a lista de poderes cósmicos", "+25 a la parada mental"]
         }
     },
     "Guardian": {
         name: "Guardian",
-        defaultEffects: ["Protección de la humanidad", "+10 a la parada mental"]
+        defaultEffects: ["Acceso a poderes de guardianes"]
     },
     "Alterado": {
         name: "Alterado",
-        defaultEffects: ["Desplazamiento social", "Poderes alterados"]
+        defaultEffects: ["Acceso a poderes de alterados"]
     },
     "Sobrenatural": {
         name: "Sobrenatural",
         disabledSubtypes: ["Hombre Lobo"],
         subtypes: {
-            "Vampiro": ["algo", "algo", "algo"],
-            "Hombre Lobo": ["algo", "algo", "algo"],
-            "Semidemonio": ["algo", "algo", "algo"],
-            "Poseido": ["algo", "algo", "algo"],
-            "Ente": ["algo", "algo", "algo"],
+            "Vampiro": ["+20 a la parada mental"],
+            "Hombre Lobo": ["+20 a la parada mental"],
+            "Semidemonio": ["+20 a la parada mental"],
+            "Poseido": ["+20 a la parada mental"],
+            "Ente": ["+20 a la parada mental"],
             "Maldito": [
                 "Condenado a recorrer la Tierra hasta que sus buenas obras le rediman.",
                 "+20 a la parada mental"
             ],
-            "Liberado": ["algo", "algo", "algo"]
+            "Liberado": ["+20 a la parada mental"]
         }
     },
     "Arcano": {
         name: "Arcano",
         disabledSubtypes: ["Elfo", "Hada", "Centauro", "Minotauro", "Enano", "Gigante", "Troll", "Grifo", "Hidra", "Medusa", "Esfinge"],
         subtypes: {
-            "Mago": ["Conocimiento arcano", "Comprensión de la senda: Magia", "+20 a la parada mental"],
+            "Mago": ["+20 a la parada mental"],
             "Dotado": ["algo", "algo", "algo"],
             "Terrano": [
                 "Energía mágica por el vinculo con terra",
                 "Desconexión de la tecnología moderna",
                 "+20 a la parada mental"
             ],
-            "Elfo": ["algo", "algo", "algo"],
-            "Hada": ["algo", "algo", "algo"],
-            "Centauro": ["algo", "algo", "algo"],
-            "Minotauro": ["algo", "algo", "algo"],
-            "Enano": ["algo", "algo", "algo"],
-            "Gigante": ["algo", "algo", "algo"],
-            "Troll": ["algo", "algo", "algo"],
-            "Grifo": ["algo", "algo", "algo"],
-            "Hidra": ["algo", "algo", "algo"],
-            "Medusa": ["algo", "algo", "algo"],
-            "Esfinge": ["algo", "algo", "algo"],
-            "Híbrido mitológico": ["algo", "algo", "algo"],
+            "Elfo": ["+20 a la parada mental"],
+            "Hada": ["+20 a la parada mental"],
+            "Centauro": ["+20 a la parada mental"],
+            "Minotauro": ["+20 a la parada mental"],
+            "Enano": ["+20 a la parada mental"],
+            "Gigante": ["+20 a la parada mental"],
+            "Troll": ["+20 a la parada mental"],
+            "Grifo": ["+20 a la parada mental"],
+            "Hidra": ["+20 a la parada mental"],
+            "Medusa": ["+20 a la parada mental"],
+            "Esfinge": ["+20 a la parada mental"],
+            "Híbrido mitológico": ["+20 a la parada mental"],
         }
     },
     "Parahumano": {
         name: "Parahumano",
         subtypes: {
-            "Atlante": ["Herencia atlante", "Resistencia acuática"],
-            "Tes-khar": ["Fisiología alienígena"],
-            "Thals": ["Poderes psíquicos avanzados"]
+            "Atlante": ["fuera del agua, -25 agi y -15 a per"],
+            "Tes-khar": ["Cuando se esconden son indetectables por medios psíquicos"],
+            "Thals": ["Acceso a la lista de poderes de los Thals", "+10 a la parada mental"]
         }
     },
     "Tecnológico": {
@@ -104,70 +104,94 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
         name: "Vigilante",
         subtypes: {
             "Acrobata": [
-                "+20 Habilidad a elección",
-                "+20 Mod. de Impacto",
-                "-20 a las tiradas de EQM cuando alguien se vaya a irse de rositas sin un buen golpe"
+                "Disponibilidad de armamento a dificultad reducida",
+                "Recarga rápida",
+                "Recuerdos dolorosos",
+                "Voluntad férrea"
             ],
             "Arquero": [
-                "+20 Habilidad a elección",
-                "+20 Mod. de Impacto",
-                "-20 a las tiradas de EQM cuando alguien se vaya a irse de rositas sin un buen golpe"
+                "Disponibilidad de armamento a dificultad reducida",
+                "Recarga rápida",
+                "Recuerdos dolorosos",
+                "Voluntad férrea"
             ],
             "Cazador": [
-                "+20 Habilidad a elección",
-                "+20 Mod. de Impacto",
-                "-20 a las tiradas de EQM cuando alguien se vaya a irse de rositas sin un buen golpe"
+                "Disponibilidad de armamento a dificultad reducida",
+                "Recarga rápida",
+                "Recuerdos dolorosos",
+                "Voluntad férrea"
             ],
             "Espadachín": [
-                "+20 Habilidad a elección",
-                "+20 Mod. de Impacto",
-                "-20 a las tiradas de EQM cuando alguien se vaya a irse de rositas sin un buen golpe"
+                "Disponibilidad de armamento a dificultad reducida",
+                "Recarga rápida",
+                "Recuerdos dolorosos",
+                "Voluntad férrea"
             ],
             "Espia/Ladrón": [
-                "+20 habilidad a elección",
-                "-20 tiradas de EQM daños al medio ambiente"
+                "Disponibilidad de armamento a dificultad reducida",
+                "Recarga rápida",
+                "Recuerdos dolorosos",
+                "Voluntad férrea"
             ],
             "Fanático/Vengador": [
-                "+20 habilidad a elección",
-                "-20 tiradas de EQM daños al medio ambiente"
+                "Disponibilidad de armamento a dificultad reducida",
+                "Recarga rápida",
+                "Recuerdos dolorosos",
+                "Voluntad férrea"
             ],
             "Francotirador": [
-                "+20 habilidad a elección",
-                "-20 tiradas de EQM daños al medio ambiente"
+                "Disponibilidad de armamento a dificultad reducida",
+                "Recarga rápida",
+                "Recuerdos dolorosos",
+                "Voluntad férrea"
             ],
             "Manipulador": [
-                "Puede repetir una tirada fallida de resistencia a prejuicios"
+                "Disponibilidad de armamento a dificultad reducida",
+                "Recarga rápida",
+                "Recuerdos dolorosos",
+                "Voluntad férrea"
             ],
             "Mente Maestra": [
-                "+20 habilidad a elección",
-                "-20 tiradas de EQM daños al medio ambiente"
+                "Disponibilidad de armamento a dificultad reducida",
+                "Recarga rápida",
+                "Recuerdos dolorosos",
+                "Voluntad férrea"
             ],
             "Militar": [
-                "+20 habilidad a elección",
-                "-20 tiradas de EQM daños al medio ambiente"
+                "Disponibilidad de armamento a dificultad reducida",
+                "Recarga rápida",
+                "Recuerdos dolorosos",
+                "Voluntad férrea"
             ],
             "Pistolero": [
-                "+20 habilidad a elección",
-                "-20 tiradas de EQM daños al medio ambiente"
+                "Disponibilidad de armamento a dificultad reducida",
+                "Recarga rápida",
+                "Recuerdos dolorosos",
+                "Voluntad férrea"
             ],
             "Artista Marcial": [
-                "-20 tiradas de EQM daños al medio ambiente"
+                "Disponibilidad de armamento a dificultad reducida",
+                "Recarga rápida",
+                "Recuerdos dolorosos",
+                "Voluntad férrea"
             ],
             "Artista Marcial con Chi": [
-                "+20 habilidad a elección",
-                "-20 tiradas de EQM daños al medio ambiente"
+                "Disponibilidad de armamento a dificultad reducida",
+                "Recarga rápida",
+                "Recuerdos dolorosos",
+                "Voluntad férrea"
             ],
         }
     },
     "Mutante": {
         name: "Mutante",
         subtypes: {
-            "Psíquico": ["algo"],
-            "Energético": ["algo"],
-            "Físico": ["algo"],
-            "Psíquico/Energético": ["algo"],
-            "Energético/Físico": ["algo"],
-            "Psíquico/Físico": ["algo"]
+            "Psíquico": ["Acceso a tabla de poderes mutantes de tipo psíquico"],
+            "Energético": ["Acceso a tabla de poderes mutantes de tipo energético"],
+            "Físico": ["Acceso a tabla de poderes mutantes de tipo físico"],
+            "Psíquico/Energético": ["Acceso a tabla de poderes mutantes de tipo psíquico y energético"],
+            "Energético/Físico": ["Acceso a tabla de poderes mutantes de tipo energético y físico"],
+            "Psíquico/Físico": ["Acceso a tabla de poderes mutantes de tipo psíquico y físico"]
         }
     }
 };
