@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS, FRIENDS_AND_ASSOCIATES } from '../../data/backgroundTables';
 import { SPELLS } from '../../data/spells';
 import { POWERS } from '../../data/powers';
+import { ORIGIN_CATEGORIES } from '../../data/originDefinitions';
 
 interface CharacterPreviewProps {
     character: any;
@@ -151,53 +152,107 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                         <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                                             {character.origin.items.map((item: any, i: number) => {
                                                 const name = Object.keys(item)[0];
-                                                const details = item[name];
+                                                const rawDetails = item[name] || [];
+                                                const originDef = ORIGIN_CATEGORIES[name];
+
+                                                // Build structured nodes for rendering
+                                                const nodes: Array<{ text: string, type: 'default' | 'subtype' | 'normal', children?: string[] }> = [];
+
+                                                // 1. Add Default Effects
+                                                if (originDef?.defaultEffects) {
+                                                    originDef.defaultEffects.forEach(eff => {
+                                                        // Avoid duplicates if already in rawDetails (though unlikely for defaults)
+                                                        if (!rawDetails.includes(eff)) {
+                                                            nodes.push({ text: eff, type: 'default' });
+                                                        }
+                                                    });
+                                                }
+
+                                                // 2. Process User Details
+                                                rawDetails.forEach((detail: string) => {
+                                                    // Skip if already added (e.g. matched a default effect)
+                                                    if (nodes.some(n => n.text === detail)) return;
+
+                                                    // Check if it is a Subtype
+                                                    if (originDef?.subtypes && originDef.subtypes[detail]) {
+                                                        nodes.push({
+                                                            text: detail,
+                                                            type: 'subtype',
+                                                            children: originDef.subtypes[detail]
+                                                        });
+                                                        return;
+                                                    }
+
+                                                    // Normal Item
+                                                    nodes.push({ text: detail, type: 'normal' });
+                                                });
+
+                                                const renderDetailContent = (detail: string, isSubtypeHeader: boolean = false) => {
+                                                    const parts = detail.includes(':') ? detail.split(':').map(s => s.trim()) : [detail];
+                                                    const detailName = parts[0];
+                                                    const detailValue = parts.length > 1 ? parts.slice(1).join(':') : undefined;
+
+                                                    return (
+                                                        <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
+                                                            <span style={{
+                                                                paddingRight: '0.5rem',
+                                                                fontWeight: isSubtypeHeader ? 'bold' : 'normal',
+                                                                color: isSubtypeHeader ? '#b91c1c' : 'inherit',
+                                                                fontSize: isSubtypeHeader ? '1rem' : 'inherit'
+                                                            }}>
+                                                                {detailName}
+                                                            </span>
+                                                            {detailValue && (
+                                                                <>
+                                                                    <span style={{
+                                                                        flexGrow: 1,
+                                                                        borderBottom: '1px dotted #ccc',
+                                                                        margin: '0 0.5rem',
+                                                                        position: 'relative',
+                                                                        top: '-4px',
+                                                                        minWidth: '20px'
+                                                                    }}></span>
+                                                                    <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>
+                                                                        {detailValue}
+                                                                    </span>
+                                                                </>
+                                                            )}
+                                                        </div>
+                                                    );
+                                                };
+
                                                 return (
-                                                    <li key={i} style={{ marginBottom: '0.75rem' }}>
+                                                    <li key={i} className="no-bullet-item" style={{ marginBottom: '0.75rem' }}>
                                                         <div style={{ fontWeight: 'bold', color: '#8B4513', marginBottom: '0.25rem' }}>
                                                             {name}
                                                         </div>
                                                         <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                                                            {details.map((detail: string, j: number) => {
-                                                                // Parse detail if it contains a colon
-                                                                const parts = detail.includes(':') ? detail.split(':').map(s => s.trim()) : [detail];
-                                                                const detailName = parts[0];
-                                                                const detailValue = parts.length > 1 ? parts.slice(1).join(':') : undefined;
+                                                            {nodes.map((node, j) => (
+                                                                <li key={j} className="no-bullet-item" style={{
+                                                                    marginBottom: '0.25rem',
+                                                                    marginTop: node.type === 'subtype' ? '0.5rem' : '0',
+                                                                    position: 'relative'
+                                                                }}>
+                                                                    {renderDetailContent(node.text, node.type === 'subtype')}
 
-                                                                return (
-                                                                    <li key={j} style={{
-                                                                        marginBottom: '0.25rem',
-                                                                        paddingLeft: '1.2rem',
-                                                                        position: 'relative'
-                                                                    }}>
-                                                                        <span style={{
-                                                                            content: '•',
-                                                                            color: '#d32f2f',
-                                                                            position: 'absolute',
-                                                                            left: 0,
-                                                                            fontWeight: 'bold'
-                                                                        }}>•</span>
-                                                                        {detailValue ? (
-                                                                            <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
-                                                                                <span style={{ paddingRight: '0.5rem' }}>{detailName}</span>
-                                                                                <span style={{
-                                                                                    flexGrow: 1,
-                                                                                    borderBottom: '1px dotted #ccc',
-                                                                                    margin: '0 0.5rem',
-                                                                                    position: 'relative',
-                                                                                    top: '-4px',
-                                                                                    minWidth: '20px'
-                                                                                }}></span>
-                                                                                <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>
-                                                                                    {detailValue}
-                                                                                </span>
-                                                                            </div>
-                                                                        ) : (
-                                                                            <span>{detail}</span>
-                                                                        )}
-                                                                    </li>
-                                                                );
-                                                            })}
+                                                                    {/* Render Subtype Children */}
+                                                                    {node.children && (
+                                                                        <ul style={{
+                                                                            listStyle: 'none',
+                                                                            padding: 0,
+                                                                            margin: '0.25rem 0 0.5rem 0',
+                                                                            borderLeft: '2px solid #fee2e2',
+                                                                            paddingLeft: '0.75rem'
+                                                                        }}>
+                                                                            {node.children.map((child, k) => (
+                                                                                <li key={k} className="no-bullet-item" style={{ marginBottom: '0.25rem' }}>
+                                                                                    {renderDetailContent(child)}
+                                                                                </li>
+                                                                            ))}
+                                                                        </ul>
+                                                                    )}
+                                                                </li>
+                                                            ))}
                                                         </ul>
                                                     </li>
                                                 );
@@ -214,7 +269,7 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                         </div>
                                         <ul>
                                             {otherStats.map((item: string, i: number) => (
-                                                <li key={i}>{item}</li>
+                                                <li key={i} className="no-bullet-item">{item}</li>
                                             ))}
                                         </ul>
                                     </div>
@@ -246,14 +301,7 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                         </div>
                                         <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                                             {character.skills.generalItems.map((item: any, i: number) => (
-                                                <li key={i} style={{ marginBottom: '0.5rem', paddingLeft: '1.2rem', position: 'relative' }}>
-                                                    <span style={{
-                                                        content: '•',
-                                                        color: '#d32f2f',
-                                                        position: 'absolute',
-                                                        left: 0,
-                                                        fontWeight: 'bold'
-                                                    }}>•</span>
+                                                <li key={i} className="no-bullet-item" style={{ marginBottom: '0.5rem', position: 'relative' }}>
                                                     <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
                                                         <span style={{ paddingRight: '0.5rem' }}>
                                                             {item.name}
@@ -285,14 +333,7 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                         </div>
                                         <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                                             {character.skills.specialItems.map((item: any, i: number) => (
-                                                <li key={i} style={{ marginBottom: '0.5rem', paddingLeft: '1.2rem', position: 'relative' }}>
-                                                    <span style={{
-                                                        content: '•',
-                                                        color: '#d32f2f',
-                                                        position: 'absolute',
-                                                        left: 0,
-                                                        fontWeight: 'bold'
-                                                    }}>•</span>
+                                                <li key={i} className="no-bullet-item" style={{ marginBottom: '0.5rem', position: 'relative' }}>
                                                     <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
                                                         <span style={{ paddingRight: '0.5rem' }}>
                                                             {item.name}
@@ -576,7 +617,7 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                         background: transparent;
                         max-width: 90vw;
                         max-height: 90vh;
-                        width: 800px;
+                        width: 1000px;
                         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
                         text-align: left;
                     }
@@ -803,6 +844,12 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                         position: absolute;
                         left: 0;
                         font-weight: bold;
+                    }
+                    .dialog-body li.no-bullet-item {
+                        padding-left: 0;
+                    }
+                    .dialog-body li.no-bullet-item::before {
+                        display: none;
                     }
                 `}} />
             </dialog>

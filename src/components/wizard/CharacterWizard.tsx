@@ -25,18 +25,28 @@ const initialCharacterState = {
     name: "Nuevo Personaje",
     alias: "",
     notes: "",
-    totalCost: "50+0",
+    totalCost: "",
     level: 1,
     origin: { items: [] },
     combatstats: [
-        "Acciones por asalto: 2",
-        "Iniciativa y Reflejos: 30",
-        "Puntos de Vida: 40",
-        "Equilibrio Mental: 40"
+        "Acciones por asalto: -",
+        "Iniciativa y Reflejos: -",
+        "Puntos de Vida: -",
+        "Equilibrio Mental: -"
     ],
     otherstats: [
-        "Inconsciencia: 4",
-        "Recuperación: 2 PV/h"
+        "Inconsciencia: -",
+        "Recuperación: - PV/h",
+        "Resistencia a gases y venenos: -",
+        "Modificador de fuerza: -",
+        "Peso Levantado: -",
+        "Daño absorbido físico: -",
+        "Daño absorbido mental: -",
+        "Modificador de impacto: -",
+        "Modificador Psionico: -",
+        "Parada Fisica: -",
+        "Parada mental: -",
+        "Salto (alto / largo): -"
     ],
     attributes: {
         values: {
@@ -381,7 +391,7 @@ export default function CharacterWizard() {
             {/* Header */}
             <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
                 <h1 style={{ fontSize: '3rem', fontWeight: '900', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
-                    Generador de Fichas (Alpha 0.0.13)
+                    Generador de Fichas (Alpha 0.0.14)
                 </h1>
                 <p style={{ fontSize: '1.25rem', color: '#666', marginBottom: '1rem' }}>
                     Crea tu personaje paso a paso
