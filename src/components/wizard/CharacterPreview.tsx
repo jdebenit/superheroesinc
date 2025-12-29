@@ -317,7 +317,7 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                 )}
 
                                 {/* History & Background Section */}
-                                {(character.background?.items?.length > 0 || character.economicStatus || character.legalStatus || character.socialStatus || character.prejudiceResistance || character.profession || character.sexualIdentity) && (
+                                {(character.background?.items?.length > 0 || character.background?.economicStatus || character.background?.legalStatus || character.background?.socialStatus || character.background?.prejudiceResistance || character.profession || character.sexualIdentity) && (
                                     <div className="sheet-section background">
                                         <div className="section-header">
                                             <h4>Historial</h4>
@@ -326,7 +326,7 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
 
                                             {/* Status Grid */}
-                                            {(character.economicStatus || character.legalStatus || character.socialStatus || character.profession || character.sexualIdentity) && (
+                                            {(character.background?.economicStatus || character.background?.legalStatus || character.background?.socialStatus || character.profession || character.sexualIdentity) && (
                                                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', paddingBottom: '1rem', borderBottom: '1px solid #e5e7eb' }}>
                                                     {character.profession && (
                                                         <div>
@@ -340,22 +340,22 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                             <span style={{ fontSize: '0.9rem', color: '#1f2937' }}>{character.sexualIdentity}</span>
                                                         </div>
                                                     )}
-                                                    {character.economicStatus && (
+                                                    {character.background?.economicStatus && (
                                                         <div>
                                                             <span style={{ display: 'block', fontSize: '0.75rem', color: '#6b7280', fontWeight: 'bold' }}>POSICIÓN ECONÓMICA</span>
-                                                            <span style={{ fontSize: '0.9rem', color: '#1f2937' }}>{ECONOMIC_STATUS.find(e => e.id === character.economicStatus)?.label}</span>
+                                                            <span style={{ fontSize: '0.9rem', color: '#1f2937' }}>{ECONOMIC_STATUS.find(e => e.id === character.background.economicStatus)?.label}</span>
                                                         </div>
                                                     )}
-                                                    {character.legalStatus && (
+                                                    {character.background?.legalStatus && (
                                                         <div>
                                                             <span style={{ display: 'block', fontSize: '0.75rem', color: '#6b7280', fontWeight: 'bold' }}>SITUACIÓN LEGAL</span>
-                                                            <span style={{ fontSize: '0.9rem', color: '#1f2937' }}>{LEGAL_STATUS.find(l => l.id === character.legalStatus)?.label}</span>
+                                                            <span style={{ fontSize: '0.9rem', color: '#1f2937' }}>{LEGAL_STATUS.find(l => l.id === character.background.legalStatus)?.label}</span>
                                                         </div>
                                                     )}
-                                                    {character.socialStatus && (
+                                                    {character.background?.socialStatus && (
                                                         <div>
                                                             <span style={{ display: 'block', fontSize: '0.75rem', color: '#6b7280', fontWeight: 'bold' }}>POSICIÓN SOCIAL</span>
-                                                            <span style={{ fontSize: '0.9rem', color: '#1f2937' }}>{SOCIAL_STATUS.find(s => s.id === character.socialStatus)?.label}</span>
+                                                            <span style={{ fontSize: '0.9rem', color: '#1f2937' }}>{SOCIAL_STATUS.find(s => s.id === character.background.socialStatus)?.label}</span>
                                                         </div>
                                                     )}
                                                 </div>
@@ -374,7 +374,7 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                             )}
 
                                             {/* Prejudice Resistance */}
-                                            {character.prejudiceResistance && (
+                                            {character.background?.prejudiceResistance && (
                                                 <div style={{
                                                     display: 'flex',
                                                     justifyContent: 'space-between',
@@ -386,10 +386,10 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                 }}>
                                                     <div>
                                                         <span style={{ display: 'block', fontSize: '0.75rem', color: '#1e40af', fontWeight: 'bold' }}>RESISTENCIA A PREJUICIOS</span>
-                                                        <span style={{ fontSize: '1.1rem', fontWeight: 'bold', color: '#1e3a8a' }}>{character.prejudiceResistance}%</span>
+                                                        <span style={{ fontSize: '1.1rem', fontWeight: 'bold', color: '#1e3a8a' }}>{character.background.prejudiceResistance}%</span>
                                                     </div>
                                                     <span style={{ fontSize: '0.85rem', color: '#3b82f6', fontWeight: 'bold' }}>
-                                                        ({((character.prejudiceResistance - 50) * 0.1).toFixed(1)} PCs)
+                                                        ({((character.background.prejudiceResistance - 50) * 0.1).toFixed(1)} PCs)
                                                     </span>
                                                 </div>
                                             )}

@@ -3,27 +3,30 @@ import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS } from '../../../data/back
 
 interface Step5Props {
     data: {
-        background: { items: string[] };
-        prejudiceResistance?: number;
-        economicStatus?: string;
-        legalStatus?: string;
-        socialStatus?: string;
+        background: {
+            items: string[];
+            prejudiceResistance?: number;
+            economicStatus?: string;
+            legalStatus?: string;
+            socialStatus?: string;
+        };
     };
     onChange: (updates: any) => void;
 }
 
 export default function Step5_Background({ data, onChange }: Step5Props) {
-    const resistanceValue = data.prejudiceResistance || 50;
+    const resistanceValue = data.background?.prejudiceResistance || 50;
     const resistanceCost = (resistanceValue - 50) * 0.1;
 
     // Get current selections (defaulting if undefined)
-    const currentEconomic = ECONOMIC_STATUS.find(e => e.id === data.economicStatus) || ECONOMIC_STATUS[3];
-    const currentLegal = LEGAL_STATUS.find(l => l.id === data.legalStatus) || LEGAL_STATUS[0];
-    const currentSocial = SOCIAL_STATUS.find(s => s.id === data.socialStatus) || SOCIAL_STATUS[2];
+    const currentEconomic = ECONOMIC_STATUS.find(e => e.id === data.background?.economicStatus) || ECONOMIC_STATUS[3];
+    const currentLegal = LEGAL_STATUS.find(l => l.id === data.background?.legalStatus) || LEGAL_STATUS[0];
+    const currentSocial = SOCIAL_STATUS.find(s => s.id === data.background?.socialStatus) || SOCIAL_STATUS[2];
 
     const addBackgroundItem = () => {
         onChange({
             background: {
+                ...data.background,
                 items: [...data.background.items, "Nuevo elemento de trasfondo"]
             }
         });
@@ -32,19 +35,19 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
     const updateBackgroundItem = (index: number, value: string) => {
         const newItems = [...data.background.items];
         newItems[index] = value;
-        onChange({ background: { items: newItems } });
+        onChange({ background: { ...data.background, items: newItems } });
     };
 
     const removeBackgroundItem = (index: number) => {
         const newItems = [...data.background.items];
         newItems.splice(index, 1);
-        onChange({ background: { items: newItems } });
+        onChange({ background: { ...data.background, items: newItems } });
     };
 
     const handleResistanceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const val = parseInt(e.target.value);
         if (!isNaN(val) && val >= 1 && val <= 100) {
-            onChange({ prejudiceResistance: val });
+            onChange({ background: { ...data.background, prejudiceResistance: val } });
         }
     };
 
@@ -125,7 +128,7 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
             </div>
             <select
                 value={currentValue || options[0].id}
-                onChange={(e) => onChange({ [field]: e.target.value })}
+                onChange={(e) => onChange({ background: { ...data.background, [field]: e.target.value } })}
                 style={{ ...inputStyle, marginBottom: '0.5rem', padding: '0.5rem' }}
             >
                 {options.map(opt => (
@@ -218,9 +221,9 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
             <div style={sectionStyle}>
                 <h3 style={{ ...titleStyle, color: '#0f766e', borderBottomColor: '#99f6e4' }}>🏛️ Estatus Social y Legal</h3>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1rem' }}>
-                    {renderStatusSelect("Posición Económica", ECONOMIC_STATUS, data.economicStatus, 'economicStatus', currentEconomic)}
-                    {renderStatusSelect("Situación Legal", LEGAL_STATUS, data.legalStatus, 'legalStatus', currentLegal)}
-                    {renderStatusSelect("Posición Social", SOCIAL_STATUS, data.socialStatus, 'socialStatus', currentSocial)}
+                    {renderStatusSelect("Posición Económica", ECONOMIC_STATUS, data.background?.economicStatus, 'economicStatus', currentEconomic)}
+                    {renderStatusSelect("Situación Legal", LEGAL_STATUS, data.background?.legalStatus, 'legalStatus', currentLegal)}
+                    {renderStatusSelect("Posición Social", SOCIAL_STATUS, data.background?.socialStatus, 'socialStatus', currentSocial)}
                 </div>
             </div>
 

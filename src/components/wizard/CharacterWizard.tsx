@@ -68,11 +68,13 @@ const initialCharacterState = {
         specified: {}
     },
     specialskills: { items: [] },
-    background: { items: [] },
-    prejudiceResistance: 50,
-    economicStatus: 'clase_media',
-    legalStatus: 'sin_antecedentes',
-    socialStatus: 'anonimo',
+    background: {
+        items: [],
+        prejudiceResistance: 50,
+        economicStatus: 'clase_media',
+        legalStatus: 'sin_antecedentes',
+        socialStatus: 'anonimo'
+    },
     equipment: { items: [] },
     weapons: { items: [] },
     spells: {
@@ -94,6 +96,41 @@ export default function CharacterWizard() {
                 const saved = localStorage.getItem('characterWizardState');
                 if (saved) {
                     const parsed = JSON.parse(saved);
+
+                    // MIGRATION: Move old root-level fields into background object
+                    if (parsed.prejudiceResistance !== undefined ||
+                        parsed.economicStatus !== undefined ||
+                        parsed.legalStatus !== undefined ||
+                        parsed.socialStatus !== undefined) {
+
+                        console.log('🔄 Migrating old character state format to new format...');
+
+                        // Ensure background object exists
+                        if (!parsed.background) {
+                            parsed.background = { items: [] };
+                        }
+
+                        // Move fields into background if they exist at root level
+                        if (parsed.prejudiceResistance !== undefined) {
+                            parsed.background.prejudiceResistance = parsed.prejudiceResistance;
+                            delete parsed.prejudiceResistance;
+                        }
+                        if (parsed.economicStatus !== undefined) {
+                            parsed.background.economicStatus = parsed.economicStatus;
+                            delete parsed.economicStatus;
+                        }
+                        if (parsed.legalStatus !== undefined) {
+                            parsed.background.legalStatus = parsed.legalStatus;
+                            delete parsed.legalStatus;
+                        }
+                        if (parsed.socialStatus !== undefined) {
+                            parsed.background.socialStatus = parsed.socialStatus;
+                            delete parsed.socialStatus;
+                        }
+
+                        console.log('✅ Migration complete:', parsed);
+                    }
+
                     console.log('✅ Loaded character from localStorage:', parsed);
                     return parsed;
                 }
@@ -155,13 +192,13 @@ export default function CharacterWizard() {
 
         // 5. Coste de Resistencia a Prejuicios
         // (Valor - 50) * 0.1
-        const prejudiceCost = ((character.prejudiceResistance || 50) - 50) * 0.1;
+        const prejudiceCost = ((character.background?.prejudiceResistance || 50) - 50) * 0.1;
         total += prejudiceCost;
 
         // 6. Coste de Estatus (Económico, Legal, Social)
-        const economicCost = ECONOMIC_STATUS.find(e => e.id === character.economicStatus)?.cost || 0;
-        const legalCost = LEGAL_STATUS.find(l => l.id === character.legalStatus)?.cost || 0;
-        const socialCost = SOCIAL_STATUS.find(s => s.id === character.socialStatus)?.cost || 0;
+        const economicCost = ECONOMIC_STATUS.find(e => e.id === character.background?.economicStatus)?.cost || 0;
+        const legalCost = LEGAL_STATUS.find(l => l.id === character.background?.legalStatus)?.cost || 0;
+        const socialCost = SOCIAL_STATUS.find(s => s.id === character.background?.socialStatus)?.cost || 0;
 
         total += economicCost + legalCost + socialCost;
 

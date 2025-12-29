@@ -175,6 +175,7 @@ export default function PowerList() {
               <h3>{power.name}</h3>
               <div className="power-details">
                 <span className="power-cost">PC: {power.formula}</span>
+                {power.skillCalc && <span className="power-skillcalc">Valor: {power.skillCalc}</span>}
                 <div className="power-tags">
                   <div className="power-types">
                     {power.types.map(type => (
@@ -200,6 +201,7 @@ export default function PowerList() {
                 <th>Coste (PC)</th>
                 <th>Tipo</th>
                 <th>Orígenes</th>
+                <th>Valor</th>
               </tr>
             </thead>
             <tbody>
@@ -221,6 +223,7 @@ export default function PowerList() {
                       ))}
                     </div>
                   </td>
+                  <td className="col-skillcalc">{power.skillCalc ? power.skillCalc : "N/A"}</td>
                 </tr>
               ))}
             </tbody>
@@ -445,10 +448,20 @@ export default function PowerList() {
           font-weight: bold;
           color: #444;
           background: #f0f0f0;
-          padding: 0.3rem 0.6rem;
+          padding: 0.2rem 0.4rem;
           border-radius: 4px;
           align-self: flex-start;
-          font-size: 0.9rem;
+          font-size: 0.7rem;
+        }
+
+        .power-skillcalc {
+          font-weight: bold;
+          color: #444;
+          background: #f0f0f0;
+          padding: 0.2rem 0.4rem;
+          border-radius: 4px;
+          align-self: flex-start;
+          font-size: 0.7rem;
         }
 
         .power-tags {
@@ -532,15 +545,21 @@ export default function PowerList() {
         .col-cost {
             font-family: var(--font-mono, monospace);
             color: #444;
-            width: 20%;
+            width: 10%;
+        }
+
+        .col-skillcalc {
+            font-family: var(--font-mono, monospace);
+            color: #444;
+            width: 10%;
         }
         
         .col-types {
-            width: 25%;
+            width: 15%;
         }
         
         .col-origins {
-            width: 30%;
+            width: 40%;
         }
 
         @media (max-width: 768px) {
