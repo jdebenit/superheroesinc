@@ -223,6 +223,10 @@
   },
   "profession": "Sin determinar",
   "sexualIdentity": "Sin determinar",
+  "traumas": {
+    "Manipulador": "Desde mi niñez he sido manipulada por intrigas de la corte y mi madrastra ha confabulado contra mi, he descubierto que las palabras tienen mas poder que los hechizos y las espadas y los uso en contra de los que se aprovechan de la gente cuando esta debil y desprotegida para evitarles lo que me paso a mi.",
+    "Artista Marcial con Chi": "En las tierras profundas de Kish’var la orden de las Nagas me enseño a dominar mi cuerpo y mi mente, a usar el poder de mis adversarios contra ellos y a entender que el unico enemigo al que debo enfrentarme esta dentro de mi."
+  },
   "notes": [
     "Cuando usa su chi en su cuerpo este adquiere un brillo verdoso",
     "El Khopesh se ilumina al colpear cuando esta cargado con chi",

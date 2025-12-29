@@ -49,6 +49,7 @@ interface Props {
         other?: string[];
         profession?: string;
         sexualIdentity?: string;
+        traumas?: Record<string, string>;
     };
 }
 
@@ -445,6 +446,28 @@ const otherStats = rpg.otherstats || rpg.other || [];
         }
 
         {
+            rpg.traumas && Object.keys(rpg.traumas).length > 0 && (
+                <div class="sheet-section traumas">
+                    <div class="section-header">
+                        <h4>Traumas</h4>
+                    </div>
+                    <ul class="no-bullets-list">
+                        {Object.entries(rpg.traumas).map(
+                            ([specialty, trauma]) => (
+                                <li class="trauma-item">
+                                    <div class="trauma-specialty">
+                                        {specialty}
+                                    </div>
+                                    <div class="trauma-text">"{trauma}"</div>
+                                </li>
+                            ),
+                        )}
+                    </ul>
+                </div>
+            )
+        }
+
+        {
             rpg.notes && (
                 <div class="sheet-section notes">
                     <div class="section-header">
@@ -744,5 +767,35 @@ const otherStats = rpg.otherstats || rpg.other || [];
         font-size: 0.85rem;
         color: #3b82f6;
         font-weight: bold;
+    }
+
+    /* Traumas Styles */
+    .sheet-section.traumas .no-bullets-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .sheet-section.traumas .trauma-item {
+        margin-bottom: 1rem;
+        padding-left: 0;
+        list-style: none;
+    }
+    .sheet-section.traumas .trauma-item::before {
+        content: none;
+    }
+    .trauma-specialty {
+        font-weight: bold;
+        color: #991b1b;
+        text-transform: uppercase;
+        font-size: 0.875rem;
+        margin-bottom: 0.25rem;
+    }
+    .trauma-text {
+        font-style: italic;
+        color: #4b5563;
+        font-size: 0.95rem;
+        line-height: 1.4;
+        padding-left: 0.5rem;
+        border-left: 3px solid #fee2e2;
     }
 </style>

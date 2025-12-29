@@ -105,6 +105,7 @@ const rpgCollection = defineCollection({
         combatstats: z.array(z.string()).optional(),
         otherstats: z.array(z.string()).optional(),
         notes: z.union([z.string(), z.array(z.string())]).optional(),
+        traumas: z.record(z.string(), z.string()).optional(),
         icon: z.string().optional(),
     }),
 });
