@@ -341,7 +341,7 @@ export function calculateSpecialSkillsPC(
         origins.forEach(item => {
             const originName = Object.keys(item)[0];
             const content = item[originName] as string[];
-            if (Array.isArray(content) && content.includes('Liberado')) {
+            if (Array.isArray(content) && content.some((s: string) => s.startsWith('Liberado'))) {
                 isLiberado = true;
             }
         });
@@ -409,7 +409,7 @@ export function calculateSpecialSkillsPCWithInt(
         origins.forEach(item => {
             const originName = Object.keys(item)[0];
             const content = item[originName] as string[];
-            if (Array.isArray(content) && content.includes('Liberado')) {
+            if (Array.isArray(content) && content.some((s: string) => s.startsWith('Liberado'))) {
                 isLiberado = true;
             }
         });

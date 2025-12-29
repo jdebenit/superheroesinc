@@ -173,7 +173,7 @@ export default function Step6_Details({ data, onChange }: Step6Props) {
                     📝 Detalles Finales
                 </h3>
                 <p style={{ margin: 0 }}>
-                    Define la identidad de tu personaje y equipalo para la aventura.
+                    Define la identidad de tu personaje y equipalo.
                 </p>
             </div>
 

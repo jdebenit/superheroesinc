@@ -495,7 +495,7 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
                                         data.origin.items.forEach((item: any) => {
                                             const originName = Object.keys(item)[0];
                                             const content = item[originName];
-                                            if (Array.isArray(content) && content.includes('Liberado')) {
+                                            if (Array.isArray(content) && content.some((s: string) => s.startsWith('Liberado'))) {
                                                 isLiberado = true;
                                             }
                                         });
@@ -612,7 +612,7 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
                                         data.origin.items.forEach((item: any) => {
                                             const originName = Object.keys(item)[0];
                                             const content = item[originName];
-                                            if (Array.isArray(content) && content.includes('Liberado')) {
+                                            if (Array.isArray(content) && content.some((s: string) => s.startsWith('Liberado'))) {
                                                 isLiberado = true;
                                             }
                                         });
@@ -762,6 +762,19 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
                             const isSelected = selectedSkills[skill.id] !== undefined;
                             const isParametrizable = skill.requiresSpecification;
 
+                            // Determine skill cost for display
+                            let isLiberado = false;
+                            if (data.origin?.items?.length > 0) {
+                                data.origin.items.forEach((item: any) => {
+                                    const originName = Object.keys(item)[0];
+                                    const content = item[originName];
+                                    if (Array.isArray(content) && content.some((s: string) => s.startsWith('Liberado'))) {
+                                        isLiberado = true;
+                                    }
+                                });
+                            }
+                            const skillCostDisplay = isLiberado ? '0.5 PC' : '1 PC';
+
                             if (isParametrizable) {
                                 return (
                                     <div key={skill.id} style={{
@@ -794,7 +807,7 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
                                                 fontWeight: 'bold'
                                             }}
                                         >
-                                            + Añadir (1 PC)
+                                            + Añadir ({skillCostDisplay})
                                         </button>
                                     </div>
                                 );
@@ -832,7 +845,7 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
                                                     fontWeight: 'bold'
                                                 }}
                                             >
-                                                + Añadir (1 PC)
+                                                + Añadir ({skillCostDisplay})
                                             </button>
                                         ) : (
                                             <span style={{ fontSize: '0.875rem', color: '#10b981', fontWeight: 'bold' }}>

@@ -40,7 +40,7 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
     },
     "Sobrenatural": {
         name: "Sobrenatural",
-        disabledSubtypes: ["Hombre Lobo", "Liberado de Unidad", "Liberado de Equidad", "Liberado de Entropia"],
+        disabledSubtypes: ["Hombre Lobo", "Liberado de Unidad", "Liberado de Equidad"],
         subtypes: {
             "Vampiro": ["+20 a la parada mental"],
             "Hombre Lobo": ["+20 a la parada mental"],
