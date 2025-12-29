@@ -37,7 +37,9 @@ export const ORIGIN_COSTS: { [key: string]: OriginCosts } = {
             "Poseido": 15,
             "Ente": 30,
             "Maldito": 5,
-            "Liberado": 15
+            "Liberado de Unidad": 15,
+            "Liberado de Equidad": 15,
+            "Liberado de Entropia": 15
         }
     },
 

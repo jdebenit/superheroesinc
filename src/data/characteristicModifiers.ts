@@ -115,6 +115,9 @@ export const ORIGIN_CHARACTERISTIC_MODIFIERS: { [key: string]: OriginCharacteris
         apariencia: { modifier: 0, max: 100 },
         voluntad: { modifier: 0, max: 100 },
     },
+    "Liberado de Unidad": allCharacteristics(0, 100),
+    "Liberado de Equidad": allCharacteristics(0, 100),
+    "Liberado de Entropia": allCharacteristics(0, 100),
 
     // Arcano
     "Mago": allCharacteristics(0, 100),

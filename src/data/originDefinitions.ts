@@ -40,7 +40,7 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
     },
     "Sobrenatural": {
         name: "Sobrenatural",
-        disabledSubtypes: ["Hombre Lobo"],
+        disabledSubtypes: ["Hombre Lobo", "Liberado de Unidad", "Liberado de Equidad", "Liberado de Entropia"],
         subtypes: {
             "Vampiro": ["+20 a la parada mental"],
             "Hombre Lobo": ["+20 a la parada mental"],
@@ -51,7 +51,9 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
                 "Condenado a recorrer la Tierra hasta que sus buenas obras le rediman.",
                 "+20 a la parada mental"
             ],
-            "Liberado": ["+20 a la parada mental"]
+            "Liberado de Unidad": ["+20 a la parada mental"],
+            "Liberado de Equidad": ["+20 a la parada mental"],
+            "Liberado de Entropia": ["+20 a la parada mental"]
         }
     },
     "Arcano": {
