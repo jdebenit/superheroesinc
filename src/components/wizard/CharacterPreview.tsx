@@ -9,6 +9,25 @@ interface CharacterPreviewProps {
     totalPCs?: number | string;
 }
 
+
+const calculatePowerSkillBase = (char: any, formula: string): number => {
+    if (!formula) return 0;
+    const getVal = (abbr: string) => {
+        const map: Record<string, string> = {
+            'FUE': 'Fuerza', 'AGI': 'Agilidad', 'CON': 'Constitución',
+            'INT': 'Inteligencia', 'PER': 'Percepción', 'VOL': 'Voluntad', 'APA': 'Apariencia'
+        };
+        const fullKey = map[abbr];
+        return char.attributes?.values?.[fullKey] || 0;
+    };
+    try {
+        const evalFormula = formula.replace(/[A-Z]{3}/g, (match) => getVal(match).toString());
+        return Math.floor(new Function('return ' + evalFormula)()) || 0;
+    } catch (e) {
+        return 0;
+    }
+};
+
 export default function CharacterPreview({ character, totalPCs }: CharacterPreviewProps) {
     const dialogRef = useRef<HTMLDialogElement>(null);
 
@@ -500,9 +519,7 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                         <div style={{ display: 'flex', alignItems: 'baseline', width: '100%', marginBottom: '0.25rem' }}>
                                                             <span style={{ paddingRight: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                                                                 <span style={{ fontWeight: 'bold', color: '#059669' }}>{powerData.name}</span>
-                                                                <span style={{ fontSize: '0.75rem', backgroundColor: '#ecfdf5', color: '#059669', padding: '2px 6px', borderRadius: '4px' }}>
-                                                                    {power.origin}
-                                                                </span>
+
                                                             </span>
                                                             <span style={{
                                                                 flexGrow: 1,
@@ -515,19 +532,18 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                             <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap', fontSize: '0.875rem' }}>
                                                                 {!powerData.characteristic ? (
                                                                     <>
-                                                                        Rango {power.rank} <span style={{ fontSize: '0.75rem', color: '#9ca3af' }}>({getRankLevel(power.rank)})</span>
+                                                                        {getRankLevel(power.rank)} <span style={{ fontSize: '0.75rem', color: '#9ca3af' }}>({power.rank})</span>
                                                                     </>
                                                                 ) : (
                                                                     <>Mod: +{power.powerMod || 0}</>
                                                                 )}
                                                             </span>
+                                                            {powerData.skillCalc && (
+                                                                <span style={{ fontSize: '0.85rem', color: '#d97706', fontWeight: '500', marginLeft: '0.5rem' }}>
+                                                                    {power.skillValue || calculatePowerSkillBase(character, powerData.skillCalc)}%
+                                                                </span>
+                                                            )}
                                                         </div>
-
-                                                        {power.skillValue && (
-                                                            <div style={{ fontSize: '0.85rem', color: '#d97706', fontWeight: '500', marginLeft: '0rem' }}>
-                                                                Base Hab: {power.skillValue}
-                                                            </div>
-                                                        )}
                                                     </li>
                                                 );
                                             })}
