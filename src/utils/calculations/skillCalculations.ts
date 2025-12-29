@@ -59,7 +59,7 @@ export function calculateGeneralSkillValues(
 
         // 2. Origin/Specialty Modifiers extraction
         let originMod = 0;
-        let specialtyMod = 0;
+        let specialtyMods: number[] = [];
 
         if (origins && origins.length > 0) {
             origins.forEach(item => {
@@ -73,7 +73,7 @@ export function calculateGeneralSkillValues(
                         if (mod.skillId === skill.id) {
                             // Determine if this is a Vigilante specialty or regular origin
                             if (originName === 'Vigilante') {
-                                specialtyMod += mod.value;
+                                specialtyMods.push(mod.value);
                             } else {
                                 originMod += mod.value;
                             }
@@ -89,7 +89,7 @@ export function calculateGeneralSkillValues(
                             if (mod.skillId === skill.id) {
                                 // Vigilante subtypes are specialties, others are origin mods
                                 if (originName === 'Vigilante') {
-                                    specialtyMod += mod.value;
+                                    specialtyMods.push(mod.value);
                                 } else {
                                     originMod += mod.value;
                                 }
@@ -99,6 +99,9 @@ export function calculateGeneralSkillValues(
                 });
             });
         }
+
+        // Take the highest specialty modifier only
+        const specialtyMod = specialtyMods.length > 0 ? Math.max(...specialtyMods) : 0;
 
         const otherMod = manualMods[skill.id] || 0;
 
@@ -172,7 +175,7 @@ export function calculateSpecialSkillValues(
 
         // Extract modifiers
         let originMod = 0;
-        let specialtyMod = 0;
+        let specialtyMods: number[] = [];
 
         if (origins && origins.length > 0) {
             origins.forEach(item => {
@@ -187,7 +190,7 @@ export function calculateSpecialSkillValues(
                     originSkillMods.forEach(mod => {
                         if (mod.skillId === skill.id) {
                             if (originName === 'Vigilante') {
-                                specialtyMod += mod.value;
+                                specialtyMods.push(mod.value);
                             } else {
                                 originMod += mod.value;
                             }
@@ -204,7 +207,7 @@ export function calculateSpecialSkillValues(
                         subtypeSkillMods.forEach(mod => {
                             if (mod.skillId === skill.id) {
                                 if (originName === 'Vigilante') {
-                                    specialtyMod += mod.value;
+                                    specialtyMods.push(mod.value);
                                 } else {
                                     originMod += mod.value;
                                 }
@@ -214,6 +217,9 @@ export function calculateSpecialSkillValues(
                 });
             });
         }
+
+        // Take the highest specialty modifier only
+        const specialtyMod = specialtyMods.length > 0 ? Math.max(...specialtyMods) : 0;
 
         const otherMod = skillData.manualMods || 0;
 
@@ -256,7 +262,7 @@ export function calculateSpecialSkillValues(
 
         // Extract modifiers (apply to ALL instances of this skill type)
         let originMod = 0;
-        let specialtyMod = 0;
+        let specialtyMods: number[] = [];
 
         if (origins && origins.length > 0) {
             origins.forEach(item => {
@@ -268,7 +274,7 @@ export function calculateSpecialSkillValues(
                     originSkillMods.forEach(mod => {
                         if (mod.skillId === skillDef.id) {
                             if (originName === 'Vigilante') {
-                                specialtyMod += mod.value;
+                                specialtyMods.push(mod.value);
                             } else {
                                 originMod += mod.value;
                             }
@@ -282,7 +288,7 @@ export function calculateSpecialSkillValues(
                         subtypeSkillMods.forEach(mod => {
                             if (mod.skillId === skillDef.id) {
                                 if (originName === 'Vigilante') {
-                                    specialtyMod += mod.value;
+                                    specialtyMods.push(mod.value);
                                 } else {
                                     originMod += mod.value;
                                 }
@@ -292,6 +298,9 @@ export function calculateSpecialSkillValues(
                 });
             });
         }
+
+        // Take the highest specialty modifier only
+        const specialtyMod = specialtyMods.length > 0 ? Math.max(...specialtyMods) : 0;
 
         const otherMod = specSkill.manualMods || 0;
 
