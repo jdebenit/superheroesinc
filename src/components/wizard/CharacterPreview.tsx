@@ -5,6 +5,7 @@ import { POWERS } from '../../data/powers';
 
 import { TECH_MODULES } from '../../data/techModules';
 import { ORIGIN_CATEGORIES } from '../../data/originDefinitions';
+import { MAGICAL_BONDS } from '../../data/magicalBonds';
 
 interface CharacterPreviewProps {
     character: any;
@@ -661,6 +662,49 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                     </li>
                                                 );
                                             })}
+                                        </ul>
+                                    </div>
+                                )}
+
+                                {/* Magical Bonds */}
+                                {(character.magicalBonds?.length > 0 || character.magicalBondsCustomName || character.magicalBondsCustom) && (
+                                    <div className="sheet-section magical-bonds">
+                                        <div className="section-header">
+                                            <h4>Vinculaciones Mágicas</h4>
+                                        </div>
+                                        <ul className="no-bullets-list" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                                            {character.magicalBonds?.map((bondId: string, idx: number) => {
+                                                const bond = MAGICAL_BONDS.find(b => b.id === bondId);
+                                                if (!bond) return null;
+                                                return (
+                                                    <li key={bondId} style={{ marginBottom: '0.75rem', borderBottom: '1px solid #f3e8ff', paddingBottom: '0.5rem' }}>
+                                                        <span style={{ fontWeight: 'bold', color: '#6b21a8', display: 'block' }}>{bond.name}</span>
+                                                        <span style={{ display: 'block', fontSize: '0.9rem', color: '#4b5563' }}>
+                                                            {bond.description}
+                                                        </span>
+                                                    </li>
+                                                );
+                                            })}
+                                            {/* New Custom Bond Structure */}
+                                            {character.magicalBondsCustomName && (
+                                                <li style={{ marginBottom: '0.75rem', borderBottom: '1px solid #f3e8ff', paddingBottom: '0.5rem' }}>
+                                                    <span style={{ fontWeight: 'bold', color: '#6b21a8', display: 'block' }}>
+                                                        {character.magicalBondsCustomName} <span className="text-xs text-gray-400 font-normal uppercase ml-2">(Personalizada)</span>
+                                                    </span>
+                                                    <span style={{ display: 'block', fontSize: '0.9rem', color: '#4b5563' }}>
+                                                        {character.magicalBondsCustomDescription}
+                                                    </span>
+                                                </li>
+                                            )}
+                                            {/* Legacy Custom Bond (Fallback) */}
+                                            {!character.magicalBondsCustomName && character.magicalBondsCustom && (
+                                                <li style={{ marginBottom: '0.5rem', marginTop: '0.5rem' }}>
+                                                    <span style={{ fontWeight: 'bold', color: '#6b21a8', display: 'block' }}>Vinculación Personalizada</span>
+                                                    <span style={{ display: 'block', fontSize: '0.9rem', color: '#4b5563', fontStyle: 'italic' }}>
+                                                        "{character.magicalBondsCustom}"
+                                                    </span>
+                                                </li>
+                                            )}
                                         </ul>
                                     </div>
                                 )}

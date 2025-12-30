@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { POWERS, type Power, type PowerType } from '../../../data/powers';
 import { SPELLS, type Spell } from '../../../data/spells';
 import { TECH_MODULES, type TechModuleDefinition } from '../../../data/techModules';
+import { MAGICAL_BONDS } from '../../../data/magicalBonds';
 
 interface Step3Props {
     data: any;
@@ -135,7 +136,7 @@ const ORIGIN_ICONS: Record<string, string> = {
 
 export default function Step3_Especials({ data, onChange }: Step3Props) {
     const [modalOpen, setModalOpen] = useState(false);
-    const [modalType, setModalType] = useState<'powers' | 'spells' | 'techModules' | null>(null);
+    const [modalType, setModalType] = useState<'powers' | 'spells' | 'techModules' | 'magical_bonds' | null>(null);
     const [modalOriginFilter, setModalOriginFilter] = useState<string | null>(null);
 
     // Modal State
@@ -440,6 +441,127 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                             No has seleccionado ningún origen que actualmente tenga habilitado este paso. Recuerda es una Alpha.
                         </p>
                         <p className="text-gray-400 mt-2 font-comic">Prueba con Guardián, Alterado, Arcano, Sobrenatural, Thals, Divino, Cósmico, Mutante o Tecnológico</p>
+                    </div>
+                )
+            }
+
+            {/* MAGICAL BONDS SECTION FOR MAGO */}
+            {
+                isMago && (
+                    <div className="bg-purple-50 border-4 border-purple-900 rounded-xl overflow-hidden shadow-[8px_8px_0px_rgba(0,0,0,0.8)] mb-8">
+                        <div className="p-6 border-b-4 border-purple-900 bg-white">
+                            <h3 className="text-2xl font-black text-purple-900 uppercase italic font-comic">Vinculaciones Mágicas</h3>
+                            <p className="text-gray-600 mt-2">
+                                Como Mago, debes elegir al menos una vinculación mágica que canalice tu poder.
+                            </p>
+                        </div>
+                        <div className="flex justify-center mb-8">
+                            <button
+                                onClick={() => {
+                                    setModalType('magical_bonds');
+                                    setModalOriginFilter('');
+                                    setModalOpen(true);
+                                }}
+                                className="pixel-button bg-purple-600 text-white hover:bg-purple-700 text-lg flex items-center px-8 py-3 gap-3 shadow-lg"
+                            >
+                                <span className="text-2xl font-black">+</span> AÑADIR VINCULACIÓN MÁGICA
+                            </button>
+                        </div>
+                        <div className="p-6 bg-purple-50 space-y-4">
+                            {/* Selected Bonds List Table */}
+                            {data.magicalBonds && data.magicalBonds.length > 0 ? (
+                                <div style={{
+                                    backgroundColor: 'white',
+                                    borderRadius: '12px',
+                                    boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                                    overflow: 'hidden',
+                                    border: '1px solid #e5e7eb',
+                                    marginBottom: '1.5rem'
+                                }}>
+                                    <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                                        <thead style={{ backgroundColor: '#f9fafb', borderBottom: '2px solid #e5e7eb' }}>
+                                            <tr>
+                                                <th style={{ padding: '1rem', textAlign: 'left', color: '#374151' }}>Vinculación</th>
+                                                <th style={{ padding: '1rem', textAlign: 'left', color: '#6b7280' }}>Descripción</th>
+                                                <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {data.magicalBonds.map((bondId: string, idx: number) => {
+                                                const bond = MAGICAL_BONDS.find(b => b.id === bondId);
+                                                if (!bond) return null;
+                                                const isEven = idx % 2 === 0;
+                                                return (
+                                                    <tr key={bondId} style={{ backgroundColor: isEven ? 'white' : '#f9fafb' }}>
+                                                        <td style={{ padding: '1rem', fontWeight: 'bold', color: '#1f2937', verticalAlign: 'top' }}>
+                                                            {bond.name}
+                                                        </td>
+                                                        <td style={{ padding: '1rem', color: '#4b5563', fontSize: '0.9rem', verticalAlign: 'top' }}>
+                                                            {bond.description}
+                                                        </td>
+                                                        <td style={{ padding: '1rem', textAlign: 'center', verticalAlign: 'top' }}>
+                                                            <button
+                                                                onClick={(e) => {
+                                                                    e.stopPropagation();
+                                                                    const current = data.magicalBonds || [];
+                                                                    onChange({ ...data, magicalBonds: current.filter((id: string) => id !== bondId) });
+                                                                }}
+                                                                style={{
+                                                                    color: '#ef4444',
+                                                                    padding: '8px',
+                                                                    borderRadius: '9999px',
+                                                                    border: 'none',
+                                                                    background: 'transparent',
+                                                                    cursor: 'pointer',
+                                                                    display: 'inline-flex',
+                                                                    alignItems: 'center',
+                                                                    justifyContent: 'center'
+                                                                }}
+                                                                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#fef2f2'}
+                                                                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+                                                                title="Eliminar vinculación"
+                                                            >
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                                                    <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                                                                </svg>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                );
+                                            })}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            ) : null}
+
+                            <div className="bg-white p-6 rounded-xl border-2 border-purple-200">
+                                <label className="block text-purple-900 font-bold mb-4 uppercase font-comic border-b pb-2">
+                                    Otra Vinculación (Personalizada)
+                                </label>
+
+                                <div className="space-y-4">
+                                    <div>
+                                        <label className="block text-sm font-bold text-gray-700 mb-1">Nombre de la Vinculación</label>
+                                        <input
+                                            type="text"
+                                            value={data.magicalBondsCustomName || ''}
+                                            onChange={(e) => onChange({ ...data, magicalBondsCustomName: e.target.value })}
+                                            className="w-full p-2 border-2 border-purple-200 rounded-lg focus:border-purple-600 focus:outline-none"
+                                            placeholder="Ej: Pacto con el Dragón Carmesí..."
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-bold text-gray-700 mb-1">Descripción y efectos</label>
+                                        <textarea
+                                            value={data.magicalBondsCustomDescription || ''}
+                                            onChange={(e) => onChange({ ...data, magicalBondsCustomDescription: e.target.value })}
+                                            className="w-full h-24 p-2 border-2 border-purple-200 rounded-lg focus:border-purple-600 focus:outline-none resize-none"
+                                            placeholder="Describe en qué consiste esta vinculación..."
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 )
             }
@@ -1612,6 +1734,76 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                                     className="confirm-button"
                                 >
                                     Confirmar Selección
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )
+            }
+
+            {/* Modal for Magical Bonds */}
+            {
+                modalOpen && modalType === 'magical_bonds' && (
+                    <div className="wizard-modal-overlay" onClick={() => setModalOpen(false)}>
+                        <div className="wizard-modal-content" onClick={e => e.stopPropagation()}>
+                            <div className="modal-header">
+                                <h3 className="modal-title">Seleccionar Vinculación Mágica</h3>
+                                <button className="modal-close" onClick={() => setModalOpen(false)}>×</button>
+                            </div>
+
+                            <div className="controls-section">
+                                <input
+                                    type="text"
+                                    placeholder="Buscar vinculación..."
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                    className="search-input"
+                                    autoFocus
+                                />
+                            </div>
+
+                            <div className="modal-scroll-area">
+                                <div className="powers-grid">
+                                    {MAGICAL_BONDS
+                                        .filter(bond =>
+                                            searchTerm === "" ||
+                                            bond.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                                            bond.description.toLowerCase().includes(searchTerm.toLowerCase())
+                                        )
+                                        .map((bond) => {
+                                            const isSelected = data.magicalBonds?.includes(bond.id);
+                                            return (
+                                                <div
+                                                    key={bond.id}
+                                                    className={`power-card ${isSelected ? 'selected' : ''}`}
+                                                    onClick={() => {
+                                                        const current = data.magicalBonds || [];
+                                                        const createNew = isSelected
+                                                            ? current.filter((id: string) => id !== bond.id)
+                                                            : [...current, bond.id];
+                                                        onChange({ ...data, magicalBonds: createNew });
+                                                        setModalOpen(false);
+                                                    }}
+                                                >
+                                                    {isSelected && <div className="selected-badge">✓</div>}
+                                                    <h3>{bond.name}</h3>
+                                                    <div className="power-details">
+                                                        <p style={{ margin: 0, fontSize: '0.9rem', color: '#555' }}>
+                                                            {bond.description}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            );
+                                        })}
+                                </div>
+                            </div>
+
+                            <div className="modal-footer">
+                                <button
+                                    className="confirm-button"
+                                    onClick={() => setModalOpen(false)}
+                                >
+                                    Cerrar
                                 </button>
                             </div>
                         </div>

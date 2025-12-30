@@ -94,7 +94,11 @@ const initialCharacterState = {
     },
     powers: {
         selected: []
-    }
+    },
+    magicalBonds: [],
+    magicalBondsCustom: "",
+    magicalBondsCustomName: "",
+    magicalBondsCustomDescription: ""
 };
 
 export default function CharacterWizard() {
