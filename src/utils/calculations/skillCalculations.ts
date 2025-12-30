@@ -25,7 +25,7 @@ export function calculateGeneralSkillValues(
         Object.keys(characteristics).forEach(key => {
             const normalizedKey = key.toLowerCase()
                 .normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-            stats[normalizedKey] = characteristics[key] || 0;
+            stats[normalizedKey] = Number(characteristics[key]) || 0;
         });
     }
 
@@ -155,7 +155,7 @@ export function calculateSpecialSkillValues(
         Object.keys(characteristics).forEach(key => {
             const normalizedKey = key.toLowerCase()
                 .normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-            stats[normalizedKey] = characteristics[key] || 0;
+            stats[normalizedKey] = Number(characteristics[key]) || 0;
         });
     }
 
@@ -411,7 +411,7 @@ export function calculateSpecialSkillsPCWithInt(
     if (attributes) {
         Object.keys(attributes).forEach(key => {
             const normalizedKey = key.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-            stats[normalizedKey] = attributes[key] || 0;
+            stats[normalizedKey] = Number(attributes[key]) || 0;
         });
     }
 
@@ -472,7 +472,7 @@ export function calculateSpecialSkillsPCWithInt(
     });
 
     // 4. Calcular bonificación por Inteligencia
-    const intelligence = attributes['Inteligencia'] || attributes['inteligencia'] || 0;
+    const intelligence = Number(attributes['Inteligencia'] || attributes['inteligencia']) || 0;
     let intBonusSkills = 0;
 
     if (intelligence >= 161) intBonusSkills = 4;

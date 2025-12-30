@@ -22,7 +22,7 @@ export function calculateDerivedStats(
     if (attributes) {
         Object.keys(attributes).forEach(key => {
             const normalizedKey = key.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-            stats[normalizedKey as keyof typeof stats] = attributes[key] || 0;
+            stats[normalizedKey as keyof typeof stats] = Number(attributes[key]) || 0;
         });
     }
 
