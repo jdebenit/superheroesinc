@@ -36,7 +36,19 @@ export function calculateGeneralSkillValues(
         // 1. Base Calculation
         let calculatedBase = 0;
         try {
-            calculatedBase = Math.floor(skill.formula(stats)) || 0;
+            // Special case for "Conocimientos generales" with "Heraldo Cósmico" origin
+            const isHeraldoCosmico = origins && origins.some(o => {
+                const originName = Object.keys(o)[0];
+                const content = o[originName] as string[];
+                return content && content.includes('Heraldo Cósmico');
+            });
+
+            if (skill.id === 'conocimientos' && isHeraldoCosmico) {
+                // Heraldo Cósmico knowledge is INT/5 instead of standard INT/3
+                calculatedBase = Math.floor(stats['inteligencia'] / 5) || 0;
+            } else {
+                calculatedBase = Math.floor(skill.formula(stats)) || 0;
+            }
         } catch (e) {
             console.error(`Error calculating base for ${skill.id}`, e);
             calculatedBase = 0;

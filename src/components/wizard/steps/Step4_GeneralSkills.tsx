@@ -365,7 +365,17 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
                                         )}
                                     </td>
                                     <td style={{ padding: '0.75rem', textAlign: 'center', color: '#6b7280', fontSize: '0.875rem', fontFamily: 'monospace' }}>
-                                        {skill.formulaText}
+                                        {(() => {
+                                            const isHeraldoCosmico = data.origin?.items?.some((o: any) => {
+                                                const originName = Object.keys(o)[0];
+                                                const content = o[originName] as string[];
+                                                return content && content.includes('Heraldo Cósmico');
+                                            });
+                                            if (skill.id === 'conocimientos' && isHeraldoCosmico) {
+                                                return 'INT/5';
+                                            }
+                                            return skill.formulaText;
+                                        })()}
                                     </td>
                                     <td style={{ padding: '0.75rem', textAlign: 'center', color: '#4b5563' }}>
                                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2px' }}>
