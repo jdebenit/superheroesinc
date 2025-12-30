@@ -241,7 +241,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
             return POWERS.filter(p => {
                 if (modalOriginFilter && !p.origins.includes(modalOriginFilter)) return false;
 
-                // Special filtering for Mutant powers by type
+                // Special filtering for Mutant powers by type (for both Mutante origin and Ente)
                 if (modalOriginFilter === 'Mutante') {
                     const allowedTypes = getMutantPowerTypes(data);
                     if (allowedTypes.length > 0 && !p.types.some(t => allowedTypes.includes(t))) {
@@ -269,6 +269,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     const isTerrano = hasSubtype(data, 'Arcano', 'Terrano');
     const isVampiro = hasSubtype(data, 'Sobrenatural', 'Vampiro');
     const isSemidemonio = hasSubtype(data, 'Sobrenatural', 'Semidemonio');
+    const isEnte = hasSubtype(data, 'Sobrenatural', 'Ente');
     const isThals = hasOrigin(data, 'Thals');
     const isDivino = hasOrigin(data, 'Divino');
     const isCosmico = hasOrigin(data, 'Cósmico');
@@ -362,6 +363,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                 isAlterado={isAlterado}
                 isVampiro={isVampiro}
                 isSemidemonio={isSemidemonio}
+                isEnte={isEnte}
                 isThals={isThals}
                 isDivino={isDivino}
                 isTerrano={isTerrano}

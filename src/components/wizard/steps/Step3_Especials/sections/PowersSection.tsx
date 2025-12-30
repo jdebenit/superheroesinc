@@ -15,6 +15,7 @@ interface PowersSectionProps {
     isAlterado: boolean;
     isVampiro: boolean;
     isSemidemonio: boolean;
+    isEnte: boolean;
     isThals: boolean;
     isDivino: boolean;
     isTerrano: boolean;
@@ -35,6 +36,7 @@ export default function PowersSection({
     isAlterado,
     isVampiro,
     isSemidemonio,
+    isEnte,
     isThals,
     isDivino,
     isTerrano,
@@ -43,7 +45,7 @@ export default function PowersSection({
     isMutante
 }: PowersSectionProps) {
     const hasAnyPowerOrigin = isGuardian || isAlterado || isVampiro || isSemidemonio ||
-        isThals || isDivino || isTerrano || isDotado || isCosmico || isMutante;
+        isEnte || isThals || isDivino || isTerrano || isDotado || isCosmico || isMutante;
 
     if (!hasAnyPowerOrigin) return null;
 
@@ -105,6 +107,11 @@ export default function PowersSection({
                     {isMutante && (
                         <button onClick={() => onOpenModal('Mutante')} className="pixel-button bg-pink-600 text-white hover:bg-pink-700 text-sm flex items-center gap-2">
                             <span>+</span> Mutante
+                        </button>
+                    )}
+                    {isEnte && (
+                        <button onClick={() => onOpenModal('Mutante')} className="pixel-button bg-purple-500 text-white hover:bg-purple-600 text-sm flex items-center gap-2">
+                            <span>+</span> Mutante (Ente)
                         </button>
                     )}
                 </div>

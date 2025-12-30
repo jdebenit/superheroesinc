@@ -96,26 +96,40 @@ export const getRankLevel = (rank: number): string => {
 
 /**
  * Get allowed power types for Mutant based on their subtype
+ * Also handles Ente origin (Sobrenatural subtype) which gets Psychic and Energetic powers
  */
 export const getMutantPowerTypes = (data: any): PowerType[] => {
+    // Check for Mutant origin
     const mutantOrigin = data.origin?.items?.find((item: any) =>
         Object.keys(item)[0] === 'Mutante'
     );
 
-    if (!mutantOrigin) return [];
+    if (mutantOrigin) {
+        const subtypes = mutantOrigin['Mutante'];
+        if (Array.isArray(subtypes) && subtypes.length > 0) {
+            const subtype = subtypes[0]; // El primer subtipo seleccionado
 
-    const subtypes = mutantOrigin['Mutante'];
-    if (!Array.isArray(subtypes) || subtypes.length === 0) return [];
+            // Mapear subtipo a tipos de poderes
+            if (subtype === 'Psíquico') return ['Psíquico'];
+            if (subtype === 'Energético') return ['Energético'];
+            if (subtype === 'Físico') return ['Físico'];
+            if (subtype === 'Psíquico/Energético') return ['Psíquico', 'Energético'];
+            if (subtype === 'Energético/Físico') return ['Energético', 'Físico'];
+            if (subtype === 'Psíquico/Físico') return ['Psíquico', 'Físico'];
+        }
+    }
 
-    const subtype = subtypes[0]; // El primer subtipo seleccionado
+    // Check for Ente origin (Sobrenatural subtype)
+    const sobrenaturalOrigin = data.origin?.items?.find((item: any) =>
+        Object.keys(item)[0] === 'Sobrenatural'
+    );
 
-    // Mapear subtipo a tipos de poderes
-    if (subtype === 'Psíquico') return ['Psíquico'];
-    if (subtype === 'Energético') return ['Energético'];
-    if (subtype === 'Físico') return ['Físico'];
-    if (subtype === 'Psíquico/Energético') return ['Psíquico', 'Energético'];
-    if (subtype === 'Energético/Físico') return ['Energético', 'Físico'];
-    if (subtype === 'Psíquico/Físico') return ['Psíquico', 'Físico'];
+    if (sobrenaturalOrigin) {
+        const subtypes = sobrenaturalOrigin['Sobrenatural'];
+        if (Array.isArray(subtypes) && subtypes.includes('Ente')) {
+            return ['Psíquico', 'Energético'];
+        }
+    }
 
     return [];
 };
