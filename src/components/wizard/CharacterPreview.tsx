@@ -103,6 +103,22 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                             <button onClick={downloadJson} className="action-btn" title="Descargar JSON">
                                 💾
                             </button>
+                            <button
+                                onClick={async () => {
+                                    try {
+                                        const { generateCharacterSheetPDF, downloadPDF } = await import('../../utils/pdfExport');
+                                        const pdfBytes = await generateCharacterSheetPDF('/ficha_template.pdf', character, totalPCs || 0);
+                                        downloadPDF(pdfBytes, `Ficha_SHI_${character.name.replace(/\s+/g, '_') || 'Personaje'}.pdf`);
+                                    } catch (error) {
+                                        console.error('Error generando PDF:', error);
+                                        alert('Error al generar el PDF. Asegúrate de que el template "ficha_template.pdf" está en la carpeta public.');
+                                    }
+                                }}
+                                className="action-btn"
+                                title="Exportar PDF"
+                            >
+                                📥
+                            </button>
                             <button onClick={closeModal} className="close-btn">
                                 ✕
                             </button>
