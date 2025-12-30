@@ -2,6 +2,8 @@ import React, { useRef, useEffect } from 'react';
 import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS, FRIENDS_AND_ASSOCIATES } from '../../data/backgroundTables';
 import { SPELLS } from '../../data/spells';
 import { POWERS } from '../../data/powers';
+
+import { TECH_MODULES } from '../../data/techModules';
 import { ORIGIN_CATEGORIES } from '../../data/originDefinitions';
 
 interface CharacterPreviewProps {
@@ -477,6 +479,62 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                     {item.notes && <span>: {item.notes}</span>}
                                                 </li>
                                             ))}
+                                        </ul>
+                                    </div>
+                                )}
+
+                                {/* Tech Modules */}
+                                {character.techModules && character.techModules.length > 0 && (
+                                    <div className="sheet-section tech-modules">
+                                        <div className="section-header">
+                                            <h4>Módulos Tecnológicos</h4>
+                                            {/* Calculate total cost just for display if needed, though usually included in global total */}
+                                            <span className="cost">
+                                                ({character.techModules.reduce((acc: number, m: any) => acc + (m.pcCost || 0), 0)} PCs)
+                                            </span>
+                                        </div>
+                                        <ul className="no-bullets-list" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                                            {character.techModules.map((module: any, idx: number) => {
+                                                const definition = TECH_MODULES.find(d => d.id === module.definitionId);
+                                                const type = definition?.type || 'General';
+
+                                                return (
+                                                    <li key={`${module.id}-${idx}`} style={{
+                                                        listStyle: 'none',
+                                                        marginBottom: '0.75rem',
+                                                        borderBottom: '1px solid #e5e7eb',
+                                                        paddingBottom: '0.5rem'
+                                                    }}>
+                                                        <div style={{ display: 'flex', alignItems: 'center', width: '100%', marginBottom: '0.25rem', gap: '0.5rem', flexWrap: 'wrap' }}>
+                                                            <span style={{ fontWeight: 'bold', color: '#1f2937' }}>{module.name}</span>
+
+                                                            <span className="type-tag" style={{
+                                                                fontSize: '0.7rem',
+                                                                padding: '0.2rem 0.5rem',
+                                                                borderRadius: '12px',
+                                                                fontWeight: 600,
+                                                                border: type === 'Mejora Interna' ? '1px solid #fbcfe8' : '1px solid #90caf9',
+                                                                background: type === 'Mejora Interna' ? '#fce7f3' : '#e3f2fd',
+                                                                color: type === 'Mejora Interna' ? '#be123c' : '#1565c0',
+                                                            }}>
+                                                                {type}
+                                                            </span>
+
+                                                            <div style={{ flexGrow: 1 }}></div>
+
+                                                            {module.location && (
+                                                                <span style={{ fontSize: '0.8rem', color: '#6b7280', fontStyle: 'italic', marginRight: '0.5rem' }}>
+                                                                    {module.location}
+                                                                </span>
+                                                            )}
+
+                                                            <span style={{ fontWeight: 'bold', color: '#4f46e5', fontSize: '0.875rem' }}>
+                                                                {module.pcCost} PC
+                                                            </span>
+                                                        </div>
+                                                    </li>
+                                                );
+                                            })}
                                         </ul>
                                     </div>
                                 )}

@@ -91,15 +91,14 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
     },
     "Tecnológico": {
         name: "Tecnológico",
-        disabled: true,
         subtypes: {
-            "Tecnoarmadura": ["Armadura tecnológica avanzada", "Sistemas integrados"],
+            "Tecnoarmadura": ["Armadura tecnológica avanzada", "Sistemas integrados", "Acceso a diseño de módulos tecnológicos"],
             "Exoesqueleto Energético": ["Armadura tecnológica avanzada", "Sistemas integrados"],
-            "Cyborg": ["algo", "algo", "algo"],
-            "I.A.": ["algo", "algo", "algo"],
-            "Robot gigante": ["algo", "algo", "algo"],
-            "Tecnovehículo": ["algo", "algo", "algo"],
-            "Inventor o forjador": ["algo", "algo", "algo"]
+            "Cyborg": ["Cuerpo cibernético", "Acceso a diseño de módulos tecnológicos"],
+            "I.A.": ["Inteligencia Artificial", "Cuerpo robótico"],
+            "Robot gigante": ["Gran tamaño", "Blindaje pesado"],
+            "Tecnovehículo": ["Vehículo avanzado", "Acceso a diseño de módulos tecnológicos"],
+            "Inventor o forjador": ["Creación de artilugios"]
         }
     },
     "Vigilante": {

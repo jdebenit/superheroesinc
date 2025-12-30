@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { POWERS, type Power, type PowerType } from '../../../data/powers';
 import { SPELLS, type Spell } from '../../../data/spells';
+import { TECH_MODULES, type TechModuleDefinition } from '../../../data/techModules';
 
 interface Step3Props {
     data: any;
@@ -13,6 +14,14 @@ interface SelectedPower {
     rank: number; // 1-100, adds 0.1 PC per unit
     powerMod?: number; // For powers with characteristics, max total 200
     skillValue?: number; // Input for skill calculation base
+}
+
+interface TechModule {
+    id: string;
+    definitionId: string; // ID from TECH_MODULES
+    name: string;
+    location: string;
+    pcCost: number;
 }
 
 // Helpers for data access
@@ -126,12 +135,13 @@ const ORIGIN_ICONS: Record<string, string> = {
 
 export default function Step3_Especials({ data, onChange }: Step3Props) {
     const [modalOpen, setModalOpen] = useState(false);
-    const [modalType, setModalType] = useState<'powers' | 'spells' | null>(null);
+    const [modalType, setModalType] = useState<'powers' | 'spells' | 'techModules' | null>(null);
     const [modalOriginFilter, setModalOriginFilter] = useState<string | null>(null);
 
     // Modal State
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedTypeFilter, setSelectedTypeFilter] = useState<string>("Todos");
+    const [selectedTechTypeFilter, setSelectedTechTypeFilter] = useState<'General' | 'Mejora Interna' | 'All'>('All');
     const [viewMode, setViewMode] = useState<"grid" | "table">("grid");
 
     // Powers are now stored as objects { id, origin }
@@ -182,6 +192,15 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
         setModalOriginFilter(null);
         setSearchTerm("");
         setSelectedTypeFilter("Todos");
+        setModalOpen(true);
+    };
+
+    const openTechModuleModal = () => {
+        setModalType('techModules');
+        setModalOriginFilter(null);
+        setSearchTerm("");
+        setSelectedTypeFilter("Todos");
+        setSelectedTechTypeFilter("All"); // Reset tech type filter
         setModalOpen(true);
     };
 
@@ -279,9 +298,17 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
             return SPELLS.filter(s => {
                 return s.name.toLowerCase().includes(lowerSearch);
             });
+        } else if (modalType === 'techModules') {
+            let itemsToFilter = TECH_MODULES;
+            if (selectedTechTypeFilter !== 'All') {
+                itemsToFilter = itemsToFilter.filter(m => m.type === selectedTechTypeFilter);
+            }
+            return itemsToFilter.filter(m => {
+                return m.name.toLowerCase().includes(lowerSearch);
+            });
         }
         return [];
-    }, [modalType, modalOriginFilter, searchTerm, selectedTypeFilter, data]);
+    }, [modalType, modalOriginFilter, searchTerm, selectedTypeFilter, selectedTechTypeFilter, data]);
 
     // Derived State for Display
     const isGuardian = hasOrigin(data, 'Guardián');
@@ -300,6 +327,12 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     const isMutante = hasOrigin(data, 'Mutante');
     const isVigilante = hasOrigin(data, 'Vigilante');
 
+    // Technological
+    const isTecnoarmadura = hasSubtype(data, 'Tecnológico', 'Tecnoarmadura');
+    const isCyborg = hasSubtype(data, 'Tecnológico', 'Cyborg');
+    const isTecnovehiculo = hasSubtype(data, 'Tecnológico', 'Tecnovehículo');
+    const isTechnological = isTecnoarmadura || isCyborg || isTecnovehiculo;
+
     // Get Vigilante specialties
     const vigilanteSpecialties = useMemo(() => {
         if (!isVigilante) return [];
@@ -315,6 +348,68 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                 ...data.traumas,
                 [specialty]: text
             }
+        });
+    };
+
+    // Tech Modules Logic
+    const techModules: TechModule[] = data.techModules || [];
+
+
+    const toggleTechModule = (defId: string) => {
+        // Check if already selected (by definitionId)
+        // Allowing multiples of same module? Usually modules are unique or stackable. 
+        // For simplicity, let's allow multiples but maybe warn? Or just standard toggle for now.
+        // Actually for modules like "Cuchilla" having two is valid (one per arm).
+        // So maybe we don't toggle, just Add?
+        // But for modal consistency, usually it is toggle. 
+        // Let's implementation ADDING, not toggling for modules, or just simple toggle for unique ones.
+        // Given the previous manual system, duplication was possible.
+        // Let's assume unique for now to keep it simple with the grid view.
+
+        const existingIndex = techModules.findIndex(m => m.definitionId === defId);
+
+        let newModules: TechModule[];
+        if (existingIndex >= 0) {
+            // Remove
+            newModules = [...techModules];
+            newModules.splice(existingIndex, 1);
+        } else {
+            const def = TECH_MODULES.find(m => m.id === defId);
+            if (!def) return;
+
+            const newModule: TechModule = {
+                id: Date.now().toString(),
+                definitionId: def.id,
+                name: def.name,
+                location: def.locations[0] || 'Integrado',
+                pcCost: def.cost
+            };
+            newModules = [...techModules, newModule];
+        }
+        onChange({
+            ...data,
+            techModules: newModules
+        });
+    };
+
+    const updateModuleLocation = (id: string, newLocation: string) => {
+        onChange({
+            ...data,
+            techModules: techModules.map(m => m.id === id ? { ...m, location: newLocation } : m)
+        });
+    };
+
+    const updateModuleCost = (id: string, newCost: number) => {
+        onChange({
+            ...data,
+            techModules: techModules.map(m => m.id === id ? { ...m, pcCost: newCost } : m)
+        });
+    };
+
+    const removeTechModule = (id: string) => {
+        onChange({
+            ...data,
+            techModules: techModules.filter(m => m.id !== id)
         });
     };
 
@@ -339,12 +434,12 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
 
 
             {
-                !isGuardian && !isAlterado && !hasEM && !isVampiro && !isSemidemonio && !isThals && !isDivino && !isCosmico && !isMutante && !isVigilante && (
+                !isGuardian && !isAlterado && !hasEM && !isVampiro && !isSemidemonio && !isThals && !isDivino && !isCosmico && !isMutante && !isVigilante && !isTechnological && (
                     <div className="text-center py-12 border-4 border-dashed border-gray-300 rounded-xl bg-gray-50">
                         <p className="text-xl text-gray-500 font-bold">
                             No has seleccionado ningún origen que actualmente tenga habilitado este paso. Recuerda es una Alpha.
                         </p>
-                        <p className="text-gray-400 mt-2 font-comic">Prueba con Guardián, Alterado, Arcano, Sobrenatural, Thals, Divino, Cósmico o Mutante</p>
+                        <p className="text-gray-400 mt-2 font-comic">Prueba con Guardián, Alterado, Arcano, Sobrenatural, Thals, Divino, Cósmico, Mutante o Tecnológico</p>
                     </div>
                 )
             }
@@ -377,6 +472,180 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                                     </div>
                                 </div>
                             ))}
+                        </div>
+                    </div>
+                )
+            }
+
+            {/* TECHNOLOGICAL MODULES SECTION */}
+            {
+                isTechnological && (
+                    <div className="bg-slate-50 border-4 border-slate-700 rounded-xl overflow-hidden shadow-[8px_8px_0px_rgba(0,0,0,0.8)] mb-8">
+                        <div className="p-6 border-b-4 border-slate-700 bg-white">
+                            <h3 className="text-2xl font-black text-slate-800 uppercase italic font-comic">Módulos Tecnológicos</h3>
+                            <p className="text-gray-600 mt-2">
+                                Instala módulos para aumentar tus capacidades.
+                            </p>
+                        </div>
+
+                        <div className="p-6 bg-slate-100">
+                            {/* Add Module Form */}
+                            <div className="flex justify-between items-center mb-6">
+                                <p className="text-gray-600 italic">
+                                    Selecciona los módulos tecnológicos instalados en la tecnoarmadura o tus tecnoimplantes.
+                                </p>
+                                <button
+                                    onClick={openTechModuleModal}
+                                    className="pixel-button bg-slate-700 text-white hover:bg-slate-800 text-sm flex items-center gap-2"
+                                >
+                                    <span>+</span> Seleccionar Módulos
+                                </button>
+                            </div>
+
+                            {/* Modules List - Table Format */}
+                            <div style={{
+                                backgroundColor: 'white',
+                                borderRadius: '12px',
+                                boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                                overflow: 'hidden',
+                                border: '1px solid #e5e7eb',
+                                marginTop: '1.5rem'
+                            }}>
+                                <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                                    <thead style={{ backgroundColor: '#f9fafb', borderBottom: '2px solid #e5e7eb' }}>
+                                        <tr>
+                                            <th style={{ padding: '1rem', textAlign: 'left', color: '#374151' }}>Módulo</th>
+                                            <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Tipo</th>
+                                            <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Localización</th>
+                                            <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Coste</th>
+                                            <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {techModules.length === 0 ? (
+                                            <tr>
+                                                <td colSpan={5} style={{ padding: '3rem', textAlign: 'center', color: '#9ca3af', fontWeight: 'bold', fontStyle: 'italic' }}>
+                                                    No hay módulos instalados.<br />
+                                                    <span style={{ fontSize: '0.9rem', fontWeight: 'normal' }}>Pulsa en "Seleccionar Módulos" para añadir mejoras.</span>
+                                                </td>
+                                            </tr>
+                                        ) : (
+                                            techModules.map((module, index) => {
+                                                const definition = TECH_MODULES.find(d => d.id === module.definitionId);
+                                                const type = definition?.type || 'General';
+                                                const isEven = index % 2 === 0;
+
+                                                return (
+                                                    <tr key={module.id} style={{ backgroundColor: isEven ? 'white' : '#f9fafb' }}>
+                                                        <td style={{ padding: '1rem', fontWeight: 'bold', color: '#1f2937' }}>
+                                                            {module.name}
+                                                        </td>
+                                                        <td style={{ padding: '0.75rem', textAlign: 'center' }}>
+                                                            <span className="type-tag" style={{
+                                                                backgroundColor: type === 'Mejora Interna' ? '#fce7f3' : undefined,
+                                                                color: type === 'Mejora Interna' ? '#be123c' : undefined,
+                                                                borderColor: type === 'Mejora Interna' ? '#fbcfe8' : undefined
+                                                            }}>
+                                                                {type}
+                                                            </span>
+                                                        </td>
+                                                        <td style={{ padding: '0.75rem', textAlign: 'center' }}>
+                                                            <input
+                                                                type="text"
+                                                                value={module.location}
+                                                                onChange={(e) => updateModuleLocation(module.id, e.target.value)}
+                                                                style={{
+                                                                    padding: '0.5rem',
+                                                                    border: '1px solid #d1d5db',
+                                                                    borderRadius: '6px',
+                                                                    backgroundColor: 'white',
+                                                                    fontSize: '0.875rem',
+                                                                    fontWeight: 'bold',
+                                                                    color: '#4f46e5',
+                                                                    width: '100%',
+                                                                    textAlign: 'center'
+                                                                }}
+                                                                placeholder="Ubicación"
+                                                            />
+                                                        </td>
+                                                        <td style={{ padding: '0.75rem', textAlign: 'center' }}>
+                                                            {(module.definitionId === 'equipacion_combate' || module.definitionId === 'prototipo_alta_tecnologia') ? (
+                                                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px' }}>
+                                                                    <input
+                                                                        type="number"
+                                                                        min="0"
+                                                                        value={module.pcCost}
+                                                                        onChange={(e) => updateModuleCost(module.id, parseInt(e.target.value) || 0)}
+                                                                        style={{
+                                                                            width: '60px',
+                                                                            padding: '2px 4px',
+                                                                            border: '1px solid #d1d5db',
+                                                                            borderRadius: '4px',
+                                                                            textAlign: 'center',
+                                                                            fontWeight: 'bold',
+                                                                            color: '#4f46e5'
+                                                                        }}
+                                                                    />
+                                                                    <span style={{ fontSize: '0.8rem', color: '#6b7280', fontWeight: 'bold' }}>PC</span>
+                                                                </div>
+                                                            ) : (
+                                                                <span style={{
+                                                                    fontSize: '0.875rem',
+                                                                    fontWeight: 'bold',
+                                                                    backgroundColor: '#eef2ff',
+                                                                    color: '#4f46e5',
+                                                                    padding: '4px 12px',
+                                                                    borderRadius: '9999px',
+                                                                    border: '1px solid #e0e7ff',
+                                                                    display: 'inline-block'
+                                                                }}>
+                                                                    {module.pcCost} PC
+                                                                </span>
+                                                            )}
+                                                        </td>
+                                                        <td style={{ padding: '0.75rem', textAlign: 'center' }}>
+                                                            <button
+                                                                onClick={() => removeTechModule(module.id)}
+                                                                style={{
+                                                                    color: '#ef4444',
+                                                                    padding: '8px',
+                                                                    borderRadius: '9999px',
+                                                                    border: 'none',
+                                                                    background: 'transparent',
+                                                                    cursor: 'pointer',
+                                                                    display: 'inline-flex',
+                                                                    alignItems: 'center',
+                                                                    justifyContent: 'center'
+                                                                }}
+                                                                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#fef2f2'}
+                                                                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+                                                                title="Desinstalar módulo"
+                                                            >
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                                                    <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                                                                </svg>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                );
+                                            })
+                                        )}
+                                    </tbody>
+                                    {techModules.length > 0 && (
+                                        <tfoot style={{ backgroundColor: '#f9fafb', borderTop: '2px solid #e5e7eb' }}>
+                                            <tr>
+                                                <td colSpan={3} style={{ padding: '1rem', textAlign: 'right', fontWeight: 'bold', color: '#374151' }}>
+                                                    Total PCs Invertidos:
+                                                </td>
+                                                <td style={{ padding: '1rem', textAlign: 'center', fontWeight: '900', color: '#4f46e5' }}>
+                                                    {techModules.reduce((acc, m) => acc + m.pcCost, 0)} PC
+                                                </td>
+                                                <td colSpan={1}></td>
+                                            </tr>
+                                        </tfoot>
+                                    )}
+                                </table>
+                            </div>
                         </div>
                     </div>
                 )
@@ -1094,7 +1363,9 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                             {/* Header */}
                             <div className="modal-header">
                                 <h3 className="modal-title">
-                                    {modalType === 'powers' ? `Seleccionar Poderes (${modalOriginFilter})` : 'Seleccionar Hechizos'}
+                                    {modalType === 'powers' ? `Seleccionar Poderes (${modalOriginFilter})` :
+                                        modalType === 'techModules' ? 'Seleccionar Módulos Tecnológicos' :
+                                            'Seleccionar Hechizos'}
                                 </h3>
                                 <button onClick={() => setModalOpen(false)} className="modal-close">&times;</button>
                             </div>
@@ -1118,10 +1389,35 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                                             </div>
                                         </div>
                                     )}
+                                    {modalType === 'techModules' && (
+                                        <div className="filter-group">
+                                            <span className="filter-label">Tipo:</span>
+                                            <div className="type-buttons">
+                                                <button
+                                                    className={`filter-button type ${selectedTechTypeFilter === 'All' ? 'active' : ''}`}
+                                                    onClick={() => setSelectedTechTypeFilter('All')}
+                                                >
+                                                    Todos
+                                                </button>
+                                                <button
+                                                    className={`filter-button type ${selectedTechTypeFilter === 'General' ? 'active' : ''}`}
+                                                    onClick={() => setSelectedTechTypeFilter('General')}
+                                                >
+                                                    General
+                                                </button>
+                                                <button
+                                                    className={`filter-button type ${selectedTechTypeFilter === 'Mejora Interna' ? 'active' : ''}`}
+                                                    onClick={() => setSelectedTechTypeFilter('Mejora Interna')}
+                                                >
+                                                    Mejoras Internas
+                                                </button>
+                                            </div>
+                                        </div>
+                                    )}
                                     <div className="search-row">
                                         <input
                                             type="text"
-                                            placeholder={modalType === 'powers' ? "Buscar poder..." : "Buscar hechizo..."}
+                                            placeholder={modalType === 'powers' ? "Buscar poder..." : modalType === 'techModules' ? "Buscar módulo..." : "Buscar hechizo..."}
                                             className="search-input"
                                             value={searchTerm}
                                             onChange={(e) => setSearchTerm(e.target.value)}
@@ -1154,21 +1450,41 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                                             let isSelected = false;
                                             if (modalType === 'powers') {
                                                 isSelected = selectedPowers.some(p => p.id === item.id && p.origin === modalOriginFilter);
-                                            } else {
+                                            } else if (modalType === 'spells') {
                                                 isSelected = selectedSpellsWithRank.some(s => s.id === item.id);
+                                            } else if (modalType === 'techModules') {
+                                                isSelected = techModules.some(m => m.definitionId === item.id);
                                             }
 
                                             return (
                                                 <div
                                                     key={item.id}
                                                     className={`power-card ${isSelected ? 'selected' : ''}`}
-                                                    onClick={() => modalType === 'powers' ? togglePowerSelection(item.id) : toggleSpellSelection(item.id)}
+                                                    onClick={() => {
+                                                        if (modalType === 'powers') togglePowerSelection(item.id);
+                                                        else if (modalType === 'spells') toggleSpellSelection(item.id);
+                                                        else if (modalType === 'techModules') toggleTechModule(item.id);
+                                                    }}
                                                 >
                                                     <h3>{item.name}</h3>
                                                     <div className="power-details">
-                                                        <span className="power-cost">
-                                                            {modalType === 'powers' ? `${item.formula} PC` : `Coste: ${item.cost}`}
-                                                        </span>
+                                                        {modalType === 'techModules' ? (
+                                                            <div style={{ display: 'flex', flexDirection: 'row', gap: '8px', alignItems: 'center' }}>
+                                                                <span className="power-cost">{item.cost} PC</span>
+                                                                <span className="type-tag" style={{
+                                                                    width: 'fit-content',
+                                                                    backgroundColor: item.type === 'Mejora Interna' ? '#fce7f3' : undefined,
+                                                                    color: item.type === 'Mejora Interna' ? '#be123c' : undefined,
+                                                                    borderColor: item.type === 'Mejora Interna' ? '#fbcfe8' : undefined
+                                                                }}>
+                                                                    {item.type}
+                                                                </span>
+                                                            </div>
+                                                        ) : (
+                                                            <span className="power-cost">
+                                                                {modalType === 'powers' ? `${item.formula} PC` : `Coste: ${item.cost}`}
+                                                            </span>
+                                                        )}
 
                                                         {modalType === 'powers' && (
                                                             <div className="power-tags">
@@ -1183,6 +1499,12 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                                                         {modalType === 'spells' && item.requirements && item.requirements !== "No especificado" && (
                                                             <div className="range-note" style={{ textAlign: 'left', color: 'red' }}>
                                                                 Req: {item.requirements}
+                                                            </div>
+                                                        )}
+
+                                                        {modalType === 'techModules' && (
+                                                            <div className="range-note" style={{ textAlign: 'left', color: '#6b7280', fontSize: '0.8em', marginTop: '4px', fontStyle: 'italic' }}>
+                                                                {item.description}
                                                             </div>
                                                         )}
                                                     </div>
@@ -1201,6 +1523,8 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                                                     <th>Coste</th>
                                                     {modalType === 'powers' && <th>Tipos</th>}
                                                     {modalType === 'spells' && <th>Requisitos</th>}
+                                                    {modalType === 'techModules' && <th>Tipo</th>}
+                                                    {modalType === 'techModules' && <th>Descripción</th>}
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -1208,14 +1532,20 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                                                     let isSelected = false;
                                                     if (modalType === 'powers') {
                                                         isSelected = selectedPowers.some(p => p.id === item.id && p.origin === modalOriginFilter);
-                                                    } else {
+                                                    } else if (modalType === 'spells') {
                                                         isSelected = selectedSpellsWithRank.some(s => s.id === item.id);
+                                                    } else if (modalType === 'techModules') {
+                                                        isSelected = techModules.some(m => m.definitionId === item.id);
                                                     }
 
                                                     return (
                                                         <tr
                                                             key={item.id}
-                                                            onClick={() => modalType === 'powers' ? togglePowerSelection(item.id) : toggleSpellSelection(item.id)}
+                                                            onClick={() => {
+                                                                if (modalType === 'powers') togglePowerSelection(item.id);
+                                                                else if (modalType === 'spells') toggleSpellSelection(item.id);
+                                                                else if (modalType === 'techModules') toggleTechModule(item.id);
+                                                            }}
                                                             className={isSelected ? 'selected-row' : ''}
                                                         >
                                                             <td>
@@ -1227,7 +1557,11 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                                                                 />
                                                             </td>
                                                             <td className="col-name">{item.name}</td>
-                                                            <td className="col-cost">{modalType === 'powers' ? item.formula : item.cost}</td>
+                                                            <td className="col-cost">
+                                                                {modalType === 'powers' ? item.formula :
+                                                                    modalType === 'techModules' ? `${item.cost} PC` :
+                                                                        item.cost}
+                                                            </td>
                                                             {modalType === 'powers' && (
                                                                 <td className="col-types">
                                                                     <div className="table-types">
@@ -1241,6 +1575,20 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                                                                 <td>
                                                                     {item.requirements === "No especificado" ? "-" : item.requirements}
                                                                 </td>
+                                                            )}
+                                                            {modalType === 'techModules' && (
+                                                                <>
+                                                                    <td style={{ textAlign: 'center' }}>
+                                                                        <span className="type-tag" style={{
+                                                                            backgroundColor: item.type === 'Mejora Interna' ? '#fce7f3' : undefined,
+                                                                            color: item.type === 'Mejora Interna' ? '#be123c' : undefined,
+                                                                            borderColor: item.type === 'Mejora Interna' ? '#fbcfe8' : undefined
+                                                                        }}>
+                                                                            {item.type}
+                                                                        </span>
+                                                                    </td>
+                                                                    <td style={{ fontSize: '0.9em', color: '#666' }}>{item.description}</td>
+                                                                </>
                                                             )}
                                                         </tr>
                                                     );
