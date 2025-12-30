@@ -371,7 +371,7 @@ export default function CharacterWizard() {
         }
 
         if (currentStep === 6) {
-            return <Step6_Details data={character} onChange={updateCharacter} />;
+            return <Step6_Details data={character} onChange={updateCharacter} totalPCs={totalPCs} />;
         }
 
         return (
