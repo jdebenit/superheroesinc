@@ -11,6 +11,7 @@ import { calculateCreationPoints, calculateGeneralSkillValues, calculateSpecialS
 import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS, FRIENDS_AND_ASSOCIATES } from '../../data/backgroundTables';
 import { SPELLS } from '../../data/spells';
 import { POWERS } from '../../data/powers';
+import { EXOSKELETON_CONFIGS } from '../../data/exoskeletonConfigs';
 
 const STEPS = [
     { id: 1, name: 'Origen', icon: '🎭' },
@@ -318,6 +319,14 @@ export default function CharacterWizard() {
             return acc + (module.pcCost || 0);
         }, 0);
         total += techModulesCost;
+
+        // 13. Exoskeleton Configuration Cost
+        if (character.exoskeletonConfig) {
+            const config = EXOSKELETON_CONFIGS.find((c) => c.id === character.exoskeletonConfig);
+            if (config) {
+                total += config.pcCost;
+            }
+        }
 
         return total.toFixed(1); // Devolver con decimales
     }, [character]);

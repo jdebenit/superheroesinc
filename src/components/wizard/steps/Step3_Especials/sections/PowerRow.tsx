@@ -1,5 +1,5 @@
 import React from 'react';
-import { POWERS } from '../../../../data/powers';
+import { POWERS } from '../../../../../data/powers';
 import { calculateSkillBase, getCharacteristicValue, getRankLevel } from '../utils';
 import type { SelectedPower } from '../types';
 

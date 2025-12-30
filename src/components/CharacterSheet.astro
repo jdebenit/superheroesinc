@@ -46,6 +46,7 @@ interface Props {
             cost?: number | string;
             items: any[];
         };
+        exoskeletonConfig?: string;
         other?: string[];
         profession?: string;
         sexualIdentity?: string;
@@ -60,6 +61,7 @@ import {
     SOCIAL_STATUS,
     FRIENDS_AND_ASSOCIATES,
 } from "../data/backgroundTables";
+import { EXOSKELETON_CONFIGS } from "../data/exoskeletonConfigs";
 
 const { rpg } = Astro.props;
 
@@ -425,6 +427,61 @@ const otherStats = rpg.otherstats || rpg.other || [];
                     </ul>
                 </div>
             )
+        }
+
+        {
+            rpg.exoskeletonConfig &&
+                (() => {
+                    const config = EXOSKELETON_CONFIGS.find(
+                        (c) => c.id === rpg.exoskeletonConfig,
+                    );
+                    if (!config) return null;
+
+                    return (
+                        <div class="sheet-section exoskeleton">
+                            <div class="section-header">
+                                <h4>Exoesqueleto Energético</h4>
+                                <span class="cost">({config.pcCost} PCs)</span>
+                            </div>
+                            <div class="exo-grid">
+                                <div class="exo-stat">
+                                    <span class="exo-label">Fuerza</span>
+                                    <span class="exo-value">{config.fue}</span>
+                                </div>
+                                <div class="exo-stat">
+                                    <span class="exo-label">
+                                        Puntos de Vida
+                                    </span>
+                                    <span class="exo-value">{config.pv}</span>
+                                </div>
+                                <div class="exo-stat">
+                                    <span class="exo-label">D.A. Físico</span>
+                                    <span class="exo-value">
+                                        {config.daCinetico}/{config.daEnergia}
+                                    </span>
+                                </div>
+                                <div class="exo-stat">
+                                    <span class="exo-label">Regeneración</span>
+                                    <span class="exo-value">
+                                        {config.regeneracion} PV/h
+                                    </span>
+                                </div>
+                                <div class="exo-stat">
+                                    <span class="exo-label">Emisión</span>
+                                    <span class="exo-value exo-emission">
+                                        {config.emision}
+                                    </span>
+                                </div>
+                                <div class="exo-stat">
+                                    <span class="exo-label">Velocidad</span>
+                                    <span class="exo-value">
+                                        {config.velocidad} Mach
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    );
+                })()
         }
 
         {
@@ -797,5 +854,44 @@ const otherStats = rpg.otherstats || rpg.other || [];
         line-height: 1.4;
         padding-left: 0.5rem;
         border-left: 3px solid #fee2e2;
+    }
+
+    /* Exoskeleton Styles */
+    .exo-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 0.75rem;
+        background: #f8fafc;
+        border: 2px solid #cbd5e1;
+        border-radius: 8px;
+        padding: 1rem;
+    }
+
+    .exo-stat {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .exo-label {
+        font-size: 0.7rem;
+        color: #64748b;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin-bottom: 0.25rem;
+    }
+
+    .exo-value {
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: #0f172a;
+        font-family: var(--font-display);
+    }
+
+    .exo-emission {
+        color: #7c3aed;
+        font-family: monospace;
+        font-size: 1rem;
     }
 </style>

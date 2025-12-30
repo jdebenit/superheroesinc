@@ -6,6 +6,7 @@ import { POWERS } from '../../data/powers';
 import { TECH_MODULES } from '../../data/techModules';
 import { ORIGIN_CATEGORIES } from '../../data/originDefinitions';
 import { MAGICAL_BONDS } from '../../data/magicalBonds';
+import { EXOSKELETON_CONFIGS } from '../../data/exoskeletonConfigs';
 
 interface CharacterPreviewProps {
     character: any;
@@ -555,6 +556,60 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                         </ul>
                                     </div>
                                 )}
+
+                                {/* Exoskeleton Energy Configuration */}
+                                {character.exoskeletonConfig && (() => {
+                                    const config = EXOSKELETON_CONFIGS.find(c => c.id === character.exoskeletonConfig);
+                                    if (!config) return null;
+
+                                    return (
+                                        <div className="sheet-section exoskeleton">
+                                            <div className="section-header">
+                                                <h4>Exoesqueleto Energético</h4>
+                                                <span className="cost">({config.pcCost} PCs)</span>
+                                            </div>
+                                            <div style={{
+                                                backgroundColor: '#f8fafc',
+                                                border: '2px solid #cbd5e1',
+                                                borderRadius: '8px',
+                                                padding: '1rem'
+                                            }}>
+                                                <div style={{
+                                                    display: 'grid',
+                                                    gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
+                                                    gap: '0.75rem'
+                                                }}>
+                                                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                                        <span style={{ fontSize: '0.7rem', color: '#64748b', fontWeight: 'bold', textTransform: 'uppercase' }}>Fuerza</span>
+                                                        <span style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#0f172a' }}>{config.fue}</span>
+                                                    </div>
+                                                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                                        <span style={{ fontSize: '0.7rem', color: '#64748b', fontWeight: 'bold', textTransform: 'uppercase' }}>Puntos de Vida</span>
+                                                        <span style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#0f172a' }}>{config.pv}</span>
+                                                    </div>
+                                                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                                        <span style={{ fontSize: '0.7rem', color: '#64748b', fontWeight: 'bold', textTransform: 'uppercase' }}>D.A. Físico</span>
+                                                        <span style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#0f172a', fontFamily: 'monospace' }}>
+                                                            {config.daCinetico}/{config.daEnergia}
+                                                        </span>
+                                                    </div>
+                                                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                                        <span style={{ fontSize: '0.7rem', color: '#64748b', fontWeight: 'bold', textTransform: 'uppercase' }}>Regeneración</span>
+                                                        <span style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#0f172a' }}>{config.regeneracion} PV/h</span>
+                                                    </div>
+                                                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                                        <span style={{ fontSize: '0.7rem', color: '#64748b', fontWeight: 'bold', textTransform: 'uppercase' }}>Emisión</span>
+                                                        <span style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#7c3aed', fontFamily: 'monospace' }}>{config.emision}</span>
+                                                    </div>
+                                                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                                        <span style={{ fontSize: '0.7rem', color: '#64748b', fontWeight: 'bold', textTransform: 'uppercase' }}>Velocidad</span>
+                                                        <span style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#0f172a' }}>{config.velocidad} Mach</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    );
+                                })()}
 
                                 {/* Powers / Poderes Especiales */}
                                 {character.powers?.selected && character.powers.selected.length > 0 && (

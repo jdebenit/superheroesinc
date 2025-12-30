@@ -1,5 +1,5 @@
 import React from 'react';
-import { SPELLS, type Spell } from '../../../../data/spells';
+import { SPELLS, type Spell } from '../../../../../data/spells';
 import { calculateEM, hasSubtype } from '../utils';
 import type { SelectedPower, SelectedSpell } from '../types';
 

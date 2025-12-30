@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MAGICAL_BONDS } from '../../../../data/magicalBonds';
+import { MAGICAL_BONDS } from '../../../../../data/magicalBonds';
 
 interface MagicalBondsModalProps {
     isOpen: boolean;

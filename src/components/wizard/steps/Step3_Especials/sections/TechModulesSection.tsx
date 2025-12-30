@@ -1,5 +1,5 @@
 import React from 'react';
-import { TECH_MODULES } from '../../../../data/techModules';
+import { TECH_MODULES } from '../../../../../data/techModules';
 import type { TechModule } from '../types';
 
 interface TechModulesSectionProps {
