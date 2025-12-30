@@ -534,29 +534,65 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                                 </div>
                             ) : null}
 
-                            <div className="bg-white p-6 rounded-xl border-2 border-purple-200">
-                                <label className="block text-purple-900 font-bold mb-4 uppercase font-comic border-b pb-2">
+                            <div className="bg-white p-6 rounded-xl border-4 border-purple-100 shadow-sm relative overflow-hidden group hover:border-purple-200 transition-colors">
+                                <div className="absolute top-0 left-0 w-2 h-full bg-purple-400"></div>
+                                <h4 className="text-xl font-black text-purple-900 uppercase font-comic mb-4 flex items-center gap-2">
                                     Otra Vinculación (Personalizada)
-                                </label>
+                                </h4>
 
-                                <div className="space-y-4">
+                                <div className="space-y-4 pl-4">
                                     <div>
-                                        <label className="block text-sm font-bold text-gray-700 mb-1">Nombre de la Vinculación</label>
+                                        <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Nombre de la Vinculación</label>
                                         <input
                                             type="text"
                                             value={data.magicalBondsCustomName || ''}
                                             onChange={(e) => onChange({ ...data, magicalBondsCustomName: e.target.value })}
-                                            className="w-full p-2 border-2 border-purple-200 rounded-lg focus:border-purple-600 focus:outline-none"
+                                            style={{
+                                                width: '100%',
+                                                padding: '0.75rem',
+                                                border: '2px solid #f3e8ff',
+                                                borderRadius: '0.5rem',
+                                                fontSize: '1rem',
+                                                fontWeight: 'bold',
+                                                color: '#581c87',
+                                                outline: 'none'
+                                            }}
+                                            onFocus={(e) => {
+                                                e.target.style.borderColor = '#a855f7';
+                                                e.target.style.boxShadow = '0 0 0 4px rgba(168, 85, 247, 0.1)';
+                                            }}
+                                            onBlur={(e) => {
+                                                e.target.style.borderColor = '#f3e8ff';
+                                                e.target.style.boxShadow = 'none';
+                                            }}
                                             placeholder="Ej: Pacto con el Dragón Carmesí..."
                                         />
                                     </div>
                                     <div>
-                                        <label className="block text-sm font-bold text-gray-700 mb-1">Descripción y efectos</label>
+                                        <label className="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">Descripción y efectos</label>
                                         <textarea
                                             value={data.magicalBondsCustomDescription || ''}
                                             onChange={(e) => onChange({ ...data, magicalBondsCustomDescription: e.target.value })}
-                                            className="w-full h-24 p-2 border-2 border-purple-200 rounded-lg focus:border-purple-600 focus:outline-none resize-none"
-                                            placeholder="Describe en qué consiste esta vinculación..."
+                                            style={{
+                                                width: '100%',
+                                                height: '8rem',
+                                                padding: '0.75rem',
+                                                border: '2px solid #f3e8ff',
+                                                borderRadius: '0.5rem',
+                                                fontSize: '1rem',
+                                                color: '#374151',
+                                                resize: 'none',
+                                                outline: 'none'
+                                            }}
+                                            onFocus={(e) => {
+                                                e.target.style.borderColor = '#a855f7';
+                                                e.target.style.boxShadow = '0 0 0 4px rgba(168, 85, 247, 0.1)';
+                                            }}
+                                            onBlur={(e) => {
+                                                e.target.style.borderColor = '#f3e8ff';
+                                                e.target.style.boxShadow = 'none';
+                                            }}
+                                            placeholder="Describe en qué consiste esta vinculación, qué beneficios otorga y qué sacrificios requiere..."
                                         />
                                     </div>
                                 </div>
