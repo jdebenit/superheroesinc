@@ -14,7 +14,7 @@ export const TECH_MODULES: TechModuleDefinition[] = [
         type: "General",
         cost: 2,
         description: "Amplían el tiempo de supervivencia hasta los cinco días de completa operatividad, pero conservan el mismo rango de temperaturas de funcionamiento.",
-        locations: ["Cualquiera"]
+        locations: ["Cuerpo completo"]
     },
     {
         id: "amortiguador_cinetico",
@@ -22,7 +22,7 @@ export const TECH_MODULES: TechModuleDefinition[] = [
         type: "General",
         cost: 4,
         description: "Protección extra a los impactos físicos basada en la dispersión de la energía cinética del proyectil mediante fibrilaciones plásticas que reparten el daño en toda la estructura de la armadura. Suma 25 PVs extras al daño absorbido causado por ataques de tipo cinético.",
-        locations: ["Torso", "Cuerpo completo"]
+        locations: ["Cuerpo completo"]
     },
     {
         id: "autodestruccion",
@@ -30,7 +30,7 @@ export const TECH_MODULES: TechModuleDefinition[] = [
         type: "General",
         cost: 1,
         description: "Como complemento al sistema anterior se suele establecer un dispositivo que efectúa una detonación de la pila nuclear de la armadura en el caso de que ésta sea abierta sin autorización previa. La autodestrucción produce una explosión que arrasa un área circular de 500 metros de radio alrededor de la armadura.",
-        locations: ["Torso", "Cinturón", "Espalda"]
+        locations: ["Torso", "Espalda"]
     },
     {
         id: "autoreparado",
@@ -46,7 +46,7 @@ export const TECH_MODULES: TechModuleDefinition[] = [
         type: "General",
         cost: 2,
         description: "Sistema que permite que una tecnoarmadura pase desapercibida en el entorno que le rodea. Produce un efecto de mimetismo con el medio. La tecnoarmadura o piel adopta el color del lugar en que se encuentra de forma automática, proporcionando un modificador +30 a las habilidades Esconderse y Acechar/Discreción del personaje.",
-        locations: ["Superficie", "Cuerpo completo"]
+        locations: ["Cuerpo completo"]
     },
     {
         id: "camuflaje_avanzado",
@@ -54,7 +54,7 @@ export const TECH_MODULES: TechModuleDefinition[] = [
         type: "General",
         cost: 4,
         description: "Este módulo más avanzado imita visualmente el entorno alrededor del personaje con un breve retardo proporcionando un modificador de +60 a las habilidades de Esconderse y Acechar/Discreción del personaje.",
-        locations: ["Superficie", "Cuerpo completo"]
+        locations: ["Cuerpo completo"]
     },
     {
         id: "computadora_tactica",
@@ -78,7 +78,7 @@ export const TECH_MODULES: TechModuleDefinition[] = [
         type: "General",
         cost: 1,
         description: "Son mucho más potentes, permitiendo mantener comunicaciones por radio hasta una distancia de 500 kilómetros, pero disponiendo además de mecanismos que permiten enlace con satélites, con lo que virtualmente pueden conectarse con cualquier punto del planeta e incluso más allá.",
-        locations: ["Cabeza", "Espalda"]
+        locations: ["Cabeza", "Espalda", "Torso"]
     },
     {
         id: "condiciones_extremas",
@@ -102,7 +102,7 @@ export const TECH_MODULES: TechModuleDefinition[] = [
         type: "General",
         cost: 0,
         description: "Este módulo integra un arma para que funcione con los sistemas tecnificados del personaje en caso de una tecnoarmadura, tecnovehículo o robot este arma pasa a controlarse mediante la habilidad de sistemas de armamento. En el caso de los cyborgs se tendrá que adquirir la habilidad a cada arma correspondiente. Los puntos de creación de este módulo se calculan en función a lo indicado en el apartado EQUIPAMIENTO.",
-        locations: ["Brazo", "Hombro", "Espalda"]
+        locations: ["Cualquiera"]
     },
     {
         id: "escudo_energetico",
@@ -110,7 +110,7 @@ export const TECH_MODULES: TechModuleDefinition[] = [
         type: "General",
         cost: 2,
         description: "Emisión controlada de la energía interna de la armadura formando un escudo invisible que absorbe ataques de tipo energético causando una disrrupción electromagnética momentánea. El límite máximo de tiempo que se puede mantener el escudo es de 5 asaltos. No puede reutilizarse hasta pasadas 24 horas.",
-        locations: ["Cinturón", "Brazo", "Torso"]
+        locations: ["Brazo", "Torso"]
     },
     {
         id: "impulsor_baja",
@@ -118,7 +118,7 @@ export const TECH_MODULES: TechModuleDefinition[] = [
         type: "General",
         cost: 4,
         description: "Muchas de las armaduras incorporan un Impulsor para permitirles desplazarse por el aire. Los impulsores pueden utilizarse debajo del agua, a un tercio de su velocidad. El impulsor de baja potencia puede alcanzar Match 0.5.",
-        locations: ["Espalda", "Botas"]
+        locations: ["Espalda", "Piernas"]
     },
     {
         id: "impulsor_media",
@@ -126,7 +126,7 @@ export const TECH_MODULES: TechModuleDefinition[] = [
         type: "General",
         cost: 6,
         description: "El impulsor de media potencia puede alcanzar Match 1.0.",
-        locations: ["Espalda", "Botas"]
+        locations: ["Espalda", "Piernas"]
     },
     {
         id: "impulsor_alta",
@@ -134,7 +134,7 @@ export const TECH_MODULES: TechModuleDefinition[] = [
         type: "General",
         cost: 8,
         description: "El impulsor de alta potencia puede alcanzar Match 2.0.",
-        locations: ["Espalda", "Botas"]
+        locations: ["Espalda", "Piernas"]
     },
     {
         id: "impulsor_silencioso",
@@ -142,7 +142,7 @@ export const TECH_MODULES: TechModuleDefinition[] = [
         type: "General",
         cost: 2,
         description: "Los Impulsores silenciosos de aire son un novedoso sistema que permite que la armadura se desplace sin emitir el más mínimo ruido. Su velocidad máxima queda limitada a 150 km/h y su principal limitación es que solo funcionan bajo condiciones atmosféricas favorables.",
-        locations: ["Espalda", "Botas"]
+        locations: ["Espalda", "Piernas"]
     },
     {
         id: "magnetizador",
@@ -150,7 +150,7 @@ export const TECH_MODULES: TechModuleDefinition[] = [
         type: "General",
         cost: 1,
         description: "Permiten cargar cualquier objeto metálico con una polaridad magnética determinada que luego puede ser controlada por el portador de la armadura. El peso máximo que se puede mover con este sistema es de 10 Ton. A una distancia efectiva de 20 m.",
-        locations: ["Brazo", "Mano"]
+        locations: ["Brazo", "Torso"]
     },
     {
         id: "rayo_tractor",
@@ -158,7 +158,7 @@ export const TECH_MODULES: TechModuleDefinition[] = [
         type: "General",
         cost: 1,
         description: "De efecto parecido a los magnetizadores, con la diferencia que este dispositivo actúa sobre cualquier tipo de material, aunque solo es capaz de afectar a objetos de hasta 1 ton a una distancia nunca superior a 100 m.",
-        locations: ["Brazo", "Mano", "Pecho"]
+        locations: ["Brazo", "Torso"]
     },
     {
         id: "medidas_electronicas",
@@ -166,7 +166,7 @@ export const TECH_MODULES: TechModuleDefinition[] = [
         type: "General",
         cost: 2,
         description: "Es un sistema de interferencias electromagnéticas que permite confundir a otros elementos electrónicos del enemigo. Las medidas electrónicas impiden completamente el funcionamiento de: Camuflaje, Computadora táctica, Comunicaciones y Sensores. Además, cualquier sistema de armas tendrá un modificador -50 en su uso y bajará a la mitad la fiabilidad de los artefactos mientras las medidas electrónicas estén activadas. Dos sistemas de Medidas Electrónicas enfrentados anulan sus efectos.",
-        locations: ["Cabeza", "Antena"]
+        locations: ["Cabeza", "Torso", "Espalda"]
     },
     {
         id: "proteccion_refractante",
@@ -174,7 +174,7 @@ export const TECH_MODULES: TechModuleDefinition[] = [
         type: "General",
         cost: 2,
         description: "Los microcristales refractantes descomponen el haz de luz del láser, dividiéndolo en luz inofensiva hasta un 96% de la energía emitida. Además confieren a la armadura la posibilidad de ser indetectable a los rayos infrarrojos al descomponer las emisiones de los sistemas. Suma un 50% extra al daño absorbido físico contra ataques de energía del tipo luz.",
-        locations: ["Superficie", "Cuerpo completo"]
+        locations: ["Cuerpo completo"]
     },
     {
         id: "proteccion_sonora",
@@ -182,7 +182,7 @@ export const TECH_MODULES: TechModuleDefinition[] = [
         type: "General",
         cost: 1,
         description: "Los polímeros de ferrita (que dan a la armadura un aspecto envejecido y oxidado) protegen contra ataques sónicos y evitan su detección mediante medios convencionales de Radar y Sonar (Sensores). Suma un 50% extra al daño absorbido contra ataques de energía del tipo sónica.",
-        locations: ["Superficie", "Cuerpo completo"]
+        locations: ["Cuerpo completo"]
     },
     {
         id: "prototipo_alta_tecnologia",
@@ -255,7 +255,7 @@ export const TECH_MODULES: TechModuleDefinition[] = [
         type: "Mejora Interna",
         cost: 3,
         description: "Una operación cerebral que complementa la memoria del sujeto añadiendo un microcomputador con bancos de memoria artificial (+50 a Conocimientos Generales).",
-        locations: ["Cabeza", "Cerebro"]
+        locations: ["Cabeza"]
     },
     {
         id: "percepcion_aumentada",
@@ -263,6 +263,6 @@ export const TECH_MODULES: TechModuleDefinition[] = [
         type: "Mejora Interna",
         cost: 5,
         description: "Refuerza los receptores sensoriales con potenciadores electroquímicos para aportar una mayor nitidez en el procesamiento de los diferentes tipos de interacciones sensitivas aumentando la percepción del sujeto hasta 110.",
-        locations: ["Cerebro", "Sistema Nervioso"]
+        locations: ["Cabeza", "Sistema Nervioso"]
     }
 ];
