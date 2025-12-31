@@ -20,6 +20,7 @@ import PowersSection from './sections/PowersSection';
 import MagicSection from './sections/MagicSection';
 import ExoskeletonSection from './sections/ExoskeletonSection';
 import EnteSection from './sections/EnteSection';
+import MalditoSection from './sections/MalditoSection';
 
 // Modal Components
 import SelectionModal from './modals/SelectionModal';
@@ -270,6 +271,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     const isTerrano = hasSubtype(data, 'Arcano', 'Terrano');
     const isVampiro = hasSubtype(data, 'Sobrenatural', 'Vampiro');
     const isSemidemonio = hasSubtype(data, 'Sobrenatural', 'Semidemonio');
+    const isMaldito = hasSubtype(data, 'Sobrenatural', 'Maldito');
     const isEnte = hasSubtype(data, 'Sobrenatural', 'Ente');
     const isThals = hasOrigin(data, 'Thals');
     const isDivino = hasOrigin(data, 'Divino');
@@ -298,7 +300,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
         return spell ? { ...spell, rank: sw.rank } : null;
     }).filter((s): s is (Spell & { rank: number }) => s !== null);
 
-    const hasAnyOrigin = isGuardian || isAlterado || hasEM || isVampiro || isSemidemonio ||
+    const hasAnyOrigin = isGuardian || isAlterado || hasEM || isVampiro || isSemidemonio || isMaldito ||
         isEnte || isThals || isDivino || isCosmico || isMutante || isVigilante || isTechnological || isExoskeleton;
 
     return (
@@ -329,6 +331,14 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
             {isEnte && (
                 <EnteSection
                     enteParams={data.enteParams || { formType: null, visualEffect: null }}
+                    onChange={onChange}
+                />
+            )}
+
+            {/* MALDITO SECTION */}
+            {isMaldito && (
+                <MalditoSection
+                    malditoParams={data.malditoParams || { magnitude: null, source: null }}
                     onChange={onChange}
                 />
             )}
@@ -372,6 +382,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                 isAlterado={isAlterado}
                 isVampiro={isVampiro}
                 isSemidemonio={isSemidemonio}
+                isMaldito={isMaldito}
                 isEnte={isEnte}
                 isThals={isThals}
                 isDivino={isDivino}

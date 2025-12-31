@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 export const ENTE_FORMS = [
     { id: 'humanoid', label: 'Humanoide', cost: 1, description: 'Aspecto humanoide en el plano' },
@@ -40,10 +40,23 @@ export default function EnteSection({ enteParams, onChange }: EnteSectionProps) 
     };
 
     const getCostLabel = (cost: number) => {
-        if (cost > 0) return `+${cost} PC`;
+        if (cost > 0) return `+ ${cost} PC`;
         if (cost < 0) return `${cost} PC`;
         return '+0 PC';
     };
+
+    const totalCost = useMemo(() => {
+        let total = 0;
+        if (enteParams.formType) {
+            const form = ENTE_FORMS.find(f => f.id === enteParams.formType);
+            if (form) total += form.cost;
+        }
+        if (enteParams.visualEffect) {
+            const effect = ENTE_EFFECTS.find(e => e.id === enteParams.visualEffect);
+            if (effect) total += effect.cost;
+        }
+        return total;
+    }, [enteParams]);
 
     return (
         <div style={{
@@ -53,7 +66,30 @@ export default function EnteSection({ enteParams, onChange }: EnteSectionProps) 
             overflow: 'hidden',
             marginBottom: '2rem'
         }}>
-            <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            <div style={{
+                padding: '1rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between'
+            }}>
+                <h3 style={{
+                    fontSize: '1rem',
+                    fontWeight: '900',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.05em'
+                }}>Opciones de Origen: Ente</h3>
+                <div style={{
+                    backgroundColor: '#7e22ce',
+                    color: 'white',
+                    padding: '0.5rem 1rem',
+                    borderRadius: '6px',
+                    fontWeight: 'bold',
+                    fontSize: '0.875rem'
+                }}>
+                    {totalCost > 0 ? '+' : ''}{totalCost} PC
+                </div>
+            </div>
+            <div style={{ padding: '1rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                 {/* Form Type Selection */}
                 <div>
                     <label style={{

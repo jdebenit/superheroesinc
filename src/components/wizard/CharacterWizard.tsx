@@ -103,15 +103,24 @@ const initialCharacterState = {
     enteParams: {
         formType: null,
         visualEffect: null
-    }
+    },
+    malditoParams: {
+        magnitude: null,
+        source: null
+    },
+    techModules: [],
+    exoskeletonConfig: null
 };
 
 
 export default function CharacterWizard() {
     const [currentStep, setCurrentStep] = useState(1);
 
-    // Load character from localStorage on mount, or use initial state
-    const [character, setCharacter] = useState(() => {
+    // Initialize with default state to prevent hydration mismatch
+    const [character, setCharacter] = useState(initialCharacterState);
+
+    // Load character from localStorage on mount (Client-side only)
+    useEffect(() => {
         if (typeof window !== 'undefined') {
             try {
                 const saved = localStorage.getItem('characterWizardState');
@@ -126,12 +135,10 @@ export default function CharacterWizard() {
 
                         console.log('🔄 Migrating old character state format to new format...');
 
-                        // Ensure background object exists
                         if (!parsed.background) {
                             parsed.background = { items: [] };
                         }
 
-                        // Move fields into background if they exist at root level
                         if (parsed.prejudiceResistance !== undefined) {
                             parsed.background.prejudiceResistance = parsed.prejudiceResistance;
                             delete parsed.prejudiceResistance;
@@ -152,16 +159,22 @@ export default function CharacterWizard() {
                         console.log('✅ Migration complete:', parsed);
                     }
 
+                    // MIGRATION: Ensure new params exist
+                    if (!parsed.enteParams) {
+                        parsed.enteParams = { formType: null, visualEffect: null };
+                    }
+                    if (!parsed.malditoParams) {
+                        parsed.malditoParams = { magnitude: null, source: null };
+                    }
+
                     console.log('✅ Loaded character from localStorage:', parsed);
-                    return parsed;
+                    setCharacter(parsed);
                 }
             } catch (e) {
                 console.error('❌ Error loading character from localStorage:', e);
             }
         }
-        console.log('🆕 Using initial character state');
-        return initialCharacterState;
-    });
+    }, []);
 
     // Save character to localStorage whenever it changes
     useEffect(() => {
@@ -345,7 +358,24 @@ export default function CharacterWizard() {
             }
         }
 
-        return total.toFixed(1); // Devolver con decimales
+        // 15. Maldito Params Cost
+        if (character.malditoParams && character.malditoParams.magnitude) {
+            const MALDITO_MAGNITUDE = [
+                { id: 'use_power', cost: 0 },
+                { id: 'own_consequences', cost: 0 },
+                { id: 'hard_to_hide', cost: 2 },
+                { id: 'uncontrolable', cost: 2 },
+                { id: 'daily_condition', cost: 3 },
+                { id: 'weekly_need', cost: 3 },
+                { id: 'noticeable', cost: 4 },
+                { id: 'monthly_condition', cost: 4 },
+                { id: 'marked', cost: 5 },
+            ];
+            const mag = MALDITO_MAGNITUDE.find(m => m.id === character.malditoParams.magnitude);
+            if (mag) total += mag.cost;
+        }
+
+        return Math.round(total * 10) / 10;
     }, [character]);
 
     const handleNext = () => {
@@ -362,6 +392,18 @@ export default function CharacterWizard() {
 
     const handleStepClick = (stepId: number) => {
         setCurrentStep(stepId);
+    };
+
+    const handleStepChange = (field: string, value: any) => {
+        console.log('🔄 handleStepChange:', field, value);
+        setCharacter((prev: any) => {
+            const newState = {
+                ...prev,
+                [field]: value
+            };
+            console.log('📝 New State:', newState);
+            return newState;
+        });
     };
 
     const handleReset = () => {
@@ -427,7 +469,7 @@ export default function CharacterWizard() {
             {/* Header */}
             <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
                 <h1 style={{ fontSize: '3rem', fontWeight: '900', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
-                    Generador de Fichas (Alpha 0.0.22)
+                    Generador de Fichas (Alpha 0.0.23)
                 </h1>
                 <p style={{ fontSize: '1.25rem', color: '#666', marginBottom: '1rem' }}>
                     Crea tu personaje paso a paso

@@ -3,8 +3,10 @@ import type { Spell } from '../../../../data/spells';
 
 export interface Step3Props {
     data: any;
+    // data.malditoParams, data.enteParams, etc are assumed dynamic
     onChange: (updates: any) => void;
 }
+
 
 export interface SelectedPower {
     id: string;
