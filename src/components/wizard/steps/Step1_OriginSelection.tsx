@@ -23,7 +23,7 @@ export default function Step1_OriginSelection({ data, onChange }: Step1Props) {
     const [selectedOrigins, setSelectedOrigins] = useState<string[]>([]);
     const [selectedSubtypes, setSelectedSubtypes] = useState<{ [originId: string]: string[] }>({});
 
-    // Initialize state from data.origin.items when component mounts or data changes
+    // Initialize state from data.origin.items when component mounts
     useEffect(() => {
         if (data.origin?.items && data.origin.items.length > 0) {
             const origins: string[] = [];
@@ -45,7 +45,15 @@ export default function Step1_OriginSelection({ data, onChange }: Step1Props) {
             setSelectedOrigins(origins);
             setSelectedSubtypes(subtypes);
         }
-    }, []); // Only run on mount to avoid overwriting user changes
+    }, []); // Only run on mount
+
+    // Detect when data has been reset (items becomes empty)
+    useEffect(() => {
+        if (!data.origin?.items || data.origin.items.length === 0) {
+            setSelectedOrigins([]);
+            setSelectedSubtypes({});
+        }
+    }, [data.origin?.items?.length]); // Only watch the length to avoid unnecessary re-renders
 
     const handleToggleOrigin = (originId: string) => {
         const newSelection = selectedOrigins.includes(originId)
