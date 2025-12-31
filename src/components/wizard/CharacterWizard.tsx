@@ -12,6 +12,7 @@ import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS, FRIENDS_AND_ASSOCIATES } 
 import { SPELLS } from '../../data/spells';
 import { POWERS } from '../../data/powers';
 import { EXOSKELETON_CONFIGS } from '../../data/exoskeletonConfigs';
+import { ENTE_FORMS, ENTE_EFFECTS } from './steps/Step3_Especials/sections/EnteSection';
 
 const STEPS = [
     { id: 1, name: 'Origen', icon: '🎭' },
@@ -97,10 +98,14 @@ const initialCharacterState = {
         selected: []
     },
     magicalBonds: [],
-    magicalBondsCustom: "",
     magicalBondsCustomName: "",
-    magicalBondsCustomDescription: ""
+    magicalBondsCustomDescription: "",
+    enteParams: {
+        formType: null,
+        visualEffect: null
+    }
 };
+
 
 export default function CharacterWizard() {
     const [currentStep, setCurrentStep] = useState(1);
@@ -328,6 +333,18 @@ export default function CharacterWizard() {
             }
         }
 
+        // 14. Ente Params Cost
+        if (character.enteParams) {
+            if (character.enteParams.formType) {
+                const form = ENTE_FORMS.find(f => f.id === character.enteParams.formType);
+                if (form) total += form.cost;
+            }
+            if (character.enteParams.visualEffect) {
+                const effect = ENTE_EFFECTS.find(e => e.id === character.enteParams.visualEffect);
+                if (effect) total += effect.cost;
+            }
+        }
+
         return total.toFixed(1); // Devolver con decimales
     }, [character]);
 
@@ -410,7 +427,7 @@ export default function CharacterWizard() {
             {/* Header */}
             <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
                 <h1 style={{ fontSize: '3rem', fontWeight: '900', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
-                    Generador de Fichas (Alpha 0.0.21)
+                    Generador de Fichas (Alpha 0.0.22)
                 </h1>
                 <p style={{ fontSize: '1.25rem', color: '#666', marginBottom: '1rem' }}>
                     Crea tu personaje paso a paso

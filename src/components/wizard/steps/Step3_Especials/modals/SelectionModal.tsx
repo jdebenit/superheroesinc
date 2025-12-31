@@ -135,143 +135,173 @@ export default function SelectionModal({
 
                 {/* Content Area */}
                 <div className="modal-scroll-area">
-                    {viewMode === 'grid' ? (
-                        <div className="powers-grid">
-                            {items.map((item: any) => {
-                                const isSelected = isItemSelected(item);
+                    {(() => {
+                        const filteredItems = items.filter(item => {
+                            // 1. Search Filter
+                            const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase());
+                            if (!matchesSearch) return false;
 
-                                return (
-                                    <div
-                                        key={item.id}
-                                        className={`power-card ${isSelected ? 'selected' : ''}`}
-                                        onClick={() => onToggleItem(item.id)}
-                                    >
-                                        <h3>{item.name}</h3>
-                                        <div className="power-details">
-                                            {type === 'techModules' ? (
-                                                <div style={{ display: 'flex', flexDirection: 'row', gap: '8px', alignItems: 'center' }}>
-                                                    <span className="power-cost">{item.cost} PC</span>
-                                                    <span className="type-tag" style={{
-                                                        width: 'fit-content',
-                                                        backgroundColor: item.type === 'Mejora Interna' ? '#fce7f3' : undefined,
-                                                        color: item.type === 'Mejora Interna' ? '#be123c' : undefined,
-                                                        borderColor: item.type === 'Mejora Interna' ? '#fbcfe8' : undefined
-                                                    }}>
-                                                        {item.type}
-                                                    </span>
-                                                </div>
-                                            ) : (
-                                                <span className="power-cost">
-                                                    {type === 'powers' ? `${item.formula} PC` : `Coste: ${item.cost}`}
-                                                </span>
-                                            )}
+                            // 2. Type Filter (Powers)
+                            if (type === 'powers' && selectedTypeFilter !== 'Todos') {
+                                if (!item.types || !item.types.includes(selectedTypeFilter)) {
+                                    return false;
+                                }
+                            }
 
-                                            {type === 'powers' && (
-                                                <div className="power-tags">
-                                                    <div className="power-types">
-                                                        {item.types?.map((t: string) => (
-                                                            <span key={t} className="type-tag">{t}</span>
-                                                        ))}
-                                                    </div>
-                                                </div>
-                                            )}
+                            // 3. Type Filter (Tech Modules)
+                            if (type === 'techModules' && selectedTechTypeFilter !== 'All') {
+                                if (item.type !== selectedTechTypeFilter) {
+                                    return false;
+                                }
+                            }
 
-                                            {type === 'spells' && item.requirements && item.requirements !== "No especificado" && (
-                                                <div className="range-note" style={{ textAlign: 'left', color: 'red' }}>
-                                                    Req: {item.requirements}
-                                                </div>
-                                            )}
+                            return true;
+                        });
 
-                                            {type === 'techModules' && (
-                                                <div className="range-note" style={{ textAlign: 'left', color: '#6b7280', fontSize: '0.8em', marginTop: '4px', fontStyle: 'italic' }}>
-                                                    {item.description}
-                                                </div>
-                                            )}
-                                        </div>
-                                        {isSelected && <div className="selected-badge">✓</div>}
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    ) : (
-                        <div className="powers-table-wrapper">
-                            <table className="powers-table">
-                                <thead>
-                                    <tr>
-                                        <th style={{ width: '50px' }}></th>
-                                        <th>Nombre</th>
-                                        <th>Coste</th>
-                                        {type === 'powers' && <th>Tipos</th>}
-                                        {type === 'spells' && <th>Requisitos</th>}
-                                        {type === 'techModules' && <th>Tipo</th>}
-                                        {type === 'techModules' && <th>Descripción</th>}
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {items.map((item: any) => {
+                        if (filteredItems.length === 0) {
+                            return (
+                                <div className="text-center py-10 text-gray-500">
+                                    No se encontraron resultados
+                                </div>
+                            );
+                        }
+
+                        if (viewMode === 'grid') {
+                            return (
+                                <div className="powers-grid">
+                                    {filteredItems.map((item: any) => {
                                         const isSelected = isItemSelected(item);
 
                                         return (
-                                            <tr
+                                            <div
                                                 key={item.id}
+                                                className={`power-card ${isSelected ? 'selected' : ''}`}
                                                 onClick={() => onToggleItem(item.id)}
-                                                className={isSelected ? 'selected-row' : ''}
                                             >
-                                                <td>
-                                                    <input
-                                                        type="checkbox"
-                                                        checked={isSelected}
-                                                        readOnly
-                                                        style={{ width: '20px', height: '20px' }}
-                                                    />
-                                                </td>
-                                                <td className="col-name">{item.name}</td>
-                                                <td className="col-cost">
-                                                    {type === 'powers' ? item.formula :
-                                                        type === 'techModules' ? `${item.cost} PC` :
-                                                            item.cost}
-                                                </td>
-                                                {type === 'powers' && (
-                                                    <td className="col-types">
-                                                        <div className="table-types">
-                                                            {item.types?.map((t: string) => (
-                                                                <span key={t} className="type-tag tiny">{t}</span>
-                                                            ))}
-                                                        </div>
-                                                    </td>
-                                                )}
-                                                {type === 'spells' && (
-                                                    <td>
-                                                        {item.requirements === "No especificado" ? "-" : item.requirements}
-                                                    </td>
-                                                )}
-                                                {type === 'techModules' && (
-                                                    <>
-                                                        <td style={{ textAlign: 'center' }}>
+                                                <h3>{item.name}</h3>
+                                                <div className="power-details">
+                                                    {type === 'techModules' ? (
+                                                        <div style={{ display: 'flex', flexDirection: 'row', gap: '8px', alignItems: 'center' }}>
+                                                            <span className="power-cost">{item.cost} PC</span>
                                                             <span className="type-tag" style={{
+                                                                width: 'fit-content',
                                                                 backgroundColor: item.type === 'Mejora Interna' ? '#fce7f3' : undefined,
                                                                 color: item.type === 'Mejora Interna' ? '#be123c' : undefined,
                                                                 borderColor: item.type === 'Mejora Interna' ? '#fbcfe8' : undefined
                                                             }}>
                                                                 {item.type}
                                                             </span>
-                                                        </td>
-                                                        <td style={{ fontSize: '0.9em', color: '#666' }}>{item.description}</td>
-                                                    </>
-                                                )}
-                                            </tr>
+                                                        </div>
+                                                    ) : (
+                                                        <span className="power-cost">
+                                                            {type === 'powers' ? `${item.formula} PC` : `Coste: ${item.cost}`}
+                                                        </span>
+                                                    )}
+
+                                                    {type === 'powers' && (
+                                                        <div className="power-tags">
+                                                            <div className="power-types">
+                                                                {item.types?.map((t: string) => (
+                                                                    <span key={t} className="type-tag">{t}</span>
+                                                                ))}
+                                                            </div>
+                                                        </div>
+                                                    )}
+
+                                                    {type === 'spells' && item.requirements && item.requirements !== "No especificado" && (
+                                                        <div className="range-note" style={{ textAlign: 'left', color: 'red' }}>
+                                                            Req: {item.requirements}
+                                                        </div>
+                                                    )}
+
+                                                    {type === 'techModules' && (
+                                                        <div className="range-note" style={{ textAlign: 'left', color: '#6b7280', fontSize: '0.8em', marginTop: '4px', fontStyle: 'italic' }}>
+                                                            {item.description}
+                                                        </div>
+                                                    )}
+                                                </div>
+                                                {isSelected && <div className="selected-badge">✓</div>}
+                                            </div>
                                         );
                                     })}
-                                </tbody>
-                            </table>
-                        </div>
-                    )}
+                                </div>
+                            );
+                        } else {
+                            return (
+                                <div className="powers-table-wrapper">
+                                    <table className="powers-table">
+                                        <thead>
+                                            <tr>
+                                                <th style={{ width: '50px' }}></th>
+                                                <th>Nombre</th>
+                                                <th>Coste</th>
+                                                {type === 'powers' && <th>Tipos</th>}
+                                                {type === 'spells' && <th>Requisitos</th>}
+                                                {type === 'techModules' && <th>Tipo</th>}
+                                                {type === 'techModules' && <th>Descripción</th>}
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {filteredItems.map((item: any) => {
+                                                const isSelected = isItemSelected(item);
 
-                    {items.length === 0 && (
-                        <div className="text-center py-10 text-gray-500">
-                            No se encontraron resultados
-                        </div>
-                    )}
+                                                return (
+                                                    <tr
+                                                        key={item.id}
+                                                        onClick={() => onToggleItem(item.id)}
+                                                        className={isSelected ? 'selected-row' : ''}
+                                                    >
+                                                        <td>
+                                                            <input
+                                                                type="checkbox"
+                                                                checked={isSelected}
+                                                                readOnly
+                                                                style={{ width: '20px', height: '20px' }}
+                                                            />
+                                                        </td>
+                                                        <td className="col-name">{item.name}</td>
+                                                        <td className="col-cost">
+                                                            {type === 'powers' ? item.formula :
+                                                                type === 'techModules' ? `${item.cost} PC` :
+                                                                    item.cost}
+                                                        </td>
+                                                        {type === 'powers' && (
+                                                            <td className="col-types">
+                                                                <div className="table-types">
+                                                                    {item.types?.map((t: string) => (
+                                                                        <span key={t} className="type-tag tiny">{t}</span>
+                                                                    ))}
+                                                                </div>
+                                                            </td>
+                                                        )}
+                                                        {type === 'spells' && (
+                                                            <td>
+                                                                {item.requirements === "No especificado" ? "-" : item.requirements}
+                                                            </td>
+                                                        )}
+                                                        {type === 'techModules' && (
+                                                            <>
+                                                                <td style={{ textAlign: 'center' }}>
+                                                                    <span className="type-tag" style={{
+                                                                        backgroundColor: item.type === 'Mejora Interna' ? '#fce7f3' : undefined,
+                                                                        color: item.type === 'Mejora Interna' ? '#be123c' : undefined,
+                                                                        borderColor: item.type === 'Mejora Interna' ? '#fbcfe8' : undefined
+                                                                    }}>
+                                                                        {item.type}
+                                                                    </span>
+                                                                </td>
+                                                                <td style={{ fontSize: '0.9em', color: '#666' }}>{item.description}</td>
+                                                            </>
+                                                        )}
+                                                    </tr>
+                                                );
+                                            })}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            );
+                        }
+                    })()}
                 </div>
 
                 {/* Footer */}

@@ -19,6 +19,7 @@ import TechModulesSection from './sections/TechModulesSection';
 import PowersSection from './sections/PowersSection';
 import MagicSection from './sections/MagicSection';
 import ExoskeletonSection from './sections/ExoskeletonSection';
+import EnteSection from './sections/EnteSection';
 
 // Modal Components
 import SelectionModal from './modals/SelectionModal';
@@ -298,7 +299,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     }).filter((s): s is (Spell & { rank: number }) => s !== null);
 
     const hasAnyOrigin = isGuardian || isAlterado || hasEM || isVampiro || isSemidemonio ||
-        isThals || isDivino || isCosmico || isMutante || isVigilante || isTechnological || isExoskeleton;
+        isEnte || isThals || isDivino || isCosmico || isMutante || isVigilante || isTechnological || isExoskeleton;
 
     return (
         <div className="space-y-8 p-6 max-w-5xl mx-auto">
@@ -321,6 +322,14 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                     data={data}
                     onChange={onChange}
                     onOpenModal={openMagicalBondsModal}
+                />
+            )}
+
+            {/* ENTE SECTION */}
+            {isEnte && (
+                <EnteSection
+                    enteParams={data.enteParams || { formType: null, visualEffect: null }}
+                    onChange={onChange}
                 />
             )}
 
