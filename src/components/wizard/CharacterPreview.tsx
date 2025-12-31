@@ -7,6 +7,8 @@ import { TECH_MODULES } from '../../data/techModules';
 import { ORIGIN_CATEGORIES } from '../../data/originDefinitions';
 import { MAGICAL_BONDS } from '../../data/magicalBonds';
 import { EXOSKELETON_CONFIGS } from '../../data/exoskeletonConfigs';
+import { ENTE_FORMS, ENTE_EFFECTS } from './steps/Step3_Especials/sections/EnteSection';
+import { MALDITO_DATA } from './steps/Step3_Especials/sections/MalditoSection';
 
 interface CharacterPreviewProps {
     character: any;
@@ -300,6 +302,7 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                     </div>
                                 )}
 
+
                                 {/* Other Stats */}
                                 {otherStats.length > 0 && (
                                     <div className="sheet-section other">
@@ -392,6 +395,118 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                     </div>
                                                 </li>
                                             ))}
+                                        </ul>
+                                    </div>
+                                )}
+
+                                {/* Ente Params */}
+                                {character.enteParams && (character.enteParams.formType || character.enteParams.visualEffect) && (
+                                    <div className="sheet-section ente-params">
+                                        <div className="section-header">
+                                            <h4>Ente</h4>
+                                        </div>
+                                        <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                                            {character.enteParams.formType && (() => {
+                                                const form = ENTE_FORMS.find(f => f.id === character.enteParams.formType);
+                                                return form && (
+                                                    <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
+                                                        <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
+                                                            <span style={{ paddingRight: '0.5rem', fontWeight: 'bold', color: '#7e22ce' }}>Forma en el plano</span>
+                                                            <span style={{
+                                                                flexGrow: 1,
+                                                                borderBottom: '1px dotted #ccc',
+                                                                margin: '0 0.5rem',
+                                                                position: 'relative',
+                                                                top: '-4px',
+                                                                minWidth: '20px'
+                                                            }}></span>
+                                                            <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>
+                                                                {form.label} ({form.cost > 0 ? '+' : ''}{form.cost} PC)
+                                                            </span>
+                                                        </div>
+                                                    </li>
+                                                );
+                                            })()}
+                                            {character.enteParams.visualEffect && (() => {
+                                                const effect = ENTE_EFFECTS.find(e => e.id === character.enteParams.visualEffect);
+                                                return effect && (
+                                                    <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
+                                                        <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
+                                                            <span style={{ paddingRight: '0.5rem', fontWeight: 'bold', color: '#7e22ce' }}>Efecto visual</span>
+                                                            <span style={{
+                                                                flexGrow: 1,
+                                                                borderBottom: '1px dotted #ccc',
+                                                                margin: '0 0.5rem',
+                                                                position: 'relative',
+                                                                top: '-4px',
+                                                                minWidth: '20px'
+                                                            }}></span>
+                                                            <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>
+                                                                {effect.label} ({effect.cost > 0 ? '+' : ''}{effect.cost} PC)
+                                                            </span>
+                                                        </div>
+                                                    </li>
+                                                );
+                                            })()}
+                                        </ul>
+                                    </div>
+                                )}
+
+                                {/* Maldito Params */}
+                                {character.malditoParams && (character.malditoParams.magnitude || character.malditoParams.source) && (
+                                    <div className="sheet-section maldito-params">
+                                        <div className="section-header">
+                                            <h4>Maldito</h4>
+                                        </div>
+                                        <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                                            {character.malditoParams.magnitude && (() => {
+                                                const mag = MALDITO_DATA.MAGNITUDE.find(m => m.id === character.malditoParams.magnitude);
+                                                return mag && (
+                                                    <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
+                                                        <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
+                                                            <span style={{ paddingRight: '0.5rem', fontWeight: 'bold', color: '#c2410c' }}>Magnitud de la maldición</span>
+                                                            <span style={{
+                                                                flexGrow: 1,
+                                                                borderBottom: '1px dotted #ccc',
+                                                                margin: '0 0.5rem',
+                                                                position: 'relative',
+                                                                top: '-4px',
+                                                                minWidth: '20px'
+                                                            }}></span>
+                                                            <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>
+                                                                {mag.label} ({mag.cost > 0 ? '+' : ''}{mag.cost} PC)
+                                                            </span>
+                                                        </div>
+                                                        <div style={{ fontSize: '0.85rem', color: '#6b7280', fontStyle: 'italic', marginTop: '0.25rem', paddingLeft: '0.5rem' }}>
+                                                            {mag.description}
+                                                        </div>
+                                                    </li>
+                                                );
+                                            })()}
+                                            {character.malditoParams.source && (() => {
+                                                const src = MALDITO_DATA.SOURCE.find(s => s.id === character.malditoParams.source);
+                                                return src && (
+                                                    <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
+                                                        <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
+                                                            <span style={{ paddingRight: '0.5rem', fontWeight: 'bold', color: '#c2410c' }}>Fuente de la maldición</span>
+                                                            <span style={{
+                                                                flexGrow: 1,
+                                                                borderBottom: '1px dotted #ccc',
+                                                                margin: '0 0.5rem',
+                                                                position: 'relative',
+                                                                top: '-4px',
+                                                                minWidth: '20px'
+                                                            }}></span>
+                                                            <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>
+                                                                {src.label}
+                                                            </span>
+                                                        </div>
+                                                        <div style={{ fontSize: '0.85rem', color: '#6b7280', fontStyle: 'italic', marginTop: '0.25rem', paddingLeft: '0.5rem' }}>
+                                                            {src.description}
+                                                        </div>
+                                                    </li>
+                                                );
+                                            })()}
                                         </ul>
                                     </div>
                                 )}
