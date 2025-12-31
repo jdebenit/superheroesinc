@@ -166,6 +166,9 @@ export default function CharacterWizard() {
                     if (!parsed.malditoParams) {
                         parsed.malditoParams = { magnitude: null, source: null };
                     }
+                    if (!parsed.alteradoParams) {
+                        parsed.alteradoParams = null;
+                    }
 
                     console.log('✅ Loaded character from localStorage:', parsed);
                     setCharacter(parsed);
@@ -375,6 +378,66 @@ export default function CharacterWizard() {
             if (mag) total += mag.cost;
         }
 
+        // 16. Alterado Params Cost (DISCOUNT/PENALTY)
+        if (character.alteradoParams) {
+            // Import sequel definitions to get costs
+            const ALTERADO_AGENTS = [
+                { id: 'nuclear', label: 'Energía nuclear', cost: 0 },
+                { id: 'electromagnetic', label: 'Accidente con energía electromagnética', cost: 0 },
+                { id: 'space_energy', label: 'Energía espacial desconocida', cost: 0 },
+                { id: 'other_energy', label: 'Otras energías', cost: 0 },
+                { id: 'radiation', label: 'Radiación diversa', cost: 0 },
+                { id: 'biological', label: 'Agente biológico', cost: 0 },
+                { id: 'mutagen', label: 'Agente mutágeno', cost: 0 },
+                { id: 'chemical', label: 'Sustancia química', cost: 0 },
+                { id: 'treatment', label: 'Tratamiento', cost: 2 },
+                { id: 'other', label: 'Otro', cost: 0 },
+            ];
+
+            // Agent Discount (e.g. Treatment = -2 PC)
+            if (character.alteradoParams.agent) {
+                const agent = ALTERADO_AGENTS.find(a => a.id === character.alteradoParams.agent);
+                if (agent && agent.cost > 0) {
+                    total -= agent.cost;
+                }
+            }
+
+            // Sequels Discount or Penalty
+            if (character.alteradoParams.sequels && Array.isArray(character.alteradoParams.sequels) && character.alteradoParams.sequels.length > 0) {
+                // Has sequels: subtract their costs (discount)
+                // We need to import the sequel definitions to get costs
+                // For now, we'll assume the cost is stored or we calculate it from the ID
+                character.alteradoParams.sequels.forEach((s: any) => {
+                    // Extract cost from sequel ID (e.g., "disability_3" -> 3)
+                    const match = s.id.match(/_(\d+)$/);
+                    if (match) {
+                        total -= parseInt(match[1]);
+                    } else {
+                        // Fixed cost sequels - we need to look them up
+                        const fixedCosts: Record<string, number> = {
+                            'compulsion': 1,
+                            'prosthesis': 2,
+                            'amnesia': 2,
+                            'no_vitals': 2,
+                            'psychosis': 1,
+                            'phobia': 1,
+                            'dependency': 2,
+                            'social_displacement': 1,
+                            'unsociableness': 1,
+                            'character_inversion': 1,
+                            'aggressiveness': 1,
+                            'vulnerable_point': 3,
+                            'involuntary_transformation': 3,
+                        };
+                        total -= (fixedCosts[s.id] || 0);
+                    }
+                });
+            } else {
+                // No sequels selected: +2 PC penalty
+                total += 2;
+            }
+        }
+
         return Math.round(total * 10) / 10;
     }, [character]);
 
@@ -469,7 +532,7 @@ export default function CharacterWizard() {
             {/* Header */}
             <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
                 <h1 style={{ fontSize: '3rem', fontWeight: '900', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
-                    Generador de Fichas (Alpha 0.0.23)
+                    Generador de Fichas (Alpha 0.0.24)
                 </h1>
                 <p style={{ fontSize: '1.25rem', color: '#666', marginBottom: '1rem' }}>
                     Crea tu personaje paso a paso

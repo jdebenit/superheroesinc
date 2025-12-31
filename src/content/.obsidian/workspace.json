@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "blog/la-web-como-punto-de-encuentro-del-juego.md",
+                "file": "characters/medianoche.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "la-web-como-punto-de-encuentro-del-juego"
+              "title": "medianoche"
             }
           }
         ]
@@ -185,9 +185,14 @@
   },
   "active": "c9b0e6ede013a1b3",
   "lastOpenFiles": [
+    "characters/mjolnir-original.md",
+    "characters/miolnir-original.md",
+    "characters/mijolnir-original.md",
+    "characters/medianoche.md",
+    "characters/mausoleo.md",
+    "blog/la-web-como-punto-de-encuentro-del-juego.md",
     "blog/guia-escritura-shi-replay-script.md",
     "blog/el-vigilante-no-es-un-atajo.md",
-    "blog/la-web-como-punto-de-encuentro-del-juego.md",
     "blog/actual-plays-superheroes-inc.md",
     "blog/guia-escritura-shi-rplay-script.md",
     "blog/nueva-web.md",
@@ -213,11 +218,6 @@
     "rpg/cu-chulainn.yaml",
     "rpg/medianoche copy.yaml",
     "lore/grupos/la-legion-sangrienta.md",
-    "characters/peter-pain.md",
-    "characters/arkham.md",
-    "characters/terror.md",
-    "characters/chainsaw.md",
-    "lore/grupos/psykosis.md",
     "rpg/terror.yaml",
     "rpg/peter-pain copy.yaml",
     "rpg/peter-pain.yaml"

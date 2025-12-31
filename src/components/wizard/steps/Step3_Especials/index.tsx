@@ -21,6 +21,7 @@ import MagicSection from './sections/MagicSection';
 import ExoskeletonSection from './sections/ExoskeletonSection';
 import EnteSection from './sections/EnteSection';
 import MalditoSection from './sections/MalditoSection';
+import AlteradoSection from './sections/AlteradoSection';
 
 // Modal Components
 import SelectionModal from './modals/SelectionModal';
@@ -339,6 +340,13 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
             {isMaldito && (
                 <MalditoSection
                     malditoParams={data.malditoParams || { magnitude: null, source: null }}
+                    onChange={onChange}
+                />
+            )}
+
+            {isAlterado && (
+                <AlteradoSection
+                    alteradoParams={data.alteradoParams || { agent: null, sequels: [] }}
                     onChange={onChange}
                 />
             )}

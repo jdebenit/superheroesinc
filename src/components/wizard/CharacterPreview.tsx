@@ -9,6 +9,7 @@ import { MAGICAL_BONDS } from '../../data/magicalBonds';
 import { EXOSKELETON_CONFIGS } from '../../data/exoskeletonConfigs';
 import { ENTE_FORMS, ENTE_EFFECTS } from './steps/Step3_Especials/sections/EnteSection';
 import { MALDITO_DATA } from './steps/Step3_Especials/sections/MalditoSection';
+import { ALTERADO_DATA } from './steps/Step3_Especials/sections/AlteradoSection';
 
 interface CharacterPreviewProps {
     character: any;
@@ -302,6 +303,143 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                     </div>
                                 )}
 
+                                {/* Ente Params */}
+                                {character.enteParams && (character.enteParams.formType || character.enteParams.visualEffect) && (
+                                    <div className="sheet-section ente-params">
+                                        <div className="section-header">
+                                            <h4>Opciones de Ente</h4>
+                                        </div>
+                                        <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                                            {character.enteParams.formType && (() => {
+                                                const form = ENTE_FORMS.find(f => f.id === character.enteParams.formType);
+                                                return form && (
+                                                    <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
+                                                        <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
+                                                            <span style={{ paddingRight: '0.5rem', fontWeight: 'bold', color: '#7e22ce' }}>Forma en el plano</span>
+                                                            <span style={{ flexGrow: 1, borderBottom: '1px dotted #ccc', margin: '0 0.5rem', position: 'relative', top: '-4px', minWidth: '20px' }}></span>
+                                                            <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>
+                                                                {form.label} ({form.cost > 0 ? '+' : ''}{form.cost} PC)
+                                                            </span>
+                                                        </div>
+                                                    </li>
+                                                );
+                                            })()}
+                                            {character.enteParams.visualEffect && (() => {
+                                                const effect = ENTE_EFFECTS.find(e => e.id === character.enteParams.visualEffect);
+                                                return effect && (
+                                                    <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
+                                                        <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
+                                                            <span style={{ paddingRight: '0.5rem', fontWeight: 'bold', color: '#7e22ce' }}>Efecto visual</span>
+                                                            <span style={{ flexGrow: 1, borderBottom: '1px dotted #ccc', margin: '0 0.5rem', position: 'relative', top: '-4px', minWidth: '20px' }}></span>
+                                                            <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>
+                                                                {effect.label} ({effect.cost > 0 ? '+' : ''}{effect.cost} PC)
+                                                            </span>
+                                                        </div>
+                                                    </li>
+                                                );
+                                            })()}
+                                        </ul>
+                                    </div>
+                                )}
+
+                                {/* Maldito Params */}
+                                {character.malditoParams && (character.malditoParams.magnitude || character.malditoParams.source) && (
+                                    <div className="sheet-section maldito-params">
+                                        <div className="section-header">
+                                            <h4>Opciones de Maldito</h4>
+                                        </div>
+                                        <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                                            {character.malditoParams.magnitude && (() => {
+                                                const mag = MALDITO_DATA.MAGNITUDE.find(m => m.id === character.malditoParams.magnitude);
+                                                return mag && (
+                                                    <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
+                                                        <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
+                                                            <span style={{ paddingRight: '0.5rem', fontWeight: 'bold', color: '#c2410c' }}>Magnitud de la maldición</span>
+                                                            <span style={{ flexGrow: 1, borderBottom: '1px dotted #ccc', margin: '0 0.5rem', position: 'relative', top: '-4px', minWidth: '20px' }}></span>
+                                                            <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>
+                                                                {mag.label} ({mag.cost > 0 ? '+' : ''}{mag.cost} PC)
+                                                            </span>
+                                                        </div>
+                                                        <div style={{ fontSize: '0.85rem', color: '#6b7280', fontStyle: 'italic', marginTop: '0.25rem', paddingLeft: '0.5rem' }}>
+                                                            {mag.description}
+                                                        </div>
+                                                    </li>
+                                                );
+                                            })()}
+                                            {character.malditoParams.source && (() => {
+                                                const src = MALDITO_DATA.SOURCE.find(s => s.id === character.malditoParams.source);
+                                                return src && (
+                                                    <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
+                                                        <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
+                                                            <span style={{ paddingRight: '0.5rem', fontWeight: 'bold', color: '#c2410c' }}>Fuente de la maldición</span>
+                                                            <span style={{ flexGrow: 1, borderBottom: '1px dotted #ccc', margin: '0 0.5rem', position: 'relative', top: '-4px', minWidth: '20px' }}></span>
+                                                            <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>
+                                                                {src.label}
+                                                            </span>
+                                                        </div>
+                                                        <div style={{ fontSize: '0.85rem', color: '#6b7280', fontStyle: 'italic', marginTop: '0.25rem', paddingLeft: '0.5rem' }}>
+                                                            {src.description}
+                                                        </div>
+                                                    </li>
+                                                );
+                                            })()}
+                                        </ul>
+                                    </div>
+                                )}
+
+                                {/* Alterado Params */}
+                                {character.alteradoParams && (character.alteradoParams.agent || (character.alteradoParams.sequels && character.alteradoParams.sequels.length > 0)) && (
+                                    <div className="sheet-section alterado-params">
+                                        <div className="section-header">
+                                            <h4>Opciones de Alterado</h4>
+                                        </div>
+                                        <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                                            {/* Agent */}
+                                            {character.alteradoParams.agent && (() => {
+                                                const agent = ALTERADO_DATA.AGENTS.find(a => a.id === character.alteradoParams.agent);
+                                                return agent && (
+                                                    <li className="no-bullet-item" style={{ marginBottom: '0.75rem' }}>
+                                                        <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
+                                                            <span style={{ paddingRight: '0.5rem', fontWeight: 'bold', color: '#15803d' }}>Agente del Cambio</span>
+                                                            <span style={{ flexGrow: 1, borderBottom: '1px dotted #ccc', margin: '0 0.5rem', position: 'relative', top: '-4px', minWidth: '20px' }}></span>
+                                                            <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>
+                                                                {agent.label} {agent.cost > 0 && <span style={{ color: '#16a34a' }}>(-{agent.cost} PC)</span>}
+                                                            </span>
+                                                        </div>
+                                                    </li>
+                                                );
+                                            })()}
+
+                                            {/* Sequels */}
+                                            {character.alteradoParams.sequels && character.alteradoParams.sequels.length > 0 && (
+                                                <li style={{ marginTop: '0.5rem' }}>
+                                                    <span style={{ display: 'block', fontSize: '0.9rem', color: '#15803d', fontWeight: 'bold', marginBottom: '0.25rem' }}>Secuelas</span>
+                                                    <ul style={{ paddingLeft: '0.5rem', margin: 0, listStyle: 'none', borderLeft: '2px solid #bbf7d0' }}>
+                                                        {character.alteradoParams.sequels.map((s: any, idx: number) => {
+                                                            const def = ALTERADO_DATA.SEQUELS.find(d => d.id === s.id);
+                                                            if (!def) return null;
+                                                            return (
+                                                                <li key={idx} style={{ marginBottom: '0.5rem', paddingLeft: '0.5rem' }}>
+                                                                    <div style={{ fontWeight: 'bold', color: '#374151', fontSize: '0.9rem' }}>
+                                                                        {def.label} <span style={{ color: '#16a34a', fontSize: '0.85rem' }}>({s.variableCost ? `-${s.variableCost}` : '0'} PC)</span>
+                                                                    </div>
+                                                                    <div style={{ fontSize: '0.85rem', color: '#6b7280', fontStyle: 'italic' }}>
+                                                                        {def.description}
+                                                                    </div>
+                                                                    {s.variableCost && (def.variableLabel || (def.minCost !== undefined && def.maxCost !== undefined)) && (
+                                                                        <div style={{ fontSize: '0.8rem', color: '#15803d', fontWeight: 'bold' }}>
+                                                                            Coste aplicado: {s.variableCost} PC
+                                                                        </div>
+                                                                    )}
+                                                                </li>
+                                                            )
+                                                        })}
+                                                    </ul>
+                                                </li>
+                                            )}
+                                        </ul>
+                                    </div>
+                                )}
 
                                 {/* Other Stats */}
                                 {otherStats.length > 0 && (
@@ -1173,7 +1311,7 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                         display: none;
                     }
                 `}} />
-            </dialog>
+            </dialog >
         </>
     );
 }

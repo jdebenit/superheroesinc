@@ -11,6 +11,8 @@ interface SelectionModalProps {
     selectedItems: any[];
     onClose: () => void;
     onToggleItem: (id: string) => void;
+    customPlaceholder?: string;
+    customTitle?: string;
 }
 
 export default function SelectionModal({
@@ -20,7 +22,9 @@ export default function SelectionModal({
     items,
     selectedItems,
     onClose,
-    onToggleItem
+    onToggleItem,
+    customPlaceholder,
+    customTitle
 }: SelectionModalProps) {
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedTypeFilter, setSelectedTypeFilter] = useState<string>("Todos");
@@ -30,12 +34,14 @@ export default function SelectionModal({
     if (!isOpen) return null;
 
     const getTitle = () => {
+        if (customTitle) return customTitle;
         if (type === 'powers') return `Seleccionar Poderes (${originFilter})`;
         if (type === 'techModules') return 'Seleccionar Módulos Tecnológicos';
         return 'Seleccionar Hechizos';
     };
 
     const getPlaceholder = () => {
+        if (customPlaceholder) return customPlaceholder;
         if (type === 'powers') return "Buscar poder...";
         if (type === 'techModules') return "Buscar módulo...";
         return "Buscar hechizo...";
