@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "characters/mjolnir-original.md",
+                "file": "characters/mjolnir.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "mjolnir-original"
+              "title": "mjolnir"
             }
           }
         ]
@@ -185,8 +185,8 @@
   },
   "active": "c63981d280fcf146",
   "lastOpenFiles": [
-    "characters/mjolnir.md",
     "characters/mjolnir-original.md",
+    "characters/mjolnir.md",
     "characters/medianoche.md",
     "characters/miolnir-original.md",
     "characters/mijolnir-original.md",
