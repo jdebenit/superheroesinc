@@ -23,6 +23,8 @@ interface PowersSectionProps {
     isDotado: boolean;
     isCosmico: boolean;
     isMutante: boolean;
+    isTesKhar?: boolean;
+    isAtlante?: boolean;
 }
 
 export default function PowersSection({
@@ -44,10 +46,12 @@ export default function PowersSection({
     isTerrano,
     isDotado,
     isCosmico,
-    isMutante
+    isMutante,
+    isTesKhar,
+    isAtlante
 }: PowersSectionProps) {
     const hasAnyPowerOrigin = isGuardian || isAlterado || isVampiro || isSemidemonio || isMaldito ||
-        isEnte || isThals || isDivino || isTerrano || isDotado || isCosmico || isMutante;
+        isEnte || isThals || isDivino || isTerrano || isDotado || isCosmico || isMutante || isTesKhar || isAtlante;
 
     if (!hasAnyPowerOrigin) return null;
 

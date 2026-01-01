@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { POWERS } from '../../../../data/powers';
 import { SPELLS, type Spell } from '../../../../data/spells';
 import { TECH_MODULES } from '../../../../data/techModules';
@@ -35,6 +35,9 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     const [modalType, setModalType] = useState<ModalType>(null);
     const [modalOriginFilter, setModalOriginFilter] = useState<string | null>(null);
 
+    const isTesKhar = hasSubtype(data, 'Parahumano', 'Tes-khar'); // Defined early for useEffect
+    const isAtlante = hasSubtype(data, 'Parahumano', 'Atlante'); // Added for Atlante logic
+
     // Powers are stored as objects { id, origin, rank, powerMod?, skillValue? }
     const selectedPowers: SelectedPower[] = useMemo(() => {
         if (!Array.isArray(data.powers?.selected)) return [];
@@ -49,6 +52,69 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
 
     // Tech Modules
     const techModules: TechModule[] = data.techModules || [];
+
+    // Auto-add Superhabilidad for Tes-khar
+    useEffect(() => {
+        if (isTesKhar) {
+            const hasSuperhabilidad = selectedPowers.some(p => p.id === 'superhabilidad');
+            if (!hasSuperhabilidad) {
+                // Add Superhabilidad at High Rank (80)
+                const newPower: SelectedPower = {
+                    id: 'superhabilidad',
+                    origin: 'Parahumano',
+                    rank: 80, // Rango Alto (71-95)
+                    skillValue: 0
+                };
+                onChange({
+                    ...data,
+                    powers: {
+                        ...data.powers,
+                        selected: [...(data.powers?.selected || []), newPower]
+                    }
+                });
+            }
+        }
+    }, [isTesKhar, selectedPowers, onChange, data]);
+
+    // Auto-add Powers for Atlante
+    useEffect(() => {
+        if (isAtlante) {
+            const hasAnimalEmpathy = selectedPowers.some(p => p.id === 'empatia_animal');
+            const hasSuperhabilidad = selectedPowers.some(p => p.id === 'superhabilidad');
+
+            let newPowers: SelectedPower[] = [];
+
+            if (!hasAnimalEmpathy) {
+                // Add Empatía animal at Low Rank (20)
+                newPowers.push({
+                    id: 'empatia_animal',
+                    origin: 'Parahumano',
+                    rank: 20, // Rango Bajo (1-20)
+                    skillValue: 0
+                });
+            }
+
+            if (!hasSuperhabilidad) {
+                // Add Superhabilidad at High Rank (80)
+                newPowers.push({
+                    id: 'superhabilidad',
+                    origin: 'Parahumano',
+                    rank: 80, // Rango Alto (71-95)
+                    skillValue: 0
+                });
+            }
+
+            if (newPowers.length > 0) {
+                onChange({
+                    ...data,
+                    powers: {
+                        ...data.powers,
+                        selected: [...(data.powers?.selected || []), ...newPowers]
+                    }
+                });
+            }
+        }
+    }, [isAtlante, selectedPowers, onChange, data]);
 
     // Update functions
     const updatePowers = (newSelected: SelectedPower[]) => {
@@ -286,6 +352,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     const isCosmico = hasOrigin(data, 'Cósmico');
     const isMutante = hasOrigin(data, 'Mutante');
     const isVigilante = hasOrigin(data, 'Vigilante');
+    // const isTesKhar = hasSubtype(data, 'Parahumano', 'Tes-khar'); // Already defined at top
 
     // Technological
     const isTecnoarmadura = hasSubtype(data, 'Tecnológico', 'Tecnoarmadura');
@@ -309,7 +376,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     }).filter((s): s is (Spell & { rank: number }) => s !== null);
 
     const hasAnyOrigin = isGuardian || isAlterado || hasEM || isVampiro || isSemidemonio || isMaldito ||
-        isEnte || isThals || isDivino || isCosmico || isMutante || isVigilante || isTechnological || isExoskeleton;
+        isEnte || isThals || isDivino || isCosmico || isMutante || isVigilante || isTechnological || isExoskeleton || isTesKhar || isAtlante;
 
     return (
         <div className="space-y-8 p-6 max-w-5xl mx-auto">
@@ -426,6 +493,8 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                 isDotado={isDotado}
                 isCosmico={isCosmico}
                 isMutante={isMutante}
+                isTesKhar={isTesKhar}
+                isAtlante={isAtlante}
             />
 
             {/* MAGIC SECTION */}

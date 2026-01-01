@@ -290,9 +290,46 @@ export default function CharacterWizard() {
 
         // 9. Power Costs (Base + Rank/PowerMod)
         const selectedPowers = character.powers?.selected || [];
+        let tesKharFreeUsed = false;
+        let atlanteAnimalUsed = false;
+        let atlanteSuperUsed = false;
+
         const powerCost = selectedPowers.reduce((acc: number, power: any) => {
             const powerData = POWERS.find((p: any) => p.id === power.id);
             if (!powerData) return acc;
+
+            // Tes-khar: Superhabilidad free at any rank (effectively) or just base?
+            // "Adquieren gratuitamente poder Superhabilidad a rango alto"
+            // We'll treat the first Superhabilidad found as completely free.
+            const isTesKhar = character.origin?.items?.some((item: any) =>
+                Object.keys(item).some(key => {
+                    const val = item[key];
+                    return Array.isArray(val) && val.includes('Tes-khar');
+                })
+            );
+
+            const isAtlante = character.origin?.items?.some((item: any) =>
+                Object.keys(item).some(key => {
+                    const val = item[key];
+                    return Array.isArray(val) && val.includes('Atlante');
+                })
+            );
+
+            if (isTesKhar && power.id === 'superhabilidad' && !tesKharFreeUsed) {
+                tesKharFreeUsed = true;
+                return acc;
+            }
+
+            if (isAtlante && power.id === 'empatia_animal' && !atlanteAnimalUsed) {
+                atlanteAnimalUsed = true;
+                return acc;
+            }
+            if (isAtlante && power.id === 'superhabilidad' && !atlanteSuperUsed) {
+                atlanteSuperUsed = true;
+                return acc;
+            }
+
+            // Base cost
 
             // Base cost
             let cost = powerData.cost;
