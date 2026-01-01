@@ -17,6 +17,7 @@ import {
     GUARDIAN_FEATURES,
     GUARDIAN_TRANSFORMATIONS
 } from '../../data/guardianOptions';
+import { DIVINE_FOCUS_OPTIONS } from '../../data/divineOptions';
 
 interface CharacterPreviewProps {
     character: any;
@@ -533,6 +534,31 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                             <span style={{ paddingRight: '0.5rem', fontWeight: 'bold', color: '#1e40af' }}>Transformación</span>
                                                             <span style={{ flexGrow: 1, borderBottom: '1px dotted #ccc', margin: '0 0.5rem', position: 'relative', top: '-4px', minWidth: '20px' }}></span>
                                                             <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>{trans.label}</span>
+                                                        </div>
+                                                    </li>
+                                                );
+                                            })()}
+                                        </ul>
+                                    </div>
+                                )}
+
+                                {/* Divine Params */}
+                                {character.divineParams && character.divineParams.focus && (
+                                    <div className="sheet-section divine-params">
+                                        <div className="section-header">
+                                            <h4>Divinidad</h4>
+                                        </div>
+                                        <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                                            {(() => {
+                                                const focus = DIVINE_FOCUS_OPTIONS.find(f => f.id === character.divineParams.focus);
+                                                return focus && (
+                                                    <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
+                                                        <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
+                                                            <span style={{ paddingRight: '0.5rem', fontWeight: 'bold', color: '#b45309' }}>Foco del Poder</span>
+                                                            <span style={{ flexGrow: 1, borderBottom: '1px dotted #ccc', margin: '0 0.5rem', position: 'relative', top: '-4px', minWidth: '20px' }}></span>
+                                                            <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>
+                                                                {focus.label} ({focus.cost > 0 ? `+${focus.cost}` : '0'} PC)
+                                                            </span>
                                                         </div>
                                                     </li>
                                                 );

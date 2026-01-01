@@ -24,6 +24,7 @@ import MalditoSection from './sections/MalditoSection';
 import AlteradoSection from './sections/AlteradoSection';
 import MutanteSection from './sections/MutanteSection';
 import GuardianSection from './sections/GuardianSection';
+import DivineSection from './sections/DivineSection';
 
 // Modal Components
 import SelectionModal from './modals/SelectionModal';
@@ -277,7 +278,11 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     const isMaldito = hasSubtype(data, 'Sobrenatural', 'Maldito');
     const isEnte = hasSubtype(data, 'Sobrenatural', 'Ente');
     const isThals = hasOrigin(data, 'Thals');
-    const isDivino = hasOrigin(data, 'Divino');
+    const isDios = hasSubtype(data, 'Divino', 'Dios');
+    const isDiosMenor = hasSubtype(data, 'Divino', 'Dios menor');
+    const isSemidios = hasSubtype(data, 'Divino', 'Semidios');
+    const isDivino = isDios || isDiosMenor || isSemidios; // Specific subtypes requested
+    // const isDivino = hasOrigin(data, 'Divino'); // Old generic check
     const isCosmico = hasOrigin(data, 'Cósmico');
     const isMutante = hasOrigin(data, 'Mutante');
     const isVigilante = hasOrigin(data, 'Vigilante');
@@ -363,6 +368,13 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
             {isGuardian && (
                 <GuardianSection
                     guardianParams={data.guardianParams || { quality: null, objectType: null, feature: null, transformation: null }}
+                    onChange={onChange}
+                />
+            )}
+
+            {(isDios || isDiosMenor) && (
+                <DivineSection
+                    divineParams={data.divineParams || { focus: null }}
                     onChange={onChange}
                 />
             )}

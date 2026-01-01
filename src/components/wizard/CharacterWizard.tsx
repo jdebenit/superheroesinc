@@ -15,6 +15,7 @@ import { EXOSKELETON_CONFIGS } from '../../data/exoskeletonConfigs';
 import { ENTE_FORMS, ENTE_EFFECTS } from './steps/Step3_Especials/sections/EnteSection';
 import { SEQUELS } from '../../data/sequels';
 import { GUARDIAN_QUALITIES } from '../../data/guardianOptions';
+import { DIVINE_FOCUS_OPTIONS } from '../../data/divineOptions';
 
 const STEPS = [
     { id: 1, name: 'Origen', icon: '🎭' },
@@ -113,6 +114,7 @@ const initialCharacterState = {
     alteradoParams: null,
     mutanteParams: null,
     guardianParams: null, // Added for Guardian origin
+    divineParams: null, // Added for Divine origin
     techModules: [],
     exoskeletonConfig: null
 };
@@ -179,6 +181,9 @@ export default function CharacterWizard() {
                     }
                     if (!parsed.guardianParams) {
                         parsed.guardianParams = null;
+                    }
+                    if (!parsed.divineParams) {
+                        parsed.divineParams = null;
                     }
 
                     console.log('✅ Loaded character from localStorage:', parsed);
@@ -446,6 +451,14 @@ export default function CharacterWizard() {
             const quality = GUARDIAN_QUALITIES.find(q => q.id === character.guardianParams.quality);
             if (quality) {
                 total += quality.cost;
+            }
+        }
+
+        // 19. Divine Params Cost
+        if (character.divineParams && character.divineParams.focus) {
+            const focus = DIVINE_FOCUS_OPTIONS.find(f => f.id === character.divineParams.focus);
+            if (focus) {
+                total += focus.cost;
             }
         }
 
