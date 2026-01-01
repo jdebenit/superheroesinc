@@ -66,7 +66,8 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                     id: 'superhabilidad',
                     origin: 'Parahumano',
                     rank: 80, // Rango Alto (71-95)
-                    skillValue: 0
+                    skillValue: 0,
+                    selectedOption: 'Esconderse'
                 };
                 onChange({
                     ...data,
@@ -103,7 +104,8 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                     id: 'superhabilidad',
                     origin: 'Parahumano',
                     rank: 80, // Rango Alto (71-95)
-                    skillValue: 0
+                    skillValue: 0,
+                    selectedOption: 'Nadar'
                 });
             }
 
@@ -217,6 +219,15 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
         const updated = selectedPowers.map(p =>
             p.id === powerId && p.origin === origin
                 ? { ...p, skillValue: newValue }
+                : p
+        );
+        updatePowers(updated);
+    };
+
+    const updatePowerOption = (powerId: string, origin: string, newOption: string) => {
+        const updated = selectedPowers.map(p =>
+            p.id === powerId && p.origin === origin
+                ? { ...p, selectedOption: newOption }
                 : p
         );
         updatePowers(updated);
@@ -502,7 +513,9 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                 onOpenModal={openPowerModal}
                 onUpdateRank={updatePowerRank}
                 onUpdateMod={updatePowerMod}
+                onUpdateMod={updatePowerMod}
                 onUpdateSkillValue={updatePowerSkillValue}
+                onUpdateOption={updatePowerOption}
                 onRemove={removePower}
                 isGuardian={isGuardian}
                 isAlterado={isAlterado || isParahumanoHybrid}

@@ -14,6 +14,7 @@ export interface SelectedPower {
     rank: number; // 1-100, adds 0.1 PC per unit
     powerMod?: number; // For powers with characteristics, max total 200
     skillValue?: number; // Input for skill calculation base
+    selectedOption?: string; // For powers with options
 }
 
 export interface TechModule {

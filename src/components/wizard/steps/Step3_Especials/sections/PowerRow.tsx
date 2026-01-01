@@ -10,8 +10,11 @@ interface PowerRowProps {
     onUpdateRank: (id: string, origin: string, rank: number) => void;
     onUpdateMod: (id: string, origin: string, mod: number) => void;
     onUpdateSkillValue: (id: string, origin: string, value: number) => void;
+    onUpdateOption: (id: string, origin: string, option: string) => void;
     onRemove: (index: number) => void;
     isParahumanoHybrid?: boolean;
+    isTesKhar?: boolean;
+    isAtlante?: boolean;
 }
 
 const getCharName = (abbr: string): string => {
@@ -40,14 +43,25 @@ export default function PowerRow({
     onUpdateRank,
     onUpdateMod,
     onUpdateSkillValue,
+    onUpdateOption,
     onRemove,
-    isParahumanoHybrid
+    isParahumanoHybrid,
+    isTesKhar,
+    isAtlante
 }: PowerRowProps) {
     const p = POWERS.find(power => power.id === selection.id);
     if (!p) return null;
 
     const isHybridPenalty = isParahumanoHybrid && selection.origin === 'Alterado';
-    const displayCost = isHybridPenalty ? `${p.cost} + 3` : p.cost;
+
+    // Check for free powers
+    const isTesKharFree = isTesKhar && p.id === 'superhabilidad';
+    const isAtlanteFree = isAtlante && (p.id === 'superhabilidad' || p.id === 'empatia_animal');
+    const isFree = isTesKharFree || isAtlanteFree;
+
+    const displayCost = isFree ?
+        <span style={{ textDecoration: 'line-through', color: '#ef4444' }}>{p.cost}</span>
+        : (isHybridPenalty ? `${p.cost} + 3` : p.cost);
 
     const isEven = index % 2 === 0;
     const originStyle = ORIGIN_STYLES[selection.origin];
@@ -56,6 +70,26 @@ export default function PowerRow({
         <tr key={`${selection.id}-${selection.origin}-${index}`} style={{ backgroundColor: isEven ? 'white' : '#f9fafb' }}>
             <td style={{ padding: '1rem', fontWeight: 'bold', color: '#1f2937' }}>
                 {p.name}
+                {p.options && p.options.length > 0 && (
+                    <div style={{ marginTop: '0.5rem' }}>
+                        <input
+                            type="text"
+                            placeholder={p.options[0]}
+                            value={selection.selectedOption || ''}
+                            onChange={(e) => onUpdateOption(selection.id, selection.origin, e.target.value)}
+                            style={{
+                                width: '100%',
+                                padding: '0.25rem',
+                                fontSize: '0.8rem',
+                                border: '1px solid #d1d5db',
+                                borderRadius: '4px',
+                                fontWeight: 'normal',
+                                color: '#4b5563'
+                            }}
+                            onClick={(e) => e.stopPropagation()}
+                        />
+                    </div>
+                )}
             </td>
             <td style={{ padding: '0.75rem', textAlign: 'center' }}>
                 {!p.characteristic ? (
@@ -112,10 +146,15 @@ export default function PowerRow({
                                     const currentVal = selection.skillValue || minVal;
                                     const extraCost = Math.max(0, currentVal - minVal) * 0.1;
                                     const penalty = isHybridPenalty ? 3 : 0;
-                                    return (p.cost + penalty + (selection.rank / 10) + extraCost).toFixed(1);
+                                    const total = (p.cost + penalty + (selection.rank / 10) + extraCost);
+
+                                    if (isFree) return "0.0";
+                                    return total.toFixed(1);
                                 })()}
                             </span>
-                            <span style={{ color: '#6b7280' }}>PCs</span>
+                            <span style={{ color: '#6b7280' }}>
+                                {isFree ? "(Gratis)" : "PCs"}
+                            </span>
                         </div>
                         <span style={{ fontSize: '0.75rem', color: '#6b7280', fontWeight: 'bold' }}>
                             {getRankLevel(selection.rank)}
@@ -127,7 +166,7 @@ export default function PowerRow({
                             {/* Characteristic Value */}
                             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem' }}>
                                 <span style={{ color: '#6b7280', fontWeight: 'bold' }}>
-                                    {getCharacteristicValue(data, getCharName(p.characteristic))}
+                                    {getCharacteristicValue(data, getCharName(p.characteristic || ''))}
                                 </span>
                                 <span style={{ fontSize: '0.65rem', color: '#9ca3af' }}>
                                     {p.characteristic}
@@ -144,7 +183,7 @@ export default function PowerRow({
                                     max="200"
                                     value={selection.powerMod || 0}
                                     onChange={(e) => {
-                                        const charValue = getCharacteristicValue(data, getCharName(p.characteristic));
+                                        const charValue = getCharacteristicValue(data, getCharName(p.characteristic || ''));
                                         const newMod = parseInt(e.target.value, 10) || 0;
                                         const total = charValue + newMod;
                                         if (total <= 200) {
@@ -172,7 +211,7 @@ export default function PowerRow({
                             {/* Total */}
                             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem' }}>
                                 <span style={{ color: '#10b981', fontWeight: 'bold' }}>
-                                    {getCharacteristicValue(data, getCharName(p.characteristic)) + (selection.powerMod || 0)}
+                                    {getCharacteristicValue(data, getCharName(p.characteristic || '')) + (selection.powerMod || 0)}
                                 </span>
                                 <span style={{ fontSize: '0.65rem', color: '#9ca3af' }}>
                                     Total
@@ -180,7 +219,11 @@ export default function PowerRow({
                             </div>
                         </div>
                         <span style={{ fontSize: '0.75rem', color: '#6b7280', fontFamily: 'monospace' }}>
-                            {p.cost} + {((selection.powerMod || 0) / 10).toFixed(1)} = {(p.cost + ((selection.powerMod || 0) / 10)).toFixed(1)} PCs
+                            {isFree ? (
+                                <span style={{ color: '#10b981', fontWeight: 'bold' }}>¡Poder Gratuito por Origen!</span>
+                            ) : (
+                                <>{p.cost} + {((selection.powerMod || 0) / 10).toFixed(1)} = {(p.cost + ((selection.powerMod || 0) / 10)).toFixed(1)} PCs</>
+                            )}
                         </span>
                     </div>
                 )}

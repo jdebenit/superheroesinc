@@ -1019,7 +1019,14 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
 
                                                         <div style={{ display: 'flex', alignItems: 'baseline', width: '100%', marginBottom: '0.25rem' }}>
                                                             <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                                                <span style={{ fontWeight: 'bold', color: '#059669' }}>{powerData.name}</span>
+                                                                <span style={{ fontWeight: 'bold', color: '#059669' }}>
+                                                                    {powerData.name}
+                                                                    {power.selectedOption && (
+                                                                        <span style={{ fontWeight: 'normal', color: '#047857', fontSize: '0.9em', marginLeft: '0.25rem' }}>
+                                                                            ({power.selectedOption})
+                                                                        </span>
+                                                                    )}
+                                                                </span>
                                                             </span>
                                                             <span style={{
                                                                 flexGrow: 1,

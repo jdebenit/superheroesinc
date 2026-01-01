@@ -2,6 +2,7 @@ import { PDFDocument } from 'pdf-lib';
 import { calculateDerivedStats } from './characterCalculations';
 import { calculateGeneralSkillValues, calculateSpecialSkillValues } from './calculations/skillCalculations';
 import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS, FRIENDS_AND_ASSOCIATES } from '../data/backgroundTables';
+import { POWERS } from '../data/powers';
 import { SPECIAL_SKILLS } from '../data/specialSkills';
 
 /**
@@ -126,8 +127,12 @@ export async function generateCharacterSheetPDF(pdfUrl: string, character: any, 
     for (let i = 0; i < 7; i++) {
         if (i < powers.length) {
             const p = powers[i];
-            fields[`power.${i + 1}.name`] = p.name || '';
-            fields[`power.${i + 1}.cost`] = (p.cost || p.baseCost || '').toString();
+            const powerData = POWERS.find(data => data.id === p.id);
+            const baseName = powerData ? powerData.name : (p.name || '');
+            const displayName = p.selectedOption ? `${baseName} (${p.selectedOption})` : baseName;
+
+            fields[`power.${i + 1}.name`] = displayName;
+            fields[`power.${i + 1}.cost`] = (powerData?.cost || p.cost || p.baseCost || '').toString(); // Use looked up cost if available
             fields[`power.${i + 1}.rank`] = (p.rank || '').toString();
             fields[`power.${i + 1}.notes`] = p.effect || '';
         }
