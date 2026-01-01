@@ -14,6 +14,7 @@ import { POWERS } from '../../data/powers';
 import { EXOSKELETON_CONFIGS } from '../../data/exoskeletonConfigs';
 import { ENTE_FORMS, ENTE_EFFECTS } from './steps/Step3_Especials/sections/EnteSection';
 import { SEQUELS } from '../../data/sequels';
+import { GUARDIAN_QUALITIES } from '../../data/guardianOptions';
 
 const STEPS = [
     { id: 1, name: 'Origen', icon: '🎭' },
@@ -110,7 +111,8 @@ const initialCharacterState = {
         source: null
     },
     alteradoParams: null,
-    mutanteParams: null, // Added for Mutante origin
+    mutanteParams: null,
+    guardianParams: null, // Added for Guardian origin
     techModules: [],
     exoskeletonConfig: null
 };
@@ -174,6 +176,9 @@ export default function CharacterWizard() {
                     }
                     if (!parsed.mutanteParams) {
                         parsed.mutanteParams = null;
+                    }
+                    if (!parsed.guardianParams) {
+                        parsed.guardianParams = null;
                     }
 
                     console.log('✅ Loaded character from localStorage:', parsed);
@@ -436,6 +441,14 @@ export default function CharacterWizard() {
             }
         }
 
+        // 18. Guardian Params Cost
+        if (character.guardianParams && character.guardianParams.quality) {
+            const quality = GUARDIAN_QUALITIES.find(q => q.id === character.guardianParams.quality);
+            if (quality) {
+                total += quality.cost;
+            }
+        }
+
         return Math.round(total * 10) / 10;
     }, [character]);
 
@@ -530,7 +543,7 @@ export default function CharacterWizard() {
             {/* Header */}
             <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
                 <h1 style={{ fontSize: '3rem', fontWeight: '900', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
-                    Generador de Fichas (Alpha 0.0.24)
+                    Generador de Fichas (Alpha 0.0.26)
                 </h1>
                 <p style={{ fontSize: '1.25rem', color: '#666', marginBottom: '1rem' }}>
                     Crea tu personaje paso a paso

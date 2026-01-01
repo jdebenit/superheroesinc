@@ -23,6 +23,7 @@ import EnteSection from './sections/EnteSection';
 import MalditoSection from './sections/MalditoSection';
 import AlteradoSection from './sections/AlteradoSection';
 import MutanteSection from './sections/MutanteSection';
+import GuardianSection from './sections/GuardianSection';
 
 // Modal Components
 import SelectionModal from './modals/SelectionModal';
@@ -355,6 +356,13 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
             {isMutante && (
                 <MutanteSection
                     mutanteParams={data.mutanteParams || { sequels: [] }}
+                    onChange={onChange}
+                />
+            )}
+
+            {isGuardian && (
+                <GuardianSection
+                    guardianParams={data.guardianParams || { quality: null, objectType: null, feature: null, transformation: null }}
                     onChange={onChange}
                 />
             )}

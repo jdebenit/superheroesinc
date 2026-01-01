@@ -11,6 +11,12 @@ import { ENTE_FORMS, ENTE_EFFECTS } from './steps/Step3_Especials/sections/EnteS
 import { MALDITO_DATA } from './steps/Step3_Especials/sections/MalditoSection';
 import { ALTERADO_DATA } from './steps/Step3_Especials/sections/AlteradoSection';
 import { SEQUELS } from '../../data/sequels';
+import {
+    GUARDIAN_QUALITIES,
+    GUARDIAN_OBJECTS,
+    GUARDIAN_FEATURES,
+    GUARDIAN_TRANSFORMATIONS
+} from '../../data/guardianOptions';
 
 interface CharacterPreviewProps {
     character: any;
@@ -463,6 +469,74 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                     })}
                                                 </ul>
                                             </li>
+                                        </ul>
+                                    </div>
+                                )}
+
+                                {/* Guardian Params */}
+                                {character.guardianParams && (character.guardianParams.objectType || character.guardianParams.quality) && (
+                                    <div className="sheet-section guardian-params">
+                                        <div className="section-header">
+                                            <h4>Guardián</h4>
+                                        </div>
+                                        <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                                            {/* Object Type */}
+                                            {character.guardianParams.objectType && (() => {
+                                                const obj = GUARDIAN_OBJECTS.find(o => o.id === character.guardianParams.objectType);
+                                                return obj && (
+                                                    <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
+                                                        <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
+                                                            <span style={{ paddingRight: '0.5rem', fontWeight: 'bold', color: '#1e40af' }}>Objeto de Poder</span>
+                                                            <span style={{ flexGrow: 1, borderBottom: '1px dotted #ccc', margin: '0 0.5rem', position: 'relative', top: '-4px', minWidth: '20px' }}></span>
+                                                            <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>{obj.label}</span>
+                                                        </div>
+                                                    </li>
+                                                );
+                                            })()}
+
+                                            {/* Quality */}
+                                            {character.guardianParams.quality && (() => {
+                                                const qual = GUARDIAN_QUALITIES.find(q => q.id === character.guardianParams.quality);
+                                                return qual && (
+                                                    <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
+                                                        <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
+                                                            <span style={{ paddingRight: '0.5rem', fontWeight: 'bold', color: '#1e40af' }}>Cualidad</span>
+                                                            <span style={{ flexGrow: 1, borderBottom: '1px dotted #ccc', margin: '0 0.5rem', position: 'relative', top: '-4px', minWidth: '20px' }}></span>
+                                                            <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>
+                                                                {qual.label} ({qual.cost > 0 ? '+' : ''}{qual.cost} PC)
+                                                            </span>
+                                                        </div>
+                                                    </li>
+                                                );
+                                            })()}
+
+                                            {/* Feature */}
+                                            {character.guardianParams.feature && (() => {
+                                                const feat = GUARDIAN_FEATURES.find(f => f.id === character.guardianParams.feature);
+                                                return feat && (
+                                                    <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
+                                                        <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
+                                                            <span style={{ paddingRight: '0.5rem', fontWeight: 'bold', color: '#1e40af' }}>Rasgo Especial</span>
+                                                            <span style={{ flexGrow: 1, borderBottom: '1px dotted #ccc', margin: '0 0.5rem', position: 'relative', top: '-4px', minWidth: '20px' }}></span>
+                                                            <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>{feat.label}</span>
+                                                        </div>
+                                                    </li>
+                                                );
+                                            })()}
+
+                                            {/* Transformation */}
+                                            {character.guardianParams.transformation && (() => {
+                                                const trans = GUARDIAN_TRANSFORMATIONS.find(t => t.id === character.guardianParams.transformation);
+                                                return trans && (
+                                                    <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
+                                                        <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
+                                                            <span style={{ paddingRight: '0.5rem', fontWeight: 'bold', color: '#1e40af' }}>Transformación</span>
+                                                            <span style={{ flexGrow: 1, borderBottom: '1px dotted #ccc', margin: '0 0.5rem', position: 'relative', top: '-4px', minWidth: '20px' }}></span>
+                                                            <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>{trans.label}</span>
+                                                        </div>
+                                                    </li>
+                                                );
+                                            })()}
                                         </ul>
                                     </div>
                                 )}
