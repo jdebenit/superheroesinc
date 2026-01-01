@@ -10,6 +10,7 @@ import { EXOSKELETON_CONFIGS } from '../../data/exoskeletonConfigs';
 import { ENTE_FORMS, ENTE_EFFECTS } from './steps/Step3_Especials/sections/EnteSection';
 import { MALDITO_DATA } from './steps/Step3_Especials/sections/MalditoSection';
 import { ALTERADO_DATA } from './steps/Step3_Especials/sections/AlteradoSection';
+import { SEQUELS } from '../../data/sequels';
 
 interface CharacterPreviewProps {
     character: any;
@@ -307,7 +308,7 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                 {character.enteParams && (character.enteParams.formType || character.enteParams.visualEffect) && (
                                     <div className="sheet-section ente-params">
                                         <div className="section-header">
-                                            <h4>Opciones de Ente</h4>
+                                            <h4>Ente</h4>
                                         </div>
                                         <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                                             {character.enteParams.formType && (() => {
@@ -346,7 +347,7 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                 {character.malditoParams && (character.malditoParams.magnitude || character.malditoParams.source) && (
                                     <div className="sheet-section maldito-params">
                                         <div className="section-header">
-                                            <h4>Opciones de Maldito</h4>
+                                            <h4>Maldito</h4>
                                         </div>
                                         <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                                             {character.malditoParams.magnitude && (() => {
@@ -391,7 +392,7 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                 {character.alteradoParams && (character.alteradoParams.agent || (character.alteradoParams.sequels && character.alteradoParams.sequels.length > 0)) && (
                                     <div className="sheet-section alterado-params">
                                         <div className="section-header">
-                                            <h4>Opciones de Alterado</h4>
+                                            <h4>Alterado</h4>
                                         </div>
                                         <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                                             {/* Agent */}
@@ -416,27 +417,52 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                     <span style={{ display: 'block', fontSize: '0.9rem', color: '#15803d', fontWeight: 'bold', marginBottom: '0.25rem' }}>Secuelas</span>
                                                     <ul style={{ paddingLeft: '0.5rem', margin: 0, listStyle: 'none', borderLeft: '2px solid #bbf7d0' }}>
                                                         {character.alteradoParams.sequels.map((s: any, idx: number) => {
-                                                            const def = ALTERADO_DATA.SEQUELS.find(d => d.id === s.id);
+                                                            const def = SEQUELS.find(d => d.id === s.id);
                                                             if (!def) return null;
                                                             return (
                                                                 <li key={idx} style={{ marginBottom: '0.5rem', paddingLeft: '0.5rem' }}>
                                                                     <div style={{ fontWeight: 'bold', color: '#374151', fontSize: '0.9rem' }}>
-                                                                        {def.label} <span style={{ color: '#16a34a', fontSize: '0.85rem' }}>({s.variableCost ? `-${s.variableCost}` : '0'} PC)</span>
+                                                                        {def.label} <span style={{ color: '#16a34a', fontSize: '0.85rem' }}>(-{def.cost} PC)</span>
                                                                     </div>
                                                                     <div style={{ fontSize: '0.85rem', color: '#6b7280', fontStyle: 'italic' }}>
                                                                         {def.description}
                                                                     </div>
-                                                                    {s.variableCost && (def.variableLabel || (def.minCost !== undefined && def.maxCost !== undefined)) && (
-                                                                        <div style={{ fontSize: '0.8rem', color: '#15803d', fontWeight: 'bold' }}>
-                                                                            Coste aplicado: {s.variableCost} PC
-                                                                        </div>
-                                                                    )}
                                                                 </li>
                                                             )
                                                         })}
                                                     </ul>
                                                 </li>
                                             )}
+                                        </ul>
+                                    </div>
+                                )}
+
+                                {/* Mutante Params */}
+                                {character.mutanteParams && character.mutanteParams.sequels && character.mutanteParams.sequels.length > 0 && (
+                                    <div className="sheet-section mutante-params">
+                                        <div className="section-header">
+                                            <h4>Mutante</h4>
+                                        </div>
+                                        <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                                            <li style={{ marginTop: '0.5rem' }}>
+                                                <span style={{ display: 'block', fontSize: '0.9rem', color: '#86198f', fontWeight: 'bold', marginBottom: '0.25rem' }}>Secuelas</span>
+                                                <ul style={{ paddingLeft: '0.5rem', margin: 0, listStyle: 'none', borderLeft: '2px solid #e879f9' }}>
+                                                    {character.mutanteParams.sequels.map((s: any, idx: number) => {
+                                                        const def = SEQUELS.find(d => d.id === s.id);
+                                                        if (!def) return null;
+                                                        return (
+                                                            <li key={idx} style={{ marginBottom: '0.5rem', paddingLeft: '0.5rem' }}>
+                                                                <div style={{ fontWeight: 'bold', color: '#374151', fontSize: '0.9rem' }}>
+                                                                    {def.label} <span style={{ color: '#c026d3', fontSize: '0.85rem' }}>(-{def.cost} PC)</span>
+                                                                </div>
+                                                                <div style={{ fontSize: '0.85rem', color: '#6b7280', fontStyle: 'italic' }}>
+                                                                    {def.description}
+                                                                </div>
+                                                            </li>
+                                                        )
+                                                    })}
+                                                </ul>
+                                            </li>
                                         </ul>
                                     </div>
                                 )}

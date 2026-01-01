@@ -13,6 +13,7 @@ import { SPELLS } from '../../data/spells';
 import { POWERS } from '../../data/powers';
 import { EXOSKELETON_CONFIGS } from '../../data/exoskeletonConfigs';
 import { ENTE_FORMS, ENTE_EFFECTS } from './steps/Step3_Especials/sections/EnteSection';
+import { SEQUELS } from '../../data/sequels';
 
 const STEPS = [
     { id: 1, name: 'Origen', icon: '🎭' },
@@ -108,6 +109,8 @@ const initialCharacterState = {
         magnitude: null,
         source: null
     },
+    alteradoParams: null,
+    mutanteParams: null, // Added for Mutante origin
     techModules: [],
     exoskeletonConfig: null
 };
@@ -168,6 +171,9 @@ export default function CharacterWizard() {
                     }
                     if (!parsed.alteradoParams) {
                         parsed.alteradoParams = null;
+                    }
+                    if (!parsed.mutanteParams) {
+                        parsed.mutanteParams = null;
                     }
 
                     console.log('✅ Loaded character from localStorage:', parsed);
@@ -405,36 +411,28 @@ export default function CharacterWizard() {
             // Sequels Discount or Penalty
             if (character.alteradoParams.sequels && Array.isArray(character.alteradoParams.sequels) && character.alteradoParams.sequels.length > 0) {
                 // Has sequels: subtract their costs (discount)
-                // We need to import the sequel definitions to get costs
-                // For now, we'll assume the cost is stored or we calculate it from the ID
                 character.alteradoParams.sequels.forEach((s: any) => {
-                    // Extract cost from sequel ID (e.g., "disability_3" -> 3)
-                    const match = s.id.match(/_(\d+)$/);
-                    if (match) {
-                        total -= parseInt(match[1]);
-                    } else {
-                        // Fixed cost sequels - we need to look them up
-                        const fixedCosts: Record<string, number> = {
-                            'compulsion': 1,
-                            'prosthesis': 2,
-                            'amnesia': 2,
-                            'no_vitals': 2,
-                            'psychosis': 1,
-                            'phobia': 1,
-                            'dependency': 2,
-                            'social_displacement': 1,
-                            'unsociableness': 1,
-                            'character_inversion': 1,
-                            'aggressiveness': 1,
-                            'vulnerable_point': 3,
-                            'involuntary_transformation': 3,
-                        };
-                        total -= (fixedCosts[s.id] || 0);
+                    const seq = SEQUELS.find(d => d.id === s.id);
+                    if (seq) {
+                        total -= seq.cost;
                     }
                 });
             } else {
                 // No sequels selected: +2 PC penalty
                 total += 2;
+            }
+        }
+
+        // 17. Mutante Params Cost (DISCOUNT)
+        if (character.mutanteParams) {
+            // Mutants get discounts for sequels, but NO penalty if none selected (unless specified otherwise)
+            if (character.mutanteParams.sequels && Array.isArray(character.mutanteParams.sequels)) {
+                character.mutanteParams.sequels.forEach((s: any) => {
+                    const seq = SEQUELS.find(d => d.id === s.id);
+                    if (seq) {
+                        total -= seq.cost;
+                    }
+                });
             }
         }
 

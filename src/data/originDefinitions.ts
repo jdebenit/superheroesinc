@@ -40,17 +40,14 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
     },
     "Sobrenatural": {
         name: "Sobrenatural",
-        disabledSubtypes: ["Hombre Lobo", "Liberado de Unidad", "Liberado de Equidad"],
+        disabledSubtypes: ["Hombre Lobo", "Liberado de Unidad", "Liberado de Equidad", "Liberado de Entropia"],
         subtypes: {
             "Vampiro": ["+20 a la parada mental"],
             "Hombre Lobo": ["+20 a la parada mental"],
             "Semidemonio": ["+20 a la parada mental"],
             "Poseido": ["+20 a la parada mental"],
             "Ente": ["+20 a la parada mental"],
-            "Maldito": [
-                "Condenado a recorrer la Tierra hasta que sus buenas obras le rediman.",
-                "+20 a la parada mental"
-            ],
+            "Maldito": ["+20 a la parada mental"],
             "Liberado de Unidad": ["+20 a la parada mental"],
             "Liberado de Equidad": ["+20 a la parada mental"],
             "Liberado de Entropia": ["+20 a la parada mental"]
@@ -63,7 +60,6 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
             "Mago": ["+20 a la parada mental"],
             "Dotado": ["algo", "algo", "algo"],
             "Terrano": [
-                "Energía mágica por el vinculo con terra",
                 "Desconexión de la tecnología moderna",
                 "+20 a la parada mental"
             ],
@@ -91,14 +87,15 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
     },
     "Tecnológico": {
         name: "Tecnológico",
+        disabledSubtypes: ["I.A.", "Robot gigante"],
         subtypes: {
-            "Tecnoarmadura": ["Armadura tecnológica avanzada", "Sistemas integrados", "Acceso a diseño de módulos tecnológicos"],
+            "Tecnoarmadura": ["Armadura tecnológica avanzada", "Sistemas integrados", "Acceso a módulos tecnológicos"],
             "Exoesqueleto Energético": ["Armadura tecnológica avanzada", "Sistemas integrados"],
-            "Cyborg": ["Cuerpo cibernético", "Acceso a diseño de módulos tecnológicos"],
+            "Cyborg": ["Cuerpo cibernético", "Acceso a módulos tecnológicos"],
             "I.A.": ["Inteligencia Artificial", "Cuerpo robótico"],
             "Robot gigante": ["Gran tamaño", "Blindaje pesado"],
-            "Tecnovehículo": ["Vehículo avanzado", "Acceso a diseño de módulos tecnológicos"],
-            "Inventor o forjador": ["Creación de artilugios"]
+            "Tecnovehículo": ["Vehículo avanzado", "Acceso a módulos tecnológicos"],
+            "Inventor o forjador": ["Creación de artefactos"]
         }
     },
     "Vigilante": {
@@ -148,9 +145,6 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
             "Psíquico": ["Acceso a tabla de poderes mutantes de tipo psíquico"],
             "Energético": ["Acceso a tabla de poderes mutantes de tipo energético"],
             "Físico": ["Acceso a tabla de poderes mutantes de tipo físico"],
-            "Psíquico/Energético": ["Acceso a tabla de poderes mutantes de tipo psíquico y energético"],
-            "Energético/Físico": ["Acceso a tabla de poderes mutantes de tipo energético y físico"],
-            "Psíquico/Físico": ["Acceso a tabla de poderes mutantes de tipo psíquico y físico"]
         }
     }
 };

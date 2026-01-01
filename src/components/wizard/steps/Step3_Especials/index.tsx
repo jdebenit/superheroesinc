@@ -22,6 +22,7 @@ import ExoskeletonSection from './sections/ExoskeletonSection';
 import EnteSection from './sections/EnteSection';
 import MalditoSection from './sections/MalditoSection';
 import AlteradoSection from './sections/AlteradoSection';
+import MutanteSection from './sections/MutanteSection';
 
 // Modal Components
 import SelectionModal from './modals/SelectionModal';
@@ -347,6 +348,13 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
             {isAlterado && (
                 <AlteradoSection
                     alteradoParams={data.alteradoParams || { agent: null, sequels: [] }}
+                    onChange={onChange}
+                />
+            )}
+
+            {isMutante && (
+                <MutanteSection
+                    mutanteParams={data.mutanteParams || { sequels: [] }}
                     onChange={onChange}
                 />
             )}
