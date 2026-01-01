@@ -35,8 +35,11 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     const [modalType, setModalType] = useState<ModalType>(null);
     const [modalOriginFilter, setModalOriginFilter] = useState<string | null>(null);
 
-    const isTesKhar = hasSubtype(data, 'Parahumano', 'Tes-khar'); // Defined early for useEffect
-    const isAtlante = hasSubtype(data, 'Parahumano', 'Atlante'); // Added for Atlante logic
+    const isTesKhar = hasSubtype(data, 'Parahumano', 'Tes-khar');
+    const isAtlante = hasSubtype(data, 'Parahumano', 'Atlante');
+    // Hybrid logic
+    const isParahumano = hasOrigin(data, 'Parahumano');
+    const isParahumanoHybrid = isParahumano && (data.isParahumanoHybrid === true); // Defined early for useEffect
 
     // Powers are stored as objects { id, origin, rank, powerMod?, skillValue? }
     const selectedPowers: SelectedPower[] = useMemo(() => {
@@ -376,7 +379,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     }).filter((s): s is (Spell & { rank: number }) => s !== null);
 
     const hasAnyOrigin = isGuardian || isAlterado || hasEM || isVampiro || isSemidemonio || isMaldito ||
-        isEnte || isThals || isDivino || isCosmico || isMutante || isVigilante || isTechnological || isExoskeleton || isTesKhar || isAtlante;
+        isEnte || isThals || isDivino || isCosmico || isMutante || isVigilante || isTechnological || isExoskeleton || isTesKhar || isAtlante || isParahumano;
 
     return (
         <div className="space-y-8 p-6 max-w-5xl mx-auto">
@@ -390,6 +393,26 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                         No has seleccionado ningún origen que actualmente tenga habilitado este paso. Recuerda es una Alpha.
                     </p>
                     <p className="text-gray-400 mt-2 font-comic">Prueba con Guardián, Alterado, Arcano, Sobrenatural, Thals, Divino, Cósmico, Mutante o Tecnológico</p>
+                </div>
+            )}
+
+            {/* Parahumano Hybrid Checkbox */}
+            {isParahumano && (
+                <div className="bg-yellow-50 border-2 border-yellow-400 p-4 rounded-lg shadow-md mb-6">
+                    <label className="flex items-center space-x-3 cursor-pointer">
+                        <input
+                            type="checkbox"
+                            checked={data.isParahumanoHybrid || false}
+                            onChange={(e) => onChange({ ...data, isParahumanoHybrid: e.target.checked })}
+                            className="form-checkbox h-5 w-5 text-yellow-600 rounded focus:ring-yellow-500 border-gray-300 transition duration-150 ease-in-out"
+                        />
+                        <span className="text-lg font-bold text-gray-800">
+                            Híbrido con Humano (Acceso a poderes de Alterado)
+                        </span>
+                    </label>
+                    <p className="text-sm text-gray-600 mt-1 ml-8">
+                        Si marcas esta opción, tendrás acceso a la lista de poderes de Alterado con un coste adicional de +3 PCs al coste base de cada poder seleccionado.
+                    </p>
                 </div>
             )}
 
@@ -482,7 +505,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                 onUpdateSkillValue={updatePowerSkillValue}
                 onRemove={removePower}
                 isGuardian={isGuardian}
-                isAlterado={isAlterado}
+                isAlterado={isAlterado || isParahumanoHybrid}
                 isVampiro={isVampiro}
                 isSemidemonio={isSemidemonio}
                 isMaldito={isMaldito}
@@ -495,6 +518,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                 isMutante={isMutante}
                 isTesKhar={isTesKhar}
                 isAtlante={isAtlante}
+                isParahumanoHybrid={isParahumanoHybrid}
             />
 
             {/* MAGIC SECTION */}

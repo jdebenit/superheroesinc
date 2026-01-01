@@ -25,6 +25,7 @@ interface PowersSectionProps {
     isMutante: boolean;
     isTesKhar?: boolean;
     isAtlante?: boolean;
+    isParahumanoHybrid?: boolean;
 }
 
 export default function PowersSection({
@@ -48,7 +49,8 @@ export default function PowersSection({
     isCosmico,
     isMutante,
     isTesKhar,
-    isAtlante
+    isAtlante,
+    isParahumanoHybrid
 }: PowersSectionProps) {
     const hasAnyPowerOrigin = isGuardian || isAlterado || isVampiro || isSemidemonio || isMaldito ||
         isEnte || isThals || isDivino || isTerrano || isDotado || isCosmico || isMutante || isTesKhar || isAtlante;
@@ -153,6 +155,7 @@ export default function PowersSection({
                                     onUpdateMod={onUpdateMod}
                                     onUpdateSkillValue={onUpdateSkillValue}
                                     onRemove={onRemove}
+                                    isParahumanoHybrid={isParahumanoHybrid}
                                 />
                             ))}
                         </tbody>

@@ -11,6 +11,7 @@ interface PowerRowProps {
     onUpdateMod: (id: string, origin: string, mod: number) => void;
     onUpdateSkillValue: (id: string, origin: string, value: number) => void;
     onRemove: (index: number) => void;
+    isParahumanoHybrid?: boolean;
 }
 
 const getCharName = (abbr: string): string => {
@@ -39,10 +40,14 @@ export default function PowerRow({
     onUpdateRank,
     onUpdateMod,
     onUpdateSkillValue,
-    onRemove
+    onRemove,
+    isParahumanoHybrid
 }: PowerRowProps) {
     const p = POWERS.find(power => power.id === selection.id);
     if (!p) return null;
+
+    const isHybridPenalty = isParahumanoHybrid && selection.origin === 'Alterado';
+    const displayCost = isHybridPenalty ? `${p.cost} + 3` : p.cost;
 
     const isEven = index % 2 === 0;
     const originStyle = ORIGIN_STYLES[selection.origin];
@@ -56,7 +61,7 @@ export default function PowerRow({
                 {!p.characteristic ? (
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.875rem', fontFamily: 'monospace' }}>
-                            <span style={{ color: '#6b7280', fontWeight: 'bold' }}>{p.cost}</span>
+                            <span style={{ color: '#6b7280', fontWeight: 'bold' }}>{displayCost}</span>
                             <span style={{ color: '#9ca3af' }}>+</span>
                             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                 <input
@@ -106,7 +111,8 @@ export default function PowerRow({
                                     const minVal = p.skillCalc ? calculateSkillBase(data, p.skillCalc) : 0;
                                     const currentVal = selection.skillValue || minVal;
                                     const extraCost = Math.max(0, currentVal - minVal) * 0.1;
-                                    return (p.cost + (selection.rank / 10) + extraCost).toFixed(1);
+                                    const penalty = isHybridPenalty ? 3 : 0;
+                                    return (p.cost + penalty + (selection.rank / 10) + extraCost).toFixed(1);
                                 })()}
                             </span>
                             <span style={{ color: '#6b7280' }}>PCs</span>

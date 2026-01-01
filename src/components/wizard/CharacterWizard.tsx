@@ -116,7 +116,8 @@ const initialCharacterState = {
     guardianParams: null, // Added for Guardian origin
     divineParams: null, // Added for Divine origin
     techModules: [],
-    exoskeletonConfig: null
+    exoskeletonConfig: null,
+    isParahumanoHybrid: false // Checkbox state for Parahumano hybrid with human
 };
 
 
@@ -184,6 +185,9 @@ export default function CharacterWizard() {
                     }
                     if (!parsed.divineParams) {
                         parsed.divineParams = null;
+                    }
+                    if (parsed.isParahumanoHybrid === undefined) {
+                        parsed.isParahumanoHybrid = false;
                     }
 
                     console.log('✅ Loaded character from localStorage:', parsed);
@@ -330,9 +334,12 @@ export default function CharacterWizard() {
             }
 
             // Base cost
-
-            // Base cost
             let cost = powerData.cost;
+
+            // Parahumano Hybrid Penalty: +3 PC for Alterado powers
+            if (character.isParahumanoHybrid && power.origin === 'Alterado') {
+                cost += 3;
+            }
 
             // Additional cost based on power type
             if (!powerData.characteristic) {
@@ -593,7 +600,7 @@ export default function CharacterWizard() {
             {/* Header */}
             <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
                 <h1 style={{ fontSize: '3rem', fontWeight: '900', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
-                    Generador de Fichas (Alpha 0.0.26)
+                    Generador de Fichas (Alpha 0.0.27)
                 </h1>
                 <p style={{ fontSize: '1.25rem', color: '#666', marginBottom: '1rem' }}>
                     Crea tu personaje paso a paso
