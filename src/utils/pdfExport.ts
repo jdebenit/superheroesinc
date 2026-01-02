@@ -64,6 +64,25 @@ export async function generateCharacterSheetPDF(pdfUrl: string, character: any, 
         'combat.hp': stats.combat.pv,
         'combat.mental': stats.combat.equilibrio,
 
+        // Energia Magica
+        'combat.energy': (() => {
+            const int = character.attributes?.values?.["Inteligencia"] || 0;
+            const per = character.attributes?.values?.["Percepción"] || 0;
+            const vol = character.attributes?.values?.["Voluntad"] || 0;
+
+            // Check for Semidemonio
+            const isSemidemonio = character.origin?.items?.some((o: any) => {
+                const originName = Object.keys(o)[0];
+                const content = o[originName] as string[];
+                return content && content.includes('Semidemonio');
+            });
+            const con = isSemidemonio ? (character.attributes?.values?.["Constitución"] || 0) : 0;
+
+            const divisor = character.spells?.emFormula?.divisor || 4;
+            const em = Math.floor((int + per + vol + con) / divisor);
+            return em.toString();
+        })(),
+
         // Otras Estadísticas
         'stats.unconscious': stats.other.inconsciencia,
         'stats.recovery': stats.other.recuperacion,
