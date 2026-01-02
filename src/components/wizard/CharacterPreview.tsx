@@ -11,6 +11,7 @@ import { ENTE_FORMS, ENTE_EFFECTS } from './steps/Step3_Especials/sections/EnteS
 import { MALDITO_DATA } from './steps/Step3_Especials/sections/MalditoSection';
 import { ALTERADO_DATA } from './steps/Step3_Especials/sections/AlteradoSection';
 import { SEQUELS } from '../../data/sequels';
+import { INCOME_SOURCES } from '../../data/technologicalOptions';
 import {
     GUARDIAN_QUALITIES,
     GUARDIAN_OBJECTS,

@@ -13,6 +13,7 @@ import { SPELLS } from '../../data/spells';
 import { POWERS } from '../../data/powers';
 import { EXOSKELETON_CONFIGS } from '../../data/exoskeletonConfigs';
 import { ENTE_FORMS, ENTE_EFFECTS } from './steps/Step3_Especials/sections/EnteSection';
+import { INCOME_SOURCES } from '../../data/technologicalOptions';
 import { SEQUELS } from '../../data/sequels';
 import { GUARDIAN_QUALITIES } from '../../data/guardianOptions';
 import { DIVINE_FOCUS_OPTIONS } from '../../data/divineOptions';
@@ -116,6 +117,7 @@ const initialCharacterState = {
     guardianParams: null, // Added for Guardian origin
     divineParams: null, // Added for Divine origin
     techModules: [],
+    techParams: { incomeSource: 'agencia_priv' }, // Default to 0 PC option
     exoskeletonConfig: null,
     isParahumanoHybrid: false // Checkbox state for Parahumano hybrid with human
 };
@@ -382,6 +384,14 @@ export default function CharacterWizard() {
             return acc + cost;
         }, 0);
         total += powerCost;
+
+        // Technological Income Source Cost
+        if (character.origin?.items?.some((i: any) => Object.keys(i)[0] === 'Tecnológico') && character.techParams?.incomeSource) {
+            const source = INCOME_SOURCES.find(s => s.id === character.techParams.incomeSource);
+            if (source) {
+                total += source.pc;
+            }
+        }
 
         // 10. Equipment Costs
         const equipmentCost = (character.equipment?.items || []).reduce((acc: number, item: any) => {

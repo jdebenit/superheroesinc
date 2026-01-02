@@ -25,6 +25,7 @@ import AlteradoSection from './sections/AlteradoSection';
 import MutanteSection from './sections/MutanteSection';
 import GuardianSection from './sections/GuardianSection';
 import DivineSection from './sections/DivineSection';
+import TechnologicalSection from './sections/TechnologicalSection';
 
 // Modal Components
 import SelectionModal from './modals/SelectionModal';
@@ -37,6 +38,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
 
     const isTesKhar = hasSubtype(data, 'Parahumano', 'Tes-khar');
     const isAtlante = hasSubtype(data, 'Parahumano', 'Atlante');
+    const isTecnologico = hasOrigin(data, 'Tecnológico');
     // Hybrid logic
     const isParahumano = hasOrigin(data, 'Parahumano');
     const isParahumanoHybrid = isParahumano && (data.isParahumanoHybrid === true); // Defined early for useEffect
@@ -487,6 +489,14 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                 onUpdateTrauma={updateTrauma}
             />
 
+            {/* TECHNOLOGICAL INCOME SECTION */}
+            {isTecnologico && (
+                <TechnologicalSection
+                    techParams={data.techParams}
+                    onChange={(params) => onChange({ ...data, techParams: { ...data.techParams, ...params } })}
+                />
+            )}
+
             {/* EXOSKELETON SECTION */}
             {isExoskeleton && (
                 <ExoskeletonSection
@@ -512,7 +522,6 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                 selectedPowers={selectedPowers}
                 onOpenModal={openPowerModal}
                 onUpdateRank={updatePowerRank}
-                onUpdateMod={updatePowerMod}
                 onUpdateMod={updatePowerMod}
                 onUpdateSkillValue={updatePowerSkillValue}
                 onUpdateOption={updatePowerOption}
