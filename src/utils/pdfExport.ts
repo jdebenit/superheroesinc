@@ -89,7 +89,15 @@ export async function generateCharacterSheetPDF(pdfUrl: string, character: any, 
     // Mapear General Skills (Fixed names)
     // IDs: acechar, combate, conocimientos, esconderse, idea, influencia, idioma, investigar, lanzar, primeros_auxilios, suerte, trepar
     Object.entries(generalSkillsData.skills).forEach(([skillId, skillData]) => {
-        fields[`skill.${skillId}`] = skillData.total.toString();
+        if (skillId === 'idioma') {
+            fields[`skill.${skillId}.val`] = skillData.total.toString();
+            // Export native language name if available
+            if (character.skills?.nativeLanguage) {
+                fields[`skill.${skillId}.name`] = character.skills.nativeLanguage;
+            }
+        } else {
+            fields[`skill.${skillId}`] = skillData.total.toString();
+        }
     });
 
     // Mapear Special Skills (Variable slots: 13)
@@ -134,6 +142,7 @@ export async function generateCharacterSheetPDF(pdfUrl: string, character: any, 
             fields[`power.${i + 1}.name`] = displayName;
             fields[`power.${i + 1}.cost`] = (powerData?.cost || p.cost || p.baseCost || '').toString(); // Use looked up cost if available
             fields[`power.${i + 1}.rank`] = (p.rank || '').toString();
+            fields[`power.${i + 1}.val`] = (p.skillValue || '').toString();
             fields[`power.${i + 1}.notes`] = p.effect || '';
         }
     }
