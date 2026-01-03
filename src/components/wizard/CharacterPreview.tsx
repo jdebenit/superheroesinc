@@ -368,9 +368,10 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                             {character.artifacts.items.map((item: any, i: number) => (
                                                 <div key={i} className="artifact-item" style={{ padding: '0.75rem', backgroundColor: '#f5f3ff', border: '1px solid #ede9fe', borderRadius: '6px' }}>
                                                     <div style={{ fontWeight: 'bold', color: '#7c3aed', marginBottom: '0.5rem' }}>{item.name}</div>
-                                                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.5rem', fontSize: '0.85rem' }}>
+                                                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem', fontSize: '0.85rem' }}>
                                                         <div><span style={{ fontWeight: 'bold' }}>Fiabilidad:</span> {item.reliability || '-'}</div>
                                                         <div><span style={{ fontWeight: 'bold' }}>Valor:</span> {item.value || '-'}</div>
+                                                        <div><span style={{ fontWeight: 'bold' }}>Coste:</span> {item.cost || '0'} PCs</div>
                                                     </div>
                                                 </div>
                                             ))}

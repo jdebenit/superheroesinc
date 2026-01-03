@@ -182,8 +182,8 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
             selected: selectedSkills,
             specified: specifiedSkills,
             generalItems: generalItems,        // Habilidades generales
-            specialItems: allSpecialItems,     // Habilidades de aprendizaje
-            items: [...generalItems, ...allSpecialItems]  // Todas juntas (para compatibilidad)
+            specialItems: allSpecialItems      // Habilidades de aprendizaje
+            // REMOVED: items array - NO LONGER NEEDED, causes duplication
         };
 
         // Simple check to avoid loop

@@ -24,6 +24,8 @@ export async function generateCharacterSheetPDF(
         spellsData?: any[];
         techData?: any[];
         weaponsData?: any[];
+        artifactsData?: any[];
+        vehiclesData?: any[];
         equipmentData?: any[];
     }
 ): Promise<Uint8Array> {
@@ -131,60 +133,86 @@ export async function generateCharacterSheetPDF(
         }
     });
 
-    // Mapear Special Skills (Variable slots: 13)
-    const flattenedSpecialSkills: any[] = [];
+    // ========================================================================
+    // SPECIAL SKILLS - USE ONLY JSON DATA, NOT PRE-CALCULATED
+    // ========================================================================
 
-    // Add standard special skills
-    Object.entries(specialSkillsData.standard).forEach(([skillId, skillData]: [string, any]) => {
-        const def = SPECIAL_SKILLS.find(s => s.id === skillId);
-        flattenedSpecialSkills.push({
-            name: def?.name || skillId,
-            val: skillData.total
-        });
+    console.log('--- SPECIAL SKILLS EXPORT ---');
+    console.log('Source: character.skills.specialItems');
+    console.log('Data:', character.skills?.specialItems);
+
+    // Get special skills DIRECTLY from character JSON
+    const specialSkillsFromJSON = character.skills?.specialItems || [];
+
+    console.log(`Found ${specialSkillsFromJSON.length} special skills in JSON`);
+
+    // STEP 1: Clear ALL possible special skill fields (predefined + generic)
+    const predefinedSkillFields = [
+        'Arcos / Ballestas',
+        'Armas cortas',
+        'Armas largas',
+        'Armas militares',
+        'Armas blancas',
+        'Explosivos',
+        'Trampas',
+        'Farmacología',
+        'Medicina',
+        'Cerrajería',
+        'Cibernética',
+        'Computadoras / Comunicaciones',
+        'Mecánica'
+    ];
+
+    // Clear predefined fields
+    predefinedSkillFields.forEach(fieldName => {
+        try {
+            const field = form.getTextField(fieldName);
+            if (field) {
+                field.setText('');
+            }
+        } catch (e) {
+            // Field doesn't exist, ignore
+        }
     });
 
-    // Add specified special skills (e.g. pilot with spec)
-    Object.values(specialSkillsData.specified).forEach((skillData: any) => {
-        const def = SPECIAL_SKILLS.find(s => s.id === skillData.skillId);
-        flattenedSpecialSkills.push({
-            name: `${def?.name || skillData.skillId}: ${skillData.specification}`,
-            val: skillData.total
-        });
-    });
+    // Clear ALL generic Texto fields (up to 26 for 13 pairs)
+    for (let i = 1; i <= 26; i++) {
+        try {
+            const field = form.getTextField(`Texto${i}`);
+            if (field) {
+                field.setText('');
+            }
+        } catch (e) {
+            // Field doesn't exist, ignore
+        }
+    }
 
-    console.log('--- DEBUG: Special Skills to PDF ---');
-    console.log('flattenedSpecialSkills:', flattenedSpecialSkills);
-    console.log('Total count:', flattenedSpecialSkills.length);
-    console.log('------------------------------');
-
+    // STEP 2: Map ONLY the skills from JSON
     for (let i = 0; i < 13; i++) {
-        // Map to potential generic fields "TextoX" found in the template
-        // Assuming pairs: Name=Odd, Val=Even
         const nameField = `Texto${(i * 2) + 1}`;
         const valField = `Texto${(i * 2) + 2}`;
 
-        if (i < flattenedSpecialSkills.length) {
-            const skillName = flattenedSpecialSkills[i].name;
-            const skillVal = flattenedSpecialSkills[i].val.toString();
+        if (i < specialSkillsFromJSON.length) {
+            const skill = specialSkillsFromJSON[i];
+            const skillName = skill.name || '';
+            const skillVal = skill.value || '';
 
-            console.log(`Mapping skill ${i}: "${skillName}" (${skillVal}) to ${nameField}/${valField}`);
+            console.log(`Mapping skill ${i}: "${skillName}" = ${skillVal}`);
 
-            // Also try legacy specific names just in case
-            fields[`skill.special.${i + 1}.name`] = skillName;
-            fields[`skill.special.${i + 1}.val`] = skillVal;
-
-            // Map to generic fields
             fields[nameField] = skillName;
             fields[valField] = skillVal;
+            fields[`skill.special.${i + 1}.name`] = skillName;
+            fields[`skill.special.${i + 1}.val`] = skillVal;
         } else {
-            console.log(`Clearing slot ${i}: ${nameField}/${valField}`);
-            fields[`skill.special.${i + 1}.name`] = '';
-            fields[`skill.special.${i + 1}.val`] = '';
-
+            // Clear unused slots
             fields[nameField] = '';
             fields[valField] = '';
+            fields[`skill.special.${i + 1}.name`] = '';
+            fields[`skill.special.${i + 1}.val`] = '';
         }
     }
+
+    console.log('--- END SPECIAL SKILLS EXPORT ---');
 
     // --- MAPPING FROM PRE-CALCULATED LISTS ---
 
@@ -251,11 +279,50 @@ export async function generateCharacterSheetPDF(
             const w = weaponList[i];
             fields[`weapon.${i + 1}.name`] = w.name;
             fields[`weapon.${i + 1}.damage`] = w.damage;
+            fields[`weapon.${i + 1}.dxa`] = w.dxa || '';
+            fields[`weapon.${i + 1}.car`] = w.car || '';
             fields[`weapon.${i + 1}.notes`] = w.notes;
         } else {
             fields[`weapon.${i + 1}.name`] = '';
             fields[`weapon.${i + 1}.damage`] = '';
+            fields[`weapon.${i + 1}.dxa`] = '';
+            fields[`weapon.${i + 1}.car`] = '';
             fields[`weapon.${i + 1}.notes`] = '';
+        }
+    }
+
+    // Artifacts (7 slots)
+    const artifactList = preCalculatedData?.artifactsData || [];
+    for (let i = 0; i < 7; i++) {
+        if (i < artifactList.length) {
+            const a = artifactList[i];
+            fields[`artifact.${i + 1}.name`] = a.name;
+            fields[`artifact.${i + 1}.reliability`] = a.reliability || '';
+            fields[`artifact.${i + 1}.value`] = a.value || '';
+            fields[`artifact.${i + 1}.cost`] = a.cost || '';
+        } else {
+            fields[`artifact.${i + 1}.name`] = '';
+            fields[`artifact.${i + 1}.reliability`] = '';
+            fields[`artifact.${i + 1}.value`] = '';
+            fields[`artifact.${i + 1}.cost`] = '';
+        }
+    }
+
+    // Vehicles (5 slots)
+    const vehicleList = preCalculatedData?.vehiclesData || [];
+    for (let i = 0; i < 5; i++) {
+        if (i < vehicleList.length) {
+            const v = vehicleList[i];
+            fields[`vehicle.${i + 1}.name`] = v.name;
+            fields[`vehicle.${i + 1}.armor`] = v.armor || '';
+            fields[`vehicle.${i + 1}.pe`] = v.pe || '';
+            fields[`vehicle.${i + 1}.speed`] = v.speed || '';
+            // Note: range is not in the PDF according to user, only name, speed, armor, pe
+        } else {
+            fields[`vehicle.${i + 1}.name`] = '';
+            fields[`vehicle.${i + 1}.armor`] = '';
+            fields[`vehicle.${i + 1}.pe`] = '';
+            fields[`vehicle.${i + 1}.speed`] = '';
         }
     }
 
