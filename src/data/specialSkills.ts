@@ -15,6 +15,7 @@ export interface SpecialSkillDefinition {
     formula?: (stats: { [key: string]: number }) => number;
     formulaText?: string;
     category: 'combat' | 'technical' | 'knowledge' | 'social' | 'other' | 'exclusive';
+    allowedCriteria?: { origin?: string; subtype?: string }[]; // New field for restrictions
 }
 
 export const SPECIAL_SKILLS: SpecialSkillDefinition[] = [
@@ -276,7 +277,8 @@ export const SPECIAL_SKILLS: SpecialSkillDefinition[] = [
         category: 'exclusive',
         formula: (stats) => (stats['inteligencia'] + stats['percepcion']) / 2,
         formulaText: '(INT+PER)/2',
-        description: 'Capacidad para lanzar hechizos'
+        description: 'Capacidad para lanzar hechizos',
+        allowedCriteria: [{ origin: 'Arcano' }]
     },
     {
         id: 'artes_marciales',
@@ -284,7 +286,13 @@ export const SPECIAL_SKILLS: SpecialSkillDefinition[] = [
         category: 'exclusive',
         formula: (stats) => (stats['agilidad'] + stats['percepcion']) / 3,
         formulaText: '(AGI+PER)/3',
-        description: 'Combate cuerpo a cuerpo sin armas'
+        description: 'Combate cuerpo a cuerpo sin armas',
+        allowedCriteria: [
+            { subtype: 'Artista Marcial' },
+            { subtype: 'Artista Marcial con Chi' }// Assuming this exists or mapping to generic if needed, user said "con chi y sin chi" but origin defs might differ.
+            // Checking originDefinitions.ts: "Artista Marcial" and "Artista Marcial con Chi" are the keys.
+            // User said "solo por Artistas marciales con chi y sin chi". The subtype "Artista Marcial" likely corresponds to "sin chi" or generic.
+        ]
     },
     {
         id: 'artesania_arcana',
@@ -292,7 +300,8 @@ export const SPECIAL_SKILLS: SpecialSkillDefinition[] = [
         category: 'exclusive',
         formula: (stats) => (stats['inteligencia'] + stats['percepcion']) / 3,
         formulaText: '(INT+PER)/3',
-        description: 'Impresión de voluntad en objetos'
+        description: 'Impresión de voluntad en objetos',
+        allowedCriteria: [{ origin: 'Arcano' }]
     },
     {
         id: 'contemplacion',
@@ -300,7 +309,11 @@ export const SPECIAL_SKILLS: SpecialSkillDefinition[] = [
         category: 'exclusive',
         formula: (stats) => stats['voluntad'] / 2,
         formulaText: 'VOL/2',
-        description: 'Centrar su voluntad en una canalización de hechizo o de chi'
+        description: 'Centrar su voluntad en una canalización de hechizo o de chi',
+        allowedCriteria: [
+            { origin: 'Arcano' },
+            { subtype: 'Artista Marcial con Chi' }
+        ]
     },
     {
         id: 'forjador_artefactos',
@@ -308,7 +321,8 @@ export const SPECIAL_SKILLS: SpecialSkillDefinition[] = [
         category: 'exclusive',
         formula: (stats) => (stats['inteligencia'] + stats['voluntad']) / 3,
         formulaText: '(INT+VOL)/3',
-        description: 'Creación y reparación de artefactos'
+        description: 'Creación y reparación de artefactos',
+        allowedCriteria: [{ subtype: 'Inventor o forjador' }]
     },
     {
         id: 'sistemas_armamento',
@@ -316,7 +330,12 @@ export const SPECIAL_SKILLS: SpecialSkillDefinition[] = [
         category: 'exclusive',
         formula: (stats) => stats['percepcion'] / 2,
         formulaText: 'PER/2',
-        description: 'Permite operar armas en tecnoarmaduras, tecnoimplantes y tecnovehiculos'
+        description: 'Permite operar armas en tecnoarmaduras, tecnoimplantes y tecnovehiculos',
+        allowedCriteria: [
+            { subtype: 'Tecnoarmadura' },
+            { subtype: 'Tecnovehículo' },
+            { subtype: 'Cyborg' }
+        ]
     },
     {
         id: 'tecnoarmadura',
@@ -324,7 +343,11 @@ export const SPECIAL_SKILLS: SpecialSkillDefinition[] = [
         category: 'exclusive',
         formula: (stats) => (stats['inteligencia'] + stats['percepcion']) / 3,
         formulaText: '(INT+PER)/3',
-        description: 'Manejo de tecnoarmaduras de combate y tecnovehiculos'
+        description: 'Manejo de tecnoarmaduras de combate y tecnovehiculos',
+        allowedCriteria: [
+            { subtype: 'Tecnoarmadura' },
+            { subtype: 'Tecnovehículo' }
+        ]
     },
 ];
 

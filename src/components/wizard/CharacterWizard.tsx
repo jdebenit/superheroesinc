@@ -3,7 +3,7 @@ import CharacterPreview from './CharacterPreview';
 import Step1_OriginSelection from './steps/Step1_OriginSelection';
 import Step2_Characteristics from './steps/Step2_Characteristics';
 import Step3_Especials from './steps/Step3_Especials';
-import Step4_GeneralSkills from './steps/Step4_GeneralSkills';
+import Step4_Skills from './steps/Step4_Skills';
 import Step5_Background from './steps/Step5_Background';
 import Step6_Details from './steps/Step6_Details';
 import { calculateOriginCost } from '../../data/originCosts.ts';
@@ -627,7 +627,7 @@ export default function CharacterWizard() {
         }
 
         if (currentStep === 4) {
-            return <Step4_GeneralSkills data={character} onChange={updateCharacter} />;
+            return <Step4_Skills data={character} onChange={updateCharacter} />;
         }
 
         if (currentStep === 5) {
@@ -655,7 +655,7 @@ export default function CharacterWizard() {
             {/* Header */}
             <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
                 <h1 style={{ fontSize: '3rem', fontWeight: '900', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
-                    Generador de Fichas (Beta 0.1.0)
+                    Generador de Fichas (Beta 0.1.2)
                 </h1>
                 <p style={{ fontSize: '1.25rem', color: '#666', marginBottom: '1rem' }}>
                     Crea tu personaje paso a paso
