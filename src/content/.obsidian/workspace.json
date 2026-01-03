@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "faq/03-exoesqueleto-energético-habilidad.md",
+                "file": "faq/04-calculo-energia-magica-terrano-semidemonio.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "03-exoesqueleto-energético-habilidad"
+              "title": "04-calculo-energia-magica-terrano-semidemonio"
             }
           }
         ]
@@ -185,8 +185,8 @@
   },
   "active": "7c7e2da5e0e36dbe",
   "lastOpenFiles": [
-    "faq/04-calculo-energia-magica-terrano-semidemonio.md",
     "faq/03-exoesqueleto-energético-habilidad.md",
+    "faq/04-calculo-energia-magica-terrano-semidemonio.md",
     "faq/02-generador-fichas-limitaciones.md",
     "faq/01-que-necesito-para-jugar.md",
     "blog/haciendo-fichas-sin-calculadora.md",

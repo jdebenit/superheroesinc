@@ -15,12 +15,12 @@ La clave está en **cuándo** se añade.
 La CON se incorpora **antes de realizar cualquier división**, no después. Es decir, primero se suman las características que correspondan y luego, si el origen lo requiere, se aplica la división.
 ## Ejemplos
 
-Un **Mago / Semidemonio**, como por ejemplo Mausoleo, tiene los siguientes valores:
+Un **Mago / Semidemonio**, como por ejemplo [Mausoleo](/personajes/mausoleo/), tiene los siguientes valores:
 
-- CONstitución: 80
-- INTeligencia: 106
-- PERcepción: 198
-- VOLuntad: 70
+- **CON**stitución: 80
+- **INT**eligencia: 106
+- **PER**cepción: 198
+- **VOL**untad: 70
 
 Si fuese **solo mago**, el cálculo de su Energía Mágica sería:
 
