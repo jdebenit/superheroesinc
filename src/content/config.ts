@@ -126,9 +126,21 @@ const charactersCollection = defineCollection({
     }),
 });
 
+const faqCollection = defineCollection({
+    type: 'content',
+    schema: z.object({
+        question: z.string(),
+        tags: z.array(z.string()),
+        category: z.string().optional(),
+        order: z.number().optional(),
+        updatedDate: z.date().optional(),
+    }),
+});
+
 export const collections = {
     'blog': blogCollection,
     'lore': loreCollection,
     'characters': charactersCollection,
     'rpg': rpgCollection,
+    'faq': faqCollection,
 };
