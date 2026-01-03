@@ -569,9 +569,44 @@ export default function CharacterWizard() {
         }
     };
 
-    const handleConfiguration = () => {
-        // TODO: Implement configuration modal
-        alert('Configuración - Próximamente');
+    const handleImportJSON = () => {
+        // Create a hidden file input
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = '.json';
+
+        input.onchange = async (e: any) => {
+            const file = e.target?.files?.[0];
+            if (!file) return;
+
+            try {
+                const text = await file.text();
+                const importedCharacter = JSON.parse(text);
+
+                // Validate that it's a character JSON
+                if (!importedCharacter.name || !importedCharacter.attributes) {
+                    alert('❌ El archivo JSON no parece ser un personaje válido.');
+                    return;
+                }
+
+                // Load the character
+                setCharacter(importedCharacter);
+                setCurrentStep(1);
+
+                // Save to localStorage
+                if (typeof window !== 'undefined') {
+                    localStorage.setItem('characterWizardState', JSON.stringify(importedCharacter));
+                }
+
+                alert(`✅ Personaje "${importedCharacter.name}" cargado correctamente!`);
+                console.log('📥 Imported character:', importedCharacter);
+            } catch (error) {
+                console.error('Error importing JSON:', error);
+                alert('❌ Error al leer el archivo JSON. Asegúrate de que es un archivo válido.');
+            }
+        };
+
+        input.click();
     };
 
     const updateCharacter = (updates: any) => {
@@ -620,7 +655,7 @@ export default function CharacterWizard() {
             {/* Header */}
             <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
                 <h1 style={{ fontSize: '3rem', fontWeight: '900', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
-                    Generador de Fichas (Alpha 0.0.30)
+                    Generador de Fichas (Beta 0.1.0)
                 </h1>
                 <p style={{ fontSize: '1.25rem', color: '#666', marginBottom: '1rem' }}>
                     Crea tu personaje paso a paso
@@ -652,12 +687,12 @@ export default function CharacterWizard() {
                     {/* Preview Button */}
                     <CharacterPreview character={character} totalPCs={totalPCs} />
 
-                    {/* Configuration Button */}
+                    {/* Import JSON Button */}
                     <button
-                        onClick={handleConfiguration}
+                        onClick={handleImportJSON}
                         style={{
                             padding: '0.75rem 1.5rem',
-                            backgroundColor: '#6366f1',
+                            backgroundColor: '#10b981',
                             color: 'white',
                             border: 'none',
                             borderRadius: '8px',
@@ -672,14 +707,14 @@ export default function CharacterWizard() {
                         }}
                         onMouseEnter={(e) => {
                             e.currentTarget.style.transform = 'translateY(-2px)';
-                            e.currentTarget.style.backgroundColor = '#4f46e5';
+                            e.currentTarget.style.backgroundColor = '#059669';
                         }}
                         onMouseLeave={(e) => {
                             e.currentTarget.style.transform = 'translateY(0)';
-                            e.currentTarget.style.backgroundColor = '#6366f1'
+                            e.currentTarget.style.backgroundColor = '#10b981'
                         }}
                     >
-                        ⚙️ Configuración
+                        📥 Importar JSON
                     </button>
 
                     {/* Reset Button */}
