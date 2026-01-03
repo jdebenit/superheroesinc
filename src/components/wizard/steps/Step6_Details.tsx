@@ -469,7 +469,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
             {/* ARTIFACTS SECTION */}
             <div style={sectionStyle}>
                 <h3 style={{ ...titleStyle, color: '#7c3aed', borderBottomColor: '#ddd6fe' }}>
-                    🔮 Artefactos
+                    ✨ Artefactos
                 </h3>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                     {data.artifacts?.items?.map((item, index) => (
