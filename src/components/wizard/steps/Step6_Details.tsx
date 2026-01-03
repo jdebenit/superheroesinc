@@ -14,6 +14,8 @@ interface Step6Props {
         notes: string;
         equipment: { items: any[] };
         weapons: { items: any[] };
+        artifacts: { items: any[] };
+        vehicles: { items: any[] };
         skills?: any;
         // We'll update combat/other stats in data directly if we want to save them
         combatstats?: string[];
@@ -94,7 +96,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
     const addWeapon = () => {
         onChange({
             weapons: {
-                items: [...(data.weapons?.items || []), { name: "Nueva arma", damage: "", notes: "", cost: 0 }]
+                items: [...(data.weapons?.items || []), { name: "Nueva arma", damage: "", dxa: "", car: "", notes: "", cost: 0 }]
             }
         });
     };
@@ -109,6 +111,48 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
         const newItems = [...(data.weapons?.items || [])];
         newItems.splice(index, 1);
         onChange({ weapons: { items: newItems } });
+    };
+
+    // --- ARTEFACTOS ---
+    const addArtifact = () => {
+        onChange({
+            artifacts: {
+                items: [...(data.artifacts?.items || []), { name: "Nuevo artefacto", reliability: "", value: "", cost: 0 }]
+            }
+        });
+    };
+
+    const updateArtifact = (index: number, field: string, value: string) => {
+        const newItems = [...(data.artifacts?.items || [])];
+        newItems[index] = { ...newItems[index], [field]: value };
+        onChange({ artifacts: { items: newItems } });
+    };
+
+    const removeArtifact = (index: number) => {
+        const newItems = [...(data.artifacts?.items || [])];
+        newItems.splice(index, 1);
+        onChange({ artifacts: { items: newItems } });
+    };
+
+    // --- VEHÍCULOS ---
+    const addVehicle = () => {
+        onChange({
+            vehicles: {
+                items: [...(data.vehicles?.items || []), { name: "Nuevo vehículo", armor: "", pe: "", speed: "", range: "" }]
+            }
+        });
+    };
+
+    const updateVehicle = (index: number, field: string, value: string) => {
+        const newItems = [...(data.vehicles?.items || [])];
+        newItems[index] = { ...newItems[index], [field]: value };
+        onChange({ vehicles: { items: newItems } });
+    };
+
+    const removeVehicle = (index: number) => {
+        const newItems = [...(data.vehicles?.items || [])];
+        newItems.splice(index, 1);
+        onChange({ vehicles: { items: newItems } });
     };
 
     const sectionStyle = {
@@ -306,7 +350,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                     {data.weapons?.items?.map((item, index) => (
                         <div key={index} style={{
                             display: 'grid',
-                            gridTemplateColumns: '1.5fr 1.5fr 1fr 1.5fr 80px auto',
+                            gridTemplateColumns: '1.5fr 1.5fr 0.8fr 0.8fr 0.8fr 1.5fr 80px auto',
                             gap: '0.5rem',
                             alignItems: 'start',
                             padding: '1rem',
@@ -347,6 +391,26 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                                     onChange={(e) => updateWeapon(index, 'damage', e.target.value)}
                                     style={{ ...inputStyle, marginBottom: 0 }}
                                     placeholder="Ej: 1d8+2"
+                                />
+                            </div>
+                            <div>
+                                <label style={{ ...labelStyle, fontSize: '0.75rem' }}>DxA</label>
+                                <input
+                                    type="text"
+                                    value={item.dxa || ''}
+                                    onChange={(e) => updateWeapon(index, 'dxa', e.target.value)}
+                                    style={{ ...inputStyle, marginBottom: 0 }}
+                                    placeholder="DxA"
+                                />
+                            </div>
+                            <div>
+                                <label style={{ ...labelStyle, fontSize: '0.75rem' }}>CAR</label>
+                                <input
+                                    type="text"
+                                    value={item.car || ''}
+                                    onChange={(e) => updateWeapon(index, 'car', e.target.value)}
+                                    style={{ ...inputStyle, marginBottom: 0 }}
+                                    placeholder="CAR"
                                 />
                             </div>
                             <div>
@@ -398,6 +462,195 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                         }}
                     >
                         + Añadir Arma
+                    </button>
+                </div>
+            </div>
+
+            {/* ARTIFACTS SECTION */}
+            <div style={sectionStyle}>
+                <h3 style={{ ...titleStyle, color: '#7c3aed', borderBottomColor: '#ddd6fe' }}>
+                    🔮 Artefactos
+                </h3>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                    {data.artifacts?.items?.map((item, index) => (
+                        <div key={index} style={{
+                            display: 'grid',
+                            gridTemplateColumns: '2fr 1fr 1fr 100px auto',
+                            gap: '1rem',
+                            alignItems: 'start',
+                            padding: '0.75rem',
+                            backgroundColor: '#f5f3ff',
+                            border: '1px solid #ede9fe',
+                            borderRadius: '8px'
+                        }}>
+                            <div>
+                                <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Nombre</label>
+                                <input
+                                    type="text"
+                                    value={item.name}
+                                    onChange={(e) => updateArtifact(index, 'name', e.target.value)}
+                                    style={{ ...inputStyle, marginBottom: 0 }}
+                                    placeholder="Nombre del artefacto"
+                                />
+                            </div>
+                            <div>
+                                <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Fiabilidad</label>
+                                <input
+                                    type="text"
+                                    value={item.reliability || ''}
+                                    onChange={(e) => updateArtifact(index, 'reliability', e.target.value)}
+                                    style={{ ...inputStyle, marginBottom: 0 }}
+                                    placeholder="Ej: 95%"
+                                />
+                            </div>
+                            <div>
+                                <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Valor</label>
+                                <input
+                                    type="text"
+                                    value={item.value || ''}
+                                    onChange={(e) => updateArtifact(index, 'value', e.target.value)}
+                                    style={{ ...inputStyle, marginBottom: 0 }}
+                                    placeholder="Valor"
+                                />
+                            </div>
+                            <div>
+                                <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Coste (PCs)</label>
+                                <input
+                                    type="number"
+                                    min="0"
+                                    value={item.cost || 0}
+                                    onChange={(e) => updateArtifact(index, 'cost', Math.max(0, parseInt(e.target.value) || 0).toString())}
+                                    style={{ ...inputStyle, marginBottom: 0 }}
+                                    placeholder="0"
+                                />
+                            </div>
+                            <button
+                                onClick={() => removeArtifact(index)}
+                                style={{
+                                    ...buttonStyle,
+                                    marginTop: '1.5rem',
+                                    backgroundColor: '#7c3aed',
+                                    color: 'white'
+                                }}
+                            >
+                                ✕
+                            </button>
+                        </div>
+                    ))}
+                    <button
+                        onClick={addArtifact}
+                        style={{
+                            width: '100%',
+                            padding: '1rem',
+                            border: '2px dashed #c4b5fd',
+                            backgroundColor: '#f5f3ff',
+                            color: '#7c3aed',
+                            borderRadius: '8px',
+                            fontWeight: 'bold',
+                            cursor: 'pointer',
+                            marginTop: '0.5rem'
+                        }}
+                    >
+                        + Añadir Artefacto
+                    </button>
+                </div>
+            </div>
+
+            {/* VEHICLES SECTION */}
+            <div style={sectionStyle}>
+                <h3 style={{ ...titleStyle, color: '#0891b2', borderBottomColor: '#a5f3fc' }}>
+                    🚗 Vehículos
+                </h3>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                    {data.vehicles?.items?.map((item, index) => (
+                        <div key={index} style={{
+                            display: 'grid',
+                            gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr auto',
+                            gap: '0.75rem',
+                            alignItems: 'start',
+                            padding: '0.75rem',
+                            backgroundColor: '#ecfeff',
+                            border: '1px solid #cffafe',
+                            borderRadius: '8px'
+                        }}>
+                            <div>
+                                <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Nombre</label>
+                                <input
+                                    type="text"
+                                    value={item.name}
+                                    onChange={(e) => updateVehicle(index, 'name', e.target.value)}
+                                    style={{ ...inputStyle, marginBottom: 0 }}
+                                    placeholder="Nombre del vehículo"
+                                />
+                            </div>
+                            <div>
+                                <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Blindaje</label>
+                                <input
+                                    type="text"
+                                    value={item.armor || ''}
+                                    onChange={(e) => updateVehicle(index, 'armor', e.target.value)}
+                                    style={{ ...inputStyle, marginBottom: 0 }}
+                                    placeholder="Blindaje"
+                                />
+                            </div>
+                            <div>
+                                <label style={{ ...labelStyle, fontSize: '0.75rem' }}>PE</label>
+                                <input
+                                    type="text"
+                                    value={item.pe || ''}
+                                    onChange={(e) => updateVehicle(index, 'pe', e.target.value)}
+                                    style={{ ...inputStyle, marginBottom: 0 }}
+                                    placeholder="PE"
+                                />
+                            </div>
+                            <div>
+                                <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Velocidad</label>
+                                <input
+                                    type="text"
+                                    value={item.speed || ''}
+                                    onChange={(e) => updateVehicle(index, 'speed', e.target.value)}
+                                    style={{ ...inputStyle, marginBottom: 0 }}
+                                    placeholder="Velocidad"
+                                />
+                            </div>
+                            <div>
+                                <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Autonomía</label>
+                                <input
+                                    type="text"
+                                    value={item.range || ''}
+                                    onChange={(e) => updateVehicle(index, 'range', e.target.value)}
+                                    style={{ ...inputStyle, marginBottom: 0 }}
+                                    placeholder="Autonomía"
+                                />
+                            </div>
+                            <button
+                                onClick={() => removeVehicle(index)}
+                                style={{
+                                    ...buttonStyle,
+                                    marginTop: '1.5rem',
+                                    backgroundColor: '#0891b2',
+                                    color: 'white'
+                                }}
+                            >
+                                ✕
+                            </button>
+                        </div>
+                    ))}
+                    <button
+                        onClick={addVehicle}
+                        style={{
+                            width: '100%',
+                            padding: '1rem',
+                            border: '2px dashed #67e8f9',
+                            backgroundColor: '#ecfeff',
+                            color: '#0891b2',
+                            borderRadius: '8px',
+                            fontWeight: 'bold',
+                            cursor: 'pointer',
+                            marginTop: '0.5rem'
+                        }}
+                    >
+                        + Añadir Vehículo
                     </button>
                 </div>
             </div>

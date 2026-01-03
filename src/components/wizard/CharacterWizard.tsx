@@ -94,6 +94,8 @@ const initialCharacterState = {
     },
     equipment: { items: [] },
     weapons: { items: [] },
+    artifacts: { items: [] },
+    vehicles: { items: [] },
     spells: {
         selected: [],
         emFormula: { divisor: 4, pcCost: 0 } // Default for Dotado/Híbrido
@@ -405,7 +407,16 @@ export default function CharacterWizard() {
         }, 0);
         total += weaponsCost;
 
-        // 12. Tech Modules Costs
+        // 12. Artifacts Costs
+        const artifactsCost = (character.artifacts?.items || []).reduce((acc: number, item: any) => {
+            return acc + (parseInt(item.cost) || 0);
+        }, 0);
+        total += artifactsCost;
+
+        // 13. Vehicles Costs (no PC cost for vehicles, they're just tracked)
+        // Vehicles don't have a cost field in PCs, they're just inventory
+
+        // 14. Tech Modules Costs
         const techModulesCost = (character.techModules || []).reduce((acc: number, module: any) => {
             return acc + (module.pcCost || 0);
         }, 0);

@@ -191,10 +191,28 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
     }));
 
     // Weapons
-    const weaponsData = (character.equipment?.weapons || []).map((w: any) => ({
+    const weaponsData = (character.weapons?.items || []).map((w: any) => ({
         name: w.name || '',
         damage: w.damage || '',
+        dxa: w.dxa || '',
+        car: w.car || '',
         notes: w.notes || w.special || ''
+    }));
+
+    // Artifacts
+    const artifactsData = (character.artifacts?.items || []).map((a: any) => ({
+        name: a.name || '',
+        reliability: a.reliability || '',
+        value: a.value || ''
+    }));
+
+    // Vehicles
+    const vehiclesData = (character.vehicles?.items || []).map((v: any) => ({
+        name: v.name || '',
+        armor: v.armor || '',
+        pe: v.pe || '',
+        speed: v.speed || '',
+        range: v.range || ''
     }));
 
     // Equipment
@@ -261,6 +279,8 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                             spellsData,
                                             techData,
                                             weaponsData,
+                                            artifactsData,
+                                            vehiclesData,
                                             equipmentData
                                         };
                                         // @ts-ignore - Argument count mismatch until pdfExport is updated
@@ -324,11 +344,55 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                         </div>
                                         <div className="weapons-grid" style={{ display: 'grid', gap: '0.5rem' }}>
                                             {character.weapons.items.map((item: any, i: number) => (
-                                                <div key={i} className="weapon-item" style={{ padding: '0.5rem', backgroundColor: '#fef2f2', border: '1px solid #fecaca', borderRadius: '6px' }}>
-                                                    <div style={{ fontWeight: 'bold', color: '#b91c1c' }}>{item.name}</div>
-                                                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.9rem', marginTop: '0.25rem' }}>
-                                                        <span style={{ fontWeight: 'bold' }}>Daño: {item.damage || '-'}</span>
-                                                        <span style={{ color: '#666', fontStyle: 'italic' }}>{item.notes}</span>
+                                                <div key={i} className="weapon-item" style={{ padding: '0.75rem', backgroundColor: '#fef2f2', border: '1px solid #fecaca', borderRadius: '6px' }}>
+                                                    <div style={{ fontWeight: 'bold', color: '#b91c1c', marginBottom: '0.5rem' }}>{item.name}</div>
+                                                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.5rem', fontSize: '0.85rem' }}>
+                                                        <div><span style={{ fontWeight: 'bold' }}>Daño:</span> {item.damage || '-'}</div>
+                                                        <div><span style={{ fontWeight: 'bold' }}>DxA:</span> {item.dxa || '-'}</div>
+                                                        <div><span style={{ fontWeight: 'bold' }}>CAR:</span> {item.car || '-'}</div>
+                                                        {item.notes && <div style={{ gridColumn: '1 / -1', color: '#666', fontStyle: 'italic' }}>{item.notes}</div>}
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* Artifacts */}
+                                {character.artifacts && character.artifacts.items.length > 0 && (
+                                    <div className="sheet-section artifacts">
+                                        <div className="section-header">
+                                            <h4>Artefactos</h4>
+                                        </div>
+                                        <div className="artifacts-grid" style={{ display: 'grid', gap: '0.5rem' }}>
+                                            {character.artifacts.items.map((item: any, i: number) => (
+                                                <div key={i} className="artifact-item" style={{ padding: '0.75rem', backgroundColor: '#f5f3ff', border: '1px solid #ede9fe', borderRadius: '6px' }}>
+                                                    <div style={{ fontWeight: 'bold', color: '#7c3aed', marginBottom: '0.5rem' }}>{item.name}</div>
+                                                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.5rem', fontSize: '0.85rem' }}>
+                                                        <div><span style={{ fontWeight: 'bold' }}>Fiabilidad:</span> {item.reliability || '-'}</div>
+                                                        <div><span style={{ fontWeight: 'bold' }}>Valor:</span> {item.value || '-'}</div>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* Vehicles */}
+                                {character.vehicles && character.vehicles.items.length > 0 && (
+                                    <div className="sheet-section vehicles">
+                                        <div className="section-header">
+                                            <h4>Vehículos</h4>
+                                        </div>
+                                        <div className="vehicles-grid" style={{ display: 'grid', gap: '0.5rem' }}>
+                                            {character.vehicles.items.map((item: any, i: number) => (
+                                                <div key={i} className="vehicle-item" style={{ padding: '0.75rem', backgroundColor: '#ecfeff', border: '1px solid #cffafe', borderRadius: '6px' }}>
+                                                    <div style={{ fontWeight: 'bold', color: '#0891b2', marginBottom: '0.5rem' }}>{item.name}</div>
+                                                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.5rem', fontSize: '0.85rem' }}>
+                                                        <div><span style={{ fontWeight: 'bold' }}>Blindaje:</span> {item.armor || '-'}</div>
+                                                        <div><span style={{ fontWeight: 'bold' }}>PE:</span> {item.pe || '-'}</div>
+                                                        <div><span style={{ fontWeight: 'bold' }}>Velocidad:</span> {item.speed || '-'}</div>
+                                                        <div><span style={{ fontWeight: 'bold' }}>Autonomía:</span> {item.range || '-'}</div>
                                                     </div>
                                                 </div>
                                             ))}
