@@ -12,7 +12,13 @@ import { MALDITO_DATA } from './steps/Step3_Especials/sections/MalditoSection';
 import { ALTERADO_DATA } from './steps/Step3_Especials/sections/AlteradoSection';
 import { SEQUELS } from '../../data/sequels';
 import { INCOME_SOURCES } from '../../data/technologicalOptions';
+
 import { calculateEM, hasSubtype } from './steps/Step3_Especials/utils';
+// Calculations
+// Calculations
+import { calculateDerivedStats, calculateSkillBase } from '../../utils/characterCalculations';
+import { calculateGeneralSkillValues, calculateSpecialSkillValues } from '../../utils/calculations/skillCalculations';
+
 import {
     GUARDIAN_QUALITIES,
     GUARDIAN_OBJECTS,
@@ -71,8 +77,132 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
         downloadAnchorNode.remove();
     }
 
-    const combatStats = character.combatstats || [];
-    const otherStats = character.otherstats || character.other || [];
+    // CALCULATE STATS LIVE to ensure they are up to date and match PDF export
+    const derivedStats = calculateDerivedStats(
+        character.attributes?.values || {},
+        character.origin?.items || [],
+        character.skills || {}
+    );
+
+    const generalSkillsData = calculateGeneralSkillValues(
+        character.attributes?.values || {},
+        character.origin?.items || [],
+        character.skills?.generalManualMods || {},
+        character.skills?.manualBases || {}
+    );
+
+    const specialSkillsData = calculateSpecialSkillValues(
+        character.attributes?.values || {},
+        character.origin?.items || [],
+        character.skills?.learning?.selected || {},
+        character.skills?.learning?.specified || {}
+    );
+
+    // Format stats for display (Live values)
+    const combatStats = [
+        `Acciones por asalto: ${derivedStats.combat.acciones}`,
+        `Iniciativa y Reflejos: ${derivedStats.combat.iniciativa}`,
+        `Puntos de Vida: ${derivedStats.combat.pv}`,
+        `Equilibrio Mental: ${derivedStats.combat.equilibrio}`
+    ];
+
+    // Note: display logic for 'other' stats currently iterates otherStats strings. 
+    // We should probably rely on derivedStats.other to ensure freshness too.
+    // Mapping derivedStats.other to the string format expected by UI loop:
+    const otherStats = [
+        `Inconsciencia: ${derivedStats.other.inconsciencia}`,
+        `Recuperación: ${derivedStats.other.recuperacion}`,
+        `Resistencia a gases y venenos: ${derivedStats.other.resistenciaGases}`,
+        `Modificador de fuerza: ${derivedStats.other.modFuerza}`,
+        `Peso Levantado: ${derivedStats.other.pesoLevantado}`,
+        `Daño absorbido físico: ${derivedStats.other.daAbsorbidoFisico}`,
+        `Daño absorbido mental: ${derivedStats.other.daAbsorbidoMental}`,
+        `Modificador de impacto: ${derivedStats.other.modImpacto}`,
+        `Modificador Psionico: ${derivedStats.other.modPsionico}`,
+        `Parada Fisica: ${derivedStats.other.paradaFisica}`,
+        `Parada mental: ${derivedStats.other.paradaMental}`,
+        `Salto (alto / largo): ${derivedStats.other.salto}`
+    ];
+
+    // --- PRE-CALCULATE LISTS FOR PDF (Powers, Spells, etc.) ---
+
+    // Powers
+    const powersData = (character.powers?.selected || []).map((p: any) => {
+        const powerData = POWERS.find(data => data.id === p.id);
+        const baseName = powerData ? powerData.name : (p.name || '');
+        const displayName = p.selectedOption ? `${baseName} (${p.selectedOption})` : baseName;
+
+        // Cost calculation logic (Moved from pdfExport)
+        const isHybridPenalty = character.isParahumanoHybrid && p.origin === 'Alterado';
+        let costVal = 0;
+
+        if (powerData) {
+            const baseCost = powerData.cost || 0;
+            const penalty = isHybridPenalty ? 3 : 0;
+
+            if (!powerData.characteristic) {
+                // Skill type
+                const rank = p.rank || 1;
+                const minVal = powerData.skillCalc ? calculateSkillBase(character.attributes?.values || {}, character.origin?.items || [], powerData.skillCalc) : 0;
+
+                const currentVal = p.skillValue !== undefined ? p.skillValue : minVal;
+                // Simplified extra cost logic from pdfExport
+                const extraCost = Math.max(0, currentVal - minVal) * 0.1;
+                costVal = baseCost + penalty + (rank * 0.1) + extraCost;
+            } else {
+                // Attribute type
+                const powerMod = p.powerMod || 0;
+                costVal = baseCost + penalty + (powerMod / 10);
+            }
+        } else {
+            costVal = p.cost || 0;
+        }
+
+        return {
+            name: displayName,
+            cost: costVal.toFixed(1),
+            val: (p.skillValue !== undefined ? p.skillValue : (p.powerMod || '')).toString(),
+            rank: (p.rank || '').toString(),
+            notes: p.effect || ''
+        };
+    });
+
+    // Spells
+    const spellsData = (character.spells?.selected || []).map((s: any) => {
+        const spellDef = SPELLS.find(def => def.id === s.id);
+        const maxRank = spellDef?.maxRank || 5;
+        const isMaestria = s.rank === maxRank + 2;
+        const baseCost = spellDef ? (parseInt(spellDef.cost, 10) || 0) : 0;
+        const effectiveRank = s.rank || 1;
+
+        return {
+            name: spellDef?.name || s.name || '',
+            rank: isMaestria ? 'Maestría' : (s.rank || '').toString(),
+            cost: (baseCost * effectiveRank).toString(),
+            notes: spellDef?.requirements || s.effect || s.description || ''
+        };
+    });
+
+    // Tech Modules
+    const techData = (character.techModules?.installed || []).map((m: any) => ({
+        name: m.name || m.definitionId || '',
+        location: m.location || '',
+        notes: m.notes || ''
+    }));
+
+    // Weapons
+    const weaponsData = (character.equipment?.weapons || []).map((w: any) => ({
+        name: w.name || '',
+        damage: w.damage || '',
+        notes: w.notes || w.special || ''
+    }));
+
+    // Equipment
+    const equipmentData = (character.equipment?.items || []).map((e: any) => ({
+        name: e.name || '',
+        notes: e.notes || ''
+    }));
+
 
     return (
         <>
@@ -122,7 +252,19 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                 onClick={async () => {
                                     try {
                                         const { generateCharacterSheetPDF, downloadPDF } = await import('../../utils/pdfExport');
-                                        const pdfBytes = await generateCharacterSheetPDF('/ficha_template.pdf', character, totalPCs || 0);
+                                        // Pass pre-calculated data to avoid re-calculation in PDF export
+                                        const preCalculatedData = {
+                                            derivedStats,
+                                            generalSkillsData,
+                                            specialSkillsData,
+                                            powersData,
+                                            spellsData,
+                                            techData,
+                                            weaponsData,
+                                            equipmentData
+                                        };
+                                        // @ts-ignore - Argument count mismatch until pdfExport is updated
+                                        const pdfBytes = await generateCharacterSheetPDF('/ficha_template.pdf', character, totalPCs || 0, preCalculatedData);
                                         downloadPDF(pdfBytes, `Ficha_SHI_${character.name.replace(/\s+/g, '_') || 'Personaje'}.pdf`);
                                     } catch (error) {
                                         console.error('Error generando PDF:', error);

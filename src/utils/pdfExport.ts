@@ -1,44 +1,9 @@
 import { PDFDocument } from 'pdf-lib';
-import { calculateDerivedStats } from './characterCalculations';
-import { calculateGeneralSkillValues, calculateSpecialSkillValues } from './calculations/skillCalculations';
 import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS, FRIENDS_AND_ASSOCIATES } from '../data/backgroundTables';
 import { ORIGIN_CATEGORIES } from '../data/originDefinitions';
-import { POWERS } from '../data/powers';
 import { SPECIAL_SKILLS } from '../data/specialSkills';
-import { SPELLS } from '../data/spells';
 
-// Helper to get characteristic value safely
-const getCharacteristicValue = (character: any, charName: string): number => {
-    return character.attributes?.values?.[charName] || 0;
-}
-
-// Helper to check subtypes
-const hasSubtype = (character: any, originName: string, subtypeName: string): boolean => {
-    return character.origin?.items?.some((item: any) => {
-        const key = Object.keys(item)[0];
-        if (key !== originName) return false;
-        const subtypes = item[key];
-        return Array.isArray(subtypes) && subtypes.includes(subtypeName);
-    });
-};
-
-// Helper to calculate skill base
-const calculateSkillBase = (character: any, formula: string): number => {
-    if (!formula) return 0;
-    const getVal = (abbr: string) => {
-        const map: Record<string, string> = {
-            'FUE': 'Fuerza', 'AGI': 'Agilidad', 'CON': 'Constitución',
-            'INT': 'Inteligencia', 'PER': 'Percepción', 'VOL': 'Voluntad', 'APA': 'Apariencia'
-        };
-        return getCharacteristicValue(character, map[abbr] || '');
-    };
-    try {
-        const evalFormula = formula.replace(/[A-Z]{3}/g, (match) => getVal(match).toString());
-        return Math.floor(new Function('return ' + evalFormula)());
-    } catch (e) {
-        return 0;
-    }
-};
+// ... (helpers removed)
 
 /**
  * Rellena el PDF de la ficha de personaje con los datos proporcionados.
@@ -47,7 +12,21 @@ const calculateSkillBase = (character: any, formula: string): number => {
  * @param totalPCs El total de puntos de creación (opcional, si no viene en character).
  * @returns Un Uint8Array con los bytes del PDF generado.
  */
-export async function generateCharacterSheetPDF(pdfUrl: string, character: any, totalPCs: string | number): Promise<Uint8Array> {
+export async function generateCharacterSheetPDF(
+    pdfUrl: string,
+    character: any,
+    totalPCs: string | number,
+    preCalculatedData?: {
+        derivedStats: any;
+        generalSkillsData: any;
+        specialSkillsData: any;
+        powersData?: any[];
+        spellsData?: any[];
+        techData?: any[];
+        weaponsData?: any[];
+        equipmentData?: any[];
+    }
+): Promise<Uint8Array> {
     // 1. Cargar el PDF
     const existingPdfBytes = await fetch(pdfUrl).then(res => res.arrayBuffer());
     const pdfDoc = await PDFDocument.load(existingPdfBytes);
@@ -55,22 +34,14 @@ export async function generateCharacterSheetPDF(pdfUrl: string, character: any, 
     // 2. Obtener el formulario
     const form = pdfDoc.getForm();
 
-    // Calcular estadísticas y habilidades
-    const stats = calculateDerivedStats(character.attributes?.values || {}, character.origin?.items || [], character.skills || {});
+    const stats = preCalculatedData?.derivedStats || {
+        combat: { acciones: '', iniciativa: '', pv: '', equilibrio: '' },
+        other: { inconsciencia: '', recuperacion: '', resistenciaGases: '', modFuerza: '', pesoLevantado: '', daAbsorbidoFisico: '', daAbsorbidoMental: '', modImpacto: '', modPsionico: '', paradaFisica: '', paradaMental: '', salto: '' }
+    };
 
-    const generalSkillsData = calculateGeneralSkillValues(
-        character.attributes?.values || {},
-        character.origin?.items || [],
-        character.skills?.generalManualMods || {},
-        character.skills?.manualBases || {}
-    );
-
-    const specialSkillsData = calculateSpecialSkillValues(
-        character.attributes?.values || {},
-        character.origin?.items || [],
-        character.skills?.learning?.selected || {},
-        character.skills?.learning?.specified || {}
-    );
+    // Default empty structures if missing
+    const generalSkillsData = preCalculatedData?.generalSkillsData || { skills: {} };
+    const specialSkillsData = preCalculatedData?.specialSkillsData || { standard: {}, specified: {} };
 
     // Lookup functions for background
     const getLabel = (list: any[], id: string) => list.find(i => i.id === id)?.label || id;
@@ -91,10 +62,8 @@ export async function generateCharacterSheetPDF(pdfUrl: string, character: any, 
                 const name = Object.keys(item)[0];
                 const details = item[name] || [];
                 const originDef = ORIGIN_CATEGORIES[name];
-
                 // Filter for subtypes (details that are keys in originDef.subtypes)
                 const subtypes = details.filter((d: string) => originDef?.subtypes && originDef.subtypes[d]);
-
                 if (subtypes.length > 0) {
                     return subtypes.join(', ');
                 }
@@ -119,57 +88,10 @@ export async function generateCharacterSheetPDF(pdfUrl: string, character: any, 
 
         // Energia Magica
         'combat.energy': (() => {
-            const int = getCharacteristicValue(character, 'Inteligencia');
-            const per = getCharacteristicValue(character, 'Percepción');
-            const vol = getCharacteristicValue(character, 'Voluntad');
-            const con = getCharacteristicValue(character, 'Constitución');
-
-            // Determine effective characteristics for EM
-            const isSemidemonio = hasSubtype(character, 'Sobrenatural', 'Semidemonio');
-            const conVal = isSemidemonio ? con : 0;
-
-            // Apply power mods to characteristics for EM calculation
-            let modInt = int;
-            let modPer = per;
-            let modVol = vol;
-            let modCon = conVal;
-
-            (character.powers?.selected || []).forEach((p: any) => {
-                const powerData = POWERS.find(power => power.id === p.id);
-                if (powerData?.characteristic && p.powerMod) {
-                    switch (powerData.characteristic) {
-                        case 'INT': modInt += p.powerMod; break;
-                        case 'PER': modPer += p.powerMod; break;
-                        case 'VOL': modVol += p.powerMod; break;
-                        case 'CON': if (isSemidemonio) modCon += p.powerMod; break;
-                    }
-                }
-            });
-
-            const isMago = hasSubtype(character, 'Arcano', 'Mago');
-            const divisor = isMago ? 1 : (character.spells?.emFormula?.divisor || 4); // Default 4 for Terrano/others
-
-            // Safety check for divisor 0
-            if (divisor === 0) return '0';
-
-            let maxEM = 0;
             if (character.spells?.calculatedEM !== undefined) {
-                maxEM = character.spells.calculatedEM;
-            } else {
-                maxEM = Math.floor((modInt + modPer + modVol + modCon) / divisor);
+                return character.spells.calculatedEM.toString();
             }
-
-            // Calculate Required EM by spells
-            const selectedSpells = character.spells?.selected || [];
-            const requiredEM = selectedSpells.reduce((acc: number, spell: any) => {
-                const s = SPELLS.find((sp: any) => sp.id === spell.id);
-                const baseCost = s ? (parseInt(s.cost, 10) || 0) : 0;
-                const rank = spell.rank || 1;
-                return acc + (baseCost * rank);
-            }, 0);
-
-            // Return only the Max/Calculated EM, ignoring spell costs (as requested by user for Preview)
-            return maxEM.toString();
+            return '0';
         })(),
 
         // Otras Estadísticas
@@ -195,10 +117,9 @@ export async function generateCharacterSheetPDF(pdfUrl: string, character: any, 
     };
 
     // Mapear General Skills (Fixed names)
-    Object.entries(generalSkillsData.skills).forEach(([skillId, skillData]) => {
+    Object.entries(generalSkillsData.skills).forEach(([skillId, skillData]: [string, any]) => {
         if (skillId === 'idioma') {
             fields[`skill.${skillId}.val`] = skillData.total.toString();
-            // Export native language name if available
             if (character.skills?.nativeLanguage) {
                 fields[`skill.${skillId}.name`] = character.skills.nativeLanguage;
             }
@@ -211,7 +132,7 @@ export async function generateCharacterSheetPDF(pdfUrl: string, character: any, 
     const flattenedSpecialSkills: any[] = [];
 
     // Add standard special skills
-    Object.entries(specialSkillsData.standard).forEach(([skillId, skillData]) => {
+    Object.entries(specialSkillsData.standard).forEach(([skillId, skillData]: [string, any]) => {
         const def = SPECIAL_SKILLS.find(s => s.id === skillId);
         flattenedSpecialSkills.push({
             name: def?.name || skillId,
@@ -220,7 +141,7 @@ export async function generateCharacterSheetPDF(pdfUrl: string, character: any, 
     });
 
     // Add specified special skills (e.g. pilot with spec)
-    Object.values(specialSkillsData.specified).forEach((skillData) => {
+    Object.values(specialSkillsData.specified).forEach((skillData: any) => {
         const def = SPECIAL_SKILLS.find(s => s.id === skillData.skillId);
         flattenedSpecialSkills.push({
             name: `${def?.name || skillData.skillId}: ${skillData.specification}`,
@@ -235,110 +156,62 @@ export async function generateCharacterSheetPDF(pdfUrl: string, character: any, 
         }
     }
 
-    // Mapear Powers (7 slots)
-    const powers = character.powers?.selected || [];
-    for (let i = 0; i < 7; i++) {
-        if (i < powers.length) {
-            const p = powers[i];
-            const powerData = POWERS.find(data => data.id === p.id);
-            const baseName = powerData ? powerData.name : (p.name || '');
-            const displayName = p.selectedOption ? `${baseName} (${p.selectedOption})` : baseName;
+    // --- MAPPING FROM PRE-CALCULATED LISTS ---
 
-            fields[`power.${i + 1}.name`] = displayName;
-
-            // Cost calculation
-            const isHybridPenalty = character.isParahumanoHybrid && p.origin === 'Alterado';
-            let costVal = 0;
-            if (powerData) {
-                const baseCost = powerData.cost;
-                const penalty = isHybridPenalty ? 3 : 0;
-                if (!powerData.characteristic) {
-                    // Skill type
-                    const rank = p.rank || 1;
-                    const minVal = powerData.skillCalc ? calculateSkillBase(character, powerData.skillCalc) : 0;
-                    const currentVal = p.skillValue || minVal;
-                    const extraCost = Math.max(0, currentVal - minVal) * 0.1;
-                    costVal = baseCost + penalty + (rank * 0.1) + extraCost;
-                } else {
-                    // Attribute type
-                    const powerMod = p.powerMod || 0;
-                    costVal = baseCost + penalty + (powerMod / 10);
-                }
-            } else {
-                costVal = (p.cost || 0);
-            }
-
-            fields[`power.${i + 1}.cost`] = costVal.toFixed(1);
-            fields[`power.${i + 1}.rank`] = (p.rank || '').toString();
-
-            // Power Value
-            if (powerData?.skillCalc) {
-                const minVal = calculateSkillBase(character, powerData.skillCalc);
-                const currentVal = p.skillValue !== undefined ? p.skillValue : minVal;
-                fields[`power.${i + 1}.val`] = currentVal.toString();
-            } else if (powerData?.characteristic) {
-                fields[`power.${i + 1}.val`] = (p.powerMod || '').toString();
-            } else {
-                fields[`power.${i + 1}.val`] = (p.skillValue || '').toString();
-            }
-
-            fields[`power.${i + 1}.notes`] = p.effect || '';
+    // Powers (10 slots)
+    const powerList = preCalculatedData?.powersData || [];
+    for (let i = 0; i < 10; i++) {
+        if (i < powerList.length) {
+            const p = powerList[i];
+            fields[`power.${i + 1}.name`] = p.name;
+            fields[`power.${i + 1}.cost`] = p.cost;
+            fields[`power.${i + 1}.val`] = p.val;
+            fields[`power.${i + 1}.rank`] = p.rank;
+            fields[`power.${i + 1}.notes`] = p.notes;
         }
     }
 
-    // Mapear Spells (15 slots)
-    const spells = character.spells?.selected || [];
+    // Spells (15 slots)
+    const spellList = preCalculatedData?.spellsData || [];
     for (let i = 0; i < 15; i++) {
-        if (i < spells.length) {
-            const s = spells[i];
-            const spellDef = SPELLS.find(def => def.id === s.id);
-
-            fields[`spell.${i + 1}.name`] = spellDef?.name || s.name || '';
-
-            // Rank
-            const maxRank = spellDef?.maxRank || 5;
-            const isMaestria = s.rank === maxRank + 2;
-            fields[`spell.${i + 1}.rank`] = isMaestria ? 'Maestría' : (s.rank || '').toString();
-
-            // Costo
-            const baseCost = spellDef ? (parseInt(spellDef.cost, 10) || 0) : 0;
-            const effectiveRank = s.rank || 1;
-            fields[`spell.${i + 1}.cost`] = (baseCost * effectiveRank).toString();
-
-            fields[`spell.${i + 1}.notes`] = spellDef?.requirements || s.effect || s.description || '';
+        if (i < spellList.length) {
+            const s = spellList[i];
+            fields[`spell.${i + 1}.name`] = s.name;
+            fields[`spell.${i + 1}.rank`] = s.rank;
+            fields[`spell.${i + 1}.cost`] = s.cost;
+            fields[`spell.${i + 1}.notes`] = s.notes;
         }
     }
 
-    // Mapear Tech Modules (12 slots)
-    const techModules = character.techModules?.installed || [];
+    // Tech Modules (12 slots)
+    const techList = preCalculatedData?.techData || [];
     for (let i = 0; i < 12; i++) {
-        if (i < techModules.length) {
-            const m = techModules[i];
-            fields[`tech.${i + 1}.name`] = m.name || m.definitionId || '';
-            fields[`tech.${i + 1}.location`] = m.location || '';
-            fields[`tech.${i + 1}.notes`] = m.notes || '';
+        if (i < techList.length) {
+            const t = techList[i];
+            fields[`tech.${i + 1}.name`] = t.name;
+            fields[`tech.${i + 1}.location`] = t.location;
+            fields[`tech.${i + 1}.notes`] = t.notes;
         }
     }
 
-    // Mapear Weapons (7 slots)
-    const weapons = character.equipment?.weapons || [];
+    // Weapons (7 slots)
+    const weaponList = preCalculatedData?.weaponsData || [];
     for (let i = 0; i < 7; i++) {
-        if (i < weapons.length) {
-            const w = weapons[i];
-            fields[`weapon.${i + 1}.name`] = w.name || '';
-            fields[`weapon.${i + 1}.damage`] = w.damage || '';
-            fields[`weapon.${i + 1}.notes`] = w.notes || w.special || '';
+        if (i < weaponList.length) {
+            const w = weaponList[i];
+            fields[`weapon.${i + 1}.name`] = w.name;
+            fields[`weapon.${i + 1}.damage`] = w.damage;
+            fields[`weapon.${i + 1}.notes`] = w.notes;
         }
     }
 
-    // Mapear Equipment (20 slots)
-    const equipment = character.equipment?.items || [];
-    const equipLimit = 20;
-    for (let i = 0; i < equipLimit; i++) {
-        if (i < equipment.length) {
-            const e = equipment[i];
-            fields[`equip.${i + 1}.name`] = e.name || '';
-            fields[`equip.${i + 1}.notes`] = e.notes || '';
+    // Equipment (20 slots)
+    const equipList = preCalculatedData?.equipmentData || [];
+    for (let i = 0; i < 20; i++) {
+        if (i < equipList.length) {
+            const e = equipList[i];
+            fields[`equip.${i + 1}.name`] = e.name;
+            fields[`equip.${i + 1}.notes`] = e.notes;
         }
     }
 
