@@ -24,7 +24,7 @@ Yo decido qué quiero jugar y el sistema me dice qué implica eso.
 Elijo un origen, un poder, habilidades  y veo al instante cómo cambian los puntos, las estadísticas derivadas y los límites. Si algo no encaja, lo veo en ese momento. Sin esperar al final. Sin sorpresas raras.
 
 No hay truco. Hay reglas bien pasadas a código. Y muchas pruebas para que no se rompa todo a la mínima.
-### Mirando bajo el capo
+## Mirando bajo el capo
 
 A nivel técnico he intentado ser coherente. Usar herramientas modernas, sí, pero sobre todo algo que no me ate de manos en el futuro. Que sea rápido, que no dependa de servidores extraños y que pueda crecer sin volverse inmanejable.
 
