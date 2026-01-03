@@ -2,6 +2,7 @@ import { PDFDocument } from 'pdf-lib';
 import { calculateDerivedStats } from './characterCalculations';
 import { calculateGeneralSkillValues, calculateSpecialSkillValues } from './calculations/skillCalculations';
 import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS, FRIENDS_AND_ASSOCIATES } from '../data/backgroundTables';
+import { ORIGIN_CATEGORIES } from '../data/originDefinitions';
 import { POWERS } from '../data/powers';
 import { SPECIAL_SKILLS } from '../data/specialSkills';
 import { SPELLS } from '../data/spells';
@@ -82,6 +83,24 @@ export async function generateCharacterSheetPDF(pdfUrl: string, character: any, 
         'info.identity': character.sexualIdentity,
         'info.notes': character.notes,
         'info.cost': totalPCs.toString(),
+
+        // Origen
+        'info.origin': (() => {
+            if (!character.origin?.items) return '';
+            return character.origin.items.map((item: any) => {
+                const name = Object.keys(item)[0];
+                const details = item[name] || [];
+                const originDef = ORIGIN_CATEGORIES[name];
+
+                // Filter for subtypes (details that are keys in originDef.subtypes)
+                const subtypes = details.filter((d: string) => originDef?.subtypes && originDef.subtypes[d]);
+
+                if (subtypes.length > 0) {
+                    return subtypes.join(', ');
+                }
+                return name;
+            }).join(' / ');
+        })(),
 
         // Características
         'attr.fue': character.attributes?.values?.["Fuerza"]?.toString(),
