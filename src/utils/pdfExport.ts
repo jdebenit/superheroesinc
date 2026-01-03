@@ -33,6 +33,9 @@ export async function generateCharacterSheetPDF(
 
     // 2. Obtener el formulario
     const form = pdfDoc.getForm();
+    console.log('--- DEBUG: PDF Form Fields ---');
+    console.log(form.getFields().map(f => f.getName()).sort());
+    console.log('------------------------------');
 
     const stats = preCalculatedData?.derivedStats || {
         combat: { acciones: '', iniciativa: '', pv: '', equilibrio: '' },
@@ -149,16 +152,48 @@ export async function generateCharacterSheetPDF(
         });
     });
 
+    console.log('--- DEBUG: Special Skills to PDF ---');
+    console.log('flattenedSpecialSkills:', flattenedSpecialSkills);
+    console.log('Total count:', flattenedSpecialSkills.length);
+    console.log('------------------------------');
+
     for (let i = 0; i < 13; i++) {
+        // Map to potential generic fields "TextoX" found in the template
+        // Assuming pairs: Name=Odd, Val=Even
+        const nameField = `Texto${(i * 2) + 1}`;
+        const valField = `Texto${(i * 2) + 2}`;
+
         if (i < flattenedSpecialSkills.length) {
-            fields[`skill.special.${i + 1}.name`] = flattenedSpecialSkills[i].name;
-            fields[`skill.special.${i + 1}.val`] = flattenedSpecialSkills[i].val.toString();
+            const skillName = flattenedSpecialSkills[i].name;
+            const skillVal = flattenedSpecialSkills[i].val.toString();
+
+            console.log(`Mapping skill ${i}: "${skillName}" (${skillVal}) to ${nameField}/${valField}`);
+
+            // Also try legacy specific names just in case
+            fields[`skill.special.${i + 1}.name`] = skillName;
+            fields[`skill.special.${i + 1}.val`] = skillVal;
+
+            // Map to generic fields
+            fields[nameField] = skillName;
+            fields[valField] = skillVal;
+        } else {
+            console.log(`Clearing slot ${i}: ${nameField}/${valField}`);
+            fields[`skill.special.${i + 1}.name`] = '';
+            fields[`skill.special.${i + 1}.val`] = '';
+
+            fields[nameField] = '';
+            fields[valField] = '';
         }
     }
 
     // --- MAPPING FROM PRE-CALCULATED LISTS ---
 
     // Powers (10 slots)
+    // IMPORTANT: Template might support up to 10 or 7. Loop used 7 before. 
+    // Checking previous code was 7. Sticking to 7. Wait, user might want 10? 
+    // I will check constant logic. Preview generates 10. `pdfExport` loop used to have 7.
+    // If template has 10 lines, I should try 10.
+    // I will increase to 10 to be safe, matching Preview generation.
     const powerList = preCalculatedData?.powersData || [];
     for (let i = 0; i < 10; i++) {
         if (i < powerList.length) {
@@ -168,6 +203,12 @@ export async function generateCharacterSheetPDF(
             fields[`power.${i + 1}.val`] = p.val;
             fields[`power.${i + 1}.rank`] = p.rank;
             fields[`power.${i + 1}.notes`] = p.notes;
+        } else {
+            fields[`power.${i + 1}.name`] = '';
+            fields[`power.${i + 1}.cost`] = '';
+            fields[`power.${i + 1}.val`] = '';
+            fields[`power.${i + 1}.rank`] = '';
+            fields[`power.${i + 1}.notes`] = '';
         }
     }
 
@@ -180,6 +221,11 @@ export async function generateCharacterSheetPDF(
             fields[`spell.${i + 1}.rank`] = s.rank;
             fields[`spell.${i + 1}.cost`] = s.cost;
             fields[`spell.${i + 1}.notes`] = s.notes;
+        } else {
+            fields[`spell.${i + 1}.name`] = '';
+            fields[`spell.${i + 1}.rank`] = '';
+            fields[`spell.${i + 1}.cost`] = '';
+            fields[`spell.${i + 1}.notes`] = '';
         }
     }
 
@@ -191,6 +237,10 @@ export async function generateCharacterSheetPDF(
             fields[`tech.${i + 1}.name`] = t.name;
             fields[`tech.${i + 1}.location`] = t.location;
             fields[`tech.${i + 1}.notes`] = t.notes;
+        } else {
+            fields[`tech.${i + 1}.name`] = '';
+            fields[`tech.${i + 1}.location`] = '';
+            fields[`tech.${i + 1}.notes`] = '';
         }
     }
 
@@ -202,6 +252,10 @@ export async function generateCharacterSheetPDF(
             fields[`weapon.${i + 1}.name`] = w.name;
             fields[`weapon.${i + 1}.damage`] = w.damage;
             fields[`weapon.${i + 1}.notes`] = w.notes;
+        } else {
+            fields[`weapon.${i + 1}.name`] = '';
+            fields[`weapon.${i + 1}.damage`] = '';
+            fields[`weapon.${i + 1}.notes`] = '';
         }
     }
 
@@ -212,6 +266,9 @@ export async function generateCharacterSheetPDF(
             const e = equipList[i];
             fields[`equip.${i + 1}.name`] = e.name;
             fields[`equip.${i + 1}.notes`] = e.notes;
+        } else {
+            fields[`equip.${i + 1}.name`] = '';
+            fields[`equip.${i + 1}.notes`] = '';
         }
     }
 

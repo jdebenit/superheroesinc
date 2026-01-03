@@ -496,3 +496,41 @@ export function calculateSpecialSkillsPCWithInt(
         totalPC
     };
 }
+
+/**
+ * Calcula el valor base de una habilidad basado en una fórmula de atributos
+ * Compatible con la llamada desde CharacterPreview (attributes, origins, formula)
+ */
+export function calculateSkillBase(
+    characteristics: { [key: string]: number },
+    origins: any[] | undefined,
+    formula: string
+): number {
+    if (!formula) return 0;
+
+    const stats: { [key: string]: number } = {
+        fuerza: 0, constitucion: 0, agilidad: 0, inteligencia: 0,
+        percepcion: 0, apariencia: 0, voluntad: 0
+    };
+    if (characteristics) {
+        Object.keys(characteristics).forEach(key => {
+            const normalizedKey = key.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            stats[normalizedKey] = Number(characteristics[key]) || 0;
+        });
+    }
+
+    const getVal = (abbr: string) => {
+        const map: Record<string, string> = {
+            'FUE': 'fuerza', 'AGI': 'agilidad', 'CON': 'constitucion',
+            'INT': 'inteligencia', 'PER': 'percepcion', 'VOL': 'voluntad', 'APA': 'apariencia'
+        };
+        return stats[map[abbr]] || 0;
+    };
+
+    try {
+        const evalFormula = formula.replace(/[A-Z]{3}/g, (match) => getVal(match).toString());
+        return Math.floor(new Function('return ' + evalFormula)());
+    } catch (e) {
+        return 0;
+    }
+}
