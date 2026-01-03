@@ -1,8 +1,9 @@
 ---
-question: ¿el exoesqueleto energético necesita de alguna habilidad especial para utilizarlo?
+question: ¿El exoesqueleto energético necesita de alguna habilidad especial para utilizarlo?
 tags:
   - creacion-personajes
   - reglas-basicas
+  - exoexqueleto-energetico
 category: Tecnificados
 order: 3
 ---
