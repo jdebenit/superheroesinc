@@ -734,54 +734,6 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                     </button>
                 </div>
             </div>
-
-            {/* EXPORT PDF BUTTON */}
-            <div style={{
-                marginTop: '3rem',
-                textAlign: 'center',
-                borderTop: '2px solid #e5e7eb',
-                paddingTop: '2rem'
-            }}>
-                <button
-                    onClick={async () => {
-                        try {
-                            // Using dynamic import to avoid SSR issues if any, though pdf-lib works in browser
-                            const { generateCharacterSheetPDF, downloadPDF } = await import('../../../utils/pdfExport');
-                            const pdfBytes = await generateCharacterSheetPDF('/ficha_template.pdf', data, totalPCs || 0);
-                            downloadPDF(pdfBytes, `Ficha_SHI_${data.name.replace(/\s+/g, '_') || 'Personaje'}.pdf`);
-                        } catch (error) {
-                            console.error('Error generando PDF:', error);
-                            alert('Error al generar el PDF. Asegúrate de que el template "ficha_template.pdf" está en la carpeta public.');
-                        }
-                    }}
-                    style={{
-                        padding: '1rem 3rem',
-                        fontSize: '1.25rem',
-                        fontWeight: 'bold',
-                        backgroundColor: '#059669',
-                        color: 'white',
-                        border: 'none',
-                        borderRadius: '8px',
-                        cursor: 'pointer',
-                        boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-                        transition: 'all 0.2s',
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '0.75rem'
-                    }}
-                    onMouseEnter={(e) => {
-                        e.currentTarget.style.transform = 'translateY(-2px)';
-                        e.currentTarget.style.backgroundColor = '#047857';
-                    }}
-                    onMouseLeave={(e) => {
-                        e.currentTarget.style.transform = 'translateY(0)';
-                        e.currentTarget.style.backgroundColor = '#059669'
-                    }}
-                >
-                    📥 Exportar Ficha PDF (Alpha)
-                </button>
-            </div>
-
         </div>
     );
 }

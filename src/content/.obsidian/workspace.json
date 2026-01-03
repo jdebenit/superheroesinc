@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "faq/02-generador-fichas-limitaciones.md",
+                "file": "blog/haciendo-fichas-sin-calculadora.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "02-generador-fichas-limitaciones"
+              "title": "haciendo-fichas-sin-calculadora"
             }
           }
         ]
@@ -185,8 +185,10 @@
   },
   "active": "d38ed0c19a5181c9",
   "lastOpenFiles": [
-    "faq/01-que-necesito-para-jugar.md",
+    "blog/la-web-como-punto-de-encuentro-del-juego.md",
+    "blog/actual-plays-superheroes-inc.md",
     "faq/02-generador-fichas-limitaciones.md",
+    "faq/01-que-necesito-para-jugar.md",
     "faq/07-hechizos-energia-magica.md",
     "faq/05-rangos-poderes.md",
     "faq/04-diferencias-origenes.md",
@@ -194,7 +196,6 @@
     "faq/02-como-calcular-puntos-creacion.md",
     "faq",
     "blog/haciendo-fichas-sin-calculadora.md",
-    "blog/la-web-como-punto-de-encuentro-del-juego.md",
     "characters/mjolnir-original.md",
     "characters/mjolnir.md",
     "characters/medianoche.md",
@@ -203,7 +204,6 @@
     "characters/mausoleo.md",
     "blog/guia-escritura-shi-replay-script.md",
     "blog/el-vigilante-no-es-un-atajo.md",
-    "blog/actual-plays-superheroes-inc.md",
     "blog/guia-escritura-shi-rplay-script.md",
     "blog/nueva-web.md",
     "blog/Sin título.md",
