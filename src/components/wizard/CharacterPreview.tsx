@@ -12,6 +12,7 @@ import { MALDITO_DATA } from './steps/Step3_Especials/sections/MalditoSection';
 import { ALTERADO_DATA } from './steps/Step3_Especials/sections/AlteradoSection';
 import { SEQUELS } from '../../data/sequels';
 import { INCOME_SOURCES } from '../../data/technologicalOptions';
+import { calculateEM, hasSubtype } from './steps/Step3_Especials/utils';
 import {
     GUARDIAN_QUALITIES,
     GUARDIAN_OBJECTS,
@@ -1064,6 +1065,23 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                     <div className="sheet-section spells">
                                         <div className="section-header">
                                             <h4>Hechizos</h4>
+                                            {(() => {
+                                                // Calculate Base EM
+                                                const isMago = hasSubtype(character, 'Arcano', 'Mago');
+                                                // Default to 4 if not set, unless Mago (1)
+                                                let divisor = character.spells?.emFormula?.divisor || 4;
+                                                if (isMago) divisor = 1;
+
+                                                if (divisor === 0) return null;
+
+                                                const calculatedEM = calculateEM(character, character.powers?.selected || [], divisor);
+
+                                                return (
+                                                    <span className="cost" style={{ color: '#4f46e5', fontWeight: 'bold' }}>
+                                                        ({calculatedEM} EM)
+                                                    </span>
+                                                );
+                                            })()}
                                         </div>
                                         <ul className="no-bullets-list" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                                             {character.spells.selected.map((spell: any, idx: number) => {

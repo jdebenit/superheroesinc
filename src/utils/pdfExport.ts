@@ -4,6 +4,40 @@ import { calculateGeneralSkillValues, calculateSpecialSkillValues } from './calc
 import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS, FRIENDS_AND_ASSOCIATES } from '../data/backgroundTables';
 import { POWERS } from '../data/powers';
 import { SPECIAL_SKILLS } from '../data/specialSkills';
+import { SPELLS } from '../data/spells';
+
+// Helper to get characteristic value safely
+const getCharacteristicValue = (character: any, charName: string): number => {
+    return character.attributes?.values?.[charName] || 0;
+}
+
+// Helper to check subtypes
+const hasSubtype = (character: any, originName: string, subtypeName: string): boolean => {
+    return character.origin?.items?.some((item: any) => {
+        const key = Object.keys(item)[0];
+        if (key !== originName) return false;
+        const subtypes = item[key];
+        return Array.isArray(subtypes) && subtypes.includes(subtypeName);
+    });
+};
+
+// Helper to calculate skill base
+const calculateSkillBase = (character: any, formula: string): number => {
+    if (!formula) return 0;
+    const getVal = (abbr: string) => {
+        const map: Record<string, string> = {
+            'FUE': 'Fuerza', 'AGI': 'Agilidad', 'CON': 'Constitución',
+            'INT': 'Inteligencia', 'PER': 'Percepción', 'VOL': 'Voluntad', 'APA': 'Apariencia'
+        };
+        return getCharacteristicValue(character, map[abbr] || '');
+    };
+    try {
+        const evalFormula = formula.replace(/[A-Z]{3}/g, (match) => getVal(match).toString());
+        return Math.floor(new Function('return ' + evalFormula)());
+    } catch (e) {
+        return 0;
+    }
+};
 
 /**
  * Rellena el PDF de la ficha de personaje con los datos proporcionados.
@@ -66,21 +100,52 @@ export async function generateCharacterSheetPDF(pdfUrl: string, character: any, 
 
         // Energia Magica
         'combat.energy': (() => {
-            const int = character.attributes?.values?.["Inteligencia"] || 0;
-            const per = character.attributes?.values?.["Percepción"] || 0;
-            const vol = character.attributes?.values?.["Voluntad"] || 0;
+            const int = getCharacteristicValue(character, 'Inteligencia');
+            const per = getCharacteristicValue(character, 'Percepción');
+            const vol = getCharacteristicValue(character, 'Voluntad');
+            const con = getCharacteristicValue(character, 'Constitución');
 
-            // Check for Semidemonio
-            const isSemidemonio = character.origin?.items?.some((o: any) => {
-                const originName = Object.keys(o)[0];
-                const content = o[originName] as string[];
-                return content && content.includes('Semidemonio');
+            // Determine effective characteristics for EM
+            const isSemidemonio = hasSubtype(character, 'Sobrenatural', 'Semidemonio');
+            const conVal = isSemidemonio ? con : 0;
+
+            // Apply power mods to characteristics for EM calculation
+            let modInt = int;
+            let modPer = per;
+            let modVol = vol;
+            let modCon = conVal;
+
+            (character.powers?.selected || []).forEach((p: any) => {
+                const powerData = POWERS.find(power => power.id === p.id);
+                if (powerData?.characteristic && p.powerMod) {
+                    switch (powerData.characteristic) {
+                        case 'INT': modInt += p.powerMod; break;
+                        case 'PER': modPer += p.powerMod; break;
+                        case 'VOL': modVol += p.powerMod; break;
+                        case 'CON': if (isSemidemonio) modCon += p.powerMod; break;
+                    }
+                }
             });
-            const con = isSemidemonio ? (character.attributes?.values?.["Constitución"] || 0) : 0;
 
-            const divisor = character.spells?.emFormula?.divisor || 4;
-            const em = Math.floor((int + per + vol + con) / divisor);
-            return em.toString();
+            const isMago = hasSubtype(character, 'Arcano', 'Mago');
+            const divisor = isMago ? 1 : (character.spells?.emFormula?.divisor || 4); // Default 4 for Terrano/others
+
+            // Safety check for divisor 0
+            if (divisor === 0) return '0';
+
+            const maxEM = Math.floor((modInt + modPer + modVol + modCon) / divisor);
+
+            // Calculate Required EM by spells
+            const selectedSpells = character.spells?.selected || [];
+            const requiredEM = selectedSpells.reduce((acc: number, spell: any) => {
+                const s = SPELLS.find((sp: any) => sp.id === spell.id);
+                const baseCost = s ? (parseInt(s.cost, 10) || 0) : 0;
+                const rank = spell.rank || 1;
+                return acc + (baseCost * rank);
+            }, 0);
+
+            // Final EM is the greater of the two
+            return Math.max(maxEM, requiredEM).toString();
         })(),
 
         // Otras Estadísticas
@@ -106,7 +171,6 @@ export async function generateCharacterSheetPDF(pdfUrl: string, character: any, 
     };
 
     // Mapear General Skills (Fixed names)
-    // IDs: acechar, combate, conocimientos, esconderse, idea, influencia, idioma, investigar, lanzar, primeros_auxilios, suerte, trepar
     Object.entries(generalSkillsData.skills).forEach(([skillId, skillData]) => {
         if (skillId === 'idioma') {
             fields[`skill.${skillId}.val`] = skillData.total.toString();
@@ -148,8 +212,6 @@ export async function generateCharacterSheetPDF(pdfUrl: string, character: any, 
     }
 
     // Mapear Powers (7 slots)
-    // Powers are in character.powers.selected (array)
-    // Needs type check, assuming array of { name, rank, cost, effects... }
     const powers = character.powers?.selected || [];
     for (let i = 0; i < 7; i++) {
         if (i < powers.length) {
@@ -159,51 +221,76 @@ export async function generateCharacterSheetPDF(pdfUrl: string, character: any, 
             const displayName = p.selectedOption ? `${baseName} (${p.selectedOption})` : baseName;
 
             fields[`power.${i + 1}.name`] = displayName;
-            fields[`power.${i + 1}.cost`] = (powerData?.cost || p.cost || p.baseCost || '').toString(); // Use looked up cost if available
+
+            // Cost calculation
+            const isHybridPenalty = character.isParahumanoHybrid && p.origin === 'Alterado';
+            let costVal = 0;
+            if (powerData) {
+                const baseCost = powerData.cost;
+                const penalty = isHybridPenalty ? 3 : 0;
+                if (!powerData.characteristic) {
+                    // Skill type
+                    const rank = p.rank || 1;
+                    const minVal = powerData.skillCalc ? calculateSkillBase(character, powerData.skillCalc) : 0;
+                    const currentVal = p.skillValue || minVal;
+                    const extraCost = Math.max(0, currentVal - minVal) * 0.1;
+                    costVal = baseCost + penalty + (rank * 0.1) + extraCost;
+                } else {
+                    // Attribute type
+                    const powerMod = p.powerMod || 0;
+                    costVal = baseCost + penalty + (powerMod / 10);
+                }
+            } else {
+                costVal = (p.cost || 0);
+            }
+
+            fields[`power.${i + 1}.cost`] = costVal.toFixed(1);
             fields[`power.${i + 1}.rank`] = (p.rank || '').toString();
-            fields[`power.${i + 1}.val`] = (p.skillValue || '').toString();
+
+            // Power Value
+            if (powerData?.skillCalc) {
+                const minVal = calculateSkillBase(character, powerData.skillCalc);
+                const currentVal = p.skillValue !== undefined ? p.skillValue : minVal;
+                fields[`power.${i + 1}.val`] = currentVal.toString();
+            } else if (powerData?.characteristic) {
+                fields[`power.${i + 1}.val`] = (p.powerMod || '').toString();
+            } else {
+                fields[`power.${i + 1}.val`] = (p.skillValue || '').toString();
+            }
+
             fields[`power.${i + 1}.notes`] = p.effect || '';
         }
     }
 
     // Mapear Spells (15 slots)
-    // Spells in character.spells.selected
     const spells = character.spells?.selected || [];
     for (let i = 0; i < 15; i++) {
         if (i < spells.length) {
             const s = spells[i];
-            fields[`spell.${i + 1}.name`] = s.name || '';
-            fields[`spell.${i + 1}.rank`] = (s.level || s.rank || '').toString();
-            fields[`spell.${i + 1}.cost`] = (s.cost || '').toString();
-            fields[`spell.${i + 1}.notes`] = s.effect || s.description || '';
+            const spellDef = SPELLS.find(def => def.id === s.id);
+
+            fields[`spell.${i + 1}.name`] = spellDef?.name || s.name || '';
+
+            // Rank
+            const maxRank = spellDef?.maxRank || 5;
+            const isMaestria = s.rank === maxRank + 2;
+            fields[`spell.${i + 1}.rank`] = isMaestria ? 'Maestría' : (s.rank || '').toString();
+
+            // Costo
+            const baseCost = spellDef ? (parseInt(spellDef.cost, 10) || 0) : 0;
+            const effectiveRank = s.rank || 1;
+            fields[`spell.${i + 1}.cost`] = (baseCost * effectiveRank).toString();
+
+            fields[`spell.${i + 1}.notes`] = spellDef?.requirements || s.effect || s.description || '';
         }
     }
 
     // Mapear Tech Modules (12 slots)
-    // Modules in character.techModules.installed ???
-    // Need to verify where tech modules are stored. Based on Step3 edits: character.techModules?.installed (array of { definitionId, location, ... })
-    // We need to look up definition from techModules.ts
-    // For now assuming existing structure, if not present will check later.
-    // Based on previous edits, user added them to Step3 but might not be in the 'character' object passed here if State hasn't been updated to include them in the root object.
-    // However, I can try to access character.techModules.installed directly.
-    // IMPORTANT: I need the Tech Module Definitions to get the name. I'll need to import TECH_MODULES.
-    // Assuming for now simple access, verify imports later or use what's available.
-    // Wait, I should import TECH_MODULES.
-
-    // I will add the import for TECH_MODULES in the next step to be safe, or just do a defensive check now.
-    // Actually I can import it in this file easily? No, I need to add the import line.
-    // I'll skip detailed tech mapping requiring external import for this exact tool call if I haven't imported it, 
-    // BUT I can try to find it in the object if the object has the full data.
-    // The `Step6` usually receives the full state.
-    // Let's assume `character.techModules.installed` exists.
-
-    // Since I cannot import TECH_MODULES in this replacement without changing the top of the file separately (well I can do it in this block).
-    // I'll add the import of TECH_MODULES below.
     const techModules = character.techModules?.installed || [];
     for (let i = 0; i < 12; i++) {
         if (i < techModules.length) {
             const m = techModules[i];
-            fields[`tech.${i + 1}.name`] = m.name || m.definitionId || ''; // Assuming 'name' or 'definitionId' is available
+            fields[`tech.${i + 1}.name`] = m.name || m.definitionId || '';
             fields[`tech.${i + 1}.location`] = m.location || '';
             fields[`tech.${i + 1}.notes`] = m.notes || '';
         }
@@ -220,9 +307,9 @@ export async function generateCharacterSheetPDF(pdfUrl: string, character: any, 
         }
     }
 
-    // Mapear Equipment (2 slots -> handling up to 20 just in case)
+    // Mapear Equipment (20 slots)
     const equipment = character.equipment?.items || [];
-    const equipLimit = 20; // safe upper bound
+    const equipLimit = 20;
     for (let i = 0; i < equipLimit; i++) {
         if (i < equipment.length) {
             const e = equipment[i];
@@ -239,12 +326,9 @@ export async function generateCharacterSheetPDF(pdfUrl: string, character: any, 
                 field.setText(value || '');
             }
         } catch (e) {
-            console.warn(`Campo '${fieldName}' no encontrado en el PDF o no es un campo de texto.`);
+            // console.warn(`Campo '${fieldName}' no encontrado en el PDF o no es un campo de texto.`);
         }
     }
-
-    // Opcional: Aplanar el formulario para que no sea editable después (comentado por defecto)
-    // form.flatten();
 
     // 5. Devolver bytes
     return await pdfDoc.save();
