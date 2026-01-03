@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "characters/mjolnir-original.md",
+                "file": "blog/haciendo-fichas-sin-calculadora.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "mjolnir-original"
+              "title": "haciendo-fichas-sin-calculadora"
             }
           }
         ]
@@ -185,13 +185,14 @@
   },
   "active": "c63981d280fcf146",
   "lastOpenFiles": [
-    "characters/mjolnir.md",
+    "blog/la-web-como-punto-de-encuentro-del-juego.md",
+    "blog/haciendo-fichas-sin-calculadora.md",
     "characters/mjolnir-original.md",
+    "characters/mjolnir.md",
     "characters/medianoche.md",
     "characters/miolnir-original.md",
     "characters/mijolnir-original.md",
     "characters/mausoleo.md",
-    "blog/la-web-como-punto-de-encuentro-del-juego.md",
     "blog/guia-escritura-shi-replay-script.md",
     "blog/el-vigilante-no-es-un-atajo.md",
     "blog/actual-plays-superheroes-inc.md",
@@ -211,7 +212,6 @@
     "lore/localizaciones/cronopolis.md",
     "2025-11-26.md",
     "lore/localizaciones/terra.md",
-    "lore/grupos/las-siete-torres.md",
     "rpg/jefe-motero-road-reapers.yaml",
     "rpg/motero-road-reapers copy.yaml",
     "rpg/motero-road-reapers.yaml",

@@ -87,12 +87,13 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
     },
     "Tecnológico": {
         name: "Tecnológico",
-        disabledSubtypes: ["I.A.", "Robot gigante"],
+        disabledSubtypes: ["Robot gigante", "Androide / Sintetico", "Robot"],
         subtypes: {
             "Tecnoarmadura": ["Armadura tecnológica avanzada", "Sistemas integrados", "Acceso a módulos tecnológicos"],
             "Exoesqueleto Energético": ["Armadura tecnológica avanzada", "Sistemas integrados"],
             "Cyborg": ["Cuerpo cibernético", "Acceso a módulos tecnológicos"],
-            "I.A.": ["Inteligencia Artificial", "Cuerpo robótico"],
+            "Robot": ["Como una tecnoarmadura"],
+            "Androide / Sintetico": ["Como un alterado"],
             "Robot gigante": ["Gran tamaño", "Blindaje pesado"],
             "Tecnovehículo": ["Vehículo avanzado", "Acceso a módulos tecnológicos"],
             "Inventor o forjador": ["Creación de artefactos"]

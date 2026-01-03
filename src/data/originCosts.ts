@@ -82,7 +82,6 @@ export const ORIGIN_COSTS: { [key: string]: OriginCosts } = {
             "Tecnoarmadura": 5,
             "Exoesqueleto Energético": 4,
             "Cyborg": 5,
-            "I.A.": 5,
             "Robot gigante": 5,
             "Tecnovehículo": 4,
             "Inventor o forjador": 4
