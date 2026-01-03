@@ -143,6 +143,8 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
         });
     };
 
+
+
     const updateTrauma = (specialty: string, text: string) => {
         onChange({
             ...data,
@@ -393,6 +395,42 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
 
     const hasAnyOrigin = isGuardian || isAlterado || hasEM || isVampiro || isSemidemonio || isMaldito ||
         isEnte || isThals || isDivino || isCosmico || isMutante || isVigilante || isTechnological || isExoskeleton || isTesKhar || isAtlante || isParahumano;
+
+    // Calculate and store EM in state
+    useEffect(() => {
+        if (!hasEM) return;
+
+        // Determine divisor
+        let divisor = emFormula.divisor;
+        if (isMago) divisor = 1;
+
+        if (divisor === 0) return;
+
+        // We use data directly to avoid issues with stale closures if props change
+        // But we need to use the calculateEM util
+        const calculated = calculateEM(data, selectedPowers, divisor);
+
+        // Only update if changed prevents infinite loop
+        if (data.spells?.calculatedEM !== calculated) {
+            onChange({
+                ...data,
+                spells: {
+                    ...data.spells,
+                    calculatedEM: calculated,
+                    emFormula: data.spells.emFormula, // Preserve existing
+                    selected: data.spells.selected // Preserve existing
+                }
+            });
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [
+        hasEM,
+        isMago,
+        emFormula.divisor,
+        data.attributes,
+        selectedPowers,
+        data.spells?.calculatedEM
+    ]);
 
     return (
         <div className="space-y-8 p-6 max-w-5xl mx-auto">

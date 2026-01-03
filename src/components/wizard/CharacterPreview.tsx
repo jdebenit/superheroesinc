@@ -1066,7 +1066,16 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                         <div className="section-header">
                                             <h4>Hechizos</h4>
                                             {(() => {
-                                                // Calculate Base EM
+                                                // 1. Try to use stored value
+                                                if (character.spells?.calculatedEM !== undefined) {
+                                                    return (
+                                                        <span className="cost" style={{ color: '#4f46e5', fontWeight: 'bold' }}>
+                                                            ({character.spells.calculatedEM} EM)
+                                                        </span>
+                                                    );
+                                                }
+
+                                                // 2. Fallback: Calculate Base EM
                                                 const isMago = hasSubtype(character, 'Arcano', 'Mago');
                                                 // Default to 4 if not set, unless Mago (1)
                                                 let divisor = character.spells?.emFormula?.divisor || 4;

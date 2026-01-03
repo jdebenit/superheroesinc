@@ -133,7 +133,12 @@ export async function generateCharacterSheetPDF(pdfUrl: string, character: any, 
             // Safety check for divisor 0
             if (divisor === 0) return '0';
 
-            const maxEM = Math.floor((modInt + modPer + modVol + modCon) / divisor);
+            let maxEM = 0;
+            if (character.spells?.calculatedEM !== undefined) {
+                maxEM = character.spells.calculatedEM;
+            } else {
+                maxEM = Math.floor((modInt + modPer + modVol + modCon) / divisor);
+            }
 
             // Calculate Required EM by spells
             const selectedSpells = character.spells?.selected || [];
@@ -144,8 +149,8 @@ export async function generateCharacterSheetPDF(pdfUrl: string, character: any, 
                 return acc + (baseCost * rank);
             }, 0);
 
-            // Final EM is the greater of the two
-            return Math.max(maxEM, requiredEM).toString();
+            // Return only the Max/Calculated EM, ignoring spell costs (as requested by user for Preview)
+            return maxEM.toString();
         })(),
 
         // Otras Estadísticas
