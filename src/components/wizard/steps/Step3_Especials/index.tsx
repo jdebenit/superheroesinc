@@ -30,6 +30,7 @@ import TechnologicalSection from './sections/TechnologicalSection';
 // Modal Components
 import SelectionModal from './modals/SelectionModal';
 import MagicalBondsModal from './modals/MagicalBondsModal';
+import MinotaurSection from './sections/MinotaurSection';
 
 export default function Step3_Especials({ data, onChange }: Step3Props) {
     const [modalOpen, setModalOpen] = useState(false);
@@ -39,6 +40,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     const isTesKhar = hasSubtype(data, 'Parahumano', 'Tes-khar');
     const isAtlante = hasSubtype(data, 'Parahumano', 'Atlante');
     const isTroll = hasSubtype(data, 'Arcano', 'Troll');
+    const isMinotauro = hasSubtype(data, 'Arcano', 'Minotauro');
     const isTecnologico = hasOrigin(data, 'Tecnológico');
     // Hybrid logic
     const isParahumano = hasOrigin(data, 'Parahumano');
@@ -435,7 +437,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     }).filter((s): s is (Spell & { rank: number; selectedOption?: string }) => s !== null);
 
     const hasAnyOrigin = isGuardian || isAlterado || hasEM || isVampiro || isSemidemonio || isMaldito ||
-        isEnte || isThals || isDivino || isCosmico || isMutante || isVigilante || isTechnological || isExoskeleton || isTesKhar || isAtlante || isParahumano || isTroll;
+        isEnte || isThals || isDivino || isCosmico || isMutante || isVigilante || isTechnological || isExoskeleton || isTesKhar || isAtlante || isParahumano || isTroll || isMinotauro;
 
     // Calculate and store EM in state
     useEffect(() => {
@@ -583,6 +585,8 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                     onSelectConfig={updateExoskeletonConfig}
                 />
             )}
+
+            {isMinotauro && <MinotaurSection />}
 
             {/* TECHNOLOGICAL MODULES SECTION */}
             {isTechnological && (
