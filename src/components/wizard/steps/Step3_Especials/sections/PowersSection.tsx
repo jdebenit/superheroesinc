@@ -167,6 +167,7 @@ export default function PowersSection({
                                     isTesKhar={isTesKhar}
                                     isAtlante={isAtlante}
                                     isTroll={isTroll}
+                                    isSemidemonio={isSemidemonio}
                                 />
                             ))}
                         </tbody>

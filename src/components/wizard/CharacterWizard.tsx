@@ -357,6 +357,13 @@ export default function CharacterWizard() {
                 })
             );
 
+            const isSemidemonio = character.origin?.items?.some((item: any) =>
+                Object.keys(item).some(key => {
+                    const val = item[key];
+                    return key === 'Sobrenatural' && Array.isArray(val) && val.includes('Semidemonio');
+                })
+            );
+
             if (isTesKhar && power.id === 'superhabilidad' && !tesKharFreeUsed) {
                 tesKharFreeUsed = true;
                 return acc;
@@ -381,6 +388,12 @@ export default function CharacterWizard() {
 
             // Base cost
             let cost = powerData.cost;
+
+            // Semidemonio Bonus: -1 PC for Sobrenatural powers (Base cost discount)
+            const isSemidemonioBonus = isSemidemonio && power.origin === 'Sobrenatural';
+            if (isSemidemonioBonus && !powerData.characteristic) {
+                cost = Math.max(0, cost - 1);
+            }
 
             // Parahumano Hybrid Penalty: +3 PC for Alterado powers
             if (character.isParahumanoHybrid && power.origin === 'Alterado') {
@@ -422,7 +435,14 @@ export default function CharacterWizard() {
             } else {
                 // Powers with characteristics: powerMod / 10
                 const powerMod = power.powerMod || 0;
-                cost += powerMod / 10;
+                let modCost = powerMod;
+
+                if (isSemidemonioBonus) {
+                    // Semidemonio Bonus for characteristic powers: 10 points free (1 PC discount equivalent)
+                    modCost = Math.max(0, modCost - 10);
+                }
+
+                cost += modCost / 10;
             }
 
             // Customizations cost
@@ -702,7 +722,7 @@ export default function CharacterWizard() {
             {/* Header */}
             <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
                 <h1 style={{ fontSize: '3rem', fontWeight: '900', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
-                    Generador de Fichas (Beta 0.3.4)
+                    Generador de Fichas (Beta 0.3.7)
                 </h1>
                 <p style={{ fontSize: '1.25rem', color: '#666', marginBottom: '1rem' }}>
                     Crea tu personaje paso a paso

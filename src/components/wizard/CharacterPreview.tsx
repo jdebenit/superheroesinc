@@ -134,10 +134,25 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
 
         // Cost calculation logic (Moved from pdfExport)
         const isHybridPenalty = character.isParahumanoHybrid && p.origin === 'Alterado';
+
+        const isSemidemonio = character.origin?.items?.some((item: any) =>
+            Object.keys(item).some(key => {
+                const val = item[key];
+                return key === 'Sobrenatural' && Array.isArray(val) && val.includes('Semidemonio');
+            })
+        );
+        const isSemidemonioBonus = isSemidemonio && p.origin === 'Sobrenatural';
+
         let costVal = 0;
 
         if (powerData) {
-            const baseCost = powerData.cost || 0;
+            let baseCost = powerData.cost || 0;
+
+            // Semidemonio Bonus: -1 PC for Sobrenatural powers (Base cost discount)
+            if (isSemidemonioBonus && !powerData.characteristic) {
+                baseCost = Math.max(0, baseCost - 1);
+            }
+
             const penalty = isHybridPenalty ? 3 : 0;
 
             if (!powerData.characteristic) {
@@ -153,7 +168,14 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
             } else {
                 // Attribute type
                 const powerMod = p.powerMod || 0;
-                costVal = baseCost + penalty + (powerMod / 10);
+                let modCost = powerMod / 10;
+
+                if (isSemidemonioBonus) {
+                    // Semidemonio Bonus for characteristic powers: 10 points free (1 PC discount equivalent)
+                    modCost = Math.max(0, (powerMod - 10) / 10);
+                }
+
+                costVal = baseCost + penalty + modCost;
                 // Technically custom powers shouldn't have customizations in this logic branch based on current UI,
                 // but if we support it later:
                 const custCost = (p.customizations || []).reduce((sum: number, c: any) => sum + (c.cost || 0), 0);

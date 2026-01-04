@@ -17,6 +17,7 @@ interface PowerRowProps {
     isTesKhar?: boolean;
     isAtlante?: boolean;
     isTroll?: boolean;
+    isSemidemonio?: boolean;
 }
 
 const getCharName = (abbr: string): string => {
@@ -51,12 +52,14 @@ export default function PowerRow({
     isParahumanoHybrid,
     isTesKhar,
     isAtlante,
-    isTroll
+    isTroll,
+    isSemidemonio
 }: PowerRowProps) {
     const p = POWERS.find(power => power.id === selection.id);
     if (!p) return null;
 
     const isHybridPenalty = isParahumanoHybrid && selection.origin === 'Alterado';
+    const isSemidemonioBonus = isSemidemonio && selection.origin === 'Sobrenatural';
 
     // Check for free powers
     const isTesKharFree = isTesKhar && p.id === 'superhabilidad';
@@ -64,9 +67,17 @@ export default function PowerRow({
     const isTrollFree = isTroll && p.id === 'regeneracion_de_tejidos';
     const isFree = isTesKharFree || isAtlanteFree || isTrollFree;
 
+    let displayBaseCostStr = p.cost.toString();
+    if (isHybridPenalty) {
+        displayBaseCostStr = `${p.cost} + 3`;
+    } else if (isSemidemonioBonus && !p.characteristic) {
+        // Show discount for normal powers
+        displayBaseCostStr = `${p.cost} - 1`;
+    }
+
     const displayCost = isFree ?
         <span style={{ textDecoration: 'line-through', color: '#ef4444' }}>{p.cost}</span>
-        : (isHybridPenalty ? `${p.cost} + 3` : p.cost);
+        : displayBaseCostStr;
 
     const isEven = index % 2 === 0;
     const originStyle = ORIGIN_STYLES[selection.origin];
@@ -171,7 +182,13 @@ export default function PowerRow({
                                     // Sum customization costs
                                     const custCost = (selection.customizations || []).reduce((sum, c) => sum + (c.cost || 0), 0);
 
-                                    const total = (p.cost + penalty + (selection.rank / 10) + extraCost + custCost);
+                                    // Apply Semidemonio Bonus (Discount 1 PC base)
+                                    let baseCost = p.cost;
+                                    if (isSemidemonioBonus) {
+                                        baseCost = Math.max(0, baseCost - 1);
+                                    }
+
+                                    const total = (baseCost + penalty + (selection.rank / 10) + extraCost + custCost);
 
                                     if (isFree) return "0.0";
                                     return total.toFixed(1);
@@ -314,13 +331,30 @@ export default function PowerRow({
                                 <span style={{ color: '#10b981', fontWeight: 'bold' }}>¡Poder Gratuito por Origen!</span>
                             ) : (
                                 <>{(() => {
-                                    const modCost = (selection.powerMod || 0) / 10;
+                                    const powerMod = (selection.powerMod || 0);
+
+                                    // Apply Semidemonio discount logic for display
+                                    // "10 points free" in value (1 PC worth)
+                                    let effectivePowerMod = powerMod;
+                                    let discountText = null;
+
+                                    if (isSemidemonioBonus) {
+                                        // The first 10 points are free.
+                                        // Cost is based on (powerMod - 10)
+                                        effectivePowerMod = Math.max(0, powerMod - 10);
+                                        discountText = "(-10 gratis)";
+                                    }
+
+                                    const modCost = effectivePowerMod / 10;
                                     const custCost = (selection.customizations || []).reduce((sum, c) => sum + (c.cost || 0), 0);
-                                    const total = p.cost + modCost + custCost;
+                                    const baseCost = p.cost; // Typically 0 for char traits
+
+                                    const total = baseCost + modCost + custCost;
 
                                     return (
                                         <>
                                             {p.cost} + {modCost.toFixed(1)}
+                                            {discountText && <span style={{ color: '#16a34a', marginLeft: '2px', fontSize: '10px' }}>{discountText}</span>}
                                             {custCost !== 0 && (
                                                 <> {custCost >= 0 ? '+' : '-'} {Math.abs(custCost)} (Pers.)</>
                                             )}
