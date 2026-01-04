@@ -4,7 +4,7 @@ pubDate: 2025-12-25
 description: El Vigilante no es un origen para ganar características, es una decisión para cargar con consecuencias.
 author: Jorge Francisco de Benito Montoya
 tags:
-  - noticias
+  - articulos
 ---
 ## Por qué este origen no debería tomarse a la ligera
 
