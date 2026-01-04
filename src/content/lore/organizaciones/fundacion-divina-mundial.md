@@ -25,17 +25,17 @@ La organización está dirigida por **Mónica Martín García**, una influyente 
 
 ## Sedes conocidas
 
-La sede principal de la FDM está en el antiguo Claustro de las Francesas, en pleno [Valladolid](/localizaciones/valladolid/). Si pasas por delante no te llama la atención. Un edificio viejo, bien cuidado, de los que llevan ahí toda la vida. Nada más.
+La sede principal de la FDM está en el antiguo Claustro de las Francesas, en pleno [Valladolid](/lore/localizaciones/valladolid/). Si pasas por delante no te llama la atención. Un edificio viejo, bien cuidado, de los que llevan ahí toda la vida. Nada más.
 
 Por dentro cambia la cosa, claro, pero tampoco de golpe. Se ha respetado el claustro, la piedra, los patios. No es un sitio frío ni futurista. Simplemente funciona. Tiene seguridad, comunicaciones, controles… todo lo necesario para que el lugar esté siempre operativo, pero sin dar la sensación de que estás entrando en algo raro.
 
 La ubicación no se eligió al azar. Debajo del edificio hay unas catacumbas antiguas, restos de un complejo religioso que ya estaba ahí mucho antes de que la FDM existiera. No son solo túneles viejos. Son un punto estable. Desde ahí es mucho más fácil moverse entre esferas sin que las cosas se descompensen demasiado.
 
-En esas galerías hay portales, sellos y sistemas de protección que se han ido añadiendo con los años. Nada espectacular a primera vista, pero suficiente para que el tránsito entre los Reinos Divinos y [Tierra Zero](/localizaciones/tierra-zero) sea seguro. O lo más seguro posible, al menos.
+En esas galerías hay portales, sellos y sistemas de protección que se han ido añadiendo con los años. Nada espectacular a primera vista, pero suficiente para que el tránsito entre los Reinos Divinos y [Tierra Zero](/lore/localizaciones/tierra-zero) sea seguro. O lo más seguro posible, al menos.
 
 Gracias a esto, la FDM puede hacer su trabajo sin montar ruido. Vigilar, mediar, tomar decisiones incómodas cuando hace falta. El propio ambiente del claustro ayuda. Es un sitio tranquilo, contenido, casi silencioso. Ideal para reuniones delicadas, pactos que no deben trascender y rituales que requieren cabeza fría.
 
-Desde fuera, sigue siendo solo un edificio más de [Valladolid](/localizaciones/valladolid/) 
+Desde fuera, sigue siendo solo un edificio más de [Valladolid](/lore/localizaciones/valladolid/) 
 Desde dentro, es uno de esos lugares donde sabes que se decide mucho más de lo que se dice.
 
 ## Funciones y actividades

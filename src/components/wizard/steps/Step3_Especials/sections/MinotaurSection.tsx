@@ -30,7 +30,6 @@ export default function MinotaurSection() {
                         ))}
                         {minotauroEffects.map((effect: string, idx: number) => (
                             <li key={`min-${idx}`} className="flex items-start gap-2">
-                                <span className="text-amber-600 mt-1">⚡</span>
                                 <span>{effect}</span>
                             </li>
                         ))}
