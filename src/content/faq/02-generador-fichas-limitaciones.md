@@ -8,7 +8,7 @@ category: Herramientas Web
 order: 2
 ---
 
-El [**Generador de Fichas**](/recursos/generador-fichas) de esta web está actualmente en **Beta 0.3.7** y tiene algunas limitaciones:
+El [**Generador de Fichas**](/recursos/generador-fichas) de esta web está actualmente en **Beta 0.4.1** y tiene algunas limitaciones:
 ## ✅ Lo que SÍ puedes hacer:
 - Crear personajes de todos los orígenes principales
 - Asignar características, habilidades y poderes

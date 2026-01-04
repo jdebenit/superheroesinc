@@ -95,6 +95,8 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
         if (isAtlante) {
             const hasWaterControl = selectedPowers.some(p => p.id === 'control_del_agua');
             const hasNativeLanguage = selectedPowers.some(p => p.id === 'superhabilidad' && p.selectedOption === 'Idioma nativo');
+            const hasSwimming = selectedPowers.some(p => p.id === 'superhabilidad' && p.selectedOption === 'Nadar');
+            const hasAnimalEmpathy = selectedPowers.some(p => p.id === 'empatia_animal');
 
             let newPowers: SelectedPower[] = [];
 
@@ -116,6 +118,32 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                     rank: 41,
                     skillValue: 0,
                     selectedOption: 'Idioma nativo'
+                });
+            }
+
+            if (!hasSwimming) {
+                // Add Superhabilidad at Rank 81 (Nadar)
+                newPowers.push({
+                    id: 'superhabilidad',
+                    origin: 'Parahumano',
+                    rank: 81,
+                    skillValue: 0,
+                    selectedOption: 'Nadar'
+                });
+            }
+
+            if (!hasAnimalEmpathy) {
+                // Add Empatía animal at Rank 11 with customization
+                newPowers.push({
+                    id: 'empatia_animal',
+                    origin: 'Parahumano',
+                    rank: 11,
+                    skillValue: 0,
+                    customizations: [{
+                        id: 'atlante_cetaceos',
+                        description: 'Hablar solo con cetáceos',
+                        cost: 0
+                    }]
                 });
             }
 

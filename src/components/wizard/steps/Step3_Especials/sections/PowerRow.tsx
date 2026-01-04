@@ -67,7 +67,7 @@ export default function PowerRow({
 
     // Check for free powers
     const isTesKharFree = isTesKhar && p.id === 'superhabilidad';
-    const isAtlanteFree = isAtlante && (p.id === 'superhabilidad' || p.id === 'control_del_agua');
+    const isAtlanteFree = isAtlante && (p.id === 'superhabilidad' || p.id === 'control_del_agua' || p.id === 'empatia_animal');
     const isTrollFree = isTroll && p.id === 'regeneracion_de_tejidos';
     const isFree = isTesKharFree || isAtlanteFree || isTrollFree;
 
