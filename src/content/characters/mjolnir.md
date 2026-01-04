@@ -2,7 +2,7 @@
 name: Solveig Andersson
 alias: Mjölnir
 description: Lingüista especializada que asume de forma consciente el legado rúnico de Mjölnir, Solveig Andersson es la actual portadora del poder manifestado en guantes de uru y miembro activo de los Campeones de Europa.
-source: "Crossover: La Encrucijada"
+source: "Crossover: Cruce de caminos"
 image: /personajes/mjolnir.png
 updatedDate: 2025-12-31
 category: principales
