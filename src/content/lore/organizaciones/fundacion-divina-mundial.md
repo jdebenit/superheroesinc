@@ -6,7 +6,7 @@ source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-11-26
 ---
 
-La **Fundación Divina Mundial (FDM)** es una organización religiosa y diplomática creada en **2006** por iniciativa de la diosa [Kigala](/personajes/kigala), con el apoyo de la mayoría de los panteones divinos. Su propósito principal es **mantener el equilibrio entre los dioses y los mortales**, preservando la estabilidad de los Reinos Divinos y evitando que estos se precipiten hacia la Tierra Zero.
+La **Fundación Divina Mundial (FDM)** es una organización religiosa y diplomática creada en **2006** por iniciativa de la diosa [Kigala](/personajes/kigala/), con el apoyo de la mayoría de los panteones divinos. Su propósito principal es **mantener el equilibrio entre los dioses y los mortales**, preservando la estabilidad de los Reinos Divinos y evitando que estos se precipiten hacia la Tierra Zero.
 
 La fundación funciona como una *tapadera mundana* para una misión mucho más profunda, **garantizar que las almas de los devotos fallecidos sigan alimentando los reinos de cada panteón**, manteniéndolos alejados de una intervención directa en el mundo humano. Esta labor secreta es esencial para evitar conflictos entre dioses y para preservar la paz.
 
@@ -14,16 +14,31 @@ La fundación funciona como una *tapadera mundana* para una misión mucho más p
 
 ## Dirección y Estructura
 
-La organización está dirigida por **Mónica Martín García**, una influyente empresaria española que en realidad es **Kigala**, diosa sumeria de la magia y la muerte bajo forma mortal.  
+La organización está dirigida por **Mónica Martín García**, una influyente empresaria española que en realidad es **[Kigala]()**, diosa sumeria de la magia y la muerte bajo forma mortal.  
 
-Kigala utiliza la FDM como plataforma para:
+[Kigala](/personajes/kigala/) utiliza la FDM como plataforma para:
 
 - Contener tensiones entre panteones.  
 - Mantener el flujo de almas necesario para la supervivencia divina.  
 - Buscar alternativas para evitar que los dioses dependan de los humanos.  
 - Prevenir guerras divinas que pondrían en riesgo a la humanidad.  
 
-## Funciones y Actividades
+## Sedes conocidas
+
+La sede principal de la FDM está en el antiguo Claustro de las Francesas, en pleno [Valladolid](/localizaciones/valladolid/). Si pasas por delante no te llama la atención. Un edificio viejo, bien cuidado, de los que llevan ahí toda la vida. Nada más.
+
+Por dentro cambia la cosa, claro, pero tampoco de golpe. Se ha respetado el claustro, la piedra, los patios. No es un sitio frío ni futurista. Simplemente funciona. Tiene seguridad, comunicaciones, controles… todo lo necesario para que el lugar esté siempre operativo, pero sin dar la sensación de que estás entrando en algo raro.
+
+La ubicación no se eligió al azar. Debajo del edificio hay unas catacumbas antiguas, restos de un complejo religioso que ya estaba ahí mucho antes de que la FDM existiera. No son solo túneles viejos. Son un punto estable. Desde ahí es mucho más fácil moverse entre esferas sin que las cosas se descompensen demasiado.
+
+En esas galerías hay portales, sellos y sistemas de protección que se han ido añadiendo con los años. Nada espectacular a primera vista, pero suficiente para que el tránsito entre los Reinos Divinos y [Tierra Zero](/localizaciones/tierra-zero) sea seguro. O lo más seguro posible, al menos.
+
+Gracias a esto, la FDM puede hacer su trabajo sin montar ruido. Vigilar, mediar, tomar decisiones incómodas cuando hace falta. El propio ambiente del claustro ayuda. Es un sitio tranquilo, contenido, casi silencioso. Ideal para reuniones delicadas, pactos que no deben trascender y rituales que requieren cabeza fría.
+
+Desde fuera, sigue siendo solo un edificio más de [Valladolid](/localizaciones/valladolid/) 
+Desde dentro, es uno de esos lugares donde sabes que se decide mucho más de lo que se dice.
+
+## Funciones y actividades
 
 La FDM desarrolla una intensa actividad pública y secreta.
 
@@ -46,7 +61,7 @@ La FDM desarrolla una intensa actividad pública y secreta.
 
 ## Grupos dependientes
 
-La FDM coordina varias iniciativas destinadas a gestionar a los seres divinos que pisan la Tierra:
+La FDM coordina varias iniciativas destinadas a gestionar a los seres de los planos divinos que pisan la Tierra:
 
 ### Jóvenes dioses y semidioses
 
@@ -59,7 +74,7 @@ La Fundación ofrece:
 
 La Fundación evalúa continuamente su **lealtad**, su alineación y su potencial riesgo. Si alguno se desvía de su misión o representa una amenaza al equilibrio, la FDM interviene sin dudar.  
 
-## Situación y Papel Global
+## Situación y papel global
 
 La FDM es una fundación legalmente registrada con sede en España, y mantiene relaciones diplomáticas con gobiernos, la ONU y otras organizaciones.  
 

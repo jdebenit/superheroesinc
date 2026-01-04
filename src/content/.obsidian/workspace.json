@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "49a9dd4a1741b575",
+        "id": "24ff9535a28989d9",
         "type": "tabs",
         "children": [
           {
-            "id": "7c7e2da5e0e36dbe",
+            "id": "857e76b5c7d513c5",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "faq/01-que-necesito-para-jugar.md",
+                "file": "lore/organizaciones/fundacion-divina-mundial.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "01-que-necesito-para-jugar"
+              "title": "fundacion-divina-mundial"
             }
           }
         ]
@@ -183,12 +183,14 @@
       "bases:Crear nueva base": false
     }
   },
-  "active": "7c7e2da5e0e36dbe",
+  "active": "857e76b5c7d513c5",
   "lastOpenFiles": [
+    "().md",
+    "lore/organizaciones/fundacion-divina-mundial.md",
+    "faq/01-que-necesito-para-jugar.md",
     "faq/02-generador-fichas-limitaciones.md",
     "faq/03-exoesqueleto-energético-habilidad.md",
     "faq/04-calculo-energia-magica-terrano-semidemonio.md",
-    "faq/01-que-necesito-para-jugar.md",
     "blog/haciendo-fichas-sin-calculadora.md",
     "blog/la-web-como-punto-de-encuentro-del-juego.md",
     "blog/actual-plays-superheroes-inc.md",
@@ -210,8 +212,6 @@
     "blog/nueva-web.md",
     "blog/Sin título.md",
     "blog/nuevos-contenidos.md",
-    "blog/lanzamiento.md",
-    "characters/aescotan.md",
     "rpg/leon-rojo.yaml",
     "rpg/jefe-motero-road-reapers.yaml",
     "rpg/motero-road-reapers copy.yaml",
