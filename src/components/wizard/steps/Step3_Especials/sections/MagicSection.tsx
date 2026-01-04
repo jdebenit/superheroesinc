@@ -13,6 +13,7 @@ interface MagicSectionProps {
     isDotado: boolean;
     isHibrido: boolean;
     isTerrano: boolean;
+    isPoseido?: boolean;
     onOpenSpellModal: () => void;
     onUpdateEMFormula: (divisor: number, pcCost: number) => void;
     onUpdateSpellRank: (index: number, rank: number) => void;
@@ -34,6 +35,7 @@ export default function MagicSection({
     isDotado,
     isHibrido,
     isTerrano,
+    isPoseido,
     onOpenSpellModal,
     onUpdateEMFormula,
     onUpdateSpellRank,
@@ -117,6 +119,12 @@ export default function MagicSection({
                                 <>
                                     <option value="4|0">Terrano: (PER+INT+VOL)/4 → +0 PCs</option>
                                     <option value="0|-5">Terrano Ajeno: No EM → -5 PCs</option>
+                                </>
+                            )}
+                            {isPoseido && (
+                                <>
+                                    <option value="2|3">Poseído: (INT+PER+VOL)/2 → +3 PCs</option>
+                                    <option value="0|0">Poseído: No accede a hechizos → +0 PCs</option>
                                 </>
                             )}
                         </select>
@@ -237,6 +245,7 @@ export default function MagicSection({
                                 const isSemidemonio = hasSubtype(data, 'Sobrenatural', 'Semidemonio');
                                 const divisor = isMago ? 1 : emFormula.divisor;
                                 let formulaText = isSemidemonio ? '(PER+INT+VOL+CON)' : '(PER+INT+VOL)';
+
                                 if (divisor > 1) {
                                     formulaText += `/${divisor}`;
                                 }

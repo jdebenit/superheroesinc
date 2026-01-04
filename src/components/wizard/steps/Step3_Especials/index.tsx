@@ -21,6 +21,7 @@ import MagicSection from './sections/MagicSection';
 import ExoskeletonSection from './sections/ExoskeletonSection';
 import EnteSection from './sections/EnteSection';
 import MalditoSection from './sections/MalditoSection';
+import PoseidoSection from './sections/PoseidoSection';
 import AlteradoSection from './sections/AlteradoSection';
 import MutanteSection from './sections/MutanteSection';
 import GuardianSection from './sections/GuardianSection';
@@ -465,6 +466,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     const isVampiro = hasSubtype(data, 'Sobrenatural', 'Vampiro');
     const isSemidemonio = hasSubtype(data, 'Sobrenatural', 'Semidemonio');
     const isMaldito = hasSubtype(data, 'Sobrenatural', 'Maldito');
+    const isPoseido = hasSubtype(data, 'Sobrenatural', 'Poseidó') || hasSubtype(data, 'Sobrenatural', 'Poseido'); // Check both just in case, though definitions say Poseido
     const isEnte = hasSubtype(data, 'Sobrenatural', 'Ente');
     const isThals = hasOrigin(data, 'Thals');
     const isDios = hasSubtype(data, 'Divino', 'Dios');
@@ -488,9 +490,17 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     const vigilanteSpecialties = getVigilanteSpecialties(data);
 
     // EM Formula state
-    const emFormula = data.spells?.emFormula || { divisor: 4, pcCost: 0 };
-    const hasEMFormula = !isMago && (isDotado || isHibrido || isTerrano);
-    const hasEM = isMago || isDotado || isHibrido || isTerrano;
+    const emFormula = data.spells?.emFormula ||
+        (isPoseido ? { divisor: 0, pcCost: 0 } : { divisor: 4, pcCost: 0 });
+    const hasEMFormula = !isMago && (isDotado || isHibrido || isTerrano || isPoseido);
+    const hasEM = isMago || isDotado || isHibrido || isTerrano || isPoseido;
+
+    // Auto-correct EM formula for Poseido if it has the generic default (4)
+    useEffect(() => {
+        if (isPoseido && emFormula.divisor === 4) {
+            updateEMFormula(0, 0); // Default to No Access
+        }
+    }, [isPoseido, emFormula.divisor]);
 
     // Spells - enrich with full spell data and rank
     const selectedSpells = selectedSpellsWithRank.map(sw => {
@@ -505,7 +515,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     }).filter((s): s is (Spell & { rank: number; selectedOption?: string }) => s !== null);
 
     const hasAnyOrigin = isGuardian || isAlterado || hasEM || isVampiro || isSemidemonio || isMaldito ||
-        isEnte || isThals || isDivino || isCosmico || isMutante || isVigilante || isTechnological || isExoskeleton || isTesKhar || isAtlante || isParahumano || isTroll || isMinotauro;
+        isEnte || isThals || isDivino || isCosmico || isMutante || isVigilante || isTechnological || isExoskeleton || isTesKhar || isAtlante || isParahumano || isTroll || isMinotauro || isPoseido;
 
     // Calculate and store EM in state
     useEffect(() => {
@@ -552,7 +562,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
             {!hasAnyOrigin && (
                 <div className="text-center py-12 border-4 border-dashed border-gray-300 rounded-xl bg-gray-50">
                     <p className="text-xl text-gray-500 font-bold">
-                        No has seleccionado ningún origen que actualmente tenga habilitado este paso. Recuerda es una Alpha.
+                        No has seleccionado ningún origen que actualmente tenga habilitado este paso. Recuerda es una Beta.
                     </p>
                     <p className="text-gray-400 mt-2 font-comic">Prueba con Guardián, Alterado, Arcano, Sobrenatural, Thals, Divino, Cósmico, Mutante o Tecnológico</p>
                 </div>
@@ -599,6 +609,13 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
             {isMaldito && (
                 <MalditoSection
                     malditoParams={data.malditoParams || { magnitude: null, source: null }}
+                    onChange={onChange}
+                />
+            )}
+
+            {isPoseido && (
+                <PoseidoSection
+                    poseidoParams={data.poseidoParams || { formType: null }}
                     onChange={onChange}
                 />
             )}
@@ -694,6 +711,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                 isAtlante={isAtlante}
                 isParahumanoHybrid={isParahumanoHybrid}
                 isTroll={isTroll}
+                isPoseido={isPoseido}
             />
 
             {/* MAGIC SECTION */}
@@ -708,6 +726,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                     isDotado={isDotado}
                     isHibrido={isHibrido}
                     isTerrano={isTerrano}
+                    isPoseido={isPoseido}
                     onOpenSpellModal={openSpellModal}
                     onUpdateEMFormula={updateEMFormula}
                     onUpdateSpellRank={updateSpellRank}

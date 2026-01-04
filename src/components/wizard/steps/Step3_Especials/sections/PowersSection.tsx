@@ -29,6 +29,7 @@ interface PowersSectionProps {
     isAtlante?: boolean;
     isParahumanoHybrid?: boolean;
     isTroll?: boolean;
+    isPoseido?: boolean;
 }
 
 export default function PowersSection({
@@ -56,10 +57,11 @@ export default function PowersSection({
     isTesKhar,
     isAtlante,
     isParahumanoHybrid,
-    isTroll
+    isTroll,
+    isPoseido
 }: PowersSectionProps) {
     const hasAnyPowerOrigin = isGuardian || isAlterado || isVampiro || isSemidemonio || isMaldito ||
-        isEnte || isThals || isDivino || isTerrano || isDotado || isCosmico || isMutante || isTesKhar || isAtlante || isTroll;
+        isEnte || isThals || isDivino || isTerrano || isDotado || isCosmico || isMutante || isTesKhar || isAtlante || isTroll || isPoseido;
 
     if (!hasAnyPowerOrigin) return null;
 
@@ -88,7 +90,7 @@ export default function PowersSection({
                             <span>+</span> Vampírico
                         </button>
                     )}
-                    {(isSemidemonio || isMaldito) && (
+                    {(isSemidemonio || isMaldito || isPoseido) && (
                         <button onClick={() => onOpenModal('Sobrenatural')} className="pixel-button bg-orange-600 text-white hover:bg-orange-700 text-sm flex items-center gap-2">
                             <span>+</span> Sobrenatural
                         </button>

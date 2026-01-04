@@ -13,6 +13,7 @@ import { SPELLS } from '../../data/spells';
 import { POWERS } from '../../data/powers';
 import { EXOSKELETON_CONFIGS } from '../../data/exoskeletonConfigs';
 import { ENTE_FORMS, ENTE_EFFECTS } from './steps/Step3_Especials/sections/EnteSection';
+import { POSEIDO_FORMS } from './steps/Step3_Especials/sections/PoseidoSection';
 import { INCOME_SOURCES } from '../../data/technologicalOptions';
 import { SEQUELS } from '../../data/sequels';
 import { GUARDIAN_QUALITIES } from '../../data/guardianOptions';
@@ -114,6 +115,9 @@ const initialCharacterState = {
         magnitude: null,
         source: null
     },
+    poseidoParams: {
+        formType: null
+    },
     alteradoParams: null,
     mutanteParams: null,
     guardianParams: null, // Added for Guardian origin
@@ -178,6 +182,9 @@ export default function CharacterWizard() {
                     }
                     if (!parsed.malditoParams) {
                         parsed.malditoParams = { magnitude: null, source: null };
+                    }
+                    if (!parsed.poseidoParams) {
+                        parsed.poseidoParams = { formType: null };
                     }
                     if (!parsed.alteradoParams) {
                         parsed.alteradoParams = null;
@@ -525,7 +532,13 @@ export default function CharacterWizard() {
             if (mag) total += mag.cost;
         }
 
-        // 16. Alterado Params Cost (DISCOUNT/PENALTY)
+        // 16. Poseido Params Cost
+        if (character.poseidoParams && character.poseidoParams.formType) {
+            const form = POSEIDO_FORMS.find(f => f.id === character.poseidoParams.formType);
+            if (form) total += form.pc;
+        }
+
+        // 17. Alterado Params Cost (DISCOUNT/PENALTY)
         if (character.alteradoParams) {
             // Import sequel definitions to get costs
             const ALTERADO_AGENTS = [

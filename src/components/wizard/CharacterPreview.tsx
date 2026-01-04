@@ -10,6 +10,7 @@ import { EXOSKELETON_CONFIGS } from '../../data/exoskeletonConfigs';
 import { ENTE_FORMS, ENTE_EFFECTS } from './steps/Step3_Especials/sections/EnteSection';
 import { MALDITO_DATA } from './steps/Step3_Especials/sections/MalditoSection';
 import { ALTERADO_DATA } from './steps/Step3_Especials/sections/AlteradoSection';
+import { POSEIDO_FORMS } from './steps/Step3_Especials/sections/PoseidoSection';
 import { SEQUELS } from '../../data/sequels';
 import { INCOME_SOURCES } from '../../data/technologicalOptions';
 
@@ -105,6 +106,20 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
         `Puntos de Vida: ${derivedStats.combat.pv}`,
         `Equilibrio Mental: ${derivedStats.combat.equilibrio}`
     ];
+
+    // Calculate EM for display
+    const emFormula = character.spells?.emFormula || { divisor: 4, pcCost: 0 };
+    // Check if character has magic access (Divisor > 0)
+    if (emFormula.divisor > 0 || (character.origin?.items?.some((i: any) => i.Mago) /* Mago always has magic */)) {
+        const isMago = character.origin?.items?.some((i: any) => i.Mago);
+        const divisor = isMago ? 1 : emFormula.divisor;
+        if (divisor > 0) {
+            // Need selectedPowers for calculateEM
+            const selectedPowers = character.powers?.selected || [];
+            const em = calculateEM(character, selectedPowers, divisor);
+            combatStats.push(`Energía Mágica: ${em}`);
+        }
+    }
 
     // Note: display logic for 'other' stats currently iterates otherStats strings. 
     // We should probably rely on derivedStats.other to ensure freshness too.
@@ -777,6 +792,36 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                     })}
                                                 </ul>
                                             </li>
+                                        </ul>
+                                    </div>
+                                )}
+
+
+
+                                {/* Poseído Params */}
+                                {character.poseidoParams && character.poseidoParams.formType && (
+                                    <div className="sheet-section poseido-params">
+                                        <div className="section-header">
+                                            <h4>Poseído</h4>
+                                        </div>
+                                        <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                                            {(() => {
+                                                const form = POSEIDO_FORMS.find(f => f.id === character.poseidoParams.formType);
+                                                return form && (
+                                                    <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
+                                                        <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
+                                                            <span style={{ paddingRight: '0.5rem', fontWeight: 'bold', color: '#be185d' }}>Tipo de Forma</span>
+                                                            <span style={{ flexGrow: 1, borderBottom: '1px dotted #ccc', margin: '0 0.5rem', position: 'relative', top: '-4px', minWidth: '20px' }}></span>
+                                                            <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>
+                                                                {form.label} ({form.pc > 0 ? '+' : ''}{form.pc} PC)
+                                                            </span>
+                                                        </div>
+                                                        <div style={{ fontSize: '0.85rem', color: '#6b7280', fontStyle: 'italic', marginTop: '0.25rem', paddingLeft: '0.5rem' }}>
+                                                            {form.description}
+                                                        </div>
+                                                    </li>
+                                                );
+                                            })()}
                                         </ul>
                                     </div>
                                 )}
