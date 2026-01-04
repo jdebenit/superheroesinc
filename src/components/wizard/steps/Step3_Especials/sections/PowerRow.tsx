@@ -15,6 +15,7 @@ interface PowerRowProps {
     isParahumanoHybrid?: boolean;
     isTesKhar?: boolean;
     isAtlante?: boolean;
+    isTroll?: boolean;
 }
 
 const getCharName = (abbr: string): string => {
@@ -47,7 +48,8 @@ export default function PowerRow({
     onRemove,
     isParahumanoHybrid,
     isTesKhar,
-    isAtlante
+    isAtlante,
+    isTroll
 }: PowerRowProps) {
     const p = POWERS.find(power => power.id === selection.id);
     if (!p) return null;
@@ -56,8 +58,9 @@ export default function PowerRow({
 
     // Check for free powers
     const isTesKharFree = isTesKhar && p.id === 'superhabilidad';
-    const isAtlanteFree = isAtlante && (p.id === 'superhabilidad' || p.id === 'empatia_animal');
-    const isFree = isTesKharFree || isAtlanteFree;
+    const isAtlanteFree = isAtlante && (p.id === 'superhabilidad' || p.id === 'control_del_agua');
+    const isTrollFree = isTroll && p.id === 'regeneracion_de_tejidos';
+    const isFree = isTesKharFree || isAtlanteFree || isTrollFree;
 
     const displayCost = isFree ?
         <span style={{ textDecoration: 'line-through', color: '#ef4444' }}>{p.cost}</span>

@@ -55,9 +55,12 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
     },
     "Arcano": {
         name: "Arcano",
-        disabledSubtypes: ["Elfo", "Hada", "Centauro", "Minotauro", "Enano", "Gigante", "Troll", "Grifo", "Hidra", "Medusa", "Esfinge"],
+        disabledSubtypes: ["Elfo", "Hada", "Centauro", "Enano", "Gigante", "Grifo", "Hidra", "Medusa", "Esfinge"],
+        defaultEffects: [
+            "+20 a la parada mental",
+        ],
         subtypes: {
-            "Mago": ["+20 a la parada mental"],
+            "Mago": ["Acceso a Magia"],
             "Dotado": ["algo", "algo", "algo"],
             "Terrano": [
                 "Desconexión de la tecnología moderna",
@@ -66,10 +69,10 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
             "Elfo": ["+20 a la parada mental"],
             "Hada": ["+20 a la parada mental"],
             "Centauro": ["+20 a la parada mental"],
-            "Minotauro": ["+20 a la parada mental"],
+            "Minotauro": ["+30 al daño con armas blancas o contundentesl"],
             "Enano": ["+20 a la parada mental"],
             "Gigante": ["+20 a la parada mental"],
-            "Troll": ["+20 a la parada mental"],
+            "Troll": ["-40 a la actividad durante el dia"],
             "Grifo": ["+20 a la parada mental"],
             "Hidra": ["+20 a la parada mental"],
             "Medusa": ["+20 a la parada mental"],

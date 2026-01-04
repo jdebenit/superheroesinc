@@ -300,6 +300,7 @@ export default function CharacterWizard() {
         let tesKharFreeUsed = false;
         let atlanteAnimalUsed = false;
         let atlanteSuperUsed = false;
+        let trollRegenUsed = false;
 
         const powerCost = selectedPowers.reduce((acc: number, power: any) => {
             const powerData = POWERS.find((p: any) => p.id === power.id);
@@ -322,17 +323,32 @@ export default function CharacterWizard() {
                 })
             );
 
+            const isTroll = character.origin?.items?.some((item: any) =>
+                Object.keys(item).some(key => {
+                    const val = item[key];
+                    return Array.isArray(val) && val.includes('Troll');
+                })
+            );
+
             if (isTesKhar && power.id === 'superhabilidad' && !tesKharFreeUsed) {
                 tesKharFreeUsed = true;
                 return acc;
             }
 
-            if (isAtlante && power.id === 'empatia_animal' && !atlanteAnimalUsed) {
-                atlanteAnimalUsed = true;
+            // Atlante: Control del agua (R11) and Superhabilidad (R41, Idioma nativo)
+            if (isAtlante && power.id === 'control_del_agua' && !atlanteAnimalUsed) {
+                atlanteAnimalUsed = true; // reusing variable name for convenience -> water control
                 return acc;
             }
             if (isAtlante && power.id === 'superhabilidad' && !atlanteSuperUsed) {
+                // If we want to be strict, we could check for selectedOption === 'Idioma nativo'
+                // For now, assuming first superhabilidad is free for Atlante matches standard pattern
                 atlanteSuperUsed = true;
+                return acc;
+            }
+
+            if (isTroll && power.id === 'regeneracion_de_tejidos' && !trollRegenUsed) {
+                trollRegenUsed = true;
                 return acc;
             }
 
@@ -655,7 +671,7 @@ export default function CharacterWizard() {
             {/* Header */}
             <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
                 <h1 style={{ fontSize: '3rem', fontWeight: '900', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
-                    Generador de Fichas (Beta 0.1.5)
+                    Generador de Fichas (Beta 0.2.0)
                 </h1>
                 <p style={{ fontSize: '1.25rem', color: '#666', marginBottom: '1rem' }}>
                     Crea tu personaje paso a paso

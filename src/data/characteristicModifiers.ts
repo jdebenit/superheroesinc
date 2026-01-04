@@ -131,6 +131,24 @@ export const ORIGIN_CHARACTERISTIC_MODIFIERS: { [key: string]: OriginCharacteris
         voluntad: { modifier: 0, max: 200 },
     },
     "Terrano": allCharacteristics(10, 110, 50),  // Terranos tienen mínimo 50
+    "Minotauro": {
+        fuerza: { modifier: 40, max: 170, min: 130 },
+        constitucion: { modifier: 50, max: 130, min: 130 },
+        agilidad: { modifier: 0, max: 100, min: 60 },
+        inteligencia: { modifier: 0, max: 100 },
+        percepcion: { modifier: 0, max: 100 },
+        apariencia: { modifier: 0, max: 60 },
+        voluntad: { modifier: 0, max: 100 },
+    },
+    "Troll": {
+        fuerza: { modifier: 50, max: 180, min: 130 },
+        constitucion: { modifier: 50, max: 180, min: 130 },
+        agilidad: { modifier: 0, max: 80 },
+        inteligencia: { modifier: 0, max: 40, min: 20 },
+        percepcion: { modifier: 0, max: 70 },
+        apariencia: { modifier: 0, max: 50, min: 20 },
+        voluntad: { modifier: 0, max: 100 },
+    },
 
     // Parahumano
     "Atlante": {

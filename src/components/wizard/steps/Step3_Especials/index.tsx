@@ -38,6 +38,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
 
     const isTesKhar = hasSubtype(data, 'Parahumano', 'Tes-khar');
     const isAtlante = hasSubtype(data, 'Parahumano', 'Atlante');
+    const isTroll = hasSubtype(data, 'Arcano', 'Troll');
     const isTecnologico = hasOrigin(data, 'Tecnológico');
     // Hybrid logic
     const isParahumano = hasOrigin(data, 'Parahumano');
@@ -83,31 +84,32 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     }, [isTesKhar, selectedPowers, onChange, data]);
 
     // Auto-add Powers for Atlante
+    // Auto-add Powers for Atlante
     useEffect(() => {
         if (isAtlante) {
-            const hasAnimalEmpathy = selectedPowers.some(p => p.id === 'empatia_animal');
-            const hasSuperhabilidad = selectedPowers.some(p => p.id === 'superhabilidad');
+            const hasWaterControl = selectedPowers.some(p => p.id === 'control_del_agua');
+            const hasNativeLanguage = selectedPowers.some(p => p.id === 'superhabilidad' && p.selectedOption === 'Idioma nativo');
 
             let newPowers: SelectedPower[] = [];
 
-            if (!hasAnimalEmpathy) {
-                // Add Empatía animal at Low Rank (20)
+            if (!hasWaterControl) {
+                // Add Control del agua at Rank 11
                 newPowers.push({
-                    id: 'empatia_animal',
+                    id: 'control_del_agua',
                     origin: 'Parahumano',
-                    rank: 20, // Rango Bajo (1-20)
+                    rank: 11,
                     skillValue: 0
                 });
             }
 
-            if (!hasSuperhabilidad) {
-                // Add Superhabilidad at High Rank (80)
+            if (!hasNativeLanguage) {
+                // Add Superhabilidad at Rank 41 (Idioma nativo)
                 newPowers.push({
                     id: 'superhabilidad',
                     origin: 'Parahumano',
-                    rank: 80, // Rango Alto (71-95)
+                    rank: 41,
                     skillValue: 0,
-                    selectedOption: 'Nadar'
+                    selectedOption: 'Idioma nativo'
                 });
             }
 
@@ -122,6 +124,29 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
             }
         }
     }, [isAtlante, selectedPowers, onChange, data]);
+
+    // Auto-add Regeneration for Troll
+    useEffect(() => {
+        if (isTroll) {
+            const hasRegeneration = selectedPowers.some(p => p.id === 'regeneracion_de_tejidos');
+            if (!hasRegeneration) {
+                // Add Regeneración de tejidos at Rank 81
+                const newPower: SelectedPower = {
+                    id: 'regeneracion_de_tejidos',
+                    origin: 'Arcano',
+                    rank: 81,
+                    skillValue: 0
+                };
+                onChange({
+                    ...data,
+                    powers: {
+                        ...data.powers,
+                        selected: [...(data.powers?.selected || []), newPower]
+                    }
+                });
+            }
+        }
+    }, [isTroll, selectedPowers, onChange, data]);
 
     // Update functions
     const updatePowers = (newSelected: SelectedPower[]) => {
@@ -410,7 +435,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     }).filter((s): s is (Spell & { rank: number; selectedOption?: string }) => s !== null);
 
     const hasAnyOrigin = isGuardian || isAlterado || hasEM || isVampiro || isSemidemonio || isMaldito ||
-        isEnte || isThals || isDivino || isCosmico || isMutante || isVigilante || isTechnological || isExoskeleton || isTesKhar || isAtlante || isParahumano;
+        isEnte || isThals || isDivino || isCosmico || isMutante || isVigilante || isTechnological || isExoskeleton || isTesKhar || isAtlante || isParahumano || isTroll;
 
     // Calculate and store EM in state
     useEffect(() => {
@@ -595,6 +620,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                 isTesKhar={isTesKhar}
                 isAtlante={isAtlante}
                 isParahumanoHybrid={isParahumanoHybrid}
+                isTroll={isTroll}
             />
 
             {/* MAGIC SECTION */}
