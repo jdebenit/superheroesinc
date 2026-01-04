@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "faq/06-kevlar-daño-mixto.md",
+                "file": "faq/02-generador-fichas-limitaciones.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "06-kevlar-daño-mixto"
+              "title": "02-generador-fichas-limitaciones"
             }
           }
         ]
@@ -185,8 +185,8 @@
   },
   "active": "857e76b5c7d513c5",
   "lastOpenFiles": [
-    "faq/05-endoesqueleto-brazos-cyberneticos.md",
     "faq/06-kevlar-daño-mixto.md",
+    "faq/05-endoesqueleto-brazos-cyberneticos.md",
     "lore/organizaciones/fundacion-divina-mundial.md",
     "().md",
     "faq/01-que-necesito-para-jugar.md",

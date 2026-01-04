@@ -276,6 +276,15 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
         updatePowers(newSelected);
     };
 
+    const updatePowerCustomizations = (index: number, customizations: { id: string; description: string; cost: number }[]) => {
+        const updated = [...selectedPowers];
+        if (updated[index]) {
+            updated[index] = { ...updated[index], customizations };
+            updatePowers(updated);
+        }
+    };
+
+
     // Spell handlers
     // Spell handlers
     const toggleSpellSelection = (id: string) => {
@@ -608,6 +617,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                 onUpdateMod={updatePowerMod}
                 onUpdateSkillValue={updatePowerSkillValue}
                 onUpdateOption={updatePowerOption}
+                onUpdateCustomizations={updatePowerCustomizations}
                 onRemove={removePower}
                 isGuardian={isGuardian}
                 isAlterado={isAlterado || isParahumanoHybrid}

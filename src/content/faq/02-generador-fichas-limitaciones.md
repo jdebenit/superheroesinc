@@ -12,6 +12,7 @@ El [**Generador de Fichas**](/recursos/generador-fichas) de esta web está actua
 ## ✅ Lo que SÍ puedes hacer:
 - Crear personajes de todos los orígenes principales
 - Asignar características, habilidades y poderes
+- Personalizaciones de poderes.
 - Calcular automáticamente los PC gastados
 - Añadir equipo, armas y módulos tecnológicos
 - Añadir hechizos (para personajes mágicos)

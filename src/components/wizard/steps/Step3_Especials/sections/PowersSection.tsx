@@ -10,6 +10,7 @@ interface PowersSectionProps {
     onUpdateMod: (index: number, mod: number) => void;
     onUpdateSkillValue: (index: number, value: number) => void;
     onUpdateOption: (index: number, option: string) => void;
+    onUpdateCustomizations: (index: number, customizations: { id: string; description: string; cost: number }[]) => void;
     onRemove: (index: number) => void;
     // Origin flags
     isGuardian: boolean;
@@ -38,6 +39,7 @@ export default function PowersSection({
     onUpdateMod,
     onUpdateSkillValue,
     onUpdateOption,
+    onUpdateCustomizations,
     onRemove,
     isGuardian,
     isAlterado,
@@ -159,6 +161,7 @@ export default function PowersSection({
                                     onUpdateMod={onUpdateMod}
                                     onUpdateSkillValue={onUpdateSkillValue}
                                     onUpdateOption={onUpdateOption}
+                                    onUpdateCustomizations={onUpdateCustomizations}
                                     onRemove={onRemove}
                                     isParahumanoHybrid={isParahumanoHybrid}
                                     isTesKhar={isTesKhar}

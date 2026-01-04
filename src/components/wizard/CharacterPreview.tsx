@@ -148,22 +148,36 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                 const currentVal = p.skillValue !== undefined ? p.skillValue : minVal;
                 // Simplified extra cost logic from pdfExport
                 const extraCost = Math.max(0, currentVal - minVal) * 0.1;
-                costVal = baseCost + penalty + (rank * 0.1) + extraCost;
+                const custCost = (p.customizations || []).reduce((sum: number, c: any) => sum + (c.cost || 0), 0);
+                costVal = baseCost + penalty + (rank * 0.1) + extraCost + custCost;
             } else {
                 // Attribute type
                 const powerMod = p.powerMod || 0;
                 costVal = baseCost + penalty + (powerMod / 10);
+                // Technically custom powers shouldn't have customizations in this logic branch based on current UI,
+                // but if we support it later:
+                const custCost = (p.customizations || []).reduce((sum: number, c: any) => sum + (c.cost || 0), 0);
+                costVal += custCost;
             }
         } else {
             costVal = p.cost || 0;
         }
 
+        // Add customization descriptions to name/notes
+        let customNotes = "";
+        if (p.customizations && p.customizations.length > 0) {
+            const custTexts = p.customizations.map((c: any) => `${c.description} (${c.cost > 0 ? '+' : ''}${c.cost})`);
+            customNotes = custTexts.join(', ');
+        }
+
+        const finalDisplayName = customNotes ? `${displayName} [${customNotes}]` : displayName;
+
         return {
-            name: displayName,
+            name: finalDisplayName,
             cost: costVal.toFixed(1),
             val: (p.skillValue !== undefined ? p.skillValue : (p.powerMod || '')).toString(),
             rank: (p.rank || '').toString(),
-            notes: p.effect || ''
+            notes: (p.effect || '')
         };
     });
 
@@ -1239,6 +1253,11 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                                         </span>
                                                                     )}
                                                                 </span>
+                                                                {power.customizations && power.customizations.length > 0 && (
+                                                                    <div style={{ fontSize: '0.75rem', color: '#065f46', marginTop: '0.1rem', fontStyle: 'italic' }}>
+                                                                        {power.customizations.map((c: any) => `${c.description} (${c.cost > 0 ? '+' : ''}${c.cost})`).join(', ')}
+                                                                    </div>
+                                                                )}
                                                             </span>
                                                             <span style={{
                                                                 flexGrow: 1,

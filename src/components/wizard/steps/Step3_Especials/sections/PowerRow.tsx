@@ -11,6 +11,7 @@ interface PowerRowProps {
     onUpdateMod: (index: number, mod: number) => void;
     onUpdateSkillValue: (index: number, value: number) => void;
     onUpdateOption: (index: number, option: string) => void;
+    onUpdateCustomizations: (index: number, customizations: { id: string; description: string; cost: number }[]) => void;
     onRemove: (index: number) => void;
     isParahumanoHybrid?: boolean;
     isTesKhar?: boolean;
@@ -45,6 +46,7 @@ export default function PowerRow({
     onUpdateMod,
     onUpdateSkillValue,
     onUpdateOption,
+    onUpdateCustomizations,
     onRemove,
     isParahumanoHybrid,
     isTesKhar,
@@ -142,6 +144,23 @@ export default function PowerRow({
                                 return null;
                             })()}
 
+                            {(() => {
+                                // Calculate total customization cost for display
+                                const custCost = (selection.customizations || []).reduce((sum, c) => sum + (c.cost || 0), 0);
+                                if (custCost !== 0) {
+                                    return (
+                                        <>
+                                            <span style={{ color: '#9ca3af' }}>{custCost >= 0 ? '+' : '-'}</span>
+                                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                                <span style={{ fontWeight: 'bold', color: custCost >= 0 ? '#b91c1c' : '#10b981' }}>{Math.abs(custCost)}</span>
+                                                <span style={{ fontSize: '0.65rem', color: '#6b7280' }}>Pers.</span>
+                                            </div>
+                                        </>
+                                    );
+                                }
+                                return null;
+                            })()}
+
                             <span style={{ color: '#9ca3af' }}>=</span>
                             <span style={{ color: '#4f46e5', fontWeight: 'bold' }}>
                                 {(() => {
@@ -149,7 +168,10 @@ export default function PowerRow({
                                     const currentVal = selection.skillValue || minVal;
                                     const extraCost = Math.max(0, currentVal - minVal) * 0.1;
                                     const penalty = isHybridPenalty ? 3 : 0;
-                                    const total = (p.cost + penalty + (selection.rank / 10) + extraCost);
+                                    // Sum customization costs
+                                    const custCost = (selection.customizations || []).reduce((sum, c) => sum + (c.cost || 0), 0);
+
+                                    const total = (p.cost + penalty + (selection.rank / 10) + extraCost + custCost);
 
                                     if (isFree) return "0.0";
                                     return total.toFixed(1);
@@ -159,6 +181,72 @@ export default function PowerRow({
                                 {isFree ? "(Gratis)" : "PCs"}
                             </span>
                         </div>
+                        {/* Customizations List */}
+                        {(selection.customizations || []).length > 0 && (
+                            <div style={{ width: '100%', marginTop: '0.5rem', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                                {selection.customizations?.map((cust, cIdx) => (
+                                    <div key={cust.id} style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', fontSize: '0.8rem' }}>
+                                        <input
+                                            type="text"
+                                            value={cust.description}
+                                            placeholder="Detalle personalización"
+                                            onChange={(e) => {
+                                                const newCusts = [...(selection.customizations || [])];
+                                                newCusts[cIdx] = { ...newCusts[cIdx], description: e.target.value };
+                                                onUpdateCustomizations(index, newCusts);
+                                            }}
+                                            style={{ flexGrow: 1, padding: '2px 4px', border: '1px solid #e5e7eb', borderRadius: '4px' }}
+                                        />
+                                        <input
+                                            type="number"
+                                            min="-10"
+                                            max="10"
+                                            value={cust.cost}
+                                            onChange={(e) => {
+                                                const newCusts = [...(selection.customizations || [])];
+                                                const val = parseFloat(e.target.value) || 0;
+                                                // Clamp between -10 and 10
+                                                const clamped = Math.max(-10, Math.min(10, val));
+                                                newCusts[cIdx] = { ...newCusts[cIdx], cost: clamped };
+                                                onUpdateCustomizations(index, newCusts);
+                                            }}
+                                            style={{ width: '50px', padding: '2px 4px', border: '1px solid #e5e7eb', borderRadius: '4px', textAlign: 'right' }}
+                                        />
+                                        <span style={{ color: '#6b7280' }}>PCs</span>
+                                        <button
+                                            onClick={() => {
+                                                const newCusts = selection.customizations?.filter((_, i) => i !== cIdx) || [];
+                                                onUpdateCustomizations(index, newCusts);
+                                            }}
+                                            style={{ color: '#ef4444', fontWeight: 'bold', padding: '0 4px', cursor: 'pointer', border: 'none', background: 'transparent' }}
+                                        >
+                                            ×
+                                        </button>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                        <div style={{ marginTop: '0.25rem' }}>
+                            <button
+                                onClick={() => {
+                                    const newCusts = [...(selection.customizations || [])];
+                                    newCusts.push({ id: Date.now().toString(), description: '', cost: 0 });
+                                    onUpdateCustomizations(index, newCusts);
+                                }}
+                                style={{
+                                    fontSize: '0.75rem',
+                                    color: '#4f46e5',
+                                    background: 'transparent',
+                                    border: '1px dashed #4f46e5',
+                                    borderRadius: '4px',
+                                    padding: '2px 8px',
+                                    cursor: 'pointer'
+                                }}
+                            >
+                                + Personalización
+                            </button>
+                        </div>
+
                         <span style={{ fontSize: '0.75rem', color: '#6b7280', fontWeight: 'bold' }}>
                             {getRankLevel(selection.rank)}
                         </span>
@@ -225,7 +313,21 @@ export default function PowerRow({
                             {isFree ? (
                                 <span style={{ color: '#10b981', fontWeight: 'bold' }}>¡Poder Gratuito por Origen!</span>
                             ) : (
-                                <>{p.cost} + {((selection.powerMod || 0) / 10).toFixed(1)} = {(p.cost + ((selection.powerMod || 0) / 10)).toFixed(1)} PCs</>
+                                <>{(() => {
+                                    const modCost = (selection.powerMod || 0) / 10;
+                                    const custCost = (selection.customizations || []).reduce((sum, c) => sum + (c.cost || 0), 0);
+                                    const total = p.cost + modCost + custCost;
+
+                                    return (
+                                        <>
+                                            {p.cost} + {modCost.toFixed(1)}
+                                            {custCost !== 0 && (
+                                                <> {custCost >= 0 ? '+' : '-'} {Math.abs(custCost)} (Pers.)</>
+                                            )}
+                                            {' = '}{total.toFixed(1)} PCs
+                                        </>
+                                    );
+                                })()}</>
                             )}
                         </span>
                     </div>

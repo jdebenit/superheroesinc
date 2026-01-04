@@ -398,6 +398,10 @@ export default function CharacterWizard() {
                 cost += powerMod / 10;
             }
 
+            // Customizations cost
+            const custCost = (power.customizations || []).reduce((sum: number, c: any) => sum + (c.cost || 0), 0);
+            cost += custCost;
+
             return acc + cost;
         }, 0);
         total += powerCost;
@@ -671,7 +675,7 @@ export default function CharacterWizard() {
             {/* Header */}
             <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
                 <h1 style={{ fontSize: '3rem', fontWeight: '900', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
-                    Generador de Fichas (Beta 0.2.0)
+                    Generador de Fichas (Beta 0.3.0)
                 </h1>
                 <p style={{ fontSize: '1.25rem', color: '#666', marginBottom: '1rem' }}>
                     Crea tu personaje paso a paso
