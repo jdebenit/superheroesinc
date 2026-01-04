@@ -331,9 +331,12 @@ export default function CharacterWizard() {
 
         // 9. Power Costs (Base + Rank/PowerMod)
         const selectedPowers = character.powers?.selected || [];
+        // Tracking used free powers
         let tesKharFreeUsed = false;
         let atlanteAnimalUsed = false;
-        let atlanteSuperUsed = false;
+        let atlanteSuperUsed = false; // For Idioma Nativo
+        let atlanteSwimmingUsed = false; // For Nadar
+        let atlanteEmpathyUsed = false; // For Empatía Animal
         let trollRegenUsed = false;
         let thalsPowerCount = 0;
 
@@ -384,16 +387,38 @@ export default function CharacterWizard() {
                 return acc;
             }
 
-            // Atlante: Control del agua (R11) and Superhabilidad (R41, Idioma nativo)
-            if (isAtlante && power.id === 'control_del_agua' && !atlanteAnimalUsed) {
-                atlanteAnimalUsed = true; // reusing variable name for convenience -> water control
-                return acc;
-            }
-            if (isAtlante && power.id === 'superhabilidad' && !atlanteSuperUsed) {
-                // If we want to be strict, we could check for selectedOption === 'Idioma nativo'
-                // For now, assuming first superhabilidad is free for Atlante matches standard pattern
-                atlanteSuperUsed = true;
-                return acc;
+            // Atlante: Control del agua (R11), Superhabilidad (R41 Idioma, R81 Nadar), Empatía (R11)
+            if (isAtlante) {
+                if (power.id === 'control_del_agua' && !atlanteAnimalUsed) { // reusing var
+                    atlanteAnimalUsed = true;
+                    // Free at Rank 11. Charge difference.
+                    // Base cost is 0 for free power, only rank diff matters? 
+                    // Wait, usually power has base cost + rank cost. 
+                    // If it's "Free", the Base Cost is 0 AND Rank Cost up to X is 0.
+                    // So we only charge (Rank - FreeRank) * 0.1. 
+                    // If Rank < FreeRank, it's negative cost (refund).
+                    const rankDiff = (power.rank || 1) - 11;
+                    return acc + (rankDiff * 0.1);
+                }
+
+                if (power.id === 'superhabilidad') {
+                    if (power.selectedOption === 'Idioma nativo' && !atlanteSuperUsed) {
+                        atlanteSuperUsed = true;
+                        const rankDiff = (power.rank || 1) - 41;
+                        return acc + (rankDiff * 0.1);
+                    }
+                    if (power.selectedOption === 'Nadar' && !atlanteSwimmingUsed) {
+                        atlanteSwimmingUsed = true;
+                        const rankDiff = (power.rank || 1) - 81;
+                        return acc + (rankDiff * 0.1);
+                    }
+                }
+
+                if (power.id === 'empatia_animal' && !atlanteEmpathyUsed) {
+                    atlanteEmpathyUsed = true;
+                    const rankDiff = (power.rank || 1) - 11;
+                    return acc + (rankDiff * 0.1);
+                }
             }
 
             if (isTroll && power.id === 'regeneracion_de_tejidos' && !trollRegenUsed) {
