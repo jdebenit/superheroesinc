@@ -6,10 +6,10 @@ interface PowersSectionProps {
     data: any;
     selectedPowers: SelectedPower[];
     onOpenModal: (origin: string) => void;
-    onUpdateRank: (id: string, origin: string, rank: number) => void;
-    onUpdateMod: (id: string, origin: string, mod: number) => void;
-    onUpdateSkillValue: (id: string, origin: string, value: number) => void;
-    onUpdateOption: (id: string, origin: string, option: string) => void;
+    onUpdateRank: (index: number, rank: number) => void;
+    onUpdateMod: (index: number, mod: number) => void;
+    onUpdateSkillValue: (index: number, value: number) => void;
+    onUpdateOption: (index: number, option: string) => void;
     onRemove: (index: number) => void;
     // Origin flags
     isGuardian: boolean;

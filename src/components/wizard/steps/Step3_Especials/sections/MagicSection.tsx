@@ -5,7 +5,7 @@ import type { SelectedPower, SelectedSpell } from '../types';
 
 interface MagicSectionProps {
     data: any;
-    selectedSpells: Array<Spell & { rank: number }>;
+    selectedSpells: Array<Spell & { rank: number; selectedOption?: string }>;
     selectedPowers: SelectedPower[];
     emFormula: { divisor: number; pcCost: number };
     hasEMFormula: boolean;
@@ -15,8 +15,9 @@ interface MagicSectionProps {
     isTerrano: boolean;
     onOpenSpellModal: () => void;
     onUpdateEMFormula: (divisor: number, pcCost: number) => void;
-    onUpdateSpellRank: (id: string, rank: number) => void;
-    onRemoveSpell: (id: string) => void;
+    onUpdateSpellRank: (index: number, rank: number) => void;
+    onUpdateOption: (index: number, option: string) => void;
+    onRemoveSpell: (index: number) => void;
 }
 
 export default function MagicSection({
@@ -32,6 +33,7 @@ export default function MagicSection({
     onOpenSpellModal,
     onUpdateEMFormula,
     onUpdateSpellRank,
+    onUpdateOption,
     onRemoveSpell
 }: MagicSectionProps) {
     const canSelectSpells = emFormula.divisor !== 0;
@@ -207,14 +209,34 @@ export default function MagicSection({
                                     const totalCost = baseCost * effectiveRank;
 
                                     return (
-                                        <tr key={s.id} style={{ backgroundColor: isEven ? 'white' : '#f9fafb' }}>
+                                        <tr key={`${s.id}-${idx}`} style={{ backgroundColor: isEven ? 'white' : '#f9fafb' }}>
                                             <td style={{ padding: '1rem', fontWeight: 'bold', color: '#1f2937' }}>
                                                 {s.name}
+                                                {s.options && s.options.length > 0 && (
+                                                    <div style={{ marginTop: '0.5rem' }}>
+                                                        <input
+                                                            type="text"
+                                                            placeholder={s.options[0]}
+                                                            value={s.selectedOption || ''}
+                                                            onChange={(e) => onUpdateOption(idx, e.target.value)}
+                                                            style={{
+                                                                width: '100%',
+                                                                padding: '0.25rem',
+                                                                fontSize: '0.8rem',
+                                                                border: '1px solid #d1d5db',
+                                                                borderRadius: '4px',
+                                                                fontWeight: 'normal',
+                                                                color: '#4b5563'
+                                                            }}
+                                                            onClick={(e) => e.stopPropagation()}
+                                                        />
+                                                    </div>
+                                                )}
                                             </td>
                                             <td style={{ padding: '0.75rem', textAlign: 'center' }}>
                                                 <select
                                                     value={s.rank}
-                                                    onChange={(e) => onUpdateSpellRank(s.id, parseInt(e.target.value, 10))}
+                                                    onChange={(e) => onUpdateSpellRank(idx, parseInt(e.target.value, 10))}
                                                     style={{
                                                         padding: '0.5rem',
                                                         border: '1px solid #d1d5db',
@@ -253,7 +275,7 @@ export default function MagicSection({
                                                 <button
                                                     onClick={(e) => {
                                                         e.stopPropagation();
-                                                        onRemoveSpell(s.id);
+                                                        onRemoveSpell(idx);
                                                     }}
                                                     style={{
                                                         color: '#ef4444',

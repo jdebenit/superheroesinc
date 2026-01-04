@@ -189,52 +189,58 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     const togglePowerSelection = (powerId: string) => {
         if (!modalOriginFilter) return;
 
-        const existingIndex = selectedPowers.findIndex(p => p.id === powerId && p.origin === modalOriginFilter);
-        let newSelected: SelectedPower[];
+        const powerDef = POWERS.find(p => p.id === powerId);
+        const hasOptions = powerDef?.options && powerDef.options.length > 0;
 
-        if (existingIndex >= 0) {
-            newSelected = [...selectedPowers];
-            newSelected.splice(existingIndex, 1);
+        if (hasOptions) {
+            // Always add new instance for powers with options
+            const newSelected = [...selectedPowers, { id: powerId, origin: modalOriginFilter, rank: 1 }];
+            updatePowers(newSelected);
         } else {
-            newSelected = [...selectedPowers, { id: powerId, origin: modalOriginFilter, rank: 1 }];
+            // Toggle behavior for standard powers
+            const existingIndex = selectedPowers.findIndex(p => p.id === powerId && p.origin === modalOriginFilter);
+            let newSelected: SelectedPower[];
+
+            if (existingIndex >= 0) {
+                newSelected = [...selectedPowers];
+                newSelected.splice(existingIndex, 1);
+            } else {
+                newSelected = [...selectedPowers, { id: powerId, origin: modalOriginFilter, rank: 1 }];
+            }
+            updatePowers(newSelected);
         }
-        updatePowers(newSelected);
     };
 
-    const updatePowerRank = (powerId: string, origin: string, newRank: number) => {
-        const updated = selectedPowers.map(p =>
-            p.id === powerId && p.origin === origin
-                ? { ...p, rank: Math.max(1, Math.min(100, newRank)) }
-                : p
-        );
-        updatePowers(updated);
+    const updatePowerRank = (index: number, newRank: number) => {
+        const updated = [...selectedPowers];
+        if (updated[index]) {
+            updated[index] = { ...updated[index], rank: Math.max(1, Math.min(100, newRank)) };
+            updatePowers(updated);
+        }
     };
 
-    const updatePowerMod = (powerId: string, origin: string, newMod: number) => {
-        const updated = selectedPowers.map(p =>
-            p.id === powerId && p.origin === origin
-                ? { ...p, powerMod: newMod }
-                : p
-        );
-        updatePowers(updated);
+    const updatePowerMod = (index: number, newMod: number) => {
+        const updated = [...selectedPowers];
+        if (updated[index]) {
+            updated[index] = { ...updated[index], powerMod: newMod };
+            updatePowers(updated);
+        }
     };
 
-    const updatePowerSkillValue = (powerId: string, origin: string, newValue: number) => {
-        const updated = selectedPowers.map(p =>
-            p.id === powerId && p.origin === origin
-                ? { ...p, skillValue: newValue }
-                : p
-        );
-        updatePowers(updated);
+    const updatePowerSkillValue = (index: number, newValue: number) => {
+        const updated = [...selectedPowers];
+        if (updated[index]) {
+            updated[index] = { ...updated[index], skillValue: newValue };
+            updatePowers(updated);
+        }
     };
 
-    const updatePowerOption = (powerId: string, origin: string, newOption: string) => {
-        const updated = selectedPowers.map(p =>
-            p.id === powerId && p.origin === origin
-                ? { ...p, selectedOption: newOption }
-                : p
-        );
-        updatePowers(updated);
+    const updatePowerOption = (index: number, newOption: string) => {
+        const updated = [...selectedPowers];
+        if (updated[index]) {
+            updated[index] = { ...updated[index], selectedOption: newOption };
+            updatePowers(updated);
+        }
     };
 
     const removePower = (index: number) => {
@@ -244,28 +250,32 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     };
 
     // Spell handlers
+    // Spell handlers
     const toggleSpellSelection = (id: string) => {
-        const existingIndex = selectedSpellsWithRank.findIndex(s => s.id === id);
-        let newSelected: SelectedSpell[];
+        // Always add a new instance for spells (allow duplicates)
+        const newSelected = [...selectedSpellsWithRank, { id, rank: 1 }];
+        updateSpells(newSelected);
+    };
 
-        if (existingIndex >= 0) {
-            newSelected = [...selectedSpellsWithRank];
-            newSelected.splice(existingIndex, 1);
-        } else {
-            newSelected = [...selectedSpellsWithRank, { id, rank: 1 }];
+    const updateSpellRank = (index: number, rank: number) => {
+        const newSelected = [...selectedSpellsWithRank];
+        if (newSelected[index]) {
+            newSelected[index] = { ...newSelected[index], rank };
+            updateSpells(newSelected);
         }
-        updateSpells(newSelected);
     };
 
-    const updateSpellRank = (id: string, rank: number) => {
-        const newSelected = selectedSpellsWithRank.map(s =>
-            s.id === id ? { ...s, rank } : s
-        );
-        updateSpells(newSelected);
+    const updateSpellOption = (index: number, option: string) => {
+        const newSelected = [...selectedSpellsWithRank];
+        if (newSelected[index]) {
+            newSelected[index] = { ...newSelected[index], selectedOption: option };
+            updateSpells(newSelected);
+        }
     };
 
-    const removeSpell = (id: string) => {
-        const newSelected = selectedSpellsWithRank.filter(s => s.id !== id);
+    const removeSpell = (index: number) => {
+        const newSelected = [...selectedSpellsWithRank];
+        newSelected.splice(index, 1);
         updateSpells(newSelected);
     };
 
@@ -390,8 +400,14 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     // Spells - enrich with full spell data and rank
     const selectedSpells = selectedSpellsWithRank.map(sw => {
         const spell = SPELLS.find(s => s.id === sw.id);
-        return spell ? { ...spell, rank: sw.rank } : null;
-    }).filter((s): s is (Spell & { rank: number }) => s !== null);
+        if (!spell) return null;
+        const result: Spell & { rank: number; selectedOption?: string } = {
+            ...spell,
+            rank: sw.rank,
+            selectedOption: sw.selectedOption
+        };
+        return result;
+    }).filter((s): s is (Spell & { rank: number; selectedOption?: string }) => s !== null);
 
     const hasAnyOrigin = isGuardian || isAlterado || hasEM || isVampiro || isSemidemonio || isMaldito ||
         isEnte || isThals || isDivino || isCosmico || isMutante || isVigilante || isTechnological || isExoskeleton || isTesKhar || isAtlante || isParahumano;
@@ -596,6 +612,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                     onOpenSpellModal={openSpellModal}
                     onUpdateEMFormula={updateEMFormula}
                     onUpdateSpellRank={updateSpellRank}
+                    onUpdateOption={updateSpellOption}
                     onRemoveSpell={removeSpell}
                 />
             )}

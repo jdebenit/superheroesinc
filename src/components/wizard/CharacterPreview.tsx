@@ -175,8 +175,11 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
         const baseCost = spellDef ? (parseInt(spellDef.cost, 10) || 0) : 0;
         const effectiveRank = s.rank || 1;
 
+        const baseName = spellDef?.name || s.name || '';
+        const displayName = s.selectedOption ? `${baseName} (${s.selectedOption})` : baseName;
+
         return {
-            name: spellDef?.name || s.name || '',
+            name: displayName,
             rank: isMaestria ? 'Maestría' : (s.rank || '').toString(),
             cost: (baseCost * effectiveRank).toString(),
             notes: spellDef?.requirements || s.effect || s.description || ''
@@ -1317,6 +1320,11 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                         <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
                                                             <span style={{ fontWeight: 'bold', color: '#4f46e5' }}>
                                                                 {spellData.name}
+                                                                {spell.selectedOption && (
+                                                                    <span style={{ fontWeight: 'normal', color: '#4338ca', fontSize: '0.9em', marginLeft: '0.25rem' }}>
+                                                                        ({spell.selectedOption})
+                                                                    </span>
+                                                                )}
                                                             </span>
                                                             <span style={{
                                                                 flexGrow: 1,

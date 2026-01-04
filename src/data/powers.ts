@@ -342,7 +342,7 @@ export const POWERS: Power[] = [
         name: "Invulnerabilidad",
         formula: "4+(Rango/10)",
         cost: 4,
-        options: ["CON", "AGI", "INT", "PER"],
+        options: ["Magia", "Temperaturas extremas"],
         types: ["Energético"],
         origins: ["Alterado", "Mutante", "Guardian", "Vampírico", "Cósmico", "Divino", "Sobrenatural"]
     },

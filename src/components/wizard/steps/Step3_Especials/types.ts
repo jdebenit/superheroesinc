@@ -28,6 +28,7 @@ export interface TechModule {
 export interface SelectedSpell {
     id: string;
     rank: number;
+    selectedOption?: string;
 }
 
 export type ModalType = 'powers' | 'spells' | 'techModules' | 'magical_bonds' | null;

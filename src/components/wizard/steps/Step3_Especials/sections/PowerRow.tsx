@@ -7,10 +7,10 @@ interface PowerRowProps {
     selection: SelectedPower;
     data: any;
     index: number;
-    onUpdateRank: (id: string, origin: string, rank: number) => void;
-    onUpdateMod: (id: string, origin: string, mod: number) => void;
-    onUpdateSkillValue: (id: string, origin: string, value: number) => void;
-    onUpdateOption: (id: string, origin: string, option: string) => void;
+    onUpdateRank: (index: number, rank: number) => void;
+    onUpdateMod: (index: number, mod: number) => void;
+    onUpdateSkillValue: (index: number, value: number) => void;
+    onUpdateOption: (index: number, option: string) => void;
     onRemove: (index: number) => void;
     isParahumanoHybrid?: boolean;
     isTesKhar?: boolean;
@@ -76,7 +76,7 @@ export default function PowerRow({
                             type="text"
                             placeholder={p.options[0]}
                             value={selection.selectedOption || ''}
-                            onChange={(e) => onUpdateOption(selection.id, selection.origin, e.target.value)}
+                            onChange={(e) => onUpdateOption(index, e.target.value)}
                             style={{
                                 width: '100%',
                                 padding: '0.25rem',
@@ -103,7 +103,7 @@ export default function PowerRow({
                                     min="1"
                                     max="100"
                                     value={selection.rank}
-                                    onChange={(e) => onUpdateRank(selection.id, selection.origin, parseInt(e.target.value, 10))}
+                                    onChange={(e) => onUpdateRank(index, parseInt(e.target.value, 10))}
                                     style={{
                                         width: '50px',
                                         padding: '0.25rem',
@@ -187,7 +187,7 @@ export default function PowerRow({
                                         const newMod = parseInt(e.target.value, 10) || 0;
                                         const total = charValue + newMod;
                                         if (total <= 200) {
-                                            onUpdateMod(selection.id, selection.origin, newMod);
+                                            onUpdateMod(index, newMod);
                                         }
                                     }}
                                     style={{
@@ -241,7 +241,7 @@ export default function PowerRow({
                                         value={selection.skillValue || minVal}
                                         onChange={(e) => {
                                             const val = parseInt(e.target.value) || 0;
-                                            onUpdateSkillValue(selection.id, selection.origin, Math.max(minVal, val));
+                                            onUpdateSkillValue(index, Math.max(minVal, val));
                                         }}
                                         style={{
                                             width: '60px',

@@ -5,6 +5,7 @@ export interface Spell {
     cost: string; // e.g. "75"
     requirements: string;
     description?: string; // Optional for now
+    options?: string[];
     maxRank: number;
     hasRequirements: boolean;
 }
@@ -126,6 +127,7 @@ export const SPELLS: Spell[] = [
         id: "invocar_elemento",
         name: "Invocar Elemento",
         cost: "50",
+        options: ["Agua", "Fuego", "Clima", "Tierra"],
         requirements: "No especificado",
         maxRank: 4,
         hasRequirements: false
@@ -142,6 +144,7 @@ export const SPELLS: Spell[] = [
         id: "invocar_espiritu_totemico",
         name: "Invocar Espíritu Totémico",
         cost: "35",
+        options: ["Fuerza", "Agilidad", "Inteligencia", "Percepción"],
         requirements: "No especificado",
         maxRank: 8,
         hasRequirements: false
