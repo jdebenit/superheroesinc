@@ -676,7 +676,7 @@ export default function CharacterWizard() {
             {/* Header */}
             <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
                 <h1 style={{ fontSize: '3rem', fontWeight: '900', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
-                    Generador de Fichas (Beta 0.3.0)
+                    Generador de Fichas (Beta 0.3.1)
                 </h1>
                 <p style={{ fontSize: '1.25rem', color: '#666', marginBottom: '1rem' }}>
                     Crea tu personaje paso a paso

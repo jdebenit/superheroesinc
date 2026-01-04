@@ -186,7 +186,7 @@ export const SPELLS: Spell[] = [
         name: "Paralizar",
         cost: "35",
         requirements: "No especificado",
-        maxRank: 1,
+        maxRank: 4,
         hasRequirements: false
     },
     {
