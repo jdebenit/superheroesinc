@@ -18,4 +18,4 @@ Los **tipos de base** están pensados para incentivar que los grupos preparen y 
 
 Las **tablas de armamento, equipamiento, artefactos y similares** sí son completamente oficiales y pueden usarse sin ningún problema, independientemente del sistema de creación o del tipo de campaña.
 
-En resumen, no es que haya reglas “incorrectas”, sino reglas pensadas para contextos concretos. Usarlas fuera de ese contexto es decisión del Guionista.
+No es que haya reglas “incorrectas”, sino reglas pensadas para contextos concretos. Usarlas fuera de ese contexto es decisión del Guionista.

@@ -1,159 +1,219 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import MarkdownIt from 'markdown-it';
 
 const md = new MarkdownIt({
-    html: true,
-    linkify: true,
-    typographer: true,
+  html: true,
+  linkify: true,
+  typographer: true,
 });
 
 interface FAQ {
-    id: string;
-    question: string;
-    answer: string;
-    tags: string[];
-    category?: string;
-    order?: number;
+  id: string;
+  question: string;
+  answer: string;
+  tags: string[];
+  category?: string;
+  order?: number;
 }
 
 interface FAQListProps {
-    faqs: FAQ[];
+  faqs: FAQ[];
 }
 
+const ITEMS_PER_PAGE = 10;
+
 export default function FAQList({ faqs }: FAQListProps) {
-    const [searchTerm, setSearchTerm] = useState("");
-    const [selectedTags, setSelectedTags] = useState<string[]>(["Todos"]);
-    const [expandedFAQs, setExpandedFAQs] = useState<Set<string>>(new Set());
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedTags, setSelectedTags] = useState<string[]>(["Todos"]);
+  const [expandedFAQs, setExpandedFAQs] = useState<Set<string>>(new Set());
 
-    // Extract all unique tags from FAQs
-    const allTags = useMemo(() => {
-        const tags = new Set<string>();
-        faqs.forEach(faq => {
-            faq.tags.forEach(tag => tags.add(tag));
-        });
-        return ["Todos", ...Array.from(tags).sort()];
-    }, [faqs]);
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
 
-    const toggleTag = (tag: string) => {
-        if (tag === "Todos") {
-            setSelectedTags(["Todos"]);
-            return;
-        }
+  // Extract all unique tags from FAQs
+  const allTags = useMemo(() => {
+    const tags = new Set<string>();
+    faqs.forEach(faq => {
+      faq.tags.forEach(tag => tags.add(tag));
+    });
+    return ["Todos", ...Array.from(tags).sort()];
+  }, [faqs]);
 
-        let newTags = [...selectedTags];
-        if (newTags.includes("Todos")) {
-            newTags = [];
-        }
+  const toggleTag = (tag: string) => {
+    if (tag === "Todos") {
+      setSelectedTags(["Todos"]);
+      return;
+    }
 
-        if (newTags.includes(tag)) {
-            newTags = newTags.filter(t => t !== tag);
-        } else {
-            newTags.push(tag);
-        }
+    let newTags = [...selectedTags];
+    if (newTags.includes("Todos")) {
+      newTags = [];
+    }
 
-        if (newTags.length === 0) {
-            newTags = ["Todos"];
-        }
+    if (newTags.includes(tag)) {
+      newTags = newTags.filter(t => t !== tag);
+    } else {
+      newTags.push(tag);
+    }
 
-        setSelectedTags(newTags);
-    };
+    if (newTags.length === 0) {
+      newTags = ["Todos"];
+    }
 
-    const toggleFAQ = (id: string) => {
-        const newExpanded = new Set(expandedFAQs);
-        if (newExpanded.has(id)) {
-            newExpanded.delete(id);
-        } else {
-            newExpanded.add(id);
-        }
-        setExpandedFAQs(newExpanded);
-    };
+    setSelectedTags(newTags);
+  };
 
-    const filteredFAQs = useMemo(() => {
-        return faqs.filter(faq => {
-            // Filter by tags
-            const matchesTags = selectedTags.includes("Todos") ||
-                faq.tags.some(tag => selectedTags.includes(tag));
+  const toggleFAQ = (id: string) => {
+    const newExpanded = new Set(expandedFAQs);
+    if (newExpanded.has(id)) {
+      newExpanded.delete(id);
+    } else {
+      newExpanded.add(id);
+    }
+    setExpandedFAQs(newExpanded);
+  };
 
-            // Filter by search term (search in both question and answer)
-            const matchesSearch = searchTerm === "" ||
-                faq.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                faq.answer.toLowerCase().includes(searchTerm.toLowerCase());
+  const filteredFAQs = useMemo(() => {
+    return faqs.filter(faq => {
+      // Filter by tags
+      const matchesTags = selectedTags.includes("Todos") ||
+        faq.tags.some(tag => selectedTags.includes(tag));
 
-            return matchesTags && matchesSearch;
-        });
-    }, [faqs, selectedTags, searchTerm]);
+      // Filter by search term (search in both question and answer)
+      const matchesSearch = searchTerm === "" ||
+        faq.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        faq.answer.toLowerCase().includes(searchTerm.toLowerCase());
 
-    return (
-        <div className="faq-list-container">
-            <div className="controls-section">
-                <div className="search-section">
-                    <input
-                        type="text"
-                        placeholder="Buscar en preguntas y respuestas..."
-                        className="search-input"
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
+      return matchesTags && matchesSearch;
+    });
+  }, [faqs, selectedTags, searchTerm]);
+
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, selectedTags]);
+
+  // Calculate pagination
+  const totalPages = Math.ceil(filteredFAQs.length / ITEMS_PER_PAGE);
+  const paginatedFAQs = filteredFAQs.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    // Scroll to top of list smoothly if needed, or just let users scroll
+    const listElement = document.querySelector('.faq-list-container');
+    if (listElement) {
+      listElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  return (
+    <div className="faq-list-container">
+      <div className="controls-section">
+        <div className="search-section">
+          <input
+            type="text"
+            placeholder="Buscar en preguntas y respuestas..."
+            className="search-input"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <div className="results-count">
+            {filteredFAQs.length} {filteredFAQs.length === 1 ? 'resultado' : 'resultados'}
+          </div>
+        </div>
+
+        <div className="filter-section">
+          <span className="filter-label">Filtrar por tags:</span>
+          <div className="tag-buttons">
+            {allTags.map(tag => (
+              <button
+                key={tag}
+                className={`tag-button ${selectedTags.includes(tag) ? 'active' : ''}`}
+                onClick={() => toggleTag(tag)}
+              >
+                {tag}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="faq-list">
+        {paginatedFAQs.length === 0 ? (
+          <div className="no-results">
+            <p>No se encontraron FAQs que coincidan con tu búsqueda.</p>
+            <p>Intenta con otros términos o tags.</p>
+          </div>
+        ) : (
+          <>
+            {paginatedFAQs.map((faq) => (
+              <div key={faq.id} className="faq-item">
+                <button
+                  className="faq-question"
+                  onClick={() => toggleFAQ(faq.id)}
+                  aria-expanded={expandedFAQs.has(faq.id)}
+                >
+                  <span className="question-icon">
+                    {expandedFAQs.has(faq.id) ? '▼' : '▶'}
+                  </span>
+                  <span className="question-text">{faq.question}</span>
+                </button>
+
+                {expandedFAQs.has(faq.id) && (
+                  <div className="faq-answer">
+                    <div
+                      className="answer-content"
+                      dangerouslySetInnerHTML={{ __html: md.render(faq.answer) }}
                     />
-                    <div className="results-count">
-                        {filteredFAQs.length} {filteredFAQs.length === 1 ? 'resultado' : 'resultados'}
+                    <div className="faq-tags">
+                      {faq.tags.map(tag => (
+                        <span key={tag} className="faq-tag">{tag}</span>
+                      ))}
                     </div>
-                </div>
-
-                <div className="filter-section">
-                    <span className="filter-label">Filtrar por tags:</span>
-                    <div className="tag-buttons">
-                        {allTags.map(tag => (
-                            <button
-                                key={tag}
-                                className={`tag-button ${selectedTags.includes(tag) ? 'active' : ''}`}
-                                onClick={() => toggleTag(tag)}
-                            >
-                                {tag}
-                            </button>
-                        ))}
-                    </div>
-                </div>
-            </div>
-
-            <div className="faq-list">
-                {filteredFAQs.length === 0 ? (
-                    <div className="no-results">
-                        <p>No se encontraron FAQs que coincidan con tu búsqueda.</p>
-                        <p>Intenta con otros términos o tags.</p>
-                    </div>
-                ) : (
-                    filteredFAQs.map((faq) => (
-                        <div key={faq.id} className="faq-item">
-                            <button
-                                className="faq-question"
-                                onClick={() => toggleFAQ(faq.id)}
-                                aria-expanded={expandedFAQs.has(faq.id)}
-                            >
-                                <span className="question-icon">
-                                    {expandedFAQs.has(faq.id) ? '▼' : '▶'}
-                                </span>
-                                <span className="question-text">{faq.question}</span>
-                            </button>
-
-                            {expandedFAQs.has(faq.id) && (
-                                <div className="faq-answer">
-                                    <div
-                                        className="answer-content"
-                                        dangerouslySetInnerHTML={{ __html: md.render(faq.answer) }}
-                                    />
-                                    <div className="faq-tags">
-                                        {faq.tags.map(tag => (
-                                            <span key={tag} className="faq-tag">{tag}</span>
-                                        ))}
-                                    </div>
-                                </div>
-                            )}
-                        </div>
-                    ))
+                  </div>
                 )}
-            </div>
+              </div>
+            ))}
 
-            <style>{`
+            {totalPages > 1 && (
+              <div className="pagination">
+                <button
+                  className="pagination-btn"
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  disabled={currentPage === 1}
+                >
+                  &lt; Anterior
+                </button>
+
+                <div className="pagination-pages">
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                    <button
+                      key={page}
+                      className={`pagination-page-btn ${currentPage === page ? 'active' : ''}`}
+                      onClick={() => handlePageChange(page)}
+                    >
+                      {page}
+                    </button>
+                  ))}
+                </div>
+
+                <button
+                  className="pagination-btn"
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                >
+                  Siguiente &gt;
+                </button>
+              </div>
+            )}
+          </>
+        )}
+      </div>
+
+      <style>{`
         .faq-list-container {
           font-family: var(--font-body, system-ui, sans-serif);
           max-width: 1000px;
@@ -415,6 +475,69 @@ export default function FAQList({ faqs }: FAQListProps) {
           font-size: 1.1rem;
           color: #333;
         }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .pagination-btn {
+            background: white;
+            border: 2px solid var(--color-secondary, #000);
+            padding: 0.5rem 1rem;
+            font-family: var(--font-comic, sans-serif);
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .pagination-btn:hover:not(:disabled) {
+            background: #f5f5f5;
+            transform: translateY(-2px);
+            box-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+        }
+
+        .pagination-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            border-color: #ccc;
+        }
+
+        .pagination-pages {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .pagination-page-btn {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border: 2px solid var(--color-secondary, #000);
+            font-family: var(--font-comic, sans-serif);
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: all 0.2s;
+        }
+        
+        .pagination-page-btn:hover:not(.active) {
+            background: #f5f5f5;
+            transform: translateY(-2px);
+        }
+
+        .pagination-page-btn.active {
+            background: var(--color-secondary, #000);
+            color: white;
+            transform: scale(1.1);
+        }
 
         @media (max-width: 768px) {
           .controls-section {
@@ -438,8 +561,17 @@ export default function FAQList({ faqs }: FAQListProps) {
             font-size: 0.8rem;
             padding: 0.4rem 0.8rem;
           }
+          
+          .pagination {
+            gap: 0.5rem;
+          }
+          
+          .pagination-btn {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.9rem;
+          }
         }
       `}</style>
-        </div>
-    );
+    </div>
+  );
 }
