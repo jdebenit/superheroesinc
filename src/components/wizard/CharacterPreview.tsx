@@ -633,6 +633,32 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                     </div>
                                 )}
 
+                                {character.isParahumanoHybrid && (
+                                    hasSubtype(character, 'Parahumano', 'Thals') ||
+                                    hasSubtype(character, 'Parahumano', 'Tes-khar') ||
+                                    hasSubtype(character, 'Parahumano', 'Atlante')
+                                ) && (
+                                        <div className="sheet-section hybrid-params">
+                                            <div className="section-header">
+                                                <h4>Híbrido</h4>
+                                            </div>
+                                            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                                                <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
+                                                    <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
+                                                        <span style={{ paddingRight: '0.5rem', fontWeight: 'bold', color: '#be185d' }}>Condición</span>
+                                                        <span style={{ flexGrow: 1, borderBottom: '1px dotted #ccc', margin: '0 0.5rem', position: 'relative', top: '-4px', minWidth: '20px' }}></span>
+                                                        <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>
+                                                            Híbrido con Humano
+                                                        </span>
+                                                    </div>
+                                                    <div style={{ fontSize: '0.85rem', color: '#6b7280', fontStyle: 'italic', marginTop: '0.25rem', paddingLeft: '0.5rem' }}>
+                                                        Acceso a poderes de Alterado (+3 PC/poder)
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    )}
+
                                 {/* Ente Params */}
                                 {character.enteParams && (character.enteParams.formType || character.enteParams.visualEffect) && (
                                     <div className="sheet-section ente-params">
