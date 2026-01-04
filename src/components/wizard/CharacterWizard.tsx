@@ -94,6 +94,7 @@ const initialCharacterState = {
     equipment: { items: [] },
     weapons: { items: [] },
     artifacts: { items: [] },
+    magicObjects: { items: [] },
     vehicles: { items: [] },
     spells: {
         selected: [],

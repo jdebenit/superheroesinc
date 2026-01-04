@@ -220,7 +220,9 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
     const artifactsData = (character.artifacts?.items || []).map((a: any) => ({
         name: a.name || '',
         reliability: a.reliability || '',
-        value: a.value || ''
+        value: a.value || '',
+        cost: a.cost || '',
+        notes: a.notes || ''
     }));
 
     // Vehicles
@@ -389,6 +391,33 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                         <div><span style={{ fontWeight: 'bold' }}>Fiabilidad:</span> {item.reliability || '-'}</div>
                                                         <div><span style={{ fontWeight: 'bold' }}>Valor:</span> {item.value || '-'}</div>
                                                         <div><span style={{ fontWeight: 'bold' }}>Coste:</span> {item.cost || '0'} PCs</div>
+                                                    </div>
+                                                    {item.notes && (
+                                                        <div style={{ marginTop: '0.5rem', fontSize: '0.85rem', color: '#666', fontStyle: 'italic' }}>
+                                                            {item.notes}
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* Magic Objects */}
+                                {character.magicObjects && character.magicObjects.items.length > 0 && (
+                                    <div className="sheet-section magic-objects">
+                                        <div className="section-header">
+                                            <h4>Objetos Mágicos</h4>
+                                        </div>
+                                        <div className="magic-objects-grid" style={{ display: 'grid', gap: '0.5rem' }}>
+                                            {character.magicObjects.items.map((item: any, i: number) => (
+                                                <div key={i} className="magic-object-item" style={{ padding: '0.75rem', backgroundColor: '#faf5ff', border: '1px solid #f3e8ff', borderRadius: '6px' }}>
+                                                    <div style={{ fontWeight: 'bold', color: '#9333ea', marginBottom: '0.5rem' }}>{item.name}</div>
+                                                    <div style={{ fontSize: '0.85rem', marginBottom: '0.5rem' }}>
+                                                        <span style={{ fontWeight: 'bold' }}>Coste EM:</span> {item.em}
+                                                    </div>
+                                                    <div style={{ fontSize: '0.85rem', color: '#666' }}>
+                                                        {item.description}
                                                     </div>
                                                 </div>
                                             ))}

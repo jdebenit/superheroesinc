@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { calculateDerivedStats } from '../../../utils/characterCalculations';
 import { GENERAL_SKILLS } from '../../../data/generalSkills';
 import { SPECIAL_SKILLS } from '../../../data/specialSkills';
+import { MAGIC_OBJECTS } from '../../../data/magicObjects';
+import { ARTIFACTS } from '../../../data/artifacts';
 
 interface Step6Props {
     data: {
@@ -15,6 +17,7 @@ interface Step6Props {
         equipment: { items: any[] };
         weapons: { items: any[] };
         artifacts: { items: any[] };
+        magicObjects: { items: any[] };
         vehicles: { items: any[] };
         skills?: any;
         // We'll update combat/other stats in data directly if we want to save them
@@ -132,6 +135,56 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
         const newItems = [...(data.artifacts?.items || [])];
         newItems.splice(index, 1);
         onChange({ artifacts: { items: newItems } });
+    };
+
+    const applyArtifactPreset = (index: number, id: string) => {
+        const preset = ARTIFACTS.find((a: any) => a.id === id);
+        if (preset) {
+            const newItems = [...(data.artifacts?.items || [])];
+            newItems[index] = {
+                ...newItems[index],
+                name: preset.name,
+                reliability: preset.reliability,
+                cost: preset.pcCost,
+                notes: preset.description // Mapping description to notes/description
+            };
+            onChange({ artifacts: { items: newItems } });
+        }
+    };
+
+    // --- OBJETOS MÁGICOS ---
+    const addMagicObject = () => {
+        onChange({
+            magicObjects: {
+                items: [...(data.magicObjects?.items || []), { name: "Nuevo objeto mágico", description: "", em: 0 }]
+            }
+        });
+    };
+
+    const updateMagicObject = (index: number, field: string, value: string | number) => {
+        const newItems = [...(data.magicObjects?.items || [])];
+        newItems[index] = { ...newItems[index], [field]: value };
+        onChange({ magicObjects: { items: newItems } });
+    };
+
+    const applyMagicPreset = (index: number, id: string) => {
+        const preset = MAGIC_OBJECTS.find((o: any) => o.id === id);
+        if (preset) {
+            const newItems = [...(data.magicObjects?.items || [])];
+            newItems[index] = {
+                ...newItems[index],
+                name: preset.name,
+                description: preset.description,
+                em: preset.em
+            };
+            onChange({ magicObjects: { items: newItems } });
+        }
+    };
+
+    const removeMagicObject = (index: number) => {
+        const newItems = [...(data.magicObjects?.items || [])];
+        newItems.splice(index, 1);
+        onChange({ magicObjects: { items: newItems } });
     };
 
     // --- VEHÍCULOS ---
@@ -474,66 +527,100 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                     {data.artifacts?.items?.map((item, index) => (
                         <div key={index} style={{
-                            display: 'grid',
-                            gridTemplateColumns: '2fr 1fr 1fr 100px auto',
-                            gap: '1rem',
-                            alignItems: 'start',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: '0.75rem',
                             padding: '0.75rem',
                             backgroundColor: '#f5f3ff',
                             border: '1px solid #ede9fe',
                             borderRadius: '8px'
                         }}>
                             <div>
-                                <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Nombre</label>
-                                <input
-                                    type="text"
-                                    value={item.name}
-                                    onChange={(e) => updateArtifact(index, 'name', e.target.value)}
+                                <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Cargar Predefinido (Opcional)</label>
+                                <select
+                                    onChange={(e) => applyArtifactPreset(index, e.target.value)}
                                     style={{ ...inputStyle, marginBottom: 0 }}
-                                    placeholder="Nombre del artefacto"
-                                />
+                                    defaultValue=""
+                                >
+                                    <option value="" disabled>Seleccionar de la lista...</option>
+                                    {ARTIFACTS.map((obj: any) => (
+                                        <option key={obj.id} value={obj.id}>
+                                            {obj.name} (Fiabilidad: {obj.reliability}, {obj.pcCost} PC)
+                                        </option>
+                                    ))}
+                                </select>
                             </div>
+
+                            <div style={{
+                                display: 'grid',
+                                gridTemplateColumns: '2fr 1fr 1fr 100px',
+                                gap: '1rem',
+                                alignItems: 'start'
+                            }}>
+                                <div>
+                                    <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Nombre</label>
+                                    <input
+                                        type="text"
+                                        value={item.name}
+                                        onChange={(e) => updateArtifact(index, 'name', e.target.value)}
+                                        style={{ ...inputStyle, marginBottom: 0 }}
+                                        placeholder="Nombre del artefacto"
+                                    />
+                                </div>
+                                <div>
+                                    <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Fiabilidad</label>
+                                    <input
+                                        type="text"
+                                        value={item.reliability || ''}
+                                        onChange={(e) => updateArtifact(index, 'reliability', e.target.value)}
+                                        style={{ ...inputStyle, marginBottom: 0 }}
+                                        placeholder="Ej: 95%"
+                                    />
+                                </div>
+                                <div>
+                                    <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Valor</label>
+                                    <input
+                                        type="text"
+                                        value={item.value || ''}
+                                        onChange={(e) => updateArtifact(index, 'value', e.target.value)}
+                                        style={{ ...inputStyle, marginBottom: 0 }}
+                                        placeholder="Valor"
+                                    />
+                                </div>
+                                <div>
+                                    <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Coste (PCs)</label>
+                                    <input
+                                        type="number"
+                                        min="0"
+                                        value={item.cost || 0}
+                                        onChange={(e) => updateArtifact(index, 'cost', Math.max(0, parseInt(e.target.value) || 0).toString())}
+                                        style={{ ...inputStyle, marginBottom: 0 }}
+                                        placeholder="0"
+                                    />
+                                </div>
+                            </div>
+
                             <div>
-                                <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Fiabilidad</label>
-                                <input
-                                    type="text"
-                                    value={item.reliability || ''}
-                                    onChange={(e) => updateArtifact(index, 'reliability', e.target.value)}
-                                    style={{ ...inputStyle, marginBottom: 0 }}
-                                    placeholder="Ej: 95%"
+                                <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Descripción / Efectos</label>
+                                <textarea
+                                    value={item.notes || ''} // Using notes to store description as it's consistent with other items
+                                    onChange={(e) => updateArtifact(index, 'notes', e.target.value)}
+                                    style={{ ...inputStyle, marginBottom: 0, minHeight: '60px', resize: 'vertical' }}
+                                    placeholder="Descripción o efectos del artefacto..."
                                 />
                             </div>
-                            <div>
-                                <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Valor</label>
-                                <input
-                                    type="text"
-                                    value={item.value || ''}
-                                    onChange={(e) => updateArtifact(index, 'value', e.target.value)}
-                                    style={{ ...inputStyle, marginBottom: 0 }}
-                                    placeholder="Valor"
-                                />
-                            </div>
-                            <div>
-                                <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Coste (PCs)</label>
-                                <input
-                                    type="number"
-                                    min="0"
-                                    value={item.cost || 0}
-                                    onChange={(e) => updateArtifact(index, 'cost', Math.max(0, parseInt(e.target.value) || 0).toString())}
-                                    style={{ ...inputStyle, marginBottom: 0 }}
-                                    placeholder="0"
-                                />
-                            </div>
+
                             <button
                                 onClick={() => removeArtifact(index)}
                                 style={{
                                     ...buttonStyle,
-                                    marginTop: '1.5rem',
+                                    marginTop: '0.5rem',
                                     backgroundColor: '#7c3aed',
-                                    color: 'white'
+                                    color: 'white',
+                                    alignSelf: 'flex-end'
                                 }}
                             >
-                                ✕
+                                ✕ Eliminar Artefacto
                             </button>
                         </div>
                     ))}
@@ -552,6 +639,105 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                         }}
                     >
                         + Añadir Artefacto
+                    </button>
+                </div>
+            </div>
+
+            {/* MAGIC OBJECTS SECTION */}
+            <div style={sectionStyle}>
+                <h3 style={{ ...titleStyle, color: '#9333ea', borderBottomColor: '#d8b4fe' }}>
+                    🔮 Objetos Mágicos
+                </h3>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                    {data.magicObjects?.items?.map((item, index) => (
+                        <div key={index} style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: '0.75rem',
+                            padding: '1rem',
+                            backgroundColor: '#faf5ff',
+                            border: '1px solid #f3e8ff',
+                            borderRadius: '8px'
+                        }}>
+                            <div>
+                                <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Cargar Predefinido (Opcional)</label>
+                                <select
+                                    onChange={(e) => applyMagicPreset(index, e.target.value)}
+                                    style={{ ...inputStyle, marginBottom: 0 }}
+                                    defaultValue=""
+                                >
+                                    <option value="" disabled>Seleccionar de la lista...</option>
+                                    {MAGIC_OBJECTS.map((obj: any) => (
+                                        <option key={obj.id} value={obj.id}>
+                                            {obj.name} (EM: {obj.em})
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            <div style={{ display: 'grid', gridTemplateColumns: '3fr 1fr', gap: '1rem' }}>
+                                <div>
+                                    <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Nombre</label>
+                                    <input
+                                        type="text"
+                                        value={item.name}
+                                        onChange={(e) => updateMagicObject(index, 'name', e.target.value)}
+                                        style={{ ...inputStyle, marginBottom: 0 }}
+                                        placeholder="Nombre del objeto"
+                                    />
+                                </div>
+                                <div>
+                                    <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Coste EM</label>
+                                    <input
+                                        type="number"
+                                        min="0"
+                                        value={item.em || 0}
+                                        onChange={(e) => updateMagicObject(index, 'em', Math.max(0, parseInt(e.target.value) || 0))}
+                                        style={{ ...inputStyle, marginBottom: 0 }}
+                                        placeholder="0"
+                                    />
+                                </div>
+                            </div>
+
+                            <div>
+                                <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Descripción</label>
+                                <textarea
+                                    value={item.description || ''}
+                                    onChange={(e) => updateMagicObject(index, 'description', e.target.value)}
+                                    style={{ ...inputStyle, marginBottom: 0, minHeight: '60px', resize: 'vertical' }}
+                                    placeholder="Descripción del efecto..."
+                                />
+                            </div>
+
+                            <button
+                                onClick={() => removeMagicObject(index)}
+                                style={{
+                                    ...buttonStyle,
+                                    marginTop: '0.5rem',
+                                    backgroundColor: '#9333ea',
+                                    color: 'white',
+                                    alignSelf: 'flex-end'
+                                }}
+                            >
+                                ✕ Eliminar Objeto
+                            </button>
+                        </div>
+                    ))}
+                    <button
+                        onClick={addMagicObject}
+                        style={{
+                            width: '100%',
+                            padding: '1rem',
+                            border: '2px dashed #d8b4fe',
+                            backgroundColor: '#faf5ff',
+                            color: '#9333ea',
+                            borderRadius: '8px',
+                            fontWeight: 'bold',
+                            cursor: 'pointer',
+                            marginTop: '0.5rem'
+                        }}
+                    >
+                        + Añadir Objeto Mágico
                     </button>
                 </div>
             </div>
