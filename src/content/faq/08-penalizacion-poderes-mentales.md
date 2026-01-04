@@ -31,7 +31,7 @@ Estos penalizadores no se aplican si el poder, una condición especial o el prop
 - Superheroes INC. Tercera Edición. Libro Básico. Pag 291.
 ## Ejemplo
 
-Pesanta es un villano con **Agresión Psiónica** y **Telequinesis**, ambos a rango bajo, y dispone de dos Acciones por Asalto.
+[Pesanta](/personajes/pesanta/) es un villano con **Agresión Psiónica** y **Telequinesis**, ambos a rango bajo, y dispone de dos Acciones por Asalto.
 
 En un asalto decide:
 - Usar **Agresión Psiónica** a pleno rendimiento

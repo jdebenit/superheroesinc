@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "faq/09-reglas-opcionales-edicion-limitada.md",
+                "file": "faq/08-penalizacion-poderes-mentales.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "09-reglas-opcionales-edicion-limitada"
+              "title": "08-penalizacion-poderes-mentales"
             }
           }
         ]
@@ -185,8 +185,8 @@
   },
   "active": "c98a215958b33c8b",
   "lastOpenFiles": [
-    "faq/07-reglas-opcionales-ramsao.md",
     "faq/09-reglas-opcionales-edicion-limitada.md",
+    "faq/07-reglas-opcionales-ramsao.md",
     "faq/08-penalizacion-poderes-mentales.md",
     "faq/06-kevlar-daño-mixto.md",
     "faq/02-generador-fichas-limitaciones.md",
