@@ -153,25 +153,38 @@ export default function PowersSection({
                             </tr>
                         </thead>
                         <tbody>
-                            {selectedPowers.map((selection, idx) => (
-                                <PowerRow
-                                    key={`${selection.id}-${selection.origin}-${idx}`}
-                                    selection={selection}
-                                    data={data}
-                                    index={idx}
-                                    onUpdateRank={onUpdateRank}
-                                    onUpdateMod={onUpdateMod}
-                                    onUpdateSkillValue={onUpdateSkillValue}
-                                    onUpdateOption={onUpdateOption}
-                                    onUpdateCustomizations={onUpdateCustomizations}
-                                    onRemove={onRemove}
-                                    isParahumanoHybrid={isParahumanoHybrid}
-                                    isTesKhar={isTesKhar}
-                                    isAtlante={isAtlante}
-                                    isTroll={isTroll}
-                                    isSemidemonio={isSemidemonio}
-                                />
-                            ))}
+                            {(() => {
+                                let thalsCount = 0;
+                                return selectedPowers.map((selection, idx) => {
+                                    const isThalsPower = isThals && selection.origin === 'Thals';
+                                    if (isThalsPower) thalsCount++;
+
+                                    const isThalsFree = isThalsPower && thalsCount === 1;
+                                    const isThalsDiscount = isThalsPower && thalsCount > 1;
+
+                                    return (
+                                        <PowerRow
+                                            key={`${selection.id}-${selection.origin}-${idx}`}
+                                            selection={selection}
+                                            data={data}
+                                            index={idx}
+                                            onUpdateRank={onUpdateRank}
+                                            onUpdateMod={onUpdateMod}
+                                            onUpdateSkillValue={onUpdateSkillValue}
+                                            onUpdateOption={onUpdateOption}
+                                            onUpdateCustomizations={onUpdateCustomizations}
+                                            onRemove={onRemove}
+                                            isParahumanoHybrid={isParahumanoHybrid}
+                                            isTesKhar={isTesKhar}
+                                            isAtlante={isAtlante}
+                                            isTroll={isTroll}
+                                            isSemidemonio={isSemidemonio}
+                                            isThalsFree={isThalsFree}
+                                            isThalsDiscount={isThalsDiscount}
+                                        />
+                                    );
+                                });
+                            })()}
                         </tbody>
                     </table>
                 ) : (

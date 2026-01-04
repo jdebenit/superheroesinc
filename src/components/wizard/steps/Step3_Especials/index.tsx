@@ -468,7 +468,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     const isMaldito = hasSubtype(data, 'Sobrenatural', 'Maldito');
     const isPoseido = hasSubtype(data, 'Sobrenatural', 'Poseidó') || hasSubtype(data, 'Sobrenatural', 'Poseido'); // Check both just in case, though definitions say Poseido
     const isEnte = hasSubtype(data, 'Sobrenatural', 'Ente');
-    const isThals = hasOrigin(data, 'Thals');
+    const isThals = hasSubtype(data, 'Parahumano', 'Thals');
     const isDios = hasSubtype(data, 'Divino', 'Dios');
     const isDiosMenor = hasSubtype(data, 'Divino', 'Dios menor');
     const isSemidios = hasSubtype(data, 'Divino', 'Semidios');

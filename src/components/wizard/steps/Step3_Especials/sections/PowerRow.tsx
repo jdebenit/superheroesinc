@@ -18,6 +18,8 @@ interface PowerRowProps {
     isAtlante?: boolean;
     isTroll?: boolean;
     isSemidemonio?: boolean;
+    isThalsDiscount?: boolean;
+    isThalsFree?: boolean;
 }
 
 const getCharName = (abbr: string): string => {
@@ -53,7 +55,9 @@ export default function PowerRow({
     isTesKhar,
     isAtlante,
     isTroll,
-    isSemidemonio
+    isSemidemonio,
+    isThalsDiscount,
+    isThalsFree
 }: PowerRowProps) {
     const p = POWERS.find(power => power.id === selection.id);
     if (!p) return null;
@@ -73,11 +77,13 @@ export default function PowerRow({
     } else if (isSemidemonioBonus && !p.characteristic) {
         // Show discount for normal powers
         displayBaseCostStr = `${p.cost} - 1`;
+    } else if (isThalsDiscount) {
+        displayBaseCostStr = `${p.cost} - 2`;
     }
 
     const displayCost = isFree ?
         <span style={{ textDecoration: 'line-through', color: '#ef4444' }}>{p.cost}</span>
-        : displayBaseCostStr;
+        : (isThalsFree ? <span style={{ color: '#10b981', fontWeight: 'bold' }}>0 (Gratis)</span> : displayBaseCostStr);
 
     const isEven = index % 2 === 0;
     const originStyle = ORIGIN_STYLES[selection.origin];
@@ -186,6 +192,10 @@ export default function PowerRow({
                                     let baseCost = p.cost;
                                     if (isSemidemonioBonus) {
                                         baseCost = Math.max(0, baseCost - 1);
+                                    } else if (isThalsDiscount) {
+                                        baseCost = Math.max(0, baseCost - 2);
+                                    } else if (isThalsFree) {
+                                        baseCost = 0;
                                     }
 
                                     const total = (baseCost + penalty + (selection.rank / 10) + extraCost + custCost);

@@ -335,6 +335,7 @@ export default function CharacterWizard() {
         let atlanteAnimalUsed = false;
         let atlanteSuperUsed = false;
         let trollRegenUsed = false;
+        let thalsPowerCount = 0;
 
         const powerCost = selectedPowers.reduce((acc: number, power: any) => {
             const powerData = POWERS.find((p: any) => p.id === power.id);
@@ -371,6 +372,13 @@ export default function CharacterWizard() {
                 })
             );
 
+            const isThals = character.origin?.items?.some((item: any) =>
+                Object.keys(item).some(key => {
+                    const val = item[key];
+                    return key === 'Parahumano' && Array.isArray(val) && val.includes('Thals');
+                })
+            );
+
             if (isTesKhar && power.id === 'superhabilidad' && !tesKharFreeUsed) {
                 tesKharFreeUsed = true;
                 return acc;
@@ -400,6 +408,16 @@ export default function CharacterWizard() {
             const isSemidemonioBonus = isSemidemonio && power.origin === 'Sobrenatural';
             if (isSemidemonioBonus && !powerData.characteristic) {
                 cost = Math.max(0, cost - 1);
+            }
+
+            // Thals Bonus: 1st Thals power Free (Base 0), others Base-2
+            if (isThals && power.origin === 'Thals') {
+                thalsPowerCount++;
+                if (thalsPowerCount === 1) {
+                    cost = 0; // First one is free (Base cost 0)
+                } else {
+                    cost = Math.max(0, cost - 2);
+                }
             }
 
             // Parahumano Hybrid Penalty: +3 PC for Alterado powers
