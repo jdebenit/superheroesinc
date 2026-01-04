@@ -403,7 +403,7 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                     </div>
                                 )}
 
-                                {/* Magic Objects */}
+                                {/* Magic Objects (Normal) */}
                                 {character.magicObjects && character.magicObjects.items.length > 0 && (
                                     <div className="sheet-section magic-objects">
                                         <div className="section-header">
@@ -421,6 +421,36 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                     </div>
                                                 </div>
                                             ))}
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* Magic Objects Table (Terrano) */}
+                                {character.magicTableRolls && character.magicTableRolls.length > 0 && (
+                                    <div className="sheet-section magic-objects-terrano">
+                                        <div className="section-header">
+                                            <h4>Tabla de Objetos (Terrano)</h4>
+                                        </div>
+                                        <div className="magic-table-grid" style={{ display: 'grid', gap: '0.5rem' }}>
+                                            {character.magicTableRolls.map((rollId: string, i: number) => {
+                                                const options = [
+                                                    { id: '180_EM', label: 'Acceso a objetos de 180 EM', cost: '+1 PC' },
+                                                    { id: '120_EM', label: 'Acceso a objetos de 120 EM', cost: '+0 PC' },
+                                                    { id: '60_EM', label: 'Acceso a objetos de 60 EM', cost: '-1 PC' },
+                                                    { id: 'none', label: 'Ningún objeto', cost: '-2 PC' },
+                                                    { id: 'guardian_power', label: 'Acceso a Poder de Guardián', cost: '+2 PC' },
+                                                ];
+                                                const opt = options.find(o => o.id === rollId) || { label: rollId, cost: '' };
+
+                                                return (
+                                                    <div key={i} className="magic-table-item" style={{ padding: '0.75rem', backgroundColor: '#e0f2fe', border: '1px solid #bae6fd', borderRadius: '6px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                                        <div style={{ fontWeight: 'bold', color: '#0369a1' }}>{opt.label}</div>
+                                                        <div style={{ fontSize: '0.85rem', fontWeight: 'bold', backgroundColor: 'white', padding: '2px 8px', borderRadius: '4px', color: '#0284c7' }}>
+                                                            {opt.cost}
+                                                        </div>
+                                                    </div>
+                                                );
+                                            })}
                                         </div>
                                     </div>
                                 )}

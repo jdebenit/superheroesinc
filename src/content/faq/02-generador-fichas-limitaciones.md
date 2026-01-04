@@ -8,14 +8,14 @@ category: Herramientas Web
 order: 2
 ---
 
-El [**Generador de Fichas**](/recursos/generador-fichas) de esta web está actualmente en **Beta 0.3.1** y tiene algunas limitaciones:
+El [**Generador de Fichas**](/recursos/generador-fichas) de esta web está actualmente en **Beta 0.3.4** y tiene algunas limitaciones:
 ## ✅ Lo que SÍ puedes hacer:
 - Crear personajes de todos los orígenes principales
 - Asignar características, habilidades y poderes
-- Personalizaciones de poderes.
+- Personalizaciones de poderes
 - Calcular automáticamente los PC gastados
 - Añadir equipo, armas y módulos tecnológicos
-- Añadir hechizos (para personajes mágicos)
+- Añadir hechizos
 - Exportar la ficha en formato JSON
 - Exportar la ficha en formato PDF
 - Importar personajes desde JSON

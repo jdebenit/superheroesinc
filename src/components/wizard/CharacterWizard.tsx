@@ -117,6 +117,7 @@ const initialCharacterState = {
     alteradoParams: null,
     mutanteParams: null,
     guardianParams: null, // Added for Guardian origin
+    magicTableRolls: [], // Added for Terrano Magic Table trade-off
     divineParams: null, // Added for Divine origin
     techModules: [],
     techParams: { incomeSource: 'agencia_priv' }, // Default to 0 PC option
@@ -295,6 +296,31 @@ export default function CharacterWizard() {
         // 8. EM Formula Cost (for Dotado/Híbrido/Terrano)
         const emFormulaCost = character.spells?.emFormula?.pcCost || 0;
         total += emFormulaCost;
+
+        // Terrano: Ajeno - No EM (divisor === 0) allows 2 Guardian Powers but costs +2 PCs
+        const isTerrano = character.origin?.items?.some((item: any) =>
+            Object.keys(item).some(key => {
+                const val = item[key];
+                return Array.isArray(val) && val.includes('Terrano');
+            })
+        );
+
+        // Explicitly check for divisor 0 (Ajeno), since emDivisor might have been defaulted to 1 above
+        // if (isTerrano && character.spells?.emFormula?.divisor === 0) {
+        //     total += 2;
+        // }
+
+        // Magic Table Rolls Cost (Terrano)
+        // 180 EM (+1 PC), 120 EM (0 PC), 60 EM (-1 PC), Nada (-2 PC)
+        if (character.magicTableRolls && character.magicTableRolls.length > 0) {
+            character.magicTableRolls.forEach((rollType: string) => {
+                if (rollType === '180_EM') total += 1;
+                else if (rollType === '120_EM') total += 0;
+                else if (rollType === '60_EM') total -= 1;
+                else if (rollType === 'none') total -= 2;
+                else if (rollType === 'guardian_power') total += 2;
+            });
+        }
 
         // 9. Power Costs (Base + Rank/PowerMod)
         const selectedPowers = character.powers?.selected || [];
@@ -676,7 +702,7 @@ export default function CharacterWizard() {
             {/* Header */}
             <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
                 <h1 style={{ fontSize: '3rem', fontWeight: '900', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
-                    Generador de Fichas (Beta 0.3.1)
+                    Generador de Fichas (Beta 0.3.4)
                 </h1>
                 <p style={{ fontSize: '1.25rem', color: '#666', marginBottom: '1rem' }}>
                     Crea tu personaje paso a paso

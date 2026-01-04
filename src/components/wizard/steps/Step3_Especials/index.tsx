@@ -61,6 +61,9 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     // Tech Modules
     const techModules: TechModule[] = data.techModules || [];
 
+    // Magic Table Rolls (Terrano)
+    const magicTableRolls: string[] = data.magicTableRolls || [];
+
     // Auto-add Superhabilidad for Tes-khar
     useEffect(() => {
         if (isTesKhar) {
@@ -170,6 +173,38 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
         });
     };
 
+    // Magic Table Handlers
+    const addMagicTableRoll = (rollId: string) => {
+        if (!isTerrano) return;
+
+        const divisor = data.spells?.emFormula?.divisor ?? 4; // Default safe
+        // Check if Ajeno (divisor === 0)
+        const isAjeno = divisor === 0;
+        const maxSlots = isAjeno ? 2 : 1;
+
+        const guardianPowerCount = selectedPowers.filter(p => p.origin === 'Guardian').length;
+        const rollCount = magicTableRolls.length;
+
+        // Revised Logic: We only care about SLOTS used in the table.
+        // Selecting "Acceso a Poder de Guardián" USES a slot.
+        // Selecting a power relies on having that access token.
+        if (rollCount >= maxSlots) {
+            alert(`Los Terranos solo tienen ${maxSlots} slots disponibles en la Tabla de Objetos.`);
+            return;
+        }
+
+        onChange({
+            ...data,
+            magicTableRolls: [...magicTableRolls, rollId]
+        });
+    };
+
+    const removeMagicTableRoll = (index: number) => {
+        const newRolls = [...magicTableRolls];
+        newRolls.splice(index, 1);
+        onChange({ ...data, magicTableRolls: newRolls });
+    };
+
 
 
     const updateTrauma = (specialty: string, text: string) => {
@@ -215,6 +250,30 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     // Power handlers
     const togglePowerSelection = (powerId: string) => {
         if (!modalOriginFilter) return;
+
+        // Terrano Restriction Logic
+        // Terranos (Arcano -> Terrano) can normally only select 1 Guardian power.
+        // Exception: If they chose "Ajeno - No EM" (divisor === 0), they can select up to 2.
+        // Note: isTerrano is defined in component scope.
+        if (isTerrano && modalOriginFilter === 'Guardian') {
+            const isAjeno = emFormula.divisor === 0;
+            const maxGuardianPowers = isAjeno ? 2 : 1;
+
+            // Check if we are trying to ADD a new power (not removing/toggling off)
+            const isAlreadySelected = selectedPowers.some(p => p.id === powerId && p.origin === 'Guardian');
+
+            if (!isAlreadySelected) {
+                // Count existing Guardian powers
+                const currentGuardianCount = selectedPowers.filter(p => p.origin === 'Guardian').length;
+                // Count "guardian_power" rolls in Magic Table
+                const allowedGuardianCount = magicTableRolls.filter(r => r === 'guardian_power').length;
+
+                if (currentGuardianCount >= allowedGuardianCount) {
+                    alert(`Para seleccionar un Poder de Guardián, debes gastar un slot en la "Tabla de Objetos Mágicos" seleccionando la opción "Acceso a Poder de Guardián". Tienes ${allowedGuardianCount} accesos y ya usas ${currentGuardianCount}.`);
+                    return;
+                }
+            }
+        }
 
         const powerDef = POWERS.find(p => p.id === powerId);
         const hasOptions = powerDef?.options && powerDef.options.length > 0;
@@ -654,6 +713,9 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                     onUpdateSpellRank={updateSpellRank}
                     onUpdateOption={updateSpellOption}
                     onRemoveSpell={removeSpell}
+                    magicTableRolls={magicTableRolls}
+                    onAddMagicTableRoll={addMagicTableRoll}
+                    onRemoveMagicTableRoll={removeMagicTableRoll}
                 />
             )}
 
