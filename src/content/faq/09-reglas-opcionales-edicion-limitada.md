@@ -7,7 +7,7 @@ order: 9
 ---
 ## Respuesta corta
 
-Sí, se pueden usar todas, pero no todas están pensadas para todos los sistemas de creación por puntos.
+Sí, se pueden usar todas, pero no todas están pensadas para todos los sistemas de creación.
 ## Respuesta larga
 
 Las reglas nuevas de la **edición limitada** no son un bloque homogéneo, y conviene entender para qué está pensada cada una.
