@@ -11,6 +11,18 @@ const sortedPosts = allPosts.sort(
 );
 const latestPosts = sortedPosts.slice(0, 3);
 
+const lastUpdate =
+  sortedPosts.length > 0 ? sortedPosts[0].data.pubDate : new Date();
+const formattedAuthDate = lastUpdate
+  .toLocaleDateString("es-ES", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  })
+  .replace(/\./g, "")
+  .replace(/ /g, "-")
+  .toUpperCase();
+
 const news = latestPosts.map((post) => ({
   title: post.data.title,
   excerpt: post.data.description,
@@ -93,7 +105,7 @@ const news = latestPosts.map((post) => ({
       </div>
 
       <div class="mt-8 text-xs font-mono text-gray-500">
-        AUTORIZACIÓN: NIVEL OMEGA // FECHA: 27-NOV-2025
+        AUTORIZACIÓN: NIVEL OMEGA // FECHA: {formattedAuthDate}
       </div>
     </div>
   </section>
