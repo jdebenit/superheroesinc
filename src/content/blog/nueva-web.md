@@ -59,3 +59,5 @@ Esta estructura permite que autores y guionistas trabajen en paralelo sin perder
 
 Bienvenidos a la nueva infraestructura del multiverso.
 
+Gracias por leerme.
+

@@ -5,6 +5,9 @@ description: Una mirada personal y práctica de cómo construir campañas de rol
 author: Jorge Francisco de Benito Montoya
 tags:
   - articulos
+  - rol
+  - psicogeografía
+  - masters
 ---
 Crear una campaña de **rol de superhéroes en España** no es cambiar Gotham por Madrid o Metrópolis por Barcelona y seguir como si nada. Precisamente porque todos hemos crecido con esas ciudades ficticias, el contraste se nota aún más cuando decides ambientar una partida aquí. Gotham y Metrópolis funcionan porque son mitos compartidos. España funciona porque es real. Porque pesa. Porque tiene memoria, ruido, contradicciones y una relación incómoda con la figura del héroe. Y eso, a nivel de juego de rol, es una ventaja enorme.
 

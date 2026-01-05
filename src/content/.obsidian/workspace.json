@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "183692fba61df7d2",
+        "id": "18b58e9f24d3a2d0",
         "type": "tabs",
         "children": [
           {
-            "id": "c98a215958b33c8b",
+            "id": "ab4baf2b308f519d",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "blog/crear-campana-rol-superheroes-en-espana-guia-epica-y-lore.md",
+                "file": "blog/psicogeografía-y-memoria-en-el-rol.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "crear-campana-rol-superheroes-en-espana-guia-epica-y-lore"
+              "title": "psicogeografía-y-memoria-en-el-rol"
             }
           }
         ]
@@ -183,18 +183,21 @@
       "bases:Crear nueva base": false
     }
   },
-  "active": "c98a215958b33c8b",
+  "active": "ab4baf2b308f519d",
   "lastOpenFiles": [
-    "blog/el-vigilante-no-es-un-atajo.md",
-    "blog/crear-campana-rol-superheroes-en-espana-guia-epica-y-lore.md",
+    "2025-11-30.md",
+    "blog/psicogeografía-y-memoria-en-el-rol.md",
+    "blog/actual-plays-superheroes-inc.md",
+    "blog/haciendo-fichas-sin-calculadora.md",
     "blog/la-web-como-punto-de-encuentro-del-juego.md",
     "blog/lanzamiento.md",
-    "blog/nuevos-contenidos.md",
     "blog/nueva-web.md",
-    "blog/guia-escritura-shi-replay-script.md",
-    "blog/haciendo-fichas-sin-calculadora.md",
-    "faq/11-supervelocidad-valor-control.md",
+    "blog/nuevos-contenidos.md",
     "blog/Sin título.md",
+    "blog/crear-campana-rol-superheroes-en-espana-guia-epica-y-lore.md",
+    "blog/el-vigilante-no-es-un-atajo.md",
+    "blog/guia-escritura-shi-replay-script.md",
+    "faq/11-supervelocidad-valor-control.md",
     "faq/10-perdida-puntos-vida-transformacion.md",
     "faq/09-reglas-opcionales-edicion-limitada.md",
     "characters/mjolnir.md",
@@ -208,9 +211,6 @@
     "faq/01-que-necesito-para-jugar.md",
     "faq/03-exoesqueleto-energético-habilidad.md",
     "faq/04-calculo-energia-magica-terrano-semidemonio.md",
-    "blog/actual-plays-superheroes-inc.md",
-    "faq/07-hechizos-energia-magica.md",
-    "faq/05-rangos-poderes.md",
     "faq",
     "rpg/leon-rojo.yaml",
     "rpg/jefe-motero-road-reapers.yaml",
