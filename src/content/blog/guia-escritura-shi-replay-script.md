@@ -4,10 +4,10 @@ pubDate: 2025-12-11
 description: Guía técnica para autores de Actual Plays
 author: Jorge Francisco de Benito Montoya
 tags:
-  - noticias
-  - tecnología
+  - articulos
   - desarrollo
-  - web
+  - actual-plays
+  - replays
 ---
 El SHI Replay Script es el formato oficial para escribir Actual Plays en Superhéroes INC. Su objetivo es permitir que cualquier persona pueda registrar una sesión de forma clara y ordenada, sin perder lo que ocurre en la mesa ni lo que ocurre en la historia.
 

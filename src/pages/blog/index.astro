@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import ComicCard from "../../components/ComicCard";
+import BlogList from "../../components/BlogList";
 import { getCollection } from "astro:content";
 
 const posts = (await getCollection("blog")).sort(
@@ -16,24 +17,7 @@ const posts = (await getCollection("blog")).sort(
 	<section class="blog-container">
 		<h1 class="page-title">Blog y novedades</h1>
 
-		<div class="posts-grid">
-			{
-				posts.map((post) => (
-					<ComicCard
-						title={post.data.title}
-						excerpt={post.data.description}
-						date={post.data.pubDate.toLocaleDateString("es-ES", {
-							year: "numeric",
-							month: "long",
-							day: "numeric",
-						})}
-						image={post.data.image}
-						link={`/blog/${post.slug}`}
-						client:visible
-					/>
-				))
-			}
-		</div>
+		<BlogList posts={posts} client:load />
 	</section>
 </Layout>
 

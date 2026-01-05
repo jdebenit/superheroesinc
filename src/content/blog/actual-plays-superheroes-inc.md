@@ -4,7 +4,7 @@ pubDate: 2025-12-11
 description: Historias que se juegan y se aprenden en Superhéroes INC
 author: Jorge Francisco de Benito Montoya
 tags:
-  - noticias
+  - articulos
   - actual-plays
   - replays
 ---
