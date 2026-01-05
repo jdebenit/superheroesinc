@@ -1,5 +1,5 @@
 ---
-title: Crear superhéroes en España cuando la épica pesa y deja huella
+title: Crear superhéroes en España. Cuando la épica pesa y deja huella
 pubDate: 2026-01-04
 description: Una mirada personal y práctica de cómo construir campañas de rol de superhéroes en España partiendo de lo cercano y lo reconocible para llegar a una épica que nace de las consecuencias, no del artificio.
 author: Jorge Francisco de Benito Montoya

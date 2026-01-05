@@ -72,10 +72,24 @@ const news = latestPosts.map((post) => ({
         </div>
       </div>
 
-      <div class="flex justify-center gap-4">
-        <a href="/lore" class="comic-button inline-block">
-          ACCEDER AL ARCHIVO
-        </a>
+      <div class="access-options">
+        <div class="access-divider-label">OPCIONES DE ACCESO</div>
+
+        <div class="access-option">
+          <a href="/lore" class="comic-button"> ACCEDER AL ARCHIVO </a>
+          <span class="access-note">Consulta de datos historicos</span>
+        </div>
+
+        <div class="access-option">
+          <a
+            href="/recursos/generador-fichas"
+            class="comic-button recruit-button-wrapper"
+          >
+            <span class="priority-badge">PRIORIDAD ALPHA</span>
+            INICIAR RECLUTAMIENTO
+          </a>
+          <span class="access-note">Creación de nuevo agente</span>
+        </div>
       </div>
 
       <div class="mt-8 text-xs font-mono text-gray-500">
@@ -149,5 +163,71 @@ const news = latestPosts.map((post) => ({
       grid-template-columns: 1fr;
       gap: var(--spacing-lg);
     }
+  }
+
+  .access-options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
+    border-top: 2px dashed #d3d0c2;
+    position: relative;
+  }
+
+  /* Desktop layout */
+  @media (min-width: 768px) {
+    .access-options {
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+      gap: var(--spacing-2xl);
+    }
+  }
+
+  .access-divider-label {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    padding: 0 1rem;
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: #9ca3af;
+  }
+
+  .access-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .access-note {
+    font-size: var(--text-xs);
+    font-family: var(--font-mono);
+    color: #6b7280;
+  }
+
+  .recruit-button-wrapper {
+    position: relative;
+    /* Ensure the button is big enough */
+    min-width: 220px;
+    text-align: center;
+  }
+
+  .priority-badge {
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    background-color: var(--color-primary);
+    color: white;
+    font-size: 0.6rem;
+    padding: 2px 6px;
+    transform: rotate(6deg);
+    border: 1px solid var(--color-primary-dark);
+    box-shadow: var(--shadow-sm);
   }
 </style>

@@ -55,19 +55,22 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
     },
     "Arcano": {
         name: "Arcano",
-        disabledSubtypes: ["Elfo", "Hada", "Centauro", "Enano", "Gigante", "Grifo", "Hidra", "Medusa", "Esfinge"],
+        disabledSubtypes: ["Elfo Físico", "Elfo Psíquico", "Elfo Mágico", "Hada Aire", "Hada Tierra", "Hada Fuego", "Hada Agua", "Hada Eter", "Centauro", "Enano", "Gigante", "Grifo", "Hidra", "Medusa", "Esfinge"],
         defaultEffects: [
             "+20 a la parada mental",
         ],
         subtypes: {
             "Mago": ["Acceso a Magia"],
-            "Dotado": ["algo", "algo", "algo"],
-            "Terrano": [
-                "Desconexión de la tecnología moderna",
-                "+20 a la parada mental"
-            ],
-            "Elfo": ["+20 a la parada mental"],
-            "Hada": ["+20 a la parada mental"],
+            "Dotado": ["Voluntad plena"],
+            "Terrano": ["Desconexión de la tecnología moderna"],
+            "Elfo Físico": ["+20 a la parada mental"],
+            "Elfo Psíquico": ["+20 a la parada mental"],
+            "Elfo Mágico": ["+20 a la parada mental"],
+            "Hada Aire": ["+20 a la parada mental"],
+            "Hada Tierra": ["+20 a la parada mental"],
+            "Hada Fuego": ["+20 a la parada mental"],
+            "Hada Agua": ["+20 a la parada mental"],
+            "Hada Eter": ["+20 a la parada mental"],
             "Centauro": ["+20 a la parada mental"],
             "Minotauro": ["+30 al daño con armas blancas o contundentesl"],
             "Enano": ["+20 a la parada mental"],
