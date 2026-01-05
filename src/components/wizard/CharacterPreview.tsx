@@ -7,6 +7,8 @@ import { TECH_MODULES } from '../../data/techModules';
 import { ORIGIN_CATEGORIES } from '../../data/originDefinitions';
 import { MAGICAL_BONDS } from '../../data/magicalBonds';
 import { EXOSKELETON_CONFIGS } from '../../data/exoskeletonConfigs';
+import { EXOSKELETON_ARMOR_CONFIGS } from '../../data/exoskeletonArmorConfigs';
+import { TECHNOSUIT_STRENGTH_CONFIGS } from '../../data/technoSuitStrengthConfigs';
 import { ENTE_FORMS, ENTE_EFFECTS } from './steps/Step3_Especials/sections/EnteSection';
 import { MALDITO_DATA } from './steps/Step3_Especials/sections/MalditoSection';
 import { ALTERADO_DATA } from './steps/Step3_Especials/sections/AlteradoSection';
@@ -1367,6 +1369,85 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                         </div>
                                     );
                                 })()}
+
+                                {/* Exoskeleton Armor & Strength (Tecnoarmadura/Tecnovehiculo) */}
+                                {(character.exoskeletonArmorConfig || character.technoSuitStrengthConfig) && (
+                                    <div className="sheet-section tech-armor-strength">
+                                        <div className="section-header">
+                                            <h4>Tecnolificado</h4>
+                                            {(() => {
+                                                let cost = 0;
+                                                if (character.exoskeletonArmorConfig) {
+                                                    const armor = EXOSKELETON_ARMOR_CONFIGS.find(c => c.id === character.exoskeletonArmorConfig);
+                                                    if (armor) cost += armor.pcCost;
+                                                }
+                                                if (character.technoSuitStrengthConfig) {
+                                                    const str = TECHNOSUIT_STRENGTH_CONFIGS.find(c => c.id === character.technoSuitStrengthConfig);
+                                                    if (str) cost += str.pcCost;
+                                                }
+                                                return <span className="cost">({cost} PCs)</span>;
+                                            })()}
+                                        </div>
+                                        <div style={{
+                                            backgroundColor: '#f0f9ff',
+                                            border: '2px solid #bae6fd',
+                                            borderRadius: '8px',
+                                            padding: '1rem',
+                                            display: 'grid',
+                                            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                                            gap: '1rem'
+                                        }}>
+
+                                            {/* Armor / Structure */}
+                                            {character.exoskeletonArmorConfig && (() => {
+                                                const config = EXOSKELETON_ARMOR_CONFIGS.find(c => c.id === character.exoskeletonArmorConfig);
+                                                if (!config) return null;
+                                                return (
+                                                    <div style={{ padding: '0.5rem', backgroundColor: 'white', borderRadius: '6px', boxShadow: '0 1px 2px rgba(0,0,0,0.05)' }}>
+                                                        <div style={{ fontWeight: 'bold', color: '#0369a1', marginBottom: '0.5rem', borderBottom: '1px solid #e0f2fe', paddingBottom: '0.25rem' }}>
+                                                            Exoesqueleto / Estructura
+                                                        </div>
+                                                        <div style={{ display: 'grid', gap: '0.5rem' }}>
+                                                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                                                <span style={{ fontSize: '0.9rem', color: '#64748b' }}>Puntos de Vida</span>
+                                                                <span style={{ fontWeight: 'bold', color: '#0f172a' }}>{config.pv}</span>
+                                                            </div>
+                                                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                                                <span style={{ fontSize: '0.9rem', color: '#64748b' }}>D.A. Físico</span>
+                                                                <span style={{ fontWeight: 'bold', color: '#0f172a' }}>{config.daFisico}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                );
+                                            })()}
+
+                                            {/* Techno-Suit Strength */}
+                                            {character.technoSuitStrengthConfig && (() => {
+                                                const config = TECHNOSUIT_STRENGTH_CONFIGS.find(c => c.id === character.technoSuitStrengthConfig);
+                                                if (!config) return null;
+                                                return (
+                                                    <div style={{ padding: '0.5rem', backgroundColor: 'white', borderRadius: '6px', boxShadow: '0 1px 2px rgba(0,0,0,0.05)' }}>
+                                                        <div style={{ fontWeight: 'bold', color: '#0369a1', marginBottom: '0.5rem', borderBottom: '1px solid #e0f2fe', paddingBottom: '0.25rem' }}>
+                                                            Fuerza
+                                                        </div>
+                                                        <div style={{ display: 'grid', gap: '0.5rem' }}>
+                                                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                                                <span style={{ fontSize: '0.9rem', color: '#64748b' }}>Fuerza Tecnoarmadura</span>
+                                                                <span style={{ fontWeight: 'bold', color: '#0f172a' }}>{config.fuerza}</span>
+                                                            </div>
+                                                            {config.fiabilidad && (
+                                                                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                                                    <span style={{ fontSize: '0.9rem', color: '#64748b' }}>Fiabilidad</span>
+                                                                    <span style={{ fontWeight: 'bold', color: '#ef4444' }}>{config.fiabilidad}</span>
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                );
+                                            })()}
+                                        </div>
+                                    </div>
+                                )}
 
                                 {/* Powers / Poderes Especiales */}
                                 {character.powers?.selected && character.powers.selected.length > 0 && (

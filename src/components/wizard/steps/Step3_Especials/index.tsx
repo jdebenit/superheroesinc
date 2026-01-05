@@ -27,6 +27,8 @@ import MutanteSection from './sections/MutanteSection';
 import GuardianSection from './sections/GuardianSection';
 import DivineSection from './sections/DivineSection';
 import TechnologicalSection from './sections/TechnologicalSection';
+import ExoskeletonArmorSection from './sections/ExoskeletonArmorSection';
+import TechnoSuitStrengthSection from './sections/TechnoSuitStrengthSection';
 
 // Modal Components
 import SelectionModal from './modals/SelectionModal';
@@ -249,6 +251,16 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     // Exoskeleton handler
     const updateExoskeletonConfig = (configId: string | null) => {
         onChange({ ...data, exoskeletonConfig: configId });
+    };
+
+    // Exoskeleton Armor handler
+    const updateExoskeletonArmorConfig = (configId: string | null) => {
+        onChange({ ...data, exoskeletonArmorConfig: configId });
+    };
+
+    // Techno-Suit Strength handler
+    const updateTechnoSuitStrengthConfig = (configId: string | null) => {
+        onChange({ ...data, technoSuitStrengthConfig: configId });
     };
 
     // Modal handlers
@@ -696,6 +708,20 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                 <ExoskeletonSection
                     selectedConfig={data.exoskeletonConfig || null}
                     onSelectConfig={updateExoskeletonConfig}
+                />
+            )}
+
+            {(isTecnoarmadura || isTecnovehiculo) && (
+                <ExoskeletonArmorSection
+                    selectedConfig={data.exoskeletonArmorConfig || null}
+                    onSelectConfig={updateExoskeletonArmorConfig}
+                />
+            )}
+
+            {isTecnoarmadura && (
+                <TechnoSuitStrengthSection
+                    selectedConfig={data.technoSuitStrengthConfig || null}
+                    onSelectConfig={updateTechnoSuitStrengthConfig}
                 />
             )}
 

@@ -12,6 +12,8 @@ import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS, FRIENDS_AND_ASSOCIATES } 
 import { SPELLS } from '../../data/spells';
 import { POWERS } from '../../data/powers';
 import { EXOSKELETON_CONFIGS } from '../../data/exoskeletonConfigs';
+import { EXOSKELETON_ARMOR_CONFIGS } from '../../data/exoskeletonArmorConfigs';
+import { TECHNOSUIT_STRENGTH_CONFIGS } from '../../data/technoSuitStrengthConfigs';
 import { ENTE_FORMS, ENTE_EFFECTS } from './steps/Step3_Especials/sections/EnteSection';
 import { POSEIDO_FORMS } from './steps/Step3_Especials/sections/PoseidoSection';
 import { INCOME_SOURCES } from '../../data/technologicalOptions';
@@ -126,6 +128,8 @@ const initialCharacterState = {
     techModules: [],
     techParams: { incomeSource: 'agencia_priv' }, // Default to 0 PC option
     exoskeletonConfig: null,
+    exoskeletonArmorConfig: null, // For Tecnoarmadura/Tecnovehiculo
+    technoSuitStrengthConfig: null, // For Tecnoarmadura only
     isParahumanoHybrid: false // Checkbox state for Parahumano hybrid with human
 };
 
@@ -546,6 +550,22 @@ export default function CharacterWizard() {
             }
         }
 
+        // 13b. Exoskeleton Armor Cost (Tecnoarmadura/Tecnovehiculo)
+        if (character.exoskeletonArmorConfig) {
+            const config = EXOSKELETON_ARMOR_CONFIGS.find((c) => c.id === character.exoskeletonArmorConfig);
+            if (config) {
+                total += config.pcCost;
+            }
+        }
+
+        // 13c. Techno-Suit Strength Cost (Tecnoarmadura only)
+        if (character.technoSuitStrengthConfig) {
+            const config = TECHNOSUIT_STRENGTH_CONFIGS.find((c) => c.id === character.technoSuitStrengthConfig);
+            if (config) {
+                total += config.pcCost;
+            }
+        }
+
         // 14. Ente Params Cost
         if (character.enteParams) {
             if (character.enteParams.formType) {
@@ -778,7 +798,7 @@ export default function CharacterWizard() {
             {/* Header */}
             <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
                 <h1 style={{ fontSize: '3rem', fontWeight: '900', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
-                    Generador de Fichas (Beta 0.4.1)
+                    Generador de Fichas (Beta 0.4.7)
                 </h1>
                 <p style={{ fontSize: '1.25rem', color: '#666', marginBottom: '1rem' }}>
                     Crea tu personaje paso a paso
