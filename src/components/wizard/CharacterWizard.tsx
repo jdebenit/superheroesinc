@@ -20,6 +20,8 @@ import { INCOME_SOURCES } from '../../data/technologicalOptions';
 import { SEQUELS } from '../../data/sequels';
 import { GUARDIAN_QUALITIES } from '../../data/guardianOptions';
 import { DIVINE_FOCUS_OPTIONS } from '../../data/divineOptions';
+import { CYBORG_IMPLANT_STATS, CYBORG_IMPLANT_STRENGTHS } from '../../data/cyborgImplantConfigs';
+import type { CyborgImplant } from '../../data/cyborgImplantConfigs';
 
 const STEPS = [
     { id: 1, name: 'Origen', icon: '🎭' },
@@ -130,8 +132,10 @@ const initialCharacterState = {
     exoskeletonConfig: null,
     exoskeletonArmorConfig: null, // For Tecnoarmadura/Tecnovehiculo
     technoSuitStrengthConfig: null, // For Tecnoarmadura only
-    isParahumanoHybrid: false // Checkbox state for Parahumano hybrid with human
+    cyborgImplants: [], // For Cyborg only
+    isParahumanoHybrid: false, // Checkbox state for Parahumano hybrid with human
 };
+
 
 
 export default function CharacterWizard() {
@@ -566,6 +570,16 @@ export default function CharacterWizard() {
             }
         }
 
+        // 13d. Cyborg Implants Cost
+        if (character.cyborgImplants && character.cyborgImplants.length > 0) {
+            character.cyborgImplants.forEach((implant: CyborgImplant) => {
+                const stat = CYBORG_IMPLANT_STATS.find(s => s.id === implant.statConfigId);
+                const str = CYBORG_IMPLANT_STRENGTHS.find(s => s.id === implant.strengthConfigId);
+                if (stat) total += stat.pcCost;
+                if (str) total += str.pcCost;
+            });
+        }
+
         // 14. Ente Params Cost
         if (character.enteParams) {
             if (character.enteParams.formType) {
@@ -798,7 +812,7 @@ export default function CharacterWizard() {
             {/* Header */}
             <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
                 <h1 style={{ fontSize: '3rem', fontWeight: '900', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
-                    Generador de Fichas (Beta 0.4.7)
+                    Generador de Fichas (Beta 0.5.0)
                 </h1>
                 <p style={{ fontSize: '1.25rem', color: '#666', marginBottom: '1rem' }}>
                     Crea tu personaje paso a paso

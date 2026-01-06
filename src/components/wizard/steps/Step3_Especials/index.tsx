@@ -29,6 +29,8 @@ import DivineSection from './sections/DivineSection';
 import TechnologicalSection from './sections/TechnologicalSection';
 import ExoskeletonArmorSection from './sections/ExoskeletonArmorSection';
 import TechnoSuitStrengthSection from './sections/TechnoSuitStrengthSection';
+import { CyborgSection } from './sections/CyborgSection';
+import type { CyborgImplant } from '../../../../data/cyborgImplantConfigs';
 
 // Modal Components
 import SelectionModal from './modals/SelectionModal';
@@ -261,6 +263,11 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     // Techno-Suit Strength handler
     const updateTechnoSuitStrengthConfig = (configId: string | null) => {
         onChange({ ...data, technoSuitStrengthConfig: configId });
+    };
+
+    // Cyborg Implants handler
+    const updateCyborgImplants = (implants: CyborgImplant[]) => {
+        onChange({ ...data, cyborgImplants: implants });
     };
 
     // Modal handlers
@@ -722,6 +729,13 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                 <TechnoSuitStrengthSection
                     selectedConfig={data.technoSuitStrengthConfig || null}
                     onSelectConfig={updateTechnoSuitStrengthConfig}
+                />
+            )}
+
+            {isCyborg && (
+                <CyborgSection
+                    implants={data.cyborgImplants || []}
+                    onChange={updateCyborgImplants}
                 />
             )}
 

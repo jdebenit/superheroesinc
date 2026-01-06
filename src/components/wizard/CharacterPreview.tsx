@@ -9,6 +9,7 @@ import { MAGICAL_BONDS } from '../../data/magicalBonds';
 import { EXOSKELETON_CONFIGS } from '../../data/exoskeletonConfigs';
 import { EXOSKELETON_ARMOR_CONFIGS } from '../../data/exoskeletonArmorConfigs';
 import { TECHNOSUIT_STRENGTH_CONFIGS } from '../../data/technoSuitStrengthConfigs';
+import { CYBORG_IMPLANT_STATS, CYBORG_IMPLANT_STRENGTHS } from '../../data/cyborgImplantConfigs';
 import { ENTE_FORMS, ENTE_EFFECTS } from './steps/Step3_Especials/sections/EnteSection';
 import { MALDITO_DATA } from './steps/Step3_Especials/sections/MalditoSection';
 import { ALTERADO_DATA } from './steps/Step3_Especials/sections/AlteradoSection';
@@ -1374,7 +1375,7 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                 {(character.exoskeletonArmorConfig || character.technoSuitStrengthConfig) && (
                                     <div className="sheet-section tech-armor-strength">
                                         <div className="section-header">
-                                            <h4>Tecnolificado</h4>
+                                            <h4>Tecnificado</h4>
                                             {(() => {
                                                 let cost = 0;
                                                 if (character.exoskeletonArmorConfig) {
@@ -1445,6 +1446,48 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                     </div>
                                                 );
                                             })()}
+
+                                            {/* Cyborg Implants */}
+                                            {character.cyborgImplants && character.cyborgImplants.length > 0 && (
+                                                <div style={{ gridColumn: '1 / -1', marginTop: '0.5rem' }}>
+                                                    <div style={{ fontWeight: 'bold', color: '#0369a1', marginBottom: '0.5rem', borderBottom: '1px solid #e0f2fe', paddingBottom: '0.25rem' }}>
+                                                        Implantes Cibernéticos
+                                                    </div>
+                                                    <div style={{ display: 'grid', gap: '0.5rem' }}>
+                                                        {character.cyborgImplants.map((implant: any) => {
+                                                            const stat = CYBORG_IMPLANT_STATS.find(s => s.id === implant.statConfigId);
+                                                            const str = CYBORG_IMPLANT_STRENGTHS.find(s => s.id === implant.strengthConfigId);
+                                                            return (
+                                                                <div key={implant.id} style={{
+                                                                    display: 'flex',
+                                                                    justifyContent: 'space-between',
+                                                                    backgroundColor: 'white',
+                                                                    padding: '0.5rem',
+                                                                    borderRadius: '4px',
+                                                                    border: '1px solid #e0e7ff',
+                                                                    fontSize: '0.9rem'
+                                                                }}>
+                                                                    <div>
+                                                                        <span style={{ fontWeight: 'bold', color: '#1e40af' }}>{implant.name}</span>
+                                                                        <div style={{ fontSize: '0.8rem', color: '#64748b' }}>
+                                                                            {stat && `PV +${stat.pvBonus} / DA ${stat.daFisico}`}
+                                                                            {str && str.pcCost > 0 && ` • FUE ${str.fuerza}`}
+                                                                        </div>
+                                                                    </div>
+                                                                    {/* Sum cost of stat + strength */}
+                                                                    {(stat || str) && (
+                                                                        <div style={{ textAlign: 'right' }}>
+                                                                            <span style={{ display: 'block', fontWeight: 'bold', color: '#0f172a' }}>
+                                                                                {((stat?.pcCost || 0) + (str?.pcCost || 0))} PC
+                                                                            </span>
+                                                                        </div>
+                                                                    )}
+                                                                </div>
+                                                            );
+                                                        })}
+                                                    </div>
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
                                 )}
