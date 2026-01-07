@@ -823,9 +823,9 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                 return obj && (
                                                     <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
                                                         <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
-                                                            <span style={{ paddingRight: '0.5rem', fontWeight: 'bold', color: '#1e40af' }}>Objeto de Poder</span>
+                                                            <span style={{ paddingRight: '0.5rem', fontWeight: 'bold', color: '#1e40af', flexShrink: 0 }}>Objeto de Poder</span>
                                                             <span style={{ flexGrow: 1, borderBottom: '1px dotted #ccc', margin: '0 0.5rem', position: 'relative', top: '-4px', minWidth: '20px' }}></span>
-                                                            <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>{obj.label}</span>
+                                                            <span style={{ fontWeight: 'bold', color: '#8B4513', textAlign: 'right' }}>{obj.label}</span>
                                                         </div>
                                                     </li>
                                                 );
@@ -837,9 +837,9 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                 return qual && (
                                                     <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
                                                         <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
-                                                            <span style={{ paddingRight: '0.5rem', fontWeight: 'bold', color: '#1e40af' }}>Cualidad</span>
+                                                            <span style={{ paddingRight: '0.5rem', fontWeight: 'bold', color: '#1e40af', flexShrink: 0 }}>Cualidad</span>
                                                             <span style={{ flexGrow: 1, borderBottom: '1px dotted #ccc', margin: '0 0.5rem', position: 'relative', top: '-4px', minWidth: '20px' }}></span>
-                                                            <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>
+                                                            <span style={{ fontWeight: 'bold', color: '#8B4513', textAlign: 'right' }}>
                                                                 {qual.label} ({qual.cost > 0 ? '+' : ''}{qual.cost} PC)
                                                             </span>
                                                         </div>
@@ -853,9 +853,9 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                 return feat && (
                                                     <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
                                                         <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
-                                                            <span style={{ paddingRight: '0.5rem', fontWeight: 'bold', color: '#1e40af' }}>Rasgo Especial</span>
+                                                            <span style={{ paddingRight: '0.5rem', fontWeight: 'bold', color: '#1e40af', flexShrink: 0 }}>Rasgo Especial</span>
                                                             <span style={{ flexGrow: 1, borderBottom: '1px dotted #ccc', margin: '0 0.5rem', position: 'relative', top: '-4px', minWidth: '20px' }}></span>
-                                                            <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>{feat.label}</span>
+                                                            <span style={{ fontWeight: 'bold', color: '#8B4513', textAlign: 'right' }}>{feat.label}</span>
                                                         </div>
                                                     </li>
                                                 );
@@ -867,9 +867,9 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                 return trans && (
                                                     <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
                                                         <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
-                                                            <span style={{ paddingRight: '0.5rem', fontWeight: 'bold', color: '#1e40af' }}>Transformación</span>
+                                                            <span style={{ paddingRight: '0.5rem', fontWeight: 'bold', color: '#1e40af', flexShrink: 0 }}>Transformación</span>
                                                             <span style={{ flexGrow: 1, borderBottom: '1px dotted #ccc', margin: '0 0.5rem', position: 'relative', top: '-4px', minWidth: '20px' }}></span>
-                                                            <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>{trans.label}</span>
+                                                            <span style={{ fontWeight: 'bold', color: '#8B4513', textAlign: 'right' }}>{trans.label}</span>
                                                         </div>
                                                     </li>
                                                 );
