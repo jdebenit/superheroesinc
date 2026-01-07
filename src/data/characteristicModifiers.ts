@@ -140,6 +140,15 @@ export const ORIGIN_CHARACTERISTIC_MODIFIERS: { [key: string]: OriginCharacteris
         apariencia: { modifier: 0, max: 60 },
         voluntad: { modifier: 0, max: 100 },
     },
+    "Enano": {
+        fuerza: { modifier: 30, max: 130, min: 100 },
+        constitucion: { modifier: 40, max: 140, min: 100 },
+        agilidad: { modifier: 0, max: 90, min: 40 },
+        inteligencia: { modifier: 0, max: 100, min: 60 },
+        percepcion: { modifier: 0, max: 100, min: 60 },
+        apariencia: { modifier: 0, max: 60 },
+        voluntad: { modifier: 0, max: 100 },
+    },
     "Troll": {
         fuerza: { modifier: 50, max: 180, min: 130 },
         constitucion: { modifier: 50, max: 180, min: 130 },

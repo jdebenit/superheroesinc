@@ -323,6 +323,20 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
             }
         }
 
+
+        // Enano Restriction Logic
+        // Enanos can select exactly 1 Guardian power.
+        if (isEnano && modalOriginFilter === 'Guardian') {
+            const isAlreadySelected = selectedPowers.some(p => p.id === powerId && p.origin === 'Guardian');
+            if (!isAlreadySelected) {
+                const currentGuardianCount = selectedPowers.filter(p => p.origin === 'Guardian').length;
+                if (currentGuardianCount >= 1) {
+                    alert(`Los Enanos solo pueden elegir un único poder de Guardián.`);
+                    return;
+                }
+            }
+        }
+
         const powerDef = POWERS.find(p => p.id === powerId);
         const hasOptions = powerDef?.options && powerDef.options.length > 0;
 
@@ -510,7 +524,9 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     const isDotado = hasSubtype(data, 'Arcano', 'Dotado');
     const isHibrido = hasSubtype(data, 'Arcano', 'Híbrido mitológico');
     const isTerrano = hasSubtype(data, 'Arcano', 'Terrano');
+    const isEnano = hasSubtype(data, 'Arcano', 'Enano');
     const isVampiro = hasSubtype(data, 'Sobrenatural', 'Vampiro');
+
     const isSemidemonio = hasSubtype(data, 'Sobrenatural', 'Semidemonio');
     const isMaldito = hasSubtype(data, 'Sobrenatural', 'Maldito');
     const isPoseido = hasSubtype(data, 'Sobrenatural', 'Poseidó') || hasSubtype(data, 'Sobrenatural', 'Poseido'); // Check both just in case, though definitions say Poseido
@@ -562,7 +578,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     }).filter((s): s is (Spell & { rank: number; selectedOption?: string }) => s !== null);
 
     const hasAnyOrigin = isGuardian || isAlterado || hasEM || isVampiro || isSemidemonio || isMaldito ||
-        isEnte || isThals || isDivino || isCosmico || isMutante || isVigilante || isTechnological || isExoskeleton || isTesKhar || isAtlante || isParahumano || isTroll || isMinotauro || isPoseido;
+        isEnte || isThals || isDivino || isCosmico || isMutante || isVigilante || isTechnological || isExoskeleton || isTesKhar || isAtlante || isParahumano || isTroll || isMinotauro || isPoseido || isEnano;
 
     // Calculate and store EM in state
     useEffect(() => {
@@ -780,6 +796,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                 isParahumanoHybrid={isParahumanoHybrid}
                 isTroll={isTroll}
                 isPoseido={isPoseido}
+                isEnano={isEnano}
             />
 
             {/* MAGIC SECTION */}

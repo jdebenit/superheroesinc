@@ -453,6 +453,18 @@ export default function CharacterWizard() {
                 }
             }
 
+            // Enano Guardian Cost: Base + 2
+            const isEnano = character.origin?.items?.some((item: any) =>
+                Object.keys(item).some(key => {
+                    const val = item[key];
+                    return key === 'Arcano' && Array.isArray(val) && val.includes('Enano');
+                })
+            );
+            if (isEnano && power.origin === 'Guardian') {
+                cost += 2;
+            }
+
+
             // Parahumano Hybrid Penalty: +3 PC for Alterado powers
             if (character.isParahumanoHybrid && power.origin === 'Alterado') {
                 cost += 3;
@@ -812,7 +824,7 @@ export default function CharacterWizard() {
             {/* Header */}
             <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
                 <h1 style={{ fontSize: '3rem', fontWeight: '900', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
-                    Generador de Fichas (Beta 0.5.0)
+                    Generador de Fichas (Beta 0.5.3)
                 </h1>
                 <p style={{ fontSize: '1.25rem', color: '#666', marginBottom: '1rem' }}>
                     Crea tu personaje paso a paso

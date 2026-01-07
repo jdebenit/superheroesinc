@@ -20,6 +20,7 @@ interface PowerRowProps {
     isSemidemonio?: boolean;
     isThalsDiscount?: boolean;
     isThalsFree?: boolean;
+    isEnano?: boolean;
 }
 
 const getCharName = (abbr: string): string => {
@@ -57,13 +58,15 @@ export default function PowerRow({
     isTroll,
     isSemidemonio,
     isThalsDiscount,
-    isThalsFree
+    isThalsFree,
+    isEnano
 }: PowerRowProps) {
     const p = POWERS.find(power => power.id === selection.id);
     if (!p) return null;
 
     const isHybridPenalty = isParahumanoHybrid && selection.origin === 'Alterado';
     const isSemidemonioBonus = isSemidemonio && selection.origin === 'Sobrenatural';
+    const isEnanoGuardian = isEnano && selection.origin === 'Guardian';
 
     // Check for free powers
     const isTesKharFree = isTesKhar && p.id === 'superhabilidad';
@@ -83,6 +86,8 @@ export default function PowerRow({
         displayBaseCostStr = `${p.cost} - 1`;
     } else if (isThalsDiscount) {
         displayBaseCostStr = `${p.cost} - 2`;
+    } else if (isEnanoGuardian) {
+        displayBaseCostStr = `${p.cost} + 2`;
     }
 
     const displayCost = isFree ?
@@ -218,7 +223,10 @@ export default function PowerRow({
 
                                     // Apply Semidemonio Bonus (Discount 1 PC base)
                                     let baseCost = p.cost;
-                                    if (isSemidemonioBonus) {
+                                    if (isEnanoGuardian) {
+                                        baseCost = p.cost + 2;
+                                    } else if (isSemidemonioBonus) {
+
                                         baseCost = Math.max(0, baseCost - 1);
                                     } else if (isThalsDiscount) {
                                         baseCost = Math.max(0, baseCost - 2);
@@ -405,7 +413,10 @@ export default function PowerRow({
 
                                     const modCost = effectivePowerMod / 10;
                                     const custCost = (selection.customizations || []).reduce((sum, c) => sum + (c.cost || 0), 0);
-                                    const baseCost = p.cost; // Typically 0 for char traits
+                                    let baseCost = p.cost;
+                                    if (isEnanoGuardian) baseCost = p.cost + 2; // Enano restriction cost
+
+
 
                                     const total = baseCost + modCost + custCost;
 

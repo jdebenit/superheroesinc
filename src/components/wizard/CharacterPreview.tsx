@@ -701,51 +701,6 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                     </div>
                                 )}
 
-                                {/* Maldito Params */}
-                                {character.malditoParams && (character.malditoParams.magnitude || character.malditoParams.source) && (
-                                    <div className="sheet-section maldito-params">
-                                        <div className="section-header">
-                                            <h4>Maldito</h4>
-                                        </div>
-                                        <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                                            {character.malditoParams.magnitude && (() => {
-                                                const mag = MALDITO_DATA.MAGNITUDE.find(m => m.id === character.malditoParams.magnitude);
-                                                return mag && (
-                                                    <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
-                                                        <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
-                                                            <span style={{ paddingRight: '0.5rem', fontWeight: 'bold', color: '#c2410c' }}>Magnitud de la maldición</span>
-                                                            <span style={{ flexGrow: 1, borderBottom: '1px dotted #ccc', margin: '0 0.5rem', position: 'relative', top: '-4px', minWidth: '20px' }}></span>
-                                                            <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>
-                                                                {mag.label} ({mag.cost > 0 ? '+' : ''}{mag.cost} PC)
-                                                            </span>
-                                                        </div>
-                                                        <div style={{ fontSize: '0.85rem', color: '#6b7280', fontStyle: 'italic', marginTop: '0.25rem', paddingLeft: '0.5rem' }}>
-                                                            {mag.description}
-                                                        </div>
-                                                    </li>
-                                                );
-                                            })()}
-                                            {character.malditoParams.source && (() => {
-                                                const src = MALDITO_DATA.SOURCE.find(s => s.id === character.malditoParams.source);
-                                                return src && (
-                                                    <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
-                                                        <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
-                                                            <span style={{ paddingRight: '0.5rem', fontWeight: 'bold', color: '#c2410c' }}>Fuente de la maldición</span>
-                                                            <span style={{ flexGrow: 1, borderBottom: '1px dotted #ccc', margin: '0 0.5rem', position: 'relative', top: '-4px', minWidth: '20px' }}></span>
-                                                            <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>
-                                                                {src.label}
-                                                            </span>
-                                                        </div>
-                                                        <div style={{ fontSize: '0.85rem', color: '#6b7280', fontStyle: 'italic', marginTop: '0.25rem', paddingLeft: '0.5rem' }}>
-                                                            {src.description}
-                                                        </div>
-                                                    </li>
-                                                );
-                                            })()}
-                                        </ul>
-                                    </div>
-                                )}
-
                                 {/* Alterado Params */}
                                 {character.alteradoParams && (character.alteradoParams.agent || (character.alteradoParams.sequels && character.alteradoParams.sequels.length > 0)) && (
                                     <div className="sheet-section alterado-params">

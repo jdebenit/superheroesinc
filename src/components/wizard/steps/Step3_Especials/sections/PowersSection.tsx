@@ -30,6 +30,7 @@ interface PowersSectionProps {
     isParahumanoHybrid?: boolean;
     isTroll?: boolean;
     isPoseido?: boolean;
+    isEnano?: boolean;
 }
 
 export default function PowersSection({
@@ -58,10 +59,11 @@ export default function PowersSection({
     isAtlante,
     isParahumanoHybrid,
     isTroll,
-    isPoseido
+    isPoseido,
+    isEnano
 }: PowersSectionProps) {
     const hasAnyPowerOrigin = isGuardian || isAlterado || isVampiro || isSemidemonio || isMaldito ||
-        isEnte || isThals || isDivino || isTerrano || isDotado || isCosmico || isMutante || isTesKhar || isAtlante || isTroll || isPoseido;
+        isEnte || isThals || isDivino || isTerrano || isDotado || isCosmico || isMutante || isTesKhar || isAtlante || isTroll || isPoseido || isEnano;
 
     if (!hasAnyPowerOrigin) return null;
 
@@ -108,6 +110,11 @@ export default function PowersSection({
                     {isTerrano && (
                         <button onClick={() => onOpenModal('Guardian')} className="pixel-button bg-emerald-600 text-white hover:bg-emerald-700 text-sm flex items-center gap-2">
                             <span>+</span> Terrano (Guardian)
+                        </button>
+                    )}
+                    {isEnano && (
+                        <button onClick={() => onOpenModal('Guardian')} className="pixel-button bg-stone-600 text-white hover:bg-stone-700 text-sm flex items-center gap-2">
+                            <span>+</span> Enano (Guardian)
                         </button>
                     )}
                     {isDotado && (
@@ -181,6 +188,7 @@ export default function PowersSection({
                                             isSemidemonio={isSemidemonio}
                                             isThalsFree={isThalsFree}
                                             isThalsDiscount={isThalsDiscount}
+                                            isEnano={isEnano}
                                         />
                                     );
                                 });
