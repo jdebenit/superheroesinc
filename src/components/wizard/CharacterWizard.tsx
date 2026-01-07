@@ -434,6 +434,18 @@ export default function CharacterWizard() {
                 return acc;
             }
 
+            const isGrifo = character.origin?.items?.some((item: any) =>
+                Object.keys(item).some(key => {
+                    const val = item[key];
+                    return key === 'Arcano' && Array.isArray(val) && val.includes('Grifo');
+                })
+            );
+
+            if (isGrifo && power.id === 'volar') {
+                const rankDiff = (power.rank || 1) - 11;
+                return acc + (rankDiff * 0.1);
+            }
+
             // Base cost
             let cost = powerData.cost;
 

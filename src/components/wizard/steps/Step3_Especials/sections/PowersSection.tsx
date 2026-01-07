@@ -31,6 +31,7 @@ interface PowersSectionProps {
     isTroll?: boolean;
     isPoseido?: boolean;
     isEnano?: boolean;
+    isGrifo?: boolean;
 }
 
 export default function PowersSection({
@@ -60,10 +61,11 @@ export default function PowersSection({
     isParahumanoHybrid,
     isTroll,
     isPoseido,
-    isEnano
+    isEnano,
+    isGrifo
 }: PowersSectionProps) {
     const hasAnyPowerOrigin = isGuardian || isAlterado || isVampiro || isSemidemonio || isMaldito ||
-        isEnte || isThals || isDivino || isTerrano || isDotado || isCosmico || isMutante || isTesKhar || isAtlante || isTroll || isPoseido || isEnano;
+        isEnte || isThals || isDivino || isTerrano || isDotado || isCosmico || isMutante || isTesKhar || isAtlante || isTroll || isPoseido || isEnano || isGrifo;
 
     if (!hasAnyPowerOrigin) return null;
 
@@ -189,6 +191,7 @@ export default function PowersSection({
                                             isThalsFree={isThalsFree}
                                             isThalsDiscount={isThalsDiscount}
                                             isEnano={isEnano}
+                                            isGrifo={isGrifo}
                                         />
                                     );
                                 });

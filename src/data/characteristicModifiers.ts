@@ -158,6 +158,15 @@ export const ORIGIN_CHARACTERISTIC_MODIFIERS: { [key: string]: OriginCharacteris
         apariencia: { modifier: 0, max: 50, min: 20 },
         voluntad: { modifier: 0, max: 100 },
     },
+    "Grifo": {
+        fuerza: { modifier: 30, max: 150, min: 120 },
+        constitucion: { modifier: 50, max: 190, min: 140 },
+        agilidad: { modifier: 0, max: 80, min: 40 },
+        inteligencia: { modifier: 0, max: 40, min: 20 },
+        percepcion: { modifier: 40, max: 140, min: 100 },
+        apariencia: { modifier: 0, max: 90, min: 60 },
+        voluntad: { modifier: 0, max: 100 },
+    },
 
     // Parahumano
     "Atlante": {

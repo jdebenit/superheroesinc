@@ -55,7 +55,7 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
     },
     "Arcano": {
         name: "Arcano",
-        disabledSubtypes: ["Elfo Físico", "Elfo Psíquico", "Elfo Mágico", "Hada Aire", "Hada Tierra", "Hada Fuego", "Hada Agua", "Hada Eter", "Centauro", "Gigante", "Grifo", "Hidra", "Medusa", "Esfinge"],
+        disabledSubtypes: ["Elfo Físico", "Elfo Psíquico", "Elfo Mágico", "Hada Aire", "Hada Tierra", "Hada Fuego", "Hada Agua", "Hada Eter", "Centauro", "Gigante", "Hidra", "Medusa", "Esfinge"],
         defaultEffects: [
             "+20 a la parada mental",
         ],
@@ -76,7 +76,7 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
             "Enano": ["Visión en la oscuridad a 10/15m", "Lo que forje hace +30 al daño"],
             "Gigante": ["+20 a la parada mental"],
             "Troll": ["-40 a la actividad durante el dia"],
-            "Grifo": ["+20 a la parada mental"],
+            "Grifo": ["Superpercepción visual"],
             "Hidra": ["+20 a la parada mental"],
             "Medusa": ["+20 a la parada mental"],
             "Esfinge": ["+20 a la parada mental"],

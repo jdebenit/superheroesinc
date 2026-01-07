@@ -496,6 +496,9 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
 
         if (modalType === 'powers') {
             return POWERS.filter(p => {
+                if (modalOriginFilter === 'Grifo') {
+                    return p.id === 'volar';
+                }
                 if (modalOriginFilter && !p.origins.includes(modalOriginFilter)) return false;
 
                 // Special filtering for Mutant powers by type (for both Mutante origin and Ente)
@@ -525,6 +528,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     const isHibrido = hasSubtype(data, 'Arcano', 'Híbrido mitológico');
     const isTerrano = hasSubtype(data, 'Arcano', 'Terrano');
     const isEnano = hasSubtype(data, 'Arcano', 'Enano');
+    const isGrifo = hasSubtype(data, 'Arcano', 'Grifo');
     const isVampiro = hasSubtype(data, 'Sobrenatural', 'Vampiro');
 
     const isSemidemonio = hasSubtype(data, 'Sobrenatural', 'Semidemonio');
@@ -578,7 +582,30 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     }).filter((s): s is (Spell & { rank: number; selectedOption?: string }) => s !== null);
 
     const hasAnyOrigin = isGuardian || isAlterado || hasEM || isVampiro || isSemidemonio || isMaldito ||
-        isEnte || isThals || isDivino || isCosmico || isMutante || isVigilante || isTechnological || isExoskeleton || isTesKhar || isAtlante || isParahumano || isTroll || isMinotauro || isPoseido || isEnano;
+        isEnte || isThals || isDivino || isCosmico || isMutante || isVigilante || isTechnological || isExoskeleton || isTesKhar || isAtlante || isParahumano || isTroll || isMinotauro || isPoseido || isEnano || isGrifo;
+
+    // Auto-select Volar for Grifo
+    useEffect(() => {
+        if (isGrifo) {
+            const hasVolar = selectedPowers.some(p => p.id === 'volar');
+            if (!hasVolar) {
+                const volarPower = POWERS.find(p => p.id === 'volar');
+                if (volarPower) {
+                    const newPower: SelectedPower = {
+                        id: volarPower.id,
+                        origin: 'Grifo', // Custom origin for display logic
+                        rank: 11, // Free at Rank 11
+                        customizations: [{
+                            id: Date.now().toString(),
+                            description: "Tiene alas para volar",
+                            cost: 0 // Assumed 0 cost as it's partial limitation/flavor, or we don't charge for it? The user didn't specify cost, usually flavor is free or limitations are negative. Assuming 0 for now unless rules say otherwise.
+                        }]
+                    };
+                    updatePowers([...selectedPowers, newPower]);
+                }
+            }
+        }
+    }, [isGrifo, selectedPowers]);
 
     // Calculate and store EM in state
     useEffect(() => {
@@ -797,6 +824,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                 isTroll={isTroll}
                 isPoseido={isPoseido}
                 isEnano={isEnano}
+                isGrifo={isGrifo}
             />
 
             {/* MAGIC SECTION */}

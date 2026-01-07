@@ -21,6 +21,7 @@ interface PowerRowProps {
     isThalsDiscount?: boolean;
     isThalsFree?: boolean;
     isEnano?: boolean;
+    isGrifo?: boolean;
 }
 
 const getCharName = (abbr: string): string => {
@@ -59,7 +60,8 @@ export default function PowerRow({
     isSemidemonio,
     isThalsDiscount,
     isThalsFree,
-    isEnano
+    isEnano,
+    isGrifo
 }: PowerRowProps) {
     const p = POWERS.find(power => power.id === selection.id);
     if (!p) return null;
@@ -72,6 +74,7 @@ export default function PowerRow({
     const isTesKharFree = isTesKhar && p.id === 'superhabilidad';
     const isAtlanteFree = isAtlante && (p.id === 'superhabilidad' || p.id === 'control_del_agua' || p.id === 'empatia_animal');
     const isTrollFree = isTroll && p.id === 'regeneracion_de_tejidos';
+    const isGrifoFree = isGrifo && p.id === 'volar';
 
     // We treat Atlante powers as 'dynamic' not strictly 'Free' visual style (strikethrough)
     // unless rank matches exactly? No, we want to show the calculation.
@@ -93,7 +96,7 @@ export default function PowerRow({
     const displayCost = isFree ?
         <span style={{ textDecoration: 'line-through', color: '#ef4444' }}>{p.cost}</span>
         : (isThalsFree ? <span style={{ color: '#10b981', fontWeight: 'bold' }}>0 (Gratis)</span>
-            : (isAtlanteFree ? <span style={{ color: '#10b981', fontWeight: 'bold' }}>
+            : ((isAtlanteFree || isGrifoFree) ? <span style={{ color: '#10b981', fontWeight: 'bold' }}>
                 {/* Logic to show "Gratis" or difference? 
                 If we use the new baseCost logic, 'total' will be correct. 
                 But this displayCost is usually for the Base Cost column.
@@ -107,6 +110,7 @@ export default function PowerRow({
                     else if (p.id === 'superhabilidad' && selection.selectedOption === 'Idioma nativo') freeRank = 41;
                     else if (p.id === 'superhabilidad' && selection.selectedOption === 'Nadar') freeRank = 81;
                     else if (p.id === 'empatia_animal') freeRank = 11;
+                    else if (isGrifo && p.id === 'volar') freeRank = 11;
 
                     const diff = (selection.rank || 1) - freeRank;
                     if (diff === 0) return "0 (Gratis)";
@@ -249,6 +253,11 @@ export default function PowerRow({
                                         } else if (p.id === 'empatia_animal') {
                                             // Assuming Empatia is free regardless of option for now, or strictly 'Cetaceos'?
                                             // Previous logic was general 'empatia_animal' check in wizard.
+                                            const freeRank = 11;
+                                            baseCost = -(freeRank * 0.1);
+                                        }
+                                    } else if (isGrifo) {
+                                        if (p.id === 'volar') {
                                             const freeRank = 11;
                                             baseCost = -(freeRank * 0.1);
                                         }
