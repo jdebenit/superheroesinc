@@ -73,11 +73,43 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
         setIsFullScreen(!isFullScreen);
     };
 
-    const downloadJson = () => {
-        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(character, null, 2));
+    const downloadJson = async () => {
+        const filename = `${character.name.toLowerCase().replace(/\s+/g, '-')}.json`;
+        const jsonStr = JSON.stringify(character, null, 2);
+
+        // Try using the File System Access API
+        if ('showSaveFilePicker' in window) {
+            try {
+                // @ts-ignore - Types for showSaveFilePicker might not be available in all envs
+                const handle = await window.showSaveFilePicker({
+                    suggestedName: filename,
+                    types: [{
+                        description: 'JSON Files',
+                        accept: { 'application/json': ['.json'] },
+                    }],
+                });
+                const writable = await handle.createWritable();
+                await writable.write(jsonStr);
+                await writable.close();
+                return;
+            } catch (err: any) {
+                // User cancelled or API error
+                if (err.name !== 'AbortError') {
+                    console.error('File Picker Error:', err);
+                }
+                // If specific error (not abort), fall back? 
+                // Usually reasonable to just return if user aborted.
+                // If it wasn't an abort error, we might want to fallback, but let's stick to abort = stop.
+                // If it fails for other reasons, fallback to classic download.
+                if (err.name === 'AbortError') return;
+            }
+        }
+
+        // Fallback or if API not supported
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(jsonStr);
         const downloadAnchorNode = document.createElement('a');
         downloadAnchorNode.setAttribute("href", dataStr);
-        downloadAnchorNode.setAttribute("download", `${character.name.toLowerCase().replace(/\s+/g, '-')}.json`);
+        downloadAnchorNode.setAttribute("download", filename);
         document.body.appendChild(downloadAnchorNode);
         downloadAnchorNode.click();
         downloadAnchorNode.remove();

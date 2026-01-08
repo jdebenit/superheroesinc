@@ -360,8 +360,32 @@ export async function generateCharacterSheetPDF(
  * @param pdfBytes Los bytes del PDF.
  * @param filename El nombre del archivo a descargar.
  */
-export function downloadPDF(pdfBytes: Uint8Array, filename: string) {
-    const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+export async function downloadPDF(pdfBytes: Uint8Array, filename: string) {
+    // Try using the File System Access API
+    if ('showSaveFilePicker' in window) {
+        try {
+            // @ts-ignore
+            const handle = await window.showSaveFilePicker({
+                suggestedName: filename,
+                types: [{
+                    description: 'PDF Document',
+                    accept: { 'application/pdf': ['.pdf'] },
+                }],
+            });
+            const writable = await handle.createWritable();
+            await writable.write(pdfBytes);
+            await writable.close();
+            return;
+        } catch (err: any) {
+            // User cancelled or API error
+            if (err.name === 'AbortError') return;
+            // For other errors, fallback to classic
+            console.warn('File Picker failed, falling back to download link:', err);
+        }
+    }
+
+    // Fallback
+    const blob = new Blob([pdfBytes as any], { type: 'application/pdf' });
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
     link.download = filename;
