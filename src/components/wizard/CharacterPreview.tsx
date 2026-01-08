@@ -58,7 +58,10 @@ const calculatePowerSkillBase = (char: any, formula: string): number => {
 export default function CharacterPreview({ character, totalPCs }: CharacterPreviewProps) {
     const dialogRef = useRef<HTMLDialogElement>(null);
 
+    const [isFullScreen, setIsFullScreen] = React.useState(false);
+
     const openModal = () => {
+        setIsFullScreen(false); // Reset to normal on open
         dialogRef.current?.showModal();
     };
 
@@ -66,9 +69,8 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
         dialogRef.current?.close();
     };
 
-    const copyToClipboard = () => {
-        navigator.clipboard.writeText(JSON.stringify(character, null, 2));
-        alert("JSON copiado al portapapeles!");
+    const toggleFullScreen = () => {
+        setIsFullScreen(!isFullScreen);
     };
 
     const downloadJson = () => {
@@ -312,15 +314,15 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                 📋 Previsualizar Ficha
             </button>
 
-            <dialog ref={dialogRef} className="character-dialog">
+            <dialog ref={dialogRef} className={`character-dialog ${isFullScreen ? 'full-screen' : ''}`}>
                 <div className="dialog-content">
                     <div className="dialog-header">
                         <div className="header-info">
                             <span className="dialog-title">{character.name || "Nuevo Personaje"}</span>
                         </div>
                         <div className="dialog-actions">
-                            <button onClick={copyToClipboard} className="action-btn" title="Copiar JSON">
-                                📋
+                            <button onClick={toggleFullScreen} className="action-btn" title={isFullScreen ? "Salir de Pantalla Completa" : "Ver Ficha Completa"}>
+                                {isFullScreen ? "❎" : "⛶"}
                             </button>
                             <button onClick={downloadJson} className="action-btn" title="Descargar JSON">
                                 💾
