@@ -1,0 +1,73 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import CharacterViewer from "../../components/tools/CharacterViewer";
+---
+
+<Layout title="Visor de Fichas">
+    <section class="viewer-page">
+        <div class="header-content">
+            <h1 class="page-title">Visor de Fichas</h1>
+            <p class="intro-text">
+                Visualiza y consulta fichas de personaje generadas previamente.
+                Sube tu archivo JSON para ver todos los detalles.
+            </p>
+        </div>
+
+        <div class="viewer-container">
+            <CharacterViewer client:load />
+        </div>
+
+        <div class="back-link">
+            <a href="/recursos">⬅ Volver a Recursos</a>
+        </div>
+    </section>
+</Layout>
+
+<style>
+    .viewer-page {
+        padding: 2rem 0;
+        max-width: 1000px;
+        margin: 0 auto;
+        min-height: 80vh;
+    }
+
+    .header-content {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .page-title {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: var(--color-secondary);
+        text-shadow: 2px 2px 0px var(--color-primary);
+    }
+
+    .intro-text {
+        font-size: 1.2rem;
+        color: var(--color-text);
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .viewer-container {
+        margin-bottom: 3rem;
+    }
+
+    .back-link {
+        text-align: center;
+        margin-top: 2rem;
+    }
+
+    .back-link a {
+        color: var(--color-secondary);
+        font-weight: bold;
+        text-decoration: none;
+        font-size: 1.1rem;
+    }
+
+    .back-link a:hover {
+        text-decoration: underline;
+        color: var(--color-primary);
+    }
+</style>
