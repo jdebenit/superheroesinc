@@ -1,0 +1,1098 @@
+/* CharacterPreview.css */
+/* Styles extracted from CharacterPreview.tsx */
+
+/* Weapons Section */
+.weapons-grid {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.weapon-item {
+    padding: 0.75rem;
+    background-color: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 6px;
+}
+
+.weapon-name {
+    font-weight: bold;
+    color: #b91c1c;
+    margin-bottom: 0.5rem;
+}
+
+.weapon-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    font-size: 0.85rem;
+}
+
+.weapon-stat-label {
+    font-weight: bold;
+}
+
+.weapon-notes {
+    grid-column: 1 / -1;
+    color: #666;
+    font-style: italic;
+}
+
+/* Artifacts Section */
+.artifacts-grid {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.artifact-item {
+    padding: 0.75rem;
+    background-color: #f5f3ff;
+    border: 1px solid #ede9fe;
+    border-radius: 6px;
+}
+
+.artifact-name {
+    font-weight: bold;
+    color: #7c3aed;
+    margin-bottom: 0.5rem;
+}
+
+.artifact-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    font-size: 0.85rem;
+}
+
+.artifact-stat-label {
+    font-weight: bold;
+}
+
+.artifact-notes {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: #666;
+    font-style: italic;
+}
+
+/* Magic Objects Section */
+.magic-objects-grid {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.magic-object-item {
+    padding: 0.75rem;
+    background-color: #faf5ff;
+    border: 1px solid #f3e8ff;
+    border-radius: 6px;
+}
+
+.magic-object-name {
+    font-weight: bold;
+    color: #9333ea;
+    margin-bottom: 0.5rem;
+}
+
+.magic-object-cost {
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+}
+
+.magic-object-description {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+/* Magic Table Section */
+.magic-table-grid {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.magic-table-item {
+    padding: 0.75rem;
+    background-color: #e0f2fe;
+    border: 1px solid #bae6fd;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.magic-table-label {
+    font-weight: bold;
+    color: #0369a1;
+}
+
+.magic-table-cost {
+    font-size: 0.85rem;
+    font-weight: bold;
+    background-color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: #0284c7;
+}
+
+/* Vehicles Section */
+.vehicles-grid {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.vehicle-item {
+    padding: 0.75rem;
+    background-color: #ecfeff;
+    border: 1px solid #cffafe;
+    border-radius: 6px;
+}
+
+.vehicle-name {
+    font-weight: bold;
+    color: #0891b2;
+    margin-bottom: 0.5rem;
+}
+
+.vehicle-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    font-size: 0.85rem;
+}
+
+.vehicle-stat-label {
+    font-weight: bold;
+}
+
+/* Origin Section */
+.origin-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.origin-item {
+    margin-bottom: 0.75rem;
+}
+
+.origin-category-name {
+    font-weight: bold;
+    color: #8B4513;
+    margin-bottom: 0.25rem;
+}
+
+.origin-sublist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.origin-detail-item {
+    margin-bottom: 0.25rem;
+    position: relative;
+}
+
+.origin-detail-item.subtype {
+    margin-top: 0.5rem;
+}
+
+.origin-subtype-list {
+    list-style: none;
+    padding: 0;
+    margin: 0.25rem 0 0.5rem 0;
+    border-left: 2px solid #fee2e2;
+    padding-left: 0.75rem;
+}
+
+.origin-detail-row {
+    display: flex;
+    align-items: baseline;
+    width: 100%;
+}
+
+.origin-detail-label {
+    padding-right: 0.5rem;
+}
+
+.origin-detail-label.subtype-header {
+    font-weight: bold;
+    color: #b91c1c;
+    font-size: 1rem;
+}
+
+.origin-detail-dots {
+    flex-grow: 1;
+    border-bottom: 1px dotted #ccc;
+    margin: 0 0.5rem;
+    position: relative;
+    top: -4px;
+    min-width: 20px;
+}
+
+.origin-detail-value {
+    font-weight: bold;
+    color: #8B4513;
+    white-space: nowrap;
+}
+
+/* Hybrid Section */
+.hybrid-condition-label {
+    padding-right: 0.5rem;
+    font-weight: bold;
+    color: #be185d;
+}
+
+/* Alterado Section */
+.agent-label {
+    padding-right: 0.5rem;
+    font-weight: bold;
+    color: #15803d;
+}
+
+.agent-cost {
+    color: #16a34a;
+}
+
+/* Sequels Section */
+.sequels-container {
+    margin-top: 0.5rem;
+}
+
+.sequels-header {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+    font-weight: bold;
+}
+
+.sequels-header.alterado {
+    color: #15803d;
+}
+
+.sequels-header.mutante {
+    color: #86198f;
+}
+
+.sequels-list {
+    padding-left: 0.5rem;
+    margin: 0;
+    list-style: none;
+}
+
+.sequels-list.alterado {
+    border-left: 2px solid #bbf7d0;
+}
+
+.sequels-list.mutante {
+    border-left: 2px solid #e879f9;
+}
+
+.sequel-item {
+    margin-bottom: 0.5rem;
+    padding-left: 0.5rem;
+}
+
+.sequel-name {
+    font-weight: bold;
+    color: #374151;
+    font-size: 0.9rem;
+}
+
+.sequel-cost {
+    font-size: 0.85rem;
+}
+
+.sequel-cost.alterado {
+    color: #16a34a;
+}
+
+.sequel-cost.mutante {
+    color: #c026d3;
+}
+
+.sequel-description {
+    font-size: 0.85rem;
+    color: #6b7280;
+    font-style: italic;
+}
+
+/* Ente Section */
+.ente-label {
+    padding-right: 0.5rem;
+    font-weight: bold;
+    color: #7e22ce;
+}
+
+/* Poseído Section */
+.poseido-form-label {
+    padding-right: 0.5rem;
+    font-weight: bold;
+    color: #be185d;
+}
+
+.poseido-description {
+    font-size: 0.85rem;
+    color: #6b7280;
+    font-style: italic;
+    margin-top: 0.25rem;
+    padding-left: 0.5rem;
+}
+
+/* Guardian Section */
+.guardian-label {
+    padding-right: 0.5rem;
+    font-weight: bold;
+    color: #1e40af;
+    flex-shrink: 0;
+}
+
+.guardian-value {
+    font-weight: bold;
+    color: #8B4513;
+    text-align: right;
+}
+
+/* Divine Section */
+.divine-label {
+    padding-right: 0.5rem;
+    font-weight: bold;
+    color: #b45309;
+}
+
+/* Skills Section */
+.skill-item {
+    margin-bottom: 0.5rem;
+    position: relative;
+}
+
+.skill-row {
+    display: flex;
+    align-items: baseline;
+    width: 100%;
+}
+
+.skill-name {
+    padding-right: 0.5rem;
+}
+
+.skill-math {
+    font-size: 0.7em;
+    color: #999;
+    margin-left: 0.5ch;
+    font-family: monospace;
+}
+
+.skill-dots {
+    flex-grow: 1;
+    border-bottom: 1px dotted #ccc;
+    margin: 0 0.5rem;
+    position: relative;
+    top: -4px;
+    min-width: 20px;
+}
+
+.skill-value {
+    font-weight: bold;
+    color: #8B4513;
+    white-space: nowrap;
+}
+
+/* Maldito Section */
+.maldito-label {
+    padding-right: 0.5rem;
+    font-weight: bold;
+    color: #c2410c;
+}
+
+.maldito-description {
+    font-size: 0.85rem;
+    color: #6b7280;
+    font-style: italic;
+    margin-top: 0.25rem;
+    padding-left: 0.5rem;
+}
+
+/* Background Section */
+.background-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.background-label {
+    display: block;
+    font-size: 0.75rem;
+    color: #6b7280;
+    font-weight: bold;
+}
+
+.background-value {
+    font-size: 0.9rem;
+    color: #1f2937;
+}
+
+.bg-notes-label {
+    display: block;
+    font-size: 0.75rem;
+    color: #6b7280;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.bg-notes-list {
+    margin: 0;
+    padding-left: 1.2rem;
+    color: #374151;
+    font-size: 0.9rem;
+}
+
+.prejudice-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #eff6ff;
+    padding: 0.75rem;
+    border-radius: 6px;
+    border: 1px solid #bfdbfe;
+}
+
+.prejudice-label {
+    display: block;
+    font-size: 0.75rem;
+    color: #1e40af;
+    font-weight: bold;
+}
+
+.prejudice-value {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #1e3a8a;
+}
+
+.prejudice-cost {
+    font-size: 0.85rem;
+    color: #3b82f6;
+    font-weight: bold;
+}
+
+/* Tech Modules Section */
+.tech-module-item {
+    list-style: none;
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 0.5rem;
+}
+
+.tech-module-row {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 0.25rem;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.tech-module-name {
+    font-weight: bold;
+    color: #1f2937;
+}
+
+.tech-type-tag {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+.tech-type-internal {
+    border: 1px solid #fbcfe8;
+    background: #fce7f3;
+    color: #be123c;
+}
+
+.tech-type-external {
+    border: 1px solid #90caf9;
+    background: #e3f2fd;
+    color: #1565c0;
+}
+
+.tech-location {
+    font-size: 0.8rem;
+    color: #6b7280;
+    font-style: italic;
+    margin-right: 0.5rem;
+}
+
+.tech-cost {
+    font-weight: bold;
+    color: #4f46e5;
+    font-size: 0.875rem;
+}
+
+/* Exoskeleton Section */
+.exoskeleton-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    margin-bottom: 1rem;
+}
+
+.exoskeleton-card {
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.exoskeleton-header {
+    font-weight: bold;
+    color: #334155;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.exoskeleton-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem 1rem;
+}
+
+.exoskeleton-stat-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.exoskeleton-stat-label {
+    font-size: 0.7rem;
+    color: #64748b;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.exoskeleton-stat-value {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #0f172a;
+}
+
+.exoskeleton-stat-value.mono {
+    font-family: monospace;
+}
+
+.exoskeleton-stat-value.highlight {
+    color: #7c3aed;
+    font-family: monospace;
+}
+
+/* Tech Armor & Strength Section */
+.tech-container {
+    background-color: #f0f9ff;
+    border: 2px solid #bae6fd;
+    border-radius: 8px;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.tech-card {
+    padding: 0.5rem;
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.tech-card-header {
+    font-weight: bold;
+    color: #0369a1;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid #e0f2fe;
+    padding-bottom: 0.25rem;
+}
+
+.tech-card-stats {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.tech-stat-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.tech-stat-label {
+    font-size: 0.9rem;
+    color: #64748b;
+}
+
+.tech-stat-value {
+    font-weight: bold;
+    color: #0f172a;
+}
+
+.tech-stat-value.alert {
+    color: #ef4444;
+}
+
+/* Cyborg Implants */
+.cyborg-container {
+    grid-column: 1 / -1;
+    margin-top: 0.5rem;
+}
+
+.cyborg-item {
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    padding: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #e0e7ff;
+    font-size: 0.9rem;
+}
+
+.cyborg-name {
+    font-weight: bold;
+    color: #1e40af;
+}
+
+.cyborg-details {
+    font-size: 0.8rem;
+    color: #64748b;
+}
+
+.cyborg-cost {
+    display: block;
+    font-weight: bold;
+    color: #0f172a;
+}
+
+/* Powers Section */
+.power-item {
+    list-style: none;
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 0.5rem;
+}
+
+.power-row {
+    display: flex;
+    align-items: baseline;
+    width: 100%;
+    margin-bottom: 0.25rem;
+}
+
+.power-name-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.power-name {
+    font-weight: bold;
+    color: #059669;
+}
+
+.power-option {
+    font-weight: normal;
+    color: #047857;
+    font-size: 0.9em;
+    margin-left: 0.25rem;
+}
+
+.power-customizations {
+    font-size: 0.75rem;
+    color: #065f46;
+    margin-top: 0.1rem;
+    font-style: italic;
+}
+
+.power-rank {
+    font-weight: bold;
+    color: #8B4513;
+    white-space: nowrap;
+    font-size: 0.875rem;
+}
+
+.power-rank-value {
+    font-size: 0.75rem;
+    color: #9ca3af;
+}
+
+.power-skill-value {
+    font-size: 0.85rem;
+    color: #d97706;
+    font-weight: 500;
+    margin-left: 0.5rem;
+}
+
+/* Spells Section */
+.spells-em-cost {
+    color: #4f46e5;
+    font-weight: bold;
+}
+
+.spell-item {
+    list-style: none;
+    margin-bottom: 0.5rem;
+}
+
+.spell-name {
+    font-weight: bold;
+    color: #4f46e5;
+}
+
+.spell-option {
+    font-weight: normal;
+    color: #4338ca;
+    font-size: 0.9em;
+    margin-left: 0.25rem;
+}
+
+.spell-rank {
+    font-size: 0.875rem;
+    white-space: nowrap;
+}
+
+.spell-rank.normal {
+    color: #8B4513;
+    font-weight: normal;
+}
+
+.spell-rank.master {
+    color: #a855f7;
+    font-weight: bold;
+}
+
+/* Traumas Section */
+.trauma-item {
+    margin-bottom: 1rem;
+}
+
+.trauma-header {
+    font-weight: bold;
+    color: #991b1b;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    margin-bottom: 0.25rem;
+}
+
+.trauma-description {
+    font-style: italic;
+    color: #4b5563;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    padding-left: 0.5rem;
+    border-left: 3px solid #fee2e2;
+}
+
+/* Notes Section */
+.notes-content {
+    white-space: pre-wrap;
+    font-style: italic;
+    color: #4b5563;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* General Layout and Component Styles */
+
+/* Force remove bullets and ALL spacing from specific lists */
+.no-bullets-list,
+.no-bullets-list li {
+    list-style-type: none !important;
+    list-style: none !important;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+    padding-inline-start: 0 !important;
+}
+
+.no-bullets-list li::before {
+    content: none !important;
+    display: none !important;
+}
+
+/* Dialog and Container Styles */
+.character-dialog {
+    padding: 0;
+    border: none;
+    border-radius: 12px;
+    background: transparent;
+    max-width: 90vw;
+    max-height: 90vh;
+    width: 1000px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    text-align: left;
+}
+
+.character-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+}
+
+.dialog-content {
+    background: #f9f7f1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-height: 90vh;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.dialog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background: white;
+    border-bottom: 2px solid #8B4513;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.dialog-actions {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+/* Buttons */
+.action-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.action-btn:hover {
+    background: #eee;
+    transform: scale(1.1);
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #666;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.close-btn:hover {
+    background: #eee;
+    color: #d32f2f;
+    transform: rotate(90deg);
+}
+
+.dialog-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #333;
+    text-transform: uppercase;
+}
+
+.dialog-body {
+    overflow-y: auto;
+    padding: 1rem;
+    flex: 1;
+}
+
+/* Sheet Layout */
+.character-sheet {
+    margin: 0;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+}
+
+.sheet-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #8B4513;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.sheet-header h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.header-stats {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.level-badge {
+    background: #d32f2f;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 2px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.total-cost {
+    font-weight: bold;
+    background: #8B4513;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 2px;
+}
+
+.sheet-grid {
+    column-count: 1;
+    column-gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+    .sheet-grid {
+        column-count: 2;
+    }
+
+    .combat-section {
+        column-span: all;
+    }
+}
+
+.sheet-section {
+    background: rgba(255, 255, 255, 0.5);
+    padding: 1rem;
+    border: 1px dashed #ccc;
+    break-inside: avoid;
+    margin-bottom: 1.5rem;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.25rem;
+}
+
+.section-header h4 {
+    margin: 0;
+    color: #8B4513;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+}
+
+.cost {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Combat Grid */
+.combat-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-between;
+}
+
+.combat-stat-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 100px;
+    border: 1px solid #e0e0e0;
+    padding: 0.5rem;
+    background: white;
+    border-radius: 4px;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: #666;
+    text-align: center;
+    margin-bottom: 0.25rem;
+}
+
+.stat-value {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Attributes Grid */
+.attr-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    gap: 1rem;
+}
+
+.attr-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #ddd;
+    padding: 0.5rem;
+    background: white;
+}
+
+.attr-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 0.25rem;
+}
+
+.attr-value {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* List Styles */
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dialog-body li {
+    margin-bottom: 0.5rem;
+    padding-left: 1.2rem;
+    position: relative;
+}
+
+.dialog-body li::before {
+    content: "•";
+    color: #d32f2f;
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+
+.dialog-body li.no-bullet-item {
+    padding-left: 0;
+}
+
+.dialog-body li.no-bullet-item::before {
+    display: none;
+}

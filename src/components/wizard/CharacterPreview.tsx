@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import './CharacterPreview.css';
 import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS, FRIENDS_AND_ASSOCIATES } from '../../data/backgroundTables';
 import { SPELLS } from '../../data/spells';
 import { POWERS } from '../../data/powers';
@@ -447,15 +448,15 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                         <div className="section-header">
                                             <h4>Armas</h4>
                                         </div>
-                                        <div className="weapons-grid" style={{ display: 'grid', gap: '0.5rem' }}>
+                                        <div className="weapons-grid">
                                             {character.weapons.items.map((item: any, i: number) => (
-                                                <div key={i} className="weapon-item" style={{ padding: '0.75rem', backgroundColor: '#fef2f2', border: '1px solid #fecaca', borderRadius: '6px' }}>
-                                                    <div style={{ fontWeight: 'bold', color: '#b91c1c', marginBottom: '0.5rem' }}>{item.name}</div>
-                                                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.5rem', fontSize: '0.85rem' }}>
-                                                        <div><span style={{ fontWeight: 'bold' }}>Daño:</span> {item.damage || '-'}</div>
-                                                        <div><span style={{ fontWeight: 'bold' }}>DxA:</span> {item.dxa || '-'}</div>
-                                                        <div><span style={{ fontWeight: 'bold' }}>CAR:</span> {item.car || '-'}</div>
-                                                        {item.notes && <div style={{ gridColumn: '1 / -1', color: '#666', fontStyle: 'italic' }}>{item.notes}</div>}
+                                                <div key={i} className="weapon-item">
+                                                    <div className="weapon-name">{item.name}</div>
+                                                    <div className="weapon-stats">
+                                                        <div><span className="weapon-stat-label">Daño:</span> {item.damage || '-'}</div>
+                                                        <div><span className="weapon-stat-label">DxA:</span> {item.dxa || '-'}</div>
+                                                        <div><span className="weapon-stat-label">CAR:</span> {item.car || '-'}</div>
+                                                        {item.notes && <div className="weapon-notes">{item.notes}</div>}
                                                     </div>
                                                 </div>
                                             ))}
@@ -469,17 +470,17 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                         <div className="section-header">
                                             <h4>Artefactos</h4>
                                         </div>
-                                        <div className="artifacts-grid" style={{ display: 'grid', gap: '0.5rem' }}>
+                                        <div className="artifacts-grid">
                                             {character.artifacts.items.map((item: any, i: number) => (
-                                                <div key={i} className="artifact-item" style={{ padding: '0.75rem', backgroundColor: '#f5f3ff', border: '1px solid #ede9fe', borderRadius: '6px' }}>
-                                                    <div style={{ fontWeight: 'bold', color: '#7c3aed', marginBottom: '0.5rem' }}>{item.name}</div>
-                                                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem', fontSize: '0.85rem' }}>
-                                                        <div><span style={{ fontWeight: 'bold' }}>Fiabilidad:</span> {item.reliability || '-'}</div>
-                                                        <div><span style={{ fontWeight: 'bold' }}>Valor:</span> {item.value || '-'}</div>
-                                                        <div><span style={{ fontWeight: 'bold' }}>Coste:</span> {item.cost || '0'} PCs</div>
+                                                <div key={i} className="artifact-item">
+                                                    <div className="artifact-name">{item.name}</div>
+                                                    <div className="artifact-stats">
+                                                        <div><span className="artifact-stat-label">Fiabilidad:</span> {item.reliability || '-'}</div>
+                                                        <div><span className="artifact-stat-label">Valor:</span> {item.value || '-'}</div>
+                                                        <div><span className="artifact-stat-label">Coste:</span> {item.cost || '0'} PCs</div>
                                                     </div>
                                                     {item.notes && (
-                                                        <div style={{ marginTop: '0.5rem', fontSize: '0.85rem', color: '#666', fontStyle: 'italic' }}>
+                                                        <div className="artifact-notes">
                                                             {item.notes}
                                                         </div>
                                                     )}
@@ -495,14 +496,14 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                         <div className="section-header">
                                             <h4>Objetos Mágicos</h4>
                                         </div>
-                                        <div className="magic-objects-grid" style={{ display: 'grid', gap: '0.5rem' }}>
+                                        <div className="magic-objects-grid">
                                             {character.magicObjects.items.map((item: any, i: number) => (
-                                                <div key={i} className="magic-object-item" style={{ padding: '0.75rem', backgroundColor: '#faf5ff', border: '1px solid #f3e8ff', borderRadius: '6px' }}>
-                                                    <div style={{ fontWeight: 'bold', color: '#9333ea', marginBottom: '0.5rem' }}>{item.name}</div>
-                                                    <div style={{ fontSize: '0.85rem', marginBottom: '0.5rem' }}>
+                                                <div key={i} className="magic-object-item">
+                                                    <div className="magic-object-name">{item.name}</div>
+                                                    <div className="magic-object-cost">
                                                         <span style={{ fontWeight: 'bold' }}>Coste EM:</span> {item.em}
                                                     </div>
-                                                    <div style={{ fontSize: '0.85rem', color: '#666' }}>
+                                                    <div className="magic-object-description">
                                                         {item.description}
                                                     </div>
                                                 </div>
@@ -517,7 +518,7 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                         <div className="section-header">
                                             <h4>Tabla de Objetos (Terrano)</h4>
                                         </div>
-                                        <div className="magic-table-grid" style={{ display: 'grid', gap: '0.5rem' }}>
+                                        <div className="magic-table-grid">
                                             {character.magicTableRolls.map((rollId: string, i: number) => {
                                                 const options = [
                                                     { id: '180_EM', label: 'Acceso a objetos de 180 EM', cost: '+1 PC' },
@@ -529,9 +530,9 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                 const opt = options.find(o => o.id === rollId) || { label: rollId, cost: '' };
 
                                                 return (
-                                                    <div key={i} className="magic-table-item" style={{ padding: '0.75rem', backgroundColor: '#e0f2fe', border: '1px solid #bae6fd', borderRadius: '6px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                                        <div style={{ fontWeight: 'bold', color: '#0369a1' }}>{opt.label}</div>
-                                                        <div style={{ fontSize: '0.85rem', fontWeight: 'bold', backgroundColor: 'white', padding: '2px 8px', borderRadius: '4px', color: '#0284c7' }}>
+                                                    <div key={i} className="magic-table-item">
+                                                        <div className="magic-table-label">{opt.label}</div>
+                                                        <div className="magic-table-cost">
                                                             {opt.cost}
                                                         </div>
                                                     </div>
@@ -547,15 +548,15 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                         <div className="section-header">
                                             <h4>Vehículos</h4>
                                         </div>
-                                        <div className="vehicles-grid" style={{ display: 'grid', gap: '0.5rem' }}>
+                                        <div className="vehicles-grid">
                                             {character.vehicles.items.map((item: any, i: number) => (
-                                                <div key={i} className="vehicle-item" style={{ padding: '0.75rem', backgroundColor: '#ecfeff', border: '1px solid #cffafe', borderRadius: '6px' }}>
-                                                    <div style={{ fontWeight: 'bold', color: '#0891b2', marginBottom: '0.5rem' }}>{item.name}</div>
-                                                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.5rem', fontSize: '0.85rem' }}>
-                                                        <div><span style={{ fontWeight: 'bold' }}>Blindaje:</span> {item.armor || '-'}</div>
-                                                        <div><span style={{ fontWeight: 'bold' }}>PE:</span> {item.pe || '-'}</div>
-                                                        <div><span style={{ fontWeight: 'bold' }}>Velocidad:</span> {item.speed || '-'}</div>
-                                                        <div><span style={{ fontWeight: 'bold' }}>Autonomía:</span> {item.range || '-'}</div>
+                                                <div key={i} className="vehicle-item">
+                                                    <div className="vehicle-name">{item.name}</div>
+                                                    <div className="vehicle-stats">
+                                                        <div><span className="vehicle-stat-label">Blindaje:</span> {item.armor || '-'}</div>
+                                                        <div><span className="vehicle-stat-label">PE:</span> {item.pe || '-'}</div>
+                                                        <div><span className="vehicle-stat-label">Velocidad:</span> {item.speed || '-'}</div>
+                                                        <div><span className="vehicle-stat-label">Autonomía:</span> {item.range || '-'}</div>
                                                     </div>
                                                 </div>
                                             ))}
@@ -614,26 +615,14 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                     const detailValue = parts.length > 1 ? parts.slice(1).join(':') : undefined;
 
                                                     return (
-                                                        <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
-                                                            <span style={{
-                                                                paddingRight: '0.5rem',
-                                                                fontWeight: isSubtypeHeader ? 'bold' : 'normal',
-                                                                color: isSubtypeHeader ? '#b91c1c' : 'inherit',
-                                                                fontSize: isSubtypeHeader ? '1rem' : 'inherit'
-                                                            }}>
+                                                        <div className="origin-detail-row">
+                                                            <span className={`origin-detail-label ${isSubtypeHeader ? 'subtype-header' : ''}`}>
                                                                 {detailName}
                                                             </span>
                                                             {detailValue && (
                                                                 <>
-                                                                    <span style={{
-                                                                        flexGrow: 1,
-                                                                        borderBottom: '1px dotted #ccc',
-                                                                        margin: '0 0.5rem',
-                                                                        position: 'relative',
-                                                                        top: '-4px',
-                                                                        minWidth: '20px'
-                                                                    }}></span>
-                                                                    <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>
+                                                                    <span className="origin-detail-dots"></span>
+                                                                    <span className="origin-detail-value">
                                                                         {detailValue}
                                                                     </span>
                                                                 </>
@@ -643,28 +632,18 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                 };
 
                                                 return (
-                                                    <li key={i} className="no-bullet-item" style={{ marginBottom: '0.75rem' }}>
-                                                        <div style={{ fontWeight: 'bold', color: '#8B4513', marginBottom: '0.25rem' }}>
+                                                    <li key={i} className="no-bullet-item origin-item">
+                                                        <div className="origin-category-name">
                                                             {name}
                                                         </div>
-                                                        <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                                                        <ul className="origin-sublist">
                                                             {nodes.map((node, j) => (
-                                                                <li key={j} className="no-bullet-item" style={{
-                                                                    marginBottom: '0.25rem',
-                                                                    marginTop: node.type === 'subtype' ? '0.5rem' : '0',
-                                                                    position: 'relative'
-                                                                }}>
+                                                                <li key={j} className={`no-bullet-item origin-detail-item ${node.type === 'subtype' ? 'subtype' : ''}`}>
                                                                     {renderDetailContent(node.text, node.type === 'subtype')}
 
                                                                     {/* Render Subtype Children */}
                                                                     {node.children && (
-                                                                        <ul style={{
-                                                                            listStyle: 'none',
-                                                                            padding: 0,
-                                                                            margin: '0.25rem 0 0.5rem 0',
-                                                                            borderLeft: '2px solid #fee2e2',
-                                                                            paddingLeft: '0.75rem'
-                                                                        }}>
+                                                                        <ul className="origin-subtype-list">
                                                                             {node.children.map((child, k) => (
                                                                                 <li key={k} className="no-bullet-item" style={{ marginBottom: '0.25rem' }}>
                                                                                     {renderDetailContent(child)}
@@ -694,7 +673,7 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                                                 <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
                                                     <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
-                                                        <span style={{ paddingRight: '0.5rem', fontWeight: 'bold', color: '#be185d' }}>Condición</span>
+                                                        <span className="hybrid-condition-label">Condición</span>
                                                         <span style={{ flexGrow: 1, borderBottom: '1px dotted #ccc', margin: '0 0.5rem', position: 'relative', top: '-4px', minWidth: '20px' }}></span>
                                                         <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>
                                                             Híbrido con Humano
@@ -720,7 +699,7 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                 return form && (
                                                     <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
                                                         <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
-                                                            <span style={{ paddingRight: '0.5rem', fontWeight: 'bold', color: '#7e22ce' }}>Forma en el plano</span>
+                                                            <span className="ente-label">Forma en el plano</span>
                                                             <span style={{ flexGrow: 1, borderBottom: '1px dotted #ccc', margin: '0 0.5rem', position: 'relative', top: '-4px', minWidth: '20px' }}></span>
                                                             <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>
                                                                 {form.label} ({form.cost > 0 ? '+' : ''}{form.cost} PC)
@@ -734,7 +713,7 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                 return effect && (
                                                     <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
                                                         <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
-                                                            <span style={{ paddingRight: '0.5rem', fontWeight: 'bold', color: '#7e22ce' }}>Efecto visual</span>
+                                                            <span className="ente-label">Efecto visual</span>
                                                             <span style={{ flexGrow: 1, borderBottom: '1px dotted #ccc', margin: '0 0.5rem', position: 'relative', top: '-4px', minWidth: '20px' }}></span>
                                                             <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>
                                                                 {effect.label} ({effect.cost > 0 ? '+' : ''}{effect.cost} PC)
@@ -760,10 +739,10 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                 return agent && (
                                                     <li className="no-bullet-item" style={{ marginBottom: '0.75rem' }}>
                                                         <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
-                                                            <span style={{ paddingRight: '0.5rem', fontWeight: 'bold', color: '#15803d' }}>Agente del Cambio</span>
+                                                            <span className="agent-label">Agente del Cambio</span>
                                                             <span style={{ flexGrow: 1, borderBottom: '1px dotted #ccc', margin: '0 0.5rem', position: 'relative', top: '-4px', minWidth: '20px' }}></span>
                                                             <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>
-                                                                {agent.label} {agent.cost > 0 && <span style={{ color: '#16a34a' }}>(-{agent.cost} PC)</span>}
+                                                                {agent.label} {agent.cost > 0 && <span className="agent-cost">(-{agent.cost} PC)</span>}
                                                             </span>
                                                         </div>
                                                     </li>
@@ -772,18 +751,18 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
 
                                             {/* Sequels */}
                                             {character.alteradoParams.sequels && character.alteradoParams.sequels.length > 0 && (
-                                                <li style={{ marginTop: '0.5rem' }}>
-                                                    <span style={{ display: 'block', fontSize: '0.9rem', color: '#15803d', fontWeight: 'bold', marginBottom: '0.25rem' }}>Secuelas</span>
-                                                    <ul style={{ paddingLeft: '0.5rem', margin: 0, listStyle: 'none', borderLeft: '2px solid #bbf7d0' }}>
+                                                <li className="sequels-container">
+                                                    <span className="sequels-header alterado">Secuelas</span>
+                                                    <ul className="sequels-list alterado">
                                                         {character.alteradoParams.sequels.map((s: any, idx: number) => {
                                                             const def = SEQUELS.find(d => d.id === s.id);
                                                             if (!def) return null;
                                                             return (
-                                                                <li key={idx} style={{ marginBottom: '0.5rem', paddingLeft: '0.5rem' }}>
-                                                                    <div style={{ fontWeight: 'bold', color: '#374151', fontSize: '0.9rem' }}>
-                                                                        {def.label} <span style={{ color: '#16a34a', fontSize: '0.85rem' }}>(-{def.cost} PC)</span>
+                                                                <li key={idx} className="sequel-item">
+                                                                    <div className="sequel-name">
+                                                                        {def.label} <span className="sequel-cost alterado">(-{def.cost} PC)</span>
                                                                     </div>
-                                                                    <div style={{ fontSize: '0.85rem', color: '#6b7280', fontStyle: 'italic' }}>
+                                                                    <div className="sequel-description">
                                                                         {def.description}
                                                                     </div>
                                                                 </li>
@@ -803,18 +782,18 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                             <h4>Mutante</h4>
                                         </div>
                                         <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                                            <li style={{ marginTop: '0.5rem' }}>
-                                                <span style={{ display: 'block', fontSize: '0.9rem', color: '#86198f', fontWeight: 'bold', marginBottom: '0.25rem' }}>Secuelas</span>
-                                                <ul style={{ paddingLeft: '0.5rem', margin: 0, listStyle: 'none', borderLeft: '2px solid #e879f9' }}>
+                                            <li className="sequels-container">
+                                                <span className="sequels-header mutante">Secuelas</span>
+                                                <ul className="sequels-list mutante">
                                                     {character.mutanteParams.sequels.map((s: any, idx: number) => {
                                                         const def = SEQUELS.find(d => d.id === s.id);
                                                         if (!def) return null;
                                                         return (
-                                                            <li key={idx} style={{ marginBottom: '0.5rem', paddingLeft: '0.5rem' }}>
-                                                                <div style={{ fontWeight: 'bold', color: '#374151', fontSize: '0.9rem' }}>
-                                                                    {def.label} <span style={{ color: '#c026d3', fontSize: '0.85rem' }}>(-{def.cost} PC)</span>
+                                                            <li key={idx} className="sequel-item">
+                                                                <div className="sequel-name">
+                                                                    {def.label} <span className="sequel-cost mutante">(-{def.cost} PC)</span>
                                                                 </div>
-                                                                <div style={{ fontSize: '0.85rem', color: '#6b7280', fontStyle: 'italic' }}>
+                                                                <div className="sequel-description">
                                                                     {def.description}
                                                                 </div>
                                                             </li>
@@ -840,13 +819,13 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                 return form && (
                                                     <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
                                                         <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
-                                                            <span style={{ paddingRight: '0.5rem', fontWeight: 'bold', color: '#be185d' }}>Tipo de Forma</span>
+                                                            <span className="poseido-form-label">Tipo de Forma</span>
                                                             <span style={{ flexGrow: 1, borderBottom: '1px dotted #ccc', margin: '0 0.5rem', position: 'relative', top: '-4px', minWidth: '20px' }}></span>
                                                             <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>
                                                                 {form.label} ({form.pc > 0 ? '+' : ''}{form.pc} PC)
                                                             </span>
                                                         </div>
-                                                        <div style={{ fontSize: '0.85rem', color: '#6b7280', fontStyle: 'italic', marginTop: '0.25rem', paddingLeft: '0.5rem' }}>
+                                                        <div className="poseido-description">
                                                             {form.description}
                                                         </div>
                                                     </li>
@@ -869,9 +848,9 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                 return obj && (
                                                     <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
                                                         <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
-                                                            <span style={{ paddingRight: '0.5rem', fontWeight: 'bold', color: '#1e40af', flexShrink: 0 }}>Objeto de Poder</span>
+                                                            <span className="guardian-label">Objeto de Poder</span>
                                                             <span style={{ flexGrow: 1, borderBottom: '1px dotted #ccc', margin: '0 0.5rem', position: 'relative', top: '-4px', minWidth: '20px' }}></span>
-                                                            <span style={{ fontWeight: 'bold', color: '#8B4513', textAlign: 'right' }}>{obj.label}</span>
+                                                            <span className="guardian-value">{obj.label}</span>
                                                         </div>
                                                     </li>
                                                 );
@@ -883,9 +862,9 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                 return qual && (
                                                     <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
                                                         <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
-                                                            <span style={{ paddingRight: '0.5rem', fontWeight: 'bold', color: '#1e40af', flexShrink: 0 }}>Cualidad</span>
+                                                            <span className="guardian-label">Cualidad</span>
                                                             <span style={{ flexGrow: 1, borderBottom: '1px dotted #ccc', margin: '0 0.5rem', position: 'relative', top: '-4px', minWidth: '20px' }}></span>
-                                                            <span style={{ fontWeight: 'bold', color: '#8B4513', textAlign: 'right' }}>
+                                                            <span className="guardian-value">
                                                                 {qual.label} ({qual.cost > 0 ? '+' : ''}{qual.cost} PC)
                                                             </span>
                                                         </div>
@@ -899,9 +878,9 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                 return feat && (
                                                     <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
                                                         <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
-                                                            <span style={{ paddingRight: '0.5rem', fontWeight: 'bold', color: '#1e40af', flexShrink: 0 }}>Rasgo Especial</span>
+                                                            <span className="guardian-label">Rasgo Especial</span>
                                                             <span style={{ flexGrow: 1, borderBottom: '1px dotted #ccc', margin: '0 0.5rem', position: 'relative', top: '-4px', minWidth: '20px' }}></span>
-                                                            <span style={{ fontWeight: 'bold', color: '#8B4513', textAlign: 'right' }}>{feat.label}</span>
+                                                            <span className="guardian-value">{feat.label}</span>
                                                         </div>
                                                     </li>
                                                 );
@@ -913,9 +892,9 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                 return trans && (
                                                     <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
                                                         <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
-                                                            <span style={{ paddingRight: '0.5rem', fontWeight: 'bold', color: '#1e40af', flexShrink: 0 }}>Transformación</span>
+                                                            <span className="guardian-label">Transformación</span>
                                                             <span style={{ flexGrow: 1, borderBottom: '1px dotted #ccc', margin: '0 0.5rem', position: 'relative', top: '-4px', minWidth: '20px' }}></span>
-                                                            <span style={{ fontWeight: 'bold', color: '#8B4513', textAlign: 'right' }}>{trans.label}</span>
+                                                            <span className="guardian-value">{trans.label}</span>
                                                         </div>
                                                     </li>
                                                 );
@@ -936,7 +915,7 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                 return focus && (
                                                     <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
                                                         <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
-                                                            <span style={{ paddingRight: '0.5rem', fontWeight: 'bold', color: '#b45309' }}>Foco del Poder</span>
+                                                            <span className="divine-label">Foco del Poder</span>
                                                             <span style={{ flexGrow: 1, borderBottom: '1px dotted #ccc', margin: '0 0.5rem', position: 'relative', top: '-4px', minWidth: '20px' }}></span>
                                                             <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>
                                                                 {focus.label} ({focus.cost > 0 ? `+${focus.cost}` : '0'} PC)
@@ -989,21 +968,14 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                         </div>
                                         <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                                             {character.skills.generalItems.map((item: any, i: number) => (
-                                                <li key={i} className="no-bullet-item" style={{ marginBottom: '0.5rem', position: 'relative' }}>
-                                                    <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
-                                                        <span style={{ paddingRight: '0.5rem' }}>
+                                                <li key={i} className="no-bullet-item skill-item">
+                                                    <div className="skill-row">
+                                                        <span className="skill-name">
                                                             {item.name}
-                                                            {item.math && <span style={{ fontSize: '0.7em', color: '#999', marginLeft: '0.5ch', fontFamily: 'monospace' }}>{item.math}</span>}
+                                                            {item.math && <span className="skill-math">{item.math}</span>}
                                                         </span>
-                                                        <span style={{
-                                                            flexGrow: 1,
-                                                            borderBottom: '1px dotted #ccc',
-                                                            margin: '0 0.5rem',
-                                                            position: 'relative',
-                                                            top: '-4px',
-                                                            minWidth: '20px'
-                                                        }}></span>
-                                                        <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>
+                                                        <span className="skill-dots"></span>
+                                                        <span className="skill-value">
                                                             {item.value}
                                                         </span>
                                                     </div>
@@ -1057,7 +1029,7 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                 return form && (
                                                     <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
                                                         <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
-                                                            <span style={{ paddingRight: '0.5rem', fontWeight: 'bold', color: '#7e22ce' }}>Forma en el plano</span>
+                                                            <span className="ente-label">Forma en el plano</span>
                                                             <span style={{
                                                                 flexGrow: 1,
                                                                 borderBottom: '1px dotted #ccc',
@@ -1078,7 +1050,7 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                 return effect && (
                                                     <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
                                                         <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
-                                                            <span style={{ paddingRight: '0.5rem', fontWeight: 'bold', color: '#7e22ce' }}>Efecto visual</span>
+                                                            <span className="ente-label">Efecto visual</span>
                                                             <span style={{
                                                                 flexGrow: 1,
                                                                 borderBottom: '1px dotted #ccc',
@@ -1110,7 +1082,7 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                 return mag && (
                                                     <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
                                                         <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
-                                                            <span style={{ paddingRight: '0.5rem', fontWeight: 'bold', color: '#c2410c' }}>Magnitud de la maldición</span>
+                                                            <span className="maldito-label">Magnitud de la maldición</span>
                                                             <span style={{
                                                                 flexGrow: 1,
                                                                 borderBottom: '1px dotted #ccc',
@@ -1123,7 +1095,7 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                                 {mag.label} ({mag.cost > 0 ? '+' : ''}{mag.cost} PC)
                                                             </span>
                                                         </div>
-                                                        <div style={{ fontSize: '0.85rem', color: '#6b7280', fontStyle: 'italic', marginTop: '0.25rem', paddingLeft: '0.5rem' }}>
+                                                        <div className="maldito-description">
                                                             {mag.description}
                                                         </div>
                                                     </li>
@@ -1134,7 +1106,7 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                 return src && (
                                                     <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
                                                         <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
-                                                            <span style={{ paddingRight: '0.5rem', fontWeight: 'bold', color: '#c2410c' }}>Fuente de la maldición</span>
+                                                            <span className="maldito-label">Fuente de la maldición</span>
                                                             <span style={{
                                                                 flexGrow: 1,
                                                                 borderBottom: '1px dotted #ccc',
@@ -1147,7 +1119,7 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                                 {src.label}
                                                             </span>
                                                         </div>
-                                                        <div style={{ fontSize: '0.85rem', color: '#6b7280', fontStyle: 'italic', marginTop: '0.25rem', paddingLeft: '0.5rem' }}>
+                                                        <div className="maldito-description">
                                                             {src.description}
                                                         </div>
                                                     </li>
@@ -1168,41 +1140,41 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
 
                                             {/* Status Grid */}
                                             {(character.background?.economicStatus || character.background?.legalStatus || character.background?.socialStatus || character.background?.friendsAndAssociates || character.profession || character.sexualIdentity) && (
-                                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', paddingBottom: '1rem', borderBottom: '1px solid #e5e7eb' }}>
+                                                <div className="background-grid">
                                                     {character.profession && (
                                                         <div>
-                                                            <span style={{ display: 'block', fontSize: '0.75rem', color: '#6b7280', fontWeight: 'bold' }}>PROFESIÓN</span>
-                                                            <span style={{ fontSize: '0.9rem', color: '#1f2937' }}>{character.profession}</span>
+                                                            <span className="background-label">PROFESIÓN</span>
+                                                            <span className="background-value">{character.profession}</span>
                                                         </div>
                                                     )}
                                                     {character.sexualIdentity && (
                                                         <div>
-                                                            <span style={{ display: 'block', fontSize: '0.75rem', color: '#6b7280', fontWeight: 'bold' }}>IDENTIDAD SEXUAL</span>
-                                                            <span style={{ fontSize: '0.9rem', color: '#1f2937' }}>{character.sexualIdentity}</span>
+                                                            <span className="background-label">IDENTIDAD SEXUAL</span>
+                                                            <span className="background-value">{character.sexualIdentity}</span>
                                                         </div>
                                                     )}
                                                     {character.background?.economicStatus && (
                                                         <div>
-                                                            <span style={{ display: 'block', fontSize: '0.75rem', color: '#6b7280', fontWeight: 'bold' }}>POSICIÓN ECONÓMICA</span>
-                                                            <span style={{ fontSize: '0.9rem', color: '#1f2937' }}>{ECONOMIC_STATUS.find(e => e.id === character.background.economicStatus)?.label}</span>
+                                                            <span className="background-label">POSICIÓN ECONÓMICA</span>
+                                                            <span className="background-value">{ECONOMIC_STATUS.find(e => e.id === character.background.economicStatus)?.label}</span>
                                                         </div>
                                                     )}
                                                     {character.background?.legalStatus && (
                                                         <div>
-                                                            <span style={{ display: 'block', fontSize: '0.75rem', color: '#6b7280', fontWeight: 'bold' }}>SITUACIÓN LEGAL</span>
-                                                            <span style={{ fontSize: '0.9rem', color: '#1f2937' }}>{LEGAL_STATUS.find(l => l.id === character.background.legalStatus)?.label}</span>
+                                                            <span className="background-label">SITUACIÓN LEGAL</span>
+                                                            <span className="background-value">{LEGAL_STATUS.find(l => l.id === character.background.legalStatus)?.label}</span>
                                                         </div>
                                                     )}
                                                     {character.background?.socialStatus && (
                                                         <div>
-                                                            <span style={{ display: 'block', fontSize: '0.75rem', color: '#6b7280', fontWeight: 'bold' }}>POSICIÓN SOCIAL</span>
-                                                            <span style={{ fontSize: '0.9rem', color: '#1f2937' }}>{SOCIAL_STATUS.find(s => s.id === character.background.socialStatus)?.label}</span>
+                                                            <span className="background-label">POSICIÓN SOCIAL</span>
+                                                            <span className="background-value">{SOCIAL_STATUS.find(s => s.id === character.background.socialStatus)?.label}</span>
                                                         </div>
                                                     )}
                                                     {character.background?.friendsAndAssociates && (
                                                         <div>
-                                                            <span style={{ display: 'block', fontSize: '0.75rem', color: '#6b7280', fontWeight: 'bold' }}>AMISTADES Y ALLEGADOS</span>
-                                                            <span style={{ fontSize: '0.9rem', color: '#1f2937' }}>{FRIENDS_AND_ASSOCIATES.find(f => f.id === character.background.friendsAndAssociates)?.label}</span>
+                                                            <span className="background-label">AMISTADES Y ALLEGADOS</span>
+                                                            <span className="background-value">{FRIENDS_AND_ASSOCIATES.find(f => f.id === character.background.friendsAndAssociates)?.label}</span>
                                                         </div>
                                                     )}
                                                 </div>
@@ -1211,8 +1183,8 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                             {/* Background Items */}
                                             {character.background?.items?.length > 0 && (
                                                 <div>
-                                                    <span style={{ display: 'block', fontSize: '0.75rem', color: '#6b7280', fontWeight: 'bold', marginBottom: '0.5rem' }}>NOTAS DE TRASFONDO</span>
-                                                    <ul style={{ margin: 0, paddingLeft: '1.2rem', color: '#374151', fontSize: '0.9rem' }}>
+                                                    <span className="bg-notes-label">NOTAS DE TRASFONDO</span>
+                                                    <ul className="bg-notes-list">
                                                         {character.background.items.map((item: string, i: number) => (
                                                             <li key={i}>{item}</li>
                                                         ))}
@@ -1222,20 +1194,12 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
 
                                             {/* Prejudice Resistance */}
                                             {character.background?.prejudiceResistance && (
-                                                <div style={{
-                                                    display: 'flex',
-                                                    justifyContent: 'space-between',
-                                                    alignItems: 'center',
-                                                    backgroundColor: '#eff6ff',
-                                                    padding: '0.75rem',
-                                                    borderRadius: '6px',
-                                                    border: '1px solid #bfdbfe'
-                                                }}>
+                                                <div className="prejudice-container">
                                                     <div>
-                                                        <span style={{ display: 'block', fontSize: '0.75rem', color: '#1e40af', fontWeight: 'bold' }}>RESISTENCIA A PREJUICIOS</span>
-                                                        <span style={{ fontSize: '1.1rem', fontWeight: 'bold', color: '#1e3a8a' }}>{character.background.prejudiceResistance}%</span>
+                                                        <span className="prejudice-label">RESISTENCIA A PREJUICIOS</span>
+                                                        <span className="prejudice-value">{character.background.prejudiceResistance}%</span>
                                                     </div>
-                                                    <span style={{ fontSize: '0.85rem', color: '#3b82f6', fontWeight: 'bold' }}>
+                                                    <span className="prejudice-cost">
                                                         ({((character.background.prejudiceResistance - 50) * 0.1).toFixed(1)} PCs)
                                                     </span>
                                                 </div>
@@ -1278,36 +1242,23 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                 const type = definition?.type || 'General';
 
                                                 return (
-                                                    <li key={`${module.id}-${idx}`} style={{
-                                                        listStyle: 'none',
-                                                        marginBottom: '0.75rem',
-                                                        borderBottom: '1px solid #e5e7eb',
-                                                        paddingBottom: '0.5rem'
-                                                    }}>
-                                                        <div style={{ display: 'flex', alignItems: 'center', width: '100%', marginBottom: '0.25rem', gap: '0.5rem', flexWrap: 'wrap' }}>
-                                                            <span style={{ fontWeight: 'bold', color: '#1f2937' }}>{module.name}</span>
+                                                    <li key={`${module.id}-${idx}`} className="tech-module-item">
+                                                        <div className="tech-module-row">
+                                                            <span className="tech-module-name">{module.name}</span>
 
-                                                            <span className="type-tag" style={{
-                                                                fontSize: '0.7rem',
-                                                                padding: '0.2rem 0.5rem',
-                                                                borderRadius: '12px',
-                                                                fontWeight: 600,
-                                                                border: type === 'Mejora Interna' ? '1px solid #fbcfe8' : '1px solid #90caf9',
-                                                                background: type === 'Mejora Interna' ? '#fce7f3' : '#e3f2fd',
-                                                                color: type === 'Mejora Interna' ? '#be123c' : '#1565c0',
-                                                            }}>
+                                                            <span className={`tech-type-tag ${type === 'Mejora Interna' ? 'tech-type-internal' : 'tech-type-external'}`}>
                                                                 {type}
                                                             </span>
 
                                                             <div style={{ flexGrow: 1 }}></div>
 
                                                             {module.location && (
-                                                                <span style={{ fontSize: '0.8rem', color: '#6b7280', fontStyle: 'italic', marginRight: '0.5rem' }}>
+                                                                <span className="tech-location">
                                                                     {module.location}
                                                                 </span>
                                                             )}
 
-                                                            <span style={{ fontWeight: 'bold', color: '#4f46e5', fontSize: '0.875rem' }}>
+                                                            <span className="tech-cost">
                                                                 {module.pcCost} PC
                                                             </span>
                                                         </div>
@@ -1326,45 +1277,37 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                     return (
                                         <div className="sheet-section exoskeleton">
                                             <div className="section-header">
-                                                <h4>Exoesqueleto Energético</h4>
+                                                <h4>Exoesqueleto (Energía)</h4>
                                                 <span className="cost">({config.pcCost} PCs)</span>
                                             </div>
-                                            <div style={{
-                                                backgroundColor: '#f8fafc',
-                                                border: '2px solid #cbd5e1',
-                                                borderRadius: '8px',
-                                                padding: '1rem'
-                                            }}>
-                                                <div style={{
-                                                    display: 'grid',
-                                                    gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
-                                                    gap: '0.75rem'
-                                                }}>
-                                                    <div style={{ display: 'flex', flexDirection: 'column' }}>
-                                                        <span style={{ fontSize: '0.7rem', color: '#64748b', fontWeight: 'bold', textTransform: 'uppercase' }}>Fuerza</span>
-                                                        <span style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#0f172a' }}>{config.fue}</span>
+                                            <div className="exoskeleton-grid">
+                                                <div className="exoskeleton-card">
+                                                    <div className="exoskeleton-header">
+                                                        {config.label}
                                                     </div>
-                                                    <div style={{ display: 'flex', flexDirection: 'column' }}>
-                                                        <span style={{ fontSize: '0.7rem', color: '#64748b', fontWeight: 'bold', textTransform: 'uppercase' }}>Puntos de Vida</span>
-                                                        <span style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#0f172a' }}>{config.pv}</span>
-                                                    </div>
-                                                    <div style={{ display: 'flex', flexDirection: 'column' }}>
-                                                        <span style={{ fontSize: '0.7rem', color: '#64748b', fontWeight: 'bold', textTransform: 'uppercase' }}>D.A. Físico</span>
-                                                        <span style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#0f172a', fontFamily: 'monospace' }}>
-                                                            {config.daCinetico}/{config.daEnergia}
-                                                        </span>
-                                                    </div>
-                                                    <div style={{ display: 'flex', flexDirection: 'column' }}>
-                                                        <span style={{ fontSize: '0.7rem', color: '#64748b', fontWeight: 'bold', textTransform: 'uppercase' }}>Regeneración</span>
-                                                        <span style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#0f172a' }}>{config.regeneracion} PV/h</span>
-                                                    </div>
-                                                    <div style={{ display: 'flex', flexDirection: 'column' }}>
-                                                        <span style={{ fontSize: '0.7rem', color: '#64748b', fontWeight: 'bold', textTransform: 'uppercase' }}>Emisión</span>
-                                                        <span style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#7c3aed', fontFamily: 'monospace' }}>{config.emision}</span>
-                                                    </div>
-                                                    <div style={{ display: 'flex', flexDirection: 'column' }}>
-                                                        <span style={{ fontSize: '0.7rem', color: '#64748b', fontWeight: 'bold', textTransform: 'uppercase' }}>Velocidad</span>
-                                                        <span style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#0f172a' }}>{config.velocidad} Mach</span>
+                                                    <div className="exoskeleton-stats">
+                                                        <div className="exoskeleton-stat-item">
+                                                            <span className="exoskeleton-stat-label">Puntos de Vida</span>
+                                                            <span className="exoskeleton-stat-value">{config.pv}</span>
+                                                        </div>
+                                                        <div className="exoskeleton-stat-item">
+                                                            <span className="exoskeleton-stat-label">D.A. Físico</span>
+                                                            <span className="exoskeleton-stat-value mono">
+                                                                {config.daCinetico}/{config.daEnergia}
+                                                            </span>
+                                                        </div>
+                                                        <div className="exoskeleton-stat-item">
+                                                            <span className="exoskeleton-stat-label">Regeneración</span>
+                                                            <span className="exoskeleton-stat-value">{config.regeneracion} PV/h</span>
+                                                        </div>
+                                                        <div className="exoskeleton-stat-item">
+                                                            <span className="exoskeleton-stat-label">Emisión</span>
+                                                            <span className="exoskeleton-stat-value highlight">{config.emision}</span>
+                                                        </div>
+                                                        <div className="exoskeleton-stat-item">
+                                                            <span className="exoskeleton-stat-label">Velocidad</span>
+                                                            <span className="exoskeleton-stat-value">{config.velocidad} Mach</span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1390,33 +1333,25 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                 return <span className="cost">({cost} PCs)</span>;
                                             })()}
                                         </div>
-                                        <div style={{
-                                            backgroundColor: '#f0f9ff',
-                                            border: '2px solid #bae6fd',
-                                            borderRadius: '8px',
-                                            padding: '1rem',
-                                            display: 'grid',
-                                            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-                                            gap: '1rem'
-                                        }}>
+                                        <div className="tech-container">
 
                                             {/* Armor / Structure */}
                                             {character.exoskeletonArmorConfig && (() => {
                                                 const config = EXOSKELETON_ARMOR_CONFIGS.find(c => c.id === character.exoskeletonArmorConfig);
                                                 if (!config) return null;
                                                 return (
-                                                    <div style={{ padding: '0.5rem', backgroundColor: 'white', borderRadius: '6px', boxShadow: '0 1px 2px rgba(0,0,0,0.05)' }}>
-                                                        <div style={{ fontWeight: 'bold', color: '#0369a1', marginBottom: '0.5rem', borderBottom: '1px solid #e0f2fe', paddingBottom: '0.25rem' }}>
+                                                    <div className="tech-card">
+                                                        <div className="tech-card-header">
                                                             Exoesqueleto / Estructura
                                                         </div>
-                                                        <div style={{ display: 'grid', gap: '0.5rem' }}>
-                                                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                                                <span style={{ fontSize: '0.9rem', color: '#64748b' }}>Puntos de Vida</span>
-                                                                <span style={{ fontWeight: 'bold', color: '#0f172a' }}>{config.pv}</span>
+                                                        <div className="tech-card-stats">
+                                                            <div className="tech-stat-row">
+                                                                <span className="tech-stat-label">Puntos de Vida</span>
+                                                                <span className="tech-stat-value">{config.pv}</span>
                                                             </div>
-                                                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                                                <span style={{ fontSize: '0.9rem', color: '#64748b' }}>D.A. Físico</span>
-                                                                <span style={{ fontWeight: 'bold', color: '#0f172a' }}>{config.daFisico}</span>
+                                                            <div className="tech-stat-row">
+                                                                <span className="tech-stat-label">D.A. Físico</span>
+                                                                <span className="tech-stat-value">{config.daFisico}</span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1428,19 +1363,19 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                 const config = TECHNOSUIT_STRENGTH_CONFIGS.find(c => c.id === character.technoSuitStrengthConfig);
                                                 if (!config) return null;
                                                 return (
-                                                    <div style={{ padding: '0.5rem', backgroundColor: 'white', borderRadius: '6px', boxShadow: '0 1px 2px rgba(0,0,0,0.05)' }}>
-                                                        <div style={{ fontWeight: 'bold', color: '#0369a1', marginBottom: '0.5rem', borderBottom: '1px solid #e0f2fe', paddingBottom: '0.25rem' }}>
+                                                    <div className="tech-card">
+                                                        <div className="tech-card-header">
                                                             Fuerza
                                                         </div>
-                                                        <div style={{ display: 'grid', gap: '0.5rem' }}>
-                                                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                                                <span style={{ fontSize: '0.9rem', color: '#64748b' }}>Fuerza Tecnoarmadura</span>
-                                                                <span style={{ fontWeight: 'bold', color: '#0f172a' }}>{config.fuerza}</span>
+                                                        <div className="tech-card-stats">
+                                                            <div className="tech-stat-row">
+                                                                <span className="tech-stat-label">Fuerza Tecnoarmadura</span>
+                                                                <span className="tech-stat-value">{config.fuerza}</span>
                                                             </div>
                                                             {config.fiabilidad && (
-                                                                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                                                    <span style={{ fontSize: '0.9rem', color: '#64748b' }}>Fiabilidad</span>
-                                                                    <span style={{ fontWeight: 'bold', color: '#ef4444' }}>{config.fiabilidad}</span>
+                                                                <div className="tech-stat-row">
+                                                                    <span className="tech-stat-label">Fiabilidad</span>
+                                                                    <span className="tech-stat-value alert">{config.fiabilidad}</span>
                                                                 </div>
                                                             )}
                                                         </div>
@@ -1450,27 +1385,19 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
 
                                             {/* Cyborg Implants */}
                                             {character.cyborgImplants && character.cyborgImplants.length > 0 && (
-                                                <div style={{ gridColumn: '1 / -1', marginTop: '0.5rem' }}>
-                                                    <div style={{ fontWeight: 'bold', color: '#0369a1', marginBottom: '0.5rem', borderBottom: '1px solid #e0f2fe', paddingBottom: '0.25rem' }}>
+                                                <div className="cyborg-container">
+                                                    <div className="tech-card-header">
                                                         Implantes Cibernéticos
                                                     </div>
-                                                    <div style={{ display: 'grid', gap: '0.5rem' }}>
+                                                    <div className="tech-card-stats">
                                                         {character.cyborgImplants.map((implant: any) => {
                                                             const stat = CYBORG_IMPLANT_STATS.find(s => s.id === implant.statConfigId);
                                                             const str = CYBORG_IMPLANT_STRENGTHS.find(s => s.id === implant.strengthConfigId);
                                                             return (
-                                                                <div key={implant.id} style={{
-                                                                    display: 'flex',
-                                                                    justifyContent: 'space-between',
-                                                                    backgroundColor: 'white',
-                                                                    padding: '0.5rem',
-                                                                    borderRadius: '4px',
-                                                                    border: '1px solid #e0e7ff',
-                                                                    fontSize: '0.9rem'
-                                                                }}>
+                                                                <div key={implant.id} className="cyborg-item">
                                                                     <div>
-                                                                        <span style={{ fontWeight: 'bold', color: '#1e40af' }}>{implant.name}</span>
-                                                                        <div style={{ fontSize: '0.8rem', color: '#64748b' }}>
+                                                                        <span className="cyborg-name">{implant.name}</span>
+                                                                        <div className="cyborg-details">
                                                                             {stat && `PV +${stat.pvBonus} / DA ${stat.daFisico}`}
                                                                             {str && str.pcCost > 0 && ` • FUE ${str.fuerza}`}
                                                                         </div>
@@ -1478,7 +1405,7 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                                     {/* Sum cost of stat + strength */}
                                                                     {(stat || str) && (
                                                                         <div style={{ textAlign: 'right' }}>
-                                                                            <span style={{ display: 'block', fontWeight: 'bold', color: '#0f172a' }}>
+                                                                            <span className="cyborg-cost">
                                                                                 {((stat?.pcCost || 0) + (str?.pcCost || 0))} PC
                                                                             </span>
                                                                         </div>
@@ -1513,25 +1440,20 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                 };
 
                                                 return (
-                                                    <li key={`${power.id}-${idx}`} style={{
-                                                        listStyle: 'none',
-                                                        marginBottom: '0.75rem',
-                                                        borderBottom: '1px solid #e5e7eb',
-                                                        paddingBottom: '0.5rem'
-                                                    }}>
+                                                    <li key={`${power.id}-${idx}`} className="power-item">
 
-                                                        <div style={{ display: 'flex', alignItems: 'baseline', width: '100%', marginBottom: '0.25rem' }}>
-                                                            <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                                                <span style={{ fontWeight: 'bold', color: '#059669' }}>
+                                                        <div className="power-row">
+                                                            <span className="power-name-container">
+                                                                <span className="power-name">
                                                                     {powerData.name}
                                                                     {power.selectedOption && (
-                                                                        <span style={{ fontWeight: 'normal', color: '#047857', fontSize: '0.9em', marginLeft: '0.25rem' }}>
+                                                                        <span className="power-option">
                                                                             ({power.selectedOption})
                                                                         </span>
                                                                     )}
                                                                 </span>
                                                                 {power.customizations && power.customizations.length > 0 && (
-                                                                    <div style={{ fontSize: '0.75rem', color: '#065f46', marginTop: '0.1rem', fontStyle: 'italic' }}>
+                                                                    <div className="power-customizations">
                                                                         {power.customizations.map((c: any) => `${c.description} (${c.cost > 0 ? '+' : ''}${c.cost})`).join(', ')}
                                                                     </div>
                                                                 )}
@@ -1544,17 +1466,17 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                                 top: '-4px',
                                                                 minWidth: '20px'
                                                             }}></span>
-                                                            <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap', fontSize: '0.875rem' }}>
+                                                            <span className="power-rank">
                                                                 {!powerData.characteristic ? (
                                                                     <>
-                                                                        {getRankLevel(power.rank)} <span style={{ fontSize: '0.75rem', color: '#9ca3af' }}>({power.rank})</span>
+                                                                        {getRankLevel(power.rank)} <span className="power-rank-value">({power.rank})</span>
                                                                     </>
                                                                 ) : (
                                                                     <>Mod: +{power.powerMod || 0}</>
                                                                 )}
                                                             </span>
                                                             {powerData.skillCalc && (
-                                                                <span style={{ fontSize: '0.85rem', color: '#d97706', fontWeight: '500', marginLeft: '0.5rem' }}>
+                                                                <span className="power-skill-value">
                                                                     {power.skillValue || calculatePowerSkillBase(character, powerData.skillCalc)}%
                                                                 </span>
                                                             )}
@@ -1575,7 +1497,7 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                 // 1. Try to use stored value
                                                 if (character.spells?.calculatedEM !== undefined) {
                                                     return (
-                                                        <span className="cost" style={{ color: '#4f46e5', fontWeight: 'bold' }}>
+                                                        <span className="cost spells-em-cost">
                                                             ({character.spells.calculatedEM} EM)
                                                         </span>
                                                     );
@@ -1592,7 +1514,7 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                 const calculatedEM = calculateEM(character, character.powers?.selected || [], divisor);
 
                                                 return (
-                                                    <span className="cost" style={{ color: '#4f46e5', fontWeight: 'bold' }}>
+                                                    <span className="cost spells-em-cost">
                                                         ({calculatedEM} EM)
                                                     </span>
                                                 );
@@ -1609,15 +1531,12 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                     : `Rango ${spell.rank}`;
 
                                                 return (
-                                                    <li key={`${spell.id}-${idx}`} style={{
-                                                        listStyle: 'none',
-                                                        marginBottom: '0.5rem'
-                                                    }}>
+                                                    <li key={`${spell.id}-${idx}`} className="spell-item">
                                                         <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
-                                                            <span style={{ fontWeight: 'bold', color: '#4f46e5' }}>
+                                                            <span className="spell-name">
                                                                 {spellData.name}
                                                                 {spell.selectedOption && (
-                                                                    <span style={{ fontWeight: 'normal', color: '#4338ca', fontSize: '0.9em', marginLeft: '0.25rem' }}>
+                                                                    <span className="spell-option">
                                                                         ({spell.selectedOption})
                                                                     </span>
                                                                 )}
@@ -1630,12 +1549,7 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                                 top: '-4px',
                                                                 minWidth: '20px'
                                                             }}></span>
-                                                            <span style={{
-                                                                fontSize: '0.875rem',
-                                                                color: spell.rank > maxRank ? '#a855f7' : '#8B4513',
-                                                                fontWeight: spell.rank > maxRank ? 'bold' : 'normal',
-                                                                whiteSpace: 'nowrap'
-                                                            }}>
+                                                            <span className={`spell-rank ${spell.rank > maxRank ? 'master' : 'normal'}`}>
                                                                 {rankDisplay}
                                                             </span>
                                                         </div>
@@ -1697,11 +1611,11 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                         </div>
                                         <ul className="no-bullets-list" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                                             {Object.entries(character.traumas).map(([specialty, trauma]: [string, any], idx: number) => (
-                                                <li key={idx} style={{ marginBottom: '1rem' }}>
-                                                    <div style={{ fontWeight: 'bold', color: '#991b1b', textTransform: 'uppercase', fontSize: '0.875rem', marginBottom: '0.25rem' }}>
+                                                <li key={idx} className="trauma-item">
+                                                    <div className="trauma-header">
                                                         {specialty}
                                                     </div>
-                                                    <div style={{ fontStyle: 'italic', color: '#4b5563', fontSize: '0.95rem', lineHeight: '1.4', paddingLeft: '0.5rem', borderLeft: '3px solid #fee2e2' }}>
+                                                    <div className="trauma-description">
                                                         "{trauma}"
                                                     </div>
                                                 </li>
@@ -1716,7 +1630,7 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                         <div className="section-header">
                                             <h4>Notas y Descripción</h4>
                                         </div>
-                                        <div style={{ whiteSpace: 'pre-wrap', fontStyle: 'italic', color: '#4b5563', fontSize: '0.95rem', lineHeight: '1.5' }}>
+                                        <div className="notes-content">
                                             {character.notes}
                                         </div>
                                     </div>
@@ -1726,263 +1640,6 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                     </div>
                 </div>
 
-                <style dangerouslySetInnerHTML={{
-                    __html: `
-                    /* Force remove bullets and ALL spacing from specific lists */
-                    .no-bullets-list, .no-bullets-list li {
-                        list-style-type: none !important;
-                        list-style: none !important;
-                        padding-left: 0 !important;
-                        margin-left: 0 !important;
-                        padding-inline-start: 0 !important;
-                    }
-                    .no-bullets-list li::before {
-                        content: none !important;
-                        display: none !important;
-                    }
-                    
-                    .character-dialog {
-                        padding: 0;
-                        border: none;
-                        border-radius: 12px;
-                        background: transparent;
-                        max-width: 90vw;
-                        max-height: 90vh;
-                        width: 1000px;
-                        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-                        text-align: left;
-                    }
-                    .character-dialog::backdrop {
-                        background: rgba(0, 0, 0, 0.5);
-                        backdrop-filter: blur(3px);
-                    }
-                    .dialog-content {
-                        background: #f9f7f1;
-                        display: flex;
-                        flex-direction: column;
-                        height: 100%;
-                        max-height: 90vh;
-                        border-radius: 12px;
-                        overflow: hidden;
-                    }
-                    .dialog-header {
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                        padding: 1rem 1.5rem;
-                        background: white;
-                        border-bottom: 2px solid #8B4513;
-                        position: sticky;
-                        top: 0;
-                        z-index: 10;
-                    }
-                    .dialog-actions {
-                        display: flex;
-                        gap: 0.5rem;
-                        align-items: center;
-                    }
-                    .action-btn {
-                        background: none;
-                        border: none;
-                        font-size: 1.2rem;
-                        cursor: pointer;
-                        width: 36px;
-                        height: 36px;
-                        border-radius: 50%;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        transition: all 0.2s;
-                    }
-                    .action-btn:hover {
-                        background: #eee;
-                        transform: scale(1.1);
-                    }
-                    .close-btn {
-                        background: none;
-                        border: none;
-                        font-size: 1.5rem;
-                        cursor: pointer;
-                        color: #666;
-                        width: 36px;
-                        height: 36px;
-                        border-radius: 50%;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        transition: all 0.2s;
-                    }
-                    .close-btn:hover {
-                        background: #eee;
-                        color: #d32f2f;
-                        transform: rotate(90deg);
-                    }
-                    .dialog-title {
-                        font-size: 1.25rem;
-                        font-weight: 700;
-                        color: #333;
-                        text-transform: uppercase;
-                    }
-                    .dialog-body {
-                        overflow-y: auto;
-                        padding: 1rem;
-                        flex: 1;
-                    }
-                    .character-sheet {
-                        margin: 0;
-                        border: none;
-                        box-shadow: none;
-                        padding: 0;
-                    }
-                    .sheet-header {
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                        border-bottom: 2px solid #8B4513;
-                        margin-bottom: 1.5rem;
-                        padding-bottom: 0.5rem;
-                    }
-                    .sheet-header h3 {
-                        margin: 0;
-                        font-size: 1.5rem;
-                        color: #333;
-                        text-transform: uppercase;
-                        letter-spacing: 0.05em;
-                    }
-                    .header-stats {
-                        display: flex;
-                        gap: 1rem;
-                        align-items: center;
-                    }
-                    .level-badge {
-                        background: #d32f2f;
-                        color: white;
-                        padding: 0.25rem 0.75rem;
-                        border-radius: 2px;
-                        font-weight: bold;
-                        text-transform: uppercase;
-                    }
-                    .total-cost {
-                        font-weight: bold;
-                        background: #8B4513;
-                        color: white;
-                        padding: 0.25rem 0.75rem;
-                        border-radius: 2px;
-                    }
-                    .sheet-grid {
-                        column-count: 1;
-                        column-gap: 2rem;
-                    }
-                    @media (min-width: 1024px) {
-                        .sheet-grid {
-                            column-count: 2;
-                        }
-                        .combat-section {
-                            column-span: all;
-                        }
-                    }
-                    .sheet-section {
-                        background: rgba(255, 255, 255, 0.5);
-                        padding: 1rem;
-                        border: 1px dashed #ccc;
-                        break-inside: avoid;
-                        margin-bottom: 1.5rem;
-                    }
-                    .section-header {
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: baseline;
-                        margin-bottom: 1rem;
-                        border-bottom: 1px solid #eee;
-                        padding-bottom: 0.25rem;
-                    }
-                    .section-header h4 {
-                        margin: 0;
-                        color: #8B4513;
-                        font-size: 1.1rem;
-                        text-transform: uppercase;
-                    }
-                    .cost {
-                        font-size: 0.9rem;
-                        color: #666;
-                    }
-                    .combat-grid {
-                        display: flex;
-                        flex-wrap: wrap;
-                        gap: 1rem;
-                        justify-content: space-between;
-                    }
-                    .combat-stat-box {
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
-                        flex: 1;
-                        min-width: 100px;
-                        border: 1px solid #e0e0e0;
-                        padding: 0.5rem;
-                        background: white;
-                        border-radius: 4px;
-                    }
-                    .stat-label {
-                        font-size: 0.8rem;
-                        text-transform: uppercase;
-                        color: #666;
-                        text-align: center;
-                        margin-bottom: 0.25rem;
-                    }
-                    .stat-value {
-                        font-size: 1.2rem;
-                        font-weight: bold;
-                        color: #333;
-                    }
-                    .attr-grid {
-                        display: grid;
-                        grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
-                        gap: 1rem;
-                    }
-                    .attr-item {
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
-                        border: 1px solid #ddd;
-                        padding: 0.5rem;
-                        background: white;
-                    }
-                    .attr-label {
-                        font-size: 0.8rem;
-                        text-transform: uppercase;
-                        color: #666;
-                        margin-bottom: 0.25rem;
-                    }
-                    .attr-value {
-                        font-size: 1.25rem;
-                        font-weight: bold;
-                        color: #333;
-                    }
-                    ul {
-                        list-style: none;
-                        padding: 0;
-                        margin: 0;
-                    }
-                    .dialog-body li {
-                        margin-bottom: 0.5rem;
-                        padding-left: 1.2rem;
-                        position: relative;
-                    }
-                    .dialog-body li::before {
-                        content: "•";
-                        color: #d32f2f;
-                        position: absolute;
-                        left: 0;
-                        font-weight: bold;
-                    }
-                    .dialog-body li.no-bullet-item {
-                        padding-left: 0;
-                    }
-                    .dialog-body li.no-bullet-item::before {
-                        display: none;
-                    }
-                `}} />
             </dialog >
         </>
     );

@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "18b58e9f24d3a2d0",
+        "id": "ac631d726b531397",
         "type": "tabs",
         "children": [
           {
-            "id": "ab4baf2b308f519d",
+            "id": "d20f7626b338e7da",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "lore/localizaciones/valladolid.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "valladolid"
+              "title": "Nueva pestaña"
             }
           }
         ]
@@ -183,10 +179,10 @@
       "bases:Crear nueva base": false
     }
   },
-  "active": "ab4baf2b308f519d",
+  "active": "d20f7626b338e7da",
   "lastOpenFiles": [
-    "lore/localizaciones/valdoria.md",
     "lore/localizaciones/valladolid.md",
+    "lore/localizaciones/valdoria.md",
     "faq/14-subida-de-nivel-pasar-de-100-en-caracteristicas.md",
     "faq/13-daño-lanzar-objetos-telequinesis.md",
     "faq/12-alcance-telepatia.md",

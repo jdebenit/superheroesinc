@@ -12,6 +12,7 @@ import {
 } from '../../data/wizardConfig';
 import { mergeWithDefaults } from '../../utils/dataCleaner';
 import { useCharacterCalculations } from '../../hooks/wizard/useCharacterCalculations';
+import './CharacterWizard.css';
 
 export default function CharacterWizard() {
     const [currentStep, setCurrentStep] = useState(1);
@@ -176,11 +177,11 @@ export default function CharacterWizard() {
         }
 
         return (
-            <div style={{ padding: '2rem' }}>
-                <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+            <div className="step-fallback-container">
+                <h2 className="step-fallback-title">
                     Paso {currentStep}: {STEPS[currentStep - 1].name}
                 </h2>
-                <p style={{ fontSize: '1.125rem', color: '#666' }}>
+                <p className="step-fallback-text">
                     Contenido del paso {currentStep} aquí...
                 </p>
             </div>
@@ -188,37 +189,21 @@ export default function CharacterWizard() {
     };
 
     return (
-        <div style={{ width: '100%', maxWidth: '1400px', margin: '0 auto', padding: '2rem 1rem' }}>
+        <div className="wizard-container">
             {/* Header */}
-            <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-                <h1 style={{ fontSize: '3rem', fontWeight: '900', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
+            <div className="wizard-header">
+                <h1 className="wizard-title">
                     Generador de Fichas (Beta 0.6.1)
                 </h1>
-                <p style={{ fontSize: '1.25rem', color: '#666', marginBottom: '1rem' }}>
+                <p className="wizard-subtitle">
                     Crea tu personaje paso a paso
                 </p>
 
                 {/* Header Controls: PC Counter + Preview + Config + Reset */}
-                <div style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    gap: '1.5rem',
-                    flexWrap: 'wrap'
-                }}>
+                <div className="wizard-controls">
                     {/* PC Counter */}
-                    <div style={{
-                        display: 'inline-block',
-                        padding: '0.75rem 2rem',
-                        backgroundColor: '#fef3c7',
-                        border: 'none',
-                        borderRadius: '8px',
-                        fontSize: '1rem',
-                        fontWeight: 'bold',
-                        color: '#92400e',
-                        boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
-                    }}>
-                        Puntos de Creación: <span style={{ color: '#dc2626', fontSize: '1rem' }}>{totalPCs}</span>
+                    <div className="pc-counter">
+                        Puntos de Creación: <span className="pc-val">{totalPCs}</span>
                     </div>
 
                     {/* Preview Button */}
@@ -227,29 +212,7 @@ export default function CharacterWizard() {
                     {/* Import JSON Button */}
                     <button
                         onClick={handleImportJSON}
-                        style={{
-                            padding: '0.75rem 1.5rem',
-                            backgroundColor: '#10b981',
-                            color: 'white',
-                            border: 'none',
-                            borderRadius: '8px',
-                            fontSize: '1rem',
-                            fontWeight: 'bold',
-                            cursor: 'pointer',
-                            boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-                            transition: 'all 0.2s',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '0.5rem'
-                        }}
-                        onMouseEnter={(e) => {
-                            e.currentTarget.style.transform = 'translateY(-2px)';
-                            e.currentTarget.style.backgroundColor = '#059669';
-                        }}
-                        onMouseLeave={(e) => {
-                            e.currentTarget.style.transform = 'translateY(0)';
-                            e.currentTarget.style.backgroundColor = '#10b981'
-                        }}
+                        className="wizard-btn btn-import"
                     >
                         📥 Importar JSON
                     </button>
@@ -257,23 +220,7 @@ export default function CharacterWizard() {
                     {/* Reset Button */}
                     <button
                         onClick={handleReset}
-                        style={{
-                            padding: '0.75rem 1.5rem',
-                            backgroundColor: '#ef4444',
-                            color: 'white',
-                            border: 'none',
-                            borderRadius: '8px',
-                            fontSize: '1rem',
-                            fontWeight: 'bold',
-                            cursor: 'pointer',
-                            boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-                            transition: 'all 0.2s',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '0.5rem'
-                        }}
-                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#dc2626'}
-                        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#ef4444'}
+                        className="wizard-btn btn-reset"
                     >
                         🔄 Reiniciar
                     </button>
@@ -281,81 +228,39 @@ export default function CharacterWizard() {
             </div>
 
             {/* Step Navigation */}
-            <div style={{ marginBottom: '4rem', position: 'relative', padding: '0 2rem' }}>
+            <div className="step-nav-container">
                 {/* Progress Line */}
-                <div style={{
-                    position: 'absolute',
-                    top: '40px',
-                    left: '10%',
-                    right: '10%',
-                    height: '4px',
-                    backgroundColor: '#e5e7eb',
-                    borderRadius: '9999px',
-                    zIndex: 0
-                }}>
-                    <div style={{
-                        height: '100%',
-                        backgroundColor: '#2563eb',
-                        borderRadius: '9999px',
-                        width: `${((currentStep - 1) / 5) * 100}%`,
-                        transition: 'width 0.5s ease'
-                    }} />
+                <div className="progress-line-bg">
+                    <div
+                        className="progress-line-fill"
+                        style={{ width: `${((currentStep - 1) / 5) * 100}%` }}
+                    />
                 </div>
 
                 {/* Step Buttons Container */}
-                <div style={{
-                    display: 'flex',
-                    justifyContent: 'space-around',
-                    alignItems: 'flex-start',
-                    position: 'relative',
-                    zIndex: 1
-                }}>
+                <div className="steps-wrapper">
                     {STEPS.map((step) => {
                         const isActive = step.id === currentStep;
                         const isCompleted = step.id < currentStep;
+
+                        let iconClass = 'step-icon pending';
+                        if (isActive) iconClass = 'step-icon active';
+                        else if (isCompleted) iconClass = 'step-icon completed';
+
+                        let nameClass = 'step-name pending';
+                        if (isActive) nameClass = 'step-name active';
+                        else if (isCompleted) nameClass = 'step-name completed';
 
                         return (
                             <button
                                 key={step.id}
                                 onClick={() => handleStepClick(step.id)}
-                                style={{
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    alignItems: 'center',
-                                    gap: '0.75rem',
-                                    background: 'none',
-                                    border: 'none',
-                                    cursor: 'pointer',
-                                    transform: isActive ? 'scale(1.1)' : 'scale(1)',
-                                    transition: 'transform 0.3s ease',
-                                    padding: '0.5rem'
-                                }}
+                                className={`step-btn ${isActive ? 'active' : ''}`}
                             >
-                                <div style={{
-                                    width: '80px',
-                                    height: '80px',
-                                    borderRadius: '50%',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    fontSize: '2.5rem',
-                                    border: '4px solid',
-                                    borderColor: isActive ? '#1e40af' : isCompleted ? '#15803d' : '#d1d5db',
-                                    backgroundColor: isActive ? '#2563eb' : isCompleted ? '#22c55e' : 'white',
-                                    color: isActive || isCompleted ? 'white' : '#000',
-                                    boxShadow: isActive ? '0 10px 25px rgba(37, 99, 235, 0.5)' :
-                                        isCompleted ? '0 4px 6px rgba(34, 197, 94, 0.3)' : '0 1px 2px rgba(0, 0, 0, 0.05)',
-                                    transition: 'all 0.3s ease'
-                                }}>
+                                <div className={iconClass}>
                                     {isCompleted ? '✓' : step.icon}
                                 </div>
-                                <span style={{
-                                    fontSize: '1rem',
-                                    fontWeight: 'bold',
-                                    color: isActive ? '#2563eb' : isCompleted ? '#22c55e' : '#9ca3af',
-                                    textAlign: 'center',
-                                    whiteSpace: 'nowrap'
-                                }}>
+                                <span className={nameClass}>
                                     {step.name}
                                 </span>
                             </button>
@@ -365,72 +270,28 @@ export default function CharacterWizard() {
             </div>
 
             {/* Step Content */}
-            <div style={{
-                backgroundColor: 'white',
-                border: '4px solid black',
-                padding: '3rem',
-                marginBottom: '2rem',
-                minHeight: '500px',
-                boxShadow: '8px 8px 0px #000',
-                borderRadius: '8px'
-            }}>
+            <div className="step-content-box">
                 {renderStepContent()}
             </div>
 
             {/* Navigation Buttons */}
-            <div style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                padding: '0 1rem'
-            }}>
+            <div className="nav-buttons-container">
                 <button
                     onClick={handlePrevious}
                     disabled={currentStep === 1}
-                    style={{
-                        padding: '1rem 2rem',
-                        fontSize: '1.125rem',
-                        fontWeight: 'bold',
-                        borderRadius: '8px',
-                        border: '4px solid',
-                        borderColor: currentStep === 1 ? '#d1d5db' : '#000',
-                        backgroundColor: currentStep === 1 ? '#e5e7eb' : 'white',
-                        color: currentStep === 1 ? '#9ca3af' : '#000',
-                        cursor: currentStep === 1 ? 'not-allowed' : 'pointer',
-                        transition: 'all 0.2s ease',
-                        boxShadow: currentStep === 1 ? 'none' : '4px 4px 0px #000'
-                    }}
+                    className="nav-btn prev"
                 >
                     ← Anterior
                 </button>
 
-                <div style={{
-                    fontSize: '1.125rem',
-                    fontWeight: 'bold',
-                    color: '#4b5563',
-                    backgroundColor: `#f3f4f6`,
-                    padding: '0.75rem 1.5rem',
-                    borderRadius: '8px'
-                }}>
+                <div className="step-indicator">
                     Paso {currentStep} de {STEPS.length}
                 </div>
 
                 <button
                     onClick={handleNext}
                     disabled={currentStep === 6}
-                    style={{
-                        padding: '1rem 2rem',
-                        fontSize: '1.125rem',
-                        fontWeight: 'bold',
-                        borderRadius: '8px',
-                        border: '4px solid',
-                        borderColor: currentStep === 6 ? '#d1d5db' : '#1e40af',
-                        backgroundColor: currentStep === 6 ? '#e5e7eb' : '#2563eb',
-                        color: currentStep === 6 ? '#9ca3af' : 'white',
-                        cursor: currentStep === 6 ? 'not-allowed' : 'pointer',
-                        transition: 'all 0.2s ease',
-                        boxShadow: currentStep === 6 ? 'none' : '4px 4px 0px #1e40af'
-                    }}
+                    className="nav-btn next"
                 >
                     {currentStep === 6 ? 'Finalizar ✓' : 'Siguiente →'}
                 </button>
