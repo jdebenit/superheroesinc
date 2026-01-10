@@ -109,6 +109,61 @@ export default function FAQList({ faqs }: FAQListProps) {
     }
   };
 
+  // Handle URL hash on mount
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.location.hash) {
+      const id = window.location.hash.substring(1);
+      // Check if this ID exists in our FAQs
+      const faqExists = faqs.some(f => f.id === id);
+
+      if (faqExists) {
+        // Expand the FAQ
+        setExpandedFAQs(prev => {
+          const newSet = new Set(prev);
+          newSet.add(id);
+          return newSet;
+        });
+
+        // Find the page this FAQ belongs to
+        // We need to calculate which page this FAQ is on given the current filters
+        // But initially, filters are default ("Todos"), so we can find it in the full list
+        // However, if we want to be robust we should ensure we are showing the right page
+
+        // Simpler approach: If we have a hash, maybe we should ignore pagination for a second or jump to that page?
+        // Let's find the index in the *current* filtered list (which is all initially)
+        const index = filteredFAQs.findIndex(f => f.id === id);
+        if (index !== -1) {
+          const page = Math.floor(index / ITEMS_PER_PAGE) + 1;
+          setCurrentPage(page);
+
+          // Wait for render then scroll
+          setTimeout(() => {
+            const element = document.getElementById(id);
+            if (element) {
+              element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              element.classList.add('highlight-faq');
+              setTimeout(() => element.classList.remove('highlight-faq'), 2000);
+            }
+          }, 100);
+        }
+      }
+    }
+  }, [faqs, filteredFAQs]); // filteredFAQs dependence ensures we find it if it's in the initial list
+
+  const copyLink = (e: React.MouseEvent, id: string) => {
+    e.stopPropagation(); // Prevent toggling the FAQ
+    const url = `${window.location.origin}${window.location.pathname}#${id}`;
+    navigator.clipboard.writeText(url).then(() => {
+      // Could show a toast here, for now let's change the button temporarily
+      const btn = e.currentTarget as HTMLButtonElement;
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '✓';
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+      }, 1500);
+    });
+  };
+
   return (
     <div className="faq-list-container">
       <div className="controls-section">
@@ -150,17 +205,26 @@ export default function FAQList({ faqs }: FAQListProps) {
         ) : (
           <>
             {paginatedFAQs.map((faq) => (
-              <div key={faq.id} className="faq-item">
-                <button
-                  className="faq-question"
-                  onClick={() => toggleFAQ(faq.id)}
-                  aria-expanded={expandedFAQs.has(faq.id)}
-                >
-                  <span className="question-icon">
-                    {expandedFAQs.has(faq.id) ? '▼' : '▶'}
-                  </span>
-                  <span className="question-text">{faq.question}</span>
-                </button>
+              <div key={faq.id} id={faq.id} className="faq-item">
+                <div className="faq-header">
+                  <button
+                    className="faq-question"
+                    onClick={() => toggleFAQ(faq.id)}
+                    aria-expanded={expandedFAQs.has(faq.id)}
+                  >
+                    <span className="question-icon">
+                      {expandedFAQs.has(faq.id) ? '▼' : '▶'}
+                    </span>
+                    <span className="question-text">{faq.question}</span>
+                  </button>
+                  <button
+                    className="copy-link-btn"
+                    onClick={(e) => copyLink(e, faq.id)}
+                    title="Copiar enlace directo"
+                  >
+                    🔗
+                  </button>
+                </div>
 
                 {expandedFAQs.has(faq.id) && (
                   <div className="faq-answer">
@@ -320,10 +384,21 @@ export default function FAQList({ faqs }: FAQListProps) {
           transform: translateX(-2px);
         }
 
-        .faq-question {
-          width: 100%;
-          padding: 1.2rem 1.5rem;
+        .faq-header {
+          display: flex;
+          align-items: stretch;
           background: white;
+          transition: background 0.2s;
+        }
+
+        .faq-header:hover {
+          background: #f9f9f9;
+        }
+
+        .faq-question {
+          flex: 1;
+          padding: 1.2rem 0 1.2rem 1.5rem;
+          background: transparent;
           border: none;
           text-align: left;
           cursor: pointer;
@@ -334,15 +409,45 @@ export default function FAQList({ faqs }: FAQListProps) {
           font-size: 1.1rem;
           font-weight: bold;
           color: var(--color-primary, #000);
-          transition: background 0.2s;
         }
 
-        .faq-question:hover {
-          background: #f9f9f9;
+        .copy-link-btn {
+          padding: 0 1.5rem;
+          background: transparent;
+          border: none;
+          cursor: pointer;
+          font-size: 1.2rem;
+          opacity: 0.3;
+          transition: all 0.2s;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .faq-header:hover .copy-link-btn {
+          opacity: 1;
+        }
+
+        .copy-link-btn:hover {
+          background: #f0f0f0;
+          transform: scale(1.1);
+        }
+
+        @keyframes highlightFade {
+          0% { background-color: rgba(255, 255, 0, 0.3); }
+          100% { background-color: transparent; }
+        }
+
+        .highlight-faq {
+          animation: highlightFade 2s ease-out;
         }
 
         .faq-question[aria-expanded="true"] {
-          background: #f0f0f0;
+          /* background is now on header */
+        }
+        
+        .faq-header:has(.faq-question[aria-expanded="true"]) {
+           background: #f0f0f0;
         }
 
         .question-icon {

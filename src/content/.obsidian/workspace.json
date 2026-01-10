@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "lore/eventos/la-tecnoguerra.md",
+                "file": "faq/12-alcance-telepatia.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "la-tecnoguerra"
+              "title": "12-alcance-telepatia"
             }
           }
         ]
@@ -185,8 +185,10 @@
   },
   "active": "ab4baf2b308f519d",
   "lastOpenFiles": [
-    "lore/eventos/la-caida-de-la-gran-barrera.md",
+    "faq/11-supervelocidad-valor-control.md",
+    "faq/12-alcance-telepatia.md",
     "lore/eventos/la-tecnoguerra.md",
+    "lore/eventos/la-caida-de-la-gran-barrera.md",
     "blog/psicogeografía-y-memoria-en-el-rol.md",
     "2025-11-30.md",
     "blog/actual-plays-superheroes-inc.md",
@@ -199,7 +201,6 @@
     "blog/crear-campana-rol-superheroes-en-espana-guia-epica-y-lore.md",
     "blog/el-vigilante-no-es-un-atajo.md",
     "blog/guia-escritura-shi-replay-script.md",
-    "faq/11-supervelocidad-valor-control.md",
     "faq/10-perdida-puntos-vida-transformacion.md",
     "faq/09-reglas-opcionales-edicion-limitada.md",
     "characters/mjolnir.md",
@@ -210,7 +211,6 @@
     "faq/05-endoesqueleto-brazos-cyberneticos.md",
     "lore/organizaciones/fundacion-divina-mundial.md",
     "().md",
-    "faq/01-que-necesito-para-jugar.md",
     "faq",
     "rpg/leon-rojo.yaml",
     "rpg/jefe-motero-road-reapers.yaml",
