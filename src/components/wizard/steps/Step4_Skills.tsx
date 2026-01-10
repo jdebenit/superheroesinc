@@ -4,6 +4,7 @@ import { SPECIAL_SKILLS, SKILL_CATEGORIES, getSkillsByCategory } from '../../../
 import { calculateGeneralSkillValues, calculateSpecialSkillsPCWithInt, calculateSpecialSkillValues } from '../../../utils/characterCalculations';
 import { getFreeSkillsForOrigins } from '../../../data/freeOriginSkills';
 import { getRequiredSkillsForOrigins } from '../../../data/requiredSpecialtySkills';
+import { useSkillAutoEffects } from '../../../hooks/wizard/useCharacterAutoEffects';
 
 interface Step4Props {
     data: any;
@@ -79,146 +80,8 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
     // Get required skills from Vigilante specialties
     const requiredSkillIds = getRequiredSkillsForOrigins(data.origin?.items || []);
 
-    // Auto-add free skills from origin
-    useEffect(() => {
-        if (freeSkillIds.length > 0) {
-            const newSelected = { ...selectedSkills };
-            let hasChanges = false;
-
-            freeSkillIds.forEach(skillId => {
-                if (!newSelected[skillId]) {
-                    newSelected[skillId] = { isFree: true, isRequired: false, manualMods: 0, manualBases: 0 };
-                    hasChanges = true;
-                }
-            });
-
-            if (hasChanges) {
-                setSelectedSkills(newSelected);
-            }
-        }
-    }, [freeSkillIds.join(',')]);
-
-    // Auto-add required skills from Vigilante specialties AND update isRequired status
-    useEffect(() => {
-        const newSelected = { ...selectedSkills };
-        const newSpecified = { ...specifiedSkills };
-        let hasChanges = false;
-
-        // 1. Cleanup: Remove isRequired from skills that are no longer required
-        Object.keys(newSelected).forEach(skillId => {
-            if (newSelected[skillId].isRequired && !requiredSkillIds.includes(skillId)) {
-                newSelected[skillId] = {
-                    ...newSelected[skillId],
-                    isRequired: false
-                };
-                hasChanges = true;
-            }
-        });
-
-        Object.keys(newSpecified).forEach(uniqueId => {
-            const skillId = newSpecified[uniqueId].skillId;
-            if (newSpecified[uniqueId].isRequired && !requiredSkillIds.includes(skillId)) {
-                newSpecified[uniqueId] = {
-                    ...newSpecified[uniqueId],
-                    isRequired: false
-                };
-                hasChanges = true;
-            }
-        });
-
-        // 2. Add: Ensure all currently required skills are marked as such
-        if (requiredSkillIds.length > 0) {
-            requiredSkillIds.forEach(skillId => {
-                const skillDef = SPECIAL_SKILLS.find(s => s.id === skillId);
-
-                if (skillDef?.requiresSpecification) {
-                    // For parametrizable skills
-                    const existingInstances = Object.values(newSpecified).filter(s => s.skillId === skillId);
-
-                    if (existingInstances.length === 0) {
-                        // If none exist, create one
-                        const uniqueId = `${skillId}_required_${Date.now()}`;
-                        newSpecified[uniqueId] = {
-                            skillId,
-                            specification: '',
-                            isFree: false,
-                            isRequired: true,
-                            manualMods: 0,
-                            manualBases: 0
-                        };
-                        hasChanges = true;
-                    } else {
-                        // If instances exist, ensure at least one is required (or all? usually just one is enough to satisfy "required")
-                        // For simplicity, let's mark the first one found as required if none are. 
-                        // Actually, if we just want to ensure the requirement is met, we should check if ANY are marked required.
-                        const hasRequiredInstance = existingInstances.some(s => s.isRequired);
-                        if (!hasRequiredInstance) {
-                            // Find the key for the first instance
-                            const firstKey = Object.keys(newSpecified).find(key => newSpecified[key].skillId === skillId);
-                            if (firstKey) {
-                                newSpecified[firstKey] = {
-                                    ...newSpecified[firstKey],
-                                    isRequired: true
-                                };
-                                hasChanges = true;
-                            }
-                        }
-                    }
-                } else {
-                    // For standard skills
-                    if (!newSelected[skillId]) {
-                        // Add if missing
-                        newSelected[skillId] = { isFree: false, isRequired: true, manualMods: 0, manualBases: 0 };
-                        hasChanges = true;
-                    } else if (!newSelected[skillId].isRequired) {
-                        // Mark required if exists but not marked
-                        newSelected[skillId] = {
-                            ...newSelected[skillId],
-                            isRequired: true
-                        };
-                        hasChanges = true;
-                    }
-                }
-            });
-        }
-
-        if (hasChanges) {
-            setSelectedSkills(newSelected);
-            setSpecifiedSkills(newSpecified);
-        }
-    }, [requiredSkillIds.join(',')]);
-
-    // Cleanup restricted skills when origin changes
-    useEffect(() => {
-        const originItems = data.origin?.items || [];
-        const newSelected = { ...selectedSkills };
-        const newSpecified = { ...specifiedSkills };
-        let hasChanges = false;
-
-        // Check selected skills
-        Object.keys(newSelected).forEach(skillId => {
-            const skillDef = SPECIAL_SKILLS.find(s => s.id === skillId);
-            if (skillDef && !isSkillAllowed(skillDef, originItems)) {
-                delete newSelected[skillId];
-                hasChanges = true;
-            }
-        });
-
-        // Check specified skills
-        Object.keys(newSpecified).forEach(uniqueId => {
-            const skillId = newSpecified[uniqueId].skillId;
-            const skillDef = SPECIAL_SKILLS.find(s => s.id === skillId);
-            if (skillDef && !isSkillAllowed(skillDef, originItems)) {
-                delete newSpecified[uniqueId];
-                hasChanges = true;
-            }
-        });
-
-        if (hasChanges) {
-            setSelectedSkills(newSelected);
-            setSpecifiedSkills(newSpecified);
-        }
-    }, [JSON.stringify(data.origin?.items)]);
+    // Use custom hook for auto-effects
+    useSkillAutoEffects(data, selectedSkills, specifiedSkills, setSelectedSkills, setSpecifiedSkills);
 
     // Save to parent whenever data changes
     useEffect(() => {

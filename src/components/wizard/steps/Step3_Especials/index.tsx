@@ -1,6 +1,8 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { POWERS } from '../../../../data/powers';
 import { SPELLS, type Spell } from '../../../../data/spells';
+import { useCharacterAutoEffects } from '../../../../hooks/wizard/useCharacterAutoEffects';
+import { useCharacterValidation } from '../../../../hooks/wizard/useCharacterValidation';
 import { TECH_MODULES } from '../../../../data/techModules';
 import {
     hasOrigin,
@@ -69,122 +71,9 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     // Magic Table Rolls (Terrano)
     const magicTableRolls: string[] = data.magicTableRolls || [];
 
-    // Auto-add Superhabilidad for Tes-khar
-    useEffect(() => {
-        if (isTesKhar) {
-            const hasSuperhabilidad = selectedPowers.some(p => p.id === 'superhabilidad');
-            if (!hasSuperhabilidad) {
-                // Add Superhabilidad at High Rank (80)
-                const newPower: SelectedPower = {
-                    id: 'superhabilidad',
-                    origin: 'Parahumano',
-                    rank: 80, // Rango Alto (71-95)
-                    skillValue: 0,
-                    selectedOption: 'Esconderse'
-                };
-                onChange({
-                    ...data,
-                    powers: {
-                        ...data.powers,
-                        selected: [...(data.powers?.selected || []), newPower]
-                    }
-                });
-            }
-        }
-    }, [isTesKhar, selectedPowers, onChange, data]);
-
-    // Auto-add Powers for Atlante
-    // Auto-add Powers for Atlante
-    useEffect(() => {
-        if (isAtlante) {
-            const hasWaterControl = selectedPowers.some(p => p.id === 'control_del_agua');
-            const hasNativeLanguage = selectedPowers.some(p => p.id === 'superhabilidad' && p.selectedOption === 'Idioma nativo');
-            const hasSwimming = selectedPowers.some(p => p.id === 'superhabilidad' && p.selectedOption === 'Nadar');
-            const hasAnimalEmpathy = selectedPowers.some(p => p.id === 'empatia_animal');
-
-            let newPowers: SelectedPower[] = [];
-
-            if (!hasWaterControl) {
-                // Add Control del agua at Rank 11
-                newPowers.push({
-                    id: 'control_del_agua',
-                    origin: 'Parahumano',
-                    rank: 11,
-                    skillValue: 0
-                });
-            }
-
-            if (!hasNativeLanguage) {
-                // Add Superhabilidad at Rank 41 (Idioma nativo)
-                newPowers.push({
-                    id: 'superhabilidad',
-                    origin: 'Parahumano',
-                    rank: 41,
-                    skillValue: 0,
-                    selectedOption: 'Idioma nativo'
-                });
-            }
-
-            if (!hasSwimming) {
-                // Add Superhabilidad at Rank 81 (Nadar)
-                newPowers.push({
-                    id: 'superhabilidad',
-                    origin: 'Parahumano',
-                    rank: 81,
-                    skillValue: 0,
-                    selectedOption: 'Nadar'
-                });
-            }
-
-            if (!hasAnimalEmpathy) {
-                // Add Empatía animal at Rank 11 with customization
-                newPowers.push({
-                    id: 'empatia_animal',
-                    origin: 'Parahumano',
-                    rank: 11,
-                    skillValue: 0,
-                    customizations: [{
-                        id: 'atlante_cetaceos',
-                        description: 'Hablar solo con cetáceos',
-                        cost: 0
-                    }]
-                });
-            }
-
-            if (newPowers.length > 0) {
-                onChange({
-                    ...data,
-                    powers: {
-                        ...data.powers,
-                        selected: [...(data.powers?.selected || []), ...newPowers]
-                    }
-                });
-            }
-        }
-    }, [isAtlante, selectedPowers, onChange, data]);
-
-    // Auto-add Regeneration for Troll
-    useEffect(() => {
-        if (isTroll) {
-            const hasRegeneration = selectedPowers.some(p => p.id === 'regeneracion_de_tejidos');
-            if (!hasRegeneration) {
-                // Add Regeneración de tejidos at Rank 81
-                const newPower: SelectedPower = {
-                    id: 'regeneracion_de_tejidos',
-                    origin: 'Arcano',
-                    rank: 81,
-                    skillValue: 0
-                };
-                onChange({
-                    ...data,
-                    powers: {
-                        ...data.powers,
-                        selected: [...(data.powers?.selected || []), newPower]
-                    }
-                });
-            }
-        }
-    }, [isTroll, selectedPowers, onChange, data]);
+    // Use custom hooks
+    useCharacterAutoEffects(data, onChange);
+    const { validatePowerSelection, validateMagicTableRoll } = useCharacterValidation(data);
 
     // Update functions
     const updatePowers = (newSelected: SelectedPower[]) => {
@@ -208,21 +97,9 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
 
     // Magic Table Handlers
     const addMagicTableRoll = (rollId: string) => {
-        if (!isTerrano) return;
-
-        const divisor = data.spells?.emFormula?.divisor ?? 4; // Default safe
-        // Check if Ajeno (divisor === 0)
-        const isAjeno = divisor === 0;
-        const maxSlots = isAjeno ? 2 : 1;
-
-        const guardianPowerCount = selectedPowers.filter(p => p.origin === 'Guardian').length;
-        const rollCount = magicTableRolls.length;
-
-        // Revised Logic: We only care about SLOTS used in the table.
-        // Selecting "Acceso a Poder de Guardián" USES a slot.
-        // Selecting a power relies on having that access token.
-        if (rollCount >= maxSlots) {
-            alert(`Los Terranos solo tienen ${maxSlots} slots disponibles en la Tabla de Objetos.`);
+        const validation = validateMagicTableRoll();
+        if (!validation.allowed) {
+            alert(validation.message);
             return;
         }
 
@@ -299,42 +176,11 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     const togglePowerSelection = (powerId: string) => {
         if (!modalOriginFilter) return;
 
-        // Terrano Restriction Logic
-        // Terranos (Arcano -> Terrano) can normally only select 1 Guardian power.
-        // Exception: If they chose "Ajeno - No EM" (divisor === 0), they can select up to 2.
-        // Note: isTerrano is defined in component scope.
-        if (isTerrano && modalOriginFilter === 'Guardian') {
-            const isAjeno = emFormula.divisor === 0;
-            const maxGuardianPowers = isAjeno ? 2 : 1;
-
-            // Check if we are trying to ADD a new power (not removing/toggling off)
-            const isAlreadySelected = selectedPowers.some(p => p.id === powerId && p.origin === 'Guardian');
-
-            if (!isAlreadySelected) {
-                // Count existing Guardian powers
-                const currentGuardianCount = selectedPowers.filter(p => p.origin === 'Guardian').length;
-                // Count "guardian_power" rolls in Magic Table
-                const allowedGuardianCount = magicTableRolls.filter(r => r === 'guardian_power').length;
-
-                if (currentGuardianCount >= allowedGuardianCount) {
-                    alert(`Para seleccionar un Poder de Guardián, debes gastar un slot en la "Tabla de Objetos Mágicos" seleccionando la opción "Acceso a Poder de Guardián". Tienes ${allowedGuardianCount} accesos y ya usas ${currentGuardianCount}.`);
-                    return;
-                }
-            }
-        }
-
-
-        // Enano Restriction Logic
-        // Enanos can select exactly 1 Guardian power.
-        if (isEnano && modalOriginFilter === 'Guardian') {
-            const isAlreadySelected = selectedPowers.some(p => p.id === powerId && p.origin === 'Guardian');
-            if (!isAlreadySelected) {
-                const currentGuardianCount = selectedPowers.filter(p => p.origin === 'Guardian').length;
-                if (currentGuardianCount >= 1) {
-                    alert(`Los Enanos solo pueden elegir un único poder de Guardián.`);
-                    return;
-                }
-            }
+        // Use validation hook
+        const validation = validatePowerSelection(powerId, modalOriginFilter);
+        if (!validation.allowed) {
+            alert(validation.message);
+            return;
         }
 
         const powerDef = POWERS.find(p => p.id === powerId);
