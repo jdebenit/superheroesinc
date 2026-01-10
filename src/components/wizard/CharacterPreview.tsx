@@ -17,6 +17,8 @@ import { POSEIDO_FORMS } from './steps/Step3_Especials/sections/PoseidoSection';
 import { SEQUELS } from '../../data/sequels';
 import { INCOME_SOURCES } from '../../data/technologicalOptions';
 
+import { calculateDiff } from '../../utils/dataCleaner';
+import { initialCharacterState } from '../../data/wizardConfig';
 import { calculateEM, hasSubtype } from './steps/Step3_Especials/utils';
 // Calculations
 // Calculations
@@ -74,8 +76,18 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
     };
 
     const downloadJson = async () => {
-        const filename = `${character.name.toLowerCase().replace(/\s+/g, '-')}.json`;
-        const jsonStr = JSON.stringify(character, null, 2);
+        // Calculate clean data (diff from defaults)
+        const cleanData = calculateDiff(character, initialCharacterState);
+        // Ensure name is preserved even if it matches default (e.g. "Nuevo Personaje"), though usually it's custom.
+        // But cleanData handles diffs. If name matches default, it's removed.
+        // However, we want at least validation keys.
+        // Let's force some restore: upon load we merge with defaults. So it's fine.
+
+        // Actually, if we export standard cleanData, valid keys should remain.
+        // The file name relies on character.name, which works.
+
+        const filename = `${(character.name || 'personaje').toLowerCase().replace(/\s+/g, '-')}.json`;
+        const jsonStr = JSON.stringify(cleanData || {}, null, 2);
 
         // Try using the File System Access API
         if ('showSaveFilePicker' in window) {

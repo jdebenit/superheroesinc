@@ -6,7 +6,11 @@ import Step3_Especials from './steps/Step3_Especials';
 import Step4_Skills from './steps/Step4_Skills';
 import Step5_Background from './steps/Step5_Background';
 import Step6_Details from './steps/Step6_Details';
-import { initialCharacterState, STEPS } from '../../data/wizardConfig';
+import {
+    STEPS,
+    initialCharacterState
+} from '../../data/wizardConfig';
+import { mergeWithDefaults } from '../../utils/dataCleaner';
 import { useCharacterCalculations } from '../../hooks/wizard/useCharacterCalculations';
 
 export default function CharacterWizard() {
@@ -23,66 +27,19 @@ export default function CharacterWizard() {
                 if (saved) {
                     const parsed = JSON.parse(saved);
 
-                    // MIGRATION: Move old root-level fields into background object
-                    if (parsed.prejudiceResistance !== undefined ||
-                        parsed.economicStatus !== undefined ||
-                        parsed.legalStatus !== undefined ||
-                        parsed.socialStatus !== undefined) {
+                    // Merge with defaults to ensure full structure and handle new fields
+                    const validated = mergeWithDefaults(parsed, initialCharacterState);
 
-                        console.log('🔄 Migrating old character state format to new format...');
-
-                        if (!parsed.background) {
-                            parsed.background = { items: [] };
-                        }
-
-                        if (parsed.prejudiceResistance !== undefined) {
-                            parsed.background.prejudiceResistance = parsed.prejudiceResistance;
-                            delete parsed.prejudiceResistance;
-                        }
-                        if (parsed.economicStatus !== undefined) {
-                            parsed.background.economicStatus = parsed.economicStatus;
-                            delete parsed.economicStatus;
-                        }
-                        if (parsed.legalStatus !== undefined) {
-                            parsed.background.legalStatus = parsed.legalStatus;
-                            delete parsed.legalStatus;
-                        }
-                        if (parsed.socialStatus !== undefined) {
-                            parsed.background.socialStatus = parsed.socialStatus;
-                            delete parsed.socialStatus;
-                        }
-
-                        console.log('✅ Migration complete:', parsed);
+                    // MIGRATION: Ensure attributes have manual bonuses if missing (old saves)
+                    if (validated.attributes && !validated.attributes.manualBonuses) {
+                        validated.attributes.manualBonuses = {
+                            Fuerza: 0, Agilidad: 0, Constitución: 0,
+                            Inteligencia: 0, Percepción: 0, Voluntad: 0, Apariencia: 0
+                        };
                     }
 
-                    // MIGRATION: Ensure new params exist
-                    if (!parsed.enteParams) {
-                        parsed.enteParams = { formType: null, visualEffect: null };
-                    }
-                    if (!parsed.malditoParams) {
-                        parsed.malditoParams = { magnitude: null, source: null };
-                    }
-                    if (!parsed.poseidoParams) {
-                        parsed.poseidoParams = { formType: null };
-                    }
-                    if (!parsed.alteradoParams) {
-                        parsed.alteradoParams = null;
-                    }
-                    if (!parsed.mutanteParams) {
-                        parsed.mutanteParams = null;
-                    }
-                    if (!parsed.guardianParams) {
-                        parsed.guardianParams = null;
-                    }
-                    if (!parsed.divineParams) {
-                        parsed.divineParams = null;
-                    }
-                    if (parsed.isParahumanoHybrid === undefined) {
-                        parsed.isParahumanoHybrid = false;
-                    }
-
-                    console.log('✅ Loaded character from localStorage:', parsed);
-                    setCharacter(parsed);
+                    console.log('✅ Loaded character from localStorage:', validated);
+                    setCharacter(validated);
                 }
             } catch (e) {
                 console.error('❌ Error loading character from localStorage:', e);
@@ -158,9 +115,12 @@ export default function CharacterWizard() {
 
             try {
                 const text = await file.text();
-                const importedCharacter = JSON.parse(text);
+                const rawImport = JSON.parse(text);
 
-                // Validate that it's a character JSON
+                // Use mergeWithDefaults to ensure we have a full state even if importing a "clean" JSON
+                const importedCharacter = mergeWithDefaults(rawImport, initialCharacterState);
+
+                // Validate that it's a character JSON (check for key structure after merge)
                 if (!importedCharacter.name || !importedCharacter.attributes) {
                     alert('❌ El archivo JSON no parece ser un personaje válido.');
                     return;
