@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "lore/eventos/la-caida-de-la-gran-barrera.md",
+                "file": "lore/eventos/la-tecnoguerra.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "la-caida-de-la-gran-barrera"
+              "title": "la-tecnoguerra"
             }
           }
         ]
@@ -185,8 +185,8 @@
   },
   "active": "ab4baf2b308f519d",
   "lastOpenFiles": [
-    "lore/eventos/la-tecnoguerra.md",
     "lore/eventos/la-caida-de-la-gran-barrera.md",
+    "lore/eventos/la-tecnoguerra.md",
     "blog/psicogeografía-y-memoria-en-el-rol.md",
     "2025-11-30.md",
     "blog/actual-plays-superheroes-inc.md",

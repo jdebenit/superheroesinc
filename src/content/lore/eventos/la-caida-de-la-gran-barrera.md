@@ -20,7 +20,7 @@ La caída de la Gran Barrera no llega por un ataque divino ni por una rebelión 
 
 A partir de ese momento, el equilibrio cambia. Los caminos entre la Tierra y los Reinos Divinos comienzan a reabrirse. Las entidades divinas recuperan margen de acción y su comportamiento deja algo claro. No regresan como protectores del mundo, sino como actores que compiten por devoción, influencia y almas. Se intensifican los conflictos entre panteones, los enfrentamientos indirectos y la lucha por la atención humana en un mundo que ya no es el mismo que dejaron atrás.
 
-La creación posterior de estructuras como la Fundación Divina Mundial confirma lo que antes solo podía intuirse. Sin el Orbe y con la Barrera dañada, los reinos divinos necesitan un nuevo modo de sostenerse. Las almas humanas pasan a ser gestionadas como un recurso imprescindible. No por maldad, sino por supervivencia.
+La creación posterior de estructuras como la [Fundación Divina Mundial](/lore/organizaciones/fundacion-divina-mundial/) confirma lo que antes solo podía intuirse. Sin el Orbe y con la Barrera dañada, los reinos divinos necesitan un nuevo modo de sostenerse. Las almas humanas pasan a ser gestionadas como un recurso imprescindible. No por maldad, sino por supervivencia.
 
 Vistos en conjunto, los hechos encajan sin necesidad de adornarlos. La Gran Barrera existe porque, sin ella, el mundo habría sido consumido lentamente por reinos incapaces de sostenerse por sí mismos y porque ocultar el Orbe era la única forma de evitar una guerra divina abierta. Cayó no por traición ni por ambición, sino porque llegó un momento en el que mantenerla intacta significaba dejar morir al propio mundo.
 
