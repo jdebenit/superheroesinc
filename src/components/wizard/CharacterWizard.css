@@ -5,6 +5,27 @@
     max-width: 1400px;
     margin: 0 auto;
     padding: 2rem 1rem;
+
+    /* CSS Variables Theme */
+    --c-primary: #2563eb;
+    --c-primary-dark: #1e40af;
+    --c-primary-shadow: rgba(37, 99, 235, 0.4);
+
+    --c-success: #22c55e;
+    --c-success-dark: #15803d;
+    --c-success-shadow: rgba(34, 197, 94, 0.3);
+
+    --c-danger: #ef4444;
+    --c-danger-dark: #dc2626;
+
+    --c-text-main: #000;
+    --c-text-muted: #666;
+    --c-text-light: #9ca3af;
+
+    --c-bg-light: #f3f4f6;
+    --c-bg-white: #ffffff;
+
+    --c-border-light: #d1d5db;
 }
 
 /* Header Section */
@@ -22,7 +43,7 @@
 
 .wizard-subtitle {
     font-size: 1.25rem;
-    color: #666;
+    color: var(--c-text-muted);
     margin-bottom: 1rem;
 }
 
@@ -52,37 +73,71 @@
     font-size: 1rem;
 }
 
-/* Common Button Styles */
-.wizard-btn {
+/* Unified Button System */
+.btn-base {
     padding: 0.75rem 1.5rem;
-    color: white;
     border: none;
+    /* Default none, overridden by outline */
     border-radius: 8px;
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: all 0.2s;
+    transition: all 0.2s ease;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
 }
 
+.btn-base:hover {
+    transform: translateY(-2px);
+}
+
+.btn-base:disabled {
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+    opacity: 0.7;
+}
+
+/* Button Variants */
 .btn-import {
     background-color: #10b981;
+    color: white;
 }
 
 .btn-import:hover {
-    transform: translateY(-2px);
     background-color: #059669;
 }
 
 .btn-reset {
-    background-color: #ef4444;
+    background-color: var(--c-danger);
+    color: white;
 }
 
 .btn-reset:hover {
-    background-color: #dc2626;
+    background-color: var(--c-danger-dark);
+}
+
+.btn-primary {
+    background-color: var(--c-primary);
+    color: white;
+    border: 4px solid var(--c-primary-dark);
+    box-shadow: 4px 4px 0px var(--c-primary-dark);
+}
+
+.btn-outline {
+    background-color: var(--c-bg-white);
+    color: var(--c-text-main);
+    border: 4px solid var(--c-text-main);
+    box-shadow: 4px 4px 0px var(--c-text-main);
+}
+
+.btn-outline:disabled {
+    background-color: #e5e7eb;
+    color: var(--c-text-light);
+    border-color: var(--c-border-light);
 }
 
 /* Step Navigation */
@@ -105,7 +160,7 @@
 
 .progress-line-fill {
     height: 100%;
-    background-color: #2563eb;
+    background-color: var(--c-primary);
     border-radius: 9999px;
     transition: width 0.5s ease;
 }
@@ -147,21 +202,21 @@
 }
 
 .step-icon.active {
-    border-color: #1e40af;
-    background-color: #2563eb;
+    border-color: var(--c-primary-dark);
+    background-color: var(--c-primary);
     color: white;
-    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.5);
+    box-shadow: 0 10px 25px var(--c-primary-shadow);
 }
 
 .step-icon.completed {
-    border-color: #15803d;
-    background-color: #22c55e;
+    border-color: var(--c-success-dark);
+    background-color: var(--c-success);
     color: white;
-    box-shadow: 0 4px 6px rgba(34, 197, 94, 0.3);
+    box-shadow: 0 4px 6px var(--c-success-shadow);
 }
 
 .step-icon.pending {
-    border-color: #d1d5db;
+    border-color: var(--c-gray-med, #d1d5db);
     background-color: white;
     color: #000;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
@@ -175,15 +230,15 @@
 }
 
 .step-name.active {
-    color: #2563eb;
+    color: var(--c-primary);
 }
 
 .step-name.completed {
-    color: #22c55e;
+    color: var(--c-success);
 }
 
 .step-name.pending {
-    color: #9ca3af;
+    color: var(--c-text-light);
 }
 
 /* Step Content */
@@ -213,7 +268,7 @@
     color: #666;
 }
 
-/* Navigation Buttons */
+/* Navigation Buttons Container */
 .nav-buttons-container {
     display: flex;
     justify-content: space-between;
@@ -221,46 +276,7 @@
     padding: 0 1rem;
 }
 
-.nav-btn {
-    padding: 1rem 2rem;
-    font-size: 1.125rem;
-    font-weight: bold;
-    border-radius: 8px;
-    border: 4px solid;
-    transition: all 0.2s ease;
-}
-
-.nav-btn.prev {
-    background-color: white;
-    color: #000;
-    border-color: #000;
-    cursor: pointer;
-    box-shadow: 4px 4px 0px #000;
-}
-
-.nav-btn.prev:disabled {
-    background-color: #e5e7eb;
-    color: #9ca3af;
-    border-color: #d1d5db;
-    cursor: not-allowed;
-    box-shadow: none;
-}
-
-.nav-btn.next {
-    background-color: #2563eb;
-    color: white;
-    border-color: #1e40af;
-    cursor: pointer;
-    box-shadow: 4px 4px 0px #1e40af;
-}
-
-.nav-btn.next:disabled {
-    background-color: #e5e7eb;
-    color: #9ca3af;
-    border-color: #d1d5db;
-    cursor: not-allowed;
-    box-shadow: none;
-}
+/* Note: Legacy .nav-btn styles removed. Use .btn-base .btn-outline / .btn-primary instead */
 
 .step-indicator {
     font-size: 1.125rem;

@@ -212,7 +212,7 @@ export default function CharacterWizard() {
                     {/* Import JSON Button */}
                     <button
                         onClick={handleImportJSON}
-                        className="wizard-btn btn-import"
+                        className="btn-base btn-import"
                     >
                         📥 Importar JSON
                     </button>
@@ -220,7 +220,7 @@ export default function CharacterWizard() {
                     {/* Reset Button */}
                     <button
                         onClick={handleReset}
-                        className="wizard-btn btn-reset"
+                        className="btn-base btn-reset"
                     >
                         🔄 Reiniciar
                     </button>
@@ -279,7 +279,8 @@ export default function CharacterWizard() {
                 <button
                     onClick={handlePrevious}
                     disabled={currentStep === 1}
-                    className="nav-btn prev"
+                    className="btn-base btn-outline"
+                    style={{ padding: '1rem 2rem', fontSize: '1.125rem' }}
                 >
                     ← Anterior
                 </button>
@@ -291,7 +292,8 @@ export default function CharacterWizard() {
                 <button
                     onClick={handleNext}
                     disabled={currentStep === 6}
-                    className="nav-btn next"
+                    className="btn-base btn-primary"
+                    style={{ padding: '1rem 2rem', fontSize: '1.125rem' }}
                 >
                     {currentStep === 6 ? 'Finalizar ✓' : 'Siguiente →'}
                 </button>
