@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import CharacterPreview from '../wizard/CharacterPreview';
 
@@ -5,12 +6,18 @@ interface StoredCharacter {
     id: string;
     data: any;
     addedAt: number;
+    source?: 'local' | 'web';
 }
 
-export default function CharacterViewer() {
-    const [characters, setCharacters] = useState<StoredCharacter[]>([]);
+interface CharacterViewerProps {
+    webCharacters?: StoredCharacter[];
+}
+
+export default function CharacterViewer({ webCharacters = [] }: CharacterViewerProps) {
+    const [localCharacters, setLocalCharacters] = useState<StoredCharacter[]>([]);
     const [selectedId, setSelectedId] = useState<string | null>(null);
     const [error, setError] = useState<string | null>(null);
+    const [showWebCharacters, setShowWebCharacters] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     // Load from localStorage on mount
@@ -20,9 +27,12 @@ export default function CharacterViewer() {
             if (saved) {
                 const parsed = JSON.parse(saved);
                 if (Array.isArray(parsed)) {
-                    setCharacters(parsed);
-                    if (parsed.length > 0) {
-                        // Automatically select the most recently added or first one
+                    // MIGRATION: Ensure old stored chars have 'local' source if missing
+                    const migrated = parsed.map((c: any) => ({ ...c, source: 'local' }));
+                    setLocalCharacters(migrated);
+
+                    if (parsed.length > 0 && !selectedId) {
+                        // Only select if nothing selected yet
                         setSelectedId(parsed[0].id);
                     }
                 }
@@ -32,14 +42,14 @@ export default function CharacterViewer() {
         }
     }, []);
 
-    // Save to localStorage whenever characters change
+    // Save to localStorage whenever localCharacters change
     useEffect(() => {
         try {
-            localStorage.setItem('shi_viewer_characters', JSON.stringify(characters));
+            localStorage.setItem('shi_viewer_characters', JSON.stringify(localCharacters));
         } catch (e) {
             console.error("Error saving characters to localStorage:", e);
         }
-    }, [characters]);
+    }, [localCharacters]);
 
     const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
@@ -64,12 +74,13 @@ export default function CharacterViewer() {
             // Create new stored character
             // Use timestamp + random for ID to avoid collisions
             const newChar: StoredCharacter = {
-                id: Date.now().toString() + Math.random().toString(36).substr(2, 9),
+                id: 'local_' + Date.now().toString() + Math.random().toString(36).substr(2, 9),
                 data: parsed,
-                addedAt: Date.now()
+                addedAt: Date.now(),
+                source: 'local'
             };
 
-            setCharacters(prev => [newChar, ...prev]);
+            setLocalCharacters(prev => [newChar, ...prev]);
             setSelectedId(newChar.id);
 
         } catch (err: any) {
@@ -87,7 +98,7 @@ export default function CharacterViewer() {
         e.stopPropagation(); // Prevent selection when clicking delete
         if (!confirm('¿Seguro que quieres eliminar este personaje de la lista?')) return;
 
-        setCharacters(prev => prev.filter(c => c.id !== id));
+        setLocalCharacters(prev => prev.filter(c => c.id !== id));
         if (selectedId === id) {
             setSelectedId(null);
         }
@@ -97,12 +108,17 @@ export default function CharacterViewer() {
         fileInputRef.current?.click();
     };
 
-    const selectedCharacter = characters.find(c => c.id === selectedId);
+    // Combine lists for selection finding
+    const allCharacters = [...localCharacters, ...webCharacters];
+    const selectedCharacter = allCharacters.find(c => c.id === selectedId);
+
+    // Sort web characters alphabetically
+    const sortedWebChars = [...webCharacters].sort((a, b) => a.data.name.localeCompare(b.data.name));
 
     return (
         <div className="viewer-layout" style={{
             display: 'grid',
-            gridTemplateColumns: 'minmax(250px, 1fr) 3fr',
+            gridTemplateColumns: 'minmax(280px, 1fr) 3fr',
             gap: '2rem',
             alignItems: 'start'
         }}>
@@ -112,28 +128,31 @@ export default function CharacterViewer() {
                 borderRadius: '8px',
                 boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
                 overflow: 'hidden',
-                border: '1px solid #e5e7eb'
+                border: '1px solid #e5e7eb',
+                display: 'flex',
+                flexDirection: 'column'
             }}>
-                <div style={{ padding: '1rem', borderBottom: '1px solid #e5e7eb', backgroundColor: '#f9fafb' }}>
-                    <h3 style={{ margin: 0, fontSize: '1.1rem', color: '#111827' }}>Mis Personajes</h3>
+                {/* Local Characters Section */}
+                <div style={{ padding: '1rem', borderBottom: '1px solid #e5e7eb', backgroundColor: '#f9fafb', flexShrink: 0 }}>
+                    <h3 style={{ margin: 0, fontSize: '1.1rem', color: '#111827' }}>Mis Fichas</h3>
                     <div style={{ fontSize: '0.85rem', color: '#6b7280', marginTop: '0.25rem' }}>
-                        {characters.length} almacenados
+                        {localCharacters.length} locales
                     </div>
                 </div>
 
-                <div className="character-list" style={{ maxHeight: '600px', overflowY: 'auto' }}>
-                    {characters.length === 0 ? (
-                        <div style={{ padding: '2rem 1rem', textAlign: 'center', color: '#9ca3af', fontStyle: 'italic' }}>
-                            No hay personajes guardados.
+                <div className="local-list" style={{ overflowY: 'auto', flex: '0 0 auto', maxHeight: '50vh', borderBottom: '1px solid #e5e7eb' }}>
+                    {localCharacters.length === 0 ? (
+                        <div style={{ padding: '1rem', textAlign: 'center', color: '#9ca3af', fontStyle: 'italic', fontSize: '0.9rem' }}>
+                            No hay fichas subidas.
                         </div>
                     ) : (
                         <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                            {characters.map(char => (
+                            {localCharacters.map(char => (
                                 <li
                                     key={char.id}
                                     onClick={() => setSelectedId(char.id)}
                                     style={{
-                                        padding: '1rem',
+                                        padding: '0.75rem 1rem',
                                         borderBottom: '1px solid #f3f4f6',
                                         cursor: 'pointer',
                                         backgroundColor: selectedId === char.id ? '#eff6ff' : 'white',
@@ -148,7 +167,7 @@ export default function CharacterViewer() {
                                         <div style={{ fontWeight: 'bold', color: selectedId === char.id ? '#1e40af' : '#374151', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                                             {char.data.name}
                                         </div>
-                                        <div style={{ fontSize: '0.85rem', color: '#6b7280' }}>
+                                        <div style={{ fontSize: '0.8rem', color: '#6b7280' }}>
                                             Nivel {char.data.level || 1}
                                         </div>
                                     </div>
@@ -162,7 +181,7 @@ export default function CharacterViewer() {
                                             cursor: 'pointer',
                                             padding: '4px',
                                             borderRadius: '4px',
-                                            fontSize: '1.1rem',
+                                            fontSize: '1rem',
                                             opacity: 0.6
                                         }}
                                         onMouseEnter={e => e.currentTarget.style.opacity = '1'}
@@ -176,7 +195,7 @@ export default function CharacterViewer() {
                     )}
                 </div>
 
-                <div style={{ padding: '1rem', borderTop: '1px solid #e5e7eb', textAlign: 'center' }}>
+                <div style={{ padding: '0.75rem', borderBottom: '1px solid #e5e7eb', backgroundColor: '#fff', flexShrink: 0 }}>
                     <input
                         type="file"
                         ref={fileInputRef}
@@ -188,7 +207,7 @@ export default function CharacterViewer() {
                         onClick={triggerFileInput}
                         style={{
                             width: '100%',
-                            padding: '0.75rem',
+                            padding: '0.5rem',
                             backgroundColor: '#2563eb',
                             color: 'white',
                             border: 'none',
@@ -198,10 +217,11 @@ export default function CharacterViewer() {
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            gap: '0.5rem'
+                            gap: '0.5rem',
+                            fontSize: '0.9rem'
                         }}
                     >
-                        ➕ Importar JSON
+                        ➕ Subir JSON
                     </button>
                     {error && (
                         <div style={{ marginTop: '0.5rem', color: '#dc2626', fontSize: '0.85rem', textAlign: 'left' }}>
@@ -209,6 +229,74 @@ export default function CharacterViewer() {
                         </div>
                     )}
                 </div>
+
+                {/* Web Characters Section */}
+                <div
+                    onClick={() => setShowWebCharacters(!showWebCharacters)}
+                    style={{
+                        padding: '1rem',
+                        borderBottom: showWebCharacters ? '1px solid #e5e7eb' : 'none',
+                        backgroundColor: '#f0fdf4',
+                        flexShrink: 0,
+                        borderTop: '4px solid #bbf7d0',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        userSelect: 'none'
+                    }}
+                >
+                    <div>
+                        <h3 style={{ margin: 0, fontSize: '1.1rem', color: '#166534' }}>Fichas de la Web</h3>
+                        <div style={{ fontSize: '0.85rem', color: '#15803d', marginTop: '0.25rem' }}>
+                            {sortedWebChars.length} oficiales
+                        </div>
+                    </div>
+                    <span style={{ fontSize: '1.2rem', transform: showWebCharacters ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s', color: '#166534' }}>
+                        ▼
+                    </span>
+                </div>
+
+                {showWebCharacters && (
+                    <div className="web-list" style={{ overflowY: 'auto', flex: '0 0 auto', backgroundColor: '#f0fdf4', maxHeight: '50vh' }}>
+                        {sortedWebChars.length === 0 ? (
+                            <div style={{ padding: '1rem', textAlign: 'center', color: '#9ca3af', fontStyle: 'italic', fontSize: '0.9rem' }}>
+                                Cargando fichas...
+                            </div>
+                        ) : (
+                            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                                {sortedWebChars.map(char => (
+                                    <li
+                                        key={char.id}
+                                        onClick={() => setSelectedId(char.id)}
+                                        style={{
+                                            padding: '0.75rem 1rem',
+                                            borderBottom: '1px solid #dcfce7',
+                                            cursor: 'pointer',
+                                            backgroundColor: selectedId === char.id ? '#dcfce7' : 'transparent',
+                                            borderLeft: selectedId === char.id ? '4px solid #16a34a' : '4px solid transparent',
+                                            transition: 'background-color 0.2s',
+                                            display: 'flex',
+                                            justifyContent: 'space-between',
+                                            alignItems: 'center'
+                                        }}
+                                    >
+                                        <div style={{ overflow: 'hidden' }}>
+                                            <div style={{ fontWeight: 'bold', color: selectedId === char.id ? '#14532d' : '#166534', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                                {char.data.name}
+                                            </div>
+                                            <div style={{ fontSize: '0.8rem', color: '#15803d' }}>
+                                                Nivel {char.data.level || 1} • {char.data?.origin?.items?.[0] ? Object.keys(char.data.origin.items[0])[0] : 'Desconocido'}
+                                            </div>
+                                        </div>
+                                        <span title="Ficha Oficial" style={{ fontSize: '1rem' }}>🌐</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                    </div>
+                )}
+
             </div>
 
             {/* Main Content */}
@@ -225,7 +313,9 @@ export default function CharacterViewer() {
                                 {selectedCharacter.data.name}
                             </h2>
                             <span style={{ fontSize: '0.9rem', color: '#6b7280' }}>
-                                Añadido: {new Date(selectedCharacter.addedAt).toLocaleDateString()}
+                                {selectedCharacter.source === 'web'
+                                    ? '🌐 Ficha Oficial de la Web'
+                                    : `Añadido: ${new Date(selectedCharacter.addedAt).toLocaleDateString()}`}
                             </span>
                         </div>
                         <CharacterPreview character={selectedCharacter.data} totalPCs={selectedCharacter.data.totalCost} />
@@ -247,7 +337,7 @@ export default function CharacterViewer() {
                         <div style={{ fontSize: '3rem', marginBottom: '1rem', opacity: 0.5 }}>👈</div>
                         <h3 style={{ margin: '0 0 0.5rem 0', color: '#6b7280' }}>Selecciona un personaje</h3>
                         <p style={{ maxWidth: '300px' }}>
-                            Selecciona un personaje de la lista o importa un nuevo archivo JSON para visualizarlo.
+                            Selecciona una ficha oficial de la web o importa tus propios archivos JSON.
                         </p>
                     </div>
                 )}
@@ -261,6 +351,7 @@ export default function CharacterViewer() {
                     }
                     .viewer-sidebar {
                         margin-bottom: 2rem;
+                        max-height: 50vh;
                     }
                 }
             `}</style>

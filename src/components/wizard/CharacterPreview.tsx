@@ -355,7 +355,7 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                     e.currentTarget.style.boxShadow = '4px 4px 0px #1e40af, 0 10px 20px rgba(37, 99, 235, 0.3)';
                 }}
             >
-                📋 Previsualizar Ficha
+                📋 Visualizar Ficha
             </button>
 
             <dialog ref={dialogRef} className={`character-dialog ${isFullScreen ? 'full-screen' : ''}`}>
