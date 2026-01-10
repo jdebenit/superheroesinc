@@ -448,15 +448,15 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                         <div className="section-header">
                                             <h4>Armas</h4>
                                         </div>
-                                        <div className="weapons-grid">
+                                        <div className="preview-section-grid">
                                             {character.weapons.items.map((item: any, i: number) => (
-                                                <div key={i} className="weapon-item">
-                                                    <div className="weapon-name">{item.name}</div>
-                                                    <div className="weapon-stats">
-                                                        <div><span className="weapon-stat-label">Daño:</span> {item.damage || '-'}</div>
-                                                        <div><span className="weapon-stat-label">DxA:</span> {item.dxa || '-'}</div>
-                                                        <div><span className="weapon-stat-label">CAR:</span> {item.car || '-'}</div>
-                                                        {item.notes && <div className="weapon-notes">{item.notes}</div>}
+                                                <div key={i} className="preview-card theme-weapon">
+                                                    <div className="preview-card-title">{item.name}</div>
+                                                    <div className="preview-stats-grid cols-2">
+                                                        <div><span className="preview-stat-label">Daño:</span> {item.damage || '-'}</div>
+                                                        <div><span className="preview-stat-label">DxA:</span> {item.dxa || '-'}</div>
+                                                        <div><span className="preview-stat-label">CAR:</span> {item.car || '-'}</div>
+                                                        {item.notes && <div className="preview-notes">{item.notes}</div>}
                                                     </div>
                                                 </div>
                                             ))}
@@ -470,17 +470,17 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                         <div className="section-header">
                                             <h4>Artefactos</h4>
                                         </div>
-                                        <div className="artifacts-grid">
+                                        <div className="preview-section-grid">
                                             {character.artifacts.items.map((item: any, i: number) => (
-                                                <div key={i} className="artifact-item">
-                                                    <div className="artifact-name">{item.name}</div>
-                                                    <div className="artifact-stats">
-                                                        <div><span className="artifact-stat-label">Fiabilidad:</span> {item.reliability || '-'}</div>
-                                                        <div><span className="artifact-stat-label">Valor:</span> {item.value || '-'}</div>
-                                                        <div><span className="artifact-stat-label">Coste:</span> {item.cost || '0'} PCs</div>
+                                                <div key={i} className="preview-card theme-artifact">
+                                                    <div className="preview-card-title">{item.name}</div>
+                                                    <div className="preview-stats-grid cols-3">
+                                                        <div><span className="preview-stat-label">Fiabilidad:</span> {item.reliability || '-'}</div>
+                                                        <div><span className="preview-stat-label">Valor:</span> {item.value || '-'}</div>
+                                                        <div><span className="preview-stat-label">Coste:</span> {item.cost || '0'} PCs</div>
                                                     </div>
                                                     {item.notes && (
-                                                        <div className="artifact-notes">
+                                                        <div className="preview-notes">
                                                             {item.notes}
                                                         </div>
                                                     )}
@@ -496,14 +496,14 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                         <div className="section-header">
                                             <h4>Objetos Mágicos</h4>
                                         </div>
-                                        <div className="magic-objects-grid">
+                                        <div className="preview-section-grid">
                                             {character.magicObjects.items.map((item: any, i: number) => (
-                                                <div key={i} className="magic-object-item">
-                                                    <div className="magic-object-name">{item.name}</div>
-                                                    <div className="magic-object-cost">
+                                                <div key={i} className="preview-card theme-magic">
+                                                    <div className="preview-card-title">{item.name}</div>
+                                                    <div style={{ fontSize: '0.85rem', marginBottom: '0.5rem' }}>
                                                         <span style={{ fontWeight: 'bold' }}>Coste EM:</span> {item.em}
                                                     </div>
-                                                    <div className="magic-object-description">
+                                                    <div style={{ fontSize: '0.85rem', color: '#666' }}>
                                                         {item.description}
                                                     </div>
                                                 </div>
@@ -518,7 +518,7 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                         <div className="section-header">
                                             <h4>Tabla de Objetos (Terrano)</h4>
                                         </div>
-                                        <div className="magic-table-grid">
+                                        <div className="preview-section-grid">
                                             {character.magicTableRolls.map((rollId: string, i: number) => {
                                                 const options = [
                                                     { id: '180_EM', label: 'Acceso a objetos de 180 EM', cost: '+1 PC' },
@@ -530,8 +530,8 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                                 const opt = options.find(o => o.id === rollId) || { label: rollId, cost: '' };
 
                                                 return (
-                                                    <div key={i} className="magic-table-item">
-                                                        <div className="magic-table-label">{opt.label}</div>
+                                                    <div key={i} className="preview-card theme-magic-table" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                                        <div className="preview-card-title" style={{ marginBottom: 0 }}>{opt.label}</div>
                                                         <div className="magic-table-cost">
                                                             {opt.cost}
                                                         </div>
@@ -548,15 +548,15 @@ export default function CharacterPreview({ character, totalPCs }: CharacterPrevi
                                         <div className="section-header">
                                             <h4>Vehículos</h4>
                                         </div>
-                                        <div className="vehicles-grid">
+                                        <div className="preview-section-grid">
                                             {character.vehicles.items.map((item: any, i: number) => (
-                                                <div key={i} className="vehicle-item">
-                                                    <div className="vehicle-name">{item.name}</div>
-                                                    <div className="vehicle-stats">
-                                                        <div><span className="vehicle-stat-label">Blindaje:</span> {item.armor || '-'}</div>
-                                                        <div><span className="vehicle-stat-label">PE:</span> {item.pe || '-'}</div>
-                                                        <div><span className="vehicle-stat-label">Velocidad:</span> {item.speed || '-'}</div>
-                                                        <div><span className="vehicle-stat-label">Autonomía:</span> {item.range || '-'}</div>
+                                                <div key={i} className="preview-card theme-vehicle">
+                                                    <div className="preview-card-title">{item.name}</div>
+                                                    <div className="preview-stats-grid cols-2">
+                                                        <div><span className="preview-stat-label">Blindaje:</span> {item.armor || '-'}</div>
+                                                        <div><span className="preview-stat-label">PE:</span> {item.pe || '-'}</div>
+                                                        <div><span className="preview-stat-label">Velocidad:</span> {item.speed || '-'}</div>
+                                                        <div><span className="preview-stat-label">Autonomía:</span> {item.range || '-'}</div>
                                                     </div>
                                                 </div>
                                             ))}

@@ -2,127 +2,84 @@
 /* Styles extracted from CharacterPreview.tsx */
 
 /* Weapons Section */
-.weapons-grid {
+/* Shared Preview Styles & Themes */
+.preview-section-grid {
     display: grid;
     gap: 0.5rem;
 }
 
-.weapon-item {
+.preview-card {
     padding: 0.75rem;
-    background-color: #fef2f2;
-    border: 1px solid #fecaca;
     border-radius: 6px;
+    border: 1px solid var(--card-border);
+    background-color: var(--card-bg);
 }
 
-.weapon-name {
+.preview-card-title {
     font-weight: bold;
-    color: #b91c1c;
+    color: var(--card-text);
     margin-bottom: 0.5rem;
 }
 
-.weapon-stats {
+.preview-stats-grid {
     display: grid;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+}
+
+.preview-stats-grid.cols-2 {
     grid-template-columns: repeat(2, 1fr);
-    gap: 0.5rem;
-    font-size: 0.85rem;
 }
 
-.weapon-stat-label {
-    font-weight: bold;
-}
-
-.weapon-notes {
-    grid-column: 1 / -1;
-    color: #666;
-    font-style: italic;
-}
-
-/* Artifacts Section */
-.artifacts-grid {
-    display: grid;
-    gap: 0.5rem;
-}
-
-.artifact-item {
-    padding: 0.75rem;
-    background-color: #f5f3ff;
-    border: 1px solid #ede9fe;
-    border-radius: 6px;
-}
-
-.artifact-name {
-    font-weight: bold;
-    color: #7c3aed;
-    margin-bottom: 0.5rem;
-}
-
-.artifact-stats {
-    display: grid;
+.preview-stats-grid.cols-3 {
     grid-template-columns: repeat(3, 1fr);
-    gap: 0.5rem;
-    font-size: 0.85rem;
 }
 
-.artifact-stat-label {
+.preview-stat-label {
     font-weight: bold;
 }
 
-.artifact-notes {
-    margin-top: 0.5rem;
+.preview-notes {
     font-size: 0.85rem;
     color: #666;
+    /* Default gray for notes */
     font-style: italic;
+    margin-top: 0.5rem;
+    grid-column: 1 / -1;
 }
 
-/* Magic Objects Section */
-.magic-objects-grid {
-    display: grid;
-    gap: 0.5rem;
+/* Base Themes */
+.theme-weapon {
+    --card-bg: #fef2f2;
+    --card-border: #fecaca;
+    --card-text: #b91c1c;
 }
 
-.magic-object-item {
-    padding: 0.75rem;
-    background-color: #faf5ff;
-    border: 1px solid #f3e8ff;
-    border-radius: 6px;
+.theme-artifact {
+    --card-bg: #f5f3ff;
+    --card-border: #ede9fe;
+    --card-text: #7c3aed;
 }
 
-.magic-object-name {
-    font-weight: bold;
-    color: #9333ea;
-    margin-bottom: 0.5rem;
+.theme-magic {
+    --card-bg: #faf5ff;
+    --card-border: #f3e8ff;
+    --card-text: #9333ea;
 }
 
-.magic-object-cost {
-    font-size: 0.85rem;
-    margin-bottom: 0.5rem;
+.theme-vehicle {
+    --card-bg: #ecfeff;
+    --card-border: #cffafe;
+    --card-text: #0891b2;
 }
 
-.magic-object-description {
-    font-size: 0.85rem;
-    color: #666;
+.theme-magic-table {
+    --card-bg: #e0f2fe;
+    --card-border: #bae6fd;
+    --card-text: #0369a1;
 }
 
-/* Magic Table Section */
-.magic-table-grid {
-    display: grid;
-    gap: 0.5rem;
-}
 
-.magic-table-item {
-    padding: 0.75rem;
-    background-color: #e0f2fe;
-    border: 1px solid #bae6fd;
-    border-radius: 6px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.magic-table-label {
-    font-weight: bold;
-    color: #0369a1;
-}
 
 .magic-table-cost {
     font-size: 0.85rem;
@@ -133,35 +90,7 @@
     color: #0284c7;
 }
 
-/* Vehicles Section */
-.vehicles-grid {
-    display: grid;
-    gap: 0.5rem;
-}
 
-.vehicle-item {
-    padding: 0.75rem;
-    background-color: #ecfeff;
-    border: 1px solid #cffafe;
-    border-radius: 6px;
-}
-
-.vehicle-name {
-    font-weight: bold;
-    color: #0891b2;
-    margin-bottom: 0.5rem;
-}
-
-.vehicle-stats {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.5rem;
-    font-size: 0.85rem;
-}
-
-.vehicle-stat-label {
-    font-weight: bold;
-}
 
 /* Origin Section */
 .origin-list {
