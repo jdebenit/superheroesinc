@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "faq/14-subida-de-nivel-pasar-de-100-en-caracteristicas.md",
+                "file": "lore/localizaciones/valladolid.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "14-subida-de-nivel-pasar-de-100-en-caracteristicas"
+              "title": "valladolid"
             }
           }
         ]
@@ -185,8 +185,10 @@
   },
   "active": "ab4baf2b308f519d",
   "lastOpenFiles": [
-    "faq/13-daño-lanzar-objetos-telequinesis.md",
+    "lore/localizaciones/valdoria.md",
+    "lore/localizaciones/valladolid.md",
     "faq/14-subida-de-nivel-pasar-de-100-en-caracteristicas.md",
+    "faq/13-daño-lanzar-objetos-telequinesis.md",
     "faq/12-alcance-telepatia.md",
     "faq/11-supervelocidad-valor-control.md",
     "lore/eventos/la-tecnoguerra.md",
@@ -209,8 +211,6 @@
     "faq/08-penalizacion-poderes-mentales.md",
     "faq/07-reglas-opcionales-ramsao.md",
     "faq/06-kevlar-daño-mixto.md",
-    "faq/02-generador-fichas-limitaciones.md",
-    "faq/05-endoesqueleto-brazos-cyberneticos.md",
     "faq",
     "rpg/leon-rojo.yaml",
     "rpg/jefe-motero-road-reapers.yaml",

@@ -24,3 +24,18 @@ La verdadera singularidad de Valladolid está en lo que no muestra a primera vis
 En los paseos junto al Pisuerga, cuando el sol empieza a caer, la luz cambia de manera casi ritual. No se sabe si es magia o simple atmósfera, aunque algunas investigaciones sugieren que hay algo más. Valladolid guarda un aire antiguo, una quietud que esconde movimiento y una estabilidad que parece contener algo a punto de manifestarse.
 
 Nada en Valladolid sucede de forma espectacular. Aquí todo avanza despacio, casi en silencio, hasta que un día aparece lo que llevaba tiempo formándose. Como una puerta bajo el agua que nadie menciona, pero que sigue allí, esperando a quien tenga la sensibilidad suficiente para reconocerla.
+
+## Sede de Superhéroes INC
+
+La sede actual de [Superhéroes INC](/lore/organizaciones/superheroes-inc/) en Valladolid está situada a las afueras, en **Zaratán**, dentro de un complejo conocido como **Equinoccio**. Desde el exterior no destaca especialmente. Podría pasar por un conjunto de edificios técnicos o un parque empresarial más, y esa discreción es intencionada.
+
+Equinoccio está concebido como una instalación completa y funcional. Alberga espacios de entrenamiento para personal metahumano y operativo, zonas de simulación controlada y áreas preparadas para pruebas que no conviene realizar en entornos urbanos. Cuenta también con un almacén de equipamiento, donde se guarda armamento especializado, tecnología sensible y vehículos adaptados a distintos perfiles de intervención.
+
+Además, el complejo actúa como **centro logístico de Superhéroes INC para toda la comunidad de Castilla y León**. Desde allí se coordinan despliegues, se gestionan recursos y se da apoyo a operaciones repartidas por la región. No es un lugar pensado para reaccionar a lo espectacular, sino para sostener el trabajo diario, el que casi nunca sale en los informes públicos.
+
+En Equinoccio se entrena, se planifica y se mantiene todo aquello que permite que las intervenciones funcionen cuando realmente hace falta. Sin épica. Sin focos.
+## Sede de la Fundación Divina Mundial
+
+La sede central de la [FDM](/lore/organizaciones/fundacion-divina-mundial) se encuentra en el **antiguo Claustro de las Francesas**, en pleno centro de la ciudad. El edificio conserva su aspecto histórico, casi intacto, y desde fuera no da ninguna pista sobre lo que ocurre en su interior.
+
+Por dentro, el claustro ha sido completamente adaptado. Sistemas de seguridad, comunicaciones avanzadas y espacios preparados para reuniones que rara vez figuran en ningún registro oficial. Bajo el edificio se extiende un entramado de **catacumbas antiguas**, utilizadas por la Fundación como infraestructura de tránsito y contención. Desde allí se accede a portales sellados y rutas entre esferas que facilitan la comunicación con los Reinos Divinos, siempre bajo estrictas medidas de control.
