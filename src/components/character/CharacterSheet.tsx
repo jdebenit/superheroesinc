@@ -180,12 +180,12 @@ export default function CharacterSheet({ character, totalPCs }: CharacterSheetPr
                             <SheetHeader character={character} totalPCs={totalPCs} />
 
                             <div className="sheet-grid">
+                                <AttributesSection character={character} />
                                 <CombatSection combatStats={combatStats} />
-                                <WeaponsSection weapons={character.weapons} />
-                                <ArtifactsSection artifacts={character.artifacts} />
-                                <MagicObjectsSection magicObjects={character.magicObjects} magicTableRolls={character.magicTableRolls} />
-                                <VehiclesSection vehicles={character.vehicles} />
+                                <OtherStatsSection otherStats={otherStats} />
                                 <OriginSection character={character} />
+                                <SkillsGeneralSection character={character} />
+                                <SkillsLearningSection character={character} />
                                 <HybridSection character={character} />
                                 <EnteSection character={character} />
                                 <AlteradoSection character={character} />
@@ -193,12 +193,12 @@ export default function CharacterSheet({ character, totalPCs }: CharacterSheetPr
                                 <PoseidoSection character={character} />
                                 <GuardianSection character={character} />
                                 <DivineSection character={character} />
-                                <OtherStatsSection otherStats={otherStats} />
-                                <AttributesSection character={character} />
-                                <SkillsGeneralSection character={character} />
-                                <SkillsLearningSection character={character} />
                                 <MalditoSection character={character} />
                                 <BackgroundSection character={character} />
+                                <WeaponsSection weapons={character.weapons} />
+                                <ArtifactsSection artifacts={character.artifacts} />
+                                <MagicObjectsSection magicObjects={character.magicObjects} magicTableRolls={character.magicTableRolls} />
+                                <VehiclesSection vehicles={character.vehicles} />
                                 <EquipmentSection equipment={character.equipment} />
                                 <TechModulesSection techModules={character.techModules?.installed || []} />
                                 <ExoskeletonSection character={character} />
