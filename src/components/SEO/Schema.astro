@@ -30,9 +30,10 @@ schema["@graph"].push({
     "@type": "WebSite",
     "@id": `${siteUrl}#website`,
     url: siteUrl,
-    name: "Superheroes INC.",
+    name: "Superheroes INC. - Juego de Rol de Superhéroes",
+    alternateName: "Superheroes INC. Tercera Edición",
     description:
-        "Base de datos y recursos para el juego de rol Superheroes INC.",
+        "Juego de rol de superhéroes completo con generador de fichas, catálogo de poderes, organizaciones y lore del universo. Sistema de reglas para crear héroes y vivir aventuras épicas.",
     publisher: {
         "@type": "Organization",
         name: "Superheroes INC.",
@@ -40,6 +41,14 @@ schema["@graph"].push({
             "@type": "ImageObject",
             url: `${siteUrl}logo_SHI.png`,
         },
+    },
+    potentialAction: {
+        "@type": "SearchAction",
+        target: {
+            "@type": "EntryPoint",
+            urlTemplate: `${siteUrl}buscar?q={search_term_string}`,
+        },
+        "query-input": "required name=search_term_string",
     },
 });
 
@@ -81,6 +90,34 @@ if (type === "article") {
             "@id": `${siteUrl}#website`,
         },
         image: image ? new URL(image, Astro.site).toString() : undefined,
+    });
+}
+
+// Game Schema (for homepage)
+if (Astro.url.pathname === "/" || Astro.url.pathname === "/index.html") {
+    schema["@graph"].push({
+        "@type": "Game",
+        "@id": `${siteUrl}#game`,
+        name: "Superheroes INC. Tercera Edición",
+        description:
+            "Juego de rol de superhéroes que permite crear personajes únicos, desde vigilantes urbanos hasta héroes cósmicos. Sistema completo con poderes, organizaciones y un universo épico.",
+        genre: ["Juego de Rol", "Superhéroes", "Juego de Mesa"],
+        gameItem: [
+            {
+                "@type": "Thing",
+                name: "Generador de Fichas",
+                url: `${siteUrl}recursos/generador-fichas`,
+            },
+            {
+                "@type": "Thing",
+                name: "Catálogo de Poderes",
+                url: `${siteUrl}recursos/poderes`,
+            },
+        ],
+        publisher: {
+            "@id": `${siteUrl}#website`,
+        },
+        inLanguage: "es-ES",
     });
 }
 

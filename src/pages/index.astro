@@ -36,9 +36,9 @@ const news = latestPosts.map((post) => ({
 ---
 
 <Layout
-  title="Inicio"
-  description="Superheroes INC. Tercera Edición - El juego de rol definitivo de superhéroes. Crea tu héroe, únete a organizaciones legendarias y vive aventuras épicas en un universo de poderes extraordinarios."
-  keywords="superheroes inc, juego de rol superhéroes, rol superhéroes, tercera edición, manual superhéroes, personajes superhéroes, organizaciones superhéroes"
+  title="Juego de Rol de Superheroes - Superheroes INC. Tercera Edición"
+  description="Superheroes INC. es el juego de rol de superhéroes definitivo. Crea tu héroe, vive aventuras épicas y descubre un sistema de rol completo con poderes, organizaciones y un universo único. Manual completo, generador de fichas y recursos para tus partidas."
+  keywords="juego rol superheroes, juego de rol de superheroes, juego rol superhéroes, juego de rol superhéroes, superheroes inc, manual juego rol superheroes, sistema rol superheroes, crear personaje superheroe rol, partidas superheroes rol, juego mesa superheroes, rol superhéroes tercera edición"
 >
   <section class="hero-container">
     <div
@@ -110,6 +110,34 @@ const news = latestPosts.map((post) => ({
     </div>
   </section>
 
+  <section class="intro-section">
+    <div class="intro-content">
+      <h2 class="intro-title">El Juego de Rol de Superhéroes Más Completo</h2>
+      <div class="intro-text">
+        <p>
+          <strong>Superheroes INC. Tercera Edición</strong> es un juego de rol de
+          superhéroes que te permite crear personajes únicos, desde vigilantes urbanos
+          hasta héroes cósmicos. Con un sistema de reglas completo y flexible, podrás
+          vivir aventuras épicas en un universo lleno de organizaciones secretas,
+          villanos legendarios y poderes extraordinarios.
+        </p>
+        <p>
+          Este <strong>manual de juego de rol</strong> incluye todo lo necesario para
+          tus partidas: un generador de fichas interactivo, catálogo completo de poderes
+          y habilidades, información detallada sobre organizaciones y grupos como
+          Los Campeones de Europa o los Irregulares, y un extenso archivo de personajes,
+          localizaciones, eventos y lore del universo SHI.
+        </p>
+        <p>
+          Ya seas un jugador experimentado o estés comenzando en el mundo del
+          rol de superhéroes, Superheroes INC. te ofrece las herramientas para
+          crear historias memorables y personajes inolvidables. Explora nuestros
+          recursos, crea tu héroe y únete a la aventura.
+        </p>
+      </div>
+    </div>
+  </section>
+
   <section class="news-section">
     <h2 class="section-title">Últimas Entradas</h2>
     <div class="news-grid">
@@ -123,6 +151,57 @@ const news = latestPosts.map((post) => ({
     padding: var(--spacing-2xl) var(--spacing-lg);
     max-width: 1400px;
     margin: 0 auto;
+  }
+
+  .intro-section {
+    padding: var(--spacing-2xl) var(--spacing-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      rgba(255, 255, 255, 0.5),
+      transparent
+    );
+  }
+
+  .intro-content {
+    background: white;
+    border: 3px solid var(--color-secondary);
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-md);
+  }
+
+  .intro-title {
+    font-size: var(--text-3xl);
+    font-weight: 700;
+    color: var(--color-secondary);
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 2px solid var(--color-primary);
+    padding-bottom: var(--spacing-md);
+  }
+
+  .intro-text {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    line-height: 1.8;
+    color: #1f2937;
+  }
+
+  .intro-text p {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .intro-text p:last-child {
+    margin-bottom: 0;
+  }
+
+  .intro-text strong {
+    color: var(--color-secondary);
+    font-weight: 600;
   }
 
   .news-section {
