@@ -34,71 +34,69 @@
     }
   },
   "skills": {
-    "items": [
+    "generalItems": [
       {
         "name": "Acechar/Discrección",
-        "math": "(AGI+PER)/2",
-        "value": "85%"
+        "value": "85%",
+        "math": "(AGI+PER)/2"
       },
       {
         "name": "Comb. cuerpo a cuerpo",
-        "math": "(AGI+PER)/2",
-        "value": "85%"
+        "value": "85%",
+        "math": "(AGI+PER)/2"
       },
       {
         "name": "Conocimientos generales",
-        "math": "(INT/3)",
-        "value": "20%"
+        "value": "20%",
+        "math": "(INT/3)"
       },
       {
         "name": "Esconderse",
-        "math": "(AGI+PER)/4",
-        "value": "42%"
+        "value": "42%",
+        "math": "(AGI+PER)/4"
       },
       {
         "name": "Idea",
-        "math": "(INT)/2",
-        "value": "30%"
+        "value": "30%",
+        "math": "(INT)/2"
       },
       {
         "name": "Influencia",
-        "math": "(INT+APA)/2",
-        "value": "60%"
+        "value": "60%",
+        "math": "(INT+APA)/2"
       },
       {
         "name": "Idioma nativo",
-        "math": "(INT)",
-        "value": "60%"
+        "value": "60%",
+        "math": "(INT)"
       },
       {
         "name": "Investigar",
-        "math": "(INT+PER)/3",
-        "value": "47%"
+        "value": "47%",
+        "math": "(INT+PER)/3"
       },
       {
         "name": "Lanzar",
-        "math": "(FUE+PER)/2",
-        "value": "81%"
+        "value": "81%",
+        "math": "(FUE+PER)/2"
       },
       {
         "name": "Primeros auxilios",
-        "math": "(INT)/2",
-        "value": "30%"
+        "value": "30%",
+        "math": "(INT)/2"
       },
       {
         "name": "Suerte",
-        "math": "(PER+VOL)/4",
-        "value": "33%"
+        "value": "33%",
+        "math": "(PER+VOL)/4"
       },
       {
         "name": "Trepar y Saltar",
-        "math": "(AGI)",
-        "value": "88%\""
+        "value": "88%\"",
+        "math": "(AGI)"
       }
-    ]
-  },
-  "specialskills": {
-    "items": [
+    ],
+    "specialItems": [
       {
         "name": "Arma especial: cadenas",
         "value": "54%"
@@ -117,5 +115,8 @@
         "notes": "Daño 2d6+20+Mod Fue"
       }
     ]
+  },
+  "powers": {
+    "selected": []
   }
 }

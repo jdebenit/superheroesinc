@@ -44,104 +44,120 @@
     }
   },
   "powers": {
-    "items": [
+    "selected": [
       {
+        "id": "power_potenciar",
         "name": "Potenciar",
         "rank": "Alto(81)",
+        "skillValue": 0,
+        "powerMod": 0,
+        "selectedOption": "",
+        "customizations": [],
+        "effect": "",
         "value": "80%"
       },
       {
+        "id": "power_vincular",
         "name": "Vincular",
         "rank": "Alto(81)",
+        "skillValue": 0,
+        "powerMod": 0,
+        "selectedOption": "",
+        "customizations": [],
+        "effect": "",
         "value": "85%"
       },
       {
+        "id": "power_traducción_de_lenguas",
         "name": "Traducción de lenguas",
         "rank": "Alto(81)",
+        "skillValue": 0,
+        "powerMod": 0,
+        "selectedOption": "",
+        "customizations": [],
+        "effect": "",
         "value": "110%"
       }
     ]
   },
   "skills": {
-    "items": [
+    "generalItems": [
       {
         "name": "Acechar/Discrección",
-        "math": "(AGI+PER)/2",
-        "value": "92%"
+        "value": "92%",
+        "math": "(AGI+PER)/2"
       },
       {
         "name": "Comb. cuerpo a cuerpo",
-        "math": "(AGI+PER)/2",
-        "value": "92%"
+        "value": "92%",
+        "math": "(AGI+PER)/2"
       },
       {
         "name": "Conocimientos generales",
-        "math": "(INT/3)",
-        "value": "40%"
+        "value": "40%",
+        "math": "(INT/3)"
       },
       {
         "name": "Esconderse",
-        "math": "(AGI+PER)/4",
-        "value": "46%"
+        "value": "46%",
+        "math": "(AGI+PER)/4"
       },
       {
         "name": "Idea",
-        "math": "(INT)/2",
-        "value": "60%"
+        "value": "60%",
+        "math": "(INT)/2"
       },
       {
         "name": "Influencia",
-        "math": "(INT+APA)/2",
-        "value": "100%"
+        "value": "100%",
+        "math": "(INT+APA)/2"
       },
       {
         "name": "Idioma nativo - Español",
-        "math": "(INT)",
-        "value": "120%"
+        "value": "120%",
+        "math": "(INT)"
       },
       {
         "name": "Investigar",
-        "math": "(INT+PER)/3",
-        "value": "73%"
+        "value": "73%",
+        "math": "(INT+PER)/3"
       },
       {
         "name": "Lanzar",
-        "math": "(FUE+PER)/2",
-        "value": "77%"
+        "value": "77%",
+        "math": "(FUE+PER)/2"
       },
       {
         "name": "Primeros auxilios",
-        "math": "(INT)/2",
-        "value": "60%"
+        "value": "60%",
+        "math": "(INT)/2"
       },
       {
         "name": "Suerte",
-        "math": "(PER+VOL)/4",
-        "value": "50%"
+        "value": "50%",
+        "math": "(PER+VOL)/4"
       },
       {
         "name": "Trepar y Saltar",
-        "math": "(AGI)",
-        "value": "85%"
+        "value": "85%",
+        "math": "(AGI)"
       }
-    ]
-  },
-  "specialskills": {
-    "items": [
+    ],
+    "specialItems": [
       {
         "name": "Psicologia",
-        "math": "(INT/3)",
-        "value": "40%"
+        "value": "40%",
+        "math": "(INT/3)"
       },
       {
         "name": "Derecho",
-        "math": "(INT/3)",
-        "value": "40%"
+        "value": "40%",
+        "math": "(INT/3)"
       },
       {
         "name": "Historia",
-        "math": "(INT/3)",
-        "value": "40%"
+        "value": "40%",
+        "math": "(INT/3)"
       },
       {
         "name": "Trato con animales",

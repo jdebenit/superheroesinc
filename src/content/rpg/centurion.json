@@ -58,71 +58,69 @@
     }
   },
   "skills": {
-    "items": [
+    "generalItems": [
       {
         "name": "Acechar/Discrección",
-        "math": "(AGI+PER)/2",
-        "value": "100%"
+        "value": "100%",
+        "math": "(AGI+PER)/2"
       },
       {
         "name": "Comb. cuerpo a cuerpo",
-        "math": "(AGI+PER)/2",
-        "value": "102%"
+        "value": "102%",
+        "math": "(AGI+PER)/2"
       },
       {
         "name": "Conocimientos generales",
-        "math": "(INT/3)",
-        "value": "35%"
+        "value": "35%",
+        "math": "(INT/3)"
       },
       {
         "name": "Esconderse",
-        "math": "(AGI+PER)/4",
-        "value": "48%"
+        "value": "48%",
+        "math": "(AGI+PER)/4"
       },
       {
         "name": "Idea",
-        "math": "(INT)/2",
-        "value": "37%"
+        "value": "37%",
+        "math": "(INT)/2"
       },
       {
         "name": "Influencia",
-        "math": "(INT+APA)/2",
-        "value": "77%"
+        "value": "77%",
+        "math": "(INT+APA)/2"
       },
       {
         "name": "Idioma nativo - Latin",
-        "math": "(INT)",
-        "value": "75%"
+        "value": "75%",
+        "math": "(INT)"
       },
       {
         "name": "Investigar",
-        "math": "(INT+PER)/3",
-        "value": "58%"
+        "value": "58%",
+        "math": "(INT+PER)/3"
       },
       {
         "name": "Lanzar",
-        "math": "(FUE+PER)/2",
-        "value": "107%"
+        "value": "107%",
+        "math": "(FUE+PER)/2"
       },
       {
         "name": "Primeros auxilios",
-        "math": "(INT)/2",
-        "value": "37%"
+        "value": "37%",
+        "math": "(INT)/2"
       },
       {
         "name": "Suerte",
-        "math": "(PER+VOL)/4",
-        "value": "49%"
+        "value": "49%",
+        "math": "(PER+VOL)/4"
       },
       {
         "name": "Trepar y Saltar",
-        "math": "(AGI)",
-        "value": "95%"
+        "value": "95%",
+        "math": "(AGI)"
       }
-    ]
-  },
-  "specialskills": {
-    "items": [
+    ],
+    "specialItems": [
       {
         "name": "Armas largas",
         "value": "120%"
@@ -166,10 +164,16 @@
     ]
   },
   "powers": {
-    "items": [
+    "selected": [
       {
+        "id": "power_incremento_vital",
         "name": "Incremento Vital",
-        "rank": "Cosmico(100)"
+        "rank": "Cosmico(100)",
+        "skillValue": 0,
+        "powerMod": 0,
+        "selectedOption": "",
+        "customizations": [],
+        "effect": ""
       }
     ]
   }

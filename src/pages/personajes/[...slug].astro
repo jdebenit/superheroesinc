@@ -1,7 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { getCollection, getEntry } from "astro:content";
-import CharacterSheet from "../../components/CharacterSheet.astro";
+import CharacterSheet from "../../components/character/CharacterSheet";
 
 export async function getStaticPaths() {
     const characters = await getCollection("characters");
@@ -177,7 +177,15 @@ const characterKeywords = [
                     <Content />
                 </div>
 
-                {rpgData && <CharacterSheet rpg={rpgData} />}
+                {
+                    rpgData && (
+                        <CharacterSheet
+                            client:load
+                            character={rpgData}
+                            mode="inline"
+                        />
+                    )
+                }
             </main>
         </div>
     </article>

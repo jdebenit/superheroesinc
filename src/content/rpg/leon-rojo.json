@@ -22,54 +22,55 @@
     }
   },
   "skills": {
-    "items": [
+    "generalItems": [
       {
         "name": "Acechar/Discrección",
-        "math": "(AGI+PER)/2",
-        "value": "100%"
+        "value": "100%",
+        "math": "(AGI+PER)/2"
       },
       {
         "name": "Comb. cuerpo a cuerpo",
-        "math": "(AGI+PER)/2",
-        "value": "100%"
+        "value": "100%",
+        "math": "(AGI+PER)/2"
       },
       {
         "name": "Esconderse",
-        "math": "(AGI+PER)/4",
-        "value": "50%"
+        "value": "50%",
+        "math": "(AGI+PER)/4"
       },
       {
         "name": "Lanzar",
-        "math": "(FUE+PER)/2",
-        "value": "125%"
+        "value": "125%",
+        "math": "(FUE+PER)/2"
       },
       {
         "name": "Trepar y Saltar",
-        "math": "(AGI)",
-        "value": "100%"
+        "value": "100%",
+        "math": "(AGI)"
       }
-    ]
-  },
-  "specialskills": {
-    "items": [
+    ],
+    "specialItems": [
       {
         "name": "Arma especial: Garras",
-        "math": "(2xPER)/3",
-        "value": "66%"
+        "value": "66%",
+        "math": "(2xPER)/3"
       }
     ]
   },
   "weapons": {
-    "cost": 2,
     "items": [
       {
         "name": "Garras",
         "value": "66%",
         "notes": "Daño 2d10+30+Mod Fue."
       }
-    ]
+    ],
+    "cost": 2
   },
   "notes": [
     "Su inteligencia representa su nivel de automatismo, no es un ser consciente."
-  ]
+  ],
+  "powers": {
+    "selected": []
+  }
 }

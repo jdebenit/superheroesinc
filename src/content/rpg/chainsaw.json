@@ -48,99 +48,125 @@
     }
   },
   "powers": {
-    "items": [
+    "selected": [
       {
+        "id": "power_incremento_vital",
         "name": "Incremento Vital",
-        "rank": "Bajo(01)"
+        "rank": "Bajo(01)",
+        "skillValue": 0,
+        "powerMod": 0,
+        "selectedOption": "",
+        "customizations": [],
+        "effect": ""
       },
       {
+        "id": "power_superfuerza",
         "name": "Superfuerza",
-        "notes": "Cuando empuña la motosierra"
+        "rank": 1,
+        "skillValue": 0,
+        "powerMod": 0,
+        "selectedOption": "",
+        "customizations": [],
+        "effect": "Cuando empuña la motosierra"
       },
       {
+        "id": "power_superconstitución",
         "name": "Superconstitución",
-        "notes": "Cuando empuña la motosierra"
+        "rank": 1,
+        "skillValue": 0,
+        "powerMod": 0,
+        "selectedOption": "",
+        "customizations": [],
+        "effect": "Cuando empuña la motosierra"
       },
       {
+        "id": "power_empatia_mental",
         "name": "Empatia mental",
-        "value": "85%",
         "rank": "Elevado(41)",
-        "notes": "Solo puede provocar terror"
+        "skillValue": 0,
+        "powerMod": 0,
+        "selectedOption": "",
+        "customizations": [],
+        "effect": "Solo puede provocar terror",
+        "value": "85%"
       },
       {
+        "id": "power_dominación_mental",
         "name": "Dominación mental",
-        "value": "85%",
         "rank": "Alto(81)",
-        "notes": "Solo puede ordenar a sus victimas que queden paralizadas"
+        "skillValue": 0,
+        "powerMod": 0,
+        "selectedOption": "",
+        "customizations": [],
+        "effect": "Solo puede ordenar a sus victimas que queden paralizadas",
+        "value": "85%"
       }
     ]
   },
   "skills": {
-    "items": [
+    "generalItems": [
       {
         "name": "Acechar/Discrección",
-        "math": "(AGI+PER)/2",
-        "value": "122%"
+        "value": "122%",
+        "math": "(AGI+PER)/2"
       },
       {
         "name": "Comb. cuerpo a cuerpo",
-        "math": "(AGI+PER)/2",
-        "value": "122%"
+        "value": "122%",
+        "math": "(AGI+PER)/2"
       },
       {
         "name": "Conocimientos generales",
-        "math": "(INT/3)",
-        "value": "25%"
+        "value": "25%",
+        "math": "(INT/3)"
       },
       {
         "name": "Esconderse",
-        "math": "(AGI+PER)/4",
-        "value": "61%"
+        "value": "61%",
+        "math": "(AGI+PER)/4"
       },
       {
         "name": "Idea",
-        "math": "(INT)/2",
-        "value": "37%"
+        "value": "37%",
+        "math": "(INT)/2"
       },
       {
         "name": "Influencia",
-        "math": "(INT+APA)/2",
-        "value": "52%"
+        "value": "52%",
+        "math": "(INT+APA)/2"
       },
       {
         "name": "Idioma nativo",
-        "math": "(INT)",
-        "value": "75%"
+        "value": "75%",
+        "math": "(INT)"
       },
       {
         "name": "Investigar",
-        "math": "(INT+PER)/3",
-        "value": "51%"
+        "value": "51%",
+        "math": "(INT+PER)/3"
       },
       {
         "name": "Lanzar",
-        "math": "(FUE+PER)/2",
-        "value": "122%"
+        "value": "122%",
+        "math": "(FUE+PER)/2"
       },
       {
         "name": "Primeros auxilios",
-        "math": "(INT)/2",
-        "value": "37%"
+        "value": "37%",
+        "math": "(INT)/2"
       },
       {
         "name": "Suerte",
-        "math": "(PER+VOL)/4",
-        "value": "38%"
+        "value": "38%",
+        "math": "(PER+VOL)/4"
       },
       {
         "name": "Trepar y Saltar",
-        "math": "(AGI)",
-        "value": "78%"
+        "value": "78%",
+        "math": "(AGI)"
       }
-    ]
-  },
-  "specialskills": {
-    "items": [
+    ],
+    "specialItems": [
       {
         "name": "Arma especial - motosierra",
         "value": "90%"

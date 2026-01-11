@@ -1,5 +1,5 @@
 ---
-import CharacterSheet from "./CharacterSheet.astro";
+import CharacterSheet from "./character/CharacterSheet";
 
 interface Props {
     item: any;
@@ -114,9 +114,11 @@ const { item, rpgDataMap = {} } = Astro.props;
                                             </div>
                                             <div class="dialog-body">
                                                 <CharacterSheet
-                                                    rpg={
+                                                    client:load
+                                                    character={
                                                         rpgDataMap[player.rpgId]
                                                     }
+                                                    mode="inline"
                                                 />
                                             </div>
                                         </div>
@@ -197,7 +199,11 @@ const { item, rpgDataMap = {} } = Astro.props;
                                             </div>
                                             <div class="dialog-body">
                                                 <CharacterSheet
-                                                    rpg={rpgDataMap[npc.rpgId]}
+                                                    client:load
+                                                    character={
+                                                        rpgDataMap[npc.rpgId]
+                                                    }
+                                                    mode="inline"
                                                 />
                                             </div>
                                         </div>

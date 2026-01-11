@@ -60,90 +60,93 @@
     ]
   },
   "powers": {
-    "items": [
+    "selected": [
       {
+        "id": "power_teleportación",
         "name": "Teleportación",
-        "value": "63%",
         "rank": "Cosmico(100)",
-        "notes": "Su poder esta imbuido en el tatuaje. Su teleportación se manifiesta en forma de portales y puede viajar entre esferas"
+        "skillValue": 0,
+        "powerMod": 0,
+        "selectedOption": "",
+        "customizations": [],
+        "effect": "Su poder esta imbuido en el tatuaje. Su teleportación se manifiesta en forma de portales y puede viajar entre esferas",
+        "value": "63%"
       }
     ]
   },
   "skills": {
-    "items": [
+    "generalItems": [
       {
         "name": "Acechar/Discrección",
-        "math": "(AGI+PER)/2",
-        "value": "104%"
+        "value": "104%",
+        "math": "(AGI+PER)/2"
       },
       {
         "name": "Comb. cuerpo a cuerpo",
-        "math": "(AGI+PER)/2",
-        "value": "104%"
+        "value": "104%",
+        "math": "(AGI+PER)/2"
       },
       {
         "name": "Conocimientos generales",
-        "math": "(INT/3)",
-        "value": "30-10%"
+        "value": "30-10%",
+        "math": "(INT/3)"
       },
       {
         "name": "Esconderse",
-        "math": "(AGI+PER)/4",
-        "value": "52%"
+        "value": "52%",
+        "math": "(AGI+PER)/4"
       },
       {
         "name": "Idea",
-        "math": "(INT)/2",
-        "value": "45%"
+        "value": "45%",
+        "math": "(INT)/2"
       },
       {
         "name": "Influencia",
-        "math": "(INT+APA)/2",
-        "value": "86%"
+        "value": "86%",
+        "math": "(INT+APA)/2"
       },
       {
         "name": "Idioma nativo",
-        "math": "(INT)",
-        "value": "90%"
+        "value": "90%",
+        "math": "(INT)"
       },
       {
         "name": "Investigar",
-        "math": "(INT+PER)/3",
-        "value": "65%"
+        "value": "65%",
+        "math": "(INT+PER)/3"
       },
       {
         "name": "Lanzar",
-        "math": "(FUE+PER)/2",
-        "value": "97%"
+        "value": "97%",
+        "math": "(FUE+PER)/2"
       },
       {
         "name": "Primeros auxilios",
-        "math": "(INT)/2",
-        "value": "45%"
+        "value": "45%",
+        "math": "(INT)/2"
       },
       {
         "name": "Suerte",
-        "math": "(PER+VOL)/4",
-        "value": "61%"
+        "value": "61%",
+        "math": "(PER+VOL)/4"
       },
       {
         "name": "Trepar y Saltar",
-        "math": "(AGI)",
-        "value": "102%"
+        "value": "102%",
+        "math": "(AGI)"
       }
-    ]
-  },
-  "specialskills": {
-    "items": [
+    ],
+    "specialItems": [
       {
         "name": "Otro Idioma - Latin",
-        "math": "(INT/3)",
-        "value": "30%"
+        "value": "30%",
+        "math": "(INT/3)"
       },
       {
         "name": "Arco",
-        "math": "(2xPER)/3",
-        "value": "70%"
+        "value": "70%",
+        "math": "(2xPER)/3"
       },
       {
         "name": "Teologia",

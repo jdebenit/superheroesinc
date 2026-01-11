@@ -7,6 +7,11 @@ interface SkillsGeneralSectionProps {
 }
 
 export const SkillsGeneralSection: React.FC<SkillsGeneralSectionProps> = ({ character }) => {
+    // Debug logging
+    console.log('SkillsGeneralSection - character:', character);
+    console.log('SkillsGeneralSection - skills:', character?.skills);
+    console.log('SkillsGeneralSection - generalItems:', character?.skills?.generalItems);
+
     if (!character.skills || !character.skills.generalItems || character.skills.generalItems.length === 0) return null;
 
     return (

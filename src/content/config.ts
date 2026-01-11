@@ -63,9 +63,18 @@ const rpgCollection = defineCollection({
             cost: z.union([z.number(), z.string()]).optional(),
             values: z.record(z.string(), z.union([z.number(), z.string()]))
         }).optional(),
+        // Skills - support both old and new formats
         skills: z.object({
             cost: z.union([z.number(), z.string()]).optional(),
-            items: z.array(z.any())
+            items: z.array(z.any()).optional(), // Old format
+            generalItems: z.array(z.any()).optional(), // New format
+            specialItems: z.array(z.any()).optional(), // New format
+            generalManualMods: z.record(z.string(), z.number()).optional(),
+            manualBases: z.record(z.string(), z.number()).optional(),
+            learning: z.object({
+                selected: z.record(z.string(), z.any()).optional(),
+                specified: z.record(z.string(), z.any()).optional(),
+            }).optional(),
         }).optional(),
         specialskills: z.object({
             cost: z.union([z.number(), z.string()]).optional(),
@@ -86,27 +95,48 @@ const rpgCollection = defineCollection({
             cost: z.union([z.number(), z.string()]).optional(),
             items: z.array(z.any())
         }).optional(),
+        // Powers - support both old and new formats
         powers: z.object({
             cost: z.union([z.number(), z.string()]).optional(),
-            items: z.array(z.any())
+            items: z.array(z.any()).optional(), // Old format
+            selected: z.array(z.any()).optional(), // New format
         }).optional(),
         spells: z.object({
             cost: z.union([z.number(), z.string()]).optional(),
-            items: z.array(z.any())
+            items: z.array(z.any()).optional(),
+            selected: z.array(z.any()).optional(), // New format
         }).optional(),
         weapons: z.object({
             cost: z.union([z.number(), z.string()]).optional(),
             items: z.array(z.any())
         }).optional(),
+        // Tech modules - support both old and new formats
         techmodules: z.object({
             cost: z.union([z.number(), z.string()]).optional(),
             items: z.array(z.any())
         }).optional(),
+        techModules: z.object({
+            installed: z.array(z.any()).optional(),
+        }).optional(),
+        artifacts: z.object({
+            cost: z.union([z.number(), z.string()]).optional(),
+            items: z.array(z.any())
+        }).optional(),
+        vehicles: z.object({
+            cost: z.union([z.number(), z.string()]).optional(),
+            items: z.array(z.any())
+        }).optional(),
+        magicObjects: z.object({
+            cost: z.union([z.number(), z.string()]).optional(),
+            items: z.array(z.any())
+        }).optional(),
+        magicTableRolls: z.array(z.any()).optional(),
         combatstats: z.array(z.string()).optional(),
         otherstats: z.array(z.string()).optional(),
         notes: z.union([z.string(), z.array(z.string())]).optional(),
         traumas: z.record(z.string(), z.string()).optional(),
         icon: z.string().optional(),
+        exoskeletonConfig: z.string().optional(),
     }),
 });
 

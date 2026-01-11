@@ -68,71 +68,69 @@
     }
   },
   "skills": {
-    "items": [
+    "generalItems": [
       {
         "name": "Acechar/Discrección",
-        "math": "(AGI+PER)/2",
-        "value": "105+20%"
+        "value": "105+20%",
+        "math": "(AGI+PER)/2"
       },
       {
         "name": "Comb. cuerpo a cuerpo",
-        "math": "(AGI+PER)/2",
-        "value": "105%"
+        "value": "105%",
+        "math": "(AGI+PER)/2"
       },
       {
         "name": "Conocimientos generales",
-        "math": "(INT/3)",
-        "value": "28%"
+        "value": "28%",
+        "math": "(INT/3)"
       },
       {
         "name": "Esconderse",
-        "math": "(AGI+PER)/4",
-        "value": "52%"
+        "value": "52%",
+        "math": "(AGI+PER)/4"
       },
       {
         "name": "Idea",
-        "math": "(INT)/2",
-        "value": "35%"
+        "value": "35%",
+        "math": "(INT)/2"
       },
       {
         "name": "Influencia",
-        "math": "(INT+APA)/2",
-        "value": "87%"
+        "value": "87%",
+        "math": "(INT+APA)/2"
       },
       {
         "name": "Idioma nativo - Japones",
-        "math": "(INT)",
-        "value": "70%"
+        "value": "70%",
+        "math": "(INT)"
       },
       {
         "name": "Investigar",
-        "math": "(INT+PER)/3",
-        "value": "60%"
+        "value": "60%",
+        "math": "(INT+PER)/3"
       },
       {
         "name": "Lanzar",
-        "math": "(FUE+PER)/2",
-        "value": "125%"
+        "value": "125%",
+        "math": "(FUE+PER)/2"
       },
       {
         "name": "Primeros auxilios",
-        "math": "(INT)/2",
-        "value": "35%"
+        "value": "35%",
+        "math": "(INT)/2"
       },
       {
         "name": "Suerte",
-        "math": "(PER+VOL)/4",
-        "value": "51%"
+        "value": "51%",
+        "math": "(PER+VOL)/4"
       },
       {
         "name": "Trepar y Saltar",
-        "math": "(AGI)",
-        "value": "100+20%"
+        "value": "100+20%",
+        "math": "(AGI)"
       }
-    ]
-  },
-  "specialskills": {
-    "items": [
+    ],
+    "specialItems": [
       {
         "name": "Artes Marciales",
         "value": "70%"
@@ -152,33 +150,47 @@
     ]
   },
   "powers": {
-    "items": [
+    "selected": [
       {
-        "name": "Superfuerza"
+        "id": "power_superfuerza",
+        "name": "Superfuerza",
+        "rank": 1,
+        "skillValue": 0,
+        "powerMod": 0,
+        "selectedOption": "",
+        "customizations": [],
+        "effect": ""
       },
       {
-        "name": "Superconstitucion"
+        "id": "power_superconstitucion",
+        "name": "Superconstitucion",
+        "rank": 1,
+        "skillValue": 0,
+        "powerMod": 0,
+        "selectedOption": "",
+        "customizations": [],
+        "effect": ""
       },
       {
+        "id": "power_volar",
         "name": "Volar",
         "rank": "Alto(81)",
+        "skillValue": 0,
+        "powerMod": 0,
+        "selectedOption": "",
+        "customizations": [],
+        "effect": "",
         "value": "60%"
       },
       {
+        "id": "power_invulnerabilidad:_cinética",
         "name": "Invulnerabilidad: Cinética",
-        "rank": "Cosmico(100)"
-      }
-    ]
-  },
-  "techmodules": {
-    "items": [
-      {
-        "name": "Tecnoimplante Ojo",
-        "notes": "+5PV. 60 al Daño Absorbido Físico en la cabeza"
-      },
-      {
-        "name": "Percepcion avanzada",
-        "notes": "110 percepción. Visual. Localización en el Tecnoimplante Ojo"
+        "rank": "Cosmico(100)",
+        "skillValue": 0,
+        "powerMod": 0,
+        "selectedOption": "",
+        "customizations": [],
+        "effect": ""
       }
     ]
   },
@@ -188,6 +200,24 @@
         "name": "Kataba de Totshu-No-Asu",
         "value": "66%",
         "notes": "Forjada a partir del alma de un demonio cada vez que derrama sangre, tirada de voluntad del portador para no perder 1d4 de EQM. Esta forjada de una aleación de Admantina y Tamahagane. Daño 3d10+50+20+Mod Fue."
+      }
+    ]
+  },
+  "techModules": {
+    "installed": [
+      {
+        "id": "tm_0iffbbpth",
+        "name": "Tecnoimplante Ojo",
+        "location": "",
+        "notes": "+5PV. 60 al Daño Absorbido Físico en la cabeza",
+        "pcCost": 0
+      },
+      {
+        "id": "tm_uihbjiv8f",
+        "name": "Percepcion avanzada",
+        "location": "",
+        "notes": "110 percepción. Visual. Localización en el Tecnoimplante Ojo",
+        "pcCost": 0
       }
     ]
   }

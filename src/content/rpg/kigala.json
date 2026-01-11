@@ -120,106 +120,117 @@
     ]
   },
   "powers": {
-    "items": [
+    "selected": [
       {
-        "name": "Superinteligencia"
+        "id": "power_superinteligencia",
+        "name": "Superinteligencia",
+        "rank": 1,
+        "skillValue": 0,
+        "powerMod": 0,
+        "selectedOption": "",
+        "customizations": [],
+        "effect": ""
       },
       {
+        "id": "power_traducción_de_lenguas",
         "name": "Traducción de Lenguas",
-        "value": "143%",
-        "rank": "Cosmico(100)"
+        "rank": "Cosmico(100)",
+        "skillValue": 0,
+        "powerMod": 0,
+        "selectedOption": "",
+        "customizations": [],
+        "effect": "",
+        "value": "143%"
       }
     ]
   },
   "skills": {
-    "items": [
+    "generalItems": [
       {
         "name": "Acechar/Discrección",
-        "math": "(AGI+PER)/2",
-        "value": "92%"
+        "value": "92%",
+        "math": "(AGI+PER)/2"
       },
       {
         "name": "Comb. cuerpo a cuerpo",
-        "math": "(AGI+PER)/2",
-        "value": "92%"
+        "value": "92%",
+        "math": "(AGI+PER)/2"
       },
       {
         "name": "Conocimientos generales",
-        "math": "(INT/3)",
-        "value": "62-10%"
+        "value": "62-10%",
+        "math": "(INT/3)"
       },
       {
         "name": "Esconderse",
-        "math": "(AGI+PER)/4",
-        "value": "46%"
+        "value": "46%",
+        "math": "(AGI+PER)/4"
       },
       {
         "name": "Idea",
-        "math": "(INT)/2",
-        "value": "93%"
+        "value": "93%",
+        "math": "(INT)/2"
       },
       {
         "name": "Influencia",
-        "math": "(INT+APA)/2",
-        "value": "142%"
+        "value": "142%",
+        "math": "(INT+APA)/2"
       },
       {
         "name": "Idioma nativo - Sumerio",
-        "math": "(INT)",
-        "value": "186%"
+        "value": "186%",
+        "math": "(INT)"
       },
       {
         "name": "Investigar",
-        "math": "(INT+PER)/3",
-        "value": "90%"
+        "value": "90%",
+        "math": "(INT+PER)/3"
       },
       {
         "name": "Lanzar",
-        "math": "(FUE+PER)/2",
-        "value": "120%"
+        "value": "120%",
+        "math": "(FUE+PER)/2"
       },
       {
         "name": "Primeros auxilios",
-        "math": "(INT)/2",
-        "value": "93%"
+        "value": "93%",
+        "math": "(INT)/2"
       },
       {
         "name": "Suerte",
-        "math": "(PER+VOL)/4",
-        "value": "50%"
+        "value": "50%",
+        "math": "(PER+VOL)/4"
       },
       {
         "name": "Trepar y Saltar",
-        "math": "(AGI)",
-        "value": "84%"
+        "value": "84%",
+        "math": "(AGI)"
       }
-    ]
-  },
-  "specialskills": {
-    "items": [
+    ],
+    "specialItems": [
       {
         "name": "Magia",
         "value": "143%"
       },
       {
         "name": "Economía",
-        "math": "(INT/3)",
-        "value": "75%"
+        "value": "75%",
+        "math": "(INT/3)"
       },
       {
         "name": "Computadora / Comunicaciones",
-        "math": "(INT/2)",
-        "value": "103%"
+        "value": "103%",
+        "math": "(INT/2)"
       },
       {
         "name": "Historia",
-        "math": "(INT/3)",
-        "value": "89%"
+        "value": "89%",
+        "math": "(INT/3)"
       },
       {
         "name": "Supervivencia: Esferas",
-        "math": "(INT/2)",
-        "value": "93%"
+        "value": "93%",
+        "math": "(INT/2)"
       }
     ]
   },

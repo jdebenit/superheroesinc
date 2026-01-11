@@ -45,95 +45,103 @@
     }
   },
   "powers": {
-    "items": [
+    "selected": [
       {
+        "id": "power_absorcion_de_vida",
         "name": "Absorcion de vida",
-        "value": "115%",
         "rank": "Medio(21)",
-        "notes": "Su mordisco le alimenta y absorbe la vida de sus victimas"
+        "skillValue": 0,
+        "powerMod": 0,
+        "selectedOption": "",
+        "customizations": [],
+        "effect": "Su mordisco le alimenta y absorbe la vida de sus victimas",
+        "value": "115%"
       },
       {
+        "id": "power_invulnerabilidad:_penalizadores_especie",
         "name": "Invulnerabilidad: Penalizadores especie",
         "rank": "Alto(81)",
-        "notes": "Las penalizaciones de los vampiros no le aplican a excepcion de su sed de sangre que no la controla y aún necesita alimentarse"
+        "skillValue": 0,
+        "powerMod": 0,
+        "selectedOption": "",
+        "customizations": [],
+        "effect": "Las penalizaciones de los vampiros no le aplican a excepcion de su sed de sangre que no la controla y aún necesita alimentarse"
       }
     ]
   },
   "skills": {
-    "items": [
+    "generalItems": [
       {
         "name": "Acechar/Discrección",
-        "math": "(AGI+PER)/2",
-        "value": "127%"
+        "value": "127%",
+        "math": "(AGI+PER)/2"
       },
       {
         "name": "Comb. cuerpo a cuerpo",
-        "math": "(AGI+PER)/2",
-        "value": "127%"
+        "value": "127%",
+        "math": "(AGI+PER)/2"
       },
       {
         "name": "Conocimientos generales",
-        "math": "(INT/3)",
-        "value": "25%"
+        "value": "25%",
+        "math": "(INT/3)"
       },
       {
         "name": "Esconderse",
-        "math": "(AGI+PER)/4",
-        "value": "63%"
+        "value": "63%",
+        "math": "(AGI+PER)/4"
       },
       {
         "name": "Idea",
-        "math": "(INT)/2",
-        "value": "37%"
+        "value": "37%",
+        "math": "(INT)/2"
       },
       {
         "name": "Influencia",
-        "math": "(INT+APA)/2",
-        "value": "80%"
+        "value": "80%",
+        "math": "(INT+APA)/2"
       },
       {
         "name": "Idioma nativo - Castellano",
-        "math": "(INT)",
-        "value": "75%"
+        "value": "75%",
+        "math": "(INT)"
       },
       {
         "name": "Investigar",
-        "math": "(INT+PER)/3",
-        "value": "65%"
+        "value": "65%",
+        "math": "(INT+PER)/3"
       },
       {
         "name": "Lanzar",
-        "math": "(FUE+PER)/2",
-        "value": "76%"
+        "value": "76%",
+        "math": "(FUE+PER)/2"
       },
       {
         "name": "Primeros auxilios",
-        "math": "(INT)/2",
-        "value": "37%"
+        "value": "37%",
+        "math": "(INT)/2"
       },
       {
         "name": "Suerte",
-        "math": "(PER+VOL)/4",
-        "value": "51%"
+        "value": "51%",
+        "math": "(PER+VOL)/4"
       },
       {
         "name": "Trepar y Saltar",
-        "math": "(AGI)",
-        "value": "135"
+        "value": "135",
+        "math": "(AGI)"
       }
-    ]
-  },
-  "specialskills": {
-    "items": [
+    ],
+    "specialItems": [
       {
         "name": "Armas blancas",
-        "math": "(AGIxPER)/3",
-        "value": "105%"
+        "value": "105%",
+        "math": "(AGIxPER)/3"
       },
       {
         "name": "Computadora/Comunicaciones",
-        "math": "(INT)/2",
-        "value": "47%"
+        "value": "47%",
+        "math": "(INT)/2"
       },
       {
         "name": "Rastrear",

@@ -43,118 +43,138 @@
     }
   },
   "powers": {
-    "items": [
+    "selected": [
       {
+        "id": "power_volar",
         "name": "Volar",
         "rank": "Bajo(01)",
-        "value": "70%",
-        "notes": "Usa sus alas"
+        "skillValue": 0,
+        "powerMod": 0,
+        "selectedOption": "",
+        "customizations": [],
+        "effect": "Usa sus alas",
+        "value": "70%"
       },
       {
+        "id": "power_ataque_especial:arma_natural_garras",
         "name": "Ataque Especial:Arma Natural Garras",
         "rank": "Medio(21)",
-        "notes": "Daño 2d10+15+Mod. Fue."
+        "skillValue": 0,
+        "powerMod": 0,
+        "selectedOption": "",
+        "customizations": [],
+        "effect": "Daño 2d10+15+Mod. Fue."
       },
       {
+        "id": "power_incremento_vital",
         "name": "Incremento Vital",
-        "rank": "Bajo(01)"
+        "rank": "Bajo(01)",
+        "skillValue": 0,
+        "powerMod": 0,
+        "selectedOption": "",
+        "customizations": [],
+        "effect": ""
       },
       {
+        "id": "power_invulnerabilidad:_poderes_psíquicos",
         "name": "Invulnerabilidad: Poderes Psíquicos",
-        "rank": "Alto(81)"
+        "rank": "Alto(81)",
+        "skillValue": 0,
+        "powerMod": 0,
+        "selectedOption": "",
+        "customizations": [],
+        "effect": ""
       }
     ]
   },
   "skills": {
-    "items": [
+    "generalItems": [
       {
         "name": "Acechar/Discrección",
-        "math": "(AGI+PER)/2",
-        "value": "110%"
+        "value": "110%",
+        "math": "(AGI+PER)/2"
       },
       {
         "name": "Comb. cuerpo a cuerpo",
-        "math": "(AGI+PER)/2",
-        "value": "110%"
+        "value": "110%",
+        "math": "(AGI+PER)/2"
       },
       {
         "name": "Conocimientos generales",
-        "math": "(INT/3)",
-        "value": "25%"
+        "value": "25%",
+        "math": "(INT/3)"
       },
       {
         "name": "Esconderse",
-        "math": "(AGI+PER)/4",
-        "value": "55%"
+        "value": "55%",
+        "math": "(AGI+PER)/4"
       },
       {
         "name": "Idea",
-        "math": "(INT)/2",
-        "value": "37%"
+        "value": "37%",
+        "math": "(INT)/2"
       },
       {
         "name": "Influencia",
-        "math": "(INT+APA)/2",
-        "value": "52%"
+        "value": "52%",
+        "math": "(INT+APA)/2"
       },
       {
         "name": "Idioma nativo - Naglo",
-        "math": "(INT)",
-        "value": "75%"
+        "value": "75%",
+        "math": "(INT)"
       },
       {
         "name": "Investigar",
-        "math": "(INT+PER)/3",
-        "value": "51%"
+        "value": "51%",
+        "math": "(INT+PER)/3"
       },
       {
         "name": "Lanzar",
-        "math": "(FUE+PER)/2",
-        "value": "140%"
+        "value": "140%",
+        "math": "(FUE+PER)/2"
       },
       {
         "name": "Primeros auxilios",
-        "math": "(INT)/2",
-        "value": "37%"
+        "value": "37%",
+        "math": "(INT)/2"
       },
       {
         "name": "Suerte",
-        "math": "(PER+VOL)/4",
-        "value": "35%"
+        "value": "35%",
+        "math": "(PER+VOL)/4"
       },
       {
         "name": "Trepar y Saltar",
-        "math": "(AGI)",
-        "value": "140%"
+        "value": "140%",
+        "math": "(AGI)"
       }
-    ]
-  },
-  "specialskills": {
-    "items": [
+    ],
+    "specialItems": [
       {
         "name": "Otro Idioma - Inglés",
-        "math": "(INT/3)",
-        "value": "55%"
+        "value": "55%",
+        "math": "(INT/3)"
       },
       {
         "name": "Otro Idioma - Español",
-        "math": "(INT/3)",
-        "value": "55%"
+        "value": "55%",
+        "math": "(INT/3)"
       },
       {
         "name": "Otro Idioma - Frances",
-        "math": "(INT/3)",
-        "value": "55%"
+        "value": "55%",
+        "math": "(INT/3)"
       },
       {
         "name": "Otro Idioma - Árabe",
-        "math": "(INT/3)",
-        "value": "45%"
+        "value": "45%",
+        "math": "(INT/3)"
       },
       {
         "name": "Otro Idioma - Chino",
-        "math": "(INT/3)",
-        "value": "35%"
+        "value": "35%",
+        "math": "(INT/3)"
       },
       {
         "name": "Arma Especial - Garras",

@@ -74,81 +74,78 @@
     }
   },
   "skills": {
-    "items": [
+    "generalItems": [
       {
         "name": "Acechar/Discrección",
-        "math": "(AGI+PER)/2",
-        "value": "110+20%"
+        "value": "110+20%",
+        "math": "(AGI+PER)/2"
       },
       {
         "name": "Comb. cuerpo a cuerpo",
-        "math": "(AGI+PER)/2",
-        "value": "110%"
+        "value": "110%",
+        "math": "(AGI+PER)/2"
       },
       {
         "name": "Conocimientos generales",
-        "math": "(INT/3)",
-        "value": "34-10%"
+        "value": "34-10%",
+        "math": "(INT/3)"
       },
       {
         "name": "Esconderse",
-        "math": "(AGI+PER)/4",
-        "value": "55%"
+        "value": "55%",
+        "math": "(AGI+PER)/4"
       },
       {
         "name": "Idea",
-        "math": "(INT)/2",
-        "value": "51+20%"
+        "value": "51+20%",
+        "math": "(INT)/2"
       },
       {
         "name": "Influencia",
-        "math": "(INT+APA)/2",
-        "value": "101+20%"
+        "value": "101+20%",
+        "math": "(INT+APA)/2"
       },
       {
         "name": "Idioma nativo",
-        "math": "(INT)",
-        "value": "102%"
+        "value": "102%",
+        "math": "(INT)"
       },
       {
         "name": "Investigar",
-        "math": "(INT+PER)/3",
-        "value": "70%"
+        "value": "70%",
+        "math": "(INT+PER)/3"
       },
       {
         "name": "Lanzar",
-        "math": "(FUE+PER)/2",
-        "value": "105%"
+        "value": "105%",
+        "math": "(FUE+PER)/2"
       },
       {
         "name": "Primeros auxilios",
-        "math": "(INT)/2",
-        "value": "51%"
+        "value": "51%",
+        "math": "(INT)/2"
       },
       {
         "name": "Suerte",
-        "math": "(PER+VOL)/4",
-        "value": "53%"
+        "value": "53%",
+        "math": "(PER+VOL)/4"
       },
       {
         "name": "Trepar y Saltar",
-        "math": "(AGI)",
-        "value": "110+20%"
+        "value": "110+20%",
+        "math": "(AGI)"
       }
-    ]
-  },
-  "specialskills": {
-    "cost": 7,
-    "items": [
+    ],
+    "specialItems": [
       {
         "name": "Otro Idioma (Req) - Inglés",
-        "math": "(INT/3)",
-        "value": "34+20%"
+        "value": "34+20%",
+        "math": "(INT/3)"
       },
       {
         "name": "Artes Marciales (Req.)",
-        "math": "(2xPER)/3",
-        "value": "73%"
+        "value": "73%",
+        "math": "(2xPER)/3"
       },
       {
         "name": "Concentración",
@@ -164,8 +161,8 @@
       },
       {
         "name": "Armas Blancas",
-        "math": "(AGI+PER)/3",
-        "value": "73%"
+        "value": "73%",
+        "math": "(AGI+PER)/3"
       },
       {
         "name": "Rastrear",
@@ -173,8 +170,8 @@
       },
       {
         "name": "Supervivencia (Bosque)",
-        "math": "INT/2",
-        "value": "51%"
+        "value": "51%",
+        "math": "INT/2"
       }
     ]
   },
@@ -190,7 +187,6 @@
     ]
   },
   "equipment": {
-    "cost": 2,
     "items": [
       {
         "name": "Tiara Mental",
@@ -204,10 +200,10 @@
         "name": "Botas de Lert",
         "notes": "Duplica su capacidad de salto"
       }
-    ]
+    ],
+    "cost": 2
   },
   "weapons": {
-    "cost": 2,
     "items": [
       {
         "name": "Khopesh de Tamahagane",
@@ -219,7 +215,8 @@
         "value": "73%",
         "notes": "Daño 2d6+20+Mod Fue."
       }
-    ]
+    ],
+    "cost": 2
   },
   "profession": "Sin determinar",
   "sexualIdentity": "Sin determinar",
@@ -231,5 +228,8 @@
     "Cuando usa su chi en su cuerpo este adquiere un brillo verdoso",
     "El Khopesh se ilumina al colpear cuando esta cargado con chi",
     "Suele usar el Sheng Biao como ayuda para moverse entre azoteas y zonas elevadas"
-  ]
+  ],
+  "powers": {
+    "selected": []
+  }
 }

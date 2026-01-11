@@ -93,99 +93,111 @@
     ]
   },
   "powers": {
-    "items": [
+    "selected": [
       {
-        "name": "Superinteligencia"
+        "id": "power_superinteligencia",
+        "name": "Superinteligencia",
+        "rank": 1,
+        "skillValue": 0,
+        "powerMod": 0,
+        "selectedOption": "",
+        "customizations": [],
+        "effect": ""
       },
       {
-        "name": "Supervoluntad"
+        "id": "power_supervoluntad",
+        "name": "Supervoluntad",
+        "rank": 1,
+        "skillValue": 0,
+        "powerMod": 0,
+        "selectedOption": "",
+        "customizations": [],
+        "effect": ""
       }
     ]
   },
   "skills": {
-    "items": [
+    "generalItems": [
       {
         "name": "Acechar/Discrección",
-        "math": "(AGI+PER)/2",
-        "value": "115%"
+        "value": "115%",
+        "math": "(AGI+PER)/2"
       },
       {
         "name": "Comb. cuerpo a cuerpo",
-        "math": "(AGI+PER)/2",
-        "value": "115%"
+        "value": "115%",
+        "math": "(AGI+PER)/2"
       },
       {
         "name": "Conocimientos generales",
-        "math": "(INT/3)",
-        "value": "47%"
+        "value": "47%",
+        "math": "(INT/3)"
       },
       {
         "name": "Esconderse",
-        "math": "(AGI+PER)/4",
-        "value": "57%"
+        "value": "57%",
+        "math": "(AGI+PER)/4"
       },
       {
         "name": "Idea",
-        "math": "(INT)/2",
-        "value": "70+20%"
+        "value": "70+20%",
+        "math": "(INT)/2"
       },
       {
         "name": "Influencia",
-        "math": "(INT+APA)/2",
-        "value": "90+20%"
+        "value": "90+20%",
+        "math": "(INT+APA)/2"
       },
       {
         "name": "Idioma nativo - Egipcio",
-        "math": "(INT)",
-        "value": "141%"
+        "value": "141%",
+        "math": "(INT)"
       },
       {
         "name": "Investigar",
-        "math": "(INT+PER)/3",
-        "value": "90%"
+        "value": "90%",
+        "math": "(INT+PER)/3"
       },
       {
         "name": "Lanzar",
-        "math": "(FUE+PER)/2",
-        "value": "85%"
+        "value": "85%",
+        "math": "(FUE+PER)/2"
       },
       {
         "name": "Primeros auxilios",
-        "math": "(INT)/2",
-        "value": "70%"
+        "value": "70%",
+        "math": "(INT)/2"
       },
       {
         "name": "Suerte",
-        "math": "(PER+VOL)/4",
-        "value": "75%"
+        "value": "75%",
+        "math": "(PER+VOL)/4"
       },
       {
         "name": "Trepar y Saltar",
-        "math": "(AGI)",
-        "value": "101%"
+        "value": "101%",
+        "math": "(AGI)"
       }
-    ]
-  },
-  "specialskills": {
-    "items": [
+    ],
+    "specialItems": [
       {
         "name": "Magia",
         "value": "128%"
       },
       {
         "name": "Otro Idioma - Español",
-        "math": "(INT/3)",
-        "value": "47+20%"
+        "value": "47+20%",
+        "math": "(INT/3)"
       },
       {
         "name": "Historia",
-        "math": "(INT/3)",
-        "value": "47%"
+        "value": "47%",
+        "math": "(INT/3)"
       },
       {
         "name": "Mitología",
-        "math": "(INT/3)",
-        "value": "47%"
+        "value": "47%",
+        "math": "(INT/3)"
       }
     ]
   }

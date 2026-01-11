@@ -57,103 +57,125 @@
     }
   },
   "powers": {
-    "items": [
+    "selected": [
       {
-        "name": "Superinteligencia"
+        "id": "power_superinteligencia",
+        "name": "Superinteligencia",
+        "rank": 1,
+        "skillValue": 0,
+        "powerMod": 0,
+        "selectedOption": "",
+        "customizations": [],
+        "effect": ""
       },
       {
+        "id": "power_supervelocidad",
         "name": "Supervelocidad",
+        "rank": 1,
+        "skillValue": 0,
+        "powerMod": 0,
+        "selectedOption": "",
+        "customizations": [],
+        "effect": "",
         "value": "140%"
       },
       {
+        "id": "power_control_de_la_energía_cinetica",
         "name": "Control de la energía cinetica",
-        "value": "70%",
         "rank": "Elevado(41)",
-        "notes": "No intercambia energias"
+        "skillValue": 0,
+        "powerMod": 0,
+        "selectedOption": "",
+        "customizations": [],
+        "effect": "No intercambia energias",
+        "value": "70%"
       },
       {
+        "id": "power_campo_de_fuerza:_automatico",
         "name": "Campo de fuerza: Automatico",
-        "value": "41%",
         "rank": "Elevado(41)",
-        "notes": "Solo se activa en supervelocidad"
+        "skillValue": 0,
+        "powerMod": 0,
+        "selectedOption": "",
+        "customizations": [],
+        "effect": "Solo se activa en supervelocidad",
+        "value": "41%"
       }
     ]
   },
   "skills": {
-    "items": [
+    "generalItems": [
       {
         "name": "Acechar/Discrección",
-        "math": "(AGI+PER)/2",
-        "value": "120%"
+        "value": "120%",
+        "math": "(AGI+PER)/2"
       },
       {
         "name": "Comb. cuerpo a cuerpo",
-        "math": "(AGI+PER)/2",
-        "value": "120%"
+        "value": "120%",
+        "math": "(AGI+PER)/2"
       },
       {
         "name": "Conocimientos generales",
-        "math": "(INT/3)",
-        "value": "33%"
+        "value": "33%",
+        "math": "(INT/3)"
       },
       {
         "name": "Esconderse",
-        "math": "(AGI+PER)/4",
-        "value": "60%"
+        "value": "60%",
+        "math": "(AGI+PER)/4"
       },
       {
         "name": "Idea",
-        "math": "(INT)/2",
-        "value": "50%"
+        "value": "50%",
+        "math": "(INT)/2"
       },
       {
         "name": "Influencia",
-        "math": "(INT+APA)/2",
-        "value": "74%"
+        "value": "74%",
+        "math": "(INT+APA)/2"
       },
       {
         "name": "Idioma nativo - Castellano",
-        "math": "(INT)",
-        "value": "100%"
+        "value": "100%",
+        "math": "(INT)"
       },
       {
         "name": "Investigar",
-        "math": "(INT+PER)/3",
-        "value": "67%"
+        "value": "67%",
+        "math": "(INT+PER)/3"
       },
       {
         "name": "Lanzar",
-        "math": "(FUE+PER)/2",
-        "value": "100%"
+        "value": "100%",
+        "math": "(FUE+PER)/2"
       },
       {
         "name": "Primeros auxilios",
-        "math": "(INT)/2",
-        "value": "50%"
+        "value": "50%",
+        "math": "(INT)/2"
       },
       {
         "name": "Suerte",
-        "math": "(PER+VOL)/4",
-        "value": "50%"
+        "value": "50%",
+        "math": "(PER+VOL)/4"
       },
       {
         "name": "Trepar y Saltar",
-        "math": "(AGI)",
-        "value": "140%"
+        "value": "140%",
+        "math": "(AGI)"
       }
-    ]
-  },
-  "specialskills": {
-    "items": [
+    ],
+    "specialItems": [
       {
         "name": "Mecanica",
-        "math": "(INT/2)",
-        "value": "66%"
+        "value": "66%",
+        "math": "(INT/2)"
       },
       {
         "name": "Arrma Especial: Cuchillas de plasma",
-        "math": "(2xPER)/3",
-        "value": "66%"
+        "value": "66%",
+        "math": "(2xPER)/3"
       }
     ]
   },

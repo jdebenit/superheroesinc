@@ -40,9 +40,10 @@ import { NotesSection } from './sections/NotesSection';
 interface CharacterSheetProps {
     character: any;
     totalPCs?: number | string;
+    mode?: 'modal' | 'inline'; // New prop to control rendering mode
 }
 
-export default function CharacterSheet({ character, totalPCs }: CharacterSheetProps) {
+export default function CharacterSheet({ character, totalPCs, mode = 'modal' }: CharacterSheetProps) {
     const dialogRef = useRef<HTMLDialogElement>(null);
     const [isFullScreen, setIsFullScreen] = React.useState(false);
 
@@ -115,8 +116,89 @@ export default function CharacterSheet({ character, totalPCs }: CharacterSheetPr
         document.body.appendChild(downloadAnchorNode);
         downloadAnchorNode.click();
         downloadAnchorNode.remove();
+    };
+
+    const handleExportPDF = async () => {
+        try {
+            const { downloadPDF, generateCharacterSheetPDF } = await import('../../utils/pdfExport');
+            // Pass pre-calculated data to avoid re-calculation in PDF export
+            const preCalculatedData = {
+                derivedStats,
+                generalSkillsData,
+                specialSkillsData,
+                powersData,
+                spellsData,
+                techData,
+                weaponsData,
+                artifactsData,
+                vehiclesData,
+                equipmentData
+            };
+            // @ts-ignore - Argument count mismatch until pdfExport is updated
+            const pdfBytes = await generateCharacterSheetPDF('/ficha_template.pdf', character, totalPCs || 0, preCalculatedData);
+            downloadPDF(pdfBytes, `Ficha_SHI_${character.name.replace(/\s+/g, '_') || 'Personaje'}.pdf`);
+        } catch (error) {
+            console.error('Error generando PDF:', error);
+            alert('Error al generar el PDF. Asegúrate de que el template "ficha_template.pdf" está en la carpeta public.');
+        }
+    };
+
+    // Render the sheet content (reusable for both modes)
+    const renderSheetContent = () => (
+        <div className="character-sheet">
+            <SheetHeader character={character} totalPCs={totalPCs} />
+
+            <div className="sheet-grid">
+                <AttributesSection character={character} />
+                <CombatSection combatStats={combatStats} />
+                <OtherStatsSection otherStats={otherStats} />
+                <OriginSection character={character} />
+                <SkillsGeneralSection character={character} />
+                <SkillsLearningSection character={character} />
+                <HybridSection character={character} />
+                <EnteSection character={character} />
+                <AlteradoSection character={character} />
+                <MutanteSection character={character} />
+                <PoseidoSection character={character} />
+                <GuardianSection character={character} />
+                <DivineSection character={character} />
+                <MalditoSection character={character} />
+                <BackgroundSection character={character} />
+                <WeaponsSection weapons={character.weapons} />
+                <ArtifactsSection artifacts={character.artifacts} />
+                <MagicObjectsSection magicObjects={character.magicObjects} magicTableRolls={character.magicTableRolls} />
+                <VehiclesSection vehicles={character.vehicles} />
+                <EquipmentSection equipment={character.equipment} />
+                <TechModulesSection techModules={character.techModules?.installed || []} />
+                <ExoskeletonSection character={character} />
+                <TechnifiedSection character={character} />
+                <PowersSection character={character} />
+                <SpellsSection character={character} />
+                <MagicalBondsSection character={character} />
+                <TraumasSection character={character} />
+                <NotesSection character={character} />
+            </div>
+        </div>
+    );
+
+    // Inline mode: render directly without modal
+    if (mode === 'inline') {
+        return (
+            <div className="character-sheet-inline" id="character-sheet">
+                <div className="inline-actions">
+                    <button onClick={downloadJson} className="action-btn" title="Descargar JSON">
+                        💾 Descargar JSON
+                    </button>
+                    <button onClick={handleExportPDF} className="action-btn" title="Exportar PDF">
+                        📥 Exportar PDF
+                    </button>
+                </div>
+                {renderSheetContent()}
+            </div>
+        );
     }
 
+    // Modal mode: render button + dialog (original behavior)
     return (
         <>
             <button
@@ -139,34 +221,7 @@ export default function CharacterSheet({ character, totalPCs }: CharacterSheetPr
                             <button onClick={downloadJson} className="action-btn" title="Descargar JSON">
                                 💾
                             </button>
-                            <button
-                                onClick={async () => {
-                                    try {
-                                        const { downloadPDF, generateCharacterSheetPDF } = await import('../../utils/pdfExport');
-                                        // Pass pre-calculated data to avoid re-calculation in PDF export
-                                        const preCalculatedData = {
-                                            derivedStats,
-                                            generalSkillsData,
-                                            specialSkillsData,
-                                            powersData,
-                                            spellsData,
-                                            techData,
-                                            weaponsData,
-                                            artifactsData,
-                                            vehiclesData,
-                                            equipmentData
-                                        };
-                                        // @ts-ignore - Argument count mismatch until pdfExport is updated
-                                        const pdfBytes = await generateCharacterSheetPDF('/ficha_template.pdf', character, totalPCs || 0, preCalculatedData);
-                                        downloadPDF(pdfBytes, `Ficha_SHI_${character.name.replace(/\s+/g, '_') || 'Personaje'}.pdf`);
-                                    } catch (error) {
-                                        console.error('Error generando PDF:', error);
-                                        alert('Error al generar el PDF. Asegúrate de que el template "ficha_template.pdf" está en la carpeta public.');
-                                    }
-                                }}
-                                className="action-btn"
-                                title="Exportar PDF"
-                            >
+                            <button onClick={handleExportPDF} className="action-btn" title="Exportar PDF">
                                 📥
                             </button>
                             <button onClick={closeModal} className="close-btn">
@@ -175,45 +230,10 @@ export default function CharacterSheet({ character, totalPCs }: CharacterSheetPr
                         </div>
                     </div>
                     <div className="dialog-body">
-                        <div className="character-sheet">
-
-                            <SheetHeader character={character} totalPCs={totalPCs} />
-
-                            <div className="sheet-grid">
-                                <AttributesSection character={character} />
-                                <CombatSection combatStats={combatStats} />
-                                <OtherStatsSection otherStats={otherStats} />
-                                <OriginSection character={character} />
-                                <SkillsGeneralSection character={character} />
-                                <SkillsLearningSection character={character} />
-                                <HybridSection character={character} />
-                                <EnteSection character={character} />
-                                <AlteradoSection character={character} />
-                                <MutanteSection character={character} />
-                                <PoseidoSection character={character} />
-                                <GuardianSection character={character} />
-                                <DivineSection character={character} />
-                                <MalditoSection character={character} />
-                                <BackgroundSection character={character} />
-                                <WeaponsSection weapons={character.weapons} />
-                                <ArtifactsSection artifacts={character.artifacts} />
-                                <MagicObjectsSection magicObjects={character.magicObjects} magicTableRolls={character.magicTableRolls} />
-                                <VehiclesSection vehicles={character.vehicles} />
-                                <EquipmentSection equipment={character.equipment} />
-                                <TechModulesSection techModules={character.techModules?.installed || []} />
-                                <ExoskeletonSection character={character} />
-                                <TechnifiedSection character={character} />
-                                <PowersSection character={character} />
-                                <SpellsSection character={character} />
-                                <MagicalBondsSection character={character} />
-                                <TraumasSection character={character} />
-                                <NotesSection character={character} />
-                            </div>
-                        </div>
+                        {renderSheetContent()}
                     </div>
                 </div>
-
-            </dialog >
+            </dialog>
         </>
     );
 }

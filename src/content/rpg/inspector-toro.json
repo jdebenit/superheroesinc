@@ -43,71 +43,69 @@
     }
   },
   "skills": {
-    "items": [
+    "generalItems": [
       {
         "name": "Acechar/Discrección",
-        "math": "(AGI+PER)/2",
-        "value": "94%"
+        "value": "94%",
+        "math": "(AGI+PER)/2"
       },
       {
         "name": "Comb. cuerpo a cuerpo",
-        "math": "(AGI+PER)/2",
-        "value": "94%"
+        "value": "94%",
+        "math": "(AGI+PER)/2"
       },
       {
         "name": "Conocimientos generales",
-        "math": "(INT/3)",
-        "value": "25%"
+        "value": "25%",
+        "math": "(INT/3)"
       },
       {
         "name": "Esconderse",
-        "math": "(AGI+PER)/4",
-        "value": "47%"
+        "value": "47%",
+        "math": "(AGI+PER)/4"
       },
       {
         "name": "Idea",
-        "math": "(INT)/2",
-        "value": "37%"
+        "value": "37%",
+        "math": "(INT)/2"
       },
       {
         "name": "Influencia",
-        "math": "(INT+APA)/2",
-        "value": "62%"
+        "value": "62%",
+        "math": "(INT+APA)/2"
       },
       {
         "name": "Idioma nativo - Naglo",
-        "math": "(INT)",
-        "value": "75%"
+        "value": "75%",
+        "math": "(INT)"
       },
       {
         "name": "Investigar",
-        "math": "(INT+PER)/3",
-        "value": "58%"
+        "value": "58%",
+        "math": "(INT+PER)/3"
       },
       {
         "name": "Lanzar",
-        "math": "(FUE+PER)/2",
-        "value": "127%"
+        "value": "127%",
+        "math": "(FUE+PER)/2"
       },
       {
         "name": "Primeros auxilios",
-        "math": "(INT)/2",
-        "value": "37%"
+        "value": "37%",
+        "math": "(INT)/2"
       },
       {
         "name": "Suerte",
-        "math": "(PER+VOL)/4",
-        "value": "48%"
+        "value": "48%",
+        "math": "(PER+VOL)/4"
       },
       {
         "name": "Trepar y Saltar",
-        "math": "(AGI)",
-        "value": "88%"
+        "value": "88%",
+        "math": "(AGI)"
       }
-    ]
-  },
-  "specialskills": {
-    "items": [
+    ],
+    "specialItems": [
       {
         "name": "Conducir coche",
         "value": "53%"
@@ -130,8 +128,7 @@
       },
       {
         "name": "Arma especial: Cuernos",
-        "value": "76%",
-        "notes": "Daño 2d10+20+Mod.Fue"
+        "value": "76%"
       }
     ]
   },
@@ -159,5 +156,8 @@
   },
   "notes": [
     "No se fía de los 'héroes' con capa"
-  ]
+  ],
+  "powers": {
+    "selected": []
+  }
 }

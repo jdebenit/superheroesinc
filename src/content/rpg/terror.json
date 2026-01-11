@@ -42,90 +42,105 @@
     }
   },
   "powers": {
-    "items": [
+    "selected": [
       {
+        "id": "power_alteracion_de_la_densidad",
         "name": "Alteracion de la densidad",
         "rank": "Bajo(01)",
+        "skillValue": 0,
+        "powerMod": 0,
+        "selectedOption": "",
+        "customizations": [],
+        "effect": "",
         "value": "55%"
       },
       {
+        "id": "power_volar",
         "name": "Volar",
-        "value": "70%",
-        "rank": "Medio(21)"
+        "rank": "Medio(21)",
+        "skillValue": 0,
+        "powerMod": 0,
+        "selectedOption": "",
+        "customizations": [],
+        "effect": "",
+        "value": "70%"
       },
       {
+        "id": "power_emisión_de_energía_mágica",
         "name": "Emisión de energía mágica",
         "rank": "Medio(21)",
-        "notes": "Cuando golpea con la guadaña"
+        "skillValue": 0,
+        "powerMod": 0,
+        "selectedOption": "",
+        "customizations": [],
+        "effect": "Cuando golpea con la guadaña"
       }
     ]
   },
   "skills": {
-    "items": [
+    "generalItems": [
       {
         "name": "Acechar/Discrección",
-        "math": "(AGI+PER)/2",
-        "value": "82%"
+        "value": "82%",
+        "math": "(AGI+PER)/2"
       },
       {
         "name": "Comb. cuerpo a cuerpo",
-        "math": "(AGI+PER)/2",
-        "value": "82%"
+        "value": "82%",
+        "math": "(AGI+PER)/2"
       },
       {
         "name": "Conocimientos generales",
-        "math": "(INT/3)",
-        "value": "23%"
+        "value": "23%",
+        "math": "(INT/3)"
       },
       {
         "name": "Esconderse",
-        "math": "(AGI+PER)/4",
-        "value": "41%"
+        "value": "41%",
+        "math": "(AGI+PER)/4"
       },
       {
         "name": "Idea",
-        "math": "(INT)/2",
-        "value": "35%"
+        "value": "35%",
+        "math": "(INT)/2"
       },
       {
         "name": "Influencia",
-        "math": "(INT+APA)/2",
-        "value": "55%"
+        "value": "55%",
+        "math": "(INT+APA)/2"
       },
       {
         "name": "Idioma nativo",
-        "math": "(INT)",
-        "value": "70%"
+        "value": "70%",
+        "math": "(INT)"
       },
       {
         "name": "Investigar",
-        "math": "(INT+PER)/3",
-        "value": "53"
+        "value": "53",
+        "math": "(INT+PER)/3"
       },
       {
         "name": "Lanzar",
-        "math": "(FUE+PER)/2",
-        "value": "77%"
+        "value": "77%",
+        "math": "(FUE+PER)/2"
       },
       {
         "name": "Primeros auxilios",
-        "math": "(INT)/2",
-        "value": "35%"
+        "value": "35%",
+        "math": "(INT)/2"
       },
       {
         "name": "Suerte",
-        "math": "(PER+VOL)/4",
-        "value": "47%"
+        "value": "47%",
+        "math": "(PER+VOL)/4"
       },
       {
         "name": "Trepar y Saltar",
-        "math": "(AGI)",
-        "value": "74%"
+        "value": "74%",
+        "math": "(AGI)"
       }
-    ]
-  },
-  "specialskills": {
-    "items": [
+    ],
+    "specialItems": [
       {
         "name": "Arma especial - guadaña",
         "value": "75%"

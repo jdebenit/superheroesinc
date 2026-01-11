@@ -1,9 +1,10 @@
 ---
 import { getCollection, getEntry } from "astro:content";
 import Layout from "../../../layouts/Layout.astro";
-import CharacterSheet from "../../../components/CharacterSheet.astro";
+import CharacterSheet from "../../../components/character/CharacterSheet";
 import ActualPlayMetadata from "../../../components/ActualPlayMetadata.astro";
 import ReplayModeSelector from "../../../components/ReplayModeSelector.astro";
+
 
 export async function getStaticPaths() {
   const items = await getCollection("lore");
@@ -168,7 +169,7 @@ if (item.data.category === "actual-plays") {
           <Content />
         </div>
 
-        {rpgData && <CharacterSheet rpg={rpgData} />}
+        {rpgData && <CharacterSheet client:load character={rpgData} mode="inline" />}
       </main>
     </div>
   </article>

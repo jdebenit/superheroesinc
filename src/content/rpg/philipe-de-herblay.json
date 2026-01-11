@@ -92,90 +92,93 @@
     ]
   },
   "powers": {
-    "items": [
+    "selected": [
       {
+        "id": "power_postcognición",
         "name": "Postcognición",
-        "value": "50%",
         "rank": "Elevado(41)",
-        "notes": "El poder se lo otorga le baston al estar en contacto con el"
+        "skillValue": 0,
+        "powerMod": 0,
+        "selectedOption": "",
+        "customizations": [],
+        "effect": "El poder se lo otorga le baston al estar en contacto con el",
+        "value": "50%"
       }
     ]
   },
   "skills": {
-    "items": [
+    "generalItems": [
       {
         "name": "Acechar/Discrección",
-        "math": "(AGI+PER)/2",
-        "value": "94%"
+        "value": "94%",
+        "math": "(AGI+PER)/2"
       },
       {
         "name": "Comb. cuerpo a cuerpo",
-        "math": "(AGI+PER)/2",
-        "value": "94%"
+        "value": "94%",
+        "math": "(AGI+PER)/2"
       },
       {
         "name": "Conocimientos generales",
-        "math": "(INT/3)",
-        "value": "32%"
+        "value": "32%",
+        "math": "(INT/3)"
       },
       {
         "name": "Esconderse",
-        "math": "(AGI+PER)/4",
-        "value": "47%"
+        "value": "47%",
+        "math": "(AGI+PER)/4"
       },
       {
         "name": "Idea",
-        "math": "(INT)/2",
-        "value": "48%"
+        "value": "48%",
+        "math": "(INT)/2"
       },
       {
         "name": "Influencia",
-        "math": "(INT+APA)/2",
-        "value": "83%"
+        "value": "83%",
+        "math": "(INT+APA)/2"
       },
       {
         "name": "Idioma nativo - Frances",
-        "math": "(INT)",
-        "value": "97%"
+        "value": "97%",
+        "math": "(INT)"
       },
       {
         "name": "Investigar",
-        "math": "(INT+PER)/3",
-        "value": "65%"
+        "value": "65%",
+        "math": "(INT+PER)/3"
       },
       {
         "name": "Lanzar",
-        "math": "(FUE+PER)/2",
-        "value": "77%"
+        "value": "77%",
+        "math": "(FUE+PER)/2"
       },
       {
         "name": "Primeros auxilios",
-        "math": "(INT)/2",
-        "value": "48%"
+        "value": "48%",
+        "math": "(INT)/2"
       },
       {
         "name": "Suerte",
-        "math": "(PER+VOL)/4",
-        "value": "59%"
+        "value": "59%",
+        "math": "(PER+VOL)/4"
       },
       {
         "name": "Trepar y Saltar",
-        "math": "(AGI)",
-        "value": "88%"
+        "value": "88%",
+        "math": "(AGI)"
       }
-    ]
-  },
-  "specialskills": {
-    "items": [
+    ],
+    "specialItems": [
       {
         "name": "Otro Idioma - Latin",
-        "math": "(INT/3)",
-        "value": "62%"
+        "value": "62%",
+        "math": "(INT/3)"
       },
       {
         "name": "Otro Idioma - Español",
-        "math": "(INT/3)",
-        "value": "52%"
+        "value": "52%",
+        "math": "(INT/3)"
       },
       {
         "name": "Magia",

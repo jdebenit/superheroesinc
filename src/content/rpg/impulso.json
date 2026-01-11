@@ -43,95 +43,110 @@
     }
   },
   "powers": {
-    "items": [
+    "selected": [
       {
+        "id": "power_telequinesis",
         "name": "Telequinesis",
-        "value": "93%",
-        "rank": "Medio(21)"
+        "rank": "Medio(21)",
+        "skillValue": 0,
+        "powerMod": 0,
+        "selectedOption": "",
+        "customizations": [],
+        "effect": "",
+        "value": "93%"
       },
       {
+        "id": "power_campos_de_fuerza",
         "name": "Campos de fuerza",
-        "value": "92%",
         "rank": "Bajo(01)",
-        "notes": "Telequinetico"
+        "skillValue": 0,
+        "powerMod": 0,
+        "selectedOption": "",
+        "customizations": [],
+        "effect": "Telequinetico",
+        "value": "92%"
       },
       {
+        "id": "power_telepatia",
         "name": "Telepatia",
-        "value": "95%",
-        "rank": "Cosmico(100)"
+        "rank": "Cosmico(100)",
+        "skillValue": 0,
+        "powerMod": 0,
+        "selectedOption": "",
+        "customizations": [],
+        "effect": "",
+        "value": "95%"
       }
     ]
   },
   "skills": {
-    "items": [
+    "generalItems": [
       {
         "name": "Acechar/Discrección",
-        "math": "(AGI+PER)/2",
-        "value": "111%"
+        "value": "111%",
+        "math": "(AGI+PER)/2"
       },
       {
         "name": "Comb. cuerpo a cuerpo",
-        "math": "(AGI+PER)/2",
-        "value": "111%"
+        "value": "111%",
+        "math": "(AGI+PER)/2"
       },
       {
         "name": "Conocimientos generales",
-        "math": "(INT/3)",
-        "value": "33%"
+        "value": "33%",
+        "math": "(INT/3)"
       },
       {
         "name": "Esconderse",
-        "math": "(AGI+PER)/4",
-        "value": "55%"
+        "value": "55%",
+        "math": "(AGI+PER)/4"
       },
       {
         "name": "Idea",
-        "math": "(INT)/2",
-        "value": "50%"
+        "value": "50%",
+        "math": "(INT)/2"
       },
       {
         "name": "Influencia",
-        "math": "(INT+APA)/2",
-        "value": "102%"
+        "value": "102%",
+        "math": "(INT+APA)/2"
       },
       {
         "name": "Idioma nativo - Asgardiano",
-        "math": "(INT)",
-        "value": "100%"
+        "value": "100%",
+        "math": "(INT)"
       },
       {
         "name": "Investigar",
-        "math": "(INT+PER)/3",
-        "value": "61%"
+        "value": "61%",
+        "math": "(INT+PER)/3"
       },
       {
         "name": "Lanzar",
-        "math": "(FUE+PER)/2",
-        "value": "61%"
+        "value": "61%",
+        "math": "(FUE+PER)/2"
       },
       {
         "name": "Primeros auxilios",
-        "math": "(INT)/2",
-        "value": "50%"
+        "value": "50%",
+        "math": "(INT)/2"
       },
       {
         "name": "Suerte",
-        "math": "(PER+VOL)/4",
-        "value": "43%"
+        "value": "43%",
+        "math": "(PER+VOL)/4"
       },
       {
         "name": "Trepar y Saltar",
-        "math": "(AGI)",
-        "value": "140%"
+        "value": "140%",
+        "math": "(AGI)"
       }
-    ]
-  },
-  "specialskills": {
-    "items": [
+    ],
+    "specialItems": [
       {
         "name": "Ciencias ocultas",
-        "math": "(INT/3)",
-        "value": "73%"
+        "value": "73%",
+        "math": "(INT/3)"
       },
       {
         "name": "Robar",
@@ -139,13 +154,13 @@
       },
       {
         "name": "Historia",
-        "math": "(INT/3)",
-        "value": "43%"
+        "value": "43%",
+        "math": "(INT/3)"
       },
       {
         "name": "Inglés",
-        "math": "(INT/3)",
-        "value": "80%"
+        "value": "80%",
+        "math": "(INT/3)"
       }
     ]
   }
