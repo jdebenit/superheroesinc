@@ -6,6 +6,7 @@ import StatCard from './components/StatCard';
 import HistoryModal from './components/HistoryModal';
 import EmptyState from './components/EmptyState';
 
+
 interface CharacterData {
     name: string;
     alias?: string;
