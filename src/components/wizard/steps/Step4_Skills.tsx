@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { GENERAL_SKILLS } from '../../../data/generalSkills';
 import { SPECIAL_SKILLS, SKILL_CATEGORIES, getSkillsByCategory } from '../../../data/specialSkills';
 import { calculateGeneralSkillValues, calculateSpecialSkillsPCWithInt, calculateSpecialSkillValues } from '../../../utils/characterCalculations';
 import { getFreeSkillsForOrigins } from '../../../data/freeOriginSkills';
 import { getRequiredSkillsForOrigins } from '../../../data/requiredSpecialtySkills';
 import { useSkillAutoEffects } from '../../../hooks/wizard/useCharacterAutoEffects';
+import { WizardSection } from '../shared/WizardSection';
+import { SkillTable } from './Step4_Components/SkillTable';
+import { SkillRow } from './Step4_Components/SkillRow';
+import { WizardButton } from '../shared/WizardButton';
 
 interface Step4Props {
     data: any;
@@ -83,9 +87,19 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
     // Use custom hook for auto-effects
     useSkillAutoEffects(data, selectedSkills, specifiedSkills, setSelectedSkills, setSpecifiedSkills);
 
+    // Check if Liberado origin is present
+    const isLiberado = useMemo(() => {
+        if (!data.origin?.items?.length) return false;
+        return data.origin.items.some((item: any) => {
+            const originName = Object.keys(item)[0];
+            const content = item[originName];
+            return Array.isArray(content) && content.some((s: string) => s.startsWith('Liberado'));
+        });
+    }, [data.origin?.items]);
+
     // Save to parent whenever data changes
     useEffect(() => {
-        // Format items for final data
+        // Format items for final data (General)
         const generalItems = Object.keys(skillValues).map(id => {
             const skillDef = GENERAL_SKILLS.find(s => s.id === id);
             const val = skillValues[id];
@@ -102,21 +116,9 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
             };
         });
 
-        // Special skills items - for parent component
-        const specialStandardItems = Object.keys(standardSpecialSkills).map(skillId => {
-            const val = standardSpecialSkills[skillId];
-            return {
-                name: val.total.toString(), // TODO: Verify what 'name' should be here. Originally it was skillDef.name
-                // Reverting to previous logic for 'name' but using calculated total
-                // Actually, let's use the logic that was here but with calculated values
-                // But wait, the previous code constructed it from definitions.
-                // Let's grab definitions again to be safe and cleaner
-            };
-        });
-
         const specialStandardItemsFormatted = Object.keys(selectedSkills).map(skillId => {
             const skillDef = SPECIAL_SKILLS.find(s => s.id === skillId);
-            const val = standardSpecialSkills[skillId]; // Using calculated values
+            const val = standardSpecialSkills[skillId];
             if (!val) return null;
             return {
                 name: skillDef?.name || skillId,
@@ -125,7 +127,6 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
             };
         }).filter(Boolean);
 
-        // Special skills items - specified
         const specialSpecifiedItemsFormatted = Object.keys(specifiedSkills).map(uniqueId => {
             const spec = specifiedSkills[uniqueId];
             const skillDef = SPECIAL_SKILLS.find(s => s.id === spec.skillId);
@@ -138,7 +139,6 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
             };
         }).filter(Boolean);
 
-        // Combine special skills (standard + specified)
         const allSpecialItems = [...specialStandardItemsFormatted, ...specialSpecifiedItemsFormatted];
 
         const newSkillsData = {
@@ -147,12 +147,10 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
             nativeLanguage: nativeLanguage,
             selected: selectedSkills,
             specified: specifiedSkills,
-            generalItems: generalItems,        // Habilidades generales
-            specialItems: allSpecialItems      // Habilidades de aprendizaje
-            // REMOVED: items array - NO LONGER NEEDED, causes duplication
+            generalItems: generalItems,
+            specialItems: allSpecialItems
         };
 
-        // Simple check to avoid loop
         if (JSON.stringify(data.skills?.generalItems) !== JSON.stringify(generalItems) ||
             JSON.stringify(data.skills?.specialItems) !== JSON.stringify(allSpecialItems) ||
             JSON.stringify(data.skills?.generalManualMods) !== JSON.stringify(manualMods) ||
@@ -170,30 +168,22 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
         }
     }, [manualMods, manualBases, nativeLanguage, selectedSkills, specifiedSkills, data.attributes.values, data.origin?.items]);
 
-    // Handlers for general skills
-    const handleNativeLanguageChange = (value: string) => {
-        setNativeLanguage(value);
-    };
+
+    // Handlers
+    const handleNativeLanguageChange = (value: string) => setNativeLanguage(value);
 
     const handleModChange = (skillId: string, value: string) => {
         const num = parseInt(value) || 0;
-        setManualMods(prev => ({
-            ...prev,
-            [skillId]: num
-        }));
+        setManualMods(prev => ({ ...prev, [skillId]: num }));
     };
 
     const handleBaseChange = (skillId: string, value: string, minLimit: number) => {
         const num = parseInt(value) || 0;
         if (num >= minLimit) {
-            setManualBases(prev => ({
-                ...prev,
-                [skillId]: num
-            }));
+            setManualBases(prev => ({ ...prev, [skillId]: num }));
         }
     };
 
-    // Handlers for special skills modifiers
     const handleSpecialBaseChange = (id: string, value: string, minLimit: number, isSpecified: boolean = false) => {
         const num = parseInt(value) || 0;
         if (num >= minLimit) {
@@ -272,570 +262,304 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
     };
 
     const skillsByCategory = getSkillsByCategory();
+    const skillBaseCost = isLiberado ? 0.5 : 1;
 
     return (
         <div style={{ padding: '2rem' }}>
             {/* GENERAL SKILLS SECTION */}
-            <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem' }}>
-                Habilidades Generales
-            </h2>
-            <p style={{ fontSize: '1.125rem', color: '#666', marginBottom: '2rem' }}>
-                Estas habilidades las poseen todos los personajes. Se calculan en base a tus características y orígenes.
-            </p>
+            <WizardSection
+                title="Habilidades Generales"
+                description="Estas habilidades las poseen todos los personajes. Se calculan en base a tus características y orígenes."
+            >
+                <SkillTable>
+                    {GENERAL_SKILLS.map((skill, index) => {
+                        const val = skillValues[skill.id];
 
-            <div style={{
-                backgroundColor: 'white',
-                borderRadius: '12px',
-                boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-                overflow: 'hidden',
-                border: '1px solid #e5e7eb',
-                marginBottom: '3rem'
-            }}>
-                <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                    <thead style={{ backgroundColor: '#f9fafb', borderBottom: '2px solid #e5e7eb' }}>
-                        <tr>
-                            <th style={{ padding: '1rem', textAlign: 'left', color: '#374151' }}>Habilidad</th>
-                            <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Fórmula</th>
-                            <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Base</th>
-                            <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Origen</th>
-                            <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Especialidad</th>
-                            <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Otros</th>
-                            <th style={{ padding: '1rem', textAlign: 'center', color: '#111827', fontWeight: 'bold' }}>TOTAL</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {GENERAL_SKILLS.map((skill, index) => {
-                            const val = skillValues[skill.id];
-                            const isEven = index % 2 === 0;
-                            return (
-                                <tr key={skill.id} style={{ backgroundColor: isEven ? 'white' : '#f9fafb' }}>
-                                    <td style={{ padding: '1rem', fontWeight: 'bold', color: '#1f2937' }}>
-                                        {skill.name}
-                                        {skill.id === 'idioma' && (
-                                            <div style={{ marginTop: '0.25rem' }}>
-                                                <input
-                                                    type="text"
-                                                    value={nativeLanguage}
-                                                    onChange={(e) => handleNativeLanguageChange(e.target.value)}
-                                                    placeholder="Especifique idioma..."
-                                                    style={{
-                                                        width: '100%',
-                                                        padding: '0.25rem 0.5rem',
-                                                        border: '1px solid #d1d5db',
-                                                        borderRadius: '4px',
-                                                        fontSize: '0.875rem',
-                                                        fontWeight: 'normal'
-                                                    }}
-                                                />
-                                            </div>
-                                        )}
-                                    </td>
-                                    <td style={{ padding: '0.75rem', textAlign: 'center', color: '#6b7280', fontSize: '0.875rem', fontFamily: 'monospace' }}>
-                                        {(() => {
-                                            const isHeraldoCosmico = data.origin?.items?.some((o: any) => {
-                                                const originName = Object.keys(o)[0];
-                                                const content = o[originName] as string[];
-                                                return content && content.includes('Heraldo Cósmico');
-                                            });
-                                            if (skill.id === 'conocimientos' && isHeraldoCosmico) {
-                                                return 'INT/5';
-                                            }
-                                            return skill.formulaText;
-                                        })()}
-                                    </td>
-                                    <td style={{ padding: '0.75rem', textAlign: 'center', color: '#4b5563' }}>
-                                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2px' }}>
-                                            <input
-                                                type="number"
-                                                value={val.base}
-                                                min={val.minBase}
-                                                onChange={(e) => handleBaseChange(skill.id, e.target.value, val.minBase)}
-                                                style={{
-                                                    width: '50px',
-                                                    padding: '0.25rem',
-                                                    border: val.pcCost > 0 ? '2px solid #f59e0b' : '1px solid #d1d5db',
-                                                    borderRadius: '4px',
-                                                    textAlign: 'center',
-                                                    fontWeight: 'bold'
-                                                }}
-                                            />
-                                            {val.pcCost > 0 && (
-                                                <span style={{ fontSize: '0.75rem', color: '#b45309' }}>
-                                                    {val.pcCost.toFixed(1)} PC
-                                                </span>
-                                            )}
-                                        </div>
-                                    </td>
-                                    <td style={{ padding: '0.75rem', textAlign: 'center', color: val.originMod ? '#2563eb' : '#9ca3af', fontWeight: val.originMod ? 'bold' : 'normal' }}>
-                                        {val.originMod > 0 ? `+${val.originMod}` : val.originMod || '-'}
-                                    </td>
-                                    <td style={{ padding: '0.75rem', textAlign: 'center', color: val.specialtyMod ? '#7c3aed' : '#9ca3af', fontWeight: val.specialtyMod ? 'bold' : 'normal' }}>
-                                        {val.specialtyMod > 0 ? `+${val.specialtyMod}` : val.specialtyMod || '-'}
-                                    </td>
-                                    <td style={{ padding: '0.5rem', textAlign: 'center' }}>
+                        // Custom formula logic for Heraldo Cosmico
+                        const isHeraldoCosmico = data.origin?.items?.some((o: any) => {
+                            const originName = Object.keys(o)[0];
+                            const content = o[originName] as string[];
+                            return content && content.includes('Heraldo Cósmico');
+                        });
+
+                        let formula = skill.formulaText;
+                        if (skill.id === 'conocimientos' && isHeraldoCosmico) {
+                            formula = 'INT/5';
+                        }
+
+                        // Render Name (with input for language)
+                        const renderName = (
+                            <>
+                                {skill.name}
+                                {skill.id === 'idioma' && (
+                                    <div style={{ marginTop: '0.25rem' }}>
                                         <input
-                                            type="number"
-                                            value={manualMods[skill.id] || ''}
-                                            onChange={(e) => handleModChange(skill.id, e.target.value)}
-                                            placeholder="0"
+                                            type="text"
+                                            value={nativeLanguage}
+                                            onChange={(e) => handleNativeLanguageChange(e.target.value)}
+                                            placeholder="Especifique idioma..."
                                             style={{
-                                                width: '60px',
-                                                padding: '0.5rem',
+                                                width: '100%',
+                                                padding: '0.25rem 0.5rem',
                                                 border: '1px solid #d1d5db',
-                                                borderRadius: '6px',
-                                                textAlign: 'center'
+                                                borderRadius: '4px',
+                                                fontSize: '0.875rem',
+                                                fontWeight: 'normal'
                                             }}
                                         />
-                                    </td>
-                                    <td style={{ padding: '0.75rem', textAlign: 'center', fontWeight: 'bold', fontSize: '1.125rem', color: '#059669' }}>
-                                        {val.total}%
-                                    </td>
-                                </tr>
-                            );
-                        })}
-                    </tbody>
-                </table>
-            </div>
+                                    </div>
+                                )}
+                            </>
+                        );
+
+                        return (
+                            <SkillRow
+                                key={skill.id}
+                                name={renderName}
+                                formula={formula}
+                                baseValue={val.base}
+                                minBase={val.minBase}
+                                originMod={val.originMod}
+                                specialtyMod={val.specialtyMod}
+                                manualMod={manualMods[skill.id] || 0}
+                                total={val.total}
+                                calcPCCost={val.pcCost}
+                                onBaseChange={(v) => handleBaseChange(skill.id, v, val.minBase)}
+                                onModChange={(v) => handleModChange(skill.id, v)}
+                            />
+                        );
+                    })}
+                </SkillTable>
+            </WizardSection>
 
             {/* SPECIAL SKILLS SECTION */}
-            <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem' }}>
-                Habilidades de Aprendizaje
-            </h2>
-            <p style={{ fontSize: '1.125rem', color: '#666', marginBottom: '1rem' }}>
-                Selecciona las habilidades que tu personaje ha aprendido. Cada habilidad cuesta <strong>1 PC</strong> (0.5 PC para Liberado).
-            </p>
-
-            {/* PC Counter */}
-            <div style={{
-                backgroundColor: '#f0f9ff',
-                border: '2px solid #3b82f6',
-                borderRadius: '8px',
-                padding: '1rem',
-                marginBottom: '2rem'
-            }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ fontSize: '1.125rem', fontWeight: 'bold' }}>
-                        Habilidades Seleccionadas: {specialSkillsPC.totalSkills}
-                    </span>
-                    <span style={{ fontSize: '1.125rem' }}>
-                        ({specialSkillsPC.freeSkills} gratuitas {specialSkillsPC.intBonusSkills > 0 && <span style={{ color: '#059669', fontSize: '0.9em' }}>[+{specialSkillsPC.intBonusSkills} INT]</span>}, {specialSkillsPC.paidSkills} pagadas)
-                    </span>
-                    <span style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#3b82f6' }}>
-                        Total: {specialSkillsPC.totalPC.toFixed(1).replace('.0', '')} PC
-                    </span>
-                </div>
-            </div>
-
-            {/* Selected Skills Table */}
-            {(Object.keys(selectedSkills).length > 0 || Object.keys(specifiedSkills).length > 0) && (
+            <WizardSection
+                title="Habilidades de Aprendizaje"
+                description={<>Selecciona las habilidades que tu personaje ha aprendido. Cada habilidad cuesta <strong>{skillBaseCost} PC</strong> + coste de mejora.</>}
+            >
+                {/* PC Counter */}
                 <div style={{
-                    backgroundColor: '#f0fdf4',
-                    borderRadius: '12px',
-                    padding: '1.5rem',
-                    marginBottom: '2rem',
-                    border: '2px solid #10b981',
-                    overflow: 'hidden'
+                    backgroundColor: '#f0f9ff',
+                    border: '2px solid #3b82f6',
+                    borderRadius: '8px',
+                    padding: '1rem',
+                    marginBottom: '2rem'
                 }}>
-                    <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem', color: '#059669' }}>
-                        ✓ Habilidades Seleccionadas
-                    </h3>
-
-                    <div style={{ overflowX: 'auto' }}>
-                        <table style={{ width: '100%', borderCollapse: 'collapse', backgroundColor: 'white', borderRadius: '8px', overflow: 'hidden' }}>
-                            <thead style={{ backgroundColor: '#ecfdf5', borderBottom: '2px solid #10b981' }}>
-                                <tr>
-                                    <th style={{ padding: '0.75rem', textAlign: 'left', color: '#065f46' }}>Habilidad</th>
-                                    <th style={{ padding: '0.75rem', textAlign: 'center', color: '#064e3b' }}>Fórmula</th>
-                                    <th style={{ padding: '0.75rem', textAlign: 'center', color: '#064e3b' }}>Base</th>
-                                    <th style={{ padding: '0.75rem', textAlign: 'center', color: '#064e3b' }}>Origen</th>
-                                    <th style={{ padding: '0.75rem', textAlign: 'center', color: '#064e3b' }}>Especialidad</th>
-                                    <th style={{ padding: '0.75rem', textAlign: 'center', color: '#064e3b' }}>Otros</th>
-                                    <th style={{ padding: '0.75rem', textAlign: 'center', color: '#064e3b', fontWeight: 'bold' }}>TOTAL</th>
-                                    <th style={{ padding: '0.75rem', textAlign: 'center', color: '#064e3b' }}>PCs</th>
-                                    <th style={{ padding: '0.75rem', textAlign: 'center', color: '#064e3b' }}>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {/* Standard Selected Skills */}
-                                {Object.entries(selectedSkills).map(([skillId, skillData]) => {
-                                    const skillDef = SPECIAL_SKILLS.find(s => s.id === skillId);
-                                    if (!skillDef) return null;
-
-                                    const val = standardSpecialSkills[skillId];
-                                    if (!val) return null; // Should not happen if calcs are correct
-
-                                    // Determine base skill cost
-                                    // Logic duplicated from calculateSpecialSkillsPC for display purposes
-                                    let isLiberado = false;
-                                    if (data.origin?.items?.length > 0) {
-                                        data.origin.items.forEach((item: any) => {
-                                            const originName = Object.keys(item)[0];
-                                            const content = item[originName];
-                                            if (Array.isArray(content) && content.some((s: string) => s.startsWith('Liberado'))) {
-                                                isLiberado = true;
-                                            }
-                                        });
-                                    }
-                                    const skillBaseCost = skillData.isFree ? 0 : (isLiberado ? 0.5 : 1);
-                                    const totalCost = skillBaseCost + (val.pcCost || 0);
-
-                                    return (
-                                        <tr key={skillId} style={{ borderBottom: '1px solid #e5e7eb' }}>
-                                            <td style={{ padding: '0.75rem', fontWeight: 'bold', color: '#1f2937' }}>
-                                                {skillDef.name}
-                                            </td>
-                                            <td style={{ padding: '0.5rem', textAlign: 'center', color: '#6b7280', fontSize: '0.875rem', fontFamily: 'monospace' }}>
-                                                {skillDef.formulaText}
-                                            </td>
-                                            <td style={{ padding: '0.5rem', textAlign: 'center' }}>
-                                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2px' }}>
-                                                    <input
-                                                        type="number"
-                                                        value={val.base}
-                                                        min={val.minBase}
-                                                        onChange={(e) => handleSpecialBaseChange(skillId, e.target.value, val.minBase, false)}
-                                                        style={{
-                                                            width: '50px',
-                                                            padding: '0.25rem',
-                                                            border: val.pcCost > 0 ? '2px solid #f59e0b' : '1px solid #d1d5db',
-                                                            borderRadius: '4px',
-                                                            textAlign: 'center',
-                                                            fontWeight: 'bold'
-                                                        }}
-                                                    />
-                                                </div>
-                                            </td>
-                                            <td style={{ padding: '0.5rem', textAlign: 'center', color: val.originMod ? '#2563eb' : '#9ca3af', fontWeight: val.originMod ? 'bold' : 'normal' }}>
-                                                {val.originMod > 0 ? `+${val.originMod}` : val.originMod || '-'}
-                                            </td>
-                                            <td style={{ padding: '0.5rem', textAlign: 'center', color: val.specialtyMod ? '#7c3aed' : '#9ca3af', fontWeight: val.specialtyMod ? 'bold' : 'normal' }}>
-                                                {val.specialtyMod > 0 ? `+${val.specialtyMod}` : val.specialtyMod || '-'}
-                                            </td>
-                                            <td style={{ padding: '0.5rem', textAlign: 'center' }}>
-                                                <input
-                                                    type="number"
-                                                    value={skillData.manualMods || ''}
-                                                    onChange={(e) => handleSpecialModChange(skillId, e.target.value, false)}
-                                                    placeholder="0"
-                                                    style={{
-                                                        width: '50px',
-                                                        padding: '0.25rem',
-                                                        border: '1px solid #d1d5db',
-                                                        borderRadius: '4px',
-                                                        textAlign: 'center'
-                                                    }}
-                                                />
-                                            </td>
-                                            <td style={{ padding: '0.5rem', textAlign: 'center', fontWeight: 'bold', fontSize: '1.125rem', color: '#059669' }}>
-                                                {val.total}%
-                                            </td>
-                                            <td style={{ padding: '0.5rem', textAlign: 'center' }}>
-                                                <span style={{
-                                                    fontSize: '0.875rem',
-                                                    fontWeight: 'bold',
-                                                    color: totalCost > 0 ? '#b45309' : '#10b981'
-                                                }}>
-                                                    {totalCost > 0 ? `${totalCost.toFixed(1).replace('.0', '')} PC` : 'GRATIS'}
-                                                </span>
-                                                {val.pcCost > 0 && (
-                                                    <div style={{ fontSize: '0.7em', color: '#666' }}>
-                                                        (Base: +{val.pcCost.toFixed(1)})
-                                                    </div>
-                                                )}
-                                                {skillData.isRequired && (
-                                                    <div style={{ fontSize: '0.7em', color: '#b45309', fontStyle: 'italic' }}>
-                                                        Obligatoria
-                                                    </div>
-                                                )}
-                                            </td>
-                                            <td style={{ padding: '0.5rem', textAlign: 'center' }}>
-                                                {!skillData.isFree && !skillData.isRequired && (
-                                                    <button
-                                                        onClick={() => handleRemoveSkill(skillId)}
-                                                        style={{
-                                                            padding: '0.25rem 0.5rem',
-                                                            backgroundColor: '#fee2e2',
-                                                            color: '#ef4444',
-                                                            border: 'none',
-                                                            borderRadius: '4px',
-                                                            cursor: 'pointer',
-                                                            fontWeight: 'bold',
-                                                            fontSize: '0.875rem'
-                                                        }}
-                                                        title="Eliminar"
-                                                    >
-                                                        ✕
-                                                    </button>
-                                                )}
-                                                {skillData.isFree && <span style={{ fontSize: '1.25rem', color: '#10b981' }}>✓</span>}
-                                                {skillData.isRequired && <span style={{ fontSize: '1.25rem', color: '#f59e0b' }}>✓</span>}
-                                            </td>
-                                        </tr>
-                                    );
-                                })}
-
-                                {/* Specified Skills */}
-                                {Object.entries(specifiedSkills).map(([uniqueId, spec]) => {
-                                    const skillDef = SPECIAL_SKILLS.find(s => s.id === spec.skillId);
-                                    if (!skillDef) return null;
-
-                                    const val = specifiedSpecialSkills[uniqueId];
-                                    if (!val) return null;
-
-                                    // Determine base skill cost
-                                    let isLiberado = false;
-                                    if (data.origin?.items?.length > 0) {
-                                        data.origin.items.forEach((item: any) => {
-                                            const originName = Object.keys(item)[0];
-                                            const content = item[originName];
-                                            if (Array.isArray(content) && content.some((s: string) => s.startsWith('Liberado'))) {
-                                                isLiberado = true;
-                                            }
-                                        });
-                                    }
-                                    const skillBaseCost = spec.isFree ? 0 : (isLiberado ? 0.5 : 1);
-                                    const totalCost = skillBaseCost + (val.pcCost || 0);
-
-                                    return (
-                                        <tr key={uniqueId} style={{ borderBottom: '1px solid #e5e7eb' }}>
-                                            <td style={{ padding: '0.75rem', fontWeight: 'bold', color: '#1f2937' }}>
-                                                <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                                                    <span>{skillDef.name}</span>
-                                                    <input
-                                                        type="text"
-                                                        value={spec.specification}
-                                                        onChange={(e) => handleSpecificationChange(uniqueId, e.target.value)}
-                                                        placeholder={skillDef.specificationPlaceholder || "Especificar..."}
-                                                        style={{
-                                                            padding: '0.25rem',
-                                                            border: '1px solid #d1d5db',
-                                                            borderRadius: '4px',
-                                                            fontSize: '0.875rem'
-                                                        }}
-                                                    />
-                                                </div>
-                                            </td>
-                                            <td style={{ padding: '0.5rem', textAlign: 'center', color: '#6b7280', fontSize: '0.875rem', fontFamily: 'monospace' }}>
-                                                {skillDef.formulaText}
-                                            </td>
-                                            <td style={{ padding: '0.5rem', textAlign: 'center' }}>
-                                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2px' }}>
-                                                    <input
-                                                        type="number"
-                                                        value={val.base}
-                                                        min={val.minBase}
-                                                        onChange={(e) => handleSpecialBaseChange(uniqueId, e.target.value, val.minBase, true)}
-                                                        style={{
-                                                            width: '50px',
-                                                            padding: '0.25rem',
-                                                            border: val.pcCost > 0 ? '2px solid #f59e0b' : '1px solid #d1d5db',
-                                                            borderRadius: '4px',
-                                                            textAlign: 'center',
-                                                            fontWeight: 'bold'
-                                                        }}
-                                                    />
-                                                </div>
-                                            </td>
-                                            <td style={{ padding: '0.5rem', textAlign: 'center', color: val.originMod ? '#2563eb' : '#9ca3af', fontWeight: val.originMod ? 'bold' : 'normal' }}>
-                                                {val.originMod > 0 ? `+${val.originMod}` : val.originMod || '-'}
-                                            </td>
-                                            <td style={{ padding: '0.5rem', textAlign: 'center', color: val.specialtyMod ? '#7c3aed' : '#9ca3af', fontWeight: val.specialtyMod ? 'bold' : 'normal' }}>
-                                                {val.specialtyMod > 0 ? `+${val.specialtyMod}` : val.specialtyMod || '-'}
-                                            </td>
-                                            <td style={{ padding: '0.5rem', textAlign: 'center' }}>
-                                                <input
-                                                    type="number"
-                                                    value={spec.manualMods || ''}
-                                                    onChange={(e) => handleSpecialModChange(uniqueId, e.target.value, true)}
-                                                    placeholder="0"
-                                                    style={{
-                                                        width: '50px',
-                                                        padding: '0.25rem',
-                                                        border: '1px solid #d1d5db',
-                                                        borderRadius: '4px',
-                                                        textAlign: 'center'
-                                                    }}
-                                                />
-                                            </td>
-                                            <td style={{ padding: '0.5rem', textAlign: 'center', fontWeight: 'bold', fontSize: '1.125rem', color: '#059669' }}>
-                                                {val.total}%
-                                            </td>
-                                            <td style={{ padding: '0.5rem', textAlign: 'center' }}>
-                                                <span style={{
-                                                    fontSize: '0.875rem',
-                                                    fontWeight: 'bold',
-                                                    color: totalCost > 0 ? '#b45309' : '#10b981'
-                                                }}>
-                                                    {totalCost > 0 ? `${totalCost.toFixed(1).replace('.0', '')} PC` : 'GRATIS'}
-                                                </span>
-                                                {val.pcCost > 0 && (
-                                                    <div style={{ fontSize: '0.7em', color: '#666' }}>
-                                                        (Base: +{val.pcCost.toFixed(1)})
-                                                    </div>
-                                                )}
-                                                {spec.isRequired && (
-                                                    <div style={{ fontSize: '0.7em', color: '#b45309', fontStyle: 'italic' }}>
-                                                        Obligatoria
-                                                    </div>
-                                                )}
-                                            </td>
-                                            <td style={{ padding: '0.5rem', textAlign: 'center' }}>
-                                                {!spec.isRequired && (
-                                                    <button
-                                                        onClick={() => handleRemoveSpecifiedSkill(uniqueId)}
-                                                        style={{
-                                                            padding: '0.25rem 0.5rem',
-                                                            backgroundColor: '#fee2e2',
-                                                            color: '#ef4444',
-                                                            border: 'none',
-                                                            borderRadius: '4px',
-                                                            cursor: 'pointer',
-                                                            fontWeight: 'bold',
-                                                            fontSize: '0.875rem'
-                                                        }}
-                                                        title="Eliminar"
-                                                    >
-                                                        ✕
-                                                    </button>
-                                                )}
-                                                {spec.isRequired && <span style={{ fontSize: '1.25rem', color: '#f59e0b' }}>✓</span>}
-                                            </td>
-                                        </tr>
-                                    );
-                                })}
-                            </tbody>
-                        </table>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <span style={{ fontSize: '1.125rem', fontWeight: 'bold' }}>
+                            Habilidades Seleccionadas: {specialSkillsPC.totalSkills}
+                        </span>
+                        <span style={{ fontSize: '1.125rem' }}>
+                            ({specialSkillsPC.freeSkills} gratuitas {specialSkillsPC.intBonusSkills > 0 && <span style={{ color: '#059669', fontSize: '0.9em' }}>[+{specialSkillsPC.intBonusSkills} INT]</span>}, {specialSkillsPC.paidSkills} pagadas)
+                        </span>
+                        <span style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#3b82f6' }}>
+                            Total: {specialSkillsPC.totalPC.toFixed(1).replace('.0', '')} PC
+                        </span>
                     </div>
                 </div>
-            )}
 
-            {/* Available Skills by Category */}
-            <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem', color: '#374151' }}>
-                Habilidades Disponibles
-            </h3>
-
-            {Object.entries(skillsByCategory).map(([category, skills]) => (
-                <div key={category} style={{ marginBottom: '2rem' }}>
-                    <h4 style={{
-                        fontSize: '1.25rem',
-                        fontWeight: 'bold',
-                        marginBottom: '0.75rem',
-                        color: '#374151',
-                        borderBottom: '2px solid #e5e7eb',
-                        paddingBottom: '0.5rem'
-                    }}>
-                        {SKILL_CATEGORIES[category as keyof typeof SKILL_CATEGORIES]}
-                    </h4>
-
+                {/* Selected Skills Table */}
+                {(Object.keys(selectedSkills).length > 0 || Object.keys(specifiedSkills).length > 0) && (
                     <div style={{
-                        backgroundColor: 'white',
+                        backgroundColor: '#f0fdf4',
                         borderRadius: '12px',
-                        boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-                        padding: '1rem',
-                        border: '1px solid #e5e7eb'
+                        padding: '1.5rem',
+                        marginBottom: '2rem',
+                        border: '2px solid #10b981',
+                        overflow: 'hidden'
                     }}>
+                        <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem', color: '#059669' }}>
+                            ✓ Habilidades Seleccionadas
+                        </h3>
+                        <SkillTable isSpecial>
+                            {/* Standard Selected Skills */}
+                            {Object.entries(selectedSkills).map(([skillId, skillData]) => {
+                                const skillDef = SPECIAL_SKILLS.find(s => s.id === skillId);
+                                if (!skillDef) return null;
+                                const val = standardSpecialSkills[skillId];
+                                if (!val) return null;
 
-                        {skills.filter(skill => isSkillAllowed(skill, data.origin?.items || [])).map(skill => {
-                            const isSelected = selectedSkills[skill.id] !== undefined;
-                            const isParametrizable = skill.requiresSpecification;
+                                const itemBaseCost = skillData.isFree ? 0 : skillBaseCost;
+                                const totalCost = itemBaseCost + (val.pcCost || 0);
 
-                            // Determine skill cost for display
-                            let isLiberado = false;
-                            if (data.origin?.items?.length > 0) {
-                                data.origin.items.forEach((item: any) => {
-                                    const originName = Object.keys(item)[0];
-                                    const content = item[originName];
-                                    if (Array.isArray(content) && content.some((s: string) => s.startsWith('Liberado'))) {
-                                        isLiberado = true;
-                                    }
-                                });
-                            }
-                            const skillCostDisplay = isLiberado ? '0.5 PC' : '1 PC';
-
-                            if (isParametrizable) {
                                 return (
-                                    <div key={skill.id} style={{
-                                        padding: '0.75rem',
-                                        borderBottom: '1px solid #e5e7eb',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        gap: '1rem'
-                                    }}>
-                                        <div style={{ flex: 1 }}>
-                                            <strong>{skill.name}</strong>
-                                            {skill.description && (
-                                                <span style={{ fontSize: '0.875rem', color: '#6b7280', marginLeft: '0.5rem' }}>
-                                                    ({skill.description})
-                                                </span>
-                                            )}
-                                        </div>
-                                        <span style={{ fontSize: '0.875rem', color: '#6b7280', fontFamily: 'monospace' }}>
-                                            {skill.formulaText}
-                                        </span>
-                                        <button
-                                            onClick={() => handleAddSpecifiedSkill(skill.id)}
+                                    <SkillRow
+                                        key={skillId}
+                                        isSpecial
+                                        name={skillDef.name}
+                                        formula={skillDef.formulaText}
+                                        baseValue={val.base}
+                                        minBase={val.minBase}
+                                        originMod={val.originMod}
+                                        specialtyMod={val.specialtyMod}
+                                        manualMod={skillData.manualMods || 0}
+                                        total={val.total}
+                                        calcPCCost={val.pcCost}
+                                        totalPCCost={totalCost}
+                                        isFree={skillData.isFree}
+                                        isRequired={skillData.isRequired}
+                                        onBaseChange={(v) => handleSpecialBaseChange(skillId, v, val.minBase, false)}
+                                        onModChange={(v) => handleSpecialModChange(skillId, v, false)}
+                                        onRemove={() => handleRemoveSkill(skillId)}
+                                    />
+                                );
+                            })}
+
+                            {/* Specified Skills */}
+                            {Object.entries(specifiedSkills).map(([uniqueId, spec]) => {
+                                const skillDef = SPECIAL_SKILLS.find(s => s.id === spec.skillId);
+                                if (!skillDef) return null;
+                                const val = specifiedSpecialSkills[uniqueId];
+                                if (!val) return null;
+
+                                const itemBaseCost = spec.isFree ? 0 : skillBaseCost;
+                                const totalCost = itemBaseCost + (val.pcCost || 0);
+
+                                const renderName = (
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                                        <span>{skillDef.name}</span>
+                                        <input
+                                            type="text"
+                                            value={spec.specification}
+                                            onChange={(e) => handleSpecificationChange(uniqueId, e.target.value)}
+                                            placeholder={skillDef.specificationPlaceholder || "Especificar..."}
                                             style={{
-                                                padding: '0.5rem 1rem',
-                                                backgroundColor: '#10b981',
-                                                color: 'white',
-                                                border: 'none',
-                                                borderRadius: '6px',
-                                                cursor: 'pointer',
-                                                fontWeight: 'bold'
+                                                padding: '0.25rem',
+                                                border: '1px solid #d1d5db',
+                                                borderRadius: '4px',
+                                                fontSize: '0.875rem'
                                             }}
-                                        >
-                                            + Añadir ({skillCostDisplay})
-                                        </button>
+                                        />
                                     </div>
                                 );
-                            } else {
+
                                 return (
-                                    <div key={skill.id} style={{
-                                        padding: '0.75rem',
-                                        borderBottom: '1px solid #e5e7eb',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        gap: '1rem',
-                                        opacity: isSelected ? 0.5 : 1
-                                    }}>
-                                        <div style={{ flex: 1 }}>
-                                            <strong>{skill.name}</strong>
-                                            {skill.description && (
-                                                <span style={{ fontSize: '0.875rem', color: '#6b7280', marginLeft: '0.5rem' }}>
-                                                    ({skill.description})
+                                    <SkillRow
+                                        key={uniqueId}
+                                        isSpecial
+                                        name={renderName}
+                                        formula={skillDef.formulaText}
+                                        baseValue={val.base}
+                                        minBase={val.minBase}
+                                        originMod={val.originMod}
+                                        specialtyMod={val.specialtyMod}
+                                        manualMod={spec.manualMods || 0}
+                                        total={val.total}
+                                        calcPCCost={val.pcCost}
+                                        totalPCCost={totalCost}
+                                        isFree={spec.isFree}
+                                        isRequired={spec.isRequired}
+                                        onBaseChange={(v) => handleSpecialBaseChange(uniqueId, v, val.minBase, true)}
+                                        onModChange={(v) => handleSpecialModChange(uniqueId, v, true)}
+                                        onRemove={() => handleRemoveSpecifiedSkill(uniqueId)}
+                                    />
+                                );
+                            })}
+                        </SkillTable>
+                    </div>
+                )}
+
+                {/* Available Skills by Category */}
+                <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem', color: '#374151' }}>
+                    Habilidades Disponibles
+                </h3>
+
+                {Object.entries(skillsByCategory).map(([category, skills]) => (
+                    <div key={category} style={{ marginBottom: '2rem' }}>
+                        <h4 style={{
+                            fontSize: '1.25rem',
+                            fontWeight: 'bold',
+                            marginBottom: '0.75rem',
+                            color: '#374151',
+                            borderBottom: '2px solid #e5e7eb',
+                            paddingBottom: '0.5rem'
+                        }}>
+                            {SKILL_CATEGORIES[category as keyof typeof SKILL_CATEGORIES]}
+                        </h4>
+
+                        <div style={{
+                            backgroundColor: 'white',
+                            borderRadius: '12px',
+                            boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                            padding: '1rem',
+                            border: '1px solid #e5e7eb'
+                        }}>
+                            {skills.filter(skill => isSkillAllowed(skill, data.origin?.items || [])).map(skill => {
+                                const isSelected = selectedSkills[skill.id] !== undefined;
+                                const isParametrizable = skill.requiresSpecification;
+                                const displayCost = `${skillBaseCost} PC`;
+
+                                if (isParametrizable) {
+                                    return (
+                                        <div key={skill.id} style={{
+                                            padding: '0.75rem',
+                                            borderBottom: '1px solid #e5e7eb',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            gap: '1rem'
+                                        }}>
+                                            <div style={{ flex: 1 }}>
+                                                <strong>{skill.name}</strong>
+                                                {skill.description && (
+                                                    <span style={{ fontSize: '0.875rem', color: '#6b7280', marginLeft: '0.5rem' }}>
+                                                        ({skill.description})
+                                                    </span>
+                                                )}
+                                            </div>
+                                            <span style={{ fontSize: '0.875rem', color: '#6b7280', fontFamily: 'monospace' }}>
+                                                {skill.formulaText}
+                                            </span>
+                                            <WizardButton
+                                                variant="primary"
+                                                onClick={() => handleAddSpecifiedSkill(skill.id)}
+                                                style={{ backgroundColor: '#10b981' }}
+                                            >
+                                                + Añadir ({displayCost})
+                                            </WizardButton>
+                                        </div>
+                                    );
+                                } else {
+                                    return (
+                                        <div key={skill.id} style={{
+                                            padding: '0.75rem',
+                                            borderBottom: '1px solid #e5e7eb',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            gap: '1rem',
+                                            opacity: isSelected ? 0.5 : 1
+                                        }}>
+                                            <div style={{ flex: 1 }}>
+                                                <strong>{skill.name}</strong>
+                                                {skill.description && (
+                                                    <span style={{ fontSize: '0.875rem', color: '#6b7280', marginLeft: '0.5rem' }}>
+                                                        ({skill.description})
+                                                    </span>
+                                                )}
+                                            </div>
+                                            <span style={{ fontSize: '0.875rem', color: '#6b7280', fontFamily: 'monospace' }}>
+                                                {skill.formulaText}
+                                            </span>
+                                            {!isSelected ? (
+                                                <WizardButton
+                                                    variant="primary"
+                                                    onClick={() => handleAddSkill(skill.id)}
+                                                    style={{ backgroundColor: '#10b981' }}
+                                                >
+                                                    + Añadir ({displayCost})
+                                                </WizardButton>
+                                            ) : (
+                                                <span style={{ color: '#10b981', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                                    ✓ Seleccionada
                                                 </span>
                                             )}
                                         </div>
-                                        <span style={{ fontSize: '0.875rem', color: '#6b7280', fontFamily: 'monospace' }}>
-                                            {skill.formulaText}
-                                        </span>
-                                        {!isSelected ? (
-                                            <button
-                                                onClick={() => handleAddSkill(skill.id)}
-                                                style={{
-                                                    padding: '0.5rem 1rem',
-                                                    backgroundColor: '#10b981',
-                                                    color: 'white',
-                                                    border: 'none',
-                                                    borderRadius: '6px',
-                                                    cursor: 'pointer',
-                                                    fontWeight: 'bold'
-                                                }}
-                                            >
-                                                + Añadir ({skillCostDisplay})
-                                            </button>
-                                        ) : (
-                                            <span style={{ fontSize: '0.875rem', color: '#10b981', fontWeight: 'bold' }}>
-                                                ✓ Seleccionada
-                                            </span>
-                                        )}
-                                    </div>
-                                );
-                            }
-                        })}
+                                    );
+                                }
+                            })}
+                        </div>
                     </div>
-                </div>
-            ))}
+                ))}
+            </WizardSection>
         </div>
     );
 }

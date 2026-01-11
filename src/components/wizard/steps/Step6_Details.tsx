@@ -4,6 +4,9 @@ import { GENERAL_SKILLS } from '../../../data/generalSkills';
 import { SPECIAL_SKILLS } from '../../../data/specialSkills';
 import { MAGIC_OBJECTS } from '../../../data/magicObjects';
 import { ARTIFACTS } from '../../../data/artifacts';
+import { WizardSection } from '../shared/WizardSection';
+import { WizardField } from '../shared/WizardField';
+import { DynamicList } from '../shared/DynamicList';
 
 interface Step6Props {
     data: {
@@ -74,188 +77,82 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
         }
     }, [data.attributes.values, data.origin?.items, data.skills]);
 
-    // --- EQUIPO ---
-    const addEquipment = () => {
+    // GENERIC LIST HELPERS
+    const addItem = (key: string, initialItem: any) => {
+        const items = data[key as keyof typeof data]?.items || [];
         onChange({
-            equipment: {
-                items: [...(data.equipment?.items || []), { name: "Nuevo equipo", notes: "", cost: 0 }]
+            [key]: {
+                items: [...items, initialItem]
             }
         });
     };
 
-    const updateEquipment = (index: number, field: string, value: string) => {
-        const newItems = [...(data.equipment?.items || [])];
-        newItems[index] = { ...newItems[index], [field]: value };
-        onChange({ equipment: { items: newItems } });
+    const updateItem = (key: string, index: number, field: string, value: any) => {
+        const items = [...(data[key as keyof typeof data]?.items || [])];
+        items[index] = { ...items[index], [field]: value };
+        onChange({ [key]: { items } });
     };
 
-    const removeEquipment = (index: number) => {
-        const newItems = [...(data.equipment?.items || [])];
-        newItems.splice(index, 1);
-        onChange({ equipment: { items: newItems } });
+    const removeItem = (key: string, index: number) => {
+        const items = [...(data[key as keyof typeof data]?.items || [])];
+        items.splice(index, 1);
+        onChange({ [key]: { items } });
     };
+
+    // --- EQUIPO ---
+    const addEquipment = () => addItem('equipment', { name: "Nuevo equipo", notes: "", cost: 0 });
+    const updateEquipment = (index: number, field: string, value: any) => updateItem('equipment', index, field, value);
+    const removeEquipment = (index: number) => removeItem('equipment', index);
 
     // --- ARMAS ---
-    const addWeapon = () => {
-        onChange({
-            weapons: {
-                items: [...(data.weapons?.items || []), { name: "Nueva arma", damage: "", dxa: "", car: "", notes: "", cost: 0 }]
-            }
-        });
-    };
-
-    const updateWeapon = (index: number, field: string, value: string) => {
-        const newItems = [...(data.weapons?.items || [])];
-        newItems[index] = { ...newItems[index], [field]: value };
-        onChange({ weapons: { items: newItems } });
-    };
-
-    const removeWeapon = (index: number) => {
-        const newItems = [...(data.weapons?.items || [])];
-        newItems.splice(index, 1);
-        onChange({ weapons: { items: newItems } });
-    };
+    const addWeapon = () => addItem('weapons', { name: "Nueva arma", damage: "", dxa: "", car: "", notes: "", cost: 0 });
+    const updateWeapon = (index: number, field: string, value: any) => updateItem('weapons', index, field, value);
+    const removeWeapon = (index: number) => removeItem('weapons', index);
 
     // --- ARTEFACTOS ---
-    const addArtifact = () => {
-        onChange({
-            artifacts: {
-                items: [...(data.artifacts?.items || []), { name: "Nuevo artefacto", reliability: "", value: "", cost: 0 }]
-            }
-        });
-    };
-
-    const updateArtifact = (index: number, field: string, value: string) => {
-        const newItems = [...(data.artifacts?.items || [])];
-        newItems[index] = { ...newItems[index], [field]: value };
-        onChange({ artifacts: { items: newItems } });
-    };
-
-    const removeArtifact = (index: number) => {
-        const newItems = [...(data.artifacts?.items || [])];
-        newItems.splice(index, 1);
-        onChange({ artifacts: { items: newItems } });
-    };
+    const addArtifact = () => addItem('artifacts', { name: "Nuevo artefacto", reliability: "", value: "", cost: 0 });
+    const updateArtifact = (index: number, field: string, value: any) => updateItem('artifacts', index, field, value);
+    const removeArtifact = (index: number) => removeItem('artifacts', index);
 
     const applyArtifactPreset = (index: number, id: string) => {
         const preset = ARTIFACTS.find((a: any) => a.id === id);
         if (preset) {
-            const newItems = [...(data.artifacts?.items || [])];
-            newItems[index] = {
-                ...newItems[index],
+            const items = [...(data.artifacts?.items || [])];
+            items[index] = {
+                ...items[index],
                 name: preset.name,
                 reliability: preset.reliability,
                 cost: preset.pcCost,
-                notes: preset.description // Mapping description to notes/description
+                notes: preset.description
             };
-            onChange({ artifacts: { items: newItems } });
+            onChange({ artifacts: { items } });
         }
     };
 
     // --- OBJETOS MÁGICOS ---
-    const addMagicObject = () => {
-        onChange({
-            magicObjects: {
-                items: [...(data.magicObjects?.items || []), { name: "Nuevo objeto mágico", description: "", em: 0 }]
-            }
-        });
-    };
-
-    const updateMagicObject = (index: number, field: string, value: string | number) => {
-        const newItems = [...(data.magicObjects?.items || [])];
-        newItems[index] = { ...newItems[index], [field]: value };
-        onChange({ magicObjects: { items: newItems } });
-    };
+    const addMagicObject = () => addItem('magicObjects', { name: "Nuevo objeto mágico", description: "", em: 0 });
+    const updateMagicObject = (index: number, field: string, value: any) => updateItem('magicObjects', index, field, value);
+    const removeMagicObject = (index: number) => removeItem('magicObjects', index);
 
     const applyMagicPreset = (index: number, id: string) => {
         const preset = MAGIC_OBJECTS.find((o: any) => o.id === id);
         if (preset) {
-            const newItems = [...(data.magicObjects?.items || [])];
-            newItems[index] = {
-                ...newItems[index],
+            const items = [...(data.magicObjects?.items || [])];
+            items[index] = {
+                ...items[index],
                 name: preset.name,
                 description: preset.description,
                 em: preset.em
             };
-            onChange({ magicObjects: { items: newItems } });
+            onChange({ magicObjects: { items } });
         }
     };
 
-    const removeMagicObject = (index: number) => {
-        const newItems = [...(data.magicObjects?.items || [])];
-        newItems.splice(index, 1);
-        onChange({ magicObjects: { items: newItems } });
-    };
-
     // --- VEHÍCULOS ---
-    const addVehicle = () => {
-        onChange({
-            vehicles: {
-                items: [...(data.vehicles?.items || []), { name: "Nuevo vehículo", armor: "", pe: "", speed: "", range: "" }]
-            }
-        });
-    };
+    const addVehicle = () => addItem('vehicles', { name: "Nuevo vehículo", armor: "", pe: "", speed: "", range: "" });
+    const updateVehicle = (index: number, field: string, value: any) => updateItem('vehicles', index, field, value);
+    const removeVehicle = (index: number) => removeItem('vehicles', index);
 
-    const updateVehicle = (index: number, field: string, value: string) => {
-        const newItems = [...(data.vehicles?.items || [])];
-        newItems[index] = { ...newItems[index], [field]: value };
-        onChange({ vehicles: { items: newItems } });
-    };
-
-    const removeVehicle = (index: number) => {
-        const newItems = [...(data.vehicles?.items || [])];
-        newItems.splice(index, 1);
-        onChange({ vehicles: { items: newItems } });
-    };
-
-    const sectionStyle = {
-        backgroundColor: 'white',
-        border: '1px solid #e5e7eb',
-        borderRadius: '12px',
-        padding: '1.5rem',
-        marginBottom: '2rem',
-        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
-    };
-
-    const titleStyle = {
-        fontSize: '1.5rem',
-        fontWeight: 'bold',
-        color: '#1f2937',
-        marginBottom: '1rem',
-        borderBottom: '2px solid #e5e7eb',
-        paddingBottom: '0.5rem',
-        display: 'flex',
-        alignItems: 'center',
-        gap: '0.5rem'
-    };
-
-    const labelStyle = {
-        display: 'block',
-        fontSize: '0.875rem',
-        fontWeight: 'bold',
-        color: '#4b5563',
-        marginBottom: '0.5rem'
-    };
-
-    const inputStyle = {
-        width: '100%',
-        padding: '0.75rem',
-        border: '1px solid #d1d5db',
-        borderRadius: '6px',
-        fontSize: '1rem',
-        marginBottom: '1rem',
-        transition: 'border-color 0.2s',
-        outline: 'none'
-    };
-
-    const buttonStyle = {
-        padding: '0.5rem 1rem',
-        borderRadius: '6px',
-        fontWeight: 'bold',
-        cursor: 'pointer',
-        border: 'none',
-        transition: 'background-color 0.2s'
-    };
 
     const weaponSkills = [
         ...GENERAL_SKILLS.filter(s => ['combate', 'lanzar'].includes(s.id)),
@@ -274,77 +171,55 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                 marginBottom: '2rem',
                 color: '#1e40af'
             }}>
-                <h3 style={{ fontWeight: 'bold', fontSize: '1.125rem', marginBottom: '0.5rem' }}>
+                <h3 style={{ fontWeight: 'bold', fontSize: '1.125rem', marginBottom: '0.5rem', margin: 0 }}>
                     📝 Detalles Finales
                 </h3>
-                <p style={{ margin: 0 }}>
+                <p style={{ margin: '0.5rem 0 0' }}>
                     Define la identidad de tu personaje y equipalo.
                 </p>
             </div>
 
             {/* IDENTITY SECTION */}
-            <div style={sectionStyle}>
-                <h3 style={titleStyle}>👤 Identidad</h3>
+            <WizardSection title="👤 Identidad">
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginBottom: '1.5rem' }}>
-                    <div>
-                        <label style={labelStyle}>Nombre del Personaje</label>
-                        <input
-                            type="text"
-                            value={data.name || ''}
-                            onChange={(e) => updateField('name', e.target.value)}
-                            style={inputStyle}
-                            placeholder="Ej: Alex Mercer"
-                        />
-                    </div>
-                    <div>
-                        <label style={labelStyle}>Alias / Nombre en Clave</label>
-                        <input
-                            type="text"
-                            value={data.alias || ''}
-                            onChange={(e) => updateField('alias', e.target.value)}
-                            style={inputStyle}
-                            placeholder="Ej: Prototype"
-                        />
-                    </div>
-                </div>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginBottom: '1.5rem' }}>
-                    <div>
-                        <label style={labelStyle}>Profesión</label>
-                        <input
-                            type="text"
-                            value={data.profession || ''}
-                            onChange={(e) => updateField('profession', e.target.value)}
-                            style={inputStyle}
-                            placeholder="Ej: Periodista, Mecánico..."
-                        />
-                    </div>
-                    <div>
-                        <label style={labelStyle}>Identidad Sexual</label>
-                        <input
-                            type="text"
-                            value={data.sexualIdentity || ''}
-                            onChange={(e) => updateField('sexualIdentity', e.target.value)}
-                            style={inputStyle}
-                            placeholder="Ej: Heterosexual, Bisexual..."
-                        />
-                    </div>
-                </div>
-                <div>
-                    <label style={labelStyle}>Descripción y Notas</label>
-                    <textarea
-                        value={data.notes || ''}
-                        onChange={(e) => updateField('notes', e.target.value)}
-                        style={{ ...inputStyle, minHeight: '120px', resize: 'vertical' }}
-                        placeholder="Describe la apariencia, personalidad, trasfondo breve..."
+                    <WizardField
+                        label="Nombre del Personaje"
+                        value={data.name || ''}
+                        onChange={(e) => updateField('name', e.target.value)}
+                        placeholder="Ej: Alex Mercer"
+                    />
+                    <WizardField
+                        label="Alias / Nombre en Clave"
+                        value={data.alias || ''}
+                        onChange={(e) => updateField('alias', e.target.value)}
+                        placeholder="Ej: Prototype"
                     />
                 </div>
-            </div>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginBottom: '1.5rem' }}>
+                    <WizardField
+                        label="Profesión"
+                        value={data.profession || ''}
+                        onChange={(e) => updateField('profession', e.target.value)}
+                        placeholder="Ej: Periodista, Mecánico..."
+                    />
+                    <WizardField
+                        label="Identidad Sexual"
+                        value={data.sexualIdentity || ''}
+                        onChange={(e) => updateField('sexualIdentity', e.target.value)}
+                        placeholder="Ej: Heterosexual, Bisexual..."
+                    />
+                </div>
+                <WizardField
+                    type="textarea"
+                    label="Descripción y Notas"
+                    value={data.notes || ''}
+                    onChange={(e) => updateField('notes', e.target.value)}
+                    placeholder="Describe la apariencia, personalidad, trasfondo breve..."
+                />
+            </WizardSection>
 
             {/* COMBAT STATS SECTION */}
-            <div style={sectionStyle}>
-                <h3 style={{ ...titleStyle, color: '#dc2626', borderBottomColor: '#fecaca' }}>
-                    ⚔️ Estadísticas de Combate
-                </h3>
+            <WizardSection title="⚔️ Estadísticas de Combate" color="#dc2626">
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
                     {data.combatstats?.map((stat, index) => {
                         const [label, val] = stat.split(': ');
@@ -365,13 +240,10 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                         );
                     })}
                 </div>
-            </div>
+            </WizardSection>
 
             {/* OTHER STATS SECTION */}
-            <div style={sectionStyle}>
-                <h3 style={{ ...titleStyle, color: '#7c3aed', borderBottomColor: '#ddd6fe' }}>
-                    🧠 Otras Estadísticas
-                </h3>
+            <WizardSection title="🧠 Otras Estadísticas" color="#7c3aed">
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
                     {data.otherstats?.map((stat, index) => {
                         const [label, val] = stat.split(': ');
@@ -392,534 +264,278 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                         );
                     })}
                 </div>
-            </div>
+            </WizardSection>
 
             {/* WEAPONS SECTION */}
-            <div style={sectionStyle}>
-                <h3 style={{ ...titleStyle, color: '#b91c1c', borderBottomColor: '#fecaca' }}>
-                    ⚔️ Armas
-                </h3>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                    {data.weapons?.items?.map((item, index) => (
-                        <div key={index} style={{
-                            display: 'grid',
-                            gridTemplateColumns: '1.5fr 1.5fr 0.8fr 0.8fr 0.8fr 1.5fr 80px auto',
-                            gap: '0.5rem',
-                            alignItems: 'start',
-                            padding: '1rem',
-                            backgroundColor: '#fef2f2',
-                            border: '1px solid #fee2e2',
-                            borderRadius: '8px'
-                        }}>
-                            <div>
-                                <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Nombre</label>
-                                <input
-                                    type="text"
-                                    value={item.name}
-                                    onChange={(e) => updateWeapon(index, 'name', e.target.value)}
-                                    style={{ ...inputStyle, marginBottom: 0 }}
-                                    placeholder="Nombre del arma"
-                                />
-                            </div>
-                            <div>
-                                <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Habilidad</label>
-                                <select
-                                    value={item.skillId || ''}
-                                    onChange={(e) => updateWeapon(index, 'skillId', e.target.value)}
-                                    style={{ ...inputStyle, marginBottom: 0, paddingRight: '2rem' }}
-                                >
-                                    <option value="">Seleccionar...</option>
-                                    {weaponSkills.map(skill => (
-                                        <option key={skill.id} value={skill.id}>
-                                            {skill.name}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
-                            <div>
-                                <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Daño</label>
-                                <input
-                                    type="text"
-                                    value={item.damage || ''}
-                                    onChange={(e) => updateWeapon(index, 'damage', e.target.value)}
-                                    style={{ ...inputStyle, marginBottom: 0 }}
-                                    placeholder="Ej: 1d8+2"
-                                />
-                            </div>
-                            <div>
-                                <label style={{ ...labelStyle, fontSize: '0.75rem' }}>DxA</label>
-                                <input
-                                    type="text"
-                                    value={item.dxa || ''}
-                                    onChange={(e) => updateWeapon(index, 'dxa', e.target.value)}
-                                    style={{ ...inputStyle, marginBottom: 0 }}
-                                    placeholder="DxA"
-                                />
-                            </div>
-                            <div>
-                                <label style={{ ...labelStyle, fontSize: '0.75rem' }}>CAR</label>
-                                <input
-                                    type="text"
-                                    value={item.car || ''}
-                                    onChange={(e) => updateWeapon(index, 'car', e.target.value)}
-                                    style={{ ...inputStyle, marginBottom: 0 }}
-                                    placeholder="CAR"
-                                />
-                            </div>
-                            <div>
-                                <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Notas / Propiedades</label>
-                                <input
-                                    type="text"
-                                    value={item.notes || ''}
-                                    onChange={(e) => updateWeapon(index, 'notes', e.target.value)}
-                                    style={{ ...inputStyle, marginBottom: 0 }}
-                                    placeholder="Alcance, Munición..."
-                                />
-                            </div>
-                            <div>
-                                <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Coste (PCs)</label>
-                                <input
-                                    type="number"
-                                    min="0"
-                                    value={item.cost || 0}
-                                    onChange={(e) => updateWeapon(index, 'cost', Math.max(0, parseInt(e.target.value) || 0).toString())}
-                                    style={{ ...inputStyle, marginBottom: 0 }}
-                                    placeholder="0"
-                                />
-                            </div>
-                            <button
-                                onClick={() => removeWeapon(index)}
-                                style={{
-                                    ...buttonStyle,
-                                    marginTop: '1.5rem',
-                                    backgroundColor: '#dc2626',
-                                    color: 'white'
-                                }}
+            <WizardSection title="⚔️ Armas" color="#b91c1c">
+                <DynamicList
+                    items={data.weapons?.items || []}
+                    onAdd={addWeapon}
+                    onRemove={removeWeapon}
+                    addButtonLabel="Añadir Arma"
+                    color="#b91c1c"
+                    renderItem={(item, index) => (
+                        <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1.5fr 0.8fr 0.8fr 0.8fr 1.5fr 80px', gap: '0.5rem', alignItems: 'start' }}>
+                            <WizardField
+                                label="Nombre"
+                                value={item.name}
+                                onChange={(e) => updateWeapon(index, 'name', e.target.value)}
+                                style={{ marginBottom: 0 }}
+                                placeholder="Nombre del arma"
+                            />
+                            <WizardField
+                                type="select"
+                                label="Habilidad"
+                                value={item.skillId || ''}
+                                onChange={(e) => updateWeapon(index, 'skillId', e.target.value)}
+                                style={{ marginBottom: 0 }}
                             >
-                                ✕
-                            </button>
+                                <option value="">Seleccionar...</option>
+                                {weaponSkills.map(skill => (
+                                    <option key={skill.id} value={skill.id}>
+                                        {skill.name}
+                                    </option>
+                                ))}
+                            </WizardField>
+                            <WizardField
+                                label="Daño"
+                                value={item.damage || ''}
+                                onChange={(e) => updateWeapon(index, 'damage', e.target.value)}
+                                style={{ marginBottom: 0 }}
+                                placeholder="Ej: 1d8+2"
+                            />
+                            <WizardField
+                                label="DxA"
+                                value={item.dxa || ''}
+                                onChange={(e) => updateWeapon(index, 'dxa', e.target.value)}
+                                style={{ marginBottom: 0 }}
+                                placeholder="DxA"
+                            />
+                            <WizardField
+                                label="CAR"
+                                value={item.car || ''}
+                                onChange={(e) => updateWeapon(index, 'car', e.target.value)}
+                                style={{ marginBottom: 0 }}
+                                placeholder="CAR"
+                            />
+                            <WizardField
+                                label="Notas / Propiedades"
+                                value={item.notes || ''}
+                                onChange={(e) => updateWeapon(index, 'notes', e.target.value)}
+                                style={{ marginBottom: 0 }}
+                                placeholder="Alcance..."
+                            />
+                            <WizardField
+                                type="number"
+                                label="Coste"
+                                min="0"
+                                value={item.cost || 0}
+                                onChange={(e) => updateWeapon(index, 'cost', Math.max(0, parseInt(e.target.value) || 0).toString())}
+                                style={{ marginBottom: 0 }}
+                            />
                         </div>
-                    ))}
-                    <button
-                        onClick={addWeapon}
-                        style={{
-                            width: '100%',
-                            padding: '1rem',
-                            border: '2px dashed #fca5a5',
-                            backgroundColor: '#fef2f2',
-                            color: '#dc2626',
-                            borderRadius: '8px',
-                            fontWeight: 'bold',
-                            cursor: 'pointer',
-                            marginTop: '0.5rem'
-                        }}
-                    >
-                        + Añadir Arma
-                    </button>
-                </div>
-            </div>
+                    )}
+                />
+            </WizardSection>
+
+            {/* EQUIPMENT SECTION (New) */}
+            <WizardSection title="🎒 Equipo" color="#059669">
+                <DynamicList
+                    items={data.equipment?.items || []}
+                    onAdd={addEquipment}
+                    onRemove={removeEquipment}
+                    addButtonLabel="Añadir Equipo"
+                    color="#059669"
+                    renderItem={(item, index) => (
+                        <div style={{ display: 'grid', gridTemplateColumns: '2fr 3fr 80px', gap: '1rem', alignItems: 'start' }}>
+                            <WizardField
+                                label="Nombre"
+                                value={item.name}
+                                onChange={(e) => updateEquipment(index, 'name', e.target.value)}
+                                style={{ marginBottom: 0 }}
+                                placeholder="Nombre del objeto"
+                            />
+                            <WizardField
+                                label="Notas"
+                                value={item.notes || ''}
+                                onChange={(e) => updateEquipment(index, 'notes', e.target.value)}
+                                style={{ marginBottom: 0 }}
+                                placeholder="Descripción..."
+                            />
+                            <WizardField
+                                type="number"
+                                label="Coste"
+                                min="0"
+                                value={item.cost || 0}
+                                onChange={(e) => updateEquipment(index, 'cost', Math.max(0, parseInt(e.target.value) || 0).toString())}
+                                style={{ marginBottom: 0 }}
+                            />
+                        </div>
+                    )}
+                />
+            </WizardSection>
 
             {/* ARTIFACTS SECTION */}
-            <div style={sectionStyle}>
-                <h3 style={{ ...titleStyle, color: '#7c3aed', borderBottomColor: '#ddd6fe' }}>
-                    ✨ Artefactos
-                </h3>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                    {data.artifacts?.items?.map((item, index) => (
-                        <div key={index} style={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            gap: '0.75rem',
-                            padding: '0.75rem',
-                            backgroundColor: '#f5f3ff',
-                            border: '1px solid #ede9fe',
-                            borderRadius: '8px'
-                        }}>
-                            <div>
-                                <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Cargar Predefinido (Opcional)</label>
-                                <select
-                                    onChange={(e) => applyArtifactPreset(index, e.target.value)}
-                                    style={{ ...inputStyle, marginBottom: 0 }}
-                                    defaultValue=""
-                                >
-                                    <option value="" disabled>Seleccionar de la lista...</option>
-                                    {ARTIFACTS.map((obj: any) => (
-                                        <option key={obj.id} value={obj.id}>
-                                            {obj.name} (Fiabilidad: {obj.reliability}, {obj.pcCost} PC)
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
+            <WizardSection title="✨ Artefactos" color="#7c3aed">
+                <DynamicList
+                    items={data.artifacts?.items || []}
+                    onAdd={addArtifact}
+                    onRemove={removeArtifact}
+                    addButtonLabel="Añadir Artefacto"
+                    color="#7c3aed"
+                    renderItem={(item, index) => (
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                            <WizardField
+                                type="select"
+                                label="Cargar Predefinido (Opcional)"
+                                value=""
+                                onChange={(e) => applyArtifactPreset(index, e.target.value)}
+                                style={{ marginBottom: 0 }}
+                            >
+                                <option value="" disabled>Seleccionar de la lista...</option>
+                                {ARTIFACTS.map((obj: any) => (
+                                    <option key={obj.id} value={obj.id}>
+                                        {obj.name} (Fiabilidad: {obj.reliability}, {obj.pcCost} PC)
+                                    </option>
+                                ))}
+                            </WizardField>
 
-                            <div style={{
-                                display: 'grid',
-                                gridTemplateColumns: '2fr 1fr 1fr 100px',
-                                gap: '1rem',
-                                alignItems: 'start'
-                            }}>
-                                <div>
-                                    <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Nombre</label>
-                                    <input
-                                        type="text"
-                                        value={item.name}
-                                        onChange={(e) => updateArtifact(index, 'name', e.target.value)}
-                                        style={{ ...inputStyle, marginBottom: 0 }}
-                                        placeholder="Nombre del artefacto"
-                                    />
-                                </div>
-                                <div>
-                                    <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Fiabilidad</label>
-                                    <input
-                                        type="text"
-                                        value={item.reliability || ''}
-                                        onChange={(e) => updateArtifact(index, 'reliability', e.target.value)}
-                                        style={{ ...inputStyle, marginBottom: 0 }}
-                                        placeholder="Ej: 95%"
-                                    />
-                                </div>
-                                <div>
-                                    <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Valor</label>
-                                    <input
-                                        type="text"
-                                        value={item.value || ''}
-                                        onChange={(e) => updateArtifact(index, 'value', e.target.value)}
-                                        style={{ ...inputStyle, marginBottom: 0 }}
-                                        placeholder="Valor"
-                                    />
-                                </div>
-                                <div>
-                                    <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Coste (PCs)</label>
-                                    <input
-                                        type="number"
-                                        min="0"
-                                        value={item.cost || 0}
-                                        onChange={(e) => updateArtifact(index, 'cost', Math.max(0, parseInt(e.target.value) || 0).toString())}
-                                        style={{ ...inputStyle, marginBottom: 0 }}
-                                        placeholder="0"
-                                    />
-                                </div>
-                            </div>
-
-                            <div>
-                                <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Descripción / Efectos</label>
-                                <textarea
-                                    value={item.notes || ''} // Using notes to store description as it's consistent with other items
-                                    onChange={(e) => updateArtifact(index, 'notes', e.target.value)}
-                                    style={{ ...inputStyle, marginBottom: 0, minHeight: '60px', resize: 'vertical' }}
-                                    placeholder="Descripción o efectos del artefacto..."
+                            <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 100px', gap: '1rem' }}>
+                                <WizardField
+                                    label="Nombre"
+                                    value={item.name}
+                                    onChange={(e) => updateArtifact(index, 'name', e.target.value)}
+                                    style={{ marginBottom: 0 }}
+                                />
+                                <WizardField
+                                    label="Fiabilidad"
+                                    value={item.reliability || ''}
+                                    onChange={(e) => updateArtifact(index, 'reliability', e.target.value)}
+                                    style={{ marginBottom: 0 }}
+                                />
+                                <WizardField
+                                    label="Valor"
+                                    value={item.value || ''}
+                                    onChange={(e) => updateArtifact(index, 'value', e.target.value)}
+                                    style={{ marginBottom: 0 }}
+                                />
+                                <WizardField
+                                    type="number"
+                                    label="Coste"
+                                    value={item.cost || 0}
+                                    onChange={(e) => updateArtifact(index, 'cost', Math.max(0, parseInt(e.target.value) || 0).toString())}
+                                    style={{ marginBottom: 0 }}
                                 />
                             </div>
-
-                            <button
-                                onClick={() => removeArtifact(index)}
-                                style={{
-                                    ...buttonStyle,
-                                    marginTop: '0.5rem',
-                                    backgroundColor: '#7c3aed',
-                                    color: 'white',
-                                    alignSelf: 'flex-end'
-                                }}
-                            >
-                                ✕ Eliminar Artefacto
-                            </button>
+                            <WizardField
+                                type="textarea"
+                                label="Descripción / Efectos"
+                                value={item.notes || ''}
+                                onChange={(e) => updateArtifact(index, 'notes', e.target.value)}
+                                style={{ marginBottom: 0, minHeight: '60px' }}
+                            />
                         </div>
-                    ))}
-                    <button
-                        onClick={addArtifact}
-                        style={{
-                            width: '100%',
-                            padding: '1rem',
-                            border: '2px dashed #c4b5fd',
-                            backgroundColor: '#f5f3ff',
-                            color: '#7c3aed',
-                            borderRadius: '8px',
-                            fontWeight: 'bold',
-                            cursor: 'pointer',
-                            marginTop: '0.5rem'
-                        }}
-                    >
-                        + Añadir Artefacto
-                    </button>
-                </div>
-            </div>
+                    )}
+                />
+            </WizardSection>
 
             {/* MAGIC OBJECTS SECTION */}
-            <div style={sectionStyle}>
-                <h3 style={{ ...titleStyle, color: '#9333ea', borderBottomColor: '#d8b4fe' }}>
-                    🔮 Objetos Mágicos
-                </h3>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                    {data.magicObjects?.items?.map((item, index) => (
-                        <div key={index} style={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            gap: '0.75rem',
-                            padding: '1rem',
-                            backgroundColor: '#faf5ff',
-                            border: '1px solid #f3e8ff',
-                            borderRadius: '8px'
-                        }}>
-                            <div>
-                                <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Cargar Predefinido (Opcional)</label>
-                                <select
-                                    onChange={(e) => applyMagicPreset(index, e.target.value)}
-                                    style={{ ...inputStyle, marginBottom: 0 }}
-                                    defaultValue=""
-                                >
-                                    <option value="" disabled>Seleccionar de la lista...</option>
-                                    {MAGIC_OBJECTS.map((obj: any) => (
-                                        <option key={obj.id} value={obj.id}>
-                                            {obj.name} (EM: {obj.em})
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
+            <WizardSection title="🔮 Objetos Mágicos" color="#9333ea">
+                <DynamicList
+                    items={data.magicObjects?.items || []}
+                    onAdd={addMagicObject}
+                    onRemove={removeMagicObject}
+                    addButtonLabel="Añadir Objeto Mágico"
+                    color="#9333ea"
+                    renderItem={(item, index) => (
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                            <WizardField
+                                type="select"
+                                label="Cargar Predefinido (Opcional)"
+                                value=""
+                                onChange={(e) => applyMagicPreset(index, e.target.value)}
+                                style={{ marginBottom: 0 }}
+                            >
+                                <option value="" disabled>Seleccionar de la lista...</option>
+                                {MAGIC_OBJECTS.map((obj: any) => (
+                                    <option key={obj.id} value={obj.id}>
+                                        {obj.name} (EM: {obj.em})
+                                    </option>
+                                ))}
+                            </WizardField>
 
                             <div style={{ display: 'grid', gridTemplateColumns: '3fr 1fr', gap: '1rem' }}>
-                                <div>
-                                    <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Nombre</label>
-                                    <input
-                                        type="text"
-                                        value={item.name}
-                                        onChange={(e) => updateMagicObject(index, 'name', e.target.value)}
-                                        style={{ ...inputStyle, marginBottom: 0 }}
-                                        placeholder="Nombre del objeto"
-                                    />
-                                </div>
-                                <div>
-                                    <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Coste EM</label>
-                                    <input
-                                        type="number"
-                                        min="0"
-                                        value={item.em || 0}
-                                        onChange={(e) => updateMagicObject(index, 'em', Math.max(0, parseInt(e.target.value) || 0))}
-                                        style={{ ...inputStyle, marginBottom: 0 }}
-                                        placeholder="0"
-                                    />
-                                </div>
-                            </div>
-
-                            <div>
-                                <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Descripción</label>
-                                <textarea
-                                    value={item.description || ''}
-                                    onChange={(e) => updateMagicObject(index, 'description', e.target.value)}
-                                    style={{ ...inputStyle, marginBottom: 0, minHeight: '60px', resize: 'vertical' }}
-                                    placeholder="Descripción del efecto..."
+                                <WizardField
+                                    label="Nombre"
+                                    value={item.name}
+                                    onChange={(e) => updateMagicObject(index, 'name', e.target.value)}
+                                    style={{ marginBottom: 0 }}
+                                />
+                                <WizardField
+                                    type="number"
+                                    label="Coste EM"
+                                    value={item.em || 0}
+                                    onChange={(e) => updateMagicObject(index, 'em', Math.max(0, parseInt(e.target.value) || 0))}
+                                    style={{ marginBottom: 0 }}
                                 />
                             </div>
-
-                            <button
-                                onClick={() => removeMagicObject(index)}
-                                style={{
-                                    ...buttonStyle,
-                                    marginTop: '0.5rem',
-                                    backgroundColor: '#9333ea',
-                                    color: 'white',
-                                    alignSelf: 'flex-end'
-                                }}
-                            >
-                                ✕ Eliminar Objeto
-                            </button>
+                            <WizardField
+                                type="textarea"
+                                label="Descripción"
+                                value={item.description || ''}
+                                onChange={(e) => updateMagicObject(index, 'description', e.target.value)}
+                                style={{ marginBottom: 0, minHeight: '60px' }}
+                            />
                         </div>
-                    ))}
-                    <button
-                        onClick={addMagicObject}
-                        style={{
-                            width: '100%',
-                            padding: '1rem',
-                            border: '2px dashed #d8b4fe',
-                            backgroundColor: '#faf5ff',
-                            color: '#9333ea',
-                            borderRadius: '8px',
-                            fontWeight: 'bold',
-                            cursor: 'pointer',
-                            marginTop: '0.5rem'
-                        }}
-                    >
-                        + Añadir Objeto Mágico
-                    </button>
-                </div>
-            </div>
+                    )}
+                />
+            </WizardSection>
 
             {/* VEHICLES SECTION */}
-            <div style={sectionStyle}>
-                <h3 style={{ ...titleStyle, color: '#0891b2', borderBottomColor: '#a5f3fc' }}>
-                    🚗 Vehículos
-                </h3>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                    {data.vehicles?.items?.map((item, index) => (
-                        <div key={index} style={{
-                            display: 'grid',
-                            gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr auto',
-                            gap: '0.75rem',
-                            alignItems: 'start',
-                            padding: '0.75rem',
-                            backgroundColor: '#ecfeff',
-                            border: '1px solid #cffafe',
-                            borderRadius: '8px'
-                        }}>
-                            <div>
-                                <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Nombre</label>
-                                <input
-                                    type="text"
-                                    value={item.name}
-                                    onChange={(e) => updateVehicle(index, 'name', e.target.value)}
-                                    style={{ ...inputStyle, marginBottom: 0 }}
-                                    placeholder="Nombre del vehículo"
-                                />
-                            </div>
-                            <div>
-                                <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Blindaje</label>
-                                <input
-                                    type="text"
-                                    value={item.armor || ''}
-                                    onChange={(e) => updateVehicle(index, 'armor', e.target.value)}
-                                    style={{ ...inputStyle, marginBottom: 0 }}
-                                    placeholder="Blindaje"
-                                />
-                            </div>
-                            <div>
-                                <label style={{ ...labelStyle, fontSize: '0.75rem' }}>PE</label>
-                                <input
-                                    type="text"
-                                    value={item.pe || ''}
-                                    onChange={(e) => updateVehicle(index, 'pe', e.target.value)}
-                                    style={{ ...inputStyle, marginBottom: 0 }}
-                                    placeholder="PE"
-                                />
-                            </div>
-                            <div>
-                                <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Velocidad</label>
-                                <input
-                                    type="text"
-                                    value={item.speed || ''}
-                                    onChange={(e) => updateVehicle(index, 'speed', e.target.value)}
-                                    style={{ ...inputStyle, marginBottom: 0 }}
-                                    placeholder="Velocidad"
-                                />
-                            </div>
-                            <div>
-                                <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Autonomía</label>
-                                <input
-                                    type="text"
-                                    value={item.range || ''}
-                                    onChange={(e) => updateVehicle(index, 'range', e.target.value)}
-                                    style={{ ...inputStyle, marginBottom: 0 }}
-                                    placeholder="Autonomía"
-                                />
-                            </div>
-                            <button
-                                onClick={() => removeVehicle(index)}
-                                style={{
-                                    ...buttonStyle,
-                                    marginTop: '1.5rem',
-                                    backgroundColor: '#0891b2',
-                                    color: 'white'
-                                }}
-                            >
-                                ✕
-                            </button>
+            <WizardSection title="🚗 Vehículos" color="#0891b2">
+                <DynamicList
+                    items={data.vehicles?.items || []}
+                    onAdd={addVehicle}
+                    onRemove={removeVehicle}
+                    addButtonLabel="Añadir Vehículo"
+                    color="#0891b2"
+                    renderItem={(item, index) => (
+                        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr', gap: '0.75rem', alignItems: 'start' }}>
+                            <WizardField
+                                label="Nombre"
+                                value={item.name}
+                                onChange={(e) => updateVehicle(index, 'name', e.target.value)}
+                                style={{ marginBottom: 0 }}
+                            />
+                            <WizardField
+                                label="Blindaje"
+                                value={item.armor || ''}
+                                onChange={(e) => updateVehicle(index, 'armor', e.target.value)}
+                                style={{ marginBottom: 0 }}
+                            />
+                            <WizardField
+                                label="PE"
+                                value={item.pe || ''}
+                                onChange={(e) => updateVehicle(index, 'pe', e.target.value)}
+                                style={{ marginBottom: 0 }}
+                            />
+                            <WizardField
+                                label="Velocidad"
+                                value={item.speed || ''}
+                                onChange={(e) => updateVehicle(index, 'speed', e.target.value)}
+                                style={{ marginBottom: 0 }}
+                            />
+                            <WizardField
+                                label="Alcance/Autonomía"
+                                value={item.range || ''}
+                                onChange={(e) => updateVehicle(index, 'range', e.target.value)}
+                                style={{ marginBottom: 0 }}
+                            />
                         </div>
-                    ))}
-                    <button
-                        onClick={addVehicle}
-                        style={{
-                            width: '100%',
-                            padding: '1rem',
-                            border: '2px dashed #67e8f9',
-                            backgroundColor: '#ecfeff',
-                            color: '#0891b2',
-                            borderRadius: '8px',
-                            fontWeight: 'bold',
-                            cursor: 'pointer',
-                            marginTop: '0.5rem'
-                        }}
-                    >
-                        + Añadir Vehículo
-                    </button>
-                </div>
-            </div>
+                    )}
+                />
+            </WizardSection>
 
-            {/* EQUIPMENT SECTION */}
-            <div style={sectionStyle}>
-                <h3 style={{ ...titleStyle, color: '#b45309', borderBottomColor: '#fcd34d' }}>
-                    🎒 Equipo
-                </h3>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                    {data.equipment?.items?.map((item, index) => (
-                        <div key={index} style={{
-                            display: 'grid',
-                            gridTemplateColumns: '1fr 2fr 100px auto',
-                            gap: '1rem',
-                            alignItems: 'start',
-                            padding: '0.75rem',
-                            backgroundColor: '#fffbeb',
-                            border: '1px solid #fef3c7',
-                            borderRadius: '8px'
-                        }}>
-                            <div>
-                                <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Nombre</label>
-                                <input
-                                    type="text"
-                                    value={item.name}
-                                    onChange={(e) => updateEquipment(index, 'name', e.target.value)}
-                                    style={{ ...inputStyle, marginBottom: 0 }}
-                                    placeholder="Nombre del objeto"
-                                />
-                            </div>
-                            <div>
-                                <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Descripción / Efectos</label>
-                                <input
-                                    type="text"
-                                    value={item.notes || ''}
-                                    onChange={(e) => updateEquipment(index, 'notes', e.target.value)}
-                                    style={{ ...inputStyle, marginBottom: 0 }}
-                                    placeholder="Descripción o efectos"
-                                />
-                            </div>
-                            <div>
-                                <label style={{ ...labelStyle, fontSize: '0.75rem' }}>Coste (PCs)</label>
-                                <input
-                                    type="number"
-                                    min="0"
-                                    value={item.cost || 0}
-                                    onChange={(e) => updateEquipment(index, 'cost', Math.max(0, parseInt(e.target.value) || 0).toString())}
-                                    style={{ ...inputStyle, marginBottom: 0 }}
-                                    placeholder="0"
-                                />
-                            </div>
-                            <button
-                                onClick={() => removeEquipment(index)}
-                                style={{
-                                    ...buttonStyle,
-                                    marginTop: '1.5rem',
-                                    backgroundColor: '#d97706',
-                                    color: 'white'
-                                }}
-                            >
-                                ✕
-                            </button>
-                        </div>
-                    ))}
-                    <button
-                        onClick={addEquipment}
-                        style={{
-                            width: '100%',
-                            padding: '1rem',
-                            border: '2px dashed #fcd34d',
-                            backgroundColor: '#fffbeb',
-                            color: '#b45309',
-                            borderRadius: '8px',
-                            fontWeight: 'bold',
-                            cursor: 'pointer',
-                            marginTop: '0.5rem'
-                        }}
-                    >
-                        + Añadir Equipo
-                    </button>
-                </div>
-            </div>
         </div>
     );
 }
