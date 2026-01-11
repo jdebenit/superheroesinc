@@ -255,3 +255,74 @@ a:hover {
   height: 100vh;
   max-height: 100vh;
 }
+
+/* ========================================
+   MOBILE RESPONSIVENESS
+   ======================================== */
+
+/* Mobile & Small Tablets (< 768px) */
+@media (max-width: 768px) {
+
+  /* Typography - Scale down for mobile readability */
+  h1 {
+    font-size: var(--text-3xl);
+    padding-bottom: 0.25rem;
+  }
+
+  h2 {
+    font-size: var(--text-2xl);
+  }
+
+  h3 {
+    font-size: var(--text-xl);
+  }
+
+  h4 {
+    font-size: var(--text-lg);
+  }
+
+  /* Content container - Reduce padding on mobile */
+  .content-container {
+    padding: 0 var(--spacing-sm);
+  }
+
+  /* Buttons - Better mobile sizing */
+  .comic-button {
+    padding: 0.625rem 1.25rem;
+    font-size: var(--text-base);
+  }
+
+  /* TOP SECRET stamp - Reposition for mobile */
+  .stamp-top-secret {
+    font-size: 1rem;
+    padding: 0.25rem 0.5rem;
+    top: 4rem;
+    right: 0.5rem;
+    border-width: 3px;
+  }
+
+  /* Paper cards - Reduce padding */
+  .paper-card {
+    padding: var(--spacing-sm);
+  }
+}
+
+/* Small Mobile Devices (< 375px) */
+@media (max-width: 374px) {
+  h1 {
+    font-size: var(--text-2xl);
+  }
+
+  h2 {
+    font-size: var(--text-xl);
+  }
+
+  .stamp-top-secret {
+    font-size: 0.85rem;
+    padding: 0.2rem 0.4rem;
+  }
+
+  .content-container {
+    padding: 0 0.75rem;
+  }
+}

@@ -242,7 +242,7 @@ const { title, intro, characters } = Astro.props;
 
     @media (max-width: 768px) {
         .characters-grid {
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: 1fr !important;
             gap: var(--spacing-lg);
         }
 
