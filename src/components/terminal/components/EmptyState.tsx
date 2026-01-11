@@ -5,7 +5,7 @@ export default function EmptyState() {
         <div className="terminal-empty-state">
             <div className="terminal-empty-icon">📋</div>
             <div className="terminal-empty-text">
-                Carga un archivo JSON de personaje para comenzar
+                Carga un archivo JSON de SHI TPT para comenzar
             </div>
         </div>
     );
