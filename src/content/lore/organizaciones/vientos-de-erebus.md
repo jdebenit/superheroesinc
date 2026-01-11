@@ -1,7 +1,7 @@
 ---
-title: "Vientos de Erebus"
-description: "Organización sobrenatural activa, vinculada a fuerzas oscuras y a la influencia del plano de Erebus."
-category: "organizaciones"
+title: Vientos de Erebus
+description: Organización sobrenatural, vinculada a seres sobrenaturales con sede en Valladolid
+category: organizaciones
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-11-26
 ---
@@ -14,7 +14,7 @@ Aunque no existe documentación extensa sobre su estructura, jerarquía o miembr
 - **entidades o ecos de Erebus**,  
 - y fenómenos vinculados a la **frontera entre mundos**.
 
-Su actividad conocida es discreta, pero lo suficientemente significativa como para figurar en el mismo registro que organizaciones como la Alianza, la Corte Itinerante o los Carbonari.
+Su actividad conocida es discreta, pero lo suficientemente significativa como para figurar en el mismo registro que organizaciones como [la Alianza](/lore/organizaciones/la-alianza/), [la Corte Itinerante](/lore/grupos/la-corte-itinerante/) o los [Carbonari](/lore/organizaciones/carbonari).
 
 ![Vientos de Erebus](/lore/vientos-de-erebus.png)
 
