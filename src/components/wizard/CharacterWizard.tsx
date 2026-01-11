@@ -6,6 +6,7 @@ import Step3_Especials from './steps/Step3_Especials';
 import Step4_Skills from './steps/Step4_Skills';
 import Step5_Background from './steps/Step5_Background';
 import Step6_Details from './steps/Step6_Details';
+import Step7_Evolution from './steps/Step7_Evolution';
 import {
     STEPS,
     initialCharacterState
@@ -65,7 +66,7 @@ export default function CharacterWizard() {
     const { totalPCs } = useCharacterCalculations(character);
 
     const handleNext = () => {
-        if (currentStep < 6) {
+        if (currentStep < 7) {
             setCurrentStep(currentStep + 1);
         }
     };
@@ -176,6 +177,10 @@ export default function CharacterWizard() {
             return <Step6_Details data={character} onChange={updateCharacter} totalPCs={totalPCs} />;
         }
 
+        if (currentStep === 7) {
+            return <Step7_Evolution data={character} onChange={updateCharacter} />;
+        }
+
         return (
             <div className="step-fallback-container">
                 <h2 className="step-fallback-title">
@@ -233,7 +238,7 @@ export default function CharacterWizard() {
                 <div className="progress-line-bg">
                     <div
                         className="progress-line-fill"
-                        style={{ width: `${((currentStep - 1) / 5) * 100}%` }}
+                        style={{ width: `${((currentStep - 1) / 6) * 100}%` }}
                     />
                 </div>
 
@@ -291,11 +296,11 @@ export default function CharacterWizard() {
 
                 <button
                     onClick={handleNext}
-                    disabled={currentStep === 6}
+                    disabled={currentStep === 7}
                     className="btn-base btn-primary"
                     style={{ padding: '1rem 2rem', fontSize: '1.125rem' }}
                 >
-                    {currentStep === 6 ? 'Finalizar ✓' : 'Siguiente →'}
+                    {currentStep === 7 ? 'Finalizar ✓' : 'Siguiente →'}
                 </button>
             </div>
         </div>

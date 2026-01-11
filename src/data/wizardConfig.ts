@@ -4,7 +4,8 @@ export const STEPS = [
     { id: 3, name: 'Especial', icon: '⚡' },
     { id: 4, name: 'Habilidades', icon: '🎯' },
     { id: 5, name: 'Trasfondo', icon: '📖' },
-    { id: 6, name: 'Detalles', icon: '⭐' }
+    { id: 6, name: 'Detalles', icon: '⭐' },
+    { id: 7, name: 'Evolución', icon: '📈' }
 ];
 
 export const initialCharacterState = {
