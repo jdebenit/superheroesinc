@@ -4,8 +4,8 @@ import { getCollection } from 'astro:content';
 export async function GET(context) {
   const blog = await getCollection('blog');
   return rss({
-    title: 'Superheroes Inc. Blog',
-    description: 'Noticias, artículos y novedades sobre juegos de rol de superhéroes.',
+    title: 'Superheroes INC. Blog',
+    description: 'Noticias, artículos y novedades sobre el juego de rol de superhéroes.',
     site: context.site,
     items: blog
       .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
@@ -26,12 +26,11 @@ export async function GET(context) {
       />
       `
       })),
-  })),
-  customData: `<language>es-es</language>`,
+    customData: `<language>es-es</language>`,
     xmlns: {
-    media: 'http://search.yahoo.com/mrss/',
+      media: 'http://search.yahoo.com/mrss/',
       atom: 'http://www.w3.org/2005/Atom', // Optional but good practice
     },
-  stylesheet: '/rss/styles.xsl', // optional
+    stylesheet: '/rss/styles.xsl', // optional
   });
 }
