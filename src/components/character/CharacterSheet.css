@@ -837,9 +837,10 @@
         column-count: 2;
     }
 
-    /* .combat-section {
+    .combat-section,
+    .attributes {
         column-span: all;
-    } */
+    }
 }
 
 .sheet-section {
