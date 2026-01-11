@@ -11,10 +11,14 @@
             "id": "d20f7626b338e7da",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "blog/juego-rol-superheroes-inc-contenido-vivo.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "Nueva pestaña"
+              "title": "juego-rol-superheroes-inc-contenido-vivo"
             }
           }
         ]
@@ -181,6 +185,9 @@
   },
   "active": "d20f7626b338e7da",
   "lastOpenFiles": [
+    "blog/la-web-como-punto-de-encuentro-del-juego.md",
+    "blog/juego-rol-superheroes-inc-contenido-vivo.md",
+    "blog/actual-plays-superheroes-inc.md",
     "lore/localizaciones/valladolid.md",
     "lore/localizaciones/valdoria.md",
     "faq/14-subida-de-nivel-pasar-de-100-en-caracteristicas.md",
@@ -191,9 +198,7 @@
     "lore/eventos/la-caida-de-la-gran-barrera.md",
     "blog/psicogeografía-y-memoria-en-el-rol.md",
     "2025-11-30.md",
-    "blog/actual-plays-superheroes-inc.md",
     "blog/haciendo-fichas-sin-calculadora.md",
-    "blog/la-web-como-punto-de-encuentro-del-juego.md",
     "blog/lanzamiento.md",
     "blog/nueva-web.md",
     "blog/nuevos-contenidos.md",
@@ -206,7 +211,6 @@
     "characters/mjolnir.md",
     "faq/08-penalizacion-poderes-mentales.md",
     "faq/07-reglas-opcionales-ramsao.md",
-    "faq/06-kevlar-daño-mixto.md",
     "faq",
     "rpg/leon-rojo.yaml",
     "rpg/jefe-motero-road-reapers.yaml",
