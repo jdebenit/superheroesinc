@@ -599,7 +599,7 @@ export default function CharacterSheet({ character, totalPCs }: CharacterSheetPr
                                                             </span>
                                                             {detailValue && (
                                                                 <>
-                                                                    <span className="origin-detail-dots"></span>
+                                                                    <span className="flex-spacer-dotted"></span>
                                                                     <span className="origin-detail-value">
                                                                         {detailValue}
                                                                     </span>
@@ -952,7 +952,7 @@ export default function CharacterSheet({ character, totalPCs }: CharacterSheetPr
                                                             {item.name}
                                                             {item.math && <span className="skill-math">{item.math}</span>}
                                                         </span>
-                                                        <span className="skill-dots"></span>
+                                                        <span className="flex-spacer-dotted"></span>
                                                         <span className="skill-value">
                                                             {item.value}
                                                         </span>
@@ -1186,7 +1186,7 @@ export default function CharacterSheet({ character, totalPCs }: CharacterSheetPr
                                                 ({character.techModules.reduce((acc: number, m: any) => acc + (m.pcCost || 0), 0)} PCs)
                                             </span>
                                         </div>
-                                        <ul className="no-bullets-list" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                                        <ul className="clean-list">
                                             {character.techModules.map((module: any, idx: number) => {
                                                 const definition = TECH_MODULES.find(d => d.id === module.definitionId);
                                                 const type = definition?.type || 'General';
@@ -1376,7 +1376,7 @@ export default function CharacterSheet({ character, totalPCs }: CharacterSheetPr
                                         <div className="section-header">
                                             <h4>Poderes</h4>
                                         </div>
-                                        <ul className="no-bullets-list" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                                        <ul className="clean-list">
                                             {character.powers.selected.map((power: any, idx: number) => {
                                                 const powerData = POWERS.find(p => p.id === power.id);
                                                 if (!powerData) return null;
@@ -1470,7 +1470,7 @@ export default function CharacterSheet({ character, totalPCs }: CharacterSheetPr
                                                 );
                                             })()}
                                         </div>
-                                        <ul className="no-bullets-list" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                                        <ul className="clean-list">
                                             {character.spells.selected.map((spell: any, idx: number) => {
                                                 const spellData = SPELLS.find(s => s.id === spell.id);
                                                 if (!spellData) return null;
@@ -1559,7 +1559,7 @@ export default function CharacterSheet({ character, totalPCs }: CharacterSheetPr
                                         <div className="section-header">
                                             <h4>Traumas</h4>
                                         </div>
-                                        <ul className="no-bullets-list" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                                        <ul className="clean-list">
                                             {Object.entries(character.traumas).map(([specialty, trauma]: [string, any], idx: number) => (
                                                 <li key={idx} className="trauma-item">
                                                     <div className="trauma-header">

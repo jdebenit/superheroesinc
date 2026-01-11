@@ -92,27 +92,15 @@
 
 
 
-/* Origin Section */
-.origin-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.origin-item {
-    margin-bottom: 0.75rem;
-}
-
+/* Origin Section - Cleaned up */
 .origin-category-name {
     font-weight: bold;
     color: #8B4513;
     margin-bottom: 0.25rem;
 }
 
-.origin-sublist {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+.origin-item {
+    margin-bottom: 0.75rem;
 }
 
 .origin-detail-item {
@@ -132,12 +120,6 @@
     padding-left: 0.75rem;
 }
 
-.origin-detail-row {
-    display: flex;
-    align-items: baseline;
-    width: 100%;
-}
-
 .origin-detail-label {
     padding-right: 0.5rem;
 }
@@ -148,19 +130,10 @@
     font-size: 1rem;
 }
 
-.origin-detail-dots {
-    flex-grow: 1;
-    border-bottom: 1px dotted #ccc;
-    margin: 0 0.5rem;
-    position: relative;
-    top: -4px;
-    min-width: 20px;
-}
-
-.origin-detail-value {
-    font-weight: bold;
-    color: #8B4513;
-    white-space: nowrap;
+.origin-detail-row {
+    display: flex;
+    align-items: baseline;
+    width: 100%;
 }
 
 /* Hybrid Section */
@@ -258,14 +231,6 @@
     color: #be185d;
 }
 
-.poseido-description {
-    font-size: 0.85rem;
-    color: #6b7280;
-    font-style: italic;
-    margin-top: 0.25rem;
-    padding-left: 0.5rem;
-}
-
 /* Guardian Section */
 .guardian-label {
     padding-right: 0.5rem;
@@ -310,14 +275,7 @@
     font-family: monospace;
 }
 
-.skill-dots {
-    flex-grow: 1;
-    border-bottom: 1px dotted #ccc;
-    margin: 0 0.5rem;
-    position: relative;
-    top: -4px;
-    min-width: 20px;
-}
+
 
 .skill-value {
     font-weight: bold;
@@ -330,14 +288,6 @@
     padding-right: 0.5rem;
     font-weight: bold;
     color: #c2410c;
-}
-
-.maldito-description {
-    font-size: 0.85rem;
-    color: #6b7280;
-    font-style: italic;
-    margin-top: 0.25rem;
-    padding-left: 0.5rem;
 }
 
 /* Background Section */
@@ -727,20 +677,7 @@
 
 /* General Layout and Component Styles */
 
-/* Force remove bullets and ALL spacing from specific lists */
-.no-bullets-list,
-.no-bullets-list li {
-    list-style-type: none !important;
-    list-style: none !important;
-    padding-left: 0 !important;
-    margin-left: 0 !important;
-    padding-inline-start: 0 !important;
-}
 
-.no-bullets-list li::before {
-    content: none !important;
-    display: none !important;
-}
 
 /* Dialog and Container Styles */
 .character-dialog {
@@ -1068,6 +1005,15 @@ ul {
     list-style: none;
     padding: 0;
     margin: 0;
+}
+
+.clean-list li {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+}
+
+.clean-list li::before {
+    display: none !important;
 }
 
 /* Utility: Flex Row with Dotted Spacer */
