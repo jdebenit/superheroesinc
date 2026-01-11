@@ -1,6 +1,8 @@
 import React from 'react';
 import { SPELLS } from '../../../data/spells';
 import { calculateEM, hasSubtype } from '../../../components/wizard/steps/Step3_Especials/utils';
+import { SheetSection } from '../common/SheetSection';
+import { DetailRow } from '../common/DetailRow';
 
 interface SpellsSectionProps {
     character: any;
@@ -10,9 +12,8 @@ export const SpellsSection: React.FC<SpellsSectionProps> = ({ character }) => {
     if (!character.spells?.selected || character.spells.selected.length === 0) return null;
 
     return (
-        <div className="sheet-section spells">
-            <div className="section-header">
-                <h4>Hechizos</h4>
+        <SheetSection title="Hechizos" className="spells">
+            <div className="section-subheader" style={{ marginTop: '-10px', marginBottom: '10px' }}>
                 {(() => {
                     // 1. Try to use stored value
                     if (character.spells?.calculatedEM !== undefined) {
@@ -52,31 +53,27 @@ export const SpellsSection: React.FC<SpellsSectionProps> = ({ character }) => {
 
                     return (
                         <li key={`${spell.id}-${idx}`} className="spell-item">
-                            <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
-                                <span className="spell-name">
-                                    {spellData.name}
-                                    {spell.selectedOption && (
-                                        <span className="spell-option">
-                                            ({spell.selectedOption})
-                                        </span>
-                                    )}
-                                </span>
-                                <span style={{
-                                    flexGrow: 1,
-                                    borderBottom: '1px dotted #ccc',
-                                    margin: '0 0.5rem',
-                                    position: 'relative',
-                                    top: '-4px',
-                                    minWidth: '20px'
-                                }}></span>
-                                <span className={`spell-rank ${spell.rank > maxRank ? 'master' : 'normal'}`}>
-                                    {rankDisplay}
-                                </span>
-                            </div>
+                            <DetailRow
+                                label={
+                                    <span className="spell-name">
+                                        {spellData.name}
+                                        {spell.selectedOption && (
+                                            <span className="spell-option">
+                                                ({spell.selectedOption})
+                                            </span>
+                                        )}
+                                    </span>
+                                }
+                                value={
+                                    <span className={`spell-rank ${spell.rank > maxRank ? 'master' : 'normal'}`}>
+                                        {rankDisplay}
+                                    </span>
+                                }
+                            />
                         </li>
                     );
                 })}
             </ul>
-        </div>
+        </SheetSection>
     );
 };

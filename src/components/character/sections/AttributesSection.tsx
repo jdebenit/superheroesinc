@@ -1,4 +1,5 @@
 import React from 'react';
+import { SheetSection } from '../common/SheetSection';
 
 interface AttributesSectionProps {
     character: any;
@@ -8,11 +9,11 @@ export const AttributesSection: React.FC<AttributesSectionProps> = ({ character 
     if (!character.attributes || Object.keys(character.attributes.values).length === 0) return null;
 
     return (
-        <div className="sheet-section attributes">
-            <div className="section-header">
-                <h4>Características</h4>
-                {character.attributes.cost && <span className="cost">({character.attributes.cost} PCs)</span>}
-            </div>
+        <SheetSection
+            title="Características"
+            className="attributes"
+            cost={character.attributes.cost ? `(${character.attributes.cost} PCs)` : undefined}
+        >
             <div className="attr-grid">
                 {Object.entries(character.attributes.values).map(([key, value]: [string, any]) => (
                     <div key={key} className="attr-item">
@@ -21,6 +22,6 @@ export const AttributesSection: React.FC<AttributesSectionProps> = ({ character 
                     </div>
                 ))}
             </div>
-        </div>
+        </SheetSection>
     );
 };

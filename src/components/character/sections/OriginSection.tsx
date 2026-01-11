@@ -1,5 +1,6 @@
 import React from 'react';
 import { ORIGIN_CATEGORIES } from '../../../data/originDefinitions';
+import { SheetSection } from '../common/SheetSection';
 
 interface OriginSectionProps {
     character: any;
@@ -9,11 +10,11 @@ export const OriginSection: React.FC<OriginSectionProps> = ({ character }) => {
     if (!character.origin || !character.origin.items || character.origin.items.length === 0) return null;
 
     return (
-        <div className="sheet-section origin">
-            <div className="section-header">
-                <h4>Origen</h4>
-                {character.origin.cost && <span className="cost">({character.origin.cost} PCs)</span>}
-            </div>
+        <SheetSection
+            title="Origen"
+            className="origin"
+            cost={character.origin.cost ? `(${character.origin.cost} PCs)` : undefined}
+        >
             <ul className="clean-list">
                 {character.origin.items.map((item: any, i: number) => {
                     const name = Object.keys(item)[0];
@@ -26,7 +27,6 @@ export const OriginSection: React.FC<OriginSectionProps> = ({ character }) => {
                     // 1. Add Default Effects
                     if (originDef?.defaultEffects) {
                         originDef.defaultEffects.forEach(eff => {
-                            // Avoid duplicates if already in rawDetails (though unlikely for defaults)
                             if (!rawDetails.includes(eff)) {
                                 nodes.push({ text: eff, type: 'default' });
                             }
@@ -35,10 +35,8 @@ export const OriginSection: React.FC<OriginSectionProps> = ({ character }) => {
 
                     // 2. Process User Details
                     rawDetails.forEach((detail: string) => {
-                        // Skip if already added (e.g. matched a default effect)
                         if (nodes.some(n => n.text === detail)) return;
 
-                        // Check if it is a Subtype
                         if (originDef?.subtypes && originDef.subtypes[detail]) {
                             nodes.push({
                                 text: detail,
@@ -48,7 +46,6 @@ export const OriginSection: React.FC<OriginSectionProps> = ({ character }) => {
                             return;
                         }
 
-                        // Normal Item
                         nodes.push({ text: detail, type: 'normal' });
                     });
 
@@ -84,7 +81,6 @@ export const OriginSection: React.FC<OriginSectionProps> = ({ character }) => {
                                     <li key={j} className={`no-bullet-item origin-detail-item ${node.type === 'subtype' ? 'subtype' : ''}`}>
                                         {renderDetailContent(node.text, node.type === 'subtype')}
 
-                                        {/* Render Subtype Children */}
                                         {node.children && (
                                             <ul className="origin-subtype-list">
                                                 {node.children.map((child, k) => (
@@ -101,6 +97,6 @@ export const OriginSection: React.FC<OriginSectionProps> = ({ character }) => {
                     );
                 })}
             </ul>
-        </div>
+        </SheetSection>
     );
 };

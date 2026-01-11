@@ -1,5 +1,6 @@
 import React from 'react';
 import { SEQUELS } from '../../../data/sequels';
+import { SheetSection } from '../common/SheetSection';
 
 interface MutanteSectionProps {
     character: any;
@@ -9,10 +10,7 @@ export const MutanteSection: React.FC<MutanteSectionProps> = ({ character }) => 
     if (!character.mutanteParams || !character.mutanteParams.sequels || character.mutanteParams.sequels.length === 0) return null;
 
     return (
-        <div className="sheet-section mutante-params">
-            <div className="section-header">
-                <h4>Mutante</h4>
-            </div>
+        <SheetSection title="Mutante" className="mutante-params">
             <ul className="clean-list">
                 <li className="sequels-container">
                     <span className="sequels-header mutante">Secuelas</span>
@@ -34,6 +32,6 @@ export const MutanteSection: React.FC<MutanteSectionProps> = ({ character }) => 
                     </ul>
                 </li>
             </ul>
-        </div>
+        </SheetSection>
     );
 };

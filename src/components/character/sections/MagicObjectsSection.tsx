@@ -1,4 +1,6 @@
 import React from 'react';
+import { SheetSection } from '../common/SheetSection';
+import { InfoCard } from '../common/InfoCard';
 
 interface MagicObjectsSectionProps {
     magicObjects: any;
@@ -10,32 +12,29 @@ export const MagicObjectsSection: React.FC<MagicObjectsSectionProps> = ({ magicO
         <>
             {/* Magic Objects (Normal) */}
             {magicObjects && magicObjects.items && magicObjects.items.length > 0 && (
-                <div className="sheet-section magic-objects">
-                    <div className="section-header">
-                        <h4>Objetos Mágicos</h4>
-                    </div>
+                <SheetSection title="Objetos Mágicos" className="magic-objects">
                     <div className="preview-section-grid">
                         {magicObjects.items.map((item: any, i: number) => (
-                            <div key={i} className="preview-card theme-magic">
-                                <div className="preview-card-title">{item.name}</div>
+                            <InfoCard
+                                key={i}
+                                title={item.name}
+                                theme="theme-magic"
+                            >
                                 <div className="magic-object-cost">
                                     <span className="magic-object-cost-label">Coste EM:</span> {item.em}
                                 </div>
                                 <div className="magic-object-desc">
                                     {item.description}
                                 </div>
-                            </div>
+                            </InfoCard>
                         ))}
                     </div>
-                </div>
+                </SheetSection>
             )}
 
             {/* Magic Objects Table (Terrano) */}
             {magicTableRolls && magicTableRolls.length > 0 && (
-                <div className="sheet-section magic-objects-terrano">
-                    <div className="section-header">
-                        <h4>Tabla de Objetos (Terrano)</h4>
-                    </div>
+                <SheetSection title="Tabla de Objetos (Terrano)" className="magic-objects-terrano">
                     <div className="preview-section-grid">
                         {magicTableRolls.map((rollId: string, i: number) => {
                             const options = [
@@ -48,16 +47,19 @@ export const MagicObjectsSection: React.FC<MagicObjectsSectionProps> = ({ magicO
                             const opt = options.find(o => o.id === rollId) || { label: rollId, cost: '' };
 
                             return (
-                                <div key={i} className="preview-card theme-magic-table magic-table-row">
-                                    <div className="preview-card-title magic-table-title">{opt.label}</div>
+                                <InfoCard
+                                    key={i}
+                                    title={opt.label}
+                                    theme="theme-magic-table magic-table-row"
+                                >
                                     <div className="magic-table-cost">
                                         {opt.cost}
                                     </div>
-                                </div>
+                                </InfoCard>
                             );
                         })}
                     </div>
-                </div>
+                </SheetSection>
             )}
         </>
     );

@@ -1,6 +1,8 @@
 import React from 'react';
 import { ALTERADO_DATA } from '../../../components/wizard/steps/Step3_Especials/sections/AlteradoSection';
 import { SEQUELS } from '../../../data/sequels';
+import { SheetSection } from '../common/SheetSection';
+import { DetailRow } from '../common/DetailRow';
 
 interface AlteradoSectionProps {
     character: any;
@@ -10,23 +12,22 @@ export const AlteradoSection: React.FC<AlteradoSectionProps> = ({ character }) =
     if (!character.alteradoParams || (!character.alteradoParams.agent && (!character.alteradoParams.sequels || character.alteradoParams.sequels.length === 0))) return null;
 
     return (
-        <div className="sheet-section alterado-params">
-            <div className="section-header">
-                <h4>Alterado</h4>
-            </div>
+        <SheetSection title="Alterado" className="alterado-params">
             <ul className="clean-list">
                 {/* Agent */}
                 {character.alteradoParams.agent && (() => {
                     const agent = ALTERADO_DATA.AGENTS.find(a => a.id === character.alteradoParams.agent);
                     return agent && (
                         <li className="no-bullet-item mb-3">
-                            <div className="flex-row-baseline">
-                                <span className="agent-label">Agente del Cambio</span>
-                                <span className="flex-spacer-dotted"></span>
-                                <span className="value-highlight-brown">
-                                    {agent.label} {agent.cost > 0 && <span className="agent-cost">(-{agent.cost} PC)</span>}
-                                </span>
-                            </div>
+                            <DetailRow
+                                label="Agente del Cambio"
+                                value={
+                                    <>
+                                        {agent.label} {agent.cost > 0 && <span className="agent-cost">(-{agent.cost} PC)</span>}
+                                    </>
+                                }
+                                valueClassName="value-highlight-brown"
+                            />
                         </li>
                     );
                 })()}
@@ -54,6 +55,6 @@ export const AlteradoSection: React.FC<AlteradoSectionProps> = ({ character }) =
                     </li>
                 )}
             </ul>
-        </div>
+        </SheetSection>
     );
 };
