@@ -81,7 +81,7 @@ const resources = [
     icon: "📚",
   },
 ];
-const oldresources = [
+const hidenresources = [
   {
     title: "Kit de Iniciación",
     description:
@@ -89,6 +89,22 @@ const oldresources = [
     link: "#",
     type: "Descarga",
     icon: "🎲",
+  },
+  {
+    title: "SHI Tactic Player Terminal",
+    description:
+      "Terminal táctica para jugadores de Superheroes Inc. Herramienta en desarrollo para gestionar información durante las partidas.",
+    link: "/recursos/tactic-player-terminal",
+    type: "Herramienta",
+    icon: "🎮",
+  },
+  {
+    title: "SHI Tactic Master Terminal",
+    description:
+      "Terminal táctica para directores de juego de Superheroes Inc. Herramienta en desarrollo para gestionar partidas y recursos del Guionista.",
+    link: "/recursos/tactic-master-terminal",
+    type: "Herramienta",
+    icon: "🎯",
   },
 ];
 ---
@@ -134,6 +150,32 @@ const oldresources = [
           </div>
         ))
       }
+      {
+        hidenresources.map((resource) => (
+          <div
+            class="resource-item hidden-resource"
+            data-type={resource.type}
+            style="display: none;"
+          >
+            <div class="resource-icon">{resource.icon}</div>
+            <div class="resource-content">
+              <div class="resource-header">
+                <h2>{resource.title}</h2>
+                <span class="resource-type">{resource.type}</span>
+              </div>
+              <p>{resource.description}</p>
+              <a
+                href={resource.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="comic-button"
+              >
+                {resource.link === "#" ? "Próximamente" : "ACCEDER"}
+              </a>
+            </div>
+          </div>
+        ))
+      }
     </div>
   </section>
 </Layout>
@@ -141,7 +183,10 @@ const oldresources = [
 <script>
   const filterBtns = document.querySelectorAll(".filter-btn");
   const resourceItems = document.querySelectorAll(".resource-item");
+  const hiddenResources = document.querySelectorAll(".hidden-resource");
+  let hiddenResourcesVisible = false;
 
+  // Filter functionality
   filterBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
       // Remove active class from all buttons
@@ -153,13 +198,43 @@ const oldresources = [
 
       resourceItems.forEach((item) => {
         const itemType = item.getAttribute("data-type");
-        if (filterValue === "all" || filterValue === itemType) {
+        const isHidden = item.classList.contains("hidden-resource");
+
+        // Only show hidden resources if they are toggled on
+        if (isHidden && !hiddenResourcesVisible) {
+          (item as HTMLElement).style.display = "none";
+        } else if (filterValue === "all" || filterValue === itemType) {
           (item as HTMLElement).style.display = "flex";
         } else {
           (item as HTMLElement).style.display = "none";
         }
       });
     });
+  });
+
+  // Keyboard shortcut to toggle hidden resources (Ctrl+H)
+  document.addEventListener("keydown", (e) => {
+    if (e.ctrlKey && e.key === "h") {
+      e.preventDefault();
+      hiddenResourcesVisible = !hiddenResourcesVisible;
+
+      const activeFilter = document.querySelector(".filter-btn.active");
+      const filterValue = activeFilter?.getAttribute("data-filter") || "all";
+
+      hiddenResources.forEach((item) => {
+        const itemType = item.getAttribute("data-type");
+
+        if (hiddenResourcesVisible) {
+          // Show hidden resources if they match the current filter
+          if (filterValue === "all" || filterValue === itemType) {
+            (item as HTMLElement).style.display = "flex";
+          }
+        } else {
+          // Hide all hidden resources
+          (item as HTMLElement).style.display = "none";
+        }
+      });
+    }
   });
 </script>
 

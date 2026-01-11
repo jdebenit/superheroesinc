@@ -1,0 +1,110 @@
+---
+import FullscreenLayout from "../../layouts/FullscreenLayout.astro";
+---
+
+<FullscreenLayout title="SHI Tactic Player Terminal">
+    <div class="terminal-container">
+        <div class="terminal-header">
+            <h1 class="terminal-title">SHI Tactic Player Terminal</h1>
+            <a href="/recursos" class="exit-button">✕ Salir</a>
+        </div>
+        <div class="terminal-content">
+            <p class="terminal-message">Terminal de jugador iniciado...</p>
+            <p class="terminal-info">Esta herramienta está en desarrollo.</p>
+        </div>
+    </div>
+</FullscreenLayout>
+
+<style>
+    .terminal-container {
+        width: 100%;
+        height: 100%;
+        background: #0a0a0a;
+        color: #00ff00;
+        font-family: "Courier New", monospace;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .terminal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 2rem;
+        background: #1a1a1a;
+        border-bottom: 2px solid #00ff00;
+    }
+
+    .terminal-title {
+        font-size: 1.5rem;
+        margin: 0;
+        color: #00ff00;
+        text-shadow: 0 0 10px #00ff00;
+    }
+
+    .exit-button {
+        background: transparent;
+        border: 2px solid #00ff00;
+        color: #00ff00;
+        padding: 0.5rem 1rem;
+        font-family: "Courier New", monospace;
+        font-size: 1rem;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.3s;
+        display: inline-block;
+    }
+
+    .exit-button:hover {
+        background: #00ff00;
+        color: #0a0a0a;
+        box-shadow: 0 0 20px #00ff00;
+    }
+
+    .terminal-content {
+        flex: 1;
+        padding: 2rem;
+        overflow: auto;
+    }
+
+    .terminal-message {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        animation: blink 1s infinite;
+    }
+
+    .terminal-info {
+        font-size: 1rem;
+        color: #00cc00;
+    }
+
+    @keyframes blink {
+        0%,
+        50% {
+            opacity: 1;
+        }
+        51%,
+        100% {
+            opacity: 0.5;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .terminal-header {
+            padding: 0.75rem 1rem;
+        }
+
+        .terminal-title {
+            font-size: 1.2rem;
+        }
+
+        .exit-button {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.9rem;
+        }
+
+        .terminal-content {
+            padding: 1rem;
+        }
+    }
+</style>
