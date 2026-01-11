@@ -20,7 +20,7 @@ Cuando un universo de juego de rol arrastra años de historia, cronologías larg
 
 Esa fue una carencia detectada con el tiempo. No un fallo de concepto, sino una consecuencia lógica de apostar por un mundo coherente y con memoria. Y es ahí donde nace la decisión de impulsar un contenido vivo en formato digital.
 
-El contenido vivo en Superhéroes INC no aparece para corregir errores del pasado, sino para acompañar al presente. Permite que el lore antiguo y el lore más reciente convivan, que puedan consultarse, releerse y redescubrirse sin necesidad de rehacer ediciones completas. Lo que antes estaba disperso entre libros, suplementos y campañas ahora puede dialogar en un mismo espacio.
+El contenido vivo en Superhéroes INC no aparece para corregir errores del pasado, sino para acompañar al presente. Permite que el lore antiguo y el lore más reciente convivan, que puedan consultarse, releerse y redescubrirse sin necesidad de rehacer ediciones completas. Lo que antes estaba disperso entre libros, suplementos y campañas ahora puede convivir en un mismo espacio.
 
 Para los jugadores nuevos, este contenido vivo ofrece una puerta de entrada más clara al universo del juego. Ayuda a entender qué ha pasado, por qué ciertas organizaciones actúan como actúan y de dónde vienen conflictos que siguen teniendo peso en la edición actual. No se les exige conocerlo todo desde el primer día, pero se les da la oportunidad de alcanzarlo con el tiempo.
 
