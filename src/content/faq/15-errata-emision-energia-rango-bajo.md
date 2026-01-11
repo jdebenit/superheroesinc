@@ -16,6 +16,6 @@ En la **página 260 del manual básico** se indica que el daño de **Emisión de
 
 El daño correcto para **rango bajo** es:
 
-**50 + 5d10**
+**25 + 1d100**
 
 El valor de **75 + 5d10** da un promedio de daño más alto que el rango medio y no debe aplicarse.
