@@ -332,29 +332,7 @@ export default function CharacterSheet({ character, totalPCs }: CharacterSheetPr
         <>
             <button
                 onClick={openModal}
-                style={{
-                    padding: '0.75rem 1.5rem',
-                    backgroundColor: '#2563eb',
-                    color: 'white',
-                    border: 'none',
-                    borderRadius: '8px',
-                    fontSize: '1rem',
-                    fontWeight: 'bold',
-                    cursor: 'pointer',
-                    boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-                    transition: 'all 0.2s',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.5rem'
-                }}
-                onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-2px)';
-                    e.currentTarget.style.boxShadow = '6px 6px 0px #1e40af, 0 15px 30px rgba(37, 99, 235, 0.4)';
-                }}
-                onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = '4px 4px 0px #1e40af, 0 10px 20px rgba(37, 99, 235, 0.3)';
-                }}
+                className="visualize-btn"
             >
                 📋 Visualizar Ficha
             </button>
@@ -411,7 +389,7 @@ export default function CharacterSheet({ character, totalPCs }: CharacterSheetPr
                         <div className="character-sheet">
                             <div className="sheet-header">
                                 <h3>{character.name || "Nuevo Personaje"}</h3>
-                                {character.alias && <h4 style={{ margin: '0 0 1rem 0', color: '#4b5563', fontSize: '1.25rem', fontStyle: 'italic' }}>"{character.alias}"</h4>}
+                                {character.alias && <h4 className="character-alias">"{character.alias}"</h4>}
 
                                 <div className="header-stats">
                                     {character.level && <span className="level-badge">Nivel {character.level}</span>}
@@ -500,10 +478,10 @@ export default function CharacterSheet({ character, totalPCs }: CharacterSheetPr
                                             {character.magicObjects.items.map((item: any, i: number) => (
                                                 <div key={i} className="preview-card theme-magic">
                                                     <div className="preview-card-title">{item.name}</div>
-                                                    <div style={{ fontSize: '0.85rem', marginBottom: '0.5rem' }}>
-                                                        <span style={{ fontWeight: 'bold' }}>Coste EM:</span> {item.em}
+                                                    <div className="magic-object-cost">
+                                                        <span className="magic-object-cost-label">Coste EM:</span> {item.em}
                                                     </div>
-                                                    <div style={{ fontSize: '0.85rem', color: '#666' }}>
+                                                    <div className="magic-object-desc">
                                                         {item.description}
                                                     </div>
                                                 </div>
@@ -530,8 +508,8 @@ export default function CharacterSheet({ character, totalPCs }: CharacterSheetPr
                                                 const opt = options.find(o => o.id === rollId) || { label: rollId, cost: '' };
 
                                                 return (
-                                                    <div key={i} className="preview-card theme-magic-table" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                                        <div className="preview-card-title" style={{ marginBottom: 0 }}>{opt.label}</div>
+                                                    <div key={i} className="preview-card theme-magic-table magic-table-row">
+                                                        <div className="preview-card-title magic-table-title">{opt.label}</div>
                                                         <div className="magic-table-cost">
                                                             {opt.cost}
                                                         </div>
@@ -571,7 +549,7 @@ export default function CharacterSheet({ character, totalPCs }: CharacterSheetPr
                                             <h4>Origen</h4>
                                             {character.origin.cost && <span className="cost">({character.origin.cost} PCs)</span>}
                                         </div>
-                                        <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                                        <ul className="clean-list">
                                             {character.origin.items.map((item: any, i: number) => {
                                                 const name = Object.keys(item)[0];
                                                 const rawDetails = item[name] || [];
@@ -645,7 +623,7 @@ export default function CharacterSheet({ character, totalPCs }: CharacterSheetPr
                                                                     {node.children && (
                                                                         <ul className="origin-subtype-list">
                                                                             {node.children.map((child, k) => (
-                                                                                <li key={k} className="no-bullet-item" style={{ marginBottom: '0.25rem' }}>
+                                                                                <li key={k} className="no-bullet-item mb-1" style={{ marginBottom: '0.25rem' }}>
                                                                                     {renderDetailContent(child)}
                                                                                 </li>
                                                                             ))}
@@ -670,16 +648,16 @@ export default function CharacterSheet({ character, totalPCs }: CharacterSheetPr
                                             <div className="section-header">
                                                 <h4>Híbrido</h4>
                                             </div>
-                                            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                                                <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
-                                                    <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
+                                            <ul className="clean-list">
+                                                <li className="no-bullet-item mb-2">
+                                                    <div className="flex-row-baseline">
                                                         <span className="hybrid-condition-label">Condición</span>
-                                                        <span style={{ flexGrow: 1, borderBottom: '1px dotted #ccc', margin: '0 0.5rem', position: 'relative', top: '-4px', minWidth: '20px' }}></span>
-                                                        <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>
+                                                        <span className="flex-spacer-dotted"></span>
+                                                        <span className="value-highlight-brown">
                                                             Híbrido con Humano
                                                         </span>
                                                     </div>
-                                                    <div style={{ fontSize: '0.85rem', color: '#6b7280', fontStyle: 'italic', marginTop: '0.25rem', paddingLeft: '0.5rem' }}>
+                                                    <div className="section-note">
                                                         Acceso a poderes de Alterado (+3 PC/poder)
                                                     </div>
                                                 </li>
@@ -693,15 +671,15 @@ export default function CharacterSheet({ character, totalPCs }: CharacterSheetPr
                                         <div className="section-header">
                                             <h4>Ente</h4>
                                         </div>
-                                        <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                                        <ul className="clean-list">
                                             {character.enteParams.formType && (() => {
                                                 const form = ENTE_FORMS.find(f => f.id === character.enteParams.formType);
                                                 return form && (
-                                                    <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
-                                                        <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
+                                                    <li className="no-bullet-item mb-2">
+                                                        <div className="flex-row-baseline">
                                                             <span className="ente-label">Forma en el plano</span>
-                                                            <span style={{ flexGrow: 1, borderBottom: '1px dotted #ccc', margin: '0 0.5rem', position: 'relative', top: '-4px', minWidth: '20px' }}></span>
-                                                            <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>
+                                                            <span className="flex-spacer-dotted"></span>
+                                                            <span className="value-highlight-brown">
                                                                 {form.label} ({form.cost > 0 ? '+' : ''}{form.cost} PC)
                                                             </span>
                                                         </div>
@@ -711,11 +689,11 @@ export default function CharacterSheet({ character, totalPCs }: CharacterSheetPr
                                             {character.enteParams.visualEffect && (() => {
                                                 const effect = ENTE_EFFECTS.find(e => e.id === character.enteParams.visualEffect);
                                                 return effect && (
-                                                    <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
-                                                        <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
+                                                    <li className="no-bullet-item mb-2">
+                                                        <div className="flex-row-baseline">
                                                             <span className="ente-label">Efecto visual</span>
-                                                            <span style={{ flexGrow: 1, borderBottom: '1px dotted #ccc', margin: '0 0.5rem', position: 'relative', top: '-4px', minWidth: '20px' }}></span>
-                                                            <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>
+                                                            <span className="flex-spacer-dotted"></span>
+                                                            <span className="value-highlight-brown">
                                                                 {effect.label} ({effect.cost > 0 ? '+' : ''}{effect.cost} PC)
                                                             </span>
                                                         </div>
@@ -732,16 +710,16 @@ export default function CharacterSheet({ character, totalPCs }: CharacterSheetPr
                                         <div className="section-header">
                                             <h4>Alterado</h4>
                                         </div>
-                                        <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                                        <ul className="clean-list">
                                             {/* Agent */}
                                             {character.alteradoParams.agent && (() => {
                                                 const agent = ALTERADO_DATA.AGENTS.find(a => a.id === character.alteradoParams.agent);
                                                 return agent && (
-                                                    <li className="no-bullet-item" style={{ marginBottom: '0.75rem' }}>
-                                                        <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
+                                                    <li className="no-bullet-item mb-3">
+                                                        <div className="flex-row-baseline">
                                                             <span className="agent-label">Agente del Cambio</span>
-                                                            <span style={{ flexGrow: 1, borderBottom: '1px dotted #ccc', margin: '0 0.5rem', position: 'relative', top: '-4px', minWidth: '20px' }}></span>
-                                                            <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>
+                                                            <span className="flex-spacer-dotted"></span>
+                                                            <span className="value-highlight-brown">
                                                                 {agent.label} {agent.cost > 0 && <span className="agent-cost">(-{agent.cost} PC)</span>}
                                                             </span>
                                                         </div>
@@ -781,7 +759,7 @@ export default function CharacterSheet({ character, totalPCs }: CharacterSheetPr
                                         <div className="section-header">
                                             <h4>Mutante</h4>
                                         </div>
-                                        <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                                        <ul className="clean-list">
                                             <li className="sequels-container">
                                                 <span className="sequels-header mutante">Secuelas</span>
                                                 <ul className="sequels-list mutante">
@@ -846,10 +824,10 @@ export default function CharacterSheet({ character, totalPCs }: CharacterSheetPr
                                             {character.guardianParams.objectType && (() => {
                                                 const obj = GUARDIAN_OBJECTS.find(o => o.id === character.guardianParams.objectType);
                                                 return obj && (
-                                                    <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
-                                                        <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
+                                                    <li className="no-bullet-item mb-2">
+                                                        <div className="flex-row-baseline">
                                                             <span className="guardian-label">Objeto de Poder</span>
-                                                            <span style={{ flexGrow: 1, borderBottom: '1px dotted #ccc', margin: '0 0.5rem', position: 'relative', top: '-4px', minWidth: '20px' }}></span>
+                                                            <span className="flex-spacer-dotted"></span>
                                                             <span className="guardian-value">{obj.label}</span>
                                                         </div>
                                                     </li>
@@ -860,10 +838,10 @@ export default function CharacterSheet({ character, totalPCs }: CharacterSheetPr
                                             {character.guardianParams.quality && (() => {
                                                 const qual = GUARDIAN_QUALITIES.find(q => q.id === character.guardianParams.quality);
                                                 return qual && (
-                                                    <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
-                                                        <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
+                                                    <li className="no-bullet-item mb-2">
+                                                        <div className="flex-row-baseline">
                                                             <span className="guardian-label">Cualidad</span>
-                                                            <span style={{ flexGrow: 1, borderBottom: '1px dotted #ccc', margin: '0 0.5rem', position: 'relative', top: '-4px', minWidth: '20px' }}></span>
+                                                            <span className="flex-spacer-dotted"></span>
                                                             <span className="guardian-value">
                                                                 {qual.label} ({qual.cost > 0 ? '+' : ''}{qual.cost} PC)
                                                             </span>
@@ -876,10 +854,10 @@ export default function CharacterSheet({ character, totalPCs }: CharacterSheetPr
                                             {character.guardianParams.feature && (() => {
                                                 const feat = GUARDIAN_FEATURES.find(f => f.id === character.guardianParams.feature);
                                                 return feat && (
-                                                    <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
-                                                        <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
+                                                    <li className="no-bullet-item mb-2">
+                                                        <div className="flex-row-baseline">
                                                             <span className="guardian-label">Rasgo Especial</span>
-                                                            <span style={{ flexGrow: 1, borderBottom: '1px dotted #ccc', margin: '0 0.5rem', position: 'relative', top: '-4px', minWidth: '20px' }}></span>
+                                                            <span className="flex-spacer-dotted"></span>
                                                             <span className="guardian-value">{feat.label}</span>
                                                         </div>
                                                     </li>
@@ -890,10 +868,10 @@ export default function CharacterSheet({ character, totalPCs }: CharacterSheetPr
                                             {character.guardianParams.transformation && (() => {
                                                 const trans = GUARDIAN_TRANSFORMATIONS.find(t => t.id === character.guardianParams.transformation);
                                                 return trans && (
-                                                    <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
-                                                        <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
+                                                    <li className="no-bullet-item mb-2">
+                                                        <div className="flex-row-baseline">
                                                             <span className="guardian-label">Transformación</span>
-                                                            <span style={{ flexGrow: 1, borderBottom: '1px dotted #ccc', margin: '0 0.5rem', position: 'relative', top: '-4px', minWidth: '20px' }}></span>
+                                                            <span className="flex-spacer-dotted"></span>
                                                             <span className="guardian-value">{trans.label}</span>
                                                         </div>
                                                     </li>
@@ -909,14 +887,14 @@ export default function CharacterSheet({ character, totalPCs }: CharacterSheetPr
                                         <div className="section-header">
                                             <h4>Divinidad</h4>
                                         </div>
-                                        <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                                        <ul className="clean-list">
                                             {(() => {
                                                 const focus = DIVINE_FOCUS_OPTIONS.find(f => f.id === character.divineParams.focus);
                                                 return focus && (
-                                                    <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
-                                                        <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
+                                                    <li className="no-bullet-item mb-2">
+                                                        <div className="flex-row-baseline">
                                                             <span className="divine-label">Foco del Poder</span>
-                                                            <span style={{ flexGrow: 1, borderBottom: '1px dotted #ccc', margin: '0 0.5rem', position: 'relative', top: '-4px', minWidth: '20px' }}></span>
+                                                            <span className="flex-spacer-dotted"></span>
                                                             <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>
                                                                 {focus.label} ({focus.cost > 0 ? `+${focus.cost}` : '0'} PC)
                                                             </span>
@@ -966,7 +944,7 @@ export default function CharacterSheet({ character, totalPCs }: CharacterSheetPr
                                         <div className="section-header">
                                             <h4>Habilidades Generales</h4>
                                         </div>
-                                        <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                                        <ul className="clean-list">
                                             {character.skills.generalItems.map((item: any, i: number) => (
                                                 <li key={i} className="no-bullet-item skill-item">
                                                     <div className="skill-row">
@@ -1023,22 +1001,15 @@ export default function CharacterSheet({ character, totalPCs }: CharacterSheetPr
                                         <div className="section-header">
                                             <h4>Ente</h4>
                                         </div>
-                                        <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                                        <ul className="clean-list">
                                             {character.enteParams.formType && (() => {
                                                 const form = ENTE_FORMS.find(f => f.id === character.enteParams.formType);
                                                 return form && (
-                                                    <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
-                                                        <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
+                                                    <li className="no-bullet-item mb-2">
+                                                        <div className="flex-row-baseline">
                                                             <span className="ente-label">Forma en el plano</span>
-                                                            <span style={{
-                                                                flexGrow: 1,
-                                                                borderBottom: '1px dotted #ccc',
-                                                                margin: '0 0.5rem',
-                                                                position: 'relative',
-                                                                top: '-4px',
-                                                                minWidth: '20px'
-                                                            }}></span>
-                                                            <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>
+                                                            <span className="flex-spacer-dotted"></span>
+                                                            <span className="value-highlight-brown">
                                                                 {form.label} ({form.cost > 0 ? '+' : ''}{form.cost} PC)
                                                             </span>
                                                         </div>
@@ -1048,18 +1019,11 @@ export default function CharacterSheet({ character, totalPCs }: CharacterSheetPr
                                             {character.enteParams.visualEffect && (() => {
                                                 const effect = ENTE_EFFECTS.find(e => e.id === character.enteParams.visualEffect);
                                                 return effect && (
-                                                    <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
-                                                        <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
+                                                    <li className="no-bullet-item mb-2">
+                                                        <div className="flex-row-baseline">
                                                             <span className="ente-label">Efecto visual</span>
-                                                            <span style={{
-                                                                flexGrow: 1,
-                                                                borderBottom: '1px dotted #ccc',
-                                                                margin: '0 0.5rem',
-                                                                position: 'relative',
-                                                                top: '-4px',
-                                                                minWidth: '20px'
-                                                            }}></span>
-                                                            <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>
+                                                            <span className="flex-spacer-dotted"></span>
+                                                            <span className="value-highlight-brown">
                                                                 {effect.label} ({effect.cost > 0 ? '+' : ''}{effect.cost} PC)
                                                             </span>
                                                         </div>
@@ -1076,22 +1040,15 @@ export default function CharacterSheet({ character, totalPCs }: CharacterSheetPr
                                         <div className="section-header">
                                             <h4>Maldito</h4>
                                         </div>
-                                        <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                                        <ul className="clean-list">
                                             {character.malditoParams.magnitude && (() => {
                                                 const mag = MALDITO_DATA.MAGNITUDE.find(m => m.id === character.malditoParams.magnitude);
                                                 return mag && (
-                                                    <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
-                                                        <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
+                                                    <li className="no-bullet-item mb-2">
+                                                        <div className="flex-row-baseline">
                                                             <span className="maldito-label">Magnitud de la maldición</span>
-                                                            <span style={{
-                                                                flexGrow: 1,
-                                                                borderBottom: '1px dotted #ccc',
-                                                                margin: '0 0.5rem',
-                                                                position: 'relative',
-                                                                top: '-4px',
-                                                                minWidth: '20px'
-                                                            }}></span>
-                                                            <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>
+                                                            <span className="flex-spacer-dotted"></span>
+                                                            <span className="value-highlight-brown">
                                                                 {mag.label} ({mag.cost > 0 ? '+' : ''}{mag.cost} PC)
                                                             </span>
                                                         </div>
@@ -1104,18 +1061,11 @@ export default function CharacterSheet({ character, totalPCs }: CharacterSheetPr
                                             {character.malditoParams.source && (() => {
                                                 const src = MALDITO_DATA.SOURCE.find(s => s.id === character.malditoParams.source);
                                                 return src && (
-                                                    <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
-                                                        <div style={{ display: 'flex', alignItems: 'baseline', width: '100%' }}>
+                                                    <li className="no-bullet-item mb-2">
+                                                        <div className="flex-row-baseline">
                                                             <span className="maldito-label">Fuente de la maldición</span>
-                                                            <span style={{
-                                                                flexGrow: 1,
-                                                                borderBottom: '1px dotted #ccc',
-                                                                margin: '0 0.5rem',
-                                                                position: 'relative',
-                                                                top: '-4px',
-                                                                minWidth: '20px'
-                                                            }}></span>
-                                                            <span style={{ fontWeight: 'bold', color: '#8B4513', whiteSpace: 'nowrap' }}>
+                                                            <span className="flex-spacer-dotted"></span>
+                                                            <span className="value-highlight-brown">
                                                                 {src.label}
                                                             </span>
                                                         </div>
@@ -1136,7 +1086,7 @@ export default function CharacterSheet({ character, totalPCs }: CharacterSheetPr
                                             <h4>Historial</h4>
                                         </div>
 
-                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                                        <div className="background-col-layout">
 
                                             {/* Status Grid */}
                                             {(character.background?.economicStatus || character.background?.legalStatus || character.background?.socialStatus || character.background?.friendsAndAssociates || character.profession || character.sexualIdentity) && (
@@ -1566,14 +1516,14 @@ export default function CharacterSheet({ character, totalPCs }: CharacterSheetPr
                                         <div className="section-header">
                                             <h4>Vinculaciones Mágicas</h4>
                                         </div>
-                                        <ul className="no-bullets-list" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                                        <ul className="clean-list">
                                             {character.magicalBonds?.map((bondId: string, idx: number) => {
                                                 const bond = MAGICAL_BONDS.find(b => b.id === bondId);
                                                 if (!bond) return null;
                                                 return (
-                                                    <li key={bondId} style={{ marginBottom: '0.75rem', borderBottom: '1px solid #f3e8ff', paddingBottom: '0.5rem' }}>
-                                                        <span style={{ fontWeight: 'bold', color: '#6b21a8', display: 'block' }}>{bond.name}</span>
-                                                        <span style={{ display: 'block', fontSize: '0.9rem', color: '#4b5563' }}>
+                                                    <li key={bondId} className="magical-bond-item">
+                                                        <span className="magical-bond-title">{bond.name}</span>
+                                                        <span className="magical-bond-desc">
                                                             {bond.description}
                                                         </span>
                                                     </li>
@@ -1581,20 +1531,20 @@ export default function CharacterSheet({ character, totalPCs }: CharacterSheetPr
                                             })}
                                             {/* New Custom Bond Structure */}
                                             {character.magicalBondsCustomName && (
-                                                <li style={{ marginBottom: '0.75rem', borderBottom: '1px solid #f3e8ff', paddingBottom: '0.5rem' }}>
-                                                    <span style={{ fontWeight: 'bold', color: '#6b21a8', display: 'block' }}>
-                                                        {character.magicalBondsCustomName} <span className="text-xs text-gray-400 font-normal uppercase ml-2">(Personalizada)</span>
+                                                <li className="magical-bond-item">
+                                                    <span className="magical-bond-title">
+                                                        {character.magicalBondsCustomName} <span className="text-xs-gray">(Personalizada)</span>
                                                     </span>
-                                                    <span style={{ display: 'block', fontSize: '0.9rem', color: '#4b5563' }}>
+                                                    <span className="magical-bond-desc">
                                                         {character.magicalBondsCustomDescription}
                                                     </span>
                                                 </li>
                                             )}
                                             {/* Legacy Custom Bond (Fallback) */}
                                             {!character.magicalBondsCustomName && character.magicalBondsCustom && (
-                                                <li style={{ marginBottom: '0.5rem', marginTop: '0.5rem' }}>
-                                                    <span style={{ fontWeight: 'bold', color: '#6b21a8', display: 'block' }}>Vinculación Personalizada</span>
-                                                    <span style={{ display: 'block', fontSize: '0.9rem', color: '#4b5563', fontStyle: 'italic' }}>
+                                                <li className="magical-bond-item" style={{ marginTop: '0.5rem' }}>
+                                                    <span className="magical-bond-title">Vinculación Personalizada</span>
+                                                    <span className="magical-bond-desc-italic">
                                                         "{character.magicalBondsCustom}"
                                                     </span>
                                                 </li>

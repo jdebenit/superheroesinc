@@ -1025,3 +1025,184 @@ ul {
 .dialog-body li.no-bullet-item::before {
     display: none;
 }
+
+/* --- New Refactored Styles --- */
+
+/* Visualize Button */
+.visualize-btn {
+    padding: 0.75rem 1.5rem;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.visualize-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 6px 6px 0px #1e40af, 0 15px 30px rgba(37, 99, 235, 0.4);
+}
+
+.visualize-btn:active {
+    transform: translateY(0);
+    box-shadow: 4px 4px 0px #1e40af, 0 10px 20px rgba(37, 99, 235, 0.3);
+}
+
+/* Header Alias */
+.character-alias {
+    margin: 0 0 1rem 0;
+    color: #4b5563;
+    font-size: 1.25rem;
+    font-style: italic;
+}
+
+/* Utility: Clean List */
+.clean-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Utility: Flex Row with Dotted Spacer */
+.flex-row-baseline {
+    display: flex;
+    align-items: baseline;
+    width: 100%;
+}
+
+.flex-spacer-dotted {
+    flex-grow: 1;
+    border-bottom: 1px dotted #ccc;
+    margin: 0 0.5rem;
+    position: relative;
+    top: -4px;
+    min-width: 20px;
+}
+
+/* Specific Section Spacing */
+.mb-1 {
+    margin-bottom: 0.25rem;
+}
+
+.mb-2 {
+    margin-bottom: 0.5rem;
+}
+
+.mb-3 {
+    margin-bottom: 0.75rem;
+}
+
+.pr-2 {
+    padding-right: 0.5rem;
+}
+
+/* Magic Table */
+.magic-table-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.magic-table-title {
+    margin-bottom: 0;
+}
+
+/* Ente/Hybrid/Alterado Specific Value Styles */
+.value-highlight-brown {
+    font-weight: bold;
+    color: #8B4513;
+    white-space: nowrap;
+}
+
+.value-highlight-green {
+    font-weight: bold;
+    color: #15803d;
+    white-space: nowrap;
+}
+
+.value-highlight-purple {
+    font-weight: bold;
+    color: #7e22ce;
+    white-space: nowrap;
+}
+
+.section-note {
+    font-size: 0.85rem;
+    color: #6b7280;
+    font-style: italic;
+    margin-top: 0.25rem;
+    padding-left: 0.5rem;
+}
+
+.magic-object-cost {
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+}
+
+.magic-object-cost-label {
+    font-weight: bold;
+}
+
+.magic-object-desc {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+/* Magical Bonds */
+.magical-bond-item {
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid #f3e8ff;
+    padding-bottom: 0.5rem;
+}
+
+.magical-bond-title {
+    font-weight: bold;
+    color: #6b21a8;
+    display: block;
+}
+
+.magical-bond-desc {
+    display: block;
+    font-size: 0.9rem;
+    color: #4b5563;
+}
+
+.magical-bond-desc-italic {
+    display: block;
+    font-size: 0.9rem;
+    color: #4b5563;
+    font-style: italic;
+}
+
+/* Learning Skills */
+.skill-item-container {
+    margin-bottom: 0.5rem;
+    position: relative;
+}
+
+.skill-name-wrapper {
+    padding-right: 0.5rem;
+}
+
+/* Background Section Layout */
+.background-col-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Text Utilities */
+.text-xs-gray {
+    font-size: 0.75rem;
+    color: #9ca3af;
+    font-weight: normal;
+    text-transform: uppercase;
+    margin-left: 0.5rem;
+}
