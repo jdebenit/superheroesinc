@@ -1,6 +1,6 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import CharacterPreview from '../wizard/CharacterPreview';
+import CharacterSheet from '../wizard/CharacterSheet';
 import { adaptWebCharacter } from '../../utils/characterAdapter';
 
 interface StoredCharacter {
@@ -320,7 +320,7 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
                                     : `Añadido: ${new Date(selectedCharacter.addedAt).toLocaleDateString()}`}
                             </span>
                         </div>
-                        <CharacterPreview character={adaptWebCharacter(selectedCharacter.data)} totalPCs={selectedCharacter.data.totalCost} />
+                        <CharacterSheet character={adaptWebCharacter(selectedCharacter.data)} totalPCs={selectedCharacter.data.totalCost} />
                     </div>
                 ) : (
                     <div style={{

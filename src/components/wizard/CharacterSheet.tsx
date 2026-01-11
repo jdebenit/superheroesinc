@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import './CharacterPreview.css';
+import './CharacterSheet.css';
 import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS, FRIENDS_AND_ASSOCIATES } from '../../data/backgroundTables';
 import { SPELLS } from '../../data/spells';
 import { POWERS } from '../../data/powers';
@@ -34,7 +34,7 @@ import {
 } from '../../data/guardianOptions';
 import { DIVINE_FOCUS_OPTIONS } from '../../data/divineOptions';
 
-interface CharacterPreviewProps {
+interface CharacterSheetProps {
     character: any;
     totalPCs?: number | string;
 }
@@ -58,7 +58,7 @@ const calculatePowerSkillBase = (char: any, formula: string): number => {
     }
 };
 
-export default function CharacterPreview({ character, totalPCs }: CharacterPreviewProps) {
+export default function CharacterSheet({ character, totalPCs }: CharacterSheetProps) {
     const dialogRef = useRef<HTMLDialogElement>(null);
 
     const [isFullScreen, setIsFullScreen] = React.useState(false);

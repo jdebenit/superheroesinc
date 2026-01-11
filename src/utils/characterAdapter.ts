@@ -42,9 +42,9 @@ export const adaptWebCharacter = (webChar: any): any => {
             let val = item.value;
             // value is usually string "75%". Wizard uses numbers often for calculations, 
             // but for simple display in Preview, string might pass. 
-            // However, CharacterPreview often expects numbers for some derivations.
+            // However, CharacterSheet often expects numbers for some derivations.
             // Let's keep it as is for "value", but if we were strictly mapping to Wizard State `selected` map, we'd want numbers.
-            // For `generalItems` / `specialItems` arrays used in Preview, they usually just have { name, value, math }.
+            // For `generalItems` / `specialItems` arrays used in Sheet, they usually just have { name, value, math }.
 
             // Standardize structure for Preview list
             const skillObj = {

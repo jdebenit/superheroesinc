@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import CharacterPreview from './CharacterPreview';
+import CharacterSheet from './CharacterSheet';
 import Step1_OriginSelection from './steps/Step1_OriginSelection';
 import Step2_Characteristics from './steps/Step2_Characteristics';
 import Step3_Especials from './steps/Step3_Especials';
@@ -207,7 +207,7 @@ export default function CharacterWizard() {
                     </div>
 
                     {/* Preview Button */}
-                    <CharacterPreview character={character} totalPCs={totalPCs} />
+                    <CharacterSheet character={character} totalPCs={totalPCs} />
 
                     {/* Import JSON Button */}
                     <button

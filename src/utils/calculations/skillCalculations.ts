@@ -499,7 +499,7 @@ export function calculateSpecialSkillsPCWithInt(
 
 /**
  * Calcula el valor base de una habilidad basado en una fórmula de atributos
- * Compatible con la llamada desde CharacterPreview (attributes, origins, formula)
+ * Compatible con la llamada desde CharacterSheet (attributes, origins, formula)
  */
 export function calculateSkillBase(
     characteristics: { [key: string]: number },
