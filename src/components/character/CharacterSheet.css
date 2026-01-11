@@ -1225,3 +1225,275 @@ ul {
         justify-content: center;
     }
 }
+
+/* ========================================
+   MOBILE RESPONSIVENESS IMPROVEMENTS
+   ======================================== */
+
+/* Mobile & Small Tablets: (< 768px) */
+@media (max-width: 768px) {
+
+    /* Modal: Full screen on mobile */
+    .character-dialog {
+        max-width: 100vw !important;
+        max-height: 100vh !important;
+        width: 100% !important;
+        height: 100% !important;
+        border-radius: 0 !important;
+        margin: 0 !important;
+    }
+
+    .character-dialog.full-screen {
+        max-width: 100vw !important;
+        max-height: 100vh !important;
+    }
+
+    .dialog-content {
+        max-height: 100vh !important;
+        border-radius: 0 !important;
+    }
+
+    /* Touch-friendly buttons (minimum 44px) */
+    .action-btn,
+    .close-btn {
+        width: 44px !important;
+        height: 44px !important;
+        font-size: 1.4rem !important;
+        min-width: 44px !important;
+        min-height: 44px !important;
+    }
+
+    .visualize-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 1rem;
+        font-size: 1rem;
+    }
+
+    /* Dialog header optimization */
+    .dialog-header {
+        padding: 0.75rem 1rem;
+        flex-wrap: wrap;
+    }
+
+    .dialog-title {
+        font-size: 1rem;
+        line-height: 1.2;
+    }
+
+    .dialog-actions {
+        gap: 0.25rem;
+    }
+
+    /* Body padding */
+    .dialog-body {
+        padding: 0.75rem;
+    }
+
+    /* Sheet layout: Single column */
+    .sheet-grid {
+        column-count: 1;
+        column-gap: 0;
+    }
+
+    .sheet-section {
+        padding: 0.75rem;
+        margin-bottom: 1rem;
+    }
+
+    /* Header: Stack on mobile */
+    .sheet-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .sheet-header h3 {
+        font-size: 1.25rem;
+    }
+
+    .header-stats {
+        width: 100%;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    /* Section headers */
+    .section-header h4 {
+        font-size: 1rem;
+    }
+
+    /* Grids: Single column on mobile */
+    .attr-grid {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+
+    .combat-grid {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .combat-stat-box {
+        min-width: 100%;
+    }
+
+    .background-grid {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+
+    .exoskeleton-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tech-container {
+        grid-template-columns: 1fr;
+    }
+
+    /* Preview grids: Single column */
+    .preview-stats-grid.cols-2,
+    .preview-stats-grid.cols-3 {
+        grid-template-columns: 1fr;
+    }
+
+    /* Increase tap targets for list items */
+    .power-item,
+    .spell-item,
+    .tech-module-item {
+        padding: 0.75rem 0;
+    }
+
+    /* Better spacing for mobile */
+    .power-row,
+    .spell-row {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    /* Inline mode adjustments */
+    .character-sheet-inline {
+        padding: 1rem;
+        margin: 0.5rem 0;
+    }
+
+    .inline-actions {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .inline-actions .action-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+    }
+
+    /* Improve readability */
+    body {
+        font-size: 16px;
+        /* Prevent zoom on input focus */
+    }
+
+    /* Stat values: Larger for readability */
+    .stat-value {
+        font-size: 1.5rem;
+    }
+
+    .attr-value {
+        font-size: 1.5rem;
+    }
+
+    /* Skill math formulas: Hide on mobile to save space */
+    .skill-math {
+        display: none;
+    }
+}
+
+/* Tablet: Medium Devices (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+
+    /* Modal: Nearly full screen on tablet */
+    .character-dialog {
+        max-width: 95vw;
+        max-height: 95vh;
+        width: 95vw;
+    }
+
+    /* Grids: 2 columns on tablet */
+    .attr-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .background-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .exoskeleton-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Combat grid: 2 columns */
+    .combat-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Sheet: Still single column for better readability */
+    .sheet-grid {
+        column-count: 1;
+    }
+
+    /* Touch-friendly buttons maintained */
+    .action-btn,
+    .close-btn {
+        width: 44px;
+        height: 44px;
+    }
+}
+
+/* Landscape mobile optimization (small height) */
+@media (max-width: 896px) and (max-height: 428px) and (orientation: landscape) {
+    .dialog-header {
+        padding: 0.5rem 1rem;
+    }
+
+    .dialog-title {
+        font-size: 0.9rem;
+    }
+
+    .action-btn,
+    .close-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 1.2rem;
+    }
+
+    .sheet-section {
+        padding: 0.5rem;
+        margin-bottom: 0.75rem;
+    }
+}
+
+/* Small mobile devices (< 375px) */
+@media (max-width: 374px) {
+    .dialog-title {
+        font-size: 0.9rem;
+    }
+
+    .sheet-header h3 {
+        font-size: 1.1rem;
+    }
+
+    .section-header h4 {
+        font-size: 0.95rem;
+    }
+
+    .level-badge,
+    .total-cost {
+        font-size: 0.85rem;
+        padding: 0.2rem 0.5rem;
+    }
+}
