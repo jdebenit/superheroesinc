@@ -11,16 +11,16 @@ import { EXOSKELETON_CONFIGS } from '../../data/exoskeletonConfigs';
 import { EXOSKELETON_ARMOR_CONFIGS } from '../../data/exoskeletonArmorConfigs';
 import { TECHNOSUIT_STRENGTH_CONFIGS } from '../../data/technoSuitStrengthConfigs';
 import { CYBORG_IMPLANT_STATS, CYBORG_IMPLANT_STRENGTHS } from '../../data/cyborgImplantConfigs';
-import { ENTE_FORMS, ENTE_EFFECTS } from './steps/Step3_Especials/sections/EnteSection';
-import { MALDITO_DATA } from './steps/Step3_Especials/sections/MalditoSection';
-import { ALTERADO_DATA } from './steps/Step3_Especials/sections/AlteradoSection';
-import { POSEIDO_FORMS } from './steps/Step3_Especials/sections/PoseidoSection';
+import { ENTE_FORMS, ENTE_EFFECTS } from '../wizard/steps/Step3_Especials/sections/EnteSection';
+import { MALDITO_DATA } from '../wizard/steps/Step3_Especials/sections/MalditoSection';
+import { ALTERADO_DATA } from '../wizard/steps/Step3_Especials/sections/AlteradoSection';
+import { POSEIDO_FORMS } from '../wizard/steps/Step3_Especials/sections/PoseidoSection';
 import { SEQUELS } from '../../data/sequels';
 import { INCOME_SOURCES } from '../../data/technologicalOptions';
 
 import { calculateDiff } from '../../utils/dataCleaner';
 import { initialCharacterState } from '../../data/wizardConfig';
-import { calculateEM, hasSubtype } from './steps/Step3_Especials/utils';
+import { calculateEM, hasSubtype } from '../wizard/steps/Step3_Especials/utils';
 // Calculations
 // Calculations
 import { calculateDerivedStats, calculateSkillBase } from '../../utils/characterCalculations';

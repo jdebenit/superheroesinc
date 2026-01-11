@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import CharacterSheet from './CharacterSheet';
+import CharacterSheet from '../character/CharacterSheet';
 import Step1_OriginSelection from './steps/Step1_OriginSelection';
 import Step2_Characteristics from './steps/Step2_Characteristics';
 import Step3_Especials from './steps/Step3_Especials';

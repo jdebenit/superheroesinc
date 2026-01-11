@@ -1,6 +1,6 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import CharacterSheet from '../wizard/CharacterSheet';
+import CharacterSheet from '../character/CharacterSheet';
 import { adaptWebCharacter } from '../../utils/characterAdapter';
 
 interface StoredCharacter {
