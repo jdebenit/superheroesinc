@@ -2,6 +2,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import CharacterSheet from '../character/CharacterSheet';
 import { adaptWebCharacter } from '../../utils/characterAdapter';
+import './CharacterViewer.css';
 
 interface StoredCharacter {
     id: string;
@@ -320,7 +321,26 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
                                     : `Añadido: ${new Date(selectedCharacter.addedAt).toLocaleDateString()}`}
                             </span>
                         </div>
-                        <CharacterSheet character={adaptWebCharacter(selectedCharacter.data)} totalPCs={selectedCharacter.data.totalCost} />
+                        <div className="viewer-actions">
+                            <CharacterSheet character={adaptWebCharacter(selectedCharacter.data)} totalPCs={selectedCharacter.data.totalCost} />
+                            <button
+                                onClick={() => {
+                                    try {
+                                        localStorage.setItem('shi_tpt_character', JSON.stringify(adaptWebCharacter(selectedCharacter.data)));
+                                        window.open('/recursos/tactic-player-terminal', '_blank');
+                                    } catch (error) {
+                                        console.error('Error sending character to terminal:', error);
+                                        alert('Error al enviar el personaje al terminal');
+                                    }
+                                }}
+                                className="tpt-button"
+                            >
+                                🎮 Abrir en SHI TPT
+                            </button>
+                            <button className="tpt-button" disabled={true}>
+                                🎯 Enviar a SHI TMT
+                            </button>
+                        </div>
                     </div>
                 ) : (
                     <div style={{
