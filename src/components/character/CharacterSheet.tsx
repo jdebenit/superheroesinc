@@ -1,9 +1,11 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import './CharacterSheet.css';
 
-import { calculateDiff } from '../../utils/dataCleaner';
-import { initialCharacterState } from '../../data/wizardConfig';
 import { useCharacterSheetData } from './hooks/useCharacterSheetData';
+import { useJsonExport } from './hooks/useJsonExport';
+import { usePdfExport } from './hooks/usePdfExport';
+import { useModal } from './hooks/useModal';
+import { ActionButtons } from './common/ActionButtons';
 
 // Section Components
 import { SheetHeader } from './sections/SheetHeader';
@@ -44,9 +46,6 @@ interface CharacterSheetProps {
 }
 
 export default function CharacterSheet({ character, totalPCs, mode = 'modal' }: CharacterSheetProps) {
-    const dialogRef = useRef<HTMLDialogElement>(null);
-    const [isFullScreen, setIsFullScreen] = React.useState(false);
-
     // Use the custom hook to get all calculated data
     const sheetData = useCharacterSheetData(character);
     const {
@@ -64,84 +63,10 @@ export default function CharacterSheet({ character, totalPCs, mode = 'modal' }: 
         equipmentData
     } = sheetData;
 
-
-    const openModal = () => {
-        setIsFullScreen(false); // Reset to normal on open
-        dialogRef.current?.showModal();
-    };
-
-    const closeModal = () => {
-        dialogRef.current?.close();
-    };
-
-    const toggleFullScreen = () => {
-        setIsFullScreen(!isFullScreen);
-    };
-
-    const downloadJson = async () => {
-        // Calculate clean data (diff from defaults)
-        const cleanData = calculateDiff(character, initialCharacterState);
-
-        const filename = `${(character.name || 'personaje').toLowerCase().replace(/\s+/g, '-')}.json`;
-        const jsonStr = JSON.stringify(cleanData || {}, null, 2);
-
-        // Try using the File System Access API
-        if ('showSaveFilePicker' in window) {
-            try {
-                // @ts-ignore - Types for showSaveFilePicker might not be available in all envs
-                const handle = await window.showSaveFilePicker({
-                    suggestedName: filename,
-                    types: [{
-                        description: 'JSON Files',
-                        accept: { 'application/json': ['.json'] },
-                    }],
-                });
-                const writable = await handle.createWritable();
-                await writable.write(jsonStr);
-                await writable.close();
-                return;
-            } catch (err: any) {
-                if (err.name !== 'AbortError') {
-                    console.error('File Picker Error:', err);
-                }
-                if (err.name === 'AbortError') return;
-            }
-        }
-
-        // Fallback or if API not supported
-        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(jsonStr);
-        const downloadAnchorNode = document.createElement('a');
-        downloadAnchorNode.setAttribute("href", dataStr);
-        downloadAnchorNode.setAttribute("download", filename);
-        document.body.appendChild(downloadAnchorNode);
-        downloadAnchorNode.click();
-        downloadAnchorNode.remove();
-    };
-
-    const handleExportPDF = async () => {
-        try {
-            const { downloadPDF, generateCharacterSheetPDF } = await import('../../utils/pdfExport');
-            // Pass pre-calculated data to avoid re-calculation in PDF export
-            const preCalculatedData = {
-                derivedStats,
-                generalSkillsData,
-                specialSkillsData,
-                powersData,
-                spellsData,
-                techData,
-                weaponsData,
-                artifactsData,
-                vehiclesData,
-                equipmentData
-            };
-            // @ts-ignore - Argument count mismatch until pdfExport is updated
-            const pdfBytes = await generateCharacterSheetPDF('/ficha_template.pdf', character, totalPCs || 0, preCalculatedData);
-            downloadPDF(pdfBytes, `Ficha_SHI_${character.name.replace(/\s+/g, '_') || 'Personaje'}.pdf`);
-        } catch (error) {
-            console.error('Error generando PDF:', error);
-            alert('Error al generar el PDF. Asegúrate de que el template "ficha_template.pdf" está en la carpeta public.');
-        }
-    };
+    // Use custom hooks for export functionality
+    const { downloadJson } = useJsonExport(character);
+    const { handleExportPDF } = usePdfExport(character, totalPCs, sheetData);
+    const { dialogRef, isFullScreen, openModal, closeModal, toggleFullScreen } = useModal();
 
     // Render the sheet content (reusable for both modes)
     const renderSheetContent = () => (
@@ -185,14 +110,11 @@ export default function CharacterSheet({ character, totalPCs, mode = 'modal' }: 
     if (mode === 'inline') {
         return (
             <div className="character-sheet-inline" id="character-sheet">
-                <div className="inline-actions">
-                    <button onClick={downloadJson} className="action-btn" title="Descargar JSON">
-                        💾 Descargar JSON
-                    </button>
-                    <button onClick={handleExportPDF} className="action-btn" title="Exportar PDF">
-                        📥 Exportar PDF
-                    </button>
-                </div>
+                <ActionButtons
+                    onDownloadJson={downloadJson}
+                    onExportPdf={handleExportPDF}
+                    variant="inline"
+                />
                 {renderSheetContent()}
             </div>
         );
@@ -218,12 +140,11 @@ export default function CharacterSheet({ character, totalPCs, mode = 'modal' }: 
                             <button onClick={toggleFullScreen} className="action-btn" title={isFullScreen ? "Salir de Pantalla Completa" : "Ver Ficha Completa"}>
                                 {isFullScreen ? "❎" : "⛶"}
                             </button>
-                            <button onClick={downloadJson} className="action-btn" title="Descargar JSON">
-                                💾
-                            </button>
-                            <button onClick={handleExportPDF} className="action-btn" title="Exportar PDF">
-                                📥
-                            </button>
+                            <ActionButtons
+                                onDownloadJson={downloadJson}
+                                onExportPdf={handleExportPDF}
+                                variant="modal"
+                            />
                             <button onClick={closeModal} className="close-btn">
                                 ✕
                             </button>
