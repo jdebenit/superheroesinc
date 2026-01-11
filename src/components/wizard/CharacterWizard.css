@@ -286,3 +286,260 @@
     padding: 0.75rem 1.5rem;
     border-radius: 8px;
 }
+
+/* ========================================
+   MOBILE RESPONSIVENESS
+   ======================================== */
+
+/* Mobile & Small Tablets (< 768px) */
+@media (max-width: 768px) {
+
+    /* Container */
+    .wizard-container {
+        padding: 1rem 0.5rem;
+    }
+
+    /* Header - Compact */
+    .wizard-header {
+        margin-bottom: 2rem;
+    }
+
+    .wizard-title {
+        font-size: 1.75rem !important;
+        line-height: 1.2;
+    }
+
+    .wizard-subtitle {
+        font-size: 1rem !important;
+    }
+
+    /* Wizard Controls - Stack Vertically */
+    .wizard-controls {
+        flex-direction: column;
+        width: 100%;
+        gap: 0.75rem;
+    }
+
+    .pc-counter {
+        width: 100%;
+        text-align: center;
+        padding: 0.75rem 1rem;
+    }
+
+    .wizard-controls .btn-base {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Step Navigation - Vertical List */
+    .step-nav-container {
+        padding: 0 0.5rem;
+        margin-bottom: 2rem;
+    }
+
+    /* Hide progress line on mobile (saves space) */
+    .progress-line-bg {
+        display: none !important;
+    }
+
+    /* Vertical step layout */
+    .steps-wrapper {
+        flex-direction: column !important;
+        gap: 0.5rem;
+    }
+
+    .step-btn {
+        flex-direction: row !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
+        width: 100%;
+        padding: 0.75rem !important;
+        border-radius: 8px;
+        background-color: white;
+        border: 2px solid #e5e7eb;
+        gap: 1rem;
+    }
+
+    .step-btn.active {
+        background-color: #eff6ff !important;
+        border-color: var(--c-primary) !important;
+        transform: none !important;
+    }
+
+    .step-btn:not(.active) {
+        transform: none !important;
+    }
+
+    /* Smaller step icons */
+    .step-icon {
+        width: 50px !important;
+        height: 50px !important;
+        font-size: 1.5rem !important;
+        flex-shrink: 0;
+    }
+
+    .step-icon.active {
+        box-shadow: 0 4px 10px var(--c-primary-shadow) !important;
+    }
+
+    .step-icon.completed {
+        box-shadow: 0 2px 4px var(--c-success-shadow) !important;
+    }
+
+    /* Step names - Allow wrapping */
+    .step-name {
+        white-space: normal !important;
+        text-align: left !important;
+        font-size: 0.9rem !important;
+        flex: 1;
+    }
+
+    /* Content Box - Compact */
+    .step-content-box {
+        padding: 1rem !important;
+        min-height: auto !important;
+        box-shadow: 4px 4px 0px #000 !important;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Navigation Buttons - Stack Vertically */
+    .nav-buttons-container {
+        flex-direction: column-reverse !important;
+        gap: 1rem;
+        padding: 0 !important;
+    }
+
+    .nav-buttons-container .btn-base {
+        width: 100% !important;
+        padding: 1rem 1.5rem !important;
+        font-size: 1rem !important;
+    }
+
+    .step-indicator {
+        width: 100%;
+        text-align: center;
+        font-size: 1rem;
+        padding: 0.75rem 1rem;
+    }
+}
+
+/* Tablet (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+
+    /* Header - Medium */
+    .wizard-title {
+        font-size: 2.25rem;
+    }
+
+    .wizard-subtitle {
+        font-size: 1.125rem;
+    }
+
+    /* Step Navigation - Horizontal with Wrap */
+    .step-nav-container {
+        padding: 0 1rem;
+    }
+
+    .steps-wrapper {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .step-btn {
+        flex-direction: column;
+        width: auto;
+        min-width: 100px;
+    }
+
+    /* Medium step icons */
+    .step-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 2rem;
+    }
+
+    .step-name {
+        font-size: 0.85rem;
+    }
+
+    /* Content Box - Medium Padding */
+    .step-content-box {
+        padding: 2rem;
+    }
+
+    /* Navigation Buttons */
+    .nav-buttons-container .btn-base {
+        padding: 0.875rem 1.75rem !important;
+    }
+}
+
+/* Small Mobile Devices (< 375px) */
+@media (max-width: 374px) {
+    .wizard-title {
+        font-size: 1.5rem !important;
+    }
+
+    .wizard-subtitle {
+        font-size: 0.9rem !important;
+    }
+
+    .step-icon {
+        width: 40px !important;
+        height: 40px !important;
+        font-size: 1.25rem !important;
+    }
+
+    .step-name {
+        font-size: 0.8rem !important;
+    }
+
+    .step-content-box {
+        padding: 0.75rem !important;
+    }
+
+    .pc-counter {
+        font-size: 0.9rem;
+        padding: 0.5rem 0.75rem;
+    }
+
+    .btn-base {
+        font-size: 0.9rem !important;
+        padding: 0.75rem 1rem !important;
+    }
+}
+
+/* Landscape Mobile (< 896px width, < 428px height) */
+@media (max-width: 896px) and (max-height: 428px) and (orientation: landscape) {
+    .wizard-header {
+        margin-bottom: 1rem;
+    }
+
+    .wizard-title {
+        font-size: 1.5rem !important;
+    }
+
+    .wizard-subtitle {
+        font-size: 0.9rem !important;
+        margin-bottom: 0.5rem;
+    }
+
+    .step-nav-container {
+        margin-bottom: 1rem;
+    }
+
+    .step-btn {
+        padding: 0.5rem !important;
+    }
+
+    .step-icon {
+        width: 40px !important;
+        height: 40px !important;
+        font-size: 1.25rem !important;
+    }
+
+    .step-content-box {
+        padding: 1rem !important;
+        margin-bottom: 1rem;
+    }
+}
