@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './TacticPlayerTerminal.css';
+import CharacterSheet from '../character/CharacterSheet';
+import { adaptWebCharacter } from '../../utils/characterAdapter';
 
 interface CharacterData {
     name: string;
@@ -347,6 +349,10 @@ export default function TacticPlayerTerminal() {
                     </button>
                     {character && (
                         <>
+                            <CharacterSheet
+                                character={adaptWebCharacter(character)}
+                                totalPCs={0}
+                            />
                             <button onClick={handleExportJSON} className="export-btn">
                                 💾 Exportar JSON
                             </button>
