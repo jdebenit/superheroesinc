@@ -221,7 +221,7 @@ export const TECH_MODULES: TechModuleDefinition[] = [
         id: "endoesqueleto",
         name: "Endoesqueleto",
         type: "Mejora Interna",
-        cost: 5,
+        cost: 3,
         description: "Este es un sistema independiente, que sustituye de una manera total el esqueleto del personaje por uno de carácter metálico. No varia para nada el aspecto exterior del personaje. Protege de la rotura de miembros y añade +20 al daño en combate físico.",
         locations: ["Cuerpo completo"]
     },
@@ -237,7 +237,7 @@ export const TECH_MODULES: TechModuleDefinition[] = [
         id: "endomusculos_avanzados",
         name: "Endomúsculos avanzados",
         type: "Mejora Interna",
-        cost: 8,
+        cost: 5,
         description: "Similar a su versión menos avanzada otorgando al cyborg una fuerza de 110 y una constitución de 110.",
         locations: ["Cuerpo completo"]
     },
@@ -245,7 +245,7 @@ export const TECH_MODULES: TechModuleDefinition[] = [
         id: "hiperactividad",
         name: "Hiperactividad",
         type: "Mejora Interna",
-        cost: 6,
+        cost: 5,
         description: "Se mejora el sistema nervioso del receptor incluyendo nervios sintéticos en todas sus terminaciones nerviosas y se añaden receptores sinápticos en su cerebro y columna. Aumenta la Agilidad hasta 110.",
         locations: ["Sistema Nervioso", "Columna"]
     },
