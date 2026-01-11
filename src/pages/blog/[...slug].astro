@@ -54,6 +54,26 @@ const { Content } = await post.render();
 			<Content />
 		</div>
 	</article>
+
+	<script
+		type="application/ld+json"
+		set:html={JSON.stringify({
+			"@context": "https://schema.org",
+			"@type": "NewsArticle",
+			headline: post.data.title,
+			image: post.data.image
+				? [new URL(post.data.image, Astro.site).toString()]
+				: [],
+			datePublished: post.data.pubDate.toISOString(),
+			dateModified: post.data.pubDate.toISOString(),
+			author: [
+				{
+					"@type": "Person",
+					name: post.data.author,
+				},
+			],
+		})}
+	/>
 </Layout>
 
 <style>
