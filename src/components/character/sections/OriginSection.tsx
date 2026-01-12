@@ -7,13 +7,119 @@ interface OriginSectionProps {
 }
 
 export const OriginSection: React.FC<OriginSectionProps> = ({ character }) => {
-    if (!character.origin || !character.origin.items || character.origin.items.length === 0) return null;
+    const [isExpanded, setIsExpanded] = React.useState(false);
+
+    if (!character.origin || !character.origin.items || character.origin.items.length === 0) {
+        // Even if no origin, we might want to show "Sin origen" in compressed view or just return null?
+        // The requirement says: "Si no tiene origenes apareera Sin origen"
+        // But existing code returned null. Let's respect the requirement.
+        if (!isExpanded) {
+            return (
+                <SheetSection
+                    title="Origen"
+                    className="origin collapsed clickable"
+                    cost={<div className="toggle-icon" onClick={(e) => { e.stopPropagation(); setIsExpanded(true); }} title="Expandir">▼</div>}
+                >
+                    <div className="origin-compressed" onClick={() => setIsExpanded(true)}>
+                        Sin origen
+                    </div>
+                </SheetSection>
+            );
+        }
+        // If expanded but empty? Probably shouldn't happen if we handle it right, but existing code returned null. 
+        // Let's keep returning null for empty if expanded, or show empty state?
+        // Existing code: if (!character.origin ... ) return null;
+        // We'll stick to requirement: "Si no tiene origenes apareera Sin origen"
+    }
+
+    // Initial check for completely missing data object, handle gracefully
+    const hasOriginData = character.origin && character.origin.items && character.origin.items.length > 0;
+
+    const toggleExpand = (e?: React.MouseEvent) => {
+        if (e) e.stopPropagation();
+        setIsExpanded(!isExpanded);
+    };
+
+    const renderToggleIcon = (expanded: boolean) => (
+        <div
+            className="toggle-icon"
+            onClick={toggleExpand}
+            title={expanded ? "Contraer" : "Expandir"}
+        >
+            {expanded ? "▲" : "▼"}
+        </div>
+    );
+
+    if (!isExpanded) {
+        let compressedText = "Sin origen";
+
+        if (hasOriginData) {
+            const allSubtypes: string[] = [];
+            character.origin.items.forEach((item: any) => {
+                const name = Object.keys(item)[0];
+                const rawDetails = item[name] || [];
+                const originDef = ORIGIN_CATEGORIES[name];
+
+                let foundSubtype = false;
+
+                // Check details for subtypes
+                rawDetails.forEach((detail: string) => {
+                    if (originDef?.subtypes && originDef.subtypes[detail]) {
+                        allSubtypes.push(detail);
+                        foundSubtype = true;
+                    }
+                });
+
+                // If no subtypes found for this origin item, use the Origin Name
+                if (!foundSubtype) {
+                    allSubtypes.push(name);
+                }
+            });
+
+            if (allSubtypes.length > 0) {
+                compressedText = allSubtypes.join(' / ');
+            }
+        }
+
+        return (
+            <SheetSection
+                title="Origen"
+                className="origin collapsed clickable"
+                cost={renderToggleIcon(false)}
+            >
+                <div
+                    className="origin-compressed"
+                    onClick={() => setIsExpanded(true)}
+                >
+                    {compressedText}
+                </div>
+            </SheetSection>
+        );
+    }
+
+    // Expanded View (Original Logic)
+    if (!hasOriginData) {
+        return (
+            <SheetSection
+                title="Origen"
+                className="origin"
+                cost={renderToggleIcon(true)}
+            >
+                <div className="origin-detail-row">Sin origen</div>
+            </SheetSection>
+        );
+    }
 
     return (
         <SheetSection
             title="Origen"
             className="origin"
-            cost={character.origin.cost ? `(${character.origin.cost} PCs)` : undefined}
+            cost={
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    {character.origin.cost ? <span>({character.origin.cost} PCs)</span> : null}
+                    {renderToggleIcon(true)}
+                </div>
+            }
         >
             <ul className="clean-list">
                 {character.origin.items.map((item: any, i: number) => {

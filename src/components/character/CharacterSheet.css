@@ -136,7 +136,42 @@
     width: 100%;
 }
 
-/* Hybrid Section */
+/* Compressed Origin View */
+.origin.collapsed.clickable {
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.origin.collapsed.clickable:hover {
+    background-color: #fdf2f2; /* Light reddish tint matching theme */
+}
+
+.origin-compressed {
+    padding: 0.25rem 0;
+    font-style: italic;
+    opacity: 0.9;
+    color: #555;
+    font-size: 0.95rem;
+}
+
+.toggle-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.8em;
+    opacity: 0.7;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    transition: all 0.2s;
+}
+
+.toggle-icon:hover {
+    background-color: rgba(139, 69, 19, 0.1);
+    opacity: 1;
+    transform: scale(1.1);
+}
 .hybrid-condition-label {
     padding-right: 0.5rem;
     font-weight: bold;
