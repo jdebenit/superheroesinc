@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import ListControls from './shared/ListControls';
 
 interface Character {
     slug: string;
@@ -21,6 +22,7 @@ export default function CharacterList({ initialCharacters }: CharacterListProps)
     const [selectedTags, setSelectedTags] = useState<string[]>(["Todos"]);
     const [searchTerm, setSearchTerm] = useState("");
     const [sortBy, setSortBy] = useState<"name" | "recent">("name");
+
 
     // Extract unique tags from all characters
     const allTags = useMemo(() => {
@@ -89,58 +91,37 @@ export default function CharacterList({ initialCharacters }: CharacterListProps)
 
     return (
         <div className="character-list-container">
-            <div className="controls-section">
-                <div className="filters-primary">
-                    {allTags.length > 1 && (
-                        <div className="filter-group">
-                            <span className="filter-label">Filtrar por etiquetas:</span>
-                            <div className="tag-buttons">
-                                {allTags.map(tag => (
-                                    <button
-                                        key={tag}
-                                        className={`filter-button ${selectedTags.includes(tag) ? 'active' : ''}`}
-                                        onClick={() => toggleTag(tag)}
-                                    >
-                                        {tag}
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
-                    )}
-
-
-
-                    <div className="toolbar-row">
-                        <div className="search-group">
-                            <input
-                                type="text"
-                                placeholder="Buscar personaje..."
-                                className="search-input"
-                                value={searchTerm}
-                                onChange={(e) => setSearchTerm(e.target.value)}
-                            />
-                        </div>
-
-                        <div className="sort-group">
-                            <span className="filter-label">Ordenar:</span>
-                            <div className="tag-buttons">
-                                <button
-                                    className={`filter-button ${sortBy === 'name' ? 'active' : ''}`}
-                                    onClick={() => setSortBy('name')}
-                                >
-                                    Nombre
-                                </button>
-                                <button
-                                    className={`filter-button ${sortBy === 'recent' ? 'active' : ''}`}
-                                    onClick={() => setSortBy('recent')}
-                                >
-                                    Recientes
-                                </button>
-                            </div>
-                        </div>
+            <ListControls
+                search={{
+                    value: searchTerm,
+                    onChange: setSearchTerm,
+                    placeholder: "Buscar personaje..."
+                }}
+                filters={allTags.length > 1 ? [{
+                    label: "Filtrar por etiquetas:",
+                    options: allTags,
+                    selected: selectedTags,
+                    onToggle: toggleTag
+                }] : []}
+            >
+                <div className="sort-group">
+                    <span className="filter-label">Ordenar:</span>
+                    <div className="tag-buttons">
+                        <button
+                            className={`filter-button ${sortBy === 'name' ? 'active' : ''}`}
+                            onClick={() => setSortBy('name')}
+                        >
+                            Nombre
+                        </button>
+                        <button
+                            className={`filter-button ${sortBy === 'recent' ? 'active' : ''}`}
+                            onClick={() => setSortBy('recent')}
+                        >
+                            Recientes
+                        </button>
                     </div>
                 </div>
-            </div>
+            </ListControls>
 
             <div className="characters-grid">
                 {filteredCharacters.map((char) => (
@@ -203,101 +184,6 @@ export default function CharacterList({ initialCharacters }: CharacterListProps)
           font-family: var(--font-body, system-ui, sans-serif);
           max-width: 1400px;
           margin: 0 auto;
-        }
-
-        .controls-section {
-          margin-bottom: 2rem;
-          display: flex;
-          flex-direction: column;
-          gap: 1.5rem;
-          background: #fff;
-          padding: 1.5rem;
-          border: 2px solid var(--color-secondary, #000);
-          box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
-        }
-
-        .filters-primary {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .filter-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .toolbar-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .search-group {
-            flex-grow: 1;
-            min-width: 250px;
-        }
-        
-        .sort-group {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .filter-label {
-            font-weight: bold;
-            font-family: var(--font-comic, sans-serif);
-            font-size: 1.1rem;
-            color: var(--color-primary, #000);
-            white-space: nowrap;
-        }
-
-        .tag-buttons {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 0.5rem;
-        }
-
-        .filter-button {
-          padding: 0.5rem 1rem;
-          border: 2px solid var(--color-secondary, #000);
-          background: white;
-          font-family: var(--font-comic, sans-serif);
-          cursor: pointer;
-          font-weight: bold;
-          transition: all 0.2s;
-          border-radius: 20px;
-          font-size: 0.9rem;
-        }
-
-        .filter-button:hover {
-          background: #f5f5f5;
-          transform: translateY(-1px);
-        }
-
-        .filter-button.active {
-          background: var(--color-secondary, #000);
-          color: white;
-          box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-
-        .search-row {
-          display: flex;
-          justify-content: center;
-          width: 100%;
-          margin-top: 0.5rem;
-        }
-
-        .search-input {
-          padding: 0.8rem 1.2rem;
-          border: 2px solid var(--color-secondary, #000);
-          font-family: var(--font-body, sans-serif);
-          width: 100%;
-          border-radius: 8px;
-          font-size: 1rem;
         }
 
         .characters-grid {
