@@ -5,7 +5,11 @@ interface BackgroundSectionProps {
     character: any;
 }
 
+import { SheetSection } from '../common/SheetSection';
+
 export const BackgroundSection: React.FC<BackgroundSectionProps> = ({ character }) => {
+    const [isExpanded, setIsExpanded] = React.useState(false);
+
     if (
         (!character.background || (
             !character.background.items?.length &&
@@ -20,12 +24,51 @@ export const BackgroundSection: React.FC<BackgroundSectionProps> = ({ character 
         return null;
     }
 
-    return (
-        <div className="sheet-section background">
-            <div className="section-header">
-                <h4>Historial</h4>
-            </div>
+    const toggleExpand = (e?: React.MouseEvent) => {
+        if (e) e.stopPropagation();
+        setIsExpanded(!isExpanded);
+    };
 
+    const renderToggleIcon = (expanded: boolean) => (
+        <div
+            className="toggle-icon"
+            onClick={toggleExpand}
+            title={expanded ? "Contraer" : "Expandir"}
+        >
+            {expanded ? "▲" : "▼"}
+        </div>
+    );
+
+    if (!isExpanded) {
+        const resistance = character.background?.prejudiceResistance;
+        return (
+            <SheetSection
+                title="Historial"
+                className="background collapsed clickable"
+                cost={renderToggleIcon(false)}
+            >
+                <div
+                    className="background-compressed"
+                    onClick={() => setIsExpanded(true)}
+                    style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+                >
+                    <span style={{ fontWeight: 'bold', fontSize: '0.85rem', color: '#1e40af' }}>
+                        RESISTENCIA A PREJUICIOS:
+                    </span>
+                    <span style={{ fontWeight: 'bold', fontSize: '1rem', color: '#333' }}>
+                        {resistance ? `${resistance}%` : '50%'}
+                    </span>
+                </div>
+            </SheetSection>
+        );
+    }
+
+    return (
+        <SheetSection
+            title="Historial"
+            className="background"
+            cost={renderToggleIcon(true)}
+        >
             <div className="background-col-layout">
 
                 {/* Status Grid */}
@@ -95,6 +138,6 @@ export const BackgroundSection: React.FC<BackgroundSectionProps> = ({ character 
                     </div>
                 )}
             </div>
-        </div>
+        </SheetSection>
     );
 };

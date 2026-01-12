@@ -55,16 +55,16 @@ export const useCharacterSheetData = (character: any) => {
     // Calculate EM for display
     const emFormula = character.spells?.emFormula || { divisor: 4, pcCost: 0 };
     // Check if character has magic access (Divisor > 0)
-    if (emFormula.divisor > 0 || (character.origin?.items?.some((i: any) => i.Mago) /* Mago always has magic */)) {
-        const isMago = character.origin?.items?.some((i: any) => i.Mago);
-        const divisor = isMago ? 1 : emFormula.divisor;
-        if (divisor > 0) {
-            // Need selectedPowers for calculateEM
-            const selectedPowers = character.powers?.selected || [];
-            const em = calculateEM(character, selectedPowers, divisor);
-            combatStats.push(`Energía Mágica: ${em}`);
-        }
-    }
+    // NOTE: EM is now displayed in SpellsSection only, logic retained here if needed for other calcs but removed from combatStats
+    // if (emFormula.divisor > 0 || (character.origin?.items?.some((i: any) => i.Mago) /* Mago always has magic */)) {
+    //     const isMago = character.origin?.items?.some((i: any) => i.Mago);
+    //     const divisor = isMago ? 1 : emFormula.divisor;
+    //     if (divisor > 0) {
+    //         const selectedPowers = character.powers?.selected || [];
+    //         const em = calculateEM(character, selectedPowers, divisor);
+    //         combatStats.push(`Energía Mágica: ${em}`);
+    //     }
+    // }
 
     const otherStats = [
         `Inconsciencia: ${derivedStats.other.inconsciencia}`,
