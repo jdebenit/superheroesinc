@@ -11,24 +11,20 @@ export const SkillsLearningSection: React.FC<SkillsLearningSectionProps> = ({ ch
 
     return (
         <SheetSection title="Habilidades de Aprendizaje" className="skills-learning">
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+            <ul className="clean-list">
                 {character.skills.specialItems.map((item: any, i: number) => (
-                    <li key={i} className="no-bullet-item" style={{ marginBottom: '0.5rem', position: 'relative' }}>
+                    <li key={i} className="no-bullet-item skill-item">
                         <DetailRow
-                            className="" // Use empty to trigger the default inline style logic in DetailRow if needed, or better yet, DetailRow supports custom className. 
-                            // However, the original had inline styles for the container. DetailRow uses flex-row-baseline by default.
-                            // Let's rely on DetailRow's default styles which match the intent (flex baseline).
+                            className="skill-row"
                             label={
                                 <>
-                                    {item.name}
-                                    {item.math && <span style={{ fontSize: '0.7em', color: '#999', marginLeft: '0.5ch', fontFamily: 'monospace' }}>{item.math}</span>}
+                                    <span className="skill-name">{item.name}</span>
+                                    {item.math && <span className="skill-math">{item.math}</span>}
                                 </>
                             }
-                            value={item.value}
+                            value={<span className="skill-value">{item.value}</span>}
                             valueClassName=""
                         />
-                        {/* We need to apply the specific styles for the value that were there: fontWeight bold, color brown */}
-                        {/* Actually DetailRow allows passing a react node as value, so we can wrap it there or use valueClassName */}
                     </li>
                 ))}
             </ul>
