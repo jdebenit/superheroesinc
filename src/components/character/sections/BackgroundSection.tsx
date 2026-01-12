@@ -50,12 +50,11 @@ export const BackgroundSection: React.FC<BackgroundSectionProps> = ({ character 
                 <div
                     className="background-compressed"
                     onClick={() => setIsExpanded(true)}
-                    style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
                 >
-                    <span style={{ fontWeight: 'bold', fontSize: '0.85rem', color: '#1e40af' }}>
+                    <span className="background-compressed-label">
                         RESISTENCIA A PREJUICIOS:
                     </span>
-                    <span style={{ fontWeight: 'bold', fontSize: '1rem', color: '#333' }}>
+                    <span className="background-compressed-value">
                         {resistance ? `${resistance}%` : '50%'}
                     </span>
                 </div>

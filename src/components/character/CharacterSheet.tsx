@@ -49,18 +49,8 @@ export default function CharacterSheet({ character, totalPCs, mode = 'modal' }: 
     // Use the custom hook to get all calculated data
     const sheetData = useCharacterSheetData(character);
     const {
-        derivedStats,
-        generalSkillsData,
-        specialSkillsData,
         combatStats,
-        otherStats,
-        powersData,
-        spellsData,
-        techData,
-        weaponsData,
-        artifactsData,
-        vehiclesData,
-        equipmentData
+        otherStats
     } = sheetData;
 
     // Use custom hooks for export functionality
@@ -74,12 +64,16 @@ export default function CharacterSheet({ character, totalPCs, mode = 'modal' }: 
             <SheetHeader character={character} totalPCs={totalPCs} />
 
             <div className="sheet-grid">
+                <OriginSection character={character} />
+                <BackgroundSection character={character} />
                 <AttributesSection character={character} />
                 <CombatSection combatStats={combatStats} />
                 <OtherStatsSection otherStats={otherStats} />
-                <OriginSection character={character} />
                 <SkillsGeneralSection character={character} />
                 <SkillsLearningSection character={character} />
+                <PowersSection character={character} />
+                <SpellsSection character={character} />
+                <WeaponsSection weapons={character.weapons} />
                 <HybridSection character={character} />
                 <EnteSection character={character} />
                 <AlteradoSection character={character} />
@@ -88,8 +82,6 @@ export default function CharacterSheet({ character, totalPCs, mode = 'modal' }: 
                 <GuardianSection character={character} />
                 <DivineSection character={character} />
                 <MalditoSection character={character} />
-                <BackgroundSection character={character} />
-                <WeaponsSection weapons={character.weapons} />
                 <ArtifactsSection artifacts={character.artifacts} />
                 <MagicObjectsSection magicObjects={character.magicObjects} magicTableRolls={character.magicTableRolls} />
                 <VehiclesSection vehicles={character.vehicles} />
@@ -97,8 +89,6 @@ export default function CharacterSheet({ character, totalPCs, mode = 'modal' }: 
                 <TechModulesSection techModules={character.techModules?.installed || []} />
                 <ExoskeletonSection character={character} />
                 <TechnifiedSection character={character} />
-                <PowersSection character={character} />
-                <SpellsSection character={character} />
                 <MagicalBondsSection character={character} />
                 <TraumasSection character={character} />
                 <NotesSection character={character} />
