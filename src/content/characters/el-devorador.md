@@ -3,8 +3,8 @@ name: "El Devorador"
 description: "Operativo infernal asignado a la sección de Cobros de la Corte Itinerante. Especializado en reclamaciones de alta peligrosidad."
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-13
-category: principales
 image: "/personajes/el-devorador.png"
+tags: ["Principales"]
 ---
 
 Este demonio gigantesco y deforme posee un cuerpo cubierto de bocas. No son simples heridas ni mutaciones al azar. Cada una se abre, susurra y observa. Cuando devora a una víctima no se limita a consumir su carne. Absorbe también sus recuerdos, sus miedos, sus secretos más íntimos. Todo lo que esa persona fue termina integrado en él.

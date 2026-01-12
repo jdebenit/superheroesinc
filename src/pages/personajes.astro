@@ -2,7 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
-import CharacterCategorySection from "../components/CharacterCategorySection.astro";
+import CharacterList from "../components/CharacterList";
 
 const characters = (await getCollection("characters")).sort((a, b) =>
   (a.data.alias || a.data.name).localeCompare(b.data.alias || b.data.name),
@@ -17,53 +17,11 @@ const characters = (await getCollection("characters")).sort((a, b) =>
   <section class="characters-page">
     <h1 class="page-title">Galería de Personajes</h1>
     <p class="intro-text">
-      Conoce a los héroes y villanos que pueblan el universo de Superheroes INC.
+      Conoce a los héroes, villanos y personajes varios que pueblan el universo
+      de Superheroes INC.
     </p>
 
-    {
-      characters.filter((c) => c.data.category === "principales").length >
-        0 && (
-        <CharacterCategorySection
-          title="Personajes Principales"
-          intro="Protagonistas centrales de las tramas actuales. Sus decisiones mueven el mundo, salvarlo o destruirlo."
-          characters={characters.filter(
-            (c) => c.data.category === "principales",
-          )}
-        />
-      )
-    }
-
-    {
-      characters.filter(
-        (c) => c.data.category === "secundarios" || !c.data.category,
-      ).length > 0 && (
-        <CharacterCategorySection
-          title="Personajes Secundarios"
-          intro="Aliados, rivales, personajes menos relevantes o inactivos y figuras clave que dan vida al universo."
-          characters={characters.filter(
-            (c) => c.data.category === "secundarios" || !c.data.category,
-          )}
-        />
-      )
-    }
-
-    {
-      characters.filter((c) => c.data.category === "genericos").length > 0 && (
-        <CharacterCategorySection
-          title="Personajes Genéricos"
-          intro="Arquetipos y fuerzas comunes que pueblan las calles y organizaciones."
-          characters={characters.filter((c) => c.data.category === "genericos")}
-        />
-      )
-    }
-
-    {
-      characters.length === 0 && (
-        <p class="empty-message">
-          La base de datos de personajes está actualizándose...
-        </p>
-      )
-    }
+    <CharacterList client:load initialCharacters={characters} />
   </section>
 </Layout>
 

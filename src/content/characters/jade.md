@@ -4,8 +4,8 @@ description: Jade es una cazadora maldita por la rosa negra, heredera de un lina
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-11-26
 image: /personajes/jade.png
-category: principales
 rpgId: jade
+tags: ["Principales"]
 ---
 > La chica saltó con elegancia y, en plena pirueta, desenvainó ambas katanas con destreza. Su trenza azabache, que colgaba a su espalda, se agitó con gracia, y sus ojos verdes brillaron con rabia mientras sus espadas decapitaban sin piedad.
 

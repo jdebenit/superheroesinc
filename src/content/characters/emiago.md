@@ -4,7 +4,7 @@ description: "Agente de Recursos Humanos de la Corte Itinerante. Funciones princ
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-13
 image: "/personajes/emiago.png"
-category: principales
+tags: ["Principales"]
 ---
 
 Emiago es el demonio encargado de la vigilancia y la recopilación de información. Su tamaño reducido y su aspecto casi insignificante hacen que muchos lo subestimen, un error que rara vez se comete dos veces. Pequeño y escurridizo, se desliza con naturalidad entre sombras, grietas y espacios olvidados, espiando tanto en el interior de la Corte como en el mundo humano.

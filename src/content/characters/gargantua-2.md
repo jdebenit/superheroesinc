@@ -5,7 +5,7 @@ description: "Integrante de Triángulo Mortal, un gigante desmemoriado, guardaes
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-12
 image: "/personajes/gargantua-ii.png"
-category: principales
+tags: ["Principales"]
 ---
 
 Jorge Lebrato, como se hace llamar, no tiene ningún recuerdo de su verdadera identidad. Despertó solo en un bosque, sin memoria, con una pulsera de identificación hospitalaria que llevaba ese nombre. Desde entonces ha intentado recomponer una vida que no recuerda haber vivido. Cuando la policía lo asistió, comprobaron que sus huellas no figuraban en ningún sistema. No había registros, antecedentes ni rastro alguno de quién había sido.

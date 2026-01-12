@@ -4,8 +4,8 @@ alias: Estrella II
 description: Descendiente de Euroman y Europa, criada por su primo David Martín (alias Jinete Nocturno). Adopta la identidad de Estrella y promueve la formación de un nuevo equipo de intervención de ámbito europeo.
 source: Superhéroes INC. Tercera Edición
 updatedDate: 2025-11-26
-category: principales
 image: /personajes/estrella-ii.png
+tags: ["Principales"]
 ---
 Diana Martín fue criada por David Martín, el ex-vigilante conocido como Jinete Nocturno, como su padre adoptivo. Sus padres biológicos son el Euroman Esteban Martín, primo de Jinete Nocturno, y la guardiana Europa, ambos miembros fundadores de Euroforce que deseaban alejar a su bebé de los peligros que perseguían a ambos.
 

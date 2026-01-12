@@ -4,7 +4,7 @@ name: Verca
 description: "Verca es la especialista de la Corte en convertir los deseos humanos en condenas perfectamente formuladas."
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-13
-category: principales
+tags: ["Principales"]
 ---
 
 Conocida por su maestría en el arte de las maldiciones, Verca presenta una apariencia horrenda y remendada, como si su propio cuerpo fuera el resultado de pactos mal cerrados. Lejos de ser un defecto, esa imagen refuerza su autoridad. Quien acude a ella entiende desde el primer momento que nada bueno puede salir sin un precio.

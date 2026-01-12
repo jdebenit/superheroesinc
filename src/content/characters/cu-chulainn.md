@@ -5,8 +5,8 @@ description: "Entidad mítica irlandesa homónima, vinculada en los archivos a L
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-11-26
 image: /personajes/cu-chulainn.png
-category: principales
 rpgId: cu-chulainn
+tags: ["Principales"]
 ---
 Sétanta nació en la vieja irlanda bendecido por [Unidad](/lore/entidades/unidad/), su pelo de tres colores le hizo destacar desde su juventud, hasta que se convirtió en un guerrero de renombre, cuya vida y habilidades lo convirtieron en una figura legendaria en la historia de Irlanda. Desde joven, mostró un talento excepcional para el combate. Su nombre cambió a Cú Chulainn tras un incidente en el que mató accidentalmente al perro guardián de un noble, prometiendo proteger la casa del noble como su guardián canino, un compromiso que reflejaba su sentido del honor y lealtad.
 

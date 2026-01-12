@@ -4,9 +4,9 @@ description: Centurión es un soldado romano condenado a la inmortalidad desde e
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-11-26
 image: /personajes/centurion.png
-category: principales
 rpgId: centurion
 alias: Centurión
+tags: ["Principales"]
 ---
 
 > Ah, sí, los tanques y los lanzallamas son muy impresionantes, pero he visto cosas mucho más extraordinarias en mis días con Constantino, Herr Weisthor. Una vez vi una lanza que otorgaba invulnerabilidad a quien la empuñara y unas runas que conferían fuerza divina a quien las pronunciaba en el orden correcto.

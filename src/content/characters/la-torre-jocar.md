@@ -4,7 +4,7 @@ name: Jocar
 description: "La Torre Jocar es el pilar inmóvil sobre el que se sostienen las operaciones materiales de la Corte."
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-13
-category: principales
+tags: ["Principales"]
 ---
 
 Jocar tiene como función principal la obtención de los recursos esenciales que mantienen en marcha a la Corte Itinerante. Está especializado en localizar, asegurar y transportar materiales y energías oscuras indispensables para rituales, construcciones y armamento infernal. Nada llega a la Corte sin pasar antes, directa o indirectamente, por su control.

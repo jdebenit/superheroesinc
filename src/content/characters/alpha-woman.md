@@ -6,7 +6,7 @@ source: Partida Oficial - Ecos de guerra
 updatedDate: 2025-12-17
 image: /personajes/alpha-woman.png
 rpgId: alpha-woman
-category: principales
+tags: ["Principales"]
 ---
 
 ## La Primera Guerrera

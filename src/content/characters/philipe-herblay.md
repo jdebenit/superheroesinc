@@ -4,8 +4,8 @@ description: Mago aristócrata, experto en espíritus y en revelar el pasado med
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-11-26
 image: /personajes/herblay.png
-category: principales
 rpgId: philipe-de-herblay
+tags: ["Principales"]
 ---
 
 > Un buen vino y una conversación amena arreglan casi cualquier problema.  

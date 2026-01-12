@@ -3,8 +3,8 @@ name: "Sphynx"
 description: "Ser mitológico vinculado a Las Siete Torres. Se presume función de guardia de acceso y custodia de conocimientos o puntos de paso."
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-13
-category: principales
 image: "/personajes/sphynx.png"
+tags: ["Principales"]
 ---
 
 Sphynx, la madre de todas las esfinges, fue reclutada personalmente por [Titania](/personajes/titania), que supo reconocer en ella a uno de los seres míticos más antiguos y poderosos que aún caminaban entre planos. Como la primera de su raza, Sphynx habitó durante eras los reinos divinos, donde el tiempo tenía otro peso y la existencia no estaba marcada por la urgencia ni el desgaste.

@@ -5,7 +5,7 @@ description: "Qital de los Yannin es la encarnación viva de un camino espiritua
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-13
 image: "/personajes/qital.png"
-category: principales
+tags: ["Principales"]
 ---
 
 Qital nació como Yannin, miembro de una antigua tribu de Oriente Medio unida por la filosofía de la Tariqah. No se trata de una doctrina cerrada ni de un dogma común, sino de un camino místico y sagrado que cada individuo recorre de forma única. La Tariqah no se impone ni se enseña de manera directa. Se revela a través de la meditación, la contemplación y la experiencia interior. Los Yannin creen que cada senda personal tiene un propósito legítimo, incluso cuando entra en conflicto con los intereses colectivos de la tribu, y por ello se apoyan mutuamente sin cuestionar el destino de cada uno.

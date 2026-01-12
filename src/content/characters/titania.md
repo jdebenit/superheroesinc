@@ -4,8 +4,8 @@ alias: "Titania"
 description: "Entidad de alto rango asociada al reino denominado Isla de Verano. Incluida entre las figuras relevantes de Las Siete Torres."
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-13
-category: principales
 image: "/personajes/titania.png"
+tags: ["Principales"]
 ---
 
 Titania de la Isla de Verano puede parecer una mujer joven y frágil, pero quien la subestime comete un error fatal. Más de un siervo de Nigalión ha desaparecido tras hacerlo. Bajo esa apariencia ligera se esconde una de las voluntades más firmes y peligrosas que existen.

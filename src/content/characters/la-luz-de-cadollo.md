@@ -3,8 +3,8 @@ name: "La Luz de Cadollo"
 description: "Entidad adscrita a la sección de Infraestructura de la Corte Itinerante. Vinculada al control de accesos a determinados dominios de la organización."
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-13
-category: principales
 image: "/personajes/la-luz-de-cadollo.png"
+tags: ["Principales"]
 ---
 
 La Luz de Cadollo es un ente de luz oscura que encontró refugio en Nigalión tras ser desterrado de su plano de existencia original. En su mundo natal, todos los seres estaban formados por luz, pero la suya era distinta. No era más brillante ni más pura. Era una luz deformada, demasiado intensa, imposible de sostener con la mirada sin que algo se quebrara por dentro.

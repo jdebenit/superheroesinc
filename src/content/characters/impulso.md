@@ -4,8 +4,8 @@ description: "Miembro de Triángulo Mortal. Elfa mental perseguida por el robo d
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-12
 image: "/personajes/impulso.png"
-category: principales
 rpgId: impulso
+tags: ["Principales"]
 ---
 
 La elfa Sylvana y la enana Lenora abandonaron Asgard en busca de aventuras en cuanto cayó la Gran Barrera. Durante un tiempo compartieron un vínculo fuerte, nacido de su amor por la libertad y de la sensación de estar ante un mundo nuevo, abierto y lleno de posibilidades. Pero ese vínculo no tardó en resquebrajarse.

@@ -3,9 +3,9 @@ name: "Alice"
 description: "La ejecutiva que abre las puertas del infierno… con una sonrisa profesional"
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-11-26
-category: principales
 rpgId: "alice"
 image: /personajes/alice.png
+tags: ["Principales"]
 ---
 
 Alice es una de las figuras más inquietantes de la Corte Itinerante, una organización sobrenatural dedicada a negociar, formalizar y ejecutar contratos infernales, pactos arcanos y acuerdos de naturaleza no humana. En un entorno habitualmente dominado por entidades demoníacas, espíritus y criaturas del Velo, Alice destaca por algo insólito, su absoluta normalidad aparente.

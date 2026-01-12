@@ -4,7 +4,7 @@ description: "Mausoleo es el nigromante que custodia las Torres del Mal con una 
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-13
 image: "/personajes/mausoleo.png"
-category: principales
+tags: ["Principales"]
 ---
 
 Mausoleo es un ser de ascendencia demoníaca con un dominio notable sobre la nigromancia. Desde hace siglos ha dedicado su existencia a la protección de las Torres del Mal, asumiendo ese papel no como un privilegio, sino como una responsabilidad ineludible. Su afinidad con la magia oscura es evidente, pero no actúa de forma caótica ni impulsiva. Sigue con rigor las normas del círculo al que pertenece y respeta los límites establecidos, incluso cuando estos juegan en su contra.

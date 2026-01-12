@@ -7,7 +7,7 @@ updatedDate: 2025-11-26
 image: /personajes/askany.png
 rpgId: askany
 autor: Alberto Gonzalez Calvo
-category: principales
+tags: ["Principales"]
 ---
 
 Askany es un ser de dualidades. Divino y mortal, místico y terrenal. Criado en un reino de leyenda pero forzado a servir en el mundo moderno, busca desesperadamente su lugar en el cosmos mientras paga por los errores de su pasado.

@@ -4,8 +4,8 @@ alias: "El Seductor"
 description: "Deaza se encarga de gestionar las interacciones directas con los humanos que buscan asistencia de la Corte o que se ven arrastrados a resolver conflictos relacionados con ella."
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-13
-category: principales
 image: "/personajes/el-seductor.png"
+tags: ["Principales"]
 ---
 
 Es un íncubo con apariencia de sátiro, una combinación diseñada para resultar inquietantemente atractiva. Deaza se encarga de gestionar las interacciones directas con los humanos que buscan asistencia de la Corte o que se ven arrastrados a resolver conflictos relacionados con ella. Es la primera cara amable que muchos encuentran, y casi siempre la última que recuerdan con claridad.

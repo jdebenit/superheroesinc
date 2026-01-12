@@ -5,8 +5,8 @@ description: Un guardia forestal que se convierte en un fugitivo tras ser someti
 source: "Aportaciones de fans"
 updatedDate: 2025-12-13
 image: /personajes/corredor-nocturno.png
-category: principales
 rpgId: corredor-nocturno
+tags: ["Principales"]
 ---
 
 Lucas siempre fue un solitario. Se sentía más cómodo entre árboles, senderos y animales que rodeado de gente. El trato humano le resultaba incómodo, innecesario. Quizá por eso acabó trabajando como guarda forestal. El sueldo era bajo, pero le permitía pasar los días donde quería, vigilando el bosque y siguiendo rastros que casi nadie más veía.

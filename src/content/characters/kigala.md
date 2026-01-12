@@ -4,8 +4,8 @@ description: "Entidad de naturaleza divina seguramente del panteón Sumerio."
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-12
 image: /personajes/kigala.png
-category: principales
 rpgId: kigala
+tags: ["Principales"]
 ---
 
 Kigala es una diosa, hija del temido dios sumerio Nergal, y gobierna sobre la magia y la muerte. Desde tiempos antiguos, su dominio se ha extendido por los reinos del más allá, donde su influencia sobre las almas de los fallecidos ha sido absoluta. Sin embargo, en la Tierra ha adoptado una identidad secreta: Mónica Martín García, directora ejecutiva de la [Fundación Divina Mundial](/lore/organizaciones/fundacion-divina-mundial), una organización con sede principal en [Valladolid](/lore/localizaciones/valladolid), España.

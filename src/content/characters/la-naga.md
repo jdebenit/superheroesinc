@@ -6,7 +6,7 @@ source: Partida Oficial - La Sombra del enroque
 updatedDate: 2025-12-29
 image: /personajes/la-naga-tierra-zero.png
 rpgId: la-naga
-category: principales
+tags: ["Principales"]
 ---
 
 ## Descripción

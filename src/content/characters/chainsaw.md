@@ -4,9 +4,9 @@ description: Integrante de PSYKOSIS con funciones de choque. Presenta elevadas c
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-11-26
 image: /personajes/chainsaw.png
-category: principales
 alias: Chainsaw
 rpgId: chainsaw
+tags: ["Principales"]
 ---
 Eva fue en otro tiempo una mujer de extraordinaria belleza, inmortalidad y dominio sobre los hombres gracias a Entropía. Todo cambió con la batalla de la llegada de [Nigalión](/lore/localizaciones/nigalion/). Su cuerpo, antaño perfecto, quedó destruido y desfigurado. En un acto de cruel ironía, Entropía decidió resucitarla de una forma grotesca, fusionando su torso y su rostro mutilado con los brazos y las piernas de su antiguo compañero Chainsaw, transformándola en una monstruosidad viviente.
 

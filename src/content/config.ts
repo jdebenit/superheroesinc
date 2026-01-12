@@ -152,7 +152,7 @@ const charactersCollection = defineCollection({
         updatedDate: z.date().optional(),
         // Reference to RPG data
         rpgId: z.string().optional(),
-        category: z.enum(['principales', 'secundarios', 'genericos']).default('secundarios'),
+        tags: z.array(z.string()).optional(),
     }),
 });
 

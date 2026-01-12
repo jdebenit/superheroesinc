@@ -4,7 +4,7 @@ description: "Supuesto lider de la Legión Sangrienta. Citado en listados junto 
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-13
 image: "/personajes/julian-provencio.png"
-category: principales
+tags: ["Principales"]
 ---
 
 Julián Provencio es un liberado cuya existencia está marcada por las memorias de vidas pasadas. No las recuerda como relatos completos, sino como fragmentos, sensaciones y escenas que emergen sin aviso. Son ecos de otras épocas, de decisiones tomadas y errores cometidos, y con el tiempo le han otorgado una comprensión profunda del delicado equilibrio entre la luz y la sombra.

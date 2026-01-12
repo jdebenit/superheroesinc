@@ -4,7 +4,7 @@ description: "Integrante de la Legión Sangrienta. Posible conexión con Avalon.
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-13
 image: "/personajes/shiafo.png"
-category: principales
+tags: ["Principales"]
 ---
 
 Una abominación a los ojos de su propio pueblo. Así fue visto siempre Shiafo, nacido de la unión prohibida entre un hada y un humano. Su existencia nunca debió producirse y Oberon, rey de las hadas, se encargó de recordárselo. Como castigo fue condenado a vivir en la Tierra por toda la eternidad, exiliado, separado de los suyos y privado de cualquier posibilidad de regreso. No habría redención ni perdón. Solo tiempo. Demasiado tiempo.

@@ -4,8 +4,8 @@ description: "Terror es un muerto viviente intangible y silencioso que mata con 
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-08
 image: "/personajes/terror.png"
-category: principales
 rpgId: terror
+tags: ["Principales"]
 ---
 
 Terror es un ser extraño e inquietante, conocido por su capacidad para alterar la densidad de su cuerpo, lo que le permite volar y emitir energía mágica. Fue ingresado en un hospital tras una noche de invierno, pero ya era demasiado tarde para salvarlo: presentaba múltiples heridas de arma blanca, todas mortales. No llevaba documentación alguna que permitiera identificarlo, y la policía asumió que se trataba de un desconocido muerto en una pelea. Sin embargo, la realidad era mucho más compleja.
