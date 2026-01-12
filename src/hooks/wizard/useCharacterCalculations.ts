@@ -9,6 +9,7 @@ import { EXOSKELETON_ARMOR_CONFIGS } from '../../data/exoskeletonArmorConfigs';
 import { TECHNOSUIT_STRENGTH_CONFIGS } from '../../data/technoSuitStrengthConfigs';
 import { ENTE_FORMS, ENTE_EFFECTS } from '../../components/wizard/steps/Step3_Especials/sections/EnteSection';
 import { POSEIDO_FORMS } from '../../components/wizard/steps/Step3_Especials/sections/PoseidoSection';
+import { calculateEM, hasSubtype } from '../../components/wizard/steps/Step3_Especials/utils';
 import { INCOME_SOURCES } from '../../data/technologicalOptions';
 import { SEQUELS } from '../../data/sequels';
 import { GUARDIAN_QUALITIES } from '../../data/guardianOptions';
@@ -63,20 +64,18 @@ export function useCharacterCalculations(character: any) {
 
         total += economicCost + legalCost + socialCost + friendsCost;
 
+        const selectedPowers = character.powers?.selected || [];
+
         // 7. Coste de Exceso de Magia (EM)
         // Por cada 1 punto de EM que se pase del total disponible: +0.1 PC
-        const int = character.attributes?.values?.['Inteligencia'] || 0;
-        const per = character.attributes?.values?.['Percepción'] || 0;
-        const vol = character.attributes?.values?.['Voluntad'] || 0;
+        // If Mago, divisor is always 1
+        const isMago = hasSubtype(character, 'Arcano', 'Mago');
 
-        // If Semidemonio, add CON to the formula
-        const isSemidemonio = character.origin?.items?.some((o: any) =>
-            o.category === 'Sobrenatural' && o.subtype === 'Semidemonio'
-        );
-        const con = isSemidemonio ? (character.attributes?.values?.['Constitución'] || 0) : 0;
+        let emDivisor = character.spells?.emFormula?.divisor || 1;
+        if (isMago) emDivisor = 1;
 
-        const emDivisor = character.spells?.emFormula?.divisor || 1;
-        const maxEM = Math.floor((int + per + vol + con) / emDivisor);
+        // Use shared calculateEM to ensure power modifiers are included
+        const maxEM = calculateEM(character, selectedPowers, emDivisor);
 
         const selectedSpells = character.spells?.selected || [];
         // Spells are now objects with { id, rank }
@@ -107,7 +106,6 @@ export function useCharacterCalculations(character: any) {
         }
 
         // 9. Power Costs (Base + Rank/PowerMod)
-        const selectedPowers = character.powers?.selected || [];
         // Tracking used free powers
         let tesKharFreeUsed = false;
         let atlanteAnimalUsed = false;
