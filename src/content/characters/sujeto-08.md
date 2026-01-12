@@ -6,6 +6,7 @@ source: "Superhéroes INC. Edición Limitada"
 updatedDate: 2025-11-26
 powers:
   - "Telequinesis"
+tags: ["Secundarios"]
 ---
 
 Sujeto 08 del Proyecto Euroman, portuguesa, con capacidad de **telequinesis**. Figura como fallecida tras los eventos asociados al programa.

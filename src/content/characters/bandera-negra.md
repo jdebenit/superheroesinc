@@ -3,6 +3,7 @@ name: "Bandera Negra"
 description: "Metahumano italiano capaz de atravesar materia. Miembro de Vértice de Combate (Kampf Scheitel) durante la Guerra Civil Española."
 source: "Superhéroes INC. Tercera Edición"
 updatedDate: 2025-11-30
+tags: ["Secundarios"]
 ---
 
 **Bandera Negra** es el nombre en clave de **Carlo Mazzoni**, un metahumano italiano reclutado por el Dr. Gustav Koch durante los experimentos de la **Sección 19** en España. Su habilidad principal es la **intangibilidad**, pudiendo atravesar materia sólida sin sufrir daño. Su perfil operativo lo convirtió en un infiltrador agresivo, un combatiente versátil y uno de los tres integrantes del grupo **Vértice de Combate**, junto a **Lince** y **Gólem**.

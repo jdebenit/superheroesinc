@@ -6,6 +6,7 @@ source: "Superhéroes INC. Edición Limitada"
 updatedDate: 2025-11-26
 powers:
   - "Vuelo"
+tags: ["Secundarios"]
 ---
 
 Sujeto 15 del Proyecto Euroman, de nacionalidad austriaca, con capacidad de **vuelo**. Figura como fallecido en los anexos del proyecto.

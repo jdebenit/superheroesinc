@@ -8,6 +8,7 @@ powers:
   - "Control del fuego"
   - "Superfuerza"
   - "Superconstitución"
+tags: ["Secundarios"]
 ---
 
 Sujeto 05 del **Proyecto Euroman**, de origen alemán. Además de la mejora física estándar, desarrolló piroquinesis. Figura como fallecida en el registro retrospectivo de sujetos.
