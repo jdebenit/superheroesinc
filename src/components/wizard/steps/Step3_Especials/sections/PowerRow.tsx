@@ -349,7 +349,7 @@ export default function PowerRow({
                             {/* Characteristic Value */}
                             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem' }}>
                                 <span style={{ color: '#6b7280', fontWeight: 'bold' }}>
-                                    {getCharacteristicValue(data, getCharName(p.characteristic || ''))}
+                                    {getCharacteristicValue(data, getCharName(p.characteristic || '')) - (selection.powerMod || 0)}
                                 </span>
                                 <span style={{ fontSize: '0.65rem', color: '#9ca3af' }}>
                                     {p.characteristic}
@@ -366,7 +366,7 @@ export default function PowerRow({
                                     max="200"
                                     value={selection.powerMod || 0}
                                     onChange={(e) => {
-                                        const charValue = getCharacteristicValue(data, getCharName(p.characteristic || ''));
+                                        const charValue = getCharacteristicValue(data, getCharName(p.characteristic || '')) - (selection.powerMod || 0);
                                         const newMod = parseInt(e.target.value, 10) || 0;
                                         const total = charValue + newMod;
                                         if (total <= 200) {
@@ -394,7 +394,7 @@ export default function PowerRow({
                             {/* Total */}
                             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem' }}>
                                 <span style={{ color: '#10b981', fontWeight: 'bold' }}>
-                                    {getCharacteristicValue(data, getCharName(p.characteristic || '')) + (selection.powerMod || 0)}
+                                    {getCharacteristicValue(data, getCharName(p.characteristic || ''))}
                                 </span>
                                 <span style={{ fontSize: '0.65rem', color: '#9ca3af' }}>
                                     Total
