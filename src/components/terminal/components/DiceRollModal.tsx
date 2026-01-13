@@ -18,10 +18,15 @@ export default function DiceRollModal({
     rollType = 'd100',
     onRoll
 }: DiceRollModalProps) {
+    const [difficultyModifier, setDifficultyModifier] = useState<number>(0);
+    const [customModifier, setCustomModifier] = useState<string>(''); // String to handle empty input
     const [result, setResult] = useState<number | null>(null);
     const [isRolling, setIsRolling] = useState(false);
 
     if (!isOpen) return null;
+
+    const parsedCustomMod = parseInt(customModifier) || 0;
+    const finalTargetValue = Math.max(0, Math.min(100, targetValue + difficultyModifier + parsedCustomMod));
 
     const handleRoll = () => {
         setIsRolling(true);
@@ -39,6 +44,8 @@ export default function DiceRollModal({
     const handleClose = () => {
         setResult(null);
         setIsRolling(false);
+        setDifficultyModifier(0);
+        setCustomModifier('');
         onClose();
     };
 
@@ -50,7 +57,7 @@ export default function DiceRollModal({
         return 'failure';
     };
 
-    const resultStatus = result !== null ? getResultStatus(result, targetValue) : '';
+    const resultStatus = result !== null ? getResultStatus(result, finalTargetValue) : '';
 
     return (
         <div className="history-modal-overlay" onClick={handleClose}>
@@ -61,21 +68,74 @@ export default function DiceRollModal({
                 </div>
 
                 <div className="history-modal-body roll-modal-body">
-                    <div className="roll-attribute-info">
-                        <span className="roll-label">Objetivo:</span>
-                        <span className="roll-value">{targetValue}</span>
+
+                    {/* Formula Section - Always at top */}
+                    <div className="roll-attribute-info compact">
+                        <div className="roll-formula">
+                            <span className="formula-part" title="Valor Base">{targetValue}</span>
+                            <span className="formula-op">{difficultyModifier >= 0 ? '+' : '-'}</span>
+                            <span className={`formula-part ${difficultyModifier < 0 ? 'negative' : 'positive'}`} title="Dificultad">
+                                {Math.abs(difficultyModifier)}
+                            </span>
+                            <span className="formula-op">{parsedCustomMod >= 0 ? '+' : '-'}</span>
+                            <span className={`formula-part ${parsedCustomMod !== 0 ? 'active' : ''}`} title="Personalizado">
+                                {Math.abs(parsedCustomMod)}
+                            </span>
+                            <span className="formula-eq">=</span>
+                            <span className="formula-result">{finalTargetValue}%</span>
+                        </div>
+                        <div className="roll-formula-label">Probabilidad de Éxito</div>
                     </div>
 
-                    <div className="roll-action-area">
-                        {result === null ? (
-                            <button
-                                className={`roll-circular-btn ${isRolling ? 'rolling' : ''}`}
-                                onClick={handleRoll}
-                                disabled={isRolling}
-                            >
-                                {isRolling ? '...' : 'LANZAR'}
-                            </button>
-                        ) : (
+                    <div className="roll-main-content">
+                        {/* Pre-Roll: Modifiers Left + Button Right */}
+                        {result === null && (
+                            <>
+                                <div className="roll-modifiers-column">
+                                    <div className="roll-modifier-group">
+                                        <label>Dificultad</label>
+                                        <select
+                                            value={difficultyModifier}
+                                            onChange={(e) => setDifficultyModifier(parseInt(e.target.value))}
+                                            className="roll-modifier-select"
+                                        >
+                                            <option value={-100}>Imposible (-100)</option>
+                                            <option value={-75}>Extrema (-75)</option>
+                                            <option value={-50}>Difícil (-50)</option>
+                                            <option value={-25}>Poca (-25)</option>
+                                            <option value={0}>Normal (0)</option>
+                                            <option value={15}>Fácil (+15)</option>
+                                            <option value={30}>Bastante (+30)</option>
+                                            <option value={50}>Muy fácil (+50)</option>
+                                        </select>
+                                    </div>
+
+                                    <div className="roll-modifier-group">
+                                        <label>Pers.</label>
+                                        <input
+                                            type="number"
+                                            placeholder="Mod."
+                                            value={customModifier}
+                                            onChange={(e) => setCustomModifier(e.target.value)}
+                                            className="roll-modifier-input"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div className="roll-button-column">
+                                    <button
+                                        className={`roll-circular-btn ${isRolling ? 'rolling' : ''}`}
+                                        onClick={handleRoll}
+                                        disabled={isRolling}
+                                    >
+                                        {isRolling ? '...' : 'LANZAR'}
+                                    </button>
+                                </div>
+                            </>
+                        )}
+
+                        {/* Post-Roll: Result Centered */}
+                        {result !== null && (
                             <div className="roll-result-display">
                                 <div className="roll-result-label">
                                     {resultStatus === 'critical-success' && '¡ÉXITO CRÍTICO!'}
@@ -85,6 +145,9 @@ export default function DiceRollModal({
                                 </div>
                                 <div className={`roll-result-number ${resultStatus}`}>
                                     {result}
+                                </div>
+                                <div className="roll-target-reference">
+                                    Objetivo: {finalTargetValue}
                                 </div>
                                 <button className="roll-again-btn" onClick={handleRoll}>
                                     Tirar de nuevo

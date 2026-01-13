@@ -246,21 +246,71 @@
     font-weight: 700;
 }
 
-.roll-action-area {
+/* Cleaned up modifier styles */
+/* Compact Roll Modal Styles */
+.roll-attribute-info.compact {
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #e5e7eb;
     width: 100%;
+}
+
+.roll-main-content {
     display: flex;
-    justify-content: center;
-    min-height: 180px;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 140px;
+}
+
+.roll-modifiers-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.roll-button-column {
+    flex: 0 0 auto;
+}
+
+.roll-modifier-group {
+    display: flex;
+    flex-direction: row;
+    /* Horizontal label + input */
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.roll-modifier-group label {
+    flex: 0 0 60px;
+    /* Fixed width label */
+    font-size: 0.8rem;
+    color: #6b7280;
+    font-weight: 600;
+    margin: 0;
+    text-align: right;
+}
+
+.roll-modifier-select,
+.roll-modifier-input {
+    flex: 1;
+    padding: 0.4rem;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    color: #111827;
 }
 
 .roll-circular-btn {
-    width: 140px;
-    height: 140px;
+    width: 100px;
+    height: 100px;
+    font-size: 1.1rem;
     border-radius: 50%;
     background: #2563eb;
     color: white;
     border: none;
-    font-size: 1.25rem;
     font-weight: 800;
     letter-spacing: 0.05em;
     cursor: pointer;
@@ -301,6 +351,7 @@
 }
 
 .roll-result-display {
+    width: 100%;
     text-align: center;
     animation: fadeIn 0.3s ease-out;
 }
