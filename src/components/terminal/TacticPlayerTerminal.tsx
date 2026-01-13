@@ -6,6 +6,7 @@ import StatCard from './components/StatCard';
 import HistoryModal from './components/HistoryModal';
 import EditStatModal from './components/EditStatModal';
 import EmptyState from './components/EmptyState';
+import AttributesPanel from './components/AttributesPanel';
 
 
 interface CharacterData {
@@ -15,7 +16,7 @@ interface CharacterData {
     otherstats?: string[];
     attributes: {
         values: {
-            Voluntad: number;
+            [key: string]: number;
         };
     };
 }
@@ -376,6 +377,8 @@ export default function TacticPlayerTerminal() {
                             onEdit={() => openEditModal('willpower')}
                         />
                     </div>
+
+                    <AttributesPanel attributes={character.attributes.values} />
                 </div>
             ) : (
                 <EmptyState />
