@@ -9,9 +9,6 @@ La web de **Superhéroes INC** inicia hoy una nueva fase con la incorporación d
 Este es el primer paso de un proceso continuo que ampliará y actualizará el lore de forma progresiva, respetando las fuentes originales y añadiendo material procedente de campañas, suplementos y documentos internos.
 
 Hasta ahora, gran parte de esta información permanecía dispersa en libros, apuntes de autor, partidas privadas o archivos de desarrollo. Con esta actualización, comenzamos a reunirlo todo en un espacio común, accesible y estructurado para la comunidad.
-
----
-
 ## Un paso inicial hacia un Lore más completo
 
 Esta fase inicial incluye la incorporación de:
@@ -21,9 +18,6 @@ Esta fase inicial incluye la incorporación de:
 - Localizaciones clave del multiverso, desde reinos mágicos hasta ciudades de Terra.  
 
 A medida que el mapa del universo vaya completándose, la comunidad podrá consultar cada elemento con su ficha correspondiente, su contexto y su papel dentro del canon.
-
----
-
 ## Construyendo una base sólida para futuras expansiones
 
 Este proceso marcará el ritmo de las próximas semanas:
@@ -34,8 +28,6 @@ Este proceso marcará el ritmo de las próximas semanas:
 - Se irán enlazando organizaciones, personajes y lugares dentro del multiverso.  
 
 El objetivo no es solo documentar, sino **abrir el universo** para que guionistas y jugadores dispongan de herramientas fiables y actualizadas.
-
----
 
 ## Un proyecto vivo desde su primer paso
 
