@@ -1,19 +1,23 @@
 import React, { useState } from 'react';
 import '../TacticPlayerTerminal.css';
 
-interface AttributeRollModalProps {
+interface DiceRollModalProps {
     isOpen: boolean;
     onClose: () => void;
-    attributeName: string;
-    attributeValue: number;
+    title: string;
+    targetValue: number;
+    rollType?: 'd100'; // Prepared for future expansion
+    onRoll?: (result: number) => void;
 }
 
-export default function AttributeRollModal({
+export default function DiceRollModal({
     isOpen,
     onClose,
-    attributeName,
-    attributeValue
-}: AttributeRollModalProps) {
+    title,
+    targetValue,
+    rollType = 'd100',
+    onRoll
+}: DiceRollModalProps) {
     const [result, setResult] = useState<number | null>(null);
     const [isRolling, setIsRolling] = useState(false);
 
@@ -28,6 +32,7 @@ export default function AttributeRollModal({
             const roll = Math.floor(Math.random() * 100) + 1;
             setResult(roll);
             setIsRolling(false);
+            if (onRoll) onRoll(roll);
         }, 600);
     };
 
@@ -37,18 +42,28 @@ export default function AttributeRollModal({
         onClose();
     };
 
+    // Determine result status
+    const getResultStatus = (roll: number, target: number) => {
+        if (roll <= 5) return 'critical-success';
+        if (roll >= 96) return 'critical-failure';
+        if (roll <= target) return 'success';
+        return 'failure';
+    };
+
+    const resultStatus = result !== null ? getResultStatus(result, targetValue) : '';
+
     return (
         <div className="history-modal-overlay" onClick={handleClose}>
-            <div className="history-modal attribute-roll-modal" onClick={e => e.stopPropagation()}>
+            <div className={`history-modal attribute-roll-modal ${resultStatus}`} onClick={e => e.stopPropagation()}>
                 <div className="history-modal-header">
-                    <h2>Tirada de {attributeName}</h2>
+                    <h2>{title}</h2>
                     <button className="close-modal-btn" onClick={handleClose}>&times;</button>
                 </div>
 
                 <div className="history-modal-body roll-modal-body">
                     <div className="roll-attribute-info">
-                        <span className="roll-label">Valor Base:</span>
-                        <span className="roll-value">{attributeValue}</span>
+                        <span className="roll-label">Objetivo:</span>
+                        <span className="roll-value">{targetValue}</span>
                     </div>
 
                     <div className="roll-action-area">
@@ -62,8 +77,13 @@ export default function AttributeRollModal({
                             </button>
                         ) : (
                             <div className="roll-result-display">
-                                <div className="roll-result-label">Resultado</div>
-                                <div className={`roll-result-number ${result <= attributeValue ? 'success' : 'failure'}`}>
+                                <div className="roll-result-label">
+                                    {resultStatus === 'critical-success' && '¡ÉXITO CRÍTICO!'}
+                                    {resultStatus === 'critical-failure' && '¡FALLO CRÍTICO!'}
+                                    {resultStatus === 'success' && 'Éxito'}
+                                    {resultStatus === 'failure' && 'Fallo'}
+                                </div>
+                                <div className={`roll-result-number ${resultStatus}`}>
                                     {result}
                                 </div>
                                 <button className="roll-again-btn" onClick={handleRoll}>

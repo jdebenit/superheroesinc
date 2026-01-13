@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../TacticPlayerTerminal.css';
-import AttributeRollModal from './AttributeRollModal';
+import DiceRollModal from './DiceRollModal';
 
 interface SkillItem {
     name: string;
@@ -65,11 +65,11 @@ export default function SkillsPanel({ generalSkills, learningSkills }: SkillsPan
             )}
 
             {selectedSkill && (
-                <AttributeRollModal
+                <DiceRollModal
                     isOpen={!!selectedSkill}
                     onClose={() => setSelectedSkill(null)}
-                    attributeName={selectedSkill.name}
-                    attributeValue={selectedSkill.value}
+                    title={`Lanzar ${selectedSkill.name}`}
+                    targetValue={selectedSkill.value}
                 />
             )}
         </div>

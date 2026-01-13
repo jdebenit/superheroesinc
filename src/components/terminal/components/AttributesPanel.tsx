@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../TacticPlayerTerminal.css';
-import AttributeRollModal from './AttributeRollModal';
+import DiceRollModal from './DiceRollModal';
 
 interface AttributesPanelProps {
     attributes: {
@@ -43,11 +43,11 @@ export default function AttributesPanel({ attributes }: AttributesPanelProps) {
             </div>
 
             {selectedAttribute && (
-                <AttributeRollModal
+                <DiceRollModal
                     isOpen={!!selectedAttribute}
                     onClose={() => setSelectedAttribute(null)}
-                    attributeName={selectedAttribute.name}
-                    attributeValue={selectedAttribute.value}
+                    title={`Lanzar ${selectedAttribute.name}`}
+                    targetValue={selectedAttribute.value}
                 />
             )}
         </div>

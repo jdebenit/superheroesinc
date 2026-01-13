@@ -322,8 +322,33 @@
     color: #16a34a;
 }
 
+.roll-result-number.critical-success {
+    color: #eab308;
+    text-shadow: 0 0 10px rgba(234, 179, 8, 0.4);
+    animation: successPulse 1s infinite;
+}
+
 .roll-result-number.failure {
     color: #dc2626;
+}
+
+.roll-result-number.critical-failure {
+    color: #991b1b;
+    text-shadow: 0 0 5px rgba(153, 27, 27, 0.5);
+}
+
+@keyframes successPulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
 .roll-again-btn {
