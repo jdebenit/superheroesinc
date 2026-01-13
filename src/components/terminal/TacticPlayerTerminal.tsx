@@ -385,12 +385,36 @@ export default function TacticPlayerTerminal() {
                         editModalType === 'mental' ? "Modificar EQM" :
                             "Modificar VOLUNTAD"
                 }
-                currentValue={editModalType === 'health' ? stats.currentHealth : 0}
-                changeValue={editModalType === 'health' ? healthChange : ''}
-                notes={editModalType === 'health' ? healthNotes : ''}
-                onChangeValueChange={editModalType === 'health' ? setHealthChange : () => { }}
-                onNotesChange={editModalType === 'health' ? setHealthNotes : () => { }}
-                onApply={editModalType === 'health' ? applyHealthChange : () => { }}
+                currentValue={
+                    editModalType === 'health' ? stats.currentHealth :
+                        editModalType === 'mental' ? stats.currentMentalBalance :
+                            (stats.willpower - stats.usedWillpower)
+                }
+                changeValue={
+                    editModalType === 'health' ? healthChange :
+                        editModalType === 'mental' ? mentalChange :
+                            willpowerChange
+                }
+                notes={
+                    editModalType === 'health' ? healthNotes :
+                        editModalType === 'mental' ? mentalNotes :
+                            willpowerNotes
+                }
+                onChangeValueChange={
+                    editModalType === 'health' ? setHealthChange :
+                        editModalType === 'mental' ? setMentalChange :
+                            setWillpowerChange
+                }
+                onNotesChange={
+                    editModalType === 'health' ? setHealthNotes :
+                        editModalType === 'mental' ? setMentalNotes :
+                            setWillpowerNotes
+                }
+                onApply={
+                    editModalType === 'health' ? applyHealthChange :
+                        editModalType === 'mental' ? applyMentalChange :
+                            applyWillpowerChange
+                }
             />
         </div>
     );
