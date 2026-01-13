@@ -8,7 +8,6 @@
         "Liberada": [
           "Liberada alineada con Entropía (FUE)",
           "Conocimiento de las esferas (CON)",
-          "Comprensión de la senda: Magia",
           "+20 a la parada mental"
         ]
       },
@@ -40,32 +39,32 @@
   "combatstats": [
     "Acciones por asalto: 3",
     "Iniciativa y Reflejos: 44",
-    "Puntos de Vida: 71",
-    "Equilibrio Mental: 60"
+    "Puntos de Vida: 91",
+    "Equilibrio Mental: 80"
   ],
   "otherstats": [
-    "Inconsciencia: 7",
+    "Inconsciencia: 8",
     "Recuperación: 4 PV/h",
     "Resistencia a gases y venenos: 37%",
     "Resistencia a prejuicios: 50%",
-    "Modificador de fuerza: 1d100+20",
-    "Peso Levantado: 20 Toneladas",
+    "Modificador de fuerza: 1d100+30",
+    "Peso Levantado: 30 Toneladas",
     "Daño absorbido físico: 30 (70)",
     "Daño absorbido mental: 0",
     "Modificador de impacto: 20",
     "Modificador Psionico: 30",
     "Parada Fisica: 22",
     "Parada mental: 50+20",
-    "Salto (alto / largo): 6m/18,2m"
+    "Salto (alto / largo): 15.16m/45.5m"
   ],
   "attributes": {
     "values": {
-      "Fuerza": 120,
+      "Fuerza": 130,
       "Constitución": 111,
       "Agilidad": 91,
       "Inteligencia": 60,
       "Percepción": 88,
-      "Apariencia": 741,
+      "Apariencia": 79,
       "Voluntad": 91
     }
   },
@@ -78,12 +77,12 @@
       },
       {
         "name": "Comb. cuerpo a cuerpo",
-        "value": "109%",
+        "value": "99%",
         "math": "(AGI+PER)/2"
       },
       {
         "name": "Conocimientos generales",
-        "value": "20%",
+        "value": "26%",
         "math": "(INT/3)"
       },
       {
@@ -98,27 +97,27 @@
       },
       {
         "name": "Influencia",
-        "value": "67+20%",
+        "value": "79+20%",
         "math": "(INT+APA)/2"
       },
       {
         "name": "Idioma nativo",
-        "value": "60%",
+        "value": "80%",
         "math": "(INT)"
       },
       {
         "name": "Investigar",
-        "value": "49%",
+        "value": "56%",
         "math": "(INT+PER)/3"
       },
       {
         "name": "Lanzar",
-        "value": "104%",
+        "value": "109%",
         "math": "(FUE+PER)/2"
       },
       {
         "name": "Primeros auxilios",
-        "value": "30%",
+        "value": "40%",
         "math": "(INT)/2"
       },
       {
@@ -135,28 +134,23 @@
     "specialItems": [
       {
         "name": "Otro Idioma - Inglés",
-        "value": "20+20%"
+        "value": "26+20%"
       },
       {
         "name": "Historía",
-        "value": "20+20%"
+        "value": "26+20%"
       },
       {
         "name": "Conducir Vehículo: coche",
-        "value": "37%"
+        "value": "42%"
       },
       {
         "name": "Quimica",
-        "value": "20%"
+        "value": "26%"
       },
-      {
-        "name": "Mágia",
-        "value": "74%"
-      }
     ]
   },
   "background": {
-    "cost": -8,
     "prejudiceResistance": 50,
     "economicStatus": "clase_medio_baja",
     "legalStatus": "sin_antecedentes",
