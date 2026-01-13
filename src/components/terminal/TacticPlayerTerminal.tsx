@@ -26,6 +26,11 @@ interface CharacterData {
             value: number | string;
             math?: string;
         }>;
+        specialItems: Array<{
+            name: string;
+            value: number | string;
+            math?: string;
+        }>;
     };
 }
 
@@ -388,8 +393,11 @@ export default function TacticPlayerTerminal() {
 
                     <AttributesPanel attributes={character.attributes.values} />
 
-                    {character.skills?.generalItems && (
-                        <SkillsPanel skills={character.skills.generalItems} />
+                    {(character.skills?.generalItems || character.skills?.specialItems) && (
+                        <SkillsPanel
+                            generalSkills={character.skills?.generalItems}
+                            learningSkills={character.skills?.specialItems}
+                        />
                     )}
                 </div>
             ) : (
