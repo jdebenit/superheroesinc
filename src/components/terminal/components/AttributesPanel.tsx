@@ -17,8 +17,8 @@ export default function AttributesPanel({ attributes }: AttributesPanelProps) {
         'Agilidad',
         'Constitución',
         'Inteligencia',
-        'Intuición',
-        'Carisma',
+        'Percepción',
+        'Apariencia',
         'Voluntad'
     ];
 

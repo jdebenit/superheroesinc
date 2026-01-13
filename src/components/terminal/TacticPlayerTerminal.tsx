@@ -7,6 +7,7 @@ import HistoryModal from './components/HistoryModal';
 import EditStatModal from './components/EditStatModal';
 import EmptyState from './components/EmptyState';
 import AttributesPanel from './components/AttributesPanel';
+import SkillsPanel from './components/SkillsPanel';
 
 
 interface CharacterData {
@@ -18,6 +19,13 @@ interface CharacterData {
         values: {
             [key: string]: number;
         };
+    };
+    skills?: {
+        generalItems: Array<{
+            name: string;
+            value: number | string;
+            math?: string;
+        }>;
     };
 }
 
@@ -379,6 +387,10 @@ export default function TacticPlayerTerminal() {
                     </div>
 
                     <AttributesPanel attributes={character.attributes.values} />
+
+                    {character.skills?.generalItems && (
+                        <SkillsPanel skills={character.skills.generalItems} />
+                    )}
                 </div>
             ) : (
                 <EmptyState />
