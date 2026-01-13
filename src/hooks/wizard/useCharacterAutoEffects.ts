@@ -229,6 +229,90 @@ export function useCharacterAutoEffects(data: any, onChange: (updates: any) => v
         data,
         onChange
     ]);
+
+    // Auto-update Attributes when Powers change (Power Mods)
+    useEffect(() => {
+        if (!data.attributes?.breakdown) return;
+
+        const powerMods: { [key: string]: number } = {};
+        const charMap: Record<string, string> = {
+            'FUE': 'fuerza',
+            'AGI': 'agilidad',
+            'CON': 'constitucion',
+            'INT': 'inteligencia',
+            'PER': 'percepcion',
+            'APA': 'apariencia',
+            'VOL': 'voluntad'
+        };
+
+        const CHARACTERISTICS = [
+            { id: 'fuerza', name: 'Fuerza' },
+            { id: 'constitucion', name: 'Constitución' },
+            { id: 'agilidad', name: 'Agilidad' },
+            { id: 'inteligencia', name: 'Inteligencia' },
+            { id: 'percepcion', name: 'Percepción' },
+            { id: 'apariencia', name: 'Apariencia' },
+            { id: 'voluntad', name: 'Voluntad' }
+        ];
+
+        // Calculate expected power mods
+        selectedPowers.forEach((p: any) => {
+            const powerData = POWERS.find(pd => pd.id === p.id);
+            if (powerData?.characteristic) {
+                const charId = charMap[powerData.characteristic];
+                if (charId) {
+                    const mod = Number(p.powerMod) || 0;
+                    powerMods[charId] = (powerMods[charId] || 0) + mod;
+                }
+            }
+        });
+
+        // Check if update is needed
+        let hasChanges = false;
+        const newBreakdown = { ...data.attributes.breakdown };
+        
+        CHARACTERISTICS.forEach(char => {
+            const charId = char.id;
+            const currentMod = newBreakdown[charId]?.powerMod || 0;
+            const newMod = powerMods[charId] || 0;
+            
+            if (currentMod !== newMod) {
+                hasChanges = true;
+                if (!newBreakdown[charId]) { // Just in case
+                    newBreakdown[charId] = { base: 40, originMod: 0, specialtyMod: 0, powerMod: 0, otherMod: 0 };
+                }
+                newBreakdown[charId] = {
+                    ...newBreakdown[charId],
+                    powerMod: newMod
+                };
+            }
+        });
+
+        if (hasChanges) {
+            // Recalculate values
+            const newValues: { [key: string]: number } = {};
+
+            CHARACTERISTICS.forEach(char => {
+                const c = newBreakdown[char.id];
+                const base = c.base || 0;
+                const origin = c.originMod || 0;
+                const specialty = c.specialtyMod || 0;
+                const power = c.powerMod || 0;
+                const other = c.otherMod || 0;
+                
+                newValues[char.name] = base + origin + specialty + power + other;
+            });
+
+            onChange({
+                ...data,
+                attributes: {
+                    ...data.attributes,
+                    values: newValues,
+                    breakdown: newBreakdown
+                }
+            });
+        }
+    }, [selectedPowers, data.attributes?.breakdown, onChange, data]); // specific dependencies are important
 }
 
 export function useSkillAutoEffects(data: any, selectedSkills: any, specifiedSkills: any, setSelectedSkills: any, setSpecifiedSkills: any) {
