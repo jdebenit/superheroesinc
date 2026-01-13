@@ -25,12 +25,14 @@
             "id": "b85975ec2cf7a6db",
             "type": "leaf",
             "state": {
-              "type": "release-notes",
+              "type": "markdown",
               "state": {
-                "currentVersion": "1.11.4"
+                "file": "blog/lanzamiento.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-book-up",
-              "title": "Registro de cambios 1.11.4"
+              "icon": "lucide-file",
+              "title": "lanzamiento"
             }
           }
         ],
@@ -198,8 +200,10 @@
   },
   "active": "b85975ec2cf7a6db",
   "lastOpenFiles": [
-    "blog/nueva-web.md",
     "blog/metahumanos-demasiado-poderosos-salida.md",
+    "blog/el-vigilante-no-es-un-atajo.md",
+    "blog/actual-plays-superheroes-inc.md",
+    "blog/nueva-web.md",
     "blog/nuevos-contenidos.md",
     "blog/lanzamiento.md",
     "2026-01-30.md",
@@ -209,7 +213,6 @@
     "lore/organizaciones/vientos-de-erebus.md",
     "blog/juego-rol-superheroes-inc-contenido-vivo.md",
     "blog/la-web-como-punto-de-encuentro-del-juego.md",
-    "blog/actual-plays-superheroes-inc.md",
     "lore/localizaciones/valladolid.md",
     "lore/localizaciones/valdoria.md",
     "faq/13-daño-lanzar-objetos-telequinesis.md",
@@ -222,7 +225,6 @@
     "blog/haciendo-fichas-sin-calculadora.md",
     "blog/Sin título.md",
     "blog/crear-campana-rol-superheroes-en-espana-guia-epica-y-lore.md",
-    "blog/el-vigilante-no-es-un-atajo.md",
     "blog/guia-escritura-shi-replay-script.md",
     "faq",
     "rpg/leon-rojo.yaml",
