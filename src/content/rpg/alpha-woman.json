@@ -5,33 +5,14 @@
   "origin": {
     "items": [
       {
-        "Liberada": [
-          "Liberada alineada con Entropía (FUE)",
-          "Conocimiento de las esferas (CON)",
-          "+20 a la parada mental"
+        "Sobrenatural": [
+          "Liberado de Entropía"
         ]
       },
       {
         "Vigilante": [
-          "Disponibilidad de armamento a dificultad reducida",
-          "Recarga rápida",
-          "Recuerdos dolorosos",
-          "Voluntad férrea"
-        ]
-      },
-      {
-        "Fanático": [
-          "+20 Habilidad a elección",
-          "+20 Mod. de Impacto",
-          "-20 a las tiradas de EQM cuando alguien se vaya a irse de rositas sin un buen golpe"
-        ]
-      },
-      {
-        "Manipulador": [
-          "+20 Idea",
-          "+20 Influencia",
-          "+20 Otro Idioma",
-          "Puede repetir una tirada fallida de resistencia a prejuicios"
+          "Manipulador",
+          "Fanático/Vengador"
         ]
       }
     ]
