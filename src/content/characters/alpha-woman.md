@@ -65,8 +65,6 @@ Su fuerza descomunal no es un don activado, es su estado natural cuando deja de 
 
 Las balas no la detienen. No deberían hacerlo. Duelen, atraviesan, desgarran, pero no bastan. Ese no es el tipo de muerte que le corresponde a alguien que aún tiene trabajo que hacer.
 
-La magia que manifiesta no nace del estudio ni de la vocación arcana. Es afinidad. Ocurre cuando el camino lo exige. No hay estética ni ritual. Solo función.
-
 La violencia directa le resulta honesta, pero no actúa sin lectura previa. Prefiere empujar la situación hasta que el estallido sea inevitable. Le interesa el momento exacto en el que el otro comprende que ha cruzado un punto del que no se vuelve.
 
 Alpha Woman no disfruta del caos ciego. Disfruta del cambio forzado. Del momento en que una estructura se rompe porque ya no puede sostenerse. No cree en finales limpios. Cree en consecuencias visibles.
