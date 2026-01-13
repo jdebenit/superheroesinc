@@ -20,8 +20,21 @@
               "icon": "lucide-file",
               "title": "metahumanos-demasiado-poderosos-salida"
             }
+          },
+          {
+            "id": "b85975ec2cf7a6db",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.11.4"
+              },
+              "icon": "lucide-book-up",
+              "title": "Registro de cambios 1.11.4"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -183,7 +196,7 @@
       "bases:Crear nueva base": false
     }
   },
-  "active": "c7ace37ba6503bcf",
+  "active": "b85975ec2cf7a6db",
   "lastOpenFiles": [
     "blog/nueva-web.md",
     "blog/metahumanos-demasiado-poderosos-salida.md",
