@@ -228,9 +228,21 @@ export default function TacticPlayerTerminal() {
     };
 
     const handleDeleteHistoryEntry = (entryToDelete: HistoryEntry) => {
-        setHistory(prev => prev.filter(entry => entry !== entryToDelete));
+        const newHistory = history.filter(entry => entry !== entryToDelete);
+        setHistory(newHistory);
 
-        // Revert the stat change
+        // If history is completely empty, force reset to max values
+        if (newHistory.length === 0) {
+            setStats(prev => ({
+                ...prev,
+                currentHealth: prev.maxHealth,
+                currentMentalBalance: prev.maxMentalBalance,
+                usedWillpower: 0
+            }));
+            return;
+        }
+
+        // Otherwise revert the specific change
         const reverseChange = -entryToDelete.change;
 
         if (entryToDelete.type === 'health') {
