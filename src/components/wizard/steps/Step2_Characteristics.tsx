@@ -657,16 +657,19 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
                                         min="-200"
                                         max="200"
                                         value={c.otherMod || 0}
+                                        disabled={true}
                                         onChange={(e) => handleCharacteristicChange(char.id, 'otherMod', e.target.value)}
                                         style={{
                                             width: '100%',
                                             padding: '0.75rem',
                                             fontSize: '1rem',
-                                            border: '2px solid #d1d5db',
+                                            border: '2px solid #e5e7eb',
                                             borderRadius: '8px',
                                             textAlign: 'center',
                                             fontWeight: 'bold',
-                                            backgroundColor: '#fce7f3'
+                                            backgroundColor: '#f3f4f6',
+                                            cursor: 'not-allowed',
+                                            color: '#9ca3af'
                                         }}
                                     />
                                 </div>

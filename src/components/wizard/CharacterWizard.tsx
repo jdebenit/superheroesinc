@@ -198,7 +198,7 @@ export default function CharacterWizard() {
             {/* Header */}
             <div className="wizard-header">
                 <h1 className="wizard-title">
-                    Generador de Fichas (Beta 0.6.2)
+                    Generador de Fichas (Beta 0.6.4)
                 </h1>
                 <p className="wizard-subtitle">
                     Crea tu personaje paso a paso
