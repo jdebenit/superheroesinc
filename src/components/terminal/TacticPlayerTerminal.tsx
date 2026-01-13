@@ -341,11 +341,6 @@ export default function TacticPlayerTerminal() {
                             max={stats.maxHealth}
                             current={stats.currentHealth}
                             type="health"
-                            changeValue={healthChange}
-                            notes={healthNotes}
-                            onChangeValueChange={setHealthChange}
-                            onNotesChange={setHealthNotes}
-                            onApply={applyHealthChange}
                             onViewHistory={() => openHistoryModal('health')}
                             unconsciousness={stats.unconsciousnessPoints}
                             onEdit={() => openEditModal('health')}
@@ -356,11 +351,6 @@ export default function TacticPlayerTerminal() {
                             max={stats.maxMentalBalance}
                             current={stats.currentMentalBalance}
                             type="mental"
-                            changeValue={mentalChange}
-                            notes={mentalNotes}
-                            onChangeValueChange={setMentalChange}
-                            onNotesChange={setMentalNotes}
-                            onApply={applyMentalChange}
                             onViewHistory={() => openHistoryModal('mental')}
                             onEdit={() => openEditModal('mental')}
                         />
@@ -370,11 +360,6 @@ export default function TacticPlayerTerminal() {
                             max={stats.willpower}
                             current={stats.willpower - stats.usedWillpower}
                             type="willpower"
-                            changeValue={willpowerChange}
-                            notes={willpowerNotes}
-                            onChangeValueChange={setWillpowerChange}
-                            onNotesChange={setWillpowerNotes}
-                            onApply={applyWillpowerChange}
                             onViewHistory={() => openHistoryModal('willpower')}
                             onEdit={() => openEditModal('willpower')}
                         />
@@ -395,7 +380,11 @@ export default function TacticPlayerTerminal() {
             <EditStatModal
                 isOpen={showEditModal}
                 onClose={() => setShowEditModal(false)}
-                title={editModalType === 'health' ? "Modificar Puntos de Vida" : "Modificar Estado"}
+                title={
+                    editModalType === 'health' ? "Modificar PVs" :
+                        editModalType === 'mental' ? "Modificar EQM" :
+                            "Modificar VOLUNTAD"
+                }
                 currentValue={editModalType === 'health' ? stats.currentHealth : 0}
                 changeValue={editModalType === 'health' ? healthChange : ''}
                 notes={editModalType === 'health' ? healthNotes : ''}

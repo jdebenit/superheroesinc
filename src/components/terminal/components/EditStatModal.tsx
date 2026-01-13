@@ -56,6 +56,12 @@ export default function EditStatModal({
                                 placeholder="0"
                                 autoFocus
                             />
+                            <div className="quick-adjust-grid">
+                                <button className="quick-btn positive" onClick={() => onChangeValueChange(String((parseInt(changeValue || '0') || 0) + 1))}>+1</button>
+                                <button className="quick-btn positive" onClick={() => onChangeValueChange(String((parseInt(changeValue || '0') || 0) + 5))}>+5</button>
+                                <button className="quick-btn negative" onClick={() => onChangeValueChange(String((parseInt(changeValue || '0') || 0) - 1))}>-1</button>
+                                <button className="quick-btn negative" onClick={() => onChangeValueChange(String((parseInt(changeValue || '0') || 0) - 5))}>-5</button>
+                            </div>
                         </div>
 
                         <div className="form-group">

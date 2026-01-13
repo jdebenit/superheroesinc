@@ -130,6 +130,8 @@
     gap: 1rem;
     max-width: 1400px;
     margin: 0 auto;
+    justify-content: center;
+    /* Center cards */
 }
 
 .terminal-stat-card {
@@ -728,8 +730,27 @@
 }
 
 /* Edit Stat Modal */
-.edit-stat-modal {
-    max-width: 350px;
+/* Mobile Optimizations for Compact Cards */
+@media (max-width: 768px) {
+    .terminal-stats-grid {
+        display: flex;
+        /* Reinforce flex behavior */
+        flex-direction: column;
+        align-items: stretch;
+        /* Cards extend to full width */
+    }
+
+    .terminal-stat-card.health-variant {
+        width: 100%;
+        /* Override fixed 260px */
+        max-width: none;
+        margin-bottom: 0;
+    }
+
+    .health-current {
+        font-size: 3rem;
+        /* Slightly smaller for very narrow screens */
+    }
 }
 
 /* Bar Colors for Compact Design */
@@ -747,23 +768,25 @@
 
 .edit-stat-current {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
+    /* Right aligned */
     align-items: center;
-    padding: 1rem;
-    background: #f3f4f6;
-    border-radius: 6px;
-    margin-bottom: 1.5rem;
+    gap: 0.5rem;
+    padding: 0;
+    margin-bottom: 0.25rem;
+    border: none;
 }
 
 .edit-stat-current .label {
-    font-weight: 600;
-    color: #4b5563;
+    font-weight: 400;
+    color: #9ca3af;
+    font-size: 0.8rem;
 }
 
 .edit-stat-current .value {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #111827;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #6b7280;
 }
 
 .edit-stat-form {
@@ -1033,3 +1056,54 @@
 .edit-stat-modal {
     max-width: 350px;
 }
+
+.quick-adjust-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.quick-btn {
+    padding: 0.75rem 0;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background: white;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    /* Touch target */
+    min-height: 44px;
+}
+
+.quick-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.quick-btn:active {
+    transform: translateY(0);
+}
+
+.quick-btn.positive {
+    color: #16a34a;
+    border-color: #bbf7d0;
+    background: #f0fdf4;
+}
+
+.quick-btn.positive:hover {
+    background: #dcfce7;
+}
+
+.quick-btn.negative {
+    color: #dc2626;
+    border-color: #fecaca;
+    background: #fef2f2;
+}
+
+.quick-btn.negative:hover {
+    background: #fee2e2;
+}
+
+/* Bar Colors for Compact Design */

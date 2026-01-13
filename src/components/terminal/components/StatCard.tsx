@@ -1,19 +1,12 @@
 import React from 'react';
-import ChangeInputSection from './ChangeInputSection';
 
 interface StatCardProps {
     label: string;
     max: number;
     current: number;
     type: 'health' | 'mental' | 'willpower';
-    changeValue: string;
-    notes: string;
-    onChangeValueChange: (value: string) => void;
-    onNotesChange: (value: string) => void;
-    onApply: () => void;
     onViewHistory: () => void;
     showBar?: boolean;
-    customDisplay?: React.ReactNode;
     unconsciousness?: number;
     onEdit?: () => void;
 }
@@ -23,14 +16,8 @@ export default function StatCard({
     max,
     current,
     type,
-    changeValue,
-    notes,
-    onChangeValueChange,
-    onNotesChange,
-    onApply,
     onViewHistory,
     showBar = true,
-    customDisplay,
     unconsciousness,
     onEdit
 }: StatCardProps) {
