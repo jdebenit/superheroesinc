@@ -14,6 +14,8 @@ interface StatCardProps {
     onViewHistory: () => void;
     showBar?: boolean;
     customDisplay?: React.ReactNode;
+    unconsciousness?: number;
+    onEdit?: () => void;
 }
 
 export default function StatCard({
@@ -28,25 +30,46 @@ export default function StatCard({
     onApply,
     onViewHistory,
     showBar = true,
-    customDisplay
+    customDisplay,
+    unconsciousness,
+    onEdit
 }: StatCardProps) {
-    const barFillClass = type === 'health' ? 'health' :
-        type === 'mental' ? 'mental' :
-            'willpower';
+    const barFillClass = type === 'mental' ? 'mental' : (type === 'willpower' ? 'willpower' : 'health');
 
     return (
-        <div className="terminal-stat-card">
-            <div className="terminal-stat-label">{label}</div>
-            <div className="terminal-stat-max">Máximo: {max}</div>
+        <div className="terminal-stat-card health-variant">
+            <div className="stat-card-label">{label}</div>
+            <div className="health-content-row" onClick={onEdit} style={{ cursor: 'pointer' }}>
+                <div className="health-current-container">
+                    <span className="health-current">{current}</span>
+                </div>
 
-            <div className="terminal-stat-current-display" onClick={onViewHistory}>
-                <span className="current-label">Actual:</span>
-                <span className="current-value">{current}</span>
-                <span className="history-hint">📋 Ver historial</span>
+                <div className="health-secondary-stats">
+                    <button
+                        className="history-icon-btn"
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            onViewHistory();
+                        }}
+                        title="Ver historial"
+                    >
+                        📋
+                    </button>
+                    <div className="health-sub-stat compact">
+                        <span className="sub-stat-label">MAX</span>
+                        <span className="sub-stat-box">{max}</span>
+                    </div>
+                    {unconsciousness !== undefined && (
+                        <div className="health-sub-stat compact">
+                            <span className="sub-stat-label">INC</span>
+                            <span className="sub-stat-box">{unconsciousness}</span>
+                        </div>
+                    )}
+                </div>
             </div>
 
             {showBar && (
-                <div className="terminal-stat-bar">
+                <div className="terminal-stat-bar health-bar-bottom">
                     <div
                         className={`terminal-stat-bar-fill ${barFillClass}`}
                         style={{ width: `${Math.max(0, Math.min(100, (current / max) * 100))}%` }}
@@ -54,15 +77,7 @@ export default function StatCard({
                 </div>
             )}
 
-            {customDisplay}
-
-            <ChangeInputSection
-                changeValue={changeValue}
-                notes={notes}
-                onChangeValueChange={onChangeValueChange}
-                onNotesChange={onNotesChange}
-                onApply={onApply}
-            />
+            {/* Hidden Input Section removed as all use modal now */}
         </div>
     );
 }

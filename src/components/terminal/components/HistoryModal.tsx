@@ -14,9 +14,10 @@ interface HistoryModalProps {
     type: 'health' | 'mental' | 'willpower';
     history: HistoryEntry[];
     onClose: () => void;
+    onDeleteEntry: (entry: HistoryEntry) => void;
 }
 
-export default function HistoryModal({ show, type, history, onClose }: HistoryModalProps) {
+export default function HistoryModal({ show, type, history, onClose, onDeleteEntry }: HistoryModalProps) {
     if (!show) return null;
 
     const typeLabel = type === 'health' ? 'Puntos de Vida' :
@@ -56,6 +57,18 @@ export default function HistoryModal({ show, type, history, onClose }: HistoryMo
                                     {entry.notes && (
                                         <div className="history-notes">{entry.notes}</div>
                                     )}
+                                    <button
+                                        className="delete-entry-btn"
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            if (confirm('¿Estás seguro de que quieres borrar esta entrada?')) {
+                                                onDeleteEntry(entry);
+                                            }
+                                        }}
+                                        title="Borrar entrada"
+                                    >
+                                        🗑️
+                                    </button>
                                 </div>
                             ))}
                         </div>

@@ -4,6 +4,7 @@ import { adaptWebCharacter } from '../../utils/characterAdapter';
 import TerminalHeader from './components/TerminalHeader';
 import StatCard from './components/StatCard';
 import HistoryModal from './components/HistoryModal';
+import EditStatModal from './components/EditStatModal';
 import EmptyState from './components/EmptyState';
 
 
@@ -11,6 +12,7 @@ interface CharacterData {
     name: string;
     alias?: string;
     combatstats: string[];
+    otherstats?: string[];
     attributes: {
         values: {
             Voluntad: number;
@@ -25,6 +27,7 @@ interface PlayerStats {
     currentMentalBalance: number;
     willpower: number;
     usedWillpower: number;
+    unconsciousnessPoints: number;
 }
 
 interface HistoryEntry {
@@ -43,11 +46,16 @@ export default function TacticPlayerTerminal() {
         maxMentalBalance: 0,
         currentMentalBalance: 0,
         willpower: 0,
-        usedWillpower: 0
+        usedWillpower: 0,
+        unconsciousnessPoints: 0
     });
     const [history, setHistory] = useState<HistoryEntry[]>([]);
     const [showHistoryModal, setShowHistoryModal] = useState(false);
     const [historyType, setHistoryType] = useState<'health' | 'mental' | 'willpower'>('health');
+
+    // Edit Modal State
+    const [showEditModal, setShowEditModal] = useState(false);
+    const [editModalType, setEditModalType] = useState<'health' | 'mental' | 'willpower'>('health');
 
     // Temporary inputs for changes
     const [healthChange, setHealthChange] = useState<string>('');
@@ -136,7 +144,8 @@ export default function TacticPlayerTerminal() {
             maxMentalBalance,
             currentMentalBalance: maxMentalBalance,
             willpower,
-            usedWillpower: 0
+            usedWillpower: 0,
+            unconsciousnessPoints: (data.otherstats?.find(s => s.includes('Inconsciencia'))?.split(':')[1]?.trim().split(' ')[0]) ? parseInt(data.otherstats.find(s => s.includes('Inconsciencia'))!.split(':')[1].trim()) : 0
         });
     };
 
@@ -158,6 +167,7 @@ export default function TacticPlayerTerminal() {
         setStats(prev => ({ ...prev, currentHealth: newValue }));
         setHealthChange('');
         setHealthNotes('');
+        setShowEditModal(false);
     };
 
     const applyMentalChange = () => {
@@ -205,6 +215,45 @@ export default function TacticPlayerTerminal() {
     const openHistoryModal = (type: 'health' | 'mental' | 'willpower') => {
         setHistoryType(type);
         setShowHistoryModal(true);
+    };
+
+    const openEditModal = (type: 'health' | 'mental' | 'willpower') => {
+        setEditModalType(type);
+        setShowEditModal(true);
+        // Reset inputs when opening
+        if (type === 'health') {
+            setHealthChange('');
+            setHealthNotes('');
+        }
+    };
+
+    const handleDeleteHistoryEntry = (entryToDelete: HistoryEntry) => {
+        setHistory(prev => prev.filter(entry => entry !== entryToDelete));
+
+        // Revert the stat change
+        const reverseChange = -entryToDelete.change;
+
+        if (entryToDelete.type === 'health') {
+            setStats(prev => ({
+                ...prev,
+                currentHealth: Math.max(0, Math.min(prev.maxHealth, prev.currentHealth + reverseChange))
+            }));
+        } else if (entryToDelete.type === 'mental') {
+            setStats(prev => ({
+                ...prev,
+                currentMentalBalance: Math.max(0, Math.min(prev.maxMentalBalance, prev.currentMentalBalance + reverseChange))
+            }));
+        } else if (entryToDelete.type === 'willpower') {
+            setStats(prev => {
+                const currentWillpower = prev.willpower - prev.usedWillpower;
+                const newCurrent = Math.max(0, Math.min(prev.willpower, currentWillpower + reverseChange));
+                const newUsed = prev.willpower - newCurrent;
+                return {
+                    ...prev,
+                    usedWillpower: newUsed
+                };
+            });
+        }
     };
 
     const handleExportJSON = () => {
@@ -288,7 +337,7 @@ export default function TacticPlayerTerminal() {
 
                     <div className="terminal-stats-grid">
                         <StatCard
-                            label="PUNTOS DE VIDA"
+                            label="PVs"
                             max={stats.maxHealth}
                             current={stats.currentHealth}
                             type="health"
@@ -298,10 +347,12 @@ export default function TacticPlayerTerminal() {
                             onNotesChange={setHealthNotes}
                             onApply={applyHealthChange}
                             onViewHistory={() => openHistoryModal('health')}
+                            unconsciousness={stats.unconsciousnessPoints}
+                            onEdit={() => openEditModal('health')}
                         />
 
                         <StatCard
-                            label="EQUILIBRIO MENTAL"
+                            label="EQM"
                             max={stats.maxMentalBalance}
                             current={stats.currentMentalBalance}
                             type="mental"
@@ -311,6 +362,7 @@ export default function TacticPlayerTerminal() {
                             onNotesChange={setMentalNotes}
                             onApply={applyMentalChange}
                             onViewHistory={() => openHistoryModal('mental')}
+                            onEdit={() => openEditModal('mental')}
                         />
 
                         <StatCard
@@ -324,6 +376,7 @@ export default function TacticPlayerTerminal() {
                             onNotesChange={setWillpowerNotes}
                             onApply={applyWillpowerChange}
                             onViewHistory={() => openHistoryModal('willpower')}
+                            onEdit={() => openEditModal('willpower')}
                         />
                     </div>
                 </div>
@@ -336,6 +389,19 @@ export default function TacticPlayerTerminal() {
                 type={historyType}
                 history={history}
                 onClose={() => setShowHistoryModal(false)}
+                onDeleteEntry={handleDeleteHistoryEntry}
+            />
+
+            <EditStatModal
+                isOpen={showEditModal}
+                onClose={() => setShowEditModal(false)}
+                title={editModalType === 'health' ? "Modificar Puntos de Vida" : "Modificar Estado"}
+                currentValue={editModalType === 'health' ? stats.currentHealth : 0}
+                changeValue={editModalType === 'health' ? healthChange : ''}
+                notes={editModalType === 'health' ? healthNotes : ''}
+                onChangeValueChange={editModalType === 'health' ? setHealthChange : () => { }}
+                onNotesChange={editModalType === 'health' ? setHealthNotes : () => { }}
+                onApply={editModalType === 'health' ? applyHealthChange : () => { }}
             />
         </div>
     );
