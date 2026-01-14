@@ -44,13 +44,16 @@ export const useCharacterSheetData = (character: any) => {
         character.skills?.learning?.specified || {}
     );
 
-    // Format stats for display (Live values)
-    const combatStats = [
-        `Acciones por asalto: ${derivedStats.combat.acciones}`,
-        `Iniciativa y Reflejos: ${derivedStats.combat.iniciativa}`,
-        `Puntos de Vida: ${derivedStats.combat.pv}`,
-        `Equilibrio Mental: ${derivedStats.combat.equilibrio}`
-    ];
+    // Format stats for display
+    // If character has explicit combatStats (from JSON), use them. Otherwise calculate from live stats.
+    const combatStats = Array.isArray(character.combatstats)
+        ? character.combatstats
+        : [
+            `Acciones por asalto: ${derivedStats.combat.acciones}`,
+            `Iniciativa y Reflejos: ${derivedStats.combat.iniciativa}`,
+            `Puntos de Vida: ${derivedStats.combat.pv}`,
+            `Equilibrio Mental: ${derivedStats.combat.equilibrio}`
+        ];
 
     // Calculate EM for display
     const emFormula = character.spells?.emFormula || { divisor: 4, pcCost: 0 };
@@ -66,20 +69,23 @@ export const useCharacterSheetData = (character: any) => {
     //     }
     // }
 
-    const otherStats = [
-        `Inconsciencia: ${derivedStats.other.inconsciencia}`,
-        `Recuperación: ${derivedStats.other.recuperacion}`,
-        `Resistencia a gases y venenos: ${derivedStats.other.resistenciaGases}`,
-        `Modificador de fuerza: ${derivedStats.other.modFuerza}`,
-        `Peso Levantado: ${derivedStats.other.pesoLevantado}`,
-        `Daño absorbido físico: ${derivedStats.other.daAbsorbidoFisico}`,
-        `Daño absorbido mental: ${derivedStats.other.daAbsorbidoMental}`,
-        `Modificador de impacto: ${derivedStats.other.modImpacto}`,
-        `Modificador Psionico: ${derivedStats.other.modPsionico}`,
-        `Parada Fisica: ${derivedStats.other.paradaFisica}`,
-        `Parada mental: ${derivedStats.other.paradaMental}`,
-        `Salto (alto / largo): ${derivedStats.other.salto}`
-    ];
+    // If character has explicit otherStats (from JSON), use them. Otherwise calculate from live stats.
+    const otherStats = Array.isArray(character.otherstats)
+        ? character.otherstats
+        : [
+            `Inconsciencia: ${derivedStats.other.inconsciencia}`,
+            `Recuperación: ${derivedStats.other.recuperacion}`,
+            `Resistencia a gases y venenos: ${derivedStats.other.resistenciaGases}`,
+            `Modificador de fuerza: ${derivedStats.other.modFuerza}`,
+            `Peso Levantado: ${derivedStats.other.pesoLevantado}`,
+            `Daño absorbido físico: ${derivedStats.other.daAbsorbidoFisico}`,
+            `Daño absorbido mental: ${derivedStats.other.daAbsorbidoMental}`,
+            `Modificador de impacto: ${derivedStats.other.modImpacto}`,
+            `Modificador Psionico: ${derivedStats.other.modPsionico}`,
+            `Parada Fisica: ${derivedStats.other.paradaFisica}`,
+            `Parada mental: ${derivedStats.other.paradaMental}`,
+            `Salto (alto / largo): ${derivedStats.other.salto}`
+        ];
 
     // --- PRE-CALCULATE LISTS FOR PDF (Powers, Spells, etc.) ---
 
@@ -88,6 +94,26 @@ export const useCharacterSheetData = (character: any) => {
         const powerData = POWERS.find(data => data.id === p.id);
         const baseName = powerData ? powerData.name : (p.name || '');
         const displayName = p.selectedOption ? `${baseName} (${p.selectedOption})` : baseName;
+
+        // Customization text
+        let customNotes = "";
+        if (p.customizations && p.customizations.length > 0) {
+            const custTexts = p.customizations.map((c: any) => `${c.description} (${c.cost > 0 ? '+' : ''}${c.cost})`);
+            customNotes = custTexts.join(', ');
+        }
+        const finalDisplayName = customNotes ? `${displayName} [${customNotes}]` : displayName;
+
+        // If JSON has explicit displayed value/cost, use those directly/trivially
+        // Note: The 'value' in JSON for powers is often the calculated % or static value
+        if (p.val || p.value) {
+            return {
+                name: finalDisplayName,
+                cost: (p.cost !== undefined ? p.cost : (powerData?.cost || 0)).toString(),
+                val: (p.value || p.val).toString(),
+                rank: (p.rank || '').toString(),
+                notes: (p.effect || '')
+            };
+        }
 
         // Cost calculation logic (Moved from pdfExport)
         const isHybridPenalty = character.isParahumanoHybrid && p.origin === 'Alterado';
@@ -139,15 +165,6 @@ export const useCharacterSheetData = (character: any) => {
         } else {
             costVal = p.cost || 0;
         }
-
-        // Add customization descriptions to name/notes
-        let customNotes = "";
-        if (p.customizations && p.customizations.length > 0) {
-            const custTexts = p.customizations.map((c: any) => `${c.description} (${c.cost > 0 ? '+' : ''}${c.cost})`);
-            customNotes = custTexts.join(', ');
-        }
-
-        const finalDisplayName = customNotes ? `${displayName} [${customNotes}]` : displayName;
 
         return {
             name: finalDisplayName,
