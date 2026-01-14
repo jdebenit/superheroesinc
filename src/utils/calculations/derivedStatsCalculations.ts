@@ -350,33 +350,39 @@ export function calculateDerivedStats(
             // --- Mental Parry Bonus ---
             let currentBonus = 0;
 
-            // 1. Check if "Thals" is in the details array
-            const hasThals = originDetails.some((detail: string) =>
-                detail.toLowerCase().includes('thals') || detail.toLowerCase().includes('thal')
-            );
+            if (ORIGIN_CATEGORIES[originCategory]) {
+                const categoryDef = ORIGIN_CATEGORIES[originCategory];
 
-            if (hasThals) {
-                currentBonus = 10;
-            } else {
-                // 2. Check the category name
-                const categoryLower = originCategory.toLowerCase();
-
-                let categoryName = "";
-
-                // Direct Category Match
-                const catKeys = Object.keys(ORIGIN_CATEGORIES);
-                for (const cat of catKeys) {
-                    if (cat.toLowerCase() === categoryLower) {
-                        categoryName = cat;
-                        break;
-                    }
+                // 1. Base Category Bonus
+                if (categoryDef.paradaMentalBonus) {
+                    currentBonus = categoryDef.paradaMentalBonus;
                 }
 
-                // Apply Bonus based on Category
-                if (categoryName === "Divino") currentBonus = 25;
-                else if (categoryName === "Cósmico") currentBonus = 25;
-                else if (categoryName === "Arcano") currentBonus = 20;
-                else if (categoryName === "Sobrenatural") currentBonus = 20;
+                // 2. Subtype Bonus (if any)
+                // If checking for specific subtype bonus like Thals
+                if (categoryDef.subtypeModifiers) {
+                    originDetails.forEach((specialization: string) => {
+                        if (!categoryDef.subtypeModifiers) return;
+                        const modifier = categoryDef.subtypeModifiers[specialization];
+                        if (modifier && modifier.paradaMental) {
+                            // If subtype bonus is higher than current, take it? 
+                            // Or add it? Thals logic was: Thals=10. Divino=25. 
+                            // Original logic: if hasThals (10) ELSE check category (20/25).
+                            // So Thals was actually lower than Arcano? No, Thals is Parahumano. Parahumano has no base bonus.
+                            // So we should take the MAX of base vs subtype? Or sum?
+                            // Original logic took maxOriginBonus across all origins. 
+                            // Inside one origin, it did if(Thals) 10 else if (Cat=Divino) 25.
+                            // So it's one or the other per origin.
+
+                            // Let's assume we take the higher of base vs subtype for now to match logic. 
+                            // Parahumano base = 0. Thals = 10. Result = 10.
+                            // Arcano base = 20. Elfo = 0 (in schema). Result = 20.
+                            if (modifier.paradaMental > currentBonus) {
+                                currentBonus = modifier.paradaMental;
+                            }
+                        }
+                    });
+                }
             }
 
             if (currentBonus > maxOriginBonus) {

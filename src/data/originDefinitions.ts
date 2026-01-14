@@ -9,7 +9,8 @@
 export interface OriginCategory {
     name: string;
     subtypes?: { [key: string]: string[] };
-    subtypeModifiers?: { [key: string]: { modImpacto?: number } };
+    subtypeModifiers?: { [key: string]: { modImpacto?: number, paradaMental?: number } };
+    paradaMentalBonus?: number;
     defaultEffects?: string[];
     disabled?: boolean;
     disabledSubtypes?: string[];
@@ -18,6 +19,7 @@ export interface OriginCategory {
 export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
     "Divino": {
         name: "Divino",
+        paradaMentalBonus: 25,
         subtypes: {
             "Dios": ["Acceso a lista de poderes divinos", "+25 a la parada mental"],
             "Dios menor": ["Acceso a lista de poderes divinos", "+25 a la parada mental"],
@@ -26,6 +28,7 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
     },
     "Cósmico": {
         name: "Cósmico",
+        paradaMentalBonus: 25,
         subtypes: {
             "Avatar Cósmico": ["Acceso a lista de poderes cósmicos", "+25 a la parada mental"],
             "Heraldo Cósmico": ["Acceso a lista de poderes cósmicos", "+25 a la parada mental"]
@@ -41,6 +44,7 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
     },
     "Sobrenatural": {
         name: "Sobrenatural",
+        paradaMentalBonus: 20,
         disabledSubtypes: ["Hombre Lobo", "Liberado de Unidad", "Liberado de Equidad", "Liberado de Entropía"],
         subtypes: {
             "Vampiro": ["+20 a la parada mental"],
@@ -56,6 +60,7 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
     },
     "Arcano": {
         name: "Arcano",
+        paradaMentalBonus: 20,
         disabledSubtypes: ["Elfo Físico", "Elfo Psíquico", "Elfo Mágico", "Hada Aire", "Hada Tierra", "Hada Fuego", "Hada Agua", "Hada Eter", "Centauro", "Gigante", "Hidra", "Medusa", "Esfinge"],
         defaultEffects: [
             "+20 a la parada mental",
@@ -90,6 +95,9 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
             "Atlante": ["fuera del agua, -25 agi y -15 a per"],
             "Tes-khar": ["Cuando se esconden son indetectables por medios psíquicos"],
             "Thals": ["Acceso a la lista de poderes de los Thals", "+10 a la parada mental"]
+        },
+        subtypeModifiers: {
+            "Thals": { paradaMental: 10 }
         }
     },
     "Tecnológico": {
