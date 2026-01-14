@@ -31,6 +31,59 @@
       "Percepción": 88,
       "Apariencia": 70,
       "Voluntad": 70
+    },
+    "breakdown": {
+      "fuerza": {
+        "base": 99,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "constitucion": {
+        "base": 100,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "agilidad": {
+        "base": 72,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "inteligencia": {
+        "base": 80,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "percepcion": {
+        "base": 88,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "apariencia": {
+        "base": 70,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "voluntad": {
+        "base": 70,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      }
+    },
+    "manualBonuses": {
+      "Fuerza": 0,
+      "Agilidad": 0,
+      "Constitución": 0,
+      "Inteligencia": 0,
+      "Percepción": 0,
+      "Voluntad": 0,
+      "Apariencia": 0
     }
   },
   "skills": {
@@ -113,7 +166,11 @@
         "name": "Supervivencia - Bajos fondos",
         "value": "40%"
       }
-    ]
+    ],
+    "generalManualMods": {},
+    "manualBases": {},
+    "selected": {},
+    "specified": {}
   },
   "weapons": {
     "items": [
@@ -131,5 +188,71 @@
   },
   "powers": {
     "selected": []
-  }
+  },
+  "alias": "",
+  "notes": "",
+  "totalCost": "",
+  "origin": {
+    "items": []
+  },
+  "background": {
+    "items": [],
+    "prejudiceResistance": 50,
+    "economicStatus": "clase_media",
+    "legalStatus": "sin_antecedentes",
+    "socialStatus": "anonimo",
+    "friendsAndAssociates": "conocido"
+  },
+  "equipment": {
+    "items": []
+  },
+  "artifacts": {
+    "items": []
+  },
+  "magicObjects": {
+    "items": []
+  },
+  "vehicles": {
+    "items": []
+  },
+  "spells": {
+    "selected": [],
+    "emFormula": {
+      "divisor": 4,
+      "pcCost": 0
+    }
+  },
+  "magicalBonds": [],
+  "magicalBondsCustomName": "",
+  "magicalBondsCustomDescription": "",
+  "specialskills": {
+    "items": []
+  },
+  "enteParams": {
+    "formType": null,
+    "visualEffect": null
+  },
+  "malditoParams": {
+    "magnitude": null,
+    "source": null
+  },
+  "poseidoParams": {
+    "formType": null
+  },
+  "alteradoParams": null,
+  "mutanteParams": null,
+  "guardianParams": null,
+  "divineParams": null,
+  "techParams": {
+    "incomeSource": "agencia_priv"
+  },
+  "exoskeletonConfig": "",
+  "exoskeletonArmorConfig": null,
+  "technoSuitStrengthConfig": null,
+  "magicTableRolls": [],
+  "techModules": {
+    "installed": []
+  },
+  "cyborgImplants": [],
+  "isParahumanoHybrid": false
 }

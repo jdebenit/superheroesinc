@@ -54,52 +54,90 @@
       "Percepción": 100,
       "Apariencia": 49,
       "Voluntad": 100
+    },
+    "breakdown": {
+      "fuerza": {
+        "base": 100,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "constitucion": {
+        "base": 100,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "agilidad": {
+        "base": 140,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "inteligencia": {
+        "base": 101,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "percepcion": {
+        "base": 100,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "apariencia": {
+        "base": 49,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "voluntad": {
+        "base": 100,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      }
+    },
+    "manualBonuses": {
+      "Fuerza": 0,
+      "Agilidad": 0,
+      "Constitución": 0,
+      "Inteligencia": 0,
+      "Percepción": 0,
+      "Voluntad": 0,
+      "Apariencia": 0
     }
   },
   "powers": {
     "selected": [
       {
-        "id": "power_superinteligencia",
-        "name": "Superinteligencia",
+        "id": "superinteligencia",
+        "origin": "Alterado",
         "rank": 1,
-        "skillValue": 0,
-        "powerMod": 0,
-        "selectedOption": "",
         "customizations": [],
-        "effect": ""
+        "skillValue": 0
       },
       {
-        "id": "power_supervelocidad",
-        "name": "Supervelocidad",
+        "id": "supervelocidad",
+        "origin": "Alterado",
         "rank": 1,
-        "skillValue": 0,
-        "powerMod": 0,
-        "selectedOption": "",
         "customizations": [],
-        "effect": "",
-        "value": "140%"
+        "skillValue": 0
       },
       {
-        "id": "power_control_de_la_energía_cinetica",
-        "name": "Control de la energía cinetica",
-        "rank": "Elevado(41)",
-        "skillValue": 0,
-        "powerMod": 0,
-        "selectedOption": "",
+        "id": "control_de_la_energía_cinetica",
+        "origin": "Alterado",
+        "rank": 41,
         "customizations": [],
-        "effect": "No intercambia energias",
-        "value": "70%"
+        "skillValue": 0
       },
       {
-        "id": "power_campo_de_fuerza:_automatico",
-        "name": "Campo de fuerza: Automatico",
-        "rank": "Elevado(41)",
-        "skillValue": 0,
-        "powerMod": 0,
-        "selectedOption": "",
+        "id": "campo_de_fuerza",
+        "origin": "Alterado",
+        "rank": 41,
         "customizations": [],
-        "effect": "Solo se activa en supervelocidad",
-        "value": "41%"
+        "skillValue": 0
       }
     ]
   },
@@ -177,7 +215,11 @@
         "value": "66%",
         "math": "(2xPER)/3"
       }
-    ]
+    ],
+    "generalManualMods": {},
+    "manualBases": {},
+    "selected": {},
+    "specified": {}
   },
   "weapons": {
     "items": [
@@ -187,5 +229,68 @@
         "notes": "Daño 1d100+100."
       }
     ]
-  }
+  },
+  "alias": "",
+  "notes": "",
+  "totalCost": "",
+  "background": {
+    "items": [],
+    "prejudiceResistance": 50,
+    "economicStatus": "clase_media",
+    "legalStatus": "sin_antecedentes",
+    "socialStatus": "anonimo",
+    "friendsAndAssociates": "conocido"
+  },
+  "equipment": {
+    "items": []
+  },
+  "artifacts": {
+    "items": []
+  },
+  "magicObjects": {
+    "items": []
+  },
+  "vehicles": {
+    "items": []
+  },
+  "spells": {
+    "selected": [],
+    "emFormula": {
+      "divisor": 4,
+      "pcCost": 0
+    }
+  },
+  "magicalBonds": [],
+  "magicalBondsCustomName": "",
+  "magicalBondsCustomDescription": "",
+  "specialskills": {
+    "items": []
+  },
+  "enteParams": {
+    "formType": null,
+    "visualEffect": null
+  },
+  "malditoParams": {
+    "magnitude": null,
+    "source": null
+  },
+  "poseidoParams": {
+    "formType": null
+  },
+  "alteradoParams": null,
+  "mutanteParams": null,
+  "guardianParams": null,
+  "divineParams": null,
+  "techParams": {
+    "incomeSource": "agencia_priv"
+  },
+  "exoskeletonConfig": "",
+  "exoskeletonArmorConfig": null,
+  "technoSuitStrengthConfig": null,
+  "magicTableRolls": [],
+  "techModules": {
+    "installed": []
+  },
+  "cyborgImplants": [],
+  "isParahumanoHybrid": false
 }

@@ -41,6 +41,59 @@
       "Percepción": 115,
       "Apariencia": 90,
       "Voluntad": 94
+    },
+    "breakdown": {
+      "fuerza": {
+        "base": 100,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "constitucion": {
+        "base": 85,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "agilidad": {
+        "base": 110,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "inteligencia": {
+        "base": 85,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "percepcion": {
+        "base": 115,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "apariencia": {
+        "base": 90,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "voluntad": {
+        "base": 94,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      }
+    },
+    "manualBonuses": {
+      "Fuerza": 0,
+      "Agilidad": 0,
+      "Constitución": 0,
+      "Inteligencia": 0,
+      "Percepción": 0,
+      "Voluntad": 0,
+      "Apariencia": 0
     }
   },
   "skills": {
@@ -127,29 +180,27 @@
         "name": "Trampas",
         "value": "82%"
       }
-    ]
+    ],
+    "generalManualMods": {},
+    "manualBases": {},
+    "selected": {},
+    "specified": {}
   },
   "powers": {
     "selected": [
       {
-        "id": "power_superpercecion",
-        "name": "superpercecion",
+        "id": "superpercecion",
+        "origin": "Maldita",
         "rank": 1,
-        "skillValue": 0,
-        "powerMod": 0,
-        "selectedOption": "",
         "customizations": [],
-        "effect": "Todos los sentidos"
+        "skillValue": 0
       },
       {
-        "id": "power_superagilidad",
-        "name": "Superagilidad",
+        "id": "superagilidad",
+        "origin": "Maldita",
         "rank": 1,
-        "skillValue": 0,
-        "powerMod": 0,
-        "selectedOption": "",
         "customizations": [],
-        "effect": ""
+        "skillValue": 0
       }
     ]
   },
@@ -169,5 +220,65 @@
         "notes": "Daño 3d10+40+Mod Fue + Daño eléctrico."
       }
     ]
-  }
+  },
+  "alias": "",
+  "notes": "",
+  "totalCost": "",
+  "background": {
+    "items": [],
+    "prejudiceResistance": 50,
+    "economicStatus": "clase_media",
+    "legalStatus": "sin_antecedentes",
+    "socialStatus": "anonimo",
+    "friendsAndAssociates": "conocido"
+  },
+  "artifacts": {
+    "items": []
+  },
+  "magicObjects": {
+    "items": []
+  },
+  "vehicles": {
+    "items": []
+  },
+  "spells": {
+    "selected": [],
+    "emFormula": {
+      "divisor": 4,
+      "pcCost": 0
+    }
+  },
+  "magicalBonds": [],
+  "magicalBondsCustomName": "",
+  "magicalBondsCustomDescription": "",
+  "specialskills": {
+    "items": []
+  },
+  "enteParams": {
+    "formType": null,
+    "visualEffect": null
+  },
+  "malditoParams": {
+    "magnitude": null,
+    "source": null
+  },
+  "poseidoParams": {
+    "formType": null
+  },
+  "alteradoParams": null,
+  "mutanteParams": null,
+  "guardianParams": null,
+  "divineParams": null,
+  "techParams": {
+    "incomeSource": "agencia_priv"
+  },
+  "exoskeletonConfig": "",
+  "exoskeletonArmorConfig": null,
+  "technoSuitStrengthConfig": null,
+  "magicTableRolls": [],
+  "techModules": {
+    "installed": []
+  },
+  "cyborgImplants": [],
+  "isParahumanoHybrid": false
 }

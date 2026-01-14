@@ -71,6 +71,59 @@
       "Percepción": 110,
       "Apariencia": 101,
       "Voluntad": 102
+    },
+    "breakdown": {
+      "fuerza": {
+        "base": 100,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "constitucion": {
+        "base": 105,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "agilidad": {
+        "base": 110,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "inteligencia": {
+        "base": 102,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "percepcion": {
+        "base": 110,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "apariencia": {
+        "base": 101,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "voluntad": {
+        "base": 102,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      }
+    },
+    "manualBonuses": {
+      "Fuerza": 0,
+      "Agilidad": 0,
+      "Constitución": 0,
+      "Inteligencia": 0,
+      "Percepción": 0,
+      "Voluntad": 0,
+      "Apariencia": 0
     }
   },
   "skills": {
@@ -173,7 +226,11 @@
         "value": "51%",
         "math": "INT/2"
       }
-    ]
+    ],
+    "generalManualMods": {},
+    "manualBases": {},
+    "selected": {},
+    "specified": {}
   },
   "background": {
     "cost": -8,
@@ -231,5 +288,55 @@
   ],
   "powers": {
     "selected": []
-  }
+  },
+  "alias": "",
+  "artifacts": {
+    "items": []
+  },
+  "magicObjects": {
+    "items": []
+  },
+  "vehicles": {
+    "items": []
+  },
+  "spells": {
+    "selected": [],
+    "emFormula": {
+      "divisor": 4,
+      "pcCost": 0
+    }
+  },
+  "magicalBonds": [],
+  "magicalBondsCustomName": "",
+  "magicalBondsCustomDescription": "",
+  "specialskills": {
+    "items": []
+  },
+  "enteParams": {
+    "formType": null,
+    "visualEffect": null
+  },
+  "malditoParams": {
+    "magnitude": null,
+    "source": null
+  },
+  "poseidoParams": {
+    "formType": null
+  },
+  "alteradoParams": null,
+  "mutanteParams": null,
+  "guardianParams": null,
+  "divineParams": null,
+  "techParams": {
+    "incomeSource": "agencia_priv"
+  },
+  "exoskeletonConfig": "",
+  "exoskeletonArmorConfig": null,
+  "technoSuitStrengthConfig": null,
+  "magicTableRolls": [],
+  "techModules": {
+    "installed": []
+  },
+  "cyborgImplants": [],
+  "isParahumanoHybrid": false
 }

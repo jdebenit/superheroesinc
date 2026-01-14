@@ -58,39 +58,83 @@
       "Percepción": 130,
       "Apariencia": 99,
       "Voluntad": 200
+    },
+    "breakdown": {
+      "fuerza": {
+        "base": 100,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "constitucion": {
+        "base": 120,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "agilidad": {
+        "base": 130,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "inteligencia": {
+        "base": 76,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "percepcion": {
+        "base": 130,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "apariencia": {
+        "base": 99,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "voluntad": {
+        "base": 200,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      }
+    },
+    "manualBonuses": {
+      "Fuerza": 0,
+      "Agilidad": 0,
+      "Constitución": 0,
+      "Inteligencia": 0,
+      "Percepción": 0,
+      "Voluntad": 0,
+      "Apariencia": 0
     }
   },
   "powers": {
     "selected": [
       {
-        "id": "power_superpercepción",
-        "name": "Superpercepción",
+        "id": "superpercepción",
+        "origin": "Vigilante",
         "rank": 1,
-        "skillValue": 0,
-        "powerMod": 0,
-        "selectedOption": "",
         "customizations": [],
-        "effect": "Solo olfato y gusto"
+        "skillValue": 0
       },
       {
-        "id": "power_superconstitución",
-        "name": "Superconstitución",
+        "id": "superconstitución",
+        "origin": "Vigilante",
         "rank": 1,
-        "skillValue": 0,
-        "powerMod": 0,
-        "selectedOption": "",
         "customizations": [],
-        "effect": ""
+        "skillValue": 0
       },
       {
-        "id": "power_superagilidad",
-        "name": "Superagilidad",
+        "id": "superagilidad",
+        "origin": "Vigilante",
         "rank": 1,
-        "skillValue": 0,
-        "powerMod": 0,
-        "selectedOption": "",
         "customizations": [],
-        "effect": ""
+        "skillValue": 0
       }
     ]
   },
@@ -201,7 +245,11 @@
         "name": "Rastrear",
         "value": "61%"
       }
-    ]
+    ],
+    "generalManualMods": {},
+    "manualBases": {},
+    "selected": {},
+    "specified": {}
   },
   "weapons": {
     "items": [
@@ -211,5 +259,61 @@
         "notes": "2d10+20+Mod Fue. Ignora el Daño Absorbido Físico."
       }
     ]
-  }
+  },
+  "alias": "",
+  "notes": "",
+  "totalCost": "",
+  "background": {
+    "items": [],
+    "prejudiceResistance": 50,
+    "economicStatus": "clase_media",
+    "legalStatus": "sin_antecedentes",
+    "socialStatus": "anonimo",
+    "friendsAndAssociates": "conocido"
+  },
+  "equipment": {
+    "items": []
+  },
+  "artifacts": {
+    "items": []
+  },
+  "magicObjects": {
+    "items": []
+  },
+  "vehicles": {
+    "items": []
+  },
+  "magicalBonds": [],
+  "magicalBondsCustomName": "",
+  "magicalBondsCustomDescription": "",
+  "specialskills": {
+    "items": []
+  },
+  "enteParams": {
+    "formType": null,
+    "visualEffect": null
+  },
+  "malditoParams": {
+    "magnitude": null,
+    "source": null
+  },
+  "poseidoParams": {
+    "formType": null
+  },
+  "alteradoParams": null,
+  "mutanteParams": null,
+  "guardianParams": null,
+  "divineParams": null,
+  "techParams": {
+    "incomeSource": "agencia_priv"
+  },
+  "exoskeletonConfig": "",
+  "exoskeletonArmorConfig": null,
+  "technoSuitStrengthConfig": null,
+  "magicTableRolls": [],
+  "techModules": {
+    "installed": []
+  },
+  "cyborgImplants": [],
+  "isParahumanoHybrid": false
 }

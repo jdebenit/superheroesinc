@@ -55,6 +55,59 @@
       "Percepción": 99,
       "Apariencia": 79,
       "Voluntad": 99
+    },
+    "breakdown": {
+      "fuerza": {
+        "base": 95,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "constitucion": {
+        "base": 80,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "agilidad": {
+        "base": 95,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "inteligencia": {
+        "base": 75,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "percepcion": {
+        "base": 99,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "apariencia": {
+        "base": 79,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "voluntad": {
+        "base": 99,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      }
+    },
+    "manualBonuses": {
+      "Fuerza": 0,
+      "Agilidad": 0,
+      "Constitución": 0,
+      "Inteligencia": 0,
+      "Percepción": 0,
+      "Voluntad": 0,
+      "Apariencia": 0
     }
   },
   "skills": {
@@ -161,20 +214,87 @@
         "name": "Historia",
         "value": "70%"
       }
-    ]
+    ],
+    "generalManualMods": {},
+    "manualBases": {},
+    "selected": {},
+    "specified": {}
   },
   "powers": {
     "selected": [
       {
-        "id": "power_incremento_vital",
-        "name": "Incremento Vital",
-        "rank": "Cosmico(100)",
-        "skillValue": 0,
-        "powerMod": 0,
-        "selectedOption": "",
+        "id": "incremento_vital",
+        "origin": "Maldito",
+        "rank": 100,
         "customizations": [],
-        "effect": ""
+        "skillValue": 0
       }
     ]
-  }
+  },
+  "alias": "",
+  "notes": "",
+  "totalCost": "",
+  "background": {
+    "items": [],
+    "prejudiceResistance": 50,
+    "economicStatus": "clase_media",
+    "legalStatus": "sin_antecedentes",
+    "socialStatus": "anonimo",
+    "friendsAndAssociates": "conocido"
+  },
+  "equipment": {
+    "items": []
+  },
+  "weapons": {
+    "items": []
+  },
+  "artifacts": {
+    "items": []
+  },
+  "magicObjects": {
+    "items": []
+  },
+  "vehicles": {
+    "items": []
+  },
+  "spells": {
+    "selected": [],
+    "emFormula": {
+      "divisor": 4,
+      "pcCost": 0
+    }
+  },
+  "magicalBonds": [],
+  "magicalBondsCustomName": "",
+  "magicalBondsCustomDescription": "",
+  "specialskills": {
+    "items": []
+  },
+  "enteParams": {
+    "formType": null,
+    "visualEffect": null
+  },
+  "malditoParams": {
+    "magnitude": null,
+    "source": null
+  },
+  "poseidoParams": {
+    "formType": null
+  },
+  "alteradoParams": null,
+  "mutanteParams": null,
+  "guardianParams": null,
+  "divineParams": null,
+  "techParams": {
+    "incomeSource": "agencia_priv"
+  },
+  "exoskeletonConfig": "",
+  "exoskeletonArmorConfig": null,
+  "technoSuitStrengthConfig": null,
+  "magicTableRolls": [],
+  "techModules": {
+    "installed": []
+  },
+  "cyborgImplants": [],
+  "isParahumanoHybrid": false
 }

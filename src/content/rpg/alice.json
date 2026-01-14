@@ -41,42 +41,83 @@
       "Percepción": 100,
       "Apariencia": 80,
       "Voluntad": 100
+    },
+    "breakdown": {
+      "fuerza": {
+        "base": 55,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "constitucion": {
+        "base": 70,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "agilidad": {
+        "base": 85,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "inteligencia": {
+        "base": 120,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "percepcion": {
+        "base": 100,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "apariencia": {
+        "base": 80,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "voluntad": {
+        "base": 100,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      }
+    },
+    "manualBonuses": {
+      "Fuerza": 0,
+      "Agilidad": 0,
+      "Constitución": 0,
+      "Inteligencia": 0,
+      "Percepción": 0,
+      "Voluntad": 0,
+      "Apariencia": 0
     }
   },
   "powers": {
     "selected": [
       {
-        "id": "power_potenciar",
-        "name": "Potenciar",
-        "rank": "Alto(81)",
-        "skillValue": 0,
-        "powerMod": 0,
-        "selectedOption": "",
+        "id": "potenciar",
+        "origin": "Semidemonio",
+        "rank": 81,
         "customizations": [],
-        "effect": "",
-        "value": "80%"
+        "skillValue": 0
       },
       {
-        "id": "power_vincular",
-        "name": "Vincular",
-        "rank": "Alto(81)",
-        "skillValue": 0,
-        "powerMod": 0,
-        "selectedOption": "",
+        "id": "vincular",
+        "origin": "Semidemonio",
+        "rank": 81,
         "customizations": [],
-        "effect": "",
-        "value": "85%"
+        "skillValue": 0
       },
       {
-        "id": "power_traducción_de_lenguas",
-        "name": "Traducción de lenguas",
-        "rank": "Alto(81)",
-        "skillValue": 0,
-        "powerMod": 0,
-        "selectedOption": "",
+        "id": "traducción_de_lenguas",
+        "origin": "Semidemonio",
+        "rank": 81,
         "customizations": [],
-        "effect": "",
-        "value": "110%"
+        "skillValue": 0
       }
     ]
   },
@@ -163,6 +204,76 @@
         "name": "Trato con animales",
         "value": "65%"
       }
-    ]
-  }
+    ],
+    "generalManualMods": {},
+    "manualBases": {},
+    "selected": {},
+    "specified": {}
+  },
+  "alias": "",
+  "notes": "",
+  "totalCost": "",
+  "background": {
+    "items": [],
+    "prejudiceResistance": 50,
+    "economicStatus": "clase_media",
+    "legalStatus": "sin_antecedentes",
+    "socialStatus": "anonimo",
+    "friendsAndAssociates": "conocido"
+  },
+  "equipment": {
+    "items": []
+  },
+  "weapons": {
+    "items": []
+  },
+  "artifacts": {
+    "items": []
+  },
+  "magicObjects": {
+    "items": []
+  },
+  "vehicles": {
+    "items": []
+  },
+  "spells": {
+    "selected": [],
+    "emFormula": {
+      "divisor": 4,
+      "pcCost": 0
+    }
+  },
+  "magicalBonds": [],
+  "magicalBondsCustomName": "",
+  "magicalBondsCustomDescription": "",
+  "specialskills": {
+    "items": []
+  },
+  "enteParams": {
+    "formType": null,
+    "visualEffect": null
+  },
+  "malditoParams": {
+    "magnitude": null,
+    "source": null
+  },
+  "poseidoParams": {
+    "formType": null
+  },
+  "alteradoParams": null,
+  "mutanteParams": null,
+  "guardianParams": null,
+  "divineParams": null,
+  "techParams": {
+    "incomeSource": "agencia_priv"
+  },
+  "exoskeletonConfig": "",
+  "exoskeletonArmorConfig": null,
+  "technoSuitStrengthConfig": null,
+  "magicTableRolls": [],
+  "techModules": {
+    "installed": []
+  },
+  "cyborgImplants": [],
+  "isParahumanoHybrid": false
 }

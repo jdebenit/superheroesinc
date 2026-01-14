@@ -39,41 +39,83 @@
       "Percepción": 90,
       "Apariencia": 40,
       "Voluntad": 100
+    },
+    "breakdown": {
+      "fuerza": {
+        "base": 65,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "constitucion": {
+        "base": 80,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "agilidad": {
+        "base": 74,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "inteligencia": {
+        "base": 70,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "percepcion": {
+        "base": 90,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "apariencia": {
+        "base": 40,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      },
+      "voluntad": {
+        "base": 100,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0
+      }
+    },
+    "manualBonuses": {
+      "Fuerza": 0,
+      "Agilidad": 0,
+      "Constitución": 0,
+      "Inteligencia": 0,
+      "Percepción": 0,
+      "Voluntad": 0,
+      "Apariencia": 0
     }
   },
   "powers": {
     "selected": [
       {
-        "id": "power_alteracion_de_la_densidad",
-        "name": "Alteracion de la densidad",
-        "rank": "Bajo(01)",
-        "skillValue": 0,
-        "powerMod": 0,
-        "selectedOption": "",
+        "id": "alteracion_de_la_densidad",
+        "origin": "Alterado",
+        "rank": 1,
         "customizations": [],
-        "effect": "",
-        "value": "55%"
+        "skillValue": 0
       },
       {
-        "id": "power_volar",
-        "name": "Volar",
-        "rank": "Medio(21)",
-        "skillValue": 0,
-        "powerMod": 0,
-        "selectedOption": "",
+        "id": "volar",
+        "origin": "Alterado",
+        "rank": 21,
         "customizations": [],
-        "effect": "",
-        "value": "70%"
+        "skillValue": 0
       },
       {
-        "id": "power_emisión_de_energía_mágica",
-        "name": "Emisión de energía mágica",
-        "rank": "Medio(21)",
-        "skillValue": 0,
-        "powerMod": 0,
-        "selectedOption": "",
+        "id": "emisión_de_energía_mágica",
+        "origin": "Alterado",
+        "rank": 21,
         "customizations": [],
-        "effect": "Cuando golpea con la guadaña"
+        "skillValue": 0
       }
     ]
   },
@@ -145,7 +187,11 @@
         "name": "Arma especial - guadaña",
         "value": "75%"
       }
-    ]
+    ],
+    "generalManualMods": {},
+    "manualBases": {},
+    "selected": {},
+    "specified": {}
   },
   "weapons": {
     "items": [
@@ -158,6 +204,65 @@
   },
   "background": {
     "items": [],
-    "prejudiceResistance": 100
-  }
+    "prejudiceResistance": 100,
+    "economicStatus": "clase_media",
+    "legalStatus": "sin_antecedentes",
+    "socialStatus": "anonimo",
+    "friendsAndAssociates": "conocido"
+  },
+  "alias": "",
+  "notes": "",
+  "totalCost": "",
+  "equipment": {
+    "items": []
+  },
+  "artifacts": {
+    "items": []
+  },
+  "magicObjects": {
+    "items": []
+  },
+  "vehicles": {
+    "items": []
+  },
+  "spells": {
+    "selected": [],
+    "emFormula": {
+      "divisor": 4,
+      "pcCost": 0
+    }
+  },
+  "magicalBonds": [],
+  "magicalBondsCustomName": "",
+  "magicalBondsCustomDescription": "",
+  "specialskills": {
+    "items": []
+  },
+  "enteParams": {
+    "formType": null,
+    "visualEffect": null
+  },
+  "malditoParams": {
+    "magnitude": null,
+    "source": null
+  },
+  "poseidoParams": {
+    "formType": null
+  },
+  "alteradoParams": null,
+  "mutanteParams": null,
+  "guardianParams": null,
+  "divineParams": null,
+  "techParams": {
+    "incomeSource": "agencia_priv"
+  },
+  "exoskeletonConfig": "",
+  "exoskeletonArmorConfig": null,
+  "technoSuitStrengthConfig": null,
+  "magicTableRolls": [],
+  "techModules": {
+    "installed": []
+  },
+  "cyborgImplants": [],
+  "isParahumanoHybrid": false
 }

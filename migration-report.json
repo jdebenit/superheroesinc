@@ -1,0 +1,239 @@
+[
+  {
+    "file": "abogado.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field",
+      "Added 'totalCost' field"
+    ]
+  },
+  {
+    "file": "aescotan.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field",
+      "Added 'totalCost' field"
+    ]
+  },
+  {
+    "file": "agente-de-policia.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field",
+      "Added 'totalCost' field"
+    ]
+  },
+  {
+    "file": "agente-secreto.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field",
+      "Added 'totalCost' field"
+    ]
+  },
+  {
+    "file": "alice.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field",
+      "Added 'totalCost' field"
+    ]
+  },
+  {
+    "file": "alpha-woman.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field"
+    ]
+  },
+  {
+    "file": "arkham.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field",
+      "Added 'totalCost' field"
+    ]
+  },
+  {
+    "file": "askany.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field",
+      "Added 'totalCost' field"
+    ]
+  },
+  {
+    "file": "centurion.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field",
+      "Added 'totalCost' field"
+    ]
+  },
+  {
+    "file": "chainsaw.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field",
+      "Added 'totalCost' field"
+    ]
+  },
+  {
+    "file": "corredor-nocturno.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field",
+      "Added 'totalCost' field"
+    ]
+  },
+  {
+    "file": "cu-chulainn.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field",
+      "Added 'totalCost' field"
+    ]
+  },
+  {
+    "file": "desertor.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field",
+      "Added 'totalCost' field"
+    ]
+  },
+  {
+    "file": "estaca.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field",
+      "Added 'totalCost' field"
+    ]
+  },
+  {
+    "file": "impulso.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field",
+      "Added 'totalCost' field"
+    ]
+  },
+  {
+    "file": "inspector-toro.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'totalCost' field"
+    ]
+  },
+  {
+    "file": "jade.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field",
+      "Added 'totalCost' field"
+    ]
+  },
+  {
+    "file": "jefe-motero-road-reapers.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field",
+      "Added 'totalCost' field"
+    ]
+  },
+  {
+    "file": "kamikaze.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field",
+      "Added 'totalCost' field"
+    ]
+  },
+  {
+    "file": "kigala.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field",
+      "Added 'totalCost' field"
+    ]
+  },
+  {
+    "file": "la-naga.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field"
+    ]
+  },
+  {
+    "file": "leon-rojo.json",
+    "status": "skipped",
+    "changes": [
+      "Category C - requires manual review"
+    ]
+  },
+  {
+    "file": "medianoche.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field",
+      "Added 'totalCost' field"
+    ]
+  },
+  {
+    "file": "motero-road-reapers.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field",
+      "Added 'totalCost' field"
+    ]
+  },
+  {
+    "file": "peter-pain.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field",
+      "Added 'totalCost' field"
+    ]
+  },
+  {
+    "file": "philipe-de-herblay.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field",
+      "Added 'totalCost' field"
+    ]
+  },
+  {
+    "file": "terror.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field",
+      "Added 'totalCost' field"
+    ]
+  }
+]
