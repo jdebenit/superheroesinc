@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import SequelsSelector from './shared/SequelsSelector';
 import { SEQUELS } from '../../../../../data/sequels';
+import { getMutantType } from '../utils';
 
 interface SelectedSequel {
     id: string;
@@ -13,9 +14,10 @@ export interface MutanteParams {
 interface MutanteSectionProps {
     mutanteParams: MutanteParams;
     onChange: (updates: any) => void;
+    data?: any; // Full character data to get mutant type
 }
 
-export default function MutanteSection({ mutanteParams, onChange }: MutanteSectionProps) {
+export default function MutanteSection({ mutanteParams, onChange, data }: MutanteSectionProps) {
     const { sequels = [] } = mutanteParams;
 
     const handleSequelsChange = (newSequels: SelectedSequel[]) => {
@@ -35,6 +37,8 @@ export default function MutanteSection({ mutanteParams, onChange }: MutanteSecti
         });
         return total;
     }, [sequels]);
+
+    const mutantType = data ? getMutantType(data) : null;
 
     return (
         <div style={{
@@ -57,7 +61,7 @@ export default function MutanteSection({ mutanteParams, onChange }: MutanteSecti
                     textTransform: 'uppercase',
                     letterSpacing: '0.05em',
                     color: '#86198f'
-                }}>Opciones de Origen: Mutante</h3>
+                }}>Opciones de Origen: Mutante {mutantType && `(${mutantType})`}</h3>
 
                 <div style={{
                     backgroundColor: '#c026d3',
@@ -72,10 +76,25 @@ export default function MutanteSection({ mutanteParams, onChange }: MutanteSecti
             </div>
 
             <div style={{ padding: '1.5rem' }}>
-                <p style={{ color: '#4b5563', marginBottom: '1.5rem', fontStyle: 'italic' }}>
-                    Como mutante, tu cuerpo ha sufrido alteraciones que pueden conllevar secuelas físicas o mentales.
+                <p style={{ color: '#4b5563', marginBottom: '1rem', fontStyle: 'italic' }}>
+                    Como mutante {mutantType && `de tipo ${mutantType}`}, tu cuerpo ha sufrido alteraciones que pueden conllevar secuelas físicas o mentales.
                     Puedes seleccionar secuelas opcionales para obtener puntos de creación extra.
                 </p>
+
+                {mutantType && (
+                    <div style={{
+                        backgroundColor: '#fef3c7',
+                        border: '1px solid #fbbf24',
+                        borderRadius: '0.5rem',
+                        padding: '0.75rem',
+                        marginBottom: '1.5rem'
+                    }}>
+                        <p style={{ fontSize: '0.875rem', color: '#92400e', margin: 0 }}>
+                            <strong>💡 Selección de poderes:</strong> Puedes elegir poderes de tu tipo ({mutantType}) normalmente,
+                            o poderes de otros tipos (Físico, Psíquico, Energético) gastando <strong>+2 PCs adicionales</strong> de coste base por cada poder.
+                        </p>
+                    </div>
+                )}
 
                 {/* SEQUELS SELECTOR */}
                 <SequelsSelector

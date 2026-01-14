@@ -9,7 +9,8 @@ import {
     hasSubtype,
     getVigilanteSpecialties,
     getMutantPowerTypes,
-    calculateEM
+    calculateEM,
+    isPowerCrossType
 } from './utils';
 import type { Step3Props, SelectedPower, SelectedSpell, TechModule, ModalType, TechTypeFilter } from './types';
 import { modalStyles } from './styles';
@@ -186,9 +187,17 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
         const powerDef = POWERS.find(p => p.id === powerId);
         const hasOptions = powerDef?.options && powerDef.options.length > 0;
 
+        // Check if this is a cross-type power for mutants
+        const isCrossType = modalOriginFilter === 'Mutante' && isPowerCrossType(data, powerId);
+
         if (hasOptions) {
             // Always add new instance for powers with options
-            const newSelected = [...selectedPowers, { id: powerId, origin: modalOriginFilter, rank: 1 }];
+            const newSelected = [...selectedPowers, {
+                id: powerId,
+                origin: modalOriginFilter,
+                rank: 1,
+                isCrossType
+            }];
             updatePowers(newSelected);
         } else {
             // Toggle behavior for standard powers
@@ -199,7 +208,12 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                 newSelected = [...selectedPowers];
                 newSelected.splice(existingIndex, 1);
             } else {
-                newSelected = [...selectedPowers, { id: powerId, origin: modalOriginFilter, rank: 1 }];
+                newSelected = [...selectedPowers, {
+                    id: powerId,
+                    origin: modalOriginFilter,
+                    rank: 1,
+                    isCrossType
+                }];
             }
             updatePowers(newSelected);
         }
@@ -347,13 +361,8 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                 }
                 if (modalOriginFilter && !p.origins.includes(modalOriginFilter)) return false;
 
-                // Special filtering for Mutant powers by type (for both Mutante origin and Ente)
-                if (modalOriginFilter === 'Mutante') {
-                    const allowedTypes = getMutantPowerTypes(data);
-                    if (allowedTypes.length > 0 && !p.types.some(t => allowedTypes.includes(t))) {
-                        return false;
-                    }
-                }
+                // NOTE: Removed type filtering for Mutante to allow cross-type selection
+                // Mutants can now select any power from their origin, with cross-type penalty
 
                 return true;
             });
@@ -519,7 +528,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                         </span>
                     </label>
                     <p className="text-sm text-gray-600 mt-1 ml-8">
-                        Si marcas esta opción, tendrás acceso a la lista de poderes de Alterado con un coste adicional de +3 PCs al coste base de cada poder seleccionado.
+                        Si marcas esta opción, tendrás acceso a la lista de poderes de Alterado con un coste adicional de <strong>+3 PCs</strong> al coste base de cada poder seleccionado.
                     </p>
                 </div>
             )}
@@ -567,6 +576,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                 <MutanteSection
                     mutanteParams={data.mutanteParams || { sequels: [] }}
                     onChange={onChange}
+                    data={data}
                 />
             )}
 
@@ -715,6 +725,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                             modalType === 'spells' ? toggleSpellSelection :
                                 toggleTechModule
                     }
+                    characterData={data}
                 />
             )}
 

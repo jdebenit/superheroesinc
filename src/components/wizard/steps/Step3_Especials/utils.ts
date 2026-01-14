@@ -142,3 +142,44 @@ export const getVigilanteSpecialties = (data: any): string[] => {
     if (!vigItem) return [];
     return vigItem['Vigilante'] || [];
 };
+
+/**
+ * Get the mutant type from character origin
+ * Returns the primary mutant type (Físico, Psíquico, or Energético)
+ */
+export const getMutantType = (data: any): PowerType | null => {
+    const mutantOrigin = data.origin?.items?.find((item: any) =>
+        Object.keys(item)[0] === 'Mutante'
+    );
+
+    if (mutantOrigin) {
+        const subtypes = mutantOrigin['Mutante'];
+        if (Array.isArray(subtypes) && subtypes.length > 0) {
+            const subtype = subtypes[0];
+
+            // Return the primary type
+            if (subtype === 'Psíquico') return 'Psíquico';
+            if (subtype === 'Energético') return 'Energético';
+            if (subtype === 'Físico') return 'Físico';
+        }
+    }
+
+    return null;
+};
+
+/**
+ * Check if a power is cross-type for a mutant
+ * A power is cross-type if the mutant's type is not in the power's types array
+ */
+export const isPowerCrossType = (data: any, powerId: string): boolean => {
+    const mutantType = getMutantType(data);
+    if (!mutantType) return false; // Not a mutant
+
+    const power = POWERS.find(p => p.id === powerId);
+    if (!power) return false;
+
+    // If the power has the mutant's type, it's NOT cross-type
+    // If the power doesn't have the mutant's type, it IS cross-type
+    return !power.types.includes(mutantType);
+};
+

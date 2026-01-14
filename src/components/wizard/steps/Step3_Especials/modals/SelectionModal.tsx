@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import type { ModalType, ViewMode, TechTypeFilter } from '../types';
+import { isPowerCrossType, getMutantType } from '../utils';
 
 const POWER_TYPES = ["Todos", "Físico", "Psíquico", "Energético"];
 
@@ -13,6 +14,7 @@ interface SelectionModalProps {
     onToggleItem: (id: string) => void;
     customPlaceholder?: string;
     customTitle?: string;
+    characterData?: any; // For checking cross-type powers
 }
 
 export default function SelectionModal({
@@ -24,7 +26,8 @@ export default function SelectionModal({
     onClose,
     onToggleItem,
     customPlaceholder,
-    customTitle
+    customTitle,
+    characterData
 }: SelectionModalProps) {
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedTypeFilter, setSelectedTypeFilter] = useState<string>("Todos");
@@ -211,6 +214,20 @@ export default function SelectionModal({
                                                                     <span key={t} className="type-tag">{t}</span>
                                                                 ))}
                                                             </div>
+                                                            {originFilter === 'Mutante' && characterData && isPowerCrossType(characterData, item.id) && (
+                                                                <div style={{
+                                                                    marginTop: '0.5rem',
+                                                                    padding: '0.25rem 0.5rem',
+                                                                    backgroundColor: '#fef3c7',
+                                                                    border: '1px solid #fbbf24',
+                                                                    borderRadius: '0.25rem',
+                                                                    fontSize: '0.75rem',
+                                                                    fontWeight: 'bold',
+                                                                    color: '#92400e'
+                                                                }}>
+                                                                    +2 PC (Otro tipo)
+                                                                </div>
+                                                            )}
                                                         </div>
                                                     )}
 
@@ -277,6 +294,21 @@ export default function SelectionModal({
                                                                     {item.types?.map((t: string) => (
                                                                         <span key={t} className="type-tag tiny">{t}</span>
                                                                     ))}
+                                                                    {originFilter === 'Mutante' && characterData && isPowerCrossType(characterData, item.id) && (
+                                                                        <span style={{
+                                                                            marginLeft: '0.5rem',
+                                                                            padding: '0.125rem 0.375rem',
+                                                                            backgroundColor: '#fef3c7',
+                                                                            border: '1px solid #fbbf24',
+                                                                            borderRadius: '0.25rem',
+                                                                            fontSize: '0.65rem',
+                                                                            fontWeight: 'bold',
+                                                                            color: '#92400e',
+                                                                            whiteSpace: 'nowrap'
+                                                                        }}>
+                                                                            +2 PC
+                                                                        </span>
+                                                                    )}
                                                                 </div>
                                                             </td>
                                                         )}

@@ -15,6 +15,7 @@ export interface SelectedPower {
     powerMod?: number; // For powers with characteristics, max total 200
     skillValue?: number; // Input for skill calculation base
     selectedOption?: string; // For powers with options
+    isCrossType?: boolean; // For mutants: power is from different type (+2 PC base cost)
     customizations?: {
         id: string;
         description: string;

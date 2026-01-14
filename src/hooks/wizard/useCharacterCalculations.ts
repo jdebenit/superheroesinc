@@ -209,6 +209,12 @@ export function useCharacterCalculations(character: any) {
             // Base cost
             let cost = powerData.cost;
 
+            // CROSS-TYPE PENALTY FOR MUTANTS (+2 PC to base cost)
+            // Applied before other modifiers
+            if (power.isCrossType) {
+                cost += 2;
+            }
+
             // Semidemonio Bonus: -1 PC for Sobrenatural powers (Base cost discount)
             const isSemidemonioBonus = isSemidemonio && power.origin === 'Sobrenatural';
             if (isSemidemonioBonus && !powerData.characteristic) {

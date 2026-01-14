@@ -82,7 +82,9 @@ export default function PowerRow({
     const isFree = isTesKharFree || isTrollFree;
 
     let displayBaseCostStr = p.cost.toString();
-    if (isHybridPenalty) {
+    if (selection.isCrossType) {
+        displayBaseCostStr = `${p.cost} + 2`;
+    } else if (isHybridPenalty) {
         displayBaseCostStr = `${p.cost} + 3`;
     } else if (isSemidemonioBonus && !p.characteristic) {
         // Show discount for normal powers
@@ -128,7 +130,23 @@ export default function PowerRow({
     return (
         <tr key={`${selection.id}-${selection.origin}-${index}`} style={{ backgroundColor: isEven ? 'white' : '#f9fafb' }}>
             <td style={{ padding: '1rem', fontWeight: 'bold', color: '#1f2937' }}>
-                {p.name}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+                    <span>{p.name}</span>
+                    {selection.isCrossType && (
+                        <span style={{
+                            fontSize: '0.65rem',
+                            padding: '0.125rem 0.375rem',
+                            backgroundColor: '#fef3c7',
+                            border: '1px solid #fbbf24',
+                            borderRadius: '0.25rem',
+                            fontWeight: 'bold',
+                            color: '#92400e',
+                            whiteSpace: 'nowrap'
+                        }}>
+                            +2 PC (Otro tipo)
+                        </span>
+                    )}
+                </div>
                 {p.options && p.options.length > 0 && (
                     <div style={{ marginTop: '0.5rem' }}>
                         <input
@@ -227,6 +245,12 @@ export default function PowerRow({
 
                                     // Apply Semidemonio Bonus (Discount 1 PC base)
                                     let baseCost = p.cost;
+
+                                    // Cross-type penalty for mutants
+                                    if (selection.isCrossType) {
+                                        baseCost += 2;
+                                    }
+
                                     if (isEnanoGuardian) {
                                         baseCost = p.cost + 2;
                                     } else if (isSemidemonioBonus) {
@@ -423,6 +447,12 @@ export default function PowerRow({
                                     const modCost = effectivePowerMod / 10;
                                     const custCost = (selection.customizations || []).reduce((sum, c) => sum + (c.cost || 0), 0);
                                     let baseCost = p.cost;
+
+                                    // Cross-type penalty for mutants
+                                    if (selection.isCrossType) {
+                                        baseCost += 2;
+                                    }
+
                                     if (isEnanoGuardian) baseCost = p.cost + 2; // Enano restriction cost
 
 
