@@ -15,8 +15,12 @@ import { mergeWithDefaults } from '../../utils/dataCleaner';
 import { useCharacterCalculations } from '../../hooks/wizard/useCharacterCalculations';
 import './CharacterWizard.css';
 
+import { WizardHelpModal } from './shared/WizardHelpModal';
+import { WIZARD_HELP } from '../../data/wizardHelp';
+
 export default function CharacterWizard() {
     const [currentStep, setCurrentStep] = useState(1);
+    const [showHelp, setShowHelp] = useState(false);
 
     // Initialize with default state to prevent hydration mismatch
     const [character, setCharacter] = useState(initialCharacterState);
@@ -197,12 +201,16 @@ export default function CharacterWizard() {
         <div className="wizard-container">
             {/* Header */}
             <div className="wizard-header">
-                <h1 className="wizard-title">
-                    Generador de Fichas (Beta 0.6.7)
-                </h1>
-                <p className="wizard-subtitle">
-                    Crea tu personaje paso a paso
-                </p>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', justifyContent: 'center' }}>
+                    <div>
+                        <h1 className="wizard-title">
+                            Generador de Fichas (Beta 0.6.7)
+                        </h1>
+                        <p className="wizard-subtitle">
+                            Crea tu personaje paso a paso
+                        </p>
+                    </div>
+                </div>
 
                 {/* Header Controls: PC Counter + Preview + Config + Reset */}
                 <div className="wizard-controls">
@@ -276,6 +284,41 @@ export default function CharacterWizard() {
 
             {/* Step Content */}
             <div className="step-content-box">
+                {/* Help Button - Absolutely positioned top-right */}
+                <button
+                    onClick={() => setShowHelp(true)}
+                    title="Ver ayuda de este paso"
+                    style={{
+                        position: 'absolute',
+                        top: '1rem',
+                        right: '1rem',
+                        width: '36px',
+                        height: '36px',
+                        borderRadius: '50%',
+                        border: '2px solid #bfdbfe',
+                        backgroundColor: '#eff6ff',
+                        color: '#2563eb',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        cursor: 'pointer',
+                        fontSize: '1.25rem',
+                        fontWeight: 'bold',
+                        transition: 'all 0.2s',
+                        zIndex: 10
+                    }}
+                    onMouseOver={(e) => {
+                        e.currentTarget.style.backgroundColor = '#2563eb';
+                        e.currentTarget.style.color = 'white';
+                    }}
+                    onMouseOut={(e) => {
+                        e.currentTarget.style.backgroundColor = '#eff6ff';
+                        e.currentTarget.style.color = '#2563eb';
+                    }}
+                >
+                    ?
+                </button>
+
                 {renderStepContent()}
             </div>
 
@@ -303,6 +346,13 @@ export default function CharacterWizard() {
                     {currentStep === 7 ? 'Finalizar ✓' : 'Siguiente →'}
                 </button>
             </div>
+
+            {/* Help Modal */}
+            <WizardHelpModal
+                isOpen={showHelp}
+                onClose={() => setShowHelp(false)}
+                content={WIZARD_HELP[currentStep]}
+            />
         </div>
     );
 }
