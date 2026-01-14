@@ -23,13 +23,14 @@ export default function Step1_OriginSelection({ data, onChange }: Step1Props) {
     const [selectedOrigins, setSelectedOrigins] = useState<string[]>([]);
     const [selectedSubtypes, setSelectedSubtypes] = useState<{ [originId: string]: string[] }>({});
 
-    // Initialize state from data.origin.items when component mounts
+    // Sync local state with data prop whenever it changes (e.g. on load from localStorage)
     useEffect(() => {
-        if (data.origin?.items && data.origin.items.length > 0) {
-            const origins: string[] = [];
-            const subtypes: { [originId: string]: string[] } = {};
+        const items = data.origin?.items || [];
+        const origins: string[] = [];
+        const subtypes: { [originId: string]: string[] } = {};
 
-            data.origin.items.forEach((item: any) => {
+        if (items.length > 0) {
+            items.forEach((item: any) => {
                 const originName = Object.keys(item)[0];
                 const origin = ORIGINS.find(o => o.name === originName);
 
@@ -41,19 +42,20 @@ export default function Step1_OriginSelection({ data, onChange }: Step1Props) {
                     }
                 }
             });
+        }
 
+        // Only update if actually different to avoid infinite loops
+        // (JSON.stringify is cheap here given the small data size)
+        if (JSON.stringify(origins) !== JSON.stringify(selectedOrigins)) {
             setSelectedOrigins(origins);
+        }
+
+        // Use deep comparison for subtypes object as well
+        if (JSON.stringify(subtypes) !== JSON.stringify(selectedSubtypes)) {
             setSelectedSubtypes(subtypes);
         }
-    }, []); // Only run on mount
 
-    // Detect when data has been reset (items becomes empty)
-    useEffect(() => {
-        if (!data.origin?.items || data.origin.items.length === 0) {
-            setSelectedOrigins([]);
-            setSelectedSubtypes({});
-        }
-    }, [data.origin?.items?.length]); // Only watch the length to avoid unnecessary re-renders
+    }, [JSON.stringify(data.origin?.items)]); // Run whenever the origin items structure changes
 
     const handleToggleOrigin = (originId: string) => {
         const newSelection = selectedOrigins.includes(originId)
