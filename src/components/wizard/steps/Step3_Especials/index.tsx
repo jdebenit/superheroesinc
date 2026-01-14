@@ -10,7 +10,11 @@ import {
     getVigilanteSpecialties,
     getMutantPowerTypes,
     calculateEM,
-    isPowerCrossType
+    isPowerCrossType,
+    // New helpers
+    isGuardian,
+    isMaldito,
+    getPowerPenalty
 } from './utils';
 import type { Step3Props, SelectedPower, SelectedSpell, TechModule, ModalType, TechTypeFilter } from './types';
 import { modalStyles } from './styles';
@@ -188,14 +192,12 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
         const hasOptions = powerDef?.options && powerDef.options.length > 0;
 
         // Check if this is a cross-type power for mutants
-        const isCrossType = modalOriginFilter === 'Mutante' && isPowerCrossType(data, powerId);
+        // Calculate penalties using centralized helper
+        const penaltyInfo = getPowerPenalty(data, powerDef);
 
-        // Check if this is a cross-origin power for Guardián
-        // Note: Power origins use "Guardian" without tilde
-        const isCrossOrigin = isGuardian && powerDef?.origins && !powerDef.origins.includes('Guardian');
-
-        // Check if this is a cross-origin power for Maldito
-        const isCrossOriginMaldito = isMaldito && powerDef?.origins && !powerDef.origins.includes('Sobrenatural');
+        const isCrossType = penaltyInfo.type === 'cross-type';
+        const isCrossOrigin = isGuardian(data) && penaltyInfo.type === 'cross-origin';
+        const isCrossOriginMaldito = isMaldito(data) && penaltyInfo.type === 'cross-origin';
 
         if (hasOptions) {
             // Always add new instance for powers with options
@@ -361,10 +363,9 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
         onChange({ ...data, magicalBonds: newBonds });
     };
 
-    // Origin flags needed for modal filtering
-    // Check both spellings just in case
-    const isGuardian = hasOrigin(data, 'Guardián') || hasOrigin(data, 'Guardian');
-    const isMaldito = hasSubtype(data, 'Sobrenatural', 'Maldito');
+    // Origin flags needed for modal filtering - using robust helpers
+    const isGuardianChar = isGuardian(data);
+    const isMalditoChar = isMaldito(data);
 
     // Filter modal items
     const modalItems = useMemo(() => {
@@ -378,12 +379,12 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
 
                 // Guardián can see all powers when opening Guardián modal (cross-origin selection)
                 // Check both spelling variations to be safe
-                if (isGuardian && (modalOriginFilter === 'Guardián' || modalOriginFilter === 'Guardian')) {
+                if (isGuardianChar && (modalOriginFilter === 'Guardián' || modalOriginFilter === 'Guardian')) {
                     return true; // Show all powers
                 }
 
                 // Maldito can see all powers when opening Sobrenatural modal (cross-origin selection)
-                if (isMaldito && modalOriginFilter === 'Sobrenatural') {
+                if (isMalditoChar && modalOriginFilter === 'Sobrenatural') {
                     return true; // Show all powers
                 }
 
@@ -469,7 +470,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
         return result;
     }).filter((s): s is (Spell & { rank: number; selectedOption?: string }) => s !== null);
 
-    const hasAnyOrigin = isGuardian || isAlterado || hasEM || isVampiro || isSemidemonio || isMaldito ||
+    const hasAnyOrigin = isGuardianChar || isAlterado || hasEM || isVampiro || isSemidemonio || isMalditoChar ||
         isEnte || isThals || isDivino || isCosmico || isMutante || isVigilante || isTechnological || isExoskeleton || isTesKhar || isAtlante || isParahumano || isTroll || isMinotauro || isPoseido || isEnano || isGrifo;
 
     // Auto-select Volar for Grifo
@@ -584,7 +585,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
             )}
 
             {/* MALDITO SECTION */}
-            {isMaldito && (
+            {isMalditoChar && (
                 <MalditoSection
                     malditoParams={data.malditoParams || { magnitude: null, source: null }}
                     onChange={onChange}
@@ -613,7 +614,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                 />
             )}
 
-            {isGuardian && (
+            {isGuardianChar && (
                 <GuardianSection
                     guardianParams={data.guardianParams || { quality: null, objectType: null, feature: null, transformation: null }}
                     onChange={onChange}
@@ -695,11 +696,11 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                 onUpdateOption={updatePowerOption}
                 onUpdateCustomizations={updatePowerCustomizations}
                 onRemove={removePower}
-                isGuardian={isGuardian}
+                isGuardian={isGuardianChar}
                 isAlterado={isAlterado || isParahumanoHybrid}
                 isVampiro={isVampiro}
                 isSemidemonio={isSemidemonio}
-                isMaldito={isMaldito}
+                isMaldito={isMalditoChar}
                 isEnte={isEnte}
                 isThals={isThals}
                 isDivino={isDivino}
@@ -759,7 +760,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                                 toggleTechModule
                     }
                     characterData={data}
-                    isMaldito={isMaldito}
+                    isMaldito={isMalditoChar}
                 />
             )}
 

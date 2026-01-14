@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { ModalType, ViewMode, TechTypeFilter } from '../types';
-import { isPowerCrossType, getMutantType } from '../utils';
+import { getPowerPenalty } from '../utils';
 
 const POWER_TYPES = ["Todos", "Físico", "Psíquico", "Energético"];
 
@@ -216,48 +216,26 @@ export default function SelectionModal({
                                                                     <span key={t} className="type-tag">{t}</span>
                                                                 ))}
                                                             </div>
-                                                            {originFilter === 'Mutante' && characterData && isPowerCrossType(characterData, item.id) && (
-                                                                <div style={{
-                                                                    marginTop: '0.5rem',
-                                                                    padding: '0.25rem 0.5rem',
-                                                                    backgroundColor: '#fef3c7',
-                                                                    border: '1px solid #fbbf24',
-                                                                    borderRadius: '0.25rem',
-                                                                    fontSize: '0.75rem',
-                                                                    fontWeight: 'bold',
-                                                                    color: '#92400e'
-                                                                }}>
-                                                                    +2 PC (Otro tipo)
-                                                                </div>
-                                                            )}
-                                                            {(originFilter === 'Guardián' || originFilter === 'Guardian') && !item.origins.includes('Guardian') && (
-                                                                <div style={{
-                                                                    marginTop: '0.5rem',
-                                                                    padding: '0.25rem 0.5rem',
-                                                                    backgroundColor: '#fef3c7',
-                                                                    border: '1px solid #fbbf24',
-                                                                    borderRadius: '0.25rem',
-                                                                    fontSize: '0.75rem',
-                                                                    fontWeight: 'bold',
-                                                                    color: '#92400e'
-                                                                }}>
-                                                                    +3 PC (Otro origen)
-                                                                </div>
-                                                            )}
-                                                            {isMaldito && originFilter === 'Sobrenatural' && !item.origins.includes('Sobrenatural') && (
-                                                                <div style={{
-                                                                    marginTop: '0.5rem',
-                                                                    padding: '0.25rem 0.5rem',
-                                                                    backgroundColor: '#fef3c7',
-                                                                    border: '1px solid #fbbf24',
-                                                                    borderRadius: '0.25rem',
-                                                                    fontSize: '0.75rem',
-                                                                    fontWeight: 'bold',
-                                                                    color: '#92400e'
-                                                                }}>
-                                                                    +1 PC (Otro origen)
-                                                                </div>
-                                                            )}
+                                                            {(() => {
+                                                                const penalty = characterData ? getPowerPenalty(characterData, item) : { cost: 0, label: '', type: 'none' };
+                                                                if (penalty.cost > 0 && penalty.type !== 'none') {
+                                                                    return (
+                                                                        <div style={{
+                                                                            marginTop: '0.5rem',
+                                                                            padding: '0.25rem 0.5rem',
+                                                                            backgroundColor: '#fef3c7',
+                                                                            border: '1px solid #fbbf24',
+                                                                            borderRadius: '0.25rem',
+                                                                            fontSize: '0.75rem',
+                                                                            fontWeight: 'bold',
+                                                                            color: '#92400e'
+                                                                        }}>
+                                                                            {penalty.label}
+                                                                        </div>
+                                                                    );
+                                                                }
+                                                                return null;
+                                                            })()}
                                                         </div>
                                                     )}
 
@@ -324,51 +302,27 @@ export default function SelectionModal({
                                                                     {item.types?.map((t: string) => (
                                                                         <span key={t} className="type-tag tiny">{t}</span>
                                                                     ))}
-                                                                    {originFilter === 'Mutante' && characterData && isPowerCrossType(characterData, item.id) && (
-                                                                        <span style={{
-                                                                            marginLeft: '0.5rem',
-                                                                            padding: '0.125rem 0.375rem',
-                                                                            backgroundColor: '#fef3c7',
-                                                                            border: '1px solid #fbbf24',
-                                                                            borderRadius: '0.25rem',
-                                                                            fontSize: '0.65rem',
-                                                                            fontWeight: 'bold',
-                                                                            color: '#92400e',
-                                                                            whiteSpace: 'nowrap'
-                                                                        }}>
-                                                                            +2 PC
-                                                                        </span>
-                                                                    )}
-                                                                    {(originFilter === 'Guardián' || originFilter === 'Guardian') && !item.origins.includes('Guardian') && (
-                                                                        <span style={{
-                                                                            marginLeft: '0.5rem',
-                                                                            padding: '0.125rem 0.375rem',
-                                                                            backgroundColor: '#fef3c7',
-                                                                            border: '1px solid #fbbf24',
-                                                                            borderRadius: '0.25rem',
-                                                                            fontSize: '0.65rem',
-                                                                            fontWeight: 'bold',
-                                                                            color: '#92400e',
-                                                                            whiteSpace: 'nowrap'
-                                                                        }}>
-                                                                            +3 PC
-                                                                        </span>
-                                                                    )}
-                                                                    {isMaldito && originFilter === 'Sobrenatural' && !item.origins.includes('Sobrenatural') && (
-                                                                        <span style={{
-                                                                            marginLeft: '0.5rem',
-                                                                            padding: '0.125rem 0.375rem',
-                                                                            backgroundColor: '#fef3c7',
-                                                                            border: '1px solid #fbbf24',
-                                                                            borderRadius: '0.25rem',
-                                                                            fontSize: '0.65rem',
-                                                                            fontWeight: 'bold',
-                                                                            color: '#92400e',
-                                                                            whiteSpace: 'nowrap'
-                                                                        }}>
-                                                                            +1 PC
-                                                                        </span>
-                                                                    )}
+                                                                    {(() => {
+                                                                        const penalty = characterData ? getPowerPenalty(characterData, item) : { cost: 0, label: '', type: 'none' };
+                                                                        if (penalty.cost > 0 && penalty.type !== 'none') {
+                                                                            return (
+                                                                                <span style={{
+                                                                                    marginLeft: '0.5rem',
+                                                                                    padding: '0.125rem 0.375rem',
+                                                                                    backgroundColor: '#fef3c7',
+                                                                                    border: '1px solid #fbbf24',
+                                                                                    borderRadius: '0.25rem',
+                                                                                    fontSize: '0.65rem',
+                                                                                    fontWeight: 'bold',
+                                                                                    color: '#92400e',
+                                                                                    whiteSpace: 'nowrap'
+                                                                                }}>
+                                                                                    +{penalty.cost} PC
+                                                                                </span>
+                                                                            );
+                                                                        }
+                                                                        return null;
+                                                                    })()}
                                                                 </div>
                                                             </td>
                                                         )}

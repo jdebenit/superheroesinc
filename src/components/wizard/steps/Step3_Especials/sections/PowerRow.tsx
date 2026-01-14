@@ -1,6 +1,6 @@
 import React from 'react';
 import { POWERS } from '../../../../../data/powers';
-import { calculateSkillBase, getCharacteristicValue, getRankLevel } from '../utils';
+import { calculateSkillBase, getCharacteristicValue, getRankLevel, getPowerPenalty } from '../utils';
 import type { SelectedPower } from '../types';
 
 interface PowerRowProps {
@@ -81,13 +81,12 @@ export default function PowerRow({
     // So removing isAtlanteFree from isFree to handle it in displayCost block and baseCost calculation.
     const isFree = isTesKharFree || isTrollFree;
 
+    const penaltyInfo = getPowerPenalty(data, p);
+    const isPenalty = penaltyInfo.type !== 'none';
+
     let displayBaseCostStr = p.cost.toString();
-    if (selection.isCrossType) {
-        displayBaseCostStr = `${p.cost} + 2`;
-    } else if (selection.isCrossOrigin) {
-        displayBaseCostStr = `${p.cost} + 3`;
-    } else if (selection.isCrossOriginMaldito) {
-        displayBaseCostStr = `${p.cost} + 1`;
+    if (isPenalty) {
+        displayBaseCostStr = `${p.cost} + ${penaltyInfo.cost}`;
     } else if (isHybridPenalty) {
         displayBaseCostStr = `${p.cost} + 3`;
     } else if (isSemidemonioBonus && !p.characteristic) {
@@ -136,7 +135,7 @@ export default function PowerRow({
             <td style={{ padding: '1rem', fontWeight: 'bold', color: '#1f2937' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
                     <span>{p.name}</span>
-                    {selection.isCrossType && (
+                    {isPenalty && (
                         <span style={{
                             fontSize: '0.65rem',
                             padding: '0.125rem 0.375rem',
@@ -147,49 +146,7 @@ export default function PowerRow({
                             color: '#92400e',
                             whiteSpace: 'nowrap'
                         }}>
-                            +2 PC (Otro tipo)
-                        </span>
-                    )}
-                    {isHybridPenalty && (
-                        <span style={{
-                            fontSize: '0.65rem',
-                            padding: '0.125rem 0.375rem',
-                            backgroundColor: '#fef3c7',
-                            border: '1px solid #fbbf24',
-                            borderRadius: '0.25rem',
-                            fontWeight: 'bold',
-                            color: '#92400e',
-                            whiteSpace: 'nowrap'
-                        }}>
-                            +3 PC (Híbrido)
-                        </span>
-                    )}
-                    {selection.isCrossOrigin && (
-                        <span style={{
-                            fontSize: '0.65rem',
-                            padding: '0.125rem 0.375rem',
-                            backgroundColor: '#fef3c7',
-                            border: '1px solid #fbbf24',
-                            borderRadius: '0.25rem',
-                            fontWeight: 'bold',
-                            color: '#92400e',
-                            whiteSpace: 'nowrap'
-                        }}>
-                            +3 PC (Otro origen)
-                        </span>
-                    )}
-                    {selection.isCrossOriginMaldito && (
-                        <span style={{
-                            fontSize: '0.65rem',
-                            padding: '0.125rem 0.375rem',
-                            backgroundColor: '#fef3c7',
-                            border: '1px solid #fbbf24',
-                            borderRadius: '0.25rem',
-                            fontWeight: 'bold',
-                            color: '#92400e',
-                            whiteSpace: 'nowrap'
-                        }}>
-                            +1 PC (Otro origen)
+                            {penaltyInfo.label}
                         </span>
                     )}
                 </div>
@@ -292,19 +249,12 @@ export default function PowerRow({
                                     // Apply Semidemonio Bonus (Discount 1 PC base)
                                     let baseCost = p.cost;
 
-                                    // Cross-type penalty for mutants
-                                    if (selection.isCrossType) {
-                                        baseCost += 2;
-                                    }
+                                    // Penalties now handled by baseCost modification above using shared isPenalty/penaltyInfo logic which is calculated outside this IIFE but accessible?
+                                    // Actually we need to recalculate inside if we want to be safe or rely on the prop calculations
 
-                                    // Cross-origin penalty for Guardián
-                                    if (selection.isCrossOrigin) {
-                                        baseCost += 3;
-                                    }
-
-                                    // Cross-origin penalty for Maldito
-                                    if (selection.isCrossOriginMaldito) {
-                                        baseCost += 1;
+                                    // We can reuse the penaltyInfo calculated in component scope
+                                    if (isPenalty) {
+                                        baseCost += penaltyInfo.cost;
                                     }
 
                                     if (isEnanoGuardian) {
@@ -526,9 +476,7 @@ export default function PowerRow({
                                     const total = baseCost + modCost + custCost;
 
                                     let penaltyDisplay = null;
-                                    if (selection.isCrossType) penaltyDisplay = <span style={{ color: '#92400e', fontWeight: 'bold' }}> + 2</span>;
-                                    else if (selection.isCrossOrigin) penaltyDisplay = <span style={{ color: '#92400e', fontWeight: 'bold' }}> + 3</span>;
-                                    else if (selection.isCrossOriginMaldito) penaltyDisplay = <span style={{ color: '#92400e', fontWeight: 'bold' }}> + 1</span>;
+                                    if (isPenalty) penaltyDisplay = <span style={{ color: '#92400e', fontWeight: 'bold' }}> + {penaltyInfo.cost}</span>;
                                     else if (isEnanoGuardian) penaltyDisplay = <span style={{ color: '#92400e', fontWeight: 'bold' }}> + 2</span>;
 
 

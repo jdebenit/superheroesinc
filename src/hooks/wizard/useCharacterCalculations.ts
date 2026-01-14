@@ -9,7 +9,7 @@ import { EXOSKELETON_ARMOR_CONFIGS } from '../../data/exoskeletonArmorConfigs';
 import { TECHNOSUIT_STRENGTH_CONFIGS } from '../../data/technoSuitStrengthConfigs';
 import { ENTE_FORMS, ENTE_EFFECTS } from '../../components/wizard/steps/Step3_Especials/sections/EnteSection';
 import { POSEIDO_FORMS } from '../../components/wizard/steps/Step3_Especials/sections/PoseidoSection';
-import { calculateEM, hasSubtype } from '../../components/wizard/steps/Step3_Especials/utils';
+import { calculateEM, hasSubtype, getPowerPenalty } from '../../components/wizard/steps/Step3_Especials/utils';
 import { INCOME_SOURCES } from '../../data/technologicalOptions';
 import { SEQUELS } from '../../data/sequels';
 import { GUARDIAN_QUALITIES } from '../../data/guardianOptions';
@@ -209,22 +209,13 @@ export function useCharacterCalculations(character: any) {
             // Base cost
             let cost = powerData.cost;
 
-            // CROSS-TYPE PENALTY FOR MUTANTS (+2 PC to base cost)
-            // Applied before other modifiers
-            if (power.isCrossType) {
-                cost += 2;
-            }
+            // Calculate penalties dynamically using shared helper
+            // This replaces stored flags (isCrossType, isCrossOrigin, etc.) ensuring consistency
+            // and auto-updates if character origin changes
+            const penalty = getPowerPenalty(character, powerData);
 
-            // CROSS-ORIGIN PENALTY FOR GUARDIÁN (+3 PC to base cost)
-            // Applied before other modifiers
-            if (power.isCrossOrigin) {
-                cost += 3;
-            }
-
-            // CROSS-ORIGIN PENALTY FOR MALDITO (+1 PC to base cost)
-            // Applied before other modifiers
-            if (power.isCrossOriginMaldito) {
-                cost += 1;
+            if (penalty.cost > 0) {
+                cost += penalty.cost;
             }
 
             // Semidemonio Bonus: -1 PC for Sobrenatural powers (Base cost discount)

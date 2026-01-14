@@ -183,3 +183,47 @@ export const isPowerCrossType = (data: any, powerId: string): boolean => {
     return !power.types.includes(mutantType);
 };
 
+/**
+ * Robust check for Guardián origin (handles spelling variations)
+ */
+export const isGuardian = (data: any): boolean => {
+    return hasOrigin(data, 'Guardián') || hasOrigin(data, 'Guardian');
+};
+
+/**
+ * Check for Maldito subtype
+ */
+export const isMaldito = (data: any): boolean => {
+    return hasSubtype(data, 'Sobrenatural', 'Maldito');
+};
+
+/**
+ * Get power penalty information based on character data and power
+ */
+export const getPowerPenalty = (data: any, power: any): { cost: number; label: string; type: 'cross-origin' | 'cross-type' | 'none' } => {
+    if (!data || !power) return { cost: 0, label: '', type: 'none' };
+
+    // 1. Check Mutant Cross-Type
+    if (isPowerCrossType(data, power.id)) {
+        return { cost: 2, label: '+2 PC (Otro tipo)', type: 'cross-type' };
+    }
+
+    // 2. Check Guardián Cross-Origin
+    if (isGuardian(data)) {
+        const isGuardianPower = power.origins?.some((o: string) => o === 'Guardián' || o === 'Guardian');
+        if (!isGuardianPower) {
+            return { cost: 3, label: '+3 PC (Otro origen)', type: 'cross-origin' };
+        }
+    }
+
+    // 3. Check Maldito Cross-Origin
+    if (isMaldito(data)) {
+        const isSobrenaturalPower = power.origins?.includes('Sobrenatural');
+        if (!isSobrenaturalPower) {
+            return { cost: 1, label: '+1 PC (Otro origen)', type: 'cross-origin' };
+        }
+    }
+
+    return { cost: 0, label: '', type: 'none' };
+};
+
