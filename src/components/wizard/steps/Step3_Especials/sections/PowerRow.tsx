@@ -146,6 +146,20 @@ export default function PowerRow({
                             +2 PC (Otro tipo)
                         </span>
                     )}
+                    {isHybridPenalty && (
+                        <span style={{
+                            fontSize: '0.65rem',
+                            padding: '0.125rem 0.375rem',
+                            backgroundColor: '#fef3c7',
+                            border: '1px solid #fbbf24',
+                            borderRadius: '0.25rem',
+                            fontWeight: 'bold',
+                            color: '#92400e',
+                            whiteSpace: 'nowrap'
+                        }}>
+                            +3 PC (Híbrido)
+                        </span>
+                    )}
                 </div>
                 {p.options && p.options.length > 0 && (
                     <div style={{ marginTop: '0.5rem' }}>
