@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { calculateDiff } from '../../../utils/dataCleaner';
 import { initialCharacterState } from '../../../data/wizardConfig';
+import { calculateDerivedStats, formatDerivedStats } from '../../../utils/characterCalculations';
 
 /**
  * Custom hook for handling JSON export functionality
@@ -10,6 +11,21 @@ export const useJsonExport = (character: any) => {
     const downloadJson = useCallback(async () => {
         // Calculate clean data (diff from defaults)
         const cleanData = calculateDiff(character, initialCharacterState);
+
+        // Force calculation of latest derived stats for the export
+        // This ensures the JSON has valid stats even if the user hasn't visited Step 6
+        const derivedStats = calculateDerivedStats(
+            character.attributes?.values || {},
+            character.origin?.items || [],
+            character.skills || {}
+        );
+        const { combatStats, otherStats } = formatDerivedStats(derivedStats);
+
+        // Inject calculated stats into the export data
+        if (cleanData) {
+            cleanData.combatstats = combatStats;
+            cleanData.otherstats = otherStats;
+        }
 
         const filename = `${(character.name || 'personaje').toLowerCase().replace(/\s+/g, '-')}.json`;
         const jsonStr = JSON.stringify(cleanData || {}, null, 2);

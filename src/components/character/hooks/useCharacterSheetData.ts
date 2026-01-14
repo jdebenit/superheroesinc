@@ -1,7 +1,7 @@
 import { SPELLS } from '../../../data/spells';
 import { POWERS } from '../../../data/powers';
 import { calculateEM } from '../../wizard/steps/Step3_Especials/utils';
-import { calculateDerivedStats, calculateSkillBase } from '../../../utils/characterCalculations';
+import { calculateDerivedStats, calculateSkillBase, formatDerivedStats } from '../../../utils/characterCalculations';
 import { calculateGeneralSkillValues, calculateSpecialSkillValues } from '../../../utils/calculations/skillCalculations';
 
 const calculatePowerSkillBase = (char: any, formula: string): number => {
@@ -45,47 +45,8 @@ export const useCharacterSheetData = (character: any) => {
     );
 
     // Format stats for display
-    // If character has explicit combatStats (from JSON), use them. Otherwise calculate from live stats.
-    const combatStats = Array.isArray(character.combatstats)
-        ? character.combatstats
-        : [
-            `Acciones por asalto: ${derivedStats.combat.acciones}`,
-            `Iniciativa y Reflejos: ${derivedStats.combat.iniciativa}`,
-            `Puntos de Vida: ${derivedStats.combat.pv}`,
-            `Equilibrio Mental: ${derivedStats.combat.equilibrio}`
-        ];
-
-    // Calculate EM for display
-    const emFormula = character.spells?.emFormula || { divisor: 4, pcCost: 0 };
-    // Check if character has magic access (Divisor > 0)
-    // NOTE: EM is now displayed in SpellsSection only, logic retained here if needed for other calcs but removed from combatStats
-    // if (emFormula.divisor > 0 || (character.origin?.items?.some((i: any) => i.Mago) /* Mago always has magic */)) {
-    //     const isMago = character.origin?.items?.some((i: any) => i.Mago);
-    //     const divisor = isMago ? 1 : emFormula.divisor;
-    //     if (divisor > 0) {
-    //         const selectedPowers = character.powers?.selected || [];
-    //         const em = calculateEM(character, selectedPowers, divisor);
-    //         combatStats.push(`Energía Mágica: ${em}`);
-    //     }
-    // }
-
-    // If character has explicit otherStats (from JSON), use them. Otherwise calculate from live stats.
-    const otherStats = Array.isArray(character.otherstats)
-        ? character.otherstats
-        : [
-            `Inconsciencia: ${derivedStats.other.inconsciencia}`,
-            `Recuperación: ${derivedStats.other.recuperacion}`,
-            `Resistencia a gases y venenos: ${derivedStats.other.resistenciaGases}`,
-            `Modificador de fuerza: ${derivedStats.other.modFuerza}`,
-            `Peso Levantado: ${derivedStats.other.pesoLevantado}`,
-            `Daño absorbido físico: ${derivedStats.other.daAbsorbidoFisico}`,
-            `Daño absorbido mental: ${derivedStats.other.daAbsorbidoMental}`,
-            `Modificador de impacto: ${derivedStats.other.modImpacto}`,
-            `Modificador Psionico: ${derivedStats.other.modPsionico}`,
-            `Parada Fisica: ${derivedStats.other.paradaFisica}`,
-            `Parada mental: ${derivedStats.other.paradaMental}`,
-            `Salto (alto / largo): ${derivedStats.other.salto}`
-        ];
+    // Always use live calculated stats to prevent stale data
+    const { combatStats, otherStats } = formatDerivedStats(derivedStats);
 
     // --- PRE-CALCULATE LISTS FOR PDF (Powers, Spells, etc.) ---
 
