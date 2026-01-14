@@ -334,8 +334,10 @@ export function calculateDerivedStats(
     }
 
 
-    // Modificador por Origen (Mental Parry)
+    // Modificador por Origen (Mental Parry & Mod. Impacto)
     let maxOriginBonus = 0;
+    let maxImpactBonus = 0;
+
     // Origins structure: [ { "NombreOrigen": ["efecto1", ...] }, ... ]
     if (origins && origins.length > 0) {
         origins.forEach(originObj => {
@@ -345,6 +347,7 @@ export function calculateDerivedStats(
             const originDetails = originObj[originCategory] || [];
             if (!originCategory) return;
 
+            // --- Mental Parry Bonus ---
             let currentBonus = 0;
 
             // 1. Check if "Thals" is in the details array
@@ -379,10 +382,35 @@ export function calculateDerivedStats(
             if (currentBonus > maxOriginBonus) {
                 maxOriginBonus = currentBonus;
             }
+
+            // --- Impact Bonus (Generic via subtypeModifiers) ---
+            if (originCategory) {
+                const categoryDef = ORIGIN_CATEGORIES[originCategory];
+                if (categoryDef && categoryDef.subtypeModifiers) {
+                    let currentImpactBonus = 0;
+
+                    // Iterate over all specializations the character has in this category
+                    originDetails.forEach((specialization: string) => {
+                        if (!categoryDef.subtypeModifiers) return;
+
+                        const modifier = categoryDef.subtypeModifiers[specialization];
+                        if (modifier && modifier.modImpacto) {
+                            if (modifier.modImpacto > currentImpactBonus) {
+                                currentImpactBonus = modifier.modImpacto;
+                            }
+                        }
+                    });
+
+                    if (currentImpactBonus > maxImpactBonus) {
+                        maxImpactBonus = currentImpactBonus;
+                    }
+                }
+            }
         });
     }
 
     paradaMental += maxOriginBonus;
+    modImpacto += maxImpactBonus;
 
     // Salto: 
     // Base from Agility Table applied with Strength Multiplier

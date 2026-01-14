@@ -9,6 +9,7 @@
 export interface OriginCategory {
     name: string;
     subtypes?: { [key: string]: string[] };
+    subtypeModifiers?: { [key: string]: { modImpacto?: number } };
     defaultEffects?: string[];
     disabled?: boolean;
     disabledSubtypes?: string[];
@@ -144,6 +145,17 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
                 "Tiene que quedar patente en el historial que un clan o varios maestros le adiestraron durante gran parte de su vida.",
                 "Acceso al uso del chi"
             ],
+        },
+        subtypeModifiers: {
+            "Acrobata": { modImpacto: 30 },
+            "Artista Marcial": { modImpacto: 30 },
+            "Artista Marcial con Chi": { modImpacto: 30 },
+            "Arquero": { modImpacto: 20 },
+            "Espadachín": { modImpacto: 20 },
+            "Espia/Ladrón": { modImpacto: 20 },
+            "Fanático/Vengador": { modImpacto: 20 },
+            "Militar": { modImpacto: 20 },
+            "Pistolero": { modImpacto: 20 }
         }
     },
     "Mutante": {
