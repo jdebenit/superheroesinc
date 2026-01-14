@@ -15,6 +15,7 @@ interface SelectionModalProps {
     customPlaceholder?: string;
     customTitle?: string;
     characterData?: any; // For checking cross-type powers
+    isMaldito?: boolean; // For checking cross-origin Maldito powers
 }
 
 export default function SelectionModal({
@@ -27,7 +28,8 @@ export default function SelectionModal({
     onToggleItem,
     customPlaceholder,
     customTitle,
-    characterData
+    characterData,
+    isMaldito
 }: SelectionModalProps) {
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedTypeFilter, setSelectedTypeFilter] = useState<string>("Todos");
@@ -228,6 +230,34 @@ export default function SelectionModal({
                                                                     +2 PC (Otro tipo)
                                                                 </div>
                                                             )}
+                                                            {(originFilter === 'Guardián' || originFilter === 'Guardian') && !item.origins.includes('Guardian') && (
+                                                                <div style={{
+                                                                    marginTop: '0.5rem',
+                                                                    padding: '0.25rem 0.5rem',
+                                                                    backgroundColor: '#fef3c7',
+                                                                    border: '1px solid #fbbf24',
+                                                                    borderRadius: '0.25rem',
+                                                                    fontSize: '0.75rem',
+                                                                    fontWeight: 'bold',
+                                                                    color: '#92400e'
+                                                                }}>
+                                                                    +3 PC (Otro origen)
+                                                                </div>
+                                                            )}
+                                                            {isMaldito && originFilter === 'Sobrenatural' && !item.origins.includes('Sobrenatural') && (
+                                                                <div style={{
+                                                                    marginTop: '0.5rem',
+                                                                    padding: '0.25rem 0.5rem',
+                                                                    backgroundColor: '#fef3c7',
+                                                                    border: '1px solid #fbbf24',
+                                                                    borderRadius: '0.25rem',
+                                                                    fontSize: '0.75rem',
+                                                                    fontWeight: 'bold',
+                                                                    color: '#92400e'
+                                                                }}>
+                                                                    +1 PC (Otro origen)
+                                                                </div>
+                                                            )}
                                                         </div>
                                                     )}
 
@@ -307,6 +337,36 @@ export default function SelectionModal({
                                                                             whiteSpace: 'nowrap'
                                                                         }}>
                                                                             +2 PC
+                                                                        </span>
+                                                                    )}
+                                                                    {(originFilter === 'Guardián' || originFilter === 'Guardian') && !item.origins.includes('Guardian') && (
+                                                                        <span style={{
+                                                                            marginLeft: '0.5rem',
+                                                                            padding: '0.125rem 0.375rem',
+                                                                            backgroundColor: '#fef3c7',
+                                                                            border: '1px solid #fbbf24',
+                                                                            borderRadius: '0.25rem',
+                                                                            fontSize: '0.65rem',
+                                                                            fontWeight: 'bold',
+                                                                            color: '#92400e',
+                                                                            whiteSpace: 'nowrap'
+                                                                        }}>
+                                                                            +3 PC
+                                                                        </span>
+                                                                    )}
+                                                                    {isMaldito && originFilter === 'Sobrenatural' && !item.origins.includes('Sobrenatural') && (
+                                                                        <span style={{
+                                                                            marginLeft: '0.5rem',
+                                                                            padding: '0.125rem 0.375rem',
+                                                                            backgroundColor: '#fef3c7',
+                                                                            border: '1px solid #fbbf24',
+                                                                            borderRadius: '0.25rem',
+                                                                            fontSize: '0.65rem',
+                                                                            fontWeight: 'bold',
+                                                                            color: '#92400e',
+                                                                            whiteSpace: 'nowrap'
+                                                                        }}>
+                                                                            +1 PC
                                                                         </span>
                                                                     )}
                                                                 </div>

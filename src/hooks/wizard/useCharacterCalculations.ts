@@ -215,6 +215,18 @@ export function useCharacterCalculations(character: any) {
                 cost += 2;
             }
 
+            // CROSS-ORIGIN PENALTY FOR GUARDIÁN (+3 PC to base cost)
+            // Applied before other modifiers
+            if (power.isCrossOrigin) {
+                cost += 3;
+            }
+
+            // CROSS-ORIGIN PENALTY FOR MALDITO (+1 PC to base cost)
+            // Applied before other modifiers
+            if (power.isCrossOriginMaldito) {
+                cost += 1;
+            }
+
             // Semidemonio Bonus: -1 PC for Sobrenatural powers (Base cost discount)
             const isSemidemonioBonus = isSemidemonio && power.origin === 'Sobrenatural';
             if (isSemidemonioBonus && !powerData.characteristic) {

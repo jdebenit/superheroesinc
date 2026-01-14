@@ -190,13 +190,22 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
         // Check if this is a cross-type power for mutants
         const isCrossType = modalOriginFilter === 'Mutante' && isPowerCrossType(data, powerId);
 
+        // Check if this is a cross-origin power for Guardián
+        // Note: Power origins use "Guardian" without tilde
+        const isCrossOrigin = isGuardian && powerDef?.origins && !powerDef.origins.includes('Guardian');
+
+        // Check if this is a cross-origin power for Maldito
+        const isCrossOriginMaldito = isMaldito && powerDef?.origins && !powerDef.origins.includes('Sobrenatural');
+
         if (hasOptions) {
             // Always add new instance for powers with options
             const newSelected = [...selectedPowers, {
                 id: powerId,
                 origin: modalOriginFilter,
                 rank: 1,
-                isCrossType
+                isCrossType,
+                isCrossOrigin,
+                isCrossOriginMaldito
             }];
             updatePowers(newSelected);
         } else {
@@ -212,7 +221,9 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                     id: powerId,
                     origin: modalOriginFilter,
                     rank: 1,
-                    isCrossType
+                    isCrossType,
+                    isCrossOrigin,
+                    isCrossOriginMaldito
                 }];
             }
             updatePowers(newSelected);
@@ -350,6 +361,11 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
         onChange({ ...data, magicalBonds: newBonds });
     };
 
+    // Origin flags needed for modal filtering
+    // Check both spellings just in case
+    const isGuardian = hasOrigin(data, 'Guardián') || hasOrigin(data, 'Guardian');
+    const isMaldito = hasSubtype(data, 'Sobrenatural', 'Maldito');
+
     // Filter modal items
     const modalItems = useMemo(() => {
         if (!modalType || modalType === 'magical_bonds') return [];
@@ -359,7 +375,26 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                 if (modalOriginFilter === 'Grifo') {
                     return p.id === 'volar';
                 }
-                if (modalOriginFilter && !p.origins.includes(modalOriginFilter)) return false;
+
+                // Guardián can see all powers when opening Guardián modal (cross-origin selection)
+                // Check both spelling variations to be safe
+                if (isGuardian && (modalOriginFilter === 'Guardián' || modalOriginFilter === 'Guardian')) {
+                    return true; // Show all powers
+                }
+
+                // Maldito can see all powers when opening Sobrenatural modal (cross-origin selection)
+                if (isMaldito && modalOriginFilter === 'Sobrenatural') {
+                    return true; // Show all powers
+                }
+
+                if (modalOriginFilter) {
+                    // Special handling for Guardián/Guardian mismatch in data vs UI
+                    if (modalOriginFilter === 'Guardián' && p.origins.includes('Guardian')) {
+                        // Allow match
+                    } else if (!p.origins.includes(modalOriginFilter)) {
+                        return false;
+                    }
+                }
 
                 // NOTE: Removed type filtering for Mutante to allow cross-type selection
                 // Mutants can now select any power from their origin, with cross-type penalty
@@ -376,7 +411,6 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     }, [modalType, modalOriginFilter, data]);
 
     // Derived state for display
-    const isGuardian = hasOrigin(data, 'Guardián');
     const isAlterado = hasOrigin(data, 'Alterado');
     const isMago = hasSubtype(data, 'Arcano', 'Mago');
     const isDotado = hasSubtype(data, 'Arcano', 'Dotado');
@@ -387,7 +421,6 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     const isVampiro = hasSubtype(data, 'Sobrenatural', 'Vampiro');
 
     const isSemidemonio = hasSubtype(data, 'Sobrenatural', 'Semidemonio');
-    const isMaldito = hasSubtype(data, 'Sobrenatural', 'Maldito');
     const isPoseido = hasSubtype(data, 'Sobrenatural', 'Poseidó') || hasSubtype(data, 'Sobrenatural', 'Poseido'); // Check both just in case, though definitions say Poseido
     const isEnte = hasSubtype(data, 'Sobrenatural', 'Ente');
     const isThals = hasSubtype(data, 'Parahumano', 'Thals');
@@ -726,6 +759,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                                 toggleTechModule
                     }
                     characterData={data}
+                    isMaldito={isMaldito}
                 />
             )}
 

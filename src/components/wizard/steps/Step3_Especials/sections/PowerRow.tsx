@@ -84,6 +84,10 @@ export default function PowerRow({
     let displayBaseCostStr = p.cost.toString();
     if (selection.isCrossType) {
         displayBaseCostStr = `${p.cost} + 2`;
+    } else if (selection.isCrossOrigin) {
+        displayBaseCostStr = `${p.cost} + 3`;
+    } else if (selection.isCrossOriginMaldito) {
+        displayBaseCostStr = `${p.cost} + 1`;
     } else if (isHybridPenalty) {
         displayBaseCostStr = `${p.cost} + 3`;
     } else if (isSemidemonioBonus && !p.characteristic) {
@@ -158,6 +162,34 @@ export default function PowerRow({
                             whiteSpace: 'nowrap'
                         }}>
                             +3 PC (Híbrido)
+                        </span>
+                    )}
+                    {selection.isCrossOrigin && (
+                        <span style={{
+                            fontSize: '0.65rem',
+                            padding: '0.125rem 0.375rem',
+                            backgroundColor: '#fef3c7',
+                            border: '1px solid #fbbf24',
+                            borderRadius: '0.25rem',
+                            fontWeight: 'bold',
+                            color: '#92400e',
+                            whiteSpace: 'nowrap'
+                        }}>
+                            +3 PC (Otro origen)
+                        </span>
+                    )}
+                    {selection.isCrossOriginMaldito && (
+                        <span style={{
+                            fontSize: '0.65rem',
+                            padding: '0.125rem 0.375rem',
+                            backgroundColor: '#fef3c7',
+                            border: '1px solid #fbbf24',
+                            borderRadius: '0.25rem',
+                            fontWeight: 'bold',
+                            color: '#92400e',
+                            whiteSpace: 'nowrap'
+                        }}>
+                            +1 PC (Otro origen)
                         </span>
                     )}
                 </div>
@@ -263,6 +295,16 @@ export default function PowerRow({
                                     // Cross-type penalty for mutants
                                     if (selection.isCrossType) {
                                         baseCost += 2;
+                                    }
+
+                                    // Cross-origin penalty for Guardián
+                                    if (selection.isCrossOrigin) {
+                                        baseCost += 3;
+                                    }
+
+                                    // Cross-origin penalty for Maldito
+                                    if (selection.isCrossOriginMaldito) {
+                                        baseCost += 1;
                                     }
 
                                     if (isEnanoGuardian) {
@@ -467,15 +509,34 @@ export default function PowerRow({
                                         baseCost += 2;
                                     }
 
+                                    // Cross-origin penalty for Guardián
+                                    if (selection.isCrossOrigin) {
+                                        baseCost += 3;
+                                    }
+
+                                    // Cross-origin penalty for Maldito
+                                    if (selection.isCrossOriginMaldito) {
+                                        baseCost += 1;
+                                    }
+
                                     if (isEnanoGuardian) baseCost = p.cost + 2; // Enano restriction cost
 
 
 
                                     const total = baseCost + modCost + custCost;
 
+                                    let penaltyDisplay = null;
+                                    if (selection.isCrossType) penaltyDisplay = <span style={{ color: '#92400e', fontWeight: 'bold' }}> + 2</span>;
+                                    else if (selection.isCrossOrigin) penaltyDisplay = <span style={{ color: '#92400e', fontWeight: 'bold' }}> + 3</span>;
+                                    else if (selection.isCrossOriginMaldito) penaltyDisplay = <span style={{ color: '#92400e', fontWeight: 'bold' }}> + 1</span>;
+                                    else if (isEnanoGuardian) penaltyDisplay = <span style={{ color: '#92400e', fontWeight: 'bold' }}> + 2</span>;
+
+
                                     return (
                                         <>
-                                            {p.cost} + {modCost.toFixed(1)}
+                                            {p.cost}
+                                            {penaltyDisplay}
+                                            {' + '}{modCost.toFixed(1)}
                                             {discountText && <span style={{ color: '#16a34a', marginLeft: '2px', fontSize: '10px' }}>{discountText}</span>}
                                             {custCost !== 0 && (
                                                 <> {custCost >= 0 ? '+' : '-'} {Math.abs(custCost)} (Pers.)</>
