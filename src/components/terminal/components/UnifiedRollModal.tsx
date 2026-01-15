@@ -292,6 +292,7 @@ export default function UnifiedRollModal({
                     <div className="roll-main-content">
                         {rollResult === null ? (
                             <>
+                                {/* LEFT COLUMN: CONTROLS */}
                                 <div className="roll-modifiers-column" style={{ maxHeight: '300px', overflowY: 'auto', paddingRight: '0.5rem' }}>
                                     {/* BASIC CONTROLS */}
                                     {mode === 'basic' && (
@@ -438,6 +439,7 @@ export default function UnifiedRollModal({
                                     )}
                                 </div>
 
+                                {/* RIGHT COLUMN: BUTTON */}
                                 <div className="roll-button-column">
                                     <button
                                         className={`roll-circular-btn ${isRolling ? 'rolling' : ''}`}
@@ -449,7 +451,7 @@ export default function UnifiedRollModal({
                                 </div>
                             </>
                         ) : (
-                            <div className="roll-result-display">
+                            <div className="roll-result-display" style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
                                 <div className="roll-result-label">
                                     {rollResult.isCrit ? '¡CRÍTICO!' :
                                         rollResult.isFumble ? '¡PIFIA!' :
@@ -459,10 +461,10 @@ export default function UnifiedRollModal({
                                     {rollResult.roll}
                                 </div>
                                 <div className="roll-details">
-                                    <small>Margen: {rollResult.margin > 0 ? '+' : ''}{rollResult.margin}</small>
+                                    Margen: {rollResult.margin > 0 ? '+' : ''}{rollResult.margin}
                                 </div>
-                                <button className="roll-again-btn" onClick={handleRoll}>
-                                    Tirar de nuevo
+                                <button className="btn-retry" onClick={() => setRollResult(null)}>
+                                    🔄 Tirar de nuevo
                                 </button>
                             </div>
                         )}
