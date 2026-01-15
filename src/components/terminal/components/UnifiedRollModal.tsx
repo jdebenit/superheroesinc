@@ -258,30 +258,44 @@ export default function UnifiedRollModal({
                         </div>
                     )}
 
-                    {/* BASIC MODE UI */}
-                    {mode === 'basic' && (
-                        <>
-                            <div className="roll-attribute-info compact">
-                                <div className="roll-formula">
-                                    <span className="formula-part" title="Valor Base">{targetValue}</span>
-                                    <span className="formula-op">{difficultyModifier >= 0 ? '+' : ''}</span>
-                                    <span className={`formula-part ${difficultyModifier < 0 ? 'negative' : 'positive'}`} title="Dificultad">
-                                        {Math.abs(difficultyModifier)}
-                                    </span>
-                                    <span className="formula-op">{parsedCustomMod >= 0 ? '+' : ''}</span>
-                                    <span className={`formula-part ${parsedCustomMod !== 0 ? 'active' : ''}`} title="Personalizado">
-                                        {Math.abs(parsedCustomMod)}
-                                    </span>
-                                    <span className="formula-eq">=</span>
-                                    <span className="formula-result">{Math.max(0, Math.min(100, finalProbability))}%</span>
-                                </div>
-                                <div className="roll-formula-label">Probabilidad de Éxito</div>
-                            </div>
+                    {/* COMMON FORMULA (Derived from state) */}
+                    <div className="roll-attribute-info compact">
+                        <div className="roll-formula">
+                            <span className="formula-part" title="Valor Base">{targetValue}</span>
 
-                            <div className="roll-main-content">
-                                {rollResult === null ? (
-                                    <>
-                                        <div className="roll-modifiers-column">
+                            {/* Modifiers Sum */}
+                            <span className="formula-op">{modifiersSum >= 0 ? '+' : ''}</span>
+                            <span className={`formula-part ${modifiersSum < 0 ? 'negative' : 'positive'}`} title="Modificadores">
+                                {Math.abs(modifiersSum)}
+                            </span>
+
+                            {/* Deduction */}
+                            <span className="formula-op">-</span>
+                            {mode === 'basic' ? (
+                                <span className={`formula-part ${parsedCustomMod !== 0 ? 'active' : ''}`} title="Personalizado (ya incluido arriba)">
+                                    0
+                                </span>
+                            ) : (
+                                <span className="formula-part negative" title={subMode === 'distance' ? 'Mod. Defensor' : 'Parada'}>
+                                    {subMode === 'distance' ? numericParry : effectiveParry}
+                                </span>
+                            )}
+
+                            <span className="formula-eq">=</span>
+                            <span className="formula-result">{isAutoHit ? 'AUTO' : `${finalProbability}%`}</span>
+                        </div>
+                        <div className="roll-formula-label">
+                            Probabilidad de Éxito {isAutoHit && '(Solo Pifia)'}
+                        </div>
+                    </div>
+
+                    <div className="roll-main-content">
+                        {rollResult === null ? (
+                            <>
+                                <div className="roll-modifiers-column" style={{ maxHeight: '300px', overflowY: 'auto', paddingRight: '0.5rem' }}>
+                                    {/* BASIC CONTROLS */}
+                                    {mode === 'basic' && (
+                                        <>
                                             <div className="roll-modifier-group">
                                                 <label>Dificultad</label>
                                                 <select
@@ -305,219 +319,156 @@ export default function UnifiedRollModal({
                                                     className="roll-modifier-input"
                                                 />
                                             </div>
-                                        </div>
+                                        </>
+                                    )}
 
-                                        <div className="roll-button-column">
-                                            <button
-                                                className={`roll-circular-btn ${isRolling ? 'rolling' : ''}`}
-                                                onClick={handleRoll}
-                                                disabled={isRolling}
-                                            >
-                                                {isRolling ? '...' : 'LANZAR'}
-                                            </button>
-                                        </div>
-                                    </>
-                                ) : (
-                                    <div className="roll-result-display">
-                                        <div className="roll-result-label">
-                                            {rollResult.isCrit ? '¡CRÍTICO!' :
-                                                rollResult.isFumble ? '¡PIFIA!' :
-                                                    rollResult.success ? 'ÉXITO' : 'FALLO'}
-                                        </div>
-                                        <div className={`roll-result-number ${rollResult.success ? 'success' : 'failure'} ${rollResult.isCrit ? 'critical-success' : ''} ${rollResult.isFumble ? 'critical-failure' : ''}`}>
-                                            {rollResult.roll}
-                                        </div>
-                                        <button className="roll-again-btn" onClick={handleRoll}>
-                                            Tirar de nuevo
-                                        </button>
-                                    </div>
-                                )}
-                            </div>
-                        </>
-                    )}
+                                    {/* ADVANCED - MELEE CONTROLS */}
+                                    {mode === 'combat' && subMode === 'melee' && (
+                                        <>
+                                            <div className="roll-modifier-group">
+                                                <label>Situación</label>
+                                                <select
+                                                    value={situation}
+                                                    onChange={(e) => setSituation(e.target.value)}
+                                                    className="roll-modifier-select"
+                                                    style={{ fontSize: '0.9rem' }}
+                                                >
+                                                    {SITUATIONS.map(s => (
+                                                        <option key={s.id} value={s.id}>
+                                                            {s.label} ({s.mod > 0 ? '+' : ''}{s.mod})
+                                                        </option>
+                                                    ))}
+                                                </select>
+                                            </div>
 
+                                            <div className="roll-modifier-group">
+                                                <label>Cobertura</label>
+                                                <select
+                                                    value={coverage}
+                                                    onChange={(e) => setCoverage(e.target.value)}
+                                                    className="roll-modifier-select"
+                                                >
+                                                    {COVERAGES.map(c => (
+                                                        <option key={c.id} value={c.id}>
+                                                            {c.label} ({c.mod})
+                                                        </option>
+                                                    ))}
+                                                </select>
+                                            </div>
 
-                    {/* ADVANCED / COMBAT MODE UI */}
-                    {mode === 'combat' && (
-                        <>
-                            {/* Base Stats */}
-                            <div className="stat-row">
-                                <span>Habilidad Base:</span>
-                                <span className="bold">{targetValue}%</span>
-                            </div>
-
-                            {/* Controls Grid */}
-                            <div className="advanced-controls-grid">
-                                {subMode === 'distance' ? (
-                                    // DISTANCE CONTROLS
-                                    <>
-                                        <div className="control-group">
-                                            <label>Situación</label>
-                                            <select
-                                                value={distSituation}
-                                                onChange={(e) => setDistSituation(e.target.value)}
-                                                className="terminal-select"
-                                            >
-                                                {DISTANCE_SITUATIONS.map(s => (
-                                                    <option key={s.id} value={s.id}>
-                                                        {s.label} ({s.mod})
-                                                    </option>
-                                                ))}
-                                            </select>
-                                        </div>
-
-                                        <div className="control-group">
-                                            <label>Alcance</label>
-                                            <select
-                                                value={range}
-                                                onChange={(e) => setRange(e.target.value)}
-                                                className="terminal-select"
-                                            >
-                                                {RANGES.map(r => (
-                                                    <option key={r.id} value={r.id}>
-                                                        {r.label} ({r.mod > 0 ? '+' : ''}{r.mod})
-                                                    </option>
-                                                ))}
-                                            </select>
-                                        </div>
-
-                                        <div className="control-group">
-                                            <label>Cobertura</label>
-                                            <select
-                                                value={coverage}
-                                                onChange={(e) => setCoverage(e.target.value)}
-                                                className="terminal-select"
-                                            >
-                                                {COVERAGES.map(c => (
-                                                    <option key={c.id} value={c.id}>
-                                                        {c.label} ({c.mod})
-                                                    </option>
-                                                ))}
-                                            </select>
-                                        </div>
-
-
-
-                                        <div className="control-group full-width">
-                                            <label>Mod. Impacto Defensor</label>
-                                            <input
-                                                type="number"
-                                                value={targetParry}
-                                                onChange={(e) => setTargetParry(e.target.value)}
-                                                placeholder="0"
-                                                className="terminal-input"
-                                            />
-                                        </div>
-                                    </>
-                                ) : (
-                                    // MELEE CONTROLS
-                                    <>
-                                        <div className="control-group">
-                                            <label>Situación</label>
-                                            <select
-                                                value={situation}
-                                                onChange={(e) => setSituation(e.target.value)}
-                                                className="terminal-select"
-                                            >
-                                                {SITUATIONS.map(s => (
-                                                    <option key={s.id} value={s.id}>
-                                                        {s.label} {s.mod > 0 ? `(+${s.mod})` : ''}
-                                                    </option>
-                                                ))}
-                                            </select>
-                                            <small className="help-text">
-                                                {currentSituation.note || `Parada: ${currentSituation.parry === 'half' ? '÷2' : currentSituation.parry === 'none' ? 'NO' : 'Normal'}`}
+                                            <div className="roll-modifier-group">
+                                                <label>Parada</label>
+                                                <input
+                                                    type="number"
+                                                    value={targetParry}
+                                                    onChange={(e) => setTargetParry(e.target.value)}
+                                                    placeholder="0"
+                                                    className="roll-modifier-input"
+                                                    disabled={currentSituation.parry === 'none'}
+                                                />
+                                            </div>
+                                            {/* Parry Note */}
+                                            <small className="help-text" style={{ display: 'block', marginTop: '-0.5rem', marginBottom: '0.5rem', color: '#6b7280', fontSize: '0.75rem' }}>
+                                                {currentSituation.note || (currentSituation.parry === 'half' ? 'Parada efectiva: ÷2' : currentSituation.parry === 'none' ? 'Sin parada' : '')}
+                                                {currentSituation.parry === 'half' && numericParry > 0 && ` (${effectiveParry})`}
                                             </small>
-                                        </div>
+                                        </>
+                                    )}
 
-                                        <div className="control-group">
-                                            <label>Cobertura</label>
-                                            <select
-                                                value={coverage}
-                                                onChange={(e) => setCoverage(e.target.value)}
-                                                className="terminal-select"
-                                            >
-                                                {COVERAGES.map(c => (
-                                                    <option key={c.id} value={c.id}>
-                                                        {c.label} ({c.mod})
-                                                    </option>
-                                                ))}
-                                            </select>
-                                        </div>
+                                    {/* ADVANCED - DISTANCE CONTROLS */}
+                                    {mode === 'combat' && subMode === 'distance' && (
+                                        <>
+                                            <div className="roll-modifier-group">
+                                                <label>Situación</label>
+                                                <select
+                                                    value={distSituation}
+                                                    onChange={(e) => setDistSituation(e.target.value)}
+                                                    className="roll-modifier-select"
+                                                    style={{ fontSize: '0.9rem' }}
+                                                >
+                                                    {DISTANCE_SITUATIONS.map(s => (
+                                                        <option key={s.id} value={s.id}>
+                                                            {s.label} ({s.mod})
+                                                        </option>
+                                                    ))}
+                                                </select>
+                                            </div>
 
-                                        <div className="control-group full-width">
-                                            <label>Parada Física del Objetivo</label>
-                                            <input
-                                                type="number"
-                                                value={targetParry}
-                                                onChange={(e) => setTargetParry(e.target.value)}
-                                                placeholder="0"
-                                                className="terminal-input"
-                                                disabled={currentSituation.parry === 'none'}
-                                            />
-                                            {currentSituation.parry === 'half' && numericParry > 0 && (
-                                                <small className="info-text">Efectiva: {effectiveParry}</small>
-                                            )}
-                                        </div>
-                                    </>
-                                )}
-                            </div>
+                                            <div className="roll-modifier-group">
+                                                <label>Alcance</label>
+                                                <select
+                                                    value={range}
+                                                    onChange={(e) => setRange(e.target.value)}
+                                                    className="roll-modifier-select"
+                                                >
+                                                    {RANGES.map(r => (
+                                                        <option key={r.id} value={r.id}>
+                                                            {r.label} ({r.mod > 0 ? '+' : ''}{r.mod})
+                                                        </option>
+                                                    ))}
+                                                </select>
+                                            </div>
 
-                            {/* Compact Summary Calculation */}
-                            <div className="roll-attribute-info compact" style={{ marginTop: '1rem', marginBottom: '0.5rem' }}>
-                                <div className="roll-formula">
-                                    <span className="formula-part" title="Valor Base">{targetValue}</span>
+                                            <div className="roll-modifier-group">
+                                                <label>Cobertura</label>
+                                                <select
+                                                    value={coverage}
+                                                    onChange={(e) => setCoverage(e.target.value)}
+                                                    className="roll-modifier-select"
+                                                >
+                                                    {COVERAGES.map(c => (
+                                                        <option key={c.id} value={c.id}>
+                                                            {c.label} ({c.mod})
+                                                        </option>
+                                                    ))}
+                                                </select>
+                                            </div>
 
-                                    {/* Modifiers Sum */}
-                                    <span className="formula-op">{modifiersSum >= 0 ? '+' : ''}</span>
-                                    <span className={`formula-part ${modifiersSum < 0 ? 'negative' : 'positive'}`} title="Modificadores (Situación + Cobertura + Alcance)">
-                                        {Math.abs(modifiersSum)}
-                                    </span>
-
-                                    {/* Deduction (Parry or Defender) */}
-                                    <span className="formula-op">-</span>
-                                    <span className="formula-part negative" title={subMode === 'distance' ? 'Mod. Defensor' : 'Parada'}>
-                                        {subMode === 'distance' ? numericParry : effectiveParry}
-                                    </span>
-
-                                    <span className="formula-eq">=</span>
-                                    <span className="formula-result">{isAutoHit ? 'AUTO' : `${finalProbability}%`}</span>
+                                            <div className="roll-modifier-group">
+                                                <label>Defensor</label>
+                                                <input
+                                                    type="number"
+                                                    value={targetParry}
+                                                    onChange={(e) => setTargetParry(e.target.value)}
+                                                    placeholder="Mod. Impacto"
+                                                    className="roll-modifier-input"
+                                                />
+                                            </div>
+                                        </>
+                                    )}
                                 </div>
-                                <div className="roll-formula-label">
-                                    Probabilidad Final {isAutoHit && '(Solo Pifia)'}
-                                </div>
-                            </div>
 
-                            {/* Roll Button */}
-                            {!rollResult && (
-                                <button
-                                    className="btn-roll-terminal large"
-                                    onClick={handleRoll}
-                                    disabled={isRolling}
-                                >
-                                    {isRolling ? 'LANZANDO...' : '🎲 LANZAR D100'}
-                                </button>
-                            )}
-
-                            {/* Result */}
-                            {rollResult && (
-                                <div className={`roll-result-box ${rollResult.success ? 'success' : 'failure'} ${rollResult.isCrit ? 'crit' : ''} ${rollResult.isFumble ? 'fumble' : ''}`}>
-                                    <div className="roll-number">{rollResult.roll}</div>
-                                    <div className="roll-status">
-                                        {rollResult.isCrit ? '¡CRÍTICO!' :
-                                            rollResult.isFumble ? '¡PIFIA!' :
-                                                rollResult.success ? 'ÉXITO' : 'FALLO'}
-                                    </div>
-                                    <div className="roll-details">
-                                        Margen: {rollResult.margin > 0 ? '+' : ''}{rollResult.margin}
-                                    </div>
-                                    <button className="btn-retry" onClick={() => setRollResult(null)}>
-                                        🔄 Repetir
+                                <div className="roll-button-column">
+                                    <button
+                                        className={`roll-circular-btn ${isRolling ? 'rolling' : ''}`}
+                                        onClick={handleRoll}
+                                        disabled={isRolling}
+                                    >
+                                        {isRolling ? '...' : 'LANZAR'}
                                     </button>
                                 </div>
-                            )}
-                        </>
-                    )}
+                            </>
+                        ) : (
+                            <div className="roll-result-display">
+                                <div className="roll-result-label">
+                                    {rollResult.isCrit ? '¡CRÍTICO!' :
+                                        rollResult.isFumble ? '¡PIFIA!' :
+                                            rollResult.success ? 'ÉXITO' : 'FALLO'}
+                                </div>
+                                <div className={`roll-result-number ${rollResult.success ? 'success' : 'failure'} ${rollResult.isCrit ? 'critical-success' : ''} ${rollResult.isFumble ? 'critical-failure' : ''}`}>
+                                    {rollResult.roll}
+                                </div>
+                                <div className="roll-details">
+                                    <small>Margen: {rollResult.margin > 0 ? '+' : ''}{rollResult.margin}</small>
+                                </div>
+                                <button className="roll-again-btn" onClick={handleRoll}>
+                                    Tirar de nuevo
+                                </button>
+                            </div>
+                        )}
+                    </div>
+
+
                 </div>
             </div>
         </div>
