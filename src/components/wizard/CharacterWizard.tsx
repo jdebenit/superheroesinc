@@ -204,7 +204,7 @@ export default function CharacterWizard() {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', justifyContent: 'center' }}>
                     <div>
                         <h1 className="wizard-title">
-                            Generador de Fichas (Beta 0.6.7)
+                            Generador de Fichas (Beta 0.6.8)
                         </h1>
                         <p className="wizard-subtitle">
                             Crea tu personaje paso a paso

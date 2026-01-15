@@ -23,6 +23,7 @@ export const ALTERADO_SEQUELS = SEQUELS;
 
 interface SelectedSequel {
     id: string;
+    description?: string;
 }
 
 export interface AlteradoParams {

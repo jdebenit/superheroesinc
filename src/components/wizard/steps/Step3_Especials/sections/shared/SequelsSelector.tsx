@@ -4,10 +4,11 @@ import { SEQUELS } from '../../../../../../data/sequels';
 
 interface SelectedSequel {
     id: string;
+    description?: string;
 }
 
 interface SequelsSelectorProps {
-    selectedSequels: SelectedSequel[]; // Array of objects { id: string }
+    selectedSequels: SelectedSequel[]; // Array of objects { id: string, description?: string }
     onChange: (sequels: SelectedSequel[]) => void;
     showWarning?: boolean;
     warningMessage?: React.ReactNode;
@@ -28,7 +29,7 @@ export default function SequelsSelector({
         if (isSelected) {
             newSequels = selectedSequels.filter(s => s.id !== sequelId);
         } else {
-            newSequels = [...selectedSequels, { id: sequelId }];
+            newSequels = [...selectedSequels, { id: sequelId, description: '' }];
         }
 
         onChange(newSequels);
@@ -36,6 +37,13 @@ export default function SequelsSelector({
 
     const handleRemoveSequel = (sequelId: string) => {
         const newSequels = selectedSequels.filter(s => s.id !== sequelId);
+        onChange(newSequels);
+    };
+
+    const handleDescriptionChange = (sequelId: string, description: string) => {
+        const newSequels = selectedSequels.map(s =>
+            s.id === sequelId ? { ...s, description } : s
+        );
         onChange(newSequels);
     };
 
@@ -105,9 +113,36 @@ export default function SequelsSelector({
                                                 -{def.cost} PC
                                             </span>
                                         </div>
-                                        <p style={{ fontSize: '0.85rem', color: '#4b5563', margin: '0' }}>
+                                        <p style={{ fontSize: '0.85rem', color: '#4b5563', margin: '0 0 0.5rem 0' }}>
                                             {def.description}
                                         </p>
+
+                                        {/* Description Input */}
+                                        <div>
+                                            <label style={{
+                                                display: 'block',
+                                                fontSize: '0.75rem',
+                                                fontWeight: 'bold',
+                                                color: '#166534',
+                                                marginBottom: '0.25rem'
+                                            }}>
+                                                Descripción de la secuela (Opcional):
+                                            </label>
+                                            <textarea
+                                                value={s.description || ''}
+                                                onChange={(e) => handleDescriptionChange(s.id, e.target.value)}
+                                                placeholder="Describe cómo se manifiesta esta secuela..."
+                                                style={{
+                                                    width: '100%',
+                                                    padding: '0.5rem',
+                                                    fontSize: '0.875rem',
+                                                    border: '1px solid #86efac',
+                                                    borderRadius: '4px',
+                                                    resize: 'vertical',
+                                                    minHeight: '60px'
+                                                }}
+                                            />
+                                        </div>
                                     </div>
                                     <button
                                         onClick={() => handleRemoveSequel(s.id)}
@@ -185,3 +220,4 @@ export default function SequelsSelector({
         </div>
     );
 }
+

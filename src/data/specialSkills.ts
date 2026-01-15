@@ -212,7 +212,7 @@ export const SPECIAL_SKILLS: SpecialSkillDefinition[] = [
         id: 'robar',
         name: 'Robar',
         category: 'social',
-        formula: (stats) => stats['agilidad'] / 3,
+        formula: (stats) => stats['agilidad'] / 2,
         formulaText: 'AGI/2',
         description: 'Sustraer objetos sin que el propietario lo detecte'
     },

@@ -46,7 +46,12 @@ export const AlteradoSection: React.FC<AlteradoSectionProps> = ({ character }) =
                                             {def.label} <span className="sequel-cost alterado">(-{def.cost} PC)</span>
                                         </div>
                                         <div className="sequel-description">
-                                            {def.description}
+                                            {s.description ? (
+                                                <>
+                                                    <span style={{ fontStyle: 'italic', display: 'block', marginBottom: '0.25rem' }}>{s.description}</span>
+                                                    <span style={{ fontSize: '0.75rem', color: '#666' }}>({def.description})</span>
+                                                </>
+                                            ) : def.description}
                                         </div>
                                     </li>
                                 )

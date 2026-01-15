@@ -15,7 +15,6 @@ export interface FreeOriginSkills {
 export const FREE_ORIGIN_SKILLS: FreeOriginSkills = {
     // Parahumano
     "Tes-khar": ['trampas', 'farmacologia'],
-    "Mago": ['magia'],
     // Añadir más orígenes según sea necesario
     // Ejemplo:
     // "Atlante": ['conducir'], // Si Atlante diera Conducir gratis

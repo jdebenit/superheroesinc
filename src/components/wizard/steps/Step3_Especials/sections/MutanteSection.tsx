@@ -5,6 +5,7 @@ import { getMutantType } from '../utils';
 
 interface SelectedSequel {
     id: string;
+    description?: string;
 }
 
 export interface MutanteParams {
