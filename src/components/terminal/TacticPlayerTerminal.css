@@ -1308,3 +1308,351 @@
 }
 
 /* Bar Colors for Compact Design */
+
+/* ========================================
+   Advanced Combat Modal Styles
+   ======================================== */
+
+.advanced-combat-modal .modal-body {
+    padding: 1.5rem;
+}
+
+.advanced-controls-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.control-group.full-width {
+    grid-column: span 2;
+}
+
+.control-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #4b5563;
+}
+
+.terminal-select,
+.terminal-input {
+    padding: 0.6rem;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    width: 100%;
+    background-color: white;
+    color: #1f2937;
+}
+
+.terminal-input:disabled {
+    background-color: #f3f4f6;
+    color: #9ca3af;
+    cursor: not-allowed;
+}
+
+.help-text {
+    font-size: 0.75rem;
+    color: #6b7280;
+    font-style: italic;
+}
+
+.info-text {
+    font-size: 0.75rem;
+    color: #d97706;
+    /* Amber-600 */
+    font-weight: 600;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+/* Stat Row */
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 0.75rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 1.1rem;
+    color: #374151;
+}
+
+.stat-row .bold {
+    font-weight: 800;
+    color: #111827;
+}
+
+/* Calculation Summary */
+.calculation-summary {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.calc-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.25rem;
+    font-size: 0.9rem;
+    color: #6b7280;
+}
+
+.calc-row span:last-child {
+    font-weight: 600;
+    font-family: monospace;
+    font-size: 1rem;
+}
+
+.calc-row .positive {
+    color: #16a34a;
+}
+
+.calc-row .negative {
+    color: #dc2626;
+}
+
+.calc-divider {
+    height: 1px;
+    background: #d1d5db;
+    margin: 0.5rem 0;
+}
+
+.calc-row.final {
+    margin-top: 0.5rem;
+    font-size: 1.1rem;
+    color: #1f2937;
+    font-weight: 700;
+}
+
+.calc-row.final .total {
+    font-size: 1.25rem;
+    color: #2563eb;
+}
+
+/* Roll Button */
+.btn-roll-terminal.large {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.2rem;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.4);
+    transition: all 0.2s;
+}
+
+.btn-roll-terminal.large:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.4);
+}
+
+/* Roll Result Box */
+.roll-result-box {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.roll-result-box.success {
+    background: #f0fdf4;
+    border: 2px solid #bbf7d0;
+    color: #166534;
+}
+
+.roll-result-box.failure {
+    background: #fef2f2;
+    border: 2px solid #fecaca;
+    color: #991b1b;
+}
+
+.roll-result-box.crit {
+    background: #fefce8;
+    border: 2px solid #fde047;
+    color: #854d0e;
+    box-shadow: 0 0 15px rgba(234, 179, 8, 0.2);
+}
+
+.roll-result-box.fumble {
+    background: #450a0a;
+    border: 2px solid #dc2626;
+    color: #fecaca;
+}
+
+.roll-number {
+    font-size: 4rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.roll-status {
+    font-size: 1.5rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.roll-details {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-bottom: 1rem;
+}
+
+.btn-retry {
+    padding: 0.5rem 1rem;
+    background: white;
+    border: 1px solid currentColor;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    opacity: 0.9;
+    transition: all 0.2s;
+}
+
+.btn-retry:hover {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+/* Reusing Modal Overlay from existing CSS or ensuring it exists */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    padding: 1rem;
+    backdrop-filter: blur(2px);
+}
+
+.modal-content.advanced-combat-modal {
+    background: white;
+    border-radius: 12px;
+    width: 100%;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 1.5rem;
+    background: #f9fafb;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: #111827;
+    font-weight: 700;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #9ca3af;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-btn:hover {
+    color: #1f2937;
+}
+
+/* Mobile Tweaks */
+@media (max-width: 640px) {
+    .advanced-controls-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .control-group.full-width {
+        grid-column: span 1;
+    }
+}
+
+/* FIX: Basic Roll Modal Styles */
+.attribute-roll-modal {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.roll-formula {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #374151;
+    flex-wrap: wrap;
+}
+
+.roll-formula-label {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #9ca3af;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 0.25rem;
+}
+
+.formula-part {
+    padding: 0 0.25rem;
+}
+
+.formula-part.positive {
+    color: #16a34a;
+}
+
+.formula-part.negative {
+    color: #dc2626;
+}
+
+.formula-part.active {
+    color: #d97706;
+    border-bottom: 2px solid #d97706;
+}
+
+.formula-result {
+    color: #2563eb;
+    font-size: 1.5rem;
+    margin-left: 0.25rem;
+}
+
+.roll-target-reference {
+    font-size: 0.9rem;
+    color: #6b7280;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+}

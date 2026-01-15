@@ -9,6 +9,9 @@ import EmptyState from './components/EmptyState';
 import AttributesPanel from './components/AttributesPanel';
 import SkillsPanel from './components/SkillsPanel';
 import { useTerminalStats } from './hooks/useTerminalStats';
+import UnifiedRollModal from './components/UnifiedRollModal';
+import { GENERAL_SKILLS } from '../../data/generalSkills';
+import { SPECIAL_SKILLS } from '../../data/specialSkills';
 
 export default function TacticPlayerTerminal() {
     const {
@@ -37,6 +40,21 @@ export default function TacticPlayerTerminal() {
     const [mentalNotes, setMentalNotes] = useState<string>('');
     const [willpowerChange, setWillpowerChange] = useState<string>('');
     const [willpowerNotes, setWillpowerNotes] = useState<string>('');
+
+    // Unified Roll Modal State
+    const [rollModalData, setRollModalData] = useState<{
+        isOpen: boolean;
+        skillName: string;
+        skillValue: number;
+        initialMode: 'basic' | 'combat';
+        skillType: 'cac' | 'distance' | 'both' | string;
+    }>({
+        isOpen: false,
+        skillName: '',
+        skillValue: 0,
+        initialMode: 'basic',
+        skillType: 'cac'
+    });
 
     const openHistoryModal = (type: 'health' | 'mental' | 'willpower') => {
         setHistoryType(type);
@@ -115,6 +133,58 @@ export default function TacticPlayerTerminal() {
         }
     };
 
+    const isCombatSkill = (name: string): boolean => {
+        const lowerName = name.toLowerCase();
+        if (lowerName.includes('artes marciales')) return true;
+
+        // Check normal name
+        const gen = GENERAL_SKILLS.find(s => s.name.toLowerCase() === name.toLowerCase());
+        if (gen) return gen.category === 'combat';
+
+        const spec = SPECIAL_SKILLS.find(s => s.name.toLowerCase() === name.toLowerCase());
+        if (spec) return spec.category === 'combat';
+
+        // Check if it's a specialization e.g. "Arma Especial: Espada"
+        // Most combat special skills start with "Armas ..." or generic name.
+        // Let's iterate special skills and see if the name starts with any combat skill name
+        const combatSpecs = SPECIAL_SKILLS.filter(s => s.category === 'combat');
+        for (const cs of combatSpecs) {
+            if (name.toLowerCase().startsWith(cs.name.toLowerCase())) return true;
+        }
+
+        return false;
+    };
+
+    const handleSkillClick = (skill: any) => {
+        // Find skill definition to get the type
+        const generalSkill = GENERAL_SKILLS.find(s => s.name === skill.name);
+        const specialSkill = SPECIAL_SKILLS.find(s =>
+            s.name === skill.name ||
+            (skill.id && s.id === skill.id) ||
+            skill.name.toLowerCase().startsWith(s.name.toLowerCase() + ':') ||
+            skill.name.toLowerCase().startsWith(s.name.toLowerCase() + ' (') // Handle variants like "Name (Spec)"
+        );
+
+        let type = 'cac'; // Default
+        if (generalSkill?.type) type = generalSkill.type;
+        if (specialSkill?.type) type = specialSkill.type;
+
+        // Artes Marciales exception if not explicitly set in data (though it should be 'both' or 'cac' now)
+        if (skill.name.toLowerCase().includes('artes marciales')) {
+            if (!type || type === 'cac') type = 'both'; // Or check if data already has it
+        }
+
+        const isCombat = isCombatSkill(skill.name);
+
+        setRollModalData({
+            isOpen: true,
+            skillName: skill.name,
+            skillValue: typeof skill.value === 'number' ? skill.value : parseInt(skill.value.toString().replace('%', '')) || 0,
+            initialMode: isCombat ? 'combat' : 'basic',
+            skillType: type
+        });
+    };
+
     return (
         <div className="tactic-player-terminal">
             <TerminalHeader
@@ -170,6 +240,7 @@ export default function TacticPlayerTerminal() {
                         <SkillsPanel
                             generalSkills={character.skills?.generalItems}
                             learningSkills={character.skills?.specialItems}
+                            onSkillClick={handleSkillClick}
                         />
                     )}
                 </div>
@@ -223,6 +294,15 @@ export default function TacticPlayerTerminal() {
                         editModalType === 'mental' ? handleApplyMental :
                             handleApplyWillpower
                 }
+            />
+
+            <UnifiedRollModal
+                isOpen={rollModalData.isOpen}
+                onClose={() => setRollModalData(prev => ({ ...prev, isOpen: false }))}
+                title={rollModalData.skillName}
+                targetValue={rollModalData.skillValue}
+                initialMode={rollModalData.initialMode}
+                skillType={rollModalData.skillType}
             />
         </div>
     );

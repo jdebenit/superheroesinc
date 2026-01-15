@@ -15,6 +15,7 @@ export interface SpecialSkillDefinition {
     formula?: (stats: { [key: string]: number }) => number;
     formulaText?: string;
     category: 'combat' | 'technical' | 'knowledge' | 'social' | 'other' | 'exclusive';
+    type?: 'cac' | 'distance' | 'both';
     allowedCriteria?: { origin?: string; subtype?: string }[]; // New field for restrictions
 }
 
@@ -26,6 +27,7 @@ export const SPECIAL_SKILLS: SpecialSkillDefinition[] = [
         id: 'arcos',
         name: 'Arcos / Ballestas',
         category: 'combat',
+        type: 'distance',
         formula: (stats) => (2 * stats['percepcion']) / 3,
         formulaText: '(2xPER)/3',
         description: 'Arcos, Ballestas'
@@ -34,6 +36,7 @@ export const SPECIAL_SKILLS: SpecialSkillDefinition[] = [
         id: 'armas_cortas',
         name: 'Armas cortas',
         category: 'combat',
+        type: 'distance',
         formula: (stats) => (2 * stats['percepcion']) / 3,
         formulaText: '(2xPER)/3',
         description: 'Pistolas, revólveres'
@@ -42,6 +45,7 @@ export const SPECIAL_SKILLS: SpecialSkillDefinition[] = [
         id: 'armas_largas',
         name: 'Armas largas',
         category: 'combat',
+        type: 'distance',
         formula: (stats) => (2 * stats['percepcion']) / 3,
         formulaText: '(2xPER)/3',
         description: 'Rifles, escopetas, subfusiles'
@@ -50,6 +54,7 @@ export const SPECIAL_SKILLS: SpecialSkillDefinition[] = [
         id: 'armas_militares',
         name: 'Armas militares',
         category: 'combat',
+        type: 'distance',
         formula: (stats) => stats['percepcion'] / 3,
         formulaText: 'PER/3',
         description: 'Armas pesadas, artillería'
@@ -58,6 +63,7 @@ export const SPECIAL_SKILLS: SpecialSkillDefinition[] = [
         id: 'armas_blancas',
         name: 'Armas blancas',
         category: 'combat',
+        type: 'cac',
         formula: (stats) => (stats['agilidad'] + stats['percepcion']) / 3,
         formulaText: '(AGI+PER)/3',
         description: 'Espadas, cuchillos, hachas'
@@ -69,6 +75,7 @@ export const SPECIAL_SKILLS: SpecialSkillDefinition[] = [
         specificationLabel: 'Arma',
         specificationPlaceholder: 'Ej: Escudo, Cerbatana, Látigo...',
         category: 'combat',
+        type: 'both',
         formula: (stats) => (2 * stats['percepcion']) / 3,
         formulaText: '(2xPER)/3',
     },
@@ -328,6 +335,7 @@ export const SPECIAL_SKILLS: SpecialSkillDefinition[] = [
         id: 'sistemas_armamento',
         name: 'Sistemas de Armamento',
         category: 'exclusive',
+        type: 'both',
         formula: (stats) => stats['percepcion'] / 2,
         formulaText: 'PER/2',
         description: 'Permite operar armas en tecnoarmaduras, tecnoimplantes y tecnovehiculos',
