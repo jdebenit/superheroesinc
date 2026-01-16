@@ -36,7 +36,7 @@ export default function EditStatModal({
             <div className="history-modal edit-stat-modal" onClick={e => e.stopPropagation()}>
                 <div className="history-modal-header">
                     <h2>{title}</h2>
-                    <button className="close-modal-btn" onClick={onClose}>&times;</button>
+                    <button className="close-btn" onClick={onClose}>&times;</button>
                 </div>
 
                 <div className="history-modal-body">

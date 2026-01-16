@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../TacticPlayerTerminal.css';
 import UnifiedRollModal from './UnifiedRollModal';
+import InitiativeCalculatorModal from './InitiativeCalculatorModal';
 
 interface OtherStatsPanelProps {
     combatstats?: string[];
@@ -23,6 +24,8 @@ export default function OtherStatsPanel({ combatstats, otherstats, background }:
         name: string;
         value: number;
     } | null>(null);
+
+    const [showInitiativeCalculator, setShowInitiativeCalculator] = useState(false);
 
     // Define which stats to display
     const statsToDisplay: StatToDisplay[] = [
@@ -103,12 +106,26 @@ export default function OtherStatsPanel({ combatstats, otherstats, background }:
         }))
         .filter(stat => stat.value > 0);
 
+    // Get initiative value for calculator
+    const initiativeValue = stats.find(s => s.label === 'Iniciativa y Reflejos')?.value || 0;
+
     // Don't render if no stats
     if (stats.length === 0) return null;
 
     return (
         <div className="terminal-section">
-            <h3 className="terminal-section-title">OTRAS ESTADÍSTICAS</h3>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                <h3 className="terminal-section-title" style={{ margin: 0 }}>OTRAS ESTADÍSTICAS</h3>
+                {initiativeValue > 0 && (
+                    <button
+                        className="initiative-calc-btn"
+                        onClick={() => setShowInitiativeCalculator(true)}
+                        title="Calcular iniciativa"
+                    >
+                        🎲 Cálculo de Iniciativa
+                    </button>
+                )}
+            </div>
             <div className="attributes-grid">
                 {stats.map((stat, index) => (
                     <div
@@ -132,6 +149,12 @@ export default function OtherStatsPanel({ combatstats, otherstats, background }:
                     skillType="cac"
                 />
             )}
+
+            <InitiativeCalculatorModal
+                isOpen={showInitiativeCalculator}
+                onClose={() => setShowInitiativeCalculator(false)}
+                baseInitiative={initiativeValue}
+            />
         </div>
     );
 }

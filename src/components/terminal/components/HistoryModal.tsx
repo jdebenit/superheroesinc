@@ -31,7 +31,7 @@ export default function HistoryModal({ show, type, history, onClose, onDeleteEnt
             <div className="history-modal" onClick={(e) => e.stopPropagation()}>
                 <div className="history-modal-header">
                     <h2>Historial de {typeLabel}</h2>
-                    <button onClick={onClose} className="close-modal-btn">✕</button>
+                    <button onClick={onClose} className="close-btn">&times;</button>
                 </div>
                 <div className="history-modal-body">
                     {filteredHistory.length === 0 ? (

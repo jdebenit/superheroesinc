@@ -158,6 +158,32 @@
     justify-content: center;
 }
 
+.initiative-calc-btn {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.initiative-calc-btn:hover {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
+    transform: translateY(-1px);
+}
+
+.initiative-calc-btn:active {
+    transform: translateY(0);
+}
+
 .skills-grid {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 0.5rem;
@@ -2015,4 +2041,22 @@
     .power-card {
         padding: 0.75rem;
     }
+}
+
+/* Remove spinners from number inputs */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+/* Modal Title Refinement */
+.attribute-roll-modal .modal-header h2 {
+    font-size: 1.5rem !important;
+    margin-bottom: 0;
 }
