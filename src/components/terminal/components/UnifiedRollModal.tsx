@@ -159,7 +159,7 @@ export default function UnifiedRollModal({
             onClose={onClose}
             title={title}
             className={mode === 'combat' ? 'advanced-combat-modal' : 'attribute-roll-modal'}
-            contentStyle={{ maxWidth: mode === 'combat' ? '500px' : '380px', transition: 'max-width 0.3s' }}
+            contentStyle={{ maxWidth: mode === 'combat' ? '500px' : '420px', transition: 'max-width 0.3s' }}
             headerActions={(
                 <button
                     className="btn-retry mode-toggle-btn"

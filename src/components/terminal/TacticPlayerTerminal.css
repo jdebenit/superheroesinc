@@ -308,6 +308,7 @@
     font-weight: 600;
     margin: 0;
     text-align: right;
+    min-width: 60px;
 }
 
 .roll-modifier-select,
