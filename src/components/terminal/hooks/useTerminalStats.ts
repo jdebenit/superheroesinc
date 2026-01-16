@@ -23,6 +23,19 @@ export interface CharacterData {
             math?: string;
         }>;
     };
+    powers?: {
+        selected?: Array<{
+            id: string;
+            origin: string;
+            rank: number;
+            customizations?: any[];
+            skillValue?: number;
+        }>;
+    };
+    background?: {
+        prejudiceResistance?: number;
+        [key: string]: any;
+    };
 }
 
 export interface PlayerStats {

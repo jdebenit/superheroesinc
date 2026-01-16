@@ -8,6 +8,8 @@ import EditStatModal from './components/EditStatModal';
 import EmptyState from './components/EmptyState';
 import AttributesPanel from './components/AttributesPanel';
 import SkillsPanel from './components/SkillsPanel';
+import PrejudiceResistancePanel from './components/PrejudiceResistancePanel';
+import PowersPanel from './components/PowersPanel';
 import { useTerminalStats } from './hooks/useTerminalStats';
 import UnifiedRollModal from './components/UnifiedRollModal';
 import { GENERAL_SKILLS } from '../../data/generalSkills';
@@ -235,6 +237,13 @@ export default function TacticPlayerTerminal() {
                     </div>
 
                     <AttributesPanel attributes={character.attributes.values} />
+
+                    <PrejudiceResistancePanel
+                        otherstats={character.otherstats}
+                        background={character.background}
+                    />
+
+                    <PowersPanel powers={character.powers} />
 
                     {(character.skills?.generalItems || character.skills?.specialItems) && (
                         <SkillsPanel

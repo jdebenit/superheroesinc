@@ -1915,3 +1915,81 @@
     height: 90px;
     border-radius: 50%;
 }
+
+/* Powers Panel Styles */
+.powers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 0.75rem;
+    justify-content: stretch;
+}
+
+.power-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+    transition: all 0.2s;
+}
+
+.power-card.clickable {
+    cursor: pointer;
+}
+
+.power-card.clickable:hover {
+    border-color: #2563eb;
+    background: #eff6ff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.power-card.clickable:active {
+    transform: translateY(0);
+}
+
+.power-card.non-clickable {
+    opacity: 0.85;
+}
+
+.power-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 0.5rem;
+}
+
+.power-details {
+    font-size: 0.8rem;
+    color: #6b7280;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.power-rank {
+    font-weight: 500;
+}
+
+.power-origin {
+    color: #9ca3af;
+}
+
+.power-skill-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #2563eb;
+    margin-top: 0.5rem;
+    text-align: right;
+}
+
+/* Mobile responsive for powers */
+@media (max-width: 768px) {
+    .powers-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .power-card {
+        padding: 0.75rem;
+    }
+}
