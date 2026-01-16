@@ -6,6 +6,7 @@ import { playDiceRollSound } from '../../../utils/diceSound';
 import { RollModalFormula } from './roll-modal/RollModalFormula';
 import { RollModalControls } from './roll-modal/RollModalControls';
 import { RollModalResult } from './roll-modal/RollModalResult';
+import Modal from './Modal';
 
 interface UnifiedRollModalProps {
     isOpen: boolean;
@@ -153,104 +154,100 @@ export default function UnifiedRollModal({
     };
 
     return (
-        <div className="modal-overlay">
-            <div className={`modal-content ${mode === 'combat' ? 'advanced-combat-modal' : 'attribute-roll-modal'}`} style={{ maxWidth: mode === 'combat' ? '500px' : '380px', transition: 'max-width 0.3s' }}>
-                <div className="modal-header">
-                    <h3>{title}</h3>
-                    <div className="modal-header-actions">
-                        {/* Toggle Mode Button */}
+        <Modal
+            isOpen={isOpen}
+            onClose={onClose}
+            title={title}
+            className={mode === 'combat' ? 'advanced-combat-modal' : 'attribute-roll-modal'}
+            contentStyle={{ maxWidth: mode === 'combat' ? '500px' : '380px', transition: 'max-width 0.3s' }}
+            headerActions={(
+                <button
+                    className="btn-retry mode-toggle-btn"
+                    onClick={() => setMode(prev => prev === 'basic' ? 'combat' : 'basic')}
+                >
+                    {mode === 'basic' ? '⚙️ Avanzado' : '⏪ Básico'}
+                </button>
+            )}
+        >
+            <div className="roll-modal-body">
+
+                {/* COMBAT SUB-MODE TOGGLE (Only if skillType is 'both' and in combat mode) */}
+                {rollResult === null && mode === 'combat' && skillType === 'both' && (
+                    <div className="submode-toggle-container">
                         <button
-                            className="btn-retry mode-toggle-btn"
-                            onClick={() => setMode(prev => prev === 'basic' ? 'combat' : 'basic')}
+                            className={`btn-retry submode-btn ${subMode === 'melee' ? 'active' : 'outline'}`}
+                            onClick={() => setSubMode('melee')}
                         >
-                            {mode === 'basic' ? '⚙️ Avanzado' : '⏪ Básico'}
+                            ⚔️ Cuerpo a Cuerpo
                         </button>
-                        <button className="close-btn" onClick={onClose}>&times;</button>
+                        <button
+                            className={`btn-retry submode-btn ${subMode === 'distance' ? 'active' : 'outline'}`}
+                            onClick={() => setSubMode('distance')}
+                        >
+                            🎯 Distancia
+                        </button>
                     </div>
-                </div>
+                )}
 
-                <div className="modal-body roll-modal-body">
+                {/* COMMON FORMULA (Derived from state) */}
+                {rollResult === null && (
+                    <RollModalFormula
+                        targetValue={targetValue}
+                        modifiersSum={modifiersSum}
+                        parsedCustomMod={parsedCustomMod}
+                        mode={mode}
+                        subMode={subMode}
+                        parryValue={subMode === 'distance' ? numericParry : effectiveParry}
+                        isAutoHit={isAutoHit}
+                        finalProbability={finalProbability}
+                    />
+                )}
 
-                    {/* COMBAT SUB-MODE TOGGLE (Only if skillType is 'both' and in combat mode) */}
-                    {rollResult === null && mode === 'combat' && skillType === 'both' && (
-                        <div className="submode-toggle-container">
-                            <button
-                                className={`btn-retry submode-btn ${subMode === 'melee' ? 'active' : 'outline'}`}
-                                onClick={() => setSubMode('melee')}
-                            >
-                                ⚔️ Cuerpo a Cuerpo
-                            </button>
-                            <button
-                                className={`btn-retry submode-btn ${subMode === 'distance' ? 'active' : 'outline'}`}
-                                onClick={() => setSubMode('distance')}
-                            >
-                                🎯 Distancia
-                            </button>
-                        </div>
-                    )}
+                <div className="roll-main-content">
+                    {rollResult === null ? (
+                        <>
+                            {/* LEFT COLUMN: CONTROLS */}
+                            <RollModalControls
+                                mode={mode}
+                                subMode={subMode}
+                                difficultyModifier={difficultyModifier}
+                                setDifficultyModifier={setDifficultyModifier}
+                                customModifier={customModifier}
+                                setCustomModifier={setCustomModifier}
+                                situation={situation}
+                                setSituation={setSituation}
+                                distSituation={distSituation}
+                                setDistSituation={setDistSituation}
+                                range={range}
+                                setRange={setRange}
+                                coverage={coverage}
+                                setCoverage={setCoverage}
+                                targetParry={targetParry}
+                                setTargetParry={setTargetParry}
+                                currentSituation={currentSituation}
+                                effectiveParry={effectiveParry}
+                                numericParry={numericParry}
+                            />
 
-                    {/* COMMON FORMULA (Derived from state) */}
-                    {rollResult === null && (
-                        <RollModalFormula
-                            targetValue={targetValue}
-                            modifiersSum={modifiersSum}
-                            parsedCustomMod={parsedCustomMod}
-                            mode={mode}
-                            subMode={subMode}
-                            parryValue={subMode === 'distance' ? numericParry : effectiveParry}
-                            isAutoHit={isAutoHit}
-                            finalProbability={finalProbability}
+                            {/* RIGHT COLUMN: BUTTON */}
+                            <div className="roll-button-column">
+                                <button
+                                    className={`roll-circular-btn ${isRolling ? 'rolling' : ''}`}
+                                    onClick={handleRoll}
+                                    disabled={isRolling}
+                                >
+                                    {isRolling ? '...' : 'LANZAR'}
+                                </button>
+                            </div>
+                        </>
+                    ) : (
+                        <RollModalResult
+                            rollResult={rollResult}
+                            onRetry={() => setRollResult(null)}
                         />
                     )}
-
-                    <div className="roll-main-content">
-                        {rollResult === null ? (
-                            <>
-                                {/* LEFT COLUMN: CONTROLS */}
-                                <RollModalControls
-                                    mode={mode}
-                                    subMode={subMode}
-                                    difficultyModifier={difficultyModifier}
-                                    setDifficultyModifier={setDifficultyModifier}
-                                    customModifier={customModifier}
-                                    setCustomModifier={setCustomModifier}
-                                    situation={situation}
-                                    setSituation={setSituation}
-                                    distSituation={distSituation}
-                                    setDistSituation={setDistSituation}
-                                    range={range}
-                                    setRange={setRange}
-                                    coverage={coverage}
-                                    setCoverage={setCoverage}
-                                    targetParry={targetParry}
-                                    setTargetParry={setTargetParry}
-                                    currentSituation={currentSituation}
-                                    effectiveParry={effectiveParry}
-                                    numericParry={numericParry}
-                                />
-
-                                {/* RIGHT COLUMN: BUTTON */}
-                                <div className="roll-button-column">
-                                    <button
-                                        className={`roll-circular-btn ${isRolling ? 'rolling' : ''}`}
-                                        onClick={handleRoll}
-                                        disabled={isRolling}
-                                    >
-                                        {isRolling ? '...' : 'LANZAR'}
-                                    </button>
-                                </div>
-                            </>
-                        ) : (
-                            <RollModalResult
-                                rollResult={rollResult}
-                                onRetry={() => setRollResult(null)}
-                            />
-                        )}
-                    </div>
-
-
                 </div>
             </div>
-        </div>
+        </Modal>
     );
 }

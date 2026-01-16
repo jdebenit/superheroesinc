@@ -68,8 +68,13 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
             }
 
             // Basic validation
-            if (!parsed || typeof parsed !== 'object' || !parsed.name || !parsed.attributes) {
+            if (!parsed || typeof parsed !== 'object' || !parsed.attributes) {
                 throw new Error("El archivo JSON no tiene la estructura de un personaje válido.");
+            }
+
+            // Fallback for missing name
+            if (!parsed.name) {
+                parsed.name = file.name.replace(/\.json$/i, '') || "Sin Nombre";
             }
 
             setError(null);
