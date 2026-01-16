@@ -233,6 +233,7 @@
     padding-top: 1rem;
 }
 
+
 .roll-attribute-info {
     font-size: 1.1rem;
     font-weight: 600;
@@ -240,13 +241,6 @@
     margin-bottom: 2rem;
 }
 
-.roll-value {
-    margin-left: 0.5rem;
-    color: #111827;
-    font-weight: 700;
-}
-
-/* Cleaned up modifier styles */
 /* Compact Roll Modal Styles */
 .roll-attribute-info.compact {
     margin-bottom: 1rem;
@@ -278,14 +272,11 @@
 .roll-modifier-group {
     display: flex;
     flex-direction: row;
-    /* Horizontal label + input */
     align-items: center;
     gap: 0.5rem;
 }
 
 .roll-modifier-group label {
-    flex: 0 0 0px;
-    /* Fixed width label */
     font-size: 0.8rem;
     color: #6b7280;
     font-weight: 600;
@@ -1874,16 +1865,12 @@
 }
 
 
-/* ========================================
-   Basic Roll Modal - Balanced Layout (RESTORED)
-   ======================================== */
+/* Basic Roll Modal - Specific Overrides */
 .attribute-roll-modal .roll-main-content {
     display: grid;
     grid-template-columns: 1fr auto;
-    /* Inputs | Button */
     gap: 1rem;
-    padding: 0 1.5rem 1.5rem 1.5rem;
-    /* Increased padding to prevent edge collision */
+    padding: 1.5rem;
     align-items: center;
 }
 
@@ -1891,69 +1878,40 @@
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
-    padding-right: 1.5rem;
-    /* Space between inputs and separator */
-    border-right: 1px dashed #e5e7eb;
 }
 
-/* Apply ONLY to basic mode (attribute-roll-modal) */
 .attribute-roll-modal .roll-modifier-group {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 0 !important;
-    /* ZERO gap - no space at all */
-    margin-bottom: 0.5rem !important;
-    font-size: 0 !important;
-    /* Collapse whitespace */
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    /* Adjust this for spacing between label and input */
 }
 
 .attribute-roll-modal .roll-modifier-group label {
-    display: block !important;
     font-size: 0.75rem;
     color: #6b7280;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin: 0 !important;
-    margin-bottom: 0 !important;
-    /* ZERO space */
-    padding: 0 !important;
-    line-height: 1 !important;
-    text-align: center !important;
+    text-align: center;
 }
 
 .attribute-roll-modal .roll-modifier-select,
 .attribute-roll-modal .roll-modifier-input {
-    width: 100%;
     padding: 0.5rem;
     border-radius: 6px;
     border: 1px solid #d1d5db;
     background-color: #f9fafb;
     font-size: 0.95rem;
-    margin: 0 !important;
-    margin-top: 0 !important;
 }
 
-/* Button Styling - Centered */
 .attribute-roll-modal .roll-button-column {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
-    padding-left: 1rem;
 }
 
 .attribute-roll-modal .roll-circular-btn {
     width: 90px;
     height: 90px;
     border-radius: 50%;
-    font-size: 1.1rem;
-    font-weight: 800;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
-    aspect-ratio: 1;
-    margin: auto 0;
 }
