@@ -9,10 +9,10 @@ import { calculateDerivedStats, formatDerivedStats } from '../../../utils/charac
  */
 export const useJsonExport = (character: any) => {
     const downloadJson = useCallback(async () => {
-        // Calculate clean data (diff from defaults)
+        // 1. Calculate clean data (diff from defaults)
         const cleanData = calculateDiff(character, initialCharacterState);
 
-        // Force calculation of latest derived stats for the export
+        // 2. Force calculation of latest derived stats for the export
         // This ensures the JSON has valid stats even if the user hasn't visited Step 6
         const derivedStats = calculateDerivedStats(
             character.attributes?.values || {},
@@ -21,14 +21,21 @@ export const useJsonExport = (character: any) => {
         );
         const { combatStats, otherStats } = formatDerivedStats(derivedStats);
 
-        // Inject calculated stats into the export data
-        if (cleanData) {
-            cleanData.combatstats = combatStats;
-            cleanData.otherstats = otherStats;
-        }
+        // 3. Prepare export object
+        // Use 'any' to allow adding properties easily
+        const exportData: any = cleanData || {};
+
+        // 4. Inject stats and critical fields
+        exportData.combatstats = combatStats;
+        exportData.otherstats = otherStats;
+
+        // Force critical fields to always be present
+        // This ensures valid import even if values match defaults
+        exportData.name = character.name;
+        exportData.attributes = character.attributes;
 
         const filename = `${(character.name || 'personaje').toLowerCase().replace(/\s+/g, '-')}.json`;
-        const jsonStr = JSON.stringify(cleanData || {}, null, 2);
+        const jsonStr = JSON.stringify(exportData, null, 2);
 
         // Try using the File System Access API
         if ('showSaveFilePicker' in window) {
