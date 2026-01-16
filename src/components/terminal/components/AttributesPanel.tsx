@@ -46,7 +46,7 @@ export default function AttributesPanel({ attributes }: AttributesPanelProps) {
                 <UnifiedRollModal
                     isOpen={!!selectedAttribute}
                     onClose={() => setSelectedAttribute(null)}
-                    title={`Lanzar ${selectedAttribute.name}`}
+                    title={selectedAttribute.name}
                     targetValue={selectedAttribute.value}
                     initialMode="basic"
                     skillType="cac" // Default for basic rolls

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import '../TacticPlayerTerminal.css';
-// import DiceRollModal from './DiceRollModal'; // DEPRECATED: Handled by parent
 import { GENERAL_SKILLS } from '../../../data/generalSkills';
 import { SPECIAL_SKILLS } from '../../../data/specialSkills';
 
@@ -67,14 +66,6 @@ export default function SkillsPanel({ generalSkills, learningSkills, onSkillClic
                     </div>
                 </>
             )}
-
-            {/* DEPRECATED INTERNAL MODAL
-            <DiceRollModal
-                isOpen={!!selectedSkill}
-                onClose={() => setSelectedSkill(null)}
-                title={selectedSkill?.name || ''}
-                targetValue={selectedSkill?.value || 0}
-            /> */}
         </div>
     );
 }
