@@ -29,7 +29,7 @@ export default function TerminalHeader({
     return (
         <div className="terminal-header-internal">
             <h1 className="terminal-title-internal">
-                SHI Tactic Player Terminal (Alpha 0.0.6)
+                SHI Tactic Player Terminal (Alpha 0.0.8)
             </h1>
             <div className="terminal-header-actions">
                 <input

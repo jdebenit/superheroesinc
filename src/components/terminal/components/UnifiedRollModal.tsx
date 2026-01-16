@@ -1,101 +1,10 @@
-
 import React, { useState, useEffect } from 'react';
 import '../TacticPlayerTerminal.css';
-
-// --- Data Constants from AdvancedCombatModal ---
-export const SITUATIONS = [
-    { id: 'normal', label: 'Normal / Frontal', mod: 0, parry: 'normal' },
-    { id: 'inconsciente', label: 'Defensor inconsciente', mod: 0, parry: 'none', note: 'Solo falla con pifia' },
-    { id: 'aturdido', label: 'Defensor aturdido', mod: 50, parry: 'half' },
-    { id: 'espaldas', label: 'Defensor de espaldas', mod: 70, parry: 'normal' },
-    { id: 'costado', label: 'Defensor de costado', mod: 30, parry: 'normal' },
-    { id: 'desequilibrado', label: 'Defensor desequilibrado', mod: 20, parry: 'normal' },
-    { id: 'debajo', label: 'Defensor por debajo', mod: 15, parry: 'normal' },
-    { id: 'inmovilizado', label: 'Defensor inmovilizado', mod: 0, parry: 'none', note: 'Solo falla con pifia' },
-];
-
-export const COVERAGES = [
-    { id: 'ninguna', label: 'Ninguna', mod: 0 },
-    { id: 'ligera', label: 'Ligera', mod: -25 },
-    { id: 'media', label: 'Media', mod: -50 },
-    { id: 'alta', label: 'Alta', mod: -75 },
-    { id: 'completa', label: 'Completa', mod: -100 },
-];
-
-export const DISTANCE_SITUATIONS = [
-    { id: 'normal', label: 'Normal', mod: 0 },
-    { id: 'atacante_mov', label: 'Atacante en movimiento', mod: -15 },
-    { id: 'objetivo_mov', label: 'Objetivo en movimiento', mod: -15 },
-    { id: 'objetivo_pared', label: 'Objetivo pegado a pared', mod: -10 },
-    { id: 'objetivo_suelo', label: 'Objetivo tumbado', mod: -10 },
-    { id: 'noche', label: 'Noche', mod: -20 },
-];
-
-export const RANGES = [
-    { id: 'media', label: 'Distancia Media (DM)', mod: 0 },
-    { id: 'quemarropa', label: 'Quemarropa (Q)', mod: 40 },
-    { id: 'corta', label: 'Distancia Corta (DC)', mod: 15 },
-    { id: 'larga', label: 'Distancia Larga (DL)', mod: -30 },
-];
-
-// --- Hit Locations for Distance Combat ---
-export const HIT_LOCATIONS: { [key: number]: { location: string, effect: string } } = {
-    1: { location: 'Pierna/pie derecho', effect: 'Tirada de Constitución/2 para no desequilibrarse.' },
-    2: { location: 'Pierna/pie izquierdo', effect: 'Tirada de Constitución/2 para no desequilibrarse.' },
-    3: { location: 'Muslo derecho', effect: 'Tirada de Constitución para no desequilibrarse.' },
-    4: { location: 'Muslo derecho', effect: 'Tirada de Constitución para no desequilibrarse.' },
-    5: { location: 'Muslo izquierdo', effect: 'Tirada de Constitución para no desequilibrarse.' },
-    6: { location: 'Muslo izquierdo', effect: 'Tirada de Constitución para no desequilibrarse.' },
-    7: { location: 'Mano/antebrazo derecho', effect: 'Tirada de Agilidad/2 para no dejar caer objetos.' },
-    8: { location: 'Mano/antebrazo izquierdo', effect: 'Tirada de Agilidad/2 para no dejar caer objetos.' },
-    9: { location: 'Brazo/hombro derecho', effect: 'Tirada de Agilidad para no dejar caer objetos.' },
-    10: { location: 'Brazo/hombro izquierdo', effect: 'Tirada de Agilidad para no dejar caer objetos.' },
-    11: { location: 'Abdomen', effect: 'Sin efecto.' },
-    12: { location: 'Abdomen', effect: 'Sin efecto.' },
-    13: { location: 'Abdomen', effect: 'Sin efecto.' },
-    14: { location: 'Pecho', effect: 'Sin efecto.' },
-    15: { location: 'Pecho', effect: 'Sin efecto.' },
-    16: { location: 'Pecho', effect: 'Sin efecto.' },
-    17: { location: 'Pecho', effect: 'Sin efecto.' },
-    18: { location: 'Cuello', effect: 'Se doblan las posibilidades de un crítico.' },
-    19: { location: 'Cabeza', effect: 'Posible aturdimiento o inconsciencia.' },
-    20: { location: 'Cabeza', effect: 'Posible aturdimiento o inconsciencia.' },
-};
-
-// --- Hit Locations for Melee Combat ---
-export const MELEE_HIT_LOCATIONS: { [key: number]: { location: string, effect: string } } = {
-    1: { location: 'Muslo derecho', effect: 'Tirada de Constitución para no desequilibrarse.' },
-    2: { location: 'Muslo derecho', effect: 'Tirada de Constitución para no desequilibrarse.' },
-    3: { location: 'Muslo izquierdo', effect: 'Tirada de Constitución para no desequilibrarse.' },
-    4: { location: 'Muslo izquierdo', effect: 'Tirada de Constitución para no desequilibrarse.' },
-    5: { location: 'Genitales', effect: 'Posible aturdimiento.' },
-    6: { location: 'Brazo/hombro derecho', effect: 'Tirada de Agilidad para no dejar caer objetos.' },
-    7: { location: 'Brazo/hombro izquierdo', effect: 'Tirada de Agilidad para no dejar caer objetos.' },
-    8: { location: 'Abdomen', effect: 'Sin efecto.' },
-    9: { location: 'Abdomen', effect: 'Sin efecto.' },
-    10: { location: 'Abdomen', effect: 'Sin efecto.' },
-    11: { location: 'Abdomen', effect: 'Sin efecto.' },
-    12: { location: 'Pecho', effect: 'Sin efecto.' },
-    13: { location: 'Pecho', effect: 'Sin efecto.' },
-    14: { location: 'Pecho', effect: 'Sin efecto.' },
-    15: { location: 'Pecho', effect: 'Sin efecto.' },
-    16: { location: 'Cuello', effect: 'Se doblan las posibilidades de un crítico.' },
-    17: { location: 'Cabeza', effect: 'Posible aturdimiento o inconsciencia.' },
-    18: { location: 'Cabeza', effect: 'Posible aturdimiento o inconsciencia.' },
-    19: { location: 'Cabeza', effect: 'Posible aturdimiento o inconsciencia.' },
-    20: { location: 'Cabeza', effect: 'Posible aturdimiento o inconsciencia.' },
-};
-
-export const DIFFICULTIES = [
-    { value: -100, label: 'Imposible (-100)' },
-    { value: -75, label: 'Extrema (-75)' },
-    { value: -50, label: 'Difícil (-50)' },
-    { value: -25, label: 'Poca (-25)' },
-    { value: 0, label: 'Normal (0)' },
-    { value: 15, label: 'Fácil (+15)' },
-    { value: 30, label: 'Bastante (+30)' },
-    { value: 50, label: 'Muy fácil (+50)' },
-];
+import { SITUATIONS, DISTANCE_SITUATIONS, RANGES, COVERAGES } from '../../../data/combatData';
+import { calculateProbability, determineHitLocation } from '../../../utils/combatLogic';
+import { RollModalFormula } from './roll-modal/RollModalFormula';
+import { RollModalControls } from './roll-modal/RollModalControls';
+import { RollModalResult } from './roll-modal/RollModalResult';
 
 interface UnifiedRollModalProps {
     isOpen: boolean;
@@ -169,55 +78,21 @@ export default function UnifiedRollModal({
     // --- Calculations ---
     const parsedCustomMod = parseInt(customModifier) || 0;
 
+    const calculation = calculateProbability({
+        mode,
+        subMode,
+        targetValue,
+        difficultyModifier,
+        customModifier: parsedCustomMod,
+        situation,
+        distSituation,
+        range,
+        coverage,
+        targetParry
+    });
 
-    // Melee Logic
-    const currentSituation = SITUATIONS.find(s => s.id === situation) || SITUATIONS[0];
+    const { finalProbability, modifiersSum, effectiveParry, numericParry, currentSituation, isAutoHit } = calculation;
 
-    // Distance Logic
-    const currentDistSituation = DISTANCE_SITUATIONS.find(s => s.id === distSituation) || DISTANCE_SITUATIONS[0];
-    const currentRange = RANGES.find(r => r.id === range) || RANGES[0];
-
-    const currentCoverage = COVERAGES.find(c => c.id === coverage) || COVERAGES[0];
-
-    // Combat logic
-    const numericParry = parseInt(targetParry) || 0;
-    let effectiveParry = numericParry;
-    if (currentSituation.parry === 'half') effectiveParry = Math.floor(numericParry / 2);
-    if (currentSituation.parry === 'none') effectiveParry = 0;
-
-    // Calculate Final Probability
-    let finalProbability = 0;
-    let modifiersSum = 0;
-
-    if (mode === 'basic') {
-        modifiersSum = difficultyModifier + parsedCustomMod;
-        finalProbability = targetValue + modifiersSum;
-    } else {
-        // Combat Mode
-        const isDistance = subMode === 'distance';
-
-        if (isDistance) {
-            // Distance Formula: Base + Range + DistSituation - Coverage - DefenderMod
-            // Note: Coverage is negative in constant, so we ADD it. same for DistSituation.
-            modifiersSum = currentRange.mod + currentDistSituation.mod + currentCoverage.mod;
-            // Defender Impact Mod (entered in targetParry input) is subtracted
-            finalProbability = (targetValue + modifiersSum) - numericParry;
-        } else {
-            // Melee Formula
-            modifiersSum = currentSituation.mod + currentCoverage.mod;
-            finalProbability = (targetValue + modifiersSum) - effectiveParry;
-        }
-    }
-
-    // Clamp logic (usually 0-100, though some games allow >100)
-    // Basic modal clipped 0-100. Advanced didn't explicit clip but math implies potential range.
-    // Let's safe-clamp for visual consistency, but keep raw for logic if needed?
-    // Usually probability > 100 just means less chance of fumble.
-    // For now, allow > 100 but display might look weird. Basic clipped. Let's keep consistent.
-    // Actually advanced could go negative.
-
-    // Special auto-hit note (Melee only)
-    const isAutoHit = mode === 'combat' && subMode === 'melee' && currentSituation.parry === 'none';
 
     // --- Actions ---
     const handleRoll = () => {
@@ -250,22 +125,7 @@ export default function UnifiedRollModal({
             // Determine Hit Location
             let hitLocation = undefined;
             if (mode === 'combat' && isSuccess) {
-                const locRoll = Math.floor(Math.random() * 20) + 1;
-                let locData = null;
-
-                if (subMode === 'distance') {
-                    locData = HIT_LOCATIONS[locRoll];
-                } else if (subMode === 'melee') {
-                    locData = MELEE_HIT_LOCATIONS[locRoll];
-                }
-
-                if (locData) {
-                    hitLocation = {
-                        roll: locRoll,
-                        location: locData.location,
-                        effect: locData.effect
-                    };
-                }
+                hitLocation = determineHitLocation(subMode);
             }
 
             setRollResult({
@@ -301,7 +161,7 @@ export default function UnifiedRollModal({
                 <div className="modal-body roll-modal-body">
 
                     {/* COMBAT SUB-MODE TOGGLE (Only if skillType is 'both' and in combat mode) */}
-                    {mode === 'combat' && skillType === 'both' && (
+                    {rollResult === null && mode === 'combat' && skillType === 'both' && (
                         <div className="submode-toggle-container">
                             <button
                                 className={`btn-retry submode-btn ${subMode === 'melee' ? 'active' : 'outline'}`}
@@ -319,182 +179,44 @@ export default function UnifiedRollModal({
                     )}
 
                     {/* COMMON FORMULA (Derived from state) */}
-                    <div className="roll-attribute-info compact">
-                        <div className="roll-formula">
-                            <span className="formula-part" title="Valor Base">{targetValue}</span>
-
-                            {/* Modifiers Sum */}
-                            <span className="formula-op">{modifiersSum >= 0 ? '+' : ''}</span>
-                            <span className={`formula-part ${modifiersSum < 0 ? 'negative' : 'positive'}`} title="Modificadores">
-                                {Math.abs(modifiersSum)}
-                            </span>
-
-                            {/* Deduction */}
-                            <span className="formula-op">-</span>
-                            {mode === 'basic' ? (
-                                <span className={`formula-part ${parsedCustomMod !== 0 ? 'active' : ''}`} title="Personalizado (ya incluido arriba)">
-                                    0
-                                </span>
-                            ) : (
-                                <span className="formula-part negative" title={subMode === 'distance' ? 'Mod. Defensor' : 'Parada'}>
-                                    {subMode === 'distance' ? numericParry : effectiveParry}
-                                </span>
-                            )}
-
-                            <span className="formula-eq">=</span>
-                            <span className="formula-result">{isAutoHit ? 'AUTO' : `${finalProbability}%`}</span>
-                        </div>
-                        <div className="roll-formula-label">
-                            Probabilidad de Éxito {isAutoHit && '(Solo Pifia)'}
-                        </div>
-                    </div>
+                    {rollResult === null && (
+                        <RollModalFormula
+                            targetValue={targetValue}
+                            modifiersSum={modifiersSum}
+                            parsedCustomMod={parsedCustomMod}
+                            mode={mode}
+                            subMode={subMode}
+                            parryValue={subMode === 'distance' ? numericParry : effectiveParry}
+                            isAutoHit={isAutoHit}
+                            finalProbability={finalProbability}
+                        />
+                    )}
 
                     <div className="roll-main-content">
                         {rollResult === null ? (
                             <>
                                 {/* LEFT COLUMN: CONTROLS */}
-                                <div className="roll-modifiers-column">
-                                    {/* BASIC CONTROLS */}
-                                    {mode === 'basic' && (
-                                        <>
-                                            <div className="roll-modifier-group">
-                                                <label>Dificultad</label>
-                                                <select
-                                                    value={difficultyModifier}
-                                                    onChange={(e) => setDifficultyModifier(parseInt(e.target.value))}
-                                                    className="roll-modifier-select"
-                                                >
-                                                    {DIFFICULTIES.map(d => (
-                                                        <option key={d.value} value={d.value}>{d.label}</option>
-                                                    ))}
-                                                </select>
-                                            </div>
-
-                                            <div className="roll-modifier-group">
-                                                <label>Pers.</label>
-                                                <input
-                                                    type="number"
-                                                    placeholder="0"
-                                                    value={customModifier}
-                                                    onChange={(e) => setCustomModifier(e.target.value)}
-                                                    className="roll-modifier-input"
-                                                />
-                                            </div>
-                                        </>
-                                    )}
-
-                                    {/* ADVANCED - MELEE CONTROLS */}
-                                    {mode === 'combat' && subMode === 'melee' && (
-                                        <>
-                                            <div className="roll-modifier-group">
-                                                <label>Situación</label>
-                                                <select
-                                                    value={situation}
-                                                    onChange={(e) => setSituation(e.target.value)}
-                                                    className="roll-modifier-select small-text"
-                                                >
-                                                    {SITUATIONS.map(s => (
-                                                        <option key={s.id} value={s.id}>
-                                                            {s.label} ({s.mod > 0 ? '+' : ''}{s.mod})
-                                                        </option>
-                                                    ))}
-                                                </select>
-                                            </div>
-
-                                            <div className="roll-modifier-group">
-                                                <label>Cobertura</label>
-                                                <select
-                                                    value={coverage}
-                                                    onChange={(e) => setCoverage(e.target.value)}
-                                                    className="roll-modifier-select"
-                                                >
-                                                    {COVERAGES.map(c => (
-                                                        <option key={c.id} value={c.id}>
-                                                            {c.label} ({c.mod})
-                                                        </option>
-                                                    ))}
-                                                </select>
-                                            </div>
-
-                                            <div className="roll-modifier-group">
-                                                <label>Parada</label>
-                                                <input
-                                                    type="number"
-                                                    value={targetParry}
-                                                    onChange={(e) => setTargetParry(e.target.value)}
-                                                    placeholder="0"
-                                                    className="roll-modifier-input"
-                                                    disabled={currentSituation.parry === 'none'}
-                                                />
-                                            </div>
-                                            <small className="help-text-block">
-                                                {currentSituation.note || (currentSituation.parry === 'half' ? 'Parada efectiva: ÷2' : currentSituation.parry === 'none' ? 'Sin parada' : '')}
-                                                {currentSituation.parry === 'half' && numericParry > 0 && ` (${effectiveParry})`}
-                                            </small>
-                                        </>
-                                    )}
-
-                                    {/* ADVANCED - DISTANCE CONTROLS */}
-                                    {mode === 'combat' && subMode === 'distance' && (
-                                        <>
-                                            <div className="roll-modifier-group">
-                                                <label>Situación</label>
-                                                <select
-                                                    value={distSituation}
-                                                    onChange={(e) => setDistSituation(e.target.value)}
-                                                    className="roll-modifier-select small-text"
-                                                >
-                                                    {DISTANCE_SITUATIONS.map(s => (
-                                                        <option key={s.id} value={s.id}>
-                                                            {s.label} ({s.mod})
-                                                        </option>
-                                                    ))}
-                                                </select>
-                                            </div>
-
-                                            <div className="roll-modifier-group">
-                                                <label>Alcance</label>
-                                                <select
-                                                    value={range}
-                                                    onChange={(e) => setRange(e.target.value)}
-                                                    className="roll-modifier-select"
-                                                >
-                                                    {RANGES.map(r => (
-                                                        <option key={r.id} value={r.id}>
-                                                            {r.label} ({r.mod > 0 ? '+' : ''}{r.mod})
-                                                        </option>
-                                                    ))}
-                                                </select>
-                                            </div>
-
-                                            <div className="roll-modifier-group">
-                                                <label>Cobertura</label>
-                                                <select
-                                                    value={coverage}
-                                                    onChange={(e) => setCoverage(e.target.value)}
-                                                    className="roll-modifier-select"
-                                                >
-                                                    {COVERAGES.map(c => (
-                                                        <option key={c.id} value={c.id}>
-                                                            {c.label} ({c.mod})
-                                                        </option>
-                                                    ))}
-                                                </select>
-                                            </div>
-
-                                            <div className="roll-modifier-group">
-                                                <label>Defensor</label>
-                                                <input
-                                                    type="number"
-                                                    value={targetParry}
-                                                    onChange={(e) => setTargetParry(e.target.value)}
-                                                    placeholder="Mod. Impacto"
-                                                    className="roll-modifier-input"
-                                                />
-                                            </div>
-                                        </>
-                                    )}
-                                </div>
+                                <RollModalControls
+                                    mode={mode}
+                                    subMode={subMode}
+                                    difficultyModifier={difficultyModifier}
+                                    setDifficultyModifier={setDifficultyModifier}
+                                    customModifier={customModifier}
+                                    setCustomModifier={setCustomModifier}
+                                    situation={situation}
+                                    setSituation={setSituation}
+                                    distSituation={distSituation}
+                                    setDistSituation={setDistSituation}
+                                    range={range}
+                                    setRange={setRange}
+                                    coverage={coverage}
+                                    setCoverage={setCoverage}
+                                    targetParry={targetParry}
+                                    setTargetParry={setTargetParry}
+                                    currentSituation={currentSituation}
+                                    effectiveParry={effectiveParry}
+                                    numericParry={numericParry}
+                                />
 
                                 {/* RIGHT COLUMN: BUTTON */}
                                 <div className="roll-button-column">
@@ -508,37 +230,10 @@ export default function UnifiedRollModal({
                                 </div>
                             </>
                         ) : (
-                            <div className="roll-result-container">
-                                <div className="roll-result-label">
-                                    {rollResult.isCrit ? '¡CRÍTICO!' :
-                                        rollResult.isFumble ? '¡PIFIA!' :
-                                            rollResult.success ? 'ÉXITO' : 'FALLO'}
-                                </div>
-                                <div className={`roll-result-number ${rollResult.success ? 'success' : 'failure'} ${rollResult.isCrit ? 'critical-success' : ''} ${rollResult.isFumble ? 'critical-failure' : ''}`}>
-                                    {rollResult.roll}
-                                </div>
-                                <div className="roll-details">
-                                    Margen: {rollResult.margin > 0 ? '+' : ''}{rollResult.margin}
-                                </div>
-
-                                {rollResult.hitLocation && (
-                                    <div className="hit-location-container">
-                                        <div className="hit-location-roll">
-                                            Localización (d20: {rollResult.hitLocation.roll})
-                                        </div>
-                                        <div className="hit-location-name">
-                                            {rollResult.hitLocation.location}
-                                        </div>
-                                        <div className="hit-location-effect">
-                                            {rollResult.hitLocation.effect}
-                                        </div>
-                                    </div>
-                                )}
-
-                                <button className="btn-retry" onClick={() => setRollResult(null)}>
-                                    🔄 Tirar de nuevo
-                                </button>
-                            </div>
+                            <RollModalResult
+                                rollResult={rollResult}
+                                onRetry={() => setRollResult(null)}
+                            />
                         )}
                     </div>
 
