@@ -750,7 +750,7 @@
     border-radius: 12px;
     background: transparent;
     max-width: 90vw;
-    max-height: 90vh;
+    max-height: 90dvh;
     width: 1000px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
     text-align: left;
@@ -766,7 +766,7 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-    max-height: 90vh;
+    max-height: 90dvh;
     border-radius: 12px;
     overflow: hidden;
 }
@@ -1300,20 +1300,20 @@ ul {
     /* Modal: Full screen on mobile */
     .character-dialog {
         max-width: 100vw !important;
-        max-height: 100vh !important;
+        max-height: 100dvh !important;
         width: 100% !important;
-        height: 100% !important;
+        height: 100dvh !important;
         border-radius: 0 !important;
         margin: 0 !important;
     }
 
     .character-dialog.full-screen {
         max-width: 100vw !important;
-        max-height: 100vh !important;
+        max-height: 100dvh !important;
     }
 
     .dialog-content {
-        max-height: 100vh !important;
+        max-height: 100dvh !important;
         border-radius: 0 !important;
     }
 
