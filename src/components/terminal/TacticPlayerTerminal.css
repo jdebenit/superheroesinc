@@ -1656,3 +1656,99 @@
     margin-top: 0.5rem;
     margin-bottom: 1rem;
 }
+/* ========================================
+   Refactored UnifiedRollModal Styles
+   ======================================== */
+
+.modal-header-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.mode-toggle-btn {
+    font-size: 0.75rem !important;
+    padding: 0.25rem 0.75rem !important;
+}
+
+.submode-toggle-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+    gap: 0.5rem;
+}
+
+.submode-btn {
+    /* Inherits from btn-retry */
+    border: 1px solid #2563eb;
+}
+
+.submode-btn.active {
+    background-color: #2563eb;
+    color: white;
+}
+
+.submode-btn.outline {
+    background-color: transparent;
+    color: #6b7280;
+}
+
+.roll-modifiers-column {
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+}
+
+.roll-modifier-select.small-text {
+    font-size: 0.9rem;
+}
+
+.help-text-block {
+    display: block;
+    margin-top: -0.5rem;
+    margin-bottom: 0.5rem;
+    color: #6b7280;
+    font-size: 0.75rem;
+}
+
+.roll-result-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.roll-result-label {
+    font-size: 1.5rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.hit-location-container {
+    margin-top: 1rem;
+    width: 100%;
+    text-align: center;
+}
+
+.hit-location-roll {
+    font-size: 0.8rem;
+    color: #6b7280;
+    margin-bottom: 0.25rem;
+}
+
+.hit-location-name {
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: #111827;
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+}
+
+.hit-location-effect {
+    font-size: 0.75rem;
+    color: #4b5563;
+    font-style: italic;
+}
+

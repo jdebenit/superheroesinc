@@ -286,11 +286,10 @@ export default function UnifiedRollModal({
             <div className={`modal-content ${mode === 'combat' ? 'advanced-combat-modal' : 'attribute-roll-modal'}`} style={{ maxWidth: mode === 'combat' ? '500px' : '380px', transition: 'max-width 0.3s' }}>
                 <div className="modal-header">
                     <h3>{title}</h3>
-                    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                    <div className="modal-header-actions">
                         {/* Toggle Mode Button */}
                         <button
-                            className="btn-retry"
-                            style={{ fontSize: '0.75rem', padding: '0.25rem 0.75rem' }}
+                            className="btn-retry mode-toggle-btn"
                             onClick={() => setMode(prev => prev === 'basic' ? 'combat' : 'basic')}
                         >
                             {mode === 'basic' ? '⚙️ Avanzado' : '⏪ Básico'}
@@ -303,25 +302,15 @@ export default function UnifiedRollModal({
 
                     {/* COMBAT SUB-MODE TOGGLE (Only if skillType is 'both' and in combat mode) */}
                     {mode === 'combat' && skillType === 'both' && (
-                        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem', gap: '0.5rem' }}>
+                        <div className="submode-toggle-container">
                             <button
-                                className={`btn-retry ${subMode === 'melee' ? '' : 'outline'}`}
-                                style={{
-                                    backgroundColor: subMode === 'melee' ? '#2563eb' : 'transparent',
-                                    color: subMode === 'melee' ? 'white' : '#6b7280',
-                                    border: '1px solid #2563eb'
-                                }}
+                                className={`btn-retry submode-btn ${subMode === 'melee' ? 'active' : 'outline'}`}
                                 onClick={() => setSubMode('melee')}
                             >
                                 ⚔️ Cuerpo a Cuerpo
                             </button>
                             <button
-                                className={`btn-retry ${subMode === 'distance' ? '' : 'outline'}`}
-                                style={{
-                                    backgroundColor: subMode === 'distance' ? '#2563eb' : 'transparent',
-                                    color: subMode === 'distance' ? 'white' : '#6b7280',
-                                    border: '1px solid #2563eb'
-                                }}
+                                className={`btn-retry submode-btn ${subMode === 'distance' ? 'active' : 'outline'}`}
                                 onClick={() => setSubMode('distance')}
                             >
                                 🎯 Distancia
@@ -364,7 +353,7 @@ export default function UnifiedRollModal({
                         {rollResult === null ? (
                             <>
                                 {/* LEFT COLUMN: CONTROLS */}
-                                <div className="roll-modifiers-column" style={{ maxHeight: '300px', overflowY: 'auto', paddingRight: '0.5rem' }}>
+                                <div className="roll-modifiers-column">
                                     {/* BASIC CONTROLS */}
                                     {mode === 'basic' && (
                                         <>
@@ -402,8 +391,7 @@ export default function UnifiedRollModal({
                                                 <select
                                                     value={situation}
                                                     onChange={(e) => setSituation(e.target.value)}
-                                                    className="roll-modifier-select"
-                                                    style={{ fontSize: '0.9rem' }}
+                                                    className="roll-modifier-select small-text"
                                                 >
                                                     {SITUATIONS.map(s => (
                                                         <option key={s.id} value={s.id}>
@@ -439,8 +427,7 @@ export default function UnifiedRollModal({
                                                     disabled={currentSituation.parry === 'none'}
                                                 />
                                             </div>
-                                            {/* Parry Note */}
-                                            <small className="help-text" style={{ display: 'block', marginTop: '-0.5rem', marginBottom: '0.5rem', color: '#6b7280', fontSize: '0.75rem' }}>
+                                            <small className="help-text-block">
                                                 {currentSituation.note || (currentSituation.parry === 'half' ? 'Parada efectiva: ÷2' : currentSituation.parry === 'none' ? 'Sin parada' : '')}
                                                 {currentSituation.parry === 'half' && numericParry > 0 && ` (${effectiveParry})`}
                                             </small>
@@ -455,8 +442,7 @@ export default function UnifiedRollModal({
                                                 <select
                                                     value={distSituation}
                                                     onChange={(e) => setDistSituation(e.target.value)}
-                                                    className="roll-modifier-select"
-                                                    style={{ fontSize: '0.9rem' }}
+                                                    className="roll-modifier-select small-text"
                                                 >
                                                     {DISTANCE_SITUATIONS.map(s => (
                                                         <option key={s.id} value={s.id}>
@@ -522,7 +508,7 @@ export default function UnifiedRollModal({
                                 </div>
                             </>
                         ) : (
-                            <div className="roll-result-display" style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                            <div className="roll-result-container">
                                 <div className="roll-result-label">
                                     {rollResult.isCrit ? '¡CRÍTICO!' :
                                         rollResult.isFumble ? '¡PIFIA!' :
@@ -536,24 +522,14 @@ export default function UnifiedRollModal({
                                 </div>
 
                                 {rollResult.hitLocation && (
-                                    <div className="hit-location-box" style={{
-                                        marginTop: '1rem',
-                                        width: '100%',
-                                        textAlign: 'center'
-                                    }}>
-                                        <div style={{ fontSize: '0.8rem', color: '#6b7280', marginBottom: '0.25rem' }}>
+                                    <div className="hit-location-container">
+                                        <div className="hit-location-roll">
                                             Localización (d20: {rollResult.hitLocation.roll})
                                         </div>
-                                        <div style={{
-                                            fontSize: '1.2rem',
-                                            fontWeight: '900',
-                                            color: '#111827',
-                                            marginBottom: '0.25rem',
-                                            textTransform: 'uppercase'
-                                        }}>
+                                        <div className="hit-location-name">
                                             {rollResult.hitLocation.location}
                                         </div>
-                                        <div style={{ fontSize: '0.75rem', color: '#4b5563', fontStyle: 'italic' }}>
+                                        <div className="hit-location-effect">
                                             {rollResult.hitLocation.effect}
                                         </div>
                                     </div>
