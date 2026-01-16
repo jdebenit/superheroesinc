@@ -38,6 +38,54 @@ export const RANGES = [
     { id: 'larga', label: 'Distancia Larga (DL)', mod: -30 },
 ];
 
+// --- Hit Locations for Distance Combat ---
+export const HIT_LOCATIONS: { [key: number]: { location: string, effect: string } } = {
+    1: { location: 'Pierna/pie derecho', effect: 'Tirada de Constitución/2 para no desequilibrarse.' },
+    2: { location: 'Pierna/pie izquierdo', effect: 'Tirada de Constitución/2 para no desequilibrarse.' },
+    3: { location: 'Muslo derecho', effect: 'Tirada de Constitución para no desequilibrarse.' },
+    4: { location: 'Muslo derecho', effect: 'Tirada de Constitución para no desequilibrarse.' },
+    5: { location: 'Muslo izquierdo', effect: 'Tirada de Constitución para no desequilibrarse.' },
+    6: { location: 'Muslo izquierdo', effect: 'Tirada de Constitución para no desequilibrarse.' },
+    7: { location: 'Mano/antebrazo derecho', effect: 'Tirada de Agilidad/2 para no dejar caer objetos.' },
+    8: { location: 'Mano/antebrazo izquierdo', effect: 'Tirada de Agilidad/2 para no dejar caer objetos.' },
+    9: { location: 'Brazo/hombro derecho', effect: 'Tirada de Agilidad para no dejar caer objetos.' },
+    10: { location: 'Brazo/hombro izquierdo', effect: 'Tirada de Agilidad para no dejar caer objetos.' },
+    11: { location: 'Abdomen', effect: 'Sin efecto.' },
+    12: { location: 'Abdomen', effect: 'Sin efecto.' },
+    13: { location: 'Abdomen', effect: 'Sin efecto.' },
+    14: { location: 'Pecho', effect: 'Sin efecto.' },
+    15: { location: 'Pecho', effect: 'Sin efecto.' },
+    16: { location: 'Pecho', effect: 'Sin efecto.' },
+    17: { location: 'Pecho', effect: 'Sin efecto.' },
+    18: { location: 'Cuello', effect: 'Se doblan las posibilidades de un crítico.' },
+    19: { location: 'Cabeza', effect: 'Posible aturdimiento o inconsciencia.' },
+    20: { location: 'Cabeza', effect: 'Posible aturdimiento o inconsciencia.' },
+};
+
+// --- Hit Locations for Melee Combat ---
+export const MELEE_HIT_LOCATIONS: { [key: number]: { location: string, effect: string } } = {
+    1: { location: 'Muslo derecho', effect: 'Tirada de Constitución para no desequilibrarse.' },
+    2: { location: 'Muslo derecho', effect: 'Tirada de Constitución para no desequilibrarse.' },
+    3: { location: 'Muslo izquierdo', effect: 'Tirada de Constitución para no desequilibrarse.' },
+    4: { location: 'Muslo izquierdo', effect: 'Tirada de Constitución para no desequilibrarse.' },
+    5: { location: 'Genitales', effect: 'Posible aturdimiento.' },
+    6: { location: 'Brazo/hombro derecho', effect: 'Tirada de Agilidad para no dejar caer objetos.' },
+    7: { location: 'Brazo/hombro izquierdo', effect: 'Tirada de Agilidad para no dejar caer objetos.' },
+    8: { location: 'Abdomen', effect: 'Sin efecto.' },
+    9: { location: 'Abdomen', effect: 'Sin efecto.' },
+    10: { location: 'Abdomen', effect: 'Sin efecto.' },
+    11: { location: 'Abdomen', effect: 'Sin efecto.' },
+    12: { location: 'Pecho', effect: 'Sin efecto.' },
+    13: { location: 'Pecho', effect: 'Sin efecto.' },
+    14: { location: 'Pecho', effect: 'Sin efecto.' },
+    15: { location: 'Pecho', effect: 'Sin efecto.' },
+    16: { location: 'Cuello', effect: 'Se doblan las posibilidades de un crítico.' },
+    17: { location: 'Cabeza', effect: 'Posible aturdimiento o inconsciencia.' },
+    18: { location: 'Cabeza', effect: 'Posible aturdimiento o inconsciencia.' },
+    19: { location: 'Cabeza', effect: 'Posible aturdimiento o inconsciencia.' },
+    20: { location: 'Cabeza', effect: 'Posible aturdimiento o inconsciencia.' },
+};
+
 export const DIFFICULTIES = [
     { value: -100, label: 'Imposible (-100)' },
     { value: -75, label: 'Extrema (-75)' },
@@ -95,6 +143,7 @@ export default function UnifiedRollModal({
         isFumble: boolean;
         finalFunction: number;
         margin: number;
+        hitLocation?: { roll: number, location: string, effect: string };
     } | null>(null);
     const [isRolling, setIsRolling] = useState(false);
 
@@ -198,13 +247,35 @@ export default function UnifiedRollModal({
 
             const margin = finalProbability - roll;
 
+            // Determine Hit Location
+            let hitLocation = undefined;
+            if (mode === 'combat' && isSuccess) {
+                const locRoll = Math.floor(Math.random() * 20) + 1;
+                let locData = null;
+
+                if (subMode === 'distance') {
+                    locData = HIT_LOCATIONS[locRoll];
+                } else if (subMode === 'melee') {
+                    locData = MELEE_HIT_LOCATIONS[locRoll];
+                }
+
+                if (locData) {
+                    hitLocation = {
+                        roll: locRoll,
+                        location: locData.location,
+                        effect: locData.effect
+                    };
+                }
+            }
+
             setRollResult({
                 roll,
                 success: isSuccess,
                 isCrit,
                 isFumble,
                 finalFunction: finalProbability,
-                margin
+                margin,
+                hitLocation
             });
             setIsRolling(false);
         }, mode === 'basic' ? 600 : 300); // Shorter anim for combat usually preferred
@@ -463,6 +534,31 @@ export default function UnifiedRollModal({
                                 <div className="roll-details">
                                     Margen: {rollResult.margin > 0 ? '+' : ''}{rollResult.margin}
                                 </div>
+
+                                {rollResult.hitLocation && (
+                                    <div className="hit-location-box" style={{
+                                        marginTop: '1rem',
+                                        width: '100%',
+                                        textAlign: 'center'
+                                    }}>
+                                        <div style={{ fontSize: '0.8rem', color: '#6b7280', marginBottom: '0.25rem' }}>
+                                            Localización (d20: {rollResult.hitLocation.roll})
+                                        </div>
+                                        <div style={{
+                                            fontSize: '1.2rem',
+                                            fontWeight: '900',
+                                            color: '#111827',
+                                            marginBottom: '0.25rem',
+                                            textTransform: 'uppercase'
+                                        }}>
+                                            {rollResult.hitLocation.location}
+                                        </div>
+                                        <div style={{ fontSize: '0.75rem', color: '#4b5563', fontStyle: 'italic' }}>
+                                            {rollResult.hitLocation.effect}
+                                        </div>
+                                    </div>
+                                )}
+
                                 <button className="btn-retry" onClick={() => setRollResult(null)}>
                                     🔄 Tirar de nuevo
                                 </button>
