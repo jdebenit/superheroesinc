@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../TacticPlayerTerminal.css';
 import { SITUATIONS, DISTANCE_SITUATIONS, RANGES, COVERAGES } from '../../../data/combatData';
 import { calculateProbability, determineHitLocation } from '../../../utils/combatLogic';
+import { playDiceRollSound } from '../../../utils/diceSound';
 import { RollModalFormula } from './roll-modal/RollModalFormula';
 import { RollModalControls } from './roll-modal/RollModalControls';
 import { RollModalResult } from './roll-modal/RollModalResult';
@@ -96,6 +97,9 @@ export default function UnifiedRollModal({
 
     // --- Actions ---
     const handleRoll = () => {
+        // Play dice roll sound
+        playDiceRollSound();
+
         setIsRolling(true);
         setRollResult(null);
 
@@ -106,18 +110,25 @@ export default function UnifiedRollModal({
             let isCrit = false;
             let isFumble = false;
 
-            // Logic
-            if (isAutoHit) {
-                if (roll > 95) isFumble = true;
-                else isSuccess = true;
-                if (roll <= Math.ceil(finalProbability / 10)) isCrit = true;
+            // Fumble check: only on 99 or 100
+            if (roll >= 99) {
+                isFumble = true;
+                isSuccess = false;
+            } else if (isAutoHit) {
+                // Auto-hit: always succeeds except on fumble
+                isSuccess = true;
             } else {
-                if (roll <= finalProbability) isSuccess = true;
-                if (roll <= Math.ceil(finalProbability / 10) && finalProbability > 0) isCrit = true;
-                if (roll > 95) {
-                    isFumble = true;
-                    isSuccess = false;
+                // Normal check: roll must be <= finalProbability
+                if (roll <= finalProbability) {
+                    isSuccess = true;
                 }
+            }
+
+            // Critical check: always on 1-2, or if roll is within 10% of success probability
+            if (roll <= 2) {
+                isCrit = true;
+            } else if (isSuccess && roll <= Math.ceil(finalProbability / 10) && finalProbability > 0) {
+                isCrit = true;
             }
 
             const margin = finalProbability - roll;
