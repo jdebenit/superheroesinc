@@ -187,6 +187,16 @@ export default function TacticPlayerTerminal() {
         });
     };
 
+    const handleMentalRoll = () => {
+        setRollModalData({
+            isOpen: true,
+            skillName: 'Equilibrio Mental',
+            skillValue: stats.maxMentalBalance,
+            initialMode: 'basic',
+            skillType: 'cac'
+        });
+    };
+
     return (
         <div className="tactic-player-terminal">
             <TerminalHeader
@@ -224,6 +234,7 @@ export default function TacticPlayerTerminal() {
                             type="mental"
                             onViewHistory={() => openHistoryModal('mental')}
                             onEdit={() => openEditModal('mental')}
+                            onRoll={handleMentalRoll}
                         />
 
                         <StatCard

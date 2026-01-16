@@ -9,6 +9,7 @@ interface StatCardProps {
     showBar?: boolean;
     unconsciousness?: number;
     onEdit?: () => void;
+    onRoll?: () => void;
 }
 
 export default function StatCard({
@@ -19,7 +20,8 @@ export default function StatCard({
     onViewHistory,
     showBar = true,
     unconsciousness,
-    onEdit
+    onEdit,
+    onRoll
 }: StatCardProps) {
     const barFillClass = type === 'mental' ? 'mental' : (type === 'willpower' ? 'willpower' : 'health');
 
@@ -51,6 +53,18 @@ export default function StatCard({
                             <span className="sub-stat-label">INC</span>
                             <span className="sub-stat-box">{unconsciousness}</span>
                         </div>
+                    )}
+                    {onRoll && (
+                        <button
+                            className="roll-icon-btn"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                onRoll();
+                            }}
+                            title="Tirar dado"
+                        >
+                            🎲
+                        </button>
                     )}
                 </div>
             </div>
