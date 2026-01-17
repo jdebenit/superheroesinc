@@ -3,6 +3,7 @@ import { GENERAL_SKILLS } from '../../../../../data/generalSkills';
 import { WizardSection } from '../../../shared/WizardSection';
 import { SkillTable } from './SkillTable';
 import { SkillRow } from './SkillRow';
+import './GeneralSkillsSection.css';
 
 interface GeneralSkillsSectionProps {
     skillValues: any;
@@ -43,20 +44,13 @@ export const GeneralSkillsSection: React.FC<GeneralSkillsSectionProps> = ({
                         <>
                             {skill.name}
                             {skill.id === 'idioma' && (
-                                <div style={{ marginTop: '0.25rem' }}>
+                                <div className="native-language-container">
                                     <input
                                         type="text"
+                                        className="native-language-input"
                                         value={nativeLanguage}
                                         onChange={(e) => onNativeLanguageChange(e.target.value)}
                                         placeholder="Especifique idioma..."
-                                        style={{
-                                            width: '100%',
-                                            padding: '0.25rem 0.5rem',
-                                            border: '1px solid #d1d5db',
-                                            borderRadius: '4px',
-                                            fontSize: '0.875rem',
-                                            fontWeight: 'normal'
-                                        }}
                                     />
                                 </div>
                             )}

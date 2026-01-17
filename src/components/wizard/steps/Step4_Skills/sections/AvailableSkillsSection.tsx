@@ -1,6 +1,7 @@
 import React from 'react';
 import { SKILL_CATEGORIES } from '../../../../../data/specialSkills';
 import { WizardButton } from '../../../shared/WizardButton';
+import './AvailableSkillsSection.css';
 
 interface AvailableSkillsSectionProps {
     skillsByCategory: { [category: string]: any[] };
@@ -43,30 +44,17 @@ export const AvailableSkillsSection: React.FC<AvailableSkillsSectionProps> = ({
 }) => {
     return (
         <div>
-            <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem', color: '#374151' }}>
+            <h3 className="available-skills-title">
                 Habilidades Disponibles
             </h3>
 
             {Object.entries(skillsByCategory).map(([category, skills]) => (
-                <div key={category} style={{ marginBottom: '2rem' }}>
-                    <h4 style={{
-                        fontSize: '1.25rem',
-                        fontWeight: 'bold',
-                        marginBottom: '0.75rem',
-                        color: '#374151',
-                        borderBottom: '2px solid #e5e7eb',
-                        paddingBottom: '0.5rem'
-                    }}>
+                <div key={category} className="skill-category-container">
+                    <h4 className="skill-category-title">
                         {SKILL_CATEGORIES[category as keyof typeof SKILL_CATEGORIES]}
                     </h4>
 
-                    <div style={{
-                        backgroundColor: 'white',
-                        borderRadius: '12px',
-                        boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-                        padding: '1rem',
-                        border: '1px solid #e5e7eb'
-                    }}>
+                    <div className="available-skills-list">
                         {skills.filter(skill => isSkillAllowed(skill, originItems)).map(skill => {
                             const isSelected = selectedSkills[skill.id] !== undefined;
                             const isParametrizable = skill.requiresSpecification;
@@ -74,22 +62,16 @@ export const AvailableSkillsSection: React.FC<AvailableSkillsSectionProps> = ({
 
                             if (isParametrizable) {
                                 return (
-                                    <div key={skill.id} style={{
-                                        padding: '0.75rem',
-                                        borderBottom: '1px solid #e5e7eb',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        gap: '1rem'
-                                    }}>
-                                        <div style={{ flex: 1 }}>
+                                    <div key={skill.id} className="available-skill-item">
+                                        <div className="available-skill-info">
                                             <strong>{skill.name}</strong>
                                             {skill.description && (
-                                                <span style={{ fontSize: '0.875rem', color: '#6b7280', marginLeft: '0.5rem' }}>
+                                                <span className="available-skill-description">
                                                     ({skill.description})
                                                 </span>
                                             )}
                                         </div>
-                                        <span style={{ fontSize: '0.875rem', color: '#6b7280', fontFamily: 'monospace' }}>
+                                        <span className="available-skill-formula">
                                             {skill.formulaText}
                                         </span>
                                         <WizardButton
@@ -103,23 +85,16 @@ export const AvailableSkillsSection: React.FC<AvailableSkillsSectionProps> = ({
                                 );
                             } else {
                                 return (
-                                    <div key={skill.id} style={{
-                                        padding: '0.75rem',
-                                        borderBottom: '1px solid #e5e7eb',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        gap: '1rem',
-                                        opacity: isSelected ? 0.5 : 1
-                                    }}>
-                                        <div style={{ flex: 1 }}>
+                                    <div key={skill.id} className={`available-skill-item ${isSelected ? 'selected' : ''}`}>
+                                        <div className="available-skill-info">
                                             <strong>{skill.name}</strong>
                                             {skill.description && (
-                                                <span style={{ fontSize: '0.875rem', color: '#6b7280', marginLeft: '0.5rem' }}>
+                                                <span className="available-skill-description">
                                                     ({skill.description})
                                                 </span>
                                             )}
                                         </div>
-                                        <span style={{ fontSize: '0.875rem', color: '#6b7280', fontFamily: 'monospace' }}>
+                                        <span className="available-skill-formula">
                                             {skill.formulaText}
                                         </span>
                                         {!isSelected ? (
@@ -131,7 +106,7 @@ export const AvailableSkillsSection: React.FC<AvailableSkillsSectionProps> = ({
                                                 + Añadir ({displayCost})
                                             </WizardButton>
                                         ) : (
-                                            <span style={{ color: '#10b981', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                            <span className="selected-indicator">
                                                 ✓ Seleccionada
                                             </span>
                                         )}

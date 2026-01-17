@@ -1,0 +1,68 @@
+/* --- Section: Available Skills --- */
+.available-skills-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #374151;
+}
+
+.skill-category-container {
+    margin-bottom: 2rem;
+}
+
+.skill-category-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 0.75rem;
+    color: #374151;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 0.5rem;
+}
+
+.available-skills-list {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    border: 1px solid #e5e7eb;
+}
+
+.available-skill-item {
+    padding: 0.75rem;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.available-skill-item.selected {
+    opacity: 0.5;
+}
+
+.available-skill-info {
+    flex: 1;
+}
+
+.available-skill-description {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin-left: 0.5rem;
+}
+
+.available-skill-formula {
+    font-size: 0.875rem;
+    color: #6b7280;
+    font-family: monospace;
+}
+
+.selected-indicator {
+    color: #10b981;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.add-btn-style {
+    background-color: #10b981;
+}

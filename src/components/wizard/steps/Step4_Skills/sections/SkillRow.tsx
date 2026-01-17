@@ -1,5 +1,6 @@
 import React from 'react';
 import { DeleteRowButton } from '../../../shared/DeleteRowButton';
+import './SkillRow.css';
 
 interface SkillRowProps {
     // Content
@@ -47,47 +48,36 @@ export const SkillRow: React.FC<SkillRowProps> = ({
     onModChange,
     onRemove
 }) => {
-    // Styles
-    const cellStyle = { padding: '0.75rem', textAlign: 'center' as const };
-    const modCellStyle = (val: number) => ({
-        ...cellStyle,
-        color: val ? (isSpecial ? '#7c3aed' : '#2563eb') : '#9ca3af',
-        fontWeight: val ? 'bold' : 'normal'
-    });
-
-    const inputStyle = {
-        width: '50px',
-        padding: '0.25rem',
-        border: calcPCCost > 0 ? '2px solid #f59e0b' : '1px solid #d1d5db',
-        borderRadius: '4px',
-        textAlign: 'center' as const,
-        fontWeight: 'bold'
+    // Helpers for classes
+    const getModClass = (val: number) => {
+        if (!val) return 'td-cell mod-text-empty';
+        return `td-cell ${isSpecial ? 'mod-text-special' : 'mod-text-general'}`;
     };
 
     return (
-        <tr style={{ borderBottom: '1px solid #e5e7eb', backgroundColor: 'white' }}>
+        <tr className="skill-row">
             {/* Name */}
-            <td style={{ padding: '0.75rem', fontWeight: 'bold', color: '#1f2937' }}>
+            <td className="td-name">
                 {name}
             </td>
 
             {/* Formula */}
-            <td style={{ ...cellStyle, color: '#6b7280', fontSize: '0.875rem', fontFamily: 'monospace' }}>
+            <td className="td-cell td-formula">
                 {formula}
             </td>
 
             {/* Base */}
-            <td style={cellStyle}>
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2px' }}>
+            <td className="td-cell">
+                <div className="base-input-container">
                     <input
                         type="number"
                         value={baseValue}
                         min={minBase}
                         onChange={(e) => onBaseChange(e.target.value)}
-                        style={inputStyle}
+                        className={`base-input ${calcPCCost > 0 ? 'base-input-cost' : 'base-input-normal'}`}
                     />
                     {calcPCCost > 0 && (
-                        <span style={{ fontSize: '0.75rem', color: '#b45309' }}>
+                        <span className="cost-text">
                             {calcPCCost.toFixed(1)} PC
                         </span>
                     )}
@@ -95,65 +85,55 @@ export const SkillRow: React.FC<SkillRowProps> = ({
             </td>
 
             {/* Origin Mod */}
-            <td style={modCellStyle(originMod)}>
+            <td className={getModClass(originMod)}>
                 {originMod > 0 ? `+${originMod}` : originMod || '-'}
             </td>
 
             {/* Specialty Mod */}
-            <td style={modCellStyle(specialtyMod)}>
+            <td className={getModClass(specialtyMod)}>
                 {specialtyMod > 0 ? `+${specialtyMod}` : specialtyMod || '-'}
             </td>
 
             {/* Manual Mod */}
-            <td style={cellStyle}>
+            <td className="td-cell">
                 <input
                     type="number"
                     value={manualMod || ''}
                     onChange={(e) => onModChange(e.target.value)}
                     placeholder="0"
-                    style={{
-                        width: '50px',
-                        padding: '0.25rem',
-                        border: '1px solid #d1d5db',
-                        borderRadius: '4px',
-                        textAlign: 'center'
-                    }}
+                    className="manual-mod-input"
                 />
             </td>
 
             {/* TOTAL */}
-            <td style={{ ...cellStyle, fontWeight: 'bold', fontSize: '1.125rem', color: '#059669' }}>
+            <td className="td-cell total-cell">
                 {total}%
             </td>
 
             {/* Special Columns */}
             {isSpecial && (
                 <>
-                    <td style={cellStyle}>
-                        <span style={{
-                            fontSize: '0.875rem',
-                            fontWeight: 'bold',
-                            color: totalPCCost > 0 ? '#b45309' : '#10b981'
-                        }}>
+                    <td className="td-cell">
+                        <span className={`special-col-cost ${totalPCCost > 0 ? 'cost-paid' : 'cost-free'}`}>
                             {totalPCCost > 0 ? `${totalPCCost.toFixed(1).replace('.0', '')} PC` : 'GRATIS'}
                         </span>
                         {calcPCCost > 0 && (
-                            <div style={{ fontSize: '0.7em', color: '#666' }}>
+                            <div className="cost-basis-detail">
                                 (Base: +{calcPCCost.toFixed(1)})
                             </div>
                         )}
                         {isRequired && (
-                            <div style={{ fontSize: '0.7em', color: '#b45309', fontStyle: 'italic' }}>
+                            <div className="required-text">
                                 Obligatoria
                             </div>
                         )}
                     </td>
-                    <td style={cellStyle}>
+                    <td className="td-cell">
                         {!isFree && !isRequired && onRemove && (
                             <DeleteRowButton onDelete={onRemove} title="Eliminar" />
                         )}
-                        {isFree && <span style={{ fontSize: '1.25rem', color: '#10b981' }}>✓</span>}
-                        {isRequired && <span style={{ fontSize: '1.25rem', color: '#f59e0b' }}>✓</span>}
+                        {isFree && <span className="check-green">✓</span>}
+                        {isRequired && <span className="check-orange">✓</span>}
                     </td>
                 </>
             )}

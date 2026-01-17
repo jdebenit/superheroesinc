@@ -2,6 +2,7 @@ import React from 'react';
 import { SPECIAL_SKILLS } from '../../../../../data/specialSkills';
 import { SkillTable } from './SkillTable';
 import { SkillRow } from './SkillRow';
+import './SelectedSkillsSection.css';
 
 interface SelectedSkillsSectionProps {
     selectedSkills: { [skillId: string]: { isFree: boolean; isRequired: boolean; manualMods: number; manualBases: number } };
@@ -36,21 +37,15 @@ export const SelectedSkillsSection: React.FC<SelectedSkillsSectionProps> = ({
     return (
         <>
             {/* PC Counter */}
-            <div style={{
-                backgroundColor: '#f0f9ff',
-                border: '2px solid #3b82f6',
-                borderRadius: '8px',
-                padding: '1rem',
-                marginBottom: '2rem'
-            }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ fontSize: '1.125rem', fontWeight: 'bold' }}>
+            <div className="pc-counter-box">
+                <div className="pc-counter-row">
+                    <span className="pc-counter-label">
                         Habilidades Seleccionadas: {specialSkillsPC.totalSkills}
                     </span>
-                    <span style={{ fontSize: '1.125rem' }}>
-                        ({specialSkillsPC.freeSkills} gratuitas {specialSkillsPC.intBonusSkills > 0 && <span style={{ color: '#059669', fontSize: '0.9em' }}>[+{specialSkillsPC.intBonusSkills} INT]</span>}, {specialSkillsPC.paidSkills} pagadas)
+                    <span className="pc-counter-details">
+                        ({specialSkillsPC.freeSkills} gratuitas {specialSkillsPC.intBonusSkills > 0 && <span className="pc-bonus-text">[+{specialSkillsPC.intBonusSkills} INT]</span>}, {specialSkillsPC.paidSkills} pagadas)
                     </span>
-                    <span style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#3b82f6' }}>
+                    <span className="pc-total-text">
                         Total: {specialSkillsPC.totalPC.toFixed(1).replace('.0', '')} PC
                     </span>
                 </div>
@@ -58,15 +53,8 @@ export const SelectedSkillsSection: React.FC<SelectedSkillsSectionProps> = ({
 
             {/* Selected Skills Table */}
             {hasSkills && (
-                <div style={{
-                    backgroundColor: '#f0fdf4',
-                    borderRadius: '12px',
-                    padding: '1.5rem',
-                    marginBottom: '2rem',
-                    border: '2px solid #10b981',
-                    overflow: 'hidden'
-                }}>
-                    <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem', color: '#059669' }}>
+                <div className="selected-skills-container">
+                    <h3 className="selected-skills-title">
                         ✓ Habilidades Seleccionadas
                     </h3>
                     <SkillTable isSpecial>
@@ -114,19 +102,14 @@ export const SelectedSkillsSection: React.FC<SelectedSkillsSectionProps> = ({
                             const totalCost = itemBaseCost + (val.pcCost || 0);
 
                             const renderName = (
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                                <div className="specified-skill-input-container">
                                     <span>{skillDef.name}</span>
                                     <input
                                         type="text"
+                                        className="specified-skill-input"
                                         value={spec.specification}
                                         onChange={(e) => onSpecificationChange(uniqueId, e.target.value)}
                                         placeholder={skillDef.specificationPlaceholder || "Especificar..."}
-                                        style={{
-                                            padding: '0.25rem',
-                                            border: '1px solid #d1d5db',
-                                            borderRadius: '4px',
-                                            fontSize: '0.875rem'
-                                        }}
                                     />
                                 </div>
                             );

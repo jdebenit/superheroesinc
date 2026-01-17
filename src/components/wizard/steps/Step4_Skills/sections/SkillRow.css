@@ -1,0 +1,115 @@
+/* --- SkillRow --- */
+.skill-row {
+    border-bottom: 1px solid #e5e7eb;
+    background-color: white;
+    display: table-row;
+    /* Explicitly enforce table row behavior */
+}
+
+.td-cell {
+    padding: 0.75rem;
+    text-align: center;
+}
+
+.td-name {
+    padding: 0.75rem;
+    font-weight: bold;
+    color: #1f2937;
+}
+
+.td-formula {
+    color: #6b7280;
+    font-size: 0.875rem;
+    font-family: monospace;
+}
+
+.base-input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.base-input {
+    width: 50px;
+    padding: 0.25rem;
+    border-radius: 4px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.base-input-normal {
+    border: 1px solid #d1d5db;
+}
+
+.base-input-cost {
+    border: 2px solid #f59e0b;
+}
+
+.cost-text {
+    font-size: 0.75rem;
+    color: #b45309;
+}
+
+.mod-text-special {
+    color: #7c3aed;
+    font-weight: bold;
+}
+
+.mod-text-general {
+    color: #2563eb;
+    font-weight: bold;
+}
+
+.mod-text-empty {
+    color: #9ca3af;
+    font-weight: normal;
+}
+
+.manual-mod-input {
+    width: 50px;
+    padding: 0.25rem;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.total-cell {
+    font-weight: bold;
+    font-size: 1.125rem;
+    color: #059669;
+}
+
+.special-col-cost {
+    font-size: 0.875rem;
+    font-weight: bold;
+}
+
+.cost-paid {
+    color: #b45309;
+}
+
+.cost-free {
+    color: #10b981;
+}
+
+.cost-basis-detail {
+    font-size: 0.7em;
+    color: #666;
+}
+
+.required-text {
+    font-size: 0.7em;
+    color: #b45309;
+    font-style: italic;
+}
+
+.check-green {
+    font-size: 1.25rem;
+    color: #10b981;
+}
+
+.check-orange {
+    font-size: 1.25rem;
+    color: #f59e0b;
+}

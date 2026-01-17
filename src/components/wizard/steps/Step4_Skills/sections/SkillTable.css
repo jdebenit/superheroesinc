@@ -1,0 +1,69 @@
+/* --- SkillTable --- */
+.skill-table-container {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    margin-bottom: 3rem;
+    overflow-x: auto;
+}
+
+.skill-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px;
+}
+
+.head-special {
+    background-color: #ecfdf5;
+    border-bottom: 2px solid #10b981;
+}
+
+.head-general {
+    background-color: #f9fafb;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.th-base {
+    padding: 1rem;
+    text-align: center;
+}
+
+.th-left {
+    padding: 1rem;
+    text-align: left;
+}
+
+.th-center {
+    padding: 1rem;
+    text-align: center;
+}
+
+.th-text-special {
+    color: #064e3b;
+}
+
+.th-text-general {
+    color: #6b7280;
+}
+
+.th-title-special {
+    color: #065f46;
+}
+
+.th-title-general {
+    color: #374151;
+}
+
+.th-total {
+    font-weight: bold;
+}
+
+.th-total-special {
+    color: #064e3b;
+}
+
+.th-total-general {
+    color: #111827;
+}

@@ -4,6 +4,7 @@ import { GeneralSkillsSection } from './sections/GeneralSkillsSection';
 import { SelectedSkillsSection } from './sections/SelectedSkillsSection';
 import { AvailableSkillsSection } from './sections/AvailableSkillsSection';
 import { useStep4Logic } from './useStep4Logic';
+import './Step4_Skills.css';
 
 interface Step4Props {
     data: any;
@@ -39,7 +40,7 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
     } = useStep4Logic(data, onChange);
 
     return (
-        <div style={{ padding: '2rem' }}>
+        <div className="step4-container">
             {/* GENERAL SKILLS SECTION */}
             <GeneralSkillsSection
                 skillValues={skillValues}
