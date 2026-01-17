@@ -1,0 +1,94 @@
+.dynamic-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.dynamic-list-empty {
+    padding: 2rem;
+    text-align: center;
+    color: #9ca3af;
+    border: 2px dashed #e5e7eb;
+    border-radius: 8px;
+}
+
+.dynamic-list-item {
+    position: relative;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid;
+}
+
+.dynamic-list-item-actions {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Theme: Blue */
+.dynamic-list-blue.dynamic-list-item {
+    background-color: #f9fafb;
+    border-color: #e5e7eb;
+}
+
+.dynamic-list-blue.dynamic-list-add-button {
+    background-color: #f9fafb;
+    color: #3b82f6;
+}
+
+/* Theme: Red */
+.dynamic-list-red.dynamic-list-item {
+    background-color: #fef2f2;
+    border-color: #fee2e2;
+}
+
+.dynamic-list-red.dynamic-list-add-button {
+    background-color: #fef2f2;
+    color: #dc2626;
+}
+
+/* Theme: Purple */
+.dynamic-list-purple.dynamic-list-item {
+    background-color: #faf5ff;
+    border-color: #f3e8ff;
+}
+
+.dynamic-list-purple.dynamic-list-add-button {
+    background-color: #faf5ff;
+    color: #9333ea;
+}
+
+/* Theme: Cyan */
+.dynamic-list-cyan.dynamic-list-item {
+    background-color: #ecfeff;
+    border-color: #cffafe;
+}
+
+.dynamic-list-cyan.dynamic-list-add-button {
+    background-color: #ecfeff;
+    color: #0891b2;
+}
+
+/* Add Button */
+.dynamic-list-add-button {
+    width: 100%;
+    padding: 1rem;
+    border: 2px dashed;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.2s;
+}
+
+.dynamic-list-add-button:hover {
+    opacity: 0.8;
+}
+
+.dynamic-list-add-icon {
+    font-size: 1.25rem;
+}

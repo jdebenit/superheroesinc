@@ -1,31 +1,24 @@
 import React from 'react';
+import './DeleteRowButton.css';
 
 interface DeleteRowButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     onDelete: () => void;
     title?: string;
 }
 
-export const DeleteRowButton: React.FC<DeleteRowButtonProps> = ({ onDelete, title = "Eliminar", style, ...props }) => {
+export const DeleteRowButton: React.FC<DeleteRowButtonProps> = ({
+    onDelete,
+    title = "Eliminar",
+    className = '',
+    ...props
+}) => {
     return (
         <button
             onClick={(e) => {
                 e.stopPropagation();
                 onDelete();
             }}
-            style={{
-                color: '#ef4444',
-                padding: '8px',
-                borderRadius: '9999px',
-                border: 'none',
-                background: 'transparent',
-                cursor: 'pointer',
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                ...style
-            }}
-            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#fef2f2'}
-            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+            className={`delete-row-button ${className}`}
             title={title}
             {...props}
         >

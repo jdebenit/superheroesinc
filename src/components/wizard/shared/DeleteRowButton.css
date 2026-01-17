@@ -1,0 +1,20 @@
+.delete-row-button {
+    color: #ef4444;
+    padding: 8px;
+    border-radius: 9999px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+.delete-row-button:hover {
+    background-color: #fef2f2;
+}
+
+.delete-row-button:active {
+    background-color: #fee2e2;
+}

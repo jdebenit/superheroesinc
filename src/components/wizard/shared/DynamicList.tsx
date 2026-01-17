@@ -1,5 +1,6 @@
 import React from 'react';
 import { WizardButton } from './WizardButton';
+import './DynamicList.css';
 
 interface DynamicListProps<T> {
     items: T[];
@@ -10,7 +11,7 @@ interface DynamicListProps<T> {
     addButtonLabel?: string;
     itemContainerStyle?: React.CSSProperties;
     emptyText?: string;
-    color?: string; // Main color for theming (button, borders)
+    color?: string;
 }
 
 export function DynamicList<T>({
@@ -19,51 +20,28 @@ export function DynamicList<T>({
     onRemove,
     renderItem,
     addButtonLabel = 'Añadir Elemento',
-    itemContainerStyle,
     emptyText,
     color = '#3b82f6'
 }: DynamicListProps<T>) {
-
-    // Helper to blend color with white for background (simulating logic from original code)
-    // For now we just use a generic light background if not fully implemented with color generic logic
-    const bgColor = color === '#dc2626' ? '#fef2f2' : // Red
-        color === '#7c3aed' ? '#f5f3ff' : // Purple
-            color === '#0891b2' ? '#ecfeff' : // Cyan
-                color === '#9333ea' ? '#faf5ff' : // Purple Light ?
-                    '#f9fafb'; // Default gray
-
-    const borderColor = color === '#dc2626' ? '#fee2e2' :
-        color === '#7c3aed' ? '#ede9fe' :
-            color === '#0891b2' ? '#cffafe' :
-                color === '#9333ea' ? '#f3e8ff' :
-                    '#e5e7eb';
+    // Determine theme class based on color
+    let themeClass = 'dynamic-list-blue';
+    if (color === '#dc2626') themeClass = 'dynamic-list-red';
+    else if (color === '#7c3aed' || color === '#9333ea') themeClass = 'dynamic-list-purple';
+    else if (color === '#0891b2') themeClass = 'dynamic-list-cyan';
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <div className="dynamic-list">
             {items.length === 0 && emptyText && (
-                <div style={{
-                    padding: '2rem',
-                    textAlign: 'center',
-                    color: '#9ca3af',
-                    border: '2px dashed #e5e7eb',
-                    borderRadius: '8px'
-                }}>
+                <div className="dynamic-list-empty">
                     {emptyText}
                 </div>
             )}
 
             {items.map((item, index) => (
-                <div key={index} style={{
-                    position: 'relative',
-                    padding: '1rem',
-                    backgroundColor: bgColor,
-                    border: `1px solid ${borderColor}`,
-                    borderRadius: '8px',
-                    ...itemContainerStyle
-                }}>
+                <div key={index} className={`dynamic-list-item ${themeClass}`}>
                     {renderItem(item, index)}
 
-                    <div style={{ marginTop: '1rem', display: 'flex', justifyContent: 'flex-end' }}>
+                    <div className="dynamic-list-item-actions">
                         <WizardButton
                             variant="danger"
                             onClick={() => onRemove(index)}
@@ -78,24 +56,10 @@ export function DynamicList<T>({
 
             <button
                 onClick={onAdd}
-                style={{
-                    width: '100%',
-                    padding: '1rem',
-                    border: `2px dashed ${color}66`, // opacity
-                    backgroundColor: bgColor,
-                    color: color,
-                    borderRadius: '8px',
-                    fontWeight: 'bold',
-                    cursor: 'pointer',
-                    marginTop: '0.5rem',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '0.5rem',
-                    transition: 'all 0.2s'
-                }}
+                className={`dynamic-list-add-button ${themeClass}`}
+                style={{ borderColor: `${color}66` }}
             >
-                <span style={{ fontSize: '1.25rem' }}>+</span> {addButtonLabel}
+                <span className="dynamic-list-add-icon">+</span> {addButtonLabel}
             </button>
         </div>
     );
