@@ -6,8 +6,8 @@ import { getFreeSkillsForOrigins } from '../../../data/freeOriginSkills';
 import { getRequiredSkillsForOrigins } from '../../../data/requiredSpecialtySkills';
 import { useSkillAutoEffects } from '../../../hooks/wizard/useCharacterAutoEffects';
 import { WizardSection } from '../shared/WizardSection';
-import { SkillTable } from './Step4_Components/SkillTable';
-import { SkillRow } from './Step4_Components/SkillRow';
+import { SkillTable } from '../shared/SkillTable';
+import { SkillRow } from '../shared/SkillRow';
 import { WizardButton } from '../shared/WizardButton';
 
 interface Step4Props {
