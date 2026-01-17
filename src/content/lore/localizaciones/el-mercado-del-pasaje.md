@@ -3,7 +3,7 @@ title: El Mercado del Pasaje
 description: Un mercado oculto entre pliegues de realidad, nacido de una vieja disputa divina, donde dioses, refugiados y artesanos de lo imposible comercian bajo reglas que nadie termina de comprender y que cambian con cada descenso.
 category: localizaciones
 source: Partida Oficial - La Sombra del enroque
-updatedDate: 2025-12-04
+updatedDate: 2026-01-16
 ---
 El Mercado del Pasaje está en Europa, dicen. Es una forma rápida de zanjar la conversación. La verdad es que está entre ciudades, entre rutas antiguas, en los huecos que deja la realidad cuando nadie la mira con atención. No es un lugar al que se llegue por error, aunque muchos juren después que fue casualidad.
 
