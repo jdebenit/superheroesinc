@@ -3,6 +3,8 @@ import PowerRow from './PowerRow';
 import type { SelectedPower } from '../types';
 import { SectionContainer } from '../../../shared/SectionContainer';
 import { PixelButton } from '../../../shared/PixelButton';
+import { TableContainer } from '../../../shared/TableContainer';
+import { EmptyState } from '../../../shared/EmptyState';
 
 interface PowersSectionProps {
     data: any;
@@ -142,67 +144,49 @@ export default function PowersSection({
             theme="gray"
             headerAction={renderHeaderActions()}
         >
-            <div style={{
-                backgroundColor: 'white',
-                borderRadius: '12px',
-                boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-                overflow: 'hidden',
-                border: '1px solid #e5e7eb',
-            }}>
-                {selectedPowers.length > 0 ? (
-                    <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                        <thead style={{ backgroundColor: '#f9fafb', borderBottom: '2px solid #e5e7eb' }}>
-                            <tr>
-                                <th style={{ padding: '1rem', textAlign: 'left', color: '#374151' }}>Poder</th>
-                                <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Base / Rango / PCs</th>
-                                <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Base Hab.</th>
-                                <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Origen</th>
-                                <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {(() => {
-                                let thalsCount = 0;
-                                return selectedPowers.map((selection, idx) => {
-                                    const isThalsPower = isThals && selection.origin === 'Thals';
-                                    if (isThalsPower) thalsCount++;
+            {selectedPowers.length > 0 ? (
+                <TableContainer
+                    headers={['Poder', 'Base / Rango / PCs', 'Base Hab.', 'Origen', 'Acciones']}
+                    showTotal={false}
+                >
+                    {(() => {
+                        let thalsCount = 0;
+                        return selectedPowers.map((selection, idx) => {
+                            const isThalsPower = isThals && selection.origin === 'Thals';
+                            if (isThalsPower) thalsCount++;
 
-                                    const isThalsFree = isThalsPower && thalsCount === 1;
-                                    const isThalsDiscount = isThalsPower && thalsCount > 1;
+                            const isThalsFree = isThalsPower && thalsCount === 1;
+                            const isThalsDiscount = isThalsPower && thalsCount > 1;
 
-                                    return (
-                                        <PowerRow
-                                            key={`${selection.id}-${selection.origin}-${idx}`}
-                                            selection={selection}
-                                            data={data}
-                                            index={idx}
-                                            onUpdateRank={onUpdateRank}
-                                            onUpdateMod={onUpdateMod}
-                                            onUpdateSkillValue={onUpdateSkillValue}
-                                            onUpdateOption={onUpdateOption}
-                                            onUpdateCustomizations={onUpdateCustomizations}
-                                            onRemove={onRemove}
-                                            isParahumanoHybrid={isParahumanoHybrid}
-                                            isTesKhar={isTesKhar}
-                                            isAtlante={isAtlante}
-                                            isTroll={isTroll}
-                                            isSemidemonio={isSemidemonio}
-                                            isThalsFree={isThalsFree}
-                                            isThalsDiscount={isThalsDiscount}
-                                            isEnano={isEnano}
-                                            isGrifo={isGrifo}
-                                        />
-                                    );
-                                });
-                            })()}
-                        </tbody>
-                    </table>
-                ) : (
-                    <div style={{ textAlign: 'center', padding: '3rem', color: '#9ca3af', fontWeight: 'bold', fontStyle: 'italic' }}>
-                        No hay poderes seleccionados
-                    </div>
-                )}
-            </div>
+                            return (
+                                <PowerRow
+                                    key={`${selection.id}-${selection.origin}-${idx}`}
+                                    selection={selection}
+                                    data={data}
+                                    index={idx}
+                                    onUpdateRank={onUpdateRank}
+                                    onUpdateMod={onUpdateMod}
+                                    onUpdateSkillValue={onUpdateSkillValue}
+                                    onUpdateOption={onUpdateOption}
+                                    onUpdateCustomizations={onUpdateCustomizations}
+                                    onRemove={onRemove}
+                                    isParahumanoHybrid={isParahumanoHybrid}
+                                    isTesKhar={isTesKhar}
+                                    isAtlante={isAtlante}
+                                    isTroll={isTroll}
+                                    isSemidemonio={isSemidemonio}
+                                    isThalsFree={isThalsFree}
+                                    isThalsDiscount={isThalsDiscount}
+                                    isEnano={isEnano}
+                                    isGrifo={isGrifo}
+                                />
+                            );
+                        });
+                    })()}
+                </TableContainer>
+            ) : (
+                <EmptyState message="No hay poderes seleccionados" />
+            )}
         </SectionContainer>
     );
 }

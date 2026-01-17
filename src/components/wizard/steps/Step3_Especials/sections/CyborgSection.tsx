@@ -6,6 +6,8 @@ import {
 } from '../../../../../data/cyborgImplantConfigs';
 import { SectionContainer } from '../../../shared/SectionContainer';
 import CyborgImplantRow from './CyborgImplantRow';
+import { TableContainer } from '../../../shared/TableContainer';
+import { EmptyState } from '../../../shared/EmptyState';
 
 interface CyborgSectionProps {
     implants: CyborgImplant[];
@@ -48,52 +50,27 @@ export const CyborgSection: React.FC<CyborgSectionProps> = ({ implants = [], onC
             description="Gestiona los implantes y mejoras cibernéticas."
             theme="blue"
         >
-            <div style={{
-                backgroundColor: 'white',
-                borderRadius: '12px',
-                boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-                overflow: 'hidden',
-                border: '1px solid #e5e7eb',
-                marginBottom: '2rem'
-            }}>
-                {implants.length > 0 ? (
-                    <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                        <thead style={{ backgroundColor: '#f9fafb', borderBottom: '2px solid #e5e7eb' }}>
-                            <tr>
-                                <th style={{ padding: '1rem', textAlign: 'left', color: '#374151' }}>Nombre / Ubicación</th>
-                                <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Configuración</th>
-                                <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Fuerza</th>
-                                <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Coste</th>
-                                <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {implants.map((implant, index) => (
-                                <CyborgImplantRow
-                                    key={implant.id}
-                                    implant={implant}
-                                    index={index}
-                                    onRemove={handleDeleteImplant}
-                                />
-                            ))}
-                            {/* Footer Row for Totals */}
-                            <tr style={{ backgroundColor: '#f8fafc', borderTop: '2px solid #e2e8f0' }}>
-                                <td colSpan={3} style={{ padding: '1rem', textAlign: 'right', fontWeight: 'bold', color: '#475569' }}>
-                                    Total PCs Invertidos:
-                                </td>
-                                <td style={{ padding: '1rem', textAlign: 'center', fontWeight: '900', color: '#2563eb', fontSize: '1.1em' }}>
-                                    {totalCost} PC
-                                </td>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                ) : (
-                    <div style={{ textAlign: 'center', padding: '3rem', color: '#9ca3af', fontWeight: 'bold', fontStyle: 'italic' }}>
-                        No hay implantes instalados. Añade implantes usando el formulario de abajo.
-                    </div>
-                )}
-            </div>
+            {implants.length > 0 ? (
+                <TableContainer
+                    headers={['Nombre / Ubicación', 'Configuración', 'Fuerza', 'Coste', 'Acciones']}
+                    totalLabel="Total PCs Invertidos:"
+                    totalValue={`${totalCost} PC`}
+                    totalColSpan={3}
+                >
+                    {implants.map((implant, index) => (
+                        <CyborgImplantRow
+                            key={implant.id}
+                            implant={implant}
+                            index={index}
+                            onRemove={handleDeleteImplant}
+                        />
+                    ))}
+                </TableContainer>
+            ) : (
+                <EmptyState
+                    message="No hay implantes instalados. Añade implantes usando el formulario de abajo."
+                />
+            )}
 
             {/* Add New Implant Form */}
             <div className="add-implant-form" style={{
