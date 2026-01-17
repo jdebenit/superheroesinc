@@ -1,0 +1,36 @@
+.form-select-container {
+    /* Container has no specific styles, just groups elements */
+}
+
+.form-select-label {
+    display: block;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+}
+
+.form-select {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 2px solid #d1d5db;
+    border-radius: 8px;
+    background-color: white;
+    color: #1f2937;
+    cursor: pointer;
+    outline: none;
+}
+
+.form-select:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.form-select-description {
+    margin-top: 0.75rem;
+    font-size: 0.875rem;
+    color: #6b7280;
+    font-style: italic;
+    margin-bottom: 0;
+}

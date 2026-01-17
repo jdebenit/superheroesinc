@@ -1,4 +1,5 @@
 import React from 'react';
+import './FormSelect.css';
 
 export interface FormSelectOption {
     id: string;
@@ -7,7 +8,7 @@ export interface FormSelectOption {
     description?: string;
 }
 
-interface FormSelectProps {
+export interface FormSelectProps {
     label: string;
     value: string;
     onChange: (value: string) => void;
@@ -23,7 +24,7 @@ export const FormSelect: React.FC<FormSelectProps> = ({
     value,
     onChange,
     options,
-    placeholder = '-- Seleccionar --',
+    placeholder = '-- Select --',
     labelColor = '#1f2937',
     showDescription = true,
     showCostInOption = true
@@ -31,31 +32,17 @@ export const FormSelect: React.FC<FormSelectProps> = ({
     const selectedOption = options.find(opt => opt.id === value);
 
     return (
-        <div>
-            <label style={{
-                display: 'block',
-                fontSize: '1rem',
-                fontWeight: 'bold',
-                color: labelColor,
-                marginBottom: '0.75rem',
-                textTransform: 'uppercase'
-            }}>
+        <div className="form-select-container">
+            <label
+                className="form-select-label"
+                style={{ color: labelColor }}
+            >
                 {label}
             </label>
             <select
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
-                style={{
-                    width: '100%',
-                    padding: '0.75rem',
-                    fontSize: '1rem',
-                    border: '2px solid #d1d5db',
-                    borderRadius: '8px',
-                    backgroundColor: 'white',
-                    color: '#1f2937',
-                    cursor: 'pointer',
-                    outline: 'none'
-                }}
+                className="form-select"
             >
                 <option value="">{placeholder}</option>
                 {options.map(option => (
@@ -68,13 +55,7 @@ export const FormSelect: React.FC<FormSelectProps> = ({
                 ))}
             </select>
             {showDescription && selectedOption?.description && (
-                <p style={{
-                    marginTop: '0.75rem',
-                    fontSize: '0.875rem',
-                    color: '#6b7280',
-                    fontStyle: 'italic',
-                    margin: '0.5rem 0 0 0'
-                }}>
+                <p className="form-select-description">
                     {selectedOption.description}
                 </p>
             )}

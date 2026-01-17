@@ -1,17 +1,26 @@
-/* WizardButton Base Styles */
-.wizard-btn {
+/* WizardButton - Overrides for PixelButton base styles */
+
+/* Reset pixel-button specific styles that we don't want */
+.wizard-btn.pixel-button {
     padding: 0.5rem 1rem;
-    border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
     border: none;
-    transition: all 0.2s;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
+    border-radius: 6px;
+    box-shadow: none;
+    text-transform: none;
 }
 
+.wizard-btn.pixel-button:hover {
+    border-color: transparent;
+    transform: none;
+    box-shadow: none;
+}
+
+.wizard-btn.pixel-button:active {
+    transform: none;
+    box-shadow: none;
+}
+
+/* Full width */
 .wizard-btn-full {
     width: 100%;
 }

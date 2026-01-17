@@ -1,0 +1,16 @@
+.empty-state {
+    text-align: center;
+    padding: 3rem;
+    color: #9ca3af;
+    font-weight: bold;
+    font-style: italic;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.empty-state-icon {
+    font-size: 2rem;
+    opacity: 0.5;
+}

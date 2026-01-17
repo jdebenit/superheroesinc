@@ -1,4 +1,5 @@
 import React from 'react';
+import './TableContainer.css';
 
 interface TableContainerProps {
     children: React.ReactNode;
@@ -23,41 +24,21 @@ export const TableContainer: React.FC<TableContainerProps> = ({
 
     if (!hasContent && emptyMessage) {
         return (
-            <div style={{
-                textAlign: 'center',
-                padding: '3rem',
-                color: '#9ca3af',
-                fontWeight: 'bold',
-                fontStyle: 'italic'
-            }}>
+            <div className="table-empty-state">
                 {emptyMessage}
             </div>
         );
     }
 
     return (
-        <div style={{
-            backgroundColor: 'white',
-            borderRadius: '12px',
-            boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-            overflow: 'hidden',
-            border: '1px solid #e5e7eb',
-            marginBottom: '2rem'
-        }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                <thead style={{
-                    backgroundColor: '#f9fafb',
-                    borderBottom: '2px solid #e5e7eb'
-                }}>
+        <div className="table-container">
+            <table className="table">
+                <thead className="table-header">
                     <tr>
                         {headers.map((header, index) => (
                             <th
                                 key={index}
-                                style={{
-                                    padding: '1rem',
-                                    textAlign: index === 0 ? 'left' : 'center',
-                                    color: index === 0 ? '#374151' : '#6b7280'
-                                }}
+                                className={index === 0 ? 'table-header-cell-first' : 'table-header-cell'}
                             >
                                 {header}
                             </th>
@@ -69,28 +50,14 @@ export const TableContainer: React.FC<TableContainerProps> = ({
 
                     {/* Total Row */}
                     {showTotal && totalLabel && totalValue !== undefined && (
-                        <tr style={{
-                            backgroundColor: '#f8fafc',
-                            borderTop: '2px solid #e2e8f0'
-                        }}>
+                        <tr className="table-footer-row">
                             <td
                                 colSpan={totalColSpan}
-                                style={{
-                                    padding: '1rem',
-                                    textAlign: 'right',
-                                    fontWeight: 'bold',
-                                    color: '#475569'
-                                }}
+                                className="table-footer-label"
                             >
                                 {totalLabel}
                             </td>
-                            <td style={{
-                                padding: '1rem',
-                                textAlign: 'center',
-                                fontWeight: '900',
-                                color: '#4f46e5',
-                                fontSize: '1.1em'
-                            }}>
+                            <td className="table-footer-value">
                                 {totalValue}
                             </td>
                             <td></td>

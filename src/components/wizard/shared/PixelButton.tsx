@@ -1,6 +1,6 @@
 import React, { type ButtonHTMLAttributes, type ReactNode } from 'react';
 
-interface PixelButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface PixelButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     children: ReactNode;
     variant?: 'primary' | 'secondary' | 'danger' | 'success' | 'warning' | 'info' | 'custom';
     customClass?: string;

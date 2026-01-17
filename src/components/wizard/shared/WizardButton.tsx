@@ -1,7 +1,8 @@
 import React from 'react';
+import { PixelButton, type PixelButtonProps } from './PixelButton';
 import './WizardButton.css';
 
-interface WizardButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface WizardButtonProps extends Omit<PixelButtonProps, 'variant' | 'customClass'> {
     variant?: 'primary' | 'secondary' | 'danger' | 'ghost';
     fullWidth?: boolean;
 }
@@ -13,7 +14,7 @@ export const WizardButton: React.FC<WizardButtonProps> = ({
     className = '',
     ...props
 }) => {
-    const classes = [
+    const wizardClasses = [
         'wizard-btn',
         `wizard-btn-${variant}`,
         fullWidth ? 'wizard-btn-full' : '',
@@ -21,9 +22,13 @@ export const WizardButton: React.FC<WizardButtonProps> = ({
     ].filter(Boolean).join(' ');
 
     return (
-        <button className={classes} {...props}>
+        <PixelButton
+            variant="custom"
+            customClass={wizardClasses}
+            {...props}
+        >
             {children}
-        </button>
+        </PixelButton>
     );
 };
 
