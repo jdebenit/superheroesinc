@@ -2,6 +2,7 @@ import React from 'react';
 import { SPELLS, type Spell } from '../../../../../data/spells';
 import { calculateEM, hasSubtype } from '../utils';
 import type { SelectedPower, SelectedSpell } from '../types';
+import { DeleteRowButton } from '../../../shared/DeleteRowButton';
 
 interface MagicSectionProps {
     data: any;
@@ -193,12 +194,7 @@ export default function MagicSection({
                                             <span style={{ fontWeight: 'bold', color: '#0c4a6e', marginRight: '0.5rem' }}>{getRollLabel(rollId)}</span>
                                             <span style={{ fontSize: '0.8rem', color: '#0284c7' }}>({getRollCost(rollId)})</span>
                                         </div>
-                                        <button
-                                            onClick={() => onRemoveMagicTableRoll(idx)}
-                                            style={{ color: '#ef4444', background: 'none', border: 'none', cursor: 'pointer', fontWeight: 'bold' }}
-                                        >
-                                            ✕
-                                        </button>
+                                        <DeleteRowButton onDelete={() => onRemoveMagicTableRoll(idx)} title="Eliminar" />
                                     </div>
                                 ))}
                             </div>
@@ -375,30 +371,7 @@ export default function MagicSection({
                                                 {s.requirements !== "No especificado" ? s.requirements : <span style={{ color: '#9ca3af', fontStyle: 'italic' }}>-</span>}
                                             </td>
                                             <td style={{ padding: '0.75rem', textAlign: 'center' }}>
-                                                <button
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        onRemoveSpell(idx);
-                                                    }}
-                                                    style={{
-                                                        color: '#ef4444',
-                                                        padding: '8px',
-                                                        borderRadius: '9999px',
-                                                        border: 'none',
-                                                        background: 'transparent',
-                                                        cursor: 'pointer',
-                                                        display: 'inline-flex',
-                                                        alignItems: 'center',
-                                                        justifyContent: 'center'
-                                                    }}
-                                                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#fef2f2'}
-                                                    onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
-                                                    title="Olvidar hechizo"
-                                                >
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-                                                        <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                                                    </svg>
-                                                </button>
+                                                <DeleteRowButton onDelete={() => onRemoveSpell(idx)} title="Eliminar hechizo" />
                                             </td>
                                         </tr>
                                     );
