@@ -11,7 +11,7 @@ updatedDate: 2026-01-16
 
 El Mercado del Pasaje está en Europa, según dicen los que quieren zanjar la conversación rápido. Es una forma cómoda de señalar algo sin tener que pensarlo demasiado. Es una realidad periférica de bolsillo, nacida en esos huecos que deja la realidad cuando nadie la mira con atención. No es un lugar al que se llegue por error, aunque muchos juren después que fue pura casualidad.
 
-Antes de ser mercado ya existía como una grieta mal cerrada entre realidades. Así se rumorea en la cafetería de la [FDM](/organizaciones/fundacion-divina-mundial/). El origen real no parece ser una creación deliberada.
+Antes de ser mercado ya existía como una grieta mal cerrada entre realidades. Así se rumorea en la cafetería de la [FDM](/lore/organizaciones/fundacion-divina-mundial/). El origen real no parece ser una creación deliberada.
 
 Hermes del Olimpo fue el primero en encontrar aquel pliegue. Guardián de los mensajes cifrados y del conocimiento que no debe circular libremente, buscaba un santuario. Un espacio discreto, fuera del tránsito, donde proteger lo que no debía exponerse al ruido del mundo. Hermes pensaba en silencio, en sombra, en caminos que solo se recorren cuando se sabe escuchar. Levantó los primeros senderos con esa idea en mente.
 
@@ -19,11 +19,11 @@ Mercurio de Capitol llegó después. Y llegó con otra mirada. Donde el olímpic
 
 De esa tensión nació el Mercado del Pasaje. No como lo quiso uno ni como lo soñó el otro. Algo intermedio, incómodo y fértil. Un sitio donde el conocimiento circula, pero nunca del todo. Donde el comercio existe, pero siempre bajo condiciones extrañas. Un pulso constante entre el hermetismo y la moneda.
 
-Con el tiempo, el mercado empezó a atraer a quienes no encajaban en ningún sitio. Artesanos imposibles, intermediarios, traficantes de favores. Y refugiados. Cuando [Avalon](/localizaciones/avalon/) endureció sus políticas y comenzó a expulsar a ciudadanos disidentes, muchos no buscaron otro reino ni otro panteón. Bajaron aquí. El Mercado no prometía justicia, pero tampoco fingía tenerla como los grandes poderes de arriba.
+Con el tiempo, el mercado empezó a atraer a quienes no encajaban en ningún sitio. Artesanos imposibles, intermediarios, traficantes de favores. Y refugiados. Cuando [Avalon](/lore/localizaciones/avalon/) endureció sus políticas y comenzó a expulsar a ciudadanos disidentes, muchos no buscaron otro reino ni otro panteón. Bajaron aquí. El Mercado no prometía justicia, pero tampoco fingía tenerla como los grandes poderes de arriba.
 
-Hoy se sabe que existen varios accesos, aunque ninguno es permanente. [La Fundación Divina Mundial](/organizaciones/fundacion-divina-mundial/) habla de entradas estables, pero siempre añade notas de advertencia. Los usuarios del mundo mágico lo confirman a su manera, cada uno con su historia.
+Hoy se sabe que existen varios accesos, aunque ninguno es permanente. [La Fundación Divina Mundial](/lore/organizaciones/fundacion-divina-mundial/) habla de entradas estables, pero siempre añade notas de advertencia. Los usuarios del mundo mágico lo confirman a su manera, cada uno con su historia.
 
-En [Valladolid](/localizaciones/valladolid/), el acceso más conocido está en el Pasaje Gutiérrez. En el centro se alza una estatua que el turista fotografía sin pensar dos veces. Para la mayoría no es más que decoración urbana. Para quienes conocen el símbolo, es un sello. El gesto se invoca, no se graba. Y cuando se completa, la base de piedra se abre y deja ver una escalera que no estaba ahí un segundo antes. Para el resto del mundo, nada cambia. La gente sigue caminando alrededor.
+En [Valladolid](/lore/localizaciones/valladolid/), el acceso más conocido está en el Pasaje Gutiérrez. En el centro se alza una estatua que el turista fotografía sin pensar dos veces. Para la mayoría no es más que decoración urbana. Para quienes conocen el símbolo, es un sello. El gesto se invoca, no se graba. Y cuando se completa, la base de piedra se abre y deja ver una escalera que no estaba ahí un segundo antes. Para el resto del mundo, nada cambia. La gente sigue caminando alrededor.
 
 Y en Albacete, el Pasaje de Lodares guarda otra entrada, más sobria, menos evidente. No hay estatua central ni nada que llame la atención. Los iniciados dicen que el descenso se abre del mismo modo. La Fundación sospecha que estos accesos son válvulas de escape de la presión constante entre Hermes y Mercurio.
 
