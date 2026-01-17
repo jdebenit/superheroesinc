@@ -242,7 +242,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
             </WizardSection>
 
             {/* COMBAT STATS SECTION */}
-            <WizardSection title="⚔️ Estadísticas de Combate" color="#dc2626">
+            <WizardSection title="Estadísticas de Combate">
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
                     {data.combatstats?.map((stat, index) => {
                         const [label, val] = stat.split(': ');
@@ -252,7 +252,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
             </WizardSection>
 
             {/* OTHER STATS SECTION */}
-            <WizardSection title="🧠 Otras Estadísticas" color="#7c3aed">
+            <WizardSection title="Otras Estadísticas">
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
                     {data.otherstats?.map((stat, index) => {
                         const [label, val] = stat.split(': ');
@@ -263,8 +263,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
 
             {/* WEAPONS SECTION */}
             <WizardSection
-                title="⚔️ Armas"
-                color="#b91c1c"
+                title="Armas"
                 rightContent={
                     <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', padding: '0.25rem 0.5rem', borderRadius: '0.5rem' }}>
                         <CostBadge
@@ -346,8 +345,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
 
             {/* EQUIPMENT SECTION (New) */}
             <WizardSection
-                title="🎒 Equipo"
-                color="#059669"
+                title="Equipo"
                 rightContent={
                     <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', padding: '0.25rem 0.5rem', borderRadius: '0.5rem' }}>
                         <CostBadge
@@ -394,10 +392,74 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                 />
             </WizardSection>
 
+            {/* VEHICLES SECTION */}
+            <WizardSection
+                title="Vehículos"
+                rightContent={
+                    <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', padding: '0.25rem 0.5rem', borderRadius: '0.5rem' }}>
+                        <CostBadge
+                            cost={data.vehicles?.items?.reduce((acc: number, item: any) => acc + (parseInt(item.cost) || 0), 0) || 0}
+                            label="PC"
+                            variant="default"
+                            className="text-white"
+                        />
+                    </div>
+                }
+            >
+                <DynamicList
+                    items={data.vehicles?.items || []}
+                    onAdd={addVehicle}
+                    onRemove={removeVehicle}
+                    addButtonLabel="Añadir Vehículo"
+                    color="#0891b2"
+                    renderItem={(item, index) => (
+                        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr 80px', gap: '0.75rem', alignItems: 'start' }}>
+                            <WizardField
+                                label="Nombre"
+                                value={item.name}
+                                onChange={(val) => updateVehicle(index, 'name', val)}
+                                style={{ marginBottom: 0 }}
+                            />
+                            <WizardField
+                                label="Blindaje"
+                                value={item.armor || ''}
+                                onChange={(val) => updateVehicle(index, 'armor', val)}
+                                style={{ marginBottom: 0 }}
+                            />
+                            <WizardField
+                                label="PE"
+                                value={item.pe || ''}
+                                onChange={(val) => updateVehicle(index, 'pe', val)}
+                                style={{ marginBottom: 0 }}
+                            />
+                            <WizardField
+                                label="Velocidad"
+                                value={item.speed || ''}
+                                onChange={(val) => updateVehicle(index, 'speed', val)}
+                                style={{ marginBottom: 0 }}
+                            />
+                            <WizardField
+                                label="Alcance/Autonomía"
+                                value={item.range || ''}
+                                onChange={(val) => updateVehicle(index, 'range', val)}
+                                style={{ marginBottom: 0 }}
+                            />
+                            <WizardField
+                                type="number"
+                                label="Coste"
+                                min="0"
+                                value={item.cost || 0}
+                                onChange={(val) => updateVehicle(index, 'cost', Math.max(0, parseInt(val) || 0).toString())}
+                                style={{ marginBottom: 0 }}
+                            />
+                        </div>
+                    )}
+                />
+            </WizardSection>
+
             {/* ARTIFACTS SECTION */}
             <WizardSection
-                title="✨ Artefactos"
-                color="#7c3aed"
+                title="Artefactos"
                 rightContent={
                     <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', padding: '0.25rem 0.5rem', borderRadius: '0.5rem' }}>
                         <CostBadge
@@ -470,7 +532,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
             </WizardSection>
 
             {/* MAGIC OBJECTS SECTION */}
-            <WizardSection title="🔮 Objetos Mágicos" color="#9333ea">
+            <WizardSection title="Objetos Mágicos">
                 <DynamicList
                     items={data.magicObjects?.items || []}
                     onAdd={addMagicObject}
@@ -518,73 +580,6 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                     )}
                 />
             </WizardSection>
-
-            {/* VEHICLES SECTION */}
-            <WizardSection
-                title="🚗 Vehículos"
-                color="#0891b2"
-                rightContent={
-                    <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', padding: '0.25rem 0.5rem', borderRadius: '0.5rem' }}>
-                        <CostBadge
-                            cost={data.vehicles?.items?.reduce((acc: number, item: any) => acc + (parseInt(item.cost) || 0), 0) || 0}
-                            label="PC"
-                            variant="default"
-                            className="text-white"
-                        />
-                    </div>
-                }
-            >
-                <DynamicList
-                    items={data.vehicles?.items || []}
-                    onAdd={addVehicle}
-                    onRemove={removeVehicle}
-                    addButtonLabel="Añadir Vehículo"
-                    color="#0891b2"
-                    renderItem={(item, index) => (
-                        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr 80px', gap: '0.75rem', alignItems: 'start' }}>
-                            <WizardField
-                                label="Nombre"
-                                value={item.name}
-                                onChange={(val) => updateVehicle(index, 'name', val)}
-                                style={{ marginBottom: 0 }}
-                            />
-                            <WizardField
-                                label="Blindaje"
-                                value={item.armor || ''}
-                                onChange={(val) => updateVehicle(index, 'armor', val)}
-                                style={{ marginBottom: 0 }}
-                            />
-                            <WizardField
-                                label="PE"
-                                value={item.pe || ''}
-                                onChange={(val) => updateVehicle(index, 'pe', val)}
-                                style={{ marginBottom: 0 }}
-                            />
-                            <WizardField
-                                label="Velocidad"
-                                value={item.speed || ''}
-                                onChange={(val) => updateVehicle(index, 'speed', val)}
-                                style={{ marginBottom: 0 }}
-                            />
-                            <WizardField
-                                label="Alcance/Autonomía"
-                                value={item.range || ''}
-                                onChange={(val) => updateVehicle(index, 'range', val)}
-                                style={{ marginBottom: 0 }}
-                            />
-                            <WizardField
-                                type="number"
-                                label="Coste"
-                                min="0"
-                                value={item.cost || 0}
-                                onChange={(val) => updateVehicle(index, 'cost', Math.max(0, parseInt(val) || 0).toString())}
-                                style={{ marginBottom: 0 }}
-                            />
-                        </div>
-                    )}
-                />
-            </WizardSection>
-
         </div>
     );
 }
