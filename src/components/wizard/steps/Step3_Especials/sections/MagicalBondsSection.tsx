@@ -1,5 +1,6 @@
 import React from 'react';
 import { MAGICAL_BONDS } from '../../../../../data/magicalBonds';
+import { DeleteRowButton } from '../../../shared/DeleteRowButton';
 
 interface MagicalBondsSectionProps {
     data: any;
@@ -61,31 +62,13 @@ export default function MagicalBondsSection({
                                                 {bond.description}
                                             </td>
                                             <td style={{ padding: '1rem', textAlign: 'center', verticalAlign: 'top' }}>
-                                                <button
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
+                                                <DeleteRowButton
+                                                    onDelete={() => {
                                                         const current = data.magicalBonds || [];
                                                         onChange({ ...data, magicalBonds: current.filter((id: string) => id !== bondId) });
                                                     }}
-                                                    style={{
-                                                        color: '#ef4444',
-                                                        padding: '8px',
-                                                        borderRadius: '9999px',
-                                                        border: 'none',
-                                                        background: 'transparent',
-                                                        cursor: 'pointer',
-                                                        display: 'inline-flex',
-                                                        alignItems: 'center',
-                                                        justifyContent: 'center'
-                                                    }}
-                                                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#fef2f2'}
-                                                    onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
                                                     title="Eliminar vinculación"
-                                                >
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-                                                        <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                                                    </svg>
-                                                </button>
+                                                />
                                             </td>
                                         </tr>
                                     );

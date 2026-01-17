@@ -1,4 +1,5 @@
 import React from 'react';
+import { DeleteRowButton } from '../../shared/DeleteRowButton';
 
 interface SkillRowProps {
     // Content
@@ -149,22 +150,7 @@ export const SkillRow: React.FC<SkillRowProps> = ({
                     </td>
                     <td style={cellStyle}>
                         {!isFree && !isRequired && onRemove && (
-                            <button
-                                onClick={onRemove}
-                                style={{
-                                    padding: '0.25rem 0.5rem',
-                                    backgroundColor: '#fee2e2',
-                                    color: '#ef4444',
-                                    border: 'none',
-                                    borderRadius: '4px',
-                                    cursor: 'pointer',
-                                    fontWeight: 'bold',
-                                    fontSize: '0.875rem'
-                                }}
-                                title="Eliminar"
-                            >
-                                ✕
-                            </button>
+                            <DeleteRowButton onDelete={onRemove} title="Eliminar" />
                         )}
                         {isFree && <span style={{ fontSize: '1.25rem', color: '#10b981' }}>✓</span>}
                         {isRequired && <span style={{ fontSize: '1.25rem', color: '#f59e0b' }}>✓</span>}
