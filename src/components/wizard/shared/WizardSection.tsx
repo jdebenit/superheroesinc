@@ -4,7 +4,7 @@ import './WizardSection.css';
 interface WizardSectionProps {
     title: string;
     children: React.ReactNode;
-    description?: string;
+    description?: React.ReactNode;
     icon?: string;
 }
 

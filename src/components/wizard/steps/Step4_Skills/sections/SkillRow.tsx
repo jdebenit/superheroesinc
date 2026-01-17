@@ -1,5 +1,5 @@
 import React from 'react';
-import { DeleteRowButton } from './DeleteRowButton';
+import { DeleteRowButton } from '../../../shared/DeleteRowButton';
 
 interface SkillRowProps {
     // Content
