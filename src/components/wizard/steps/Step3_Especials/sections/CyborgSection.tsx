@@ -4,6 +4,8 @@ import {
     CYBORG_IMPLANT_STRENGTHS,
     type CyborgImplant
 } from '../../../../../data/cyborgImplantConfigs';
+import { SectionContainer } from '../../../shared/SectionContainer';
+import CyborgImplantRow from './CyborgImplantRow';
 
 interface CyborgSectionProps {
     implants: CyborgImplant[];
@@ -41,78 +43,58 @@ export const CyborgSection: React.FC<CyborgSectionProps> = ({ implants = [], onC
     }, 0);
 
     return (
-        <div className="cyborg-section">
-            <div className="section-header" style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                borderBottom: '2px solid #3b82f6',
-                paddingBottom: '0.5rem',
-                marginBottom: '1rem'
+        <SectionContainer
+            title="Implantes Cibernéticos"
+            description="Gestiona los implantes y mejoras cibernéticas."
+            theme="blue"
+        >
+            <div style={{
+                backgroundColor: 'white',
+                borderRadius: '12px',
+                boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                overflow: 'hidden',
+                border: '1px solid #e5e7eb',
+                marginBottom: '2rem'
             }}>
-                <h3 style={{ margin: 0, color: '#1e40af' }}>Implantes Cibernéticos</h3>
-                <span className="total-cost" style={{
-                    background: '#3b82f6',
-                    color: 'white',
-                    padding: '0.25rem 0.75rem',
-                    borderRadius: '999px',
-                    fontWeight: 'bold',
-                    fontSize: '0.9rem'
-                }}>
-                    Total: {totalCost} PC
-                </span>
+                {implants.length > 0 ? (
+                    <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                        <thead style={{ backgroundColor: '#f9fafb', borderBottom: '2px solid #e5e7eb' }}>
+                            <tr>
+                                <th style={{ padding: '1rem', textAlign: 'left', color: '#374151' }}>Nombre / Ubicación</th>
+                                <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Configuración</th>
+                                <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Fuerza</th>
+                                <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Coste</th>
+                                <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {implants.map((implant, index) => (
+                                <CyborgImplantRow
+                                    key={implant.id}
+                                    implant={implant}
+                                    index={index}
+                                    onRemove={handleDeleteImplant}
+                                />
+                            ))}
+                            {/* Footer Row for Totals */}
+                            <tr style={{ backgroundColor: '#f8fafc', borderTop: '2px solid #e2e8f0' }}>
+                                <td colSpan={3} style={{ padding: '1rem', textAlign: 'right', fontWeight: 'bold', color: '#475569' }}>
+                                    Total PCs Implantes:
+                                </td>
+                                <td style={{ padding: '1rem', textAlign: 'center', fontWeight: '900', color: '#2563eb', fontSize: '1.1em' }}>
+                                    {totalCost} PC
+                                </td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                ) : (
+                    <div className="p-12 text-center text-gray-400 font-bold italic">
+                        No hay implantes instalados.<br />
+                        <span className="text-sm font-normal">Añade implantes usando el formulario de abajo.</span>
+                    </div>
+                )}
             </div>
-
-            {/* List of existing implants */}
-            {implants.length > 0 && (
-                <div className="implants-list" style={{ display: 'grid', gap: '1rem', marginBottom: '2rem' }}>
-                    {implants.map(implant => {
-                        const stat = CYBORG_IMPLANT_STATS.find(s => s.id === implant.statConfigId);
-                        const str = CYBORG_IMPLANT_STRENGTHS.find(s => s.id === implant.strengthConfigId);
-                        const cost = (stat?.pcCost || 0) + (str?.pcCost || 0);
-
-                        return (
-                            <div key={implant.id} className="implant-card" style={{
-                                backgroundColor: 'white',
-                                border: '1px solid #e5e7eb',
-                                borderRadius: '8px',
-                                padding: '1rem',
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                alignItems: 'center',
-                                boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
-                            }}>
-                                <div>
-                                    <div style={{ fontWeight: 'bold', color: '#374151', fontSize: '1.1rem' }}>{implant.name}</div>
-                                    <div style={{ fontSize: '0.9rem', color: '#6b7280', marginTop: '0.25rem' }}>
-                                        {stat && `${stat.pvBonus} PV, DA ${stat.daFisico}`}
-                                        {str && str.pcCost > 0 && ` • FUE ${str.fuerza}`}
-                                        {str && str.pcCost === 0 && ` • FUE Base (${str.fuerza})`}
-                                    </div>
-                                </div>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                                    <span style={{ fontWeight: 'bold', color: '#2563eb' }}>{cost} PC</span>
-                                    <button
-                                        onClick={() => handleDeleteImplant(implant.id)}
-                                        style={{
-                                            background: '#fee2e2',
-                                            color: '#ef4444',
-                                            border: 'none',
-                                            borderRadius: '6px',
-                                            padding: '0.5rem',
-                                            cursor: 'pointer',
-                                            transition: 'background 0.2s'
-                                        }}
-                                        aria-label="Eliminar implante"
-                                    >
-                                        🗑️
-                                    </button>
-                                </div>
-                            </div>
-                        );
-                    })}
-                </div>
-            )}
 
             {/* Add New Implant Form */}
             <div className="add-implant-form" style={{
@@ -230,6 +212,6 @@ export const CyborgSection: React.FC<CyborgSectionProps> = ({ implants = [], onC
                     Añadir Implante
                 </button>
             </div>
-        </div>
+        </SectionContainer>
     );
 };

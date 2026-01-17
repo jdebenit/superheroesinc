@@ -104,15 +104,14 @@ export default function TechModuleRow({
                     onClick={() => onRemove(module.id)}
                     style={{
                         color: '#ef4444',
-                        padding: '0.5rem',
+                        padding: '8px',
                         borderRadius: '9999px',
                         border: 'none',
                         background: 'transparent',
                         cursor: 'pointer',
                         display: 'inline-flex',
                         alignItems: 'center',
-                        justifyContent: 'center',
-                        transition: 'background-color 0.2s'
+                        justifyContent: 'center'
                     }}
                     onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#fef2f2'}
                     onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
