@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import SelectionModal from '../../modals/SelectionModal';
-import { SEQUELS } from '../../../../../../data/sequels';
+import SelectionModal from '../steps/Step3_Especials/modals/SelectionModal';
+import { SEQUELS } from '../../../data/sequels';
+import { DeleteRowButton } from './DeleteRowButton';
 
 interface SelectedSequel {
     id: string;
@@ -144,21 +145,10 @@ export default function SequelsSelector({
                                             />
                                         </div>
                                     </div>
-                                    <button
-                                        onClick={() => handleRemoveSequel(s.id)}
-                                        style={{
-                                            padding: '0.25rem 0.5rem',
-                                            backgroundColor: '#dc2626',
-                                            color: 'white',
-                                            border: 'none',
-                                            borderRadius: '4px',
-                                            cursor: 'pointer',
-                                            fontSize: '0.75rem',
-                                            marginLeft: '0.5rem'
-                                        }}
-                                    >
-                                        ✕
-                                    </button>
+                                    <DeleteRowButton
+                                        onDelete={() => handleRemoveSequel(s.id)}
+                                        title="Eliminar secuela"
+                                    />
                                 </div>
                             </div>
                         );
