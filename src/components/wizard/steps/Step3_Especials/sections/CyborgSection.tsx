@@ -89,9 +89,8 @@ export const CyborgSection: React.FC<CyborgSectionProps> = ({ implants = [], onC
                         </tbody>
                     </table>
                 ) : (
-                    <div className="p-12 text-center text-gray-400 font-bold italic">
-                        No hay implantes instalados.<br />
-                        <span className="text-sm font-normal">Añade implantes usando el formulario de abajo.</span>
+                    <div style={{ textAlign: 'center', padding: '3rem', color: '#9ca3af', fontWeight: 'bold', fontStyle: 'italic' }}>
+                        No hay implantes instalados. Añade implantes usando el formulario de abajo.
                     </div>
                 )}
             </div>

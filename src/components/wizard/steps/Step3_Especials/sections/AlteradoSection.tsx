@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import SequelsSelector from './shared/SequelsSelector';
+import SequelsSelector from '../../../shared/SequelsSelector';
 import { SEQUELS } from '../../../../../data/sequels';
 import { OriginOptionsContainer } from '../../../shared/OriginOptionsContainer';
 

@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { OriginOptionsContainer } from '../../../shared/OriginOptionsContainer';
 
 export const ENTE_FORMS = [
     { id: 'humanoid', label: 'Humanoide', cost: 1, description: 'Aspecto humanoide en el plano' },
@@ -59,37 +60,12 @@ export default function EnteSection({ enteParams, onChange }: EnteSectionProps) 
     }, [enteParams]);
 
     return (
-        <div style={{
-            backgroundColor: '#faf5ff', // purple-50
-            border: '2px solid #6b21a8', // purple-800
-            borderRadius: '0.75rem',
-            overflow: 'hidden',
-            marginBottom: '2rem'
-        }}>
-            <div style={{
-                padding: '1rem',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between'
-            }}>
-                <h3 style={{
-                    fontSize: '1rem',
-                    fontWeight: '900',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05em'
-                }}>Opciones de Origen: Ente</h3>
-                <div style={{
-                    backgroundColor: '#7e22ce',
-                    color: 'white',
-                    padding: '0.5rem 1rem',
-                    borderRadius: '6px',
-                    fontWeight: 'bold',
-                    fontSize: '0.875rem'
-                }}>
-                    {totalCost > 0 ? '+' : ''}{totalCost} PC
-                </div>
-            </div>
-            <div style={{ padding: '1rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+        <OriginOptionsContainer
+            title="Opciones de Origen: Ente"
+            cost={totalCost}
+            themeColor="purple"
+        >
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                 {/* Form Type Selection */}
                 <div>
                     <label style={{
@@ -164,6 +140,7 @@ export default function EnteSection({ enteParams, onChange }: EnteSectionProps) 
                     </select>
                 </div>
             </div>
-        </div>
+        </OriginOptionsContainer>
     );
 }
+

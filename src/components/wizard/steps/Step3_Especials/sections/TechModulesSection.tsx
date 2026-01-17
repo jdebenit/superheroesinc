@@ -77,12 +77,11 @@ export default function TechModulesSection({
                         </tbody>
                     </table>
                 ) : (
-                    <div className="p-12 text-center text-gray-400 font-bold italic">
-                        No hay módulos instalados.<br />
-                        <span className="text-sm font-normal">Pulsa en "Seleccionar Módulos" para añadir mejoras.</span>
+                    <div style={{ textAlign: 'center', padding: '3rem', color: '#9ca3af', fontWeight: 'bold', fontStyle: 'italic' }}>
+                        No hay modulos instalados. Pulsa en "Seleccionar Módulos" para añadir mejoras.
                     </div>
                 )}
             </div>
-        </SectionContainer>
+        </SectionContainer >
     );
 }
