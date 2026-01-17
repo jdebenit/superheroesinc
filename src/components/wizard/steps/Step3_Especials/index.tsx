@@ -37,6 +37,7 @@ import TechnologicalSection from './sections/TechnologicalSection';
 import ExoskeletonArmorSection from './sections/ExoskeletonArmorSection';
 import TechnoSuitStrengthSection from './sections/TechnoSuitStrengthSection';
 import { CyborgSection } from './sections/CyborgSection';
+import ParahumanoSection from './sections/ParahumanoSection';
 import type { CyborgImplant } from '../../../../data/cyborgImplantConfigs';
 
 // Modal Components
@@ -56,7 +57,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     const isTecnologico = hasOrigin(data, 'Tecnológico');
     // Hybrid logic
     const isParahumano = hasOrigin(data, 'Parahumano');
-    const isParahumanoHybrid = isParahumano && (data.isParahumanoHybrid === true); // Defined early for useEffect
+    const isParahumanoHybrid = isParahumano && (data.parahumanoParams?.isHybridWithHuman === true); // Defined early for useEffect
 
     // Powers are stored as objects { id, origin, rank, powerMod?, skillValue? }
     const selectedPowers: SelectedPower[] = useMemo(() => {
@@ -547,24 +548,12 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                 </div>
             )}
 
-            {/* Parahumano Hybrid Checkbox */}
+            {/* Parahumano Section */}
             {isParahumano && (
-                <div className="bg-yellow-50 border-2 border-yellow-400 p-4 rounded-lg shadow-md mb-6">
-                    <label className="flex items-center space-x-3 cursor-pointer">
-                        <input
-                            type="checkbox"
-                            checked={data.isParahumanoHybrid || false}
-                            onChange={(e) => onChange({ ...data, isParahumanoHybrid: e.target.checked })}
-                            className="form-checkbox h-5 w-5 text-yellow-600 rounded focus:ring-yellow-500 border-gray-300 transition duration-150 ease-in-out"
-                        />
-                        <span className="text-lg font-bold text-gray-800">
-                            Híbrido con Humano (Acceso a poderes de Alterado)
-                        </span>
-                    </label>
-                    <p className="text-sm text-gray-600 mt-1 ml-8">
-                        Si marcas esta opción, tendrás acceso a la lista de poderes de Alterado con un coste adicional de <strong>+3 PCs</strong> al coste base de cada poder seleccionado.
-                    </p>
-                </div>
+                <ParahumanoSection
+                    parahumanoParams={data.parahumanoParams || { isHybridWithHuman: false }}
+                    onChange={onChange}
+                />
             )}
 
             {/* ENTE SECTION */}

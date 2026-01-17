@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import SequelsSelector from './shared/SequelsSelector';
 import { SEQUELS } from '../../../../../data/sequels';
+import { OriginOptionsContainer } from '../../../shared/OriginOptionsContainer';
 
 // --- Data Constants ---
 
@@ -79,84 +80,54 @@ export default function AlteradoSection({ alteradoParams, onChange }: AlteradoSe
     }, [agent, sequels]);
 
     return (
-        <div style={{
-            backgroundColor: '#f0fdf4',
-            border: '2px solid #15803d',
-            borderRadius: '0.75rem',
-            overflow: 'hidden',
-            marginBottom: '2rem'
-        }}>
-            <div style={{
-                padding: '1rem',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                borderBottom: '1px solid #bbf7d0'
-            }}>
-                <h3 style={{
-                    fontSize: '1.25rem',
-                    fontWeight: '900',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05em',
-                    color: '#14532d'
-                }}>Opciones de Origen: Alterado</h3>
-
-                <div style={{
-                    backgroundColor: '#15803d',
-                    color: 'white',
-                    padding: '0.5rem 1rem',
-                    borderRadius: '6px',
+        <OriginOptionsContainer
+            title="Opciones de Origen: Alterado"
+            cost={totalDiscount}
+            themeColor="green"
+        >
+            {/* AGENT SELECT */}
+            <div style={{ marginBottom: '2rem' }}>
+                <label style={{
+                    display: 'block',
+                    fontSize: '1rem',
                     fontWeight: 'bold',
-                    fontSize: '0.875rem'
+                    color: '#166534',
+                    marginBottom: '0.75rem',
+                    textTransform: 'uppercase'
                 }}>
-                    {totalDiscount > 0 ? `-${totalDiscount} PC` : '0 PC'}
-                </div>
-            </div>
-
-            <div style={{ padding: '1.5rem' }}>
-                {/* AGENT SELECT */}
-                <div style={{ marginBottom: '2rem' }}>
-                    <label style={{
-                        display: 'block',
+                    Agente del Cambio
+                </label>
+                <select
+                    value={agent || ''}
+                    onChange={handleAgentChange}
+                    style={{
+                        width: '100%',
+                        padding: '0.75rem',
                         fontSize: '1rem',
-                        fontWeight: 'bold',
-                        color: '#166534',
-                        marginBottom: '0.75rem',
-                        textTransform: 'uppercase'
-                    }}>
-                        Agente del Cambio
-                    </label>
-                    <select
-                        value={agent || ''}
-                        onChange={handleAgentChange}
-                        style={{
-                            width: '100%',
-                            padding: '0.75rem',
-                            fontSize: '1rem',
-                            border: '2px solid #16a34a',
-                            borderRadius: '8px',
-                            backgroundColor: 'white',
-                            color: '#1f2937',
-                            cursor: 'pointer'
-                        }}
-                    >
-                        <option value="">-- Selecciona un agente --</option>
-                        {ALTERADO_AGENTS.map(item => (
-                            <option key={item.id} value={item.id}>
-                                {item.label} {item.cost > 0 ? `(Bonificación: ${item.cost} PC)` : ''}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-
-                {/* SEQUELS SELECTOR */}
-                <SequelsSelector
-                    selectedSequels={sequels}
-                    onChange={handleSequelsChange}
-                    showWarning={sequels.length === 0}
-                    warningMessage="Si no seleccionas ninguna secuela, se añadirán +2 PC al coste total del personaje."
-                />
+                        border: '2px solid #16a34a',
+                        borderRadius: '8px',
+                        backgroundColor: 'white',
+                        color: '#1f2937',
+                        cursor: 'pointer'
+                    }}
+                >
+                    <option value="">-- Selecciona un agente --</option>
+                    {ALTERADO_AGENTS.map(item => (
+                        <option key={item.id} value={item.id}>
+                            {item.label} {item.cost > 0 ? `(Bonificación: ${item.cost} PC)` : ''}
+                        </option>
+                    ))}
+                </select>
             </div>
-        </div>
+
+            {/* SEQUELS SELECTOR */}
+            <SequelsSelector
+                selectedSequels={sequels}
+                onChange={handleSequelsChange}
+                showWarning={sequels.length === 0}
+                warningMessage="Si no seleccionas ninguna secuela, se añadirán +2 PC al coste total del personaje."
+            />
+        </OriginOptionsContainer>
     );
 }
+

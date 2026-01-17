@@ -1,6 +1,6 @@
 import React from 'react';
 
-type ThemeColor = 'amber' | 'blue' | 'purple' | 'green' | 'red';
+type ThemeColor = 'amber' | 'blue' | 'purple' | 'green' | 'red' | 'orange' | 'magenta';
 
 interface OriginOptionsContainerProps {
     title: string;
@@ -45,6 +45,20 @@ const THEME_COLORS = {
         headerBorder: '#fecaca',
         titleColor: '#991b1b',
         badgeBg: '#dc2626'
+    },
+    orange: {
+        bg: '#fff7ed',
+        border: '#c2410c',
+        headerBorder: '#fed7aa',
+        titleColor: '#c2410c',
+        badgeBg: '#c2410c'
+    },
+    magenta: {
+        bg: '#fdf4ff',
+        border: '#c026d3',
+        headerBorder: '#e879f9',
+        titleColor: '#86198f',
+        badgeBg: '#c026d3'
     }
 };
 

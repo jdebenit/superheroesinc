@@ -17,15 +17,15 @@ export default function VigilanteTraumasSection({
 
     return (
         <SectionContainer
-            title="Traumas del Vigilante"
-            description="Como Vigilante, cada especialidad proviene de un trauma profundo. Describe el evento trágico que te llevó a desarrollar estas habilidades."
+            title="Traumas/Motivaciones del Vigilante"
+            description="Como Vigilante, cada especialidad proviene de un trauma o una motivación profunda. Describe el evento que te llevó a desarrollar estas habilidades."
             theme="red"
         >
             <div className="space-y-6">
                 {vigilanteSpecialties.map((specialty: string) => (
                     <div key={specialty} className="bg-white p-6 rounded-xl border-2 border-red-200 shadow-sm hover:shadow-md transition-shadow">
                         <ComicTextArea
-                            label={`Trauma: ${specialty}`}
+                            label={`Trauma/Motivación: ${specialty}`}
                             value={traumas?.[specialty] || ''}
                             onChange={(e) => onUpdateTrauma(specialty, e.target.value)}
                             placeholder={`Describe el trauma que te convirtió en ${specialty}...`}

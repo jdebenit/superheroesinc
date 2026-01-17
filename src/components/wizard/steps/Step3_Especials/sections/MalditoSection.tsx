@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { OriginOptionsContainer } from '../../../shared/OriginOptionsContainer';
 
 interface MalditoParams {
     magnitude: string | null;
@@ -71,37 +72,12 @@ export default function MalditoSection({ malditoParams, onChange }: MalditoSecti
     }, [malditoParams]);
 
     return (
-        <div style={{
-            backgroundColor: '#fff7ed', // orange-50
-            border: '2px solid #c2410c', // orange-700
-            borderRadius: '0.75rem',
-            overflow: 'hidden',
-            marginBottom: '2rem'
-        }}>
-            <div style={{
-                padding: '1rem',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between'
-            }}>
-                <h3 style={{
-                    fontSize: '1.25rem',
-                    fontWeight: '900',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05em'
-                }}>Opciones de Origen: Maldito</h3>
-                <div style={{
-                    backgroundColor: '#c2410c',
-                    color: 'white',
-                    padding: '0.5rem 1rem',
-                    borderRadius: '6px',
-                    fontWeight: 'bold',
-                    fontSize: '0.875rem'
-                }}>
-                    {totalCost > 0 ? '+' : ''}{totalCost} PC
-                </div>
-            </div>
-            <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+        <OriginOptionsContainer
+            title="Opciones de Origen: Maldito"
+            cost={totalCost}
+            themeColor="orange"
+        >
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                 {/* Magnitude Selection */}
                 <div>
                     <label style={{
@@ -176,6 +152,7 @@ export default function MalditoSection({ malditoParams, onChange }: MalditoSecti
                     </select>
                 </div>
             </div>
-        </div>
+        </OriginOptionsContainer>
     );
 }
+
