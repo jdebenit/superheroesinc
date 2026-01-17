@@ -1,12 +1,12 @@
 /* Sequels Selector Styles */
-.sequels-header {
+.wizard-sequels-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
 }
 
-.sequels-title {
+.wizard-sequels-title {
     font-size: 1rem;
     font-weight: bold;
     color: #166534;
@@ -14,7 +14,7 @@
     margin: 0;
 }
 
-.sequels-add-button {
+.wizard-sequels-add-button {
     padding: 0.5rem 1rem;
     background-color: #16a34a;
     color: white;
@@ -26,45 +26,45 @@
     transition: background-color 0.2s;
 }
 
-.sequels-add-button:hover {
+.wizard-sequels-add-button:hover {
     background-color: #15803d;
 }
 
-.sequels-list {
+.wizard-sequels-list {
     display: grid;
     gap: 0.75rem;
 }
 
-.sequel-item {
+.wizard-sequel-item {
     padding: 0.75rem;
     background-color: #dcfce7;
     border: 1px solid #16a34a;
     border-radius: 8px;
 }
 
-.sequel-item-content {
+.wizard-sequel-item-content {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
 }
 
-.sequel-item-info {
+.wizard-sequel-item-info {
     flex-grow: 1;
 }
 
-.sequel-item-header {
+.wizard-sequel-item-header {
     display: flex;
     align-items: center;
     gap: 0.5rem;
     margin-bottom: 0.25rem;
 }
 
-.sequel-item-label {
+.wizard-sequel-item-label {
     font-weight: bold;
     color: #1f2937;
 }
 
-.sequel-item-cost {
+.wizard-sequel-item-cost {
     font-size: 0.75rem;
     background-color: #15803d;
     color: white;
@@ -73,13 +73,13 @@
     font-weight: bold;
 }
 
-.sequel-item-description {
+.wizard-sequel-item-description {
     font-size: 0.85rem;
     color: #4b5563;
     margin: 0 0 0.5rem 0;
 }
 
-.sequel-input-label {
+.wizard-sequel-input-label {
     display: block;
     font-size: 0.75rem;
     font-weight: bold;
@@ -87,7 +87,7 @@
     margin-bottom: 0.25rem;
 }
 
-.sequel-input-textarea {
+.wizard-sequel-input-textarea {
     width: 100%;
     padding: 0.5rem;
     font-size: 0.875rem;
@@ -97,14 +97,14 @@
     min-height: 60px;
 }
 
-.sequel-input-textarea:focus {
+.wizard-sequel-input-textarea:focus {
     outline: none;
     border-color: #16a34a;
     box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
 }
 
 /* Warning State */
-.sequels-warning {
+.wizard-sequels-warning {
     padding: 1rem;
     background-color: #fef3c7;
     border: 2px solid #f59e0b;
@@ -114,24 +114,24 @@
     gap: 0.75rem;
 }
 
-.sequels-warning-icon {
+.wizard-sequels-warning-icon {
     font-size: 1.5rem;
 }
 
-.sequels-warning-title {
+.wizard-sequels-warning-title {
     color: #92400e;
     font-weight: bold;
     margin: 0 0 0.25rem 0;
 }
 
-.sequels-warning-message {
+.wizard-sequels-warning-message {
     color: #78350f;
     font-size: 0.875rem;
     margin: 0;
 }
 
 /* Empty State */
-.sequels-empty {
+.wizard-sequels-empty {
     color: #6b7280;
     font-style: italic;
     margin: 0;

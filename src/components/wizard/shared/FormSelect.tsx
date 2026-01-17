@@ -32,9 +32,10 @@ export const FormSelect: React.FC<FormSelectProps> = ({
     const selectedOption = options.find(opt => opt.id === value);
 
     return (
-        <div className="form-select-container">
+
+        <div className="wizard-form-select-container">
             <label
-                className="form-select-label"
+                className="wizard-form-select-label"
                 style={{ color: labelColor }}
             >
                 {label}
@@ -42,7 +43,7 @@ export const FormSelect: React.FC<FormSelectProps> = ({
             <select
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
-                className="form-select"
+                className="wizard-form-select"
             >
                 <option value="">{placeholder}</option>
                 {options.map(option => (
@@ -55,7 +56,7 @@ export const FormSelect: React.FC<FormSelectProps> = ({
                 ))}
             </select>
             {showDescription && selectedOption?.description && (
-                <p className="form-select-description">
+                <p className="wizard-form-select-description">
                     {selectedOption.description}
                 </p>
             )}

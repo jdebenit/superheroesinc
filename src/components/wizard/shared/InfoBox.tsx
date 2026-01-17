@@ -15,13 +15,13 @@ export const InfoBox: React.FC<InfoBoxProps> = ({
     icon
 }) => {
     return (
-        <div className={`info-box info-box-${variant}`}>
+        <div className={`wizard-info-box wizard-info-box-${variant}`}>
             {icon && (
-                <span className="info-box-icon">
+                <span className="wizard-info-box-icon">
                     {icon}
                 </span>
             )}
-            <div className="info-box-content">
+            <div className="wizard-info-box-content">
                 {children}
             </div>
         </div>

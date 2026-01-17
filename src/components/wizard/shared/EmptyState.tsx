@@ -8,9 +8,9 @@ interface EmptyStateProps {
 
 export const EmptyState: React.FC<EmptyStateProps> = ({ message, icon }) => {
     return (
-        <div className="empty-state">
+        <div className="wizard-empty-state">
             {icon && (
-                <span className="empty-state-icon">
+                <span className="wizard-empty-state-icon">
                     {icon}
                 </span>
             )}

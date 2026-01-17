@@ -6,19 +6,24 @@ interface WizardSectionProps {
     children: React.ReactNode;
     description?: React.ReactNode;
     icon?: string;
+    color?: string;
 }
 
 export const WizardSection: React.FC<WizardSectionProps> = ({
     title,
     children,
     description,
-    icon
+    icon,
+    color
 }) => {
     return (
         <div className="wizard-section">
-            <div className="wizard-section-header">
+            <div
+                className="wizard-section-header"
+                style={color ? { borderBottomColor: color } : undefined}
+            >
                 <div>
-                    <h3 className="wizard-section-title">
+                    <h3 className="wizard-section-title" style={color ? { color } : undefined}>
                         {icon && <span className="wizard-section-icon">{icon}</span>}
                         {title}
                     </h3>

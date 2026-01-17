@@ -51,13 +51,13 @@ export default function SequelsSelector({
 
     return (
         <div>
-            <div className="sequels-header">
-                <h4 className="sequels-title">
+            <div className="wizard-sequels-header">
+                <h4 className="wizard-sequels-title">
                     Secuelas (Opcional)
                 </h4>
                 <button
                     onClick={() => setIsSequelModalOpen(true)}
-                    className="sequels-add-button"
+                    className="wizard-sequels-add-button"
                 >
                     + Añadir Secuela
                 </button>
@@ -65,35 +65,35 @@ export default function SequelsSelector({
 
             {/* Selected Sequels List */}
             {selectedSequels.length > 0 ? (
-                <div className="sequels-list">
+                <div className="wizard-sequels-list">
                     {selectedSequels.map(s => {
                         const def = SEQUELS.find(d => d.id === s.id);
                         if (!def) return null;
 
                         return (
-                            <div key={s.id} className="sequel-item">
-                                <div className="sequel-item-content">
-                                    <div className="sequel-item-info">
-                                        <div className="sequel-item-header">
-                                            <span className="sequel-item-label">{def.label}</span>
-                                            <span className="sequel-item-cost">
+                            <div key={s.id} className="wizard-sequel-item">
+                                <div className="wizard-sequel-item-content">
+                                    <div className="wizard-sequel-item-info">
+                                        <div className="wizard-sequel-item-header">
+                                            <span className="wizard-sequel-item-label">{def.label}</span>
+                                            <span className="wizard-sequel-item-cost">
                                                 -{def.cost} PC
                                             </span>
                                         </div>
-                                        <p className="sequel-item-description">
+                                        <p className="wizard-sequel-item-description">
                                             {def.description}
                                         </p>
 
                                         {/* Description Input */}
                                         <div>
-                                            <label className="sequel-input-label">
+                                            <label className="wizard-sequel-input-label">
                                                 Descripción de la secuela (Opcional):
                                             </label>
                                             <textarea
                                                 value={s.description || ''}
                                                 onChange={(e) => handleDescriptionChange(s.id, e.target.value)}
                                                 placeholder="Describe cómo se manifiesta esta secuela..."
-                                                className="sequel-input-textarea"
+                                                className="wizard-sequel-input-textarea"
                                             />
                                         </div>
                                     </div>
@@ -108,19 +108,19 @@ export default function SequelsSelector({
                 </div>
             ) : (
                 showWarning ? (
-                    <div className="sequels-warning">
-                        <span className="sequels-warning-icon">⚠️</span>
+                    <div className="wizard-sequels-warning">
+                        <span className="wizard-sequels-warning-icon">⚠️</span>
                         <div>
-                            <p className="sequels-warning-title">
+                            <p className="wizard-sequels-warning-title">
                                 Sin secuelas seleccionadas
                             </p>
-                            <p className="sequels-warning-message">
+                            <p className="wizard-sequels-warning-message">
                                 {warningMessage || "Si no seleccionas ninguna secuela, se aplicará una penalización estándar."}
                             </p>
                         </div>
                     </div>
                 ) : (
-                    <p className="sequels-empty">
+                    <p className="wizard-sequels-empty">
                         No hay secuelas seleccionadas. Haz clic en "Añadir Secuela" para elegir.
                     </p>
                 )

@@ -19,17 +19,17 @@ export const OriginOptionsContainer: React.FC<OriginOptionsContainerProps> = ({
     children
 }) => {
     return (
-        <div className={`origin-container origin-container-${themeColor}`}>
-            <div className="origin-header">
-                <h3 className="origin-title">{title}</h3>
-                <div className="origin-cost-badge">
+        <div className={`wizard-origin-container wizard-origin-container-${themeColor}`}>
+            <div className="wizard-origin-header">
+                <h3 className="wizard-origin-title">{title}</h3>
+                <div className="wizard-origin-cost-badge">
                     {cost > 0 ? `+${cost}` : cost} PC
                 </div>
             </div>
 
-            <div className="origin-content">
+            <div className="wizard-origin-content">
                 {description && (
-                    <p className="origin-description">
+                    <p className="wizard-origin-description">
                         {description}
                     </p>
                 )}

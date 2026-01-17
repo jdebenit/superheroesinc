@@ -1,4 +1,4 @@
-.empty-state {
+.wizard-empty-state {
     text-align: center;
     padding: 3rem;
     color: #9ca3af;
@@ -10,7 +10,7 @@
     gap: 0.5rem;
 }
 
-.empty-state-icon {
+.wizard-empty-state-icon {
     font-size: 2rem;
     opacity: 0.5;
 }

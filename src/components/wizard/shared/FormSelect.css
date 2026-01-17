@@ -1,8 +1,8 @@
-.form-select-container {
+.wizard-form-select-container {
     /* Container has no specific styles, just groups elements */
 }
 
-.form-select-label {
+.wizard-form-select-label {
     display: block;
     font-size: 1rem;
     font-weight: bold;
@@ -10,7 +10,7 @@
     text-transform: uppercase;
 }
 
-.form-select {
+.wizard-form-select {
     width: 100%;
     padding: 0.75rem;
     font-size: 1rem;
@@ -22,12 +22,12 @@
     outline: none;
 }
 
-.form-select:focus {
+.wizard-form-select:focus {
     border-color: #3b82f6;
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
-.form-select-description {
+.wizard-form-select-description {
     margin-top: 0.75rem;
     font-size: 0.875rem;
     color: #6b7280;

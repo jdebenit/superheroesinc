@@ -18,7 +18,7 @@ export const DeleteRowButton: React.FC<DeleteRowButtonProps> = ({
                 e.stopPropagation();
                 onDelete();
             }}
-            className={`delete-row-button ${className}`}
+            className={`wizard-delete-row-button ${className}`}
             title={title}
             {...props}
         >

@@ -1,5 +1,5 @@
 import React from 'react';
-import { WizardButton } from './WizardButton';
+import { DeleteRowButton } from './DeleteRowButton';
 import './DynamicList.css';
 
 interface DynamicListProps<T> {
@@ -24,42 +24,38 @@ export function DynamicList<T>({
     color = '#3b82f6'
 }: DynamicListProps<T>) {
     // Determine theme class based on color
-    let themeClass = 'dynamic-list-blue';
-    if (color === '#dc2626') themeClass = 'dynamic-list-red';
-    else if (color === '#7c3aed' || color === '#9333ea') themeClass = 'dynamic-list-purple';
-    else if (color === '#0891b2') themeClass = 'dynamic-list-cyan';
+    let themeClass = 'wizard-dynamic-list-blue';
+    if (color === '#dc2626') themeClass = 'wizard-dynamic-list-red';
+    else if (color === '#7c3aed' || color === '#9333ea') themeClass = 'wizard-dynamic-list-purple';
+    else if (color === '#0891b2') themeClass = 'wizard-dynamic-list-cyan';
 
     return (
-        <div className="dynamic-list">
+        <div className="wizard-dynamic-list">
             {items.length === 0 && emptyText && (
-                <div className="dynamic-list-empty">
+                <div className="wizard-dynamic-list-empty">
                     {emptyText}
                 </div>
             )}
 
             {items.map((item, index) => (
-                <div key={index} className={`dynamic-list-item ${themeClass}`}>
+                <div key={index} className={`wizard-dynamic-list-item ${themeClass}`}>
                     {renderItem(item, index)}
 
-                    <div className="dynamic-list-item-actions">
-                        <WizardButton
-                            variant="danger"
-                            onClick={() => onRemove(index)}
+                    <div className="wizard-dynamic-list-item-actions">
+                        <DeleteRowButton
+                            onDelete={() => onRemove(index)}
                             title="Eliminar elemento"
-                            style={{ fontSize: '0.875rem', padding: '0.25rem 0.75rem' }}
-                        >
-                            ✕ Eliminar
-                        </WizardButton>
+                        />
                     </div>
                 </div>
             ))}
 
             <button
                 onClick={onAdd}
-                className={`dynamic-list-add-button ${themeClass}`}
+                className={`wizard-dynamic-list-add-button ${themeClass}`}
                 style={{ borderColor: `${color}66` }}
             >
-                <span className="dynamic-list-add-icon">+</span> {addButtonLabel}
+                <span className="wizard-dynamic-list-add-icon">+</span> {addButtonLabel}
             </button>
         </div>
     );

@@ -24,21 +24,21 @@ export const TableContainer: React.FC<TableContainerProps> = ({
 
     if (!hasContent && emptyMessage) {
         return (
-            <div className="table-empty-state">
+            <div className="wizard-table-empty-state">
                 {emptyMessage}
             </div>
         );
     }
 
     return (
-        <div className="table-container">
-            <table className="table">
-                <thead className="table-header">
+        <div className="wizard-table-container">
+            <table className="wizard-table">
+                <thead className="wizard-table-header">
                     <tr>
                         {headers.map((header, index) => (
                             <th
                                 key={index}
-                                className={index === 0 ? 'table-header-cell-first' : 'table-header-cell'}
+                                className={index === 0 ? 'wizard-table-header-cell-first' : 'wizard-table-header-cell'}
                             >
                                 {header}
                             </th>
@@ -50,14 +50,14 @@ export const TableContainer: React.FC<TableContainerProps> = ({
 
                     {/* Total Row */}
                     {showTotal && totalLabel && totalValue !== undefined && (
-                        <tr className="table-footer-row">
+                        <tr className="wizard-table-footer-row">
                             <td
                                 colSpan={totalColSpan}
-                                className="table-footer-label"
+                                className="wizard-table-footer-label"
                             >
                                 {totalLabel}
                             </td>
-                            <td className="table-footer-value">
+                            <td className="wizard-table-footer-value">
                                 {totalValue}
                             </td>
                             <td></td>

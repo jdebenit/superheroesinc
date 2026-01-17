@@ -1,4 +1,4 @@
-.table-container {
+.wizard-table-container {
     background-color: white;
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -7,41 +7,41 @@
     margin-bottom: 2rem;
 }
 
-.table {
+.wizard-table {
     width: 100%;
     border-collapse: collapse;
 }
 
-.table-header {
+.wizard-table-header {
     background-color: #f9fafb;
     border-bottom: 2px solid #e5e7eb;
 }
 
-.table-header-cell-first {
+.wizard-table-header-cell-first {
     padding: 1rem;
     text-align: left;
     color: #374151;
 }
 
-.table-header-cell {
+.wizard-table-header-cell {
     padding: 1rem;
     text-align: center;
     color: #6b7280;
 }
 
-.table-footer-row {
+.wizard-table-footer-row {
     background-color: #f8fafc;
     border-top: 2px solid #e2e8f0;
 }
 
-.table-footer-label {
+.wizard-table-footer-label {
     padding: 1rem;
     text-align: right;
     font-weight: bold;
     color: #475569;
 }
 
-.table-footer-value {
+.wizard-table-footer-value {
     padding: 1rem;
     text-align: center;
     font-weight: 900;
@@ -49,7 +49,7 @@
     font-size: 1.1em;
 }
 
-.table-empty-state {
+.wizard-table-empty-state {
     text-align: center;
     padding: 3rem;
     color: #9ca3af;

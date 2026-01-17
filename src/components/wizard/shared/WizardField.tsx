@@ -9,6 +9,8 @@ interface WizardFieldProps {
     placeholder?: string;
     error?: string;
     disabled?: boolean;
+    style?: React.CSSProperties;
+    min?: string | number;
 }
 
 export const WizardField: React.FC<WizardFieldProps> = ({
@@ -18,18 +20,21 @@ export const WizardField: React.FC<WizardFieldProps> = ({
     type = 'text',
     placeholder,
     error,
-    disabled = false
+    disabled = false,
+    style,
+    min
 }) => {
     const inputProps = {
         value,
         onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => onChange(e.target.value),
         placeholder,
         disabled,
-        className: `wizard-field-input ${error ? 'wizard-field-input-error' : ''}`
+        className: `wizard-field-input ${error ? 'wizard-field-input-error' : ''}`,
+        min
     };
 
     return (
-        <div className="wizard-field">
+        <div className="wizard-field" style={style}>
             <label className="wizard-field-label">{label}</label>
             {type === 'textarea' ? (
                 <textarea
