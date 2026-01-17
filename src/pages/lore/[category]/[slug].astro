@@ -4,6 +4,7 @@ import Layout from "../../../layouts/Layout.astro";
 import CharacterSheet from "../../../components/character/CharacterSheet";
 import ActualPlayMetadata from "../../../components/ActualPlayMetadata.astro";
 import ReplayModeSelector from "../../../components/ReplayModeSelector.astro";
+import Logger from "../../../utils/Logger";
 
 
 export async function getStaticPaths() {
@@ -30,7 +31,7 @@ if (item.data.rpgId) {
       rpgData = rpgEntry.data;
     }
   } catch (error) {
-    console.error(`Failed to load RPG data for ${item.data.rpgId}:`, error);
+    Logger.error(`Failed to load RPG data for ${item.data.rpgId}:`, error);
   }
 }
 
@@ -58,8 +59,7 @@ if (item.data.category === "actual-plays") {
             if (id === "jefe-moteros") { // Hardcode mapping if generic slug fails for specific known edge cases or try to match filenames if possible
                  // Note: 'Jefe Moteros' -> 'jefe-moteros', but file is 'jefe-motero-road-reapers'.
                  // We can't easily loose-match against all files without listing them all, 
-                 // but for now let's try to map specific known patterns if we can, or just expect better data.
-                 // Actually, let's try to find an entry that *starts with* the slug if exact fail.
+                 // but for now let's try to find an entry that *starts with* the slug if exact fail.
             }
             
             entry = await getEntry("rpg", id);
@@ -75,7 +75,7 @@ if (item.data.category === "actual-plays") {
           rpgDataMap[char.rpgId] = entry.data;
         }
       } catch (e) {
-        console.error(`Error fetching RPG data for ${char.rpgId}:`, e);
+        Logger.error(`Error fetching RPG data for ${char.rpgId}:`, e);
       }
     }
   }

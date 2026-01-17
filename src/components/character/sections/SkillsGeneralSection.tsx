@@ -1,6 +1,7 @@
 import React from 'react';
 import { SheetSection } from '../common/SheetSection';
 import { DetailRow } from '../common/DetailRow';
+import Logger from '../../../utils/Logger';
 
 interface SkillsGeneralSectionProps {
     character: any;
@@ -8,9 +9,9 @@ interface SkillsGeneralSectionProps {
 
 export const SkillsGeneralSection: React.FC<SkillsGeneralSectionProps> = ({ character }) => {
     // Debug logging
-    console.log('SkillsGeneralSection - character:', character);
-    console.log('SkillsGeneralSection - skills:', character?.skills);
-    console.log('SkillsGeneralSection - generalItems:', character?.skills?.generalItems);
+    Logger.log('SkillsGeneralSection - character:', character);
+    Logger.log('SkillsGeneralSection - skills:', character?.skills);
+    Logger.log('SkillsGeneralSection - generalItems:', character?.skills?.generalItems);
 
     if (!character.skills || !character.skills.generalItems || character.skills.generalItems.length === 0) return null;
 

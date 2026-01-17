@@ -19,6 +19,7 @@ import { WizardHelpModal } from './shared/WizardHelpModal';
 import { WIZARD_HELP } from '../../data/wizardHelp';
 
 import { APP_VERSIONS } from '../../data/appVersions';
+import Logger from '../../utils/Logger';
 
 export default function CharacterWizard() {
     const [currentStep, setCurrentStep] = useState(1);
@@ -46,11 +47,11 @@ export default function CharacterWizard() {
                         };
                     }
 
-                    console.log('✅ Loaded character from localStorage:', validated);
+                    Logger.log('✅ Loaded character from localStorage:', validated);
                     setCharacter(validated);
                 }
             } catch (e) {
-                console.error('❌ Error loading character from localStorage:', e);
+                Logger.error('❌ Error loading character from localStorage:', e);
             }
         }
     }, []);
@@ -60,9 +61,9 @@ export default function CharacterWizard() {
         if (typeof window !== 'undefined') {
             try {
                 localStorage.setItem('characterWizardState', JSON.stringify(character));
-                console.log('💾 Saved character to localStorage');
+                Logger.log('💾 Saved character to localStorage');
             } catch (e) {
-                console.error('❌ Error saving to localStorage:', e);
+                Logger.error('❌ Error saving to localStorage:', e);
             }
         }
     }, [character]);
@@ -82,7 +83,7 @@ export default function CharacterWizard() {
                 return prev;
             }
 
-            console.log('🔄 Updating Character Metadata:', newMeta);
+            Logger.log('🔄 Updating Character Metadata:', newMeta);
             return {
                 ...prev,
                 meta: newMeta
@@ -111,13 +112,13 @@ export default function CharacterWizard() {
     };
 
     const handleStepChange = (field: string, value: any) => {
-        console.log('🔄 handleStepChange:', field, value);
+        Logger.log('🔄 handleStepChange:', field, value);
         setCharacter((prev: any) => {
             const newState = {
                 ...prev,
                 [field]: value
             };
-            console.log('📝 New State:', newState);
+            Logger.log('📝 New State:', newState);
             return newState;
         });
     };
@@ -129,7 +130,7 @@ export default function CharacterWizard() {
             // Clear localStorage
             if (typeof window !== 'undefined') {
                 localStorage.removeItem('characterWizardState');
-                console.log('🗑️ Cleared localStorage');
+                Logger.log('🗑️ Cleared localStorage');
             }
         }
     };
@@ -167,9 +168,9 @@ export default function CharacterWizard() {
                 }
 
                 alert(`✅ Personaje "${importedCharacter.name}" cargado correctamente!`);
-                console.log('📥 Imported character:', importedCharacter);
+                Logger.log('📥 Imported character:', importedCharacter);
             } catch (error) {
-                console.error('Error importing JSON:', error);
+                Logger.error('Error importing JSON:', error);
                 alert('❌ Error al leer el archivo JSON. Asegúrate de que es un archivo válido.');
             }
         };

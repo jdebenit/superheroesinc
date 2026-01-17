@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import Logger from '../../../utils/Logger';
 
 interface SheetData {
     derivedStats: any;
@@ -50,7 +51,7 @@ export const usePdfExport = (
 
             downloadPDF(pdfBytes, `Ficha_SHI_${character.name.replace(/\s+/g, '_') || 'Personaje'}.pdf`);
         } catch (error) {
-            console.error('Error generando PDF:', error);
+            Logger.error('Error generando PDF:', error);
             alert('Error al generar el PDF. Asegúrate de que el template "ficha_template.pdf" está en la carpeta public.');
         }
     }, [character, totalPCs, sheetData]);

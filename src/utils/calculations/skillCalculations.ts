@@ -1,6 +1,7 @@
 import { GENERAL_SKILLS, type GeneralSkillDefinition } from '../../data/generalSkills';
 import { SPECIAL_SKILLS, type SpecialSkillDefinition } from '../../data/specialSkills';
 import { ORIGIN_SKILL_MODIFIERS } from '../../data/skillModifiers';
+import Logger from '../Logger';
 
 /**
  * Calcula el desglose de habilidades generales
@@ -50,7 +51,7 @@ export function calculateGeneralSkillValues(
                 calculatedBase = Math.floor(skill.formula(stats)) || 0;
             }
         } catch (e) {
-            console.error(`Error calculating base for ${skill.id}`, e);
+            Logger.error(`Error calculating base for ${skill.id}`, e);
             calculatedBase = 0;
         }
 
@@ -171,7 +172,7 @@ export function calculateSpecialSkillValues(
                 calculatedBase = Math.floor(skill.formula(stats)) || 0;
             }
         } catch (e) {
-            console.error(`Error calculating base for ${skill.id}`, e);
+            Logger.error(`Error calculating base for ${skill.id}`, e);
         }
 
         const skillData = standardSkills[skill.id] || { manualMods: 0, manualBases: 0 };
@@ -259,7 +260,7 @@ export function calculateSpecialSkillValues(
                 calculatedBase = Math.floor(skillDef.formula(stats)) || 0;
             }
         } catch (e) {
-            console.error(`Error calculating base for ${specSkill.skillId}:${specSkill.specification}`, e);
+            Logger.error(`Error calculating base for ${specSkill.skillId}:${specSkill.specification}`, e);
         }
 
         let base = calculatedBase;

@@ -2,6 +2,7 @@ import { PDFDocument } from 'pdf-lib';
 import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS, FRIENDS_AND_ASSOCIATES } from '../data/backgroundTables';
 import { ORIGIN_CATEGORIES } from '../data/originDefinitions';
 import { SPECIAL_SKILLS } from '../data/specialSkills';
+import Logger from './Logger';
 
 // ... (helpers removed)
 
@@ -35,9 +36,9 @@ export async function generateCharacterSheetPDF(
 
     // 2. Obtener el formulario
     const form = pdfDoc.getForm();
-    console.log('--- DEBUG: PDF Form Fields ---');
-    console.log(form.getFields().map(f => f.getName()).sort());
-    console.log('------------------------------');
+    Logger.log('--- DEBUG: PDF Form Fields ---');
+    Logger.log(form.getFields().map(f => f.getName()).sort());
+    Logger.log('------------------------------');
 
     const stats = preCalculatedData?.derivedStats || {
         combat: { acciones: '', iniciativa: '', pv: '', equilibrio: '' },
@@ -137,14 +138,14 @@ export async function generateCharacterSheetPDF(
     // SPECIAL SKILLS - USE ONLY JSON DATA, NOT PRE-CALCULATED
     // ========================================================================
 
-    console.log('--- SPECIAL SKILLS EXPORT ---');
-    console.log('Source: character.skills.specialItems');
-    console.log('Data:', character.skills?.specialItems);
+    Logger.log('--- SPECIAL SKILLS EXPORT ---');
+    Logger.log('Source: character.skills.specialItems');
+    Logger.log('Data:', character.skills?.specialItems);
 
     // Get special skills DIRECTLY from character JSON
     const specialSkillsFromJSON = character.skills?.specialItems || [];
 
-    console.log(`Found ${specialSkillsFromJSON.length} special skills in JSON`);
+    Logger.log(`Found ${specialSkillsFromJSON.length} special skills in JSON`);
 
     // STEP 1: Clear ALL possible special skill fields (predefined + generic)
     const predefinedSkillFields = [
@@ -197,7 +198,7 @@ export async function generateCharacterSheetPDF(
             const skillName = skill.name || '';
             const skillVal = skill.value || '';
 
-            console.log(`Mapping skill ${i}: "${skillName}" = ${skillVal}`);
+            Logger.log(`Mapping skill ${i}: "${skillName}" = ${skillVal}`);
 
             fields[nameField] = skillName;
             fields[valField] = skillVal;
@@ -212,7 +213,7 @@ export async function generateCharacterSheetPDF(
         }
     }
 
-    console.log('--- END SPECIAL SKILLS EXPORT ---');
+    Logger.log('--- END SPECIAL SKILLS EXPORT ---');
 
     // --- MAPPING FROM PRE-CALCULATED LISTS ---
 
@@ -347,7 +348,7 @@ export async function generateCharacterSheetPDF(
                 field.setText(value || '');
             }
         } catch (e) {
-            // console.warn(`Campo '${fieldName}' no encontrado en el PDF o no es un campo de texto.`);
+
         }
     }
 
@@ -380,7 +381,7 @@ export async function downloadPDF(pdfBytes: Uint8Array, filename: string) {
             // User cancelled or API error
             if (err.name === 'AbortError') return;
             // For other errors, fallback to classic
-            console.warn('File Picker failed, falling back to download link:', err);
+            Logger.warn('File Picker failed, falling back to download link:', err);
         }
     }
 

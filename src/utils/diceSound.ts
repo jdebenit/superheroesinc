@@ -3,6 +3,8 @@
  * Creates a realistic dice rolling sound with multiple bounces
  */
 
+import Logger from './Logger';
+
 let audioContext: AudioContext | null = null;
 
 const getAudioContext = (): AudioContext => {
@@ -88,7 +90,7 @@ export const playDiceRollSound = () => {
         noiseSource.stop(now + 0.35);
 
     } catch (error) {
-        console.warn('Could not play dice roll sound:', error);
+        Logger.warn('Could not play dice roll sound:', error);
     }
 };
 

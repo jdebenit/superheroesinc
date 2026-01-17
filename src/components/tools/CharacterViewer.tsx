@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import CharacterSheet from '../character/CharacterSheet';
 import { adaptWebCharacter } from '../../utils/characterAdapter';
 import './CharacterViewer.css';
+import Logger from '../../utils/Logger';
 
 interface StoredCharacter {
     id: string;
@@ -41,7 +42,7 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
                 }
             }
         } catch (e) {
-            console.error("Error loading characters from localStorage:", e);
+            Logger.error("Error loading characters from localStorage:", e);
         }
     }, []);
 
@@ -50,7 +51,7 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
         try {
             localStorage.setItem('shi_viewer_characters', JSON.stringify(localCharacters));
         } catch (e) {
-            console.error("Error saving characters to localStorage:", e);
+            Logger.error("Error saving characters to localStorage:", e);
         }
     }, [localCharacters]);
 
@@ -92,7 +93,7 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
             setSelectedId(newChar.id);
 
         } catch (err: any) {
-            console.error(err);
+            Logger.error(err);
             setError(err.message || "Error al leer el archivo.");
         }
 
@@ -334,7 +335,7 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
                                         localStorage.setItem('shi_tpt_character', JSON.stringify(adaptWebCharacter(selectedCharacter.data)));
                                         window.open('/recursos/tactic-player-terminal', '_blank');
                                     } catch (error) {
-                                        console.error('Error sending character to terminal:', error);
+                                        Logger.error('Error sending character to terminal:', error);
                                         alert('Error al enviar el personaje al terminal');
                                     }
                                 }}

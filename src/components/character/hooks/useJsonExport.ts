@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 import { calculateDiff } from '../../../utils/dataCleaner';
 import { initialCharacterState } from '../../../data/wizardConfig';
 import { calculateDerivedStats, formatDerivedStats } from '../../../utils/characterCalculations';
+import Logger from '../../../utils/Logger';
 
 /**
  * Custom hook for handling JSON export functionality
@@ -55,7 +56,7 @@ export const useJsonExport = (character: any) => {
                 return;
             } catch (err: any) {
                 if (err.name !== 'AbortError') {
-                    console.error('File Picker Error:', err);
+                    Logger.error('File Picker Error:', err);
                 }
                 if (err.name === 'AbortError') return;
             }

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { adaptWebCharacter } from '../../../utils/characterAdapter';
+import Logger from '../../../utils/Logger';
 
 export interface CharacterData {
     name: string;
@@ -78,7 +79,7 @@ export function useTerminalStats() {
                 loadCharacter(data);
                 localStorage.removeItem('shi_tpt_character');
             } catch (error) {
-                console.error('Error loading character from localStorage:', error);
+                Logger.error('Error loading character from localStorage:', error);
             }
         } else {
             const persistentCharacter = localStorage.getItem('shi_tpt_persistent_character');
@@ -91,7 +92,7 @@ export function useTerminalStats() {
                     setCharacter(charData);
                     setStats(statsData);
                 } catch (error) {
-                    console.error('Error loading persistent data:', error);
+                    Logger.error('Error loading persistent data:', error);
                 }
             }
         }
@@ -123,7 +124,7 @@ export function useTerminalStats() {
             try {
                 setHistory(JSON.parse(persistentHistory));
             } catch (error) {
-                console.error('Error loading history:', error);
+                Logger.error('Error loading history:', error);
             }
         }
     }, []);
@@ -273,7 +274,7 @@ export function useTerminalStats() {
 
             alert('✅ Datos importados correctamente');
         } catch (error) {
-            console.error('Error importing JSON:', error);
+            Logger.error('Error importing JSON:', error);
             alert('❌ ERROR: No se pudo leer el archivo JSON');
         }
     };

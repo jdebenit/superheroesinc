@@ -1,3 +1,5 @@
+import Logger from '../utils/Logger';
+
 /**
  * Costes en Puntos de Coste (PCs) para cada origen y subtipo
  */
@@ -141,7 +143,7 @@ export function calculateOriginCost(originItems: any[]): number {
         const originName = Object.keys(item)[0];
         const subtypesList = item[originName] || [];
 
-        console.log("Processing origin:", originName, "with subtypes:", subtypesList);
+        Logger.log("Processing origin:", originName, "with subtypes:", subtypesList);
 
         // Buscar en ORIGIN_COSTS
         let found = false;
@@ -150,7 +152,7 @@ export function calculateOriginCost(originItems: any[]): number {
         if (ORIGIN_COSTS[originName]) {
             const costData = ORIGIN_COSTS[originName];
             totalCost += costData.base || 0;
-            console.log(`  Added base cost for ${originName}: ${costData.base || 0}`);
+            Logger.log(`  Added base cost for ${originName}: ${costData.base || 0}`);
             found = true;
 
             // Si tiene subtipos, sumar sus costes
@@ -158,7 +160,7 @@ export function calculateOriginCost(originItems: any[]): number {
                 subtypesList.forEach((subtypeName: string) => {
                     const subtypeCost = costData.subtypes![subtypeName] || 0;
                     totalCost += subtypeCost;
-                    console.log(`  Added subtype cost for ${subtypeName}: ${subtypeCost}`);
+                    Logger.log(`  Added subtype cost for ${subtypeName}: ${subtypeCost}`);
                 });
             }
         }
@@ -170,7 +172,7 @@ export function calculateOriginCost(originItems: any[]): number {
                 if (categoryData.subtypes && categoryData.subtypes[originName]) {
                     const subtypeCost = categoryData.subtypes[originName];
                     totalCost += subtypeCost;
-                    console.log(`  Added cost for ${originName} (subtipo de ${categoryName}): ${subtypeCost}`);
+                    Logger.log(`  Added cost for ${originName} (subtipo de ${categoryName}): ${subtypeCost}`);
                     found = true;
                     break;
                 }
@@ -178,10 +180,10 @@ export function calculateOriginCost(originItems: any[]): number {
         }
 
         if (!found) {
-            console.warn(`No cost found for origin: ${originName}`);
+            Logger.warn(`No cost found for origin: ${originName}`);
         }
     });
 
-    console.log("Total cost:", totalCost);
+    Logger.log("Total cost:", totalCost);
     return totalCost;
 }

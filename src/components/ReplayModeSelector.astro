@@ -146,34 +146,36 @@ const characterData = JSON.stringify({
 </style>
 
 <script>
+    import Logger from "../utils/Logger";
+
     // Client-side script for mode switching and content detection
     document.addEventListener("DOMContentLoaded", () => {
-        console.log("=== ReplayModeSelector: DOMContentLoaded fired ===");
+        Logger.log("=== ReplayModeSelector: DOMContentLoaded fired ===");
 
         const buttons = document.querySelectorAll(".mode-btn");
         const replayContent = document.querySelector(".lore-text");
 
         if (!replayContent) {
-            console.error("ERROR: .lore-text element not found!");
+            Logger.error("ERROR: .lore-text element not found!");
             return;
         }
 
         const category = replayContent.getAttribute("data-category");
-        console.log("Page category:", category);
+        Logger.log("Page category:", category);
 
         // Only process if this is an actual-plays page
         if (category !== "actual-plays") {
-            console.log("Not an actual-plays page, skipping");
+            Logger.log("Not an actual-plays page, skipping");
             return;
         }
 
         // STEP 1: Process content to add data-type attributes
-        console.log("=== STEP 1: Processing replay content ===");
+        Logger.log("=== STEP 1: Processing replay content ===");
         let paragraphs = replayContent.querySelectorAll("p");
-        console.log(`Found ${paragraphs.length} paragraphs`);
+        Logger.log(`Found ${paragraphs.length} paragraphs`);
 
         // STEP 1.1: Split paragraphs that contain multiple tags
-        console.log("=== STEP 1.1: Splitting multi-tag paragraphs ===");
+        Logger.log("=== STEP 1.1: Splitting multi-tag paragraphs ===");
         const tagPattern = /(NARR:|CHAR\[|PLAYER\[|GM:|ROLL\[|RULE\[|META:)/g;
 
         paragraphs.forEach((p) => {
@@ -182,7 +184,7 @@ const characterData = JSON.stringify({
 
             if (matches && matches.length > 1) {
                 // This paragraph has multiple tags, split it
-                console.log("Splitting paragraph with", matches.length, "tags");
+                Logger.log("Splitting paragraph with", matches.length, "tags");
 
                 // Split by tag patterns
                 const parts = html.split(
@@ -229,13 +231,13 @@ const characterData = JSON.stringify({
 
         // Re-query paragraphs after splitting
         paragraphs = replayContent.querySelectorAll("p");
-        console.log(`After splitting: ${paragraphs.length} paragraphs`);
+        Logger.log(`After splitting: ${paragraphs.length} paragraphs`);
 
         let taggedCount = 0;
-        const tagCounts = {};
+        const tagCounts: Record<string, number> = {};
 
         paragraphs.forEach((p, index) => {
-            const text = p.textContent.trim();
+            const text = p.textContent?.trim() || "";
             let dataType = null;
 
             if (text.startsWith("NARR:")) {
@@ -263,18 +265,18 @@ const characterData = JSON.stringify({
                 tagCounts[dataType] = (tagCounts[dataType] || 0) + 1;
 
                 if (index < 3) {
-                    console.log(
+                    Logger.log(
                         `  [${index}] Tagged '${dataType}': ${text.substring(0, 40)}...`,
                     );
                 }
             }
         });
 
-        console.log(`Tagged ${taggedCount} / ${paragraphs.length} paragraphs`);
-        console.log("Tag distribution:", tagCounts);
+        Logger.log(`Tagged ${taggedCount} / ${paragraphs.length} paragraphs`);
+        Logger.log("Tag distribution:", tagCounts);
 
         // STEP 1.5: Add character icons to CHAR dialogues
-        console.log("=== STEP 1.5: Adding character icons ===");
+        Logger.log("=== STEP 1.5: Adding character icons ===");
         const selector = document.querySelector(".replay-mode-selector");
         const charactersJson = selector?.getAttribute("data-characters");
 
@@ -282,7 +284,7 @@ const characterData = JSON.stringify({
             try {
                 const { players, npcs } = JSON.parse(charactersJson);
                 const allCharacters = [...players, ...npcs];
-                console.log(
+                Logger.log(
                     "Character data loaded:",
                     allCharacters.length,
                     "characters",
@@ -297,7 +299,7 @@ const characterData = JSON.stringify({
                         dataType === "player" ||
                         dataType === "roll"
                     ) {
-                        const text = p.textContent.trim();
+                        const text = p.textContent?.trim() || "";
                         let match = null;
                         let tagPattern = null;
 
@@ -317,7 +319,7 @@ const characterData = JSON.stringify({
 
                             // Find character in players or NPCs
                             const character = allCharacters.find(
-                                (c) =>
+                                (c: any) =>
                                     c.character === charName ||
                                     c.name === charName,
                             );
@@ -397,7 +399,7 @@ const characterData = JSON.stringify({
                 // Process GM paragraphs to add "Guionista" label
                 paragraphs.forEach((p) => {
                     if (p.getAttribute("data-type") === "gm") {
-                        const text = p.textContent.trim();
+                        const text = p.textContent?.trim() || "";
                         if (text.startsWith("GM:")) {
                             const labelSpan = document.createElement("span");
                             labelSpan.className = "gm-label";
@@ -425,7 +427,7 @@ const characterData = JSON.stringify({
                 // Process RULE paragraphs to add book icon
                 paragraphs.forEach((p) => {
                     if (p.getAttribute("data-type") === "rule") {
-                        const text = p.textContent.trim();
+                        const text = p.textContent?.trim() || "";
                         const match = text.match(/^RULE\[([^\]]+)\]:/);
 
                         if (match) {
@@ -466,7 +468,7 @@ const characterData = JSON.stringify({
                 // Process NARR paragraphs to hide the tag
                 paragraphs.forEach((p) => {
                     if (p.getAttribute("data-type") === "narr") {
-                        const text = p.textContent.trim();
+                        const text = p.textContent?.trim() || "";
                         if (text.startsWith("NARR:")) {
                             // Hide the NARR: tag
                             const firstChild = p.firstChild;
@@ -488,7 +490,7 @@ const characterData = JSON.stringify({
                 // Process META paragraphs to hide the tag
                 paragraphs.forEach((p) => {
                     if (p.getAttribute("data-type") === "meta") {
-                        const text = p.textContent.trim();
+                        const text = p.textContent?.trim() || "";
                         if (text.startsWith("META:")) {
                             // Hide the META: tag
                             const firstChild = p.firstChild;
@@ -508,7 +510,7 @@ const characterData = JSON.stringify({
                 });
 
                 // Process @scene and @location markers
-                console.log("=== Processing @scene and @location markers ===");
+                Logger.log("=== Processing @scene and @location markers ===");
 
                 // FIRST: Split paragraphs that contain both @scene and @location
                 const paragraphsArray = Array.from(paragraphs);
@@ -519,7 +521,7 @@ const characterData = JSON.stringify({
                         html.includes("@scene:") &&
                         html.includes("@location:")
                     ) {
-                        console.log(
+                        Logger.log(
                             "Found paragraph with both markers, splitting...",
                         );
                         // Split by <br> or <br/> or <br />
@@ -542,13 +544,13 @@ const characterData = JSON.stringify({
 
                 // Re-query paragraphs after splitting
                 paragraphs = replayContent.querySelectorAll("p");
-                console.log(
+                Logger.log(
                     `After splitting scene/location: ${paragraphs.length} paragraphs`,
                 );
 
                 // NOW process the markers
                 paragraphs.forEach((p) => {
-                    const text = p.textContent.trim();
+                    const text = p.textContent?.trim() || "";
                     const htmlContent = p.innerHTML.trim();
 
                     // Debug: log first 100 chars of each paragraph
@@ -556,7 +558,7 @@ const characterData = JSON.stringify({
                         htmlContent.includes("@scene") ||
                         htmlContent.includes("@location")
                     ) {
-                        console.log(
+                        Logger.log(
                             "Found marker paragraph:",
                             htmlContent.substring(0, 100),
                         );
@@ -564,7 +566,7 @@ const characterData = JSON.stringify({
 
                     // Process @scene markers
                     if (text.startsWith("@scene:")) {
-                        console.log("Processing @scene marker");
+                        Logger.log("Processing @scene marker");
                         const sceneMatch = text.match(/@scene:\s*(\d+)/);
                         if (sceneMatch) {
                             const sceneNumber = sceneMatch[1];
@@ -591,7 +593,7 @@ const characterData = JSON.stringify({
                                 nextP &&
                                 nextP.innerHTML.trim().startsWith("@location:")
                             ) {
-                                console.log(
+                                Logger.log(
                                     "Found location marker right after scene",
                                 );
                                 const locationMatch =
@@ -637,7 +639,7 @@ const characterData = JSON.stringify({
                             p.innerHTML = "";
                             p.appendChild(container);
                             p.setAttribute("data-type", "scene-marker");
-                            console.log(
+                            Logger.log(
                                 "Scene badge created for scene",
                                 sceneNumber,
                             );
@@ -649,7 +651,7 @@ const characterData = JSON.stringify({
                         htmlContent.startsWith("@location:") &&
                         !p.hasAttribute("data-remove")
                     ) {
-                        console.log("Processing standalone @location marker");
+                        Logger.log("Processing standalone @location marker");
                         const locationMatch =
                             htmlContent.match(/@location:\s*(.+)/);
                         if (locationMatch) {
@@ -669,7 +671,7 @@ const characterData = JSON.stringify({
                             p.appendChild(label);
                             p.appendChild(contentSpan);
                             p.setAttribute("data-type", "location-marker");
-                            console.log("Standalone location label created");
+                            Logger.log("Standalone location label created");
                         }
                     }
                 });
@@ -678,14 +680,14 @@ const characterData = JSON.stringify({
                 replayContent
                     .querySelectorAll('p[data-remove="true"]')
                     .forEach((p) => p.remove());
-                console.log("Character icons added");
+                Logger.log("Character icons added");
             } catch (e) {
-                console.error("Error parsing character data:", e);
+                Logger.error("Error parsing character data:", e);
             }
         }
 
         // STEP 2: Setup mode switching
-        console.log("=== STEP 2: Setting up mode switching ===");
+        Logger.log("=== STEP 2: Setting up mode switching ===");
 
         // Load saved mode from localStorage
         const savedMode = localStorage.getItem("replayViewMode") || "completo";
@@ -693,23 +695,28 @@ const characterData = JSON.stringify({
 
         buttons.forEach((button) => {
             button.addEventListener("click", () => {
-                const mode = button.dataset.mode;
-                setMode(mode);
-                localStorage.setItem("replayViewMode", mode);
+                const mode = button.getAttribute("data-mode");
+                if (mode) {
+                    setMode(mode);
+                    localStorage.setItem("replayViewMode", mode);
+                }
             });
         });
 
-        function setMode(mode) {
+        function setMode(mode: string) {
             // Update active button
             buttons.forEach((btn) => {
-                btn.classList.toggle("active", btn.dataset.mode === mode);
+                btn.classList.toggle(
+                    "active",
+                    btn.getAttribute("data-mode") === mode,
+                );
             });
 
             // Update content visibility
             if (replayContent) {
                 replayContent.className = `lore-text mode-${mode}`;
-                console.log(`Mode changed to: ${mode}`);
-                console.log(`Content class: ${replayContent.className}`);
+                Logger.log(`Mode changed to: ${mode}`);
+                Logger.log(`Content class: ${replayContent.className}`);
 
                 // Count visible paragraphs
                 const allP = replayContent.querySelectorAll("p");
@@ -718,11 +725,11 @@ const characterData = JSON.stringify({
                 const withDataType = Array.from(allP).filter((p) =>
                     p.hasAttribute("data-type"),
                 );
-                console.log(
+                Logger.log(
                     `Paragraphs with data-type: ${withDataType.length} / ${allP.length}`,
                 );
                 if (withDataType.length > 0) {
-                    console.log(
+                    Logger.log(
                         "Sample data-types:",
                         withDataType
                             .slice(0, 3)
@@ -735,7 +742,7 @@ const characterData = JSON.stringify({
                     const style = window.getComputedStyle(p);
                     return style.display !== "none";
                 });
-                console.log(
+                Logger.log(
                     `Visible paragraphs: ${visibleP.length} / ${allP.length}`,
                 );
 
@@ -743,7 +750,7 @@ const characterData = JSON.stringify({
                 if (mode !== "completo" && withDataType.length > 0) {
                     const shouldBeHidden = Array.from(allP).find((p) => {
                         const type = p.getAttribute("data-type");
-                        if (mode === "novela")
+                        if (mode === "novela" && type)
                             return [
                                 "player",
                                 "gm",
@@ -751,9 +758,9 @@ const characterData = JSON.stringify({
                                 "rule",
                                 "meta",
                             ].includes(type);
-                        if (mode === "mesa")
+                        if (mode === "mesa" && type)
                             return ["roll", "rule", "meta"].includes(type);
-                        if (mode === "reglas")
+                        if (mode === "reglas" && type)
                             return ["char", "player", "gm", "meta"].includes(
                                 type,
                             );
@@ -763,15 +770,15 @@ const characterData = JSON.stringify({
                     if (shouldBeHidden) {
                         const computedStyle =
                             window.getComputedStyle(shouldBeHidden);
-                        console.log("DEBUG: Paragraph that should be hidden:");
-                        console.log(
+                        Logger.log("DEBUG: Paragraph that should be hidden:");
+                        Logger.log(
                             "  data-type:",
                             shouldBeHidden.getAttribute("data-type"),
                         );
-                        console.log("  display:", computedStyle.display);
-                        console.log("  visibility:", computedStyle.visibility);
-                        console.log("  classes:", shouldBeHidden.className);
-                        console.log(
+                        Logger.log("  display:", computedStyle.display);
+                        Logger.log("  visibility:", computedStyle.visibility);
+                        Logger.log("  classes:", shouldBeHidden.className);
+                        Logger.log(
                             "  parent classes:",
                             shouldBeHidden.parentElement?.className,
                         );
@@ -780,18 +787,18 @@ const characterData = JSON.stringify({
 
                 // Debug: show first few visible paragraphs
                 if (visibleP.length < allP.length) {
-                    console.log("Sample visible paragraphs:");
+                    Logger.log("Sample visible paragraphs:");
                     visibleP.slice(0, 3).forEach((p, i) => {
-                        console.log(
-                            `  ${i}: ${p.getAttribute("data-type")} - ${p.textContent.substring(0, 40)}...`,
+                        Logger.log(
+                            `  ${i}: ${p.getAttribute("data-type")} - ${p.textContent?.substring(0, 40)}...`,
                         );
                     });
                 }
             } else {
-                console.error("Replay content element not found!");
+                Logger.error("Replay content element not found!");
             }
         }
 
-        console.log("=== Setup complete ===");
+        Logger.log("=== Setup complete ===");
     });
 </script>

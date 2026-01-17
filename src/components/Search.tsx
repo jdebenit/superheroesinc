@@ -1,205 +1,206 @@
 import React, { useState, useEffect, useRef } from 'react';
+import Logger from '../utils/Logger';
 
 interface SearchResult {
-    title: string;
-    description: string;
-    url: string;
-    category: string;
-    type: string;
-    source?: string;
-    alias?: string;
+  title: string;
+  description: string;
+  url: string;
+  category: string;
+  type: string;
+  source?: string;
+  alias?: string;
 }
 
 const Search: React.FC = () => {
-    const [query, setQuery] = useState('');
-    const [results, setResults] = useState<SearchResult[]>([]);
-    const [isOpen, setIsOpen] = useState(false);
-    const [searchIndex, setSearchIndex] = useState<SearchResult[]>([]);
-    const [selectedIndex, setSelectedIndex] = useState(0);
-    const searchRef = useRef<HTMLDivElement>(null);
-    const inputRef = useRef<HTMLInputElement>(null);
+  const [query, setQuery] = useState('');
+  const [results, setResults] = useState<SearchResult[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [searchIndex, setSearchIndex] = useState<SearchResult[]>([]);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const searchRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
-    // Load search index
-    useEffect(() => {
-        fetch('/search-index.json')
-            .then(res => res.json())
-            .then(data => setSearchIndex(data))
-            .catch(err => console.error('Error loading search index:', err));
-    }, []);
+  // Load search index
+  useEffect(() => {
+    fetch('/search-index.json')
+      .then(res => res.json())
+      .then(data => setSearchIndex(data))
+      .catch(err => Logger.error('Error loading search index:', err));
+  }, []);
 
-    // Close dropdown when clicking outside
-    useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
-                setIsOpen(false);
-            }
-        };
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
 
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => document.removeEventListener('mousedown', handleClickOutside);
-    }, []);
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
-    // Search function
-    const performSearch = (searchQuery: string) => {
-        if (!searchQuery.trim()) {
-            setResults([]);
-            setIsOpen(false);
-            return;
+  // Search function
+  const performSearch = (searchQuery: string) => {
+    if (!searchQuery.trim()) {
+      setResults([]);
+      setIsOpen(false);
+      return;
+    }
+
+    const normalizedQuery = searchQuery.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+    const filtered = searchIndex.filter(item => {
+      const normalizedTitle = item.title.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      const normalizedDesc = item.description.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      const normalizedAlias = item.alias?.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '') || '';
+
+      return normalizedTitle.includes(normalizedQuery) ||
+        normalizedDesc.includes(normalizedQuery) ||
+        normalizedAlias.includes(normalizedQuery);
+    });
+
+    // Sort by relevance (title matches first)
+    const sorted = filtered.sort((a, b) => {
+      const aTitle = a.title.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      const bTitle = b.title.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+      const aInTitle = aTitle.includes(normalizedQuery);
+      const bInTitle = bTitle.includes(normalizedQuery);
+
+      if (aInTitle && !bInTitle) return -1;
+      if (!aInTitle && bInTitle) return 1;
+      return 0;
+    });
+
+    setResults(sorted.slice(0, 8)); // Limit to 8 results
+    setIsOpen(true);
+    setSelectedIndex(0);
+  };
+
+  // Handle input change with debounce
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      performSearch(query);
+    }, 200);
+
+    return () => clearTimeout(timer);
+  }, [query, searchIndex]);
+
+  // Keyboard navigation
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (!isOpen || results.length === 0) return;
+
+    switch (e.key) {
+      case 'ArrowDown':
+        e.preventDefault();
+        setSelectedIndex(prev => (prev + 1) % results.length);
+        break;
+      case 'ArrowUp':
+        e.preventDefault();
+        setSelectedIndex(prev => (prev - 1 + results.length) % results.length);
+        break;
+      case 'Enter':
+        e.preventDefault();
+        if (results[selectedIndex]) {
+          window.location.href = results[selectedIndex].url;
         }
+        break;
+      case 'Escape':
+        setIsOpen(false);
+        inputRef.current?.blur();
+        break;
+    }
+  };
 
-        const normalizedQuery = searchQuery.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  // Highlight matching text
+  const highlightText = (text: string, query: string) => {
+    if (!query.trim()) return text;
 
-        const filtered = searchIndex.filter(item => {
-            const normalizedTitle = item.title.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-            const normalizedDesc = item.description.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-            const normalizedAlias = item.alias?.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '') || '';
+    const normalizedText = text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    const normalizedQuery = query.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    const index = normalizedText.toLowerCase().indexOf(normalizedQuery.toLowerCase());
 
-            return normalizedTitle.includes(normalizedQuery) ||
-                normalizedDesc.includes(normalizedQuery) ||
-                normalizedAlias.includes(normalizedQuery);
-        });
+    if (index === -1) return text;
 
-        // Sort by relevance (title matches first)
-        const sorted = filtered.sort((a, b) => {
-            const aTitle = a.title.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-            const bTitle = b.title.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-
-            const aInTitle = aTitle.includes(normalizedQuery);
-            const bInTitle = bTitle.includes(normalizedQuery);
-
-            if (aInTitle && !bInTitle) return -1;
-            if (!aInTitle && bInTitle) return 1;
-            return 0;
-        });
-
-        setResults(sorted.slice(0, 8)); // Limit to 8 results
-        setIsOpen(true);
-        setSelectedIndex(0);
-    };
-
-    // Handle input change with debounce
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            performSearch(query);
-        }, 200);
-
-        return () => clearTimeout(timer);
-    }, [query, searchIndex]);
-
-    // Keyboard navigation
-    const handleKeyDown = (e: React.KeyboardEvent) => {
-        if (!isOpen || results.length === 0) return;
-
-        switch (e.key) {
-            case 'ArrowDown':
-                e.preventDefault();
-                setSelectedIndex(prev => (prev + 1) % results.length);
-                break;
-            case 'ArrowUp':
-                e.preventDefault();
-                setSelectedIndex(prev => (prev - 1 + results.length) % results.length);
-                break;
-            case 'Enter':
-                e.preventDefault();
-                if (results[selectedIndex]) {
-                    window.location.href = results[selectedIndex].url;
-                }
-                break;
-            case 'Escape':
-                setIsOpen(false);
-                inputRef.current?.blur();
-                break;
-        }
-    };
-
-    // Highlight matching text
-    const highlightText = (text: string, query: string) => {
-        if (!query.trim()) return text;
-
-        const normalizedText = text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-        const normalizedQuery = query.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-        const index = normalizedText.toLowerCase().indexOf(normalizedQuery.toLowerCase());
-
-        if (index === -1) return text;
-
-        const before = text.slice(0, index);
-        const match = text.slice(index, index + query.length);
-        const after = text.slice(index + query.length);
-
-        return (
-            <>
-                {before}
-                <mark className="search-highlight">{match}</mark>
-                {after}
-            </>
-        );
-    };
+    const before = text.slice(0, index);
+    const match = text.slice(index, index + query.length);
+    const after = text.slice(index + query.length);
 
     return (
-        <div className="search-container" ref={searchRef}>
-            <div className="search-input-wrapper">
-                <svg className="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <circle cx="11" cy="11" r="8" strokeWidth="2" />
-                    <path d="m21 21-4.35-4.35" strokeWidth="2" strokeLinecap="round" />
-                </svg>
-                <input
-                    ref={inputRef}
-                    type="text"
-                    className="search-input"
-                    placeholder="Buscar..."
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                    onKeyDown={handleKeyDown}
-                    onFocus={() => query && setIsOpen(true)}
-                />
-                {query && (
-                    <button
-                        className="search-clear"
-                        onClick={() => {
-                            setQuery('');
-                            setResults([]);
-                            setIsOpen(false);
-                        }}
-                        aria-label="Limpiar búsqueda"
-                    >
-                        ×
-                    </button>
-                )}
-            </div>
+      <>
+        {before}
+        <mark className="search-highlight">{match}</mark>
+        {after}
+      </>
+    );
+  };
 
-            {isOpen && results.length > 0 && (
-                <div className="search-results">
-                    {results.map((result, index) => (
-                        <a
-                            key={`${result.type}-${result.url}`}
-                            href={result.url}
-                            className={`search-result-item ${index === selectedIndex ? 'selected' : ''}`}
-                            onMouseEnter={() => setSelectedIndex(index)}
-                        >
-                            <div className="result-header">
-                                <span className="result-title">
-                                    {highlightText(result.title, query)}
-                                </span>
-                                <span className="result-category">{result.category}</span>
-                            </div>
-                            <p className="result-description">
-                                {highlightText(result.description.slice(0, 100), query)}
-                                {result.description.length > 100 ? '...' : ''}
-                            </p>
-                        </a>
-                    ))}
-                </div>
-            )}
+  return (
+    <div className="search-container" ref={searchRef}>
+      <div className="search-input-wrapper">
+        <svg className="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <circle cx="11" cy="11" r="8" strokeWidth="2" />
+          <path d="m21 21-4.35-4.35" strokeWidth="2" strokeLinecap="round" />
+        </svg>
+        <input
+          ref={inputRef}
+          type="text"
+          className="search-input"
+          placeholder="Buscar..."
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          onKeyDown={handleKeyDown}
+          onFocus={() => query && setIsOpen(true)}
+        />
+        {query && (
+          <button
+            className="search-clear"
+            onClick={() => {
+              setQuery('');
+              setResults([]);
+              setIsOpen(false);
+            }}
+            aria-label="Limpiar búsqueda"
+          >
+            ×
+          </button>
+        )}
+      </div>
 
-            {isOpen && query && results.length === 0 && (
-                <div className="search-results">
-                    <div className="search-no-results">
-                        No se encontraron resultados para "{query}"
-                    </div>
-                </div>
-            )}
+      {isOpen && results.length > 0 && (
+        <div className="search-results">
+          {results.map((result, index) => (
+            <a
+              key={`${result.type}-${result.url}`}
+              href={result.url}
+              className={`search-result-item ${index === selectedIndex ? 'selected' : ''}`}
+              onMouseEnter={() => setSelectedIndex(index)}
+            >
+              <div className="result-header">
+                <span className="result-title">
+                  {highlightText(result.title, query)}
+                </span>
+                <span className="result-category">{result.category}</span>
+              </div>
+              <p className="result-description">
+                {highlightText(result.description.slice(0, 100), query)}
+                {result.description.length > 100 ? '...' : ''}
+              </p>
+            </a>
+          ))}
+        </div>
+      )}
 
-            <style>{`
+      {isOpen && query && results.length === 0 && (
+        <div className="search-results">
+          <div className="search-no-results">
+            No se encontraron resultados para "{query}"
+          </div>
+        </div>
+      )}
+
+      <style>{`
         .search-container {
           position: relative;
           width: 100%;
@@ -351,8 +352,8 @@ const Search: React.FC = () => {
           }
         }
       `}</style>
-        </div>
-    );
+    </div>
+  );
 };
 
 export default Search;

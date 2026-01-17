@@ -1,3 +1,5 @@
+import Logger from './Logger';
+
 /**
  * JSON Diagnostic and Repair Utility for Character Data
  * 
@@ -103,12 +105,12 @@ export function repairCharacterJSON(character: any): any {
 
     // Convert arrays to objects if needed
     if (Array.isArray(skills.selected)) {
-        console.warn('Converting selected from array to object');
+        Logger.warn('Converting selected from array to object');
         skills.selected = {};
     }
 
     if (Array.isArray(skills.specified)) {
-        console.warn('Converting specified from array to object');
+        Logger.warn('Converting specified from array to object');
         skills.specified = {};
     }
 
@@ -119,10 +121,10 @@ export function repairCharacterJSON(character: any): any {
 
     // Remove duplicates from items arrays
     skills.generalItems = Array.from(new Set(skills.generalItems.map((item: any) => JSON.stringify(item))))
-        .map((str: string) => JSON.parse(str));
+        .map((str: any) => JSON.parse(str));
 
     skills.specialItems = Array.from(new Set(skills.specialItems.map((item: any) => JSON.stringify(item))))
-        .map((str: string) => JSON.parse(str));
+        .map((str: any) => JSON.parse(str));
 
     // Rebuild combined items array
     skills.items = [...skills.generalItems, ...skills.specialItems];
@@ -143,5 +145,5 @@ export function repairCharacterJSON(character: any): any {
 if (typeof window !== 'undefined') {
     (window as any).diagnoseCharacterJSON = diagnoseCharacterJSON;
     (window as any).repairCharacterJSON = repairCharacterJSON;
-    console.log('✅ JSON diagnostic tools loaded. Use diagnoseCharacterJSON(char) and repairCharacterJSON(char)');
+    Logger.log('✅ JSON diagnostic tools loaded. Use diagnoseCharacterJSON(char) and repairCharacterJSON(char)');
 }
