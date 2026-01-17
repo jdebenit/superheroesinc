@@ -1,5 +1,5 @@
 ---
-title: Resistencia a prejuicios no es solo un numero
+title: Resistencia a prejuicios no es solo un número
 pubDate: 2026-01-17
 description: Una reflexión sobre la Resistencia a Prejuicios, su sentido original en Superhéroes Inc. y cómo puede generar mejores decisiones, conflictos y escenas memorables cuando se usa con intención en mesa.
 author: Jorge Francisco de Benito Montoya
