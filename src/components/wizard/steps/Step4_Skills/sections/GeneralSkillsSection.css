@@ -6,8 +6,8 @@
 .native-language-input {
     width: 100%;
     padding: 0.25rem 0.5rem;
-    border: 1px solid #d1d5db;
-    border-radius: 4px;
+    border: 1px solid var(--s4-gray-300);
+    border-radius: var(--s4-border-radius-sm);
     font-size: 0.875rem;
     font-weight: normal;
 }

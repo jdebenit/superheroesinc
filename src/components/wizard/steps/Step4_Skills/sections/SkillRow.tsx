@@ -50,34 +50,34 @@ export const SkillRow: React.FC<SkillRowProps> = ({
 }) => {
     // Helpers for classes
     const getModClass = (val: number) => {
-        if (!val) return 'td-cell mod-text-empty';
-        return `td-cell ${isSpecial ? 'mod-text-special' : 'mod-text-general'}`;
+        if (!val) return 'wizard-td-cell wizard-mod-text-empty';
+        return `wizard-td-cell ${isSpecial ? 'wizard-mod-text-special' : 'wizard-mod-text-general'}`;
     };
 
     return (
-        <tr className="skill-row">
+        <tr className="wizard-skill-row">
             {/* Name */}
-            <td className="td-name">
+            <td className="wizard-td-name">
                 {name}
             </td>
 
             {/* Formula */}
-            <td className="td-cell td-formula">
+            <td className="wizard-td-cell wizard-td-formula">
                 {formula}
             </td>
 
             {/* Base */}
-            <td className="td-cell">
-                <div className="base-input-container">
+            <td className="wizard-td-cell">
+                <div className="wizard-base-input-container">
                     <input
                         type="number"
                         value={baseValue}
                         min={minBase}
                         onChange={(e) => onBaseChange(e.target.value)}
-                        className={`base-input ${calcPCCost > 0 ? 'base-input-cost' : 'base-input-normal'}`}
+                        className={`wizard-base-input ${calcPCCost > 0 ? 'wizard-base-input-cost' : 'wizard-base-input-normal'}`}
                     />
                     {calcPCCost > 0 && (
-                        <span className="cost-text">
+                        <span className="wizard-cost-text">
                             {calcPCCost.toFixed(1)} PC
                         </span>
                     )}
@@ -95,45 +95,45 @@ export const SkillRow: React.FC<SkillRowProps> = ({
             </td>
 
             {/* Manual Mod */}
-            <td className="td-cell">
+            <td className="wizard-td-cell">
                 <input
                     type="number"
                     value={manualMod || ''}
                     onChange={(e) => onModChange(e.target.value)}
                     placeholder="0"
-                    className="manual-mod-input"
+                    className="wizard-manual-mod-input"
                 />
             </td>
 
             {/* TOTAL */}
-            <td className="td-cell total-cell">
+            <td className="wizard-td-cell wizard-total-cell">
                 {total}%
             </td>
 
             {/* Special Columns */}
             {isSpecial && (
                 <>
-                    <td className="td-cell">
-                        <span className={`special-col-cost ${totalPCCost > 0 ? 'cost-paid' : 'cost-free'}`}>
+                    <td className="wizard-td-cell">
+                        <span className={`wizard-special-col-cost ${totalPCCost > 0 ? 'wizard-cost-paid' : 'wizard-cost-free'}`}>
                             {totalPCCost > 0 ? `${totalPCCost.toFixed(1).replace('.0', '')} PC` : 'GRATIS'}
                         </span>
                         {calcPCCost > 0 && (
-                            <div className="cost-basis-detail">
+                            <div className="wizard-cost-basis-detail">
                                 (Base: +{calcPCCost.toFixed(1)})
                             </div>
                         )}
                         {isRequired && (
-                            <div className="required-text">
+                            <div className="wizard-required-text">
                                 Obligatoria
                             </div>
                         )}
                     </td>
-                    <td className="td-cell">
+                    <td className="wizard-td-cell">
                         {!isFree && !isRequired && onRemove && (
                             <DeleteRowButton onDelete={onRemove} title="Eliminar" />
                         )}
-                        {isFree && <span className="check-green">✓</span>}
-                        {isRequired && <span className="check-orange">✓</span>}
+                        {isFree && <span className="wizard-check-green">✓</span>}
+                        {isRequired && <span className="wizard-check-orange">✓</span>}
                     </td>
                 </>
             )}

@@ -8,21 +8,21 @@ interface SkillTableProps {
 
 export const SkillTable: React.FC<SkillTableProps> = ({ isSpecial = false, children }) => {
     return (
-        <div className="skill-table-container">
-            <table className="skill-table">
-                <thead className={isSpecial ? 'head-special' : 'head-general'}>
+        <div className="wizard-skill-table-container">
+            <table className="wizard-skill-table">
+                <thead className={isSpecial ? 'wizard-head-special' : 'wizard-head-general'}>
                     <tr>
-                        <th className={`th-left ${isSpecial ? 'th-title-special' : 'th-title-general'}`}>Habilidad</th>
-                        <th className={`th-center ${isSpecial ? 'th-text-special' : 'th-text-general'}`}>Fórmula</th>
-                        <th className={`th-center ${isSpecial ? 'th-text-special' : 'th-text-general'}`}>Base</th>
-                        <th className={`th-center ${isSpecial ? 'th-text-special' : 'th-text-general'}`}>Origen</th>
-                        <th className={`th-center ${isSpecial ? 'th-text-special' : 'th-text-general'}`}>Especialidad</th>
-                        <th className={`th-center ${isSpecial ? 'th-text-special' : 'th-text-general'}`}>Otros</th>
-                        <th className={`th-center th-total ${isSpecial ? 'th-total-special' : 'th-total-general'}`}>TOTAL</th>
+                        <th className={`wizard-th-left ${isSpecial ? 'wizard-th-title-special' : 'wizard-th-title-general'}`}>Habilidad</th>
+                        <th className={`wizard-th-center ${isSpecial ? 'wizard-th-text-special' : 'wizard-th-text-general'}`}>Fórmula</th>
+                        <th className={`wizard-th-center ${isSpecial ? 'wizard-th-text-special' : 'wizard-th-text-general'}`}>Base</th>
+                        <th className={`wizard-th-center ${isSpecial ? 'wizard-th-text-special' : 'wizard-th-text-general'}`}>Origen</th>
+                        <th className={`wizard-th-center ${isSpecial ? 'wizard-th-text-special' : 'wizard-th-text-general'}`}>Especialidad</th>
+                        <th className={`wizard-th-center ${isSpecial ? 'wizard-th-text-special' : 'wizard-th-text-general'}`}>Otros</th>
+                        <th className={`wizard-th-center wizard-th-total ${isSpecial ? 'wizard-th-total-special' : 'wizard-th-total-general'}`}>TOTAL</th>
                         {isSpecial && (
                             <>
-                                <th className="th-center th-text-special">PCs</th>
-                                <th className="th-center th-text-special">Acciones</th>
+                                <th className="wizard-th-center wizard-th-text-special">PCs</th>
+                                <th className="wizard-th-center wizard-th-text-special">Acciones</th>
                             </>
                         )}
                     </tr>

@@ -77,7 +77,7 @@ export const AvailableSkillsSection: React.FC<AvailableSkillsSectionProps> = ({
                                         <WizardButton
                                             variant="primary"
                                             onClick={() => onAddSpecifiedSkill(skill.id)}
-                                            style={{ backgroundColor: '#10b981' }}
+                                            className="add-btn-style"
                                         >
                                             + Añadir ({displayCost})
                                         </WizardButton>
@@ -101,7 +101,7 @@ export const AvailableSkillsSection: React.FC<AvailableSkillsSectionProps> = ({
                                             <WizardButton
                                                 variant="primary"
                                                 onClick={() => onAddSkill(skill.id)}
-                                                style={{ backgroundColor: '#10b981' }}
+                                                className="add-btn-style"
                                             >
                                                 + Añadir ({displayCost})
                                             </WizardButton>
