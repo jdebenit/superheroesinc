@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { OriginOptionsContainer } from '../../../shared/OriginOptionsContainer';
+import { FormSelect } from '../../../shared/FormSelect';
 
 interface MalditoParams {
     magnitude: string | null;
@@ -38,28 +39,22 @@ export const MALDITO_DATA = {
 };
 
 export default function MalditoSection({ malditoParams, onChange }: MalditoSectionProps) {
-    const handleMagnitudeChange = (id: string) => {
+    const handleMagnitudeChange = (value: string) => {
         onChange({
             malditoParams: {
                 ...malditoParams,
-                magnitude: id
+                magnitude: value || null
             }
         });
     };
 
-    const handleSourceChange = (id: string) => {
+    const handleSourceChange = (value: string) => {
         onChange({
             malditoParams: {
                 ...malditoParams,
-                source: id
+                source: value || null
             }
         });
-    };
-
-    const getCostLabel = (cost: number) => {
-        if (cost > 0) return `+${cost} PC`;
-        if (cost < 0) return `${cost} PC`;
-        return '+0 PC';
     };
 
     const totalCost = useMemo(() => {
@@ -78,81 +73,28 @@ export default function MalditoSection({ malditoParams, onChange }: MalditoSecti
             themeColor="orange"
         >
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                {/* Magnitude Selection */}
-                <div>
-                    <label style={{
-                        display: 'block',
-                        fontSize: '0.875rem',
-                        fontWeight: 'bold',
-                        color: '#c2410c', // orange-700
-                        marginBottom: '0.5rem',
-                        textTransform: 'uppercase'
-                    }}>
-                        Magnitud de la maldición
-                    </label>
-                    <select
-                        value={malditoParams?.magnitude || ""}
-                        onChange={(e) => handleMagnitudeChange(e.target.value)}
-                        style={{
-                            width: '100%',
-                            padding: '0.75rem',
-                            border: '2px solid #f97316', // orange-500
-                            borderRadius: '8px',
-                            backgroundColor: 'white',
-                            fontSize: '0.875rem',
-                            fontWeight: 'bold',
-                            color: '#c2410c', // orange-700
-                            cursor: 'pointer',
-                            outline: 'none'
-                        }}
-                    >
-                        <option value="" disabled>Selecciona la magnitud...</option>
-                        {MALDITO_MAGNITUDE.map((option) => (
-                            <option key={option.id} value={option.id}>
-                                {option.label} ({option.description}) → {getCostLabel(option.cost)}
-                            </option>
-                        ))}
-                    </select>
-                </div>
+                <FormSelect
+                    label="Magnitud de la maldición"
+                    value={malditoParams?.magnitude || ''}
+                    onChange={handleMagnitudeChange}
+                    options={MALDITO_MAGNITUDE}
+                    placeholder="Selecciona la magnitud..."
+                    labelColor="#c2410c"
+                />
 
-                {/* Source Selection */}
-                <div>
-                    <label style={{
-                        display: 'block',
-                        fontSize: '0.875rem',
-                        fontWeight: 'bold',
-                        color: '#c2410c', // orange-700
-                        marginBottom: '0.5rem',
-                        textTransform: 'uppercase'
-                    }}>
-                        Fuente de la maldición
-                    </label>
-                    <select
-                        value={malditoParams?.source || ""}
-                        onChange={(e) => handleSourceChange(e.target.value)}
-                        style={{
-                            width: '100%',
-                            padding: '0.75rem',
-                            border: '2px solid #f97316', // orange-500
-                            borderRadius: '8px',
-                            backgroundColor: 'white',
-                            fontSize: '0.875rem',
-                            fontWeight: 'bold',
-                            color: '#c2410c', // orange-700
-                            cursor: 'pointer',
-                            outline: 'none'
-                        }}
-                    >
-                        <option value="" disabled>Selecciona la fuente...</option>
-                        {MALDITO_SOURCE.map((option) => (
-                            <option key={option.id} value={option.id}>
-                                {option.label} ({option.description})
-                            </option>
-                        ))}
-                    </select>
-                </div>
+
+                <FormSelect
+                    label="Origen de la maldición"
+                    value={malditoParams?.source || ''}
+                    onChange={handleSourceChange}
+                    options={MALDITO_SOURCE.map(s => ({ ...s, cost: 0 }))}
+                    placeholder="Selecciona el origen..."
+                    labelColor="#c2410c"
+                    showCostInOption={false}
+                />
             </div>
         </OriginOptionsContainer>
     );
 }
+
 

@@ -8,10 +8,7 @@ import {
     hasOrigin,
     hasSubtype,
     getVigilanteSpecialties,
-    getMutantPowerTypes,
     calculateEM,
-    isPowerCrossType,
-    // New helpers
     isGuardian,
     isMaldito,
     getPowerPenalty
@@ -120,8 +117,6 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
         newRolls.splice(index, 1);
         onChange({ ...data, magicTableRolls: newRolls });
     };
-
-
 
     const updateTrauma = (specialty: string, text: string) => {
         onChange({

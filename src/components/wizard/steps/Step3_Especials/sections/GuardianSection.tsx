@@ -6,6 +6,7 @@ import {
     GUARDIAN_TRANSFORMATIONS
 } from '../../../../../data/guardianOptions';
 import { OriginOptionsContainer } from '../../../shared/OriginOptionsContainer';
+import { FormSelect } from '../../../shared/FormSelect';
 
 export interface GuardianParams {
     quality: string | null;
@@ -42,80 +43,50 @@ export default function GuardianSection({ guardianParams, onChange }: GuardianSe
             themeColor="blue"
         >
             <div style={{ display: 'grid', gap: '1.5rem' }}>
-                {/* QUALITY */}
-                <div>
-                    <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '0.5rem', color: '#1e40af' }}>
-                        Cualidad del Objeto
-                    </label>
-                    <select
-                        value={quality || ''}
-                        onChange={(e) => handleChange('quality', e.target.value || null)}
-                        style={{ width: '100%', padding: '0.5rem', borderRadius: '6px', border: '1px solid #ccc' }}
-                    >
-                        <option value="">-- Seleccionar --</option>
-                        {GUARDIAN_QUALITIES.map(q => (
-                            <option key={q.id} value={q.id}>
-                                {q.label} ({q.cost > 0 ? '+' : ''}{q.cost} PC)
-                            </option>
-                        ))}
-                    </select>
-                    {selectedQuality && (
-                        <p style={{ marginTop: '0.25rem', fontSize: '0.85rem', color: '#6b7280', fontStyle: 'italic' }}>
-                            {selectedQuality.description}
-                        </p>
-                    )}
-                </div>
+                <FormSelect
+                    label="Cualidad del Objeto"
+                    value={quality || ''}
+                    onChange={(value) => handleChange('quality', value || null)}
+                    options={GUARDIAN_QUALITIES}
+                    placeholder="-- Seleccionar --"
+                    labelColor="#1e40af"
+                    showDescription={false}
+                />
+                {selectedQuality && (
+                    <p style={{ marginTop: '-1rem', fontSize: '0.85rem', color: '#6b7280', fontStyle: 'italic' }}>
+                        {selectedQuality.description}
+                    </p>
+                )}
 
-                {/* OBJECT TYPE */}
-                <div>
-                    <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '0.5rem', color: '#1e40af' }}>
-                        Objeto
-                    </label>
-                    <select
-                        value={objectType || ''}
-                        onChange={(e) => handleChange('objectType', e.target.value || null)}
-                        style={{ width: '100%', padding: '0.5rem', borderRadius: '6px', border: '1px solid #ccc' }}
-                    >
-                        <option value="">-- Seleccionar --</option>
-                        {GUARDIAN_OBJECTS.map(o => (
-                            <option key={o.id} value={o.id}>{o.label}</option>
-                        ))}
-                    </select>
-                </div>
+                <FormSelect
+                    label="Objeto"
+                    value={objectType || ''}
+                    onChange={(value) => handleChange('objectType', value || null)}
+                    options={GUARDIAN_OBJECTS.map(o => ({ ...o, cost: 0 }))}
+                    placeholder="-- Seleccionar --"
+                    labelColor="#1e40af"
+                    showCostInOption={false}
+                />
 
-                {/* FEATURE */}
-                <div>
-                    <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '0.5rem', color: '#1e40af' }}>
-                        Rasgo Especial
-                    </label>
-                    <select
-                        value={feature || ''}
-                        onChange={(e) => handleChange('feature', e.target.value || null)}
-                        style={{ width: '100%', padding: '0.5rem', borderRadius: '6px', border: '1px solid #ccc' }}
-                    >
-                        <option value="">-- Seleccionar --</option>
-                        {GUARDIAN_FEATURES.map(f => (
-                            <option key={f.id} value={f.id}>{f.label}</option>
-                        ))}
-                    </select>
-                </div>
+                <FormSelect
+                    label="Rasgo Especial"
+                    value={feature || ''}
+                    onChange={(value) => handleChange('feature', value || null)}
+                    options={GUARDIAN_FEATURES.map(f => ({ ...f, cost: 0 }))}
+                    placeholder="-- Seleccionar --"
+                    labelColor="#1e40af"
+                    showCostInOption={false}
+                />
 
-                {/* TRANSFORMATION */}
-                <div>
-                    <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '0.5rem', color: '#1e40af' }}>
-                        Transformación
-                    </label>
-                    <select
-                        value={transformation || ''}
-                        onChange={(e) => handleChange('transformation', e.target.value || null)}
-                        style={{ width: '100%', padding: '0.5rem', borderRadius: '6px', border: '1px solid #ccc' }}
-                    >
-                        <option value="">-- Seleccionar --</option>
-                        {GUARDIAN_TRANSFORMATIONS.map(t => (
-                            <option key={t.id} value={t.id}>{t.label}</option>
-                        ))}
-                    </select>
-                </div>
+                <FormSelect
+                    label="Transformación"
+                    value={transformation || ''}
+                    onChange={(value) => handleChange('transformation', value || null)}
+                    options={GUARDIAN_TRANSFORMATIONS.map(t => ({ ...t, cost: 0 }))}
+                    placeholder="-- Seleccionar --"
+                    labelColor="#1e40af"
+                    showCostInOption={false}
+                />
             </div>
         </OriginOptionsContainer>
     );
