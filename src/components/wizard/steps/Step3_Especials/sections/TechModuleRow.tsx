@@ -2,6 +2,8 @@ import React from 'react';
 import type { TechModule } from '../types';
 import { TECH_MODULES } from '../../../../../data/techModules';
 import { Badge } from '../../../shared/Badge';
+import { CostBadge } from '../../../shared/CostBadge';
+import { DeleteRowButton } from '../../../shared/DeleteRowButton';
 
 interface TechModuleRowProps {
     module: TechModule;
@@ -83,44 +85,13 @@ export default function TechModuleRow({
                         <span style={{ fontSize: '0.75rem', fontWeight: 'bold', color: '#6b7280' }}>PC</span>
                     </div>
                 ) : (
-                    <span style={{
-                        fontSize: '0.875rem',
-                        fontWeight: 'bold',
-                        backgroundColor: '#eef2ff',
-                        color: '#4f46e5',
-                        padding: '0.25rem 0.75rem',
-                        borderRadius: '9999px',
-                        border: '1px solid #e0e7ff',
-                        display: 'inline-block'
-                    }}>
-                        {module.pcCost} PC
-                    </span>
+                    <CostBadge cost={module.pcCost} label="PC" />
                 )}
             </td>
 
             {/* Acciones */}
             <td style={{ padding: '0.75rem', textAlign: 'center' }}>
-                <button
-                    onClick={() => onRemove(module.id)}
-                    style={{
-                        color: '#ef4444',
-                        padding: '8px',
-                        borderRadius: '9999px',
-                        border: 'none',
-                        background: 'transparent',
-                        cursor: 'pointer',
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                    }}
-                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#fef2f2'}
-                    onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
-                    title="Desinstalar módulo"
-                >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                    </svg>
-                </button>
+                <DeleteRowButton onDelete={() => onRemove(module.id)} title="Desinstalar módulo" />
             </td>
         </tr>
     );
