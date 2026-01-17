@@ -7,11 +7,11 @@ updatedDate: 2026-01-16
 ---
 > El Mercado del Pasaje es un lugar donde respiro mejor, y eso me inquieta más de lo que debería. No sabría explicar por qué, pero allí el ruido no molesta y el movimiento no empuja. Todo parece estar donde tiene que estar, aunque no se entienda. No siento la presión de demostrar nada, ni de encajar en una forma concreta. Camino, observo, y el cuerpo responde como si conociera el ritmo desde antes. A veces tengo la sensación de que el mercado no me mira, sino que me deja estar, y esa ausencia de juicio resulta extrañamente cómoda. No sé qué voy a encontrar cada vez que bajo, pero tampoco siento la necesidad de controlarlo. Y para alguien como yo, eso ya es decir mucho.
 > 
-> Crónicas de Asha de Cindraor.
+> Crónicas de [Asha de Cindraor](/personajes/la-naga).
 
 El Mercado del Pasaje está en Europa, según dicen los que quieren zanjar la conversación rápido. Es una forma cómoda de señalar algo sin tener que pensarlo demasiado. Es una realidad periférica de bolsillo, nacida en esos huecos que deja la realidad cuando nadie la mira con atención. No es un lugar al que se llegue por error, aunque muchos juren después que fue pura casualidad.
 
-Antes de ser mercado ya existía como una grieta mal cerrada entre realidades. Así se rumorea, con mucha cautela en alguna de las cafeteria de la [FDM](/organizaciones/fundacion-divina-mundial/)) El origen real parece ser un acto fundacional o una creación deliberada.
+Antes de ser mercado ya existía como una grieta mal cerrada entre realidades. Así se rumorea en la cafetería de la [FDM](/organizaciones/fundacion-divina-mundial/). El origen real no parece ser una creación deliberada.
 
 Hermes del Olimpo fue el primero en encontrar aquel pliegue. Guardián de los mensajes cifrados y del conocimiento que no debe circular libremente, buscaba un santuario. Un espacio discreto, fuera del tránsito, donde proteger lo que no debía exponerse al ruido del mundo. Hermes pensaba en silencio, en sombra, en caminos que solo se recorren cuando se sabe escuchar. Levantó los primeros senderos con esa idea en mente.
 
@@ -25,7 +25,7 @@ Hoy se sabe que existen varios accesos, aunque ninguno es permanente. [La Fundac
 
 En [Valladolid](/localizaciones/valladolid/), el acceso más conocido está en el Pasaje Gutiérrez. En el centro se alza una estatua que el turista fotografía sin pensar dos veces. Para la mayoría no es más que decoración urbana. Para quienes conocen el símbolo, es un sello. El gesto se invoca, no se graba. Y cuando se completa, la base de piedra se abre y deja ver una escalera que no estaba ahí un segundo antes. Para el resto del mundo, nada cambia. La gente sigue caminando alrededor.
 
-En Albacete, el Pasaje de Lodares guarda otra entrada, más sobria, menos evidente. No hay estatua central ni nada que llame la atención. Los iniciados dicen que el descenso se abre del mismo modo. La Fundación sospecha que estos accesos son válvulas de escape de la presión constante entre Hermes y Mercurio.
+Y en Albacete, el Pasaje de Lodares guarda otra entrada, más sobria, menos evidente. No hay estatua central ni nada que llame la atención. Los iniciados dicen que el descenso se abre del mismo modo. La Fundación sospecha que estos accesos son válvulas de escape de la presión constante entre Hermes y Mercurio.
 
 El descenso suma siempre setecientos setenta y siete peldaños. No porque alguien los contara una vez, sino porque están numerados. Es imposible no darse cuenta. A medida que bajas, el ruido de la superficie se apaga y te envuelve otro sonido, más profundo, más constante, bullicio caótico...
 
