@@ -203,7 +203,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
             </div>
 
             {/* IDENTITY SECTION */}
-            <WizardSection title="👤 Identidad">
+            <WizardSection title="Identidad">
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginBottom: '1.5rem' }}>
                     <WizardField
                         label="Nombre del Personaje"
