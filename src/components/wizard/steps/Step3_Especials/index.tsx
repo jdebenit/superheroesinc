@@ -567,15 +567,6 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                 </div>
             )}
 
-            {/* MAGICAL BONDS SECTION FOR MAGO */}
-            {isMago && (
-                <MagicalBondsSection
-                    data={data}
-                    onChange={onChange}
-                    onOpenModal={openMagicalBondsModal}
-                />
-            )}
-
             {/* ENTE SECTION */}
             {isEnte && (
                 <EnteSection
@@ -628,6 +619,8 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                 />
             )}
 
+            {isMinotauro && <MinotaurSection />}
+
             {/* VIGILANTE TRAUMAS SECTION */}
             <VigilanteTraumasSection
                 vigilanteSpecialties={vigilanteSpecialties}
@@ -671,8 +664,6 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                     onChange={updateCyborgImplants}
                 />
             )}
-
-            {isMinotauro && <MinotaurSection />}
 
             {/* TECHNOLOGICAL MODULES SECTION */}
             {isTechnological && (
@@ -771,6 +762,15 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                 onClose={() => setModalOpen(false)}
                 onToggleBond={toggleMagicalBond}
             />
+
+            {/* MAGICAL BONDS SECTION FOR MAGO */}
+            {isMago && (
+                <MagicalBondsSection
+                    data={data}
+                    onChange={onChange}
+                    onOpenModal={openMagicalBondsModal}
+                />
+            )}
 
             <style>{modalStyles}</style>
         </div>

@@ -1,9 +1,10 @@
 import React from 'react';
 import { TECH_MODULES } from '../../../../../data/techModules';
 import type { TechModule } from '../types';
-import { SectionContainer } from '../components/atomic/SectionContainer';
-import { PixelButton } from '../components/atomic/PixelButton';
-import { DataTable, type Column } from '../components/atomic/DataTable';
+import { SectionContainer } from '../../../shared/SectionContainer';
+import { PixelButton } from '../../../shared/PixelButton';
+import { DataTable, type Column } from '../../../shared/DataTable';
+import { Badge } from '../../../shared/Badge';
 
 interface TechModulesSectionProps {
     techModules: TechModule[];
@@ -36,14 +37,11 @@ export default function TechModulesSection({
                 const type = definition?.type || 'General';
                 const isInternal = type === 'Mejora Interna';
                 return (
-                    <span
-                        className={`text-xs px-2 py-1 rounded-full border font-bold ${isInternal
-                                ? 'bg-pink-100 text-pink-700 border-pink-200'
-                                : 'bg-blue-50 text-blue-700 border-blue-200'
-                            }`}
-                    >
-                        {type}
-                    </span>
+                    <Badge
+                        label={type}
+                        color={isInternal ? 'pink' : 'blue'}
+                        variant="solid"
+                    />
                 );
             }
         },

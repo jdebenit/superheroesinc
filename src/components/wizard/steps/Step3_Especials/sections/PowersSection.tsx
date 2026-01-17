@@ -1,8 +1,8 @@
 import React from 'react';
 import PowerRow from './PowerRow';
 import type { SelectedPower } from '../types';
-import { SectionContainer } from '../components/atomic/SectionContainer';
-import { PixelButton } from '../components/atomic/PixelButton';
+import { SectionContainer } from '../../../shared/SectionContainer';
+import { PixelButton } from '../../../shared/PixelButton';
 
 interface PowersSectionProps {
     data: any;

@@ -1,6 +1,6 @@
 import React from 'react';
-import { SectionContainer } from '../components/atomic/SectionContainer';
-import { ComicTextArea } from '../components/atomic/ComicTextArea';
+import { SectionContainer } from '../../../shared/SectionContainer';
+import { ComicTextArea } from '../../../shared/ComicTextArea';
 
 interface VigilanteTraumasSectionProps {
     vigilanteSpecialties: string[];
