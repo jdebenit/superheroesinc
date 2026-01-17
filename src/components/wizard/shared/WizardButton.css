@@ -1,0 +1,58 @@
+/* WizardButton Base Styles */
+.wizard-btn {
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.wizard-btn-full {
+    width: 100%;
+}
+
+/* Primary Variant */
+.wizard-btn-primary {
+    background-color: #3b82f6;
+    color: white;
+}
+
+.wizard-btn-primary:hover {
+    background-color: #2563eb;
+}
+
+/* Secondary Variant */
+.wizard-btn-secondary {
+    background-color: #f3f4f6;
+    color: #374151;
+    border: 1px solid #d1d5db;
+}
+
+.wizard-btn-secondary:hover {
+    background-color: #e5e7eb;
+}
+
+/* Danger Variant */
+.wizard-btn-danger {
+    background-color: #fee2e2;
+    color: #ef4444;
+}
+
+.wizard-btn-danger:hover {
+    background-color: #fecaca;
+}
+
+/* Ghost Variant */
+.wizard-btn-ghost {
+    background-color: transparent;
+    color: #6b7280;
+}
+
+.wizard-btn-ghost:hover {
+    background-color: #f9fafb;
+}
