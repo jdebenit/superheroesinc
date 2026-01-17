@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { OriginOptionsContainer } from '../../../shared/OriginOptionsContainer';
+import { FormSelect } from '../../../shared/FormSelect';
 
 export const ENTE_FORMS = [
     { id: 'humanoid', label: 'Humanoide', cost: 1, description: 'Aspecto humanoide en el plano' },
@@ -22,28 +23,22 @@ interface EnteSectionProps {
 }
 
 export default function EnteSection({ enteParams, onChange }: EnteSectionProps) {
-    const handleFormChange = (formId: string) => {
+    const handleFormChange = (value: string) => {
         onChange({
             enteParams: {
                 ...enteParams,
-                formType: formId
+                formType: value || null
             }
         });
     };
 
-    const handleEffectChange = (effectId: string) => {
+    const handleEffectChange = (value: string) => {
         onChange({
             enteParams: {
                 ...enteParams,
-                visualEffect: effectId
+                visualEffect: value || null
             }
         });
-    };
-
-    const getCostLabel = (cost: number) => {
-        if (cost > 0) return `+ ${cost} PC`;
-        if (cost < 0) return `${cost} PC`;
-        return '+0 PC';
     };
 
     const totalCost = useMemo(() => {
@@ -66,81 +61,26 @@ export default function EnteSection({ enteParams, onChange }: EnteSectionProps) 
             themeColor="purple"
         >
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                {/* Form Type Selection */}
-                <div>
-                    <label style={{
-                        display: 'block',
-                        fontSize: '0.875rem',
-                        fontWeight: 'bold',
-                        color: '#7e22ce', // purple-700
-                        marginBottom: '0.5rem',
-                        textTransform: 'uppercase'
-                    }}>
-                        Tipo de forma en el plano
-                    </label>
-                    <select
-                        value={enteParams?.formType || ""}
-                        onChange={(e) => handleFormChange(e.target.value)}
-                        style={{
-                            width: '100%',
-                            padding: '0.75rem',
-                            border: '2px solid #a855f7', // purple-500
-                            borderRadius: '8px',
-                            backgroundColor: 'white',
-                            fontSize: '0.875rem',
-                            fontWeight: 'bold',
-                            color: '#7e22ce', // purple-700
-                            cursor: 'pointer',
-                            outline: 'none'
-                        }}
-                    >
-                        <option value="" disabled>Selecciona una forma...</option>
-                        {ENTE_FORMS.map((option) => (
-                            <option key={option.id} value={option.id}>
-                                {option.label} ({option.description}) → {getCostLabel(option.cost)}
-                            </option>
-                        ))}
-                    </select>
-                </div>
+                <FormSelect
+                    label="Tipo de forma en el plano"
+                    value={enteParams?.formType || ''}
+                    onChange={handleFormChange}
+                    options={ENTE_FORMS}
+                    placeholder="Selecciona una forma..."
+                    labelColor="#7e22ce"
+                />
 
-                {/* Visual Effect Selection */}
-                <div>
-                    <label style={{
-                        display: 'block',
-                        fontSize: '0.875rem',
-                        fontWeight: 'bold',
-                        color: '#7e22ce', // purple-700
-                        marginBottom: '0.5rem',
-                        textTransform: 'uppercase'
-                    }}>
-                        Efectos en la forma adoptada
-                    </label>
-                    <select
-                        value={enteParams?.visualEffect || ""}
-                        onChange={(e) => handleEffectChange(e.target.value)}
-                        style={{
-                            width: '100%',
-                            padding: '0.75rem',
-                            border: '2px solid #a855f7', // purple-500
-                            borderRadius: '8px',
-                            backgroundColor: 'white',
-                            fontSize: '0.875rem',
-                            fontWeight: 'bold',
-                            color: '#7e22ce', // purple-700
-                            cursor: 'pointer',
-                            outline: 'none'
-                        }}
-                    >
-                        <option value="" disabled>Selecciona un efecto visual...</option>
-                        {ENTE_EFFECTS.map((option) => (
-                            <option key={option.id} value={option.id}>
-                                {option.label} ({option.description}) → {getCostLabel(option.cost)}
-                            </option>
-                        ))}
-                    </select>
-                </div>
+                <FormSelect
+                    label="Efectos en la forma adoptada"
+                    value={enteParams?.visualEffect || ''}
+                    onChange={handleEffectChange}
+                    options={ENTE_EFFECTS}
+                    placeholder="Selecciona un efecto visual..."
+                    labelColor="#7e22ce"
+                />
             </div>
         </OriginOptionsContainer>
     );
 }
+
 

@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import SequelsSelector from '../../../shared/SequelsSelector';
 import { SEQUELS } from '../../../../../data/sequels';
 import { OriginOptionsContainer } from '../../../shared/OriginOptionsContainer';
+import { FormSelect } from '../../../shared/FormSelect';
 
 // --- Data Constants ---
 
@@ -47,12 +48,11 @@ export const ALTERADO_DATA = {
 export default function AlteradoSection({ alteradoParams, onChange }: AlteradoSectionProps) {
     const { agent, sequels = [] } = alteradoParams;
 
-    const handleAgentChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        const agentId = e.target.value || null;
+    const handleAgentChange = (value: string) => {
         onChange({
             alteradoParams: {
                 ...alteradoParams,
-                agent: agentId
+                agent: value || null
             }
         });
     };
@@ -85,40 +85,15 @@ export default function AlteradoSection({ alteradoParams, onChange }: AlteradoSe
             cost={totalDiscount}
             themeColor="green"
         >
-            {/* AGENT SELECT */}
-            <div style={{ marginBottom: '2rem' }}>
-                <label style={{
-                    display: 'block',
-                    fontSize: '1rem',
-                    fontWeight: 'bold',
-                    color: '#166534',
-                    marginBottom: '0.75rem',
-                    textTransform: 'uppercase'
-                }}>
-                    Agente del Cambio
-                </label>
-                <select
-                    value={agent || ''}
-                    onChange={handleAgentChange}
-                    style={{
-                        width: '100%',
-                        padding: '0.75rem',
-                        fontSize: '1rem',
-                        border: '2px solid #16a34a',
-                        borderRadius: '8px',
-                        backgroundColor: 'white',
-                        color: '#1f2937',
-                        cursor: 'pointer'
-                    }}
-                >
-                    <option value="">-- Selecciona un agente --</option>
-                    {ALTERADO_AGENTS.map(item => (
-                        <option key={item.id} value={item.id}>
-                            {item.label} {item.cost > 0 ? `(Bonificación: ${item.cost} PC)` : ''}
-                        </option>
-                    ))}
-                </select>
-            </div>
+            <FormSelect
+                label="Agente del Cambio"
+                value={agent || ''}
+                onChange={handleAgentChange}
+                options={ALTERADO_AGENTS}
+                placeholder="-- Selecciona un agente --"
+                labelColor="#166534"
+                showCostInOption={false}
+            />
 
             {/* SEQUELS SELECTOR */}
             <SequelsSelector
