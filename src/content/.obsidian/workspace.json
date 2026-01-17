@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "lore/localizaciones/el-mercado-del-pasaje.md",
+                "file": "lore/localizaciones/avalon.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "el-mercado-del-pasaje"
+              "title": "avalon"
             }
           }
         ]
@@ -185,8 +185,10 @@
   },
   "active": "420a991fd7188ca7",
   "lastOpenFiles": [
-    "lore/localizaciones/valdoria.md",
     "lore/localizaciones/el-mercado-del-pasaje.md",
+    "lore/localizaciones/avalon.md",
+    "lore/localizaciones/cronopolis.md",
+    "lore/localizaciones/valdoria.md",
     "lore/localizaciones/paraiso.md",
     "lore/localizaciones/Sin título.md",
     "blog/resistencia-a-prejuicios-superheroes-inc.md",
@@ -209,8 +211,6 @@
     "blog/la-web-como-punto-de-encuentro-del-juego.md",
     "lore/localizaciones/valladolid.md",
     "faq/13-daño-lanzar-objetos-telequinesis.md",
-    "faq/12-alcance-telepatia.md",
-    "faq/11-supervelocidad-valor-control.md",
     "faq",
     "rpg/leon-rojo.yaml",
     "rpg/jefe-motero-road-reapers.yaml",

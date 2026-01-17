@@ -1,0 +1,14 @@
+---
+title: avalon
+description: Avalon es un reino mágico antiguo que no busca dominar ni salvar al mundo, sino evitar que se rompa, incluso cuando eso implica cerrar puertas y cumplir pactos incómodos.
+category: localizaciones
+source: "Héroe Agenda: Sobrenaturales y Arcanos"
+updatedDate: 2026-01-18
+---
+Avalon, no es un reino feérico idealizado ni un decorado mítico sin consecuencias. Es un reino mágico estable, antiguo y consciente de sí mismo, con soberanía, memoria histórica y una relación compleja con el mundo humano. Existe separado de la [Tierra Zero](/localizaciones/tierra-zero/), pero nunca del todo aislado, y su vínculo principal se establece desde muy temprano con las islas británicas, especialmente con Gales. Avalon no busca dominar a la humanidad, pero tampoco se subordina a ella. Su prioridad siempre ha sido el equilibrio y la supervivencia a largo plazo.
+
+El contacto real entre Avalon y los humanos se consolida a través de Myrddin Wyllt y su linaje, que crea un lazo permanente entre ambos mundos. Ese contacto trae avances, intercambio de conocimiento y una época de prosperidad mágica, pero también genera tensiones, abusos y conflictos de poder. Para evitar que la relación derive en una guerra abierta, se firma el llamado Pacto de las Edades bajo el liderazgo del Rey Arturo y los representantes de Avalon. Este pacto no establece una jerarquía, sino una cooperación vigilada, regulando los caminos entre mundos y el uso de la magia compartida.
+
+Durante siglos, Avalon actúa además como refugio para magos, hechiceros y seres sobrenaturales perseguidos en el mundo humano, especialmente durante el auge de la Inquisición y las cacerías de brujas. Sin embargo, cuando la persecución se vuelve sistemática y el miedo humano empieza a poner en peligro la estabilidad del propio reino, Avalon toma una decisión drástica pero coherente con su filosofía, cerrar el Camino de Myrddin. No es un acto de castigo ni de desprecio, sino una medida de contención. El equilibrio se ha roto y mantener abiertas las puertas supondría la destrucción de ambos lados.
+
+En la era contemporánea, Avalon deja de ser un mito dormido y reaparece como actor político real. Bajo el gobierno de Oberon, el reino demuestra una visión pragmática del mundo moderno. Tras el caos provocado por la Tecnoguerra y la llegada de Nigalión, y en un contexto de debilitamiento europeo, el Reino Unido reactiva su antigua alianza con Avalon mediante el Tratado de Carmarthen. Este acuerdo incluye defensa mutua, intercambio de magia y tecnología, reapertura controlada de los Caminos de Myrddin y la restauración del vínculo mágico de la monarquía británica. Avalon no actúa desde la nostalgia, sino desde la necesidad estratégica.
