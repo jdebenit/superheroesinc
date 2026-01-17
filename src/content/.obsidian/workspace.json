@@ -11,10 +11,14 @@
             "id": "420a991fd7188ca7",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "lore/localizaciones/el-mercado-del-pasaje.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "Nueva pestaña"
+              "title": "el-mercado-del-pasaje"
             }
           }
         ]
@@ -179,11 +183,15 @@
       "bases:Crear nueva base": false
     }
   },
-  "active": "2bf133c1830a0ce8",
+  "active": "420a991fd7188ca7",
   "lastOpenFiles": [
+    "lore/localizaciones/valdoria.md",
+    "lore/localizaciones/el-mercado-del-pasaje.md",
+    "lore/localizaciones/paraiso.md",
+    "lore/localizaciones/Sin título.md",
+    "blog/resistencia-a-prejuicios-superheroes-inc.md",
     "faq/17-funcion-resistencia-prejuicios.md",
     "faq/16-errata-daño-campo-energetico.md",
-    "blog/resistencia-a-prejuicios-superheroes-inc.md",
     "2025-12-11.md",
     "blog/actual-plays-superheroes-inc.md",
     "blog/metahumanos-demasiado-poderosos-salida.md",
@@ -200,13 +208,9 @@
     "blog/juego-rol-superheroes-inc-contenido-vivo.md",
     "blog/la-web-como-punto-de-encuentro-del-juego.md",
     "lore/localizaciones/valladolid.md",
-    "lore/localizaciones/valdoria.md",
     "faq/13-daño-lanzar-objetos-telequinesis.md",
     "faq/12-alcance-telepatia.md",
     "faq/11-supervelocidad-valor-control.md",
-    "lore/eventos/la-tecnoguerra.md",
-    "lore/eventos/la-caida-de-la-gran-barrera.md",
-    "blog/psicogeografía-y-memoria-en-el-rol.md",
     "faq",
     "rpg/leon-rojo.yaml",
     "rpg/jefe-motero-road-reapers.yaml",
