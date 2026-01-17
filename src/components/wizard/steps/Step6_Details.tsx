@@ -9,6 +9,7 @@ import { WizardField } from '../shared/WizardField';
 import { DynamicList } from '../shared/DynamicList';
 import { FormSelect } from '../shared/FormSelect';
 import { InfoBox } from '../shared/InfoBox';
+import { CostBadge } from '../shared/CostBadge';
 
 interface Step6Props {
     data: {
@@ -175,7 +176,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
     };
 
     // --- VEHÍCULOS ---
-    const addVehicle = () => addItem('vehicles', { name: "Nuevo vehículo", armor: "", pe: "", speed: "", range: "" });
+    const addVehicle = () => addItem('vehicles', { name: "Nuevo vehículo", armor: "", pe: "", speed: "", range: "", cost: 0 });
     const updateVehicle = (index: number, field: string, value: any) => updateItem('vehicles', index, field, value);
     const removeVehicle = (index: number) => removeItem('vehicles', index);
 
@@ -261,7 +262,20 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
             </WizardSection>
 
             {/* WEAPONS SECTION */}
-            <WizardSection title="⚔️ Armas" color="#b91c1c">
+            <WizardSection
+                title="⚔️ Armas"
+                color="#b91c1c"
+                rightContent={
+                    <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', padding: '0.25rem 0.5rem', borderRadius: '0.5rem' }}>
+                        <CostBadge
+                            cost={data.weapons?.items?.reduce((acc: number, item: any) => acc + (parseInt(item.cost) || 0), 0) || 0}
+                            label="PC"
+                            variant="default"
+                            className="text-white"
+                        />
+                    </div>
+                }
+            >
                 <DynamicList
                     items={data.weapons?.items || []}
                     onAdd={addWeapon}
@@ -331,7 +345,20 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
             </WizardSection>
 
             {/* EQUIPMENT SECTION (New) */}
-            <WizardSection title="🎒 Equipo" color="#059669">
+            <WizardSection
+                title="🎒 Equipo"
+                color="#059669"
+                rightContent={
+                    <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', padding: '0.25rem 0.5rem', borderRadius: '0.5rem' }}>
+                        <CostBadge
+                            cost={data.equipment?.items?.reduce((acc: number, item: any) => acc + (parseInt(item.cost) || 0), 0) || 0}
+                            label="PC"
+                            variant="default"
+                            className="text-white"
+                        />
+                    </div>
+                }
+            >
                 <DynamicList
                     items={data.equipment?.items || []}
                     onAdd={addEquipment}
@@ -368,7 +395,20 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
             </WizardSection>
 
             {/* ARTIFACTS SECTION */}
-            <WizardSection title="✨ Artefactos" color="#7c3aed">
+            <WizardSection
+                title="✨ Artefactos"
+                color="#7c3aed"
+                rightContent={
+                    <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', padding: '0.25rem 0.5rem', borderRadius: '0.5rem' }}>
+                        <CostBadge
+                            cost={data.artifacts?.items?.reduce((acc: number, item: any) => acc + (parseInt(item.cost) || 0), 0) || 0}
+                            label="PC"
+                            variant="default"
+                            className="text-white"
+                        />
+                    </div>
+                }
+            >
                 <DynamicList
                     items={data.artifacts?.items || []}
                     onAdd={addArtifact}
@@ -480,7 +520,20 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
             </WizardSection>
 
             {/* VEHICLES SECTION */}
-            <WizardSection title="🚗 Vehículos" color="#0891b2">
+            <WizardSection
+                title="🚗 Vehículos"
+                color="#0891b2"
+                rightContent={
+                    <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', padding: '0.25rem 0.5rem', borderRadius: '0.5rem' }}>
+                        <CostBadge
+                            cost={data.vehicles?.items?.reduce((acc: number, item: any) => acc + (parseInt(item.cost) || 0), 0) || 0}
+                            label="PC"
+                            variant="default"
+                            className="text-white"
+                        />
+                    </div>
+                }
+            >
                 <DynamicList
                     items={data.vehicles?.items || []}
                     onAdd={addVehicle}
@@ -488,7 +541,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                     addButtonLabel="Añadir Vehículo"
                     color="#0891b2"
                     renderItem={(item, index) => (
-                        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr', gap: '0.75rem', alignItems: 'start' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr 80px', gap: '0.75rem', alignItems: 'start' }}>
                             <WizardField
                                 label="Nombre"
                                 value={item.name}
@@ -517,6 +570,14 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                                 label="Alcance/Autonomía"
                                 value={item.range || ''}
                                 onChange={(val) => updateVehicle(index, 'range', val)}
+                                style={{ marginBottom: 0 }}
+                            />
+                            <WizardField
+                                type="number"
+                                label="Coste"
+                                min="0"
+                                value={item.cost || 0}
+                                onChange={(val) => updateVehicle(index, 'cost', Math.max(0, parseInt(val) || 0).toString())}
                                 style={{ marginBottom: 0 }}
                             />
                         </div>

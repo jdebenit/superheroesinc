@@ -7,6 +7,7 @@ interface WizardSectionProps {
     description?: React.ReactNode;
     icon?: string;
     color?: string;
+    rightContent?: React.ReactNode;
 }
 
 export const WizardSection: React.FC<WizardSectionProps> = ({
@@ -14,7 +15,8 @@ export const WizardSection: React.FC<WizardSectionProps> = ({
     children,
     description,
     icon,
-    color
+    color,
+    rightContent
 }) => {
     return (
         <div className="wizard-section">
@@ -22,14 +24,21 @@ export const WizardSection: React.FC<WizardSectionProps> = ({
                 className="wizard-section-header"
                 style={color ? { borderBottomColor: color } : undefined}
             >
-                <div>
-                    <h3 className="wizard-section-title" style={color ? { color } : undefined}>
-                        {icon && <span className="wizard-section-icon">{icon}</span>}
-                        {title}
-                    </h3>
-                    {description && (
-                        <div className="wizard-section-description">
-                            {description}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', width: '100%' }}>
+                    <div>
+                        <h3 className="wizard-section-title" style={color ? { color } : undefined}>
+                            {icon && <span className="wizard-section-icon">{icon}</span>}
+                            {title}
+                        </h3>
+                        {description && (
+                            <div className="wizard-section-description">
+                                {description}
+                            </div>
+                        )}
+                    </div>
+                    {rightContent && (
+                        <div className="wizard-section-right-content">
+                            {rightContent}
                         </div>
                     )}
                 </div>
