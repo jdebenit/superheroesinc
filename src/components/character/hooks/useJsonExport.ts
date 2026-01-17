@@ -33,6 +33,7 @@ export const useJsonExport = (character: any) => {
         // This ensures valid import even if values match defaults
         exportData.name = character.name;
         exportData.attributes = character.attributes;
+        exportData.meta = character.meta;
 
         const filename = `${(character.name || 'personaje').toLowerCase().replace(/\s+/g, '-')}.json`;
         const jsonStr = JSON.stringify(exportData, null, 2);

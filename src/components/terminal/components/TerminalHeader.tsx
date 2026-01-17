@@ -1,5 +1,6 @@
 import React from 'react';
 import CharacterSheet from '../../character/CharacterSheet';
+import { APP_VERSIONS } from '../../../data/appVersions';
 
 interface CharacterData {
     name: string;
@@ -29,7 +30,7 @@ export default function TerminalHeader({
     return (
         <div className="terminal-header-internal">
             <h1 className="terminal-title-internal">
-                SHI Tactic Player Terminal (Alpha 0.0.12)
+                SHI Tactic Player Terminal ({APP_VERSIONS.TACTIC_TERMINAL})
             </h1>
             <div className="terminal-header-actions">
                 <input

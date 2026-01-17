@@ -12,6 +12,10 @@ export const initialCharacterState = {
     name: "Nuevo Personaje",
     alias: "",
     notes: "",
+    meta: {
+        version: "",
+        generator: ""
+    },
     totalCost: "",
     level: 1,
     origin: { items: [] },

@@ -18,6 +18,8 @@ import './CharacterWizard.css';
 import { WizardHelpModal } from './shared/WizardHelpModal';
 import { WIZARD_HELP } from '../../data/wizardHelp';
 
+import { APP_VERSIONS } from '../../data/appVersions';
+
 export default function CharacterWizard() {
     const [currentStep, setCurrentStep] = useState(1);
     const [showHelp, setShowHelp] = useState(false);
@@ -64,6 +66,29 @@ export default function CharacterWizard() {
             }
         }
     }, [character]);
+
+    // Ensure metadata is always up to date with current version
+    useEffect(() => {
+        setCharacter((prev: any) => {
+            const currentMeta = prev.meta || {};
+            const newMeta = {
+                ...currentMeta,
+                version: APP_VERSIONS.WIZARD,
+                generator: `SHI Wizard`
+            };
+
+            // Avoid infinite loops if already matches
+            if (currentMeta.version === newMeta.version && currentMeta.generator === newMeta.generator) {
+                return prev;
+            }
+
+            console.log('🔄 Updating Character Metadata:', newMeta);
+            return {
+                ...prev,
+                meta: newMeta
+            };
+        });
+    }, []);
 
 
     // Calculate total PCs using custom hook
@@ -204,7 +229,7 @@ export default function CharacterWizard() {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', justifyContent: 'center' }}>
                     <div>
                         <h1 className="wizard-title">
-                            Generador de Fichas (Beta 0.6.8)
+                            Generador de Fichas ({APP_VERSIONS.WIZARD})
                         </h1>
                         <p className="wizard-subtitle">
                             Crea tu personaje paso a paso

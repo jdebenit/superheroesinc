@@ -1,4 +1,5 @@
 import React from 'react';
+import { APP_VERSIONS } from '../../../data/appVersions';
 
 interface SheetHeaderProps {
     character: any;
@@ -16,6 +17,9 @@ export const SheetHeader: React.FC<SheetHeaderProps> = ({ character, totalPCs })
                 {(totalPCs || character.totalCost) && (
                     <span className="total-cost">Total PCs: {totalPCs || character.totalCost}</span>
                 )}
+                <span className="sheet-version" style={{ fontSize: '0.75rem', color: '#666', marginLeft: '0.5rem' }}>
+                    v{APP_VERSIONS.CHARACTER_SHEET}
+                </span>
             </div>
         </div>
     );
