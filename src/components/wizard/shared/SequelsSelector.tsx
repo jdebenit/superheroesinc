@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import SelectionModal from '../steps/Step3_Especials/modals/SelectionModal';
 import { SEQUELS } from '../../../data/sequels';
 import { DeleteRowButton } from './DeleteRowButton';
+import './SequelsSelector.css';
 
 interface SelectedSequel {
     id: string;
@@ -9,7 +10,7 @@ interface SelectedSequel {
 }
 
 interface SequelsSelectorProps {
-    selectedSequels: SelectedSequel[]; // Array of objects { id: string, description?: string }
+    selectedSequels: SelectedSequel[];
     onChange: (sequels: SelectedSequel[]) => void;
     showWarning?: boolean;
     warningMessage?: React.ReactNode;
@@ -50,33 +51,13 @@ export default function SequelsSelector({
 
     return (
         <div>
-            <div style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                marginBottom: '1rem'
-            }}>
-                <h4 style={{
-                    fontSize: '1rem',
-                    fontWeight: 'bold',
-                    color: '#166534',
-                    textTransform: 'uppercase',
-                    margin: 0
-                }}>
+            <div className="sequels-header">
+                <h4 className="sequels-title">
                     Secuelas (Opcional)
                 </h4>
                 <button
                     onClick={() => setIsSequelModalOpen(true)}
-                    style={{
-                        padding: '0.5rem 1rem',
-                        backgroundColor: '#16a34a',
-                        color: 'white',
-                        border: 'none',
-                        borderRadius: '6px',
-                        cursor: 'pointer',
-                        fontWeight: 'bold',
-                        fontSize: '0.875rem'
-                    }}
+                    className="sequels-add-button"
                 >
                     + Añadir Secuela
                 </button>
@@ -84,64 +65,35 @@ export default function SequelsSelector({
 
             {/* Selected Sequels List */}
             {selectedSequels.length > 0 ? (
-                <div style={{ display: 'grid', gap: '0.75rem' }}>
+                <div className="sequels-list">
                     {selectedSequels.map(s => {
                         const def = SEQUELS.find(d => d.id === s.id);
                         if (!def) return null;
 
                         return (
-                            <div
-                                key={s.id}
-                                style={{
-                                    padding: '0.75rem',
-                                    backgroundColor: '#dcfce7',
-                                    border: '1px solid #16a34a',
-                                    borderRadius: '8px'
-                                }}
-                            >
-                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                                    <div style={{ flexGrow: 1 }}>
-                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem' }}>
-                                            <span style={{ fontWeight: 'bold', color: '#1f2937' }}>{def.label}</span>
-                                            <span style={{
-                                                fontSize: '0.75rem',
-                                                backgroundColor: '#15803d',
-                                                color: 'white',
-                                                padding: '2px 6px',
-                                                borderRadius: '4px',
-                                                fontWeight: 'bold'
-                                            }}>
+                            <div key={s.id} className="sequel-item">
+                                <div className="sequel-item-content">
+                                    <div className="sequel-item-info">
+                                        <div className="sequel-item-header">
+                                            <span className="sequel-item-label">{def.label}</span>
+                                            <span className="sequel-item-cost">
                                                 -{def.cost} PC
                                             </span>
                                         </div>
-                                        <p style={{ fontSize: '0.85rem', color: '#4b5563', margin: '0 0 0.5rem 0' }}>
+                                        <p className="sequel-item-description">
                                             {def.description}
                                         </p>
 
                                         {/* Description Input */}
                                         <div>
-                                            <label style={{
-                                                display: 'block',
-                                                fontSize: '0.75rem',
-                                                fontWeight: 'bold',
-                                                color: '#166534',
-                                                marginBottom: '0.25rem'
-                                            }}>
+                                            <label className="sequel-input-label">
                                                 Descripción de la secuela (Opcional):
                                             </label>
                                             <textarea
                                                 value={s.description || ''}
                                                 onChange={(e) => handleDescriptionChange(s.id, e.target.value)}
                                                 placeholder="Describe cómo se manifiesta esta secuela..."
-                                                style={{
-                                                    width: '100%',
-                                                    padding: '0.5rem',
-                                                    fontSize: '0.875rem',
-                                                    border: '1px solid #86efac',
-                                                    borderRadius: '4px',
-                                                    resize: 'vertical',
-                                                    minHeight: '60px'
-                                                }}
+                                                className="sequel-input-textarea"
                                             />
                                         </div>
                                     </div>
@@ -156,27 +108,19 @@ export default function SequelsSelector({
                 </div>
             ) : (
                 showWarning ? (
-                    <div style={{
-                        padding: '1rem',
-                        backgroundColor: '#fef3c7',
-                        border: '2px solid #f59e0b',
-                        borderRadius: '8px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '0.75rem'
-                    }}>
-                        <span style={{ fontSize: '1.5rem' }}>⚠️</span>
+                    <div className="sequels-warning">
+                        <span className="sequels-warning-icon">⚠️</span>
                         <div>
-                            <p style={{ color: '#92400e', fontWeight: 'bold', margin: '0 0 0.25rem 0' }}>
+                            <p className="sequels-warning-title">
                                 Sin secuelas seleccionadas
                             </p>
-                            <p style={{ color: '#78350f', fontSize: '0.875rem', margin: 0 }}>
+                            <p className="sequels-warning-message">
                                 {warningMessage || "Si no seleccionas ninguna secuela, se aplicará una penalización estándar."}
                             </p>
                         </div>
                     </div>
                 ) : (
-                    <p style={{ color: '#6b7280', fontStyle: 'italic', margin: 0 }}>
+                    <p className="sequels-empty">
                         No hay secuelas seleccionadas. Haz clic en "Añadir Secuela" para elegir.
                     </p>
                 )
@@ -186,7 +130,7 @@ export default function SequelsSelector({
             <SelectionModal
                 isOpen={isSequelModalOpen}
                 onClose={() => setIsSequelModalOpen(false)}
-                type="spells" // Using 'spells' type to display simple 'cost' field
+                type="spells"
                 originFilter={null}
                 customTitle="Seleccionar Secuelas"
                 customPlaceholder="Buscar secuela..."
@@ -210,4 +154,3 @@ export default function SequelsSelector({
         </div>
     );
 }
-
