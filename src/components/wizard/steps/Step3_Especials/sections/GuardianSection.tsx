@@ -5,6 +5,7 @@ import {
     GUARDIAN_FEATURES,
     GUARDIAN_TRANSFORMATIONS
 } from '../../../../../data/guardianOptions';
+import { OriginOptionsContainer } from '../../../shared/OriginOptionsContainer';
 
 export interface GuardianParams {
     quality: string | null;
@@ -35,44 +36,12 @@ export default function GuardianSection({ guardianParams, onChange }: GuardianSe
         [quality]);
 
     return (
-        <div style={{
-            backgroundColor: '#eff6ff', // Light blue
-            border: '2px solid #2563eb', // Blue border
-            borderRadius: '0.75rem',
-            overflow: 'hidden',
-            marginBottom: '2rem'
-        }}>
-            <div style={{
-                padding: '1rem',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                borderBottom: '1px solid #bfdbfe'
-            }}>
-                <h3 style={{
-                    fontSize: '1.25rem',
-                    fontWeight: '900',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05em',
-                    color: '#1e40af'
-                }}>Opciones de Origen: Guardián</h3>
-
-                <div style={{
-                    backgroundColor: '#2563eb',
-                    color: 'white',
-                    padding: '0.5rem 1rem',
-                    borderRadius: '6px',
-                    fontWeight: 'bold',
-                    fontSize: '0.875rem'
-                }}>
-                    {selectedQuality ? (
-                        selectedQuality.cost > 0 ? `+${selectedQuality.cost} PC` : `${selectedQuality.cost} PC`
-                    ) : '0 PC'}
-                </div>
-            </div>
-
-            <div style={{ padding: '1.5rem', display: 'grid', gap: '1.5rem' }}>
-
+        <OriginOptionsContainer
+            title="Opciones de Origen: Guardián"
+            cost={selectedQuality?.cost || 0}
+            themeColor="blue"
+        >
+            <div style={{ display: 'grid', gap: '1.5rem' }}>
                 {/* QUALITY */}
                 <div>
                     <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '0.5rem', color: '#1e40af' }}>
@@ -147,8 +116,8 @@ export default function GuardianSection({ guardianParams, onChange }: GuardianSe
                         ))}
                     </select>
                 </div>
-
             </div>
-        </div>
+        </OriginOptionsContainer>
     );
 }
+
