@@ -40,7 +40,18 @@ export default function CyborgImplantRow({ implant, index, onRemove }: CyborgImp
                 )}
             </td>
             <td style={{ padding: '0.75rem', textAlign: 'center' }}>
-                <CostBadge cost={cost} />
+                <span style={{
+                    fontSize: '0.875rem',
+                    fontWeight: 'bold',
+                    backgroundColor: '#eef2ff',
+                    color: '#4f46e5',
+                    padding: '0.25rem 0.75rem',
+                    borderRadius: '9999px',
+                    border: '1px solid #e0e7ff',
+                    display: 'inline-block'
+                }}>
+                    {cost} PC
+                </span>
             </td>
             <td style={{ padding: '0.75rem', textAlign: 'center' }}>
                 <button

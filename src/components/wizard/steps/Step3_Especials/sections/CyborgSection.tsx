@@ -79,7 +79,7 @@ export const CyborgSection: React.FC<CyborgSectionProps> = ({ implants = [], onC
                             {/* Footer Row for Totals */}
                             <tr style={{ backgroundColor: '#f8fafc', borderTop: '2px solid #e2e8f0' }}>
                                 <td colSpan={3} style={{ padding: '1rem', textAlign: 'right', fontWeight: 'bold', color: '#475569' }}>
-                                    Total PCs Implantes:
+                                    Total PCs Invertidos:
                                 </td>
                                 <td style={{ padding: '1rem', textAlign: 'center', fontWeight: '900', color: '#2563eb', fontSize: '1.1em' }}>
                                     {totalCost} PC
