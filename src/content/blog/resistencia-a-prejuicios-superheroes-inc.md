@@ -46,7 +46,7 @@ En mesa, esta mecánica también cumple una función muy práctica. Ayuda a mant
 Cuando un personaje empieza a resolverlo todo desde el extremo, cuando la violencia se convierte en rutina o cuando las decisiones dejan de tener matices, la Resistencia a Prejuicios introduce un coste. No impide actuar, pero deja claro que hacerlo tiene consecuencias internas.
 
 Muchas veces eso basta para que el propio jugador se lo piense dos veces. O para que acepte ese desgaste como parte del camino del personaje.
-## Cómo nos mirábamos entre superseres
+## Cómo nos mirábamos entre metahumanos
 
 La Resistencia a Prejuicios tampoco se quedaba en el plano individual. En la primera edición influía directamente en cómo dos superseres se percibían al conocerse por primera vez.
 
