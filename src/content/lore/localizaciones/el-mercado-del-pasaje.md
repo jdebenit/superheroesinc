@@ -5,9 +5,9 @@ category: localizaciones
 source: Partida Oficial - La Sombra del enroque
 updatedDate: 2026-01-16
 ---
-El Mercado del Pasaje está en Europa, según dicen los que quieren zanjar la conversación rápido. Es una forma cómoda de señalar algo sin tener que pensarlo demasiado. La verdad es que flota entre rutas antiguas, en esos huecos que deja la realidad cuando nadie la mira con atención. No es un lugar al que se llegue por error, aunque muchos juren después que fue pura casualidad.
+El Mercado del Pasaje está en Europa, según dicen los que quieren zanjar la conversación rápido. Es una forma cómoda de señalar algo sin tener que pensarlo demasiado. Es una realidad periférica de bolsillo, nacida en esos huecos que deja la realidad cuando nadie la mira con atención. No es un lugar al que se llegue por error, aunque muchos juren después que fue pura casualidad.
 
-Antes de ser mercado ya existía como una grieta. Una fisura mal cerrada entre realidades. Así aparece, con mucha cautela y demasiadas notas al margen, en algunos informes internos de la Fundación Divina Mundial. El origen real no es un acto fundacional ni una creación deliberada. Es una cicatriz.
+Antes de ser mercado ya existía como una grieta mal cerrada entre realidades. Así se rumorea, con mucha cautela en alguna de las cafeterias de la Fundación Divina Mundial. El origen real no es un acto fundacional ni una creación deliberada.
 
 Hermes del Olimpo fue el primero en encontrar aquel pliegue. Guardián de los mensajes cifrados y del conocimiento que no debe circular libremente, buscaba un santuario. Un espacio discreto, fuera del tránsito, donde proteger lo que no debía exponerse al ruido del mundo. Hermes pensaba en silencio, en sombra, en caminos que solo se recorren cuando se sabe escuchar. Levantó los primeros senderos con esa idea en mente.
 
