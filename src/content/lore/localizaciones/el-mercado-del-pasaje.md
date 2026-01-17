@@ -9,7 +9,7 @@ El Mercado del Pasaje está en Europa, dicen. Es una forma rápida de zanjar la 
 
 Antes de ser mercado ya existía como grieta. Una fisura mal cerrada entre realidades. Así lo cuentan quienes llevan tiempo bajando, y así aparece, con muchas cautelas, en algunos informes internos de la Fundación Divina Mundial. El origen se atribuye a una disputa antigua, de esas que no se resuelven porque representan dos maneras opuestas de entender el mundo.
 
-Hermes, guardián de los caminos ocultos, de los mensajes cifrados y del conocimiento que no debe circular libremente, habría sido el primero en encontrar aquel pliegue. Un espacio intermedio, discreto, fuera del tránsito habitual. Dicen que lo estabilizó, que le dio forma, que levantó los primeros senderos con la idea de proteger lo que no debía exponerse al ruido. No pensó en comercio. Pensó en reserva.
+Hermes, guardián de los caminos ocultos, de los mensajes cifrados y del conocimiento que no debe circular libremente, habría sido el primero en encontrar aquel pliegue. Un espacio intermedio, discreto, fuera del tránsito habitual. Dicen que lo estabilizó, que le dio forma, que levantó los primeros senderos con la idea de proteger lo que no debía exponerse al ruido. Pensó en conocimiento secreto.
 
 Mercurio llegó después. Y donde uno vio santuario, el otro vio cruce. Abrió caminos. Muchos. Convirtió aquel espacio reservado en punto de paso, en lugar de intercambio, en nodo inevitable. No por altruismo, dicen, sino para mantener viva la enemistad. Mientras el lugar creciera, mientras más ojos se posaran sobre él, el conflicto no moriría.
 
