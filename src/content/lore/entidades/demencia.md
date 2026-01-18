@@ -1,6 +1,6 @@
 ---
 title: Demencia
-description: Fuerza primordial que rompe la cordura para revelar, entre el caos, verdades y posibilidades que solo nacen cuando la mente se quiebra.
+description: Una de los cuatro oscuros, la fuerza primordial que rompe la cordura para revelar, entre el caos, verdades y posibilidades que solo nacen cuando la mente se quiebra.
 category: entidades
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-08
