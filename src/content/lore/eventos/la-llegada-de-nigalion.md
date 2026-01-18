@@ -9,7 +9,7 @@ updatedDate: 2026-01-18
 > 
 > Intenté seguir hablando, porque se supone que tienes que narrar lo que pasa, pero me quedé sin palabras. El audio se cortaba, el móvil vibraba sin parar y alguien gritó detrás de mí que aquello no era normal, que no era una protesta ni un incendio. Vi cosas que no sé cómo describir sin que parezca que me lo estoy inventando. Apagué el directo cuando algo pasó muy cerca y sentí miedo de verdad.
 > 
-> Luego, cuando revisé el vídeo, había partes que no recordaba haber grabado. Mi cara, pálida, diciendo “no sé qué es esto” una y otra vez. No sé si esto es periodismo, un podcast fallido o solo una chica con un móvil en el peor momento posible. Pero si alguien quiere saber cómo fue el día en que el infierno se abrió, que vea ese vídeo. Yo todavía no he sido capaz.
+> Luego, cuando revisé el vídeo, había partes que no recordaba haber grabado. Mi cara, pálida, diciendo “no sé qué es esto” una y otra vez. No sé si esto es periodismo, un podcast fallido o solo una chica con un móvil en el peor momento posible. Pero si alguien quiere saber cómo fue el día en que el infierno se abrió, que vea ese vídeo. Yo todavía no he sido capaz de verlo entero.
 > 
 > Clara Cardenal, Ganadora del premio Ortega y Gasset de Periodismo.
 
