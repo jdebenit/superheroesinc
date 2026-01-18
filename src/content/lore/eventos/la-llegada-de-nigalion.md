@@ -1,6 +1,6 @@
 ---
 title: La Llegada de Nigalión
-description: La Revelación fue el momento en que la proliferación de metahumanos y el colapso del secreto hicieron imposible seguir fingiendo normalidad, obligando al mundo a aceptar que había vivido durante siglos dentro de una verdad incompleta.
+description: Fue una irrupción caótica y brutal que rompió la realidad sin aviso, obligando a héroes y villanos a sacrificarlo todo para cerrar portales al infierno que nunca debieron abrirse.
 category: eventos
 source: "Superhéroes INC. Tercera Edición y Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2026-01-18
