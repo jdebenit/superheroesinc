@@ -1,0 +1,20 @@
+---
+title: El Tratado de Carmarthen
+description: El Tratado de Carmarthen aseguró la protección mutua entre el Reino Unido y Avalon tras el Brexit, pero lo hizo al precio de fracturar ambos mundos y forzar un equilibrio sostenido por decisiones que aún siguen teniendo consecuencias.
+category: eventos
+source: "Héroe Agenda: Sobrenaturales y Arcanos"
+updatedDate: 2026-01-18
+---
+El **Brexit** no fue solo una decisión política motivada por economía, fronteras o discursos identitarios. En el trasfondo real del mundo supuso la ruptura consciente de un marco de protección que llevaba décadas conteniendo fuerzas que no figuraban en ningún tratado europeo. El Reino Unido aceptó el coste del aislamiento porque necesitaba recuperar margen de maniobra sobre asuntos que Bruselas no podía, ni quería, comprender. Lo que para la opinión pública fue un acto de soberanía, en los círculos adecuados se entendió como una retirada estratégica. Menos controles externos, menos ojos mirando y más libertad para reactivar acuerdos antiguos.
+
+Ese vacío legal y político permitió que saliera a la luz lo que llevaba siglos latente. Los pactos no humanos que sostenían la estabilidad de las islas ya no podían seguir ocultos bajo estructuras supranacionales. Al abandonar la Unión Europea, el Reino Unido dejó de estar cubierto por determinadas salvaguardas arcanas colectivas y se vio obligado a reforzar sus propias defensas. Fue entonces cuando se retomaron negociaciones que llevaban siglos congeladas, por temor a sus consecuencias.
+
+El **Tratado de Carmarthen** fue el resultado directo de ese proceso. Firmado lejos de las miradas profanas, selló la reactivación formal del pacto entre la Corona británica y [Avalon](/lore/localizaciones/avalon/). No era una alianza nueva, sino la renovación de un juramento antiguo, debilitado deliberadamente durante la era moderna para evitar interferencias fae en la política humana. Carmarthen no fue elegido al azar. Es un lugar donde las capas del mundo se superponen y donde las palabras aún tienen peso real.
+
+Con el tratado se reabrieron los Caminos de Myrddin, rutas que no aparecen en ningún mapa y que permiten un tránsito limitado entre realidades. Avalon recuperó influencia directa sobre la defensa espiritual de las islas, mientras que el Reino Unido aceptó restricciones que ningún otro estado soberano admitiría en público. A cambio obtuvo protección frente a amenazas que ni la ciencia ni las alianzas militares convencionales podían afrontar.
+
+Desde entonces el Reino Unido vive en una tensión constante entre dos legitimidades. De cara al mundo sigue siendo una potencia moderna, con problemas económicos y políticos reconocibles. En la sombra es otra cosa. Un territorio fronterizo protegido por fuerzas antiguas que no responden a parlamentos ni elecciones. 
+
+Pero el tratado no solo tuvo consecuencias en el mundo humano. En [Avalon](/lore/localizaciones/avalon/) también provocó una fractura profunda. No todos sus habitantes aceptaron la renovación del pacto, sobre todo cuando se hizo explícito que la defensa mutua implicaba una obligación incómoda y peligrosa. Si el Reino Unido era atacado, las fuerzas de Avalon estarían obligadas a intervenir incluso contra humanos no británicos. Para muchos fae aquello cruzaba una línea que llevaba siglos sin traspasarse.
+
+La oposición no fue simbólica Surgieron facciones que consideraban el tratado una traición al equilibrio antiguo, una sumisión innecesaria a conflictos humanos que siempre acaban devorándolo todo. Algunos se negaron a aceptar órdenes, otros sabotearon preparativos defensivos y unos pocos llegaron a desafiar abiertamente la autoridad del trono. La respuesta fue dura. **Oberon** no tuvo margen para la duda y actuó para evitar una guerra civil larvada. Varios elementos disidentes fueron expulsados de Avalon, desterrados a territorios donde su influencia no pudiera comprometer el pacto.

@@ -5,7 +5,7 @@ category: localizaciones
 source: Partida Oficial - La Sombra del enroque
 updatedDate: 2026-01-16
 ---
-> El Mercado del Pasaje es un lugar donde respiro mejor, y eso me inquieta más de lo que debería. No sabría explicar por qué, pero allí el ruido no molesta y el movimiento no empuja. Todo parece estar donde tiene que estar, aunque no se entienda. No siento la presión de demostrar nada, ni de encajar en una forma concreta. Camino, observo, y el cuerpo responde como si conociera el ritmo desde antes. A veces tengo la sensación de que el mercado no me mira, sino que me deja estar, y esa ausencia de juicio resulta extrañamente cómoda. No sé qué voy a encontrar cada vez que bajo, pero tampoco siento la necesidad de controlarlo. Y para alguien como yo, eso ya es decir mucho.
+****> El Mercado del Pasaje es un lugar donde respiro mejor, y eso me inquieta más de lo que debería. No sabría explicar por qué, pero allí el ruido no molesta y el movimiento no empuja. Todo parece estar donde tiene que estar, aunque no se entienda. No siento la presión de demostrar nada, ni de encajar en una forma concreta. Camino, observo, y el cuerpo responde como si conociera el ritmo desde antes. A veces tengo la sensación de que el mercado no me mira, sino que me deja estar, y esa ausencia de juicio resulta extrañamente cómoda. No sé qué voy a encontrar cada vez que bajo, pero tampoco siento la necesidad de controlarlo. Y para alguien como yo, eso ya es decir mucho.
 > 
 > Crónicas de [Asha de Cindraor](/personajes/la-naga).
 
@@ -37,7 +37,7 @@ Cruzas por las manzanas de los gnomos y te envuelve un gris apagado. Tienen la p
 
 La cantera troll ocupa un espacio amplio. Grandes bloques de roca reposan como animales dormidos. Los trolls trabajan despacio, golpeando solo cuando la piedra parece aceptar el cambio. Los nuevos se desesperan, los trolls se toman su tiempo.
 
-Si aguantas el picor de los vapores de colores que flotan más adentro, llegas a la zona de la alquimia y magia. Tienes el Báculo Dorado si eres de los que necesitan etiquetas y orden, pero la mayoría prefiere rebuscar entre los puestos que venden errores documentados: pócimas que fallaron pero que sirven para cosas que nadie se atreve a preguntar. La Casa de Sanación y el local de Nakaki están tambien por la zona, el local de Nakaki se reconoce rápido, bajo el brillo de esa bola de cristal que parece vigilar a todo el que llega con un poema en el bolsillo esperando pagar su consulta.
+Si aguantas el picor de los vapores de colores que flotan más adentro, llegas a la zona de la alquimia y magia. Tienes el Báculo Dorado si eres de los que necesitan etiquetas y orden, pero la mayoría prefiere rebuscar entre los puestos que venden errores documentados, pócimas que fallaron pero que sirven para cosas que nadie se atreve a preguntar. La Casa de Sanación y el local de Nakaki están tambien por la zona, el local de Nakaki se reconoce rápido, bajo el brillo de esa bola de cristal que parece vigilar a todo el que llega con un poema en el bolsillo esperando pagar su consulta.
 
 A veces te cruzas con una diosa sentada en una mesa baja bebiendo whisky enano en una esquina mugrienta, pasando del tema de los templos y de los pesados que les rezan arriba. O con un trasgo concentrado en una Nintendo mientras espera que arranque un motor imposible. Nadie pregunta nada. En este sitio lo extraordinario dura lo justo para dejar de llamar la atención.
 
