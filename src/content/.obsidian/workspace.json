@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "9ea4c056a3e9372b",
+        "id": "7135d44e920c62d4",
         "type": "tabs",
         "children": [
           {
-            "id": "420a991fd7188ca7",
+            "id": "a77bbf72d6aa46c7",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -183,10 +183,10 @@
       "bases:Crear nueva base": false
     }
   },
-  "active": "420a991fd7188ca7",
+  "active": "a77bbf72d6aa46c7",
   "lastOpenFiles": [
-    "lore/eventos/la-tecnoguerra.md",
     "lore/eventos/la-revelacion.md",
+    "lore/eventos/la-tecnoguerra.md",
     "lore/eventos/la-caida-de-la-gran-barrera.md",
     "lore/localizaciones/el-mercado-del-pasaje.md",
     "lore/eventos/tratado-carmarthen.md",
