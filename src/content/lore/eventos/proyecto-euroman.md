@@ -1,6 +1,6 @@
 ---
 title: Proyecto Euroman
-description: El Proyecto Euroman fue el intento de fabricar héroes para proteger Europa, y acabó demostrando que crear superhumanos es mucho más fácil que asumir las consecuencias.
+description: El estado financio el Proyecto Euroman con el fin de fabricar héroes para proteger Europa, y acabó demostrando que crear superhumanos es mucho más fácil que asumir las consecuencias.
 category: eventos
 source: Superhéroes INC. Tercera Edición y Pantalla Segunda Edición
 updatedDate: 2025-12-13

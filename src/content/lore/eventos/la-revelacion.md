@@ -1,6 +1,6 @@
 ---
 title: La Revelación
-description: La Revelación fue el momento en que la proliferación de metahumanos y el colapso del secreto hicieron imposible seguir fingiendo normalidad, obligando al mundo a aceptar que había vivido durante siglos dentro de una verdad incompleta.
+description: La Revelación, cambio la percecpción de la historia del mundo. Fue el momento en que la proliferación de metahumanos y el colapso del secreto hicieron imposible seguir fingiendo normalidad, obligando al mundo a aceptar que había vivido durante siglos dentro de una verdad incompleta.
 category: eventos
 source: "Superhéroes INC. Tercera Edición y Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2026-01-18

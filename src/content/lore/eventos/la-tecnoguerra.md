@@ -1,6 +1,6 @@
 ---
 title: La TecnoGuerra
-description: La TecnoGuerra fue el mayor colapso tecnológico y militar de la historia reciente de Europa.
+description: Guerra propiciada por El H4ck3r que provocó el mayor colapso tecnológico y militar de la historia reciente de Europa.
 category: eventos
 source: Superhéroes INC. Tercera Edición
 updatedDate: 2025-12-04

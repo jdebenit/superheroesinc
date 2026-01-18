@@ -1,6 +1,6 @@
 ---
 title: La caída de la Gran Barrera
-description: La Gran Barrera fue el acto desesperado con el que se aisló a la Tierra de los dioses para evitar que, al perder el Orbe Sagrado, convirtieran el mundo en su única forma de supervivencia.
+description: El acto desesperado con el que se aisló a la Tierra de los dioses para evitar que, al perder el Orbe Sagrado, convirtieran el mundo en su única forma de supervivencia.
 category: eventos
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2026-01-10

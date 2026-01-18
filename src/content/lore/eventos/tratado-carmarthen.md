@@ -1,6 +1,6 @@
 ---
 title: El Tratado de Carmarthen
-description: El Tratado de Carmarthen aseguró la protección mutua entre el Reino Unido y Avalon tras el Brexit, pero lo hizo al precio de fracturar ambos mundos y forzar un equilibrio sostenido por decisiones que aún siguen teniendo consecuencias.
+description: El Tratado aseguró la protección mutua entre el Reino Unido y Avalon tras el Brexit, pero lo hizo al precio de fracturar ambos mundos y forzar un equilibrio sostenido por decisiones que aún siguen teniendo consecuencias.
 category: eventos
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2026-01-18
