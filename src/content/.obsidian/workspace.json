@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "lore/eventos/tratado-carmarthen.md",
+                "file": "lore/localizaciones/el-mercado-del-pasaje.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "tratado-carmarthen"
+              "title": "el-mercado-del-pasaje"
             }
           }
         ]
@@ -185,8 +185,8 @@
   },
   "active": "420a991fd7188ca7",
   "lastOpenFiles": [
-    "lore/eventos/la-tecnoguerra.md",
     "lore/eventos/tratado-carmarthen.md",
+    "lore/eventos/la-tecnoguerra.md",
     "lore/localizaciones/avalon.md",
     "lore/localizaciones/el-mercado-del-pasaje.md",
     "lore/localizaciones/cronopolis.md",

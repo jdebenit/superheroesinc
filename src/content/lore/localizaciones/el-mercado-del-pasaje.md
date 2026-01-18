@@ -5,7 +5,7 @@ category: localizaciones
 source: Partida Oficial - La Sombra del enroque
 updatedDate: 2026-01-16
 ---
-****> El Mercado del Pasaje es un lugar donde respiro mejor, y eso me inquieta más de lo que debería. No sabría explicar por qué, pero allí el ruido no molesta y el movimiento no empuja. Todo parece estar donde tiene que estar, aunque no se entienda. No siento la presión de demostrar nada, ni de encajar en una forma concreta. Camino, observo, y el cuerpo responde como si conociera el ritmo desde antes. A veces tengo la sensación de que el mercado no me mira, sino que me deja estar, y esa ausencia de juicio resulta extrañamente cómoda. No sé qué voy a encontrar cada vez que bajo, pero tampoco siento la necesidad de controlarlo. Y para alguien como yo, eso ya es decir mucho.
+> El Mercado del Pasaje es un lugar donde respiro mejor, y eso me inquieta más de lo que debería. No sabría explicar por qué, pero allí el ruido no molesta y el movimiento no empuja. Todo parece estar donde tiene que estar, aunque no se entienda. No siento la presión de demostrar nada, ni de encajar en una forma concreta. Camino, observo, y el cuerpo responde como si conociera el ritmo desde antes. A veces tengo la sensación de que el mercado no me mira, sino que me deja estar, y esa ausencia de juicio resulta extrañamente cómoda. No sé qué voy a encontrar cada vez que bajo, pero tampoco siento la necesidad de controlarlo. Y para alguien como yo, eso ya es decir mucho.
 > 
 > Crónicas de [Asha de Cindraor](/personajes/la-naga).
 
