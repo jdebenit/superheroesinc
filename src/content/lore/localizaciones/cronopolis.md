@@ -16,7 +16,7 @@ updatedDate: 2025-12-08
 > 
 > Quin-Jao Sen
 
-Cronópolis, la ciudad eterna, se eleva majestuosa como un faro en el océano del tiempo. Oculta en los pliegues de la manifestación, actúa como un cruce entre planos, un lugar donde las líneas temporales convergen y las realidades alternativas se tocan. Aquí, pasado, presente y futuro dejan de ser fronteras rígidas para fundirse en un flujo maleable bajo la influencia del Tiempo Supremo, al que sus habitantes, los Cronoides, llaman Cronos.
+Cronópolis, la ciudad eterna, se eleva majestuosa como un faro en el océano del tiempo. Oculta en los pliegues de la manifestación, actúa como un cruce entre planos, un lugar donde las líneas temporales convergen y las realidades alternativas se tocan. Aquí, pasado, presente y futuro dejan de ser fronteras rígidas para fundirse en un flujo maleable bajo la influencia del [Cronos Supremo](/lore/entidades/cronos-supremo/), al que sus habitantes, los Cronoides, llaman Tiempo Supremo.
 
 Caminar por sus calles adoquinadas es transitar por siglos superpuestos. Los edificios, mezcla de tecnología imposible y antigüedad insondable, se alzan como testigos de eras ya olvidadas. Arcos que parecen doblar el espacio, torres que serpentean hacia el cielo y estructuras que vibran con un pulso casi orgánico, todo en Cronópolis está construido para armonizar con el latido del tiempo.
 
