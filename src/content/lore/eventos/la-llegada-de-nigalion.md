@@ -11,7 +11,7 @@ updatedDate: 2026-01-18
 > 
 > Luego, cuando revisé el vídeo, había partes que no recordaba haber grabado. Mi cara, pálida, diciendo “no sé qué es esto” una y otra vez. No sé si esto es periodismo, un podcast fallido o solo una chica con un móvil en el peor momento posible. Pero si alguien quiere saber cómo fue el día en que el infierno se abrió, que vea ese vídeo. Yo todavía no he sido capaz.
 > 
-> Clara Montes, Ganadora del premio Ortega y Gasset de Periodismo.
+> Clara Cardenal, Ganadora del premio Ortega y Gasset de Periodismo.
 
 El ataque de [Nigalión](/lore/localizaciones/nigalion) fue caótico, brusco y devastador, incluso para los propios estándares del Caos. Nigalión no esperó a que todo estuviera preparado ni a que el mundo alcanzara un punto óptimo de debilidad. Entró cuando pudo. Una brecha mal sellada, una cadena de errores acumulados y decisiones tomadas con prisas bastaron para que la presión estallara. Un día el mundo aún funcionaba con grietas controladas y al siguiente esas grietas se abrieron de golpe, sin aviso ni coherencia.
 
