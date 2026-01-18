@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "lore/localizaciones/el-mercado-del-pasaje.md",
+                "file": "lore/eventos/la-revelacion.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "el-mercado-del-pasaje"
+              "title": "la-revelacion"
             }
           }
         ]
@@ -185,10 +185,12 @@
   },
   "active": "420a991fd7188ca7",
   "lastOpenFiles": [
-    "lore/eventos/tratado-carmarthen.md",
     "lore/eventos/la-tecnoguerra.md",
-    "lore/localizaciones/avalon.md",
+    "lore/eventos/la-revelacion.md",
+    "lore/eventos/la-caida-de-la-gran-barrera.md",
     "lore/localizaciones/el-mercado-del-pasaje.md",
+    "lore/eventos/tratado-carmarthen.md",
+    "lore/localizaciones/avalon.md",
     "lore/localizaciones/cronopolis.md",
     "lore/localizaciones/valdoria.md",
     "lore/localizaciones/paraiso.md",
@@ -209,8 +211,6 @@
     "faq/15-errata-emision-energia-rango-bajo.md",
     "faq/14-subida-de-nivel-pasar-de-100-en-caracteristicas.md",
     "lore/organizaciones/vientos-de-erebus.md",
-    "blog/juego-rol-superheroes-inc-contenido-vivo.md",
-    "blog/la-web-como-punto-de-encuentro-del-juego.md",
     "faq",
     "rpg/leon-rojo.yaml",
     "rpg/jefe-motero-road-reapers.yaml",
