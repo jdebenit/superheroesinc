@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "blog/mantener-tono-partida.md",
+                "file": "faq/25-como-usar-esudo.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "mantener-tono-partida"
+              "title": "25-como-usar-esudo"
             }
           }
         ]
@@ -185,8 +185,17 @@
   },
   "active": "6f3746b7d976bb09",
   "lastOpenFiles": [
-    "blog/mantener-t.md",
+    "faq/24-carga-daño-recibido-daño-absorbido-fisico.md",
+    "faq/25-como-usar-esudo.md",
+    "faq/23-recuperacion-voluntad-sesion.md",
+    "faq/22-impacto-cuello-posibilidades-critico.md",
+    "faq/21-tirada-eqm-modificador-psionico-parada-mental.md",
+    "faq/20-metodo-mixto-cambio-origen.md",
+    "faq/18-alterado-secuela-coste.md",
+    "faq/19-parahumanos-hibridos-coste.md",
+    "faq/17-funcion-resistencia-prejuicios.md",
     "blog/mantener-tono-partida.md",
+    "blog/mantener-t.md",
     "blog/resistencia-a-prejuicios-superheroes-inc.md",
     "blog/nueva-web.md",
     "lore/entidades/unidad.md",
@@ -202,15 +211,6 @@
     "lore/entidades/gea.md",
     "lore/entidades/entropia.md",
     "lore/entidades/olvido.md",
-    "lore/entidades/muerte.md",
-    "lore/entidades/demencia.md",
-    "lore/eventos/la-llegada-de-nigalion.md",
-    "lore/localizaciones/el-mercado-del-pasaje.md",
-    "lore/localizaciones/nigalion.md",
-    "lore/eventos/la-revelacion.md",
-    "lore/eventos/la-tecnoguerra.md",
-    "lore/eventos/la-caida-de-la-gran-barrera.md",
-    "lore/eventos/tratado-carmarthen.md",
     "faq",
     "rpg/leon-rojo.yaml",
     "rpg/jefe-motero-road-reapers.yaml",
