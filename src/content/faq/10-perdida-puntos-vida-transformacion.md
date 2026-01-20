@@ -8,7 +8,7 @@ order: 10
 ---
 ## Respuesta corta
 
-Sí, se pueden usar todas, pero no todas están pensadas para todos los sistemas de creación.
+Al volver a la forma normal, el personaje conserva el daño recibido, priorizando la pérdida de los PV otorgados por la transformación y sin superar nunca sus PV máximos base.
 ## Respuesta larga
 
 Cuando un personaje sufre daño mientras está transformado, ese daño **no desaparece** al volver a su forma original. La transformación no “cura”, solo modifica el cuerpo temporalmente.

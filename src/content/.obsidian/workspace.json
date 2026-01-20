@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "faq/26-daño-arco-ballesta.md",
+                "file": "faq/10-perdida-puntos-vida-transformacion.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "26-daño-arco-ballesta"
+              "title": "10-perdida-puntos-vida-transformacion"
             }
           }
         ]
@@ -185,8 +185,8 @@
   },
   "active": "6f3746b7d976bb09",
   "lastOpenFiles": [
-    "faq/25-como-usar-esudo.md",
     "faq/26-daño-arco-ballesta.md",
+    "faq/25-como-usar-esudo.md",
     "faq/24-carga-daño-recibido-daño-absorbido-fisico.md",
     "faq/23-recuperacion-voluntad-sesion.md",
     "faq/22-impacto-cuello-posibilidades-critico.md",
