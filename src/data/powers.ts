@@ -496,7 +496,7 @@ export const POWERS: Power[] = [
         name: "Telepatía",
         formula: "5+(Rango/10)",
         cost: 5,
-        skillCalc: "(INT+VOL)2)",
+        skillCalc: "(INT+VOL)/2",
         types: ["Psíquico"],
         origins: ["Alterado", "Mutante", "Guardian", "Vampírico", "Thals"]
     },

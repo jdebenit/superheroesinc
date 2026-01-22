@@ -43,7 +43,7 @@ export const usePdfExport = (
 
             // @ts-ignore - Argument count mismatch until pdfExport is updated
             const pdfBytes = await generateCharacterSheetPDF(
-                '/ficha_template.pdf',
+                `${import.meta.env.BASE_URL}ficha_template.pdf`,
                 character,
                 totalPCs || 0,
                 preCalculatedData

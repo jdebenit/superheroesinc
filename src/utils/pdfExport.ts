@@ -31,7 +31,10 @@ export async function generateCharacterSheetPDF(
     }
 ): Promise<Uint8Array> {
     // 1. Cargar el PDF
-    const existingPdfBytes = await fetch(pdfUrl).then(res => res.arrayBuffer());
+    const existingPdfBytes = await fetch(pdfUrl).then(async res => {
+        if (!res.ok) throw new Error(`Could not load template (Status ${res.status}): ${pdfUrl}`);
+        return res.arrayBuffer();
+    });
     const pdfDoc = await PDFDocument.load(existingPdfBytes);
 
     // 2. Obtener el formulario
