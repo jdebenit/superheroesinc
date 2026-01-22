@@ -1,0 +1,5 @@
+# Auto-detect text files and perform LF normalization
+* text=auto
+
+# Treat PDF files as binary (no EOL conversion)
+*.pdf binary

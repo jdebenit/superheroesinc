@@ -33,7 +33,29 @@ export async function generateCharacterSheetPDF(
     // 1. Cargar el PDF
     const existingPdfBytes = await fetch(pdfUrl).then(async res => {
         if (!res.ok) throw new Error(`Could not load template (Status ${res.status}): ${pdfUrl}`);
-        return res.arrayBuffer();
+
+        // Debugging: Check if we are receiving an HTML fallback instead of a PDF
+        const contentType = res.headers.get('content-type');
+        Logger.log(`PDF Template Response Config:`, {
+            status: res.status,
+            contentType,
+            url: res.url
+        });
+
+        if (contentType && contentType.includes('text/html')) {
+            throw new Error(`Expected PDF but received HTML. Check the file path: ${pdfUrl}`);
+        }
+
+        const buffer = await res.arrayBuffer();
+
+        // Check magic bytes %PDF-
+        const header = new Uint8Array(buffer.slice(0, 5));
+        const headerString = String.fromCharCode(...header);
+        if (headerString !== '%PDF-') {
+            throw new Error(`Invalid PDF file structure. Header: ${headerString}. Bytes: ${header}`);
+        }
+
+        return buffer;
     });
     const pdfDoc = await PDFDocument.load(existingPdfBytes);
 
