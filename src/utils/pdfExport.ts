@@ -371,12 +371,19 @@ export async function generateCharacterSheetPDF(
         }
     }
 
+    // Helper to sanitize text for PDF (standard fonts don't support some extended chars like č, ř, etc.)
+    const sanitizeForPdf = (str: string) => {
+        if (!str) return '';
+        return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    };
+
     // 4. Rellenar campos
     for (const [fieldName, value] of Object.entries(fields)) {
         try {
             const field = form.getTextField(fieldName);
             if (field) {
-                field.setText(value || '');
+                // Sanitize content to avoid PDF generation errors with incompatible fonts
+                field.setText(sanitizeForPdf(value || ''));
             }
         } catch (e) {
 

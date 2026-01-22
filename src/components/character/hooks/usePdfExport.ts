@@ -50,7 +50,12 @@ export const usePdfExport = (
                 preCalculatedData
             );
 
-            downloadPDF(pdfBytes, `Ficha_SHI_${character.name.replace(/\s+/g, '_') || 'Personaje'}.pdf`);
+            const sanitizedName = (character.name || 'Personaje')
+                .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // Remove accents
+                .replace(/[^a-zA-Z0-9\s-_]/g, "") // Remove special chars
+                .replace(/\s+/g, '_'); // Spaces to underscores
+
+            downloadPDF(pdfBytes, `Ficha_SHI_${sanitizedName}.pdf`);
         } catch (error) {
             Logger.error('Error generando PDF:', error);
             alert('Error al generar el PDF. Asegúrate de que el template "ficha_template.pdf" está en la carpeta public.');
