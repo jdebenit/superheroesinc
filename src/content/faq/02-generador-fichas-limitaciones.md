@@ -33,6 +33,6 @@ Estamos trabajando constantemente en mejorar el generador. Puedes:
 - Sugerir nuevas funcionalidades
 - Contribuir con feedback sobre la experiencia de uso
 ## Alternativa
-Si necesitas crear un personaje muy específico o con reglas caseras, puedes usar la [Ficha de Personaje Editable en PDF](/public/pdfs/SHI_HOJA_DE_PERSONAJE_EDITABLE.pdf) y rellenarla manualmente.
+Si necesitas crear un personaje muy específico o con reglas caseras, puedes usar la [Ficha de Personaje Editable en PDF](/pdfs/SHI_HOJA_DE_PERSONAJE_EDITABLE.pdf) y rellenarla manualmente.
 ## Consejo
 Guarda tus personajes en formato JSON regularmente. Así podrás importarlos más tarde y continuar editándolos conforme añadamos nuevas funcionalidades.
