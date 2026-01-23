@@ -9,7 +9,7 @@ rpgId: la-naga
 tags:
   - Principales
   - FDM
-  - terrano
+  - Terranos
 ---
 
 ## Descripción
