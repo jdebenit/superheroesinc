@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ComicCard from "../components/ComicCard";
+import CharacterCard from "../components/CharacterCard";
 
 import { getCollection } from "astro:content";
 
@@ -55,6 +56,27 @@ const latestLore = sortedLore.slice(0, 3).map((entry) => ({
       })
     : "",
   link: `/lore/${entry.slug}`,
+}));
+
+// Fetch latest character updates
+const allCharacters = await getCollection("characters");
+const sortedCharacters = allCharacters
+  .filter((entry) => entry.data.updatedDate) // Only show entries with updatedDate
+  .sort((a, b) => {
+    const dateA = a.data.updatedDate ? a.data.updatedDate.valueOf() : 0;
+    const dateB = b.data.updatedDate ? b.data.updatedDate.valueOf() : 0;
+    return dateB - dateA;
+  });
+
+const latestCharacters = sortedCharacters.slice(0, 3).map((entry) => ({
+  slug: entry.slug,
+  data: {
+    name: entry.data.name,
+    alias: entry.data.alias,
+    description: entry.data.description,
+    image: entry.data.image,
+    source: entry.data.source,
+  },
 }));
 ---
 
@@ -176,10 +198,22 @@ const latestLore = sortedLore.slice(0, 3).map((entry) => ({
       {latestLore.map((item) => <ComicCard {...item} client:visible />)}
     </div>
   </section>
+
+  <section class="characters-section">
+    <h2 class="section-title">Personajes Actualizados</h2>
+    <div class="characters-grid">
+      {
+        latestCharacters.map((item) => (
+          <CharacterCard {...item} client:visible />
+        ))
+      }
+    </div>
+  </section>
 </Layout>
 
 <style>
-  .lore-section {
+  .lore-section,
+  .characters-section {
     padding: var(--spacing-2xl) var(--spacing-lg);
     max-width: 1400px;
     margin: 0 auto;
@@ -276,7 +310,8 @@ const latestLore = sortedLore.slice(0, 3).map((entry) => ({
     color: var(--color-primary);
   }
 
-  .news-grid {
+  .news-grid,
+  .characters-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: var(--spacing-xl);
@@ -288,7 +323,8 @@ const latestLore = sortedLore.slice(0, 3).map((entry) => ({
       font-size: var(--text-4xl);
     }
 
-    .news-grid {
+    .news-grid,
+    .characters-grid {
       grid-template-columns: 1fr;
       gap: var(--spacing-lg);
     }
