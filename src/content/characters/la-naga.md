@@ -317,3 +317,38 @@ Una Naga no se apresura.
 Una Naga no se venga.  
 Una Naga avanza porque respira.  
 Y Asha sigue respirando.
+
+### Año 1 (Tierra Zero)
+
+El primer año de Asha en este mundo no fue una llegada. Fue más bien una caída lenta.
+
+Después del incidente con la banda de moteros, la policía no volvió a olvidarse de ella. No la persiguieron, pero tampoco la dejaron en paz. Su nombre quedó apuntado en algún sitio, en alguna pantalla. Cada intervención, por pequeña que fuera, la encogía un poco más el margen. Asha lo notaba enseguida. Patrullas que tardaban menos en aparecer. Miradas que se alargaban más de la cuenta. Preguntas que no buscaban respuestas, solo confirmar que seguía allí.
+
+Durante un tiempo durmió en el Campo Grande. Le gustaba ese lugar, aunque no sabía explicarlo bien. El agua, los árboles viejos, la sensación de estar dentro de algo vivo. Dormía mal, pero al menos respiraba mejor. Hasta que los fae que habitaban el parque empezaron a incomodarse. No fue una expulsión como tal. Nadie levantó la voz. Solo una invitación educada a buscar otro sitio. Asha la entendió al instante. Cuando un lugar deja de acogerte, quedarse es romper un equilibrio que no te pertenece.
+
+Se fue sin discusión.
+
+Probó suerte cerca del río, en distintos tramos, distintos parques, siempre al lado del agua. Allí la ciudad parecía menos agresiva, como si el cauce se llevara parte del ruido. Vivía con poco, casi con nada. Cambiaba de sitio cuando hacía falta. Sabía hacerlo. Lo había hecho antes, en otros mundos, por otras razones.
+
+Aun así, este lugar le costaba. Mucho.
+
+No por peligro, sino por la gente. Aquí todo iba deprisa. Las relaciones eran intensas y frágiles a la vez. Mucha palabra, poco silencio. Asha observaba, escuchaba, pero le costaba acercarse. Hacer amistades no era una técnica que se pudiera entrenar. Y la soledad, aunque la conocía bien, pesaba distinto cuando no sabes si ese es ya tu único estado posible.
+
+El encuentro con el semidiós no tuvo nada de solemne. No hubo señales, ni presagios. Fue una conversación incómoda, casi casual, en un lugar sin importancia. Él trabajaba para una organización que Asha aún no conocía, aunque ellos sí llevaban tiempo observándola. Desde el primer momento. Desde su llegada.
+
+Tenían controlado el punto de entrada. Sabían que había aparecido algo que no encajaba. Sin magia, sin registro previo, pero con una disciplina corporal y energética que no pertenecía a este mundo. No intervinieron. Prefirieron esperar. Y cuando vieron que Asha no buscaba imponerse ni esconderse del todo, que intentaba convivir aunque no supiera cómo, decidieron dar el paso.
+
+La oferta fue sencilla. Demasiado, casi. Un sitio donde dormir. Comida caliente. Un mínimo de estabilidad. A cambio, colaboración. Sus capacidades en combate. Su experiencia con cosas que no deberían estar aquí y aun así lo están. Nada de promesas. Nada de discursos sobre pertenencia. Solo estructura.
+
+Asha aceptó sin dramatismo.
+
+Las instalaciones de Las Francesas le resultaron extrañas al principio. Demasiadas paredes. Demasiadas líneas rectas. Pero también rutinas claras. Horarios. Un lugar donde dejar las armas sin sentir que se desarmaba por dentro. Poco a poco volvió a dormir sin sobresaltos. Poco a poco dejó de comer como si fuera la última vez.
+
+Ahora intenta algo que nunca le resultó fácil. Integrarse, aunque sea a su manera. Conseguir una estancia legal en este mundo. Entender sus normas sin dejar que la aplasten. Ganar aliados sin confundirse con ellos. Construir contactos sin venderse. Y, sobre todo, sentirse un poco menos sola.
+
+No es un proceso limpio. Asha sigue midiendo cada gesto. Sigue observando más de lo que habla. No termina de fiarse, y probablemente nunca lo hará del todo.
+
+Pero ha vuelto a tener una estructura. Algo que sostiene.
+
+Y por primera vez desde que cayó aquí, no siente que solo esté sobreviviendo.  
+Siente que, quizá, está empezando a habitar este mundo.

@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "blog/diseñar-un-sistema-no-te-protege-de-jugar-mal.md",
+                "file": "characters/la-naga.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "diseñar-un-sistema-no-te-protege-de-jugar-mal"
+              "title": "la-naga"
             }
           }
         ],
@@ -200,8 +200,8 @@
   },
   "active": "053dfcde930afc0c",
   "lastOpenFiles": [
-    "blog/resistencia-a-prejuicios-superheroes-inc.md",
     "blog/diseñar-un-sistema-no-te-protege-de-jugar-mal.md",
+    "blog/resistencia-a-prejuicios-superheroes-inc.md",
     "faq/26-daño-arco-ballesta.md",
     "faq/25-como-usar-esudo.md",
     "faq/24-carga-daño-recibido-daño-absorbido-fisico.md",
