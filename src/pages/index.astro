@@ -190,12 +190,18 @@ const latestCharacters = sortedCharacters.slice(0, 3).map((entry) => ({
     <div class="news-grid">
       {news.map((item) => <ComicCard {...item} client:visible />)}
     </div>
+    <div class="section-footer">
+      <a href="/blog" class="comic-button small">Ver todas las entradas</a>
+    </div>
   </section>
 
   <section class="lore-section">
     <h2 class="section-title">Actualizaciones del Archivo</h2>
     <div class="news-grid">
       {latestLore.map((item) => <ComicCard {...item} client:visible />)}
+    </div>
+    <div class="section-footer">
+      <a href="/lore" class="comic-button small">Explorar el Archivo</a>
     </div>
   </section>
 
@@ -207,6 +213,11 @@ const latestCharacters = sortedCharacters.slice(0, 3).map((entry) => ({
           <CharacterCard {...item} client:visible />
         ))
       }
+    </div>
+    <div class="section-footer">
+      <a href="/personajes" class="comic-button small"
+        >Ver Galería de Personajes</a
+      >
     </div>
   </section>
 </Layout>
@@ -394,5 +405,15 @@ const latestCharacters = sortedCharacters.slice(0, 3).map((entry) => ({
     transform: rotate(6deg);
     border: 1px solid var(--color-primary-dark);
     box-shadow: var(--shadow-sm);
+  }
+  .section-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--spacing-xl);
+  }
+
+  .comic-button.small {
+    font-size: var(--text-sm);
+    padding: 0.5rem 1.5rem;
   }
 </style>

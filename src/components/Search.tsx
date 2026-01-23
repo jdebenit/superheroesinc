@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+// Force rebuild
 import Logger from '../utils/Logger';
 
 interface SearchResult {

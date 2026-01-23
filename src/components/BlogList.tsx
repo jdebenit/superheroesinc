@@ -1,159 +1,160 @@
 import React, { useState, useMemo, useEffect } from 'react';
+// Force rebuild
 import ComicCard from './ComicCard';
 
 interface BlogPost {
-    slug: string;
-    data: {
-        title: string;
-        description: string;
-        pubDate: Date;
-        image?: string;
-        tags?: string[];
-    };
+  slug: string;
+  data: {
+    title: string;
+    description: string;
+    pubDate: Date;
+    image?: string;
+    tags?: string[];
+  };
 }
 
 interface BlogListProps {
-    posts: BlogPost[];
+  posts: BlogPost[];
 }
 
 const ITEMS_PER_PAGE = 9;
 
 export default function BlogList({ posts }: BlogListProps) {
-    const [selectedTag, setSelectedTag] = useState<string>("Todos");
-    const [currentPage, setCurrentPage] = useState(1);
-    const [searchTerm, setSearchTerm] = useState("");
+  const [selectedTag, setSelectedTag] = useState<string>("Todos");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
 
-    // Extract all unique tags
-    const allTags = useMemo(() => {
-        const tags = new Set<string>();
-        posts.forEach(post => {
-            if (post.data.tags) {
-                post.data.tags.forEach(tag => tags.add(tag));
-            }
-        });
-        return ["Todos", ...Array.from(tags).sort()];
-    }, [posts]);
+  // Extract all unique tags
+  const allTags = useMemo(() => {
+    const tags = new Set<string>();
+    posts.forEach(post => {
+      if (post.data.tags) {
+        post.data.tags.forEach(tag => tags.add(tag));
+      }
+    });
+    return ["Todos", ...Array.from(tags).sort()];
+  }, [posts]);
 
-    // Filter posts
-    const filteredPosts = useMemo(() => {
-        return posts.filter(post => {
-            const matchesTag = selectedTag === "Todos" || (post.data.tags && post.data.tags.includes(selectedTag));
-            const matchesSearch = searchTerm === "" ||
-                post.data.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                post.data.description.toLowerCase().includes(searchTerm.toLowerCase());
+  // Filter posts
+  const filteredPosts = useMemo(() => {
+    return posts.filter(post => {
+      const matchesTag = selectedTag === "Todos" || (post.data.tags && post.data.tags.includes(selectedTag));
+      const matchesSearch = searchTerm === "" ||
+        post.data.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        post.data.description.toLowerCase().includes(searchTerm.toLowerCase());
 
-            return matchesTag && matchesSearch;
-        });
-    }, [posts, selectedTag, searchTerm]);
+      return matchesTag && matchesSearch;
+    });
+  }, [posts, selectedTag, searchTerm]);
 
-    // Reset pagination when filters change
-    useEffect(() => {
-        setCurrentPage(1);
-    }, [selectedTag, searchTerm]);
+  // Reset pagination when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedTag, searchTerm]);
 
-    // Pagination logic
-    const totalPages = Math.ceil(filteredPosts.length / ITEMS_PER_PAGE);
-    const paginatedPosts = filteredPosts.slice(
-        (currentPage - 1) * ITEMS_PER_PAGE,
-        currentPage * ITEMS_PER_PAGE
-    );
+  // Pagination logic
+  const totalPages = Math.ceil(filteredPosts.length / ITEMS_PER_PAGE);
+  const paginatedPosts = filteredPosts.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
 
-    const handlePageChange = (page: number) => {
-        setCurrentPage(page);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
-    return (
-        <div className="blog-list-container">
-            <div className="controls-section">
-                <input
-                    type="text"
-                    placeholder="Buscar artículos..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="search-bar"
-                />
+  return (
+    <div className="blog-list-container">
+      <div className="controls-section">
+        <input
+          type="text"
+          placeholder="Buscar artículos..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="search-bar"
+        />
 
-                <div className="tag-buttons">
-                    {allTags.map(tag => (
-                        <button
-                            key={tag}
-                            onClick={() => setSelectedTag(tag)}
-                            className={`tag-button ${selectedTag === tag ? 'active' : ''}`}
-                        >
-                            {tag}
-                        </button>
-                    ))}
-                </div>
-            </div>
+        <div className="tag-buttons">
+          {allTags.map(tag => (
+            <button
+              key={tag}
+              onClick={() => setSelectedTag(tag)}
+              className={`tag-button ${selectedTag === tag ? 'active' : ''}`}
+            >
+              {tag}
+            </button>
+          ))}
+        </div>
+      </div>
 
-            <div className="results-info">
-                Mostrando {filteredPosts.length} artículos {selectedTag !== "Todos" && `etiquetados como "${selectedTag}"`}
-            </div>
+      <div className="results-info">
+        Mostrando {filteredPosts.length} artículos {selectedTag !== "Todos" && `etiquetados como "${selectedTag}"`}
+      </div>
 
-            {paginatedPosts.length > 0 ? (
-                <div className="posts-grid">
-                    {paginatedPosts.map((post) => (
-                        <ComicCard
-                            key={post.slug}
-                            title={post.data.title}
-                            excerpt={post.data.description}
-                            date={new Date(post.data.pubDate).toLocaleDateString("es-ES", {
-                                year: "numeric",
-                                month: "long",
-                                day: "numeric",
-                            })}
-                            image={post.data.image}
-                            link={`/blog/${post.slug}`}
-                        />
-                    ))}
-                </div>
-            ) : (
-                <div className="no-results">
-                    <p>No se encontraron artículos con estos filtros.</p>
-                    <button
-                        onClick={() => { setSelectedTag("Todos"); setSearchTerm(""); }}
-                        className="btn-link"
-                        style={{ background: 'none', border: 'none', color: 'var(--color-primary)', textDecoration: 'underline', cursor: 'pointer' }}
-                    >
-                        Limpiar filtros
-                    </button>
-                </div>
-            )}
+      {paginatedPosts.length > 0 ? (
+        <div className="posts-grid">
+          {paginatedPosts.map((post) => (
+            <ComicCard
+              key={post.slug}
+              title={post.data.title}
+              excerpt={post.data.description}
+              date={new Date(post.data.pubDate).toLocaleDateString("es-ES", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+              image={post.data.image}
+              link={`/blog/${post.slug}`}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="no-results">
+          <p>No se encontraron artículos con estos filtros.</p>
+          <button
+            onClick={() => { setSelectedTag("Todos"); setSearchTerm(""); }}
+            className="btn-link"
+            style={{ background: 'none', border: 'none', color: 'var(--color-primary)', textDecoration: 'underline', cursor: 'pointer' }}
+          >
+            Limpiar filtros
+          </button>
+        </div>
+      )}
 
-            {totalPages > 1 && (
-                <div className="pagination">
-                    <button
-                        onClick={() => handlePageChange(currentPage - 1)}
-                        disabled={currentPage === 1}
-                        className="pagination-btn"
-                    >
-                        Anterior
-                    </button>
+      {totalPages > 1 && (
+        <div className="pagination">
+          <button
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+            className="pagination-btn"
+          >
+            Anterior
+          </button>
 
-                    <div className="pagination-pages">
-                        {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
-                            <button
-                                key={page}
-                                onClick={() => handlePageChange(page)}
-                                className={`pagination-page-btn ${currentPage === page ? 'active' : ''}`}
-                            >
-                                {page}
-                            </button>
-                        ))}
-                    </div>
+          <div className="pagination-pages">
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+              <button
+                key={page}
+                onClick={() => handlePageChange(page)}
+                className={`pagination-page-btn ${currentPage === page ? 'active' : ''}`}
+              >
+                {page}
+              </button>
+            ))}
+          </div>
 
-                    <button
-                        onClick={() => handlePageChange(currentPage + 1)}
-                        disabled={currentPage === totalPages}
-                        className="pagination-btn"
-                    >
-                        Siguiente
-                    </button>
-                </div>
-            )}
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className="pagination-btn"
+          >
+            Siguiente
+          </button>
+        </div>
+      )}
 
-            <style>{`
+      <style>{`
         .blog-list-container {
           max-width: 1200px;
           margin: 0 auto;
@@ -309,6 +310,6 @@ export default function BlogList({ posts }: BlogListProps) {
           }
         }
       `}</style>
-        </div>
-    );
+    </div>
+  );
 }
