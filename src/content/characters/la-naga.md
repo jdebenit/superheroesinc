@@ -335,7 +335,7 @@ Probó suerte cerca del río, en distintos tramos, distintos parques, siempre al
 
 Aun así, este lugar le costaba. Mucho.
 
-No por peligro, sino por la gente. Aquí todo iba deprisa. Las relaciones eran intensas y frágiles a la vez. Mucha palabra, poco silencio. Asha observaba, escuchaba, pero le costaba acercarse. Hacer amistades no era una técnica que se pudiera entrenar. Y la soledad, aunque la conocía bien, pesaba distinto cuando no sabes si ese es ya tu único estado posible.
+No por peligro, sino por la gente. Aquí todo iba deprisa. Las relaciones eran intensas y frágiles a la vez. Mucha palabra, poco silencio. Asha observaba, escuchaba, pero le costaba acercarse. Hacer amistades no era una técnica que se pudiera entrenar. Y la soledad, aunque la conocía bien, pesaba distinto cuando estas en un mundo que no conoces.
 
 El encuentro con el semidiós no tuvo nada de solemne. Fue una conversación incómoda, casi casual, en un lugar sin importancia. Él trabajaba para una organización que Asha aún no conocía, la [Fundación Divina Mundial](/lore/organizaciones/fundacion-divina-mundial/), aunque ellos sí llevaban tiempo observándola. Desde el primer momento. Desde su llegada.
 

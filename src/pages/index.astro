@@ -33,6 +33,29 @@ const news = latestPosts.map((post) => ({
   }),
   link: `/blog/${post.slug}`,
 }));
+
+// Fetch latest lore updates
+const allLore = await getCollection("lore");
+const sortedLore = allLore
+  .filter((entry) => entry.data.updatedDate) // Only show entries with updatedDate
+  .sort((a, b) => {
+    const dateA = a.data.updatedDate ? a.data.updatedDate.valueOf() : 0;
+    const dateB = b.data.updatedDate ? b.data.updatedDate.valueOf() : 0;
+    return dateB - dateA;
+  });
+
+const latestLore = sortedLore.slice(0, 3).map((entry) => ({
+  title: entry.data.title,
+  excerpt: entry.data.description, // Using description as excerpt
+  date: entry.data.updatedDate
+    ? entry.data.updatedDate.toLocaleDateString("es-ES", {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+      })
+    : "",
+  link: `/lore/${entry.slug}`,
+}));
 ---
 
 <Layout
@@ -141,14 +164,27 @@ const news = latestPosts.map((post) => ({
   </section>
 
   <section class="news-section">
-    <h2 class="section-title">Últimas Entradas</h2>
+    <h2 class="section-title">Últimas Entradas del Blog</h2>
     <div class="news-grid">
       {news.map((item) => <ComicCard {...item} client:visible />)}
+    </div>
+  </section>
+
+  <section class="lore-section">
+    <h2 class="section-title">Actualizaciones del Archivo</h2>
+    <div class="news-grid">
+      {latestLore.map((item) => <ComicCard {...item} client:visible />)}
     </div>
   </section>
 </Layout>
 
 <style>
+  .lore-section {
+    padding: var(--spacing-2xl) var(--spacing-lg);
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
   .hero-container {
     padding: var(--spacing-2xl) var(--spacing-lg);
     max-width: 1400px;
