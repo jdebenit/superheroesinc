@@ -27,7 +27,7 @@ No es un nexo arcano ni una herida del mundo. Es un punto de equilibrio. Un luga
 
 Quien entra en estas tierras buscando poder suele salir agotado o desorientado. Quien entra buscando control rara vez encuentra lo que espera. Pero quien llega buscando equilibrio a veces se queda. Y si vuelve al mundo exterior, lo hace de forma distinta, con menos ruido dentro y menos necesidad de imponerse sobre nada.
 
-### Lengua y forma de hablar
+## Lengua y forma de hablar
 
 En Kish’var se habla una lengua equivalente al rumano de [Terra](/lore/localizaciones/terra/). El Kishvari, aunque ese nombre es externo. La gente del lugar rara vez lo nombra. Simplemente lo habla. Es una lengua áspera al oído al principio, con muchas consonantes suaves, vocales largas y un ritmo irregular. No suena agresiva, pero tampoco melodiosa. Tiene pausas naturales, silencios, frases que parecen quedarse a medias y continuar después. Eso encaja bastante bien con la forma de pensar de la región.
 
