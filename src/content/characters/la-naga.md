@@ -12,7 +12,6 @@ tags:
   - Terranos
   - Vigilantes
 ---
-
 ## Descripción
 
 Asha es una mujer alta, esbelta y de movimientos fluidos, marcada por años de disciplina física y mental. Su piel cálida refleja la luz con un matiz dorado, y su largo cabello moreno cae como una cortina oscura que acompaña cada gesto. Sus ojos verde esmeralda son intensos y expresivos, capaces de leer tensiones y emociones con una precisión inquietante. Su rostro sereno rara vez muestra grandes emociones, pero cuando sonríe lo hace con sinceridad suave y contenida.
@@ -65,17 +64,17 @@ Cuando el ritual terminó, nadie habló. Los magos evitaron mirarla y repitieron
 
 No hubo reproches ni alboroto. Solo un cambio sutil en el aire, en las miradas que ya no sabían dónde posarse, en la forma en que la casa empezó a tomar distancia. Asha dejó de ser una hija incómoda y pasó a una anomalía que no encajaba en el linaje y que habría que resolver.
 
-La propuesta de su madrastra llegó envuelta en palabras suaves. La Orden de las Nagas podía darle un propósito. Allí sabrían qué hacer con una niña así. No se habló de destierro ni de vergüenza, aunque ambos flotaban en la estancia.
+La propuesta de su madrastra llegó envuelta en palabras suaves. [La Orden de las Nagas](/lore/organizaciones/la-orden-de-las-nagas/) podía darle un propósito. Allí sabrían qué hacer con una niña así. No se habló de destierro ni de vergüenza, aunque ambos flotaban en la estancia.
 
 Su padre aceptó sin discutir demasiado. Quizá pensó que era una salida digna. Quizá solo necesitaba que el problema dejara de estar delante de sus ojos. Asha no protestó. Tampoco comprendía aún el alcance de aquella decisión. Solo notó que nadie le preguntaba qué quería.
 
 Esa noche se prometió algo en silencio. No sabía exactamente qué, ni cómo cumplirlo. Solo que no volvería a dejar que la rompieran de esa manera.
-## La Orden de las Nagas
+## Entrada en la orden
 
 El viaje hacia la Orden no fue un destierro brusco, sino una caída lenta.  
 Abandonó Valdoria sin despedidas ni lágrimas. En la Torre Cindraor había sido una grieta; en la Orden, le dijeron, tal vez tendría un propósito. Nadie se molestó en explicárselo.
 
-Cuando llegó a las Tierras Profundas de Kish’var, lo primero que notó fue el silencio. No era un silencio vacío, sino uno lleno de respiraciones antiguas. El Bosque de Seshara no la acogió con calidez, pero tampoco con rechazo. La midió, la sopesó y la aceptó con la misma neutralidad con la que un árbol acepta la lluvia o la sequía.
+Cuando llegó a las Tierras Profundas de [Kish’var](/lore/localizaciones/kishvar/), lo primero que notó fue el silencio. No era un silencio vacío, sino uno lleno de respiraciones antiguas. El Bosque de Seshara no la acogió con calidez, pero tampoco con rechazo. La midió, la sopesó y la aceptó con la misma neutralidad con la que un árbol acepta la lluvia o la sequía.
 ### El entrenamiento sin palabras
 
 Las Nagas no la recibieron con ceremonias ni con desprecio.  
@@ -114,7 +113,7 @@ Nunca tuvo magia, pero en la Orden nadie la esperaba. Nadie la necesitaba.
 Su ausencia de poder arcano no era un defecto, sino la razón por la que su Kundalini brillaba con tanta claridad.
 
 Había llegado como una niña rota.  Se marchó convertida en Naga.
-### Regreso a Valdoria
+## Regreso a Valdoria
 
 Asha regresó sin esperar nada.  Habían pasado catorce años desde que dejó la ciudad atrás. Catorce años respirando con calma ondulante, escuchando su fuego interno antes que cualquier ruido del mundo.
 
@@ -126,14 +125,14 @@ Pero esa niña ya no existía.
 Su respiración se alargó.  
 La columna se aflojó.  
 La sombra retrocedió.
-#### El recibimiento
+### El recibimiento
 
 Su padre fue el primero en verla. Los ojos cansados y las manos temblorosas revelaban a un hombre que había vivido más en dudas que en decisiones. La abrazó con torpeza y cariño.
 
 Su madrastra no mostró odio.  Mostró inquietud.  La mirada de quien ve regresar un problema que creía resuelto.
 
 Asha no reaccionó. Había aprendido que responder al impulso de una emoción ajena solo te encadena. Se limitó a respirar y a observar. La calma de Asha descolocó a todos.
-#### Una presencia incómoda
+### Una presencia incómoda
 
 Los Cindraor eran una casa de magos.  
 Ella, en cambio, pertenecía a algo que no podían nombrar.
@@ -165,7 +164,7 @@ Asha lo entendió de inmediato.
 Aquel movimiento alteraba un equilibrio que ya estaba fracturado.
 
 Y en Valdoria, donde el orden arcano es sagrado, romper un equilibrio siempre atrae consecuencias.
-### La noche sin luna
+## La noche sin luna
 
 Los atacantes entraron sin dejar rastro.  Conocían cada pasillo, cada turno de guardia, cada trampa mágica. Para cualquier mago aquello habría sido imposible. Para Asha, la explicación era clara, el enemigo estaba dentro.
 
@@ -181,7 +180,7 @@ Era un golpe. Un golpe destinado a quebrar a la casa Cindraor… y a ella con el
 Su padre murió protegiendo un cofre lleno de pactos antiguos.  Asha sintió cómo su vida se apagaba. Por un instante, el impulso quiso dominarla; la serpiente interna quiso ascender con furia. Recordó entonces la Doma del Impulso y se aferró a ella. Pero el golpe final llegó de donde siempre lo sospechó.  Desde dentro de su propia casa.
 
 Cayó inconsciente.
-#### El juicio y el pozo
+### El juicio y el pozo
 
 Cuando despertó, la decisión ya estaba tomada.
 
@@ -211,7 +210,7 @@ Una Naga acepta lo inevitable, pero nunca deja de observar.
 Mientras la empujaban hacia el torbellino ancestral, lo comprendió con absoluta claridad. No la desterraban por débil. No lo hacían por error ni por vergüenza.
 
 La desterraban porque, después de todo, **no habían conseguido romperla**.
-### Valladolid (Tierra Zero)
+## Valladolid (Tierra Zero)
 
 El Pozo la expulsó como si el mundo la escupiera. Apareció en mitad de la noche, en un cielo que no reconocía. Cayó de golpe en el estanque del Campo Grande, envuelta en un remolino helado. Durante unos segundos no supo si estaba viva, muerta o atrapada en algún lugar intermedio.
 
