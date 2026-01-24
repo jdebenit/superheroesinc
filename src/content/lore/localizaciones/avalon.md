@@ -1,5 +1,5 @@
 ---
-title: avalon
+title: Avalon
 description: Avalon es un reino mágico antiguo que no busca dominar ni salvar al mundo, sino evitar que se rompa, incluso cuando eso implica cerrar puertas y cumplir pactos incómodos.
 category: localizaciones
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
