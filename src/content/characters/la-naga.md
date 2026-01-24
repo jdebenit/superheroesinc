@@ -61,7 +61,9 @@ Asha aprendió muy joven a sobrevivir leyendo rostros, anticipando explosiones e
 
 El golpe decisivo llegó a los diez años, durante el examen arcano obligatorio para quienes llevaban el apellido Cindraor.  El día del examen arcano nadie esperaba sorpresas. Era un trámite más, una confirmación pública de lo que la casa siempre había dado por hecho. Asha cumplió con cada indicación sin comprender del todo los símbolos ni los rituales, solo siguiendo instrucciones que otros habían repetido antes que ella.
 
-El día del examen arcano nadie esperaba sorpresas. Era un trámite más, una confirmación pública de lo que la casa siempre había dado por hecho. Asha cumplió con cada indicación sin comprender del todo los símbolos ni los rituales, solo siguiendo instrucciones que otros habían repetido antes que ella.
+Cuando el ritual terminó, nadie habló. Los magos evitaron mirarla y repitieron gestos innecesarios para ganar tiempo. El resultado era evidente. Asha no tenía magia. Nada.
+
+No hubo reproches ni alboroto. Solo un cambio sutil en el aire, en las miradas que ya no sabían dónde posarse, en la forma en que la casa empezó a tomar distancia. Asha dejó de ser una hija incómoda y pasó a una anomalía que no encajaba en el linaje y que habría que resolver.
 
 La propuesta de su madrastra llegó envuelta en palabras suaves. La Orden de las Nagas podía darle un propósito. Allí sabrían qué hacer con una niña así. No se habló de destierro ni de vergüenza, aunque ambos flotaban en la estancia.
 
@@ -96,18 +98,13 @@ No era magia ni un don, tampoco una bendición divina. Era Kundalini. El mismo f
 Cuando Asha abrió los ojos, ya no se sintió defectuosa. La niña bastarda se había disuelto. Solo quedaba alguien que por fin empezaba a escucharse.
 ### Catorce años bajo raíces antiguas
 
-El bosque la moldeó igual que había moldeado a tantas antes que ella.  
-Su cuerpo se volvió flexible y firme, capaz de moverse sin dejar huella.  
-Su mente aprendió a distinguir entre impulso e intención.  
-La percepción interior, que antes era refugio, se transformó en brújula.  
-Su intuición emocional se volvió precisa, capaz de leer miedo, mentira o deseo con apenas un gesto.  
-Su Kundalini se convirtió en una serpiente despierta, dispuesta a elevarse cuando lo necesitara y a dormir cuando debía.
+El bosque la moldeó igual que había moldeado a tantas antes que ella.  Su cuerpo se volvió flexible y firme, capaz de moverse sin dejar huella.  Su mente aprendió a distinguir entre impulso e intención.  La percepción interior, que antes era refugio, se transformó en brújula.  
 
-Asha aprendió a moverse sin sombra, a escuchar antes de actuar, a no permitir que su dolor dirigiera su paso.  
-Comprendió que las Nagas no buscaban poder, sino equilibrio. No luchaban por dominar, sino para restaurar lo que estaba roto.
+Su intuición emocional se volvió precisa, capaz de leer miedo, mentira o deseo con apenas un gesto.  Su Kundalini se convirtió en una serpiente despierta, dispuesta a elevarse cuando lo necesitara y a dormir cuando debía.
 
-Y descubrió que su aparente vacío no era un defecto, sino un espacio donde algo nuevo podía crecer.  
-Un espacio que en Valdoria jamás habrían reconocido.
+Asha aprendió a moverse sin sombra, a escuchar antes de actuar, a no permitir que su dolor dirigiera su paso.  Comprendió que las Nagas no buscaban poder, sino equilibrio. No luchaban por dominar, sino para restaurar lo que estaba roto.
+
+Y descubrió que su aparente vacío no era un defecto, sino un espacio donde algo nuevo podía crecer.  Un espacio que en Valdoria jamás habrían reconocido.
 ### La discípula serpentina
 
 A los veinticuatro años, Asha se había convertido en una de las practicantes más respetadas del Monasterio de la Columna Ardiente.  
@@ -119,14 +116,10 @@ Su ausencia de poder arcano no era un defecto, sino la razón por la que su Kund
 Había llegado como una niña rota.  Se marchó convertida en Naga.
 ### Regreso a Valdoria
 
-_El linaje que la rechazó recibe a una hija que ya no les pertenece_
-
-Asha regresó sin esperar nada.  
-Habían pasado catorce años desde que dejó la ciudad atrás. Catorce años respirando con calma ondulante, escuchando su fuego interno antes que cualquier ruido del mundo.
+Asha regresó sin esperar nada.  Habían pasado catorce años desde que dejó la ciudad atrás. Catorce años respirando con calma ondulante, escuchando su fuego interno antes que cualquier ruido del mundo.
 
 A pesar de eso, al ver las torres pálidas de Valdoria sintió que una sombra antigua se acercaba.  
-No era miedo ni nostalgia.  
-Era la memoria de aquella niña que se acostumbró a leer amenazas en cada gesto.
+No era miedo ni nostalgia.  Era la memoria de aquella niña que se acostumbró a leer amenazas en cada gesto.
 
 Pero esa niña ya no existía.
 
