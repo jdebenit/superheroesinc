@@ -10,7 +10,7 @@ updatedDate: 2025-11-26
 
 A diferencia de otros Reinos de la Magia (como Avalon o Nigalión), Terra es un **mundo completo**, con sociedades, reinos, ciudades, culturas, razas fantásticas y su propio panteón de héroes y villanos. Para muchos arcanistas, Terra es una fuente de teorías sobre el origen mismo de la magia cruda presente en Tierra Zero.
 
-## Naturaleza del Mundo
+## Naturaleza del mundo
 
 Terra es una realidad en la que:
 
@@ -25,7 +25,7 @@ Comparte cierta semejanza geográfica con nuestro planeta, pero está marcada po
 - el **descubrimiento tardío de América** a finales del siglo XIX,  
 - la existencia de **reinos y ducados** en lugar de estados modernos.
 
-## Sociedades y Civilización
+## Sociedades y civilización
 
 En Terra, la magia es una herramienta tan común como la electricidad en nuestro mundo. Magos, brujos, druidas y ritualistas forman parte activa de la sociedad:
 
@@ -37,7 +37,7 @@ En Terra, la magia es una herramienta tan común como la electricidad en nuestro
 
 La vida se estructura en torno a **Reinos, Ducados, Órdenes y Gremios**, con dinámicas propias de una fantasía clásica, pero atravesadas por elementos del multiverso superheroico.
 
-## Razas y Criaturas
+## Razas y criaturas
 
 Terra está habitada por una amplia variedad de seres:
 
@@ -48,7 +48,7 @@ Terra está habitada por una amplia variedad de seres:
 
 Muchas de estas razas tienen versiones o paralelos de personajes de Tierra Zero.
 
-## Héroes y Villanos de Terra
+## Héroes y villanos de Terra
 
 El mundo cuenta con sus propios supergrupos y antagonistas, equivalentes a los de Tierra Zero pero adaptados al paradigma mágico:
 

@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "characters/la-naga.md",
+                "file": "characters/mjolnir-original.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "la-naga"
+              "title": "mjolnir-original"
             }
           }
         ]
@@ -185,12 +185,12 @@
   },
   "active": "d71b59adf17a3f03",
   "lastOpenFiles": [
+    "lore/localizaciones/terra.md",
+    "lore/localizaciones/kishvar.md",
+    "characters/la-naga.md",
     "characters/la-luz-de-cadollo.md",
     "characters/la-bruja-verca.md",
-    "characters/la-naga.md",
     "lore/organizaciones/la-orden-de-las-nagas.md",
-    "lore/localizaciones/kishvar.md",
-    "lore/localizaciones/terra.md",
     "lore/localizaciones/avalon.md",
     "lore/localizaciones/valdoria.md",
     "lore/localizaciones/valladolid.md",
