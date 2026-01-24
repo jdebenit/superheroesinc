@@ -191,7 +191,7 @@
     ],
     "specialItems": [
       {
-        "name": "Otro Idioma (Req) - Inglés",
+        "name": "Otro Idioma (Req) - Kishvari / Rumano",
         "value": "34+20%",
         "math": "(INT/3)"
       },
@@ -201,7 +201,7 @@
         "math": "(2xPER)/3"
       },
       {
-        "name": "Concentración",
+        "name": "Contemplación",
         "value": "54%"
       },
       {
