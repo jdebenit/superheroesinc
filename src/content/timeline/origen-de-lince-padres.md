@@ -4,5 +4,5 @@ date: 1934-01-01
 description: "Fallecimiento en un accidente ferroviario de los padres de Ángel Carreras, posteriormente conocido como Lince."
 reality: "Tierra Zero"
 icon: "star"
-tags: ["personaje","origen"]
+tags: ["personaje"]
 ---

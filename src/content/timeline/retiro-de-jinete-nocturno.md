@@ -5,5 +5,5 @@ date: 2003-01-01
 description: "Jinete Nocturno (David Martín) se retira tras un accidente."
 reality: "Tierra Zero"
 icon: "star"
-tags: ["personaje","retiro"]
+tags: ["personaje", "contemporaneo"]
 ---

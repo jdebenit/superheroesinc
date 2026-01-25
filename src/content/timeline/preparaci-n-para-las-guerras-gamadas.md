@@ -5,5 +5,5 @@ displayDate: "1930s-40s"
 description: "La Orden de los Magos Blancos recluta miembros ante la premonición de las Guerras Gamadas. Madame Blavatsky recibe revelaciones tergiversadas. Los Carbonarios se infiltran en la Sociedad Teosófica."
 reality: "Tierra Zero"
 icon: "star"
-tags: ["magos-blancos","guerras-gamadas","blavatsky","carbonarios"]
+tags: ["guerras-gamadas"]
 ---

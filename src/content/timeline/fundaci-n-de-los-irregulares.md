@@ -5,5 +5,5 @@ date: 2021-01-01
 description: "Se fundan los Irregulares."
 reality: "Tierra Zero"
 icon: "star"
-tags: ["irregulares","grupo","2021"]
+tags: ["contemporaneo"]
 ---

@@ -5,5 +5,5 @@ date: 2011-01-01
 description: "Orfeo gana las elecciones. Purgatorio pasa a llamarse Paraíso y es aceptada en la ONU. Descubrimiento de Athalne."
 reality: "Tierra Zero"
 icon: "star"
-tags: ["politica","paraiso","orfeo"]
+tags: ["contemporaneo"]
 ---

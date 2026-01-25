@@ -5,5 +5,5 @@ displayDate: "1585 en adelante"
 description: "Bruno continúa su obra en Ginebra e Inglaterra. Finalmente es arrestado y ejecutado en la hoguera en Roma, pero su legado arcano perdura."
 reality: "Tierra Zero"
 icon: "star"
-tags: ["giordano-bruno","inquisicion","muerte","1600"]
+tags: ["era-mitica"]
 ---

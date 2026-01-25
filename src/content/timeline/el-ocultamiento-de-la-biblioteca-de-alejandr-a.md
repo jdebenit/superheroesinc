@@ -5,5 +5,5 @@ displayDate: "Siglo VII"
 description: "Un concilio de magos transfiere los textos de la Biblioteca de Alejandría a una realidad periférica y simula su destrucción en un incendio para proteger el conocimiento arcano."
 reality: "Tierra Zero"
 icon: "star"
-tags: ["biblioteca-alejandria","magos","siglo-vii"]
+tags: ["era-mitica"]
 ---

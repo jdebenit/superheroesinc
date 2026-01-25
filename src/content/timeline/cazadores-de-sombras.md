@@ -4,5 +4,5 @@ date: 1986-01-01
 description: "Se forma el grupo Cazadores de Sombras."
 reality: "Tierra Zero"
 icon: "star"
-tags: ["grupo","fundacion"]
+tags: []
 ---

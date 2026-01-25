@@ -5,5 +5,5 @@ displayDate: "Siglo XIII"
 description: "Tras las advertencias de Preste Juan, el miedo a los demonios impulsa a la Inquisición a cazar practicantes de magia y buscar conocimientos arcanos para combatir la amenaza."
 reality: "Tierra Zero"
 icon: "star"
-tags: ["inquisicion","magia","siglo-xiii"]
+tags: []
 ---

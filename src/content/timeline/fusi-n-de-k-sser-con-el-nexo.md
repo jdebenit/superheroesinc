@@ -5,5 +5,5 @@ date: 1999-01-01
 description: "K'sser y su hija Jewel se fusionan con el Nexo de Terra. Jewel lo bloquea el tiempo suficiente para que sea derrotado y escapa."
 reality: "Terra"
 icon: "star"
-tags: ["ksser","jewel","nexo","terra","1999"]
+tags: ["invasion-ksser"]
 ---

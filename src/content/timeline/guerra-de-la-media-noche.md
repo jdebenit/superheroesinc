@@ -5,5 +5,5 @@ date: 2010-01-01
 description: "Grupo metahumano (presumiblemente EEUU) asesina a Dante. Desmantelamiento Winter Office."
 reality: "Tierra Zero"
 icon: "star"
-tags: ["guerra","asesinato","purgatorio"]
+tags: ["guerras-gamadas", "contemporaneo"]
 ---

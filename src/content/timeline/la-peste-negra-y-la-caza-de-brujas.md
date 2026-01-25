@@ -5,5 +5,5 @@ displayDate: "Siglo XIV"
 description: "La Peste Negra devasta Europa. Se culpa a la magia negra, intensificando las persecuciones de la Inquisición, que utiliza la crisis para consolidar su poder."
 reality: "Tierra Zero"
 icon: "star"
-tags: ["peste-negra","inquisicion","siglo-xiv"]
+tags: []
 ---
