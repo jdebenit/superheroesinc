@@ -50,6 +50,14 @@ export async function getStaticPaths() {
       },
     },
     {
+      params: { category: "cronicas" },
+      props: {
+        title: "Crónicas",
+        description:
+          "Relatos y crónicas ficticias ambientadas en el universo de Superhéroes INC.",
+      },
+    },
+    {
       params: { category: "actual-plays" },
       props: {
         title: "Actual Plays",
