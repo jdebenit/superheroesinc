@@ -32,15 +32,15 @@ export const Timeline: React.FC<TimelineProps> = ({ events }) => {
     }, [events, selectedReality]);
 
     return (
-        <div className="timeline-container w-full max-w-6xl mx-auto px-4 py-8">
-            <div className="flex justify-center mb-8 gap-4 flex-wrap">
+        <div className="timeline-container w-full max-w-6xl mx-auto py-8">
+            <div className="flex justify-center mb-12 gap-4 flex-wrap">
                 {realities.map(reality => (
                     <button
                         key={reality}
                         onClick={() => setSelectedReality(reality)}
-                        className={`px-4 py-2 rounded-full transition-all duration-300 ${selectedReality === reality
-                                ? 'bg-primary-500 text-white shadow-lg scale-105'
-                                : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                        className={`comic-button text-sm ${selectedReality === reality
+                            ? 'bg-[#1a1a1a] text-white'
+                            : ''
                             }`}
                     >
                         {reality}
@@ -48,48 +48,65 @@ export const Timeline: React.FC<TimelineProps> = ({ events }) => {
                 ))}
             </div>
 
-            <VerticalTimeline lineColor="#374151">
+            <VerticalTimeline lineColor="#1a1a1a">
                 {filteredEvents.map((event) => (
                     <VerticalTimelineElement
                         key={`${event.type}-${event.id}`}
                         className="vertical-timeline-element--work"
-                        contentStyle={{ background: '#1f2937', color: '#fff', border: '1px solid #374151' }}
-                        contentArrowStyle={{ borderRight: '7px solid  #1f2937' }}
-                        date={event.date.toLocaleDateString()} // improved date formatting can be done here
-                        iconStyle={{ background: '#3b82f6', color: '#fff' }}
+                        contentStyle={{
+                            background: '#fff',
+                            color: '#1a1a1a',
+                            border: '1px solid #d3d0c2',
+                            boxShadow: '2px 2px 0 rgba(0, 0, 0, 0.1)',
+                            borderRadius: '0'
+                        }}
+                        contentArrowStyle={{ borderRight: '7px solid #fff' }}
+                        date={event.date.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}
+                        dateClassName="text-[#1a1a1a] font-bold font-mono"
+                        iconStyle={{ background: '#c41e3a', color: '#fff', boxShadow: 'none', border: '2px solid #1a1a1a' }}
                     // You can add custom icons here based on event.icon
                     >
-                        <h3 className="vertical-timeline-element-title text-xl font-bold">{event.title}</h3>
-                        <h4 className="vertical-timeline-element-subtitle text-sm text-gray-400 mt-1 capitalize">{event.type}</h4>
-                        <div className="mt-4 text-gray-300">
+                        <h3 className="vertical-timeline-element-title text-xl font-bold uppercase tracking-tighter" style={{ fontFamily: "'Courier Prime', monospace", color: '#c41e3a' }}>
+                            {event.title}
+                        </h3>
+                        {/* <h4 className="vertical-timeline-element-subtitle text-sm text-gray-500 mt-1 capitalize font-mono">{event.type}</h4> */}
+
+                        <div className="mt-4 text-[#1a1a1a] font-mono leading-relaxed">
                             <p>{event.description}</p>
                         </div>
 
                         {event.image && (
-                            <img
-                                src={event.image}
-                                alt={event.title}
-                                className="mt-4 rounded-lg w-full h-48 object-cover"
-                            />
+                            <div className="mt-4 border-2 border-[#1a1a1a] p-1 bg-white transform rotate-1 shadow-md">
+                                <img
+                                    src={event.image}
+                                    alt={event.title}
+                                    className="w-full h-48 object-cover filter sepia-[.3]"
+                                />
+                            </div>
                         )}
 
                         {event.slug && (
-                            <div className="mt-4">
+                            <div className="mt-6 text-right">
                                 <a
-                                    href={`/lore/${event.slug}`} // Assuming 'lore' structure, might need adjustment
-                                    className="inline-block px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded transition-colors"
+                                    href={`/lore/${event.slug}`}
+                                    className="text-[#c41e3a] hover:text-[#8a1529] uppercase font-bold text-sm tracking-widest border-b-2 border-[#c41e3a] pb-1 hover:pb-2 transition-all"
                                 >
-                                    Read more
+                                    VER ARCHIVO &rarr;
                                 </a>
                             </div>
                         )}
+
+                        {/* Stamp effect if needed */}
+                        <div className="absolute top-2 right-2 opacity-10 pointer-events-none transform -rotate-12 border-2 border-red-800 p-1 text-xs font-bold text-red-800 uppercase">
+                            CONFIDENTIAL
+                        </div>
                     </VerticalTimelineElement>
                 ))}
             </VerticalTimeline>
 
             {filteredEvents.length === 0 && (
-                <div className="text-center text-gray-400 mt-10">
-                    No events found for this timeline reality.
+                <div className="text-center text-gray-500 mt-10 font-mono italic">
+                    -- [ DATOS ELIMINADOS ] --
                 </div>
             )}
         </div>
