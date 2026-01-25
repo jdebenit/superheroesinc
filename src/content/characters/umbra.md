@@ -3,7 +3,7 @@ name: Christiane de Ugarte
 alias: Umbra
 description: CLASIFICADO
 source: "Superhéroes INC. Tercera Edición y Héroe Agenda: Sobrenaturales y Arcanos"
-updatedDate: 2025-11-26
+updatedDate: 2026-01-25
 image: /personajes/umbra.png
 tags:
   - Principales
