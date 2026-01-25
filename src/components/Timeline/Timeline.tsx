@@ -214,7 +214,10 @@ export const Timeline: React.FC<TimelineProps> = ({ events }) => {
                             color: '#1a1a1a',
                             border: '1px solid #d3d0c2',
                             boxShadow: '2px 2px 0 rgba(0, 0, 0, 0.1)',
-                            borderRadius: '0'
+                            borderRadius: '0',
+                            overflow: 'hidden', // Prevent overflow
+                            display: 'flex',
+                            flexDirection: 'column'
                         }}
                         contentArrowStyle={{ borderRight: '7px solid #fff' }}
                         date={event.displayDate || event.date.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}
@@ -222,7 +225,7 @@ export const Timeline: React.FC<TimelineProps> = ({ events }) => {
                         iconStyle={getIconStyle(event.icon)}
                         icon={getIcon(event.icon)}
                     >
-                        <h3 className="vertical-timeline-element-title text-xl font-bold uppercase tracking-tighter" style={{ fontFamily: "'Courier Prime', monospace", color: '#c41e3a' }}>
+                        <h3 className="vertical-timeline-element-title text-xl font-bold uppercase tracking-tighter break-words" style={{ fontFamily: "'Courier Prime', monospace", color: '#c41e3a' }}>
                             {event.title}
                         </h3>
                         {/* <h4 className="vertical-timeline-element-subtitle text-sm text-gray-500 mt-1 capitalize font-mono">{event.type}</h4> */}
@@ -243,16 +246,35 @@ export const Timeline: React.FC<TimelineProps> = ({ events }) => {
                             )}
                         </div>
 
-                        <div className="mt-4 text-[#1a1a1a] font-mono leading-relaxed">
+                        <div className="mt-4 text-[#1a1a1a] font-mono leading-relaxed break-words text-justify">
                             <p>{event.description}</p>
                         </div>
 
                         {event.image && (
-                            <div className="mt-4 border-2 border-[#1a1a1a] p-1 bg-white transform rotate-1 shadow-md">
+                            <div style={{
+                                marginTop: '1rem',
+                                border: '2px solid #1a1a1a',
+                                padding: '4px',
+                                backgroundColor: 'white',
+                                boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                                width: '100%',
+                                maxWidth: '100%',
+                                overflow: 'hidden',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center'
+                            }}>
                                 <img
                                     src={event.image}
                                     alt={event.title}
-                                    className="w-full h-48 object-cover filter sepia-[.3]"
+                                    style={{
+                                        maxWidth: '100%',
+                                        maxHeight: '400px',
+                                        width: 'auto',
+                                        height: 'auto',
+                                        display: 'block',
+                                        filter: 'sepia(0.3)'
+                                    }}
                                 />
                             </div>
                         )}
