@@ -56,7 +56,21 @@ const timelineCollection = defineCollection({
     type: 'content',
     schema: z.object({
         title: z.string(),
-        date: z.union([z.string(), z.date()]).transform((val) => new Date(val)),
+        date: z.union([z.string(), z.date()]).transform((val) => {
+            if (val instanceof Date) return val;
+            // Handle negative years manually
+            const match = val.match(/^(-?\d+)-(\d{2})-(\d{2})/);
+            if (match) {
+                const year = parseInt(match[1]);
+                const month = parseInt(match[2]) - 1; // 0-indexed
+                const day = parseInt(match[3]);
+                const date = new Date();
+                date.setFullYear(year, month, day);
+                date.setHours(0, 0, 0, 0);
+                return date;
+            }
+            return new Date(val);
+        }),
         displayDate: z.string().optional(),
         description: z.string(),
         reality: z.string().optional().default('Principal'),
