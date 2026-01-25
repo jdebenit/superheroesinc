@@ -1,13 +1,13 @@
 ---
 title: Proyecto Euroman
-description: El estado financio el Proyecto Euroman con el fin de fabricar héroes para proteger Europa, y acabó demostrando que crear superhumanos es mucho más fácil que asumir las consecuencias.
+description: El estado financia el Proyecto Euroman con el fin de fabricar héroes para proteger Europa, y acabó demostrando que crear superhumanos es mucho más fácil que asumir las consecuencias.
 category: eventos
 source: Superhéroes INC. Tercera Edición y Pantalla Segunda Edición
 updatedDate: 2025-12-13
 pubDate: 2025-12-13
 eventDate: 1977-08-24
 reality: "Tierra Zero"
-tags: []
+tags: ["euroman"]]
 ---
 El Proyecto Euroman fue uno de los experimentos más ambiciosos y controvertidos de la historia metahumana europea. No nació como un acto de heroísmo, sino como una respuesta política, científica y militar a un mundo que empezaba a llenarse de seres con poderes imposibles de controlar por medios convencionales.
 
