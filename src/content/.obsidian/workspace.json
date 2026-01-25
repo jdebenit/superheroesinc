@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "lore/cronicas/nadie-hablo-de-esto-despues.md",
+                "file": "lore/organizaciones/la-academia-de-los-jovenes-heroes.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "nadie-hablo-de-esto-despues"
+              "title": "la-academia-de-los-jovenes-heroes"
             }
           }
         ]
@@ -183,10 +183,12 @@
       "bases:Crear nueva base": false
     }
   },
-  "active": "2bf133c1830a0ce8",
+  "active": "d3ff2e248c4f088d",
   "lastOpenFiles": [
-    "lore/cronicas/la-caida-de-la-gran-barrera 1.md",
+    "lore/organizaciones/zelig.md",
+    "lore/organizaciones/la-academia-de-los-jovenes-heroes.md",
     "lore/cronicas/nadie-hablo-de-esto-despues.md",
+    "lore/cronicas/la-caida-de-la-gran-barrera 1.md",
     "lore/localizaciones/kishvar.md",
     "lore/eventos/la-caida-de-la-gran-barrera.md",
     "lore/entidades/armonia.md",
@@ -210,8 +212,6 @@
     "faq/21-tirada-eqm-modificador-psionico-parada-mental.md",
     "faq/20-metodo-mixto-cambio-origen.md",
     "faq/18-alterado-secuela-coste.md",
-    "faq/19-parahumanos-hibridos-coste.md",
-    "faq/17-funcion-resistencia-prejuicios.md",
     "faq",
     "rpg/leon-rojo.yaml",
     "rpg/jefe-motero-road-reapers.yaml",

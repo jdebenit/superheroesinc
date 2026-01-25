@@ -12,29 +12,6 @@ const sortedPosts = allPosts.sort(
 );
 const latestPosts = sortedPosts.slice(0, 3);
 
-const lastUpdate =
-  sortedPosts.length > 0 ? sortedPosts[0].data.pubDate : new Date();
-const formattedAuthDate = lastUpdate
-  .toLocaleDateString("es-ES", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-  })
-  .replace(/\./g, "")
-  .replace(/ /g, "-")
-  .toUpperCase();
-
-const news = latestPosts.map((post) => ({
-  title: post.data.title,
-  excerpt: post.data.description,
-  date: post.data.pubDate.toLocaleDateString("es-ES", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  }),
-  link: `/blog/${post.slug}`,
-}));
-
 // Fetch latest lore updates
 const allLore = await getCollection("lore");
 const sortedLore = allLore
@@ -77,6 +54,47 @@ const latestCharacters = sortedCharacters.slice(0, 3).map((entry) => ({
     image: entry.data.image,
     source: entry.data.source,
   },
+}));
+
+// Calculate last update based on all content
+const latestPostDate =
+  sortedPosts.length > 0 ? sortedPosts[0].data.pubDate.valueOf() : 0;
+const latestLoreDate =
+  sortedLore.length > 0 && sortedLore[0].data.updatedDate
+    ? sortedLore[0].data.updatedDate.valueOf()
+    : 0;
+const latestCharacterDate =
+  sortedCharacters.length > 0 && sortedCharacters[0].data.updatedDate
+    ? sortedCharacters[0].data.updatedDate.valueOf()
+    : 0;
+
+const lastUpdateTimestamp = Math.max(
+  latestPostDate,
+  latestLoreDate,
+  latestCharacterDate,
+);
+const lastUpdate =
+  lastUpdateTimestamp > 0 ? new Date(lastUpdateTimestamp) : new Date();
+
+const formattedAuthDate = lastUpdate
+  .toLocaleDateString("es-ES", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  })
+  .replace(/\./g, "")
+  .replace(/ /g, "-")
+  .toUpperCase();
+
+const news = latestPosts.map((post) => ({
+  title: post.data.title,
+  excerpt: post.data.description,
+  date: post.data.pubDate.toLocaleDateString("es-ES", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  }),
+  link: `/blog/${post.slug}`,
 }));
 ---
 
