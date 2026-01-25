@@ -23,7 +23,7 @@ const allEvents = [
         reality: entry.data.reality || "Tierra Zero",
         type: "lore" as const,
         image: entry.data.image,
-        slug: `${entry.data.category}/${entry.slug}`, // Construct correct slug for lore items
+        slug: entry.slug,
         tags: entry.data.tags,
     })),
     ...timelineEntries.map((entry) => ({
