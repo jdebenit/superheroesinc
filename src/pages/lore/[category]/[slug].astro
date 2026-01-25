@@ -139,6 +139,36 @@ if (item.data.category === "actual-plays") {
                   </time>
                 </div>
               )}
+              {item.data.pubDate && (
+                <div class="metadata-item">
+                  <span class="label">Publicado:</span>
+                  <time class="value">
+                    {new Date(item.data.pubDate).toLocaleDateString(
+                      "es-ES",
+                      {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      },
+                    )}
+                  </time>
+                </div>
+              )}
+              {item.data.eventDate && (
+                <div class="metadata-item">
+                  <span class="label">Fecha del Evento:</span>
+                  <time class="value">
+                    {new Date(item.data.eventDate).toLocaleDateString(
+                      "es-ES",
+                      {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      },
+                    )}
+                  </time>
+                </div>
+              )}
             </div>
           )
         }

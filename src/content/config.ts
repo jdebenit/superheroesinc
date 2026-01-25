@@ -21,6 +21,8 @@ const loreCollection = defineCollection({
         image: z.string().optional(),
         source: z.string().optional(),
         updatedDate: z.date().optional(),
+        pubDate: z.date().optional(),
+        eventDate: z.date().optional(),
         // Reference to RPG data
         rpgId: z.string().optional(),
         // Actual Play specific fields
