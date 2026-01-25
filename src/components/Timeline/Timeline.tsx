@@ -214,10 +214,6 @@ export const Timeline: React.FC<TimelineProps> = ({ events }) => {
                             color: '#1a1a1a',
                             border: '1px solid #d3d0c2',
                             boxShadow: '2px 2px 0 rgba(0, 0, 0, 0.1)',
-                            borderRadius: '0',
-                            overflow: 'hidden', // Prevent overflow
-                            display: 'flex',
-                            flexDirection: 'column'
                         }}
                         contentArrowStyle={{ borderRight: '7px solid #fff' }}
                         date={event.displayDate || event.date.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}
