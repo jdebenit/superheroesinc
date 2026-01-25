@@ -169,6 +169,8 @@ const charactersCollection = defineCollection({
         updatedDate: z.date().optional(),
         // Reference to RPG data
         rpgId: z.string().optional(),
+        birthDate: z.date().optional(),
+        deathDate: z.date().optional(),
         tags: z.array(z.string()).optional(),
     }),
 });

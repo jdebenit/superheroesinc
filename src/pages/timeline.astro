@@ -12,6 +12,8 @@ const loreEntries = await getCollection("lore", ({ data }) => {
 
 const timelineEntries = await getCollection("timeline");
 
+const charactersEntries = await getCollection("characters");
+
 const allEvents = [
     ...loreEntries.map((entry) => ({
         id: entry.slug,
@@ -33,6 +35,34 @@ const allEvents = [
         image: entry.data.image,
         icon: entry.data.icon,
     })),
+    ...charactersEntries.flatMap((entry) => {
+        const events = [];
+        if (entry.data.birthDate) {
+            events.push({
+                id: `birth-${entry.slug}`,
+                title: `Nacimiento: ${entry.data.name}`,
+                date: entry.data.birthDate,
+                description: `Nacimiento de ${entry.data.name}${entry.data.alias ? ` (${entry.data.alias})` : ""}.`,
+                reality: "Principal",
+                type: "timeline" as const, // Reusing timeline type
+                image: entry.data.image,
+                icon: "star",
+            });
+        }
+        if (entry.data.deathDate) {
+            events.push({
+                id: `death-${entry.slug}`,
+                title: `Muerte: ${entry.data.name}`,
+                date: entry.data.deathDate,
+                description: `Fallecimiento de ${entry.data.name}${entry.data.alias ? ` (${entry.data.alias})` : ""}.`,
+                reality: "Principal",
+                type: "timeline" as const,
+                image: entry.data.image,
+                icon: "skull",
+            });
+        }
+        return events;
+    }),
 ].sort((a, b) => a.date.getTime() - b.date.getTime());
 ---
 
@@ -41,7 +71,7 @@ const allEvents = [
         <div class="content-container">
             <h1 class="text-center mb-4">Timeline</h1>
             <p class="text-center mb-12">
-                Explora los eventos de las diferentes realidades.
+                Explora los eventos de las diferentes esferas.
             </p>
 
             <Timeline client:only="react" events={allEvents} />

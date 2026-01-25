@@ -1,0 +1,8 @@
+---
+title: "Retorno de Miguel Alberto"
+date: 1958-01-01
+description: "El rey Miguel Alberto vuelve al poder en Transjastán para alejar del ámbito soviético a algunos países de la zona."
+reality: "Principal"
+icon: "star"
+tags: ["politica","transjastan"]
+---
