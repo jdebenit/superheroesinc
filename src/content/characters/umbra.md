@@ -1,7 +1,7 @@
 ---
 name: Christiane de Ugarte
 alias: Umbra
-description: CLASIFICADO
+description: Hechicera dispuesta a cruzar cualquier límite para sostener el equilibrio, convencida de que el mundo solo sobrevive cuando alguien acepta cargar con las decisiones que nadie más quiere tomar.
 source: "Superhéroes INC. Tercera Edición y Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2026-01-25
 image: /personajes/umbra.png
