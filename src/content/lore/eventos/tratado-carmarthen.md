@@ -4,6 +4,8 @@ description: El Tratado aseguró la protección mutua entre el Reino Unido y Ava
 category: eventos
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2026-01-18
+pubDate: 2026-01-18
+eventDate: 2020-02-01
 ---
 El **Brexit** no fue solo una decisión política motivada por economía, fronteras o discursos identitarios. En el trasfondo real del mundo supuso la ruptura consciente de un marco de protección que llevaba décadas conteniendo fuerzas que no figuraban en ningún tratado europeo. El Reino Unido aceptó el coste del aislamiento porque necesitaba recuperar margen de maniobra sobre asuntos que Bruselas no podía, ni quería, comprender. Lo que para la opinión pública fue un acto de soberanía, en los círculos adecuados se entendió como una retirada estratégica. Menos controles externos, menos ojos mirando y más libertad para reactivar acuerdos antiguos.
 

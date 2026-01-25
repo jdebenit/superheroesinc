@@ -4,6 +4,8 @@ description: Guerra propiciada por El H4ck3r que provocó el mayor colapso tecno
 category: eventos
 source: Superhéroes INC. Tercera Edición
 updatedDate: 2025-12-04
+pubDate: 2025-12-04
+eventDate: 2012-11-11
 ---
 
 La TecnoGuerra fue el mayor colapso tecnológico y militar de la historia reciente de Europa. Durante años, el Proyecto TecnoRED había sido el símbolo de la defensa continental, un sistema de unidades de asalto equipadas con servoarmaduras avanzadas, pilotadas por humanos entrenados y consideradas un baluarte de seguridad. Nadie imaginaba que su caída sería tan rápida y devastadora.

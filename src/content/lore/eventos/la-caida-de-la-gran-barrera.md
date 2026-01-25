@@ -4,8 +4,9 @@ description: El acto desesperado con el que se aisló a la Tierra de los dioses 
 category: eventos
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2026-01-10
+pubDate: 2026-01-10
+eventDate: 2029-01-02
 ---
-
 La creación de la Gran Barrera es un hecho histórico y mágico que marca el antes y el después de la relación entre la Tierra y los Reinos Divinos.
 
 Su origen está directamente ligado a la desaparición del Orbe Sagrado. Durante eras, ese artefacto fue el anclaje que mantenía estables a los reinos de los dioses y regulaba su vínculo con el mundo mortal. Cuando el Orbe desaparece, el equilibrio se rompe. No de forma inmediata, sino de manera progresiva. Los reinos comienzan a perder cohesión, influencia y sustento. La Tierra, por proximidad y riqueza de almas, se convierte en el punto de presión natural.

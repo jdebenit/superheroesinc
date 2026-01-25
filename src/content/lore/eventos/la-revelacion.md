@@ -4,6 +4,8 @@ description: La Revelación, cambio la percecpción de la historia del mundo. Fu
 category: eventos
 source: "Superhéroes INC. Tercera Edición y Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2026-01-18
+pubDate: 2026-01-18
+eventDate: 2001-06-07
 ---
 La Revelación es el nombre que se le da al proceso por el que la gente corriente empezó a asumir, de forma masiva, que el mundo no era como se lo habían contado. No fue un anuncio oficial ni una única “gran prueba”. Fue más bien un cambio de estado. Algo que pasa de ser rumor, rareza o mito moderno a convertirse en una certeza incómoda, aunque no se entiendan todos los detalles. A partir de ahí, muchas personas aceptan dos ideas básicas. Que existen fuerzas y entidades fuera del marco humano, y que durante siglos alguien se ha esforzado en mantenerlo fuera del foco.
 
