@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "lore/eventos/la-caida-de-la-gran-barrera.md",
+                "file": "timeline/textos-nordicos.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "la-caida-de-la-gran-barrera"
+              "title": "textos-nordicos"
             }
           },
           {
@@ -199,6 +199,8 @@
   },
   "active": "e86d5fda35badf15",
   "lastOpenFiles": [
+    "timeline/el-poeta-quin-jao-sen.md",
+    "lore/eventos/la-caida-de-la-gran-barrera.md",
     "timeline/nacimiento-de-idess.md",
     "timeline/nacimiento-de-erzfeind.md",
     "timeline/aleister-crowley-y-la-aurora-dorada.md",
@@ -223,8 +225,6 @@
     "timeline/guerreros-del-imperio.md",
     "timeline/detenci-n-de-jaguar.md",
     "timeline/disoluci-n-goa-17.md",
-    "timeline/el-bar-n-y-la-iglesia-de-sat-n.md",
-    "timeline/el-libro-de-la-ley-y-thelema.md",
     "timeline",
     "lore/cronicas",
     "faq",
