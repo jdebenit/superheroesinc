@@ -2,7 +2,7 @@
 title: "Búsquedas Gubernamentales"
 date: 1939-01-01
 description: "Búsquedas gubernamentales de metahumanos para la integración de éstos en programas militares."
-reality: "Principal"
+reality: "Tierra Zero"
 icon: "star"
 tags: ["gobierno","militar"]
 ---

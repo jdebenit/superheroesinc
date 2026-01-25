@@ -637,7 +637,7 @@ title: "${event.title}"
 date: ${event.date}
 ${event.displayDate ? `displayDate: "${event.displayDate}"` : ''}
 description: "${event.description.replace(/"/g, '\\"')}"
-reality: "Principal"
+reality: "Tierra Zero"
 icon: "star"
 tags: ${JSON.stringify(event.tags)}
 ---

@@ -3,7 +3,7 @@ title: "Vientos de Erebus"
 date: 1970-01-01
 
 description: "Vampiros, Hombres Lobo y Semidemonios firman un pacto en Valladolid para proteger a los seres sobrenaturales, fundando Vientos de Erebus."
-reality: "Principal"
+reality: "Tierra Zero"
 icon: "star"
 tags: ["vientos-de-erebus","valladolid","vampiros","hombres-lobo","1970"]
 ---

@@ -3,7 +3,7 @@ title: "Llegada a Cronópolis"
 date: 1501-01-01
 
 description: "Los Buscadores llegan a la ciudad de Cronópolis, más allá del tiempo, esperando encontrar pistas sobre el Orbe Sagrado."
-reality: "Principal"
+reality: "Tierra Zero"
 icon: "star"
 tags: ["cronopolis","buscadores","1501"]
 ---

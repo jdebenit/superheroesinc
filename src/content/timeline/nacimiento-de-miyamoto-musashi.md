@@ -2,7 +2,7 @@
 title: "Nacimiento de Miyamoto Musashi"
 date: 1584-05-19
 description: "Nace Miyamoto Musashi."
-reality: "Principal"
+reality: "Tierra Zero"
 icon: "star"
 tags: ["personaje","nacimiento"]
 ---
