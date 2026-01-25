@@ -184,8 +184,36 @@ const charactersCollection = defineCollection({
         updatedDate: z.date().optional(),
         // Reference to RPG data
         rpgId: z.string().optional(),
-        birthDate: z.date().optional(),
-        deathDate: z.date().optional(),
+        birthDate: z.union([z.string(), z.date()]).transform((val) => {
+            if (!val) return undefined;
+            if (val instanceof Date) return val;
+            const match = val.match(/^(-?\d+)-(\d{2})-(\d{2})/);
+            if (match) {
+                const year = parseInt(match[1]);
+                const month = parseInt(match[2]) - 1;
+                const day = parseInt(match[3]);
+                const date = new Date();
+                date.setFullYear(year, month, day);
+                date.setHours(0, 0, 0, 0);
+                return date;
+            }
+            return new Date(val);
+        }).optional(),
+        deathDate: z.union([z.string(), z.date()]).transform((val) => {
+            if (!val) return undefined;
+            if (val instanceof Date) return val;
+            const match = val.match(/^(-?\d+)-(\d{2})-(\d{2})/);
+            if (match) {
+                const year = parseInt(match[1]);
+                const month = parseInt(match[2]) - 1;
+                const day = parseInt(match[3]);
+                const date = new Date();
+                date.setFullYear(year, month, day);
+                date.setHours(0, 0, 0, 0);
+                return date;
+            }
+            return new Date(val);
+        }).optional(),
         tags: z.array(z.string()).optional(),
     }),
 });
