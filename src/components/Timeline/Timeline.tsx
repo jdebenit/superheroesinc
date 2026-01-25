@@ -223,15 +223,20 @@ export const Timeline: React.FC<TimelineProps> = ({ events }) => {
                         </h3>
                         {/* <h4 className="vertical-timeline-element-subtitle text-sm text-gray-500 mt-1 capitalize font-mono">{event.type}</h4> */}
 
-                        <div className="mb-2 flex flex-wrap gap-2 mt-2">
-                            <span className="text-xs font-bold uppercase tracking-wider bg-[#1a1a1a] text-white px-2 py-0.5">
-                                {event.reality || 'Principal'}
+                        <div className="mb-2">
+                            <span className="inline-block text-xs font-bold uppercase tracking-wider bg-[#1a1a1a] text-white px-2 py-1 mb-2">
+                                {event.reality || 'Tierra Zero'}
                             </span>
-                            {event.tags && event.tags.map(tag => (
-                                <span key={tag} className="text-xs font-bold uppercase tracking-wider bg-[#e5e7eb] text-[#1a1a1a] px-2 py-0.5">
-                                    #{tag}
-                                </span>
-                            ))}
+
+                            {event.tags && event.tags.length > 0 && (
+                                <div className="flex flex-wrap gap-3 mt-1">
+                                    {event.tags.map(tag => (
+                                        <span key={tag} className="inline-block text-[10px] font-bold uppercase tracking-wide bg-gray-200 text-gray-800 px-2 py-0.5 rounded-full border border-gray-300">
+                                            #{tag}
+                                        </span>
+                                    ))}
+                                </div>
+                            )}
                         </div>
 
                         <div className="mt-4 text-[#1a1a1a] font-mono leading-relaxed">
