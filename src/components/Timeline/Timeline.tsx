@@ -225,20 +225,55 @@ export const Timeline: React.FC<TimelineProps> = ({ events }) => {
                         iconStyle={getIconStyle(event.icon)}
                         icon={getIcon(event.icon)}
                     >
-                        <h3 className="vertical-timeline-element-title text-xl font-bold uppercase tracking-tighter break-words" style={{ fontFamily: "'Courier Prime', monospace", color: '#c41e3a' }}>
+                        <h3 className="vertical-timeline-element-title" style={{
+                            fontFamily: "'Courier Prime', monospace",
+                            color: '#c41e3a',
+                            fontSize: '1.25rem',
+                            fontWeight: 'bold',
+                            textTransform: 'uppercase',
+                            letterSpacing: '-0.05em',
+                            wordBreak: 'break-word',
+                            marginBottom: '0.5rem'
+                        }}>
                             {event.title}
                         </h3>
                         {/* <h4 className="vertical-timeline-element-subtitle text-sm text-gray-500 mt-1 capitalize font-mono">{event.type}</h4> */}
 
-                        <div className="mb-2">
-                            <span className="inline-block text-xs font-bold uppercase tracking-wider bg-[#1a1a1a] text-white px-2 py-1 mb-2">
+                        <div style={{ marginBottom: '0.5rem' }}>
+                            <span style={{
+                                display: 'inline-block',
+                                fontSize: '0.75rem',
+                                fontWeight: 'bold',
+                                textTransform: 'uppercase',
+                                letterSpacing: '0.05em',
+                                backgroundColor: '#1a1a1a',
+                                color: 'white',
+                                padding: '0.25rem 0.5rem',
+                                marginBottom: '0.5rem'
+                            }}>
                                 {event.reality || 'Tierra Zero'}
                             </span>
 
                             {event.tags && event.tags.length > 0 && (
-                                <div className="flex flex-wrap gap-3 mt-1">
+                                <div style={{
+                                    display: 'flex',
+                                    flexWrap: 'wrap',
+                                    gap: '0.75rem',
+                                    marginTop: '0.25rem'
+                                }}>
                                     {event.tags.map(tag => (
-                                        <span key={tag} className="inline-block text-xs font-bold uppercase tracking-wide bg-[#e5e5e5] text-[#1a1a1a] px-3 py-1 rounded-full border border-[#d4d4d4]">
+                                        <span key={tag} style={{
+                                            display: 'inline-block',
+                                            fontSize: '0.75rem',
+                                            fontWeight: 'bold',
+                                            textTransform: 'uppercase',
+                                            letterSpacing: '0.025em',
+                                            backgroundColor: '#e5e5e5',
+                                            color: '#1a1a1a',
+                                            padding: '0.25rem 0.75rem',
+                                            borderRadius: '9999px',
+                                            border: '1px solid #d4d4d4'
+                                        }}>
                                             #{tag}
                                         </span>
                                     ))}
@@ -246,7 +281,14 @@ export const Timeline: React.FC<TimelineProps> = ({ events }) => {
                             )}
                         </div>
 
-                        <div className="mt-4 text-[#1a1a1a] font-mono leading-relaxed break-words text-justify">
+                        <div style={{
+                            marginTop: '1rem',
+                            color: '#1a1a1a',
+                            fontFamily: 'monospace',
+                            lineHeight: '1.625',
+                            wordBreak: 'break-word',
+                            textAlign: 'justify'
+                        }}>
                             <p>{event.description}</p>
                         </div>
 
