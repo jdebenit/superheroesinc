@@ -24,6 +24,7 @@ const allEvents = [
         type: "lore" as const,
         image: entry.data.image,
         slug: `${entry.data.category}/${entry.slug}`, // Construct correct slug for lore items
+        tags: entry.data.tags,
     })),
     ...timelineEntries.map((entry) => ({
         id: entry.id,
@@ -35,6 +36,7 @@ const allEvents = [
         image: entry.data.image,
         icon: entry.data.icon,
         displayDate: entry.data.displayDate,
+        tags: entry.data.tags,
     })),
     ...charactersEntries.flatMap((entry) => {
         const events = [];
@@ -48,6 +50,7 @@ const allEvents = [
                 type: "timeline" as const, // Reusing timeline type
                 image: entry.data.image,
                 icon: "star",
+                tags: entry.data.tags,
             });
         }
         if (entry.data.deathDate) {
@@ -60,6 +63,7 @@ const allEvents = [
                 type: "timeline" as const,
                 image: entry.data.image,
                 icon: "skull",
+                tags: entry.data.tags,
             });
         }
         return events;

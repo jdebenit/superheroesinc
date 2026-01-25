@@ -56,7 +56,7 @@ const timelineCollection = defineCollection({
     type: 'content',
     schema: z.object({
         title: z.string(),
-        date: z.date(),
+        date: z.union([z.string(), z.date()]).transform((val) => new Date(val)),
         displayDate: z.string().optional(),
         description: z.string(),
         reality: z.string().optional().default('Principal'),

@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
+import ListControls from '../shared/ListControls';
 
 export interface TimelineEvent {
     id: string;
@@ -13,6 +14,7 @@ export interface TimelineEvent {
     icon?: string;
     slug?: string;
     displayDate?: string;
+    tags?: string[];
 }
 
 interface TimelineProps {
@@ -44,13 +46,21 @@ const getIconStyle = (iconName?: string) => {
 };
 
 export const Timeline: React.FC<TimelineProps> = ({ events }) => {
+    const [selectedTags, setSelectedTags] = useState<string[]>(["Todos"]);
+    const [startDate, setStartDate] = useState("");
+    const [endDate, setEndDate] = useState("");
+    const [searchTerm, setSearchTerm] = useState("");
+
     // Get unique realities from events, defaulting to 'Principal' if not found
     const realities = useMemo(() => {
         const allRealities = events.map(e => e.reality || 'Principal');
         return Array.from(new Set(allRealities)).sort();
     }, [events]);
 
-    const [selectedRealities, setSelectedRealities] = useState<string[]>(realities.length > 0 ? [realities[0]] : ['Principal']);
+    const [selectedRealities, setSelectedRealities] = useState<string[]>(() => {
+        if (realities.includes('Tierra Zero')) return ['Tierra Zero'];
+        return realities.length > 0 ? [realities[0]] : ['Principal'];
+    });
 
     const toggleReality = (reality: string) => {
         setSelectedRealities(prev => {
@@ -62,13 +72,77 @@ export const Timeline: React.FC<TimelineProps> = ({ events }) => {
         });
     };
 
+    // Extract unique tags
+    const allTags = useMemo(() => {
+        const tags = new Set<string>();
+        events.forEach(event => {
+            if (event.tags) {
+                event.tags.forEach(tag => tags.add(tag));
+            }
+        });
+        return ["Todos", ...Array.from(tags).sort()];
+    }, [events]);
+
+    const toggleTag = (tag: string) => {
+        if (tag === "Todos") {
+            setSelectedTags(["Todos"]);
+            return;
+        }
+
+        let newTags = [...selectedTags];
+        if (newTags.includes("Todos")) {
+            newTags = [];
+        }
+
+        if (newTags.includes(tag)) {
+            newTags = newTags.filter(t => t !== tag);
+        } else {
+            newTags.push(tag);
+        }
+
+        if (newTags.length === 0) {
+            newTags = ["Todos"];
+        }
+
+        setSelectedTags(newTags);
+    };
+
     const filteredEvents = useMemo(() => {
-        return events.filter(e => selectedRealities.includes(e.reality || 'Principal'));
-    }, [events, selectedRealities]);
+        return events.filter(e => {
+            // Reality Filter
+            const matchesReality = selectedRealities.includes(e.reality || 'Principal');
+            if (!matchesReality) return false;
+
+            // Tag Filter
+            const eventTags = e.tags || [];
+            const matchesTags = selectedTags.includes("Todos") || selectedTags.some(tag => eventTags.includes(tag));
+            if (!matchesTags) return false;
+
+            // Date Range Filter
+            if (startDate) {
+                const start = new Date(startDate);
+                if (e.date < start) return false;
+            }
+            if (endDate) {
+                const end = new Date(endDate);
+                if (e.date > end) return false;
+            }
+
+            // Search
+            if (searchTerm) {
+                const searchLower = searchTerm.toLowerCase();
+                const titleMatch = e.title.toLowerCase().includes(searchLower);
+                const descMatch = e.description.toLowerCase().includes(searchLower);
+                if (!titleMatch && !descMatch) return false;
+            }
+
+            return true;
+        });
+    }, [events, selectedRealities, selectedTags, startDate, endDate, searchTerm]);
 
     return (
         <div className="timeline-container w-full max-w-6xl mx-auto py-8">
-            <div className="flex flex-col items-center mb-12 gap-4">
+            <div className="flex flex-col items-center mb-8 gap-4">
                 <div className="flex justify-center gap-4 flex-wrap">
                     {realities.map(reality => (
                         <button
@@ -84,6 +158,47 @@ export const Timeline: React.FC<TimelineProps> = ({ events }) => {
                     ))}
                 </div>
             </div>
+
+            <ListControls
+                search={{
+                    value: searchTerm,
+                    onChange: setSearchTerm,
+                    placeholder: "Buscar eventos..."
+                }}
+                // Tags hidden for now as per user request
+                filters={[]}
+            >
+                <div className="date-filters flex flex-wrap items-center gap-4 bg-white p-3 border-2 border-[#1a1a1a] shadow-[4px_4px_0px_rgba(0,0,0,0.1)]">
+                    <span className="font-bold font-mono uppercase text-sm tracking-wider text-[#c41e3a]">Rango Temporal:</span>
+
+                    <div className="flex items-center gap-2 bg-[#f4f4f4] p-1 px-2 border border-[#ccc]">
+                        <input
+                            type="date"
+                            value={startDate}
+                            onChange={(e) => setStartDate(e.target.value)}
+                            className="bg-transparent border-none p-1 font-mono text-sm focus:ring-0 outline-none text-[#1a1a1a]"
+                            title="Fecha Inicio"
+                        />
+                        <span className="text-gray-400 font-bold">→</span>
+                        <input
+                            type="date"
+                            value={endDate}
+                            onChange={(e) => setEndDate(e.target.value)}
+                            className="bg-transparent border-none p-1 font-mono text-sm focus:ring-0 outline-none text-[#1a1a1a]"
+                            title="Fecha Fin"
+                        />
+                    </div>
+
+                    {(startDate || endDate) && (
+                        <button
+                            onClick={() => { setStartDate(""); setEndDate(""); }}
+                            className="text-xs bg-[#c41e3a] text-white px-2 py-1 uppercase font-bold tracking-wider hover:bg-[#a01830] transition-colors border border-black shadow-[2px_2px_0px_rgba(0,0,0,1)] active:translate-y-[1px] active:shadow-none"
+                        >
+                            Limpiar
+                        </button>
+                    )}
+                </div>
+            </ListControls>
 
             <VerticalTimeline lineColor="#1a1a1a">
                 {filteredEvents.map((event) => (
@@ -108,10 +223,15 @@ export const Timeline: React.FC<TimelineProps> = ({ events }) => {
                         </h3>
                         {/* <h4 className="vertical-timeline-element-subtitle text-sm text-gray-500 mt-1 capitalize font-mono">{event.type}</h4> */}
 
-                        <div className="mb-2">
+                        <div className="mb-2 flex flex-wrap gap-2 mt-2">
                             <span className="text-xs font-bold uppercase tracking-wider bg-[#1a1a1a] text-white px-2 py-0.5">
                                 {event.reality || 'Principal'}
                             </span>
+                            {event.tags && event.tags.map(tag => (
+                                <span key={tag} className="text-xs font-bold uppercase tracking-wider bg-[#e5e7eb] text-[#1a1a1a] px-2 py-0.5">
+                                    #{tag}
+                                </span>
+                            ))}
                         </div>
 
                         <div className="mt-4 text-[#1a1a1a] font-mono leading-relaxed">
@@ -149,7 +269,7 @@ export const Timeline: React.FC<TimelineProps> = ({ events }) => {
 
             {filteredEvents.length === 0 && (
                 <div className="text-center text-gray-500 mt-10 font-mono italic">
-                    -- [ SELECCIONE UNA REALIDAD PARA VISUALIZAR DATOS ] --
+                    -- [ NO SE ENCONTRARON EVENTOS CON ESTOS CRITERIOS ] --
                 </div>
             )}
         </div>
