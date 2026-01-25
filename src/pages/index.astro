@@ -150,36 +150,6 @@ const latestCharacters = sortedCharacters.slice(0, 3).map((entry) => ({
     </div>
   </section>
 
-  <section class="intro-section">
-    <div class="intro-content">
-      <h2 class="intro-title">El Juego de Rol de Superhéroes Más Completo</h2>
-      <div class="intro-text">
-        <p>
-          <strong>Superheroes INC. Tercera Edición</strong> es un juego de rol de
-          superhéroes que te permite crear personajes únicos, desde vigilantes urbanos
-          hasta héroes cósmicos. Con un sistema de reglas completo y flexible, podrás
-          vivir aventuras épicas en un universo lleno de organizaciones secretas,
-          villanos legendarios y poderes extraordinarios.
-        </p>
-        <p>
-          En el <strong>manual del juego de rol</strong> y los sumplementos se incluyen
-          todo lo necesario para tus partidas, catálogo completo de poderes y habilidades,
-          información detallada sobre organizaciones y grupos como Los Campeones de
-          Europa o los Irregulares, y un extenso archivo de personajes, localizaciones,
-          eventos y lore del universo SHI. Ademas en la web encontraras información
-          actualizada, personajes de campañas oficiales y diversos recursos útiles
-          como el generador de fichas interactivo o la busqueda de FAQs (y erratas).
-        </p>
-        <p>
-          Ya seas un jugador experimentado o estés comenzando en el mundo del
-          rol de superhéroes, Superheroes INC. te ofrece las herramientas para
-          crear historias memorables y personajes inolvidables. Explora nuestros
-          recursos, crea tu héroe y únete a la aventura.
-        </p>
-      </div>
-    </div>
-  </section>
-
   <section class="news-section">
     <h2 class="section-title">Últimas Entradas del Blog</h2>
     <div class="news-grid">
@@ -215,24 +185,54 @@ const latestCharacters = sortedCharacters.slice(0, 3).map((entry) => ({
       >
     </div>
   </section>
+
+  <section class="intro-section">
+    <div class="intro-content">
+      <h2 class="intro-title">El Juego de Rol de Superhéroes Más Completo</h2>
+      <div class="intro-text">
+        <p>
+          <strong>Superheroes INC. Tercera Edición</strong> es un juego de rol de
+          superhéroes que te permite crear personajes únicos, desde vigilantes urbanos
+          hasta héroes cósmicos. Con un sistema de reglas completo y flexible, podrás
+          vivir aventuras épicas en un universo lleno de organizaciones secretas,
+          villanos legendarios y poderes extraordinarios.
+        </p>
+        <p>
+          En el <strong>manual del juego de rol</strong> y los sumplementos se incluyen
+          todo lo necesario para tus partidas, catálogo completo de poderes y habilidades,
+          información detallada sobre organizaciones y grupos como Los Campeones de
+          Europa o los Irregulares, y un extenso archivo de personajes, localizaciones,
+          eventos y lore del universo SHI. Ademas en la web encontraras información
+          actualizada, personajes de campañas oficiales y diversos recursos útiles
+          como el generador de fichas interactivo o la busqueda de FAQs (y erratas).
+        </p>
+        <p>
+          Ya seas un jugador experimentado o estés comenzando en el mundo del
+          rol de superhéroes, Superheroes INC. te ofrece las herramientas para
+          crear historias memorables y personajes inolvidables. Explora nuestros
+          recursos, crea tu héroe y únete a la aventura.
+        </p>
+      </div>
+    </div>
+  </section>
 </Layout>
 
 <style>
   .lore-section,
   .characters-section {
-    padding: var(--spacing-2xl) var(--spacing-lg);
+    padding: var(--spacing-lg) var(--spacing-lg);
     max-width: 1400px;
     margin: 0 auto;
   }
 
   .hero-container {
-    padding: var(--spacing-2xl) var(--spacing-lg);
+    padding: var(--spacing-lg) var(--spacing-lg);
     max-width: 1400px;
     margin: 0 auto;
   }
 
   .intro-section {
-    padding: var(--spacing-2xl) var(--spacing-lg);
+    padding: var(--spacing-lg) var(--spacing-lg);
     max-width: 1200px;
     margin: 0 auto;
     background: linear-gradient(
@@ -283,7 +283,7 @@ const latestCharacters = sortedCharacters.slice(0, 3).map((entry) => ({
   }
 
   .news-section {
-    padding: var(--spacing-2xl) var(--spacing-lg);
+    padding: var(--spacing-lg) var(--spacing-lg);
     max-width: 1400px;
     margin: 0 auto;
   }
@@ -292,7 +292,7 @@ const latestCharacters = sortedCharacters.slice(0, 3).map((entry) => ({
     font-size: var(--text-4xl);
     font-weight: 700;
     text-align: center;
-    margin-bottom: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
     color: var(--color-secondary);
     position: relative;
     letter-spacing: 0.1em;
@@ -341,7 +341,7 @@ const latestCharacters = sortedCharacters.slice(0, 3).map((entry) => ({
     flex-direction: column;
     align-items: center;
     gap: var(--spacing-lg);
-    margin-top: var(--spacing-xl);
+    margin-top: var(--spacing-lg);
     padding-top: var(--spacing-lg);
     border-top: 2px dashed #d3d0c2;
     position: relative;
