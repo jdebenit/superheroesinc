@@ -4,17 +4,35 @@
     "type": "split",
     "children": [
       {
-        "id": "6ce4d1429f791373",
+        "id": "df056f133ec3b742",
         "type": "tabs",
         "children": [
           {
-            "id": "61b2fb3813b7d04d",
+            "id": "e86d5fda35badf15",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "characters/umbra.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "Nueva pestaña"
+              "title": "umbra"
+            }
+          },
+          {
+            "id": "f224a24343e22f67",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "lore/organizaciones/umbra-enterprises.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "umbra-enterprises"
             }
           }
         ]
@@ -179,8 +197,12 @@
       "bases:Crear nueva base": false
     }
   },
-  "active": "61b2fb3813b7d04d",
+  "active": "e86d5fda35badf15",
   "lastOpenFiles": [
+    "lore/organizaciones/umbra-enterprises.md",
+    "characters/umbra.md",
+    "2025-11-26.md",
+    "lore/organizaciones/zortek.md",
     "lore/organizaciones/el-instituto-de-las-sombras.md",
     "lore/organizaciones/la-alianza.md",
     "lore/organizaciones/la-academia-de-los-jovenes-heroes.md",
@@ -204,10 +226,6 @@
     "blog/resistencia-a-prejuicios-superheroes-inc.md",
     "faq/26-daño-arco-ballesta.md",
     "faq/25-como-usar-esudo.md",
-    "faq/24-carga-daño-recibido-daño-absorbido-fisico.md",
-    "faq/23-recuperacion-voluntad-sesion.md",
-    "faq/22-impacto-cuello-posibilidades-critico.md",
-    "faq/21-tirada-eqm-modificador-psionico-parada-mental.md",
     "faq",
     "rpg/leon-rojo.yaml",
     "rpg/jefe-motero-road-reapers.yaml",
