@@ -231,7 +231,7 @@ export const Timeline: React.FC<TimelineProps> = ({ events }) => {
                             {event.tags && event.tags.length > 0 && (
                                 <div className="flex flex-wrap gap-3 mt-1">
                                     {event.tags.map(tag => (
-                                        <span key={tag} className="inline-block text-[10px] font-bold uppercase tracking-wide bg-gray-200 text-gray-800 px-2 py-0.5 rounded-full border border-gray-300">
+                                        <span key={tag} className="inline-block text-xs font-bold uppercase tracking-wide bg-[#e5e5e5] text-[#1a1a1a] px-3 py-1 rounded-full border border-[#d4d4d4]">
                                             #{tag}
                                         </span>
                                     ))}
