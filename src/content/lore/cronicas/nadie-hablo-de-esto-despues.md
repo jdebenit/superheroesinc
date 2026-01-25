@@ -1,8 +1,8 @@
 ---
 title: Nadie habló de esto después
-description: Crónica
+description: Crónica ambientada tras la Invasión de Nigalión que retrata las secuelas humanas, sociales y espaciales que permanecieron cuando el conflicto ya había terminado.
 category: cronicas
-updatedDate: 2026-01-10
+updatedDate: 2026-01-25
 ---
 El día después de la expulsión de [Nigalión](/lore/localizaciones/nigalion/), nadie sabía muy bien qué hacer con los restos.
 
