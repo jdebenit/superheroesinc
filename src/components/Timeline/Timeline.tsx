@@ -12,6 +12,7 @@ export interface TimelineEvent {
     image?: string;
     icon?: string;
     slug?: string;
+    displayDate?: string;
 }
 
 interface TimelineProps {
@@ -97,7 +98,7 @@ export const Timeline: React.FC<TimelineProps> = ({ events }) => {
                             borderRadius: '0'
                         }}
                         contentArrowStyle={{ borderRight: '7px solid #fff' }}
-                        date={event.date.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}
+                        date={event.displayDate || event.date.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}
                         dateClassName="text-[#1a1a1a] font-bold font-mono"
                         iconStyle={getIconStyle(event.icon)}
                         icon={getIcon(event.icon)}

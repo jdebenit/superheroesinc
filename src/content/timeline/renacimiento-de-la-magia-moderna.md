@@ -1,0 +1,9 @@
+---
+title: "Renacimiento de la Magia Moderna"
+date: 1860-01-01
+
+description: "Eliphas Levi publica 'Dogma y ritual de la alta magia', revolucionando el esoterismo. Surgen la Sociedad Teosófica (1875) y la Orden Hermética de la Aurora Dorada."
+reality: "Principal"
+icon: "star"
+tags: ["eliphas-levi","magia","aurora-dorada","teosofia","1860","1875"]
+---

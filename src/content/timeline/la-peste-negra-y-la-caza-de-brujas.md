@@ -1,0 +1,9 @@
+---
+title: "La Peste Negra y la Caza de Brujas"
+date: 1347-01-01
+displayDate: "Siglo XIV"
+description: "La Peste Negra devasta Europa. Se culpa a la magia negra, intensificando las persecuciones de la Inquisición, que utiliza la crisis para consolidar su poder."
+reality: "Principal"
+icon: "star"
+tags: ["peste-negra","inquisicion","siglo-xiv"]
+---

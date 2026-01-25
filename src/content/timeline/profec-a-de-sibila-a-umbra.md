@@ -1,0 +1,9 @@
+---
+title: "Profecía de Sibila a Umbra"
+date: 2008-01-01
+
+description: "Una joven Sibila revela a Umbra una visión crucial: está destinada a jugar un papel clave en la salvación de su mundo y debe crecer en poder para evitar la destrucción."
+reality: "Principal"
+icon: "star"
+tags: ["sibila","umbra","profecia","2008"]
+---

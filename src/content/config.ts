@@ -57,6 +57,7 @@ const timelineCollection = defineCollection({
     schema: z.object({
         title: z.string(),
         date: z.date(),
+        displayDate: z.string().optional(),
         description: z.string(),
         reality: z.string().optional().default('Principal'),
         image: z.string().optional(),
