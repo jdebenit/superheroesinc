@@ -6,6 +6,7 @@ source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2026-01-10
 pubDate: 2026-01-10
 eventDate: 2029-01-02
+reality: "Tierra Zero"
 ---
 La creación de la Gran Barrera es un hecho histórico y mágico que marca el antes y el después de la relación entre la Tierra y los Reinos Divinos.
 

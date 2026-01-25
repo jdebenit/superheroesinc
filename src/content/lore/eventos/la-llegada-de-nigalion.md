@@ -6,6 +6,7 @@ source: "Superhéroes INC. Tercera Edición y Héroe Agenda: Sobrenaturales y Ar
 updatedDate: 2026-01-18
 pubDate: 2026-01-18
 eventDate: 2014-07-19
+reality: "Tierra Zero"
 ---
 > Vale, esto va a sonar fatal, pero es lo que hay. Yo estaba en directo, con el móvil en la mano, hablando de una tontería, creo que de un atasco o algo así, cuando el cielo se puso raro. No bonito raro, raro mal. La luz cambió de golpe y en los comentarios empezó a entrar gente preguntando si yo también veía esas sombras. Pensé que era un filtro fallando o alguna broma, pero entonces la gente empezó a correr y ya no sabía a quién enfocar ni qué decir.
 > 

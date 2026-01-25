@@ -47,6 +47,21 @@ const loreCollection = defineCollection({
         })).optional(),
         tags: z.array(z.string()).optional(),
         summary: z.string().optional(),
+        reality: z.string().optional().default('Principal'),
+        showInTimeline: z.boolean().optional().default(true),
+    }),
+});
+
+const timelineCollection = defineCollection({
+    type: 'content',
+    schema: z.object({
+        title: z.string(),
+        date: z.date(),
+        description: z.string(),
+        reality: z.string().optional().default('Principal'),
+        image: z.string().optional(),
+        icon: z.string().optional(), // 'star', 'work', 'military', etc.
+        tags: z.array(z.string()).optional(),
     }),
 });
 
@@ -175,4 +190,5 @@ export const collections = {
     'characters': charactersCollection,
     'rpg': rpgCollection,
     'faq': faqCollection,
+    'timeline': timelineCollection,
 };

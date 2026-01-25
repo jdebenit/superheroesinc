@@ -6,6 +6,7 @@ source: Superhéroes INC. Tercera Edición y Pantalla Segunda Edición
 updatedDate: 2025-12-13
 pubDate: 2025-12-13
 eventDate: 1977-08-24
+reality: "Tierra Zero"
 ---
 El Proyecto Euroman fue uno de los experimentos más ambiciosos y controvertidos de la historia metahumana europea. No nació como un acto de heroísmo, sino como una respuesta política, científica y militar a un mundo que empezaba a llenarse de seres con poderes imposibles de controlar por medios convencionales.
 

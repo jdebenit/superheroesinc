@@ -1,0 +1,50 @@
+---
+import Layout from "../layouts/Layout.astro"; // Assuming Layout exists
+import { Timeline } from "../components/Timeline/Timeline";
+import { getCollection } from "astro:content";
+
+const loreEntries = await getCollection("lore", ({ data }) => {
+    return (
+        data.eventDate !== undefined &&
+        (data.showInTimeline === true || data.showInTimeline === undefined)
+    );
+});
+
+const timelineEntries = await getCollection("timeline");
+
+const allEvents = [
+    ...loreEntries.map((entry) => ({
+        id: entry.slug,
+        title: entry.data.title,
+        date: entry.data.eventDate!,
+        description: entry.data.description,
+        reality: entry.data.reality || "Tierra Zero",
+        type: "lore" as const,
+        image: entry.data.image,
+        slug: `${entry.data.category}/${entry.slug}`, // Construct correct slug for lore items
+    })),
+    ...timelineEntries.map((entry) => ({
+        id: entry.id,
+        title: entry.data.title,
+        date: entry.data.date,
+        description: entry.data.description,
+        reality: entry.data.reality || "Tierra Zero",
+        type: "timeline" as const,
+        image: entry.data.image,
+        icon: entry.data.icon,
+    })),
+].sort((a, b) => a.date.getTime() - b.date.getTime());
+---
+
+<Layout title="Timeline | SHI">
+    <main class="min-h-screen bg-gray-900 text-white pt-20">
+        <div class="container mx-auto px-4">
+            <h1 class="text-4xl font-bold text-center mb-4">Timeline</h1>
+            <p class="text-center text-gray-400 mb-12">
+                Explora los eventos de las diferentes realidades.
+            </p>
+
+            <Timeline client:only="react" events={allEvents} />
+        </div>
+    </main>
+</Layout>

@@ -199,6 +199,8 @@
   },
   "active": "e86d5fda35badf15",
   "lastOpenFiles": [
+    "timeline/first-event.md",
+    "timeline",
     "lore/eventos/la-llegada-de-nigalion.md",
     "lore/eventos/la-revelacion.md",
     "lore/eventos/la-tecnoguerra.md",
@@ -225,7 +227,6 @@
     "characters/la-bruja-verca.md",
     "lore/organizaciones/la-orden-de-las-nagas.md",
     "lore/localizaciones/avalon.md",
-    "lore/localizaciones/valdoria.md",
     "faq",
     "rpg/leon-rojo.yaml",
     "rpg/jefe-motero-road-reapers.yaml",
@@ -233,7 +234,6 @@
     "rpg/motero-road-reapers.yaml",
     "rpg/philipe-de-herblay copy.yaml",
     "rpg/cu-chulainn.yaml",
-    "rpg/medianoche copy.yaml",
-    "rpg/terror.yaml"
+    "rpg/medianoche copy.yaml"
   ]
 }
