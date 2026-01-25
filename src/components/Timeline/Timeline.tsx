@@ -165,8 +165,12 @@ export const Timeline: React.FC<TimelineProps> = ({ events }) => {
                     onChange: setSearchTerm,
                     placeholder: "Buscar eventos..."
                 }}
-                // Tags hidden for now as per user request
-                filters={[]}
+                filters={allTags.length > 1 ? [{
+                    label: "Filtrar por etiquetas:",
+                    options: allTags,
+                    selected: selectedTags,
+                    onToggle: toggleTag
+                }] : []}
             >
                 <div className="date-filters flex flex-wrap items-center gap-4 bg-white p-3 border-2 border-[#1a1a1a] shadow-[4px_4px_0px_rgba(0,0,0,0.1)]">
                     <span className="font-bold font-mono uppercase text-sm tracking-wider text-[#c41e3a]">Rango Temporal:</span>
