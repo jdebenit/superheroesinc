@@ -12,6 +12,15 @@ const loreEntries = await getCollection("lore", ({ data }) => {
 
 const timelineEntries = await getCollection("timeline");
 
+// Helper to format date
+const formatDate = (date: Date) => {
+    return date.toLocaleDateString("es-ES", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+    });
+};
+
 const charactersEntries = await getCollection("characters");
 
 const allEvents = [
@@ -45,12 +54,14 @@ const allEvents = [
                 id: `birth-${entry.slug}`,
                 title: `Nacimiento: ${entry.data.name}`,
                 date: entry.data.birthDate,
+                displayDate: formatDate(entry.data.birthDate),
                 description: `Nacimiento de ${entry.data.name}${entry.data.alias ? ` (${entry.data.alias})` : ""}.`,
                 reality: "Tierra Zero",
                 type: "timeline" as const, // Reusing timeline type
                 image: entry.data.image,
                 icon: "star",
                 tags: entry.data.tags,
+                characterSlug: entry.slug,
             });
         }
         if (entry.data.deathDate) {
@@ -58,12 +69,14 @@ const allEvents = [
                 id: `death-${entry.slug}`,
                 title: `Muerte: ${entry.data.name}`,
                 date: entry.data.deathDate,
+                displayDate: formatDate(entry.data.deathDate),
                 description: `Fallecimiento de ${entry.data.name}${entry.data.alias ? ` (${entry.data.alias})` : ""}.`,
                 reality: "Tierra Zero",
                 type: "timeline" as const,
                 image: entry.data.image,
                 icon: "skull",
                 tags: entry.data.tags,
+                characterSlug: entry.slug,
             });
         }
         return events;
