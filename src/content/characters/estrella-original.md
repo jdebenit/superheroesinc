@@ -1,5 +1,5 @@
 ---
-name: Estrella
+name: Estrella (original)
 description: Estrella fue una princesa de Iberia enviada a otro mundo para buscar héroes, perdida durante siglos entre los restos de una nave estrellada, y que al regresar comprendió que ya no quedaba reino al que volver.
 source: "Una Estrella de otro mundo y Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2026-01-26
