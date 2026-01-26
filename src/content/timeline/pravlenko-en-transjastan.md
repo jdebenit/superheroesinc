@@ -5,5 +5,5 @@ displayDate: "1961"
 description: "El comandante Viktor Pravlenko se hace con el poder en Transjastán, devolviendo al país al comunismo más radical."
 reality: "Tierra Zero"
 icon: "star"
-tags: []
+tags: ["iniciativa-epsilon"]
 ---

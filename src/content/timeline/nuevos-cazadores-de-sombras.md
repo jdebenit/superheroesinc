@@ -5,5 +5,5 @@ displayDate: "2022"
 description: "Jade reúne a los nuevos Cazadores de Sombras tras la aparición de una mujer llamada Medianoche."
 reality: "Tierra Zero"
 icon: "star"
-tags: ["contemporaneo"]
+tags: ["contemporaneo", "rosa-negra"]
 ---

@@ -5,5 +5,5 @@ displayDate: "1996"
 description: "Epsilon Eridani provoca tsunamis artificiales en Japón."
 reality: "Tierra Zero"
 icon: "star"
-tags: ["personaje"]
+tags: ["iniciativa-epsilon"]
 ---
