@@ -1,6 +1,7 @@
 ---
 title: "Trífido dado de alta"
 date: 1981-01-01
+displayDate: "1981"
 description: "Trífido es dado de alta y abandona las instalaciones de IDESS Italia."
 reality: "Tierra Zero"
 icon: "star"
