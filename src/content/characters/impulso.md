@@ -2,15 +2,15 @@
 name: "Impulso"
 description: "Miembro de Triángulo Mortal. Elfa mental perseguida por el robo de unas reliquias mágicas."
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
+birthDate: 1401-08-06
 updatedDate: 2025-12-12
 image: "/personajes/impulso.png"
 rpgId: impulso
 tags: ["Principales"]
-originReality: "Tierra Zero"
+originReality: "Reinos Divinos"
 actualReality: "Tierra Zero"
 ---
-
-La elfa Sylvana y la enana Lenora abandonaron Asgard en busca de aventuras en cuanto cayó la Gran Barrera. Durante un tiempo compartieron un vínculo fuerte, nacido de su amor por la libertad y de la sensación de estar ante un mundo nuevo, abierto y lleno de posibilidades. Pero ese vínculo no tardó en resquebrajarse.
+La elfa Sylvana y la enana [Lenora](/personajes/la-artifice) abandonaron Asgard en busca de aventuras en cuanto [cayó la Gran Barrera](/lore/eventos/la-caida-de-la-gran-barrera/). Durante un tiempo compartieron un vínculo fuerte, nacido de su amor por la libertad y de la sensación de estar ante un mundo nuevo, abierto y lleno de posibilidades. Pero ese vínculo no tardó en resquebrajarse.
 
 El contacto prolongado con el mundo humano fue erosionando la paciencia de Sylvana. La crueldad cotidiana y el prejuicio hacia todo lo que se salía de la norma terminaron por convencerla de que los humanos no respetaban a quienes poseían dones más allá de lo ordinario. Lenora, en cambio, conservó una mirada más empática y comprensiva. Esa diferencia acabó separándolas.
 
@@ -20,7 +20,7 @@ Todo cambió el día que decidió asaltar una finca en Sintra. Le habían llegad
 
 Sylvana no sabía que al llevarse aquellas reliquias había despertado la ira de alguien extremadamente poderoso. Desde entonces vive en fuga. No sabe quién la persigue ni qué objeto concreto provocó esa obsesión, solo que la caza es constante. Ha recorrido medio mundo, usando cada truco, cada identidad falsa y cada manipulación mental a su alcance. Da igual. Siempre terminan encontrándola.
 
-Cansada de huir, Sylvana ha decidido contraatacar. Ha localizado al Dr. Junk y le ha ofrecido sus servicios, junto con los de un humano al que mantiene bajo su control. Necesita aliados. Necesita músculo y cobertura. Su objetivo no es salvar a nadie ni redimirse. Solo quiere acabar con quien la persigue y recuperar algo parecido a su antigua vida.
+Cansada de huir, Sylvana ha decidido contraatacar. Ha localizado al [Dr. Junk](/personajes/dr-junk-davenport) y le ha ofrecido sus servicios, junto con los de un humano al que mantiene bajo su control. Necesita aliados. Necesita músculo y cobertura. Su objetivo no es salvar a nadie ni redimirse. Solo quiere acabar con quien la persigue y recuperar algo parecido a su antigua vida.
 
 Una vida de crimen.
 Sin castigo.

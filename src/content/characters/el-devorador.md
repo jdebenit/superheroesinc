@@ -5,7 +5,7 @@ source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-13
 image: "/personajes/el-devorador.png"
 tags: ["Principales"]
-originReality: "Tierra Zero"
+originReality: "Nigalión"
 actualReality: "Tierra Zero"
 ---
 
