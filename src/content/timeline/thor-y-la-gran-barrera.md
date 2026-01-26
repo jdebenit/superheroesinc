@@ -5,5 +5,5 @@ displayDate: "Siglo IV (350)"
 description: "Thor sacrifica a su cabra Tanngrisnir para atravesar la Gran Barrera y buscar el Orbe Sagrado. Viaja por el mundo sin éxito y regresa sacrificando a Tanngnjóstr."
 reality: "Tierra Zero"
 icon: "star"
-tags: ["gran-barrera"]
+tags: ["búsqueda-orbe-sagrado"]
 ---
