@@ -4,7 +4,7 @@ description: Estrella fue una princesa de Iberia enviada a otro mundo para busca
 source: "Una Estrella de otro mundo y Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2026-01-26
 birthDate: 1592-03-03
-tags: ["Secundarios", "Terranos", "Desaparecidos]
+tags: ["Secundarios", "Terranos", "Desaparecidos"]
 originReality: "Terra"
 actualReality: "Tierra Zero"
 ---
