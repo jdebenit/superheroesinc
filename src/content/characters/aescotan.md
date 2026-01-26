@@ -4,9 +4,12 @@ alias: "Aescotan"
 description: "Agente de Cobros de la Corte Itinerante, entidad especializada en la ejecución de contratos sobrenaturales."
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-11-26
+birthDate: "0555-11-11"
 rpgId: aescotan
 image: /personajes/aescotan.png
 tags: ["Principales"]
+originReality: "Nigalión"
+actualReality: "Tierra Zero"
 ---
 
 Aescotan no es un simple demonio, es una institución en sí mismo dentro de la burocracia infernal. Conocido como el "Señor del No Tiempo", sirve como el brazo ejecutor de la **Corte Itinerante**, una entidad transdimensional encargada de arbitrar y asegurar el cumplimiento de pactos entre mortales y entidades sobrenaturales.

@@ -6,6 +6,8 @@ image: /lore/road-reapers.png
 updatedDate: 2025-12-04
 rpgId: jefe-motero-road-reapers
 tags: ["Genericos"]
+originReality: "Tierra Zero"
+actualReality: "Tierra Zero"
 ---
 
 Suelen ir acompañados de dos o mas miembros de los **[Road Reapers](/lore/organizaciones/road-reapers)**.

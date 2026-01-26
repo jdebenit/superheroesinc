@@ -6,6 +6,8 @@ source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-12
 image: "/personajes/davenport.png"
 tags: ["Principales"]
+originReality: "Tierra Zero"
+actualReality: "Tierra Zero"
 ---
 
 El Dr. Junk, conocido también como Davenfort, ha acumulado una larga historia de cuerpos. Cada uno ha sido más prescindible que el anterior. Con el paso del tiempo ha perfeccionado su capacidad para crear nuevos recipientes para sí mismo, alcanzando lo que podría considerarse una forma de inmortalidad técnica.

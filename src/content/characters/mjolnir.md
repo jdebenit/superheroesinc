@@ -6,6 +6,8 @@ source: "Crossover: Cruce de caminos"
 image: /personajes/mjolnir.png
 updatedDate: 2025-12-31
 tags: ["Principales"]
+originReality: "Tierra Zero"
+actualReality: "Tierra Zero"
 ---
 Solveig Andersson, oriunda de Uppsala, es la actual portadora del legado rúnico conocido como Mjölnir. A diferencia de su [predecesor](/personajes/mjolnir-original/), su acceso al poder no se produjo por accidente, sino tras un proceso controlado de estudio y comprensión de las antiguas runas nórdicas asociadas al fenómeno. Andersson fue identificada por las autoridades europeas como una de las mayores expertas en la materia, participando en varios análisis de artefactos de origen preasgardiano antes de asumir el legado.
 

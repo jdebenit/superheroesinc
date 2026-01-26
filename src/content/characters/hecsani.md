@@ -6,6 +6,8 @@ source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-13
 image: "/personajes/hecsani.png"
 tags: ["Principales"]
+originReality: "Tierra Zero"
+actualReality: "Tierra Zero"
 ---
 
 Hecsani, conocido como el Rey Goblin, es una figura respetada dentro del departamento de Logística. Su baja estatura y su aspecto engañosamente modesto llevan a muchos a subestimarlo, a menudo con consecuencias graves. Detrás de esa apariencia se esconde una mente extraordinariamente organizada, especializada en coordinar fuerzas numerosas, indisciplinadas y peligrosas.

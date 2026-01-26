@@ -6,6 +6,8 @@ source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-13
 image: "/personajes/las-ishara.png"
 tags: ["Principales"]
+originReality: "Tierra Zero"
+actualReality: "Tierra Zero"
 ---
 
 Las Ishara son un ser dual, nacido de la posesión compartida de un mismo cuerpo por dos demonios, Isacan y Shara. No se trata de una lucha interna ni de una alternancia caótica. Ambas conciencias coexisten en equilibrio, plenamente conscientes la una de la otra. Piensan juntas. Deciden juntas. Cada acción es el resultado de un acuerdo tácito entre dos voluntades distintas que nunca actúan por impulso.

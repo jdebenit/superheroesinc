@@ -7,6 +7,8 @@ updatedDate: 2025-11-26
 birthDate: 2004-01-14
 image: /personajes/estrella-ii.png
 tags: ["Principales"]
+originReality: "Tierra Zero"
+actualReality: "Tierra Zero"
 ---
 Diana Martín fue criada por David Martín, el ex-vigilante conocido como [Jinete Nocturno](/personajes/jinete-nocturno/), como su padre adoptivo. Sus padres biológicos son el [Euroman](/personajes/euroman-ii/) Esteban Martín, primo de [Jinete Nocturno](/personajes/jinete-nocturno/), y la guardiana Europa, ambos miembros fundadores de Euroforce que deseaban alejar a su bebé de los peligros que perseguían a ambos.
 

@@ -6,6 +6,8 @@ source: "Superhéroes INC. Tercera Edición"
 updatedDate: 2025-11-26
 image: "/personajes/euroman.png"
 tags: ["Secundarios"]
+originReality: "Tierra Zero"
+actualReality: "Tierra Zero"
 ---
 
 Sujeto 02 del Proyecto Euroman y primer portador conocido del título Euroman. Su sangre alterada permitió la activación de EuroKid mediante trasplante de médula. El paradero actual de Torrens se clasifica como desconocido.

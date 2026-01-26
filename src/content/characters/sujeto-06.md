@@ -7,6 +7,8 @@ updatedDate: 2025-11-26
 powers:
   - "Supervelocidad"
 tags: ["Secundarios"]
+originReality: "Tierra Zero"
+actualReality: "Tierra Zero"
 ---
 
 Sujeto 06 del Proyecto Euroman, de origen alemán, con capacidad de **supervelocidad**. Consta como fallecido, ilustrando el elevado índice de mortalidad asociado al programa.

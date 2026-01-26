@@ -7,6 +7,8 @@ updatedDate: 2025-11-26
 powers:
   - "Vuelo"
 tags: ["Secundarios"]
+originReality: "Tierra Zero"
+actualReality: "Tierra Zero"
 ---
 
 Sujeto 15 del Proyecto Euroman, de nacionalidad austriaca, con capacidad de **vuelo**. Figura como fallecido en los anexos del proyecto.

@@ -5,6 +5,8 @@ description: "Sujeto 04 del Proyecto Euroman, de nacionalidad francesa."
 source: "Superhéroes INC. Edición Limitada"
 updatedDate: 2025-11-26
 tags: ["Secundarios"]
+originReality: "Tierra Zero"
+actualReality: "Tierra Zero"
 ---
 
 Sujeto 04 del Proyecto Euroman, de nacionalidad francesa. La documentación únicamente consigna su fallecimiento durante o tras el programa.

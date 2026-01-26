@@ -4,6 +4,8 @@ description: "Operativo de Recursos Humanos de la Corte Itinerante, se utiliza p
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-11-26
 tags: ["Principales"]
+originReality: "Tierra Zero"
+actualReality: "Tierra Zero"
 ---
 
 Es un demonio aterrador cuya existencia ha estado marcada por siglos de encierro. Sus propios congéneres lo confinaron tras cometer crímenes tan graves que ni siquiera el Infierno estaba dispuesto a tolerarlos. No fue un castigo rápido ni piadoso. Fue aislamiento. Tiempo infinito sin voces, sin combate, sin propósito.

@@ -7,6 +7,8 @@ updatedDate: 2025-12-13
 image: /personajes/corredor-nocturno.png
 rpgId: corredor-nocturno
 tags: ["Principales"]
+originReality: "Tierra Zero"
+actualReality: "Tierra Zero"
 ---
 
 Lucas siempre fue un solitario. Se sentía más cómodo entre árboles, senderos y animales que rodeado de gente. El trato humano le resultaba incómodo, innecesario. Quizá por eso acabó trabajando como guarda forestal. El sueldo era bajo, pero le permitía pasar los días donde quería, vigilando el bosque y siguiendo rastros que casi nadie más veía.

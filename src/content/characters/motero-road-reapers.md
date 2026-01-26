@@ -6,6 +6,8 @@ updatedDate: 2025-12-04
 image: /lore/road-reapers.png
 rpgId: motero-road-reapers
 tags: ["Genericos"]
+originReality: "Tierra Zero"
+actualReality: "Tierra Zero"
 ---
 
 Los **[Road Reapers](/lore/organizaciones/road-reapers)** son una banda de moteros que opera en los límites de la ciudad. Se caracterizan por su violencia y su lealtad al grupo. Un miembro típico lleva chaqueta de cuero con el parche de la banda, cadenas y suele portar armas contundentes o de fuego corto.

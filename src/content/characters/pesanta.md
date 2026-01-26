@@ -5,6 +5,8 @@ source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-13
 image: "/personajes/pesanta.png"
 tags: ["Principales"]
+originReality: "Tierra Zero"
+actualReality: "Tierra Zero"
 ---
 
 Un ser atrapado entre dos mundos, alimentado por los sueños de otros y condenado a existir como una sombra de lo que alguna vez fue. Así ha sido Pesanta durante siglos. Su presencia se ha deslizado por el umbral del sueño, atormentando el descanso de los mortales y alimentándose de sus miedos más profundos. No caza cuerpos, caza temores. Su esencia crece a partir del sufrimiento de quienes duermen.

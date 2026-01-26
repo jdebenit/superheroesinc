@@ -6,6 +6,8 @@ source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-13
 image: "/personajes/little-red-wolf.png"
 tags: ["Principales"]
+originReality: "Tierra Zero"
+actualReality: "Tierra Zero"
 ---
 
 María Jiménez Fuentes acababa de casarse. Había encontrado a la mujer con la que quería compartir el resto de su vida y, por una vez, todo parecía encajar. Decidieron pasar la luna de miel en una villa apartada, cerca del monte Liceo, un lugar tranquilo donde nadie las conocía y donde el mundo parecía quedar lejos.

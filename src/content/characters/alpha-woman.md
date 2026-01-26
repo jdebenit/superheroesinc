@@ -7,6 +7,8 @@ updatedDate: 2025-12-17
 image: /personajes/alpha-woman.png
 rpgId: alpha-woman
 tags: ["Principales"]
+originReality: "Tierra Zero"
+actualReality: "Tierra Zero"
 ---
 
 ## La Primera Guerrera

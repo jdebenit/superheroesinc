@@ -6,6 +6,8 @@ source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-11-26
 image: "/personajes/lenapis.png"
 tags: ["Principales"]
+originReality: "Tierra Zero"
+actualReality: "Tierra Zero"
 ---
 
 Lenapis, conocida como La Ley, es una medusa, un ser mitológico que no es originario de Nigalión. Su historia comenzó en el Olimpo, donde fue adquirida por [Alice](/personajes/alice.md), líder de [la Corte Itinerante](/lore/grupos/la-corte-itinerante.md), a cambio de un favor que solo la Corte podía cumplir. Desde entonces, Lenapis ha servido como apoyo y consejera en los asuntos legales más complejos que afectan a las distintas esferas de poder.

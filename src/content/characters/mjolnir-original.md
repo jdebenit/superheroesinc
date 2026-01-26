@@ -7,6 +7,8 @@ image: "/personajes/mjolnir-original.png"
 updatedDate: 2025-12-31
 birthDate: 1960-03-04
 tags: ["Secundarios"]
+originReality: "Tierra Zero"
+actualReality: "Tierra Zero"
 ---
 Harald Värkaard, (Göteborg, 1960) es un exprofesor de antropología y arqueología que, tras un hallazgo fortuito durante una excavación no autorizada, acabó convertido en uno de los metahumanos más poderosos registrados en Europa. Desde su aparición pública se autodefine como “el dios Thor reencarnado”, aunque esta afirmación es más una interpretación personal que un hecho contrastado.
 

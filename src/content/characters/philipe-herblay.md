@@ -6,6 +6,8 @@ updatedDate: 2025-11-26
 image: /personajes/herblay.png
 rpgId: philipe-de-herblay
 tags: ["Principales"]
+originReality: "Tierra Zero"
+actualReality: "Tierra Zero"
 ---
 
 > Un buen vino y una conversación amena arreglan casi cualquier problema.  

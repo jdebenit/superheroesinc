@@ -5,6 +5,8 @@ description: "Operador enmascarado de origen español con larga trayectoria prev
 source: "Superhéroes INC. Tercera Edición"
 updatedDate: 2025-11-26
 tags: ["Secundarios"]
+originReality: "Tierra Zero"
+actualReality: "Tierra Zero"
 ---
 
 Operador enmascarado de origen español con larga trayectoria previa. Tras un incidente que fuerza su retirada, asume la tutela y entrenamiento de Diana Martín (posteriormente Estrella), funcionando como enlace entre generaciones anteriores de vigilantes y las nuevas estructuras metahumanas organizadas.

@@ -9,6 +9,8 @@ powers:
   - "Superfuerza"
   - "Superconstitución"
 tags: ["Secundarios"]
+originReality: "Tierra Zero"
+actualReality: "Tierra Zero"
 ---
 
 Sujeto 05 del **Proyecto Euroman**, de origen alemán. Además de la mejora física estándar, desarrolló piroquinesis. Figura como fallecida en el registro retrospectivo de sujetos.

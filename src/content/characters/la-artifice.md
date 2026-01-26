@@ -6,6 +6,8 @@ source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-13
 image: "/personajes/la-artifice.png"
 tags: ["Principales"]
+originReality: "Reinos Divinos"
+actualReality: "Tierra Zero"
 ---
 
 La enana Lenora, forjadora de armas y objetos imposibles, se rebeló contra el papel servil que se le había impuesto en Asgard. Nunca se vio a sí misma como una simple artesana al servicio de otros. Se consideraba una igual a los dioses, alguien cuyo talento merecía reconocimiento y no obediencia. Esa convicción la llevó a incitar levantamientos entre enanos y elfos, desafiando un orden que consideraba injusto y caduco.

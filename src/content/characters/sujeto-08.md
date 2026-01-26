@@ -7,6 +7,8 @@ updatedDate: 2025-11-26
 powers:
   - "Telequinesis"
 tags: ["Secundarios"]
+originReality: "Tierra Zero"
+actualReality: "Tierra Zero"
 ---
 
 Sujeto 08 del Proyecto Euroman, portuguesa, con capacidad de **telequinesis**. Figura como fallecida tras los eventos asociados al programa.

@@ -214,6 +214,8 @@ const charactersCollection = defineCollection({
             }
             return new Date(val);
         }).optional(),
+        originReality: z.string().optional(),
+        actualReality: z.string().optional(),
         tags: z.array(z.string()).optional(),
     }),
 });

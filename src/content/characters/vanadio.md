@@ -6,6 +6,8 @@ source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-13
 image: "/personajes/vanadio.png"
 tags: ["Principales"]
+originReality: "Tierra Zero"
+actualReality: "Tierra Zero"
 ---
 
 Julián Ramos es hijo de Marcos Ramos y Jennifer Williams, figuras reconocidas en los campos de la cibernética y las tecnoarmaduras. Ambos fueron piezas clave en el desarrollo del prototipo Spider de TecnoRed, una de las armaduras tecnológicas más avanzadas de su época y símbolo del potencial que la tecnología podía alcanzar antes de descontrolarse.

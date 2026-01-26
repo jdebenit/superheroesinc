@@ -5,6 +5,8 @@ source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-13
 image: "/personajes/la-luz-de-cadollo.png"
 tags: ["Principales"]
+originReality: "Otros"
+actualReality: "Tierra Zero"
 ---
 
 La Luz de Cadollo es un ente de luz oscura que encontró refugio en Nigalión tras ser desterrado de su plano de existencia original. En su mundo natal, todos los seres estaban formados por luz, pero la suya era distinta. No era más brillante ni más pura. Era una luz deformada, demasiado intensa, imposible de sostener con la mirada sin que algo se quebrara por dentro.

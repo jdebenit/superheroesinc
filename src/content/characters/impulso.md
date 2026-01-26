@@ -6,6 +6,8 @@ updatedDate: 2025-12-12
 image: "/personajes/impulso.png"
 rpgId: impulso
 tags: ["Principales"]
+originReality: "Tierra Zero"
+actualReality: "Tierra Zero"
 ---
 
 La elfa Sylvana y la enana Lenora abandonaron Asgard en busca de aventuras en cuanto cayó la Gran Barrera. Durante un tiempo compartieron un vínculo fuerte, nacido de su amor por la libertad y de la sensación de estar ante un mundo nuevo, abierto y lleno de posibilidades. Pero ese vínculo no tardó en resquebrajarse.

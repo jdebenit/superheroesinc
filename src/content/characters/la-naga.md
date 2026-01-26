@@ -4,6 +4,8 @@ alias: La Naga
 description: Guerrera formada en la ancestral Orden de las Nagas, Asha transformó la ausencia de magia que marcó su infancia en Valdoria en una fuerza interior única. Tras años de disciplina aprendiendo a dominar la Kundalini, fue traicionada por su linaje y desterrada a Tierra Zero.
 source: Partida Oficial - La Sombra del enroque
 updatedDate: 2026-01-23
+publishedDate: 2025-12-13
+birthDate: 2000-06-12
 image: /personajes/la-naga-tierra-zero.png
 rpgId: la-naga
 tags:
@@ -11,6 +13,8 @@ tags:
   - FDM
   - Terranos
   - Vigilantes
+originReality: "Terra"
+actualReality: "Tierra Zero"
 ---
 ## Descripción
 

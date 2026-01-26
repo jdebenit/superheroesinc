@@ -6,6 +6,8 @@ source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-13
 image: "/personajes/warlock.png"
 tags: ["Principales"]
+originReality: "Tierra Zero"
+actualReality: "Tierra Zero"
 ---
 
 Giordano Bruno, conocido en su actual encarnación como Warlock, es el custodio de la Torre Vor’Gorthak, situada en la Toscana italiana. En su vida anterior fue filósofo, matemático y astrónomo, un pensador adelantado a su tiempo cuya negativa a someterse a las creencias establecidas lo enfrentó directamente con la Inquisición. Su desafío intelectual terminó con su ejecución pública en el año 1600, aunque esa no fue realmente su muerte.

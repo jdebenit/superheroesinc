@@ -8,6 +8,8 @@ powers:
   - "Invisibilidad"
   - "Mejora física"
 tags: ["Secundarios"]
+originReality: "Tierra Zero"
+actualReality: "Tierra Zero"
 ---
 
 Sujeto 14 del Proyecto Euroman, danesa, con capacidad de **invisibilidad**, además de la mejora física estándar. Consta como fallecida, en línea con el patrón general del proyecto.
