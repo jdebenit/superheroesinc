@@ -4,7 +4,7 @@ description: Estrella fue una princesa de Iberia enviada a otro mundo para busca
 source: "Una Estrella de otro mundo y Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2026-01-26
 birthDate: 1592-03-03
-tags: ["Secundarios", "Terranos"]
+tags: ["Secundarios", "Terranos", "Desaparecidos]
 originReality: "Terra"
 actualReality: "Tierra Zero"
 ---
@@ -16,4 +16,4 @@ Durante el cautiverio, Estrella se defendió de forma instintiva. En el enfrenta
 
 Fue descubierta por Euroforce el 3 de diciembre del año 2000, durante el verano polar, y despertó una semana después. El 18 de diciembre de ese mismo año regresó brevemente a Terra acompañada de Euroforce. Tras hablar con Tronador y conocer el destino definitivo del Reino de Iberia, comprendió que ya no quedaba nada a lo que aferrarse. Decidió entonces regresar a Tierra Zero junto a Euroforce, aceptando que su mundo había quedado atrás.
 
-Durante catorce años actuó como heroína en Tierra Zero, cargando con la memoria de un reino destruido y de unos héroes que no había podido salvar. Murió el 16 de julio de 2014 durante los acontecimientos ligados a la apertura del vórtice de Nigalión, convirtiéndose en el último eco del Reino de Iberia.
+Durante catorce años actuó como heroína en Tierra Zero, cargando con la memoria de un reino destruido y de unos héroes que no había podido salvar. Fue uno de los muchos héroes que murieron el 16 de julio de 2014 durante los acontecimientos ligados a la apertura del vórtice de Nigalión.
