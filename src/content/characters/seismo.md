@@ -1,6 +1,6 @@
 ---
 name: "Geb"
-alias: "Seismo"
+alias: "Seísmo"
 description: "El Dios Loco."
 source: "Superhéroes INC. Edición Limitada"
 updatedDate: 2025-12-13
