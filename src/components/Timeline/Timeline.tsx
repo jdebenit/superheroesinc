@@ -77,7 +77,7 @@ export const Timeline: React.FC<TimelineProps> = ({ events }) => {
     const allTags = useMemo(() => {
         const tags = new Set<string>();
         events.forEach(event => {
-            if (event.tags) {
+            if (event.tags && !event.characterSlug) {
                 event.tags.forEach(tag => tags.add(tag));
             }
         });

@@ -1,9 +1,10 @@
 ---
 alias: "La Artífice de los Dioses"
 name: Lenora
-description: "Lenora es la artífice que se negó a servir a los dioses y acabó creando herramientas capaces de igualarlos.."
+description: "Lenora es la artífice que se negó a servir a los dioses y acabó creando herramientas capaces de igualarlos."
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-13
+birthDate: "1561-12-20"
 image: "/personajes/la-artifice.png"
 tags: ["Principales"]
 originReality: "Reinos Divinos"
