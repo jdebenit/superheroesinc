@@ -1,9 +1,8 @@
 ---
 title: "Muerte de Estrella y Llegada de Nigalión"
-date: 2014-07-01
-
+date: 2014-07-16
 description: "Muere Estrella, la princesa de Terra. El dios Geb (Seísmo) abre un vórtice y Nigalión se abre paso a la Tierra."
 reality: "Tierra Zero"
 icon: "star"
-tags: ["contemporaneo"]
+tags: ["contemporaneo", "nigalión"]
 ---
