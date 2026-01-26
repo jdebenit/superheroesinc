@@ -5,5 +5,5 @@ displayDate: "2007"
 description: "Tercer conflicto armado entre Ecuador y Purgatorio."
 reality: "Tierra Zero"
 icon: "star"
-tags: ["contemporaneo"]
+tags: ["contemporaneo", "purgatorio-paraiso"]
 ---
