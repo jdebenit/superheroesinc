@@ -15,6 +15,7 @@ export interface TimelineEvent {
     slug?: string;
     displayDate?: string;
     tags?: string[];
+    characterSlug?: string;
 }
 
 interface TimelineProps {
@@ -324,6 +325,17 @@ export const Timeline: React.FC<TimelineProps> = ({ events }) => {
                                     className="text-[#c41e3a] hover:text-[#8a1529] uppercase font-bold text-sm tracking-widest border-b-2 border-[#c41e3a] pb-1 hover:pb-2 transition-all"
                                 >
                                     VER ARCHIVO &rarr;
+                                </a>
+                            </div>
+                        )}
+
+                        {event.characterSlug && (
+                            <div className="mt-6 text-right">
+                                <a
+                                    href={`/personajes/${event.characterSlug}`}
+                                    className="text-[#c41e3a] hover:text-[#8a1529] uppercase font-bold text-sm tracking-widest border-b-2 border-[#c41e3a] pb-1 hover:pb-2 transition-all"
+                                >
+                                    VER PERFIL &rarr;
                                 </a>
                             </div>
                         )}

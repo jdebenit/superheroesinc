@@ -2,7 +2,9 @@
 name: Castáphilo
 description: Centurión es un soldado romano condenado a la inmortalidad desde el año 33 que, tras siglos de guerras y violencia, lucha contra el mal buscando la redención.
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
+birthDate: "0006-06-06"
 updatedDate: 2025-11-26
+publishDate: 2025-11-26
 image: /personajes/centurion.png
 rpgId: centurion
 alias: Centurión
