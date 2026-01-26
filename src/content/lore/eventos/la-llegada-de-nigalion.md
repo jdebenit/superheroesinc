@@ -5,7 +5,7 @@ category: eventos
 source: "Superhéroes INC. Tercera Edición y Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2026-01-18
 pubDate: 2026-01-18
-eventDate: 2014-07-19
+eventDate: 2014-07-16
 reality: "Tierra Zero"
 tags: []
 ---
