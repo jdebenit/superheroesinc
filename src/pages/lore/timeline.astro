@@ -1,6 +1,6 @@
 ---
-import Layout from "../layouts/Layout.astro"; // Assuming Layout exists
-import { Timeline as TimelineComponent } from "../components/Timeline/Timeline";
+import Layout from "../../layouts/Layout.astro"; // Updated path
+import { Timeline as TimelineComponent } from "../../components/Timeline/Timeline"; // Updated path
 import { getCollection } from "astro:content";
 
 const loreEntries = await getCollection("lore", ({ data }) => {
@@ -89,7 +89,7 @@ const allEvents = [
         <div class="content-container">
             <h1 class="text-center mb-4">Timeline</h1>
             <p class="text-center mb-12">
-                Explora los eventos de las diferentes esferas. EN DESARROLLO.
+                Explora los eventos de las diferentes esferas.
             </p>
 
             <TimelineComponent client:only="react" events={allEvents} />
