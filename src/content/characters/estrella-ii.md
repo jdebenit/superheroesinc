@@ -4,7 +4,7 @@ alias: Estrella II
 description: Descendiente de Euroman y Europa, criada por su primo David Martín (alias Jinete Nocturno). Adopta la identidad de Estrella y promueve la formación de un nuevo equipo de intervención de ámbito europeo.
 source: Superhéroes INC. Tercera Edición
 updatedDate: 2025-11-26
-birthDate: 2004-01-06
+birthDate: 2004-01-14
 image: /personajes/estrella-ii.png
 tags: ["Principales"]
 ---
