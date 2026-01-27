@@ -34,16 +34,90 @@ const SkullIcon = () => (
     </svg>
 );
 
+const BattleIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+        <path fillRule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z" clipRule="evenodd" />
+        <path d="M14.5 10.5l-5 5m5-5l-5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+);
+
+const MagicIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+        <path fillRule="evenodd" d="M10.5 2a.75.75 0 01.75.75v5.25H16a.75.75 0 010 1.5h-4.75V15a.75.75 0 01-1.5 0v-5.25H4.5a.75.75 0 010-1.5h5.25V2.75A.75.75 0 0110.5 2z" clipRule="evenodd" />
+        <path d="M12.5 7.5L14 4l1.5 3.5L19 9l-3.5 1.5L14 14l-1.5-3.5L9 9l3.5-1.5z" />
+    </svg>
+);
+
+const TechIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+        <path fillRule="evenodd" d="M3 6a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V6Zm14.25 6a.75.75 0 0 1-.75.75h-2.25a.75.75 0 0 1 0-1.5h2.25a.75.75 0 0 1 .75.75Zm-8.25-.75a.75.75 0 0 0 0 1.5h2.25a.75.75 0 0 0 0-1.5H9Z" clipRule="evenodd" />
+    </svg>
+);
+
+const ShieldIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+        <path fillRule="evenodd" d="M12.516 2.17a.75.75 0 0 0-1.032 0 11.209 11.209 0 0 1-7.877 3.08.75.75 0 0 0-.722.515A12.74 12.74 0 0 0 2.25 9.75c0 5.942 4.064 10.933 9.563 12.348a.749.749 0 0 0 .374 0c5.499-1.415 9.563-6.406 9.563-12.348 0-1.352-.272-2.636-.759-3.801a.754.754 0 0 0-.719-.515 11.21 11.21 0 0 1-7.877-3.08ZM12 4.296A12.68 12.68 0 0 0 17.585 6.01 11.264 11.264 0 0 1 12 19.863 11.264 11.264 0 0 1 6.415 6.01 12.68 12.68 0 0 0 12 4.296Z" clipRule="evenodd" />
+    </svg>
+);
+
+const DealIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+        <path fillRule="evenodd" d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z" clipRule="evenodd" />
+    </svg>
+);
+
+const PortalIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+        <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-2.625 6c-.54 0-.828.419-.936.634a6.765 6.765 0 0 0-.165 2.616 2.625 2.625 0 0 1-5.25 0 9.75 9.75 0 0 1 16.125 0 2.625 2.625 0 0 1-5.25 0 6.765 6.765 0 0 0-.165-2.616c-.108-.215-.396-.634-.936-.634.54 0 .936.419 1.044.634.053.106.082.213.1.316l.243 1.282a5.75 5.75 0 0 1-3.236 6.13l-.41.173a.855.855 0 0 1-.72 0l-.41-.173a5.75 5.75 0 0 1-3.236-6.13l.243-1.282c.018-.103.047-.21.1-.316.108-.215.504-.634 1.044-.634Z" clipRule="evenodd" />
+    </svg>
+);
+
+const CharacterIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+        <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clipRule="evenodd" />
+    </svg>
+);
+
 const getIcon = (iconName?: string) => {
-    if (iconName === 'star') return <StarIcon />;
-    if (iconName === 'skull') return <SkullIcon />;
-    return undefined;
+    switch (iconName) {
+        case 'star': return <StarIcon />;
+        case 'skull': return <SkullIcon />;
+        case 'battle': return <BattleIcon />;
+        case 'magic': return <MagicIcon />;
+        case 'tech': return <TechIcon />;
+        case 'shield': return <ShieldIcon />;
+        case 'deal': return <DealIcon />;
+        case 'portal': return <PortalIcon />;
+        case 'character': return <CharacterIcon />;
+        default: return <StarIcon />; // Default to star instead of undefined to ensure icon presence
+    }
 };
 
 const getIconStyle = (iconName?: string) => {
-    if (iconName === 'star') return { background: '#fbbf24', color: '#1a1a1a', boxShadow: 'none', border: '2px solid #1a1a1a' };
-    if (iconName === 'skull') return { background: '#1a1a1a', color: '#f4f1e8', boxShadow: 'none', border: '2px solid #f4f1e8' };
-    return { background: '#c41e3a', color: '#fff', boxShadow: 'none', border: '2px solid #1a1a1a' };
+    const baseStyle = { color: '#fff', boxShadow: 'none', border: '2px solid #1a1a1a' };
+
+    switch (iconName) {
+        case 'star':
+            return { ...baseStyle, background: '#fbbf24', color: '#1a1a1a' };
+        case 'skull':
+            return { ...baseStyle, background: '#1a1a1a', color: '#f4f1e8', border: '2px solid #f4f1e8' };
+        case 'battle':
+            return { ...baseStyle, background: '#dc2626' }; // Red
+        case 'magic':
+            return { ...baseStyle, background: '#9333ea' }; // Purple
+        case 'tech':
+            return { ...baseStyle, background: '#0891b2' }; // Cyan
+        case 'shield':
+            return { ...baseStyle, background: '#1e3a8a' }; // Dark Blue
+        case 'deal':
+            return { ...baseStyle, background: '#16a34a' }; // Green
+        case 'portal':
+            return { ...baseStyle, background: '#c026d3' }; // Magenta
+        case 'character':
+            return { ...baseStyle, background: '#f97316' }; // Orange
+        default:
+            return { ...baseStyle, background: '#c41e3a' }; // Default Red
+    }
 };
 
 export const Timeline: React.FC<TimelineProps> = ({ events }) => {

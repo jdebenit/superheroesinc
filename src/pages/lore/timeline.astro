@@ -59,7 +59,7 @@ const allEvents = [
                 reality: entry.data.originReality || "Tierra Zero",
                 type: "timeline" as const, // Reusing timeline type
                 image: entry.data.image,
-                icon: "star",
+                icon: "character",
                 tags: entry.data.tags,
                 characterSlug: entry.slug,
             });
@@ -89,7 +89,7 @@ const allEvents = [
         <div class="content-container">
             <h1 class="text-center mb-4">Timeline</h1>
             <p class="text-center mb-12">
-                Explora los eventos de las diferentes esferas.
+                Explora los eventos de las diferentes esferas. EN DESARROLLO.
             </p>
 
             <TimelineComponent client:only="react" events={allEvents} />
