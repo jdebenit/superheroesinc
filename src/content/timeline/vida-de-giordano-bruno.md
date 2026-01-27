@@ -4,6 +4,6 @@ date: 1548-01-01
 displayDate: "1548-1583"
 description: "Giordano Bruno nace en Nola (1548), estudia lo arcano y desarrolla teorías sobre el universo infinito. Huye de la Inquisición en 1583."
 reality: "Tierra Zero"
-icon: "star"
+icon: "magic"
 tags: ["personaje"]
 ---

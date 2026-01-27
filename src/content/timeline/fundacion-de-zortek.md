@@ -4,6 +4,6 @@ date: 1974-01-01
 displayDate: "1974"
 description: "Fundación de ZORTEK."
 reality: "Tierra Zero"
-icon: "star"
+icon: "shield"
 tags: ["tecnoguerra"]
 ---

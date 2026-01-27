@@ -4,6 +4,6 @@ date: 1982-01-01
 displayDate: "1982"
 description: "Fundación de Guerreros del Imperio."
 reality: "Tierra Zero"
-icon: "star"
+icon: "shield"
 tags: []
 ---

@@ -4,6 +4,6 @@ date: 2001-01-01
 displayDate: "2001"
 description: "Morgan L. Fay publica Ancient Gods. Boom de la fantasía y la magia."
 reality: "Tierra Zero"
-icon: "star"
+icon: "magic"
 tags: ["contemporaneo"]
 ---

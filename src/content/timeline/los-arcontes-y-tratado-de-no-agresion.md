@@ -4,6 +4,6 @@ date: 2002-01-01
 displayDate: "2002"
 description: "Fin del Frente de Liberación Mutante. Creación de Los Arcontes en Purgatorio. Segundo ataque de Ecuador y firma de tratado de no agresión."
 reality: "Tierra Zero"
-icon: "star"
+icon: "battle"
 tags: ["purgatorio-paraiso", "contemporaneo"]
 ---
