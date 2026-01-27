@@ -2,6 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 import { getCollection, getEntry } from "astro:content";
 import CharacterSheet from "../../components/character/CharacterSheet";
+import ShareButtons from "../../components/ShareButtons.astro";
 
 export async function getStaticPaths() {
     const characters = await getCollection("characters");
@@ -186,6 +187,11 @@ const characterKeywords = [
                         />
                     )
                 }
+
+                <ShareButtons
+                    title={entry.data.alias || entry.data.name}
+                    url={Astro.url.href}
+                />
             </main>
         </div>
     </article>
