@@ -16,7 +16,7 @@ const TRAMAS = {
     'flecha-roja': ['Flecha Roja', 'Koch', 'Ángel Carreras', 'Héroe dorado'],
     'invasion-ksser': ['K\'sser', 'K\'rnai', 'Enigma', 'Nexo', 'Invasión', 'Jewel'],
     'tecnoguerra': ['TecnoGuerra', 'TecnoRED', 'Euroman', 'Umbra', 'IDESS', 'Zortek', 'H4ck3r', 'Blue Royals', 'Westerners'],
-    'politica': ['CISS', 'Fundación Divina', 'Ley de Regulación', 'Registro', 'Superheroes Inc', 'Antihéroes Limited', 'Tratado', 'Naciones Unidas', 'ONU', 'CEAM'],
+    'política': ['CISS', 'Fundación Divina', 'Ley de Regulación', 'Registro', 'Superheroes Inc', 'Antihéroes Limited', 'Tratado', 'Naciones Unidas', 'ONU', 'CEAM'],
     'era-mitica': ['Avalon', 'Myrddin', 'Arturo', 'Alejandría', 'Pacto de las Edades', 'Giordano Bruno', 'Salém', 'Vórtice', 'Oculto']
 };
 
