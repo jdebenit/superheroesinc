@@ -1,4 +1,5 @@
 import React from 'react';
+import ShareButtons from './ShareButtons';
 
 interface ComicCardProps {
     title: string;
@@ -52,9 +53,12 @@ const ComicCard: React.FC<ComicCardProps> = ({ title, excerpt, date, image, link
                         {excerpt}
                     </p>
 
-                    <div className="mt-auto flex items-center justify-end text-secondary font-bold text-xs uppercase tracking-wide border-t border-secondary pt-2">
-                        <span className="group-hover:underline">VER EXPEDIENTE</span>
-                        <span className="ml-1">→</span>
+                    <div className="mt-auto flex flex-col sm:flex-row items-start sm:items-center justify-between border-t border-secondary pt-3 gap-3">
+                        <ShareButtons title={title} url={link} className="origin-left" />
+                        <div className="flex items-center text-secondary font-bold text-xs uppercase tracking-wide self-end sm:self-auto">
+                            <span className="group-hover:underline">VER EXPEDIENTE</span>
+                            <span className="ml-1">→</span>
+                        </div>
                     </div>
                 </div>
 
