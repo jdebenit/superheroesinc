@@ -84,7 +84,7 @@ export const SPECIAL_SKILLS: SpecialSkillDefinition[] = [
         name: 'Explosivos',
         category: 'combat',
         formula: (stats) => stats['inteligencia'] / 2,
-        formulaText: 'INT)/2',
+        formulaText: 'INT/2',
         description: 'Manipular y crear explosivos'
     },
     {
@@ -92,7 +92,7 @@ export const SPECIAL_SKILLS: SpecialSkillDefinition[] = [
         name: 'Trampas',
         category: 'combat',
         formula: (stats) => stats['inteligencia'] / 2,
-        formulaText: 'INT)/2',
+        formulaText: 'INT/2',
         description: 'Detectar, desarmar y crear trampas'
     },
 
@@ -132,8 +132,8 @@ export const SPECIAL_SKILLS: SpecialSkillDefinition[] = [
         specificationLabel: 'Campo médico',
         specificationPlaceholder: 'Ej: Cirugía, Oncologia, Inmunología...',
         category: 'knowledge',
-        formula: (stats) => stats['inteligencia'] / 3,
-        formulaText: 'INT/3',
+        formula: (stats) => stats['inteligencia'] / 2,
+        formulaText: 'INT/2',
     },
 
     // ==========================================
