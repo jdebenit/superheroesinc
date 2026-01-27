@@ -101,7 +101,10 @@ export const ORIGIN_SKILL_MODIFIERS: OriginSkillModifiers = {
     ],
 
     "Militar": [
-        { skillId: 'combate', value: 20 }
+        { skillId: 'combate', value: 20 },
+        { skillId: 'armas_militares', value: 20 },
+        { skillId: 'armas_cortas', value: 20 },
+        { skillId: 'armas_largas', value: 20 }
     ],
 
     "Pistolero": [
