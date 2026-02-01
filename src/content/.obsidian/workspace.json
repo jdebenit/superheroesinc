@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "lore/organizaciones/umbra-enterprises.md",
+                "file": "lore/eventos/las-guerras-gamadas.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "umbra-enterprises"
+              "title": "las-guerras-gamadas"
             }
           }
         ]
@@ -185,6 +185,16 @@
   },
   "active": "f224a24343e22f67",
   "lastOpenFiles": [
+    "lore/eventos/la-tecnoguerra.md",
+    "lore/eventos/las-guerras-gamadas.md",
+    "characters/drache.md",
+    "characters/blinker.md",
+    "characters/lowe.md",
+    "characters/wirbelsturm.md",
+    "lore/grupos/escuadron-blitzkrieg.md",
+    "characters/jinete-nocturno.md",
+    "lore/grupos/world-force.md",
+    "lore/organizaciones/umbra-enterprises.md",
     "lore/cronicas/estados-unidos-primero-otra-vez.md",
     "blog/un-timeline-para-no-perderte-jugando-y-dirigiendo.md",
     "blog/juego-rol-superheroes-inc-contenido-vivo.md",
@@ -195,22 +205,12 @@
     "lore/cronicas/nadie-hablo-de-esto-despues.md",
     "timeline/toma-posesion-presidente-estados-unidos.md",
     "timeline/manifestaciones-antifascistas-en-madrid copy.md",
-    "lore/eventos/la-tecnoguerra 1.md",
     "timeline/formacion-liga-del-caos.md",
     "timeline/evento-inframundo copy.md",
     "blog/actual-plays-superheroes-inc.md",
     "timeline/textos-nordicos.md",
     "timeline/brexit-y-ciss.md",
     "timeline/brote-pseudovampirismo.md",
-    "timeline/retorno-de-enigma.md",
-    "timeline/brote-pseudovampirismo-y-retorno-de-enigma copy.md",
-    "timeline/operativo-antracita.md",
-    "timeline/comienzo-de-las-guerras-gamadas.md",
-    "timeline/terremoto-de-kobe-y-tri-ngulo-mortal.md",
-    "timeline/el-poeta-quin-jao-sen.md",
-    "lore/eventos/la-caida-de-la-gran-barrera.md",
-    "timeline/nacimiento-de-idess.md",
-    "timeline/nacimiento-de-erzfeind.md",
     "timeline",
     "lore/cronicas",
     "faq",
