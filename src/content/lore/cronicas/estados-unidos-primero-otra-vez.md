@@ -1,6 +1,6 @@
 ---
 title: Estados Unidos primero, otra vez
-description: El 20 de enero de 2025, Kent Clarke Jr asume la presidencia de Estados Unidos con un discurso agresivo y egocéntrico en el que promete poner fin a la era de los metahumanos sin control, utiliza la Tecnoguerra y la caída de Europa como advertencia y convierte el asesinato de su padre en el eje de una nueva política de fuerza.
+description: El 20 de enero de 2025, Ken Clarke Jr. asume la presidencia de Estados Unidos con un discurso agresivo y egocéntrico en el que promete poner fin a la era de los metahumanos sin control, utiliza la Tecnoguerra y la caída de Europa como advertencia y convierte el asesinato de su padre en el eje de una nueva política de fuerza.
 category: cronicas
 updatedDate: 2026-02-01
 ---
@@ -50,7 +50,7 @@ Mientras otros repetían que “nadie podía preverlo”, yo sabía exactamente 
 Mi padre lo sabía antes que nadie.  
 Por eso lo mataron.
 
-Kent Clarke creía en un mundo con poder bajo control.  
+Ken Clarke creía en un mundo con poder bajo control.  
 Un mundo donde ningún metahumano estuviera por encima del Estado.  
 Y ese pensamiento le costó la vida.
 
@@ -84,4 +84,4 @@ Y que el resto del mundo empiece a tomar notas.
 
 _20 de enero de 2025.  
 Washington D. C.  
-Discurso de toma de posesión del presidente Kent Clarke Jr._
+Discurso de toma de posesión del presidente Ken Clarke Jr._
