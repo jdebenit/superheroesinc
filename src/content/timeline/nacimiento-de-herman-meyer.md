@@ -5,5 +5,5 @@ displayDate: "1916"
 description: "Nacimiento de Herman Meyer. Fundador del Escuadrón Blitzkrieg"
 reality: "Tierra Zero"
 icon: "character"
-tags: ["personaje"]
+tags: ["personaje", "guerras-gamadas"]
 ---
