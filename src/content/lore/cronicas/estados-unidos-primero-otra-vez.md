@@ -16,7 +16,7 @@ Que los superseres, las guerras imposibles y las amenazas de otros planos eran �
 
 Mentira.
 
-Lo que pasó fue que **dejaron de mandar adultos**.
+Lo que pasó fue que dejaron de mandar adultos.
 
 Recordad [la Tecnoguerra](/lore/eventos/la-tecnoguerra/).  
 Todos la recordáis. Yo también.  
