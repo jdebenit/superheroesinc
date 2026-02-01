@@ -26,6 +26,7 @@ interface PowerRowProps {
     isThalsFree?: boolean;
     isEnano?: boolean;
     isGrifo?: boolean;
+    isElfoFisico?: boolean;
 }
 
 const getCharName = (abbr: string): string => {
@@ -44,7 +45,8 @@ const ORIGIN_TAG_COLORS: Record<string, "blue" | "purple" | "red" | "orange" | "
     'Thals': 'teal',
     'Divino': 'yellow',
     'Cósmico': 'indigo',
-    'Mutante': 'pink'
+    'Mutante': 'pink',
+    'Elfo Físico': 'green'
 };
 
 export default function PowerRow({
@@ -65,7 +67,8 @@ export default function PowerRow({
     isThalsDiscount,
     isThalsFree,
     isEnano,
-    isGrifo
+    isGrifo,
+    isElfoFisico
 }: PowerRowProps) {
     const p = POWERS.find(power => power.id === selection.id);
     if (!p) return null;
@@ -79,8 +82,9 @@ export default function PowerRow({
     const isAtlanteFree = isAtlante && (p.id === 'superhabilidad' || p.id === 'control_del_agua' || p.id === 'empatia_animal');
     const isTrollFree = isTroll && p.id === 'regeneracion_de_tejidos';
     const isGrifoFree = isGrifo && p.id === 'volar';
+    const isElfoFisicoFree = isElfoFisico && p.id === 'supervelocidad';
 
-    const isFree = isTesKharFree || isTrollFree;
+    const isFree = isTesKharFree || isTrollFree || isElfoFisicoFree;
 
     const penaltyInfo = getPowerPenalty(data, p);
     const isPenalty = penaltyInfo.type !== 'none';
@@ -240,6 +244,8 @@ export default function PowerRow({
                                     else if (p.id === 'empatia_animal') baseCost = -1.1;
                                 } else if (isGrifo && p.id === 'volar') {
                                     baseCost = -1.1;
+                                } else if (isElfoFisicoFree) {
+                                    baseCost = 0;
                                 }
 
                                 const total = (baseCost + penalty + (selection.rank / 10) + extraCost + custCost);

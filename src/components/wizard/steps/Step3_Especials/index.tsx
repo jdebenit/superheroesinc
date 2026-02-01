@@ -373,6 +373,10 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                     return p.id === 'volar';
                 }
 
+                if (modalOriginFilter === 'Psíquico') {
+                    return p.types.includes('Psíquico');
+                }
+
                 // Guardián can see all powers when opening Guardián modal (cross-origin selection)
                 // Check both spelling variations to be safe
                 if (isGuardianChar && (modalOriginFilter === 'Guardián' || modalOriginFilter === 'Guardian')) {
@@ -415,6 +419,8 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     const isTerrano = hasSubtype(data, 'Arcano', 'Terrano');
     const isEnano = hasSubtype(data, 'Arcano', 'Enano');
     const isGrifo = hasSubtype(data, 'Arcano', 'Grifo');
+    const isElfoFisico = hasSubtype(data, 'Arcano', 'Elfo Físico');
+    const isElfoPsiquico = hasSubtype(data, 'Arcano', 'Elfo Psíquico');
     const isVampiro = hasSubtype(data, 'Sobrenatural', 'Vampiro');
 
     const isSemidemonio = hasSubtype(data, 'Sobrenatural', 'Semidemonio');
@@ -467,7 +473,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     }).filter((s): s is (Spell & { rank: number; selectedOption?: string }) => s !== null);
 
     const hasAnyOrigin = isGuardianChar || isAlterado || hasEM || isVampiro || isSemidemonio || isMalditoChar ||
-        isEnte || isThals || isDivino || isCosmico || isMutante || isVigilante || isTechnological || isExoskeleton || isTesKhar || isAtlante || isParahumano || isTroll || isMinotauro || isPoseido || isEnano || isGrifo;
+        isEnte || isThals || isDivino || isCosmico || isMutante || isVigilante || isTechnological || isExoskeleton || isTesKhar || isAtlante || isParahumano || isTroll || isMinotauro || isPoseido || isEnano || isGrifo || isElfoFisico || isElfoPsiquico;
 
     // Auto-select Volar for Grifo
     useEffect(() => {
@@ -491,6 +497,25 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
             }
         }
     }, [isGrifo, selectedPowers]);
+
+    // Auto-select Supervelocidad for Elfo Físico
+    useEffect(() => {
+        if (isElfoFisico) {
+            const hasSupervelocidad = selectedPowers.some(p => p.id === 'supervelocidad');
+            if (!hasSupervelocidad) {
+                const svPower = POWERS.find(p => p.id === 'supervelocidad');
+                if (svPower) {
+                    const newPower: SelectedPower = {
+                        id: svPower.id,
+                        origin: 'Elfo Físico',
+                        rank: 1,
+                        customizations: []
+                    };
+                    updatePowers([...selectedPowers, newPower]);
+                }
+            }
+        }
+    }, [isElfoFisico, selectedPowers]);
 
     // Calculate and store EM in state
     useEffect(() => {
@@ -690,6 +715,8 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                 isPoseido={isPoseido}
                 isEnano={isEnano}
                 isGrifo={isGrifo}
+                isElfoFisico={isElfoFisico}
+                isElfoPsiquico={isElfoPsiquico}
             />
 
             {/* MAGIC SECTION */}

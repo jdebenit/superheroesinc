@@ -36,6 +36,8 @@ interface PowersSectionProps {
     isPoseido?: boolean;
     isEnano?: boolean;
     isGrifo?: boolean;
+    isElfoFisico?: boolean;
+    isElfoPsiquico?: boolean;
 }
 
 export default function PowersSection({
@@ -66,10 +68,12 @@ export default function PowersSection({
     isTroll,
     isPoseido,
     isEnano,
-    isGrifo
+    isGrifo,
+    isElfoFisico,
+    isElfoPsiquico
 }: PowersSectionProps) {
     const hasAnyPowerOrigin = isGuardian || isAlterado || isVampiro || isSemidemonio || isMaldito ||
-        isEnte || isThals || isDivino || isTerrano || isDotado || isCosmico || isMutante || isTesKhar || isAtlante || isTroll || isPoseido || isEnano || isGrifo;
+        isEnte || isThals || isDivino || isTerrano || isDotado || isCosmico || isMutante || isTesKhar || isAtlante || isTroll || isPoseido || isEnano || isGrifo || isElfoFisico || isElfoPsiquico;
 
     if (!hasAnyPowerOrigin) return null;
 
@@ -135,6 +139,11 @@ export default function PowersSection({
                     <span>+</span> Mutante (Ente)
                 </PixelButton>
             )}
+            {isElfoPsiquico && (
+                <PixelButton onClick={() => onOpenModal('Psíquico')} variant="custom" className="bg-cyan-600 text-white hover:bg-cyan-700 text-sm">
+                    <span>+</span> Poderes Psíquicos
+                </PixelButton>
+            )}
         </div>
     );
 
@@ -179,6 +188,7 @@ export default function PowersSection({
                                     isThalsDiscount={isThalsDiscount}
                                     isEnano={isEnano}
                                     isGrifo={isGrifo}
+                                    isElfoFisico={isElfoFisico}
                                 />
                             );
                         });
