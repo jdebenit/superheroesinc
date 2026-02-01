@@ -87,6 +87,13 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
             "Medusa": ["+20 a la parada mental"],
             "Esfinge": ["+20 a la parada mental"],
             "Híbrido mitológico": ["+20 a la parada mental"],
+        },
+        subtypeModifiers: {
+            "Hada Aire": { modImpacto: 50 },
+            "Hada Tierra": { modImpacto: 50 },
+            "Hada Fuego": { modImpacto: 50 },
+            "Hada Agua": { modImpacto: 50 },
+            "Hada Eter": { modImpacto: 50 }
         }
     },
     "Parahumano": {

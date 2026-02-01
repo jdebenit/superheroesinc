@@ -29,6 +29,9 @@ interface PowerRowProps {
     isElfoFisico?: boolean;
     isHadaEter?: boolean;
     isHadaAire?: boolean;
+    isHadaFuego?: boolean;
+    isHadaAgua?: boolean;
+    isHadaTierra?: boolean;
 }
 
 const getCharName = (abbr: string): string => {
@@ -72,7 +75,10 @@ export default function PowerRow({
     isGrifo,
     isElfoFisico,
     isHadaEter,
-    isHadaAire
+    isHadaAire,
+    isHadaFuego,
+    isHadaAgua,
+    isHadaTierra
 }: PowerRowProps) {
     const p = POWERS.find(power => power.id === selection.id);
     if (!p) return null;
@@ -88,7 +94,10 @@ export default function PowerRow({
     const isGrifoFree = isGrifo && p.id === 'volar';
     const isElfoFisicoFree = isElfoFisico && p.id === 'supervelocidad';
     const isHadaAireSpeedFree = isHadaAire && p.id === 'supervelocidad';
-    const isHadaFlyFree = (isHadaEter || isHadaAire) && p.id === 'volar';
+    const isHadaFlyFree = (isHadaEter || isHadaAire || isHadaFuego || isHadaAgua || isHadaTierra) && p.id === 'volar';
+    const isHadaFuegoFree = isHadaFuego && p.id === 'control_del_fuego';
+    const isHadaAguaFree = isHadaAgua && p.id === 'control_del_agua';
+    const isHadaTierraFree = isHadaTierra && (p.id === 'control_de_la_vegetacion' || p.id === 'control_de_la_geodinamica');
 
     const isFree = isTesKharFree || isTrollFree || isElfoFisicoFree || isHadaAireSpeedFree;
 
@@ -115,13 +124,16 @@ export default function PowerRow({
         if (isThalsFree) {
             return <CostBadge cost={0} variant="free" />;
         }
-        if (isAtlanteFree || isGrifoFree || isHadaFlyFree) {
+        if (isAtlanteFree || isGrifoFree || isHadaFlyFree || isHadaFuegoFree || isHadaAguaFree || isHadaTierraFree) {
             // Logic to show "Gratis" or difference based on rank
             let freeRank = 0;
-            if (p.id === 'control_del_agua') freeRank = 11;
+            if (p.id === 'control_del_agua' && isAtlante) freeRank = 11;
+            else if (p.id === 'control_del_agua' && isHadaAgua) freeRank = 21;
+            else if (p.id === 'control_del_fuego' && isHadaFuego) freeRank = 21;
+            else if ((p.id === 'control_de_la_vegetacion' || p.id === 'control_de_la_geodinamica') && isHadaTierra) freeRank = 11;
             else if (p.id === 'superhabilidad' && selection.selectedOption === 'Idioma nativo') freeRank = 41;
             else if (p.id === 'superhabilidad' && selection.selectedOption === 'Nadar') freeRank = 81;
-            else if (p.id === 'empatia_animal') freeRank = 11;
+            else if (p.id === 'empatia_animal' && isAtlante) freeRank = 11;
             else if (isGrifo && p.id === 'volar') freeRank = 11;
             else if (isHadaFlyFree && p.id === 'volar') freeRank = 11;
 

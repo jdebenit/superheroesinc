@@ -424,6 +424,9 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     const isElfoMagico = hasSubtype(data, 'Arcano', 'Elfo Mágico');
     const isHadaEter = hasSubtype(data, 'Arcano', 'Hada Eter');
     const isHadaAire = hasSubtype(data, 'Arcano', 'Hada Aire');
+    const isHadaFuego = hasSubtype(data, 'Arcano', 'Hada Fuego');
+    const isHadaAgua = hasSubtype(data, 'Arcano', 'Hada Agua');
+    const isHadaTierra = hasSubtype(data, 'Arcano', 'Hada Tierra');
     const isVampiro = hasSubtype(data, 'Sobrenatural', 'Vampiro');
 
     const isSemidemonio = hasSubtype(data, 'Sobrenatural', 'Semidemonio');
@@ -501,7 +504,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     }).filter((s): s is (Spell & { rank: number; selectedOption?: string }) => s !== null);
 
     const hasAnyOrigin = isGuardianChar || isAlterado || hasEM || isVampiro || isSemidemonio || isMalditoChar ||
-        isEnte || isThals || isDivino || isCosmico || isMutante || isVigilante || isTechnological || isExoskeleton || isTesKhar || isAtlante || isParahumano || isTroll || isMinotauro || isPoseido || isEnano || isGrifo || isElfoFisico || isElfoPsiquico || isHadaEter || isHadaAire;
+        isEnte || isThals || isDivino || isCosmico || isMutante || isVigilante || isTechnological || isExoskeleton || isTesKhar || isAtlante || isParahumano || isTroll || isMinotauro || isPoseido || isEnano || isGrifo || isElfoFisico || isElfoPsiquico || isHadaEter || isHadaAire || isHadaFuego || isHadaAgua || isHadaTierra;
 
     // Auto-select Volar for Grifo
     useEffect(() => {
@@ -545,14 +548,15 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
         }
     }, [isElfoFisico, selectedPowers]);
 
-    // Auto-add Powers for Hada Eter and Hada Aire
+    // Auto-add Powers for Hada Eter, Aire, Fuego, Agua, Tierra
     useEffect(() => {
-        if (!isHadaEter && !isHadaAire) return;
+        const isHada = isHadaEter || isHadaAire || isHadaFuego || isHadaAgua || isHadaTierra;
+        if (!isHada) return;
 
         let newPowers = [...selectedPowers];
         let changed = false;
 
-        // Volar (Rank 11) for both
+        // Volar (Rank 11) for ALL Hadas
         const hasFly = newPowers.some(p => p.id === 'volar');
         if (!hasFly) {
             const volarPower = POWERS.find(p => p.id === 'volar');
@@ -584,10 +588,75 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
             }
         }
 
+        // Control del Fuego (Rank 21) for Hada Fuego
+        if (isHadaFuego) {
+            const hasFire = newPowers.some(p => p.id === 'control_del_fuego');
+            if (!hasFire) {
+                const firePower = POWERS.find(p => p.id === 'control_del_fuego');
+                if (firePower) {
+                    newPowers.push({
+                        id: firePower.id,
+                        origin: 'Arcano',
+                        rank: 21,
+                        customizations: []
+                    });
+                    changed = true;
+                }
+            }
+        }
+
+        // Control del Agua (Rank 21) for Hada Agua
+        if (isHadaAgua) {
+            const hasWater = newPowers.some(p => p.id === 'control_del_agua');
+            if (!hasWater) {
+                const waterPower = POWERS.find(p => p.id === 'control_del_agua');
+                if (waterPower) {
+                    newPowers.push({
+                        id: waterPower.id,
+                        origin: 'Arcano',
+                        rank: 21,
+                        customizations: []
+                    });
+                    changed = true;
+                }
+            }
+        }
+
+        // Control de la Vegetación (Rank 11) & Geodinámica (Rank 11) for Hada Tierra
+        if (isHadaTierra) {
+            const hasPlants = newPowers.some(p => p.id === 'control_de_la_vegetacion');
+            if (!hasPlants) {
+                const plantPower = POWERS.find(p => p.id === 'control_de_la_vegetacion');
+                if (plantPower) {
+                    newPowers.push({
+                        id: plantPower.id,
+                        origin: 'Arcano',
+                        rank: 11,
+                        customizations: []
+                    });
+                    changed = true;
+                }
+            }
+
+            const hasGeo = newPowers.some(p => p.id === 'control_de_la_geodinamica');
+            if (!hasGeo) {
+                const geoPower = POWERS.find(p => p.id === 'control_de_la_geodinamica');
+                if (geoPower) {
+                    newPowers.push({
+                        id: geoPower.id,
+                        origin: 'Arcano',
+                        rank: 11,
+                        customizations: []
+                    });
+                    changed = true;
+                }
+            }
+        }
+
         if (changed) {
             updatePowers(newPowers);
         }
-    }, [isHadaEter, isHadaAire, selectedPowers]);
+    }, [isHadaEter, isHadaAire, isHadaFuego, isHadaAgua, isHadaTierra, selectedPowers]);
 
     // Calculate and store EM in state
     useEffect(() => {
@@ -791,6 +860,9 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                 isElfoPsiquico={isElfoPsiquico}
                 isHadaEter={isHadaEter}
                 isHadaAire={isHadaAire}
+                isHadaFuego={isHadaFuego}
+                isHadaAgua={isHadaAgua}
+                isHadaTierra={isHadaTierra}
             />
 
             {/* MAGIC SECTION */}
