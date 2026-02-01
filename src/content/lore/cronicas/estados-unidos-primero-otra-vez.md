@@ -1,6 +1,6 @@
 ---
 title: Estados Unidos primero, otra vez
-description: El 20 de enero de 2025, Ken Clarke Jr. asume la presidencia de Estados Unidos con un discurso agresivo y egocéntrico en el que promete poner fin a la era de los metahumanos sin control, utiliza la Tecnoguerra y la caída de Europa como advertencia y convierte el asesinato de su padre en el eje de una nueva política de fuerza.
+description: El 20 de enero de 2025, Ken Clarke Jr. asume la presidencia de Estados Unidos con un discurso agresivo en el que promete poner fin a la era de los metahumanos sin control, utiliza la Tecnoguerra y la invasión de Nigalión a Europa como advertencia y convierte el asesinato de su padre en el eje de una nueva política de fuerza.
 category: cronicas
 updatedDate: 2026-02-01
 ---
@@ -12,7 +12,7 @@ Porque cuando este país necesita liderazgo de verdad, siempre aparece alguien c
 
 Durante años nos dijeron que el mundo había cambiado.  
 Que teníamos que aceptar el caos.  
-Que los superseres, las guerras imposibles y las amenazas de otros planos eran “el nuevo normal”.
+Que los metahumanos, las guerras imposibles y las amenazas de otros planos eran “el nuevo normal”.
 
 Mentira.
 
