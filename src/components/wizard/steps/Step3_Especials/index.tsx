@@ -423,6 +423,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     const isElfoPsiquico = hasSubtype(data, 'Arcano', 'Elfo Psíquico');
     const isElfoMagico = hasSubtype(data, 'Arcano', 'Elfo Mágico');
     const isHadaEter = hasSubtype(data, 'Arcano', 'Hada Eter');
+    const isHadaAire = hasSubtype(data, 'Arcano', 'Hada Aire');
     const isVampiro = hasSubtype(data, 'Sobrenatural', 'Vampiro');
 
     const isSemidemonio = hasSubtype(data, 'Sobrenatural', 'Semidemonio');
@@ -500,7 +501,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     }).filter((s): s is (Spell & { rank: number; selectedOption?: string }) => s !== null);
 
     const hasAnyOrigin = isGuardianChar || isAlterado || hasEM || isVampiro || isSemidemonio || isMalditoChar ||
-        isEnte || isThals || isDivino || isCosmico || isMutante || isVigilante || isTechnological || isExoskeleton || isTesKhar || isAtlante || isParahumano || isTroll || isMinotauro || isPoseido || isEnano || isGrifo || isElfoFisico || isElfoPsiquico;
+        isEnte || isThals || isDivino || isCosmico || isMutante || isVigilante || isTechnological || isExoskeleton || isTesKhar || isAtlante || isParahumano || isTroll || isMinotauro || isPoseido || isEnano || isGrifo || isElfoFisico || isElfoPsiquico || isHadaEter || isHadaAire;
 
     // Auto-select Volar for Grifo
     useEffect(() => {
@@ -543,6 +544,50 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
             }
         }
     }, [isElfoFisico, selectedPowers]);
+
+    // Auto-add Powers for Hada Eter and Hada Aire
+    useEffect(() => {
+        if (!isHadaEter && !isHadaAire) return;
+
+        let newPowers = [...selectedPowers];
+        let changed = false;
+
+        // Volar (Rank 11) for both
+        const hasFly = newPowers.some(p => p.id === 'volar');
+        if (!hasFly) {
+            const volarPower = POWERS.find(p => p.id === 'volar');
+            if (volarPower) {
+                newPowers.push({
+                    id: volarPower.id,
+                    origin: 'Arcano',
+                    rank: 11,
+                    customizations: []
+                });
+                changed = true;
+            }
+        }
+
+        // Supervelocidad for Hada Aire
+        if (isHadaAire) {
+            const hasSpeed = newPowers.some(p => p.id === 'supervelocidad');
+            if (!hasSpeed) {
+                const speedPower = POWERS.find(p => p.id === 'supervelocidad');
+                if (speedPower) {
+                    newPowers.push({
+                        id: speedPower.id,
+                        origin: 'Arcano',
+                        rank: 1,
+                        customizations: []
+                    });
+                    changed = true;
+                }
+            }
+        }
+
+        if (changed) {
+            updatePowers(newPowers);
+        }
+    }, [isHadaEter, isHadaAire, selectedPowers]);
 
     // Calculate and store EM in state
     useEffect(() => {
@@ -744,6 +789,8 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                 isGrifo={isGrifo}
                 isElfoFisico={isElfoFisico}
                 isElfoPsiquico={isElfoPsiquico}
+                isHadaEter={isHadaEter}
+                isHadaAire={isHadaAire}
             />
 
             {/* MAGIC SECTION */}

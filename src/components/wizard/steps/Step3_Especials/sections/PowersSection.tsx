@@ -38,6 +38,8 @@ interface PowersSectionProps {
     isGrifo?: boolean;
     isElfoFisico?: boolean;
     isElfoPsiquico?: boolean;
+    isHadaEter?: boolean;
+    isHadaAire?: boolean;
 }
 
 export default function PowersSection({
@@ -70,10 +72,12 @@ export default function PowersSection({
     isEnano,
     isGrifo,
     isElfoFisico,
-    isElfoPsiquico
+    isElfoPsiquico,
+    isHadaEter,
+    isHadaAire
 }: PowersSectionProps) {
     const hasAnyPowerOrigin = isGuardian || isAlterado || isVampiro || isSemidemonio || isMaldito ||
-        isEnte || isThals || isDivino || isTerrano || isDotado || isCosmico || isMutante || isTesKhar || isAtlante || isTroll || isPoseido || isEnano || isGrifo || isElfoFisico || isElfoPsiquico;
+        isEnte || isThals || isDivino || isTerrano || isDotado || isCosmico || isMutante || isTesKhar || isAtlante || isTroll || isPoseido || isEnano || isGrifo || isElfoFisico || isElfoPsiquico || isHadaEter || isHadaAire;
 
     if (!hasAnyPowerOrigin) return null;
 
@@ -189,6 +193,8 @@ export default function PowersSection({
                                     isEnano={isEnano}
                                     isGrifo={isGrifo}
                                     isElfoFisico={isElfoFisico}
+                                    isHadaEter={isHadaEter}
+                                    isHadaAire={isHadaAire}
                                 />
                             );
                         });

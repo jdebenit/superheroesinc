@@ -27,6 +27,8 @@ interface PowerRowProps {
     isEnano?: boolean;
     isGrifo?: boolean;
     isElfoFisico?: boolean;
+    isHadaEter?: boolean;
+    isHadaAire?: boolean;
 }
 
 const getCharName = (abbr: string): string => {
@@ -68,7 +70,9 @@ export default function PowerRow({
     isThalsFree,
     isEnano,
     isGrifo,
-    isElfoFisico
+    isElfoFisico,
+    isHadaEter,
+    isHadaAire
 }: PowerRowProps) {
     const p = POWERS.find(power => power.id === selection.id);
     if (!p) return null;
@@ -83,8 +87,10 @@ export default function PowerRow({
     const isTrollFree = isTroll && p.id === 'regeneracion_de_tejidos';
     const isGrifoFree = isGrifo && p.id === 'volar';
     const isElfoFisicoFree = isElfoFisico && p.id === 'supervelocidad';
+    const isHadaAireSpeedFree = isHadaAire && p.id === 'supervelocidad';
+    const isHadaFlyFree = (isHadaEter || isHadaAire) && p.id === 'volar';
 
-    const isFree = isTesKharFree || isTrollFree || isElfoFisicoFree;
+    const isFree = isTesKharFree || isTrollFree || isElfoFisicoFree || isHadaAireSpeedFree;
 
     const penaltyInfo = getPowerPenalty(data, p);
     const isPenalty = penaltyInfo.type !== 'none';
@@ -109,7 +115,7 @@ export default function PowerRow({
         if (isThalsFree) {
             return <CostBadge cost={0} variant="free" />;
         }
-        if (isAtlanteFree || isGrifoFree) {
+        if (isAtlanteFree || isGrifoFree || isHadaFlyFree) {
             // Logic to show "Gratis" or difference based on rank
             let freeRank = 0;
             if (p.id === 'control_del_agua') freeRank = 11;
@@ -117,9 +123,10 @@ export default function PowerRow({
             else if (p.id === 'superhabilidad' && selection.selectedOption === 'Nadar') freeRank = 81;
             else if (p.id === 'empatia_animal') freeRank = 11;
             else if (isGrifo && p.id === 'volar') freeRank = 11;
+            else if (isHadaFlyFree && p.id === 'volar') freeRank = 11;
 
             const diff = (selection.rank || 1) - freeRank;
-            if (diff === 0) return <CostBadge cost={0} variant="free" />;
+            if (diff <= 0) return <CostBadge cost={0} variant="free" />;
             return <CostBadge cost={p.cost} variant="variable" />;
         }
         return <span className='font-bold text-gray-700'>{displayBaseCostStr}</span>;
