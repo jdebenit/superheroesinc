@@ -421,6 +421,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     const isGrifo = hasSubtype(data, 'Arcano', 'Grifo');
     const isElfoFisico = hasSubtype(data, 'Arcano', 'Elfo Físico');
     const isElfoPsiquico = hasSubtype(data, 'Arcano', 'Elfo Psíquico');
+    const isElfoMagico = hasSubtype(data, 'Arcano', 'Elfo Mágico');
     const isVampiro = hasSubtype(data, 'Sobrenatural', 'Vampiro');
 
     const isSemidemonio = hasSubtype(data, 'Sobrenatural', 'Semidemonio');
@@ -448,17 +449,31 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     const vigilanteSpecialties = getVigilanteSpecialties(data);
 
     // EM Formula state
-    const emFormula = data.spells?.emFormula ||
+    // For Magos and Magical Elves, FORCE the best formula (Divisor 1, Cost 0)
+    // This overrides any other potential formulas (e.g. if they are also Dotado)
+    const rawEmFormula = data.spells?.emFormula ||
         (isPoseido ? { divisor: 0, pcCost: 0 } : { divisor: 4, pcCost: 0 });
-    const hasEMFormula = !isMago && (isDotado || isHibrido || isTerrano || isPoseido);
-    const hasEM = isMago || isDotado || isHibrido || isTerrano || isPoseido;
+
+    const emFormula = (isMago || isElfoMagico)
+        ? { divisor: 1, pcCost: 0 }
+        : rawEmFormula;
+
+    const hasEMFormula = !isMago && !isElfoMagico && (isDotado || isHibrido || isTerrano || isPoseido);
+    const hasEM = isMago || isElfoMagico || isDotado || isHibrido || isTerrano || isPoseido;
 
     // Auto-correct EM formula for Poseido if it has the generic default (4)
     useEffect(() => {
-        if (isPoseido && emFormula.divisor === 4) {
+        if (isPoseido && rawEmFormula.divisor === 4) {
             updateEMFormula(0, 0); // Default to No Access
         }
-    }, [isPoseido, emFormula.divisor]);
+    }, [isPoseido, rawEmFormula.divisor]);
+
+    // Enforce Mago/Elfo Magico formula in state if it differs
+    useEffect(() => {
+        if ((isMago || isElfoMagico) && (rawEmFormula.divisor !== 1 || rawEmFormula.pcCost !== 0)) {
+            updateEMFormula(1, 0);
+        }
+    }, [isMago, isElfoMagico, rawEmFormula.divisor, rawEmFormula.pcCost]);
 
     // Spells - enrich with full spell data and rank
     const selectedSpells = selectedSpellsWithRank.map(sw => {
@@ -732,6 +747,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                     isHibrido={isHibrido}
                     isTerrano={isTerrano}
                     isPoseido={isPoseido}
+                    isElfoMagico={isElfoMagico}
                     onOpenSpellModal={openSpellModal}
                     onUpdateEMFormula={updateEMFormula}
                     onUpdateSpellRank={updateSpellRank}

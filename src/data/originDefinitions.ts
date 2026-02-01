@@ -61,7 +61,7 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
     "Arcano": {
         name: "Arcano",
         paradaMentalBonus: 20,
-        disabledSubtypes: ["Hada Aire", "Hada Tierra", "Hada Fuego", "Hada Agua", "Hada Eter", "Centauro", "Gigante", "Hidra", "Medusa", "Esfinge"],
+        disabledSubtypes: ["Hada Aire", "Hada Tierra", "Hada Fuego", "Hada Agua", "Centauro", "Gigante", "Hidra", "Medusa", "Esfinge"],
         defaultEffects: [
             "+20 a la parada mental",
         ],

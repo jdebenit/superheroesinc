@@ -157,6 +157,15 @@ export const ORIGIN_CHARACTERISTIC_MODIFIERS: { [key: string]: OriginCharacteris
         apariencia: { modifier: 20, min: 100, max: 120 },
         voluntad: { modifier: 0, max: 100 },
     },
+    "Hada Eter": {
+        fuerza: { modifier: 0, min: 60, max: 90 },
+        constitucion: { modifier: 0, min: 50, max: 90 },
+        agilidad: { modifier: 50, min: 100, max: 150 },
+        inteligencia: { modifier: 0, min: 60, max: 100 },
+        percepcion: { modifier: 0, min: 60, max: 100 },
+        apariencia: { modifier: 20, min: 100, max: 120 },
+        voluntad: { modifier: 0, max: 100 },
+    },
     "Terrano": allCharacteristics(10, 110, 50),  // Terranos tienen mínimo 50
     "Minotauro": {
         fuerza: { modifier: 40, max: 170, min: 130 },
