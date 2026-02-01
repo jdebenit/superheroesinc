@@ -16,6 +16,7 @@ interface MagicSectionProps {
     isTerrano: boolean;
     isPoseido?: boolean;
     isElfoMagico?: boolean;
+    isHadaEter?: boolean;
     onOpenSpellModal: () => void;
     onUpdateEMFormula: (divisor: number, pcCost: number) => void;
     onUpdateSpellRank: (index: number, rank: number) => void;
@@ -39,6 +40,7 @@ export default function MagicSection({
     isTerrano,
     isPoseido,
     isElfoMagico,
+    isHadaEter,
     onOpenSpellModal,
     onUpdateEMFormula,
     onUpdateSpellRank,
@@ -235,7 +237,10 @@ export default function MagicSection({
                                     const effectiveRank = s.rank;
                                     return acc + (baseCost * effectiveRank);
                                 }, 0);
-                                const divisor = (isMago || isElfoMagico) ? 1 : emFormula.divisor;
+                                let divisor = emFormula.divisor;
+                                if (isMago || isElfoMagico) divisor = 1;
+                                else if (isHadaEter) divisor = 2;
+
                                 const maxEM = calculateEM(data, selectedPowers, divisor);
                                 const isOver = totalCost > maxEM;
                                 const extraPC = isOver ? ((totalCost - maxEM) * 0.1).toFixed(1) : '0.0';

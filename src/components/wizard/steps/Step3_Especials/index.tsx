@@ -422,6 +422,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     const isElfoFisico = hasSubtype(data, 'Arcano', 'Elfo Físico');
     const isElfoPsiquico = hasSubtype(data, 'Arcano', 'Elfo Psíquico');
     const isElfoMagico = hasSubtype(data, 'Arcano', 'Elfo Mágico');
+    const isHadaEter = hasSubtype(data, 'Arcano', 'Hada Eter');
     const isVampiro = hasSubtype(data, 'Sobrenatural', 'Vampiro');
 
     const isSemidemonio = hasSubtype(data, 'Sobrenatural', 'Semidemonio');
@@ -450,16 +451,20 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
 
     // EM Formula state
     // For Magos and Magical Elves, FORCE the best formula (Divisor 1, Cost 0)
+    // For Hada Eter, FORCE Divisor 2, Cost 0
     // This overrides any other potential formulas (e.g. if they are also Dotado)
     const rawEmFormula = data.spells?.emFormula ||
         (isPoseido ? { divisor: 0, pcCost: 0 } : { divisor: 4, pcCost: 0 });
 
-    const emFormula = (isMago || isElfoMagico)
-        ? { divisor: 1, pcCost: 0 }
-        : rawEmFormula;
+    let emFormula = rawEmFormula;
+    if (isMago || isElfoMagico) {
+        emFormula = { divisor: 1, pcCost: 0 };
+    } else if (isHadaEter) {
+        emFormula = { divisor: 2, pcCost: 0 };
+    }
 
-    const hasEMFormula = !isMago && !isElfoMagico && (isDotado || isHibrido || isTerrano || isPoseido);
-    const hasEM = isMago || isElfoMagico || isDotado || isHibrido || isTerrano || isPoseido;
+    const hasEMFormula = !isMago && !isElfoMagico && !isHadaEter && (isDotado || isHibrido || isTerrano || isPoseido);
+    const hasEM = isMago || isElfoMagico || isHadaEter || isDotado || isHibrido || isTerrano || isPoseido;
 
     // Auto-correct EM formula for Poseido if it has the generic default (4)
     useEffect(() => {
@@ -468,12 +473,19 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
         }
     }, [isPoseido, rawEmFormula.divisor]);
 
-    // Enforce Mago/Elfo Magico formula in state if it differs
+    // Enforce Mago/Elfo Magico formula (1/0)
     useEffect(() => {
         if ((isMago || isElfoMagico) && (rawEmFormula.divisor !== 1 || rawEmFormula.pcCost !== 0)) {
             updateEMFormula(1, 0);
         }
     }, [isMago, isElfoMagico, rawEmFormula.divisor, rawEmFormula.pcCost]);
+
+    // Enforce Hada Eter formula (2/0)
+    useEffect(() => {
+        if (isHadaEter && (rawEmFormula.divisor !== 2 || rawEmFormula.pcCost !== 0)) {
+            updateEMFormula(2, 0);
+        }
+    }, [isHadaEter, rawEmFormula.divisor, rawEmFormula.pcCost]);
 
     // Spells - enrich with full spell data and rank
     const selectedSpells = selectedSpellsWithRank.map(sw => {
@@ -748,6 +760,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
                     isTerrano={isTerrano}
                     isPoseido={isPoseido}
                     isElfoMagico={isElfoMagico}
+                    isHadaEter={isHadaEter}
                     onOpenSpellModal={openSpellModal}
                     onUpdateEMFormula={updateEMFormula}
                     onUpdateSpellRank={updateSpellRank}
