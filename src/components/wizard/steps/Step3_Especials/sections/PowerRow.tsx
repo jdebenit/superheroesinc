@@ -1,6 +1,6 @@
 import React from 'react';
 import { POWERS } from '../../../../../data/powers';
-import { calculateSkillBase, getCharacteristicValue, getRankLevel, getPowerPenalty } from '../utils';
+import { calculateSkillBase, getCharacteristicValue, getRankLevel, getPowerPenalty, getPowerCostConfig, calculatePowerBaseCost, type PowerContext } from '../utils';
 import type { SelectedPower } from '../types';
 import { Badge } from '../../../shared/Badge';
 import { NumberControl } from '../../../shared/NumberControl';
@@ -87,19 +87,14 @@ export default function PowerRow({
     const isSemidemonioBonus = isSemidemonio && selection.origin === 'Sobrenatural';
     const isEnanoGuardian = isEnano && selection.origin === 'Guardian';
 
-    // Check for free powers
-    const isTesKharFree = isTesKhar && p.id === 'superhabilidad';
-    const isAtlanteFree = isAtlante && (p.id === 'superhabilidad' || p.id === 'control_del_agua' || p.id === 'empatia_animal');
-    const isTrollFree = isTroll && p.id === 'regeneracion_de_tejidos';
-    const isGrifoFree = isGrifo && p.id === 'volar';
-    const isElfoFisicoFree = isElfoFisico && p.id === 'supervelocidad';
-    const isHadaAireSpeedFree = isHadaAire && p.id === 'supervelocidad';
-    const isHadaFlyFree = (isHadaEter || isHadaAire || isHadaFuego || isHadaAgua || isHadaTierra) && p.id === 'volar';
-    const isHadaFuegoFree = isHadaFuego && p.id === 'control_del_fuego';
-    const isHadaAguaFree = isHadaAgua && p.id === 'control_del_agua';
-    const isHadaTierraFree = isHadaTierra && (p.id === 'control_de_la_vegetacion' || p.id === 'control_de_la_geodinamica');
+    const context: PowerContext = {
+        isParahumanoHybrid, isTesKhar, isAtlante, isTroll, isSemidemonio,
+        isThalsDiscount, isThalsFree, isEnano, isGrifo, isElfoFisico,
+        isHadaEter, isHadaAire, isHadaFuego, isHadaAgua, isHadaTierra
+    };
 
-    const isFree = isTesKharFree || isTrollFree || isElfoFisicoFree || isHadaAireSpeedFree;
+    const costConfig = getPowerCostConfig(p, selection, context);
+    const { isFree, freeRank, isFixedCost } = costConfig;
 
     const penaltyInfo = getPowerPenalty(data, p);
     const isPenalty = penaltyInfo.type !== 'none';
@@ -121,22 +116,11 @@ export default function PowerRow({
         if (isFree) {
             return <span className="line-through text-red-500">{p.cost}</span>;
         }
-        if (isThalsFree) {
+        if (isFixedCost) { // Thals Free
             return <CostBadge cost={0} variant="free" />;
         }
-        if (isAtlanteFree || isGrifoFree || isHadaFlyFree || isHadaFuegoFree || isHadaAguaFree || isHadaTierraFree) {
+        if (freeRank > 0) {
             // Logic to show "Gratis" or difference based on rank
-            let freeRank = 0;
-            if (p.id === 'control_del_agua' && isAtlante) freeRank = 11;
-            else if (p.id === 'control_del_agua' && isHadaAgua) freeRank = 21;
-            else if (p.id === 'control_del_fuego' && isHadaFuego) freeRank = 21;
-            else if ((p.id === 'control_de_la_vegetacion' || p.id === 'control_de_la_geodinamica') && isHadaTierra) freeRank = 11;
-            else if (p.id === 'superhabilidad' && selection.selectedOption === 'Idioma nativo') freeRank = 41;
-            else if (p.id === 'superhabilidad' && selection.selectedOption === 'Nadar') freeRank = 81;
-            else if (p.id === 'empatia_animal' && isAtlante) freeRank = 11;
-            else if (isGrifo && p.id === 'volar') freeRank = 11;
-            else if (isHadaFlyFree && p.id === 'volar') freeRank = 11;
-
             const diff = (selection.rank || 1) - freeRank;
             if (diff <= 0) return <CostBadge cost={0} variant="free" />;
             return <CostBadge cost={p.cost} variant="variable" />;
@@ -239,38 +223,26 @@ export default function PowerRow({
                                 const minVal = p.skillCalc ? calculateSkillBase(data, p.skillCalc) : 0;
                                 const currentVal = selection.skillValue || minVal;
                                 const extraCost = Math.max(0, currentVal - minVal) * 0.1;
-                                const penalty = isHybridPenalty ? 3 : 0;
+
+                                const baseCost = calculatePowerBaseCost(p, selection, context, penaltyInfo);
+
+                                // Recalculate total
                                 const custCost = (selection.customizations || []).reduce((sum, c) => sum + (c.cost || 0), 0);
+                                const rank = selection.rank || 1;
+                                const rankCost = rank * 0.1;
 
-                                let baseCost = p.cost;
+                                const total = baseCost + rankCost + extraCost + custCost;
 
-                                if (isPenalty) {
-                                    baseCost += penaltyInfo.cost;
-                                }
-
-                                if (isEnanoGuardian) {
-                                    baseCost = p.cost + 2;
-                                } else if (isSemidemonioBonus) {
-                                    baseCost = Math.max(0, baseCost - 1);
-                                } else if (isThalsDiscount) {
-                                    baseCost = Math.max(0, baseCost - 2);
-                                } else if (isThalsFree) {
-                                    baseCost = 0;
-                                } else if (isAtlante) {
-                                    if (p.id === 'control_del_agua') baseCost = -1.1;
-                                    else if (p.id === 'superhabilidad' && selection.selectedOption === 'Idioma nativo') baseCost = -4.1;
-                                    else if (p.id === 'superhabilidad' && selection.selectedOption === 'Nadar') baseCost = -8.1;
-                                    else if (p.id === 'empatia_animal') baseCost = -1.1;
-                                } else if (isGrifo && p.id === 'volar') {
-                                    baseCost = -1.1;
-                                } else if (isElfoFisicoFree) {
-                                    baseCost = 0;
-                                }
-
-                                const total = (baseCost + penalty + (selection.rank / 10) + extraCost + custCost);
-
-                                if (isFree) return <CostBadge cost={0} variant="free" />;
-                                return <CostBadge cost={total.toFixed(1)} />;
+                                return (
+                                    <div className="flex flex-col items-center">
+                                        <Badge
+                                            label={Math.max(0, total).toFixed(1)}
+                                            // color="gray" // Default
+                                            className="text-lg font-bold"
+                                        />
+                                        <span className="text-xs text-gray-400">Total</span>
+                                    </div>
+                                );
                             })()}
                         </div>
 
