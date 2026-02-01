@@ -1,6 +1,6 @@
 ---
 title: Las Guerras Gamadas
-description: Conflicto secreto nacido en la Segunda Guerra Mundial en el que se persiguió el mito del triunfo de la raza aria mediante dos vías paralelas el ocultismo y la experimentación científica para crear un superhombre. Aunque nunca fue reconocida oficialmente la guerra continuó en la sombra durante décadas dejando tras de sí horrores silenciados proyectos fallidos y una herencia de fanatismo que aún pesa sobre el mundo superhumano.
+description: Conflicto secreto nacido en la Segunda Guerra Mundial en el que se persiguió el mito del triunfo de la raza aria mediante dos vías paralelas el ocultismo y la experimentación científica para crear un superhombre. Aunque nunca fue reconocida oficialmente la guerra continuó en la sombra durante décadas dejando tras de sí horrores silenciados proyectos fallidos y una herencia de fanatismo que aún pesa sobre el mundo metahumano.
 category: eventos
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2026-02-01
