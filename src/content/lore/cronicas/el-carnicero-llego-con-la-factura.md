@@ -1,0 +1,19 @@
+---
+title: El Carnicero llego con la factura
+description: Hay deudas que no se pagan con oro, sino con el alma; y cuando el acreedor es un cataclismo con rostro de padre renacido, ni siquiera los dioses pueden permitirse el lujo de la dignidad. Arturo del Hierro y Reverte nos ofrece este descarnado relato sobre el fin de una era, donde la bajeza de unos y el sacrificio suicida de otros dibujan el mapa de un mundo divino que, tras jugar a ser eterno, acabó descubriendo que no era más que carne de cañón para el olvido.
+category: cronicas
+updatedDate: 2026-02-03
+---
+No hubo trompetas celestiales ni coros de ángeles para anunciar el fin de los tiempos. Hubo sangre, barro y esa vieja desesperación que hiede a miedo antiguo. Viene de lejos la historia, de cuando el mundo aún era joven y los dioses, en su arrogancia, creyeron que el cuerpo de Ymir era un botín y no una hipoteca. Ahora el Avatar, ese cobrador de deudas con rostro de cataclismo, ha venido a reclamar los intereses. Y lo ha hecho con la eficacia de un verdugo que no necesita presentación.
+
+Fue una carnicería de las que hacen época. El tal Avatar traía consigo a sus vástagos, una prole de perros de presa nacidos en estrellas remotas, con la lealtad de quien no conoce otra ley que el hambre de su padre. Cayeron panteones enteros, como castillos de naipes soplados por un borracho. Hasta el Fuego Estelar, ese dios forastero que se creía invulnerable por venir de fuera, acabó mordiendo el polvo ante uno de los campeones de esa estirpe implacable.
+
+Lo peor no fue la derrota, sino la bajeza. Siempre hay un momento en que el héroe se descubre villano por pura supervivencia. Doce dioses, los mismos que antaño trocearon a Ymir, comprendieron que estaban atados al Avatar por el ombligo: matarlo era suicidarse. Y ahí los tienen: Ares, Shiva, Set, Quetzalcóatl... nombres que antaño hacían temblar la tierra, arrastrándose ahora como lacayos, vendiendo a su propia familia divina para salvar el pellejo. Una estampa miserable, muy humana, si me permiten el sarcasmo. Fue el Maestro Arcano quien les quitó la venda de los ojos: el Avatar no buscaba súbditos, sino ganado. Quería devorarlos uno a uno para recuperar su poder original.
+
+Tuvo que ser un celta, Ogma, el de la espada de mil filos, quien pusiera un poco de dignidad y mucha astucia de tahúr en el tablero. El plan era de una lógica sangrienta: extirpar la esencia de Ymir que latía en los doce destructores. Morir para matar, y luego esperar que un pacto con Legba, ese guardián que fuma en la frontera del más allá, les permitiera volver del otro lado una vez cumplido el trámite.
+
+Pero el Avatar no es manco. Sintió el frío de la nada en las costillas y lanzó una maldición que brotó de las cuencas vacías del viejo Odín. La locura de Némesis infectó a Thor y a Tyr, transformando a los hijos en bestias enloquecidas justo cuando debían empuñar el acero de la espada Orna. Se liaron a mamporros en una batalla desesperada, de esas donde ya no importa quién es el bueno sino quién queda en pie. Al final, en un rincón de sombras, Ogma cumplió su parte. Nueve tajos precisos, como los de un cirujano borracho de justicia.
+
+Un estallido, un silencio de muerte, y el Avatar se fue al infierno llevándose de la mano a Ogma y a Odín. Un final con cierta elegancia, si no fuera porque Legba juró después que sus almas nunca cruzaron la frontera. Se han ido a un lugar que no figura en los mapas, dejando a Thor y a Tyr corrompidos, huyendo hacia la Tierra como perros apaleados. Una victoria amarga, de las que te dejan vivo pero con el alma llena de cicatrices.
+
+_por Alonso Palau-Ribera_
