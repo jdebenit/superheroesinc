@@ -25,6 +25,6 @@ Así que lo estoy trabajando antes. Pequeños gestos. Escuchar más. Intentar ha
 
 Y eso, para mí, es subir de nivel. No es solo gastar puntos. Es preparar el terreno. Es sembrar antes de recoger. Es aceptar que el personaje cambia, pero que ese cambio se ve venir si prestas atención.
 
-¿Se puede jugar solo a optimizar? Claro. ¿Es menos válido? Para nada. Pero si el sistema te da herramientas para crecer también desde la historia, a mí me gusta usarlas.
+¿Se puede jugar solo a optimizar? Claro. ¿Es menos válido? Para nada. Pero si el sistema te da herramientas de crecimiento, me gusta introducirlas dentro de mi narrativa para crecer también desde la historia y asi que la interpretación de un personaje, (a veces se me hace muy dura), me cueste menos incorporando estos pequeños detalles.
 
 Gracias por leerme.
