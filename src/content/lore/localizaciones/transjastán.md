@@ -1,0 +1,16 @@
+---
+title: Transjastán
+description: Transjastán fue una antigua república comunista satélite de la Unión Soviética que acabó convirtiéndose en un territorio estratégico tras el descubrimiento del Strenium bajo su suelo. Su historia reciente está marcada por golpes de estado, experimentación encubierta y el ascenso de Eridani al poder.
+category: localizaciones
+source: Superhéroes INC. Primera y Segunda Edición
+updatedDate: 2026-02-04
+---
+Transjastán fue durante décadas una república comunista satélite de la extinta Unión Soviética. Bajo la tutela de Moscú, el país se convirtió en un territorio periférico pero útil, empleado como campo de pruebas para experimentos sobre los efectos de la radiación en seres humanos. La magnitud real de aquel programa sigue siendo desconocida. La falta de información sobre este periodo oscuro de la historia contemporánea se ha visto agravada por la desaparición o destrucción deliberada de la mayoría de los informes elaborados por los científicos soviéticos implicados.
+
+En 1958, el rey Miguel Alberto regresó a la república con apoyo internacional en un intento por alejar a Transjastán de la órbita soviética dentro de una estrategia más amplia para debilitar la influencia de la URSS en pequeños estados periféricos. Su reinado fue blando y errático. La incapacidad para consolidar el poder y responder a las tensiones sociales provocó una oleada de revueltas que culminaron en 1961 con la toma del poder por el comandante Víctor Pravienko y el retorno a un comunismo marxista de carácter radical. Toda la familia real fue ejecutada tras unos llamados juicios populares al ser declarados culpables de crímenes contra el pueblo de Transjastán.
+
+El nuevo gobierno impuesto por los golpistas dio paso a una etapa de aparente prosperidad económica. Las ayudas soviéticas impulsaron la industria, los servicios y la modernización tecnológica del país. En pocos años Transjastán pasó de ser una sociedad basada casi por completo en la ganadería y la agricultura a convertirse en un enclave tecnológico relevante dentro de la esfera de influencia soviética.
+
+La miseria estructural generada por el propio sistema soviético junto con un fuerte sentimiento de arraigo nacional llevó a Eridani, un noble transjeco exiliado, a asumir lo que consideró su responsabilidad histórica con el país. En 1966 se situó al frente de una revolución que puso fin al régimen comunista. La ausencia de herederos directos de la antigua familia real facilitó que Eridani se autoproclamara rey de Transjastán, presentándose como una figura de continuidad y ruptura al mismo tiempo.
+
+En 1988, un meteorito devastó gran parte de Harnia, la capital del país. En el lecho del cráter, científicos transjecos descubrieron una pequeña cantidad de un material extremadamente resistente y de propiedades inusuales, el Strenium. En un primer momento se creyó que se trataba de un material de origen estelar. Sin embargo, investigaciones posteriores revelaron que el impacto había dejado al descubierto un estrato profundo del subsuelo transjeco especialmente rico en este material, cuyas propiedades incluían la absorción de vibraciones y el refuerzo de la estructura atómica del hierro.
