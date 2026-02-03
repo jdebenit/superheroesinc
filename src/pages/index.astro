@@ -33,6 +33,8 @@ const latestLore = sortedLore.slice(0, 3).map((entry) => ({
       })
     : "",
   link: `/lore/${entry.slug}`,
+  category: entry.data.category,
+  categoryLink: `/lore/${entry.data.category}`,
 }));
 
 // Fetch latest character updates

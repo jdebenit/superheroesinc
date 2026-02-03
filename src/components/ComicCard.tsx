@@ -7,9 +7,11 @@ interface ComicCardProps {
     date: string;
     image?: string;
     link: string;
+    category?: string;
+    categoryLink?: string;
 }
 
-const ComicCard: React.FC<ComicCardProps> = ({ title, excerpt, date, image, link }) => {
+const ComicCard: React.FC<ComicCardProps> = ({ title, excerpt, date, image, link, category, categoryLink }) => {
     return (
         <a href={link} className="block group h-full" style={{ textDecoration: 'none', backgroundColor: 'transparent' }}>
             <article className="paper-card h-full flex flex-col transition-all transform hover:-translate-y-1 hover:shadow-lg relative bg-white border border-[#d3d0c2]">
@@ -26,11 +28,26 @@ const ComicCard: React.FC<ComicCardProps> = ({ title, excerpt, date, image, link
                 )}
 
                 <div className="flex-grow flex flex-col relative">
-                    <div className="flex justify-between items-center mb-4 border-b border-dashed border-gray-300 pb-2 w-full">
-                        <time className="text-xs font-mono text-gray-500 uppercase whitespace-nowrap">FECHA: {date}</time>
+                    <div className="flex justify-between items-start mb-4 border-b border-dashed border-gray-300 pb-2 w-full">
+                        <div className="flex flex-col w-full">
+                            {category && categoryLink && (
+                                <div className="w-full mb-1">
+                                    <a
+                                        href={categoryLink}
+                                        className="inline-block bg-gray-100 border border-gray-300 px-2 py-0.5 text-[10px] uppercase tracking-widest font-bold text-gray-600 hover:bg-secondary hover:text-white hover:border-secondary transition-colors duration-300 w-fit"
+                                        style={{ fontFamily: 'var(--font-mono)' }}
+                                        onClick={(e) => e.stopPropagation()}
+                                    >
+                                        ARCH: {category}
+                                    </a>
+                                </div>
+                            )}
+                            <div className="w-full text-right">
+                                <time className="text-xs font-mono text-gray-500 uppercase whitespace-nowrap">REF: {date}</time>
+                            </div>
+                        </div>
                     </div>
 
-                    {/* Classified Stamp */}
                     {/* Classified Stamp */}
                     <div className="stamp-classified" style={{
                         position: 'absolute',

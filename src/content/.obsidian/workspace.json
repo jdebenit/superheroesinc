@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "f6ff543fda84507a",
+        "id": "ba24499a34bee33e",
         "type": "tabs",
         "children": [
           {
-            "id": "efede9bf42bd0962",
+            "id": "e16c6424a437de6b",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -19,20 +19,6 @@
               },
               "icon": "lucide-file",
               "title": "transjastan"
-            }
-          },
-          {
-            "id": "38c5e72aa2d8030c",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "characters/epsilon-eridiani.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "epsilon-eridiani"
             }
           }
         ]
@@ -197,15 +183,16 @@
       "bases:Crear nueva base": false
     }
   },
-  "active": "efede9bf42bd0962",
+  "active": "e16c6424a437de6b",
   "lastOpenFiles": [
-    "characters/epsilon-eridiani.md",
+    "lore/localizaciones/kishvar.md",
+    "characters/estrella-original.md",
     "lore/localizaciones/transjastan.md",
+    "characters/epsilon-eridiani.md",
     "lore/localizaciones/avalon.md",
     "characters/emiago.md",
     "characters/estaca.md",
     "characters/eurokid.md",
-    "characters/estrella-original.md",
     "lore/cronicas/el-carnicero-llego-con-la-factura.md",
     "lore/eventos/el-colapso-del-nexo.md",
     "timeline/fusion-de-k-sser-con-el-nexo.md",
@@ -224,7 +211,6 @@
     "lore/organizaciones/umbra-enterprises.md",
     "blog/un-timeline-para-no-perderte-jugando-y-dirigiendo.md",
     "blog/juego-rol-superheroes-inc-contenido-vivo.md",
-    "blog/nueva-web.md",
     "timeline",
     "lore/cronicas",
     "faq",
