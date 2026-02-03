@@ -10,7 +10,7 @@ actualReality: Tierra Zero
 image: /personajes/epsilon-eridiani.png
 alias: Epsilon Eridiani
 ---
-Epsilon Eridiani es el actual monarca de [Transjastán](/lore/localizaciones/transjastan), un pequeño país situado al sur de Uzbekistán, una franja de tierra pobre en apariencia pero estratégica por lo que esconde bajo el suelo, un metal de increíbles propiedades conocido como Strenium. Durante décadas fue un lugar irrelevante para el resto del mundo. Eso cambió con él.
+Epsilon Eridiani es el actual monarca de [Transjastán](/lore/localizaciones/transjastán/), un pequeño país situado al sur de Uzbekistán, una franja de tierra pobre en apariencia pero estratégica por lo que esconde bajo el suelo, un metal de increíbles propiedades conocido como Strenium. Durante décadas fue un lugar irrelevante para el resto del mundo. Eso cambió con él.
 
 Eridiani llegó al poder por primera vez en 1966, tras liderar personalmente una revuelta anticomunista que mezcló nacionalismo, culto a la personalidad y viejas lealtades tribales. No fue un alzamiento espontáneo. Contó con apoyos contradictorios y oportunistas, incluida una ayuda encubierta de la propia Unión Soviética y un pacto informal entre varios monarcas de la región, más interesados en la estabilidad que en la ideología. Aquel primer reinado fue breve, tenso y marcado por purgas internas, pero suficiente para construir su mito.
 

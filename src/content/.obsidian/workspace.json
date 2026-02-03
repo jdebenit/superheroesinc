@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "lore/localizaciones/transjastan.md",
+                "file": "characters/epsilon-eridiani.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "transjastan"
+              "title": "epsilon-eridiani"
             }
           }
         ]
@@ -185,9 +185,9 @@
   },
   "active": "e16c6424a437de6b",
   "lastOpenFiles": [
+    "lore/localizaciones/transjastán.md",
     "lore/localizaciones/kishvar.md",
     "characters/estrella-original.md",
-    "lore/localizaciones/transjastan.md",
     "characters/epsilon-eridiani.md",
     "lore/localizaciones/avalon.md",
     "characters/emiago.md",
