@@ -5,7 +5,8 @@ description: Una reflexión personal sobre cómo vivir la subida de nivel en Sup
 author: Jorge Francisco de Benito Montoya
 tags:
   - articulos
-  - creacion-personajes
+  - personajes
+  - rol
 ---
 Siempre que un personaje sube de nivel hay un momento casi ritual en la mesa. Se reparten puntos, se miran tablas, alguien ya sabe exactamente qué va a subir porque lo lleva calculado desde la sesión uno. Y oye, es totalmente válido. Hay gente a la que le gustan los números. A mí también, hasta cierto punto.
 
