@@ -16,4 +16,5 @@ Pero el Avatar no es manco. Sintió el frío de la nada en las costillas y lanz�
 
 Un estallido, un silencio de muerte, y el Avatar se fue al infierno llevándose de la mano a Ogma y a Odín. Un final con cierta elegancia, si no fuera porque Legba juró después que sus almas nunca cruzaron la frontera. Se han ido a un lugar que no figura en los mapas, dejando a Thor y a Tyr corrompidos, huyendo hacia la Tierra como perros apaleados. Una victoria amarga, de las que te dejan vivo pero con el alma llena de cicatrices.
 
-_por Alonso Palau-Ribera_
+por _Alonso Palau-Ribera_
+Artículo publicado en la revista _El Quincenal_
