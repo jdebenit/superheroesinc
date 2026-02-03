@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "characters/epsilon-eridiani.md",
+                "file": "blog/subir-nivel-no-va-solo-de-numeros.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "epsilon-eridiani"
+              "title": "subir-nivel-no-va-solo-de-numeros"
             }
           }
         ]
@@ -185,10 +185,12 @@
   },
   "active": "e16c6424a437de6b",
   "lastOpenFiles": [
+    "blog/actual-plays-superheroes-inc.md",
+    "blog/subir-nivel-no-va-solo-de-numeros.md",
+    "characters/epsilon-eridiani.md",
     "lore/localizaciones/transjastán.md",
     "lore/localizaciones/kishvar.md",
     "characters/estrella-original.md",
-    "characters/epsilon-eridiani.md",
     "lore/localizaciones/avalon.md",
     "characters/emiago.md",
     "characters/estaca.md",
@@ -209,8 +211,6 @@
     "characters/jinete-nocturno.md",
     "lore/grupos/world-force.md",
     "lore/organizaciones/umbra-enterprises.md",
-    "blog/un-timeline-para-no-perderte-jugando-y-dirigiendo.md",
-    "blog/juego-rol-superheroes-inc-contenido-vivo.md",
     "timeline",
     "lore/cronicas",
     "faq",
