@@ -1,6 +1,6 @@
 ---
 title: El Carnicero llego con la factura
-description: Hay deudas que no se pagan con oro, sino con el alma; y cuando el acreedor es un cataclismo con rostro de padre renacido, ni siquiera los dioses pueden permitirse el lujo de la dignidad. Arturo del Hierro y Reverte nos ofrece este descarnado relato sobre el fin de una era, donde la bajeza de unos y el sacrificio suicida de otros dibujan el mapa de un mundo divino que, tras jugar a ser eterno, acabó descubriendo que no era más que carne de cañón para el olvido.
+description: Hay deudas que no se pagan con oro, sino con el alma y cuando el acreedor es un cataclismo con rostro de padre renacido, ni siquiera los dioses pueden permitirse el lujo de la dignidad. Alonso Palau-Ribera nos ofrece este descarnado relato sobre el fin de una era, donde la bajeza de unos y el sacrificio suicida de otros dibujan el mapa de un mundo divino que, tras jugar a ser eterno, acabó descubriendo que no era más que carne de cañón para el olvido.
 category: cronicas
 updatedDate: 2026-02-03
 ---
