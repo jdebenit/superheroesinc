@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "lore/cronicas/el-carnicero-llego-con-la-factura.md",
+                "file": "characters/epsilon-eridiani.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "el-carnicero-llego-con-la-factura"
+              "title": "epsilon-eridiani"
             }
           }
         ]
@@ -185,9 +185,14 @@
   },
   "active": "efede9bf42bd0962",
   "lastOpenFiles": [
+    "characters/emiago.md",
+    "characters/epsilon-eridiani.md",
+    "characters/estaca.md",
+    "characters/eurokid.md",
+    "characters/estrella-original.md",
+    "lore/cronicas/el-carnicero-llego-con-la-factura.md",
     "lore/eventos/el-colapso-del-nexo.md",
     "timeline/fusion-de-k-sser-con-el-nexo.md",
-    "lore/cronicas/el-carnicero-llego-con-la-factura.md",
     "1929-01-02.md",
     "lore/eventos/la-caida-de-la-gran-barrera.md",
     "lore/cronicas/estados-unidos-primero-otra-vez.md",
@@ -206,11 +211,6 @@
     "blog/nueva-web.md",
     "blog/el-vigilante-no-es-un-atajo.md",
     "characters/el-terror-mangel.md",
-    "characters/chainsaw.md",
-    "lore/cronicas/nadie-hablo-de-esto-despues.md",
-    "timeline/toma-posesion-presidente-estados-unidos.md",
-    "timeline/manifestaciones-antifascistas-en-madrid copy.md",
-    "timeline/formacion-liga-del-caos.md",
     "timeline",
     "lore/cronicas",
     "faq",
