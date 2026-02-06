@@ -48,6 +48,24 @@ export const useCharacterSheetData = (character: any) => {
     // Always use live calculated stats to prevent stale data
     const { combatStats, otherStats } = formatDerivedStats(derivedStats);
 
+    // Override calculated Hit Points with saved value from JSON if present and valid
+    if (character.combatstats && Array.isArray(character.combatstats)) {
+        const savedPV = character.combatstats.find((s: string) => s && s.startsWith("Puntos de Vida:"));
+        if (savedPV) {
+            const parts = savedPV.split(':');
+            if (parts.length > 1) {
+                const val = parts[1].trim();
+                // If value is valid (not empty/dash/placeholder), prioritize it over calculation
+                if (val && val !== '-' && val !== '') {
+                    const calculatedIndex = combatStats.findIndex((s: string) => s.startsWith("Puntos de Vida:"));
+                    if (calculatedIndex !== -1) {
+                        combatStats[calculatedIndex] = savedPV;
+                    }
+                }
+            }
+        }
+    }
+
     // --- PRE-CALCULATE LISTS FOR PDF (Powers, Spells, etc.) ---
 
     // Powers
