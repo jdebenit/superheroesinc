@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "blog/subir-nivel-no-va-solo-de-numeros.md",
+                "file": "blog/el-miedo-a-romperse-por-dentro.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "subir-nivel-no-va-solo-de-numeros"
+              "title": "el-miedo-a-romperse-por-dentro"
             }
           }
         ]
@@ -185,8 +185,9 @@
   },
   "active": "e16c6424a437de6b",
   "lastOpenFiles": [
-    "blog/actual-plays-superheroes-inc.md",
     "blog/subir-nivel-no-va-solo-de-numeros.md",
+    "blog/el-miedo-a-romperse-por-dentro.md",
+    "blog/actual-plays-superheroes-inc.md",
     "characters/epsilon-eridiani.md",
     "lore/localizaciones/transjastán.md",
     "lore/localizaciones/kishvar.md",
@@ -210,7 +211,6 @@
     "lore/grupos/escuadron-blitzkrieg.md",
     "characters/jinete-nocturno.md",
     "lore/grupos/world-force.md",
-    "lore/organizaciones/umbra-enterprises.md",
     "timeline",
     "lore/cronicas",
     "faq",
