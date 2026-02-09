@@ -22,6 +22,13 @@ export const ORIGIN_SKILL_MODIFIERS: OriginSkillModifiers = {
     // ==========================================
     // DIVINO
     // ==========================================
+    "Dios": [
+        {
+            skillId: 'conocimientos',
+            value: -15,
+            description: 'Conocimiento limitado del mundo mortal'
+        }
+    ],
     "Dios menor": [
         {
             skillId: 'conocimientos',
@@ -69,7 +76,9 @@ export const ORIGIN_SKILL_MODIFIERS: OriginSkillModifiers = {
 
     "Cazador": [
         { skillId: 'acechar', value: 20 },
-        { skillId: 'investigar', value: 20 }
+        { skillId: 'investigar', value: 20 },
+        { skillId: 'rastrear', value: 20 },
+        { skillId: 'trampas', value: 20 }
     ],
 
     "Espadachín": [
@@ -79,12 +88,14 @@ export const ORIGIN_SKILL_MODIFIERS: OriginSkillModifiers = {
 
     "Espia/Ladrón": [
         { skillId: 'esconderse', value: 20 },
-        { skillId: 'acechar', value: 20 }
+        { skillId: 'acechar', value: 20 },
+        { skillId: 'robar', value: 20 }
     ],
 
     "Francotirador": [
         { skillId: 'esconderse', value: 20 },
-        { skillId: 'acechar', value: 20 }
+        { skillId: 'acechar', value: 20 },
+        { skillId: 'armas_largas', value: 20 }
     ],
 
     "Manipulador": [
@@ -108,7 +119,8 @@ export const ORIGIN_SKILL_MODIFIERS: OriginSkillModifiers = {
     ],
 
     "Pistolero": [
-        { skillId: 'acechar', value: 20 }
+        { skillId: 'armas_cortas', value: 20 },
+        { skillId: 'armas_largas', value: 20 }
     ],
 
     // =============================================

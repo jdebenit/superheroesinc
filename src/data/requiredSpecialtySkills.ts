@@ -21,7 +21,7 @@ export const REQUIRED_SPECIALTY_SKILLS: RequiredSpecialtySkills = {
     "Arquero": ['arcos'],
     "Cazador": ['trampas', 'rastrear'],
     "Espadachín": ['armas_blancas'],
-    "Espía/Ladrón": ['robar'],
+    "Espia/Ladrón": ['robar'],
     "Francotirador": ['armas_largas'],
     "Manipulador": ['otro_idioma'],  // Parametrizable - se añadirá una instancia vacía
     "Mente Maestra": ['computadoras'],

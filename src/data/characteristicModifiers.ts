@@ -338,12 +338,12 @@ export const VIGILANTE_SPECIALTY_MODIFIERS: { [key: string]: SpecialtyCharacteri
         percepcion: 30
     },
     "Francotirador": {
-        percepcion: 40,
-        agilidad: 20
+        agilidad: 20,
+        percepcion: 40
     },
     "Pistolero": {
-        agilidad: 30,
-        percepcion: 20
+        agilidad: 20,
+        percepcion: 40
     },
     "Manipulador": {
         inteligencia: 30,
