@@ -28,17 +28,17 @@ Muchos miembros nunca pasaron de repetir consignas y símbolos, el círculo inte
 
 Financiaron excavaciones privadas, adquirieron artefactos de procedencia dudosa y llevaron a cabo rituales experimentales con resultados irregulares. Algunos no produjeron efecto alguno. Otros generaron fenómenos que los propios thulistas fueron incapaces de controlar o comprender.
 
-Sus intentos de contacto con fuerzas no humanas fueron torpes y peligrosos. Carecían de la preparación necesaria y confundían mitología con estructura real del cosmos. Sin saberlo, rozaron en varias ocasiones corrientes vinculadas al Caos, la Demencia y el Olvido, atrayendo la atención de entidades que no distinguían entre invocador y sacrificio.
+Sus intentos de contacto con fuerzas no humanas fueron torpes y peligrosos. Carecían de la preparación necesaria y confundían mitología con estructura real del cosmos. Sin saberlo, rozaron en varias ocasiones corrientes vinculadas al [Caos](/lore/entidades/caos/), la [Demencia](/lore/entidades/demencia/) y el [Olvido](/lore/entidades/olvido/), atrayendo la atención de entidades que no distinguían entre invocador y sacrificio.
 
 ## Relación con las Guerras Gamadas
 
-Durante el periodo previo a las Guerras Gamadas, varios de los conceptos, símbolos y experimentos iniciados por círculos thulistas fueron reutilizados por organizaciones más radicales y mejor estructuradas. La Sociedad Thule no fue un actor central del conflicto, pero sí un precursor torpe y peligroso.
+Durante el periodo previo a [las Guerras Gamadas](/lore/eventos/las-guerras-gamadas/), varios de los conceptos, símbolos y experimentos iniciados por círculos thulistas fueron reutilizados por organizaciones más radicales y mejor estructuradas. La Sociedad Thule no fue un actor central del conflicto, pero sí un precursor torpe y peligroso.
 
-Algunos horrores tempranos y anomalías surgidas durante los primeros compases de la guerra pueden rastrearse hasta rituales incompletos, textos mal traducidos o artefactos extraídos por miembros de Thule y posteriormente reutilizados por el Círculo del Nigalión y otros grupos afines.
+Algunos horrores tempranos y anomalías surgidas durante los primeros compases de la guerra pueden rastrearse hasta rituales incompletos, textos mal traducidos o artefactos extraídos por miembros de Thule y posteriormente reutilizados por el Círculo del [Nigalión](/lore/localizaciones/Nigalión/) y otros grupos afines.
 
 ## Castáphilo y la instrumentalización del saber
 
-Castáphilo, bajo distintos nombres y roles, mantuvo contacto indirecto con círculos vinculados al movimiento nacionalsocialista. Su conocimiento fragmentario sobre conflictos sobrenaturales y artefactos antiguos fue utilizado por otros como justificación para profundizar en prácticas que jamás comprendió ni aprobó plenamente.
+[Castáphilo](/personajes/centurion/), bajo distintos nombres y roles, mantuvo contacto indirecto con círculos vinculados al movimiento nacionalsocialista. Su conocimiento fragmentario sobre conflictos sobrenaturales y artefactos antiguos fue utilizado por otros como justificación para profundizar en prácticas que jamás comprendió ni aprobó plenamente.
 
 No compartía la ideología racial de Thule, pero su experiencia fue instrumentalizada. Parte de la tragedia posterior tiene su raíz en esa colaboración involuntaria, donde información real fue interpretada desde una lógica ideológica y no desde la prudencia.
 
