@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "ba24499a34bee33e",
+        "id": "4f526de52d53cc4a",
         "type": "tabs",
         "children": [
           {
-            "id": "e16c6424a437de6b",
+            "id": "7434aa67092f35b5",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "lore/cronicas/aparicion-infernal-en-una-vivienda-de-pueblo-madrileño.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "aparicion-infernal-en-una-vivienda-de-pueblo-madrileño"
+              "title": "Nueva pestaña"
             }
           }
         ]
@@ -183,16 +179,16 @@
       "bases:Crear nueva base": false
     }
   },
-  "active": "e16c6424a437de6b",
+  "active": "7434aa67092f35b5",
   "lastOpenFiles": [
-    "lore/cronicas/nadie-hablo-de-esto-despues.md",
+    "lore/organizaciones/sociedad-thule.md",
     "lore/cronicas/aparicion-infernal-en-una-vivienda-de-pueblo-madrileño.md",
+    "lore/cronicas/nadie-hablo-de-esto-despues.md",
     "lore/eventos/las-guerras-gamadas.md",
     "timeline/enfrentamientos-metahumanos-bosque-negro copy.md",
     "timeline/enfrentamientos-metahumanos-bosque-negro.md",
     "timeline/enfrentamientos-bosque-negro.md",
     "timeline/aleister-crowley-y-la-aurora-dorada copy.md",
-    "lore/organizaciones/sociedad-thule.md",
     "lore/organizaciones/la-orden-de-las-nagas.md",
     "lore/organizaciones/ciss.md",
     "blog/el-miedo-a-romperse-por-dentro.md",

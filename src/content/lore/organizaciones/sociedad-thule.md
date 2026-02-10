@@ -1,6 +1,6 @@
 ---
 title: La Sociedad Thule
-description: La Sociedad Thule fue una organización ocultista alemana activa tras la Primera Guerra Mundial que, bajo la apariencia de un círculo cultural, investigó lo arcano, la pureza del linaje y un supuesto saber anterior a la historia, convencida de que la humanidad había perdido contacto con fuerzas primordiales. Sus rituales, textos incompletos y contactos indirectos con corrientes más oscuras no desencadenaron por sí solos las Guerras Gamadas, pero sí dejaron ideas, símbolos y errores que otros reutilizaron con consecuencias mucho más graves.
+description: Organización ocultista alemana activa tras la Primera Guerra Mundial que, bajo la apariencia de un círculo cultural, investigó lo arcano, la pureza del linaje y un supuesto saber anterior a la historia, convencida de que la humanidad había perdido contacto con fuerzas primordiales. Sus rituales, textos incompletos y contactos indirectos con corrientes influyeron en las Guerras Gamadas.
 category: organizaciones
 source: Partida Oficial - Ecos de Guerra
 updatedDate: 2026-02-10
