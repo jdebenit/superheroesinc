@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "blog/el-miedo-a-romperse-por-dentro.md",
+                "file": "lore/organizaciones/sociedad-thule.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "el-miedo-a-romperse-por-dentro"
+              "title": "sociedad-thule"
             }
           }
         ]
@@ -185,8 +185,11 @@
   },
   "active": "e16c6424a437de6b",
   "lastOpenFiles": [
-    "blog/subir-nivel-no-va-solo-de-numeros.md",
+    "lore/organizaciones/la-orden-de-las-nagas.md",
+    "lore/organizaciones/sociedad-thule.md",
+    "lore/organizaciones/ciss.md",
     "blog/el-miedo-a-romperse-por-dentro.md",
+    "blog/subir-nivel-no-va-solo-de-numeros.md",
     "blog/actual-plays-superheroes-inc.md",
     "characters/epsilon-eridiani.md",
     "lore/localizaciones/transjastán.md",
@@ -208,9 +211,6 @@
     "characters/blinker.md",
     "characters/lowe.md",
     "characters/wirbelsturm.md",
-    "lore/grupos/escuadron-blitzkrieg.md",
-    "characters/jinete-nocturno.md",
-    "lore/grupos/world-force.md",
     "timeline",
     "lore/cronicas",
     "faq",
