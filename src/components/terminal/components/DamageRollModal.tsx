@@ -13,6 +13,7 @@ interface DamageRollModalProps {
 
 export default function DamageRollModal({ isOpen, onClose, title, diceString }: DamageRollModalProps) {
     const [additionalModifier, setAdditionalModifier] = useState<string>('');
+    const [multiplier, setMultiplier] = useState<number>(1);
     const [isRolling, setIsRolling] = useState(false);
     const [result, setResult] = useState<{
         total: number;
@@ -39,10 +40,16 @@ export default function DamageRollModal({ isOpen, onClose, title, diceString }: 
             const rollResult = parseAndRollDice(finalDiceString);
 
             if (rollResult) {
+                const total = rollResult.total * multiplier;
+                let finalFormula = finalDiceString;
+                if (multiplier > 1) {
+                    finalFormula = `(${finalDiceString}) x ${multiplier}`;
+                }
+
                 setResult({
-                    total: rollResult.total,
-                    detail: rollResult.detail,
-                    finalFormula: finalDiceString
+                    total: total,
+                    detail: multiplier > 1 ? `${rollResult.detail} (x${multiplier})` : rollResult.detail,
+                    finalFormula: finalFormula
                 });
             }
 
@@ -53,6 +60,7 @@ export default function DamageRollModal({ isOpen, onClose, title, diceString }: 
     const handleClose = () => {
         setResult(null);
         setAdditionalModifier('');
+        setMultiplier(1);
         setIsRolling(false);
         onClose();
     };
@@ -103,16 +111,31 @@ export default function DamageRollModal({ isOpen, onClose, title, diceString }: 
                             </div>
                         </div>
 
-                        <div className="roll-modifier-group" style={{ overflow: 'hidden', marginTop: '1rem' }}>
-                            <label style={{ whiteSpace: 'nowrap' }}>Extra</label>
-                            <input
-                                type="number"
-                                value={additionalModifier}
-                                onChange={(e) => setAdditionalModifier(e.target.value)}
-                                placeholder="0"
-                                className="roll-modifier-input-large"
-                                autoFocus
-                            />
+                        <div className="roll-modifier-group" style={{ overflow: 'hidden', marginTop: '1rem', display: 'flex', gap: '0.5rem' }}>
+                            <div style={{ flex: 1 }}>
+                                <label style={{ whiteSpace: 'nowrap' }}>Extra</label>
+                                <input
+                                    type="number"
+                                    value={additionalModifier}
+                                    onChange={(e) => setAdditionalModifier(e.target.value)}
+                                    placeholder="0"
+                                    className="roll-modifier-input-large"
+                                    autoFocus
+                                />
+                            </div>
+                            <div style={{ width: '80px' }}>
+                                <label style={{ whiteSpace: 'nowrap' }}>xM</label>
+                                <select
+                                    value={multiplier}
+                                    onChange={(e) => setMultiplier(parseInt(e.target.value))}
+                                    className="roll-modifier-input-large"
+                                    style={{ padding: '0.5rem 0.2rem', cursor: 'pointer' }}
+                                >
+                                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(num => (
+                                        <option key={num} value={num}>x{num}</option>
+                                    ))}
+                                </select>
+                            </div>
                         </div>
                     </div>
 
