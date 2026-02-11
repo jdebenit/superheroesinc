@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import '../TacticPlayerTerminal.css';
 import UnifiedRollModal from './UnifiedRollModal';
 import InitiativeCalculatorModal from './InitiativeCalculatorModal';
+import DiceResultModal from './DiceResultModal';
+import { parseAndRollDice } from '../../../utils/diceLogic';
+import { playDiceRollSound } from '../../../utils/diceSound';
 
 interface OtherStatsPanelProps {
     combatstats?: string[];
@@ -14,9 +17,10 @@ interface OtherStatsPanelProps {
 
 interface StatToDisplay {
     label: string;
-    value: number;
+    value: number | string;
     searchTerms: string[];
     source: 'combat' | 'other' | 'background';
+    isDiceRoll?: boolean;
 }
 
 export default function OtherStatsPanel({ combatstats, otherstats, background }: OtherStatsPanelProps) {
@@ -26,6 +30,13 @@ export default function OtherStatsPanel({ combatstats, otherstats, background }:
     } | null>(null);
 
     const [showInitiativeCalculator, setShowInitiativeCalculator] = useState(false);
+
+    // Dice Result State
+    const [diceResult, setDiceResult] = useState<{
+        total: number;
+        detail: string;
+        originalDice: string;
+    } | null>(null);
 
     // Define which stats to display
     const statsToDisplay: StatToDisplay[] = [
@@ -46,11 +57,18 @@ export default function OtherStatsPanel({ combatstats, otherstats, background }:
             value: 0,
             searchTerms: ['resistencia a prejuicios'],
             source: 'background'
+        },
+        {
+            label: 'Modificador de fuerza',
+            value: 0,
+            searchTerms: ['modificador de fuerza', 'mod fuerza', 'mod. fuerza'],
+            source: 'other',
+            isDiceRoll: true
         }
     ];
 
     // Extract stat values
-    const extractStatValue = (stat: StatToDisplay): number => {
+    const extractStatValue = (stat: StatToDisplay): number | string => {
         // Handle background source (prejudice resistance)
         if (stat.source === 'background') {
             // First try background.prejudiceResistance (primary source)
@@ -85,6 +103,13 @@ export default function OtherStatsPanel({ combatstats, otherstats, background }:
             );
 
             if (statString) {
+                // If it is a dice roll stat (like strength mod), we want the full value part (e.g. "1d4" or "1d100+30")
+                if (stat.isDiceRoll) {
+                    // Extract part after colon
+                    const colonPart = statString.split(':')[1]?.trim();
+                    if (colonPart) return colonPart;
+                }
+
                 // Try to extract percentage first (e.g., "66%")
                 const percentMatch = statString.match(/(\d+)%/);
                 if (percentMatch) return parseInt(percentMatch[1]);
@@ -104,13 +129,33 @@ export default function OtherStatsPanel({ combatstats, otherstats, background }:
             ...stat,
             value: extractStatValue(stat)
         }))
-        .filter(stat => stat.value > 0);
+        .filter(stat => {
+            if (typeof stat.value === 'number') return stat.value > 0;
+            return stat.value !== "0" && stat.value !== "";
+        });
 
     // Get initiative value for calculator
-    const initiativeValue = stats.find(s => s.label === 'Iniciativa y Reflejos')?.value || 0;
+    const initiativeValue = (stats.find(s => s.label === 'Iniciativa y Reflejos')?.value as number) || 0;
 
     // Don't render if no stats
     if (stats.length === 0) return null;
+
+    const handleStatClick = (stat: any) => {
+        if (stat.isDiceRoll && typeof stat.value === 'string') {
+            const rollResult = parseAndRollDice(stat.value);
+            if (rollResult) {
+                playDiceRollSound();
+                setDiceResult({
+                    ...rollResult,
+                    originalDice: stat.value
+                });
+            } else {
+                console.warn("Could not parse dice string:", stat.value);
+            }
+        } else if (typeof stat.value === 'number') {
+            setSelectedStat({ name: stat.label, value: stat.value });
+        }
+    };
 
     return (
         <div className="terminal-section">
@@ -131,10 +176,13 @@ export default function OtherStatsPanel({ combatstats, otherstats, background }:
                     <div
                         key={index}
                         className="attribute-card clickable"
-                        onClick={() => setSelectedStat({ name: stat.label, value: stat.value })}
+                        onClick={() => handleStatClick(stat)}
                     >
                         <div className="attribute-label">{stat.label.toUpperCase()}</div>
-                        <div className="attribute-value">{stat.value}{(stat.source === 'other' || stat.source === 'background') ? '%' : ''}</div>
+                        <div className="attribute-value">
+                            {stat.value}
+                            {(stat.source === 'other' || stat.source === 'background') && typeof stat.value === 'number' ? '%' : ''}
+                        </div>
                     </div>
                 ))}
             </div>
@@ -154,6 +202,13 @@ export default function OtherStatsPanel({ combatstats, otherstats, background }:
                 isOpen={showInitiativeCalculator}
                 onClose={() => setShowInitiativeCalculator(false)}
                 baseInitiative={initiativeValue}
+            />
+
+            <DiceResultModal
+                isOpen={!!diceResult}
+                onClose={() => setDiceResult(null)}
+                title="Resultado Tirada"
+                result={diceResult}
             />
         </div>
     );
