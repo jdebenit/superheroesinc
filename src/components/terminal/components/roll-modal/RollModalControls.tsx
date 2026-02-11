@@ -2,7 +2,7 @@ import React from 'react';
 import { DIFFICULTIES, SITUATIONS, COVERAGES, DISTANCE_SITUATIONS, RANGES } from '../../../../data/combatData';
 
 interface RollModalControlsProps {
-    mode: 'basic' | 'combat';
+    mode: 'basic' | 'combat' | 'opposed';
     subMode: 'melee' | 'distance';
     // Basic Params
     difficultyModifier: number;
@@ -23,6 +23,8 @@ interface RollModalControlsProps {
     currentSituation: any;
     effectiveParry: number;
     numericParry: number;
+    opposedValue?: string;
+    setOpposedValue?: (val: string) => void;
 }
 
 export const RollModalControls: React.FC<RollModalControlsProps> = ({
@@ -44,7 +46,9 @@ export const RollModalControls: React.FC<RollModalControlsProps> = ({
     setTargetParry,
     currentSituation,
     effectiveParry,
-    numericParry
+    numericParry,
+    opposedValue,
+    setOpposedValue
 }) => {
     return (
         <div className="roll-modifiers-column">
@@ -187,6 +191,26 @@ export const RollModalControls: React.FC<RollModalControlsProps> = ({
                             className="roll-modifier-input"
                         />
                     </div>
+                </>
+            )}
+
+            {/* OPPOSED CONTROLS */}
+            {mode === 'opposed' && (
+                <>
+                    <div className="roll-modifier-group">
+                        <label>Valor Oponente</label>
+                        <input
+                            type="number"
+                            value={opposedValue || ''}
+                            onChange={(e) => setOpposedValue && setOpposedValue(e.target.value)}
+                            placeholder="0"
+                            className="roll-modifier-input"
+                            autoFocus
+                        />
+                    </div>
+                    <small className="help-text-block">
+                        La probabilidad base es 50% +/- la diferencia de habilidad.
+                    </small>
                 </>
             )}
         </div>

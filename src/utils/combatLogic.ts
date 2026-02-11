@@ -1,11 +1,12 @@
 import { SITUATIONS, COVERAGES, DISTANCE_SITUATIONS, RANGES, HIT_LOCATIONS, MELEE_HIT_LOCATIONS } from '../data/combatData';
 
 interface CalculationParams {
-    mode: 'basic' | 'combat';
+    mode: 'basic' | 'combat' | 'opposed';
     subMode?: 'melee' | 'distance';
     targetValue: number;
     difficultyModifier: number;
     customModifier: number;
+    opposedValue?: number;
     situation: string;
     distSituation: string;
     range: string;
@@ -20,6 +21,7 @@ export const calculateProbability = (params: CalculationParams) => {
         targetValue,
         difficultyModifier,
         customModifier,
+        opposedValue,
         situation,
         distSituation,
         range,
@@ -45,6 +47,10 @@ export const calculateProbability = (params: CalculationParams) => {
     if (mode === 'basic') {
         modifiersSum = difficultyModifier + customModifier;
         finalProbability = targetValue + modifiersSum;
+    } else if (mode === 'opposed') {
+        // Opposed Roll: 50 + (Attacker - Defender)
+        const oppVal = opposedValue || 0;
+        finalProbability = 50 + (targetValue - oppVal);
     } else {
         // Combat Mode
         const isDistance = subMode === 'distance';

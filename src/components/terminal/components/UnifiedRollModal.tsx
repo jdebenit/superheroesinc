@@ -25,7 +25,7 @@ export default function UnifiedRollModal({
     initialMode = 'basic',
     skillType = 'cac'
 }: UnifiedRollModalProps) {
-    const [mode, setMode] = useState<'basic' | 'combat'>(initialMode);
+    const [mode, setMode] = useState<'basic' | 'combat' | 'opposed'>(initialMode);
 
     // Determine initial sub-mode (melee vs distance)
     const getInitialSubMode = () => {
@@ -38,6 +38,7 @@ export default function UnifiedRollModal({
     // Basic Mode State
     const [difficultyModifier, setDifficultyModifier] = useState<number>(0);
     const [customModifier, setCustomModifier] = useState<string>('');
+    const [opposedValue, setOpposedValue] = useState<string>('');
 
     // Advanced/Combat Mode State
     const [situation, setSituation] = useState(SITUATIONS[0].id);
@@ -65,6 +66,7 @@ export default function UnifiedRollModal({
             setSubMode(getInitialSubMode());
             setDifficultyModifier(0);
             setCustomModifier('');
+            setOpposedValue('');
             setSituation(SITUATIONS[0].id);
             setDistSituation(DISTANCE_SITUATIONS[0].id);
             setRange(RANGES[0].id);
@@ -86,6 +88,7 @@ export default function UnifiedRollModal({
         targetValue,
         difficultyModifier,
         customModifier: parsedCustomMod,
+        opposedValue: parseInt(opposedValue) || 0,
         situation,
         distSituation,
         range,
@@ -163,9 +166,13 @@ export default function UnifiedRollModal({
             headerActions={(
                 <button
                     className="btn-retry mode-toggle-btn"
-                    onClick={() => setMode(prev => prev === 'basic' ? 'combat' : 'basic')}
+                    onClick={() => setMode(prev => {
+                        if (prev === 'basic') return 'combat';
+                        if (prev === 'combat') return 'opposed';
+                        return 'basic';
+                    })}
                 >
-                    {mode === 'basic' ? '⚙️ Avanzado' : '⏪ Básico'}
+                    {mode === 'basic' ? '⚙️ Avanzado' : mode === 'combat' ? '⚔️ Enfrentada' : '⏪ Básico'}
                 </button>
             )}
         >
@@ -198,6 +205,7 @@ export default function UnifiedRollModal({
                         mode={mode}
                         subMode={subMode}
                         parryValue={subMode === 'distance' ? numericParry : effectiveParry}
+                        opposedValue={parseInt(opposedValue) || 0}
                         isAutoHit={isAutoHit}
                         finalProbability={finalProbability}
                     />
@@ -227,6 +235,8 @@ export default function UnifiedRollModal({
                                 currentSituation={currentSituation}
                                 effectiveParry={effectiveParry}
                                 numericParry={numericParry}
+                                opposedValue={opposedValue}
+                                setOpposedValue={setOpposedValue}
                             />
 
                             {/* RIGHT COLUMN: BUTTON */}

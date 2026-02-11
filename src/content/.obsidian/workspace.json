@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "4f526de52d53cc4a",
+        "id": "4261c3b0e1f96b36",
         "type": "tabs",
         "children": [
           {
-            "id": "7434aa67092f35b5",
+            "id": "85361f369081eb44",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -179,7 +179,7 @@
       "bases:Crear nueva base": false
     }
   },
-  "active": "7434aa67092f35b5",
+  "active": "85361f369081eb44",
   "lastOpenFiles": [
     "lore/organizaciones/sociedad-thule.md",
     "lore/cronicas/aparicion-infernal-en-una-vivienda-de-pueblo-madrileño.md",
