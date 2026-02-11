@@ -39,6 +39,7 @@ export default function UnifiedRollModal({
     const [difficultyModifier, setDifficultyModifier] = useState<number>(0);
     const [customModifier, setCustomModifier] = useState<string>('');
     const [opposedValue, setOpposedValue] = useState<string>('');
+    const [divisionFactor, setDivisionFactor] = useState<string>('');
 
     // Advanced/Combat Mode State
     const [situation, setSituation] = useState(SITUATIONS[0].id);
@@ -67,6 +68,7 @@ export default function UnifiedRollModal({
             setDifficultyModifier(0);
             setCustomModifier('');
             setOpposedValue('');
+            setDivisionFactor('');
             setSituation(SITUATIONS[0].id);
             setDistSituation(DISTANCE_SITUATIONS[0].id);
             setRange(RANGES[0].id);
@@ -89,6 +91,7 @@ export default function UnifiedRollModal({
         difficultyModifier,
         customModifier: parsedCustomMod,
         opposedValue: parseInt(opposedValue) || 0,
+        divisionFactor: parseInt(divisionFactor) || 1,
         situation,
         distSituation,
         range,
@@ -216,6 +219,7 @@ export default function UnifiedRollModal({
                         subMode={subMode}
                         parryValue={subMode === 'distance' ? numericParry : effectiveParry}
                         opposedValue={parseInt(opposedValue) || 0}
+                        divisionFactor={parseInt(divisionFactor) || 1}
                         isAutoHit={isAutoHit}
                         finalProbability={finalProbability}
                     />
@@ -247,6 +251,8 @@ export default function UnifiedRollModal({
                                 numericParry={numericParry}
                                 opposedValue={opposedValue}
                                 setOpposedValue={setOpposedValue}
+                                divisionFactor={divisionFactor}
+                                setDivisionFactor={setDivisionFactor}
                             />
 
                             {/* RIGHT COLUMN: BUTTON */}

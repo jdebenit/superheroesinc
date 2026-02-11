@@ -8,6 +8,7 @@ interface RollModalFormulaProps {
     subMode: 'melee' | 'distance';
     parryValue: number;
     opposedValue?: number;
+    divisionFactor?: number;
     isAutoHit: boolean;
     finalProbability: number;
 }
@@ -20,6 +21,7 @@ export const RollModalFormula: React.FC<RollModalFormulaProps> = ({
     subMode,
     parryValue,
     opposedValue,
+    divisionFactor,
     isAutoHit,
     finalProbability
 }) => {
@@ -36,7 +38,9 @@ export const RollModalFormula: React.FC<RollModalFormulaProps> = ({
                     </>
                 ) : (
                     <>
-                        <span className="formula-part" title="Valor Base">{targetValue}</span>
+                        <span className="formula-part" title="Valor Base">
+                            {divisionFactor && divisionFactor > 1 ? `${targetValue}/${divisionFactor}` : targetValue}
+                        </span>
 
                         {/* Modifiers Sum */}
                         <span className="formula-op">{modifiersSum >= 0 ? '+' : ''}</span>

@@ -25,6 +25,8 @@ interface RollModalControlsProps {
     numericParry: number;
     opposedValue?: string;
     setOpposedValue?: (val: string) => void;
+    divisionFactor?: string;
+    setDivisionFactor?: (val: string) => void;
 }
 
 export const RollModalControls: React.FC<RollModalControlsProps> = ({
@@ -48,7 +50,9 @@ export const RollModalControls: React.FC<RollModalControlsProps> = ({
     effectiveParry,
     numericParry,
     opposedValue,
-    setOpposedValue
+    setOpposedValue,
+    divisionFactor,
+    setDivisionFactor
 }) => {
     return (
         <div className="roll-modifiers-column">
@@ -84,6 +88,28 @@ export const RollModalControls: React.FC<RollModalControlsProps> = ({
             {/* ADVANCED - MELEE CONTROLS */}
             {mode === 'combat' && subMode === 'melee' && (
                 <>
+                    <div className="roll-modifier-group">
+                        <label>Divisor</label>
+                        <input
+                            type="number"
+                            value={divisionFactor || ''}
+                            onChange={(e) => {
+                                const val = e.target.value;
+                                if (val === '') {
+                                    setDivisionFactor && setDivisionFactor('');
+                                } else {
+                                    const intVal = parseInt(val);
+                                    if (!isNaN(intVal) && intVal >= 1) {
+                                        setDivisionFactor && setDivisionFactor(intVal.toString());
+                                    }
+                                }
+                            }}
+                            placeholder="1"
+                            min="1"
+                            className="roll-modifier-input"
+                        />
+                    </div>
+
                     <div className="roll-modifier-group">
                         <label>Situación</label>
                         <select
@@ -136,6 +162,28 @@ export const RollModalControls: React.FC<RollModalControlsProps> = ({
             {/* ADVANCED - DISTANCE CONTROLS */}
             {mode === 'combat' && subMode === 'distance' && (
                 <>
+                    <div className="roll-modifier-group">
+                        <label>Divisor</label>
+                        <input
+                            type="number"
+                            value={divisionFactor || ''}
+                            onChange={(e) => {
+                                const val = e.target.value;
+                                if (val === '') {
+                                    setDivisionFactor && setDivisionFactor('');
+                                } else {
+                                    const intVal = parseInt(val);
+                                    if (!isNaN(intVal) && intVal >= 1) {
+                                        setDivisionFactor && setDivisionFactor(intVal.toString());
+                                    }
+                                }
+                            }}
+                            placeholder="1"
+                            min="1"
+                            className="roll-modifier-input"
+                        />
+                    </div>
+
                     <div className="roll-modifier-group">
                         <label>Situación</label>
                         <select

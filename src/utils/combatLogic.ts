@@ -7,6 +7,7 @@ interface CalculationParams {
     difficultyModifier: number;
     customModifier: number;
     opposedValue?: number;
+    divisionFactor?: number;
     situation: string;
     distSituation: string;
     range: string;
@@ -22,6 +23,7 @@ export const calculateProbability = (params: CalculationParams) => {
         difficultyModifier,
         customModifier,
         opposedValue,
+        divisionFactor,
         situation,
         distSituation,
         range,
@@ -53,6 +55,10 @@ export const calculateProbability = (params: CalculationParams) => {
         finalProbability = 50 + (targetValue - oppVal);
     } else {
         // Combat Mode
+        // Apply Division Factor first (default 1)
+        const divisor = divisionFactor && divisionFactor > 1 ? divisionFactor : 1;
+        const effectiveBase = Math.floor(targetValue / divisor);
+
         const isDistance = subMode === 'distance';
 
         if (isDistance) {
@@ -60,11 +66,11 @@ export const calculateProbability = (params: CalculationParams) => {
             // Note: Coverage is negative in constant, so we ADD it. same for DistSituation.
             modifiersSum = currentRange.mod + currentDistSituation.mod + currentCoverage.mod;
             // Defender Impact Mod (entered in targetParry input) is subtracted
-            finalProbability = (targetValue + modifiersSum) - numericParry;
+            finalProbability = (effectiveBase + modifiersSum) - numericParry;
         } else {
             // Melee Formula
             modifiersSum = currentSituation.mod + currentCoverage.mod;
-            finalProbability = (targetValue + modifiersSum) - effectiveParry;
+            finalProbability = (effectiveBase + modifiersSum) - effectiveParry;
         }
     }
 
