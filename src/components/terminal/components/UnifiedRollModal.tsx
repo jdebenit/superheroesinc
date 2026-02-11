@@ -131,10 +131,10 @@ export default function UnifiedRollModal({
                 }
             }
 
-            // Critical check: always on 1-2, or if roll is within 10% of success probability
+            // Critical check: always on 1-2, or if roll is within 10% of success probability (rounded down)
             if (roll <= 2) {
                 isCrit = true;
-            } else if (isSuccess && roll <= Math.ceil(finalProbability / 10) && finalProbability > 0) {
+            } else if (isSuccess && roll <= Math.floor(finalProbability / 10) && finalProbability > 0) {
                 isCrit = true;
             }
 
