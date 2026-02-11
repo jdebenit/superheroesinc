@@ -5,13 +5,10 @@ export const parseAndRollDice = (diceString: string): { total: number, detail: s
     // Clean string: remove spaces, lowercase
     const cleanStr = diceString.toLowerCase().replace(/\s/g, '');
 
-    // Regex for XdY(+/-Z)
-    // Matches:
-    // Group 1: Number of dice (X)
-    // Group 2: Sides (Y)
-    // Group 3: Modifier (+/-Z) - optional
-    const regex = /^(\d+)d(\d+)([+-]\d+)?$/;
-    const match = cleanStr.match(regex);
+    // Regex for XdY followed by optional modifiers
+    // Matches: 1d100, 1d100+10, 1d100-5+10
+    const mainRegex = /^(\d+)d(\d+)(.*)$/;
+    const match = cleanStr.match(mainRegex);
 
     if (!match) {
         return null;
@@ -19,11 +16,24 @@ export const parseAndRollDice = (diceString: string): { total: number, detail: s
 
     const count = parseInt(match[1], 10);
     const sides = parseInt(match[2], 10);
-    const modifierStr = match[3];
-    const modifier = modifierStr ? parseInt(modifierStr, 10) : 0;
+    const remainder = match[3];
 
     let total = 0;
     const rolls: number[] = [];
+
+    // Parse modifiers from the remainder string
+    let modifier = 0;
+    if (remainder) {
+        // Match all +N or -N
+        const modRegex = /([+-]\d+)/g;
+        const modMatches = remainder.match(modRegex);
+
+        if (modMatches) {
+            modMatches.forEach(m => {
+                modifier += parseInt(m, 10);
+            });
+        }
+    }
 
     for (let i = 0; i < count; i++) {
         // Roll 1 to Sides

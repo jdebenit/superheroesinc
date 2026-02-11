@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import '../TacticPlayerTerminal.css';
 import UnifiedRollModal from './UnifiedRollModal';
 import InitiativeCalculatorModal from './InitiativeCalculatorModal';
-import DiceResultModal from './DiceResultModal';
-import { parseAndRollDice } from '../../../utils/diceLogic';
-import { playDiceRollSound } from '../../../utils/diceSound';
+import DamageRollModal from './DamageRollModal';
 
 interface OtherStatsPanelProps {
     combatstats?: string[];
@@ -37,6 +35,17 @@ export default function OtherStatsPanel({ combatstats, otherstats, background }:
         detail: string;
         originalDice: string;
     } | null>(null);
+
+    // Damage Modal State
+    const [damageModal, setDamageModal] = useState<{
+        isOpen: boolean;
+        title: string;
+        diceString: string;
+    }>({
+        isOpen: false,
+        title: '',
+        diceString: ''
+    });
 
     // Define which stats to display
     const statsToDisplay: StatToDisplay[] = [
@@ -142,16 +151,11 @@ export default function OtherStatsPanel({ combatstats, otherstats, background }:
 
     const handleStatClick = (stat: any) => {
         if (stat.isDiceRoll && typeof stat.value === 'string') {
-            const rollResult = parseAndRollDice(stat.value);
-            if (rollResult) {
-                playDiceRollSound();
-                setDiceResult({
-                    ...rollResult,
-                    originalDice: stat.value
-                });
-            } else {
-                console.warn("Could not parse dice string:", stat.value);
-            }
+            setDamageModal({
+                isOpen: true,
+                title: stat.label.toUpperCase(),
+                diceString: stat.value
+            });
         } else if (typeof stat.value === 'number') {
             setSelectedStat({ name: stat.label, value: stat.value });
         }
@@ -204,11 +208,11 @@ export default function OtherStatsPanel({ combatstats, otherstats, background }:
                 baseInitiative={initiativeValue}
             />
 
-            <DiceResultModal
-                isOpen={!!diceResult}
-                onClose={() => setDiceResult(null)}
-                title="Resultado Tirada"
-                result={diceResult}
+            <DamageRollModal
+                isOpen={damageModal.isOpen}
+                onClose={() => setDamageModal({ ...damageModal, isOpen: false })}
+                title={damageModal.title}
+                diceString={damageModal.diceString}
             />
         </div>
     );
