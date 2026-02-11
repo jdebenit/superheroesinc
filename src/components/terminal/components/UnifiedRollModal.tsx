@@ -164,16 +164,26 @@ export default function UnifiedRollModal({
             className={mode === 'combat' ? 'advanced-combat-modal' : 'attribute-roll-modal'}
             contentStyle={{ maxWidth: mode === 'combat' ? '500px' : '420px', transition: 'max-width 0.3s' }}
             headerActions={(
-                <button
-                    className="btn-retry mode-toggle-btn"
-                    onClick={() => setMode(prev => {
-                        if (prev === 'basic') return 'combat';
-                        if (prev === 'combat') return 'opposed';
-                        return 'basic';
-                    })}
-                >
-                    {mode === 'basic' ? '⚙️ Avanzado' : mode === 'combat' ? '⚔️ Enfrentada' : '⏪ Básico'}
-                </button>
+                <div className="mode-selector-container">
+                    <select
+                        value={mode}
+                        onChange={(e) => setMode(e.target.value as any)}
+                        className="mode-selector-dropdown"
+                        style={{
+                            padding: '4px 8px',
+                            borderRadius: '4px',
+                            backgroundColor: '#333',
+                            color: '#fff',
+                            border: '1px solid #555',
+                            cursor: 'pointer',
+                            fontSize: '0.9rem'
+                        }}
+                    >
+                        <option value="basic">⚙️ Básico</option>
+                        <option value="combat">⚔️ Avanzado</option>
+                        <option value="opposed">🤝 Enfrentada</option>
+                    </select>
+                </div>
             )}
         >
             <div className="roll-modal-body">
