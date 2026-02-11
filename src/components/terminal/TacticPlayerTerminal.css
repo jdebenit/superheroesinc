@@ -2099,3 +2099,100 @@ input[type=number] {
     font-size: 1.5rem !important;
     margin-bottom: 0;
 }
+
+/* Damage Roll Modal Refactor */
+.roll-result-overlay-absolute {
+    animation: fadeIn 0.3s;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.98);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    padding: 1rem;
+}
+
+.roll-result-value-large {
+    font-size: 4rem;
+    font-weight: 900;
+    line-height: 1;
+    margin: 0.5rem 0;
+    color: #16a34a;
+    text-shadow: 0 2px 10px rgba(22, 163, 74, 0.2);
+}
+
+.roll-result-details-text {
+    color: #6b7280;
+    font-size: 0.9rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.roll-result-details-text strong {
+    font-weight: 700;
+}
+
+.roll-result-details-code {
+    font-family: monospace;
+    background: #f3f4f6;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    margin-top: 0.25rem;
+}
+
+.btn-retry-large {
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.4);
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.btn-retry-large:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 8px -1px rgba(37, 99, 235, 0.5);
+}
+
+.btn-retry-large:active {
+    transform: translateY(0);
+}
+
+.roll-base-display {
+    padding: 10px;
+    background-color: #222;
+    border-radius: 4px;
+    color: #eee;
+    text-align: center;
+    font-family: monospace;
+    border: 1px solid #444;
+    font-size: 1.1rem;
+}
+
+.roll-modifier-input-large {
+    padding: 0.5rem;
+    font-size: 1.5rem;
+    text-align: center;
+    font-weight: bold;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background: #f9fafb;
+}
+
+.roll-modifier-input-large:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    background: white;
+}

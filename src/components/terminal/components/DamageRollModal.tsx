@@ -68,61 +68,25 @@ export default function DamageRollModal({ isOpen, onClose, title, diceString }: 
             <div className="roll-modal-body" style={{ position: 'relative', minHeight: '200px' }}>
                 {/* Result Overlay - Takes full space when active */}
                 {result && (
-                    <div className="roll-result-overlay" style={{
-                        animation: 'fadeIn 0.3s',
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        bottom: 0,
-                        background: 'rgba(255, 255, 255, 0.98)',
-                        zIndex: 10,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        borderRadius: '12px',
-                        padding: '1rem'
-                    }}>
+                    <div className="roll-result-overlay-absolute">
                         <div className="roll-result-label" style={{ fontSize: '1rem', fontWeight: 700, color: '#4b5563' }}>
                             DAÑO TOTAL
                         </div>
 
-                        <div className={`roll-result-value ${result.total >= 0 ? 'success' : ''}`} style={{
-                            fontSize: '4rem',
-                            fontWeight: 900,
-                            lineHeight: 1,
-                            margin: '0.5rem 0',
-                            color: '#16a34a',
-                            textShadow: '0 2px 10px rgba(22, 163, 74, 0.2)'
-                        }}>
+                        <div className={`roll-result-value-large ${result.total >= 0 ? 'success' : ''}`}>
                             {result.total}
                         </div>
 
-                        <div className="roll-result-details" style={{
-                            color: '#6b7280',
-                            fontSize: '1rem',
-                            textAlign: 'center',
-                            marginBottom: '1rem'
-                        }}>
-                            <div style={{ marginBottom: '0.25rem' }}>Fórmula: <strong>{result.finalFormula}</strong></div>
-                            <div style={{ fontFamily: 'monospace', background: '#f3f4f6', padding: '0.25rem 0.5rem', borderRadius: '4px' }}>
+                        <div className="roll-result-details-text">
+                            <div>Fórmula: <strong>{result.finalFormula}</strong></div>
+                            <div className="roll-result-details-code">
                                 {result.detail}
                             </div>
                         </div>
 
                         <button
-                            className="btn-retry"
+                            className="btn-retry-large"
                             onClick={() => setResult(null)}
-                            style={{
-                                padding: '0.5rem 1.5rem',
-                                fontSize: '1rem',
-                                background: '#2563eb',
-                                color: 'white',
-                                border: 'none',
-                                borderRadius: '30px',
-                                boxShadow: '0 4px 6px -1px rgba(37, 99, 235, 0.4)'
-                            }}
                         >
                             🔄 Nueva Tirada
                         </button>
@@ -134,16 +98,7 @@ export default function DamageRollModal({ isOpen, onClose, title, diceString }: 
                     <div className="roll-modifiers-column" style={{ flex: 1 }}>
                         <div className="roll-modifier-group">
                             <label>Base</label>
-                            <div style={{
-                                padding: '10px',
-                                backgroundColor: '#222',
-                                borderRadius: '4px',
-                                color: '#eee',
-                                textAlign: 'center',
-                                fontFamily: 'monospace',
-                                border: '1px solid #444',
-                                fontSize: '1.1rem'
-                            }}>
+                            <div className="roll-base-display">
                                 {diceString}
                             </div>
                         </div>
@@ -155,16 +110,8 @@ export default function DamageRollModal({ isOpen, onClose, title, diceString }: 
                                 value={additionalModifier}
                                 onChange={(e) => setAdditionalModifier(e.target.value)}
                                 placeholder="0"
-                                className="roll-modifier-input"
+                                className="roll-modifier-input-large"
                                 autoFocus
-                                style={{
-                                    padding: '0.5rem',
-                                    fontSize: '1.5rem',
-                                    textAlign: 'center',
-                                    fontWeight: 'bold',
-                                    width: '100%',
-                                    boxSizing: 'border-box'
-                                }}
                             />
                         </div>
                     </div>
