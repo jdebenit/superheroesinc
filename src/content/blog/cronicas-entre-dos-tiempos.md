@@ -22,7 +22,7 @@ Bajo la dirección de Alberto los martes nos sumergimos en el barro y la pólvor
 
 ## 2025 La Sombra del Enroque
 
-Y entonces llegan los viernes bajo la batuta de Jose. En la actualidad nos movemos entre las conspiraciones modernas de La Sombra del Enroque. Todo estalló con el atraco a un furgón blindado donde se utilizó una cronosfera de origen arcano y tecnología fusionada. Ese evento nos arrastró por el submundo mitológico del juego y desembocó en la revelación de la organización Fuego Nórdico. El descubrimiento fue un shock para mi porque los experimentos con humanos y seres mitológicos que enfrentamos hoy tienen su ADN directo en los campos de batalla que visito los martes. Es fascinante ver cómo esa esqueje plantado hace ochenta años ha crecido cual enredadera en una amenaza global.
+Y entonces llegan los viernes bajo la batuta de Jose. En la actualidad nos movemos entre las conspiraciones modernas de La Sombra del Enroque. Todo estalló con el atraco a un furgón blindado donde se utilizó una cronosfera de origen arcano y tecnología fusionada. Ese evento nos arrastró por el submundo mitológico del juego y desembocó en la revelación de la organización Fuego Nórdico. El descubrimiento fue un shock para mi porque los experimentos con humanos y seres mitológicos que enfrentamos hoy tienen su ADN directo en los campos de batalla que visito los martes. Es fascinante ver cómo el esqueje plantado hace ochenta años ha crecido cual enredadera en una amenaza global.
 
 ## La emoción de la espera y el lore expandido
 
