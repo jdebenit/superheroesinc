@@ -11,10 +11,14 @@
             "id": "85361f369081eb44",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "blog/cronicas-entre-dos-tiempos.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "Nueva pestaña"
+              "title": "cronicas-entre-dos-tiempos"
             }
           }
         ]
@@ -181,6 +185,9 @@
   },
   "active": "85361f369081eb44",
   "lastOpenFiles": [
+    "blog/el-miedo-a-romperse-por-dentro.md",
+    "blog/cronicas-entre-dos-tiempos.md",
+    "blog/subir-nivel-no-va-solo-de-numeros.md",
     "lore/organizaciones/sociedad-thule.md",
     "lore/cronicas/aparicion-infernal-en-una-vivienda-de-pueblo-madrileño.md",
     "lore/cronicas/nadie-hablo-de-esto-despues.md",
@@ -191,8 +198,6 @@
     "timeline/aleister-crowley-y-la-aurora-dorada copy.md",
     "lore/organizaciones/la-orden-de-las-nagas.md",
     "lore/organizaciones/ciss.md",
-    "blog/el-miedo-a-romperse-por-dentro.md",
-    "blog/subir-nivel-no-va-solo-de-numeros.md",
     "blog/actual-plays-superheroes-inc.md",
     "characters/epsilon-eridiani.md",
     "lore/localizaciones/transjastán.md",
@@ -206,7 +211,6 @@
     "lore/eventos/el-colapso-del-nexo.md",
     "timeline/fusion-de-k-sser-con-el-nexo.md",
     "1929-01-02.md",
-    "lore/eventos/la-caida-de-la-gran-barrera.md",
     "timeline",
     "lore/cronicas",
     "faq",
