@@ -5,6 +5,8 @@ import Logger from '../../../utils/Logger';
 export interface CharacterData {
     name: string;
     alias?: string;
+    level?: number;
+    origin?: { items?: Array<{ [key: string]: any }> };
     combatstats: string[];
     otherstats?: string[];
     attributes: {
@@ -70,6 +72,7 @@ export function useTerminalStats() {
     });
     const [history, setHistory] = useState<HistoryEntry[]>([]);
     const [notes, setNotes] = useState<string>('');
+    const [usedChi, setUsedChi] = useState<number>(0);
 
     // Check for character in localStorage on mount
     useEffect(() => {
@@ -105,12 +108,20 @@ export function useTerminalStats() {
         if (savedNotes !== null) {
             setNotes(savedNotes);
         }
+        const savedChi = localStorage.getItem('shi_tpt_persistent_chi');
+        if (savedChi !== null) {
+            setUsedChi(parseInt(savedChi) || 0);
+        }
     }, []);
 
-    // Auto-save notes to localStorage whenever they change
+    // Auto-save notes and chi to localStorage whenever they change
     useEffect(() => {
         localStorage.setItem('shi_tpt_persistent_notes', notes);
     }, [notes]);
+
+    useEffect(() => {
+        localStorage.setItem('shi_tpt_persistent_chi', String(usedChi));
+    }, [usedChi]);
 
     // Auto-save character and stats to localStorage whenever they change
     useEffect(() => {
@@ -265,6 +276,7 @@ export function useTerminalStats() {
             localStorage.removeItem('shi_tpt_persistent_stats');
             localStorage.removeItem('shi_tpt_persistent_history');
             localStorage.removeItem('shi_tpt_persistent_notes');
+            localStorage.removeItem('shi_tpt_persistent_chi');
             window.location.reload();
         }
     };
@@ -298,15 +310,26 @@ export function useTerminalStats() {
         setNotes(value);
     };
 
+    const updateChi = (newUsed: number, max: number) => {
+        setUsedChi(Math.max(0, Math.min(max, newUsed)));
+    };
+
+    const resetChi = () => {
+        setUsedChi(0);
+    };
+
     return {
         character,
         stats,
         history,
         notes,
+        usedChi,
         updateHealth,
         updateMental,
         updateWillpower,
         updateNotes,
+        updateChi,
+        resetChi,
         deleteHistoryEntry,
         resetData,
         importData

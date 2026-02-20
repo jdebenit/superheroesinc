@@ -2248,3 +2248,45 @@ input[type=number] {
     color: #d1d5db;
     font-style: italic;
 }
+
+/* Chi Counter — StatCard style */
+.terminal-stat-bar-fill.chi-fill {
+    background: linear-gradient(90deg, #7c3aed, #a78bfa);
+}
+
+.chi-inline-btn {
+    border: none;
+    border-radius: 4px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    width: 100%;
+    height: 22px;
+    cursor: pointer;
+    transition: background 0.15s, opacity 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chi-inline-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.chi-inline-btn--recover {
+    background: #ede9fe;
+    color: #7c3aed;
+}
+
+.chi-inline-btn--recover:hover:not(:disabled) {
+    background: #ddd6fe;
+}
+
+.chi-inline-btn--use {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.chi-inline-btn--use:hover:not(:disabled) {
+    background: #fde68a;
+}

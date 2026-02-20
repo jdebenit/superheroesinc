@@ -13,6 +13,7 @@ import OtherStatsPanel from './components/OtherStatsPanel';
 import { useTerminalStats } from './hooks/useTerminalStats';
 import UnifiedRollModal from './components/UnifiedRollModal';
 import NotesPanel from './components/NotesPanel';
+import ChiCounter from './components/ChiCounter';
 import { GENERAL_SKILLS } from '../../data/generalSkills';
 import { SPECIAL_SKILLS } from '../../data/specialSkills';
 
@@ -22,10 +23,13 @@ export default function TacticPlayerTerminal() {
         stats,
         history,
         notes,
+        usedChi,
         updateHealth,
         updateMental,
         updateWillpower,
         updateNotes,
+        updateChi,
+        resetChi,
         deleteHistoryEntry,
         resetData,
         importData
@@ -248,6 +252,34 @@ export default function TacticPlayerTerminal() {
                             onViewHistory={() => openHistoryModal('willpower')}
                             onEdit={() => openEditModal('willpower')}
                         />
+
+                        {/* Chi card — only for Artista Marcial con Chi */}
+                        {(() => {
+                            const CHI_TERM = 'artista marcial con chi';
+                            const char = character as any;
+                            const isArtistaConChi =
+                                char.origin?.items?.some((item: any) => {
+                                    const keys = Object.keys(item);
+                                    if (keys.some((k: string) => k.toLowerCase().includes(CHI_TERM))) return true;
+                                    return keys.some((k: string) => {
+                                        const val = item[k];
+                                        return Array.isArray(val) && val.some((v: any) =>
+                                            typeof v === 'string' && v.toLowerCase().includes(CHI_TERM)
+                                        );
+                                    });
+                                }) ||
+                                (char.traumas && Object.keys(char.traumas).some((k: string) =>
+                                    k.toLowerCase().includes(CHI_TERM)
+                                ));
+                            return isArtistaConChi ? (
+                                <ChiCounter
+                                    level={character.level ?? 1}
+                                    usedChi={usedChi}
+                                    onUpdate={updateChi}
+                                    onReset={resetChi}
+                                />
+                            ) : null;
+                        })()}
                     </div>
 
                     <AttributesPanel attributes={character.attributes.values} />
@@ -267,6 +299,7 @@ export default function TacticPlayerTerminal() {
                             onSkillClick={handleSkillClick}
                         />
                     )}
+
 
                     <NotesPanel notes={notes} onChange={updateNotes} />
                 </div>
