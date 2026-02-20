@@ -285,7 +285,7 @@ export const SPECIAL_SKILLS: SpecialSkillDefinition[] = [
         formula: (stats) => (stats['inteligencia'] + stats['percepcion']) / 2,
         formulaText: '(INT+PER)/2',
         description: 'Capacidad para lanzar hechizos',
-        allowedCriteria: [{ origin: 'Arcano' }]
+        allowedCriteria: [{ origin: 'Arcano' }, { subtype: 'Poseido' }]
     },
     {
         id: 'artes_marciales',

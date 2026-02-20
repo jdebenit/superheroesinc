@@ -404,7 +404,7 @@ export function useCharacterCalculations(character: any) {
         // 16. Poseido Params Cost
         if (character.poseidoParams && character.poseidoParams.formType) {
             const form = POSEIDO_FORMS.find(f => f.id === character.poseidoParams.formType);
-            if (form) total += form.pc;
+            if (form) total += form.cost;
         }
 
         // 17. Alterado Params Cost
