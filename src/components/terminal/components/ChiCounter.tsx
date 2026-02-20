@@ -20,61 +20,47 @@ export default function ChiCounter({ level, usedChi, onUpdate, onReset }: ChiCou
 
     return (
         <div className="terminal-stat-card health-variant">
+            {/* Top-left label */}
             <div className="stat-card-label">CHI ☯</div>
 
-            <div className="health-content-row">
-                {/* Big number */}
-                <div className="health-current-container">
-                    <span className="health-current" style={{ color: remaining === 0 ? '#d1d5db' : '#7c3aed' }}>
-                        {remaining}
-                    </span>
-                </div>
-
-                {/* Side controls */}
-                <div className="health-secondary-stats">
-                    {/* Reset button (replaces 📋) */}
-                    <button
-                        className="history-icon-btn"
-                        onClick={onReset}
-                        disabled={usedChi === 0}
-                        title="Recuperar todo el Chi"
-                        style={{ opacity: usedChi === 0 ? 0.3 : 1 }}
-                    >
-                        ↺
-                    </button>
-
-                    {/* MAX */}
-                    <div className="health-sub-stat compact">
-                        <span className="sub-stat-label">MAX</span>
-                        <span className="sub-stat-box">{maxChi}</span>
-                    </div>
-
-                    {/* +1 / -1 */}
-                    <button
-                        className="chi-inline-btn chi-inline-btn--recover"
-                        onClick={() => onUpdate(usedChi - 1, maxChi)}
-                        disabled={usedChi === 0}
-                        title="Recuperar 1 Chi"
-                    >
-                        +1
-                    </button>
-                    <button
-                        className="chi-inline-btn chi-inline-btn--use"
-                        onClick={() => onUpdate(usedChi + 1, maxChi)}
-                        disabled={usedChi >= maxChi}
-                        title="Usar 1 Chi"
-                    >
-                        −1
-                    </button>
+            {/* Top-right: MAX + reset */}
+            <div className="chi-corner-meta">
+                <button
+                    className="history-icon-btn chi-reset-icon"
+                    onClick={onReset}
+                    disabled={usedChi === 0}
+                    title="Recuperar todo el Chi"
+                >↺</button>
+                <div className="health-sub-stat compact">
+                    <span className="sub-stat-label">MÁX</span>
+                    <span className="sub-stat-box">{maxChi}</span>
                 </div>
             </div>
 
-            {/* Progress bar — purple */}
+            {/* Center row: [+1]  number  [−1] */}
+            <div className="chi-center-row">
+                <button
+                    className="chi-side-btn chi-side-btn--recover"
+                    onClick={() => onUpdate(usedChi - 1, maxChi)}
+                    disabled={usedChi === 0}
+                    title="Recuperar 1 Chi"
+                >+1</button>
+
+                <span className="health-current" style={{ color: remaining === 0 ? '#d1d5db' : '#7c3aed' }}>
+                    {remaining}
+                </span>
+
+                <button
+                    className="chi-side-btn chi-side-btn--use"
+                    onClick={() => onUpdate(usedChi + 1, maxChi)}
+                    disabled={usedChi >= maxChi}
+                    title="Usar 1 Chi"
+                >−1</button>
+            </div>
+
+            {/* Progress bar */}
             <div className="terminal-stat-bar health-bar-bottom">
-                <div
-                    className="terminal-stat-bar-fill chi-fill"
-                    style={{ width: `${pct}%` }}
-                />
+                <div className="terminal-stat-bar-fill chi-fill" style={{ width: `${pct}%` }} />
             </div>
         </div>
     );
