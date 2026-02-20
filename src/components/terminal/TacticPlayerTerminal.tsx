@@ -12,6 +12,7 @@ import PowersPanel from './components/PowersPanel';
 import OtherStatsPanel from './components/OtherStatsPanel';
 import { useTerminalStats } from './hooks/useTerminalStats';
 import UnifiedRollModal from './components/UnifiedRollModal';
+import NotesPanel from './components/NotesPanel';
 import { GENERAL_SKILLS } from '../../data/generalSkills';
 import { SPECIAL_SKILLS } from '../../data/specialSkills';
 
@@ -20,9 +21,11 @@ export default function TacticPlayerTerminal() {
         character,
         stats,
         history,
+        notes,
         updateHealth,
         updateMental,
         updateWillpower,
+        updateNotes,
         deleteHistoryEntry,
         resetData,
         importData
@@ -264,6 +267,8 @@ export default function TacticPlayerTerminal() {
                             onSkillClick={handleSkillClick}
                         />
                     )}
+
+                    <NotesPanel notes={notes} onChange={updateNotes} />
                 </div>
             ) : (
                 <EmptyState />

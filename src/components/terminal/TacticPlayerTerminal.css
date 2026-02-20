@@ -2196,3 +2196,55 @@ input[type=number] {
     box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
     background: white;
 }
+
+/* Notes Panel - integrated into terminal-section pattern */
+.terminal-section-title .notes-clear-btn,
+.notes-clear-btn {
+    background: none;
+    border: 1px solid #e5e7eb;
+    color: #9ca3af;
+    cursor: pointer;
+    font-size: 0.72rem;
+    padding: 0.1rem 0.5rem;
+    border-radius: 4px;
+    margin-left: 0.75rem;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+    line-height: 1.4;
+    font-weight: 500;
+    letter-spacing: 0;
+    vertical-align: middle;
+}
+
+.notes-clear-btn:hover {
+    background: #fee2e2;
+    color: #dc2626;
+    border-color: #fecaca;
+}
+
+.notes-textarea {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    font-family: inherit;
+    color: #111827;
+    background: white;
+    resize: vertical;
+    min-height: 90px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    line-height: 1.6;
+    outline: none;
+    display: block;
+}
+
+.notes-textarea:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.notes-textarea::placeholder {
+    color: #d1d5db;
+    font-style: italic;
+}

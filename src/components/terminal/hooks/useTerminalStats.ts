@@ -69,6 +69,7 @@ export function useTerminalStats() {
         unconsciousnessPoints: 0
     });
     const [history, setHistory] = useState<HistoryEntry[]>([]);
+    const [notes, setNotes] = useState<string>('');
 
     // Check for character in localStorage on mount
     useEffect(() => {
@@ -97,6 +98,19 @@ export function useTerminalStats() {
             }
         }
     }, []);
+
+    // Load notes from localStorage on mount
+    useEffect(() => {
+        const savedNotes = localStorage.getItem('shi_tpt_persistent_notes');
+        if (savedNotes !== null) {
+            setNotes(savedNotes);
+        }
+    }, []);
+
+    // Auto-save notes to localStorage whenever they change
+    useEffect(() => {
+        localStorage.setItem('shi_tpt_persistent_notes', notes);
+    }, [notes]);
 
     // Auto-save character and stats to localStorage whenever they change
     useEffect(() => {
@@ -250,6 +264,7 @@ export function useTerminalStats() {
             localStorage.removeItem('shi_tpt_persistent_character');
             localStorage.removeItem('shi_tpt_persistent_stats');
             localStorage.removeItem('shi_tpt_persistent_history');
+            localStorage.removeItem('shi_tpt_persistent_notes');
             window.location.reload();
         }
     };
@@ -279,13 +294,19 @@ export function useTerminalStats() {
         }
     };
 
+    const updateNotes = (value: string) => {
+        setNotes(value);
+    };
+
     return {
         character,
         stats,
         history,
+        notes,
         updateHealth,
         updateMental,
         updateWillpower,
+        updateNotes,
         deleteHistoryEntry,
         resetData,
         importData
