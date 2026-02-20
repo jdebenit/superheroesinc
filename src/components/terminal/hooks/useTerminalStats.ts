@@ -53,7 +53,7 @@ export interface PlayerStats {
 
 export interface HistoryEntry {
     timestamp: string;
-    type: 'health' | 'mental' | 'willpower';
+    type: 'health' | 'mental' | 'willpower' | 'chi';
     change: number;
     newValue: number;
     notes: string;
@@ -267,6 +267,8 @@ export function useTerminalStats() {
                     usedWillpower: newUsed
                 };
             });
+        } else if (entryToDelete.type === 'chi') {
+            setUsedChi(prev => Math.max(0, prev - entryToDelete.change));
         }
     };
 
@@ -311,10 +313,31 @@ export function useTerminalStats() {
     };
 
     const updateChi = (newUsed: number, max: number) => {
-        setUsedChi(Math.max(0, Math.min(max, newUsed)));
+        const clamped = Math.max(0, Math.min(max, newUsed));
+        const change = clamped - usedChi; // positive = more used (chi spent), negative = recovered
+        if (change === 0) return;
+        const remaining = max - clamped;
+        const entry: HistoryEntry = {
+            timestamp: new Date().toISOString(),
+            type: 'chi',
+            change,
+            newValue: remaining,
+            notes: change > 0 ? 'Chi gastado' : 'Chi recuperado'
+        };
+        setHistory(prev => [entry, ...prev]);
+        setUsedChi(clamped);
     };
 
     const resetChi = () => {
+        if (usedChi === 0) return;
+        const entry: HistoryEntry = {
+            timestamp: new Date().toISOString(),
+            type: 'chi',
+            change: -usedChi,
+            newValue: 0,
+            notes: 'Descanso — Chi recuperado al completo'
+        };
+        setHistory(prev => [entry, ...prev]);
         setUsedChi(0);
     };
 

@@ -2254,37 +2254,13 @@ input[type=number] {
     background: linear-gradient(90deg, #7c3aed, #a78bfa);
 }
 
-/* Top-right meta (MÁX + ↺ reset) */
-.chi-corner-meta {
-    position: absolute;
-    top: 0.4rem;
-    right: 0.6rem;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 0.2rem;
-}
-
-.chi-reset-icon {
-    width: 28px !important;
-    height: 20px !important;
-    font-size: 0.85rem !important;
-    margin-bottom: 0 !important;
-}
-
-.chi-reset-icon:disabled {
-    opacity: 0.25 !important;
-}
-
-/* Center row: [+1] number [−1] */
+/* Center row: [+1] number [−1] inside health-current-container */
 .chi-center-row {
-    flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.6rem;
-    padding: 0.5rem 0.75rem;
-    padding-right: 64px;
+    gap: 0.5rem;
+    width: 100%;
 }
 
 /* Side buttons flanking the number */

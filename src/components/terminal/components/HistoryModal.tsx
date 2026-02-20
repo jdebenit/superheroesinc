@@ -4,7 +4,7 @@ import Modal from './Modal';
 
 interface HistoryEntry {
     timestamp: string;
-    type: 'health' | 'mental' | 'willpower';
+    type: 'health' | 'mental' | 'willpower' | 'chi';
     change: number;
     newValue: number;
     notes: string;
@@ -12,7 +12,7 @@ interface HistoryEntry {
 
 interface HistoryModalProps {
     show: boolean;
-    type: 'health' | 'mental' | 'willpower';
+    type: 'health' | 'mental' | 'willpower' | 'chi';
     history: HistoryEntry[];
     onClose: () => void;
     onDeleteEntry: (entry: HistoryEntry) => void;
@@ -23,7 +23,8 @@ export default function HistoryModal({ show, type, history, onClose, onDeleteEnt
 
     const typeLabel = type === 'health' ? 'Puntos de Vida' :
         type === 'mental' ? 'Equilibrio Mental' :
-            'Voluntad';
+            type === 'chi' ? 'Chi' :
+                'Voluntad';
 
     const filteredHistory = history.filter(entry => entry.type === type);
 
@@ -42,7 +43,10 @@ export default function HistoryModal({ show, type, history, onClose, onDeleteEnt
                         {filteredHistory.map((entry, index) => (
                             <div key={index} className="history-entry">
                                 <div className="history-entry-header">
-                                    <span className={`history-change ${entry.change > 0 ? 'positive' : 'negative'}`}>
+                                    <span className={`history-change ${type === 'chi'
+                                            ? (entry.change > 0 ? 'negative' : 'positive') // for chi: spending is bad, recovering is good
+                                            : (entry.change > 0 ? 'positive' : 'negative')
+                                        }`}>
                                         {entry.change > 0 ? '+' : ''}{entry.change}
                                     </span>
                                     <span className="history-new-value">→ {entry.newValue}</span>

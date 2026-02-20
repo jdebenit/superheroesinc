@@ -36,7 +36,7 @@ export default function TacticPlayerTerminal() {
     } = useTerminalStats();
 
     const [showHistoryModal, setShowHistoryModal] = useState(false);
-    const [historyType, setHistoryType] = useState<'health' | 'mental' | 'willpower'>('health');
+    const [historyType, setHistoryType] = useState<'health' | 'mental' | 'willpower' | 'chi'>('health');
 
     // Edit Modal State
     const [showEditModal, setShowEditModal] = useState(false);
@@ -65,7 +65,7 @@ export default function TacticPlayerTerminal() {
         skillType: 'cac'
     });
 
-    const openHistoryModal = (type: 'health' | 'mental' | 'willpower') => {
+    const openHistoryModal = (type: 'health' | 'mental' | 'willpower' | 'chi') => {
         setHistoryType(type);
         setShowHistoryModal(true);
     };
@@ -277,6 +277,7 @@ export default function TacticPlayerTerminal() {
                                     usedChi={usedChi}
                                     onUpdate={updateChi}
                                     onReset={resetChi}
+                                    onViewHistory={() => openHistoryModal('chi')}
                                 />
                             ) : null;
                         })()}
