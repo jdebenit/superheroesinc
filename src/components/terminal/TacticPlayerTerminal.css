@@ -9,7 +9,9 @@
     overflow: hidden;
 }
 
-/* Header */
+/* ========================================
+   Header
+   ======================================== */
 .terminal-header-internal {
     display: flex;
     justify-content: space-between;
@@ -34,8 +36,8 @@
     align-items: center;
 }
 
-.export-btn {
-    background: #16a34a;
+/* Base de los botones de acción del header */
+.terminal-action-btn {
     color: white;
     border: none;
     padding: 0.5rem 1rem;
@@ -45,36 +47,41 @@
     cursor: pointer;
     transition: all 0.2s;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.terminal-action-btn:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+}
+
+.export-btn {
+    background: #16a34a;
 }
 
 .export-btn:hover {
     background: #15803d;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    transform: translateY(-1px);
 }
 
 .import-btn {
     background: #2563eb;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .import-btn:hover {
     background: #1d4ed8;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    transform: translateY(-1px);
 }
-
 
 .reset-btn {
     background: #dc2626;
+}
+
+.reset-btn:hover {
+    background: #b91c1c;
+}
+
+/* Aplicar base a los tres */
+.export-btn,
+.import-btn,
+.reset-btn {
     color: white;
     border: none;
     padding: 0.5rem 1rem;
@@ -86,14 +93,16 @@
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
+.export-btn:hover,
+.import-btn:hover,
 .reset-btn:hover {
-    background: #b91c1c;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     transform: translateY(-1px);
 }
 
-
-/* Character Header */
+/* ========================================
+   Character Header
+   ======================================== */
 .terminal-character-header {
     text-align: center;
     padding: 1.5rem 2rem;
@@ -116,14 +125,15 @@
     font-style: italic;
 }
 
-/* Stats Container */
+/* ========================================
+   Stats Layout
+   ======================================== */
 .terminal-stats-container {
     flex: 1;
     overflow-y: auto;
     padding: 2rem;
 }
 
-/* Stats Grid */
 .terminal-stats-grid {
     display: flex;
     flex-wrap: wrap;
@@ -131,10 +141,11 @@
     max-width: 1400px;
     margin: 0 auto;
     justify-content: center;
-    /* Center cards */
 }
 
-/* Attributes Panel */
+/* ========================================
+   Sections (Attributes, Skills, Powers…)
+   ======================================== */
 .terminal-section {
     max-width: 1400px;
     margin: 2rem auto 0;
@@ -158,38 +169,15 @@
     justify-content: center;
 }
 
-.initiative-calc-btn {
-    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-    box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.initiative-calc-btn:hover {
-    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-    box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
-    transform: translateY(-1px);
-}
-
-.initiative-calc-btn:active {
-    transform: translateY(0);
-}
-
 .skills-grid {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 0.5rem;
     justify-content: stretch;
 }
 
+/* ========================================
+   Attribute / Skill Cards
+   ======================================== */
 .attribute-card {
     background: white;
     border: 1px solid #e5e7eb;
@@ -247,207 +235,38 @@
     font-size: 1.1rem;
 }
 
-/* Roll Modal Styles */
-.attribute-roll-modal {
-    max-width: 350px;
-}
-
-.roll-modal-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 1rem;
-}
-
-
-.roll-attribute-info {
-    font-size: 1.1rem;
+/* ========================================
+   Initiative Button
+   ======================================== */
+.initiative-calc-btn {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
     font-weight: 600;
-    color: #4b5563;
-    margin-bottom: 2rem;
-}
-
-/* Compact Roll Modal Styles */
-.roll-attribute-info.compact {
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid #e5e7eb;
-    width: 100%;
-}
-
-.roll-main-content {
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
     display: flex;
-    width: 100%;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    min-height: 140px;
-}
-
-.roll-modifiers-column {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-}
-
-.roll-button-column {
-    flex: 0 0 auto;
-}
-
-.roll-modifier-group {
-    display: flex;
-    flex-direction: row;
     align-items: center;
     gap: 0.5rem;
 }
 
-.roll-modifier-group label {
-    font-size: 0.8rem;
-    color: #6b7280;
-    font-weight: 600;
-    margin: 0;
-    text-align: right;
-    min-width: 60px;
+.initiative-calc-btn:hover {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
+    transform: translateY(-1px);
 }
 
-.roll-modifier-select,
-.roll-modifier-input {
-    flex: 1;
-    padding: 0.4rem;
-    border: 1px solid #d1d5db;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    color: #111827;
+.initiative-calc-btn:active {
+    transform: translateY(0);
 }
 
-.roll-circular-btn {
-    width: 100px;
-    height: 100px;
-    font-size: 1.1rem;
-    border-radius: 50%;
-    background: #2563eb;
-    color: white;
-    border: none;
-    font-weight: 800;
-    letter-spacing: 0.05em;
-    cursor: pointer;
-    box-shadow: 0 4px 6px rgba(37, 99, 235, 0.3), 0 10px 15px rgba(37, 99, 235, 0.2);
-    transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    outline: none;
-}
-
-.roll-circular-btn:active {
-    transform: scale(0.95);
-    background: #1d4ed8;
-    box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
-}
-
-.roll-circular-btn.rolling {
-    animation: pulse 0.6s infinite;
-    background: #4f46e5;
-}
-
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.7);
-    }
-
-    70% {
-        transform: scale(1.05);
-        box-shadow: 0 0 0 20px rgba(79, 70, 229, 0);
-    }
-
-    100% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(79, 70, 229, 0);
-    }
-}
-
-.roll-result-display {
-    width: 100%;
-    text-align: center;
-    animation: fadeIn 0.3s ease-out;
-}
-
-.roll-result-label {
-    font-size: 0.9rem;
-    color: #6b7280;
-    margin-bottom: 0.5rem;
-}
-
-.roll-result-number {
-    font-size: 4rem;
-    font-weight: 800;
-    line-height: 1;
-    margin-bottom: 1.5rem;
-}
-
-.roll-result-number.success {
-    color: #16a34a;
-}
-
-.roll-result-number.critical-success {
-    color: #eab308;
-    text-shadow: 0 0 10px rgba(234, 179, 8, 0.4);
-    animation: successPulse 1s infinite;
-}
-
-.roll-result-number.failure {
-    color: #dc2626;
-}
-
-.roll-result-number.critical-failure {
-    color: #991b1b;
-    text-shadow: 0 0 5px rgba(153, 27, 27, 0.5);
-}
-
-@keyframes successPulse {
-    0% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.1);
-    }
-
-    100% {
-        transform: scale(1);
-    }
-}
-
-.roll-again-btn {
-    padding: 0.5rem 1.5rem;
-    background: transparent;
-    border: 1px solid #d1d5db;
-    border-radius: 20px;
-    color: #4b5563;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-.roll-again-btn:hover {
-    background: #f3f4f6;
-    border-color: #9ca3af;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
+/* ========================================
+   Terminal Stat Card (base)
+   ======================================== */
 .terminal-stat-card {
     background: white;
     border: 1px solid #e5e7eb;
@@ -456,7 +275,6 @@
     display: flex;
     flex-direction: column;
     width: 260px;
-    /* Fixed width as requested */
     flex-shrink: 0;
     gap: 0.65rem;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -486,7 +304,9 @@
     font-weight: 500;
 }
 
-/* Stat Bar */
+/* ========================================
+   Stat Bar
+   ======================================== */
 .terminal-stat-bar {
     width: 100%;
     height: 10px;
@@ -506,14 +326,159 @@
 }
 
 .terminal-stat-bar-fill.mental {
-    background: linear-gradient(90deg, #3b82f6, #06b6d4);
+    background: linear-gradient(90deg, #3b82f6, #60a5fa);
 }
 
 .terminal-stat-bar-fill.willpower {
-    background: linear-gradient(90deg, #f59e0b, #fbbf24);
+    background: linear-gradient(90deg, #a855f7, #c084fc);
 }
 
-/* Empty State */
+.terminal-stat-bar-fill.chi-fill {
+    background: linear-gradient(90deg, #7c3aed, #a78bfa);
+}
+
+/* ========================================
+   Health Variant Card
+   ======================================== */
+.terminal-stat-card.health-variant {
+    position: relative;
+    padding: 0;
+    overflow: hidden;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 260px;
+}
+
+.stat-card-label {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #9ca3af;
+    letter-spacing: 0.5px;
+    font-family: system-ui, -apple-system, sans-serif;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.terminal-stat-bar.health-bar-bottom {
+    width: 100%;
+    height: 6px;
+    background: #e5e7eb;
+    margin-top: auto;
+    border-radius: 0;
+    border: none;
+    border-top: 1px solid #d1d5db;
+}
+
+.health-content-row {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0.75rem;
+    position: relative;
+    gap: 0.5rem;
+}
+
+.health-current-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 0;
+}
+
+.health-current {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: #1f2937;
+    line-height: 1;
+    font-family: system-ui, -apple-system, sans-serif;
+    cursor: pointer;
+    transition: transform 0.2s;
+    margin-right: 0;
+}
+
+.health-current:hover {
+    transform: scale(1.05);
+    color: #2563eb;
+}
+
+.health-secondary-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    min-width: 60px;
+    justify-content: center;
+}
+
+.health-sub-stat.compact {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.25rem;
+}
+
+.sub-stat-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #9ca3af;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+.sub-stat-box {
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    padding: 0 0.25rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    min-width: 30px;
+    text-align: center;
+    background: white;
+}
+
+/* ========================================
+   Icon Bar Buttons (history / roll)
+   ======================================== */
+.history-icon-btn,
+.roll-icon-btn {
+    color: #6b7280;
+    background: #f3f4f6;
+    border: 1px solid #e5e7eb;
+    width: 100%;
+    height: 24px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-bottom: 0.25rem;
+    opacity: 1;
+}
+
+.history-icon-btn:hover {
+    color: #1f2937;
+    background: #e5e7eb;
+    border-color: #d1d5db;
+}
+
+.roll-icon-btn:hover {
+    color: #1f2937;
+    background: #dbeafe;
+    border-color: #3b82f6;
+}
+
+/* ========================================
+   Empty State
+   ======================================== */
 .terminal-empty-state {
     flex: 1;
     display: flex;
@@ -535,272 +500,9 @@
     text-align: center;
 }
 
-/* Mobile Responsive */
-@media (max-width: 768px) {
-    .terminal-header-internal {
-        padding: 1rem;
-    }
-
-    .terminal-title-internal {
-        font-size: 1rem;
-    }
-
-    .terminal-character-header {
-        padding: 1rem;
-    }
-
-    .terminal-character-name {
-        font-size: 1.5rem;
-    }
-
-    .terminal-stats-container {
-        padding: 1rem;
-    }
-
-    .terminal-stats-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-
-    .terminal-stat-card {
-        padding: 1rem;
-    }
-
-    .terminal-stat-input {
-        width: 80px;
-        font-size: 1rem;
-    }
-
-    .terminal-stat-total {
-        font-size: 1.25rem;
-    }
-
-    .change-input-section {
-        grid-template-columns: 1fr;
-    }
-
-    .change-input,
-    .notes-input,
-    .apply-btn {
-        width: 100%;
-    }
-}
-
 /* ========================================
-   RESPONSIVE DESIGN
+   Change Input / Notes
    ======================================== */
-
-/* Tablet (768px - 1024px) */
-@media (max-width: 1024px) {
-    .terminal-stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
-    }
-
-    .terminal-header-internal {
-        padding: 1rem 1.5rem;
-    }
-
-    .terminal-title-internal {
-        font-size: 1.1rem;
-    }
-}
-
-/* Mobile (< 768px) */
-@media (max-width: 768px) {
-
-    /* Header */
-    .terminal-header-internal {
-        padding: 0.75rem 1rem;
-        flex-direction: column;
-        gap: 0.75rem;
-        align-items: stretch;
-    }
-
-    .terminal-title-internal {
-        font-size: 0.95rem;
-        text-align: center;
-    }
-
-    .terminal-header-actions {
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        justify-content: center;
-    }
-
-    .import-btn,
-    .export-btn,
-    .reset-btn {
-        font-size: 0.8rem;
-        padding: 0.4rem 0.8rem;
-        flex: 1 1 auto;
-        min-width: 120px;
-    }
-
-    /* Stats Container */
-    .terminal-stats-container {
-        padding: 1rem;
-    }
-
-    .terminal-stats-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-        padding: 0;
-    }
-
-    /* Character Header */
-    .terminal-character-header {
-        padding: 1rem;
-    }
-
-    .terminal-character-name {
-        font-size: 1.25rem;
-    }
-
-    .terminal-character-alias {
-        font-size: 0.9rem;
-    }
-
-    /* Stat Cards */
-    .terminal-stat-card {
-        padding: 0.75rem;
-        gap: 0.5rem;
-    }
-
-    .terminal-stat-label {
-        font-size: 0.7rem;
-        padding-bottom: 0.25rem;
-    }
-
-    .terminal-stat-max {
-        font-size: 0.75rem;
-    }
-
-    /* Touch-friendly inputs */
-    .change-input,
-    .notes-input {
-        font-size: 16px;
-        /* Prevents zoom on iOS */
-        min-height: 44px;
-        /* Touch target size */
-        padding: 0.6rem;
-    }
-
-    .apply-btn {
-        min-height: 44px;
-        font-size: 0.9rem;
-        padding: 0.6rem 1rem;
-    }
-
-    .change-input-section {
-        gap: 0.4rem;
-    }
-
-    /* History Modal */
-    .history-modal {
-        max-width: 95%;
-        max-height: 85vh;
-        margin: 1rem;
-    }
-
-    .history-modal-header {
-        padding: 0.75rem 1rem;
-    }
-
-    .history-modal-header h2 {
-        font-size: 1.1rem;
-    }
-
-    .close-modal-btn {
-        width: 32px;
-        height: 32px;
-        font-size: 1.25rem;
-    }
-
-    .history-modal-body {
-        padding: 0.75rem;
-    }
-
-    .history-entry {
-        padding: 0.6rem;
-    }
-
-    .history-entry-header {
-        font-size: 0.85rem;
-        gap: 0.4rem;
-    }
-
-    .history-timestamp {
-        font-size: 0.7rem;
-    }
-
-    /* Empty State */
-    .terminal-empty-state {
-        padding: 2rem 1rem;
-    }
-
-    .terminal-empty-icon {
-        font-size: 3rem;
-    }
-
-    .terminal-empty-text {
-        font-size: 0.95rem;
-    }
-}
-
-/* Landscape Mobile (< 768px landscape) */
-@media (max-width: 768px) and (orientation: landscape) {
-    .terminal-stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .terminal-header-internal {
-        flex-direction: row;
-        padding: 0.5rem 1rem;
-    }
-
-    .terminal-title-internal {
-        font-size: 0.85rem;
-    }
-
-    .terminal-stats-container {
-        padding: 0.75rem;
-    }
-}
-
-/* Small Mobile (< 480px) */
-@media (max-width: 480px) {
-    .terminal-title-internal {
-        font-size: 0.85rem;
-    }
-
-    .import-btn,
-    .export-btn,
-    .reset-btn {
-        font-size: 0.75rem;
-        padding: 0.35rem 0.7rem;
-        min-width: 100px;
-    }
-
-    .terminal-character-name {
-        font-size: 1.1rem;
-    }
-
-    .terminal-stat-current-display {
-        padding: 0.5rem;
-    }
-
-    .current-value {
-        font-size: 1.3rem;
-    }
-
-    .history-hint {
-        font-size: 0.65rem;
-    }
-}
-
-
-/* Change Input Section - Reused in Modals */
 .change-input {
     padding: 0.5rem;
     border: 2px solid #e5e7eb;
@@ -810,7 +512,8 @@
     text-align: center;
 }
 
-.change-input:focus {
+.change-input:focus,
+.notes-input:focus {
     outline: none;
     border-color: #2563eb;
     box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
@@ -821,12 +524,6 @@
     border: 2px solid #e5e7eb;
     border-radius: 6px;
     font-size: 0.85rem;
-}
-
-.notes-input:focus {
-    outline: none;
-    border-color: #2563eb;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
 .apply-btn {
@@ -847,7 +544,23 @@
     transform: translateY(-1px);
 }
 
-/* History Modal */
+.change-input.large {
+    font-size: 2rem;
+    padding: 1rem;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.apply-btn.large {
+    flex: 2;
+    font-size: 1rem;
+    padding: 0.75rem;
+}
+
+/* ========================================
+   History Modal
+   ======================================== */
 .history-modal-overlay {
     position: fixed;
     top: 0;
@@ -912,6 +625,9 @@
     flex: 1;
     overflow-y: auto;
     padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
 .history-empty {
@@ -932,6 +648,8 @@
     border: 1px solid #e5e7eb;
     border-radius: 6px;
     padding: 1rem;
+    position: relative;
+    padding-right: 2rem;
 }
 
 .history-entry-header {
@@ -948,47 +666,160 @@
     border-radius: 4px;
 }
 
-/* Edit Stat Modal */
-/* Mobile Optimizations for Compact Cards */
-@media (max-width: 768px) {
-    .terminal-stats-grid {
-        display: flex;
-        /* Reinforce flex behavior */
-        flex-direction: column;
-        align-items: stretch;
-        /* Cards extend to full width */
-    }
-
-    .terminal-stat-card.health-variant {
-        width: 100%;
-        /* Override fixed 260px */
-        max-width: none;
-        margin-bottom: 0;
-    }
-
-    .health-current {
-        font-size: 3rem;
-        /* Slightly smaller for very narrow screens */
-    }
+.history-change.positive {
+    background: #dcfce7;
+    color: #15803d;
 }
 
-/* Bar Colors for Compact Design */
-.terminal-stat-bar-fill.mental {
-    background: linear-gradient(90deg, #3b82f6, #60a5fa);
-    height: 100%;
-    transition: width 0.5s ease;
+.history-change.negative {
+    background: #fee2e2;
+    color: #dc2626;
 }
 
-.terminal-stat-bar-fill.willpower {
-    background: linear-gradient(90deg, #a855f7, #c084fc);
-    height: 100%;
-    transition: width 0.5s ease;
+.history-new-value {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #374151;
+}
+
+.history-timestamp {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin-left: auto;
+}
+
+.history-notes {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid #e5e7eb;
+    font-size: 0.9rem;
+    color: #374151;
+    font-style: italic;
+}
+
+.delete-entry-btn {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+}
+
+.delete-entry-btn:hover {
+    opacity: 1;
+}
+
+.history-hint {
+    font-size: 0.65rem;
+}
+
+/* ========================================
+   Modal Overlay & Content
+   ======================================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    padding: 1rem;
+    backdrop-filter: blur(2px);
+}
+
+.modal-content {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh;
+    width: 90%;
+    max-width: 500px;
+}
+
+.modal-content.advanced-combat-modal {
+    /* Only extends max-width from base */
+    max-width: none;
+    width: 100%;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 1.5rem;
+    background: #f9fafb;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: #111827;
+    font-weight: 700;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #9ca3af;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-btn:hover {
+    color: #1f2937;
+}
+
+.modal-body {
+    padding: 1.5rem;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.cancel-btn {
+    flex: 1;
+    padding: 0.75rem;
+    background: white;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-weight: 600;
+    color: #374151;
+    cursor: pointer;
+}
+
+.cancel-btn:hover {
+    background: #f9fafb;
+}
+
+/* ========================================
+   Edit Stat Modal
+   ======================================== */
+.edit-stat-modal {
+    max-width: 400px;
 }
 
 .edit-stat-current {
     display: flex;
     justify-content: flex-end;
-    /* Right aligned */
     align-items: center;
     gap: 0.5rem;
     padding: 0;
@@ -1026,279 +857,6 @@
     font-size: 0.9rem;
 }
 
-.change-input.large {
-    font-size: 2rem;
-    padding: 1rem;
-    text-align: center;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.modal-actions {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
-}
-
-.cancel-btn {
-    flex: 1;
-    padding: 0.75rem;
-    background: white;
-    border: 1px solid #d1d5db;
-    border-radius: 6px;
-    font-weight: 600;
-    color: #374151;
-    cursor: pointer;
-}
-
-.cancel-btn:hover {
-    background: #f9fafb;
-}
-
-.apply-btn.large {
-    flex: 2;
-    font-size: 1rem;
-    padding: 0.75rem;
-}
-
-.health-current {
-    cursor: pointer;
-    transition: transform 0.2s;
-}
-
-.health-current:hover {
-    transform: scale(1.05);
-    color: #2563eb;
-}
-
-.history-entry {
-    position: relative;
-    padding-right: 2rem;
-}
-
-.delete-entry-btn {
-    position: absolute;
-    right: 0.5rem;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 1rem;
-    opacity: 0.5;
-    transition: opacity 0.2s;
-}
-
-.delete-entry-btn:hover {
-    opacity: 1;
-}
-
-.history-change.positive {
-    background: #dcfce7;
-    color: #15803d;
-}
-
-.history-change.negative {
-    background: #fee2e2;
-    color: #dc2626;
-}
-
-.history-new-value {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #374151;
-}
-
-.history-timestamp {
-    font-size: 0.875rem;
-    color: #6b7280;
-    margin-left: auto;
-}
-
-.history-notes {
-    margin-top: 0.75rem;
-    padding-top: 0.75rem;
-    border-top: 1px solid #e5e7eb;
-    font-size: 0.9rem;
-    color: #374151;
-    font-style: italic;
-}
-
-/* ========================================
-   Health Card Variant (Horizontal Compact)
-   ======================================== */
-
-.terminal-stat-card.health-variant {
-    position: relative;
-    padding: 0;
-    overflow: hidden;
-    /* Fixed height for uniformity */
-    height: 120px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    /* Explicit fixed width */
-    width: 260px;
-}
-
-.stat-card-label {
-    position: absolute;
-    top: 0.5rem;
-    left: 0.75rem;
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: #9ca3af;
-    letter-spacing: 0.5px;
-    font-family: system-ui, -apple-system, sans-serif;
-    z-index: 10;
-    pointer-events: none;
-}
-
-/* .health-header removed */
-
-.history-icon-btn {
-    color: #6b7280;
-    background: #f3f4f6;
-    border: 1px solid #e5e7eb;
-    /* Full width in column */
-    width: 100%;
-    height: 24px;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: all 0.2s;
-    /* Space below button */
-    margin-bottom: 0.25rem;
-    opacity: 1;
-}
-
-.history-icon-btn:hover {
-    color: #1f2937;
-    background: #e5e7eb;
-    border-color: #d1d5db;
-}
-
-.roll-icon-btn {
-    color: #6b7280;
-    background: #f3f4f6;
-    border: 1px solid #e5e7eb;
-    width: 100%;
-    height: 24px;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: all 0.2s;
-    margin-bottom: 0.25rem;
-    opacity: 1;
-}
-
-.roll-icon-btn:hover {
-    color: #1f2937;
-    background: #dbeafe;
-    border-color: #3b82f6;
-}
-
-.health-content-row {
-    flex: 1;
-    /* Take available space */
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.5rem 0.75rem;
-    position: relative;
-    gap: 0.5rem;
-}
-
-.health-current-container {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /* Centered as requested */
-    padding-left: 0;
-}
-
-.health-current {
-    font-size: 3.5rem;
-    /* Restored size slightly */
-    font-weight: 800;
-    color: #1f2937;
-    line-height: 1;
-    font-family: system-ui, -apple-system, sans-serif;
-    cursor: pointer;
-    transition: transform 0.2s;
-    margin-right: 0;
-}
-
-.health-current:hover {
-    transform: scale(1.05);
-    color: #2563eb;
-}
-
-.health-secondary-stats {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    /* Tighter gap */
-    min-width: 60px;
-    justify-content: center;
-}
-
-.health-sub-stat.compact {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.25rem;
-}
-
-.sub-stat-label {
-    font-size: 0.7rem;
-    font-weight: 700;
-    color: #9ca3af;
-    font-family: system-ui, -apple-system, sans-serif;
-}
-
-.sub-stat-box {
-    border: 1px solid #d1d5db;
-    border-radius: 4px;
-    padding: 0 0.25rem;
-    font-size: 0.9rem;
-    font-weight: 700;
-    min-width: 30px;
-    text-align: center;
-    background: white;
-}
-
-.terminal-stat-bar.health-bar-bottom {
-    width: 100%;
-    height: 6px;
-    background: #e5e7eb;
-    margin-top: auto;
-    /* Push to bottom if flex spacing allows, though justify-between handles it */
-    border-radius: 0;
-    border: none;
-    border-top: 1px solid #d1d5db;
-}
-
-.terminal-stat-bar-fill.health {
-    height: 100%;
-    background: linear-gradient(90deg, #ef4444, #22c55e);
-    transition: width 0.5s ease;
-}
-
-/* Edit Stat Modal Adjustments */
-.edit-stat-modal {
-    max-width: 350px;
-}
-
 .quick-adjust-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -1315,7 +873,6 @@
     font-size: 1rem;
     cursor: pointer;
     transition: all 0.2s;
-    /* Touch target */
     min-height: 44px;
 }
 
@@ -1348,12 +905,475 @@
     background: #fee2e2;
 }
 
-/* Bar Colors for Compact Design */
+/* ========================================
+   Roll Modal — Attribute Roll
+   ======================================== */
+.attribute-roll-modal {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    max-width: 350px;
+}
+
+.attribute-roll-modal .modal-header h2 {
+    font-size: 1.5rem !important;
+    margin-bottom: 0;
+}
+
+.roll-modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    height: 100%;
+}
+
+.roll-attribute-info {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #4b5563;
+    margin-bottom: 2rem;
+}
+
+.roll-attribute-info.compact {
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #e5e7eb;
+    width: 100%;
+}
+
+.roll-main-content {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 140px;
+}
+
+.roll-modifiers-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+}
+
+.roll-button-column {
+    flex: 0 0 auto;
+}
+
+.roll-modifier-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.roll-modifier-group label {
+    font-size: 0.8rem;
+    color: #6b7280;
+    font-weight: 600;
+    margin: 0;
+    text-align: right;
+    min-width: 60px;
+}
+
+.roll-modifier-select,
+.roll-modifier-input {
+    flex: 1;
+    padding: 0.4rem;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    color: #111827;
+}
+
+.roll-modifier-select.small-text {
+    font-size: 0.9rem;
+}
+
+/* Attribute roll modal specific overrides */
+.attribute-roll-modal .roll-main-content {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+    padding: 1.5rem;
+    align-items: center;
+}
+
+.attribute-roll-modal .roll-modifiers-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.attribute-roll-modal .roll-modifier-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.attribute-roll-modal .roll-modifier-group label {
+    font-size: 0.75rem;
+    color: #6b7280;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.attribute-roll-modal .roll-modifier-select,
+.attribute-roll-modal .roll-modifier-input {
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid #d1d5db;
+    background-color: #f9fafb;
+    font-size: 0.95rem;
+}
+
+.attribute-roll-modal .roll-button-column {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.attribute-roll-modal .roll-circular-btn {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+}
 
 /* ========================================
-   Advanced Combat Modal Styles
+   Circular Roll Button
    ======================================== */
+.roll-circular-btn {
+    width: 100px;
+    height: 100px;
+    font-size: 1.1rem;
+    border-radius: 50%;
+    background: #2563eb;
+    color: white;
+    border: none;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(37, 99, 235, 0.3), 0 10px 15px rgba(37, 99, 235, 0.2);
+    transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+}
 
+.roll-circular-btn:active {
+    transform: scale(0.95);
+    background: #1d4ed8;
+    box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+}
+
+.roll-circular-btn.rolling {
+    animation: pulse 0.6s infinite;
+    background: #4f46e5;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.7);
+    }
+
+    70% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 20px rgba(79, 70, 229, 0);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(79, 70, 229, 0);
+    }
+}
+
+/* ========================================
+   Roll Result Display
+   ======================================== */
+.roll-result-display {
+    width: 100%;
+    text-align: center;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.roll-result-label {
+    font-size: 1.5rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.roll-result-number {
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 1.5rem;
+}
+
+.roll-result-number.success {
+    color: #16a34a;
+}
+
+.roll-result-number.critical-success {
+    color: #eab308;
+    text-shadow: 0 0 10px rgba(234, 179, 8, 0.4);
+    animation: successPulse 1s infinite;
+}
+
+.roll-result-number.failure {
+    color: #dc2626;
+}
+
+.roll-result-number.critical-failure {
+    color: #991b1b;
+    text-shadow: 0 0 5px rgba(153, 27, 27, 0.5);
+}
+
+@keyframes successPulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.roll-again-btn {
+    padding: 0.5rem 1.5rem;
+    background: transparent;
+    border: 1px solid #d1d5db;
+    border-radius: 20px;
+    color: #4b5563;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.roll-again-btn:hover {
+    background: #f3f4f6;
+    border-color: #9ca3af;
+}
+
+.roll-result-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ========================================
+   Roll Result Box (advanced combat)
+   ======================================== */
+.roll-result-box {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.roll-result-box.success {
+    background: #f0fdf4;
+    border: 2px solid #bbf7d0;
+    color: #166534;
+}
+
+.roll-result-box.failure {
+    background: #fef2f2;
+    border: 2px solid #fecaca;
+    color: #991b1b;
+}
+
+.roll-result-box.crit {
+    background: #fefce8;
+    border: 2px solid #fde047;
+    color: #854d0e;
+    box-shadow: 0 0 15px rgba(234, 179, 8, 0.2);
+}
+
+.roll-result-box.fumble {
+    background: #450a0a;
+    border: 2px solid #dc2626;
+    color: #fecaca;
+}
+
+.roll-number {
+    font-size: 4rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.roll-status {
+    font-size: 1.5rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.roll-details {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-bottom: 1rem;
+}
+
+/* ========================================
+   Roll Formula
+   ======================================== */
+.roll-formula {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #374151;
+    flex-wrap: wrap;
+}
+
+.roll-formula-label {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #9ca3af;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 0.25rem;
+}
+
+.formula-part {
+    padding: 0 0.25rem;
+}
+
+.formula-part.positive {
+    color: #16a34a;
+}
+
+.formula-part.negative {
+    color: #dc2626;
+}
+
+.formula-part.active {
+    color: #d97706;
+    border-bottom: 2px solid #d97706;
+}
+
+.formula-result {
+    color: #2563eb;
+    font-size: 1.5rem;
+    margin-left: 0.25rem;
+}
+
+.roll-target-reference {
+    font-size: 0.9rem;
+    color: #6b7280;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+/* ========================================
+   Hit Location
+   ======================================== */
+.hit-location-container {
+    margin-top: 1rem;
+    width: 100%;
+    text-align: center;
+}
+
+.hit-location-roll {
+    font-size: 0.8rem;
+    color: #6b7280;
+    margin-bottom: 0.25rem;
+}
+
+.hit-location-name {
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: #111827;
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+}
+
+.hit-location-effect {
+    font-size: 0.75rem;
+    color: #4b5563;
+    font-style: italic;
+}
+
+/* ========================================
+   Unified Roll Modal (submode toggles)
+   ======================================== */
+.modal-header-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.mode-toggle-btn {
+    font-size: 0.75rem !important;
+    padding: 0.25rem 0.75rem !important;
+}
+
+.submode-toggle-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+    gap: 0.5rem;
+}
+
+.submode-btn {
+    border: 1px solid #2563eb;
+}
+
+.submode-btn.active {
+    background-color: #2563eb;
+    color: white;
+}
+
+.submode-btn.outline {
+    background-color: transparent;
+    color: #6b7280;
+}
+
+.help-text-block {
+    display: block;
+    margin-top: -0.5rem;
+    margin-bottom: 0.5rem;
+    color: #6b7280;
+    font-size: 0.75rem;
+}
+
+/* ========================================
+   Advanced Combat Modal
+   ======================================== */
 .advanced-combat-modal .modal-body {
     padding: 1.5rem;
 }
@@ -1407,7 +1427,6 @@
 .info-text {
     font-size: 0.75rem;
     color: #d97706;
-    /* Amber-600 */
     font-weight: 600;
     margin-top: 0.25rem;
     display: block;
@@ -1479,7 +1498,9 @@
     color: #2563eb;
 }
 
-/* Roll Button */
+/* ========================================
+   Roll Button (large, full-width)
+   ======================================== */
 .btn-roll-terminal.large {
     width: 100%;
     padding: 1rem;
@@ -1500,60 +1521,9 @@
     box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.4);
 }
 
-/* Roll Result Box */
-.roll-result-box {
-    margin-top: 1.5rem;
-    padding: 1.5rem;
-    border-radius: 8px;
-    text-align: center;
-    animation: fadeIn 0.3s ease-out;
-}
-
-.roll-result-box.success {
-    background: #f0fdf4;
-    border: 2px solid #bbf7d0;
-    color: #166534;
-}
-
-.roll-result-box.failure {
-    background: #fef2f2;
-    border: 2px solid #fecaca;
-    color: #991b1b;
-}
-
-.roll-result-box.crit {
-    background: #fefce8;
-    border: 2px solid #fde047;
-    color: #854d0e;
-    box-shadow: 0 0 15px rgba(234, 179, 8, 0.2);
-}
-
-.roll-result-box.fumble {
-    background: #450a0a;
-    border: 2px solid #dc2626;
-    color: #fecaca;
-}
-
-.roll-number {
-    font-size: 4rem;
-    font-weight: 900;
-    line-height: 1;
-    margin-bottom: 0.5rem;
-}
-
-.roll-status {
-    font-size: 1.5rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
-}
-
-.roll-details {
-    font-size: 0.9rem;
-    opacity: 0.8;
-    margin-bottom: 1rem;
-}
-
+/* ========================================
+   Retry / Overlay Result Buttons
+   ======================================== */
 .btn-retry {
     padding: 0.5rem 1rem;
     background: white;
@@ -1570,441 +1540,105 @@
     transform: scale(1.05);
 }
 
-/* Reusing Modal Overlay from existing CSS or ensuring it exists */
-.modal-overlay {
-    position: fixed;
+.btn-retry-large {
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.4);
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.btn-retry-large:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 8px -1px rgba(37, 99, 235, 0.5);
+}
+
+.btn-retry-large:active {
+    transform: translateY(0);
+}
+
+.roll-result-overlay-absolute {
+    animation: fadeIn 0.3s;
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(255, 255, 255, 0.98);
+    z-index: 10;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    z-index: 2000;
+    border-radius: 12px;
     padding: 1rem;
-    backdrop-filter: blur(2px);
 }
 
-.modal-content.advanced-combat-modal {
-    background: white;
-    border-radius: 12px;
-    width: 100%;
-    max-height: 90vh;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-    overflow: hidden;
+.roll-result-value-large {
+    font-size: 4rem;
+    font-weight: 900;
+    line-height: 1;
+    margin: 0.5rem 0;
+    color: #16a34a;
+    text-shadow: 0 2px 10px rgba(22, 163, 74, 0.2);
 }
 
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.25rem 1.5rem;
-    background: #f9fafb;
-    border-bottom: 1px solid #e5e7eb;
-}
-
-.modal-header h3 {
-    margin: 0;
-    font-size: 1.25rem;
-    color: #111827;
-    font-weight: 700;
-}
-
-.close-btn {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    color: #9ca3af;
-    cursor: pointer;
-    transition: color 0.2s;
-}
-
-.close-btn:hover {
-    color: #1f2937;
-}
-
-/* Mobile Tweaks */
-@media (max-width: 640px) {
-    .advanced-controls-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .control-group.full-width {
-        grid-column: span 1;
-    }
-}
-
-
-/* Base Modal Content */
-.modal-content {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    max-height: 90vh;
-    width: 90%;
-    max-width: 500px;
-    /* Default max width */
-}
-
-.edit-stat-modal {
-    max-width: 400px;
-}
-
-.modal-body {
-    padding: 1.5rem;
-    overflow-y: auto;
-    flex: 1;
-}
-
-.history-modal-body {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.roll-modal-body {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    height: 100%;
-}
-
-/* FIX: Basic Roll Modal Styles */
-.attribute-roll-modal {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-}
-
-.roll-formula {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.25rem;
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #374151;
-    flex-wrap: wrap;
-}
-
-.roll-formula-label {
+.roll-result-details-text {
+    color: #6b7280;
+    font-size: 0.9rem;
     text-align: center;
-    font-size: 0.8rem;
-    color: #9ca3af;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+}
+
+.roll-result-details-text strong {
+    font-weight: 700;
+}
+
+.roll-result-details-code {
+    font-family: monospace;
+    background: #f3f4f6;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
     margin-top: 0.25rem;
 }
 
-.formula-part {
-    padding: 0 0.25rem;
-}
-
-.formula-part.positive {
-    color: #16a34a;
-}
-
-.formula-part.negative {
-    color: #dc2626;
-}
-
-.formula-part.active {
-    color: #d97706;
-    border-bottom: 2px solid #d97706;
-}
-
-.formula-result {
-    color: #2563eb;
-    font-size: 1.5rem;
-    margin-left: 0.25rem;
-}
-
-.roll-target-reference {
-    font-size: 0.9rem;
-    color: #6b7280;
-    margin-top: 0.5rem;
-    margin-bottom: 1rem;
-}
-
-/* ========================================
-   Refactored UnifiedRollModal Styles
-   ======================================== */
-
-.modal-header-actions {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-}
-
-.mode-toggle-btn {
-    font-size: 0.75rem !important;
-    padding: 0.25rem 0.75rem !important;
-}
-
-.submode-toggle-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 1rem;
-    gap: 0.5rem;
-}
-
-.submode-btn {
-    /* Inherits from btn-retry */
-    border: 1px solid #2563eb;
-}
-
-.submode-btn.active {
-    background-color: #2563eb;
-    color: white;
-}
-
-.submode-btn.outline {
-    background-color: transparent;
-    color: #6b7280;
-}
-
-.roll-modifiers-column {
-    max-height: 300px;
-    overflow-y: auto;
-    padding-right: 0.5rem;
-}
-
-.roll-modifier-select.small-text {
-    font-size: 0.9rem;
-}
-
-.help-text-block {
-    display: block;
-    margin-top: -0.5rem;
-    margin-bottom: 0.5rem;
-    color: #6b7280;
-    font-size: 0.75rem;
-}
-
-.roll-result-container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.roll-result-label {
-    font-size: 1.5rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
-}
-
-.hit-location-container {
-    margin-top: 1rem;
-    width: 100%;
+.roll-base-display {
+    padding: 10px;
+    background-color: #222;
+    border-radius: 4px;
+    color: #eee;
     text-align: center;
+    font-family: monospace;
+    border: 1px solid #444;
+    font-size: 1.1rem;
 }
 
-.hit-location-roll {
-    font-size: 0.8rem;
-    color: #6b7280;
-    margin-bottom: 0.25rem;
-}
-
-.hit-location-name {
-    font-size: 1.2rem;
-    font-weight: 900;
-    color: #111827;
-    margin-bottom: 0.25rem;
-    text-transform: uppercase;
-}
-
-.hit-location-effect {
-    font-size: 0.75rem;
-    color: #4b5563;
-    font-style: italic;
-}
-
-
-/* ========================================
-   Aggressive Mobile Optimization
-   ======================================== */
-@media (max-width: 480px) {
-
-    .modal-content.advanced-combat-modal,
-    .modal-content.attribute-roll-modal {
-        width: 95vw !important;
-        max-width: 95vw !important;
-        max-height: 85vh;
-        margin: 0 auto;
-    }
-
-    .modal-header {
-        padding: 0.75rem 1rem;
-    }
-
-    .modal-header h3 {
-        font-size: 1rem;
-    }
-
-    .modal-header-actions .btn-retry {
-        font-size: 0.7rem !important;
-        padding: 0.2rem 0.5rem !important;
-    }
-
-    .close-btn {
-        font-size: 1.25rem;
-    }
-
-    /* Compress Formula */
-    .roll-formula {
-        font-size: 1rem;
-    }
-
-    .roll-formula-label {
-        font-size: 0.7rem;
-        margin-bottom: 0.5rem;
-    }
-
-    /* Stack Content */
-    .roll-main-content {
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-        overflow: hidden;
-    }
-
-    /* Scrollable Modifiers List */
-    .roll-modifiers-column {
-        flex: 1;
-        max-height: none;
-        /* Let flex handle it */
-        overflow-y: auto;
-        padding-right: 0.25rem;
-        margin-bottom: 0.75rem;
-    }
-
-    /* Compact Modifier Rows: Label Left, Input Right */
-    .roll-modifiers-column .roll-modifier-group {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 0.5rem;
-        gap: 0.5rem;
-    }
-
-    .roll-modifiers-column label {
-        margin-bottom: 0;
-        font-size: 0.85rem;
-        white-space: nowrap;
-        width: 35%;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-    .roll-modifiers-column .roll-modifier-select,
-    .roll-modifiers-column .roll-modifier-input {
-        width: 65%;
-        padding: 0.35rem;
-        font-size: 0.9rem;
-        height: 32px;
-    }
-
-    /* Compact Button Area */
-    .roll-button-column {
-        flex-shrink: 0;
-        width: 100%;
-        padding-top: 0.5rem;
-        border-top: 1px solid #e5e7eb;
-    }
-
-    .roll-circular-btn {
-        width: 100%;
-        height: auto;
-        border-radius: 8px;
-        /* Rectangular bar button on mobile */
-        aspect-ratio: auto;
-        padding: 0.75rem;
-        font-size: 1.1rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    /* Result Result Tweaks */
-    .roll-result-display {
-        padding: 1rem 0;
-    }
-
-    .roll-number {
-        font-size: 3rem;
-    }
-
-    .hit-location-name {
-        font-size: 1rem;
-    }
-}
-
-
-/* Basic Roll Modal - Specific Overrides */
-.attribute-roll-modal .roll-main-content {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 1rem;
-    padding: 1.5rem;
-    align-items: center;
-}
-
-.attribute-roll-modal .roll-modifiers-column {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-}
-
-.attribute-roll-modal .roll-modifier-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    /* Adjust this for spacing between label and input */
-}
-
-.attribute-roll-modal .roll-modifier-group label {
-    font-size: 0.75rem;
-    color: #6b7280;
-    font-weight: 700;
-    text-transform: uppercase;
-    text-align: center;
-}
-
-.attribute-roll-modal .roll-modifier-select,
-.attribute-roll-modal .roll-modifier-input {
+.roll-modifier-input-large {
     padding: 0.5rem;
-    border-radius: 6px;
+    font-size: 1.5rem;
+    text-align: center;
+    font-weight: bold;
+    width: 100%;
+    box-sizing: border-box;
     border: 1px solid #d1d5db;
-    background-color: #f9fafb;
-    font-size: 0.95rem;
+    border-radius: 6px;
+    background: #f9fafb;
 }
 
-.attribute-roll-modal .roll-button-column {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.roll-modifier-input-large:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    background: white;
 }
 
-.attribute-roll-modal .roll-circular-btn {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-}
-
-/* Powers Panel Styles */
+/* ========================================
+   Powers Panel
+   ======================================== */
 .powers-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -2071,133 +1705,9 @@
     text-align: right;
 }
 
-/* Mobile responsive for powers */
-@media (max-width: 768px) {
-    .powers-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .power-card {
-        padding: 0.75rem;
-    }
-}
-
-/* Remove spinners from number inputs */
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-input[type=number] {
-    -moz-appearance: textfield;
-    appearance: textfield;
-}
-
-/* Modal Title Refinement */
-.attribute-roll-modal .modal-header h2 {
-    font-size: 1.5rem !important;
-    margin-bottom: 0;
-}
-
-/* Damage Roll Modal Refactor */
-.roll-result-overlay-absolute {
-    animation: fadeIn 0.3s;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(255, 255, 255, 0.98);
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 12px;
-    padding: 1rem;
-}
-
-.roll-result-value-large {
-    font-size: 4rem;
-    font-weight: 900;
-    line-height: 1;
-    margin: 0.5rem 0;
-    color: #16a34a;
-    text-shadow: 0 2px 10px rgba(22, 163, 74, 0.2);
-}
-
-.roll-result-details-text {
-    color: #6b7280;
-    font-size: 0.9rem;
-    text-align: center;
-    margin-bottom: 1rem;
-}
-
-.roll-result-details-text strong {
-    font-weight: 700;
-}
-
-.roll-result-details-code {
-    font-family: monospace;
-    background: #f3f4f6;
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
-    margin-top: 0.25rem;
-}
-
-.btn-retry-large {
-    padding: 0.5rem 1.5rem;
-    font-size: 1rem;
-    background: #2563eb;
-    color: white;
-    border: none;
-    border-radius: 30px;
-    box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.4);
-    cursor: pointer;
-    transition: transform 0.1s, box-shadow 0.1s;
-}
-
-.btn-retry-large:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 6px 8px -1px rgba(37, 99, 235, 0.5);
-}
-
-.btn-retry-large:active {
-    transform: translateY(0);
-}
-
-.roll-base-display {
-    padding: 10px;
-    background-color: #222;
-    border-radius: 4px;
-    color: #eee;
-    text-align: center;
-    font-family: monospace;
-    border: 1px solid #444;
-    font-size: 1.1rem;
-}
-
-.roll-modifier-input-large {
-    padding: 0.5rem;
-    font-size: 1.5rem;
-    text-align: center;
-    font-weight: bold;
-    width: 100%;
-    box-sizing: border-box;
-    border: 1px solid #d1d5db;
-    border-radius: 6px;
-    background: #f9fafb;
-}
-
-.roll-modifier-input-large:focus {
-    outline: none;
-    border-color: #2563eb;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-    background: white;
-}
-
-/* Notes Panel - integrated into terminal-section pattern */
+/* ========================================
+   Notes Panel
+   ======================================== */
 .terminal-section-title .notes-clear-btn,
 .notes-clear-btn {
     background: none;
@@ -2211,7 +1721,6 @@ input[type=number] {
     transition: background 0.15s, color 0.15s, border-color 0.15s;
     line-height: 1.4;
     font-weight: 500;
-    letter-spacing: 0;
     vertical-align: middle;
 }
 
@@ -2249,12 +1758,9 @@ input[type=number] {
     font-style: italic;
 }
 
-/* Chi Counter — StatCard style */
-.terminal-stat-bar-fill.chi-fill {
-    background: linear-gradient(90deg, #7c3aed, #a78bfa);
-}
-
-/* Center row: [+1] number [−1] inside health-current-container */
+/* ========================================
+   Chi Counter
+   ======================================== */
 .chi-center-row {
     display: flex;
     align-items: center;
@@ -2263,7 +1769,6 @@ input[type=number] {
     width: 100%;
 }
 
-/* Side buttons flanking the number */
 .chi-side-btn {
     border: none;
     border-radius: 6px;
@@ -2303,4 +1808,360 @@ input[type=number] {
 .chi-side-btn--use:hover:not(:disabled) {
     background: #fde68a;
     transform: scale(1.08);
+}
+
+/* ========================================
+   Form Utilities
+   ======================================== */
+/* Remove spinners from number inputs */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+/* Tablet (≤ 1024px) */
+@media (max-width: 1024px) {
+    .terminal-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .terminal-header-internal {
+        padding: 1rem 1.5rem;
+    }
+
+    .terminal-title-internal {
+        font-size: 1.1rem;
+    }
+}
+
+/* Mobile (≤ 768px) */
+@media (max-width: 768px) {
+
+    /* Header */
+    .terminal-header-internal {
+        padding: 0.75rem 1rem;
+        flex-direction: column;
+        gap: 0.75rem;
+        align-items: stretch;
+    }
+
+    .terminal-title-internal {
+        font-size: 0.95rem;
+        text-align: center;
+    }
+
+    .terminal-header-actions {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        justify-content: center;
+    }
+
+    .import-btn,
+    .export-btn,
+    .reset-btn {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
+        flex: 1 1 auto;
+        min-width: 120px;
+    }
+
+    /* Character Header */
+    .terminal-character-header {
+        padding: 1rem;
+    }
+
+    .terminal-character-name {
+        font-size: 1.25rem;
+    }
+
+    .terminal-character-alias {
+        font-size: 0.9rem;
+    }
+
+    /* Stats Container */
+    .terminal-stats-container {
+        padding: 1rem;
+    }
+
+    .terminal-stats-grid {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+        padding: 0;
+    }
+
+    /* Stat Cards */
+    .terminal-stat-card {
+        padding: 0.75rem;
+        gap: 0.5rem;
+    }
+
+    .terminal-stat-card.health-variant {
+        width: 100%;
+        max-width: none;
+    }
+
+    .terminal-stat-label {
+        font-size: 0.7rem;
+        padding-bottom: 0.25rem;
+    }
+
+    .terminal-stat-max {
+        font-size: 0.75rem;
+    }
+
+    .health-current {
+        font-size: 3rem;
+    }
+
+    /* Touch-friendly inputs */
+    .change-input,
+    .notes-input {
+        font-size: 16px;
+        /* Prevents zoom on iOS */
+        min-height: 44px;
+        padding: 0.6rem;
+    }
+
+    .apply-btn {
+        min-height: 44px;
+        font-size: 0.9rem;
+        padding: 0.6rem 1rem;
+    }
+
+    .change-input-section {
+        gap: 0.4rem;
+    }
+
+    /* History Modal */
+    .history-modal {
+        max-width: 95%;
+        max-height: 85vh;
+        margin: 1rem;
+    }
+
+    .history-modal-header {
+        padding: 0.75rem 1rem;
+    }
+
+    .history-modal-header h2 {
+        font-size: 1.1rem;
+    }
+
+    .close-modal-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 1.25rem;
+    }
+
+    .history-modal-body {
+        padding: 0.75rem;
+    }
+
+    .history-entry {
+        padding: 0.6rem;
+    }
+
+    .history-entry-header {
+        font-size: 0.85rem;
+        gap: 0.4rem;
+    }
+
+    .history-timestamp {
+        font-size: 0.7rem;
+    }
+
+    /* Empty State */
+    .terminal-empty-state {
+        padding: 2rem 1rem;
+    }
+
+    .terminal-empty-icon {
+        font-size: 3rem;
+    }
+
+    .terminal-empty-text {
+        font-size: 0.95rem;
+    }
+
+    /* Powers */
+    .powers-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .power-card {
+        padding: 0.75rem;
+    }
+}
+
+/* Landscape Mobile (≤ 768px landscape) */
+@media (max-width: 768px) and (orientation: landscape) {
+    .terminal-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .terminal-header-internal {
+        flex-direction: row;
+        padding: 0.5rem 1rem;
+    }
+
+    .terminal-title-internal {
+        font-size: 0.85rem;
+    }
+
+    .terminal-stats-container {
+        padding: 0.75rem;
+    }
+}
+
+/* Small Mobile (≤ 480px) */
+@media (max-width: 480px) {
+    .terminal-title-internal {
+        font-size: 0.85rem;
+    }
+
+    .import-btn,
+    .export-btn,
+    .reset-btn {
+        font-size: 0.75rem;
+        padding: 0.35rem 0.7rem;
+        min-width: 100px;
+    }
+
+    .terminal-character-name {
+        font-size: 1.1rem;
+    }
+
+    .terminal-stat-current-display {
+        padding: 0.5rem;
+    }
+
+    .current-value {
+        font-size: 1.3rem;
+    }
+
+    /* Modal tweaks */
+    .modal-content.advanced-combat-modal,
+    .modal-content.attribute-roll-modal {
+        width: 95vw !important;
+        max-width: 95vw !important;
+        max-height: 85vh;
+        margin: 0 auto;
+    }
+
+    .modal-header {
+        padding: 0.75rem 1rem;
+    }
+
+    .modal-header h3 {
+        font-size: 1rem;
+    }
+
+    .modal-header-actions .btn-retry {
+        font-size: 0.7rem !important;
+        padding: 0.2rem 0.5rem !important;
+    }
+
+    .close-btn {
+        font-size: 1.25rem;
+    }
+
+    .roll-formula {
+        font-size: 1rem;
+    }
+
+    .roll-formula-label {
+        font-size: 0.7rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .roll-main-content {
+        flex-direction: column;
+        flex: 1;
+        overflow: hidden;
+    }
+
+    .roll-modifiers-column {
+        flex: 1;
+        max-height: none;
+        overflow-y: auto;
+        padding-right: 0.25rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .roll-modifiers-column .roll-modifier-group {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+        gap: 0.5rem;
+    }
+
+    .roll-modifiers-column label {
+        margin-bottom: 0;
+        font-size: 0.85rem;
+        white-space: nowrap;
+        width: 35%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .roll-modifiers-column .roll-modifier-select,
+    .roll-modifiers-column .roll-modifier-input {
+        width: 65%;
+        padding: 0.35rem;
+        font-size: 0.9rem;
+        height: 32px;
+    }
+
+    .roll-button-column {
+        flex-shrink: 0;
+        width: 100%;
+        padding-top: 0.5rem;
+        border-top: 1px solid #e5e7eb;
+    }
+
+    .roll-circular-btn {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        aspect-ratio: auto;
+        padding: 0.75rem;
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .roll-result-display {
+        padding: 1rem 0;
+    }
+
+    .roll-number {
+        font-size: 3rem;
+    }
+
+    .hit-location-name {
+        font-size: 1rem;
+    }
+
+    .advanced-controls-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .control-group.full-width {
+        grid-column: span 1;
+    }
 }

@@ -16,6 +16,7 @@ import NotesPanel from './components/NotesPanel';
 import ChiCounter from './components/ChiCounter';
 import { GENERAL_SKILLS } from '../../data/generalSkills';
 import { SPECIAL_SKILLS } from '../../data/specialSkills';
+import { APP_VERSIONS } from '../../data/appVersions';
 
 export default function TacticPlayerTerminal() {
     const {
@@ -117,6 +118,10 @@ export default function TacticPlayerTerminal() {
         if (!character) return;
 
         const exportData = {
+            meta: {
+                version: APP_VERSIONS.TACTIC_TERMINAL,
+                generator: 'SHI-TPT'
+            },
             character,
             stats,
             history,
