@@ -136,32 +136,109 @@ export default function Step1_OriginSelection({ data, onChange }: Step1Props) {
     };
 
     return (
-        <div style={{ padding: '2rem' }}>
-            <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+        <div style={{ padding: '1.5rem' }}>
+            <h2 style={{ fontSize: '1.75rem', fontWeight: 'bold', marginBottom: '0.5rem' }}>
                 Selecciona los Orígenes del Personaje
             </h2>
-            <p style={{ fontSize: '1.125rem', color: '#666', marginBottom: '3rem' }}>
-                Selecciona los orígenes y sus tipos. Divino, Cósmico y Parahumano solo pueden elegir un tipo. Los demás pueden elegir múltiples tipos.
+            <p style={{ fontSize: '1rem', color: '#666', marginBottom: '1.25rem' }}>
+                Divino, Cósmico y Parahumano solo pueden elegir un tipo. Los demás pueden elegir múltiples tipos.
             </p>
 
-            {/* Origins Grid */}
+            {/* ── SELECTED ORIGINS PANEL (above grid) ──────── */}
+            <div style={{
+                position: 'sticky',
+                top: 0,
+                zIndex: 10,
+                marginBottom: '1.25rem',
+                padding: '0.85rem 1rem',
+                backgroundColor: selectedOrigins.length > 0 ? '#f0f9ff' : '#f8fafc',
+                border: `2px solid ${selectedOrigins.length > 0 ? '#2563eb' : '#e2e8f0'}`,
+                borderRadius: '10px',
+                transition: 'all 0.25s ease',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.07)'
+            }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: selectedOrigins.length > 0 ? '0.6rem' : 0 }}>
+                    <span style={{ fontWeight: 700, fontSize: '0.85rem', color: selectedOrigins.length > 0 ? '#1e40af' : '#9ca3af', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                        {selectedOrigins.length > 0
+                            ? `✓ Seleccionados (${selectedOrigins.length})`
+                            : '↓ Selecciona un origen a continuación'}
+                    </span>
+                </div>
+
+                {selectedOrigins.length > 0 && (
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                        {selectedOrigins.map(id => {
+                            const origin = ORIGINS.find(o => o.id === id);
+                            const subtypes = selectedSubtypes[id] || [];
+                            const category = getOriginCategory(id);
+                            const hasSubtypes = category?.subtypes && Object.keys(category.subtypes).length > 0;
+                            const visibleSubtypes = subtypes.filter(s => !category?.defaultEffects?.includes(s));
+
+                            return (
+                                <div
+                                    key={id}
+                                    style={{
+                                        display: 'inline-flex',
+                                        alignItems: 'center',
+                                        gap: '0.35rem',
+                                        padding: '0.35rem 0.75rem',
+                                        backgroundColor: 'white',
+                                        borderRadius: '999px',
+                                        border: '2px solid #bfdbfe',
+                                        flexWrap: 'wrap'
+                                    }}
+                                >
+                                    <span style={{
+                                        padding: '0.15rem 0.6rem',
+                                        backgroundColor: '#2563eb',
+                                        color: 'white',
+                                        borderRadius: '999px',
+                                        fontSize: '0.8rem',
+                                        fontWeight: 'bold'
+                                    }}>
+                                        {origin?.name}
+                                    </span>
+                                    {visibleSubtypes.map(subtype => (
+                                        <span key={subtype} style={{
+                                            padding: '0.15rem 0.6rem',
+                                            backgroundColor: '#60a5fa',
+                                            color: 'white',
+                                            borderRadius: '999px',
+                                            fontSize: '0.78rem',
+                                            fontWeight: 'bold'
+                                        }}>
+                                            {subtype}
+                                        </span>
+                                    ))}
+                                    {hasSubtypes && subtypes.length === 0 && (
+                                        <span style={{ fontSize: '0.78rem', color: '#dc2626', fontStyle: 'italic' }}>
+                                            ⚠️ elige {id === 'vigilantes' ? 'especialización' : 'tipo'}
+                                        </span>
+                                    )}
+                                </div>
+                            );
+                        })}
+                    </div>
+                )}
+            </div>
+
+            {/* ── ORIGINS GRID ──────────────────────────────── */}
             <div style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-                gap: '1.5rem',
-                marginBottom: '2rem'
+                gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))',
+                gap: '1rem',
+                marginBottom: '1rem'
             }}>
                 {ORIGINS.map((origin) => {
                     const isSelected = selectedOrigins.includes(origin.id);
                     const category = getOriginCategory(origin.id);
                     const isDisabled = category?.disabled;
-
                     const hasSubtypes = category?.subtypes && Object.keys(category.subtypes).length > 0;
 
                     if (!category) return null;
 
                     return (
-                        <div key={origin.id} style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                        <div key={origin.id} style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                             <button
                                 onClick={() => !isDisabled && handleToggleOrigin(origin.id)}
                                 disabled={isDisabled}
@@ -169,18 +246,19 @@ export default function Step1_OriginSelection({ data, onChange }: Step1Props) {
                                     display: 'flex',
                                     flexDirection: 'column',
                                     alignItems: 'center',
-                                    gap: '1rem',
-                                    padding: '1.5rem',
-                                    border: '4px solid',
+                                    gap: '0.75rem',
+                                    padding: '1rem',
+                                    border: '3px solid',
                                     borderColor: isDisabled ? '#e5e7eb' : (isSelected ? '#2563eb' : '#e5e7eb'),
                                     borderRadius: '12px',
                                     backgroundColor: isDisabled ? '#f3f4f6' : (isSelected ? '#eff6ff' : 'white'),
                                     cursor: isDisabled ? 'not-allowed' : 'pointer',
-                                    transition: 'all 0.3s ease',
+                                    transition: 'all 0.2s ease',
                                     opacity: isDisabled ? 0.6 : 1,
-                                    boxShadow: isSelected ? '0 4px 12px rgba(37, 99, 235, 0.3)' : '0 2px 4px rgba(0, 0, 0, 0.1)',
-                                    transform: isSelected ? 'scale(1.05)' : 'scale(1)',
-                                    position: 'relative'
+                                    boxShadow: isSelected ? '0 4px 12px rgba(37, 99, 235, 0.25)' : '0 1px 3px rgba(0,0,0,0.08)',
+                                    transform: isSelected ? 'scale(1.04)' : 'scale(1)',
+                                    position: 'relative',
+                                    width: '100%'
                                 }}
                             >
                                 {/* Checkbox indicator */}
@@ -188,8 +266,8 @@ export default function Step1_OriginSelection({ data, onChange }: Step1Props) {
                                     position: 'absolute',
                                     top: '0.5rem',
                                     right: '0.5rem',
-                                    width: '24px',
-                                    height: '24px',
+                                    width: '20px',
+                                    height: '20px',
                                     borderRadius: '4px',
                                     border: '2px solid',
                                     borderColor: isSelected ? '#2563eb' : '#d1d5db',
@@ -199,7 +277,7 @@ export default function Step1_OriginSelection({ data, onChange }: Step1Props) {
                                     justifyContent: 'center',
                                     color: 'white',
                                     fontWeight: 'bold',
-                                    fontSize: '14px'
+                                    fontSize: '12px'
                                 }}>
                                     {isSelected && '✓'}
                                 </div>
@@ -209,17 +287,17 @@ export default function Step1_OriginSelection({ data, onChange }: Step1Props) {
                                     src={origin.logo}
                                     alt={origin.name}
                                     style={{
-                                        width: '100px',
-                                        height: '100px',
+                                        width: '80px',
+                                        height: '80px',
                                         objectFit: 'contain',
                                         filter: isSelected ? 'none' : 'grayscale(50%)',
-                                        transition: 'filter 0.3s ease'
+                                        transition: 'filter 0.2s ease'
                                     }}
                                 />
 
                                 {/* Name */}
                                 <span style={{
-                                    fontSize: '1.125rem',
+                                    fontSize: '1rem',
                                     fontWeight: 'bold',
                                     color: isSelected ? '#1e40af' : '#4b5563',
                                     textAlign: 'center'
@@ -228,27 +306,27 @@ export default function Step1_OriginSelection({ data, onChange }: Step1Props) {
                                 </span>
                             </button>
 
-                            {/* Radio buttons o Checkboxes según el origen */}
+                            {/* Subtypes */}
                             {isSelected && hasSubtypes && (
                                 <div style={{
                                     display: 'flex',
                                     flexDirection: 'column',
-                                    gap: '0.5rem',
-                                    padding: '0.75rem',
+                                    gap: '0.35rem',
+                                    padding: '0.6rem',
                                     backgroundColor: '#f8fafc',
                                     borderRadius: '8px',
                                     border: '2px solid #bfdbfe'
                                 }}>
                                     <span style={{
-                                        fontSize: '0.75rem',
+                                        fontSize: '0.7rem',
                                         fontWeight: 'bold',
                                         color: '#6b7280',
                                         textTransform: 'uppercase',
-                                        marginBottom: '0.25rem'
+                                        marginBottom: '0.15rem'
                                     }}>
                                         {origin.id === 'vigilantes' ? 'Especializaciones:' : 'Tipos:'}
                                         {(origin.id === 'divinos' || origin.id === 'cosmicos' || origin.id === 'parahumanos' || origin.id === 'mutantes') &&
-                                            <span style={{ fontSize: '0.65rem', color: '#9ca3af', marginLeft: '0.5rem' }}>(solo uno)</span>
+                                            <span style={{ fontSize: '0.6rem', color: '#9ca3af', marginLeft: '0.35rem' }}>(solo uno)</span>
                                         }
                                     </span>
                                     {Object.keys(category!.subtypes!)
@@ -256,37 +334,30 @@ export default function Step1_OriginSelection({ data, onChange }: Step1Props) {
                                         .map(subtype => {
                                             const isSingleSelection = origin.id === 'divinos' || origin.id === 'cosmicos' || origin.id === 'parahumanos' || origin.id === 'mutantes';
                                             const isChecked = selectedSubtypes[origin.id]?.includes(subtype) || false;
-                                            const isSelected = isSingleSelection ? (selectedSubtypes[origin.id]?.[0] === subtype) : isChecked;
+                                            const isSubSelected = isSingleSelection ? (selectedSubtypes[origin.id]?.[0] === subtype) : isChecked;
 
                                             return (
-                                                <label
-                                                    key={subtype}
-                                                    style={{
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                        gap: '0.5rem',
-                                                        cursor: 'pointer',
-                                                        padding: '0.5rem',
-                                                        borderRadius: '4px',
-                                                        backgroundColor: isSelected ? '#dbeafe' : 'transparent',
-                                                        transition: 'background-color 0.2s'
-                                                    }}
-                                                >
+                                                <label key={subtype} style={{
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    gap: '0.4rem',
+                                                    cursor: 'pointer',
+                                                    padding: '0.3rem 0.4rem',
+                                                    borderRadius: '4px',
+                                                    backgroundColor: isSubSelected ? '#dbeafe' : 'transparent',
+                                                    transition: 'background-color 0.15s'
+                                                }}>
                                                     <input
                                                         type={isSingleSelection ? 'radio' : 'checkbox'}
                                                         name={isSingleSelection ? `origin-${origin.id}` : undefined}
-                                                        checked={isSelected}
+                                                        checked={isSubSelected}
                                                         onChange={() => handleToggleSubtype(origin.id, subtype)}
-                                                        style={{
-                                                            width: '18px',
-                                                            height: '18px',
-                                                            cursor: 'pointer'
-                                                        }}
+                                                        style={{ width: '15px', height: '15px', cursor: 'pointer' }}
                                                     />
                                                     <span style={{
-                                                        fontSize: '0.875rem',
-                                                        fontWeight: isSelected ? 'bold' : 'normal',
-                                                        color: isSelected ? '#1e40af' : '#4b5563'
+                                                        fontSize: '0.82rem',
+                                                        fontWeight: isSubSelected ? 'bold' : 'normal',
+                                                        color: isSubSelected ? '#1e40af' : '#4b5563'
                                                     }}>
                                                         {subtype}
                                                     </span>
@@ -299,82 +370,7 @@ export default function Step1_OriginSelection({ data, onChange }: Step1Props) {
                     );
                 })}
             </div>
-
-            {/* Selected Summary */}
-            {selectedOrigins.length > 0 && (
-                <div style={{
-                    marginTop: '2rem',
-                    padding: '1.5rem',
-                    backgroundColor: '#f0f9ff',
-                    border: '2px solid #2563eb',
-                    borderRadius: '8px'
-                }}>
-                    <h3 style={{ fontSize: '1.25rem', fontWeight: 'bold', marginBottom: '1rem', color: '#1e40af' }}>
-                        Orígenes Seleccionados
-                    </h3>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                        {selectedOrigins.map(id => {
-                            const origin = ORIGINS.find(o => o.id === id);
-                            const subtypes = selectedSubtypes[id] || [];
-                            const category = getOriginCategory(id);
-                            const hasSubtypes = category?.subtypes && Object.keys(category.subtypes).length > 0;
-
-                            return (
-                                <div
-                                    key={id}
-                                    style={{
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        gap: '0.5rem',
-                                        padding: '0.75rem',
-                                        backgroundColor: 'white',
-                                        borderRadius: '8px',
-                                        border: '2px solid #bfdbfe',
-                                        flexWrap: 'wrap'
-                                    }}
-                                >
-                                    <span style={{
-                                        padding: '0.5rem 1rem',
-                                        backgroundColor: '#2563eb',
-                                        color: 'white',
-                                        borderRadius: '9999px',
-                                        fontSize: '0.875rem',
-                                        fontWeight: 'bold'
-                                    }}>
-                                        {origin?.name}
-                                    </span>
-                                    {subtypes
-                                        .filter(subtype => !category?.defaultEffects?.includes(subtype))
-                                        .map(subtype => (
-                                            <span
-                                                key={subtype}
-                                                style={{
-                                                    padding: '0.5rem 1rem',
-                                                    backgroundColor: '#60a5fa',
-                                                    color: 'white',
-                                                    borderRadius: '9999px',
-                                                    fontSize: '0.875rem',
-                                                    fontWeight: 'bold'
-                                                }}
-                                            >
-                                                {subtype}
-                                            </span>
-                                        ))}
-                                    {hasSubtypes && subtypes.length === 0 && (
-                                        <span style={{
-                                            fontSize: '0.875rem',
-                                            color: '#dc2626',
-                                            fontStyle: 'italic'
-                                        }}>
-                                            ⚠️ Selecciona al menos {id === 'vigilantes' ? 'una especialización' : 'un tipo'}
-                                        </span>
-                                    )}
-                                </div>
-                            );
-                        })}
-                    </div>
-                </div>
-            )}
         </div>
     );
 }
+
