@@ -107,6 +107,19 @@ export default function CharacterWizard() {
         }
     };
 
+    const handleFinish = () => {
+        const charName = (character as any).name || 'personaje';
+        const filename = `${charName.replace(/\s+/g, '_').toLowerCase()}.json`;
+        const json = JSON.stringify(character, null, 2);
+        const blob = new Blob([json], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        a.click();
+        URL.revokeObjectURL(url);
+    };
+
     const handleStepClick = (stepId: number) => {
         setCurrentStep(stepId);
     };
@@ -224,156 +237,100 @@ export default function CharacterWizard() {
     };
 
     return (
-        <div className="wizard-container">
-            {/* Header */}
-            <div className="wizard-header">
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', justifyContent: 'center' }}>
-                    <div>
-                        <h1 className="wizard-title">
-                            Generador de Fichas ({APP_VERSIONS.WIZARD})
-                        </h1>
-                        <p className="wizard-subtitle">
-                            Crea tu personaje paso a paso
-                        </p>
-                    </div>
+        <div className="wizard-app">
+
+            {/* ── TOP BAR ─────────────────────────────── */}
+            <div className="wizard-topbar">
+                <div className="wizard-topbar-brand">
+                    <span className="wizard-topbar-title">Generador de Fichas</span>
+                    <span className="wizard-topbar-version">{APP_VERSIONS.WIZARD}</span>
                 </div>
 
-                {/* Header Controls: PC Counter + Preview + Config + Reset */}
-                <div className="wizard-controls">
-                    {/* PC Counter */}
-                    <div className="pc-counter">
-                        Puntos de Creación: <span className="pc-val">{totalPCs}</span>
-                    </div>
+                <div className="pc-counter">
+                    PC: <span className="pc-val">{totalPCs}</span>
+                </div>
 
-                    {/* Preview Button */}
+                <div className="wizard-topbar-actions">
+                    {/* Preview / CharacterSheet */}
                     <CharacterSheet character={character} totalPCs={totalPCs} />
 
-                    {/* Import JSON Button */}
-                    <button
-                        onClick={handleImportJSON}
-                        className="btn-base btn-import"
-                    >
-                        📥 Importar JSON
+                    {/* Import JSON */}
+                    <button onClick={handleImportJSON} className="btn-base btn-import" title="Importar JSON">
+                        📥 <span>Importar</span>
                     </button>
 
-                    {/* Reset Button */}
+                    {/* Reset */}
+                    <button onClick={handleReset} className="btn-base btn-reset" title="Reiniciar personaje">
+                        🔄 <span>Reiniciar</span>
+                    </button>
+
+                    {/* Help */}
                     <button
-                        onClick={handleReset}
-                        className="btn-base btn-reset"
+                        onClick={() => setShowHelp(true)}
+                        className="btn-icon"
+                        title="Ayuda de este paso"
                     >
-                        🔄 Reiniciar
+                        ❓
                     </button>
                 </div>
             </div>
 
-            {/* Step Navigation */}
-            <div className="step-nav-container">
-                {/* Progress Line */}
-                <div className="progress-line-bg">
-                    <div
-                        className="progress-line-fill"
-                        style={{ width: `${((currentStep - 1) / 6) * 100}%` }}
-                    />
-                </div>
+            {/* ── TABS NAV ────────────────────────────── */}
+            <div className="wizard-tabs" role="tablist">
+                {STEPS.map((step) => {
+                    const isActive = step.id === currentStep;
+                    const isCompleted = step.id < currentStep;
+                    let cls = 'wizard-tab';
+                    if (isActive) cls += ' active';
+                    if (isCompleted) cls += ' completed';
 
-                {/* Step Buttons Container */}
-                <div className="steps-wrapper">
-                    {STEPS.map((step) => {
-                        const isActive = step.id === currentStep;
-                        const isCompleted = step.id < currentStep;
-
-                        let iconClass = 'step-icon pending';
-                        if (isActive) iconClass = 'step-icon active';
-                        else if (isCompleted) iconClass = 'step-icon completed';
-
-                        let nameClass = 'step-name pending';
-                        if (isActive) nameClass = 'step-name active';
-                        else if (isCompleted) nameClass = 'step-name completed';
-
-                        return (
-                            <button
-                                key={step.id}
-                                onClick={() => handleStepClick(step.id)}
-                                className={`step-btn ${isActive ? 'active' : ''}`}
-                            >
-                                <div className={iconClass}>
-                                    {isCompleted ? '✓' : step.icon}
-                                </div>
-                                <span className={nameClass}>
-                                    {step.name}
-                                </span>
-                            </button>
-                        );
-                    })}
-                </div>
+                    return (
+                        <button
+                            key={step.id}
+                            role="tab"
+                            aria-selected={isActive}
+                            onClick={() => handleStepClick(step.id)}
+                            className={cls}
+                            title={step.name}
+                        >
+                            <span className="tab-icon">
+                                {isCompleted ? '✓' : step.icon}
+                            </span>
+                            <span className="tab-label">{step.name}</span>
+                            {isCompleted && <span className="tab-check" />}
+                        </button>
+                    );
+                })}
             </div>
 
-            {/* Step Content */}
-            <div className="step-content-box">
-                {/* Help Button - Absolutely positioned top-right */}
-                <button
-                    onClick={() => setShowHelp(true)}
-                    title="Ver ayuda de este paso"
-                    style={{
-                        position: 'absolute',
-                        top: '1rem',
-                        right: '1rem',
-                        width: '36px',
-                        height: '36px',
-                        borderRadius: '50%',
-                        border: '2px solid #bfdbfe',
-                        backgroundColor: '#eff6ff',
-                        color: '#2563eb',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        cursor: 'pointer',
-                        fontSize: '1.25rem',
-                        fontWeight: 'bold',
-                        transition: 'all 0.2s',
-                        zIndex: 10
-                    }}
-                    onMouseOver={(e) => {
-                        e.currentTarget.style.backgroundColor = '#2563eb';
-                        e.currentTarget.style.color = 'white';
-                    }}
-                    onMouseOut={(e) => {
-                        e.currentTarget.style.backgroundColor = '#eff6ff';
-                        e.currentTarget.style.color = '#2563eb';
-                    }}
-                >
-                    ?
-                </button>
-
+            {/* ── CONTENT AREA ────────────────────────── */}
+            <div className="wizard-content" role="tabpanel">
                 {renderStepContent()}
             </div>
 
-            {/* Navigation Buttons */}
-            <div className="nav-buttons-container">
+            {/* ── BOTTOM NAV ──────────────────────────── */}
+            <div className="wizard-bottomnav">
                 <button
                     onClick={handlePrevious}
                     disabled={currentStep === 1}
                     className="btn-base btn-outline"
-                    style={{ padding: '1rem 2rem', fontSize: '1.125rem' }}
                 >
                     ← Anterior
                 </button>
 
-                <div className="step-indicator">
-                    Paso {currentStep} de {STEPS.length}
-                </div>
+                <span className="step-indicator">
+                    {currentStep} / {STEPS.length}
+                </span>
 
                 <button
-                    onClick={handleNext}
-                    disabled={currentStep === 7}
+                    onClick={currentStep === 7 ? handleFinish : handleNext}
                     className="btn-base btn-primary"
-                    style={{ padding: '1rem 2rem', fontSize: '1.125rem' }}
                 >
-                    {currentStep === 7 ? 'Finalizar ✓' : 'Siguiente →'}
+                    {currentStep === 7 ? '💾 Finalizar y exportar' : 'Siguiente →'}
                 </button>
             </div>
 
-            {/* Help Modal */}
+            {/* ── HELP MODAL ───────────────────────────── */}
             <WizardHelpModal
                 isOpen={showHelp}
                 onClose={() => setShowHelp(false)}

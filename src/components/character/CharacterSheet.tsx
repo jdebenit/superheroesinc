@@ -117,7 +117,7 @@ export default function CharacterSheet({ character, totalPCs, mode = 'modal' }: 
                 onClick={openModal}
                 className="visualize-btn"
             >
-                📋 Visualizar Ficha
+                📋 <span className="visualize-label">Visualizar Ficha</span>
             </button>
 
             <dialog ref={dialogRef} className={`character-dialog ${isFullScreen ? 'full-screen' : ''}`}>
