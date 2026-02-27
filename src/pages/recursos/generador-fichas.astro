@@ -10,28 +10,193 @@ import CharacterWizard from "../../components/wizard/CharacterWizard";
 >
     <section class="wizard-page">
         <div class="header">
-            <h1 class="page-title">Generador de Personajes</h1>
+            <div class="header-top">
+                <a href="/recursos" class="back-link">← Volver a Recursos</a>
+            </div>
+            <h1 class="page-title">Generador de Fichas</h1>
             <p class="intro-text">
-                Crea tu personaje paso a paso, define su origen, características
-                y habilidades para comenzar tu aventura.
+                Crea tu personaje de superhéroe de forma guiada, paso a paso. El
+                generador calcula automáticamente costes, penalizaciones y
+                estadísticas derivadas según las reglas del juego, y te permite
+                exportar la ficha en PDF o JSON para usarla en tus partidas.
             </p>
-            <a href="/recursos" class="back-link">← Volver a Recursos</a>
+            <a
+                href="/recursos/wizard-fullscreen"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="fullscreen-btn"
+            >
+                ⛶ Abrir generador de fichas
+            </a>
         </div>
-        <div class="wizard-container">
-            <CharacterWizard client:only="react" />
+
+        <div class="info-grid">
+            <div class="steps-card">
+                <h2 class="card-title">¿Cómo funciona?</h2>
+                <ol class="steps-list">
+                    <li>
+                        <span class="step-num">1</span>
+                        <div>
+                            <strong>Origen y subtipo</strong>
+                            <p>
+                                Elige el origen mutante de tu personaje: Nacido,
+                                Poseído, Grifo, Cyborg… El origen determina los
+                                poderes, habilidades exclusivas y capacidades
+                                especiales que tendrás disponibles.
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="step-num">2</span>
+                        <div>
+                            <strong>Características</strong>
+                            <p>
+                                Distribuye puntos en Fuerza, Destreza,
+                                Percepción, Inteligencia y Voluntad. Los valores
+                                derivados (PVs, iniciativa, acciones por asalto,
+                                equilibrio mental…) se calculan solos.
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="step-num">3</span>
+                        <div>
+                            <strong>Especial</strong>
+                            <p>
+                                Configura las capacidades únicas de tu origen:
+                                poderes innatos de Grifo, implantes de Cyborg,
+                                hechizos de Poseído, guardianes y otras opciones
+                                exclusivas.
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="step-num">4</span>
+                        <div>
+                            <strong>Habilidades</strong>
+                            <p>
+                                Selecciona habilidades generales (combate,
+                                sigilo, medicina…) y especiales. Algunas solo
+                                están disponibles según tu origen o subtipo; el
+                                generador lo filtra automáticamente.
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="step-num">5</span>
+                        <div>
+                            <strong>Trasfondo</strong>
+                            <p>
+                                Define la historia y el contexto de tu
+                                personaje: posición económica, situación legal,
+                                estatus social, resistencia a prejuicios y notas
+                                de trasfondo libres.
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="step-num">6</span>
+                        <div>
+                            <strong>Detalles</strong>
+                            <p>
+                                Pon nombre y alias, define profesión e
+                                identidad, y equipa al personaje con armas,
+                                equipo, vehículos, artefactos y objetos mágicos.
+                                Se muestran también las estadísticas de combate
+                                calculadas.
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="step-num">7</span>
+                        <div>
+                            <strong>Evolución</strong>
+                            <p>
+                                Sección en desarrollo para gestionar la subida
+                                de nivel: incremento de características, mejora
+                                de habilidades y poderes adicionales a lo largo
+                                de la campaña.
+                            </p>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+
+            <div class="features-col">
+                <div class="feature-card">
+                    <span class="feature-icon">⚡</span>
+                    <div>
+                        <strong>Cálculo automático</strong>
+                        <p>
+                            Costes en Puntos de Creación (PC), penalizaciones
+                            por tipo cruzado y estadísticas derivadas se
+                            actualizan en tiempo real mientras construyes el
+                            personaje.
+                        </p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">👁</span>
+                    <div>
+                        <strong>Vista previa en vivo</strong>
+                        <p>
+                            Una ficha del personaje se genera al instante en la
+                            columna lateral para que veas el resultado final
+                            mientras rellenas cada apartado.
+                        </p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">📄</span>
+                    <div>
+                        <strong>Exportar en PDF</strong>
+                        <p>
+                            Genera una ficha lista para imprimir o compartir en
+                            formato PDF con un solo clic.
+                        </p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">💾</span>
+                    <div>
+                        <strong>Exportar en JSON</strong>
+                        <p>
+                            Guarda la ficha en JSON para cargarla más tarde en
+                            el generador o en el <a
+                                href="/recursos/tactic-player-terminal"
+                                >Tactic Player Terminal</a
+                            >.
+                        </p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">📂</span>
+                    <div>
+                        <strong>Importar ficha existente</strong>
+                        <p>
+                            Carga un JSON guardado previamente para continuar
+                            editando un personaje ya creado.
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 </Layout>
 
 <style>
     .wizard-page {
-        padding: 2rem 1rem;
-        max-width: 1400px;
+        padding: 2rem 1rem 4rem;
+        max-width: 1200px;
         margin: 0 auto;
     }
 
     .header {
-        margin-bottom: 2rem;
+        margin-bottom: 3rem;
+    }
+
+    .header-top {
+        margin-bottom: 1rem;
     }
 
     .page-title {
@@ -42,9 +207,11 @@ import CharacterWizard from "../../components/wizard/CharacterWizard";
     }
 
     .intro-text {
-        font-size: 1.2rem;
-        max-width: 1400px;
+        font-size: 1.15rem;
+        max-width: 720px;
+        line-height: 1.7;
         margin-bottom: 1.5rem;
+        opacity: 0.9;
     }
 
     .back-link {
@@ -54,22 +221,153 @@ import CharacterWizard from "../../components/wizard/CharacterWizard";
         text-decoration: none;
         border-bottom: 2px solid transparent;
         transition: border-color 0.2s;
-        margin-bottom: 1rem;
     }
 
     .back-link:hover {
         border-bottom-color: var(--color-secondary);
     }
 
-    /* Remove specific container styling if Wizard has its own, 
-       but keep layout structure */
-    .wizard-container {
-        /* Optional wrapper styles */
+    .fullscreen-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.65rem 1.4rem;
+        background: var(--color-primary);
+        color: #fff;
+        font-weight: bold;
+        font-size: 1rem;
+        text-decoration: none;
+        border-radius: 8px;
+        transition:
+            opacity 0.2s,
+            transform 0.1s;
+    }
+
+    .fullscreen-btn:hover {
+        opacity: 0.85;
+        transform: scale(1.03);
+    }
+
+    /* ── Info grid ─────────────────────────────── */
+    .info-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        align-items: start;
+    }
+
+    /* ── Steps card ────────────────────────────── */
+    .steps-card {
+        background: rgba(255 255 255 / 0.04);
+        border: 1px solid rgba(255 255 255 / 0.1);
+        border-radius: 12px;
+        padding: 2rem;
+    }
+
+    .card-title {
+        font-size: 1.4rem;
+        color: var(--color-secondary);
+        margin-bottom: 1.5rem;
+    }
+
+    .steps-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1.1rem;
+    }
+
+    .steps-list li {
+        display: flex;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+
+    .step-num {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        background: var(--color-primary);
+        color: #fff;
+        font-weight: bold;
+        font-size: 0.9rem;
+        flex-shrink: 0;
+        margin-top: 0.1rem;
+    }
+
+    .steps-list strong {
+        display: block;
+        margin-bottom: 0.2rem;
+    }
+
+    .steps-list p {
+        margin: 0;
+        font-size: 0.92rem;
+        opacity: 0.8;
+        line-height: 1.5;
+    }
+
+    /* ── Features column ───────────────────────── */
+    .features-col {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .feature-card {
+        display: flex;
+        gap: 1rem;
+        align-items: flex-start;
+        background: rgba(255 255 255 / 0.04);
+        border: 1px solid rgba(255 255 255 / 0.1);
+        border-radius: 10px;
+        padding: 1rem 1.2rem;
+    }
+
+    .feature-icon {
+        font-size: 1.5rem;
+        flex-shrink: 0;
+        margin-top: 0.1rem;
+    }
+
+    .feature-card strong {
+        display: block;
+        margin-bottom: 0.2rem;
+    }
+
+    .feature-card p {
+        margin: 0;
+        font-size: 0.92rem;
+        opacity: 0.8;
+        line-height: 1.5;
+    }
+
+    .feature-card a {
+        color: var(--color-secondary);
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+        transition: border-color 0.2s;
+    }
+
+    .feature-card a:hover {
+        border-bottom-color: var(--color-secondary);
+    }
+
+    /* ── Responsive ────────────────────────────── */
+    @media (max-width: 900px) {
+        .info-grid {
+            grid-template-columns: 1fr;
+        }
     }
 
     @media (max-width: 600px) {
         .wizard-page {
-            padding: 1rem;
+            padding: 1rem 1rem 3rem;
         }
 
         .page-title {
