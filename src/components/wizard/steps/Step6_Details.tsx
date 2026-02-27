@@ -190,17 +190,12 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
         <div style={{ padding: '2rem' }}>
 
             {/* Header Description */}
-            {/* Header Description */}
-            <div style={{ marginBottom: '2rem' }}>
-                <InfoBox variant="info" icon="📝">
-                    <h3 style={{ fontWeight: 'bold', fontSize: '1.125rem', marginBottom: '0.5rem', margin: 0 }}>
-                        Detalles Finales
-                    </h3>
-                    <p style={{ margin: 0 }}>
-                        Define la identidad de tu personaje y equipalo.
-                    </p>
-                </InfoBox>
-            </div>
+            <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+                Detalles Finales
+            </h2>
+            <p style={{ fontSize: '1.125rem', color: '#666', marginBottom: '1rem' }}>
+                Define la identidad de tu personaje y equipalo.
+            </p>
 
             {/* IDENTITY SECTION */}
             <WizardSection title="Identidad">

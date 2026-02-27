@@ -696,7 +696,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
 
     return (
         <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-            <h2 style={{ fontSize: '2rem', fontWeight: 'bold', textTransform: 'uppercase', textAlign: 'center', color: '#1f2937', margin: 0 }}>
+            <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem' }}>
                 Poderes y Habilidades Especiales
             </h2>
 

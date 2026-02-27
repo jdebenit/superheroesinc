@@ -41,6 +41,12 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
 
     return (
         <div className="step4-container">
+            <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+                Habilidades
+            </h2>
+            <p style={{ fontSize: '1.125rem', color: '#666', marginBottom: '1rem' }}>
+                Define las habilidades de tu personaje.
+            </p>
             {/* GENERAL SKILLS SECTION */}
             <GeneralSkillsSection
                 skillValues={skillValues}

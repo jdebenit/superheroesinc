@@ -149,21 +149,12 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
         <div style={{ padding: '2rem' }}>
 
             {/* Header Description */}
-            <div style={{
-                backgroundColor: '#eff6ff',
-                border: '1px solid #bfdbfe',
-                borderRadius: '8px',
-                padding: '1rem',
-                marginBottom: '2rem',
-                color: '#1e40af'
-            }}>
-                <h3 style={{ fontWeight: 'bold', fontSize: '1.125rem', marginBottom: '0.5rem' }}>
-                    📖 Trasfondo y Personalidad
-                </h3>
-                <p style={{ margin: 0 }}>
-                    Define la historia, contexto, estatus social y resistencia psicológica de tu personaje.
-                </p>
-            </div>
+            <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+                Trasfondo y Personalidad
+            </h2>
+            <p style={{ fontSize: '1.125rem', color: '#666', marginBottom: '1rem' }}>
+                Define la historia, contexto, estatus social y resistencia psicológica de tu personaje.
+            </p>
 
             {/* PREJUDICE RESISTANCE */}
             <div style={sectionStyle}>
