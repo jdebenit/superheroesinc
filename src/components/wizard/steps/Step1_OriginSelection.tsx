@@ -145,232 +145,184 @@ export default function Step1_OriginSelection({ data, onChange }: Step1Props) {
                 Divino, Cósmico y Parahumano solo pueden elegir un tipo. Los demás pueden elegir múltiples tipos.
             </p>
 
-            {/* ── SELECTED ORIGINS PANEL (above grid) ──────── */}
-            <div style={{
-                position: 'sticky',
-                top: 0,
-                zIndex: 10,
-                marginBottom: '1.25rem',
-                padding: '0.85rem 1rem',
-                backgroundColor: selectedOrigins.length > 0 ? '#f0f9ff' : '#f8fafc',
-                border: `2px solid ${selectedOrigins.length > 0 ? '#2563eb' : '#e2e8f0'}`,
-                borderRadius: '10px',
-                transition: 'all 0.25s ease',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.07)'
-            }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: selectedOrigins.length > 0 ? '0.6rem' : 0 }}>
-                    <span style={{ fontWeight: 700, fontSize: '0.85rem', color: selectedOrigins.length > 0 ? '#1e40af' : '#9ca3af', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                        {selectedOrigins.length > 0
-                            ? `✓ Seleccionados (${selectedOrigins.length})`
-                            : '↓ Selecciona un origen a continuación'}
-                    </span>
-                </div>
 
-                {selectedOrigins.length > 0 && (
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-                        {selectedOrigins.map(id => {
-                            const origin = ORIGINS.find(o => o.id === id);
-                            const subtypes = selectedSubtypes[id] || [];
-                            const category = getOriginCategory(id);
-                            const hasSubtypes = category?.subtypes && Object.keys(category.subtypes).length > 0;
-                            const visibleSubtypes = subtypes.filter(s => !category?.defaultEffects?.includes(s));
-
-                            return (
-                                <div
-                                    key={id}
-                                    style={{
-                                        display: 'inline-flex',
-                                        alignItems: 'center',
-                                        gap: '0.35rem',
-                                        padding: '0.35rem 0.75rem',
-                                        backgroundColor: 'white',
-                                        borderRadius: '999px',
-                                        border: '2px solid #bfdbfe',
-                                        flexWrap: 'wrap'
-                                    }}
-                                >
-                                    <span style={{
-                                        padding: '0.15rem 0.6rem',
-                                        backgroundColor: '#2563eb',
-                                        color: 'white',
-                                        borderRadius: '999px',
-                                        fontSize: '0.8rem',
-                                        fontWeight: 'bold'
-                                    }}>
-                                        {origin?.name}
-                                    </span>
-                                    {visibleSubtypes.map(subtype => (
-                                        <span key={subtype} style={{
-                                            padding: '0.15rem 0.6rem',
-                                            backgroundColor: '#60a5fa',
-                                            color: 'white',
-                                            borderRadius: '999px',
-                                            fontSize: '0.78rem',
-                                            fontWeight: 'bold'
-                                        }}>
-                                            {subtype}
-                                        </span>
-                                    ))}
-                                    {hasSubtypes && subtypes.length === 0 && (
-                                        <span style={{ fontSize: '0.78rem', color: '#dc2626', fontStyle: 'italic' }}>
-                                            ⚠️ elige {id === 'vigilantes' ? 'especialización' : 'tipo'}
-                                        </span>
-                                    )}
-                                </div>
-                            );
-                        })}
-                    </div>
-                )}
-            </div>
-
-            {/* ── ORIGINS GRID ──────────────────────────────── */}
+            {/* ── ORIGINS GRID — cards only, no subtypes inside ── */}
             <div style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))',
+                gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))',
                 gap: '1rem',
-                marginBottom: '1rem'
+                marginBottom: '1.5rem'
             }}>
                 {ORIGINS.map((origin) => {
                     const isSelected = selectedOrigins.includes(origin.id);
                     const category = getOriginCategory(origin.id);
                     const isDisabled = category?.disabled;
                     const hasSubtypes = category?.subtypes && Object.keys(category.subtypes).length > 0;
+                    const needsSubtype = isSelected && hasSubtypes && (selectedSubtypes[origin.id] || []).filter(s => !category?.defaultEffects?.includes(s)).length === 0;
 
                     if (!category) return null;
 
                     return (
-                        <div key={origin.id} style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                            <button
-                                onClick={() => !isDisabled && handleToggleOrigin(origin.id)}
-                                disabled={isDisabled}
+                        <button
+                            key={origin.id}
+                            onClick={() => !isDisabled && handleToggleOrigin(origin.id)}
+                            disabled={isDisabled}
+                            title={isDisabled ? 'Próximamente disponible' : origin.name}
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                gap: '0.6rem',
+                                padding: '0.9rem 0.75rem',
+                                border: '3px solid',
+                                borderColor: isDisabled ? '#e5e7eb' : needsSubtype ? '#f59e0b' : (isSelected ? '#2563eb' : '#e5e7eb'),
+                                borderRadius: '12px',
+                                backgroundColor: isDisabled ? '#f3f4f6' : (isSelected ? '#eff6ff' : 'white'),
+                                cursor: isDisabled ? 'not-allowed' : 'pointer',
+                                transition: 'all 0.2s ease',
+                                opacity: isDisabled ? 0.5 : 1,
+                                boxShadow: isSelected ? '0 4px 12px rgba(37, 99, 235, 0.2)' : '0 1px 3px rgba(0,0,0,0.07)',
+                                transform: isSelected ? 'scale(1.04)' : 'scale(1)',
+                                position: 'relative',
+                                width: '100%'
+                            }}
+                        >
+                            {/* Check / warning indicator */}
+                            <div style={{
+                                position: 'absolute',
+                                top: '0.4rem',
+                                right: '0.4rem',
+                                width: '18px',
+                                height: '18px',
+                                borderRadius: '4px',
+                                border: '2px solid',
+                                borderColor: needsSubtype ? '#f59e0b' : (isSelected ? '#2563eb' : '#d1d5db'),
+                                backgroundColor: needsSubtype ? '#fef3c7' : (isSelected ? '#2563eb' : 'white'),
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                color: needsSubtype ? '#92400e' : 'white',
+                                fontWeight: 'bold',
+                                fontSize: '11px'
+                            }}>
+                                {needsSubtype ? '!' : (isSelected && '✓')}
+                            </div>
+
+                            {/* Logo */}
+                            <img
+                                src={origin.logo}
+                                alt={origin.name}
                                 style={{
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    alignItems: 'center',
-                                    gap: '0.75rem',
-                                    padding: '1rem',
-                                    border: '3px solid',
-                                    borderColor: isDisabled ? '#e5e7eb' : (isSelected ? '#2563eb' : '#e5e7eb'),
-                                    borderRadius: '12px',
-                                    backgroundColor: isDisabled ? '#f3f4f6' : (isSelected ? '#eff6ff' : 'white'),
-                                    cursor: isDisabled ? 'not-allowed' : 'pointer',
-                                    transition: 'all 0.2s ease',
-                                    opacity: isDisabled ? 0.6 : 1,
-                                    boxShadow: isSelected ? '0 4px 12px rgba(37, 99, 235, 0.25)' : '0 1px 3px rgba(0,0,0,0.08)',
-                                    transform: isSelected ? 'scale(1.04)' : 'scale(1)',
-                                    position: 'relative',
-                                    width: '100%'
+                                    width: '72px',
+                                    height: '72px',
+                                    objectFit: 'contain',
+                                    filter: isDisabled ? 'grayscale(100%)' : (isSelected ? 'none' : 'grayscale(40%)'),
+                                    transition: 'filter 0.2s ease'
                                 }}
-                            >
-                                {/* Checkbox indicator */}
-                                <div style={{
-                                    position: 'absolute',
-                                    top: '0.5rem',
-                                    right: '0.5rem',
-                                    width: '20px',
-                                    height: '20px',
-                                    borderRadius: '4px',
-                                    border: '2px solid',
-                                    borderColor: isSelected ? '#2563eb' : '#d1d5db',
-                                    backgroundColor: isSelected ? '#2563eb' : 'white',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    color: 'white',
-                                    fontWeight: 'bold',
-                                    fontSize: '12px'
-                                }}>
-                                    {isSelected && '✓'}
-                                </div>
+                            />
 
-                                {/* Logo */}
-                                <img
-                                    src={origin.logo}
-                                    alt={origin.name}
-                                    style={{
-                                        width: '80px',
-                                        height: '80px',
-                                        objectFit: 'contain',
-                                        filter: isSelected ? 'none' : 'grayscale(50%)',
-                                        transition: 'filter 0.2s ease'
-                                    }}
-                                />
-
-                                {/* Name */}
-                                <span style={{
-                                    fontSize: '1rem',
-                                    fontWeight: 'bold',
-                                    color: isSelected ? '#1e40af' : '#4b5563',
-                                    textAlign: 'center'
-                                }}>
-                                    {origin.name}
-                                </span>
-                            </button>
-
-                            {/* Subtypes */}
-                            {isSelected && hasSubtypes && (
-                                <div style={{
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    gap: '0.35rem',
-                                    padding: '0.6rem',
-                                    backgroundColor: '#f8fafc',
-                                    borderRadius: '8px',
-                                    border: '2px solid #bfdbfe'
-                                }}>
-                                    <span style={{
-                                        fontSize: '0.7rem',
-                                        fontWeight: 'bold',
-                                        color: '#6b7280',
-                                        textTransform: 'uppercase',
-                                        marginBottom: '0.15rem'
-                                    }}>
-                                        {origin.id === 'vigilantes' ? 'Especializaciones:' : 'Tipos:'}
-                                        {(origin.id === 'divinos' || origin.id === 'cosmicos' || origin.id === 'parahumanos' || origin.id === 'mutantes') &&
-                                            <span style={{ fontSize: '0.6rem', color: '#9ca3af', marginLeft: '0.35rem' }}>(solo uno)</span>
-                                        }
-                                    </span>
-                                    {Object.keys(category!.subtypes!)
-                                        .filter(subtype => !category?.disabledSubtypes?.includes(subtype))
-                                        .map(subtype => {
-                                            const isSingleSelection = origin.id === 'divinos' || origin.id === 'cosmicos' || origin.id === 'parahumanos' || origin.id === 'mutantes';
-                                            const isChecked = selectedSubtypes[origin.id]?.includes(subtype) || false;
-                                            const isSubSelected = isSingleSelection ? (selectedSubtypes[origin.id]?.[0] === subtype) : isChecked;
-
-                                            return (
-                                                <label key={subtype} style={{
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                    gap: '0.4rem',
-                                                    cursor: 'pointer',
-                                                    padding: '0.3rem 0.4rem',
-                                                    borderRadius: '4px',
-                                                    backgroundColor: isSubSelected ? '#dbeafe' : 'transparent',
-                                                    transition: 'background-color 0.15s'
-                                                }}>
-                                                    <input
-                                                        type={isSingleSelection ? 'radio' : 'checkbox'}
-                                                        name={isSingleSelection ? `origin-${origin.id}` : undefined}
-                                                        checked={isSubSelected}
-                                                        onChange={() => handleToggleSubtype(origin.id, subtype)}
-                                                        style={{ width: '15px', height: '15px', cursor: 'pointer' }}
-                                                    />
-                                                    <span style={{
-                                                        fontSize: '0.82rem',
-                                                        fontWeight: isSubSelected ? 'bold' : 'normal',
-                                                        color: isSubSelected ? '#1e40af' : '#4b5563'
-                                                    }}>
-                                                        {subtype}
-                                                    </span>
-                                                </label>
-                                            );
-                                        })}
-                                </div>
-                            )}
-                        </div>
+                            {/* Name */}
+                            <span style={{
+                                fontSize: '0.875rem',
+                                fontWeight: 'bold',
+                                color: isDisabled ? '#9ca3af' : (isSelected ? '#1e40af' : '#4b5563'),
+                                textAlign: 'center',
+                                lineHeight: 1.2
+                            }}>
+                                {origin.name}
+                            </span>
+                        </button>
                     );
                 })}
             </div>
+
+            {/* ── SUBTYPES PANEL — below the grid, one card per selected origin ── */}
+            {selectedOrigins.some(id => {
+                const cat = getOriginCategory(id);
+                return cat?.subtypes && Object.keys(cat.subtypes).length > 0;
+            }) && (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '1rem' }}>
+                        <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                            Tipo / Especialización
+                        </span>
+                        {selectedOrigins.map(id => {
+                            const origin = ORIGINS.find(o => o.id === id);
+                            const category = getOriginCategory(id);
+                            if (!category?.subtypes || Object.keys(category.subtypes).length === 0) return null;
+
+                            const isSingleSelection = ['divinos', 'cosmicos', 'parahumanos', 'mutantes'].includes(id);
+                            const availableSubtypes = Object.keys(category.subtypes).filter(s => !category.disabledSubtypes?.includes(s));
+                            const needsWarning = (selectedSubtypes[id] || []).filter(s => !category.defaultEffects?.includes(s)).length === 0;
+
+                            return (
+                                <div
+                                    key={id}
+                                    style={{
+                                        padding: '1rem 1.25rem',
+                                        backgroundColor: needsWarning ? '#fffbeb' : '#f0f9ff',
+                                        border: `2px solid ${needsWarning ? '#fcd34d' : '#bfdbfe'}`,
+                                        borderRadius: '10px',
+                                        transition: 'border-color 0.2s'
+                                    }}
+                                >
+                                    {/* Header */}
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
+                                        <img src={origin?.logo} alt={origin?.name} style={{ width: '24px', height: '24px', objectFit: 'contain' }} />
+                                        <span style={{ fontWeight: 700, fontSize: '0.95rem', color: '#1e40af' }}>{origin?.name}</span>
+                                        <span style={{ fontSize: '0.75rem', color: '#6b7280' }}>
+                                            {id === 'vigilantes' ? '— Elige especializaciones' : (isSingleSelection ? '— Elige uno' : '— Elige uno o varios')}
+                                        </span>
+                                        {needsWarning && (
+                                            <span style={{ marginLeft: 'auto', fontSize: '0.78rem', color: '#92400e', fontWeight: 600 }}>
+                                                ⚠️ Pendiente de elegir
+                                            </span>
+                                        )}
+                                    </div>
+
+                                    {/* Subtype chips */}
+                                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                                        {availableSubtypes.map(subtype => {
+                                            const isChecked = selectedSubtypes[id]?.includes(subtype) || false;
+                                            const isSubSelected = isSingleSelection ? (selectedSubtypes[id]?.[0] === subtype) : isChecked;
+
+                                            return (
+                                                <label
+                                                    key={subtype}
+                                                    style={{
+                                                        display: 'inline-flex',
+                                                        alignItems: 'center',
+                                                        gap: '0.4rem',
+                                                        padding: '0.4rem 0.9rem',
+                                                        borderRadius: '999px',
+                                                        border: '2px solid',
+                                                        borderColor: isSubSelected ? '#2563eb' : '#d1d5db',
+                                                        backgroundColor: isSubSelected ? '#dbeafe' : 'white',
+                                                        cursor: 'pointer',
+                                                        transition: 'all 0.15s',
+                                                        fontSize: '0.875rem',
+                                                        fontWeight: isSubSelected ? 700 : 400,
+                                                        color: isSubSelected ? '#1e40af' : '#374151',
+                                                        userSelect: 'none'
+                                                    }}
+                                                >
+                                                    <input
+                                                        type={isSingleSelection ? 'radio' : 'checkbox'}
+                                                        name={isSingleSelection ? `subtype-${id}` : undefined}
+                                                        checked={isSubSelected}
+                                                        onChange={() => handleToggleSubtype(id, subtype)}
+                                                        style={{ position: 'absolute', opacity: 0, width: 0, height: 0 }}
+                                                    />
+                                                    {isSubSelected && <span style={{ fontSize: '0.75rem' }}>✓</span>}
+                                                    {subtype}
+                                                </label>
+                                            );
+                                        })}
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                )}
         </div>
     );
 }
