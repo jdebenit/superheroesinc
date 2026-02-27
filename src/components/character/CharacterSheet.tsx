@@ -43,9 +43,10 @@ interface CharacterSheetProps {
     character: any;
     totalPCs?: number | string;
     mode?: 'modal' | 'inline'; // New prop to control rendering mode
+    onShowToast?: (message: string, type?: 'success' | 'error' | 'info') => void;
 }
 
-export default function CharacterSheet({ character, totalPCs, mode = 'modal' }: CharacterSheetProps) {
+export default function CharacterSheet({ character, totalPCs, mode = 'modal', onShowToast }: CharacterSheetProps) {
     // Use the custom hook to get all calculated data
     const sheetData = useCharacterSheetData(character);
     const {
@@ -54,7 +55,7 @@ export default function CharacterSheet({ character, totalPCs, mode = 'modal' }: 
     } = sheetData;
 
     // Use custom hooks for export functionality
-    const { downloadJson } = useJsonExport(character);
+    const { downloadJson } = useJsonExport(character, onShowToast);
     const { handleExportPDF } = usePdfExport(character, totalPCs, sheetData);
     const { dialogRef, isFullScreen, openModal, closeModal, toggleFullScreen } = useModal();
 

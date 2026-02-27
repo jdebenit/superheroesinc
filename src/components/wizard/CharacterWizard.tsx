@@ -284,7 +284,7 @@ export default function CharacterWizard() {
 
                 <div className="wizard-topbar-actions">
                     {/* Preview / CharacterSheet */}
-                    <CharacterSheet character={character} totalPCs={totalPCs} />
+                    <CharacterSheet character={character} totalPCs={totalPCs} onShowToast={showToast} />
 
                     {/* Import JSON */}
                     <button onClick={handleImportJSON} className="btn-base btn-import" title="Importar JSON">

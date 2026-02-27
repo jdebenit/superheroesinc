@@ -8,7 +8,10 @@ import Logger from '../../../utils/Logger';
  * Custom hook for handling JSON export functionality
  * Supports File System Access API with automatic fallback
  */
-export const useJsonExport = (character: any) => {
+export const useJsonExport = (
+    character: any,
+    onShowToast?: (message: string, type?: 'success' | 'error' | 'info') => void
+) => {
     const downloadJson = useCallback(async () => {
         // 1. Calculate clean data (diff from defaults)
         const cleanData = calculateDiff(character, initialCharacterState);
@@ -53,10 +56,12 @@ export const useJsonExport = (character: any) => {
                 const writable = await handle.createWritable();
                 await writable.write(jsonStr);
                 await writable.close();
+                if (onShowToast) onShowToast('¡Personaje exportado correctamente!', 'success');
                 return;
             } catch (err: any) {
                 if (err.name !== 'AbortError') {
                     Logger.error('File Picker Error:', err);
+                    if (onShowToast) onShowToast('Hubo un error al exportar el archivo.', 'error');
                 }
                 if (err.name === 'AbortError') return;
             }
@@ -70,7 +75,8 @@ export const useJsonExport = (character: any) => {
         document.body.appendChild(downloadAnchorNode);
         downloadAnchorNode.click();
         downloadAnchorNode.remove();
-    }, [character]);
+        if (onShowToast) onShowToast('¡Personaje exportado correctamente!', 'success');
+    }, [character, onShowToast]);
 
     return { downloadJson };
 };
