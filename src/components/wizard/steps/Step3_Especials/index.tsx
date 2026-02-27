@@ -36,6 +36,7 @@ import TechnoSuitStrengthSection from './sections/TechnoSuitStrengthSection';
 import { CyborgSection } from './sections/CyborgSection';
 import ParahumanoSection from './sections/ParahumanoSection';
 import type { CyborgImplant } from '../../../../data/cyborgImplantConfigs';
+import { stepPageTitleStyle } from '../../shared/stepStyles';
 
 // Modal Components
 import SelectionModal from './modals/SelectionModal';
@@ -696,7 +697,7 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
 
     return (
         <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-            <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+            <h2 style={stepPageTitleStyle}>
                 Poderes y Habilidades Especiales
             </h2>
 

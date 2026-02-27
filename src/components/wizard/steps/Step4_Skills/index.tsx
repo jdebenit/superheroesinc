@@ -3,6 +3,7 @@ import { WizardSection } from '../../shared/WizardSection';
 import { GeneralSkillsSection } from './sections/GeneralSkillsSection';
 import { SelectedSkillsSection } from './sections/SelectedSkillsSection';
 import { AvailableSkillsSection } from './sections/AvailableSkillsSection';
+import { stepPageTitleStyle, stepPageSubtitleStyle } from '../../shared/stepStyles';
 import { useStep4Logic } from './useStep4Logic';
 import './Step4_Skills.css';
 
@@ -41,10 +42,10 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
 
     return (
         <div className="step4-container">
-            <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+            <h2 style={stepPageTitleStyle}>
                 Habilidades
             </h2>
-            <p style={{ fontSize: '1.125rem', color: '#666', marginBottom: '1rem' }}>
+            <p style={stepPageSubtitleStyle}>
                 Define las habilidades de tu personaje.
             </p>
             {/* GENERAL SKILLS SECTION */}

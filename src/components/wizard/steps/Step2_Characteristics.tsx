@@ -29,6 +29,7 @@ import {
     calculateSpecialtyAllowedCharacteristics,
     calculateCreationPoints
 } from '../../../utils/characterCalculations';
+import { stepPageTitleStyle, stepPageSubtitleStyle } from '../shared/stepStyles';
 
 export default function Step2_Characteristics({ data, onChange }: Step2Props) {
     const [characteristics, setCharacteristics] = useState<{
@@ -323,10 +324,10 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
 
     return (
         <div style={{ padding: '2rem' }}>
-            <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+            <h2 style={stepPageTitleStyle}>
                 Características del Personaje
             </h2>
-            <p style={{ fontSize: '1.125rem', color: '#666', marginBottom: '1rem' }}>
+            <p style={stepPageSubtitleStyle}>
                 {isDistributableMode
                     ? 'Distribuye los puntos de origen entre las características.'
                     : 'Define las características base y sus modificadores.'}

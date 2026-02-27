@@ -1,5 +1,14 @@
 import React from 'react';
 import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS, FRIENDS_AND_ASSOCIATES } from '../../../data/backgroundTables';
+import {
+    sectionCardStyle,
+    sectionTitleStyle,
+    innerCardStyle,
+    textInputStyle,
+    dangerButtonStyle,
+    stepPageTitleStyle,
+    stepPageSubtitleStyle,
+} from '../shared/stepStyles';
 
 interface Step5Props {
     data: {
@@ -53,62 +62,6 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
         }
     };
 
-    // --- STYLES ---
-    const sectionStyle = {
-        backgroundColor: 'white',
-        border: '1px solid #e5e7eb',
-        borderRadius: '12px',
-        padding: '1.5rem',
-        marginBottom: '2rem',
-        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
-    };
-
-    const titleStyle = {
-        fontSize: '1.5rem',
-        fontWeight: 'bold',
-        color: '#1f2937',
-        marginBottom: '1rem',
-        borderBottom: '2px solid #e5e7eb',
-        paddingBottom: '0.5rem',
-        display: 'flex',
-        alignItems: 'center',
-        gap: '0.5rem'
-    };
-
-    const cardStyle = {
-        backgroundColor: '#f8fafc',
-        border: '1px solid #e2e8f0',
-        borderRadius: '8px',
-        padding: '1rem',
-        marginBottom: '1rem'
-    };
-
-    const labelStyle = {
-        display: 'block',
-        fontSize: '0.875rem',
-        fontWeight: 'bold',
-        color: '#4b5563',
-        marginBottom: '0.5rem'
-    };
-
-    const inputStyle = {
-        width: '100%',
-        padding: '0.75rem',
-        border: '1px solid #d1d5db',
-        borderRadius: '6px',
-        fontSize: '1rem',
-        transition: 'border-color 0.2s',
-        outline: 'none'
-    };
-
-    const buttonStyle = {
-        padding: '0.5rem 1rem',
-        borderRadius: '6px',
-        fontWeight: 'bold',
-        cursor: 'pointer',
-        border: 'none',
-        transition: 'background-color 0.2s'
-    };
 
     const renderStatusSelect = (
         title: string,
@@ -117,7 +70,7 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
         field: string,
         currentObj: any
     ) => (
-        <div style={cardStyle}>
+        <div style={innerCardStyle}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
                 <h4 style={{ fontWeight: 'bold', color: '#1e293b', margin: 0 }}>{title}</h4>
                 <div style={{
@@ -131,7 +84,7 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
             <select
                 value={currentValue || options[0].id}
                 onChange={(e) => onChange({ background: { ...data.background, [field]: e.target.value } })}
-                style={{ ...inputStyle, marginBottom: '0.5rem', padding: '0.5rem' }}
+                style={{ ...textInputStyle, marginBottom: '0.5rem', padding: '0.5rem' }}
             >
                 {options.map(opt => (
                     <option key={opt.id} value={opt.id}>
@@ -149,17 +102,17 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
         <div style={{ padding: '2rem' }}>
 
             {/* Header Description */}
-            <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+            <h2 style={stepPageTitleStyle}>
                 Trasfondo y Personalidad
             </h2>
-            <p style={{ fontSize: '1.125rem', color: '#666', marginBottom: '1rem' }}>
+            <p style={stepPageSubtitleStyle}>
                 Define la historia, contexto, estatus social y resistencia psicológica de tu personaje.
             </p>
 
             {/* PREJUDICE RESISTANCE */}
-            <div style={sectionStyle}>
+            <div style={sectionCardStyle}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                    <h3 style={{ ...titleStyle, borderBottom: 'none', marginBottom: 0 }}>🛡️ Resistencia a Prejuicios</h3>
+                    <h3 style={{ ...sectionTitleStyle, borderBottom: 'none', marginBottom: 0 }}>🛡️ Resistencia a Prejuicios</h3>
                     <div style={{
                         fontSize: '1.1rem',
                         fontWeight: 'bold',
@@ -211,8 +164,8 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
             </div>
 
             {/* ADVANCED STATUS OPTIONS */}
-            <div style={sectionStyle}>
-                <h3 style={{ ...titleStyle, color: '#0f766e', borderBottomColor: '#99f6e4' }}>🏛️ Estatus Social y Legal</h3>
+            <div style={sectionCardStyle}>
+                <h3 style={{ ...sectionTitleStyle, color: '#0f766e', borderBottomColor: '#99f6e4' }}>🏛️ Estatus Social y Legal</h3>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1rem' }}>
                     {renderStatusSelect("Posición Económica", ECONOMIC_STATUS, data.background?.economicStatus, 'economicStatus', currentEconomic)}
                     {renderStatusSelect("Situación Legal", LEGAL_STATUS, data.background?.legalStatus, 'legalStatus', currentLegal)}
@@ -222,8 +175,8 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
             </div>
 
             {/* BACKGROUND ITEMS */}
-            <div style={sectionStyle}>
-                <h3 style={{ ...titleStyle, color: '#4338ca', borderBottomColor: '#c7d2fe' }}>📝 Notas de Trasfondo</h3>
+            <div style={sectionCardStyle}>
+                <h3 style={{ ...sectionTitleStyle, color: '#4338ca', borderBottomColor: '#c7d2fe' }}>📝 Notas de Trasfondo</h3>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                     {data.background.items.map((item, index) => (
                         <div key={index} style={{ display: 'flex', gap: '0.5rem' }}>
@@ -231,16 +184,12 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
                                 type="text"
                                 value={item}
                                 onChange={(e) => updateBackgroundItem(index, e.target.value)}
-                                style={inputStyle}
+                                style={textInputStyle}
                                 placeholder="Ej: Trabajo medio/bajo: mecánico"
                             />
                             <button
                                 onClick={() => removeBackgroundItem(index)}
-                                style={{
-                                    ...buttonStyle,
-                                    backgroundColor: '#dc2626',
-                                    color: 'white'
-                                }}
+                                style={dangerButtonStyle}
                             >
                                 ✕
                             </button>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { stepPageTitleStyle, stepPageSubtitleStyle } from '../shared/stepStyles';
 
 interface Step7Props {
     data: any;
@@ -8,8 +9,8 @@ interface Step7Props {
 export default function Step7_Evolution({ data, onChange }: Step7Props) {
     return (
         <div style={{ padding: '2rem' }}>
-            <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem' }}>Evolución del Personaje</h2>
-            <p style={{ fontSize: '1rem', color: '#666', marginBottom: '2rem' }}>
+            <h2 style={stepPageTitleStyle}>Evolución del Personaje</h2>
+            <p style={stepPageSubtitleStyle}>
                 Gestiona la subida de nivel de tu personaje
             </p>
             <div style={{

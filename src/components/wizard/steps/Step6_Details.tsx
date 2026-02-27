@@ -10,6 +10,7 @@ import { DynamicList } from '../shared/DynamicList';
 import { FormSelect } from '../shared/FormSelect';
 import { InfoBox } from '../shared/InfoBox';
 import { CostBadge } from '../shared/CostBadge';
+import { stepPageTitleStyle, stepPageSubtitleStyle } from '../shared/stepStyles';
 
 interface Step6Props {
     data: {
@@ -190,10 +191,10 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
         <div style={{ padding: '2rem' }}>
 
             {/* Header Description */}
-            <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+            <h2 style={stepPageTitleStyle}>
                 Detalles Finales
             </h2>
-            <p style={{ fontSize: '1.125rem', color: '#666', marginBottom: '1rem' }}>
+            <p style={stepPageSubtitleStyle}>
                 Define la identidad de tu personaje y equipalo.
             </p>
 

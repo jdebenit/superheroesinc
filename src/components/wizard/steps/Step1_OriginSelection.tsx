@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ORIGIN_CATEGORIES } from '../../../data/originDefinitions';
+import { stepPageTitleStyle, stepPageSubtitleStyle } from '../shared/stepStyles';
 
 interface Step1Props {
     data: any;
@@ -137,10 +138,10 @@ export default function Step1_OriginSelection({ data, onChange }: Step1Props) {
 
     return (
         <div style={{ padding: '2rem' }}>
-            <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+            <h2 style={stepPageTitleStyle}>
                 Selecciona los Orígenes del Personaje
             </h2>
-            <p style={{ fontSize: '1.125rem', color: '#666', marginBottom: '1rem' }}>
+            <p style={stepPageSubtitleStyle}>
                 Divino, Cósmico y Parahumano solo pueden elegir un tipo. Los demás pueden elegir múltiples tipos.
             </p>
 
