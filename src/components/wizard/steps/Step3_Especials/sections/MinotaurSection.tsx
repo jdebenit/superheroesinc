@@ -24,7 +24,6 @@ export default function MinotaurSection() {
                     <ul className="list-none space-y-2 text-gray-700">
                         {arcanoEffects.map((effect: string, idx: number) => (
                             <li key={`arc-${idx}`} className="flex items-start gap-2">
-                                <span className="text-amber-600 mt-1">Proof</span>
                                 <span>{effect}</span>
                             </li>
                         ))}

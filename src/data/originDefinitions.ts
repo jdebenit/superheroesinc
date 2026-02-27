@@ -78,7 +78,7 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
             "Hada Agua": ["+50 al modificador de impacto"],
             "Hada Eter": ["+50 al modificador de impacto"],
             "Centauro": ["+20 a la parada mental"],
-            "Minotauro": ["+30 al daño con armas blancas o contundentesl"],
+            "Minotauro": ["+30 al daño con armas blancas o contundentes"],
             "Enano": ["Visión en la oscuridad a 10/15m", "Lo que forje hace +30 al daño"],
             "Gigante": ["+20 a la parada mental"],
             "Troll": ["-40 a la actividad durante el dia"],

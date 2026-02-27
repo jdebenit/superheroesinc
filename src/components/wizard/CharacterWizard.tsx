@@ -17,6 +17,7 @@ import './CharacterWizard.css';
 
 import { WizardHelpModal } from './shared/WizardHelpModal';
 import { WIZARD_HELP } from '../../data/wizardHelp';
+import { WizardToast, WizardConfirm, type ToastType } from './shared/WizardDialogs';
 
 import { APP_VERSIONS } from '../../data/appVersions';
 import Logger from '../../utils/Logger';
@@ -24,6 +25,10 @@ import Logger from '../../utils/Logger';
 export default function CharacterWizard() {
     const [currentStep, setCurrentStep] = useState(1);
     const [showHelp, setShowHelp] = useState(false);
+
+    // Global Modal/Toast State
+    const [toast, setToast] = useState<{ message: string; type: ToastType } | null>(null);
+    const [confirmDialog, setConfirmDialog] = useState<{ message: string; onConfirm: () => void } | null>(null);
 
     // Refs for scroll-position memory per step
     const contentRef = useRef<HTMLDivElement>(null);
@@ -137,6 +142,10 @@ export default function CharacterWizard() {
     const handleStepClick = (stepId: number) => {
         goToStep(stepId);
     };
+    const showToast = useCallback((message: string, type: ToastType = 'info') => {
+        setToast({ message, type });
+        setTimeout(() => setToast(null), 3000);
+    }, []);
 
     const handleStepChange = (field: string, value: any) => {
         Logger.log('🔄 handleStepChange:', field, value);
@@ -151,15 +160,20 @@ export default function CharacterWizard() {
     };
 
     const handleReset = () => {
-        if (confirm('¿Estás seguro de que quieres reiniciar toda la creación del personaje? Esta acción no se puede deshacer.')) {
-            setCharacter(initialCharacterState);
-            setCurrentStep(1);
-            // Clear localStorage
-            if (typeof window !== 'undefined') {
-                localStorage.removeItem('characterWizardState');
-                Logger.log('🗑️ Cleared localStorage');
+        setConfirmDialog({
+            message: '¿Estás seguro de que quieres reiniciar toda la creación del personaje? Esta acción no se puede deshacer.',
+            onConfirm: () => {
+                setCharacter(initialCharacterState);
+                setCurrentStep(1);
+                // Clear localStorage
+                if (typeof window !== 'undefined') {
+                    localStorage.removeItem('characterWizardState');
+                    Logger.log('🗑️ Cleared localStorage');
+                }
+                setConfirmDialog(null);
+                showToast('Personaje reiniciado.', 'success');
             }
-        }
+        });
     };
 
     const handleImportJSON = () => {
@@ -181,7 +195,7 @@ export default function CharacterWizard() {
 
                 // Validate that it's a character JSON (check for key structure after merge)
                 if (!importedCharacter.name || !importedCharacter.attributes) {
-                    alert('❌ El archivo JSON no parece ser un personaje válido.');
+                    showToast('❌ El archivo JSON no parece ser un personaje válido.', 'error');
                     return;
                 }
 
@@ -194,11 +208,11 @@ export default function CharacterWizard() {
                     localStorage.setItem('characterWizardState', JSON.stringify(importedCharacter));
                 }
 
-                alert(`✅ Personaje "${importedCharacter.name}" cargado correctamente!`);
+                showToast(`Personaje "${importedCharacter.name}" cargado correctamente!`, 'success');
                 Logger.log('📥 Imported character:', importedCharacter);
             } catch (error) {
                 Logger.error('Error importing JSON:', error);
-                alert('❌ Error al leer el archivo JSON. Asegúrate de que es un archivo válido.');
+                showToast('Error al leer el archivo JSON. Asegúrate de que es un archivo válido.', 'error');
             }
         };
 
@@ -219,7 +233,11 @@ export default function CharacterWizard() {
         }
 
         if (currentStep === 3) {
-            return <Step3_Especials data={character} onChange={updateCharacter} />;
+            return <Step3_Especials
+                data={character}
+                onChange={updateCharacter}
+                onShowToast={showToast}
+            />;
         }
 
         if (currentStep === 4) {
@@ -350,6 +368,23 @@ export default function CharacterWizard() {
                 onClose={() => setShowHelp(false)}
                 content={WIZARD_HELP[currentStep]}
             />
+            {/* ── ALERTS & MODALS ─────────────────────── */}
+            {toast && (
+                <WizardToast
+                    message={toast.message}
+                    type={toast.type}
+                    onClose={() => setToast(null)}
+                />
+            )}
+
+            {confirmDialog && (
+                <WizardConfirm
+                    message={confirmDialog.message}
+                    onConfirm={confirmDialog.onConfirm}
+                    onCancel={() => setConfirmDialog(null)}
+                />
+            )}
+
         </div>
     );
 }

@@ -43,7 +43,7 @@ import SelectionModal from './modals/SelectionModal';
 import MagicalBondsModal from './modals/MagicalBondsModal';
 import MinotaurSection from './sections/MinotaurSection';
 
-export default function Step3_Especials({ data, onChange }: Step3Props) {
+export default function Step3_Especials({ data, onChange, onShowToast }: Step3Props) {
     const [modalOpen, setModalOpen] = useState(false);
     const [modalType, setModalType] = useState<ModalType>(null);
     const [modalOriginFilter, setModalOriginFilter] = useState<string | null>(null);
@@ -103,7 +103,11 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
     const addMagicTableRoll = (rollId: string) => {
         const validation = validateMagicTableRoll();
         if (!validation.allowed) {
-            alert(validation.message);
+            if (onShowToast) {
+                onShowToast(validation.message || 'Opción no permitida', 'error');
+            } else {
+                alert(validation.message || 'Opción no permitida');
+            }
             return;
         }
 
@@ -181,7 +185,11 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
         // Use validation hook
         const validation = validatePowerSelection(powerId, modalOriginFilter);
         if (!validation.allowed) {
-            alert(validation.message);
+            if (onShowToast) {
+                onShowToast(validation.message || 'Poder no permitido', 'error');
+            } else {
+                alert(validation.message || 'Poder no permitido');
+            }
             return;
         }
 
