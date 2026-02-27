@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import CharacterSheet from '../character/CharacterSheet';
 import Step1_OriginSelection from './steps/Step1_OriginSelection';
 import Step2_Characteristics from './steps/Step2_Characteristics';
@@ -24,6 +24,10 @@ import Logger from '../../utils/Logger';
 export default function CharacterWizard() {
     const [currentStep, setCurrentStep] = useState(1);
     const [showHelp, setShowHelp] = useState(false);
+
+    // Refs for scroll-position memory per step
+    const contentRef = useRef<HTMLDivElement>(null);
+    const scrollPositions = useRef<Map<number, number>>(new Map());
 
     // Initialize with default state to prevent hydration mismatch
     const [character, setCharacter] = useState(initialCharacterState);
@@ -95,16 +99,26 @@ export default function CharacterWizard() {
     // Calculate total PCs using custom hook
     const { totalPCs } = useCharacterCalculations(character);
 
-    const handleNext = () => {
-        if (currentStep < 7) {
-            setCurrentStep(currentStep + 1);
+    const goToStep = useCallback((nextStep: number) => {
+        // Save current scroll before leaving
+        if (contentRef.current) {
+            scrollPositions.current.set(currentStep, contentRef.current.scrollTop);
         }
+        setCurrentStep(nextStep);
+        // Restore scroll for the target step (or go to top on first visit)
+        requestAnimationFrame(() => {
+            if (contentRef.current) {
+                contentRef.current.scrollTop = scrollPositions.current.get(nextStep) ?? 0;
+            }
+        });
+    }, [currentStep]);
+
+    const handleNext = () => {
+        if (currentStep < 7) goToStep(currentStep + 1);
     };
 
     const handlePrevious = () => {
-        if (currentStep > 1) {
-            setCurrentStep(currentStep - 1);
-        }
+        if (currentStep > 1) goToStep(currentStep - 1);
     };
 
     const handleFinish = () => {
@@ -121,7 +135,7 @@ export default function CharacterWizard() {
     };
 
     const handleStepClick = (stepId: number) => {
-        setCurrentStep(stepId);
+        goToStep(stepId);
     };
 
     const handleStepChange = (field: string, value: any) => {
@@ -304,7 +318,7 @@ export default function CharacterWizard() {
             </div>
 
             {/* ── CONTENT AREA ────────────────────────── */}
-            <div className="wizard-content" role="tabpanel">
+            <div className="wizard-content" role="tabpanel" ref={contentRef}>
                 {renderStepContent()}
             </div>
 
