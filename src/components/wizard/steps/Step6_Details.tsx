@@ -187,7 +187,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
     ];
 
     return (
-        <div style={{ padding: '1rem', maxWidth: '1000px', margin: '0 auto' }}>
+        <div style={{ padding: '2rem' }}>
 
             {/* Header Description */}
             {/* Header Description */}

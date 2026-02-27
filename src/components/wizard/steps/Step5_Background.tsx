@@ -146,7 +146,7 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
     );
 
     return (
-        <div style={{ padding: '1rem', maxWidth: '1000px', margin: '0 auto' }}>
+        <div style={{ padding: '2rem' }}>
 
             {/* Header Description */}
             <div style={{
