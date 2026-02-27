@@ -702,11 +702,47 @@ export default function Step3_Especials({ data, onChange }: Step3Props) {
             </h2>
 
             {!hasAnyOrigin && (
-                <div className="text-center py-12 border-4 border-dashed border-gray-300 rounded-xl bg-gray-50">
-                    <p className="text-xl text-gray-500 font-bold">
-                        No has seleccionado ningún origen que actualmente tenga habilitado este paso. Recuerda es una Beta.
+                <div style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '4rem 2rem',
+                    backgroundColor: '#f8fafc',
+                    border: '2px dashed #cbd5e1',
+                    borderRadius: '16px',
+                    textAlign: 'center',
+                    marginTop: '2rem'
+                }}>
+                    <div style={{ fontSize: '4rem', marginBottom: '1rem', opacity: 0.8 }}>⚡</div>
+                    <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#1e293b', marginBottom: '0.75rem' }}>
+                        Sin Origen Seleccionado
+                    </h3>
+                    <p style={{ color: '#64748b', fontSize: '1.1rem', maxWidth: '500px', lineHeight: 1.6, marginBottom: '2rem' }}>
+                        Este paso gestiona los poderes y habilidades especiales derivadas de tus orígenes (Mutante, Arcano, Tecnológico, etc.). Necesitas seleccionar al menos uno en el primer paso para desbloquear estas opciones.
                     </p>
-                    <p className="text-gray-400 mt-2 font-comic">Prueba con Guardián, Alterado, Arcano, Sobrenatural, Thals, Divino, Cósmico, Mutante o Tecnológico</p>
+                    <button
+                        onClick={() => {
+                            const originTab = document.querySelector<HTMLButtonElement>('button[title="Origen"]');
+                            if (originTab) originTab.click();
+                        }}
+                        style={{
+                            padding: '0.75rem 1.5rem',
+                            backgroundColor: '#2563eb',
+                            color: 'white',
+                            fontWeight: 'bold',
+                            borderRadius: '8px',
+                            border: 'none',
+                            cursor: 'pointer',
+                            fontSize: '1rem',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '0.5rem',
+                            boxShadow: '0 4px 6px -1px rgba(37, 99, 235, 0.2)'
+                        }}
+                    >
+                        <span>← Volver al Paso 1</span>
+                    </button>
                 </div>
             )}
 
