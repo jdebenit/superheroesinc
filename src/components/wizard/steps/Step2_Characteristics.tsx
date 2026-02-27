@@ -422,7 +422,8 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
 
             <div style={{
                 display: 'grid',
-                gap: '1.5rem',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
+                gap: '1rem',
                 marginBottom: '2rem'
             }}>
                 {CHARACTERISTICS.map((char) => {
@@ -441,20 +442,22 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
                         <div
                             key={char.id}
                             style={{
-                                padding: '1.5rem',
+                                padding: '1.25rem',
                                 backgroundColor: 'white',
                                 border: '2px solid #e5e7eb',
                                 borderRadius: '12px',
-                                boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+                                boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: '1rem'
                             }}
                         >
                             <div style={{
                                 display: 'flex',
                                 justifyContent: 'space-between',
                                 alignItems: 'center',
-                                marginBottom: '1rem',
                                 paddingBottom: '0.75rem',
-                                borderBottom: '2px solid #e5e7eb'
+                                borderBottom: '2px solid #f3f4f6'
                             }}>
                                 <div>
                                     <span style={{
