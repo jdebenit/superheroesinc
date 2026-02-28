@@ -109,7 +109,7 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
             {/* PREJUDICE RESISTANCE */}
             <div style={sectionCardStyle}>
                 <div className="step5-section-title">
-                    <h3>🛡️ Resistencia a Prejuicios</h3>
+                    <h3>Resistencia a Prejuicios</h3>
                     <div className={`step5-cost-display step5-cost-${resistanceCost > 0 ? 'positive' : resistanceCost < 0 ? 'negative' : 'neutral'}`}>
                         Coste: {resistanceCost > 0 ? '+' : ''}{resistanceCost.toFixed(1)} PC
                     </div>
@@ -149,7 +149,7 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
 
             {/* ADVANCED STATUS OPTIONS */}
             <div style={sectionCardStyle}>
-                <h3 style={{ ...sectionTitleStyle, color: '#0f766e', borderBottomColor: '#99f6e4' }}>🏛️ Estatus Social y Legal</h3>
+                <h3 style={{ ...sectionTitleStyle, color: '#0f766e', borderBottomColor: '#99f6e4' }}>Estatus Social y Legal</h3>
                 <div className="step5-status-grid">
                     {renderStatusSelect("Posición Económica", ECONOMIC_STATUS, data.background?.economicStatus, 'economicStatus', currentEconomic)}
                     {renderStatusSelect("Situación Legal", LEGAL_STATUS, data.background?.legalStatus, 'legalStatus', currentLegal)}
@@ -160,10 +160,10 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
 
             {/* BACKGROUND ITEMS */}
             <div style={sectionCardStyle}>
-                <h3 style={{ ...sectionTitleStyle, color: '#4338ca', borderBottomColor: '#c7d2fe' }}>📝 Notas de Trasfondo</h3>
+                <h3 style={{ ...sectionTitleStyle, color: '#4338ca', borderBottomColor: '#c7d2fe' }}>Notas de Trasfondo</h3>
 
                 <div className="step5-help-notice">
-                    <p className="step5-help-title">💡 Ejemplos de trasfondo:</p>
+                    <p className="step5-help-title">Ejemplos de trasfondo:</p>
                     <ul className="step5-help-list">
                         <li><strong>Identidad secreta:</strong> No la mantiene / Opuesta a la real</li>
                         <li><strong>Carácter:</strong> Depresivo / Frío / Afable</li>
