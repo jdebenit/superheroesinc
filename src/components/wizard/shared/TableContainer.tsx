@@ -9,6 +9,7 @@ interface TableContainerProps {
     totalColSpan?: number;
     emptyMessage?: string;
     showTotal?: boolean;
+    tableClassName?: string;
 }
 
 export const TableContainer: React.FC<TableContainerProps> = ({
@@ -18,7 +19,8 @@ export const TableContainer: React.FC<TableContainerProps> = ({
     totalValue,
     totalColSpan = 3,
     emptyMessage,
-    showTotal = true
+    showTotal = true,
+    tableClassName = ''
 }) => {
     const hasContent = React.Children.count(children) > 0;
 
@@ -32,7 +34,7 @@ export const TableContainer: React.FC<TableContainerProps> = ({
 
     return (
         <div className="wizard-table-container">
-            <table className="wizard-table">
+            <table className={`wizard-table ${tableClassName}`}>
                 <thead className="wizard-table-header">
                     <tr>
                         {headers.map((header, index) => (

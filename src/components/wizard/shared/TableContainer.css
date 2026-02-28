@@ -33,13 +33,13 @@
     white-space: nowrap;
 }
 
-/* Wider cost/rank column for powers table */
-.wizard-table-header-cell:nth-child(2) {
+/* Wider cost/rank column — only for powers table */
+.wizard-table--powers .wizard-table-header-cell:nth-child(2) {
     min-width: 260px;
 }
 
-/* Compact action column */
-.wizard-table-header-cell:last-child {
+/* Compact action column — only for powers table */
+.wizard-table--powers .wizard-table-header-cell:last-child {
     width: 60px;
     min-width: 60px;
 }

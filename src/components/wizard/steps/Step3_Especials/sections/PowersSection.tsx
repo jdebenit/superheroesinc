@@ -168,6 +168,7 @@ export default function PowersSection({
                 <TableContainer
                     headers={['Poder', 'Base / Rango / PCs', 'Base Hab.', 'Origen', 'Acciones']}
                     showTotal={false}
+                    tableClassName="wizard-table--powers"
                 >
                     {(() => {
                         let thalsCount = 0;
