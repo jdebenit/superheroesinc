@@ -1,4 +1,5 @@
 import React from 'react';
+import './CostBadge.css';
 
 interface CostBadgeProps {
     cost: number | string;
@@ -15,23 +16,23 @@ export const CostBadge: React.FC<CostBadgeProps> = ({
 }) => {
     if (variant === 'free') {
         return (
-            <span className={`text-sm font-bold text-green-600 ${className}`}>
-                0 <span className="text-xs font-normal text-gray-500">(Gratis)</span>
+            <span className={`cost-badge cost-badge-free ${className}`}>
+                0 <span className="cost-badge-subtext">(Gratis)</span>
             </span>
         );
     }
 
     if (variant === 'variable') {
         return (
-            <span className={`text-sm font-bold text-indigo-600 ${className}`}>
-                {cost} <span className="text-xs font-normal text-gray-500">(Variable)</span>
+            <span className={`cost-badge cost-badge-variable ${className}`}>
+                {cost} <span className="cost-badge-subtext">(Variable)</span>
             </span>
         );
     }
 
     if (variant === 'penalty') {
         return (
-            <span className={`text-sm font-bold text-red-700 bg-red-50 border border-red-200 px-2 py-0.5 rounded ${className}`}>
+            <span className={`cost-badge cost-badge-penalty ${className}`}>
                 {cost}
             </span>
         );
@@ -39,7 +40,7 @@ export const CostBadge: React.FC<CostBadgeProps> = ({
 
     if (variant === 'bonus') {
         return (
-            <span className={`text-sm font-bold text-green-700 bg-green-50 border border-green-200 px-2 py-0.5 rounded ${className}`}>
+            <span className={`cost-badge cost-badge-bonus ${className}`}>
                 {cost}
             </span>
         );
@@ -47,7 +48,7 @@ export const CostBadge: React.FC<CostBadgeProps> = ({
 
     // Default
     return (
-        <span className={`text-sm font-bold bg-indigo-50 text-indigo-600 px-3 py-1 rounded-full border border-indigo-100 inline-block ${className}`}>
+        <span className={`cost-badge cost-badge-default ${className}`}>
             {cost} {label}
         </span>
     );
