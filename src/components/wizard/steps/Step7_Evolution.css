@@ -1,0 +1,45 @@
+/* =========================================================================
+   Step 7 : Evolución del Personaje (Work in Progress)
+   ========================================================================= */
+
+.step7-container {
+    padding: 2rem;
+}
+
+.step7-wip-card {
+    padding: 3rem 2rem;
+    text-align: center;
+    background-color: var(--color-bg-secondary, #f8f9fa);
+    border-radius: 12px;
+    border: 2px dashed var(--color-border, #dee2e6);
+}
+
+.step7-wip-icon {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.6;
+}
+
+.step7-wip-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--color-text-primary, #212529);
+}
+
+.step7-wip-description {
+    font-size: 1.125rem;
+    color: var(--color-text-secondary, #6c757d);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.step7-wip-notice {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: var(--color-bg-tertiary, #e9ecef);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: var(--color-text-secondary, #495057);
+}

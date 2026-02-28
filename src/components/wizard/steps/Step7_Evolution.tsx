@@ -1,5 +1,6 @@
 import React from 'react';
 import { stepPageTitleStyle, stepPageSubtitleStyle } from '../shared/stepStyles';
+import './Step7_Evolution.css';
 
 interface Step7Props {
     data: any;
@@ -8,53 +9,25 @@ interface Step7Props {
 
 export default function Step7_Evolution({ data, onChange }: Step7Props) {
     return (
-        <div style={{ padding: '2rem' }}>
+        <div className="step7-container">
             <h2 style={stepPageTitleStyle}>Evolución del Personaje</h2>
             <p style={stepPageSubtitleStyle}>
                 Gestiona la subida de nivel de tu personaje
             </p>
-            <div style={{
-                padding: '3rem 2rem',
-                textAlign: 'center',
-                backgroundColor: 'var(--color-bg-secondary, #f8f9fa)',
-                borderRadius: '12px',
-                border: '2px dashed var(--color-border, #dee2e6)'
-            }}>
-                <div style={{
-                    fontSize: '4rem',
-                    marginBottom: '1.5rem',
-                    opacity: 0.6
-                }}>
+            <div className="step7-wip-card">
+                <div className="step7-wip-icon">
                     🚧
                 </div>
-                <h3 style={{
-                    fontSize: '1.5rem',
-                    fontWeight: 600,
-                    marginBottom: '1rem',
-                    color: 'var(--color-text-primary, #212529)'
-                }}>
+                <h3 className="step7-wip-title">
                     Funcionalidad en Desarrollo
                 </h3>
-                <p style={{
-                    fontSize: '1.125rem',
-                    color: 'var(--color-text-secondary, #6c757d)',
-                    maxWidth: '600px',
-                    margin: '0 auto',
-                    lineHeight: 1.6
-                }}>
+                <p className="step7-wip-description">
                     La funcionalidad de subida de nivel del personaje
                     estará disponible próximamente. Aquí podrás gestionar el
                     crecimiento y desarrollo de tu personaje a medida que avanza
                     en sus aventuras por el increible mundo de Superheroes INC.
                 </p>
-                <div style={{
-                    marginTop: '2rem',
-                    padding: '1rem',
-                    backgroundColor: 'var(--color-bg-tertiary, #e9ecef)',
-                    borderRadius: '8px',
-                    fontSize: '0.95rem',
-                    color: 'var(--color-text-secondary, #495057)'
-                }}>
+                <div className="step7-wip-notice">
                     <strong>Próximamente:</strong> Incremento de características,
                     mejora de habilidades, hechizos adicionales y más.
                 </div>
