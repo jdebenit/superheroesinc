@@ -2,7 +2,7 @@ import React from 'react';
 import { TECHNOSUIT_STRENGTH_CONFIGS } from '../../../../../data/technoSuitStrengthConfigs';
 import type { TechnoSuitStrengthConfig } from '../../../../../data/technoSuitStrengthConfigs';
 import { WizardSection } from '../../../shared/WizardSection';
-import { CostBadge } from '../../../shared/CostBadge';
+import { SectionHeaderBadge } from '../../../shared/SectionHeaderBadge';
 import { InfoBox } from '../../../shared/InfoBox';
 import { RadioSelectTable } from '../../../shared/RadioSelectTable';
 import type { RadioSelectColumn } from '../../../shared/RadioSelectTable';
@@ -48,7 +48,7 @@ export default function TechnoSuitStrengthSection({
             description="Selecciona la capacidad de Fuerza aumentada que proporciona tu tecnoarmadura."
             rightContent={
                 selected ? (
-                    <CostBadge cost={`+${selected.pcCost}`} label="PC" variant="penalty" />
+                    <SectionHeaderBadge cost={`+${selected.pcCost}`} label="PC" variant="penalty" />
                 ) : undefined
             }
         >

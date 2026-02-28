@@ -1,6 +1,7 @@
 import React from 'react';
 import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS, FRIENDS_AND_ASSOCIATES } from '../../../data/backgroundTables';
 import { WizardSection } from '../shared/WizardSection';
+import { SectionHeaderBadge } from '../shared/SectionHeaderBadge';
 import { WizardField } from '../shared/WizardField';
 import { DynamicList } from '../shared/DynamicList';
 import { FormSelect } from '../shared/FormSelect';
@@ -75,13 +76,11 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
             <WizardSection
                 title="Resistencia a Prejuicios"
                 rightContent={
-                    <div className="section-header-badge">
-                        <CostBadge
-                            cost={resistanceCost > 0 ? `+${resistanceCost.toFixed(1)}` : resistanceCost.toFixed(1)}
-                            label="PC"
-                            variant={resistanceCost === 0 ? "default" : (resistanceCost > 0 ? "penalty" : "bonus")}
-                        />
-                    </div>
+                    <SectionHeaderBadge
+                        cost={resistanceCost > 0 ? `+${resistanceCost.toFixed(1)}` : resistanceCost.toFixed(1)}
+                        label="PC"
+                        variant={resistanceCost === 0 ? "default" : (resistanceCost > 0 ? "penalty" : "bonus")}
+                    />
                 }
                 description={
                     <>

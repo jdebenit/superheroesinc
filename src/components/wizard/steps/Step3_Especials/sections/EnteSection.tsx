@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { WizardSection } from '../../../shared/WizardSection';
 import { FormSelect } from '../../../shared/FormSelect';
 import { CostBadge } from '../../../shared/CostBadge';
+import { SectionHeaderBadge } from '../../../shared/SectionHeaderBadge';
 
 export const ENTE_FORMS = [
     { id: 'humanoid', label: 'Humanoide', cost: 1, description: 'Aspecto humanoide en el plano' },
@@ -60,7 +61,7 @@ export default function EnteSection({ enteParams, onChange }: EnteSectionProps) 
             title="Opciones de Origen: Ente"
             color="#7e22ce"
             rightContent={
-                <CostBadge
+                <SectionHeaderBadge
                     cost={totalCost > 0 ? `+${totalCost}` : totalCost}
                     label="PC"
                     variant={totalCost === 0 ? "free" : (totalCost > 0 ? "penalty" : "bonus")}

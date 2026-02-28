@@ -3,6 +3,7 @@ import SequelsSelector from '../../../shared/SequelsSelector';
 import { SEQUELS } from '../../../../../data/sequels';
 import { WizardSection } from '../../../shared/WizardSection';
 import { CostBadge } from '../../../shared/CostBadge';
+import { SectionHeaderBadge } from '../../../shared/SectionHeaderBadge';
 import { FormSelect } from '../../../shared/FormSelect';
 
 // --- Data Constants ---
@@ -85,7 +86,7 @@ export default function AlteradoSection({ alteradoParams, onChange }: AlteradoSe
             title="Opciones de Origen: Alterado"
             color="#166534"
             rightContent={
-                <CostBadge
+                <SectionHeaderBadge
                     cost={totalDiscount > 0 ? `-${totalDiscount}` : 0}
                     label="PC"
                     variant={totalDiscount === 0 ? "free" : "bonus"}

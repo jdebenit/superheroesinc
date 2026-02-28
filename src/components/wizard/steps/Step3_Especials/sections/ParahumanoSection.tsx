@@ -1,6 +1,7 @@
 import React from 'react';
 import { WizardSection } from '../../../shared/WizardSection';
 import { CostBadge } from '../../../shared/CostBadge';
+import { SectionHeaderBadge } from '../../../shared/SectionHeaderBadge';
 
 export interface ParahumanoParams {
     isHybridWithHuman: boolean;
@@ -28,7 +29,7 @@ export default function ParahumanoSection({ parahumanoParams, onChange }: Parahu
             title="Opciones de Origen: Parahumano"
             color="#166534"
             rightContent={
-                <CostBadge
+                <SectionHeaderBadge
                     cost={isHybridWithHuman ? "+3" : 0}
                     label="PC extra"
                     variant={isHybridWithHuman ? "penalty" : "default"}

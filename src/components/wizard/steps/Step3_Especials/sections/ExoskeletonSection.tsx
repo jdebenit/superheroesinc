@@ -3,6 +3,7 @@ import { EXOSKELETON_CONFIGS } from '../../../../../data/exoskeletonConfigs';
 import type { ExoskeletonConfig } from '../../../../../data/exoskeletonConfigs';
 import { WizardSection } from '../../../shared/WizardSection';
 import { CostBadge } from '../../../shared/CostBadge';
+import { SectionHeaderBadge } from '../../../shared/SectionHeaderBadge';
 import { InfoBox } from '../../../shared/InfoBox';
 import { RadioSelectTable } from '../../../shared/RadioSelectTable';
 import type { RadioSelectColumn } from '../../../shared/RadioSelectTable';
@@ -66,7 +67,7 @@ export default function ExoskeletonSection({
             description="Selecciona la configuración del campo energético de tu exoesqueleto."
             rightContent={
                 selected ? (
-                    <CostBadge cost={`+${selected.pcCost}`} label="PC" variant="penalty" />
+                    <SectionHeaderBadge cost={`+${selected.pcCost}`} label="PC" variant="penalty" />
                 ) : undefined
             }
         >

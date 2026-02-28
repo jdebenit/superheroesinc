@@ -4,6 +4,7 @@ import { WizardSection } from '../../../shared/WizardSection';
 import { FormSelect } from '../../../shared/FormSelect';
 import { InfoBox } from '../../../shared/InfoBox';
 import { CostBadge } from '../../../shared/CostBadge';
+import { SectionHeaderBadge } from '../../../shared/SectionHeaderBadge';
 
 interface TechnologicalSectionProps {
     techParams: { incomeSource: string } | null;
@@ -27,7 +28,7 @@ export default function TechnologicalSection({ techParams, onChange }: Technolog
             color="#334155"
             description="Selecciona cómo financia el personaje su tecnología. Esto afecta al coste en Puntos de Creación."
             rightContent={
-                <CostBadge
+                <SectionHeaderBadge
                     cost={(selectedSource?.pc || 0) > 0 ? `+${selectedSource?.pc}` : (selectedSource?.pc || 0)}
                     label="PC"
                     variant={!(selectedSource?.pc) ? "default" : (selectedSource.pc > 0 ? "penalty" : "bonus")}

@@ -3,6 +3,7 @@ import { DIVINE_FOCUS_OPTIONS } from '../../../../../data/divineOptions';
 import { WizardSection } from '../../../shared/WizardSection';
 import { FormSelect } from '../../../shared/FormSelect';
 import { CostBadge } from '../../../shared/CostBadge';
+import { SectionHeaderBadge } from '../../../shared/SectionHeaderBadge';
 import { InfoBox } from '../../../shared/InfoBox';
 
 export interface DivineParams {
@@ -36,7 +37,7 @@ export default function DivineSection({ divineParams, onChange }: DivineSectionP
             color="#b45309"
             description="Como entidad divina, debes determinar si tu poder requiere un foco para manifestarse o alcanzar su máximo potencial."
             rightContent={
-                <CostBadge
+                <SectionHeaderBadge
                     cost={(selectedFocus?.cost || 0) > 0 ? `+${selectedFocus?.cost}` : (selectedFocus?.cost || 0)}
                     label="PC"
                     variant={!(selectedFocus?.cost) ? "free" : (selectedFocus.cost > 0 ? "penalty" : "bonus")}

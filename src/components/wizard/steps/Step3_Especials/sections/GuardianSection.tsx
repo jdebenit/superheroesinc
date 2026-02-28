@@ -8,6 +8,7 @@ import {
 import { WizardSection } from '../../../shared/WizardSection';
 import { FormSelect } from '../../../shared/FormSelect';
 import { CostBadge } from '../../../shared/CostBadge';
+import { SectionHeaderBadge } from '../../../shared/SectionHeaderBadge';
 
 export interface GuardianParams {
     quality: string | null;
@@ -42,7 +43,7 @@ export default function GuardianSection({ guardianParams, onChange }: GuardianSe
             title="Opciones de Origen: Guardián"
             color="#1e40af"
             rightContent={
-                <CostBadge
+                <SectionHeaderBadge
                     cost={(selectedQuality?.cost || 0) > 0 ? `+${selectedQuality?.cost}` : (selectedQuality?.cost || 0)}
                     label="PC"
                     variant={!(selectedQuality?.cost) ? "free" : (selectedQuality.cost > 0 ? "penalty" : "bonus")}

@@ -3,6 +3,7 @@ import { EXOSKELETON_ARMOR_CONFIGS } from '../../../../../data/exoskeletonArmorC
 import type { ExoskeletonArmorConfig } from '../../../../../data/exoskeletonArmorConfigs';
 import { WizardSection } from '../../../shared/WizardSection';
 import { CostBadge } from '../../../shared/CostBadge';
+import { SectionHeaderBadge } from '../../../shared/SectionHeaderBadge';
 import { InfoBox } from '../../../shared/InfoBox';
 import { RadioSelectTable } from '../../../shared/RadioSelectTable';
 import type { RadioSelectColumn } from '../../../shared/RadioSelectTable';
@@ -47,7 +48,7 @@ export default function ExoskeletonArmorSection({
             description="Selecciona el nivel de blindaje y protección de tu armadura o vehículo."
             rightContent={
                 selected ? (
-                    <CostBadge cost={`+${selected.pcCost}`} label="PC" variant="penalty" />
+                    <SectionHeaderBadge cost={`+${selected.pcCost}`} label="PC" variant="penalty" />
                 ) : undefined
             }
         >

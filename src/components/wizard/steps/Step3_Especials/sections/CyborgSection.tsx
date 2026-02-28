@@ -6,6 +6,7 @@ import {
 } from '../../../../../data/cyborgImplantConfigs';
 import { WizardSection } from '../../../shared/WizardSection';
 import { CostBadge } from '../../../shared/CostBadge';
+import { SectionHeaderBadge } from '../../../shared/SectionHeaderBadge';
 import { WizardField } from '../../../shared/WizardField';
 import { FormSelect } from '../../../shared/FormSelect';
 import CyborgImplantRow from './CyborgImplantRow';
@@ -39,7 +40,7 @@ export const CyborgSection: React.FC<CyborgSectionProps> = ({ implants = [], onC
             description="Gestiona los implantes y mejoras cibernéticas del personaje."
             rightContent={
                 totalCost > 0 ? (
-                    <CostBadge cost={`+${totalCost}`} label="PC" variant="penalty" />
+                    <SectionHeaderBadge cost={`+${totalCost}`} label="PC" variant="penalty" />
                 ) : undefined
             }
         >

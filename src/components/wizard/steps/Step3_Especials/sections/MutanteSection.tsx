@@ -4,6 +4,7 @@ import { SEQUELS } from '../../../../../data/sequels';
 import { getMutantType } from '../utils';
 import { WizardSection } from '../../../shared/WizardSection';
 import { CostBadge } from '../../../shared/CostBadge';
+import { SectionHeaderBadge } from '../../../shared/SectionHeaderBadge';
 import { InfoBox } from '../../../shared/InfoBox';
 
 interface SelectedSequel {
@@ -50,7 +51,7 @@ export default function MutanteSection({ mutanteParams, onChange, data }: Mutant
             color="#166534"
             description={`Como mutante ${mutantType ? `de tipo ${mutantType}` : ''}, tu cuerpo ha sufrido alteraciones que pueden conllevar secuelas físicas o mentales. Puedes seleccionar secuelas opcionales para obtener puntos de creación extra.`}
             rightContent={
-                <CostBadge
+                <SectionHeaderBadge
                     cost={totalDiscount > 0 ? `-${totalDiscount}` : 0}
                     label="PC"
                     variant={totalDiscount === 0 ? "free" : "bonus"}

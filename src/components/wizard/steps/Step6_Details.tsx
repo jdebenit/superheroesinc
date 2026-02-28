@@ -8,6 +8,7 @@ import { DynamicList } from '../shared/DynamicList';
 import { FormSelect } from '../shared/FormSelect';
 import { InfoBox } from '../shared/InfoBox';
 import { CostBadge } from '../shared/CostBadge';
+import { SectionHeaderBadge } from '../shared/SectionHeaderBadge';
 import { useStep6Logic } from '../hooks/useStep6Logic';
 import '../shared/WizardStep.css';
 import './Step6_Details.css';
@@ -145,14 +146,12 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                 defaultCollapsed={(data.weapons?.items?.length ?? 0) === 0}
                 rightContent={
                     (data.weapons?.items?.length ?? 0) > 0 ? (
-                        <div className="section-header-badge">
-                            <CostBadge
-                                cost={data.weapons?.items?.reduce((acc: number, item: any) => acc + (parseInt(item.cost) || 0), 0) || 0}
-                                label="PC"
-                                variant="default"
-                                className="text-white"
-                            />
-                        </div>
+                        <SectionHeaderBadge
+                            cost={data.weapons?.items?.reduce((acc: number, item: any) => acc + (parseInt(item.cost) || 0), 0) || 0}
+                            label="PC"
+                            variant="default"
+                            className="text-white"
+                        />
                     ) : undefined
                 }
             >
@@ -228,14 +227,12 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                 defaultCollapsed={(data.equipment?.items?.length ?? 0) === 0}
                 rightContent={
                     (data.equipment?.items?.length ?? 0) > 0 ? (
-                        <div className="section-header-badge">
-                            <CostBadge
-                                cost={data.equipment?.items?.reduce((acc: number, item: any) => acc + (parseInt(item.cost) || 0), 0) || 0}
-                                label="PC"
-                                variant="default"
-                                className="text-white"
-                            />
-                        </div>
+                        <SectionHeaderBadge
+                            cost={data.equipment?.items?.reduce((acc: number, item: any) => acc + (parseInt(item.cost) || 0), 0) || 0}
+                            label="PC"
+                            variant="default"
+                            className="text-white"
+                        />
                     ) : undefined
                 }
             >
@@ -286,14 +283,12 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                 defaultCollapsed={(data.vehicles?.items?.length ?? 0) === 0}
                 rightContent={
                     (data.vehicles?.items?.length ?? 0) > 0 ? (
-                        <div className="section-header-badge">
-                            <CostBadge
-                                cost={data.vehicles?.items?.reduce((acc: number, item: any) => acc + (parseInt(item.cost) || 0), 0) || 0}
-                                label="PC"
-                                variant="default"
-                                className="text-white"
-                            />
-                        </div>
+                        <SectionHeaderBadge
+                            cost={data.vehicles?.items?.reduce((acc: number, item: any) => acc + (parseInt(item.cost) || 0), 0) || 0}
+                            label="PC"
+                            variant="default"
+                            className="text-white"
+                        />
                     ) : undefined
                 }
             >
@@ -372,14 +367,12 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                 defaultCollapsed={(data.artifacts?.items?.length ?? 0) === 0}
                 rightContent={
                     (data.artifacts?.items?.length ?? 0) > 0 ? (
-                        <div className="section-header-badge">
-                            <CostBadge
-                                cost={data.artifacts?.items?.reduce((acc: number, item: any) => acc + (parseInt(item.cost) || 0), 0) || 0}
-                                label="PC"
-                                variant="default"
-                                className="text-white"
-                            />
-                        </div>
+                        <SectionHeaderBadge
+                            cost={data.artifacts?.items?.reduce((acc: number, item: any) => acc + (parseInt(item.cost) || 0), 0) || 0}
+                            label="PC"
+                            variant="default"
+                            className="text-white"
+                        />
                     ) : undefined
                 }
             >
