@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
     CYBORG_IMPLANT_STATS,
     CYBORG_IMPLANT_STRENGTHS,
@@ -12,6 +12,7 @@ import CyborgImplantRow from './CyborgImplantRow';
 import { TableContainer } from '../../../shared/TableContainer';
 import { EmptyState } from '../../../shared/EmptyState';
 import { PixelButton } from '../../../shared/PixelButton';
+import { useCyborgSectionLogic } from '../../../hooks/useCyborgSectionLogic';
 
 interface CyborgSectionProps {
     implants: CyborgImplant[];
@@ -19,33 +20,17 @@ interface CyborgSectionProps {
 }
 
 export const CyborgSection: React.FC<CyborgSectionProps> = ({ implants = [], onChange }) => {
-    const [newImplantName, setNewImplantName] = useState('');
-    const [selectedStatId, setSelectedStatId] = useState<string>(CYBORG_IMPLANT_STATS[0].id);
-    const [selectedStrengthId, setSelectedStrengthId] = useState<string>(CYBORG_IMPLANT_STRENGTHS[0].id);
-
-    const handleAddImplant = () => {
-        if (!newImplantName.trim()) return;
-
-        const newImplant: CyborgImplant = {
-            id: crypto.randomUUID(),
-            name: newImplantName.trim(),
-            statConfigId: selectedStatId,
-            strengthConfigId: selectedStrengthId
-        };
-
-        onChange([...implants, newImplant]);
-        setNewImplantName('');
-    };
-
-    const handleDeleteImplant = (id: string) => {
-        onChange(implants.filter(imp => imp.id !== id));
-    };
-
-    const totalCost = implants.reduce((acc, imp) => {
-        const stat = CYBORG_IMPLANT_STATS.find(s => s.id === imp.statConfigId);
-        const str = CYBORG_IMPLANT_STRENGTHS.find(s => s.id === imp.strengthConfigId);
-        return acc + (stat?.pcCost || 0) + (str?.pcCost || 0);
-    }, 0);
+    const {
+        newImplantName,
+        setNewImplantName,
+        selectedStatId,
+        setSelectedStatId,
+        selectedStrengthId,
+        setSelectedStrengthId,
+        handleAddImplant,
+        handleDeleteImplant,
+        totalCost
+    } = useCyborgSectionLogic(implants, onChange);
 
     return (
         <WizardSection
