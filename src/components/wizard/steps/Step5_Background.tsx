@@ -3,9 +3,9 @@ import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS, FRIENDS_AND_ASSOCIATES } 
 import { WizardSection } from '../shared/WizardSection';
 import { SectionHeaderBadge } from '../shared/SectionHeaderBadge';
 import { WizardField } from '../shared/WizardField';
+import { WizardRange } from '../shared/WizardRange';
+import { StatusSelectCard } from '../shared/StatusSelectCard';
 import { DynamicList } from '../shared/DynamicList';
-import { FormSelect } from '../shared/FormSelect';
-import { CostBadge } from '../shared/CostBadge';
 import { useStep5Logic } from '../hooks/useStep5Logic';
 import '../shared/WizardStep.css';
 import './Step5_Background.css';
@@ -31,40 +31,7 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
         updateStatus
     } = useStep5Logic(data, onChange);
 
-    const renderStatusSelect = (
-        title: string,
-        options: any[],
-        currentValue: string | undefined,
-        field: string,
-        currentObj: any
-    ) => (
-        <div className="step5-status-card">
-            <div className="step5-status-header">
-                <h4 className="step5-status-title">{title}</h4>
-                <div className="section-header-badge">
-                    <CostBadge
-                        cost={currentObj.cost > 0 ? `+${currentObj.cost}` : currentObj.cost}
-                        label="PC"
-                        variant={currentObj.cost === 0 ? "default" : (currentObj.cost > 0 ? "penalty" : "bonus")}
-                    />
-                </div>
-            </div>
-            <FormSelect
-                label=""
-                value={currentValue || options[0].id}
-                onChange={(val) => updateStatus(field, val)}
-                options={options.map(opt => ({
-                    id: opt.id,
-                    label: opt.label,
-                    cost: opt.cost,
-                    description: opt.description
-                }))}
-                showCostInOption={true}
-                showDescription={true}
-                noMargin
-            />
-        </div>
-    );
+    // Using shared Component StatusSelectCard instead of renderStatusSelect inline function
 
     return (
         <div className="wizard-step-container">
@@ -89,39 +56,21 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
                     </>
                 }
             >
-                <div className="step5-range-container">
-                    <span className="step5-range-label">1</span>
-                    <input
-                        type="range"
-                        min="1"
-                        max="100"
-                        value={resistanceValue}
-                        onChange={(e) => handleResistanceChange(parseInt(e.target.value))}
-                        className="step5-range-input"
-                    />
-                    <span className="step5-range-label">100</span>
-
-                    <div className="step5-number-input-wrapper">
-                        <WizardField
-                            label=""
-                            type="number"
-                            min="1"
-                            max="100"
-                            value={resistanceValue}
-                            onChange={(val) => handleResistanceChange(parseInt(val))}
-                            noMargin
-                        />
-                        <span className="step5-percent-symbol">%</span>
-                    </div>
-                </div>
+                <WizardRange
+                    min={1}
+                    max={100}
+                    value={resistanceValue}
+                    onChange={(val) => handleResistanceChange(val)}
+                    suffix="%"
+                />
             </WizardSection>
 
             <WizardSection title="Estatus Social y Legal">
                 <div className="step5-status-grid">
-                    {renderStatusSelect("Posición Económica", ECONOMIC_STATUS, data.background?.economicStatus, 'economicStatus', currentEconomic)}
-                    {renderStatusSelect("Situación Legal", LEGAL_STATUS, data.background?.legalStatus, 'legalStatus', currentLegal)}
-                    {renderStatusSelect("Posición Social", SOCIAL_STATUS, data.background?.socialStatus, 'socialStatus', currentSocial)}
-                    {renderStatusSelect("Amistades y allegados", FRIENDS_AND_ASSOCIATES, data.background?.friendsAndAssociates, 'friendsAndAssociates', currentFriends)}
+                    <StatusSelectCard title="Posición Económica" options={ECONOMIC_STATUS} currentValue={data.background?.economicStatus} field="economicStatus" currentObj={currentEconomic} onChange={(field, val) => updateStatus(field, val)} />
+                    <StatusSelectCard title="Situación Legal" options={LEGAL_STATUS} currentValue={data.background?.legalStatus} field="legalStatus" currentObj={currentLegal} onChange={(field, val) => updateStatus(field, val)} />
+                    <StatusSelectCard title="Posición Social" options={SOCIAL_STATUS} currentValue={data.background?.socialStatus} field="socialStatus" currentObj={currentSocial} onChange={(field, val) => updateStatus(field, val)} />
+                    <StatusSelectCard title="Amistades y allegados" options={FRIENDS_AND_ASSOCIATES} currentValue={data.background?.friendsAndAssociates} field="friendsAndAssociates" currentObj={currentFriends} onChange={(field, val) => updateStatus(field, val)} />
                 </div>
             </WizardSection>
 

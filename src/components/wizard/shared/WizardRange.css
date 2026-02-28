@@ -1,0 +1,100 @@
+/* =========================================================================
+   WizardRange Component
+   ========================================================================= */
+
+.wizard-range-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: #f8fafc;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+.wizard-range-label {
+    font-weight: bold;
+    color: #64748b;
+}
+
+.wizard-range-input {
+    flex: 1;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    border-radius: 3px;
+    background: #e2e8f0;
+    outline: none;
+    accent-color: #4f46e5;
+}
+
+/* Track filled - simulated via background gradient on value change in JS or use accent-color */
+.wizard-range-input::-webkit-slider-runnable-track {
+    height: 6px;
+    border-radius: 3px;
+    background: #e2e8f0;
+}
+
+.wizard-range-input::-moz-range-track {
+    height: 6px;
+    border-radius: 3px;
+    background: #e2e8f0;
+    border: none;
+}
+
+.wizard-range-input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #4f46e5;
+    cursor: pointer;
+    box-shadow: 0 1px 4px rgba(79, 70, 229, 0.4);
+    margin-top: -7px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.wizard-range-input::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #4f46e5;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 1px 4px rgba(79, 70, 229, 0.4);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.wizard-range-input:hover::-webkit-slider-thumb {
+    transform: scale(1.15);
+    box-shadow: 0 2px 8px rgba(79, 70, 229, 0.55);
+}
+
+.wizard-range-input:hover::-moz-range-thumb {
+    transform: scale(1.15);
+    box-shadow: 0 2px 8px rgba(79, 70, 229, 0.55);
+}
+
+.wizard-range-input:focus::-webkit-slider-thumb {
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.3);
+}
+
+.wizard-range-input:focus::-moz-range-thumb {
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.3);
+}
+
+.wizard-range-number-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: 1rem;
+    width: 100px;
+}
+
+.wizard-range-percent-symbol {
+    font-size: 0.9rem;
+    color: #64748b;
+    font-weight: bold;
+}
