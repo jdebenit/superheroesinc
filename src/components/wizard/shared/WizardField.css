@@ -80,3 +80,10 @@
 .wizard-field-nomargin {
     margin-bottom: 0 !important;
 }
+
+/* Responsive Hide Label */
+@media (min-width: 769px) {
+    .wizard-field-hide-label-desktop .wizard-field-label {
+        display: none;
+    }
+}

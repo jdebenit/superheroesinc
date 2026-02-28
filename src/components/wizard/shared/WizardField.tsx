@@ -16,6 +16,7 @@ interface WizardFieldProps {
     noMargin?: boolean;
     inputWidth?: string;
     textAlign?: 'left' | 'center' | 'right';
+    hideLabelDesktop?: boolean;
 }
 
 export const WizardField: React.FC<WizardFieldProps> = ({
@@ -32,7 +33,8 @@ export const WizardField: React.FC<WizardFieldProps> = ({
     max,
     noMargin = false,
     inputWidth,
-    textAlign = 'left'
+    textAlign = 'left',
+    hideLabelDesktop = false
 }) => {
     const inputProps = {
         value,
@@ -49,8 +51,10 @@ export const WizardField: React.FC<WizardFieldProps> = ({
         }
     };
 
+    const fieldClass = `wizard-field ${noMargin ? 'wizard-field-nomargin' : ''} ${hideLabelDesktop ? 'wizard-field-hide-label-desktop' : ''}`;
+
     return (
-        <div className={`wizard-field ${noMargin ? 'wizard-field-nomargin' : ''}`} style={style}>
+        <div className={fieldClass} style={style}>
             {label && <label className="wizard-field-label">{label}</label>}
             {type === 'textarea' ? (
                 <textarea

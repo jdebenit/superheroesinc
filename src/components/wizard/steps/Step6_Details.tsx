@@ -6,6 +6,7 @@ import { MAGIC_OBJECTS } from '../../../data/magicObjects';
 import { ARTIFACTS } from '../../../data/artifacts';
 import { WizardSection } from '../shared/WizardSection';
 import { WizardField } from '../shared/WizardField';
+import { WizardGrid } from '../shared/WizardGrid';
 import { DynamicList } from '../shared/DynamicList';
 import { FormSelect } from '../shared/FormSelect';
 import { InfoBox } from '../shared/InfoBox';
@@ -298,51 +299,58 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                         color="#3b82f6"
                         renderItem={(item, index) => (
                             <div className="weapon-card">
-                                {/* Row 1: stats compactos */}
-                                <div className="weapon-row-top">
+                                <WizardGrid
+                                    columns="2fr 1fr 1fr 1fr 120px"
+                                    headers={['Nombre', 'Daño', 'DxA', 'CAR', 'Coste PC']}
+                                >
                                     <WizardField
                                         label="Nombre"
                                         value={item.name}
-                                        onChange={(val) => updateWeapon(index, 'name', val)}
+                                        onChange={(val: string) => updateWeapon(index, 'name', val)}
                                         style={{ marginBottom: 0 }}
                                         placeholder="Nombre del arma"
+                                        hideLabelDesktop={true}
                                     />
                                     <WizardField
                                         label="Daño"
                                         value={item.damage || ''}
-                                        onChange={(val) => updateWeapon(index, 'damage', val)}
+                                        onChange={(val: string) => updateWeapon(index, 'damage', val)}
                                         style={{ marginBottom: 0 }}
                                         placeholder="Ej: 1d8+2"
+                                        hideLabelDesktop={true}
                                     />
                                     <WizardField
                                         label="DxA"
                                         value={item.dxa || ''}
-                                        onChange={(val) => updateWeapon(index, 'dxa', val)}
+                                        onChange={(val: string) => updateWeapon(index, 'dxa', val)}
                                         style={{ marginBottom: 0 }}
                                         placeholder="DxA"
+                                        hideLabelDesktop={true}
                                     />
                                     <WizardField
                                         label="CAR"
                                         value={item.car || ''}
-                                        onChange={(val) => updateWeapon(index, 'car', val)}
+                                        onChange={(val: string) => updateWeapon(index, 'car', val)}
                                         style={{ marginBottom: 0 }}
                                         placeholder="CAR"
+                                        hideLabelDesktop={true}
                                     />
                                     <WizardField
                                         type="number"
                                         label="Coste PC"
                                         min="0"
                                         value={item.cost || 0}
-                                        onChange={(val) => updateWeapon(index, 'cost', Math.max(0, parseInt(val) || 0).toString())}
+                                        onChange={(val: string) => updateWeapon(index, 'cost', Math.max(0, parseInt(val) || 0).toString())}
                                         style={{ marginBottom: 0 }}
+                                        hideLabelDesktop={true}
                                     />
-                                </div>
+                                </WizardGrid>
                                 {/* Row 2: Notas full width */}
                                 <WizardField
                                     label="Notas / Propiedades"
                                     value={item.notes || ''}
-                                    onChange={(val) => updateWeapon(index, 'notes', val)}
-                                    style={{ marginBottom: 0 }}
+                                    onChange={(val: string) => updateWeapon(index, 'notes', val)}
+                                    style={{ marginBottom: 0, marginTop: '0.5rem' }}
                                     placeholder="Alcance, cadencia, efectos especiales..."
                                 />
                             </div>
@@ -375,30 +383,36 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                         addButtonLabel="Añadir Equipo"
                         color="#3b82f6"
                         renderItem={(item, index) => (
-                            <div className="inventory-card equipment-grid">
+                            <WizardGrid
+                                columns="2fr 3fr 120px"
+                                headers={['Nombre', 'Notas / Descripción', 'Coste']}
+                            >
                                 <WizardField
                                     label="Nombre"
                                     value={item.name}
-                                    onChange={(val) => updateEquipment(index, 'name', val)}
+                                    onChange={(val: string) => updateEquipment(index, 'name', val)}
                                     style={{ marginBottom: 0 }}
                                     placeholder="Nombre del objeto"
+                                    hideLabelDesktop={true}
                                 />
                                 <WizardField
                                     label="Notas / Descripción"
                                     value={item.notes || ''}
-                                    onChange={(val) => updateEquipment(index, 'notes', val)}
+                                    onChange={(val: string) => updateEquipment(index, 'notes', val)}
                                     style={{ marginBottom: 0 }}
                                     placeholder="Descripción corta..."
+                                    hideLabelDesktop={true}
                                 />
                                 <WizardField
                                     type="number"
                                     label="Coste"
                                     min="0"
                                     value={item.cost || 0}
-                                    onChange={(val) => updateEquipment(index, 'cost', Math.max(0, parseInt(val) || 0).toString())}
+                                    onChange={(val: string) => updateEquipment(index, 'cost', Math.max(0, parseInt(val) || 0).toString())}
                                     style={{ marginBottom: 0 }}
+                                    hideLabelDesktop={true}
                                 />
-                            </div>
+                            </WizardGrid>
                         )}
                     />
                 </WizardSection>
@@ -428,54 +442,64 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                         addButtonLabel="Añadir Vehículo"
                         color="#3b82f6"
                         renderItem={(item, index) => (
-                            <div className="inventory-card vehicle-grid">
+                            <WizardGrid
+                                columns="2fr 1fr 1fr 1fr 1fr 1fr 120px"
+                                headers={['Modelo', 'Blind.', 'PE', 'Vel.', 'Alc.', 'Man.', 'Coste']}
+                            >
                                 <WizardField
                                     label="Modelo / Fabricante"
                                     value={item.name}
-                                    onChange={(val) => updateVehicle(index, 'name', val)}
+                                    onChange={(val: string) => updateVehicle(index, 'name', val)}
                                     style={{ marginBottom: 0 }}
+                                    hideLabelDesktop={true}
                                 />
                                 <WizardField
                                     label="Blindaje"
                                     value={item.armor || ''}
-                                    onChange={(val) => updateVehicle(index, 'armor', val)}
+                                    onChange={(val: string) => updateVehicle(index, 'armor', val)}
                                     style={{ marginBottom: 0 }}
+                                    hideLabelDesktop={true}
                                 />
                                 <WizardField
                                     label="PE"
                                     value={item.pe || ''}
-                                    onChange={(val) => updateVehicle(index, 'pe', val)}
+                                    onChange={(val: string) => updateVehicle(index, 'pe', val)}
                                     style={{ marginBottom: 0 }}
+                                    hideLabelDesktop={true}
                                 />
                                 <WizardField
                                     label="Velocidad"
                                     value={item.speed || ''}
-                                    onChange={(val) => updateVehicle(index, 'speed', val)}
+                                    onChange={(val: string) => updateVehicle(index, 'speed', val)}
                                     style={{ marginBottom: 0 }}
+                                    hideLabelDesktop={true}
                                 />
                                 <WizardField
                                     label="Alcance/Autonomía"
                                     value={item.range || ''}
-                                    onChange={(val) => updateVehicle(index, 'range', val)}
+                                    onChange={(val: string) => updateVehicle(index, 'range', val)}
                                     style={{ marginBottom: 0 }}
+                                    hideLabelDesktop={true}
                                 />
                                 <WizardField
                                     type="number"
                                     label="Maniobrabilidad"
                                     min="0"
                                     value={item.maneuverability ?? 0}
-                                    onChange={(val) => updateVehicle(index, 'maneuverability', Math.max(0, parseInt(val) || 0))}
+                                    onChange={(val: string) => updateVehicle(index, 'maneuverability', Math.max(0, parseInt(val) || 0))}
                                     style={{ marginBottom: 0 }}
+                                    hideLabelDesktop={true}
                                 />
                                 <WizardField
                                     type="number"
                                     label="Coste"
                                     min="0"
                                     value={item.cost || 0}
-                                    onChange={(val) => updateVehicle(index, 'cost', Math.max(0, parseInt(val) || 0).toString())}
+                                    onChange={(val: string) => updateVehicle(index, 'cost', Math.max(0, parseInt(val) || 0).toString())}
                                     style={{ marginBottom: 0 }}
+                                    hideLabelDesktop={true}
                                 />
-                            </div>
+                            </WizardGrid>
                         )}
                     />
                 </WizardSection>
@@ -519,39 +543,46 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                                     }))}
                                 />
 
-                                <div className="artifact-grid">
+                                <WizardGrid
+                                    columns="2fr 1fr 1fr 120px"
+                                    headers={['Nombre', 'Fiabilidad', 'Valor', 'Coste']}
+                                >
                                     <WizardField
                                         label="Nombre"
                                         value={item.name}
-                                        onChange={(val) => updateArtifact(index, 'name', val)}
+                                        onChange={(val: string) => updateArtifact(index, 'name', val)}
                                         style={{ marginBottom: 0 }}
+                                        hideLabelDesktop={true}
                                     />
                                     <WizardField
                                         label="Fiabilidad"
                                         value={item.reliability || ''}
-                                        onChange={(val) => updateArtifact(index, 'reliability', val)}
+                                        onChange={(val: string) => updateArtifact(index, 'reliability', val)}
                                         style={{ marginBottom: 0 }}
+                                        hideLabelDesktop={true}
                                     />
                                     <WizardField
                                         label="Valor"
                                         value={item.value || ''}
-                                        onChange={(val) => updateArtifact(index, 'value', val)}
+                                        onChange={(val: string) => updateArtifact(index, 'value', val)}
                                         style={{ marginBottom: 0 }}
+                                        hideLabelDesktop={true}
                                     />
                                     <WizardField
                                         type="number"
                                         label="Coste"
                                         value={item.cost || 0}
-                                        onChange={(val) => updateArtifact(index, 'cost', Math.max(0, parseInt(val) || 0).toString())}
+                                        onChange={(val: string) => updateArtifact(index, 'cost', Math.max(0, parseInt(val) || 0).toString())}
                                         style={{ marginBottom: 0 }}
+                                        hideLabelDesktop={true}
                                     />
-                                </div>
+                                </WizardGrid>
                                 <WizardField
                                     type="textarea"
                                     label="Descripción / Efectos"
                                     value={item.notes || ''}
-                                    onChange={(val) => updateArtifact(index, 'notes', val)}
-                                    style={{ marginBottom: 0, minHeight: '60px' }}
+                                    onChange={(val: string) => updateArtifact(index, 'notes', val)}
+                                    style={{ marginBottom: 0, minHeight: '60px', marginTop: '0.5rem' }}
                                 />
                             </div>
                         )}
@@ -575,7 +606,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                                 <FormSelect
                                     label="Cargar Predefinido (Opcional)"
                                     value=""
-                                    onChange={(val) => applyMagicPreset(index, val)}
+                                    onChange={(val: string) => applyMagicPreset(index, val)}
                                     placeholder="Seleccionar de la lista..."
                                     options={MAGIC_OBJECTS.map((obj: any) => ({
                                         id: obj.id,
@@ -585,25 +616,31 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                                     showCostInOption={false}
                                 />
 
-                                <div className="magic-grid">
+                                <WizardGrid
+                                    columns="3fr 120px"
+                                    headers={['Nombre', 'Coste EM']}
+                                >
                                     <WizardField
                                         label="Nombre"
                                         value={item.name}
-                                        onChange={(val) => updateMagicObject(index, 'name', val)}
+                                        onChange={(val: string) => updateMagicObject(index, 'name', val)}
                                         style={{ marginBottom: 0 }}
+                                        hideLabelDesktop={true}
                                     />
                                     <WizardField
                                         type="number"
                                         label="Coste EM"
                                         value={item.em || 0}
-                                        onChange={(val) => updateMagicObject(index, 'em', Math.max(0, parseInt(val) || 0))}
+                                        onChange={(val: string) => updateMagicObject(index, 'em', Math.max(0, parseInt(val) || 0))}
+                                        hideLabelDesktop={true}
                                     />
-                                </div>
+                                </WizardGrid>
                                 <WizardField
                                     type="textarea"
                                     label="Descripción"
                                     value={item.description || ''}
-                                    onChange={(val) => updateMagicObject(index, 'description', val)}
+                                    onChange={(val: string) => updateMagicObject(index, 'description', val)}
+                                    style={{ marginTop: '0.5rem' }}
                                 />
                             </div>
                         )}
