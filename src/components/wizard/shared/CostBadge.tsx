@@ -3,7 +3,7 @@ import React from 'react';
 interface CostBadgeProps {
     cost: number | string;
     label?: string;
-    variant?: 'default' | 'free' | 'penalty' | 'variable';
+    variant?: 'default' | 'free' | 'penalty' | 'bonus' | 'variable';
     className?: string;
 }
 
@@ -32,6 +32,14 @@ export const CostBadge: React.FC<CostBadgeProps> = ({
     if (variant === 'penalty') {
         return (
             <span className={`text-sm font-bold text-red-700 bg-red-50 border border-red-200 px-2 py-0.5 rounded ${className}`}>
+                {cost}
+            </span>
+        );
+    }
+
+    if (variant === 'bonus') {
+        return (
+            <span className={`text-sm font-bold text-green-700 bg-green-50 border border-green-200 px-2 py-0.5 rounded ${className}`}>
                 {cost}
             </span>
         );

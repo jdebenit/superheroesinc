@@ -1,14 +1,11 @@
 import React from 'react';
 import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS, FRIENDS_AND_ASSOCIATES } from '../../../data/backgroundTables';
-import {
-    sectionCardStyle,
-    sectionTitleStyle,
-    innerCardStyle,
-    textInputStyle,
-    stepPageTitleStyle,
-    stepPageSubtitleStyle,
-} from '../shared/stepStyles';
-import { DeleteRowButton } from '../shared/DeleteRowButton';
+import { stepPageTitleStyle, stepPageSubtitleStyle } from '../shared/stepStyles';
+import { WizardSection } from '../shared/WizardSection';
+import { WizardField } from '../shared/WizardField';
+import { DynamicList } from '../shared/DynamicList';
+import { FormSelect } from '../shared/FormSelect';
+import { CostBadge } from '../shared/CostBadge';
 import './Step5_Background.css';
 
 interface Step5Props {
@@ -63,7 +60,6 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
         }
     };
 
-
     const renderStatusSelect = (
         title: string,
         options: any[],
@@ -71,27 +67,29 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
         field: string,
         currentObj: any
     ) => (
-        <div style={innerCardStyle}>
+        <div className="step5-status-card">
             <div className="step5-status-header">
                 <h4 className="step5-status-title">{title}</h4>
-                <div className={`step5-cost-small step5-cost-${currentObj.cost > 0 ? 'positive' : currentObj.cost < 0 ? 'negative' : 'neutral'}`}>
-                    {currentObj.cost > 0 ? '+' : ''}{currentObj.cost} PC
-                </div>
+                <CostBadge
+                    cost={currentObj.cost > 0 ? `+${currentObj.cost}` : currentObj.cost}
+                    label="PC"
+                    variant={currentObj.cost === 0 ? "free" : (currentObj.cost > 0 ? "penalty" : "bonus")}
+                />
             </div>
-            <select
+            <FormSelect
+                label=""
                 value={currentValue || options[0].id}
-                onChange={(e) => onChange({ background: { ...data.background, [field]: e.target.value } })}
-                style={{ ...textInputStyle, marginBottom: '0.5rem', padding: '0.5rem' }}
-            >
-                {options.map(opt => (
-                    <option key={opt.id} value={opt.id}>
-                        {opt.label} ({opt.cost > 0 ? '+' : ''}{opt.cost} PC)
-                    </option>
-                ))}
-            </select>
-            <p style={{ fontSize: '0.85rem', color: '#64748b', fontStyle: 'italic', margin: 0 }}>
-                {currentObj.description}
-            </p>
+                onChange={(val) => onChange({ background: { ...data.background, [field]: val } })}
+                options={options.map(opt => ({
+                    id: opt.id,
+                    label: opt.label,
+                    cost: opt.cost,
+                    description: opt.description
+                }))}
+                showCostInOption={true}
+                showDescription={true}
+                noMargin
+            />
         </div>
     );
 
@@ -107,20 +105,22 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
             </p>
 
             {/* PREJUDICE RESISTANCE */}
-            <div style={sectionCardStyle}>
-                <div className="step5-section-title">
-                    <h3>Resistencia a Prejuicios</h3>
-                    <div className={`step5-cost-display step5-cost-${resistanceCost > 0 ? 'positive' : resistanceCost < 0 ? 'negative' : 'neutral'}`}>
-                        Coste: {resistanceCost > 0 ? '+' : ''}{resistanceCost.toFixed(1)} PC
-                    </div>
-                </div>
-
-                <p style={{ fontSize: '0.9rem', color: '#4b5563', marginBottom: '1.5rem', lineHeight: '1.5' }}>
-                    La capacidad del personaje para resistir la influencia de prejuicios y estereotipos.
-                    <br />
-                    <strong>50</strong> es el valor promedio. Subir cuesta PC, bajar devuelve PC.
-                </p>
-
+            <WizardSection
+                title="Resistencia a Prejuicios"
+                rightContent={
+                    <div className="section-header-badge"><CostBadge
+                        cost={resistanceCost > 0 ? `+${resistanceCost.toFixed(1)}` : resistanceCost.toFixed(1)}
+                        label="PC"
+                        variant={resistanceCost === 0 ? "default" : (resistanceCost > 0 ? "penalty" : "bonus")}
+                    /></div>
+                }
+                description={
+                    <>
+                        La capacidad del personaje para resistir la influencia de prejuicios y estereotipos.<br />
+                        <strong>50</strong> es el valor promedio. Subir cuesta PC, bajar devuelve PC.
+                    </>
+                }
+            >
                 <div className="step5-range-container">
                     <span className="step5-range-label">1</span>
                     <input
@@ -134,34 +134,40 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
                     <span className="step5-range-label">100</span>
 
                     <div className="step5-number-input-wrapper">
-                        <input
+                        <WizardField
+                            label=""
                             type="number"
                             min="1"
-                            max="100"
                             value={resistanceValue}
-                            onChange={handleResistanceChange}
-                            className="step5-number-input"
+                            onChange={(val) => {
+                                const parseVal = parseInt(val);
+                                if (!isNaN(parseVal)) {
+                                    handleResistanceChange({ target: { value: val } } as any);
+                                }
+                            }}
+                            noMargin
                         />
                         <span className="step5-percent-symbol">%</span>
                     </div>
                 </div>
-            </div>
+            </WizardSection>
 
             {/* ADVANCED STATUS OPTIONS */}
-            <div style={sectionCardStyle}>
-                <h3 style={{ ...sectionTitleStyle, color: '#0f766e', borderBottomColor: '#99f6e4' }}>Estatus Social y Legal</h3>
+            <WizardSection
+                title="Estatus Social y Legal"
+            >
                 <div className="step5-status-grid">
                     {renderStatusSelect("Posición Económica", ECONOMIC_STATUS, data.background?.economicStatus, 'economicStatus', currentEconomic)}
                     {renderStatusSelect("Situación Legal", LEGAL_STATUS, data.background?.legalStatus, 'legalStatus', currentLegal)}
                     {renderStatusSelect("Posición Social", SOCIAL_STATUS, data.background?.socialStatus, 'socialStatus', currentSocial)}
                     {renderStatusSelect("Amistades y allegados", FRIENDS_AND_ASSOCIATES, data.background?.friendsAndAssociates, 'friendsAndAssociates', currentFriends)}
                 </div>
-            </div>
+            </WizardSection>
 
             {/* BACKGROUND ITEMS */}
-            <div style={sectionCardStyle}>
-                <h3 style={{ ...sectionTitleStyle, color: '#4338ca', borderBottomColor: '#c7d2fe' }}>Notas de Trasfondo</h3>
-
+            <WizardSection
+                title="Notas de Trasfondo"
+            >
                 <div className="step5-help-notice">
                     <p className="step5-help-title">Ejemplos de trasfondo:</p>
                     <ul className="step5-help-list">
@@ -172,33 +178,23 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
                     </ul>
                 </div>
 
-                <div className="step5-items-list">
-                    {data.background.items.map((item, index) => (
-                        <div key={index} className="step5-item-row" style={{ alignItems: 'center' }}>
-                            <input
-                                type="text"
-                                value={item}
-                                onChange={(e) => updateBackgroundItem(index, e.target.value)}
-                                style={{ ...textInputStyle, flex: 1, marginBottom: 0 }}
-                                placeholder="Ej: Trabajo medio/bajo: mecánico"
-                            />
-                            <div style={{ marginLeft: '1rem', display: 'flex' }}>
-                                <DeleteRowButton
-                                    onDelete={() => removeBackgroundItem(index)}
-                                    title="Eliminar elemento"
-                                />
-                            </div>
-                        </div>
-                    ))}
-
-                    <button
-                        onClick={addBackgroundItem}
-                        className="step5-add-item-btn"
-                    >
-                        + Añadir Elemento de Trasfondo
-                    </button>
-                </div>
-            </div>
+                <DynamicList
+                    items={data.background.items}
+                    onAdd={addBackgroundItem}
+                    onRemove={removeBackgroundItem}
+                    addButtonLabel="Añadir Elemento de Trasfondo"
+                    color="#4338ca"
+                    renderItem={(item, index) => (
+                        <WizardField
+                            label=""
+                            value={item}
+                            onChange={(val) => updateBackgroundItem(index, val)}
+                            noMargin
+                            placeholder="Ej: Trabajo medio/bajo: mecánico"
+                        />
+                    )}
+                />
+            </WizardSection>
         </div>
     );
 }
