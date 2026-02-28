@@ -315,3 +315,50 @@
     flex-direction: column;
     gap: 0.75rem;
 }
+
+/* ── PowersSection ───────────────────────────────────────────────────────── */
+
+.powers-section-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+@media (min-width: 768px) {
+    .powers-section-actions {
+        justify-content: flex-end;
+    }
+}
+
+/* ── VigilanteTraumasSection ─────────────────────────────────────────────── */
+
+.vigilante-trauma-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.vigilante-trauma-card {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    border: 2px solid #fecaca;
+    /* red-200 */
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    /* shadow-sm */
+    transition: box-shadow 0.2s;
+}
+
+.vigilante-trauma-card:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    /* shadow-md */
+}
+
+/* ── CyborgSection ───────────────────────────────────────────────────────── */
+
+.cyborg-add-button-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}

@@ -89,69 +89,69 @@ export default function PowersSection({
     if (!hasAnyPowerOrigin) return null;
 
     const renderHeaderActions = () => (
-        <div className="flex flex-wrap gap-2 justify-center md:justify-end">
+        <div className="powers-section-actions">
             {isGuardian && (
-                <PixelButton onClick={() => onOpenModal('Guardian')} variant="primary" className="text-sm">
+                <PixelButton onClick={() => onOpenModal('Guardian')} variant="primary" className="small">
                     <span>+</span> Guardián
                 </PixelButton>
             )}
             {isAlterado && (
-                <PixelButton onClick={() => onOpenModal('Alterado')} variant="custom" className="bg-purple-600 text-white hover:bg-purple-700 text-sm">
+                <PixelButton onClick={() => onOpenModal('Alterado')} variant="custom" style={{ backgroundColor: '#9333ea', color: 'white' }} className="small">
                     <span>+</span> Alterado
                 </PixelButton>
             )}
             {isVampiro && (
-                <PixelButton onClick={() => onOpenModal('Vampírico')} variant="danger" className="bg-red-700 hover:bg-red-800 text-sm">
+                <PixelButton onClick={() => onOpenModal('Vampírico')} variant="danger" style={{ backgroundColor: '#b91c1c' }} className="small">
                     <span>+</span> Vampírico
                 </PixelButton>
             )}
             {(isSemidemonio || isMaldito || isPoseido) && (
-                <PixelButton onClick={() => onOpenModal('Sobrenatural')} variant="custom" className="bg-orange-600 text-white hover:bg-orange-700 text-sm">
+                <PixelButton onClick={() => onOpenModal('Sobrenatural')} variant="custom" style={{ backgroundColor: '#ea580c', color: 'white' }} className="small">
                     <span>+</span> Sobrenatural
                 </PixelButton>
             )}
             {isThals && (
-                <PixelButton onClick={() => onOpenModal('Thals')} variant="custom" className="bg-teal-600 text-white hover:bg-teal-700 text-sm">
+                <PixelButton onClick={() => onOpenModal('Thals')} variant="custom" style={{ backgroundColor: '#0d9488', color: 'white' }} className="small">
                     <span>+</span> Thals
                 </PixelButton>
             )}
             {isDivino && (
-                <PixelButton onClick={() => onOpenModal('Divino')} variant="warning" className="text-sm">
+                <PixelButton onClick={() => onOpenModal('Divino')} variant="warning" className="small">
                     <span>+</span> Divino
                 </PixelButton>
             )}
             {isTerrano && (
-                <PixelButton onClick={() => onOpenModal('Guardian')} variant="custom" className="bg-emerald-600 text-white hover:bg-emerald-700 text-sm">
+                <PixelButton onClick={() => onOpenModal('Guardian')} variant="custom" style={{ backgroundColor: '#059669', color: 'white' }} className="small">
                     <span>+</span> Terrano (Guardian)
                 </PixelButton>
             )}
             {isEnano && (
-                <PixelButton onClick={() => onOpenModal('Guardian')} variant="custom" className="bg-stone-600 text-white hover:bg-stone-700 text-sm">
+                <PixelButton onClick={() => onOpenModal('Guardian')} variant="custom" style={{ backgroundColor: '#57534e', color: 'white' }} className="small">
                     <span>+</span> Enano (Guardian)
                 </PixelButton>
             )}
             {isDotado && (
-                <PixelButton onClick={() => onOpenModal('Sobrenatural')} variant="custom" className="bg-amber-600 text-white hover:bg-amber-700 text-sm">
+                <PixelButton onClick={() => onOpenModal('Sobrenatural')} variant="custom" style={{ backgroundColor: '#d97706', color: 'white' }} className="small">
                     <span>+</span> Dotado (Sobrenatural)
                 </PixelButton>
             )}
             {isCosmico && (
-                <PixelButton onClick={() => onOpenModal('Cósmico')} variant="custom" className="bg-indigo-600 text-white hover:bg-indigo-700 text-sm">
+                <PixelButton onClick={() => onOpenModal('Cósmico')} variant="custom" style={{ backgroundColor: '#4f46e5', color: 'white' }} className="small">
                     <span>+</span> Cósmico
                 </PixelButton>
             )}
             {isMutante && (
-                <PixelButton onClick={() => onOpenModal('Mutante')} variant="custom" className="bg-pink-600 text-white hover:bg-pink-700 text-sm">
+                <PixelButton onClick={() => onOpenModal('Mutante')} variant="custom" style={{ backgroundColor: '#db2777', color: 'white' }} className="small">
                     <span>+</span> Mutante
                 </PixelButton>
             )}
             {isEnte && (
-                <PixelButton onClick={() => onOpenModal('Mutante')} variant="custom" className="bg-purple-500 text-white hover:bg-purple-600 text-sm">
+                <PixelButton onClick={() => onOpenModal('Mutante')} variant="custom" style={{ backgroundColor: '#a855f7', color: 'white' }} className="small">
                     <span>+</span> Mutante (Ente)
                 </PixelButton>
             )}
             {isElfoPsiquico && (
-                <PixelButton onClick={() => onOpenModal('Psíquico')} variant="custom" className="bg-cyan-600 text-white hover:bg-cyan-700 text-sm">
+                <PixelButton onClick={() => onOpenModal('Psíquico')} variant="custom" style={{ backgroundColor: '#0891b2', color: 'white' }} className="small">
                     <span>+</span> Poderes Psíquicos
                 </PixelButton>
             )}

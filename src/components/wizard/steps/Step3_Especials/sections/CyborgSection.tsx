@@ -80,14 +80,8 @@ export const CyborgSection: React.FC<CyborgSectionProps> = ({ implants = [], onC
             )}
 
             {/* Add New Implant Form */}
-            <div style={{
-                backgroundColor: '#f8fafc',
-                border: '1px dashed #94a3b8',
-                borderRadius: '8px',
-                padding: '1.25rem',
-                borderLeft: '4px solid #3b82f6'
-            }}>
-                <p style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', color: '#3b82f6', marginBottom: '1rem', marginTop: 0 }}>
+            <div className="section-add-form section-add-form--blue">
+                <p className="section-add-form__label">
                     Añadir Nuevo Implante
                 </p>
 
@@ -170,14 +164,15 @@ export const CyborgSection: React.FC<CyborgSectionProps> = ({ implants = [], onC
                     </div>
                 </div>
 
-                <PixelButton
-                    onClick={handleAddImplant}
-                    disabled={!newImplantName.trim()}
-                    variant="primary"
-                    className="w-full justify-center"
-                >
-                    Añadir Implante
-                </PixelButton>
+                <div className="cyborg-add-button-wrapper">
+                    <PixelButton
+                        onClick={handleAddImplant}
+                        disabled={!newImplantName.trim()}
+                        variant="primary"
+                    >
+                        Añadir Implante
+                    </PixelButton>
+                </div>
             </div>
         </WizardSection>
     );

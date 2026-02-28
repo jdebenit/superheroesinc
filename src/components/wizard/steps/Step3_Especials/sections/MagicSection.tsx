@@ -169,7 +169,7 @@ export default function MagicSection({
 
                     <div style={{ marginBottom: '1rem' }}>
                         <InfoBox variant="info" icon="ℹ️">
-                            Puedes intercambiar tus slots de Poder de Guardián por tiradas en esta tabla.
+                            Puedes intercambiar tus slots de Poder de Guardián por las siguientes opciones.
                         </InfoBox>
                     </div>
 
