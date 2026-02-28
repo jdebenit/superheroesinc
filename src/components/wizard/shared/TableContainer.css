@@ -71,3 +71,60 @@
     font-weight: bold;
     font-style: italic;
 }
+
+/* ── Row utilities ──────────────────────────────────────────────────────── */
+
+.wizard-table-row--even {
+    background-color: white;
+}
+
+.wizard-table-row--odd {
+    background-color: var(--wiz-color-gray-50);
+}
+
+/* ── Cell utilities ─────────────────────────────────────────────────────── */
+
+.wizard-table-cell {
+    padding: var(--wiz-spacing-3) var(--wiz-spacing-4);
+    text-align: center;
+    vertical-align: middle;
+    font-size: 0.875rem;
+    color: var(--wiz-color-gray-700);
+}
+
+.wizard-table-cell--left {
+    text-align: left;
+}
+
+.wizard-table-cell--bold {
+    font-weight: bold;
+    color: var(--wiz-color-gray-900);
+}
+
+.wizard-table-cell--secondary {
+    color: var(--wiz-color-gray-500);
+    font-size: 0.875rem;
+}
+
+.wizard-table-cell--mono {
+    font-family: monospace;
+}
+
+/* Spell option input inside a table cell */
+.wizard-table-spell-option {
+    width: 100%;
+    margin-top: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+    border: 1px solid var(--wiz-color-gray-300);
+    border-radius: 4px;
+    font-weight: normal;
+    color: var(--wiz-color-gray-600);
+    background-color: white;
+}
+
+.wizard-table-spell-option:focus {
+    outline: none;
+    border-color: var(--wiz-color-primary-400);
+    box-shadow: 0 0 0 2px var(--wiz-color-primary-100);
+}

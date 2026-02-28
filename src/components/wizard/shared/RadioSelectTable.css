@@ -1,0 +1,111 @@
+/* RadioSelectTable — shared component for radio-button-based config selection tables */
+
+.radio-select-table-wrapper {
+    background-color: white;
+    border-radius: var(--wiz-radius-lg);
+    box-shadow: var(--wiz-shadow-md);
+    overflow: hidden;
+    border: 1px solid var(--wiz-color-gray-200);
+    overflow-x: auto;
+}
+
+.radio-select-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 400px;
+}
+
+/* Dark header */
+.radio-select-table thead {
+    background-color: #334155;
+    color: white;
+}
+
+.radio-select-table thead th {
+    padding: var(--wiz-spacing-4);
+    text-align: center;
+    font-size: 0.875rem;
+    white-space: nowrap;
+}
+
+.radio-select-table thead th:first-child {
+    width: 50px;
+    min-width: 50px;
+}
+
+/* Body rows */
+.radio-select-table tbody tr {
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+.radio-select-table tbody tr.row-even {
+    background-color: white;
+}
+
+.radio-select-table tbody tr.row-odd {
+    background-color: var(--wiz-color-gray-50);
+}
+
+.radio-select-table tbody tr.row-selected {
+    background-color: #ecfdf5;
+}
+
+.radio-select-table tbody tr:not(.row-selected):hover {
+    background-color: var(--wiz-color-gray-100);
+}
+
+/* Cells */
+.radio-select-table tbody td {
+    padding: var(--wiz-spacing-4);
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--wiz-color-gray-800);
+}
+
+.radio-select-table tbody td.cell-radio {
+    text-align: center;
+}
+
+.radio-select-table tbody td.cell-bold {
+    font-weight: bold;
+    color: var(--wiz-color-gray-900);
+}
+
+.radio-select-table tbody td.cell-mono {
+    font-family: monospace;
+    color: var(--wiz-color-gray-600);
+}
+
+.radio-select-table tbody td.cell-accent {
+    font-weight: bold;
+    color: #7c3aed;
+    font-family: monospace;
+}
+
+/* Radio input */
+.radio-select-table .radio-input {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: #059669;
+}
+
+/* Cost badge inside table */
+.radio-select-table .cost-pill {
+    display: inline-block;
+    font-size: 0.875rem;
+    font-weight: bold;
+    padding: 4px 12px;
+    border-radius: 9999px;
+    border: 1px solid #e0e7ff;
+    background-color: #eef2ff;
+    color: #4f46e5;
+    transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.radio-select-table .cost-pill--selected {
+    background-color: #10b981;
+    color: white;
+    border: 2px solid #059669;
+}

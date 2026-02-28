@@ -5,6 +5,11 @@ import type { SelectedPower, SelectedSpell } from '../types';
 import { WizardSection } from '../../../shared/WizardSection';
 import { DeleteRowButton } from '../../../shared/DeleteRowButton';
 import { CostBadge } from '../../../shared/CostBadge';
+import { FormSelect } from '../../../shared/FormSelect';
+import { TableContainer } from '../../../shared/TableContainer';
+import { EmptyState } from '../../../shared/EmptyState';
+import { InfoBox } from '../../../shared/InfoBox';
+import { PixelButton } from '../../../shared/PixelButton';
 
 interface MagicSectionProps {
     data: any;
@@ -24,11 +29,40 @@ interface MagicSectionProps {
     onUpdateSpellRank: (index: number, rank: number) => void;
     onUpdateOption: (index: number, option: string) => void;
     onRemoveSpell: (index: number) => void;
-    // New props for Terrano Magic Table
+    // Terrano Magic Table
     magicTableRolls?: string[];
     onAddMagicTableRoll?: (rollId: string) => void;
     onRemoveMagicTableRoll?: (index: number) => void;
 }
+
+// Helper for Terrano Display
+const TERRANO_TABLE_OPTIONS = [
+    { id: 'guardian_power', label: 'Acceso a Poder de Guardián', cost: 2, costText: '+2 PC' },
+    { id: '180_EM', label: 'Acceso a objetos de 180 EM', cost: 1, costText: '+1 PC' },
+    { id: '120_EM', label: 'Acceso a objetos de 120 EM', cost: 0, costText: '+0 PC' },
+    { id: '60_EM', label: 'Acceso a objetos de 60 EM', cost: -1, costText: '-1 PC' },
+    { id: 'none', label: 'Ningún objeto', cost: -2, costText: '-2 PC' },
+];
+
+const EM_FORMULA_OPTIONS_DOTADO = [
+    { id: '2|8', label: 'Dotado: (PER+INT+VOL)/2 → +8 PCs', cost: 8 },
+    { id: '3|3', label: 'Dotado: (PER+INT+VOL)/3 → +3 PCs', cost: 3 },
+    { id: '4|0', label: 'Dotado: (PER+INT+VOL)/4 → +0 PCs', cost: 0 },
+];
+const EM_FORMULA_OPTIONS_HIBRIDO = [
+    { id: '2|15', label: 'Híbrido: (PER+INT+VOL)/2 → +15 PCs', cost: 15 },
+    { id: '3|10', label: 'Híbrido: (PER+INT+VOL)/3 → +10 PCs', cost: 10 },
+    { id: '4|7', label: 'Híbrido: (PER+INT+VOL)/4 → +7 PCs', cost: 7 },
+    { id: '0|0', label: 'Híbrido: No EM', cost: 0 },
+];
+const EM_FORMULA_OPTIONS_TERRANO = [
+    { id: '4|0', label: 'Terrano: (PER+INT+VOL)/4 → +0 PCs', cost: 0 },
+    { id: '0|-5', label: 'Terrano Ajeno: No EM → -5 PCs', cost: -5 },
+];
+const EM_FORMULA_OPTIONS_POSEIDO = [
+    { id: '2|3', label: 'Poseído: (INT+PER+VOL)/2 → +3 PCs', cost: 3 },
+    { id: '0|0', label: 'Poseído: No accede a hechizos → +0 PCs', cost: 0 },
+];
 
 export default function MagicSection({
     data,
@@ -50,182 +84,113 @@ export default function MagicSection({
     onRemoveSpell,
     magicTableRolls = [],
     onAddMagicTableRoll,
-    onRemoveMagicTableRoll
+    onRemoveMagicTableRoll,
 }: MagicSectionProps) {
-    const canSelectSpells = emFormula.divisor !== 0;
+    const getRollLabel = (id: string) => TERRANO_TABLE_OPTIONS.find((o) => o.id === id)?.label || id;
+    const getRollCost = (id: string) => TERRANO_TABLE_OPTIONS.find((o) => o.id === id)?.costText || '';
 
-    // Helper for Terrano Display
-    const terranoTableOptions = [
-        { id: 'guardian_power', label: 'Acceso a Poder de Guardián', cost: 2, costText: '+2 PC' },
-        { id: '180_EM', label: 'Acceso a objetos de 180 EM', cost: 1, costText: '+1 PC' },
-        { id: '120_EM', label: 'Acceso a objetos de 120 EM', cost: 0, costText: '+0 PC' },
-        { id: '60_EM', label: 'Acceso a objetos de 60 EM', cost: -1, costText: '-1 PC' },
-        { id: 'none', label: 'Ningún objeto', cost: -2, costText: '-2 PC' },
-    ];
+    // Build em formula options for FormSelect
+    const emFormulaOptions = isDotado
+        ? EM_FORMULA_OPTIONS_DOTADO
+        : isHibrido
+            ? EM_FORMULA_OPTIONS_HIBRIDO
+            : isTerrano
+                ? EM_FORMULA_OPTIONS_TERRANO
+                : isPoseido
+                    ? EM_FORMULA_OPTIONS_POSEIDO
+                    : [];
 
-    const getRollLabel = (id: string) => terranoTableOptions.find(o => o.id === id)?.label || id;
-    const getRollCost = (id: string) => terranoTableOptions.find(o => o.id === id)?.costText || '';
+    const emFormulaValue = `${emFormula.divisor}|${emFormula.pcCost}`;
+
+    const totalCost = selectedSpells.reduce((acc, s) => {
+        const baseCost = parseInt(s.cost, 10) || 0;
+        return acc + baseCost * s.rank;
+    }, 0);
+
+    let divisor = emFormula.divisor;
+    if (isMago || isElfoMagico) divisor = 1;
+    else if (isHadaEter) divisor = 2;
+    const maxEM = emFormula.divisor !== 0 ? calculateEM(data, selectedPowers, divisor) : 0;
 
     return (
         <WizardSection
             title="Magia"
             color="#4f46e5"
             rightContent={
-                <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                    <button
+                <div className="magic-section-header-actions">
+                    <PixelButton
                         onClick={onOpenSpellModal}
                         disabled={emFormula.divisor === 0}
-                        className="wizard-button primary small"
-                        style={{ opacity: emFormula.divisor === 0 ? 0.5 : 1, cursor: emFormula.divisor === 0 ? 'not-allowed' : 'pointer' }}
+                        variant="primary"
+                        className="small"
                     >
                         + Lista de Hechizos
-                    </button>
+                    </PixelButton>
                     {emFormula.divisor !== 0 && (
-                        (() => {
-                            const totalCost = selectedSpells.reduce((acc, s) => {
-                                const baseCost = parseInt(s.cost, 10) || 0;
-                                const effectiveRank = s.rank;
-                                return acc + (baseCost * effectiveRank);
-                            }, 0);
-                            let divisor = emFormula.divisor;
-                            if (isMago || isElfoMagico) divisor = 1;
-                            else if (isHadaEter) divisor = 2;
-
-                            const maxEM = calculateEM(data, selectedPowers, divisor);
-                            return (
-                                <CostBadge
-                                    cost={`${totalCost}/${maxEM}`}
-                                    label="EM"
-                                    variant={totalCost > maxEM ? "penalty" : "default"}
-                                />
-                            );
-                        })()
+                        <CostBadge
+                            cost={`${totalCost}/${maxEM}`}
+                            label="EM"
+                            variant={totalCost > maxEM ? 'penalty' : 'default'}
+                        />
                     )}
                 </div>
             }
         >
-            {/* EM Formula Selector (for Dotado/Híbrido, not Mago) */}
-            {hasEMFormula && (
-                <div style={{ marginBottom: '1.5rem' }}>
-                    <label style={{
-                        display: 'block',
-                        fontSize: '0.875rem',
-                        fontWeight: 'bold',
-                        color: '#4f46e5',
-                        marginBottom: '0.5rem'
-                    }}>
-                        Fórmula de Energía Mágica
-                    </label>
-                    <select
-                        value={`${emFormula.divisor}|${emFormula.pcCost}`}
-                        onChange={(e) => {
-                            const [divisor, pcCost] = e.target.value.split('|').map(Number);
-                            onUpdateEMFormula(divisor, pcCost);
-                        }}
-                        style={{
-                            width: '100%',
-                            padding: '0.75rem',
-                            border: '2px solid #6366f1',
-                            borderRadius: '8px',
-                            backgroundColor: 'white',
-                            fontSize: '0.875rem',
-                            fontWeight: 'bold',
-                            color: '#4f46e5',
-                            cursor: 'pointer'
-                        }}
-                    >
-                        {isDotado && (
-                            <>
-                                <option value="2|8">Dotado: (PER+INT+VOL)/2 → +8 PCs</option>
-                                <option value="3|3">Dotado: (PER+INT+VOL)/3 → +3 PCs</option>
-                                <option value="4|0">Dotado: (PER+INT+VOL)/4 → +0 PCs</option>
-                            </>
-                        )}
-                        {isHibrido && (
-                            <>
-                                <option value="2|15">Híbrido: (PER+INT+VOL)/2 → +15 PCs</option>
-                                <option value="3|10">Híbrido: (PER+INT+VOL)/3 → +10 PCs</option>
-                                <option value="4|7">Híbrido: (PER+INT+VOL)/4 → +7 PCs</option>
-                                <option value="0|0">Híbrido: No EM</option>
-                            </>
-                        )}
-                        {isTerrano && (
-                            <>
-                                <option value="4|0">Terrano: (PER+INT+VOL)/4 → +0 PCs</option>
-                                <option value="0|-5">Terrano Ajeno: No EM → -5 PCs</option>
-                            </>
-                        )}
-                        {isPoseido && (
-                            <>
-                                <option value="2|3">Poseído: (INT+PER+VOL)/2 → +3 PCs</option>
-                                <option value="0|0">Poseído: No accede a hechizos → +0 PCs</option>
-                            </>
-                        )}
-                    </select>
-                </div>
+            {/* EM Formula Selector (for Dotado/Híbrido/Terrano/Poseido, not Mago) */}
+            {hasEMFormula && emFormulaOptions.length > 0 && (
+                <FormSelect
+                    label="Fórmula de Energía Mágica"
+                    value={emFormulaValue}
+                    onChange={(val) => {
+                        const [divisor, pcCost] = val.split('|').map(Number);
+                        onUpdateEMFormula(divisor, pcCost);
+                    }}
+                    options={emFormulaOptions.map((o) => ({ id: o.id, label: o.label, cost: o.cost }))}
+                    labelColor="#4f46e5"
+                    showCostInOption={false}
+                />
             )}
 
             {/* Terrano Magic Table Selector */}
             {isTerrano && onAddMagicTableRoll && onRemoveMagicTableRoll && (
-                <div style={{ marginBottom: '2rem', padding: '1rem', backgroundColor: '#e0f2fe', border: '2px dashed #0284c7', borderRadius: '8px' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                        <h4 style={{ fontSize: '1.1rem', fontWeight: 'bold', color: '#0369a1', margin: 0 }}>
-                            Tabla de Objetos Mágicos
-                        </h4>
-                        <span style={{ fontSize: '0.9rem', color: '#0c4a6e', fontWeight: "bold" }}>
+                <div className="terrano-magic-table">
+                    <div className="terrano-magic-table__header">
+                        <h4 className="terrano-magic-table__title">Tabla de Objetos Mágicos</h4>
+                        <span className="terrano-magic-table__slots">
                             {(() => {
                                 const isAjeno = emFormula.divisor === 0;
                                 const maxSlots = isAjeno ? 2 : 1;
-                                const guardianPowerCount = selectedPowers.filter(p => p.origin === 'Guardian').length;
+                                const guardianPowerCount = selectedPowers.filter((p) => p.origin === 'Guardian').length;
                                 const rollCount = magicTableRolls.length;
                                 return `Slots Usados: ${guardianPowerCount + rollCount} / ${maxSlots}`;
                             })()}
                         </span>
                     </div>
 
-                    <p style={{ fontSize: '0.85rem', color: '#0c4a6e', marginBottom: '1rem' }}>
+                    <p className="terrano-magic-table__description">
                         Puedes intercambiar tus slots de Poder de Guardián por tiradas en esta tabla.
                     </p>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '0.5rem', marginBottom: '1rem' }}>
-                        {terranoTableOptions.map(opt => (
+                    <div className="terrano-magic-table__options">
+                        {TERRANO_TABLE_OPTIONS.map((opt) => (
                             <button
                                 key={opt.id}
                                 onClick={() => onAddMagicTableRoll(opt.id)}
-                                className="pixel-button"
-                                style={{
-                                    backgroundColor: 'white',
-                                    border: '1px solid #7dd3fc',
-                                    color: '#0284c7',
-                                    padding: '0.5rem',
-                                    fontSize: '0.8rem',
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    alignItems: 'center',
-                                    gap: '0.25rem'
-                                }}
+                                className="terrano-magic-table__option-btn"
                             >
-                                <span style={{ fontWeight: 'bold' }}>{opt.label}</span>
-                                <span style={{ fontSize: '0.75rem', backgroundColor: '#e0f2fe', padding: '2px 6px', borderRadius: '4px' }}>
-                                    {opt.costText}
-                                </span>
+                                <span className="terrano-magic-table__option-label">{opt.label}</span>
+                                <span className="terrano-magic-table__option-cost">{opt.costText}</span>
                             </button>
                         ))}
                     </div>
 
                     {magicTableRolls.length > 0 && (
-                        <div style={{ backgroundColor: 'white', borderRadius: '6px', overflow: 'hidden', border: '1px solid #bae6fd' }}>
+                        <div className="terrano-magic-table__rolls">
                             {magicTableRolls.map((rollId, idx) => (
-                                <div key={idx} style={{
-                                    display: 'flex',
-                                    justifyContent: 'space-between',
-                                    alignItems: 'center',
-                                    padding: '0.5rem 1rem',
-                                    borderBottom: idx < magicTableRolls.length - 1 ? '1px solid #f0f9ff' : 'none'
-                                }}>
+                                <div key={idx} className={`terrano-magic-table__roll-row${idx < magicTableRolls.length - 1 ? ' terrano-magic-table__roll-row--bordered' : ''}`}>
                                     <div>
-                                        <span style={{ fontWeight: 'bold', color: '#0c4a6e', marginRight: '0.5rem' }}>{getRollLabel(rollId)}</span>
-                                        <span style={{ fontSize: '0.8rem', color: '#0284c7' }}>({getRollCost(rollId)})</span>
+                                        <span className="terrano-magic-table__roll-name">{getRollLabel(rollId)}</span>
+                                        <span className="terrano-magic-table__roll-cost">({getRollCost(rollId)})</span>
                                     </div>
                                     <DeleteRowButton onDelete={() => onRemoveMagicTableRoll(idx)} title="Eliminar" />
                                 </div>
@@ -235,110 +200,65 @@ export default function MagicSection({
                 </div>
             )}
 
+            {/* Spells Table */}
             {selectedSpells.length > 0 ? (
-                <div style={{
-                    backgroundColor: 'white',
-                    borderRadius: '12px',
-                    boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-                    overflow: 'hidden',
-                    border: '1px solid #e5e7eb',
-                    marginTop: '1.5rem'
-                }}>
-                    <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                        <thead style={{ backgroundColor: '#f9fafb', borderBottom: '2px solid #e5e7eb' }}>
-                            <tr>
-                                <th style={{ padding: '1rem', textAlign: 'left', color: '#374151' }}>Hechizo</th>
-                                <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Rango</th>
-                                <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Coste</th>
-                                <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Requisitos</th>
-                                <th style={{ padding: '1rem', textAlign: 'center', color: '#6b7280' }}>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {selectedSpells.map((s, idx) => {
-                                const isEven = idx % 2 === 0;
-                                const baseCost = parseInt(s.cost, 10) || 0;
-                                const maestriaValue = s.maxRank + 2;
-                                const isMaestria = s.rank === maestriaValue;
-                                const effectiveRank = isMaestria ? maestriaValue : s.rank;
-                                const totalCost = baseCost * effectiveRank;
+                <TableContainer
+                    headers={['Hechizo', 'Rango', 'Coste', 'Requisitos', 'Acciones']}
+                    showTotal={false}
+                >
+                    {selectedSpells.map((s, idx) => {
+                        const baseCost = parseInt(s.cost, 10) || 0;
+                        const maestriaValue = s.maxRank + 2;
+                        const isMaestria = s.rank === maestriaValue;
+                        const effectiveRank = isMaestria ? maestriaValue : s.rank;
+                        const spellTotalCost = baseCost * effectiveRank;
 
-                                return (
-                                    <tr key={`${s.id}-${idx}`} style={{ backgroundColor: isEven ? 'white' : '#f9fafb' }}>
-                                        <td style={{ padding: '1rem', fontWeight: 'bold', color: '#1f2937' }}>
-                                            {s.name}
-                                            {s.options && s.options.length > 0 && (
-                                                <div style={{ marginTop: '0.5rem' }}>
-                                                    <input
-                                                        type="text"
-                                                        placeholder={s.options[0]}
-                                                        value={s.selectedOption || ''}
-                                                        onChange={(e) => onUpdateOption(idx, e.target.value)}
-                                                        style={{
-                                                            width: '100%',
-                                                            padding: '0.25rem',
-                                                            fontSize: '0.8rem',
-                                                            border: '1px solid #d1d5db',
-                                                            borderRadius: '4px',
-                                                            fontWeight: 'normal',
-                                                            color: '#4b5563'
-                                                        }}
-                                                        onClick={(e) => e.stopPropagation()}
-                                                    />
-                                                </div>
-                                            )}
-                                        </td>
-                                        <td style={{ padding: '0.75rem', textAlign: 'center' }}>
-                                            <select
-                                                value={s.rank}
-                                                onChange={(e) => onUpdateSpellRank(idx, parseInt(e.target.value, 10))}
-                                                style={{
-                                                    padding: '0.5rem',
-                                                    border: '1px solid #d1d5db',
-                                                    borderRadius: '6px',
-                                                    backgroundColor: 'white',
-                                                    fontSize: '0.875rem',
-                                                    fontWeight: 'bold',
-                                                    color: '#4f46e5',
-                                                    cursor: 'pointer'
-                                                }}
-                                            >
-                                                {Array.from({ length: s.maxRank }, (_, i) => i + 1).map(rank => (
-                                                    <option key={rank} value={rank}>{rank}</option>
-                                                ))}
-                                                <option key="maestria" value={s.maxRank + 2}>Maestría</option>
-                                            </select>
-                                        </td>
-                                        <td style={{ padding: '0.75rem', textAlign: 'center' }}>
-                                            <span style={{
-                                                fontSize: '0.875rem',
-                                                fontWeight: 'bold',
-                                                backgroundColor: isMaestria ? '#f3e8ff' : '#eef2ff',
-                                                color: isMaestria ? '#7c3aed' : '#4f46e5',
-                                                padding: '4px 12px',
-                                                borderRadius: '9999px',
-                                                border: isMaestria ? '1px solid #ddd6fe' : '1px solid #e0e7ff',
-                                                display: 'inline-block'
-                                            }}>
-                                                {baseCost} × {isMaestria ? `${maestriaValue} (M)` : effectiveRank} = {totalCost} EM
-                                            </span>
-                                        </td>
-                                        <td style={{ padding: '0.75rem', textAlign: 'center', color: '#6b7280', fontSize: '0.875rem' }}>
-                                            {s.requirements !== "No especificado" ? s.requirements : <span style={{ color: '#9ca3af', fontStyle: 'italic' }}>-</span>}
-                                        </td>
-                                        <td style={{ padding: '0.75rem', textAlign: 'center' }}>
-                                            <DeleteRowButton onDelete={() => onRemoveSpell(idx)} title="Eliminar hechizo" />
-                                        </td>
-                                    </tr>
-                                );
-                            })}
-                        </tbody>
-                    </table>
-                </div>
+                        return (
+                            <tr key={`${s.id}-${idx}`} className={idx % 2 === 0 ? 'wizard-table-row--even' : 'wizard-table-row--odd'}>
+                                <td className="wizard-table-cell wizard-table-cell--left wizard-table-cell--bold">
+                                    {s.name}
+                                    {s.options && s.options.length > 0 && (
+                                        <input
+                                            type="text"
+                                            className="wizard-table-spell-option"
+                                            placeholder={s.options[0]}
+                                            value={s.selectedOption || ''}
+                                            onChange={(e) => onUpdateOption(idx, e.target.value)}
+                                            onClick={(e) => e.stopPropagation()}
+                                        />
+                                    )}
+                                </td>
+                                <td className="wizard-table-cell">
+                                    <select
+                                        className="spell-rank-select"
+                                        value={s.rank}
+                                        onChange={(e) => onUpdateSpellRank(idx, parseInt(e.target.value, 10))}
+                                    >
+                                        {Array.from({ length: s.maxRank }, (_, i) => i + 1).map((rank) => (
+                                            <option key={rank} value={rank}>{rank}</option>
+                                        ))}
+                                        <option key="maestria" value={s.maxRank + 2}>Maestría</option>
+                                    </select>
+                                </td>
+                                <td className="wizard-table-cell">
+                                    <span className={`spell-cost-badge${isMaestria ? ' spell-cost-badge--maestria' : ''}`}>
+                                        {baseCost} × {isMaestria ? `${maestriaValue} (M)` : effectiveRank} = {spellTotalCost} EM
+                                    </span>
+                                </td>
+                                <td className="wizard-table-cell wizard-table-cell--secondary">
+                                    {s.requirements !== 'No especificado'
+                                        ? s.requirements
+                                        : <span className="spell-req-none">—</span>}
+                                </td>
+                                <td className="wizard-table-cell">
+                                    <DeleteRowButton onDelete={() => onRemoveSpell(idx)} title="Eliminar hechizo" />
+                                </td>
+                            </tr>
+                        );
+                    })}
+                </TableContainer>
             ) : (
-                <div style={{ textAlign: 'center', padding: '3rem', color: '#9ca3af', fontWeight: 'bold', fontStyle: 'italic' }}>
-                    No hay hechizos disponibles
-                </div>
+                <EmptyState message="No hay hechizos seleccionados" />
             )}
         </WizardSection>
     );
