@@ -14,15 +14,44 @@
 
 .wizard-dynamic-list-item {
     position: relative;
-    padding: 1rem;
+    padding: 0.75rem 2.75rem 0.75rem 0.75rem;
+    /* right padding reserves space for the X */
     border-radius: 8px;
     border: 1px solid;
 }
 
+/* Delete button: always top-right, inside the card border */
 .wizard-dynamic-list-item-actions {
-    margin-top: 1rem;
+    position: absolute;
+    top: 0.4rem;
+    right: 0.4rem;
+    margin-top: 0;
     display: flex;
-    justify-content: flex-end;
+}
+
+.wizard-delete-row-button {
+    color: #d1d5db;
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    transition: background-color 0.15s, color 0.15s;
+}
+
+.wizard-delete-row-button:hover {
+    background-color: #fef2f2;
+    color: #ef4444;
+}
+
+.wizard-delete-row-button:active {
+    background-color: #fee2e2;
+    color: #dc2626;
 }
 
 /* Theme: Blue */

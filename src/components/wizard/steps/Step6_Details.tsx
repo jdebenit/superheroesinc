@@ -188,481 +188,517 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
     ];
 
     return (
-        <div style={{ padding: '2rem' }}>
+        <>
+            <div style={{ padding: '2rem' }}>
 
-            {/* Header Description */}
-            <h2 style={stepPageTitleStyle}>
-                Detalles Finales
-            </h2>
-            <p style={stepPageSubtitleStyle}>
-                Define la identidad de tu personaje y equipalo.
-            </p>
-
-            {/* IDENTITY SECTION */}
-            <WizardSection title="Identidad">
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginBottom: '1.5rem' }}>
-                    <WizardField
-                        label="Nombre del Personaje"
-                        value={data.name || ''}
-                        onChange={(val) => updateField('name', val)}
-                        placeholder="Ej: Alex Mercer"
-                    />
-                    <WizardField
-                        label="Alias / Nombre en Clave"
-                        value={data.alias || ''}
-                        onChange={(val) => updateField('alias', val)}
-                        placeholder="Ej: Prototype"
-                    />
-                </div>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
-                    <WizardField
-                        label="Profesión"
-                        value={data.profession || ''}
-                        onChange={(val) => updateField('profession', val)}
-                        placeholder="Ej: Periodista, Mecánico..."
-                    />
-                    <WizardField
-                        label="Identidad Sexual"
-                        value={data.sexualIdentity || ''}
-                        onChange={(val) => updateField('sexualIdentity', val)}
-                        placeholder="Ej: Heterosexual, Bisexual..."
-                    />
-                </div>
-            </WizardSection>
-
-            {/* DESCRIPTION SECTION — standalone for visibility */}
-            <WizardSection title="Descripción y Notas">
-                <p style={{ fontSize: '0.85rem', color: '#6b7280', marginBottom: '0.75rem', marginTop: 0 }}>
-                    Describe la apariencia física, carácter, historia personal y cualquier nota relevante del personaje.
+                {/* Header Description */}
+                <h2 style={stepPageTitleStyle}>
+                    Detalles Finales
+                </h2>
+                <p style={stepPageSubtitleStyle}>
+                    Define la identidad de tu personaje y equipalo.
                 </p>
-                <WizardField
-                    type="textarea"
-                    label=""
-                    value={data.notes || ''}
-                    onChange={(val) => updateField('notes', val)}
-                    placeholder="Describe la apariencia, personalidad, trasfondo breve..."
-                    style={{ marginBottom: 0 }}
-                />
-            </WizardSection>
 
-            {/* COMBAT STATS SECTION */}
-            <WizardSection
-                title="Estadísticas de Combate"
-                description={
-                    <span style={{ fontSize: '0.85rem', opacity: 0.9 }}>
-                        🔒 Calculadas automáticamente a partir de tus características — no son editables.
-                    </span>
-                }
-            >
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
-                    {data.combatstats?.map((stat, index) => {
-                        const [label, val] = stat.split(': ');
-                        return <StatItem key={index} label={label} value={val} theme="red" />;
-                    })}
-                </div>
-            </WizardSection>
+                {/* IDENTITY SECTION */}
+                <WizardSection title="Identidad">
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginBottom: '1.5rem' }}>
+                        <WizardField
+                            label="Nombre del Personaje"
+                            value={data.name || ''}
+                            onChange={(val) => updateField('name', val)}
+                            placeholder="Ej: Alex Mercer"
+                        />
+                        <WizardField
+                            label="Alias / Nombre en Clave"
+                            value={data.alias || ''}
+                            onChange={(val) => updateField('alias', val)}
+                            placeholder="Ej: Prototype"
+                        />
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
+                        <WizardField
+                            label="Profesión"
+                            value={data.profession || ''}
+                            onChange={(val) => updateField('profession', val)}
+                            placeholder="Ej: Periodista, Mecánico..."
+                        />
+                        <WizardField
+                            label="Identidad Sexual"
+                            value={data.sexualIdentity || ''}
+                            onChange={(val) => updateField('sexualIdentity', val)}
+                            placeholder="Ej: Heterosexual, Bisexual..."
+                        />
+                    </div>
+                </WizardSection>
 
-            {/* OTHER STATS SECTION */}
-            <WizardSection
-                title="Otras Estadísticas"
-                description={
-                    <span style={{ fontSize: '0.85rem', opacity: 0.9 }}>
-                        🔒 Calculadas automáticamente a partir de tus características — no son editables.
-                    </span>
-                }
-            >
-                <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-                    gap: '0',
-                    border: '1px solid #ede9fe',
-                    borderRadius: '10px',
-                    overflow: 'hidden'
-                }}>
-                    {data.otherstats?.map((stat, index) => {
-                        const colonIdx = stat.indexOf(': ');
-                        const label = colonIdx !== -1 ? stat.slice(0, colonIdx) : stat;
-                        const val = colonIdx !== -1 ? stat.slice(colonIdx + 2) : '';
-                        const isEven = index % 2 === 0;
-                        return (
-                            <div key={index} style={{
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                alignItems: 'center',
-                                padding: '0.6rem 1rem',
-                                backgroundColor: isEven ? 'white' : '#faf5ff',
-                                borderBottom: '1px solid #f3e8ff',
-                                gap: '1rem',
-                                minWidth: 0
-                            }}>
-                                <span style={{ fontSize: '0.875rem', color: '#5b21b6', fontWeight: '500', flexShrink: 0 }}>
-                                    {label}
-                                </span>
-                                <span style={{
-                                    fontSize: '0.95rem',
-                                    fontWeight: 'bold',
-                                    color: '#7c3aed',
-                                    background: '#f5f3ff',
-                                    border: '1px solid #ddd6fe',
-                                    borderRadius: '6px',
-                                    padding: '0.15rem 0.6rem',
-                                    whiteSpace: 'nowrap'
+                {/* DESCRIPTION SECTION — standalone for visibility */}
+                <WizardSection title="Descripción y Notas">
+                    <p style={{ fontSize: '0.85rem', color: '#6b7280', marginBottom: '0.75rem', marginTop: 0 }}>
+                        Describe la apariencia física, carácter, historia personal y cualquier nota relevante del personaje.
+                    </p>
+                    <WizardField
+                        type="textarea"
+                        label=""
+                        value={data.notes || ''}
+                        onChange={(val) => updateField('notes', val)}
+                        placeholder="Describe la apariencia, personalidad, trasfondo breve..."
+                        style={{ marginBottom: 0 }}
+                    />
+                </WizardSection>
+
+                {/* COMBAT STATS SECTION */}
+                <WizardSection
+                    title="Estadísticas de Combate"
+                    description={
+                        <span style={{ fontSize: '0.85rem', opacity: 0.9 }}>
+                            🔒 Calculadas automáticamente a partir de tus características — no son editables.
+                        </span>
+                    }
+                >
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
+                        {data.combatstats?.map((stat, index) => {
+                            const [label, val] = stat.split(': ');
+                            return <StatItem key={index} label={label} value={val} theme="red" />;
+                        })}
+                    </div>
+                </WizardSection>
+
+                {/* OTHER STATS SECTION */}
+                <WizardSection
+                    title="Otras Estadísticas"
+                    description={
+                        <span style={{ fontSize: '0.85rem', opacity: 0.9 }}>
+                            🔒 Calculadas automáticamente a partir de tus características — no son editables.
+                        </span>
+                    }
+                >
+                    <div style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                        gap: '0',
+                        border: '1px solid #ede9fe',
+                        borderRadius: '10px',
+                        overflow: 'hidden'
+                    }}>
+                        {data.otherstats?.map((stat, index) => {
+                            const colonIdx = stat.indexOf(': ');
+                            const label = colonIdx !== -1 ? stat.slice(0, colonIdx) : stat;
+                            const val = colonIdx !== -1 ? stat.slice(colonIdx + 2) : '';
+                            const isEven = index % 2 === 0;
+                            return (
+                                <div key={index} style={{
+                                    display: 'flex',
+                                    justifyContent: 'space-between',
+                                    alignItems: 'center',
+                                    padding: '0.6rem 1rem',
+                                    backgroundColor: isEven ? 'white' : '#faf5ff',
+                                    borderBottom: '1px solid #f3e8ff',
+                                    gap: '1rem',
+                                    minWidth: 0
                                 }}>
-                                    {val || '-'}
-                                </span>
+                                    <span style={{ fontSize: '0.875rem', color: '#5b21b6', fontWeight: '500', flexShrink: 0 }}>
+                                        {label}
+                                    </span>
+                                    <span style={{
+                                        fontSize: '0.95rem',
+                                        fontWeight: 'bold',
+                                        color: '#7c3aed',
+                                        background: '#f5f3ff',
+                                        border: '1px solid #ddd6fe',
+                                        borderRadius: '6px',
+                                        padding: '0.15rem 0.6rem',
+                                        whiteSpace: 'nowrap'
+                                    }}>
+                                        {val || '-'}
+                                    </span>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </WizardSection>
+
+                {/* WEAPONS SECTION */}
+                <WizardSection
+                    title="Armas"
+                    collapsible
+                    defaultCollapsed={(data.weapons?.items?.length ?? 0) === 0}
+                    rightContent={
+                        (data.weapons?.items?.length ?? 0) > 0 ? (
+                            <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', padding: '0.25rem 0.5rem', borderRadius: '0.5rem' }}>
+                                <CostBadge
+                                    cost={data.weapons?.items?.reduce((acc: number, item: any) => acc + (parseInt(item.cost) || 0), 0) || 0}
+                                    label="PC"
+                                    variant="default"
+                                    className="text-white"
+                                />
                             </div>
-                        );
-                    })}
-                </div>
-            </WizardSection>
+                        ) : undefined
+                    }
+                >
+                    <DynamicList
+                        items={data.weapons?.items || []}
+                        onAdd={addWeapon}
+                        onRemove={removeWeapon}
+                        addButtonLabel="Añadir Arma"
+                        color="#3b82f6"
+                        renderItem={(item, index) => (
+                            <div className="weapon-card">
+                                {/* Row 1: stats compactos */}
+                                <div className="weapon-row-top">
+                                    <WizardField
+                                        label="Nombre"
+                                        value={item.name}
+                                        onChange={(val) => updateWeapon(index, 'name', val)}
+                                        style={{ marginBottom: 0 }}
+                                        placeholder="Nombre del arma"
+                                    />
+                                    <WizardField
+                                        label="Daño"
+                                        value={item.damage || ''}
+                                        onChange={(val) => updateWeapon(index, 'damage', val)}
+                                        style={{ marginBottom: 0 }}
+                                        placeholder="Ej: 1d8+2"
+                                    />
+                                    <WizardField
+                                        label="DxA"
+                                        value={item.dxa || ''}
+                                        onChange={(val) => updateWeapon(index, 'dxa', val)}
+                                        style={{ marginBottom: 0 }}
+                                        placeholder="DxA"
+                                    />
+                                    <WizardField
+                                        label="CAR"
+                                        value={item.car || ''}
+                                        onChange={(val) => updateWeapon(index, 'car', val)}
+                                        style={{ marginBottom: 0 }}
+                                        placeholder="CAR"
+                                    />
+                                    <WizardField
+                                        type="number"
+                                        label="Coste PC"
+                                        min="0"
+                                        value={item.cost || 0}
+                                        onChange={(val) => updateWeapon(index, 'cost', Math.max(0, parseInt(val) || 0).toString())}
+                                        style={{ marginBottom: 0 }}
+                                    />
+                                </div>
+                                {/* Row 2: Notas full width */}
+                                <WizardField
+                                    label="Notas / Propiedades"
+                                    value={item.notes || ''}
+                                    onChange={(val) => updateWeapon(index, 'notes', val)}
+                                    style={{ marginBottom: 0 }}
+                                    placeholder="Alcance, cadencia, efectos especiales..."
+                                />
+                            </div>
+                        )}
+                    />
+                </WizardSection>
 
-            {/* WEAPONS SECTION */}
-            <WizardSection
-                title="Armas"
-                collapsible
-                defaultCollapsed={(data.weapons?.items?.length ?? 0) === 0}
-                rightContent={
-                    (data.weapons?.items?.length ?? 0) > 0 ? (
-                        <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', padding: '0.25rem 0.5rem', borderRadius: '0.5rem' }}>
-                            <CostBadge
-                                cost={data.weapons?.items?.reduce((acc: number, item: any) => acc + (parseInt(item.cost) || 0), 0) || 0}
-                                label="PC"
-                                variant="default"
-                                className="text-white"
-                            />
-                        </div>
-                    ) : undefined
-                }
-            >
-                <DynamicList
-                    items={data.weapons?.items || []}
-                    onAdd={addWeapon}
-                    onRemove={removeWeapon}
-                    addButtonLabel="Añadir Arma"
-                    color="#3b82f6"
-                    renderItem={(item, index) => (
-                        <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1.5fr 0.8fr 0.8fr 0.8fr 1.5fr 80px', gap: '0.5rem', alignItems: 'start' }}>
-                            <WizardField
-                                label="Nombre"
-                                value={item.name}
-                                onChange={(val) => updateWeapon(index, 'name', val)}
-                                style={{ marginBottom: 0 }}
-                                placeholder="Nombre del arma"
-                            />
-                            <FormSelect
-                                label=""
-                                value={item.skillId || ''}
-                                onChange={(val) => updateWeapon(index, 'skillId', val)}
-                                placeholder="Seleccionar..."
-                                options={weaponSkills.map(skill => ({
-                                    id: skill.id,
-                                    label: skill.name
-                                }))}
-                                showCostInOption={false}
-                                showDescription={false}
-                            />
-                            <WizardField
-                                label="Daño"
-                                value={item.damage || ''}
-                                onChange={(val) => updateWeapon(index, 'damage', val)}
-                                style={{ marginBottom: 0 }}
-                                placeholder="Ej: 1d8+2"
-                            />
-                            <WizardField
-                                label="DxA"
-                                value={item.dxa || ''}
-                                onChange={(val) => updateWeapon(index, 'dxa', val)}
-                                style={{ marginBottom: 0 }}
-                                placeholder="DxA"
-                            />
-                            <WizardField
-                                label="CAR"
-                                value={item.car || ''}
-                                onChange={(val) => updateWeapon(index, 'car', val)}
-                                style={{ marginBottom: 0 }}
-                                placeholder="CAR"
-                            />
-                            <WizardField
-                                label="Notas / Propiedades"
-                                value={item.notes || ''}
-                                onChange={(val) => updateWeapon(index, 'notes', val)}
-                                style={{ marginBottom: 0 }}
-                                placeholder="Alcance..."
-                            />
-                            <WizardField
-                                type="number"
-                                label="Coste"
-                                min="0"
-                                value={item.cost || 0}
-                                onChange={(val) => updateWeapon(index, 'cost', Math.max(0, parseInt(val) || 0).toString())}
-                                style={{ marginBottom: 0 }}
-                            />
-                        </div>
-                    )}
-                />
-            </WizardSection>
-
-            {/* EQUIPMENT SECTION (New) */}
-            <WizardSection
-                title="Equipo"
-                collapsible
-                defaultCollapsed={(data.equipment?.items?.length ?? 0) === 0}
-                rightContent={
-                    (data.equipment?.items?.length ?? 0) > 0 ? (
-                        <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', padding: '0.25rem 0.5rem', borderRadius: '0.5rem' }}>
-                            <CostBadge
-                                cost={data.equipment?.items?.reduce((acc: number, item: any) => acc + (parseInt(item.cost) || 0), 0) || 0}
-                                label="PC"
-                                variant="default"
-                                className="text-white"
-                            />
-                        </div>
-                    ) : undefined
-                }
-            >
-                <DynamicList
-                    items={data.equipment?.items || []}
-                    onAdd={addEquipment}
-                    onRemove={removeEquipment}
-                    addButtonLabel="Añadir Equipo"
-                    color="#3b82f6"
-                    renderItem={(item, index) => (
-                        <div style={{ display: 'grid', gridTemplateColumns: '2fr 3fr 80px', gap: '1rem', alignItems: 'start' }}>
-                            <WizardField
-                                label="Nombre"
-                                value={item.name}
-                                onChange={(val) => updateEquipment(index, 'name', val)}
-                                style={{ marginBottom: 0 }}
-                                placeholder="Nombre del objeto"
-                            />
-                            <WizardField
-                                label="Notas"
-                                value={item.notes || ''}
-                                onChange={(val) => updateEquipment(index, 'notes', val)}
-                                style={{ marginBottom: 0 }}
-                                placeholder="Descripción..."
-                            />
-                            <WizardField
-                                type="number"
-                                label="Coste"
-                                min="0"
-                                value={item.cost || 0}
-                                onChange={(val) => updateEquipment(index, 'cost', Math.max(0, parseInt(val) || 0).toString())}
-                                style={{ marginBottom: 0 }}
-                            />
-                        </div>
-                    )}
-                />
-            </WizardSection>
-
-            {/* VEHICLES SECTION */}
-            <WizardSection
-                title="Vehículos"
-                collapsible
-                defaultCollapsed={(data.vehicles?.items?.length ?? 0) === 0}
-                rightContent={
-                    (data.vehicles?.items?.length ?? 0) > 0 ? (
-                        <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', padding: '0.25rem 0.5rem', borderRadius: '0.5rem' }}>
-                            <CostBadge
-                                cost={data.vehicles?.items?.reduce((acc: number, item: any) => acc + (parseInt(item.cost) || 0), 0) || 0}
-                                label="PC"
-                                variant="default"
-                                className="text-white"
-                            />
-                        </div>
-                    ) : undefined
-                }
-            >
-                <DynamicList
-                    items={data.vehicles?.items || []}
-                    onAdd={addVehicle}
-                    onRemove={removeVehicle}
-                    addButtonLabel="Añadir Vehículo"
-                    color="#3b82f6"
-                    renderItem={(item, index) => (
-                        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr 1fr 80px', gap: '0.75rem', alignItems: 'start' }}>
-                            <WizardField
-                                label="Nombre"
-                                value={item.name}
-                                onChange={(val) => updateVehicle(index, 'name', val)}
-                                style={{ marginBottom: 0 }}
-                            />
-                            <WizardField
-                                label="Blindaje"
-                                value={item.armor || ''}
-                                onChange={(val) => updateVehicle(index, 'armor', val)}
-                                style={{ marginBottom: 0 }}
-                            />
-                            <WizardField
-                                label="PE"
-                                value={item.pe || ''}
-                                onChange={(val) => updateVehicle(index, 'pe', val)}
-                                style={{ marginBottom: 0 }}
-                            />
-                            <WizardField
-                                label="Velocidad"
-                                value={item.speed || ''}
-                                onChange={(val) => updateVehicle(index, 'speed', val)}
-                                style={{ marginBottom: 0 }}
-                            />
-                            <WizardField
-                                label="Alcance/Autonomía"
-                                value={item.range || ''}
-                                onChange={(val) => updateVehicle(index, 'range', val)}
-                                style={{ marginBottom: 0 }}
-                            />
-                            <WizardField
-                                type="number"
-                                label="Maniobrabilidad"
-                                min="0"
-                                value={item.maneuverability ?? 0}
-                                onChange={(val) => updateVehicle(index, 'maneuverability', Math.max(0, parseInt(val) || 0))}
-                                style={{ marginBottom: 0 }}
-                            />
-                            <WizardField
-                                type="number"
-                                label="Coste"
-                                min="0"
-                                value={item.cost || 0}
-                                onChange={(val) => updateVehicle(index, 'cost', Math.max(0, parseInt(val) || 0).toString())}
-                                style={{ marginBottom: 0 }}
-                            />
-                        </div>
-                    )}
-                />
-            </WizardSection>
-
-            {/* ARTIFACTS SECTION */}
-            <WizardSection
-                title="Artefactos"
-                collapsible
-                defaultCollapsed={(data.artifacts?.items?.length ?? 0) === 0}
-                rightContent={
-                    (data.artifacts?.items?.length ?? 0) > 0 ? (
-                        <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', padding: '0.25rem 0.5rem', borderRadius: '0.5rem' }}>
-                            <CostBadge
-                                cost={data.artifacts?.items?.reduce((acc: number, item: any) => acc + (parseInt(item.cost) || 0), 0) || 0}
-                                label="PC"
-                                variant="default"
-                                className="text-white"
-                            />
-                        </div>
-                    ) : undefined
-                }
-            >
-                <DynamicList
-                    items={data.artifacts?.items || []}
-                    onAdd={addArtifact}
-                    onRemove={removeArtifact}
-                    addButtonLabel="Añadir Artefacto"
-                    color="#3b82f6"
-                    renderItem={(item, index) => (
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                            <FormSelect
-                                label="Cargar Predefinido (Opcional)"
-                                value=""
-                                onChange={(val) => applyArtifactPreset(index, val)}
-                                placeholder="Seleccionar de la lista..."
-                                options={ARTIFACTS.map((obj: any) => ({
-                                    id: obj.id,
-                                    label: `${obj.name} (Fiabilidad: ${obj.reliability})`,
-                                    cost: obj.pcCost,
-                                    description: obj.description
-                                }))}
-                            />
-
-                            <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 100px', gap: '1rem' }}>
+                {/* EQUIPMENT SECTION (New) */}
+                <WizardSection
+                    title="Equipo"
+                    collapsible
+                    defaultCollapsed={(data.equipment?.items?.length ?? 0) === 0}
+                    rightContent={
+                        (data.equipment?.items?.length ?? 0) > 0 ? (
+                            <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', padding: '0.25rem 0.5rem', borderRadius: '0.5rem' }}>
+                                <CostBadge
+                                    cost={data.equipment?.items?.reduce((acc: number, item: any) => acc + (parseInt(item.cost) || 0), 0) || 0}
+                                    label="PC"
+                                    variant="default"
+                                    className="text-white"
+                                />
+                            </div>
+                        ) : undefined
+                    }
+                >
+                    <DynamicList
+                        items={data.equipment?.items || []}
+                        onAdd={addEquipment}
+                        onRemove={removeEquipment}
+                        addButtonLabel="Añadir Equipo"
+                        color="#3b82f6"
+                        renderItem={(item, index) => (
+                            <div style={{ display: 'grid', gridTemplateColumns: '2fr 3fr 80px', gap: '1rem', alignItems: 'start' }}>
                                 <WizardField
                                     label="Nombre"
                                     value={item.name}
-                                    onChange={(val) => updateArtifact(index, 'name', val)}
+                                    onChange={(val) => updateEquipment(index, 'name', val)}
+                                    style={{ marginBottom: 0 }}
+                                    placeholder="Nombre del objeto"
+                                />
+                                <WizardField
+                                    label="Notas"
+                                    value={item.notes || ''}
+                                    onChange={(val) => updateEquipment(index, 'notes', val)}
+                                    style={{ marginBottom: 0 }}
+                                    placeholder="Descripción..."
+                                />
+                                <WizardField
+                                    type="number"
+                                    label="Coste"
+                                    min="0"
+                                    value={item.cost || 0}
+                                    onChange={(val) => updateEquipment(index, 'cost', Math.max(0, parseInt(val) || 0).toString())}
+                                    style={{ marginBottom: 0 }}
+                                />
+                            </div>
+                        )}
+                    />
+                </WizardSection>
+
+                {/* VEHICLES SECTION */}
+                <WizardSection
+                    title="Vehículos"
+                    collapsible
+                    defaultCollapsed={(data.vehicles?.items?.length ?? 0) === 0}
+                    rightContent={
+                        (data.vehicles?.items?.length ?? 0) > 0 ? (
+                            <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', padding: '0.25rem 0.5rem', borderRadius: '0.5rem' }}>
+                                <CostBadge
+                                    cost={data.vehicles?.items?.reduce((acc: number, item: any) => acc + (parseInt(item.cost) || 0), 0) || 0}
+                                    label="PC"
+                                    variant="default"
+                                    className="text-white"
+                                />
+                            </div>
+                        ) : undefined
+                    }
+                >
+                    <DynamicList
+                        items={data.vehicles?.items || []}
+                        onAdd={addVehicle}
+                        onRemove={removeVehicle}
+                        addButtonLabel="Añadir Vehículo"
+                        color="#3b82f6"
+                        renderItem={(item, index) => (
+                            <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr 1fr 80px', gap: '0.75rem', alignItems: 'start' }}>
+                                <WizardField
+                                    label="Nombre"
+                                    value={item.name}
+                                    onChange={(val) => updateVehicle(index, 'name', val)}
                                     style={{ marginBottom: 0 }}
                                 />
                                 <WizardField
-                                    label="Fiabilidad"
-                                    value={item.reliability || ''}
-                                    onChange={(val) => updateArtifact(index, 'reliability', val)}
+                                    label="Blindaje"
+                                    value={item.armor || ''}
+                                    onChange={(val) => updateVehicle(index, 'armor', val)}
                                     style={{ marginBottom: 0 }}
                                 />
                                 <WizardField
-                                    label="Valor"
-                                    value={item.value || ''}
-                                    onChange={(val) => updateArtifact(index, 'value', val)}
+                                    label="PE"
+                                    value={item.pe || ''}
+                                    onChange={(val) => updateVehicle(index, 'pe', val)}
+                                    style={{ marginBottom: 0 }}
+                                />
+                                <WizardField
+                                    label="Velocidad"
+                                    value={item.speed || ''}
+                                    onChange={(val) => updateVehicle(index, 'speed', val)}
+                                    style={{ marginBottom: 0 }}
+                                />
+                                <WizardField
+                                    label="Alcance/Autonomía"
+                                    value={item.range || ''}
+                                    onChange={(val) => updateVehicle(index, 'range', val)}
+                                    style={{ marginBottom: 0 }}
+                                />
+                                <WizardField
+                                    type="number"
+                                    label="Maniobrabilidad"
+                                    min="0"
+                                    value={item.maneuverability ?? 0}
+                                    onChange={(val) => updateVehicle(index, 'maneuverability', Math.max(0, parseInt(val) || 0))}
                                     style={{ marginBottom: 0 }}
                                 />
                                 <WizardField
                                     type="number"
                                     label="Coste"
+                                    min="0"
                                     value={item.cost || 0}
-                                    onChange={(val) => updateArtifact(index, 'cost', Math.max(0, parseInt(val) || 0).toString())}
+                                    onChange={(val) => updateVehicle(index, 'cost', Math.max(0, parseInt(val) || 0).toString())}
                                     style={{ marginBottom: 0 }}
                                 />
                             </div>
-                            <WizardField
-                                type="textarea"
-                                label="Descripción / Efectos"
-                                value={item.notes || ''}
-                                onChange={(val) => updateArtifact(index, 'notes', val)}
-                                style={{ marginBottom: 0, minHeight: '60px' }}
-                            />
-                        </div>
-                    )}
-                />
-            </WizardSection>
+                        )}
+                    />
+                </WizardSection>
 
-            {/* MAGIC OBJECTS SECTION */}
-            <WizardSection
-                title="Objetos Mágicos"
-                collapsible
-                defaultCollapsed={(data.magicObjects?.items?.length ?? 0) === 0}
-            >
-                <DynamicList
-                    items={data.magicObjects?.items || []}
-                    onAdd={addMagicObject}
-                    onRemove={removeMagicObject}
-                    addButtonLabel="Añadir Objeto Mágico"
-                    color="#3b82f6"
-                    renderItem={(item, index) => (
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                            <FormSelect
-                                label="Cargar Predefinido (Opcional)"
-                                value=""
-                                onChange={(val) => applyMagicPreset(index, val)}
-                                placeholder="Seleccionar de la lista..."
-                                options={MAGIC_OBJECTS.map((obj: any) => ({
-                                    id: obj.id,
-                                    label: `${obj.name} (EM: ${obj.em})`,
-                                    description: obj.description
-                                }))}
-                                showCostInOption={false}
-                            />
-
-                            <div style={{ display: 'grid', gridTemplateColumns: '3fr 1fr', gap: '1rem' }}>
-                                <WizardField
-                                    label="Nombre"
-                                    value={item.name}
-                                    onChange={(val) => updateMagicObject(index, 'name', val)}
-                                    style={{ marginBottom: 0 }}
-                                />
-                                <WizardField
-                                    type="number"
-                                    label="Coste EM"
-                                    value={item.em || 0}
-                                    onChange={(val) => updateMagicObject(index, 'em', Math.max(0, parseInt(val) || 0))}
-                                    style={{ marginBottom: 0 }}
+                {/* ARTIFACTS SECTION */}
+                <WizardSection
+                    title="Artefactos"
+                    collapsible
+                    defaultCollapsed={(data.artifacts?.items?.length ?? 0) === 0}
+                    rightContent={
+                        (data.artifacts?.items?.length ?? 0) > 0 ? (
+                            <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', padding: '0.25rem 0.5rem', borderRadius: '0.5rem' }}>
+                                <CostBadge
+                                    cost={data.artifacts?.items?.reduce((acc: number, item: any) => acc + (parseInt(item.cost) || 0), 0) || 0}
+                                    label="PC"
+                                    variant="default"
+                                    className="text-white"
                                 />
                             </div>
-                            <WizardField
-                                type="textarea"
-                                label="Descripción"
-                                value={item.description || ''}
-                                onChange={(val) => updateMagicObject(index, 'description', val)}
-                                style={{ marginBottom: 0, minHeight: '60px' }}
-                            />
-                        </div>
-                    )}
-                />
-            </WizardSection>
-        </div>
+                        ) : undefined
+                    }
+                >
+                    <DynamicList
+                        items={data.artifacts?.items || []}
+                        onAdd={addArtifact}
+                        onRemove={removeArtifact}
+                        addButtonLabel="Añadir Artefacto"
+                        color="#3b82f6"
+                        renderItem={(item, index) => (
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                                <FormSelect
+                                    label="Cargar Predefinido (Opcional)"
+                                    value=""
+                                    onChange={(val) => applyArtifactPreset(index, val)}
+                                    placeholder="Seleccionar de la lista..."
+                                    options={ARTIFACTS.map((obj: any) => ({
+                                        id: obj.id,
+                                        label: `${obj.name} (Fiabilidad: ${obj.reliability})`,
+                                        cost: obj.pcCost,
+                                        description: obj.description
+                                    }))}
+                                />
+
+                                <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 100px', gap: '1rem' }}>
+                                    <WizardField
+                                        label="Nombre"
+                                        value={item.name}
+                                        onChange={(val) => updateArtifact(index, 'name', val)}
+                                        style={{ marginBottom: 0 }}
+                                    />
+                                    <WizardField
+                                        label="Fiabilidad"
+                                        value={item.reliability || ''}
+                                        onChange={(val) => updateArtifact(index, 'reliability', val)}
+                                        style={{ marginBottom: 0 }}
+                                    />
+                                    <WizardField
+                                        label="Valor"
+                                        value={item.value || ''}
+                                        onChange={(val) => updateArtifact(index, 'value', val)}
+                                        style={{ marginBottom: 0 }}
+                                    />
+                                    <WizardField
+                                        type="number"
+                                        label="Coste"
+                                        value={item.cost || 0}
+                                        onChange={(val) => updateArtifact(index, 'cost', Math.max(0, parseInt(val) || 0).toString())}
+                                        style={{ marginBottom: 0 }}
+                                    />
+                                </div>
+                                <WizardField
+                                    type="textarea"
+                                    label="Descripción / Efectos"
+                                    value={item.notes || ''}
+                                    onChange={(val) => updateArtifact(index, 'notes', val)}
+                                    style={{ marginBottom: 0, minHeight: '60px' }}
+                                />
+                            </div>
+                        )}
+                    />
+                </WizardSection>
+
+                {/* MAGIC OBJECTS SECTION */}
+                <WizardSection
+                    title="Objetos Mágicos"
+                    collapsible
+                    defaultCollapsed={(data.magicObjects?.items?.length ?? 0) === 0}
+                >
+                    <DynamicList
+                        items={data.magicObjects?.items || []}
+                        onAdd={addMagicObject}
+                        onRemove={removeMagicObject}
+                        addButtonLabel="Añadir Objeto Mágico"
+                        color="#3b82f6"
+                        renderItem={(item, index) => (
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                                <FormSelect
+                                    label="Cargar Predefinido (Opcional)"
+                                    value=""
+                                    onChange={(val) => applyMagicPreset(index, val)}
+                                    placeholder="Seleccionar de la lista..."
+                                    options={MAGIC_OBJECTS.map((obj: any) => ({
+                                        id: obj.id,
+                                        label: `${obj.name} (EM: ${obj.em})`,
+                                        description: obj.description
+                                    }))}
+                                    showCostInOption={false}
+                                />
+
+                                <div style={{ display: 'grid', gridTemplateColumns: '3fr 1fr', gap: '1rem' }}>
+                                    <WizardField
+                                        label="Nombre"
+                                        value={item.name}
+                                        onChange={(val) => updateMagicObject(index, 'name', val)}
+                                        style={{ marginBottom: 0 }}
+                                    />
+                                    <WizardField
+                                        type="number"
+                                        label="Coste EM"
+                                        value={item.em || 0}
+                                        onChange={(val) => updateMagicObject(index, 'em', Math.max(0, parseInt(val) || 0))}
+                                        style={{ marginBottom: 0 }}
+                                    />
+                                </div>
+                                <WizardField
+                                    type="textarea"
+                                    label="Descripción"
+                                    value={item.description || ''}
+                                    onChange={(val) => updateMagicObject(index, 'description', val)}
+                                    style={{ marginBottom: 0, minHeight: '60px' }}
+                                />
+                            </div>
+                        )}
+                    />
+                </WizardSection>
+            </div>
+            <style>{`
+            .weapon-card {
+                display: flex;
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+            .weapon-row-top {
+                display: grid;
+                grid-template-columns: 2fr 1fr 1fr 1fr 80px;
+                gap: 0.75rem;
+                align-items: start;
+            }
+            @media (max-width: 640px) {
+                .weapon-row-top {
+                    grid-template-columns: 1fr 1fr;
+                }
+                .weapon-row-top > *:first-child {
+                    grid-column: 1 / -1;
+                }
+            }
+            /* Anclar el botón X en la esquina superior derecha de la tarjeta */
+            .wizard-dynamic-list-item:has(.weapon-card) {
+                padding-top: 0.75rem;
+            }
+            .wizard-dynamic-list-item:has(.weapon-card) .wizard-dynamic-list-item-actions {
+                position: absolute;
+                top: 0.4rem;
+                right: 0.4rem;
+                margin-top: 0;
+            }
+            .wizard-dynamic-list-item:has(.weapon-card) .wizard-delete-row-button {
+                width: 2rem;
+                height: 2rem;
+                border-radius: 6px;
+                color: #9ca3af;
+                transition: all 0.15s;
+            }
+            .wizard-dynamic-list-item:has(.weapon-card) .wizard-delete-row-button:hover {
+                background-color: #fef2f2;
+                color: #ef4444;
+            }
+        `}</style>
+        </>
     );
 }
