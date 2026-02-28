@@ -30,6 +30,7 @@ import {
     calculateCreationPoints
 } from '../../../utils/characterCalculations';
 import { stepPageTitleStyle, stepPageSubtitleStyle } from '../shared/stepStyles';
+import './Step2_Characteristics.css';
 
 export default function Step2_Characteristics({ data, onChange }: Step2Props) {
     const [characteristics, setCharacteristics] = useState<{
@@ -334,47 +335,16 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
             </p>
 
             {choosableInfo && (
-                <div style={{
-                    marginBottom: '2rem',
-                    padding: '1.5rem',
-                    backgroundColor: '#fef3c7',
-                    border: '3px solid #f59e0b',
-                    borderRadius: '12px'
-                }}>
-                    <h3 style={{
-                        fontSize: '1.125rem',
-                        fontWeight: 'bold',
-                        marginBottom: '1rem',
-                        color: '#92400e'
-                    }}>
+                <div className="step2-bonus-box">
+                    <h3 className="step2-bonus-title">
                         ⭐ Elige la característica para el bonus de +{choosableInfo.bonus}
                     </h3>
-                    <div style={{
-                        display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
-                        gap: '0.75rem'
-                    }}>
+                    <div className="step2-bonus-grid">
                         {CHARACTERISTICS.map(char => (
                             <button
                                 key={char.id}
                                 onClick={() => setChosenBonusCharacteristic(char.id)}
-                                style={{
-                                    padding: '0.75rem 1rem',
-                                    fontSize: '1rem',
-                                    fontWeight: 'bold',
-                                    borderRadius: '8px',
-                                    border: chosenBonusCharacteristic === char.id
-                                        ? '3px solid #16a34a'
-                                        : '2px solid #d1d5db',
-                                    backgroundColor: chosenBonusCharacteristic === char.id
-                                        ? '#dcfce7'
-                                        : 'white',
-                                    color: chosenBonusCharacteristic === char.id
-                                        ? '#166534'
-                                        : '#4b5563',
-                                    cursor: 'pointer',
-                                    transition: 'all 0.2s'
-                                }}
+                                className={`step2-bonus-btn ${chosenBonusCharacteristic === char.id ? 'selected' : 'unselected'}`}
                             >
                                 {char.name} {chosenBonusCharacteristic === char.id && '✓'}
                             </button>
@@ -385,47 +355,22 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
 
             <div className="flex gap-4 mb-8">
                 {isDistributableMode && pointsInfo && (
-                    <div style={{
-                        display: 'inline-block',
-                        padding: '1rem 2rem',
-                        backgroundColor: pointsInfo.remaining >= 0 ? '#dbeafe' : '#fee2e2',
-                        border: `3px solid ${pointsInfo.remaining >= 0 ? '#2563eb' : '#dc2626'}`,
-                        borderRadius: '12px',
-                        fontSize: '1.125rem',
-                        fontWeight: 'bold'
-                    }}>
+                    <div className={`step2-balance-box ${pointsInfo.remaining >= 0 ? 'positive' : 'negative'}`}>
                         📊 Puntos de Origen: {pointsInfo.used}/{pointsInfo.total}
-                        <span style={{
-                            marginLeft: '1rem',
-                            color: pointsInfo.remaining >= 0 ? '#16a34a' : '#dc2626'
-                        }}>
+                        <span className={pointsInfo.remaining >= 0 ? 'step2-balance-note-positive' : 'step2-balance-note-negative'}>
                             ({pointsInfo.remaining >= 0 ? `${pointsInfo.remaining} restantes` : `${Math.abs(pointsInfo.remaining)} excedido`})
                         </span>
                     </div>
                 )}
 
                 {specialtyPointsInfo && (
-                    <div style={{
-                        display: 'inline-block',
-                        padding: '1rem 2rem',
-                        backgroundColor: specialtyPointsInfo.remaining >= 0 ? '#dbeafe' : '#fee2e2',
-                        border: `3px solid ${specialtyPointsInfo.remaining >= 0 ? '#3b82f6' : '#dc2626'}`,
-                        borderRadius: '12px',
-                        fontSize: '1.125rem',
-                        fontWeight: 'bold',
-                        color: specialtyPointsInfo.remaining >= 0 ? '#1e40af' : '#dc2626'
-                    }}>
+                    <div className={`step2-specialty-balance ${specialtyPointsInfo.remaining >= 0 ? 'positive' : 'negative'}`}>
                         ⚡ Puntos Especialidad: {specialtyPointsInfo.used}/{specialtyPointsInfo.total}
                     </div>
                 )}
             </div>
 
-            <div style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-                gap: '1rem',
-                marginBottom: '2rem'
-            }}>
+            <div className="step2-chars-grid">
                 {CHARACTERISTICS.map((char) => {
                     const total = getTotal(char.id);
                     const c = characteristics[char.id];
@@ -439,63 +384,21 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
                     };
 
                     return (
-                        <div
-                            key={char.id}
-                            style={{
-                                padding: '1.25rem',
-                                backgroundColor: 'white',
-                                border: '2px solid #e5e7eb',
-                                borderRadius: '12px',
-                                boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
-                                display: 'flex',
-                                flexDirection: 'column',
-                                gap: '1rem'
-                            }}
-                        >
-                            <div style={{
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                alignItems: 'center',
-                                paddingBottom: '0.75rem',
-                                borderBottom: '2px solid #f3f4f6'
-                            }}>
+                        <div key={char.id} className="step2-char-card">
+                            <div className="step2-char-header">
                                 <div>
-                                    <span style={{
-                                        fontSize: '1.25rem',
-                                        fontWeight: 'bold',
-                                        color: '#1f2937'
-                                    }}>
+                                    <span className="step2-char-name">
                                         {char.name}
                                     </span>
-                                    <span style={{
-                                        marginLeft: '0.5rem',
-                                        fontSize: '0.875rem',
-                                        color: '#9ca3af',
-                                        fontWeight: 'bold'
-                                    }}>
+                                    <span className="step2-char-abbr">
                                         ({char.abbr})
                                     </span>
                                 </div>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                    <div style={{
-                                        fontSize: '2rem',
-                                        fontWeight: 'bold',
-                                        color: '#2563eb',
-                                        padding: '0.5rem 1rem',
-                                        backgroundColor: '#eff6ff',
-                                        borderRadius: '8px',
-                                        minWidth: '80px',
-                                        textAlign: 'center'
-                                    }}>
+                                    <div className="step2-char-total-badge">
                                         {total}
                                     </div>
-                                    <div style={{
-                                        fontSize: '0.75rem',
-                                        color: '#6b7280',
-                                        fontWeight: 'bold',
-                                        textAlign: 'center',
-                                        lineHeight: '1.2'
-                                    }}>
+                                    <div className="step2-char-limits">
                                         <div style={{ color: '#dc2626' }}>Min: {charLimits.min}</div>
                                         <div style={{ color: hasPowerMod ? '#9333ea' : '#16a34a' }}>
                                             Max: {charLimits.max} {hasPowerMod && '⚡'}
@@ -504,19 +407,9 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
                                 </div>
                             </div>
 
-                            <div style={{
-                                display: 'grid',
-                                gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
-                                gap: '1rem'
-                            }}>
+                            <div className="step2-input-grid">
                                 <div>
-                                    <label style={{
-                                        display: 'block',
-                                        fontSize: '0.875rem',
-                                        fontWeight: 'bold',
-                                        color: '#4b5563',
-                                        marginBottom: '0.5rem'
-                                    }}>
+                                    <label className="step2-input-label">
                                         Base
                                     </label>
                                     <input
@@ -525,26 +418,12 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
                                         max="200" // Always allow typing up to 200, but logic clamps
                                         value={c.base}
                                         onChange={(e) => handleCharacteristicChange(char.id, 'base', e.target.value)}
-                                        style={{
-                                            width: '100%',
-                                            padding: '0.75rem',
-                                            fontSize: '1rem',
-                                            border: '2px solid #d1d5db',
-                                            borderRadius: '8px',
-                                            textAlign: 'center',
-                                            fontWeight: 'bold'
-                                        }}
+                                        className="step2-input-base"
                                     />
                                 </div>
 
                                 <div>
-                                    <label style={{
-                                        display: 'block',
-                                        fontSize: '0.875rem',
-                                        fontWeight: 'bold',
-                                        color: '#4b5563',
-                                        marginBottom: '0.5rem'
-                                    }}>
+                                    <label className="step2-input-label">
                                         {isDistributableMode ? 'Mod. Origen' : 'Mod. Origen (Auto)'}
                                     </label>
                                     <input
@@ -554,29 +433,12 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
                                         value={c.originMod}
                                         readOnly={!isDistributableMode}
                                         onChange={isDistributableMode ? (e) => handleCharacteristicChange(char.id, 'originMod', e.target.value) : undefined}
-                                        style={{
-                                            width: '100%',
-                                            padding: '0.75rem',
-                                            fontSize: '1rem',
-                                            border: `2px solid ${isDistributableMode ? '#2563eb' : '#f59e0b'}`,
-                                            borderRadius: '8px',
-                                            textAlign: 'center',
-                                            fontWeight: 'bold',
-                                            backgroundColor: isDistributableMode ? 'white' : '#fef3c7',
-                                            cursor: isDistributableMode ? 'text' : 'not-allowed',
-                                            color: isDistributableMode ? '#1f2937' : '#92400e'
-                                        }}
+                                        className={`step2-input-origin ${isDistributableMode ? 'distributable' : 'fixed'}`}
                                     />
                                 </div>
 
                                 <div>
-                                    <label style={{
-                                        display: 'block',
-                                        fontSize: '0.875rem',
-                                        fontWeight: 'bold',
-                                        color: '#4b5563',
-                                        marginBottom: '0.5rem'
-                                    }}>
+                                    <label className="step2-input-label">
                                         Mod. Especialidad
                                         {(() => {
                                             const allowedChars = calculateSpecialtyAllowedCharacteristics(origins);
@@ -602,27 +464,12 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
                                             return allowedChars ? !allowedChars.includes(char.id) : false;
                                         })()}
                                         onChange={(e) => handleCharacteristicChange(char.id, 'specialtyMod', e.target.value)}
-                                        style={{
-                                            width: '100%',
-                                            padding: '0.75rem',
-                                            fontSize: '1rem',
-                                            border: '2px solid #d1d5db',
-                                            borderRadius: '8px',
-                                            textAlign: 'center',
-                                            fontWeight: 'bold',
-                                            backgroundColor: '#dbeafe'
-                                        }}
+                                        className="step2-input-specialty"
                                     />
                                 </div>
 
                                 <div>
-                                    <label style={{
-                                        display: 'block',
-                                        fontSize: '0.875rem',
-                                        fontWeight: 'bold',
-                                        color: '#4b5563',
-                                        marginBottom: '0.5rem'
-                                    }}>
+                                    <label className="step2-input-label">
                                         Mod. Poder
                                     </label>
                                     <input
@@ -631,29 +478,12 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
                                         max="200"
                                         value={c.powerMod}
                                         readOnly={true}
-                                        style={{
-                                            width: '100%',
-                                            padding: '0.75rem',
-                                            fontSize: '1rem',
-                                            border: '2px solid #e5e7eb',
-                                            borderRadius: '8px',
-                                            textAlign: 'center',
-                                            fontWeight: 'bold',
-                                            backgroundColor: '#f3f4f6',
-                                            color: '#374151',
-                                            cursor: 'default'
-                                        }}
+                                        className="step2-input-readonly"
                                     />
                                 </div>
 
                                 <div>
-                                    <label style={{
-                                        display: 'block',
-                                        fontSize: '0.875rem',
-                                        fontWeight: 'bold',
-                                        color: '#4b5563',
-                                        marginBottom: '0.5rem'
-                                    }}>
+                                    <label className="step2-input-label">
                                         Mod. Otros
                                     </label>
                                     <input
@@ -663,55 +493,19 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
                                         value={c.otherMod || 0}
                                         disabled={true}
                                         onChange={(e) => handleCharacteristicChange(char.id, 'otherMod', e.target.value)}
-                                        style={{
-                                            width: '100%',
-                                            padding: '0.75rem',
-                                            fontSize: '1rem',
-                                            border: '2px solid #e5e7eb',
-                                            borderRadius: '8px',
-                                            textAlign: 'center',
-                                            fontWeight: 'bold',
-                                            backgroundColor: '#f3f4f6',
-                                            cursor: 'not-allowed',
-                                            color: '#9ca3af'
-                                        }}
+                                        className="step2-input-other"
                                     />
                                 </div>
                             </div>
 
-                            <div style={{
-                                marginTop: '1rem',
-                                borderTop: '1px solid #f0f0f0',
-                                paddingTop: '0.75rem',
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                alignItems: 'center',
-                                gap: '0.5rem',
-                                flexWrap: 'wrap'
-                            }}>
+                            <div className="step2-char-footer">
                                 {/* Formula */}
-                                <span style={{
-                                    fontSize: '0.8rem',
-                                    color: '#9ca3af',
-                                    fontFamily: 'monospace'
-                                }}>
+                                <span className="step2-formula-text">
                                     {c.base} + {c.originMod} + {c.specialtyMod} + {c.powerMod} + {c.otherMod || 0} = <strong style={{ color: '#2563eb' }}>{total}</strong>
                                 </span>
 
                                 {/* PC Cost Badge */}
-                                <div style={{
-                                    display: 'inline-flex',
-                                    alignItems: 'center',
-                                    gap: '0.35rem',
-                                    padding: '0.3rem 0.8rem',
-                                    background: 'linear-gradient(135deg, #2563eb, #1e40af)',
-                                    borderRadius: '999px',
-                                    color: 'white',
-                                    fontWeight: 'bold',
-                                    fontSize: '0.9rem',
-                                    boxShadow: '0 2px 6px rgba(37,99,235,0.25)',
-                                    whiteSpace: 'nowrap'
-                                }}>
+                                <div className="step2-pc-badge">
                                     <span style={{ opacity: 0.8, fontSize: '0.75rem' }}>PC</span>
                                     <span>{pcValues[char.id].toFixed(1)}</span>
                                 </div>
@@ -722,36 +516,13 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
             </div>
 
             {/* ── STICKY SUMMARY BAR ── */}
-            <div style={{
-                position: 'sticky',
-                bottom: 0,
-                marginLeft: '-2rem',
-                marginRight: '-2rem',
-                marginTop: '1.5rem',
-                padding: '0.75rem 2rem',
-                background: 'linear-gradient(to right, #1e3a8a, #1e40af)',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                flexWrap: 'wrap',
-                zIndex: 10,
-                boxShadow: '0 -4px 12px rgba(0,0,0,0.12)'
-            }}>
+            <div className="step2-sticky-summary">
                 {CHARACTERISTICS.map(char => {
                     const total = getTotal(char.id);
                     const limits = calculateLimits(origins, char.id);
                     const isValid = total >= limits.min && total <= limits.max;
                     return (
-                        <div key={char.id} style={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                            padding: '0.25rem 0.6rem',
-                            backgroundColor: isValid ? 'rgba(255,255,255,0.12)' : 'rgba(239,68,68,0.35)',
-                            borderRadius: '8px',
-                            border: `1px solid ${isValid ? 'rgba(255,255,255,0.15)' : '#fca5a5'}`,
-                            minWidth: '44px'
-                        }}>
+                        <div key={char.id} className={`step2-summary-item ${isValid ? 'valid' : 'invalid'}`}>
                             <span style={{ color: '#93c5fd', fontSize: '0.65rem', fontWeight: 'bold' }}>{char.abbr}</span>
                             <span style={{ color: isValid ? 'white' : '#fca5a5', fontWeight: 'bold', fontSize: '1rem', lineHeight: 1.1 }}>{total}</span>
                         </div>
@@ -762,16 +533,7 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
                 <div style={{ flex: 1 }} />
 
                 {/* Total PC badge */}
-                <div style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.4rem',
-                    padding: '0.4rem 1rem',
-                    backgroundColor: 'rgba(255,255,255,0.15)',
-                    borderRadius: '999px',
-                    border: '1px solid rgba(255,255,255,0.3)',
-                    whiteSpace: 'nowrap'
-                }}>
+                <div className="step2-summary-total">
                     <span style={{ color: '#bfdbfe', fontSize: '0.75rem', fontWeight: 'bold' }}>Total</span>
                     <span style={{ color: 'white', fontWeight: 'bold', fontSize: '1rem' }}>
                         {Object.values(pcValues).reduce((a: number, b: number) => a + b, 0).toFixed(1)} PC

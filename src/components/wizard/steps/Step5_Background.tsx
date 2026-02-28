@@ -9,6 +9,7 @@ import {
     stepPageTitleStyle,
     stepPageSubtitleStyle,
 } from '../shared/stepStyles';
+import './Step5_Background.css';
 
 interface Step5Props {
     data: {
@@ -71,13 +72,9 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
         currentObj: any
     ) => (
         <div style={innerCardStyle}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-                <h4 style={{ fontWeight: 'bold', color: '#1e293b', margin: 0 }}>{title}</h4>
-                <div style={{
-                    fontWeight: 'bold',
-                    fontSize: '0.9rem',
-                    color: currentObj.cost > 0 ? '#dc2626' : currentObj.cost < 0 ? '#16a34a' : '#6b7280'
-                }}>
+            <div className="step5-status-header">
+                <h4 className="step5-status-title">{title}</h4>
+                <div className={`step5-cost-small step5-cost-${currentObj.cost > 0 ? 'positive' : currentObj.cost < 0 ? 'negative' : 'neutral'}`}>
                     {currentObj.cost > 0 ? '+' : ''}{currentObj.cost} PC
                 </div>
             </div>
@@ -99,7 +96,7 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
     );
 
     return (
-        <div style={{ padding: '2rem' }}>
+        <div className="step5-container">
 
             {/* Header Description */}
             <h2 style={stepPageTitleStyle}>
@@ -111,13 +108,9 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
 
             {/* PREJUDICE RESISTANCE */}
             <div style={sectionCardStyle}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                    <h3 style={{ ...sectionTitleStyle, borderBottom: 'none', marginBottom: 0 }}>🛡️ Resistencia a Prejuicios</h3>
-                    <div style={{
-                        fontSize: '1.1rem',
-                        fontWeight: 'bold',
-                        color: resistanceCost > 0 ? '#dc2626' : resistanceCost < 0 ? '#16a34a' : '#6b7280'
-                    }}>
+                <div className="step5-section-title">
+                    <h3>🛡️ Resistencia a Prejuicios</h3>
+                    <div className={`step5-cost-display step5-cost-${resistanceCost > 0 ? 'positive' : resistanceCost < 0 ? 'negative' : 'neutral'}`}>
                         Coste: {resistanceCost > 0 ? '+' : ''}{resistanceCost.toFixed(1)} PC
                     </div>
                 </div>
@@ -128,37 +121,28 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
                     <strong>50</strong> es el valor promedio. Subir cuesta PC, bajar devuelve PC.
                 </p>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', backgroundColor: '#f8fafc', padding: '1.5rem', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-                    <span style={{ fontWeight: 'bold', color: '#64748b' }}>1</span>
+                <div className="step5-range-container">
+                    <span className="step5-range-label">1</span>
                     <input
                         type="range"
                         min="1"
                         max="100"
                         value={resistanceValue}
                         onChange={handleResistanceChange}
-                        style={{ flex: 1, cursor: 'pointer', height: '8px', borderRadius: '4px', accentColor: '#4f46e5' }}
+                        className="step5-range-input"
                     />
-                    <span style={{ fontWeight: 'bold', color: '#64748b' }}>100</span>
+                    <span className="step5-range-label">100</span>
 
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginLeft: '1rem' }}>
+                    <div className="step5-number-input-wrapper">
                         <input
                             type="number"
                             min="1"
                             max="100"
                             value={resistanceValue}
                             onChange={handleResistanceChange}
-                            style={{
-                                width: '70px',
-                                padding: '0.5rem',
-                                border: '1px solid #cbd5e1',
-                                borderRadius: '6px',
-                                textAlign: 'center',
-                                fontWeight: 'bold',
-                                fontSize: '1.2rem',
-                                color: '#1e293b'
-                            }}
+                            className="step5-number-input"
                         />
-                        <span style={{ fontSize: '0.9rem', color: '#64748b' }}>%</span>
+                        <span className="step5-percent-symbol">%</span>
                     </div>
                 </div>
             </div>
@@ -166,7 +150,7 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
             {/* ADVANCED STATUS OPTIONS */}
             <div style={sectionCardStyle}>
                 <h3 style={{ ...sectionTitleStyle, color: '#0f766e', borderBottomColor: '#99f6e4' }}>🏛️ Estatus Social y Legal</h3>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1rem' }}>
+                <div className="step5-status-grid">
                     {renderStatusSelect("Posición Económica", ECONOMIC_STATUS, data.background?.economicStatus, 'economicStatus', currentEconomic)}
                     {renderStatusSelect("Situación Legal", LEGAL_STATUS, data.background?.legalStatus, 'legalStatus', currentLegal)}
                     {renderStatusSelect("Posición Social", SOCIAL_STATUS, data.background?.socialStatus, 'socialStatus', currentSocial)}
@@ -177,9 +161,9 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
             {/* BACKGROUND ITEMS */}
             <div style={sectionCardStyle}>
                 <h3 style={{ ...sectionTitleStyle, color: '#4338ca', borderBottomColor: '#c7d2fe' }}>📝 Notas de Trasfondo</h3>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <div className="step5-items-list">
                     {data.background.items.map((item, index) => (
-                        <div key={index} style={{ display: 'flex', gap: '0.5rem' }}>
+                        <div key={index} className="step5-item-row">
                             <input
                                 type="text"
                                 value={item}
@@ -198,33 +182,16 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
 
                     <button
                         onClick={addBackgroundItem}
-                        style={{
-                            width: '100%',
-                            padding: '1rem',
-                            border: '2px dashed #a5b4fc',
-                            backgroundColor: '#eef2ff',
-                            color: '#4338ca',
-                            borderRadius: '8px',
-                            fontWeight: 'bold',
-                            cursor: 'pointer',
-                            marginTop: '0.5rem'
-                        }}
+                        className="step5-add-item-btn"
                     >
                         + Añadir Elemento de Trasfondo
                     </button>
                 </div>
             </div>
 
-            <div style={{
-                fontSize: '0.9rem',
-                color: '#475569',
-                backgroundColor: '#f1f5f9',
-                padding: '1rem',
-                borderRadius: '8px',
-                border: '1px solid #e2e8f0'
-            }}>
-                <p style={{ fontWeight: 'bold', marginBottom: '0.5rem' }}>💡 Ejemplos de trasfondo:</p>
-                <ul style={{ margin: 0, paddingLeft: '1.2rem', listStyleType: 'disc' }}>
+            <div className="step5-help-notice">
+                <p className="step5-help-title">💡 Ejemplos de trasfondo:</p>
+                <ul className="step5-help-list">
                     <li>Personalida secreta: no mantiene / Opuesta a la real</li>
                     <li>Depresivo / Frio</li>
                     <li>Infancia feliz / Criado en la calle</li>

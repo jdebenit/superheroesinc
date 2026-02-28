@@ -1,0 +1,333 @@
+/* =========================================================================
+   Step 2 : Características del Personaje
+   ========================================================================= */
+
+.step2-container {
+    padding: 2rem;
+}
+
+/* --- Bonus Choice Box (origin bonus target) --- */
+
+.step2-bonus-box {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background-color: #fef3c7;
+    border: 3px solid #f59e0b;
+    border-radius: 12px;
+}
+
+.step2-bonus-title {
+    font-size: 1.125rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #92400e;
+}
+
+.step2-bonus-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.75rem;
+}
+
+.step2-bonus-btn {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.step2-bonus-btn.selected {
+    border: 3px solid #16a34a;
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.step2-bonus-btn.unselected {
+    border: 2px solid #d1d5db;
+    background-color: white;
+    color: #4b5563;
+}
+
+
+/* --- Point Balances --- */
+
+.step2-balance-box {
+    display: inline-block;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-size: 1.125rem;
+    font-weight: bold;
+}
+
+.step2-balance-box.positive {
+    background-color: #dbeafe;
+    border: 3px solid #2563eb;
+}
+
+.step2-balance-box.negative {
+    background-color: #fee2e2;
+    border: 3px solid #dc2626;
+}
+
+.step2-balance-note-positive {
+    color: #16a34a;
+    margin-left: 1rem;
+}
+
+.step2-balance-note-negative {
+    color: #dc2626;
+    margin-left: 1rem;
+}
+
+.step2-specialty-balance {
+    display: inline-block;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-size: 1.125rem;
+    font-weight: bold;
+}
+
+.step2-specialty-balance.positive {
+    background-color: #dbeafe;
+    border: 3px solid #3b82f6;
+    color: #1e40af;
+}
+
+.step2-specialty-balance.negative {
+    background-color: #fee2e2;
+    border: 3px solid #dc2626;
+    color: #dc2626;
+}
+
+
+/* --- Characteristics Grid --- */
+
+.step2-chars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.step2-char-card {
+    padding: 1.25rem;
+    background-color: white;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.step2-char-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #f3f4f6;
+}
+
+.step2-char-name {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #1f2937;
+}
+
+.step2-char-abbr {
+    margin-left: 0.5rem;
+    font-size: 0.875rem;
+    color: #9ca3af;
+    font-weight: bold;
+}
+
+.step2-char-total-badge {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #2563eb;
+    padding: 0.5rem 1rem;
+    background-color: #eff6ff;
+    border-radius: 8px;
+    min-width: 80px;
+    text-align: center;
+}
+
+.step2-char-limits {
+    font-size: 0.75rem;
+    color: #6b7280;
+    font-weight: bold;
+    text-align: center;
+    line-height: 1.2;
+}
+
+
+/* --- Input Grid --- */
+
+.step2-input-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+}
+
+.step2-input-label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: bold;
+    color: #4b5563;
+    margin-bottom: 0.5rem;
+}
+
+.step2-input-base {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 2px solid #d1d5db;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.step2-input-origin {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.step2-input-origin.distributable {
+    border: 2px solid #2563eb;
+    background-color: white;
+    cursor: text;
+    color: #1f2937;
+}
+
+.step2-input-origin.fixed {
+    border: 2px solid #f59e0b;
+    background-color: #fef3c7;
+    cursor: not-allowed;
+    color: #92400e;
+}
+
+.step2-input-specialty {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 2px solid #d1d5db;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+    background-color: #dbeafe;
+}
+
+.step2-input-readonly {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+    background-color: #f3f4f6;
+    color: #374151;
+    cursor: default;
+}
+
+.step2-input-other {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+    background-color: #f3f4f6;
+    color: #9ca3af;
+    cursor: not-allowed;
+}
+
+
+/* --- Footer Formula --- */
+
+.step2-char-footer {
+    margin-top: 1rem;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.step2-formula-text {
+    font-size: 0.8rem;
+    color: #9ca3af;
+    font-family: monospace;
+}
+
+.step2-pc-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.3rem 0.8rem;
+    background: linear-gradient(135deg, #2563eb, #1e40af);
+    border-radius: 999px;
+    color: white;
+    font-weight: bold;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
+    white-space: nowrap;
+}
+
+
+/* --- Sticky Summary Bar --- */
+
+.step2-sticky-summary {
+    position: sticky;
+    bottom: 0;
+    margin-left: -2rem;
+    margin-right: -2rem;
+    margin-top: 1.5rem;
+    padding: 0.75rem 2rem;
+    background: linear-gradient(to right, #1e3a8a, #1e40af);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    z-index: 10;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.step2-summary-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.25rem 0.6rem;
+    border-radius: 8px;
+    min-width: 44px;
+}
+
+.step2-summary-item.valid {
+    background-color: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.step2-summary-item.invalid {
+    background-color: rgba(239, 68, 68, 0.35);
+    border: 1px solid #fca5a5;
+}
+
+.step2-summary-total {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 1rem;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    white-space: nowrap;
+}

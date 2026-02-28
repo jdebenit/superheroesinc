@@ -1,0 +1,233 @@
+/* =========================================================================
+   Step 1 : Selección de Origen
+   ========================================================================= */
+
+.step1-container {
+    padding: 2rem;
+}
+
+/* --- Origins Grid --- */
+.step1-origins-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.step1-origin-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.9rem 0.75rem;
+    border: 3px solid;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    width: 100%;
+}
+
+/* States for Origin Card */
+.step1-origin-card.default {
+    border-color: #e5e7eb;
+    background-color: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.07);
+    transform: scale(1);
+}
+
+.step1-origin-card.selected {
+    border-color: #2563eb;
+    background-color: #eff6ff;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+    transform: scale(1.04);
+}
+
+.step1-origin-card.needs-subtype {
+    border-color: #f59e0b;
+    background-color: white;
+    /* Base background, indicator will be warning */
+}
+
+.step1-origin-card.disabled {
+    border-color: #e5e7eb;
+    background-color: #f3f4f6;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+/* Indicator Box (Checkmark or Warning) */
+.step1-origin-indicator {
+    position: absolute;
+    top: 0.4rem;
+    right: 0.4rem;
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    border: 2px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 11px;
+}
+
+.step1-origin-indicator.default {
+    border-color: #d1d5db;
+    background-color: white;
+    color: transparent;
+}
+
+.step1-origin-indicator.selected {
+    border-color: #2563eb;
+    background-color: #2563eb;
+    color: white;
+}
+
+.step1-origin-indicator.needs-subtype {
+    border-color: #f59e0b;
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+/* Origin Logo */
+.step1-origin-logo {
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+    transition: filter 0.2s ease;
+}
+
+.step1-origin-logo.default {
+    filter: grayscale(40%);
+}
+
+.step1-origin-logo.selected {
+    filter: none;
+}
+
+.step1-origin-logo.disabled {
+    filter: grayscale(100%);
+}
+
+/* Origin Name Text */
+.step1-origin-name {
+    font-size: 0.875rem;
+    font-weight: bold;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.step1-origin-name.default {
+    color: #4b5563;
+}
+
+.step1-origin-name.selected {
+    color: #1e40af;
+}
+
+.step1-origin-name.disabled {
+    color: #9ca3af;
+}
+
+
+/* --- Subtypes Panel --- */
+
+.step1-subtypes-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.step1-subtypes-header {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.step1-subtype-card {
+    padding: 1rem 1.25rem;
+    border-radius: 10px;
+    border: 2px solid;
+    transition: border-color 0.2s;
+}
+
+.step1-subtype-card.warning {
+    background-color: #fffbeb;
+    border-color: #fcd34d;
+}
+
+.step1-subtype-card.normal {
+    background-color: #f0f9ff;
+    border-color: #bfdbfe;
+}
+
+.step1-subtype-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.step1-subtype-origin-logo {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+.step1-subtype-origin-name {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #1e40af;
+}
+
+.step1-subtype-instruction {
+    font-size: 0.75rem;
+    color: #6b7280;
+}
+
+.step1-subtype-warning-text {
+    margin-left: auto;
+    font-size: 0.78rem;
+    color: #92400e;
+    font-weight: 600;
+}
+
+.step1-subtype-chips-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.step1-subtype-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    border: 2px solid;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.step1-subtype-chip.selected {
+    border-color: #2563eb;
+    background-color: #dbeafe;
+    color: #1d4ed8;
+    font-weight: bold;
+}
+
+.step1-subtype-chip.unselected {
+    border-color: #d1d5db;
+    background-color: white;
+    color: #4b5563;
+    font-weight: 600;
+}
+
+.step1-subtype-chip-text {
+    font-size: 0.85rem;
+}

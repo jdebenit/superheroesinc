@@ -20,6 +20,8 @@ const ORIGINS = [
     { id: 'vigilantes', name: 'Vigilante', logo: '/logos/vigilantes.png', categoryKey: 'Vigilante' }
 ];
 
+import './Step1_OriginSelection.css';
+
 export default function Step1_OriginSelection({ data, onChange }: Step1Props) {
     const [selectedOrigins, setSelectedOrigins] = useState<string[]>([]);
     const [selectedSubtypes, setSelectedSubtypes] = useState<{ [originId: string]: string[] }>({});
@@ -137,7 +139,7 @@ export default function Step1_OriginSelection({ data, onChange }: Step1Props) {
     };
 
     return (
-        <div style={{ padding: '2rem' }}>
+        <div className="step1-container">
             <h2 style={stepPageTitleStyle}>
                 Selecciona los Orígenes del Personaje
             </h2>
@@ -147,12 +149,7 @@ export default function Step1_OriginSelection({ data, onChange }: Step1Props) {
 
 
             {/* ── ORIGINS GRID — cards only, no subtypes inside ── */}
-            <div style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))',
-                gap: '1rem',
-                marginBottom: '1.5rem'
-            }}>
+            <div className="step1-origins-grid">
                 {ORIGINS.map((origin) => {
                     const isSelected = selectedOrigins.includes(origin.id);
                     const category = getOriginCategory(origin.id);
@@ -168,43 +165,10 @@ export default function Step1_OriginSelection({ data, onChange }: Step1Props) {
                             onClick={() => !isDisabled && handleToggleOrigin(origin.id)}
                             disabled={isDisabled}
                             title={isDisabled ? 'Próximamente disponible' : origin.name}
-                            style={{
-                                display: 'flex',
-                                flexDirection: 'column',
-                                alignItems: 'center',
-                                gap: '0.6rem',
-                                padding: '0.9rem 0.75rem',
-                                border: '3px solid',
-                                borderColor: isDisabled ? '#e5e7eb' : needsSubtype ? '#f59e0b' : (isSelected ? '#2563eb' : '#e5e7eb'),
-                                borderRadius: '12px',
-                                backgroundColor: isDisabled ? '#f3f4f6' : (isSelected ? '#eff6ff' : 'white'),
-                                cursor: isDisabled ? 'not-allowed' : 'pointer',
-                                transition: 'all 0.2s ease',
-                                opacity: isDisabled ? 0.5 : 1,
-                                boxShadow: isSelected ? '0 4px 12px rgba(37, 99, 235, 0.2)' : '0 1px 3px rgba(0,0,0,0.07)',
-                                transform: isSelected ? 'scale(1.04)' : 'scale(1)',
-                                position: 'relative',
-                                width: '100%'
-                            }}
+                            className={`step1-origin-card ${isDisabled ? 'disabled' : needsSubtype ? 'needs-subtype' : isSelected ? 'selected' : 'default'}`}
                         >
                             {/* Check / warning indicator */}
-                            <div style={{
-                                position: 'absolute',
-                                top: '0.4rem',
-                                right: '0.4rem',
-                                width: '18px',
-                                height: '18px',
-                                borderRadius: '4px',
-                                border: '2px solid',
-                                borderColor: needsSubtype ? '#f59e0b' : (isSelected ? '#2563eb' : '#d1d5db'),
-                                backgroundColor: needsSubtype ? '#fef3c7' : (isSelected ? '#2563eb' : 'white'),
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                color: needsSubtype ? '#92400e' : 'white',
-                                fontWeight: 'bold',
-                                fontSize: '11px'
-                            }}>
+                            <div className={`step1-origin-indicator ${needsSubtype ? 'needs-subtype' : isSelected ? 'selected' : 'default'}`}>
                                 {needsSubtype ? '!' : (isSelected && '✓')}
                             </div>
 
@@ -212,23 +176,11 @@ export default function Step1_OriginSelection({ data, onChange }: Step1Props) {
                             <img
                                 src={origin.logo}
                                 alt={origin.name}
-                                style={{
-                                    width: '72px',
-                                    height: '72px',
-                                    objectFit: 'contain',
-                                    filter: isDisabled ? 'grayscale(100%)' : (isSelected ? 'none' : 'grayscale(40%)'),
-                                    transition: 'filter 0.2s ease'
-                                }}
+                                className={`step1-origin-logo ${isDisabled ? 'disabled' : isSelected ? 'selected' : 'default'}`}
                             />
 
                             {/* Name */}
-                            <span style={{
-                                fontSize: '0.875rem',
-                                fontWeight: 'bold',
-                                color: isDisabled ? '#9ca3af' : (isSelected ? '#1e40af' : '#4b5563'),
-                                textAlign: 'center',
-                                lineHeight: 1.2
-                            }}>
+                            <span className={`step1-origin-name ${isDisabled ? 'disabled' : isSelected ? 'selected' : 'default'}`}>
                                 {origin.name}
                             </span>
                         </button>
@@ -241,8 +193,8 @@ export default function Step1_OriginSelection({ data, onChange }: Step1Props) {
                 const cat = getOriginCategory(id);
                 return cat?.subtypes && Object.keys(cat.subtypes).length > 0;
             }) && (
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '1rem' }}>
-                        <span style={{ fontSize: '0.75rem', fontWeight: 700, color: '#6b7280', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                    <div className="step1-subtypes-panel">
+                        <span className="step1-subtypes-header">
                             Tipo / Especialización
                         </span>
                         {selectedOrigins.map(id => {
@@ -257,30 +209,24 @@ export default function Step1_OriginSelection({ data, onChange }: Step1Props) {
                             return (
                                 <div
                                     key={id}
-                                    style={{
-                                        padding: '1rem 1.25rem',
-                                        backgroundColor: needsWarning ? '#fffbeb' : '#f0f9ff',
-                                        border: `2px solid ${needsWarning ? '#fcd34d' : '#bfdbfe'}`,
-                                        borderRadius: '10px',
-                                        transition: 'border-color 0.2s'
-                                    }}
+                                    className={`step1-subtype-card ${needsWarning ? 'warning' : 'normal'}`}
                                 >
                                     {/* Header */}
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
-                                        <img src={origin?.logo} alt={origin?.name} style={{ width: '24px', height: '24px', objectFit: 'contain' }} />
-                                        <span style={{ fontWeight: 700, fontSize: '0.95rem', color: '#1e40af' }}>{origin?.name}</span>
-                                        <span style={{ fontSize: '0.75rem', color: '#6b7280' }}>
+                                    <div className="step1-subtype-card-header">
+                                        <img src={origin?.logo} alt={origin?.name} className="step1-subtype-origin-logo" />
+                                        <span className="step1-subtype-origin-name">{origin?.name}</span>
+                                        <span className="step1-subtype-instruction">
                                             {id === 'vigilantes' ? '— Elige especializaciones' : (isSingleSelection ? '— Elige uno' : '— Elige uno o varios')}
                                         </span>
                                         {needsWarning && (
-                                            <span style={{ marginLeft: 'auto', fontSize: '0.78rem', color: '#92400e', fontWeight: 600 }}>
+                                            <span className="step1-subtype-warning-text">
                                                 ⚠️ Pendiente de elegir
                                             </span>
                                         )}
                                     </div>
 
                                     {/* Subtype chips */}
-                                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                                    <div className="step1-subtype-chips-container">
                                         {availableSubtypes.map(subtype => {
                                             const isChecked = selectedSubtypes[id]?.includes(subtype) || false;
                                             const isSubSelected = isSingleSelection ? (selectedSubtypes[id]?.[0] === subtype) : isChecked;
