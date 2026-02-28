@@ -681,17 +681,39 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
 
                             <div style={{
                                 marginTop: '1rem',
-                                padding: '0.75rem',
-                                backgroundColor: '#f9fafb',
-                                borderRadius: '8px',
-                                fontSize: '0.875rem',
-                                color: '#6b7280',
-                                textAlign: 'center',
-                                fontFamily: 'monospace'
+                                borderTop: '1px solid #f0f0f0',
+                                paddingTop: '0.75rem',
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                                alignItems: 'center',
+                                gap: '0.5rem',
+                                flexWrap: 'wrap'
                             }}>
-                                {c.base} + {c.originMod} + {c.specialtyMod} + {c.powerMod} + {c.otherMod || 0} = <strong style={{ color: '#2563eb' }}>{total}</strong>
-                                <div style={{ marginTop: '0.25rem', color: '#7e22ce', fontWeight: 'bold' }}>
-                                    Genera: {pcValues[char.id].toFixed(1)} PC
+                                {/* Formula */}
+                                <span style={{
+                                    fontSize: '0.8rem',
+                                    color: '#9ca3af',
+                                    fontFamily: 'monospace'
+                                }}>
+                                    {c.base} + {c.originMod} + {c.specialtyMod} + {c.powerMod} + {c.otherMod || 0} = <strong style={{ color: '#2563eb' }}>{total}</strong>
+                                </span>
+
+                                {/* PC Cost Badge */}
+                                <div style={{
+                                    display: 'inline-flex',
+                                    alignItems: 'center',
+                                    gap: '0.35rem',
+                                    padding: '0.3rem 0.8rem',
+                                    background: 'linear-gradient(135deg, #2563eb, #1e40af)',
+                                    borderRadius: '999px',
+                                    color: 'white',
+                                    fontWeight: 'bold',
+                                    fontSize: '0.9rem',
+                                    boxShadow: '0 2px 6px rgba(37,99,235,0.25)',
+                                    whiteSpace: 'nowrap'
+                                }}>
+                                    <span style={{ opacity: 0.8, fontSize: '0.75rem' }}>PC</span>
+                                    <span>{pcValues[char.id].toFixed(1)}</span>
                                 </div>
                             </div>
                         </div>
@@ -699,40 +721,61 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
                 })}
             </div>
 
+            {/* ── STICKY SUMMARY BAR ── */}
             <div style={{
-                marginTop: '2rem',
-                padding: '1.5rem',
-                backgroundColor: '#f0f9ff',
-                border: '2px solid #2563eb',
-                borderRadius: '12px'
+                position: 'sticky',
+                bottom: 0,
+                marginLeft: '-2rem',
+                marginRight: '-2rem',
+                marginTop: '1.5rem',
+                padding: '0.75rem 2rem',
+                background: 'linear-gradient(to right, #1e3a8a, #1e40af)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                flexWrap: 'wrap',
+                zIndex: 10,
+                boxShadow: '0 -4px 12px rgba(0,0,0,0.12)'
             }}>
-                <h3 style={{ fontSize: '1.25rem', fontWeight: 'bold', marginBottom: '1rem', color: '#1e40af' }}>
-                    Resumen de Características
-                </h3>
-                <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))',
-                    gap: '1rem'
-                }}>
-                    {CHARACTERISTICS.map(char => (
-                        <div
-                            key={char.id}
-                            style={{
-                                textAlign: 'center',
-                                padding: '0.75rem',
-                                backgroundColor: 'white',
-                                borderRadius: '8px',
-                                border: '2px solid #bfdbfe'
-                            }}
-                        >
-                            <div style={{ fontSize: '0.75rem', color: '#6b7280', fontWeight: 'bold', marginBottom: '0.25rem' }}>
-                                {char.abbr}
-                            </div>
-                            <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#2563eb' }}>
-                                {getTotal(char.id)}
-                            </div>
+                {CHARACTERISTICS.map(char => {
+                    const total = getTotal(char.id);
+                    const limits = calculateLimits(origins, char.id);
+                    const isValid = total >= limits.min && total <= limits.max;
+                    return (
+                        <div key={char.id} style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            padding: '0.25rem 0.6rem',
+                            backgroundColor: isValid ? 'rgba(255,255,255,0.12)' : 'rgba(239,68,68,0.35)',
+                            borderRadius: '8px',
+                            border: `1px solid ${isValid ? 'rgba(255,255,255,0.15)' : '#fca5a5'}`,
+                            minWidth: '44px'
+                        }}>
+                            <span style={{ color: '#93c5fd', fontSize: '0.65rem', fontWeight: 'bold' }}>{char.abbr}</span>
+                            <span style={{ color: isValid ? 'white' : '#fca5a5', fontWeight: 'bold', fontSize: '1rem', lineHeight: 1.1 }}>{total}</span>
                         </div>
-                    ))}
+                    );
+                })}
+
+                {/* Spacer */}
+                <div style={{ flex: 1 }} />
+
+                {/* Total PC badge */}
+                <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.4rem',
+                    padding: '0.4rem 1rem',
+                    backgroundColor: 'rgba(255,255,255,0.15)',
+                    borderRadius: '999px',
+                    border: '1px solid rgba(255,255,255,0.3)',
+                    whiteSpace: 'nowrap'
+                }}>
+                    <span style={{ color: '#bfdbfe', fontSize: '0.75rem', fontWeight: 'bold' }}>Total</span>
+                    <span style={{ color: 'white', fontWeight: 'bold', fontSize: '1rem' }}>
+                        {Object.values(pcValues).reduce((a: number, b: number) => a + b, 0).toFixed(1)} PC
+                    </span>
                 </div>
             </div>
         </div>
