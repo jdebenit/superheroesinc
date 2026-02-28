@@ -17,6 +17,7 @@ interface WizardFieldProps {
     inputWidth?: string;
     textAlign?: 'left' | 'center' | 'right';
     hideLabelDesktop?: boolean;
+    className?: string;
 }
 
 export const WizardField: React.FC<WizardFieldProps> = ({
@@ -34,7 +35,8 @@ export const WizardField: React.FC<WizardFieldProps> = ({
     noMargin = false,
     inputWidth,
     textAlign = 'left',
-    hideLabelDesktop = false
+    hideLabelDesktop = false,
+    className = ''
 }) => {
     const inputProps = {
         value,
@@ -51,7 +53,7 @@ export const WizardField: React.FC<WizardFieldProps> = ({
         }
     };
 
-    const fieldClass = `wizard-field ${noMargin ? 'wizard-field-nomargin' : ''} ${hideLabelDesktop ? 'wizard-field-hide-label-desktop' : ''}`;
+    const fieldClass = `wizard-field ${noMargin ? 'wizard-field-nomargin' : ''} ${hideLabelDesktop ? 'wizard-field-hide-label-desktop' : ''} ${className}`.trim();
 
     return (
         <div className={fieldClass} style={style}>

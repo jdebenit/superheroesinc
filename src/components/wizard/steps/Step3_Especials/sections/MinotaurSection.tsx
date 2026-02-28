@@ -19,20 +19,20 @@ export default function MinotaurSection() {
             </InfoBox>
 
             {(arcanoEffects.length > 0 || minotauroEffects.length > 0) && (
-                <div style={{ marginTop: '1rem' }}>
-                    <p style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', color: '#6b7280', marginBottom: '0.5rem' }}>
+                <div className="wizard-margin-top">
+                    <p className="form-field-description wizard-table-cell--bold" style={{ color: '#6b7280', marginBottom: '0.5rem' }}>
                         Efectos Pasivos (Arcano / Minotauro)
                     </p>
-                    <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', paddingLeft: 0, listStyle: 'none', margin: 0 }}>
+                    <ul className="wizard-list">
                         {arcanoEffects.map((effect: string, idx: number) => (
-                            <li key={`arc-${idx}`} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', fontSize: '0.875rem', color: '#374151' }}>
-                                <span style={{ color: '#6366f1', fontWeight: 'bold', flexShrink: 0 }}>•</span>
+                            <li key={`arc-${idx}`} className="wizard-list-item">
+                                <span className="wizard-list-bullet" style={{ color: '#6366f1' }}>•</span>
                                 <span>{effect}</span>
                             </li>
                         ))}
                         {minotauroEffects.map((effect: string, idx: number) => (
-                            <li key={`min-${idx}`} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', fontSize: '0.875rem', color: '#374151' }}>
-                                <span style={{ color: '#b45309', fontWeight: 'bold', flexShrink: 0 }}>•</span>
+                            <li key={`min-${idx}`} className="wizard-list-item">
+                                <span className="wizard-list-bullet" style={{ color: '#b45309' }}>•</span>
                                 <span>{effect}</span>
                             </li>
                         ))}

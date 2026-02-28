@@ -18,3 +18,58 @@
         gap: 1.5rem;
     }
 }
+
+/* Common Layout Utilities */
+.wizard-margin-bottom {
+    margin-bottom: 1.5rem;
+}
+
+.wizard-margin-top {
+    margin-top: 1rem;
+}
+
+.wizard-padding {
+    padding: 1.5rem;
+}
+
+.wizard-gap-sm {
+    gap: 0.5rem;
+}
+
+.wizard-gap-md {
+    gap: 1rem;
+}
+
+.wizard-gap-lg {
+    gap: 1.5rem;
+}
+
+.wizard-flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.wizard-flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wizard-full-width {
+    width: 100%;
+}
+
+.wizard-grid {
+    display: grid;
+}
+
+.wizard-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+@media (max-width: 640px) {
+    .wizard-grid-2 {
+        grid-template-columns: 1fr;
+    }
+}

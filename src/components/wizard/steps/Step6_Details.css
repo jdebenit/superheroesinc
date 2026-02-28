@@ -25,6 +25,18 @@
     margin-top: 0;
 }
 
+.step6-margin-bottom {
+    margin-bottom: 1.5rem;
+}
+
+.step6-margin-top {
+    margin-top: 0.5rem;
+}
+
+.step6-textarea-field {
+    min-height: 60px;
+}
+
 /* Combat Stats */
 .step6-combat-stats-grid {
     display: grid;

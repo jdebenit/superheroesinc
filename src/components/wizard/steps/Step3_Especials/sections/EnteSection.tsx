@@ -68,7 +68,7 @@ export default function EnteSection({ enteParams, onChange }: EnteSectionProps) 
                 />
             }
         >
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            <div className="wizard-flex-column wizard-gap-lg">
                 <FormSelect
                     label="Tipo de forma en el plano"
                     value={enteParams?.formType || ''}

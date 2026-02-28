@@ -120,16 +120,16 @@ export default function PowerRow({
     const isEven = index % 2 === 0;
 
     return (
-        <tr key={`${selection.id}-${selection.origin}-${index}`} style={{ backgroundColor: isEven ? 'white' : '#f9fafb' }}>
-            <td style={{ padding: '1rem', fontWeight: 'bold', color: '#1f2937' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+        <tr key={`${selection.id}-${selection.origin}-${index}`} className={`power-row ${isEven ? 'even' : ''}`}>
+            <td className="power-cell name-cell">
+                <div className="power-name-container">
                     <span>{p.name}</span>
                     {isPenalty && penaltyInfo.label && (
                         <Badge label={penaltyInfo.label} color="yellow" className="text-xs" />
                     )}
                 </div>
                 {p.options && p.options.length > 0 && (
-                    <div style={{ marginTop: '0.5rem' }}>
+                    <div className="power-options-container">
                         <WizardField
                             label=""
                             placeholder={p.options[0]}
@@ -140,14 +140,14 @@ export default function PowerRow({
                     </div>
                 )}
             </td>
-            <td style={{ padding: '0.75rem', textAlign: 'center' }}>
+            <td className="power-cell">
                 {!p.characteristic ? (
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.875rem', fontFamily: 'monospace' }}>
+                    <div className="power-formula-component" style={{ gap: '0.5rem' }}>
+                        <div className="power-cost-formula">
                             <div className="flex items-center">
                                 {renderDisplayCost()}
                             </div>
-                            <span style={{ color: '#9ca3af' }}>+</span>
+                            <span className="power-formula-operator">+</span>
 
                             <NumberControl
                                 value={selection.rank}
@@ -158,7 +158,7 @@ export default function PowerRow({
                                 description="Rango"
                             />
 
-                            <span style={{ color: '#9ca3af' }}>/10</span>
+                            <span className="power-formula-operator">/10</span>
 
                             {(() => {
                                 const minVal = p.skillCalc ? calculateSkillBase(data, p.skillCalc) : 0;
@@ -168,12 +168,12 @@ export default function PowerRow({
                                 if (extraPoints > 0) {
                                     return (
                                         <>
-                                            <span style={{ color: '#9ca3af' }}>+</span>
-                                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                                <span style={{ fontWeight: 'bold', color: '#d97706' }}>{extraPoints}</span>
-                                                <span style={{ fontSize: '0.65rem', color: '#6b7280' }}>Hab.</span>
+                                            <span className="power-formula-operator">+</span>
+                                            <div className="power-formula-component">
+                                                <span className="power-formula-value highlight-amber">{extraPoints}</span>
+                                                <span className="power-formula-label">Hab.</span>
                                             </div>
-                                            <span style={{ color: '#9ca3af' }}>/10</span>
+                                            <span className="power-formula-operator">/10</span>
                                         </>
                                     );
                                 }
@@ -186,10 +186,10 @@ export default function PowerRow({
                                 if (custCost !== 0) {
                                     return (
                                         <>
-                                            <span style={{ color: '#9ca3af' }}>{custCost >= 0 ? '+' : '-'}</span>
-                                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                                <span style={{ fontWeight: 'bold', color: custCost >= 0 ? '#b91c1c' : '#10b981' }}>{Math.abs(custCost)}</span>
-                                                <span style={{ fontSize: '0.65rem', color: '#6b7280' }}>Pers.</span>
+                                            <span className="power-formula-operator">{custCost >= 0 ? '+' : '-'}</span>
+                                            <div className="power-formula-component">
+                                                <span className={`power-formula-value ${custCost >= 0 ? 'highlight-red' : 'highlight-green'}`}>{Math.abs(custCost)}</span>
+                                                <span className="power-formula-label">Pers.</span>
                                             </div>
                                         </>
                                     );
@@ -197,7 +197,7 @@ export default function PowerRow({
                                 return null;
                             })()}
 
-                            <span style={{ color: '#9ca3af' }}>=</span>
+                            <span className="power-formula-operator">=</span>
 
                             {(() => {
                                 const minVal = p.skillCalc ? calculateSkillBase(data, p.skillCalc) : 0;
@@ -217,7 +217,6 @@ export default function PowerRow({
                                     <div className="flex flex-col items-center">
                                         <Badge
                                             label={Math.max(0, total).toFixed(1)}
-                                            // color="gray" // Default
                                             className="text-lg font-bold"
                                         />
                                         <span className="text-xs text-gray-400">Total</span>
@@ -228,9 +227,9 @@ export default function PowerRow({
 
                         {/* Customizations List */}
                         {(selection.customizations || []).length > 0 && (
-                            <div style={{ width: '100%', marginTop: '0.5rem', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                            <div className="power-customizations-list">
                                 {selection.customizations?.map((cust, cIdx) => (
-                                    <div key={cust.id} style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', fontSize: '0.8rem' }}>
+                                    <div key={cust.id} className="power-customization-row">
                                         <WizardField
                                             label=""
                                             value={cust.description}
@@ -241,7 +240,7 @@ export default function PowerRow({
                                                 onUpdateCustomizations(index, newCusts);
                                             }}
                                             noMargin
-                                            style={{ flexGrow: 1 }}
+                                            className="flex-grow"
                                         />
                                         <WizardField
                                             label=""
@@ -257,15 +256,15 @@ export default function PowerRow({
                                                 onUpdateCustomizations(index, newCusts);
                                             }}
                                             noMargin
-                                            style={{ width: '80px' }}
+                                            className="w-20"
                                         />
-                                        <span style={{ color: '#6b7280' }}>PCs</span>
+                                        <span className="power-customization-pcs">PCs</span>
                                         <button
                                             onClick={() => {
                                                 const newCusts = selection.customizations?.filter((_, i) => i !== cIdx) || [];
                                                 onUpdateCustomizations(index, newCusts);
                                             }}
-                                            style={{ color: '#ef4444', fontWeight: 'bold', padding: '0 4px', cursor: 'pointer', border: 'none', background: 'transparent' }}
+                                            className="power-remove-customization"
                                         >
                                             ×
                                         </button>
@@ -273,45 +272,37 @@ export default function PowerRow({
                                 ))}
                             </div>
                         )}
-                        <div style={{ marginTop: '0.25rem' }}>
+                        <div>
                             <button
                                 onClick={() => {
                                     const newCusts = [...(selection.customizations || [])];
                                     newCusts.push({ id: Date.now().toString(), description: '', cost: 0 });
                                     onUpdateCustomizations(index, newCusts);
                                 }}
-                                style={{
-                                    fontSize: '0.75rem',
-                                    color: '#4f46e5',
-                                    background: 'transparent',
-                                    border: '1px dashed #4f46e5',
-                                    borderRadius: '4px',
-                                    padding: '2px 8px',
-                                    cursor: 'pointer'
-                                }}
+                                className="power-add-customization-btn"
                             >
                                 + Personalización
                             </button>
                         </div>
 
-                        <span style={{ fontSize: '0.75rem', color: '#6b7280', fontWeight: 'bold' }}>
+                        <span className="power-formula-label font-bold">
                             {getRankLevel(selection.rank)}
                         </span>
                     </div>
                 ) : (
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
-                        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', fontSize: '0.875rem', fontFamily: 'monospace' }}>
+                    <div className="power-formula-component" style={{ gap: '0.5rem' }}>
+                        <div className="power-char-info">
                             {/* Characteristic Value */}
-                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem' }}>
-                                <span style={{ color: '#6b7280', fontWeight: 'bold' }}>
+                            <div className="power-char-component">
+                                <span className="power-char-value">
                                     {getCharacteristicValue(data, getCharName(p.characteristic || '')) - (selection.powerMod || 0)}
                                 </span>
-                                <span style={{ fontSize: '0.65rem', color: '#9ca3af' }}>
+                                <span className="power-char-label">
                                     {p.characteristic}
                                 </span>
                             </div>
 
-                            <span style={{ color: '#9ca3af', paddingTop: '0.25rem' }}>+</span>
+                            <span className="power-formula-operator pt-1">+</span>
 
                             {/* Power Mod Input */}
                             <NumberControl
@@ -329,19 +320,19 @@ export default function PowerRow({
                                 className="text-green-600"
                             />
 
-                            <span style={{ color: '#9ca3af', paddingTop: '0.25rem' }}>=</span>
+                            <span className="power-formula-operator pt-1">=</span>
 
                             {/* Total */}
-                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem' }}>
-                                <span style={{ color: '#10b981', fontWeight: 'bold' }}>
+                            <div className="power-char-component">
+                                <span className="power-char-value total">
                                     {getCharacteristicValue(data, getCharName(p.characteristic || ''))}
                                 </span>
-                                <span style={{ fontSize: '0.65rem', color: '#9ca3af' }}>
+                                <span className="power-char-label">
                                     Total
                                 </span>
                             </div>
                         </div>
-                        <span style={{ fontSize: '0.75rem', color: '#6b7280', fontFamily: 'monospace' }}>
+                        <span className="power-cost-summary">
                             <>{(() => {
                                 const powerMod = (selection.powerMod || 0);
 
@@ -351,8 +342,6 @@ export default function PowerRow({
                                 let discountText = null;
 
                                 if (isSemidemonio && selection.origin === 'Sobrenatural') {
-                                    // The first 10 points are free.
-                                    // Cost is based on (powerMod - 10)
                                     effectivePowerMod = Math.max(0, powerMod - 10);
                                     discountText = "(-10 gratis)";
                                 }
@@ -386,9 +375,9 @@ export default function PowerRow({
                     </div>
                 )}
             </td>
-            <td style={{ padding: '0.75rem', textAlign: 'center' }}>
+            <td className="power-cell">
                 {p.skillCalc ? (
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem' }}>
+                    <div className="power-skill-container">
                         {(() => {
                             const minVal = calculateSkillBase(data, p.skillCalc);
                             return (
@@ -399,7 +388,7 @@ export default function PowerRow({
                                         min={minVal}
                                         width="60px"
                                     />
-                                    <span style={{ fontSize: '0.65rem', color: '#9ca3af', fontFamily: 'monospace' }}>
+                                    <span className="power-skill-label">
                                         {p.skillCalc} ({minVal})
                                     </span>
                                 </>
@@ -407,16 +396,16 @@ export default function PowerRow({
                         })()}
                     </div>
                 ) : (
-                    <span style={{ color: '#9ca3af', fontSize: '0.875rem' }}>N/A</span>
+                    <span className="power-na-label">N/A</span>
                 )}
             </td>
-            <td style={{ padding: '0.75rem', textAlign: 'center' }}>
+            <td className="power-cell">
                 <Badge
                     label={selection.origin}
                     color={ORIGIN_TAG_COLORS[selection.origin] || 'gray'}
                 />
             </td>
-            <td style={{ padding: '0.75rem', textAlign: 'center' }}>
+            <td className="power-cell">
                 <DeleteRowButton onDelete={() => onRemove(index)} title="Eliminar poder" />
             </td>
         </tr>

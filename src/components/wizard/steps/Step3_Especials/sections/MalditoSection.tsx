@@ -74,13 +74,13 @@ export default function MalditoSection({ malditoParams, onChange }: MalditoSecti
             color="#c2410c"
             rightContent={
                 <SectionHeaderBadge
-                    cost={totalCost > 0 ? `-${totalCost}` : 0}
+                    cost={(totalCost || 0) > 0 ? `+${totalCost}` : (totalCost || 0)}
                     label="PC"
-                    variant={totalCost === 0 ? "free" : "bonus"}
+                    variant={!(totalCost) ? "free" : (totalCost > 0 ? "penalty" : "bonus")}
                 />
             }
         >
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            <div className="wizard-flex-column wizard-gap-lg">
                 <FormSelect
                     label="Magnitud de la maldición"
                     value={malditoParams?.magnitude || ''}

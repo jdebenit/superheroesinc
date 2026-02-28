@@ -26,69 +26,42 @@ export default function TechModuleRow({
     const isEven = index % 2 === 0;
 
     return (
-        <tr style={{ backgroundColor: isEven ? 'white' : '#f9fafb' }}>
+        <tr className={`tech-module-row ${isEven ? 'even' : ''}`}>
             {/* Módulo */}
-            <td style={{ padding: '1rem', fontWeight: 'bold', color: '#1f2937', textAlign: 'left' }}>
+            <td className="tech-module-cell name-cell">
                 {module.name}
             </td>
 
             {/* Tipo */}
-            <td style={{ padding: '0.75rem', textAlign: 'center', whiteSpace: 'nowrap' }}>
-                <span style={{
-                    display: 'inline-block',
-                    padding: '2px 8px',
-                    borderRadius: '9999px',
-                    fontSize: '0.75rem',
-                    fontWeight: 'bold',
-                    backgroundColor: isInternal ? '#fce7f3' : '#dbeafe',
-                    color: isInternal ? '#be123c' : '#1d4ed8',
-                    border: `1px solid ${isInternal ? '#fbcfe8' : '#bfdbfe'}`
-                }}>
+            <td className="tech-module-cell nowrap">
+                <span className={`type-tag ${isInternal ? 'type-tag-internal' : 'type-tag-external'}`}>
                     {type}
                 </span>
             </td>
 
             {/* Localización */}
-            <td style={{ padding: '0.75rem', textAlign: 'center' }}>
+            <td className="tech-module-cell">
                 <input
                     type="text"
                     value={module.location}
                     onChange={(e) => onUpdateLocation(module.id, e.target.value)}
                     placeholder="Ubicación"
-                    style={{
-                        padding: '0.25rem 0.5rem',
-                        border: '1px solid #d1d5db',
-                        borderRadius: '0.375rem',
-                        fontSize: '0.875rem',
-                        fontWeight: 'bold',
-                        color: '#4f46e5',
-                        width: '8rem',
-                        textAlign: 'center',
-                        backgroundColor: 'white'
-                    }}
+                    className="tech-module-input"
                 />
             </td>
 
             {/* Coste */}
-            <td style={{ padding: '0.75rem', textAlign: 'center', whiteSpace: 'nowrap' }}>
+            <td className="tech-module-cell nowrap">
                 {isVariable ? (
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.25rem' }}>
+                    <div className="tech-module-cost-wrapper">
                         <input
                             type="number"
                             min="0"
                             value={module.pcCost}
                             onChange={(e) => onUpdateCost(module.id, parseInt(e.target.value) || 0)}
-                            style={{
-                                width: '50px',
-                                padding: '0.125rem 0.25rem',
-                                border: '1px solid #d1d5db',
-                                borderRadius: '0.25rem',
-                                textAlign: 'center',
-                                fontWeight: 'bold',
-                                color: '#4f46e5'
-                            }}
+                            className="tech-module-cost-input"
                         />
-                        <span style={{ fontSize: '0.75rem', fontWeight: 'bold', color: '#6b7280' }}>PC</span>
+                        <span className="tech-module-cost-label">PC</span>
                     </div>
                 ) : (
                     <CostBadge cost={module.pcCost} label="PC" />
@@ -96,7 +69,7 @@ export default function TechModuleRow({
             </td>
 
             {/* Acciones */}
-            <td style={{ padding: '0.75rem', textAlign: 'center' }}>
+            <td className="tech-module-cell">
                 <DeleteRowButton onDelete={() => onRemove(module.id)} title="Desinstalar módulo" />
             </td>
         </tr>

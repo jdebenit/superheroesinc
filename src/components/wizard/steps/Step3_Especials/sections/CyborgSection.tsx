@@ -79,27 +79,20 @@ export const CyborgSection: React.FC<CyborgSectionProps> = ({ implants = [], onC
                     placeholder="Ej: Brazo derecho, Ojo cibernético..."
                 />
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginBottom: '1.25rem' }}>
+                <div className="wizard-grid-2 wizard-gap-lg wizard-margin-bottom">
                     {/* Stats Selection Table */}
                     <div>
-                        <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600, color: '#4b5563', fontSize: '0.875rem' }}>Configuración (PV / DA)</label>
-                        <div style={{ border: '1px solid #e2e8f0', borderRadius: '6px', overflow: 'hidden' }}>
-                            <div style={{ display: 'flex', background: '#f1f5f9', padding: '0.5rem', fontWeight: 'bold', fontSize: '0.85rem' }}>
-                                <div style={{ width: '40px' }}></div>
-                                <div style={{ flex: 1 }}>Coste</div>
-                                <div style={{ flex: 1 }}>PV</div>
-                                <div style={{ flex: 1 }}>DA Físico</div>
+                        <label className="form-field-label">Configuración (PV / DA)</label>
+                        <div className="cyborg-selection-table">
+                            <div className="cyborg-table-header">
+                                <div className="cyborg-table-radio-cell"></div>
+                                <div className="cyborg-table-cell">Coste</div>
+                                <div className="cyborg-table-cell">PV</div>
+                                <div className="cyborg-table-cell">DA Físico</div>
                             </div>
                             {CYBORG_IMPLANT_STATS.map(stat => (
-                                <label key={stat.id} style={{
-                                    display: 'flex',
-                                    padding: '0.5rem',
-                                    borderTop: '1px solid #e2e8f0',
-                                    cursor: 'pointer',
-                                    background: selectedStatId === stat.id ? '#eff6ff' : 'white',
-                                    alignItems: 'center'
-                                }}>
-                                    <div style={{ width: '40px', display: 'flex', justifyContent: 'center' }}>
+                                <label key={stat.id} className={`cyborg-table-row ${selectedStatId === stat.id ? 'selected' : ''}`}>
+                                    <div className="cyborg-table-radio-cell">
                                         <input
                                             type="radio"
                                             name="implantStats"
@@ -107,9 +100,9 @@ export const CyborgSection: React.FC<CyborgSectionProps> = ({ implants = [], onC
                                             onChange={() => setSelectedStatId(stat.id)}
                                         />
                                     </div>
-                                    <div style={{ flex: 1, fontWeight: 'bold', color: '#2563eb' }}>{stat.pcCost} PC</div>
-                                    <div style={{ flex: 1 }}>+{stat.pvBonus}</div>
-                                    <div style={{ flex: 1 }}>{stat.daFisico}</div>
+                                    <div className="cyborg-table-cell cost">{stat.pcCost} PC</div>
+                                    <div className="cyborg-table-cell">+{stat.pvBonus}</div>
+                                    <div className="cyborg-table-cell">{stat.daFisico}</div>
                                 </label>
                             ))}
                         </div>
@@ -117,23 +110,16 @@ export const CyborgSection: React.FC<CyborgSectionProps> = ({ implants = [], onC
 
                     {/* Strength Selection Table */}
                     <div>
-                        <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600, color: '#4b5563', fontSize: '0.875rem' }}>Fuerza</label>
-                        <div style={{ border: '1px solid #e2e8f0', borderRadius: '6px', overflow: 'hidden' }}>
-                            <div style={{ display: 'flex', background: '#f1f5f9', padding: '0.5rem', fontWeight: 'bold', fontSize: '0.85rem' }}>
-                                <div style={{ width: '40px' }}></div>
-                                <div style={{ flex: 1 }}>Fuerza</div>
-                                <div style={{ flex: 1 }}>Coste</div>
+                        <label className="form-field-label">Fuerza</label>
+                        <div className="cyborg-selection-table">
+                            <div className="cyborg-table-header">
+                                <div className="cyborg-table-radio-cell"></div>
+                                <div className="cyborg-table-cell">Fuerza</div>
+                                <div className="cyborg-table-cell">Coste</div>
                             </div>
                             {CYBORG_IMPLANT_STRENGTHS.map(str => (
-                                <label key={str.id} style={{
-                                    display: 'flex',
-                                    padding: '0.5rem',
-                                    borderTop: '1px solid #e2e8f0',
-                                    cursor: 'pointer',
-                                    background: selectedStrengthId === str.id ? '#eff6ff' : 'white',
-                                    alignItems: 'center'
-                                }}>
-                                    <div style={{ width: '40px', display: 'flex', justifyContent: 'center' }}>
+                                <label key={str.id} className={`cyborg-table-row ${selectedStrengthId === str.id ? 'selected' : ''}`}>
+                                    <div className="cyborg-table-radio-cell">
                                         <input
                                             type="radio"
                                             name="implantStrength"
@@ -141,8 +127,8 @@ export const CyborgSection: React.FC<CyborgSectionProps> = ({ implants = [], onC
                                             onChange={() => setSelectedStrengthId(str.id)}
                                         />
                                     </div>
-                                    <div style={{ flex: 1, fontWeight: 'bold' }}>{str.fuerza}</div>
-                                    <div style={{ flex: 1, color: str.pcCost > 0 ? '#2563eb' : '#64748b' }}>
+                                    <div className="cyborg-table-cell font-bold">{str.fuerza}</div>
+                                    <div className={`cyborg-table-cell ${str.pcCost > 0 ? 'cost' : 'cost-muted'}`}>
                                         {str.pcCost} PC
                                     </div>
                                 </label>

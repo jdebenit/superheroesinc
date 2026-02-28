@@ -50,7 +50,7 @@ export default function GuardianSection({ guardianParams, onChange }: GuardianSe
                 />
             }
         >
-            <div style={{ display: 'grid', gap: '1.5rem' }}>
+            <div className="wizard-grid wizard-gap-lg">
                 <FormSelect
                     label="Cualidad del Objeto"
                     value={quality || ''}
@@ -61,7 +61,7 @@ export default function GuardianSection({ guardianParams, onChange }: GuardianSe
                     showDescription={false}
                 />
                 {selectedQuality && (
-                    <p style={{ marginTop: '-1rem', fontSize: '0.85rem', color: '#6b7280', fontStyle: 'italic' }}>
+                    <p className="form-field-description" style={{ marginTop: '-1rem' }}>
                         {selectedQuality.description}
                     </p>
                 )}

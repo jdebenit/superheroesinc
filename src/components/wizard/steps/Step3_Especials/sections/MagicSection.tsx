@@ -144,7 +144,7 @@ export default function MagicSection({
                         </span>
                     </div>
 
-                    <div style={{ marginBottom: '1rem' }}>
+                    <div className="wizard-margin-bottom">
                         <InfoBox variant="info" icon="ℹ️">
                             Puedes intercambiar tus slots de Poder de Guardián por las siguientes opciones.
                         </InfoBox>

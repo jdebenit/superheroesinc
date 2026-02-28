@@ -11,13 +11,25 @@
     align-items: center;
 }
 
+.type-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
 .type-tag-internal {
     background-color: #fce7f3;
     color: #be123c;
-    border-color: #fbcfe8;
+    border: 1px solid #fbcfe8;
 }
 
-/* Uses default .type-tag from existing CSS if any, or can be extended here */
+.type-tag-external {
+    background-color: #dbeafe;
+    color: #1d4ed8;
+    border: 1px solid #bfdbfe;
+}
 
 .power-penalty-badge {
     margin-top: 0.5rem;
@@ -71,6 +83,10 @@
 .tech-module-cell {
     padding: 0.75rem;
     text-align: center;
+}
+
+.tech-module-cell.nowrap {
+    white-space: nowrap;
 }
 
 .tech-module-cell.name-cell {
@@ -361,4 +377,928 @@
     width: 100%;
     display: flex;
     justify-content: center;
+}
+
+/* --- PowerRow Styles --- */
+
+.power-row {
+    background-color: #f9fafb;
+}
+
+.power-row.even {
+    background-color: white;
+}
+
+.power-cell {
+    padding: 0.75rem;
+    text-align: center;
+}
+
+.power-cell.name-cell {
+    padding: 1rem;
+    font-weight: bold;
+    color: #1f2937;
+    text-align: left;
+}
+
+.power-name-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.power-options-container {
+    margin-top: 0.5rem;
+}
+
+.power-cost-formula {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-family: monospace;
+}
+
+.power-formula-operator {
+    color: #9ca3af;
+}
+
+.power-formula-component {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.power-formula-value {
+    font-weight: bold;
+}
+
+.power-formula-value.highlight-amber {
+    color: #d97706;
+}
+
+.power-formula-value.highlight-red {
+    color: #b91c1c;
+}
+
+.power-formula-value.highlight-green {
+    color: #10b981;
+}
+
+.power-formula-label {
+    font-size: 0.65rem;
+    color: #6b7280;
+}
+
+.power-customizations-list {
+    width: 100%;
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.power-customization-row {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    font-size: 0.8rem;
+}
+
+.power-customization-pcs {
+    color: #6b7280;
+}
+
+.power-remove-customization {
+    color: #ef4444;
+    font-weight: bold;
+    padding: 0 4px;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+}
+
+.power-add-customization-btn {
+    font-size: 0.75rem;
+    color: #4f46e5;
+    background: transparent;
+    border: 1px dashed #4f46e5;
+    border-radius: 4px;
+    padding: 2px 8px;
+    cursor: pointer;
+    margin-top: 0.25rem;
+}
+
+.power-char-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-family: monospace;
+}
+
+.power-char-component {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.power-char-value {
+    color: #6b7280;
+    font-weight: bold;
+}
+
+.power-char-value.total {
+    color: #10b981;
+}
+
+.power-char-label {
+    font-size: 0.65rem;
+    color: #9ca3af;
+}
+
+.power-cost-summary {
+    font-size: 0.75rem;
+    color: #6b7280;
+    font-family: monospace;
+}
+
+.power-skill-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.power-skill-label {
+    font-size: 0.65rem;
+    color: #9ca3af;
+    font-family: monospace;
+}
+
+.power-na-label {
+    color: #9ca3af;
+    font-size: 0.875rem;
+}
+
+/* --- Checkbox Card --- */
+.wizard-checkbox-card {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    padding: 1rem;
+    background-color: #fef3c7;
+    border: 2px solid #fbbf24;
+    border-radius: 0.5rem;
+    transition: all 0.2s;
+}
+
+.wizard-checkbox-card-input {
+    width: 1.25rem;
+    height: 1.25rem;
+    cursor: pointer;
+    accent-color: #9333ea;
+}
+
+.wizard-checkbox-card-title {
+    font-size: 1.125rem;
+    font-weight: bold;
+    color: #1f2937;
+    display: block;
+}
+
+.wizard-checkbox-card-description {
+    font-size: 0.875rem;
+    color: #4b5563;
+    display: block;
+    margin-top: 0.25rem;
+}
+
+/* --- Exoskeleton Table Utilities --- */
+.cost-pill {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 9999px;
+    background-color: #f3f4f6;
+    color: #374151;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.cost-pill--selected {
+    background-color: #4f46e5;
+    color: white;
+}
+
+.cell-bold {
+    font-weight: bold;
+}
+
+.cell-mono {
+    font-family: monospace;
+}
+
+.cell-accent {
+    color: #4f46e5;
+    font-weight: bold;
+}
+
+/* --- Cyborg Add Form --- */
+.cyborg-selection-table {
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.cyborg-table-header {
+    display: flex;
+    background: #f1f5f9;
+    padding: 0.5rem;
+    font-weight: bold;
+    font-size: 0.85rem;
+}
+
+.cyborg-table-row {
+    display: flex;
+    padding: 0.5rem;
+    border-top: 1px solid #e2e8f0;
+    cursor: pointer;
+    align-items: center;
+}
+
+.cyborg-table-row.selected {
+    background-color: #eff6ff;
+}
+
+.cyborg-table-row:not(.selected) {
+    background-color: white;
+}
+
+.cyborg-table-radio-cell {
+    width: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.cyborg-table-cell {
+    flex: 1;
+}
+
+.cyborg-table-cell.cost {
+    font-weight: bold;
+    color: #2563eb;
+}
+
+.cyborg-table-cell.cost-muted {
+    font-weight: bold;
+    color: #64748b;
+}
+
+/* --- Cyborg Implant Row --- */
+.cyborg-implant-row {
+    background-color: #f9fafb;
+}
+
+.cyborg-implant-row.even {
+    background-color: white;
+}
+
+.cyborg-implant-cell {
+    padding: 0.75rem;
+    text-align: center;
+    color: #4b5563;
+}
+
+.cyborg-implant-cell.name-cell {
+    padding: 1rem;
+    font-weight: bold;
+    color: #1f2937;
+    text-align: left;
+}
+
+.cyborg-implant-config {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.cyborg-implant-pv {
+    font-weight: bold;
+    color: #2563eb;
+}
+
+.cyborg-implant-da {
+    font-size: 0.75rem;
+    color: #6b7280;
+}
+
+.cyborg-implant-fue {
+    font-weight: bold;
+    color: #9333ea;
+}
+
+.cyborg-implant-muted {
+    font-size: 0.75rem;
+    color: #6b7280;
+}
+
+/* --- Generic Wizard Lists --- */
+.wizard-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding-left: 0;
+    list-style: none;
+    margin: 0;
+}
+
+.wizard-list-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: #374151;
+}
+
+.wizard-list-bullet {
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+/* --- Magic Section Styles --- */
+.magic-section-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.terrano-magic-table {
+    border: 1px solid #e0e7ff;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    background-color: #f8fafc;
+    margin-bottom: 1.5rem;
+}
+
+.terrano-magic-table__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.terrano-magic-table__title {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #1e1b4b;
+    margin: 0;
+}
+
+.terrano-magic-table__slots {
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: #6366f1;
+}
+
+.terrano-magic-table__options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.terrano-magic-table__option-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    background-color: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.terrano-magic-table__option-btn:hover {
+    border-color: #6366f1;
+    background-color: #f5f3ff;
+}
+
+.terrano-magic-table__option-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.terrano-magic-table__option-cost {
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: #6366f1;
+}
+
+.terrano-magic-table__rolls {
+    border: 1px solid #e2e8f0;
+    border-radius: 0.375rem;
+    background-color: white;
+    overflow: hidden;
+}
+
+.terrano-magic-table__roll-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+}
+
+.terrano-magic-table__roll-row--bordered {
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.terrano-magic-table__roll-name {
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.terrano-magic-table__roll-cost {
+    font-size: 0.75rem;
+    color: #6366f1;
+    margin-left: 0.5rem;
+}
+
+/* --- Spells Table Styles --- */
+.spell-rank-select {
+    padding: 0.25rem 0.5rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    font-size: 0.875rem;
+}
+
+.spell-cost-badge {
+    background-color: #f1f5f9;
+    color: #334155;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.spell-cost-badge--maestria {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.spell-req-none {
+    color: #94a3b8;
+}
+
+.wizard-table-spell-option {
+    display: block;
+    width: 100%;
+    margin-top: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: normal;
+}
+
+.wizard-table-row--even {
+    background-color: white;
+}
+
+.wizard-table-row--odd {
+    background-color: #f8fafc;
+}
+
+.wizard-table-cell {
+    padding: 0.75rem;
+    text-align: center;
+}
+
+.wizard-table-cell--left {
+    text-align: left;
+}
+
+.wizard-table-cell--bold {
+    font-weight: 600;
+}
+
+.wizard-table-cell--secondary {
+    font-size: 0.75rem;
+    color: #64748b;
+}
+
+/* --- Selection Modal Internal Styles --- */
+.modal-no-results {
+    text-align: center;
+    padding: 2.5rem 0;
+    color: #6b7280;
+}
+
+.power-penalty-tag {
+    margin-left: 0.5rem;
+    padding: 0.125rem 0.375rem;
+    background-color: #fef3c7;
+    border: 1px solid #fbbf24;
+    border-radius: 0.25rem;
+    font-size: 0.65rem;
+    font-weight: bold;
+    color: #92400e;
+    white-space: nowrap;
+}
+
+.type-tag-internal {
+    background-color: #fce7f3;
+    color: #be123c;
+    border-color: #fbcfe8;
+}
+
+.col-tech-type {
+    text-align: center;
+}
+
+.col-description {
+    font-size: 0.9em;
+    color: #4b5563;
+}
+
+/* Ensure type-tag has a default if not internal */
+.type-tag:not(.type-tag-internal) {
+    background: #e3f2fd;
+    border-color: #90caf9;
+    color: #1565c0;
+}
+
+/* --- Integrated Modal Styles --- */
+.pixel-button {
+    padding: 0.75rem 1.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    transition: all 0.2s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    font-family: var(--font-comic, sans-serif);
+}
+
+.pixel-button:hover {
+    border-color: rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.pixel-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Modal Overlay Styles */
+.wizard-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+.wizard-modal-content {
+    background: white;
+    width: 100%;
+    max-width: 1200px;
+    max-height: 90vh;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 4px solid var(--color-secondary, #000);
+}
+
+.modal-header {
+    padding: 1rem 1.5rem;
+    background: var(--color-secondary, #000);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-title {
+    font-family: var(--font-comic, sans-serif);
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.modal-scroll-area {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem;
+    background: #f5f5f5;
+}
+
+.modal-footer {
+    padding: 1rem;
+    background: white;
+    border-top: 2px solid #eee;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.confirm-button {
+    background: #22c55e;
+    color: white;
+    padding: 0.8rem 2rem;
+    border: 2px solid #166534;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 4px 4px 0px #166534;
+    transition: all 0.2s;
+    font-family: var(--font-comic, sans-serif);
+}
+
+.confirm-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 6px 6px 0px #166534;
+}
+
+.confirm-button:active {
+    transform: translateY(0);
+    box-shadow: 2px 2px 0px #166534;
+}
+
+/* PowerList Styles Adapted */
+.controls-section {
+    padding: 1.5rem;
+    background: #fff;
+    border-bottom: 2px solid #eee;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+@media(min-width: 768px) {
+    .controls-section {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+.filters-primary {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex: 1;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.filter-label {
+    font-weight: bold;
+    font-family: var(--font-comic, sans-serif);
+}
+
+.type-buttons {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.filter-button {
+    padding: 0.4rem 1rem;
+    border: 2px solid var(--color-secondary, #000);
+    background: white;
+    font-family: var(--font-comic, sans-serif);
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+}
+
+.filter-button.active {
+    background: var(--color-secondary, #000);
+    color: white;
+}
+
+.search-input {
+    padding: 0.6rem 1rem;
+    border: 2px solid var(--color-secondary, #000);
+    border-radius: 8px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.view-toggles {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.view-button {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--color-secondary, #000);
+    background: white;
+    cursor: pointer;
+    font-size: 1.2rem;
+    border-radius: 8px;
+}
+
+.view-button.active {
+    background: var(--color-secondary, #000);
+    color: white;
+}
+
+/* Grid & Card Styles */
+.powers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.power-card {
+    border: 2px solid var(--color-secondary, #000);
+    padding: 1.2rem;
+    background: white;
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+}
+
+.power-card:hover {
+    box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.power-card.selected {
+    background: #ecfdf5;
+    border-color: #059669;
+    box-shadow: 6px 6px 0px #059669;
+}
+
+.selected-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #059669;
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.power-card h3 {
+    margin: 0;
+    font-family: var(--font-comic, sans-serif);
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 0.5rem;
+    font-size: 1.1rem;
+    color: var(--color-primary, #000);
+}
+
+.power-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.power-cost {
+    font-weight: bold;
+    background: #f0f0f0;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    align-self: flex-start;
+    font-size: 0.85rem;
+}
+
+.power-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.origin-tag {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    border: 1px solid #ccc;
+    background: #eee;
+}
+
+/* Table Styles */
+.powers-table-wrapper {
+    border: 2px solid var(--color-secondary, #000);
+    border-radius: 8px;
+    overflow: hidden;
+    background: white;
+}
+
+.powers-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.powers-table th {
+    background: var(--color-secondary, #000);
+    color: white;
+    padding: 0.8rem;
+    text-align: left;
+    font-family: var(--font-comic, sans-serif);
+}
+
+.powers-table td {
+    padding: 0.8rem;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.powers-table tr:hover {
+    background: #f9f9f9;
+}
+
+.selected-row {
+    background: #ecfdf5 !important;
+}
+
+.col-name {
+    font-weight: bold;
+}
+
+.col-cost {
+    font-family: var(--font-mono, monospace);
+}
+
+.tech-module-input {
+    width: 8rem;
+}
+
+/* --- Wizard Empty State --- */
+.wizard-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    text-align: center;
+}
+
+.wizard-empty-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.8;
+}
+
+.wizard-empty-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #1e293b;
+    margin-bottom: 0.75rem;
+}
+
+.wizard-empty-description {
+    color: #64748b;
+    font-size: 1rem;
+    max-width: 500px;
+    line-height: 1.6;
+    margin-bottom: 2rem;
 }

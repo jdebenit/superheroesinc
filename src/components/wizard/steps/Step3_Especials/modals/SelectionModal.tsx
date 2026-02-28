@@ -172,7 +172,7 @@ export default function SelectionModal({
 
                         if (filteredItems.length === 0) {
                             return (
-                                <div className="text-center py-10 text-gray-500">
+                                <div className="modal-no-results">
                                     No se encontraron resultados
                                 </div>
                             );
@@ -293,17 +293,7 @@ export default function SelectionModal({
                                                                         const penalty = characterData ? getPowerPenalty(characterData, item) : { cost: 0, label: '', type: 'none' };
                                                                         if (penalty.cost > 0 && penalty.type !== 'none') {
                                                                             return (
-                                                                                <span style={{
-                                                                                    marginLeft: '0.5rem',
-                                                                                    padding: '0.125rem 0.375rem',
-                                                                                    backgroundColor: '#fef3c7',
-                                                                                    border: '1px solid #fbbf24',
-                                                                                    borderRadius: '0.25rem',
-                                                                                    fontSize: '0.65rem',
-                                                                                    fontWeight: 'bold',
-                                                                                    color: '#92400e',
-                                                                                    whiteSpace: 'nowrap'
-                                                                                }}>
+                                                                                <span className="power-penalty-tag">
                                                                                     +{penalty.cost} PC
                                                                                 </span>
                                                                             );
@@ -320,16 +310,12 @@ export default function SelectionModal({
                                                         )}
                                                         {type === 'techModules' && (
                                                             <>
-                                                                <td style={{ textAlign: 'center' }}>
-                                                                    <span className="type-tag" style={{
-                                                                        backgroundColor: item.type === 'Mejora Interna' ? '#fce7f3' : undefined,
-                                                                        color: item.type === 'Mejora Interna' ? '#be123c' : undefined,
-                                                                        borderColor: item.type === 'Mejora Interna' ? '#fbcfe8' : undefined
-                                                                    }}>
+                                                                <td className="col-tech-type">
+                                                                    <span className={`type-tag ${item.type === 'Mejora Interna' ? 'type-tag-internal' : ''}`}>
                                                                         {item.type}
                                                                     </span>
                                                                 </td>
-                                                                <td style={{ fontSize: '0.9em', color: '#666' }}>{item.description}</td>
+                                                                <td className="col-description">{item.description}</td>
                                                             </>
                                                         )}
                                                     </tr>

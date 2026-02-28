@@ -59,7 +59,7 @@ export default function MutanteSection({ mutanteParams, onChange, data }: Mutant
             }
         >
             {mutantType && (
-                <div style={{ marginBottom: '1.5rem' }}>
+                <div className="wizard-margin-bottom">
                     <InfoBox variant="warning" icon="💡">
                         <strong>Selección de poderes:</strong> Puedes elegir poderes de tu tipo ({mutantType}) normalmente,
                         o poderes de otros tipos (Físico, Psíquico, Energético) gastando <strong>+2 PCs adicionales</strong> de coste base por cada poder.

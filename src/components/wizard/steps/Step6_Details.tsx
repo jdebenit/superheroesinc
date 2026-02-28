@@ -94,12 +94,12 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                     value={data.notes || ''}
                     onChange={(val) => updateField('notes', val)}
                     placeholder="Describe la apariencia, personalidad, trasfondo breve..."
-                    style={{ marginBottom: 0 }}
+                    noMargin
                 />
             </WizardSection>
 
             <WizardSection title="Estadísticas de Combate">
-                <div style={{ marginBottom: '1.5rem' }}>
+                <div className="step6-margin-bottom">
                     <InfoBox variant="info" icon="🔒">
                         Calculadas automáticamente a partir de tus características — no son editables.
                     </InfoBox>
@@ -113,7 +113,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
             </WizardSection>
 
             <WizardSection title="Otras Estadísticas">
-                <div style={{ marginBottom: '1.5rem' }}>
+                <div className="step6-margin-bottom">
                     <InfoBox variant="info" icon="🔒">
                         Calculadas automáticamente a partir de tus características — no son editables.
                     </InfoBox>
@@ -165,7 +165,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                                     label="Nombre"
                                     value={item.name}
                                     onChange={(val: string) => updateItem('weapons', index, 'name', val)}
-                                    style={{ marginBottom: 0 }}
+                                    noMargin
                                     placeholder="Nombre del arma"
                                     hideLabelDesktop={true}
                                 />
@@ -173,7 +173,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                                     label="Daño"
                                     value={item.damage || ''}
                                     onChange={(val: string) => updateItem('weapons', index, 'damage', val)}
-                                    style={{ marginBottom: 0 }}
+                                    noMargin
                                     placeholder="Ej: 1d8+2"
                                     hideLabelDesktop={true}
                                 />
@@ -181,7 +181,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                                     label="DxA"
                                     value={item.dxa || ''}
                                     onChange={(val: string) => updateItem('weapons', index, 'dxa', val)}
-                                    style={{ marginBottom: 0 }}
+                                    noMargin
                                     placeholder="DxA"
                                     hideLabelDesktop={true}
                                 />
@@ -189,7 +189,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                                     label="CAR"
                                     value={item.car || ''}
                                     onChange={(val: string) => updateItem('weapons', index, 'car', val)}
-                                    style={{ marginBottom: 0 }}
+                                    noMargin
                                     placeholder="CAR"
                                     hideLabelDesktop={true}
                                 />
@@ -199,7 +199,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                                     min="0"
                                     value={item.cost || 0}
                                     onChange={(val: string) => updateItem('weapons', index, 'cost', Math.max(0, parseInt(val) || 0).toString())}
-                                    style={{ marginBottom: 0 }}
+                                    noMargin
                                     hideLabelDesktop={true}
                                 />
                             </WizardGrid>
@@ -207,7 +207,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                                 label="Notas / Propiedades"
                                 value={item.notes || ''}
                                 onChange={(val: string) => updateItem('weapons', index, 'notes', val)}
-                                style={{ marginBottom: 0, marginTop: '0.5rem' }}
+                                noMargin
                                 placeholder="Alcance, cadencia, efectos especiales..."
                             />
                         </div>
@@ -245,7 +245,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                                 label="Nombre"
                                 value={item.name}
                                 onChange={(val: string) => updateItem('equipment', index, 'name', val)}
-                                style={{ marginBottom: 0 }}
+                                noMargin
                                 placeholder="Nombre del objeto"
                                 hideLabelDesktop={true}
                             />
@@ -253,7 +253,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                                 label="Notas / Descripción"
                                 value={item.notes || ''}
                                 onChange={(val: string) => updateItem('equipment', index, 'notes', val)}
-                                style={{ marginBottom: 0 }}
+                                noMargin
                                 placeholder="Descripción corta..."
                                 hideLabelDesktop={true}
                             />
@@ -263,7 +263,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                                 min="0"
                                 value={item.cost || 0}
                                 onChange={(val: string) => updateItem('equipment', index, 'cost', Math.max(0, parseInt(val) || 0).toString())}
-                                style={{ marginBottom: 0 }}
+                                noMargin
                                 hideLabelDesktop={true}
                             />
                         </WizardGrid>
@@ -301,35 +301,35 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                                 label="Modelo / Fabricante"
                                 value={item.name}
                                 onChange={(val: string) => updateItem('vehicles', index, 'name', val)}
-                                style={{ marginBottom: 0 }}
+                                noMargin
                                 hideLabelDesktop={true}
                             />
                             <WizardField
                                 label="Blindaje"
                                 value={item.armor || ''}
                                 onChange={(val: string) => updateItem('vehicles', index, 'armor', val)}
-                                style={{ marginBottom: 0 }}
+                                noMargin
                                 hideLabelDesktop={true}
                             />
                             <WizardField
                                 label="PE"
                                 value={item.pe || ''}
                                 onChange={(val: string) => updateItem('vehicles', index, 'pe', val)}
-                                style={{ marginBottom: 0 }}
+                                noMargin
                                 hideLabelDesktop={true}
                             />
                             <WizardField
                                 label="Velocidad"
                                 value={item.speed || ''}
                                 onChange={(val: string) => updateItem('vehicles', index, 'speed', val)}
-                                style={{ marginBottom: 0 }}
+                                noMargin
                                 hideLabelDesktop={true}
                             />
                             <WizardField
                                 label="Alcance/Autonomía"
                                 value={item.range || ''}
                                 onChange={(val: string) => updateItem('vehicles', index, 'range', val)}
-                                style={{ marginBottom: 0 }}
+                                noMargin
                                 hideLabelDesktop={true}
                             />
                             <WizardField
@@ -338,7 +338,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                                 min="0"
                                 value={item.maneuverability ?? 0}
                                 onChange={(val: string) => updateItem('vehicles', index, 'maneuverability', Math.max(0, parseInt(val) || 0))}
-                                style={{ marginBottom: 0 }}
+                                noMargin
                                 hideLabelDesktop={true}
                             />
                             <WizardField
@@ -347,7 +347,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                                 min="0"
                                 value={item.cost || 0}
                                 onChange={(val: string) => updateItem('vehicles', index, 'cost', Math.max(0, parseInt(val) || 0).toString())}
-                                style={{ marginBottom: 0 }}
+                                noMargin
                                 hideLabelDesktop={true}
                             />
                         </WizardGrid>
@@ -399,21 +399,21 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                                     label="Nombre"
                                     value={item.name}
                                     onChange={(val: string) => updateItem('artifacts', index, 'name', val)}
-                                    style={{ marginBottom: 0 }}
+                                    noMargin
                                     hideLabelDesktop={true}
                                 />
                                 <WizardField
                                     label="Fiabilidad"
                                     value={item.reliability || ''}
                                     onChange={(val: string) => updateItem('artifacts', index, 'reliability', val)}
-                                    style={{ marginBottom: 0 }}
+                                    noMargin
                                     hideLabelDesktop={true}
                                 />
                                 <WizardField
                                     label="Valor"
                                     value={item.value || ''}
                                     onChange={(val: string) => updateItem('artifacts', index, 'value', val)}
-                                    style={{ marginBottom: 0 }}
+                                    noMargin
                                     hideLabelDesktop={true}
                                 />
                                 <WizardField
@@ -421,7 +421,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                                     label="Coste"
                                     value={item.cost || 0}
                                     onChange={(val: string) => updateItem('artifacts', index, 'cost', Math.max(0, parseInt(val) || 0).toString())}
-                                    style={{ marginBottom: 0 }}
+                                    noMargin
                                     hideLabelDesktop={true}
                                 />
                             </WizardGrid>
@@ -430,7 +430,8 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                                 label="Descripción / Efectos"
                                 value={item.notes || ''}
                                 onChange={(val: string) => updateItem('artifacts', index, 'notes', val)}
-                                style={{ marginBottom: 0, minHeight: '60px', marginTop: '0.5rem' }}
+                                noMargin
+                                className="step6-textarea-field"
                             />
                         </div>
                     )}
@@ -471,7 +472,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                                     label="Nombre"
                                     value={item.name}
                                     onChange={(val: string) => updateItem('magicObjects', index, 'name', val)}
-                                    style={{ marginBottom: 0 }}
+                                    noMargin
                                     hideLabelDesktop={true}
                                 />
                                 <WizardField
@@ -487,7 +488,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                                 label="Descripción"
                                 value={item.description || ''}
                                 onChange={(val: string) => updateItem('magicObjects', index, 'description', val)}
-                                style={{ marginTop: '0.5rem' }}
+                                className="step6-margin-top"
                             />
                         </div>
                     )}

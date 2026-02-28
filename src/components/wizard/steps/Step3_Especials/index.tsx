@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Step3Props } from './types';
-import { modalStyles } from './styles';
+import './Step3_Especials.css';
 import { useStep3Logic } from '../../hooks/useStep3Logic';
 
 // Section Components
@@ -94,19 +94,12 @@ export default function Step3_Especials({ data, onChange, onShowToast }: Step3Pr
                 description="Gestiona los poderes y habilidades especiales derivadas de tus orígenes (Mutante, Arcano, Tecnológico, etc.)."
             >
                 {!hasAnyOrigin && (
-                    <div style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        padding: '2rem 1rem',
-                        textAlign: 'center'
-                    }}>
-                        <div style={{ fontSize: '3rem', marginBottom: '1rem', opacity: 0.8 }}>⚡</div>
-                        <h4 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#1e293b', marginBottom: '0.75rem' }}>
+                    <div className="wizard-empty-state">
+                        <div className="wizard-empty-icon">⚡</div>
+                        <h4 className="wizard-empty-title">
                             Sin Origen Seleccionado
                         </h4>
-                        <p style={{ color: '#64748b', fontSize: '1rem', maxWidth: '500px', lineHeight: 1.6, marginBottom: '2rem' }}>
+                        <p className="wizard-empty-description">
                             Necesitas seleccionar al menos un origen en el primer paso para desbloquear estas opciones.
                         </p>
                         <button
@@ -114,12 +107,7 @@ export default function Step3_Especials({ data, onChange, onShowToast }: Step3Pr
                                 const originTab = document.querySelector<HTMLButtonElement>('button[title="Origen"]');
                                 if (originTab) originTab.click();
                             }}
-                            className="wizard-button primary"
-                            style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '0.5rem'
-                            }}
+                            className="wizard-button primary wizard-flex-center wizard-gap-sm"
                         >
                             <span>← Volver al Paso 1</span>
                         </button>
@@ -336,8 +324,6 @@ export default function Step3_Especials({ data, onChange, onShowToast }: Step3Pr
                     onOpenModal={() => openModal('magical_bonds')}
                 />
             )}
-
-            <style>{modalStyles}</style>
         </div>
     );
 }
