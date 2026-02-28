@@ -253,7 +253,7 @@ export default function CharacterWizard() {
         }
 
         if (currentStep === 7) {
-            return <Step7_Evolution data={character} onChange={updateCharacter} />;
+            return <Step7_Evolution />;
         }
 
         return (

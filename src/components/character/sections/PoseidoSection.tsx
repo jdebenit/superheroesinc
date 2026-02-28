@@ -19,7 +19,7 @@ export const PoseidoSection: React.FC<PoseidoSectionProps> = ({ character }) => 
                         <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
                             <DetailRow
                                 label="Tipo de Forma"
-                                value={`${form.label} (${form.pc > 0 ? '+' : ''}${form.pc} PC)`}
+                                value={`${form.label} (${form.cost > 0 ? '+' : ''}${form.cost} PC)`}
                                 valueClassName=""
                             />
                             <div className="poseido-description">

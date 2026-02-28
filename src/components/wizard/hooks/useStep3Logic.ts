@@ -285,7 +285,8 @@ export function useStep3Logic(data: any, onChange: (updates: any) => void, onSho
         selectedSpells: selectedSpellsWithRank.map(sw => {
             const spell = SPELLS.find(s => s.id === sw.id);
             if (!spell) return null;
-            return { ...spell, rank: sw.rank, selectedOption: sw.selectedOption };
+            const item: Spell & { rank: number; selectedOption?: string } = { ...spell, rank: sw.rank, selectedOption: sw.selectedOption };
+            return item;
         }).filter((s): s is (Spell & { rank: number; selectedOption?: string }) => s !== null),
         techModules,
         magicTableRolls,

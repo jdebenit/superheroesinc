@@ -23,5 +23,8 @@
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-vertical-timeline-component": "^3.5.3"
+  },
+  "devDependencies": {
+    "@types/react-vertical-timeline-component": "^3.3.6"
   }
 }

@@ -20,7 +20,7 @@ export const ExoskeletonSection: React.FC<ExoskeletonSectionProps> = ({ characte
             <div className="exoskeleton-grid">
                 <div className="exoskeleton-card">
                     <div className="exoskeleton-header">
-                        {config.label}
+                        {config.id.replace('exo_config_', 'Configuración ')}
                     </div>
                     <div className="exoskeleton-stats">
                         <div className="exoskeleton-stat-item">

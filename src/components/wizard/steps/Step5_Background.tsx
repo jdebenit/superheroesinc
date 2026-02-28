@@ -146,7 +146,7 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
                     renderItem={(item, index) => (
                         <WizardField
                             label=""
-                            value={item}
+                            value={item as string}
                             onChange={(val) => updateBackgroundItem(index, val)}
                             noMargin
                             placeholder="Ej: Trabajo medio/bajo: mecánico"
