@@ -33,7 +33,7 @@ export const CostBadge: React.FC<CostBadgeProps> = ({
     if (variant === 'penalty') {
         return (
             <span className={`cost-badge cost-badge-penalty ${className}`}>
-                {cost}
+                {cost} {label}
             </span>
         );
     }
@@ -41,7 +41,7 @@ export const CostBadge: React.FC<CostBadgeProps> = ({
     if (variant === 'bonus') {
         return (
             <span className={`cost-badge cost-badge-bonus ${className}`}>
-                {cost}
+                {cost} {label}
             </span>
         );
     }
