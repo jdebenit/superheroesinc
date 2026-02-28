@@ -1,0 +1,221 @@
+/* =========================================================================
+   Step 6 : Final Details
+   ========================================================================= */
+
+/* Identity Section */
+.step6-identity-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.step6-identity-row {
+    margin-bottom: 1.5rem;
+}
+
+/* Notes Section */
+.step6-notes-description {
+    font-size: 0.85rem;
+    color: #6b7280;
+    margin-bottom: 0.75rem;
+    margin-top: 0;
+}
+
+/* Combat Stats */
+.step6-combat-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.stat-item {
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid;
+}
+
+.stat-item-label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.stat-item-value {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+/* Red Stat Theme */
+.stat-item-red {
+    background-color: #fef2f2;
+    border-color: #fee2e2;
+}
+
+.stat-item-red .stat-item-label {
+    color: #991b1b;
+}
+
+.stat-item-red .stat-item-value {
+    color: #dc2626;
+}
+
+/* Purple Stat Theme */
+.stat-item-purple {
+    background-color: #f5f3ff;
+    border-color: #ede9fe;
+}
+
+.stat-item-purple .stat-item-label {
+    color: #5b21b6;
+}
+
+.stat-item-purple .stat-item-value {
+    color: #7c3aed;
+}
+
+/* Other Stats Table */
+.step6-other-stats-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 0;
+    border: 1px solid #ede9fe;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.step6-other-stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid #f3e8ff;
+    gap: 1rem;
+    min-width: 0;
+}
+
+.step6-other-stat-row.even {
+    background-color: white;
+}
+
+.step6-other-stat-row.odd {
+    background-color: #faf5ff;
+}
+
+.step6-other-stat-label {
+    font-size: 0.875rem;
+    color: #5b21b6;
+    font-weight: 500;
+    flex-shrink: 0;
+}
+
+.step6-other-stat-value {
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: #7c3aed;
+    background: #f5f3ff;
+    border: 1px solid #ddd6fe;
+    border-radius: 6px;
+    padding: 0.15rem 0.6rem;
+    white-space: nowrap;
+}
+
+/* Shared Inventory Cards (Equipment, Vehicle, Artifacts, Magic Objects) */
+.inventory-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+/* Equipment Grid */
+.equipment-grid {
+    display: grid;
+    grid-template-columns: 2fr 3fr 100px;
+    gap: 1rem;
+    align-items: start;
+}
+
+/* Vehicles Grid */
+.vehicle-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 100px;
+    gap: 0.75rem;
+    align-items: start;
+}
+
+/* Artifacts Grid */
+.artifact-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 100px;
+    gap: 1rem;
+    align-items: start;
+}
+
+/* Magic Objects Grid */
+.magic-grid {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 1rem;
+    align-items: start;
+}
+
+/* Weapon Specific (Moved from Inline Style Tag) */
+.weapon-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.weapon-row-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 100px;
+    gap: 0.75rem;
+    align-items: start;
+}
+
+/* Global Section Header Badge */
+.section-header-badge {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.5rem;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+    .step6-identity-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .equipment-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .vehicle-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .vehicle-grid>*:first-child {
+        grid-column: 1 / -1;
+    }
+
+    .artifact-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .artifact-grid>*:first-child {
+        grid-column: 1 / -1;
+    }
+
+    .magic-grid {
+        grid-template-columns: 2fr 1fr;
+    }
+
+    .weapon-row-top {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .weapon-row-top>*:first-child {
+        grid-column: 1 / -1;
+    }
+}

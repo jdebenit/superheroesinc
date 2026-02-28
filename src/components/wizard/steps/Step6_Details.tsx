@@ -11,6 +11,7 @@ import { FormSelect } from '../shared/FormSelect';
 import { InfoBox } from '../shared/InfoBox';
 import { CostBadge } from '../shared/CostBadge';
 import { stepPageTitleStyle, stepPageSubtitleStyle } from '../shared/stepStyles';
+import './Step6_Details.css';
 
 interface Step6Props {
     data: {
@@ -36,25 +37,10 @@ interface Step6Props {
 }
 
 const StatItem = ({ label, value, theme }: { label: string, value: string, theme: 'red' | 'purple' }) => {
-    const styles = theme === 'red' ? {
-        bg: '#fef2f2', border: '#fee2e2', text: '#991b1b', value: '#dc2626'
-    } : {
-        bg: '#f5f3ff', border: '#ede9fe', text: '#5b21b6', value: '#7c3aed'
-    };
-
     return (
-        <div style={{
-            backgroundColor: styles.bg,
-            padding: '1rem',
-            borderRadius: '8px',
-            border: `1px solid ${styles.border}`
-        }}>
-            <span style={{ display: 'block', fontSize: '0.8rem', color: styles.text, fontWeight: 'bold', textTransform: 'uppercase' }}>
-                {label}
-            </span>
-            <span style={{ fontSize: '1.25rem', fontWeight: 'bold', color: styles.value }}>
-                {value || '-'}
-            </span>
+        <div className={`stat-item stat-item-${theme}`}>
+            <span className="stat-item-label">{label}</span>
+            <span className="stat-item-value">{value || '-'}</span>
         </div>
     );
 };
@@ -201,7 +187,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
 
                 {/* IDENTITY SECTION */}
                 <WizardSection title="Identidad">
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginBottom: '1.5rem' }}>
+                    <div className="step6-identity-grid step6-identity-row">
                         <WizardField
                             label="Nombre del Personaje"
                             value={data.name || ''}
@@ -215,7 +201,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                             placeholder="Ej: Prototype"
                         />
                     </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
+                    <div className="step6-identity-grid">
                         <WizardField
                             label="Profesión"
                             value={data.profession || ''}
@@ -233,7 +219,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
 
                 {/* DESCRIPTION SECTION — standalone for visibility */}
                 <WizardSection title="Descripción y Notas">
-                    <p style={{ fontSize: '0.85rem', color: '#6b7280', marginBottom: '0.75rem', marginTop: 0 }}>
+                    <p className="step6-notes-description">
                         Describe la apariencia física, carácter, historia personal y cualquier nota relevante del personaje.
                     </p>
                     <WizardField
@@ -255,7 +241,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                         </span>
                     }
                 >
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
+                    <div className="step6-combat-stats-grid">
                         {data.combatstats?.map((stat, index) => {
                             const [label, val] = stat.split(': ');
                             return <StatItem key={index} label={label} value={val} theme="red" />;
@@ -272,45 +258,16 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                         </span>
                     }
                 >
-                    <div style={{
-                        display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-                        gap: '0',
-                        border: '1px solid #ede9fe',
-                        borderRadius: '10px',
-                        overflow: 'hidden'
-                    }}>
+                    <div className="step6-other-stats-container">
                         {data.otherstats?.map((stat, index) => {
                             const colonIdx = stat.indexOf(': ');
                             const label = colonIdx !== -1 ? stat.slice(0, colonIdx) : stat;
                             const val = colonIdx !== -1 ? stat.slice(colonIdx + 2) : '';
                             const isEven = index % 2 === 0;
                             return (
-                                <div key={index} style={{
-                                    display: 'flex',
-                                    justifyContent: 'space-between',
-                                    alignItems: 'center',
-                                    padding: '0.6rem 1rem',
-                                    backgroundColor: isEven ? 'white' : '#faf5ff',
-                                    borderBottom: '1px solid #f3e8ff',
-                                    gap: '1rem',
-                                    minWidth: 0
-                                }}>
-                                    <span style={{ fontSize: '0.875rem', color: '#5b21b6', fontWeight: '500', flexShrink: 0 }}>
-                                        {label}
-                                    </span>
-                                    <span style={{
-                                        fontSize: '0.95rem',
-                                        fontWeight: 'bold',
-                                        color: '#7c3aed',
-                                        background: '#f5f3ff',
-                                        border: '1px solid #ddd6fe',
-                                        borderRadius: '6px',
-                                        padding: '0.15rem 0.6rem',
-                                        whiteSpace: 'nowrap'
-                                    }}>
-                                        {val || '-'}
-                                    </span>
+                                <div key={index} className={`step6-other-stat-row ${isEven ? 'even' : 'odd'}`}>
+                                    <span className="step6-other-stat-label">{label}</span>
+                                    <span className="step6-other-stat-value">{val || '-'}</span>
                                 </div>
                             );
                         })}
@@ -324,7 +281,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                     defaultCollapsed={(data.weapons?.items?.length ?? 0) === 0}
                     rightContent={
                         (data.weapons?.items?.length ?? 0) > 0 ? (
-                            <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', padding: '0.25rem 0.5rem', borderRadius: '0.5rem' }}>
+                            <div className="section-header-badge">
                                 <CostBadge
                                     cost={data.weapons?.items?.reduce((acc: number, item: any) => acc + (parseInt(item.cost) || 0), 0) || 0}
                                     label="PC"
@@ -402,7 +359,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                     defaultCollapsed={(data.equipment?.items?.length ?? 0) === 0}
                     rightContent={
                         (data.equipment?.items?.length ?? 0) > 0 ? (
-                            <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', padding: '0.25rem 0.5rem', borderRadius: '0.5rem' }}>
+                            <div className="section-header-badge">
                                 <CostBadge
                                     cost={data.equipment?.items?.reduce((acc: number, item: any) => acc + (parseInt(item.cost) || 0), 0) || 0}
                                     label="PC"
@@ -420,7 +377,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                         addButtonLabel="Añadir Equipo"
                         color="#3b82f6"
                         renderItem={(item, index) => (
-                            <div style={{ display: 'grid', gridTemplateColumns: '2fr 3fr 80px', gap: '1rem', alignItems: 'start' }}>
+                            <div className="inventory-card equipment-grid">
                                 <WizardField
                                     label="Nombre"
                                     value={item.name}
@@ -429,11 +386,11 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                                     placeholder="Nombre del objeto"
                                 />
                                 <WizardField
-                                    label="Notas"
+                                    label="Notas / Descripción"
                                     value={item.notes || ''}
                                     onChange={(val) => updateEquipment(index, 'notes', val)}
                                     style={{ marginBottom: 0 }}
-                                    placeholder="Descripción..."
+                                    placeholder="Descripción corta..."
                                 />
                                 <WizardField
                                     type="number"
@@ -455,7 +412,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                     defaultCollapsed={(data.vehicles?.items?.length ?? 0) === 0}
                     rightContent={
                         (data.vehicles?.items?.length ?? 0) > 0 ? (
-                            <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', padding: '0.25rem 0.5rem', borderRadius: '0.5rem' }}>
+                            <div className="section-header-badge">
                                 <CostBadge
                                     cost={data.vehicles?.items?.reduce((acc: number, item: any) => acc + (parseInt(item.cost) || 0), 0) || 0}
                                     label="PC"
@@ -473,9 +430,9 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                         addButtonLabel="Añadir Vehículo"
                         color="#3b82f6"
                         renderItem={(item, index) => (
-                            <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr 1fr 80px', gap: '0.75rem', alignItems: 'start' }}>
+                            <div className="inventory-card vehicle-grid">
                                 <WizardField
-                                    label="Nombre"
+                                    label="Modelo / Fabricante"
                                     value={item.name}
                                     onChange={(val) => updateVehicle(index, 'name', val)}
                                     style={{ marginBottom: 0 }}
@@ -532,7 +489,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                     defaultCollapsed={(data.artifacts?.items?.length ?? 0) === 0}
                     rightContent={
                         (data.artifacts?.items?.length ?? 0) > 0 ? (
-                            <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', padding: '0.25rem 0.5rem', borderRadius: '0.5rem' }}>
+                            <div className="section-header-badge">
                                 <CostBadge
                                     cost={data.artifacts?.items?.reduce((acc: number, item: any) => acc + (parseInt(item.cost) || 0), 0) || 0}
                                     label="PC"
@@ -550,7 +507,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                         addButtonLabel="Añadir Artefacto"
                         color="#3b82f6"
                         renderItem={(item, index) => (
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                            <div className="inventory-card">
                                 <FormSelect
                                     label="Cargar Predefinido (Opcional)"
                                     value=""
@@ -564,7 +521,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                                     }))}
                                 />
 
-                                <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 100px', gap: '1rem' }}>
+                                <div className="artifact-grid">
                                     <WizardField
                                         label="Nombre"
                                         value={item.name}
@@ -616,7 +573,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                         addButtonLabel="Añadir Objeto Mágico"
                         color="#3b82f6"
                         renderItem={(item, index) => (
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                            <div className="inventory-card">
                                 <FormSelect
                                     label="Cargar Predefinido (Opcional)"
                                     value=""
@@ -630,7 +587,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                                     showCostInOption={false}
                                 />
 
-                                <div style={{ display: 'grid', gridTemplateColumns: '3fr 1fr', gap: '1rem' }}>
+                                <div className="magic-grid">
                                     <WizardField
                                         label="Nombre"
                                         value={item.name}
@@ -642,7 +599,6 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                                         label="Coste EM"
                                         value={item.em || 0}
                                         onChange={(val) => updateMagicObject(index, 'em', Math.max(0, parseInt(val) || 0))}
-                                        style={{ marginBottom: 0 }}
                                     />
                                 </div>
                                 <WizardField
@@ -650,55 +606,12 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                                     label="Descripción"
                                     value={item.description || ''}
                                     onChange={(val) => updateMagicObject(index, 'description', val)}
-                                    style={{ marginBottom: 0, minHeight: '60px' }}
                                 />
                             </div>
                         )}
                     />
                 </WizardSection>
             </div>
-            <style>{`
-            .weapon-card {
-                display: flex;
-                flex-direction: column;
-                gap: 0.75rem;
-            }
-            .weapon-row-top {
-                display: grid;
-                grid-template-columns: 2fr 1fr 1fr 1fr 80px;
-                gap: 0.75rem;
-                align-items: start;
-            }
-            @media (max-width: 640px) {
-                .weapon-row-top {
-                    grid-template-columns: 1fr 1fr;
-                }
-                .weapon-row-top > *:first-child {
-                    grid-column: 1 / -1;
-                }
-            }
-            /* Anclar el botón X en la esquina superior derecha de la tarjeta */
-            .wizard-dynamic-list-item:has(.weapon-card) {
-                padding-top: 0.75rem;
-            }
-            .wizard-dynamic-list-item:has(.weapon-card) .wizard-dynamic-list-item-actions {
-                position: absolute;
-                top: 0.4rem;
-                right: 0.4rem;
-                margin-top: 0;
-            }
-            .wizard-dynamic-list-item:has(.weapon-card) .wizard-delete-row-button {
-                width: 2rem;
-                height: 2rem;
-                border-radius: 6px;
-                color: #9ca3af;
-                transition: all 0.15s;
-            }
-            .wizard-dynamic-list-item:has(.weapon-card) .wizard-delete-row-button:hover {
-                background-color: #fef2f2;
-                color: #ef4444;
-            }
-        `}</style>
         </>
     );
 }
