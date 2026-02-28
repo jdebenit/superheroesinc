@@ -1,14 +1,15 @@
 .wizard-section {
     background-color: white;
     border-radius: var(--wiz-radius-md);
-    box-shadow: var(--wiz-shadow-sm);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.05);
     margin-bottom: var(--wiz-spacing-6);
     overflow: hidden;
+    border-left: 4px solid var(--wiz-color-primary, #4f46e5);
 }
 
 .wizard-section-header {
-    padding: var(--wiz-spacing-6);
-    background-color: var(--wiz-color-gray-50);
+    padding: var(--wiz-spacing-4) var(--wiz-spacing-6);
+    background: linear-gradient(to right, #f5f3ff, var(--wiz-color-gray-50));
     border-bottom: 1px solid var(--wiz-color-gray-200);
     color: var(--wiz-color-gray-800);
 }
@@ -20,7 +21,7 @@
 }
 
 .wizard-section-header-collapsible:hover {
-    background-color: var(--wiz-color-gray-100);
+    background: linear-gradient(to right, #ede9fe, var(--wiz-color-gray-100));
 }
 
 .wizard-section-chevron {
