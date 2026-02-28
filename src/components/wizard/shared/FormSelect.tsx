@@ -17,6 +17,7 @@ export interface FormSelectProps {
     labelColor?: string;
     showDescription?: boolean;
     showCostInOption?: boolean;
+    noMargin?: boolean;
 }
 
 export const FormSelect: React.FC<FormSelectProps> = ({
@@ -27,13 +28,14 @@ export const FormSelect: React.FC<FormSelectProps> = ({
     placeholder = '-- Select --',
     labelColor = '#1f2937',
     showDescription = true,
-    showCostInOption = true
+    showCostInOption = true,
+    noMargin = false
 }) => {
     const selectedOption = options.find(opt => opt.id === value);
 
     return (
 
-        <div className="wizard-form-select-container">
+        <div className={`wizard-form-select-container ${noMargin ? 'wizard-form-select-nomargin' : ''}`}>
             <label
                 className="wizard-form-select-label"
                 style={{ color: labelColor }}

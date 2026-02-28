@@ -1,4 +1,5 @@
 import React from 'react';
+import './WizardDialogs.css';
 
 export type ToastType = 'success' | 'error' | 'info';
 
@@ -9,41 +10,13 @@ interface ToastProps {
 }
 
 export function WizardToast({ message, type = 'info', onClose }: ToastProps) {
-    const bgColor = type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#3b82f6';
+    const toastClass = type === 'success' ? 'toast-success' : type === 'error' ? 'toast-error' : 'toast-info';
 
     return (
-        <div style={{
-            position: 'fixed',
-            bottom: '2rem',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            backgroundColor: bgColor,
-            color: 'white',
-            padding: '1rem 2rem',
-            borderRadius: '999px',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-            zIndex: 9999,
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.75rem',
-            fontWeight: 'bold',
-            animation: 'slideUp 0.3s ease-out',
-        }}>
+        <div className={`wizard-toast ${toastClass}`}>
             <span>{type === 'success' ? '✅' : type === 'error' ? '❌' : 'ℹ️'}</span>
             <span>{message}</span>
-            <button
-                onClick={onClose}
-                style={{
-                    background: 'none',
-                    border: 'none',
-                    color: 'white',
-                    marginLeft: '1rem',
-                    cursor: 'pointer',
-                    opacity: 0.8,
-                    fontWeight: 'bold',
-                    fontSize: '1.25rem'
-                }}
-            >
+            <button onClick={onClose} className="wizard-toast-close">
                 ×
             </button>
         </div>
@@ -58,61 +31,20 @@ interface ConfirmProps {
 
 export function WizardConfirm({ message, onConfirm, onCancel }: ConfirmProps) {
     return (
-        <div style={{
-            position: 'fixed',
-            top: 0, left: 0, right: 0, bottom: 0,
-            backgroundColor: 'rgba(0,0,0,0.5)',
-            backdropFilter: 'blur(4px)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: 9999,
-            animation: 'fadeIn 0.2s ease-out'
-        }}>
-            <div style={{
-                backgroundColor: 'white',
-                padding: '2rem',
-                borderRadius: '16px',
-                boxShadow: '0 10px 25px rgba(0,0,0,0.2)',
-                maxWidth: '400px',
-                width: '90%',
-                textAlign: 'center'
-            }}>
-                <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>⚠️</div>
-                <h3 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#1e293b', marginBottom: '1rem' }}>
+        <div className="wizard-confirm-overlay">
+            <div className="wizard-confirm-box">
+                <div className="wizard-confirm-icon">⚠️</div>
+                <h3 className="wizard-confirm-title">
                     Confirmación
                 </h3>
-                <p style={{ color: '#64748b', marginBottom: '2rem', lineHeight: 1.5 }}>
+                <p className="wizard-confirm-message">
                     {message}
                 </p>
-                <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
-                    <button
-                        onClick={onCancel}
-                        style={{
-                            padding: '0.75rem 1.5rem',
-                            backgroundColor: '#f1f5f9',
-                            color: '#475569',
-                            border: '1px solid #cbd5e1',
-                            borderRadius: '8px',
-                            fontWeight: 'bold',
-                            cursor: 'pointer'
-                        }}
-                    >
+                <div className="wizard-confirm-actions">
+                    <button onClick={onCancel} className="wizard-confirm-btn btn-cancel">
                         Cancelar
                     </button>
-                    <button
-                        onClick={onConfirm}
-                        style={{
-                            padding: '0.75rem 1.5rem',
-                            backgroundColor: '#ef4444',
-                            color: 'white',
-                            border: 'none',
-                            borderRadius: '8px',
-                            fontWeight: 'bold',
-                            cursor: 'pointer',
-                            boxShadow: '0 2px 4px rgba(239, 68, 68, 0.2)'
-                        }}
-                    >
+                    <button onClick={onConfirm} className="wizard-confirm-btn btn-danger">
                         Sí, continuar
                     </button>
                 </div>
@@ -120,3 +52,4 @@ export function WizardConfirm({ message, onConfirm, onCancel }: ConfirmProps) {
         </div>
     );
 }
+

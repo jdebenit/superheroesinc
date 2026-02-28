@@ -1,6 +1,4 @@
-.wizard-form-select-container {
-    /* Container has no specific styles, just groups elements */
-}
+/* Form Select Container */
 
 .wizard-form-select-label {
     display: block;
@@ -33,4 +31,8 @@
     color: #6b7280;
     font-style: italic;
     margin-bottom: 0;
+}
+
+.wizard-form-select-nomargin {
+    margin-bottom: 0 !important;
 }

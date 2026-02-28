@@ -11,6 +11,7 @@ interface WizardFieldProps {
     disabled?: boolean;
     style?: React.CSSProperties;
     min?: string | number;
+    noMargin?: boolean;
 }
 
 export const WizardField: React.FC<WizardFieldProps> = ({
@@ -22,7 +23,8 @@ export const WizardField: React.FC<WizardFieldProps> = ({
     error,
     disabled = false,
     style,
-    min
+    min,
+    noMargin = false
 }) => {
     const inputProps = {
         value,
@@ -34,7 +36,7 @@ export const WizardField: React.FC<WizardFieldProps> = ({
     };
 
     return (
-        <div className="wizard-field" style={style}>
+        <div className={`wizard-field ${noMargin ? 'wizard-field-nomargin' : ''}`} style={style}>
             <label className="wizard-field-label">{label}</label>
             {type === 'textarea' ? (
                 <textarea
