@@ -1,6 +1,6 @@
 import React from 'react';
 import { POWERS } from '../../../../../data/powers';
-import { calculateSkillBase, getCharacteristicValue, getRankLevel, getPowerPenalty, getPowerCostConfig, calculatePowerBaseCost, type PowerContext } from '../utils';
+import { calculateSkillBase, getCharacteristicValue, getRankLevel, getPowerPenalty, getPowerCostConfig, calculatePowerBaseCost, getBaseCostAdjustment, type PowerContext } from '../utils';
 import type { SelectedPower } from '../types';
 import { Badge } from '../../../shared/Badge';
 import { NumberControl } from '../../../shared/NumberControl';
@@ -84,10 +84,6 @@ export default function PowerRow({
     const p = POWERS.find(power => power.id === selection.id);
     if (!p) return null;
 
-    const isHybridPenalty = isParahumanoHybrid && selection.origin === 'Alterado';
-    const isSemidemonioBonus = isSemidemonio && selection.origin === 'Sobrenatural';
-    const isEnanoGuardian = isEnano && selection.origin === 'Guardian';
-
     const context: PowerContext = {
         isParahumanoHybrid, isTesKhar, isAtlante, isTroll, isSemidemonio,
         isThalsDiscount, isThalsFree, isEnano, isGrifo, isElfoFisico,
@@ -99,18 +95,11 @@ export default function PowerRow({
 
     const penaltyInfo = getPowerPenalty(data, p);
     const isPenalty = penaltyInfo.type !== 'none';
+    const adjustment = getBaseCostAdjustment(p, selection, context, penaltyInfo);
 
     let displayBaseCostStr = p.cost.toString();
-    if (isPenalty) {
-        displayBaseCostStr = `${p.cost} + ${penaltyInfo.cost}`;
-    } else if (isHybridPenalty) {
-        displayBaseCostStr = `${p.cost} + 3`;
-    } else if (isSemidemonioBonus && !p.characteristic) {
-        displayBaseCostStr = `${p.cost} - 1`;
-    } else if (isThalsDiscount) {
-        displayBaseCostStr = `${p.cost} - 2`;
-    } else if (isEnanoGuardian) {
-        displayBaseCostStr = `${p.cost} + 2`;
+    if (adjustment !== 0) {
+        displayBaseCostStr = `${p.cost} ${adjustment > 0 ? '+' : '-'} ${Math.abs(adjustment)}`;
     }
 
     const renderDisplayCost = () => {
@@ -136,7 +125,7 @@ export default function PowerRow({
             <td style={{ padding: '1rem', fontWeight: 'bold', color: '#1f2937' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
                     <span>{p.name}</span>
-                    {isPenalty && (
+                    {isPenalty && penaltyInfo.label && (
                         <Badge label={penaltyInfo.label} color="yellow" className="text-xs" />
                     )}
                 </div>
@@ -365,7 +354,7 @@ export default function PowerRow({
                                     let effectivePowerMod = powerMod;
                                     let discountText = null;
 
-                                    if (isSemidemonioBonus) {
+                                    if (isSemidemonio && selection.origin === 'Sobrenatural') {
                                         // The first 10 points are free.
                                         // Cost is based on (powerMod - 10)
                                         effectivePowerMod = Math.max(0, powerMod - 10);
@@ -374,31 +363,15 @@ export default function PowerRow({
 
                                     const modCost = effectivePowerMod / 10;
                                     const custCost = (selection.customizations || []).reduce((sum, c) => sum + (c.cost || 0), 0);
-                                    let baseCost = p.cost;
 
-                                    // Cross-type penalty for mutants
-                                    if (selection.isCrossType) {
-                                        baseCost += 2;
-                                    }
-
-                                    // Cross-origin penalty for Guardián
-                                    if (selection.isCrossOrigin) {
-                                        baseCost += 3;
-                                    }
-
-                                    // Cross-origin penalty for Maldito
-                                    if (selection.isCrossOriginMaldito) {
-                                        baseCost += 1;
-                                    }
-
-                                    if (isEnanoGuardian) baseCost = p.cost + 2; // Enano restriction cost
-
+                                    const baseCost = calculatePowerBaseCost(p, selection, context, penaltyInfo);
                                     const total = baseCost + modCost + custCost;
 
                                     let penaltyDisplay = null;
-                                    if (isPenalty) penaltyDisplay = <span style={{ color: '#92400e', fontWeight: 'bold' }}> + {penaltyInfo.cost}</span>;
-                                    else if (isEnanoGuardian) penaltyDisplay = <span style={{ color: '#92400e', fontWeight: 'bold' }}> + 2</span>;
-
+                                    const adjustment = getBaseCostAdjustment(p, selection, context, penaltyInfo);
+                                    if (adjustment !== 0) {
+                                        penaltyDisplay = <span style={{ color: adjustment > 0 ? '#92400e' : '#16a34a', fontWeight: 'bold' }}> {adjustment > 0 ? '+' : '-'} {Math.abs(adjustment)}</span>;
+                                    }
 
                                     return (
                                         <div className="flex items-center gap-1">

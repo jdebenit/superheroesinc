@@ -203,40 +203,58 @@ export const getPowerCostConfig = (power: any, selection: SelectedPower, context
 };
 
 /**
+ * Get total base cost adjustment for display and calculation purposes
+ */
+export const getBaseCostAdjustment = (power: any, selection: SelectedPower, context: PowerContext, penaltyInfo: any): number => {
+    let adjustment = 0;
+
+    if (penaltyInfo && penaltyInfo.type !== 'none') {
+        adjustment += penaltyInfo.cost;
+    }
+
+    // Penalties
+    if (context.isParahumanoHybrid && selection.origin === 'Alterado') {
+        adjustment += 3;
+    }
+    if (context.isEnano && selection.origin === 'Guardian') {
+        adjustment += 2;
+    }
+
+    // Bonuses / Discounts
+    if (context.isSemidemonio && selection.origin === 'Sobrenatural') {
+        // Only non-characteristic powers get the base cost -1 discount? 
+        // Wait, the original math in utils.ts was:
+        // if (isSemidemonioBonus) baseCost = Math.max(0, baseCost - 1)
+        // Let's preserve that logic:
+        adjustment -= 1;
+    } else if (context.isThalsDiscount) {
+        adjustment -= 2;
+    }
+
+    return adjustment;
+};
+
+/**
  * Calculate the final base cost of a power including all modifiers
  */
 export const calculatePowerBaseCost = (power: any, selection: SelectedPower, context: PowerContext, penaltyInfo: any): number => {
     const config = getPowerCostConfig(power, selection, context);
-    const { isParahumanoHybrid, isSemidemonio, isThalsDiscount, isThalsFree, isEnano, isAtlante, isGrifo } = context;
-
-    // Default base
-    let baseCost = power.cost;
-
-    // 1. Penalties
-    if (penaltyInfo.type !== 'none') {
-        baseCost += penaltyInfo.cost;
-    }
-
-    // 2. Hybrid Penalty (+3 PC for Parahumano Hybrids taking Alterado powers)
-    if (isParahumanoHybrid && selection.origin === 'Alterado') {
-        baseCost += 3;
-    }
-
-    // Replicate the big if/else chain from PowerRow for Base Cost
-    const isEnanoGuardian = isEnano && selection.origin === 'Guardian';
-    const isSemidemonioBonus = isSemidemonio && selection.origin === 'Sobrenatural';
+    const { isAtlante, isGrifo } = context;
 
     // Free powers (handled via config.isFree or isFixedCost in UI, but math-wise?)
     if (config.isFree) return 0; // Usually treated as 0 or ignored
     if (config.isFixedCost) return 0; // Thals free
 
-    if (isEnanoGuardian) {
-        baseCost = power.cost + 2;
-    } else if (isSemidemonioBonus) {
-        baseCost = Math.max(0, baseCost - 1);
-    } else if (isThalsDiscount) {
-        baseCost = Math.max(0, baseCost - 2);
-    } else if (isAtlante) {
+    // Default base
+    let baseCost = power.cost;
+
+    // Apply adjustments
+    const adjustment = getBaseCostAdjustment(power, selection, context, penaltyInfo);
+    baseCost += adjustment;
+    baseCost = Math.max(0, baseCost);
+
+    // Specific cost overrides
+    if (isAtlante) {
         if (power.id === 'control_del_agua') baseCost = -1.1;
         else if (power.id === 'superhabilidad' && selection.selectedOption === 'Idioma nativo') baseCost = -4.1;
         else if (power.id === 'superhabilidad' && selection.selectedOption === 'Nadar') baseCost = -8.1;
@@ -244,13 +262,7 @@ export const calculatePowerBaseCost = (power: any, selection: SelectedPower, con
     } else if (isGrifo && power.id === 'volar') {
         baseCost = -1.1;
     } else if (config.freeRank > 0) {
-        // If it has a free rank, we often set baseCost to negative to offset the rank cost?
-        // Original logic: `else if (isHadaFlyFree) baseCost = -1.1;`
-        // `else if (isHadaFuegoFree) baseCost = -2.1;`
-        // This implies: Base Cost = -(FreeRank * 0.1). 
-        // Volar (11 * 0.1 = 1.1) -> -1.1.
-        // Fuego (21 * 0.1 = 2.1) -> -2.1.
-        // So we can generalize this!
+        // If it has a free rank, we often set baseCost to negative to offset the rank cost
         baseCost = -(config.freeRank * 0.1);
     }
 
