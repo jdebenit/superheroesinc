@@ -9,6 +9,7 @@ import { FormSelect } from '../shared/FormSelect';
 import { InfoBox } from '../shared/InfoBox';
 import { CostBadge } from '../shared/CostBadge';
 import { SectionHeaderBadge } from '../shared/SectionHeaderBadge';
+import { StatItem } from '../shared/StatItem';
 import { useStep6Logic } from '../hooks/useStep6Logic';
 import '../shared/WizardStep.css';
 import './Step6_Details.css';
@@ -34,13 +35,6 @@ interface Step6Props {
     onChange: (updates: any) => void;
     totalPCs?: string | number;
 }
-
-const StatItem = ({ label, value, theme }: { label: string, value: string, theme: 'red' | 'purple' }) => (
-    <div className={`stat-item stat-item-${theme}`}>
-        <span className="stat-item-label">{label}</span>
-        <span className="stat-item-value">{value || '-'}</span>
-    </div>
-);
 
 export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) {
     const {
