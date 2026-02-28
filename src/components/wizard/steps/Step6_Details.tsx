@@ -1,6 +1,4 @@
 import React from 'react';
-import { GENERAL_SKILLS } from '../../../data/generalSkills';
-import { SPECIAL_SKILLS } from '../../../data/specialSkills';
 import { MAGIC_OBJECTS } from '../../../data/magicObjects';
 import { ARTIFACTS } from '../../../data/artifacts';
 import { WizardSection } from '../shared/WizardSection';
@@ -52,11 +50,6 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
         applyArtifactPreset,
         applyMagicPreset
     } = useStep6Logic(data, onChange);
-
-    const weaponSkills = [
-        ...GENERAL_SKILLS.filter(s => ['combate', 'lanzar'].includes(s.id)),
-        ...SPECIAL_SKILLS.filter(s => s.category === 'combat')
-    ];
 
     return (
         <div className="wizard-step-container">
