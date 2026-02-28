@@ -5,6 +5,7 @@ import type { SelectedPower } from '../types';
 import { Badge } from '../../../shared/Badge';
 import { NumberControl } from '../../../shared/NumberControl';
 import { CostBadge } from '../../../shared/CostBadge';
+import { WizardField } from '../../../shared/WizardField';
 import { DeleteRowButton } from '../../../shared/DeleteRowButton';
 
 interface PowerRowProps {
@@ -141,21 +142,12 @@ export default function PowerRow({
                 </div>
                 {p.options && p.options.length > 0 && (
                     <div style={{ marginTop: '0.5rem' }}>
-                        <input
-                            type="text"
+                        <WizardField
+                            label=""
                             placeholder={p.options[0]}
                             value={selection.selectedOption || ''}
-                            onChange={(e) => onUpdateOption(index, e.target.value)}
-                            style={{
-                                width: '100%',
-                                padding: '0.25rem',
-                                fontSize: '0.8rem',
-                                border: '1px solid #d1d5db',
-                                borderRadius: '4px',
-                                fontWeight: 'normal',
-                                color: '#4b5563'
-                            }}
-                            onClick={(e) => e.stopPropagation()}
+                            onChange={(val: string) => onUpdateOption(index, val)}
+                            noMargin
                         />
                     </div>
                 )}
@@ -251,30 +243,33 @@ export default function PowerRow({
                             <div style={{ width: '100%', marginTop: '0.5rem', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
                                 {selection.customizations?.map((cust, cIdx) => (
                                     <div key={cust.id} style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', fontSize: '0.8rem' }}>
-                                        <input
-                                            type="text"
+                                        <WizardField
+                                            label=""
                                             value={cust.description}
                                             placeholder="Detalle personalización"
-                                            onChange={(e) => {
+                                            onChange={(val: string) => {
                                                 const newCusts = [...(selection.customizations || [])];
-                                                newCusts[cIdx] = { ...newCusts[cIdx], description: e.target.value };
+                                                newCusts[cIdx] = { ...newCusts[cIdx], description: val };
                                                 onUpdateCustomizations(index, newCusts);
                                             }}
-                                            style={{ flexGrow: 1, padding: '2px 4px', border: '1px solid #e5e7eb', borderRadius: '4px' }}
+                                            noMargin
+                                            style={{ flexGrow: 1 }}
                                         />
-                                        <input
+                                        <WizardField
+                                            label=""
                                             type="number"
                                             min="-10"
                                             max="10"
                                             value={cust.cost}
-                                            onChange={(e) => {
+                                            onChange={(val: string) => {
                                                 const newCusts = [...(selection.customizations || [])];
-                                                const val = parseFloat(e.target.value) || 0;
-                                                const clamped = Math.max(-10, Math.min(10, val));
+                                                const parseVal = parseFloat(val) || 0;
+                                                const clamped = Math.max(-10, Math.min(10, parseVal));
                                                 newCusts[cIdx] = { ...newCusts[cIdx], cost: clamped };
                                                 onUpdateCustomizations(index, newCusts);
                                             }}
-                                            style={{ width: '50px', padding: '2px 4px', border: '1px solid #e5e7eb', borderRadius: '4px', textAlign: 'right' }}
+                                            noMargin
+                                            style={{ width: '80px' }}
                                         />
                                         <span style={{ color: '#6b7280' }}>PCs</span>
                                         <button

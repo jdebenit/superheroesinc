@@ -166,87 +166,21 @@
 
 .step2-input-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 1.5rem 1rem;
+    justify-items: center;
+    /* Center WizardFields in their grid cells */
 }
 
-.step2-input-label {
-    display: block;
-    font-size: 0.875rem;
-    font-weight: bold;
-    color: #4b5563;
-    margin-bottom: 0.5rem;
-}
-
-.step2-input-base {
-    width: 100%;
-    padding: 0.75rem;
-    font-size: 1rem;
-    border: 2px solid #d1d5db;
-    border-radius: 8px;
+/* Ensure labels also center relative to the fixed-width input */
+.step2-input-grid .wizard-field {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    font-weight: bold;
 }
 
-.step2-input-origin {
-    width: 100%;
-    padding: 0.75rem;
-    font-size: 1rem;
-    border-radius: 8px;
-    text-align: center;
-    font-weight: bold;
-}
-
-.step2-input-origin.distributable {
-    border: 2px solid #2563eb;
-    background-color: white;
-    cursor: text;
-    color: #1f2937;
-}
-
-.step2-input-origin.fixed {
-    border: 2px solid #f59e0b;
-    background-color: #fef3c7;
-    cursor: not-allowed;
-    color: #92400e;
-}
-
-.step2-input-specialty {
-    width: 100%;
-    padding: 0.75rem;
-    font-size: 1rem;
-    border: 2px solid #d1d5db;
-    border-radius: 8px;
-    text-align: center;
-    font-weight: bold;
-    background-color: #dbeafe;
-}
-
-.step2-input-readonly {
-    width: 100%;
-    padding: 0.75rem;
-    font-size: 1rem;
-    border: 2px solid #e5e7eb;
-    border-radius: 8px;
-    text-align: center;
-    font-weight: bold;
-    background-color: #f3f4f6;
-    color: #374151;
-    cursor: default;
-}
-
-.step2-input-other {
-    width: 100%;
-    padding: 0.75rem;
-    font-size: 1rem;
-    border: 2px solid #e5e7eb;
-    border-radius: 8px;
-    text-align: center;
-    font-weight: bold;
-    background-color: #f3f4f6;
-    color: #9ca3af;
-    cursor: not-allowed;
-}
+/* --- Formula and Footer --- */
 
 
 /* --- Footer Formula --- */
@@ -267,21 +201,6 @@
     color: #9ca3af;
     font-family: monospace;
 }
-
-.step2-pc-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    padding: 0.3rem 0.8rem;
-    background: linear-gradient(135deg, #2563eb, #1e40af);
-    border-radius: 999px;
-    color: white;
-    font-weight: bold;
-    font-size: 0.9rem;
-    box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
-    white-space: nowrap;
-}
-
 
 /* --- Sticky Summary Bar --- */
 

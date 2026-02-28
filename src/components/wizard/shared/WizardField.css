@@ -25,6 +25,22 @@
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
+.wizard-field-input:read-only {
+    background-color: var(--wiz-color-gray-50);
+    border-color: var(--wiz-color-gray-200);
+    border-style: dashed;
+    cursor: default;
+    color: var(--wiz-color-gray-600);
+}
+
+.wizard-field-input:disabled {
+    background-color: var(--wiz-color-gray-100);
+    border-color: var(--wiz-color-gray-200);
+    cursor: not-allowed;
+    color: var(--wiz-color-gray-400);
+    opacity: 0.7;
+}
+
 .wizard-field-textarea {
     width: 100%;
     padding: var(--wiz-spacing-3);

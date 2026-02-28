@@ -417,94 +417,89 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
                                 </div>
 
                                 <div className="step2-input-grid">
-                                    <div>
-                                        <label className="step2-input-label">
-                                            Base
-                                        </label>
-                                        <input
-                                            type="number"
-                                            min="0"
-                                            max="200" // Always allow typing up to 200, but logic clamps
-                                            value={c.base}
-                                            onChange={(e) => handleCharacteristicChange(char.id, 'base', e.target.value)}
-                                            className="step2-input-base"
-                                        />
-                                    </div>
+                                    <WizardField
+                                        label="Base"
+                                        type="number"
+                                        min="0"
+                                        max="200"
+                                        value={c.base}
+                                        onChange={(val) => handleCharacteristicChange(char.id, 'base', val)}
+                                        noMargin
+                                        inputWidth="70px"
+                                        textAlign="center"
+                                    />
 
-                                    <div>
-                                        <label className="step2-input-label">
-                                            {isDistributableMode ? 'Mod. Origen' : 'Mod. Origen (Auto)'}
-                                        </label>
-                                        <input
-                                            type="number"
-                                            min="0"
-                                            max="200"
-                                            value={c.originMod}
-                                            readOnly={!isDistributableMode}
-                                            onChange={isDistributableMode ? (e) => handleCharacteristicChange(char.id, 'originMod', e.target.value) : undefined}
-                                            className={`step2-input-origin ${isDistributableMode ? 'distributable' : 'fixed'}`}
-                                        />
-                                    </div>
+                                    <WizardField
+                                        label={isDistributableMode ? 'Mod. Origen' : 'Mod. Origen (Auto)'}
+                                        type="number"
+                                        min="0"
+                                        max="200"
+                                        value={c.originMod}
+                                        readOnly={!isDistributableMode}
+                                        onChange={isDistributableMode ? (val) => handleCharacteristicChange(char.id, 'originMod', val) : () => { }}
+                                        noMargin
+                                        inputWidth="70px"
+                                        textAlign="center"
+                                    />
 
-                                    <div>
-                                        <label className="step2-input-label">
-                                            Mod. Especialidad
-                                            {(() => {
-                                                const allowedChars = calculateSpecialtyAllowedCharacteristics(origins);
-                                                if (allowedChars && !allowedChars.includes(char.id)) {
-                                                    return <span style={{ color: '#dc2626', marginLeft: '0.5rem' }}>🔒</span>;
-                                                }
-                                                return null;
-                                            })()}
-                                        </label>
-                                        <input
-                                            type="number"
-                                            min="0"
-                                            max="200"
-                                            value={c.specialtyMod}
-                                            readOnly={(() => {
-                                                if (!specialtyPointsInfo) return true;
-                                                const allowedChars = calculateSpecialtyAllowedCharacteristics(origins);
-                                                return allowedChars ? !allowedChars.includes(char.id) : false;
-                                            })()}
-                                            disabled={(() => {
-                                                if (!specialtyPointsInfo) return true;
-                                                const allowedChars = calculateSpecialtyAllowedCharacteristics(origins);
-                                                return allowedChars ? !allowedChars.includes(char.id) : false;
-                                            })()}
-                                            onChange={(e) => handleCharacteristicChange(char.id, 'specialtyMod', e.target.value)}
-                                            className="step2-input-specialty"
-                                        />
-                                    </div>
+                                    <WizardField
+                                        label={
+                                            <>
+                                                Mod. Especialidad
+                                                {(() => {
+                                                    const allowedChars = calculateSpecialtyAllowedCharacteristics(origins);
+                                                    if (allowedChars && !allowedChars.includes(char.id)) {
+                                                        return <span style={{ color: '#dc2626', marginLeft: '0.5rem' }}>🔒</span>;
+                                                    }
+                                                    return null;
+                                                })()}
+                                            </>
+                                        }
+                                        type="number"
+                                        min="0"
+                                        max="200"
+                                        value={c.specialtyMod}
+                                        readOnly={(() => {
+                                            if (!specialtyPointsInfo) return true;
+                                            const allowedChars = calculateSpecialtyAllowedCharacteristics(origins);
+                                            return allowedChars ? !allowedChars.includes(char.id) : false;
+                                        })()}
+                                        disabled={(() => {
+                                            if (!specialtyPointsInfo) return true;
+                                            const allowedChars = calculateSpecialtyAllowedCharacteristics(origins);
+                                            return allowedChars ? !allowedChars.includes(char.id) : false;
+                                        })()}
+                                        onChange={(val) => handleCharacteristicChange(char.id, 'specialtyMod', val)}
+                                        noMargin
+                                        inputWidth="70px"
+                                        textAlign="center"
+                                    />
 
-                                    <div>
-                                        <label className="step2-input-label">
-                                            Mod. Poder
-                                        </label>
-                                        <input
-                                            type="number"
-                                            min="0"
-                                            max="200"
-                                            value={c.powerMod}
-                                            readOnly={true}
-                                            className="step2-input-readonly"
-                                        />
-                                    </div>
+                                    <WizardField
+                                        label="Mod. Poder"
+                                        type="number"
+                                        min="0"
+                                        max="200"
+                                        value={c.powerMod}
+                                        readOnly={true}
+                                        onChange={() => { }}
+                                        noMargin
+                                        inputWidth="70px"
+                                        textAlign="center"
+                                    />
 
-                                    <div>
-                                        <label className="step2-input-label">
-                                            Mod. Otros
-                                        </label>
-                                        <input
-                                            type="number"
-                                            min="-200"
-                                            max="200"
-                                            value={c.otherMod || 0}
-                                            disabled={true}
-                                            onChange={(e) => handleCharacteristicChange(char.id, 'otherMod', e.target.value)}
-                                            className="step2-input-other"
-                                        />
-                                    </div>
+                                    <WizardField
+                                        label="Mod. Otros"
+                                        type="number"
+                                        min="-200"
+                                        max="200"
+                                        value={c.otherMod || 0}
+                                        disabled={true}
+                                        onChange={(val) => handleCharacteristicChange(char.id, 'otherMod', val)}
+                                        noMargin
+                                        inputWidth="70px"
+                                        textAlign="center"
+                                    />
                                 </div>
 
                                 <div className="step2-char-footer">
@@ -514,10 +509,10 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
                                     </span>
 
                                     {/* PC Cost Badge */}
-                                    <div className="step2-pc-badge">
-                                        <span style={{ opacity: 0.8, fontSize: '0.75rem' }}>PC</span>
-                                        <span>{pcValues[char.id].toFixed(1)}</span>
-                                    </div>
+                                    <CostBadge
+                                        cost={pcValues[char.id].toFixed(1)}
+                                        label="PC"
+                                    />
                                 </div>
                             </div>
                         );
