@@ -1,45 +1,9 @@
 .step4-container {
     padding: 2rem;
-
-    /* --- CSS Variables for Step 4 --- */
-
-    /* Green Palette (Success/Special) */
-    --s4-green-50: #ecfdf5;
-    --s4-green-100: #d1fae5;
-    --s4-green-500: #10b981;
-    --s4-green-600: #059669;
-    --s4-green-700: #047857;
-    --s4-green-800: #065f46;
-    --s4-green-900: #064e3b;
-
-    /* Gray Palette (Neutral) */
-    --s4-gray-50: #f9fafb;
-    --s4-gray-100: #f3f4f6;
-    --s4-gray-200: #e5e7eb;
-    --s4-gray-300: #d1d5db;
-    --s4-gray-400: #9ca3af;
-    --s4-gray-500: #6b7280;
-    --s4-gray-600: #4b5563;
-    --s4-gray-700: #374151;
-    --s4-gray-800: #1f2937;
-    --s4-gray-900: #111827;
-
-    /* Blue Palette (General/Info) */
-    --s4-blue-50: #f0f9ff;
-    --s4-blue-500: #3b82f6;
-    --s4-blue-600: #2563eb;
-    --s4-blue-700: #1d4ed8;
-
-    /* Orange/Amber Palette (Warning/Cost) */
-    --s4-amber-500: #f59e0b;
-    --s4-amber-700: #b45309;
-
-    /* Purple Palette (Special Mod) */
-    --s4-purple-600: #7c3aed;
-
-    /* Common */
-    --s4-bg-white: #ffffff;
-    --s4-border-radius: 12px;
-    --s4-border-radius-sm: 4px;
-    --s4-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
+/* 
+  Removed the massive ecosystem of --s4-* custom CSS variables 
+  so that Step 4 components can be unified with the global Wizard design language. 
+  Colors like slate-600, blue-600, emerald-600 will be used directly below or in related files.
+*/

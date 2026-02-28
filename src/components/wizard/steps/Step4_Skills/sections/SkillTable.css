@@ -1,11 +1,11 @@
 /* --- SkillTable --- */
 .wizard-skill-table-container {
-    background-color: var(--s4-bg-white);
-    border-radius: 12px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-    overflow: hidden;
-    border: 1px solid var(--s4-gray-200);
-    margin-bottom: 3rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e2e8f0;
+    /* slate-200 */
+    margin-bottom: 2rem;
     overflow-x: auto;
 }
 
@@ -17,23 +17,28 @@
 
 /* Header Styles */
 .wizard-head-special {
-    background: linear-gradient(to right, #14532d, #166534);
-    border-bottom: none;
+    background-color: #f1f5f9;
+    /* slate-100 */
+    border-bottom: 1px solid #cbd5e1;
+    /* slate-300 */
 }
 
 .wizard-head-general {
-    background: linear-gradient(to right, #1e3a8a, #1e40af);
-    border-bottom: none;
+    background-color: #f1f5f9;
+    /* slate-100 */
+    border-bottom: 1px solid #cbd5e1;
+    /* slate-300 */
 }
 
 /* TH Base */
 .wizard-skill-table th {
-    padding: 0.85rem 1rem;
-    font-size: 0.8rem;
+    padding: 0.75rem 1rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: rgba(255,255,255,0.85) !important;
-    font-weight: 600;
+    color: #475569;
+    /* slate-600 */
+    font-weight: 700;
 }
 
 .wizard-th-left {
@@ -44,16 +49,16 @@
     text-align: center;
 }
 
-/* TH Text Colors — overridden by header gradient above */
-.wizard-th-text-special { color: rgba(255,255,255,0.8); }
-.wizard-th-text-general { color: rgba(255,255,255,0.8); }
-.wizard-th-title-special { color: white; }
-.wizard-th-title-general { color: white; }
-
-.wizard-th-total {
-    font-weight: bold;
-    color: white !important;
+/* Removing over-colored text rules */
+.wizard-th-text-special,
+.wizard-th-title-special,
+.wizard-th-total-special,
+.wizard-th-text-general,
+.wizard-th-title-general,
+.wizard-th-total-general {
+    color: inherit;
 }
 
-.wizard-th-total-special { color: white; }
-.wizard-th-total-general { color: white; }
+.wizard-th-total {
+    font-weight: 800;
+}

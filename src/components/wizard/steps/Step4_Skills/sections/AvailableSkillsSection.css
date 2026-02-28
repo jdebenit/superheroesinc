@@ -1,9 +1,10 @@
 /* --- Section: Available Skills --- */
 .available-skills-title {
-    font-size: 1.5rem;
-    font-weight: bold;
+    font-size: 1.25rem;
+    font-weight: 800;
     margin-bottom: 1rem;
-    color: var(--s4-gray-700);
+    color: #1e293b;
+    /* slate-800 */
 }
 
 .skill-category-container {
@@ -11,32 +12,46 @@
 }
 
 .skill-category-title {
-    font-size: 1.25rem;
-    font-weight: bold;
+    font-size: 1.1rem;
+    font-weight: 700;
     margin-bottom: 0.75rem;
-    color: var(--s4-gray-700);
-    border-bottom: 2px solid var(--s4-gray-200);
+    color: #334155;
+    /* slate-700 */
+    border-bottom: 1px solid #e2e8f0;
+    /* slate-200 */
     padding-bottom: 0.5rem;
 }
 
 .available-skills-list {
-    background-color: var(--s4-bg-white);
-    border-radius: var(--s4-border-radius);
-    box-shadow: var(--s4-box-shadow);
+    background-color: white;
+    border-radius: 8px;
     padding: 1rem;
-    border: 1px solid var(--s4-gray-200);
+    border: 1px solid #e2e8f0;
+    /* slate-200 */
 }
 
 .available-skill-item {
     padding: 0.75rem;
-    border-bottom: 1px solid var(--s4-gray-200);
+    border-bottom: 1px solid #f1f5f9;
+    /* slate-100 */
     display: flex;
     align-items: center;
     gap: 1rem;
+    transition: background-color 0.2s ease;
+}
+
+.available-skill-item:hover {
+    background-color: #f8fafc;
+    /* slate-50 */
+}
+
+.available-skill-item:last-child {
+    border-bottom: none;
 }
 
 .available-skill-item.selected {
-    opacity: 0.5;
+    opacity: 0.6;
+    background-color: #f8fafc;
 }
 
 .available-skill-info {
@@ -44,26 +59,44 @@
 }
 
 .available-skill-description {
-    font-size: 0.875rem;
-    color: var(--s4-gray-500);
+    font-size: 0.85rem;
+    color: #64748b;
+    /* slate-500 */
     margin-left: 0.5rem;
 }
 
 .available-skill-formula {
-    font-size: 0.875rem;
-    color: var(--s4-gray-500);
+    font-size: 0.85rem;
+    color: #94a3b8;
+    /* slate-400 */
     font-family: monospace;
 }
 
 .selected-indicator {
-    color: var(--s4-green-500);
+    color: #10b981;
+    /* emerald-500 */
     font-weight: bold;
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    font-size: 0.9rem;
 }
 
+/* Button override to ensure it matches the light green "Añadir" pattern */
 .add-btn-style {
-    background-color: var(--s4-green-500);
-    /* Add text color white if implied? No, typically helper class. Let's assume it's used elsewhere or check usage. */
+    background-color: #10b981;
+    /* emerald-500 */
+    color: white;
+    padding: 0.35rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.add-btn-style:hover {
+    background-color: #059669;
+    /* emerald-600 */
 }

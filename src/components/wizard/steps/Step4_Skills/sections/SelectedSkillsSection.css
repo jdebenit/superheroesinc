@@ -1,64 +1,76 @@
 /* --- Section: Selected Skills --- */
 .pc-counter-box {
-    background-color: var(--s4-blue-50);
-    border: 2px solid var(--s4-blue-500);
+    background-color: #f8fafc;
+    /* slate-50 */
+    border: 1px solid #cbd5e1;
+    /* slate-300 */
     border-radius: 8px;
-    /* keeping 8px as it wasn't 12px in valid var */
-    padding: 1rem;
+    padding: 1.25rem;
     margin-bottom: 2rem;
-}
-
-.pc-counter-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
+/* Reusing basic structure from previous counters, but visually softer */
 .pc-counter-label {
-    font-size: 1.125rem;
-    font-weight: bold;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #334155;
+    /* slate-700 */
 }
 
 .pc-counter-details {
-    font-size: 1.125rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
 }
 
 .pc-bonus-text {
-    color: var(--s4-green-600);
-    font-size: 0.9em;
+    color: #10b981;
+    /* emerald-500 */
+    font-size: 0.9rem;
+    font-weight: 500;
 }
 
 .pc-total-text {
     font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--s4-blue-500);
+    font-weight: 800;
+    color: #0f172a;
+    /* slate-900 */
 }
 
 .selected-skills-container {
-    background-color: var(--s4-green-50);
-    border-radius: var(--s4-border-radius);
-    padding: 1.5rem;
+    background-color: transparent;
+    border-radius: 8px;
+    padding: 0;
     margin-bottom: 2rem;
-    border: 2px solid var(--s4-green-500);
-    overflow: hidden;
+    border: none;
 }
 
+/* The title can be hidden or made subtler since WizardSection covers it */
 .selected-skills-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-    color: var(--s4-green-600);
+    display: none;
 }
 
 .specified-skill-input-container {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 0.25rem;
 }
 
 .specified-skill-input {
-    padding: 0.25rem;
-    border: 1px solid var(--s4-gray-300);
-    border-radius: var(--s4-border-radius-sm);
-    font-size: 0.875rem;
+    padding: 0.35rem 0.5rem;
+    border: 1px solid #cbd5e1;
+    /* slate-300 */
+    border-radius: 4px;
+    font-size: 0.85rem;
+    background-color: white;
+}
+
+.specified-skill-input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    /* blue-500 */
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15);
 }

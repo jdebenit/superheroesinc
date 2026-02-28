@@ -1,20 +1,14 @@
 /* --- SkillRow --- */
 .wizard-skill-row {
-    border-bottom: 1px solid var(--s4-gray-100);
-    background-color: var(--s4-bg-white);
+    border-bottom: 1px solid #f1f5f9;
+    /* slate-100 */
+    background-color: white;
     transition: background-color 0.15s ease;
 }
 
 .wizard-skill-row:hover {
-    background-color: #f8faff;
-}
-
-.wizard-skill-row:nth-child(even) {
-    background-color: #fafbff;
-}
-
-.wizard-skill-row:nth-child(even):hover {
-    background-color: #f0f4ff;
+    background-color: #f8fafc;
+    /* slate-50 */
 }
 
 .wizard-td-cell {
@@ -25,12 +19,14 @@
 .wizard-td-name {
     padding: 0.65rem 1rem;
     font-weight: 600;
-    color: var(--s4-gray-800);
+    color: #1e293b;
+    /* slate-800 */
     font-size: 0.95rem;
 }
 
 .wizard-td-formula {
-    color: var(--s4-gray-400);
+    color: #64748b;
+    /* slate-500 */
     font-size: 0.8rem;
     font-family: monospace;
 }
@@ -43,55 +39,65 @@
 }
 
 .wizard-base-input {
-    width: 54px;
-    padding: 0.3rem;
+    width: 60px;
+    /* Slightly wider */
+    padding: 0.35rem;
     border-radius: 6px;
     text-align: center;
     font-weight: bold;
     font-size: 0.95rem;
-}
-
-.wizard-base-input-normal {
-    border: 1.5px solid var(--s4-gray-300);
+    border: 1px solid #cbd5e1;
+    /* slate-300 */
     background: white;
 }
 
-.wizard-base-input-normal:focus {
+.wizard-base-input:focus {
     outline: none;
     border-color: #3b82f6;
+    /* blue-500 */
     box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15);
 }
 
 .wizard-base-input-cost {
-    border: 2px solid var(--s4-amber-500);
-    background: #fffbeb;
+    /* Different styling for paid inputs */
+    border-color: #fca5a5;
+    /* red-300 */
+    background: #fef2f2;
+    /* red-50 */
+    color: #b91c1c;
+    /* red-700 */
 }
 
 .wizard-cost-text {
     font-size: 0.7rem;
-    color: var(--s4-amber-700);
+    color: #b91c1c;
+    /* red-700 */
     font-weight: bold;
 }
 
 .wizard-mod-text-special {
-    color: var(--s4-purple-600);
+    color: #6d28d9;
+    /* purple-700 */
     font-weight: bold;
 }
 
 .wizard-mod-text-general {
-    color: #3b82f6;
+    color: #2563eb;
+    /* blue-600 */
     font-weight: bold;
 }
 
 .wizard-mod-text-empty {
-    color: var(--s4-gray-300);
+    color: #cbd5e1;
+    /* slate-300 */
     font-weight: normal;
 }
 
 .wizard-manual-mod-input {
     width: 50px;
-    padding: 0.3rem;
-    border: 1.5px solid var(--s4-gray-300);
+    padding: 0.35rem;
+    border: 1px solid #cbd5e1;
+    /* slate-300 */
     border-radius: 6px;
     text-align: center;
     background: white;
@@ -113,10 +119,11 @@
     display: inline-block;
     padding: 0.2rem 0.6rem;
     border-radius: 999px;
-    background: linear-gradient(135deg, #16a34a, #15803d);
+    background-color: #334155;
+    /* slate-700 */
     color: white;
     font-size: 0.9rem;
-    box-shadow: 0 1px 4px rgba(22, 163, 74, 0.25);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .wizard-special-col-cost {
@@ -125,30 +132,40 @@
 }
 
 .wizard-cost-paid {
-    color: var(--s4-amber-700);
+    color: #dc2626;
+    /* red-600 */
 }
 
 .wizard-cost-free {
-    color: var(--s4-green-500);
+    color: #059669;
+    /* emerald-600 */
 }
 
 .wizard-cost-basis-detail {
     font-size: 0.7em;
-    color: var(--s4-gray-500);
+    color: #64748b;
+    /* slate-500 */
 }
 
 .wizard-required-text {
-    font-size: 0.7em;
-    color: var(--s4-amber-700);
+    font-size: 0.75rem;
+    color: #b45309;
+    /* amber-700 (warning color for required) */
     font-style: italic;
+    background-color: #fef3c7;
+    /* amber-50 */
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
 }
 
 .wizard-check-green {
     font-size: 1.25rem;
-    color: var(--s4-green-500);
+    color: #10b981;
+    /* emerald-500 */
 }
 
 .wizard-check-orange {
     font-size: 1.25rem;
-    color: var(--s4-amber-500);
+    color: #f59e0b;
+    /* amber-500 */
 }

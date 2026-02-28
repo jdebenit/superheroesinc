@@ -2,6 +2,7 @@ import React from 'react';
 import { SPECIAL_SKILLS } from '../../../../../data/specialSkills';
 import { SkillTable } from './SkillTable';
 import { SkillRow } from './SkillRow';
+import { CostBadge } from '../../../shared/CostBadge';
 import './SelectedSkillsSection.css';
 
 interface SelectedSkillsSectionProps {
@@ -46,7 +47,7 @@ export const SelectedSkillsSection: React.FC<SelectedSkillsSectionProps> = ({
                         ({specialSkillsPC.freeSkills} gratuitas {specialSkillsPC.intBonusSkills > 0 && <span className="pc-bonus-text">[+{specialSkillsPC.intBonusSkills} INT]</span>}, {specialSkillsPC.paidSkills} pagadas)
                     </span>
                     <span className="pc-total-text">
-                        Total: {specialSkillsPC.totalPC.toFixed(1).replace('.0', '')} PC
+                        Total: <CostBadge cost={specialSkillsPC.totalPC.toFixed(1).replace('.0', '')} label="PC" variant="default" />
                     </span>
                 </div>
             </div>
