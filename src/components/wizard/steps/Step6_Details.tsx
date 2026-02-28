@@ -181,12 +181,11 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
 
 
                 {/* Header Description */}
-                <h2 style={stepPageTitleStyle}>
-                    Detalles Finales
-                </h2>
-                <p style={stepPageSubtitleStyle}>
-                    Define la identidad de tu personaje y equipalo.
-                </p>
+                <WizardSection
+                    title="Detalles Finales"
+                    description="Define la identidad de tu personaje y equipalo."
+                />
+
 
                 {/* IDENTITY SECTION */}
                 <WizardSection title="Identidad">

@@ -1,6 +1,7 @@
 import React from 'react';
 import type { TechModule } from '../types';
-import { SectionContainer } from '../../../shared/SectionContainer';
+import { WizardSection } from '../../../shared/WizardSection';
+
 import { PixelButton } from '../../../shared/PixelButton';
 import TechModuleRow from './TechModuleRow';
 import { TableContainer } from '../../../shared/TableContainer';
@@ -23,11 +24,10 @@ export default function TechModulesSection({
 }: TechModulesSectionProps) {
 
     return (
-        <SectionContainer
+        <WizardSection
             title="Módulos Tecnológicos"
             description="Instala módulos para aumentar tus capacidades."
-            theme="slate"
-            headerAction={
+            rightContent={
                 <PixelButton
                     onClick={onOpenModal}
                     variant="secondary"
@@ -37,6 +37,7 @@ export default function TechModulesSection({
                 </PixelButton>
             }
         >
+
             {techModules.length > 0 ? (
                 <TableContainer
                     headers={['Módulo', 'Tipo', 'Localización', 'Coste', 'Acciones']}
@@ -60,6 +61,7 @@ export default function TechModulesSection({
                     message='No hay módulos instalados. Pulsa en "Seleccionar Módulos" para añadir mejoras.'
                 />
             )}
-        </SectionContainer >
+        </WizardSection>
+
     );
 }

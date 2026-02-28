@@ -3,7 +3,7 @@ import './WizardSection.css';
 
 interface WizardSectionProps {
     title: string;
-    children: React.ReactNode;
+    children?: React.ReactNode;
     description?: React.ReactNode;
     icon?: string;
     color?: string;
@@ -57,7 +57,7 @@ export const WizardSection: React.FC<WizardSectionProps> = ({
                     )}
                 </div>
             </div>
-            {!collapsed && (
+            {children && !collapsed && (
                 <div className="wizard-section-content">
                     {children}
                 </div>

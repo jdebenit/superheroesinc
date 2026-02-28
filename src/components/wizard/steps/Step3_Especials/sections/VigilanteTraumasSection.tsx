@@ -1,5 +1,6 @@
 import React from 'react';
-import { SectionContainer } from '../../../shared/SectionContainer';
+import { WizardSection } from '../../../shared/WizardSection';
+
 import { ComicTextArea } from '../../../shared/ComicTextArea';
 
 interface VigilanteTraumasSectionProps {
@@ -16,11 +17,11 @@ export default function VigilanteTraumasSection({
     if (vigilanteSpecialties.length === 0) return null;
 
     return (
-        <SectionContainer
+        <WizardSection
             title="Traumas/Motivaciones del Vigilante"
             description="Como Vigilante, cada especialidad proviene de un trauma o una motivación profunda. Describe el evento que te llevó a desarrollar estas habilidades."
-            theme="red"
         >
+
             <div className="space-y-6">
                 {vigilanteSpecialties.map((specialty: string) => (
                     <div key={specialty} className="bg-white p-6 rounded-xl border-2 border-red-200 shadow-sm hover:shadow-md transition-shadow">
@@ -33,6 +34,7 @@ export default function VigilanteTraumasSection({
                     </div>
                 ))}
             </div>
-        </SectionContainer>
+        </WizardSection>
+
     );
 }

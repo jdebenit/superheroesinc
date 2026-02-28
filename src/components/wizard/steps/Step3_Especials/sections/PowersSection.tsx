@@ -1,7 +1,8 @@
 import React from 'react';
 import PowerRow from './PowerRow';
 import type { SelectedPower } from '../types';
-import { SectionContainer } from '../../../shared/SectionContainer';
+import { WizardSection } from '../../../shared/WizardSection';
+
 import { PixelButton } from '../../../shared/PixelButton';
 import { TableContainer } from '../../../shared/TableContainer';
 import { EmptyState } from '../../../shared/EmptyState';
@@ -158,11 +159,11 @@ export default function PowersSection({
     );
 
     return (
-        <SectionContainer
+        <WizardSection
             title="Poderes Especiales"
-            theme="gray"
-            headerAction={renderHeaderActions()}
+            rightContent={renderHeaderActions()}
         >
+
             {selectedPowers.length > 0 ? (
                 <TableContainer
                     headers={['Poder', 'Base / Rango / PCs', 'Base Hab.', 'Origen', 'Acciones']}
@@ -209,6 +210,7 @@ export default function PowersSection({
             ) : (
                 <EmptyState message="No hay poderes seleccionados" />
             )}
-        </SectionContainer>
+        </WizardSection>
+
     );
 }

@@ -101,12 +101,11 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
 
 
             {/* Header Description */}
-            <h2 style={stepPageTitleStyle}>
-                Trasfondo y Personalidad
-            </h2>
-            <p style={stepPageSubtitleStyle}>
-                Define la historia, contexto, estatus social y resistencia psicológica de tu personaje.
-            </p>
+            <WizardSection
+                title="Trasfondo y Personalidad"
+                description="Define la historia, contexto, estatus social y resistencia psicológica de tu personaje."
+            />
+
 
             {/* PREJUDICE RESISTANCE */}
             <WizardSection

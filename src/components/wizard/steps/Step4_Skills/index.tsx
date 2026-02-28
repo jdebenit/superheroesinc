@@ -45,12 +45,11 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
     return (
         <div className="wizard-step-container">
 
-            <h2 style={stepPageTitleStyle}>
-                Habilidades
-            </h2>
-            <p style={stepPageSubtitleStyle}>
-                Define las habilidades de tu personaje.
-            </p>
+            <WizardSection
+                title="Habilidades"
+                description="Define las habilidades de tu personaje."
+            />
+
             {/* GENERAL SKILLS SECTION */}
             <GeneralSkillsSection
                 skillValues={skillValues}

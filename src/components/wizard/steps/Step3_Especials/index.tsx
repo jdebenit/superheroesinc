@@ -36,6 +36,7 @@ import TechnoSuitStrengthSection from './sections/TechnoSuitStrengthSection';
 import { CyborgSection } from './sections/CyborgSection';
 import ParahumanoSection from './sections/ParahumanoSection';
 import type { CyborgImplant } from '../../../../data/cyborgImplantConfigs';
+import { WizardSection } from '../../shared/WizardSection';
 import { stepPageTitleStyle } from '../../shared/stepStyles';
 import '../../shared/WizardStep.css';
 
@@ -709,54 +710,44 @@ export default function Step3_Especials({ data, onChange, onShowToast }: Step3Pr
     return (
         <div className="wizard-step-container">
 
-            <h2 style={{ ...stepPageTitleStyle, marginBottom: '0.5rem' }}>
-                Poderes y Habilidades Especiales
-            </h2>
+            <WizardSection
+                title="Poderes y Habilidades Especiales"
+                description="Gestiona los poderes y habilidades especiales derivadas de tus orígenes (Mutante, Arcano, Tecnológico, etc.)."
+            >
+                {!hasAnyOrigin && (
+                    <div style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        padding: '2rem 1rem',
+                        textAlign: 'center'
+                    }}>
+                        <div style={{ fontSize: '3rem', marginBottom: '1rem', opacity: 0.8 }}>⚡</div>
+                        <h4 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#1e293b', marginBottom: '0.75rem' }}>
+                            Sin Origen Seleccionado
+                        </h4>
+                        <p style={{ color: '#64748b', fontSize: '1rem', maxWidth: '500px', lineHeight: 1.6, marginBottom: '2rem' }}>
+                            Necesitas seleccionar al menos un origen en el primer paso para desbloquear estas opciones.
+                        </p>
+                        <button
+                            onClick={() => {
+                                const originTab = document.querySelector<HTMLButtonElement>('button[title="Origen"]');
+                                if (originTab) originTab.click();
+                            }}
+                            className="wizard-button primary"
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '0.5rem'
+                            }}
+                        >
+                            <span>← Volver al Paso 1</span>
+                        </button>
+                    </div>
+                )}
+            </WizardSection>
 
-            {!hasAnyOrigin && (
-                <div style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    padding: '4rem 2rem',
-                    backgroundColor: '#f8fafc',
-                    border: '2px dashed #cbd5e1',
-                    borderRadius: '16px',
-                    textAlign: 'center',
-                    marginTop: '2rem'
-                }}>
-                    <div style={{ fontSize: '4rem', marginBottom: '1rem', opacity: 0.8 }}>⚡</div>
-                    <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#1e293b', marginBottom: '0.75rem' }}>
-                        Sin Origen Seleccionado
-                    </h3>
-                    <p style={{ color: '#64748b', fontSize: '1.1rem', maxWidth: '500px', lineHeight: 1.6, marginBottom: '2rem' }}>
-                        Este paso gestiona los poderes y habilidades especiales derivadas de tus orígenes (Mutante, Arcano, Tecnológico, etc.). Necesitas seleccionar al menos uno en el primer paso para desbloquear estas opciones.
-                    </p>
-                    <button
-                        onClick={() => {
-                            const originTab = document.querySelector<HTMLButtonElement>('button[title="Origen"]');
-                            if (originTab) originTab.click();
-                        }}
-                        style={{
-                            padding: '0.75rem 1.5rem',
-                            backgroundColor: '#2563eb',
-                            color: 'white',
-                            fontWeight: 'bold',
-                            borderRadius: '8px',
-                            border: 'none',
-                            cursor: 'pointer',
-                            fontSize: '1rem',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '0.5rem',
-                            boxShadow: '0 4px 6px -1px rgba(37, 99, 235, 0.2)'
-                        }}
-                    >
-                        <span>← Volver al Paso 1</span>
-                    </button>
-                </div>
-            )}
 
             {/* Parahumano Section */}
             {isParahumano && (
