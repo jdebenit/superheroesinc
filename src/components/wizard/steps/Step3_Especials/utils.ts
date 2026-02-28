@@ -1,4 +1,5 @@
 import { POWERS, type PowerType } from '../../../../data/powers';
+import { ORIGIN_CATEGORIES } from '../../../../data/originDefinitions';
 import type { SelectedPower } from './types';
 
 /**
@@ -311,7 +312,16 @@ export const getMutantPowerTypes = (data: any): PowerType[] => {
 export const getVigilanteSpecialties = (data: any): string[] => {
     const vigItem = data.origin?.items?.find((item: any) => Object.keys(item)[0] === 'Vigilante');
     if (!vigItem) return [];
-    return vigItem['Vigilante'] || [];
+
+    const allValues: string[] = vigItem['Vigilante'] || [];
+
+    // Filter out base defaultEffects — only return actual chosen specialties
+    const vigilanteDef = ORIGIN_CATEGORIES['Vigilante'];
+    const defaultEffects = vigilanteDef?.defaultEffects || [];
+    const validSubtypes = vigilanteDef?.subtypes ? Object.keys(vigilanteDef.subtypes) : [];
+
+    // Keep only values that are actual specialty names (keys of subtypes), not defaultEffects
+    return allValues.filter(v => validSubtypes.includes(v) && !defaultEffects.includes(v));
 };
 
 /**
