@@ -25,12 +25,16 @@
 
 .wizard-field-textarea {
     width: 100%;
-    padding: 0.5rem;
+    padding: 0.75rem;
     border: 1px solid #d1d5db;
-    border-radius: 4px;
-    font-size: 1rem;
-    min-height: 100px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    min-height: 150px;
     resize: vertical;
+    font-family: inherit;
+    line-height: 1.6;
+    background-color: #fdfcfb;
+    color: #374151;
 }
 
 .wizard-field-textarea:focus {

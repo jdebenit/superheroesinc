@@ -214,7 +214,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                         placeholder="Ej: Prototype"
                     />
                 </div>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginBottom: '1.5rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
                     <WizardField
                         label="Profesión"
                         value={data.profession || ''}
@@ -228,12 +228,20 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                         placeholder="Ej: Heterosexual, Bisexual..."
                     />
                 </div>
+            </WizardSection>
+
+            {/* DESCRIPTION SECTION — standalone for visibility */}
+            <WizardSection title="Descripción y Notas">
+                <p style={{ fontSize: '0.85rem', color: '#6b7280', marginBottom: '0.75rem', marginTop: 0 }}>
+                    Describe la apariencia física, carácter, historia personal y cualquier nota relevante del personaje.
+                </p>
                 <WizardField
                     type="textarea"
-                    label="Descripción y Notas"
+                    label=""
                     value={data.notes || ''}
                     onChange={(val) => updateField('notes', val)}
                     placeholder="Describe la apariencia, personalidad, trasfondo breve..."
+                    style={{ marginBottom: 0 }}
                 />
             </WizardSection>
 
