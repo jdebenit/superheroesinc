@@ -15,9 +15,9 @@ import { mergeWithDefaults } from '../../utils/dataCleaner';
 import { useCharacterCalculations } from '../../hooks/wizard/useCharacterCalculations';
 import './CharacterWizard.css';
 
-import { WizardHelpModal } from './shared/WizardHelpModal';
+import { WizardHelpModal } from './shared/ui/WizardHelpModal';
 import { WIZARD_HELP } from '../../data/wizardHelp';
-import { WizardToast, WizardConfirm, type ToastType } from './shared/WizardDialogs';
+import { WizardToast, WizardConfirm, type ToastType } from './shared/layout/WizardDialogs';
 
 import { APP_VERSIONS } from '../../data/appVersions';
 import Logger from '../../utils/Logger';

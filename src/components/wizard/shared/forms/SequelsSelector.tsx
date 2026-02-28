@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import SelectionModal from '../steps/Step3_Especials/modals/SelectionModal';
-import { SEQUELS } from '../../../data/sequels';
-import { DeleteRowButton } from './DeleteRowButton';
+import SelectionModal from '../../steps/Step3_Especials/modals/SelectionModal';
+import { SEQUELS } from '../../../../data/sequels';
+import { DeleteRowButton } from '../ui/DeleteRowButton';
 import './SequelsSelector.css';
 
 interface SelectedSequel {

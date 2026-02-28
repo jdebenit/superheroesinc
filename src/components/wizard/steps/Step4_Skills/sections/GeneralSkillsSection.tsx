@@ -1,6 +1,6 @@
 import React from 'react';
 import { GENERAL_SKILLS } from '../../../../../data/generalSkills';
-import { WizardSection } from '../../../shared/WizardSection';
+import { WizardSection } from '../../../shared/layout/WizardSection';
 import { SkillTable } from './SkillTable';
 import { SkillRow } from './SkillRow';
 import './GeneralSkillsSection.css';
@@ -78,3 +78,4 @@ export const GeneralSkillsSection: React.FC<GeneralSkillsSectionProps> = ({
         </WizardSection>
     );
 };
+

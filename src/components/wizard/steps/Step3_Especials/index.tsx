@@ -23,8 +23,8 @@ import TechnoSuitStrengthSection from './sections/TechnoSuitStrengthSection';
 import { CyborgSection } from './sections/CyborgSection';
 import ParahumanoSection from './sections/ParahumanoSection';
 import MinotaurSection from './sections/MinotaurSection';
-import { WizardSection } from '../../shared/WizardSection';
-import '../../shared/WizardStep.css';
+import { WizardSection } from '../../shared/layout/WizardSection';
+import '../../shared/layout/WizardStep.css';
 
 // Modal Components
 import SelectionModal from './modals/SelectionModal';

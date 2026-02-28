@@ -1,12 +1,12 @@
 import React from 'react';
 import { EXOSKELETON_CONFIGS } from '../../../../../data/exoskeletonConfigs';
 import type { ExoskeletonConfig } from '../../../../../data/exoskeletonConfigs';
-import { WizardSection } from '../../../shared/WizardSection';
-import { CostBadge } from '../../../shared/CostBadge';
-import { SectionHeaderBadge } from '../../../shared/SectionHeaderBadge';
-import { InfoBox } from '../../../shared/InfoBox';
-import { RadioSelectTable } from '../../../shared/RadioSelectTable';
-import type { RadioSelectColumn } from '../../../shared/RadioSelectTable';
+import { WizardSection } from '../../../shared/layout/WizardSection';
+import { CostBadge } from '../../../shared/ui/CostBadge';
+import { SectionHeaderBadge } from '../../../shared/ui/SectionHeaderBadge';
+import { InfoBox } from '../../../shared/ui/InfoBox';
+import { RadioSelectTable } from '../../../shared/forms/RadioSelectTable';
+import type { RadioSelectColumn } from '../../../shared/forms/RadioSelectTable';
 
 interface ExoskeletonSectionProps {
     selectedConfig: string | null;
@@ -96,3 +96,5 @@ export default function ExoskeletonSection({
         </WizardSection>
     );
 }
+
+

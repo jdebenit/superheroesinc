@@ -1,11 +1,11 @@
 import React from 'react';
 import { TECHNOSUIT_STRENGTH_CONFIGS } from '../../../../../data/technoSuitStrengthConfigs';
 import type { TechnoSuitStrengthConfig } from '../../../../../data/technoSuitStrengthConfigs';
-import { WizardSection } from '../../../shared/WizardSection';
-import { SectionHeaderBadge } from '../../../shared/SectionHeaderBadge';
-import { InfoBox } from '../../../shared/InfoBox';
-import { RadioSelectTable } from '../../../shared/RadioSelectTable';
-import type { RadioSelectColumn } from '../../../shared/RadioSelectTable';
+import { WizardSection } from '../../../shared/layout/WizardSection';
+import { SectionHeaderBadge } from '../../../shared/ui/SectionHeaderBadge';
+import { InfoBox } from '../../../shared/ui/InfoBox';
+import { RadioSelectTable } from '../../../shared/forms/RadioSelectTable';
+import type { RadioSelectColumn } from '../../../shared/forms/RadioSelectTable';
 
 interface TechnoSuitStrengthSectionProps {
     selectedConfig: string | null;
@@ -75,3 +75,5 @@ export default function TechnoSuitStrengthSection({
         </WizardSection>
     );
 }
+
+

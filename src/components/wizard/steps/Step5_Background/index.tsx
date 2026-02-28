@@ -1,13 +1,13 @@
 import React from 'react';
 import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS, FRIENDS_AND_ASSOCIATES } from '../../../../data/backgroundTables';
-import { WizardSection } from '../../shared/WizardSection';
-import { SectionHeaderBadge } from '../../shared/SectionHeaderBadge';
-import { WizardField } from '../../shared/WizardField';
-import { WizardRange } from '../../shared/WizardRange';
-import { StatusSelectCard } from '../../shared/StatusSelectCard';
-import { DynamicList } from '../../shared/DynamicList';
+import { WizardSection } from '../../shared/layout/WizardSection';
+import { SectionHeaderBadge } from '../../shared/ui/SectionHeaderBadge';
+import { WizardField } from '../../shared/forms/WizardField';
+import { WizardRange } from '../../shared/forms/WizardRange';
+import { StatusSelectCard } from '../../shared/forms/StatusSelectCard';
+import { DynamicList } from '../../shared/layout/DynamicList';
 import { useStep5Logic } from './useStep5Logic';
-import '../../shared/WizardStep.css';
+import '../../shared/layout/WizardStep.css';
 import './Step5_Background.css';
 
 interface Step5Props {

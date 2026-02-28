@@ -1,5 +1,5 @@
-import { POWERS } from '../../data/powers';
-import { hasSubtype } from '../../components/wizard/steps/Step3_Especials/utils';
+import { POWERS } from '../../../../../data/powers';
+import { hasSubtype } from '../utils';
 
 export function useCharacterValidation(data: any) {
     const isTerrano = hasSubtype(data, 'Arcano', 'Terrano');

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { DeleteRowButton } from './DeleteRowButton';
+import { DeleteRowButton } from '../ui/DeleteRowButton';
 import { WizardConfirm } from './WizardDialogs';
 import './DynamicList.css';
 

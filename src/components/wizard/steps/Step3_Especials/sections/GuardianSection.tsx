@@ -5,10 +5,10 @@ import {
     GUARDIAN_FEATURES,
     GUARDIAN_TRANSFORMATIONS
 } from '../../../../../data/guardianOptions';
-import { WizardSection } from '../../../shared/WizardSection';
-import { FormSelect } from '../../../shared/FormSelect';
-import { CostBadge } from '../../../shared/CostBadge';
-import { SectionHeaderBadge } from '../../../shared/SectionHeaderBadge';
+import { WizardSection } from '../../../shared/layout/WizardSection';
+import { FormSelect } from '../../../shared/forms/FormSelect';
+import { CostBadge } from '../../../shared/ui/CostBadge';
+import { SectionHeaderBadge } from '../../../shared/ui/SectionHeaderBadge';
 
 export interface GuardianParams {
     quality: string | null;
@@ -99,4 +99,6 @@ export default function GuardianSection({ guardianParams, onChange }: GuardianSe
         </WizardSection>
     );
 }
+
+
 

@@ -3,7 +3,7 @@ import { POWERS } from '../../../../../data/powers';
 import { SPELLS, type Spell } from '../../../../../data/spells';
 import { TECH_MODULES } from '../../../../../data/techModules';
 import { useCharacterAutoEffects } from '../../../../../hooks/wizard/useCharacterAutoEffects';
-import { useCharacterValidation } from '../../../../../hooks/wizard/useCharacterValidation';
+import { useCharacterValidation } from './useCharacterValidation';
 import {
     hasOrigin,
     hasSubtype,

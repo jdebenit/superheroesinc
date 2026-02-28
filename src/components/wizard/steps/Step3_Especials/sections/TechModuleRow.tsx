@@ -1,8 +1,8 @@
 import React from 'react';
 import type { TechModule } from '../types';
 import { TECH_MODULES } from '../../../../../data/techModules';
-import { CostBadge } from '../../../shared/CostBadge';
-import { DeleteRowButton } from '../../../shared/DeleteRowButton';
+import { CostBadge } from '../../../shared/ui/CostBadge';
+import { DeleteRowButton } from '../../../shared/ui/DeleteRowButton';
 
 interface TechModuleRowProps {
     module: TechModule;
@@ -75,3 +75,4 @@ export default function TechModuleRow({
         </tr>
     );
 }
+

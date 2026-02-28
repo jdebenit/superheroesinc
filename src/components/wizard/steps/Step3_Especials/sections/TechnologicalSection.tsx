@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react';
 import { INCOME_SOURCES } from '../../../../../data/technologicalOptions';
-import { WizardSection } from '../../../shared/WizardSection';
-import { FormSelect } from '../../../shared/FormSelect';
-import { InfoBox } from '../../../shared/InfoBox';
-import { CostBadge } from '../../../shared/CostBadge';
-import { SectionHeaderBadge } from '../../../shared/SectionHeaderBadge';
+import { WizardSection } from '../../../shared/layout/WizardSection';
+import { FormSelect } from '../../../shared/forms/FormSelect';
+import { InfoBox } from '../../../shared/ui/InfoBox';
+import { CostBadge } from '../../../shared/ui/CostBadge';
+import { SectionHeaderBadge } from '../../../shared/ui/SectionHeaderBadge';
 
 interface TechnologicalSectionProps {
     techParams: { incomeSource: string } | null;
@@ -58,4 +58,6 @@ export default function TechnologicalSection({ techParams, onChange }: Technolog
         </WizardSection>
     );
 }
+
+
 

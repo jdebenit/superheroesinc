@@ -2,14 +2,14 @@ import React from 'react';
 import { SPELLS, type Spell } from '../../../../../data/spells';
 import { calculateEM, hasSubtype } from '../utils';
 import type { SelectedPower, SelectedSpell } from '../types';
-import { WizardSection } from '../../../shared/WizardSection';
-import { DeleteRowButton } from '../../../shared/DeleteRowButton';
-import { CostBadge } from '../../../shared/CostBadge';
-import { FormSelect } from '../../../shared/FormSelect';
-import { TableContainer } from '../../../shared/TableContainer';
-import { EmptyState } from '../../../shared/EmptyState';
-import { InfoBox } from '../../../shared/InfoBox';
-import { PixelButton } from '../../../shared/PixelButton';
+import { WizardSection } from '../../../shared/layout/WizardSection';
+import { DeleteRowButton } from '../../../shared/ui/DeleteRowButton';
+import { CostBadge } from '../../../shared/ui/CostBadge';
+import { FormSelect } from '../../../shared/forms/FormSelect';
+import { TableContainer } from '../../../shared/layout/TableContainer';
+import { EmptyState } from '../../../shared/ui/EmptyState';
+import { InfoBox } from '../../../shared/ui/InfoBox';
+import { PixelButton } from '../../../shared/ui/PixelButton';
 import { useMagicSectionLogic } from '../hooks/useMagicSectionLogic';
 
 interface MagicSectionProps {
@@ -242,3 +242,5 @@ export default function MagicSection({
         </WizardSection>
     );
 }
+
+

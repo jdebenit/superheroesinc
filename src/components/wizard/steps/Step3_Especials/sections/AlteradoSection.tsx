@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react';
-import SequelsSelector from '../../../shared/SequelsSelector';
+import SequelsSelector from '../../../shared/forms/SequelsSelector';
 import { SEQUELS } from '../../../../../data/sequels';
-import { WizardSection } from '../../../shared/WizardSection';
-import { CostBadge } from '../../../shared/CostBadge';
-import { SectionHeaderBadge } from '../../../shared/SectionHeaderBadge';
-import { FormSelect } from '../../../shared/FormSelect';
+import { WizardSection } from '../../../shared/layout/WizardSection';
+import { CostBadge } from '../../../shared/ui/CostBadge';
+import { SectionHeaderBadge } from '../../../shared/ui/SectionHeaderBadge';
+import { FormSelect } from '../../../shared/forms/FormSelect';
 
 // --- Data Constants ---
 
@@ -113,4 +113,6 @@ export default function AlteradoSection({ alteradoParams, onChange }: AlteradoSe
         </WizardSection>
     );
 }
+
+
 

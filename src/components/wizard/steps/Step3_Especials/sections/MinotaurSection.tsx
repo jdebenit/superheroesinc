@@ -1,7 +1,7 @@
 import React from 'react';
 import { ORIGIN_CATEGORIES } from '../../../../../data/originDefinitions';
-import { WizardSection } from '../../../shared/WizardSection';
-import { InfoBox } from '../../../shared/InfoBox';
+import { WizardSection } from '../../../shared/layout/WizardSection';
+import { InfoBox } from '../../../shared/ui/InfoBox';
 
 export default function MinotaurSection() {
     const arcano = ORIGIN_CATEGORIES['Arcano'];
@@ -42,4 +42,6 @@ export default function MinotaurSection() {
         </WizardSection>
     );
 }
+
+
 

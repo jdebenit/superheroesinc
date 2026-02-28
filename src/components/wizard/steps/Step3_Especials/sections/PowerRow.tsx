@@ -2,11 +2,11 @@ import React from 'react';
 import { POWERS } from '../../../../../data/powers';
 import { calculateSkillBase, getCharacteristicValue, getRankLevel, getPowerPenalty, getPowerCostConfig, calculatePowerBaseCost, getBaseCostAdjustment, type PowerContext } from '../utils';
 import type { SelectedPower } from '../types';
-import { Badge } from '../../../shared/Badge';
-import { NumberControl } from '../../../shared/NumberControl';
-import { CostBadge } from '../../../shared/CostBadge';
-import { WizardField } from '../../../shared/WizardField';
-import { DeleteRowButton } from '../../../shared/DeleteRowButton';
+import { Badge } from '../../../shared/ui/Badge';
+import { NumberControl } from '../../../shared/forms/NumberControl';
+import { CostBadge } from '../../../shared/ui/CostBadge';
+import { WizardField } from '../../../shared/forms/WizardField';
+import { DeleteRowButton } from '../../../shared/ui/DeleteRowButton';
 
 interface PowerRowProps {
     selection: SelectedPower;
@@ -411,3 +411,4 @@ export default function PowerRow({
         </tr>
     );
 }
+

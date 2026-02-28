@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ORIGIN_CATEGORIES } from '../../../../data/originDefinitions';
-import { WizardSection } from '../../shared/WizardSection';
-import { stepPageTitleStyle, stepPageSubtitleStyle } from '../../shared/stepStyles';
+import { WizardSection } from '../../shared/layout/WizardSection';
+import { stepPageTitleStyle, stepPageSubtitleStyle } from '../../shared/layout/stepStyles';
 
 interface Step1Props {
     data: any;
@@ -22,7 +22,7 @@ const ORIGINS = [
 ];
 
 import './Step1_OriginSelection.css';
-import '../../shared/WizardStep.css';
+import '../../shared/layout/WizardStep.css';
 
 
 export default function Step1_OriginSelection({ data, onChange }: Step1Props) {

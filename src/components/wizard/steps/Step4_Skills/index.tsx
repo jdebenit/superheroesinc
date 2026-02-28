@@ -1,11 +1,11 @@
 import React from 'react';
-import { WizardSection } from '../../shared/WizardSection';
+import { WizardSection } from '../../shared/layout/WizardSection';
 import { GeneralSkillsSection } from './sections/GeneralSkillsSection';
 import { SelectedSkillsSection } from './sections/SelectedSkillsSection';
 import { AvailableSkillsSection } from './sections/AvailableSkillsSection';
-import { stepPageTitleStyle, stepPageSubtitleStyle } from '../../shared/stepStyles';
+import { stepPageTitleStyle, stepPageSubtitleStyle } from '../../shared/layout/stepStyles';
 import { useStep4Logic } from './useStep4Logic';
-import '../../shared/WizardStep.css';
+import '../../shared/layout/WizardStep.css';
 import './Step4_Skills.css';
 
 

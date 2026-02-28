@@ -1,5 +1,5 @@
 import React from 'react';
-import { DeleteRowButton } from '../../../shared/DeleteRowButton';
+import { DeleteRowButton } from '../../../shared/ui/DeleteRowButton';
 import './SkillRow.css';
 
 interface SkillRowProps {
@@ -140,3 +140,4 @@ export const SkillRow: React.FC<SkillRowProps> = ({
         </tr>
     );
 };
+

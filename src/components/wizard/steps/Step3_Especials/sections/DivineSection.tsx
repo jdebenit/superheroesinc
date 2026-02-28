@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react';
 import { DIVINE_FOCUS_OPTIONS } from '../../../../../data/divineOptions';
-import { WizardSection } from '../../../shared/WizardSection';
-import { FormSelect } from '../../../shared/FormSelect';
-import { CostBadge } from '../../../shared/CostBadge';
-import { SectionHeaderBadge } from '../../../shared/SectionHeaderBadge';
-import { InfoBox } from '../../../shared/InfoBox';
+import { WizardSection } from '../../../shared/layout/WizardSection';
+import { FormSelect } from '../../../shared/forms/FormSelect';
+import { CostBadge } from '../../../shared/ui/CostBadge';
+import { SectionHeaderBadge } from '../../../shared/ui/SectionHeaderBadge';
+import { InfoBox } from '../../../shared/ui/InfoBox';
 
 export interface DivineParams {
     focus: string | null;
@@ -62,5 +62,7 @@ export default function DivineSection({ divineParams, onChange }: DivineSectionP
         </WizardSection>
     );
 }
+
+
 
 

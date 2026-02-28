@@ -1,11 +1,11 @@
 import React from 'react';
 import { MAGICAL_BONDS } from '../../../../../data/magicalBonds';
-import { DeleteRowButton } from '../../../shared/DeleteRowButton';
-import { WizardSection } from '../../../shared/WizardSection';
-import { WizardField } from '../../../shared/WizardField';
-import { EmptyState } from '../../../shared/EmptyState';
-import { PixelButton } from '../../../shared/PixelButton';
-import { TableContainer } from '../../../shared/TableContainer';
+import { DeleteRowButton } from '../../../shared/ui/DeleteRowButton';
+import { WizardSection } from '../../../shared/layout/WizardSection';
+import { WizardField } from '../../../shared/forms/WizardField';
+import { EmptyState } from '../../../shared/ui/EmptyState';
+import { PixelButton } from '../../../shared/ui/PixelButton';
+import { TableContainer } from '../../../shared/layout/TableContainer';
 
 interface MagicalBondsSectionProps {
     data: any;
@@ -84,3 +84,4 @@ export default function MagicalBondsSection({
         </WizardSection>
     );
 }
+

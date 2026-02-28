@@ -1,11 +1,11 @@
 import React from 'react';
 import PowerRow from './PowerRow';
 import type { SelectedPower } from '../types';
-import { WizardSection } from '../../../shared/WizardSection';
+import { WizardSection } from '../../../shared/layout/WizardSection';
 
-import { PixelButton } from '../../../shared/PixelButton';
-import { TableContainer } from '../../../shared/TableContainer';
-import { EmptyState } from '../../../shared/EmptyState';
+import { PixelButton } from '../../../shared/ui/PixelButton';
+import { TableContainer } from '../../../shared/layout/TableContainer';
+import { EmptyState } from '../../../shared/ui/EmptyState';
 
 interface PowersSectionProps {
     data: any;
@@ -219,3 +219,4 @@ export default function PowersSection({
 
     );
 }
+

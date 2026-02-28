@@ -1,5 +1,5 @@
 import React from 'react';
-import { SectionHeaderBadge } from './SectionHeaderBadge';
+import { SectionHeaderBadge } from '../ui/SectionHeaderBadge';
 import { FormSelect } from './FormSelect';
 import './StatusSelectCard.css';
 

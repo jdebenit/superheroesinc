@@ -1,11 +1,11 @@
 import React, { useMemo } from 'react';
-import SequelsSelector from '../../../shared/SequelsSelector';
+import SequelsSelector from '../../../shared/forms/SequelsSelector';
 import { SEQUELS } from '../../../../../data/sequels';
 import { getMutantType } from '../utils';
-import { WizardSection } from '../../../shared/WizardSection';
-import { CostBadge } from '../../../shared/CostBadge';
-import { SectionHeaderBadge } from '../../../shared/SectionHeaderBadge';
-import { InfoBox } from '../../../shared/InfoBox';
+import { WizardSection } from '../../../shared/layout/WizardSection';
+import { CostBadge } from '../../../shared/ui/CostBadge';
+import { SectionHeaderBadge } from '../../../shared/ui/SectionHeaderBadge';
+import { InfoBox } from '../../../shared/ui/InfoBox';
 
 interface SelectedSequel {
     id: string;
@@ -76,4 +76,6 @@ export default function MutanteSection({ mutanteParams, onChange, data }: Mutant
         </WizardSection>
     );
 }
+
+
 

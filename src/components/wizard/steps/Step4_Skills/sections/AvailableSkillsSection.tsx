@@ -1,6 +1,6 @@
 import React from 'react';
 import { SKILL_CATEGORIES } from '../../../../../data/specialSkills';
-import { WizardButton } from '../../../shared/WizardButton';
+import { WizardButton } from '../../../shared/ui/WizardButton';
 import './AvailableSkillsSection.css';
 
 interface AvailableSkillsSectionProps {
@@ -120,3 +120,4 @@ export const AvailableSkillsSection: React.FC<AvailableSkillsSectionProps> = ({
         </div>
     );
 };
+

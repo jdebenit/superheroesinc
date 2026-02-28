@@ -1,7 +1,7 @@
 import React from 'react';
-import { WizardSection } from '../../../shared/WizardSection';
-import { CostBadge } from '../../../shared/CostBadge';
-import { SectionHeaderBadge } from '../../../shared/SectionHeaderBadge';
+import { WizardSection } from '../../../shared/layout/WizardSection';
+import { CostBadge } from '../../../shared/ui/CostBadge';
+import { SectionHeaderBadge } from '../../../shared/ui/SectionHeaderBadge';
 
 export interface ParahumanoParams {
     isHybridWithHuman: boolean;
@@ -50,3 +50,5 @@ export default function ParahumanoSection({ parahumanoParams, onChange }: Parahu
         </WizardSection >
     );
 }
+
+

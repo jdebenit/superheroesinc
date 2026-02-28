@@ -1,7 +1,7 @@
 import React from 'react';
-import { WizardSection } from '../../../shared/WizardSection';
+import { WizardSection } from '../../../shared/layout/WizardSection';
 
-import { ComicTextArea } from '../../../shared/ComicTextArea';
+import { ComicTextArea } from '../../../shared/forms/ComicTextArea';
 
 interface VigilanteTraumasSectionProps {
     vigilanteSpecialties: string[];
@@ -39,3 +39,5 @@ export default function VigilanteTraumasSection({
 
     );
 }
+
+

@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
-import { WizardSection } from '../../../shared/WizardSection';
-import { FormSelect } from '../../../shared/FormSelect';
-import { CostBadge } from '../../../shared/CostBadge';
-import { SectionHeaderBadge } from '../../../shared/SectionHeaderBadge';
+import { WizardSection } from '../../../shared/layout/WizardSection';
+import { FormSelect } from '../../../shared/forms/FormSelect';
+import { CostBadge } from '../../../shared/ui/CostBadge';
+import { SectionHeaderBadge } from '../../../shared/ui/SectionHeaderBadge';
 
 interface PoseidoParams {
     formType: string | null;
@@ -60,5 +60,7 @@ export default function PoseidoSection({ poseidoParams, onChange }: PoseidoSecti
         </WizardSection>
     );
 }
+
+
 
 

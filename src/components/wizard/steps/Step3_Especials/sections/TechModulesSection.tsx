@@ -1,11 +1,11 @@
 import React from 'react';
 import type { TechModule } from '../types';
-import { WizardSection } from '../../../shared/WizardSection';
+import { WizardSection } from '../../../shared/layout/WizardSection';
 
-import { PixelButton } from '../../../shared/PixelButton';
+import { PixelButton } from '../../../shared/ui/PixelButton';
 import TechModuleRow from './TechModuleRow';
-import { TableContainer } from '../../../shared/TableContainer';
-import { EmptyState } from '../../../shared/EmptyState';
+import { TableContainer } from '../../../shared/layout/TableContainer';
+import { EmptyState } from '../../../shared/ui/EmptyState';
 
 interface TechModulesSectionProps {
     techModules: TechModule[];
@@ -66,3 +66,4 @@ export default function TechModulesSection({
 
     );
 }
+

@@ -2,7 +2,7 @@ import React from 'react';
 import { SPECIAL_SKILLS } from '../../../../../data/specialSkills';
 import { SkillTable } from './SkillTable';
 import { SkillRow } from './SkillRow';
-import { CostBadge } from '../../../shared/CostBadge';
+import { CostBadge } from '../../../shared/ui/CostBadge';
 import './SelectedSkillsSection.css';
 
 interface SelectedSkillsSectionProps {
@@ -143,3 +143,4 @@ export const SelectedSkillsSection: React.FC<SelectedSkillsSectionProps> = ({
         </>
     );
 };
+

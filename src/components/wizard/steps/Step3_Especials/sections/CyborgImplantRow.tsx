@@ -4,8 +4,8 @@ import {
     CYBORG_IMPLANT_STRENGTHS,
     type CyborgImplant
 } from '../../../../../data/cyborgImplantConfigs';
-import { CostBadge } from '../../../shared/CostBadge';
-import { DeleteRowButton } from '../../../shared/DeleteRowButton';
+import { CostBadge } from '../../../shared/ui/CostBadge';
+import { DeleteRowButton } from '../../../shared/ui/DeleteRowButton';
 
 interface CyborgImplantRowProps {
     implant: CyborgImplant;
@@ -49,3 +49,4 @@ export default function CyborgImplantRow({ implant, index, onRemove }: CyborgImp
         </tr>
     );
 }
+

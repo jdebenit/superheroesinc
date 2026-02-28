@@ -4,15 +4,15 @@ import {
     CYBORG_IMPLANT_STRENGTHS,
     type CyborgImplant
 } from '../../../../../data/cyborgImplantConfigs';
-import { WizardSection } from '../../../shared/WizardSection';
-import { CostBadge } from '../../../shared/CostBadge';
-import { SectionHeaderBadge } from '../../../shared/SectionHeaderBadge';
-import { WizardField } from '../../../shared/WizardField';
-import { FormSelect } from '../../../shared/FormSelect';
+import { WizardSection } from '../../../shared/layout/WizardSection';
+import { CostBadge } from '../../../shared/ui/CostBadge';
+import { SectionHeaderBadge } from '../../../shared/ui/SectionHeaderBadge';
+import { WizardField } from '../../../shared/forms/WizardField';
+import { FormSelect } from '../../../shared/forms/FormSelect';
 import CyborgImplantRow from './CyborgImplantRow';
-import { TableContainer } from '../../../shared/TableContainer';
-import { EmptyState } from '../../../shared/EmptyState';
-import { PixelButton } from '../../../shared/PixelButton';
+import { TableContainer } from '../../../shared/layout/TableContainer';
+import { EmptyState } from '../../../shared/ui/EmptyState';
+import { PixelButton } from '../../../shared/ui/PixelButton';
 import { useCyborgSectionLogic } from '../hooks/useCyborgSectionLogic';
 
 interface CyborgSectionProps {
@@ -150,3 +150,5 @@ export const CyborgSection: React.FC<CyborgSectionProps> = ({ implants = [], onC
         </WizardSection>
     );
 };
+
+
