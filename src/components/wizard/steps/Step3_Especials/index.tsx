@@ -457,7 +457,8 @@ export default function Step3_Especials({ data, onChange, onShowToast }: Step3Pr
     const isCyborg = hasSubtype(data, 'Tecnológico', 'Cyborg');
     const isTecnovehiculo = hasSubtype(data, 'Tecnológico', 'Tecnovehículo');
     const isExoskeleton = hasSubtype(data, 'Tecnológico', 'Exoesqueleto Energético');
-    const isTechnological = isTecnoarmadura || isCyborg || isTecnovehiculo;
+    const isInventor = hasSubtype(data, 'Tecnológico', 'Inventor o forjador');
+    const isTechnological = isTecnoarmadura || isCyborg || isTecnovehiculo || isInventor;
 
     // Get Vigilante specialties
     const vigilanteSpecialties = getVigilanteSpecialties(data);
@@ -861,7 +862,7 @@ export default function Step3_Especials({ data, onChange, onShowToast }: Step3Pr
             )}
 
             {/* TECHNOLOGICAL MODULES SECTION */}
-            {isTechnological && (
+            {(isTecnoarmadura || isCyborg || isTecnovehiculo) && (
                 <TechModulesSection
                     techModules={techModules}
                     onOpenModal={openTechModuleModal}
