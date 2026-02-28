@@ -1,8 +1,8 @@
 /* --- SkillTable --- */
 .wizard-skill-table-container {
     background-color: var(--s4-bg-white);
-    border-radius: var(--s4-border-radius);
-    box-shadow: var(--s4-box-shadow);
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
     overflow: hidden;
     border: 1px solid var(--s4-gray-200);
     margin-bottom: 3rem;
@@ -17,18 +17,23 @@
 
 /* Header Styles */
 .wizard-head-special {
-    background-color: var(--s4-green-50);
-    border-bottom: 2px solid var(--s4-green-500);
+    background: linear-gradient(to right, #14532d, #166534);
+    border-bottom: none;
 }
 
 .wizard-head-general {
-    background-color: var(--s4-gray-50);
-    border-bottom: 2px solid var(--s4-gray-200);
+    background: linear-gradient(to right, #1e3a8a, #1e40af);
+    border-bottom: none;
 }
 
 /* TH Base */
 .wizard-skill-table th {
-    padding: 1rem;
+    padding: 0.85rem 1rem;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgba(255,255,255,0.85) !important;
+    font-weight: 600;
 }
 
 .wizard-th-left {
@@ -39,31 +44,16 @@
     text-align: center;
 }
 
-/* TH Text Colors */
-.wizard-th-text-special {
-    color: var(--s4-green-900);
-}
-
-.wizard-th-text-general {
-    color: var(--s4-gray-500);
-}
-
-.wizard-th-title-special {
-    color: var(--s4-green-800);
-}
-
-.wizard-th-title-general {
-    color: var(--s4-gray-700);
-}
+/* TH Text Colors — overridden by header gradient above */
+.wizard-th-text-special { color: rgba(255,255,255,0.8); }
+.wizard-th-text-general { color: rgba(255,255,255,0.8); }
+.wizard-th-title-special { color: white; }
+.wizard-th-title-general { color: white; }
 
 .wizard-th-total {
     font-weight: bold;
+    color: white !important;
 }
 
-.wizard-th-total-special {
-    color: var(--s4-green-900);
-}
-
-.wizard-th-total-general {
-    color: var(--s4-gray-900);
-}
+.wizard-th-total-special { color: white; }
+.wizard-th-total-general { color: white; }

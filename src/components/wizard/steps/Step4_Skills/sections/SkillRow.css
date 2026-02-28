@@ -1,23 +1,37 @@
 /* --- SkillRow --- */
 .wizard-skill-row {
-    border-bottom: 1px solid var(--s4-gray-200);
+    border-bottom: 1px solid var(--s4-gray-100);
     background-color: var(--s4-bg-white);
+    transition: background-color 0.15s ease;
+}
+
+.wizard-skill-row:hover {
+    background-color: #f8faff;
+}
+
+.wizard-skill-row:nth-child(even) {
+    background-color: #fafbff;
+}
+
+.wizard-skill-row:nth-child(even):hover {
+    background-color: #f0f4ff;
 }
 
 .wizard-td-cell {
-    padding: 0.75rem;
+    padding: 0.65rem 0.75rem;
     text-align: center;
 }
 
 .wizard-td-name {
-    padding: 0.75rem;
-    font-weight: bold;
+    padding: 0.65rem 1rem;
+    font-weight: 600;
     color: var(--s4-gray-800);
+    font-size: 0.95rem;
 }
 
 .wizard-td-formula {
-    color: var(--s4-gray-500);
-    font-size: 0.875rem;
+    color: var(--s4-gray-400);
+    font-size: 0.8rem;
     font-family: monospace;
 }
 
@@ -29,24 +43,34 @@
 }
 
 .wizard-base-input {
-    width: 50px;
-    padding: 0.25rem;
-    border-radius: var(--s4-border-radius-sm);
+    width: 54px;
+    padding: 0.3rem;
+    border-radius: 6px;
     text-align: center;
     font-weight: bold;
+    font-size: 0.95rem;
 }
 
 .wizard-base-input-normal {
-    border: 1px solid var(--s4-gray-300);
+    border: 1.5px solid var(--s4-gray-300);
+    background: white;
+}
+
+.wizard-base-input-normal:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15);
 }
 
 .wizard-base-input-cost {
     border: 2px solid var(--s4-amber-500);
+    background: #fffbeb;
 }
 
 .wizard-cost-text {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: var(--s4-amber-700);
+    font-weight: bold;
 }
 
 .wizard-mod-text-special {
@@ -55,27 +79,44 @@
 }
 
 .wizard-mod-text-general {
-    color: var(--s4-blue-600);
+    color: #3b82f6;
     font-weight: bold;
 }
 
 .wizard-mod-text-empty {
-    color: var(--s4-gray-400);
+    color: var(--s4-gray-300);
     font-weight: normal;
 }
 
 .wizard-manual-mod-input {
     width: 50px;
-    padding: 0.25rem;
-    border: 1px solid var(--s4-gray-300);
-    border-radius: var(--s4-border-radius-sm);
+    padding: 0.3rem;
+    border: 1.5px solid var(--s4-gray-300);
+    border-radius: 6px;
     text-align: center;
+    background: white;
 }
 
+.wizard-manual-mod-input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15);
+}
+
+/* TOTAL chip */
 .wizard-total-cell {
     font-weight: bold;
-    font-size: 1.125rem;
-    color: var(--s4-green-600);
+    font-size: 1rem;
+}
+
+.wizard-total-cell span {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #16a34a, #15803d);
+    color: white;
+    font-size: 0.9rem;
+    box-shadow: 0 1px 4px rgba(22, 163, 74, 0.25);
 }
 
 .wizard-special-col-cost {

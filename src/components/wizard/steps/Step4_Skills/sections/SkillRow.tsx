@@ -107,7 +107,7 @@ export const SkillRow: React.FC<SkillRowProps> = ({
 
             {/* TOTAL */}
             <td className="wizard-td-cell wizard-total-cell">
-                {total}%
+                <span>{total}%</span>
             </td>
 
             {/* Special Columns */}
