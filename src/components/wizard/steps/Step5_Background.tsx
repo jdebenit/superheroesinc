@@ -161,6 +161,17 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
             {/* BACKGROUND ITEMS */}
             <div style={sectionCardStyle}>
                 <h3 style={{ ...sectionTitleStyle, color: '#4338ca', borderBottomColor: '#c7d2fe' }}>📝 Notas de Trasfondo</h3>
+
+                <div className="step5-help-notice">
+                    <p className="step5-help-title">💡 Ejemplos de trasfondo:</p>
+                    <ul className="step5-help-list">
+                        <li><strong>Identidad secreta:</strong> No la mantiene / Opuesta a la real</li>
+                        <li><strong>Carácter:</strong> Depresivo / Frío / Afable</li>
+                        <li><strong>Infancia:</strong> Feliz / Criado en la calle / Privilegiada</li>
+                        <li><strong>Familia:</strong> Sus padres viven / Huérfano / Familia numerosa</li>
+                    </ul>
+                </div>
+
                 <div className="step5-items-list">
                     {data.background.items.map((item, index) => (
                         <div key={index} className="step5-item-row">
@@ -187,16 +198,6 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
                         + Añadir Elemento de Trasfondo
                     </button>
                 </div>
-            </div>
-
-            <div className="step5-help-notice">
-                <p className="step5-help-title">💡 Ejemplos de trasfondo:</p>
-                <ul className="step5-help-list">
-                    <li>Personalida secreta: no mantiene / Opuesta a la real</li>
-                    <li>Depresivo / Frio</li>
-                    <li>Infancia feliz / Criado en la calle</li>
-                    <li>Sus padres viven / Huérfano</li>
-                </ul>
             </div>
         </div>
     );
