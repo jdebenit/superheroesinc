@@ -5,8 +5,9 @@ import {
     GUARDIAN_FEATURES,
     GUARDIAN_TRANSFORMATIONS
 } from '../../../../../data/guardianOptions';
-import { OriginOptionsContainer } from '../../../shared/OriginOptionsContainer';
+import { WizardSection } from '../../../shared/WizardSection';
 import { FormSelect } from '../../../shared/FormSelect';
+import { CostBadge } from '../../../shared/CostBadge';
 
 export interface GuardianParams {
     quality: string | null;
@@ -37,10 +38,15 @@ export default function GuardianSection({ guardianParams, onChange }: GuardianSe
         [quality]);
 
     return (
-        <OriginOptionsContainer
+        <WizardSection
             title="Opciones de Origen: Guardián"
-            cost={selectedQuality?.cost || 0}
-            themeColor="blue"
+            rightContent={
+                <CostBadge
+                    cost={(selectedQuality?.cost || 0) > 0 ? `+${selectedQuality?.cost}` : (selectedQuality?.cost || 0)}
+                    label="PC"
+                    variant={!(selectedQuality?.cost) ? "free" : (selectedQuality.cost > 0 ? "penalty" : "bonus")}
+                />
+            }
         >
             <div style={{ display: 'grid', gap: '1.5rem' }}>
                 <FormSelect
@@ -88,7 +94,7 @@ export default function GuardianSection({ guardianParams, onChange }: GuardianSe
                     showCostInOption={false}
                 />
             </div>
-        </OriginOptionsContainer>
+        </WizardSection>
     );
 }
 

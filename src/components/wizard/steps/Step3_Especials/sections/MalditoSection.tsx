@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
-import { OriginOptionsContainer } from '../../../shared/OriginOptionsContainer';
+import { WizardSection } from '../../../shared/WizardSection';
 import { FormSelect } from '../../../shared/FormSelect';
+import { CostBadge } from '../../../shared/CostBadge';
 
 interface MalditoParams {
     magnitude: string | null;
@@ -67,10 +68,15 @@ export default function MalditoSection({ malditoParams, onChange }: MalditoSecti
     }, [malditoParams]);
 
     return (
-        <OriginOptionsContainer
+        <WizardSection
             title="Opciones de Origen: Maldito"
-            cost={totalCost}
-            themeColor="orange"
+            rightContent={
+                <CostBadge
+                    cost={totalCost > 0 ? `-${totalCost}` : 0}
+                    label="PC"
+                    variant={totalCost === 0 ? "free" : "bonus"}
+                />
+            }
         >
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                 <FormSelect
@@ -93,7 +99,7 @@ export default function MalditoSection({ malditoParams, onChange }: MalditoSecti
                     showCostInOption={false}
                 />
             </div>
-        </OriginOptionsContainer>
+        </WizardSection>
     );
 }
 

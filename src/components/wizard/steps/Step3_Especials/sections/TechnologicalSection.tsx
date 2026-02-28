@@ -1,8 +1,9 @@
 import React, { useMemo } from 'react';
 import { INCOME_SOURCES } from '../../../../../data/technologicalOptions';
-import { OriginOptionsContainer } from '../../../shared/OriginOptionsContainer';
+import { WizardSection } from '../../../shared/WizardSection';
 import { FormSelect } from '../../../shared/FormSelect';
 import { InfoBox } from '../../../shared/InfoBox';
+import { CostBadge } from '../../../shared/CostBadge';
 
 interface TechnologicalSectionProps {
     techParams: { incomeSource: string } | null;
@@ -21,11 +22,16 @@ export default function TechnologicalSection({ techParams, onChange }: Technolog
         [selectedId]);
 
     return (
-        <OriginOptionsContainer
+        <WizardSection
             title="Tecnológico"
-            cost={selectedSource?.pc || 0}
-            themeColor="cyan"
             description="Selecciona cómo financia el personaje su tecnología. Esto afecta al coste en Puntos de Creación."
+            rightContent={
+                <CostBadge
+                    cost={(selectedSource?.pc || 0) > 0 ? `+${selectedSource?.pc}` : (selectedSource?.pc || 0)}
+                    label="PC"
+                    variant={!(selectedSource?.pc) ? "default" : (selectedSource.pc > 0 ? "penalty" : "bonus")}
+                />
+            }
         >
             <FormSelect
                 label="Fuente de Ingresos"
@@ -47,7 +53,7 @@ export default function TechnologicalSection({ techParams, onChange }: Technolog
                     <strong>Descripción:</strong> {selectedSource.description}
                 </InfoBox>
             )}
-        </OriginOptionsContainer>
+        </WizardSection>
     );
 }
 

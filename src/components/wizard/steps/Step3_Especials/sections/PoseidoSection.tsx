@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
-import { OriginOptionsContainer } from '../../../shared/OriginOptionsContainer';
+import { WizardSection } from '../../../shared/WizardSection';
 import { FormSelect } from '../../../shared/FormSelect';
+import { CostBadge } from '../../../shared/CostBadge';
 
 interface PoseidoParams {
     formType: string | null;
@@ -36,10 +37,15 @@ export default function PoseidoSection({ poseidoParams, onChange }: PoseidoSecti
     }, [poseidoParams]);
 
     return (
-        <OriginOptionsContainer
+        <WizardSection
             title="Opciones de Origen: Poseído"
-            cost={totalCost}
-            themeColor="orange"
+            rightContent={
+                <CostBadge
+                    cost={totalCost > 0 ? `+${totalCost}` : totalCost}
+                    label="PC"
+                    variant={totalCost === 0 ? "free" : (totalCost > 0 ? "penalty" : "bonus")}
+                />
+            }
         >
             <FormSelect
                 label="Tipo de Forma"
@@ -49,7 +55,7 @@ export default function PoseidoSection({ poseidoParams, onChange }: PoseidoSecti
                 placeholder="Selecciona el tipo de forma..."
                 labelColor="#c2410c"
             />
-        </OriginOptionsContainer>
+        </WizardSection>
     );
 }
 

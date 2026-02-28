@@ -1,7 +1,8 @@
 import React, { useMemo } from 'react';
 import SequelsSelector from '../../../shared/SequelsSelector';
 import { SEQUELS } from '../../../../../data/sequels';
-import { OriginOptionsContainer } from '../../../shared/OriginOptionsContainer';
+import { WizardSection } from '../../../shared/WizardSection';
+import { CostBadge } from '../../../shared/CostBadge';
 import { FormSelect } from '../../../shared/FormSelect';
 
 // --- Data Constants ---
@@ -80,10 +81,15 @@ export default function AlteradoSection({ alteradoParams, onChange }: AlteradoSe
     }, [agent, sequels]);
 
     return (
-        <OriginOptionsContainer
+        <WizardSection
             title="Opciones de Origen: Alterado"
-            cost={totalDiscount}
-            themeColor="green"
+            rightContent={
+                <CostBadge
+                    cost={totalDiscount > 0 ? `-${totalDiscount}` : 0}
+                    label="PC"
+                    variant={totalDiscount === 0 ? "free" : "bonus"}
+                />
+            }
         >
             <FormSelect
                 label="Agente del Cambio"
@@ -102,7 +108,7 @@ export default function AlteradoSection({ alteradoParams, onChange }: AlteradoSe
                 showWarning={sequels.length === 0}
                 warningMessage="Si no seleccionas ninguna secuela, se añadirán +2 PC al coste total del personaje."
             />
-        </OriginOptionsContainer>
+        </WizardSection>
     );
 }
 

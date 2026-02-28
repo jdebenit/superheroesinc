@@ -1,5 +1,6 @@
 import React from 'react';
-import { OriginOptionsContainer } from '../../../shared/OriginOptionsContainer';
+import { WizardSection } from '../../../shared/WizardSection';
+import { CostBadge } from '../../../shared/CostBadge';
 
 export interface ParahumanoParams {
     isHybridWithHuman: boolean;
@@ -23,40 +24,16 @@ export default function ParahumanoSection({ parahumanoParams, onChange }: Parahu
     };
 
     return (
-        <div style={{
-            backgroundColor: '#faf5ff',
-            border: '2px solid #9333ea',
-            borderRadius: '0.75rem',
-            overflow: 'hidden',
-            marginBottom: '2rem'
-        }}>
-            <div style={{
-                padding: '1rem',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                borderBottom: '1px solid #e9d5ff'
-            }}>
-                <h3 style={{
-                    fontSize: '1.25rem',
-                    fontWeight: '900',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05em',
-                    color: '#6b21a8'
-                }}>Opciones de Origen: Parahumano</h3>
-
-                <div style={{
-                    backgroundColor: isHybridWithHuman ? '#9333ea' : '#d1d5db',
-                    color: 'white',
-                    padding: '0.5rem 1rem',
-                    borderRadius: '6px',
-                    fontWeight: 'bold',
-                    fontSize: '0.875rem'
-                }}>
-                    {isHybridWithHuman ? 'HÍBRIDO ACTIVO' : 'NO HÍBRIDO'}
-                </div>
-            </div>
-
+        <WizardSection
+            title="Opciones de Origen: Parahumano"
+            rightContent={
+                <CostBadge
+                    cost={isHybridWithHuman ? "+3" : 0}
+                    label="PC extra"
+                    variant={isHybridWithHuman ? "penalty" : "default"}
+                />
+            }
+        >
             <div style={{ padding: '1.5rem' }}>
                 <label style={{
                     display: 'flex',
@@ -100,7 +77,6 @@ export default function ParahumanoSection({ parahumanoParams, onChange }: Parahu
                     </div>
                 </label>
             </div>
-        </div>
+        </WizardSection >
     );
 }
-

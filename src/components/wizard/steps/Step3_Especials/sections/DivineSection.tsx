@@ -1,7 +1,8 @@
 import React, { useMemo } from 'react';
 import { DIVINE_FOCUS_OPTIONS } from '../../../../../data/divineOptions';
-import { OriginOptionsContainer } from '../../../shared/OriginOptionsContainer';
+import { WizardSection } from '../../../shared/WizardSection';
 import { FormSelect } from '../../../shared/FormSelect';
+import { CostBadge } from '../../../shared/CostBadge';
 import { InfoBox } from '../../../shared/InfoBox';
 
 export interface DivineParams {
@@ -30,11 +31,16 @@ export default function DivineSection({ divineParams, onChange }: DivineSectionP
         [focus]);
 
     return (
-        <OriginOptionsContainer
+        <WizardSection
             title="Opciones de Origen: Divino"
-            cost={selectedFocus?.cost || 0}
-            themeColor="amber"
             description="Como entidad divina, debes determinar si tu poder requiere un foco para manifestarse o alcanzar su máximo potencial."
+            rightContent={
+                <CostBadge
+                    cost={(selectedFocus?.cost || 0) > 0 ? `+${selectedFocus?.cost}` : (selectedFocus?.cost || 0)}
+                    label="PC"
+                    variant={!(selectedFocus?.cost) ? "free" : (selectedFocus.cost > 0 ? "penalty" : "bonus")}
+                />
+            }
         >
             <FormSelect
                 label="Foco del Poder"
@@ -51,7 +57,7 @@ export default function DivineSection({ divineParams, onChange }: DivineSectionP
                     <strong>Efecto:</strong> {selectedFocus.description}
                 </InfoBox>
             )}
-        </OriginOptionsContainer>
+        </WizardSection>
     );
 }
 

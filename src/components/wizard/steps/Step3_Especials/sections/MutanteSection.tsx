@@ -2,7 +2,8 @@ import React, { useMemo } from 'react';
 import SequelsSelector from '../../../shared/SequelsSelector';
 import { SEQUELS } from '../../../../../data/sequels';
 import { getMutantType } from '../utils';
-import { OriginOptionsContainer } from '../../../shared/OriginOptionsContainer';
+import { WizardSection } from '../../../shared/WizardSection';
+import { CostBadge } from '../../../shared/CostBadge';
 
 interface SelectedSequel {
     id: string;
@@ -43,11 +44,16 @@ export default function MutanteSection({ mutanteParams, onChange, data }: Mutant
     const mutantType = data ? getMutantType(data) : null;
 
     return (
-        <OriginOptionsContainer
+        <WizardSection
             title={`Opciones de Origen: Mutante ${mutantType ? `(${mutantType})` : ''}`}
-            cost={totalDiscount}
-            themeColor="magenta"
             description={`Como mutante ${mutantType ? `de tipo ${mutantType}` : ''}, tu cuerpo ha sufrido alteraciones que pueden conllevar secuelas físicas o mentales. Puedes seleccionar secuelas opcionales para obtener puntos de creación extra.`}
+            rightContent={
+                <CostBadge
+                    cost={totalDiscount > 0 ? `-${totalDiscount}` : 0}
+                    label="PC"
+                    variant={totalDiscount === 0 ? "free" : "bonus"}
+                />
+            }
         >
             {mutantType && (
                 <div style={{
@@ -70,7 +76,7 @@ export default function MutanteSection({ mutanteParams, onChange, data }: Mutant
                 onChange={handleSequelsChange}
                 showWarning={false} // Optional for mutants, no penalty
             />
-        </OriginOptionsContainer>
+        </WizardSection>
     );
 }
 
