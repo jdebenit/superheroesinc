@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './WizardSection.css';
 
 interface WizardSectionProps {
@@ -8,6 +8,8 @@ interface WizardSectionProps {
     icon?: string;
     color?: string;
     rightContent?: React.ReactNode;
+    collapsible?: boolean;
+    defaultCollapsed?: boolean;
 }
 
 export const WizardSection: React.FC<WizardSectionProps> = ({
@@ -16,25 +18,37 @@ export const WizardSection: React.FC<WizardSectionProps> = ({
     description,
     icon,
     color,
-    rightContent
+    rightContent,
+    collapsible = false,
+    defaultCollapsed = false
 }) => {
+    const [collapsed, setCollapsed] = useState(defaultCollapsed);
+
     return (
         <div className="wizard-section">
             <div
-                className="wizard-section-header"
+                className={`wizard-section-header ${collapsible ? 'wizard-section-header-collapsible' : ''}`}
                 style={color ? { borderBottomColor: color } : undefined}
+                onClick={collapsible ? () => setCollapsed(c => !c) : undefined}
             >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', width: '100%' }}>
-                    <div>
-                        <h3 className="wizard-section-title" style={color ? { color } : undefined}>
-                            {icon && <span className="wizard-section-icon">{icon}</span>}
-                            {title}
-                        </h3>
-                        {description && (
-                            <div className="wizard-section-description">
-                                {description}
-                            </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flex: 1 }}>
+                        {collapsible && (
+                            <span className={`wizard-section-chevron ${collapsed ? 'wizard-section-chevron-collapsed' : ''}`}>
+                                ▾
+                            </span>
                         )}
+                        <div>
+                            <h3 className="wizard-section-title" style={color ? { color } : undefined}>
+                                {icon && <span className="wizard-section-icon">{icon}</span>}
+                                {title}
+                            </h3>
+                            {description && (
+                                <div className="wizard-section-description">
+                                    {description}
+                                </div>
+                            )}
+                        </div>
                     </div>
                     {rightContent && (
                         <div className="wizard-section-right-content">
@@ -43,9 +57,11 @@ export const WizardSection: React.FC<WizardSectionProps> = ({
                     )}
                 </div>
             </div>
-            <div className="wizard-section-content">
-                {children}
-            </div>
+            {!collapsed && (
+                <div className="wizard-section-content">
+                    {children}
+                </div>
+            )}
         </div>
     );
 };

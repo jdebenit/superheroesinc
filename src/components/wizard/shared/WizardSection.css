@@ -12,6 +12,29 @@
     color: white;
 }
 
+.wizard-section-header-collapsible {
+    cursor: pointer;
+    user-select: none;
+    transition: opacity 0.15s ease;
+}
+
+.wizard-section-header-collapsible:hover {
+    opacity: 0.92;
+}
+
+.wizard-section-chevron {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.85);
+    transition: transform 0.2s ease;
+    display: inline-block;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.wizard-section-chevron-collapsed {
+    transform: rotate(-90deg);
+}
+
 .wizard-section-title {
     font-size: 1.5rem;
     font-weight: bold;

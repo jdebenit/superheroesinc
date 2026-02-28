@@ -246,7 +246,14 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
             </WizardSection>
 
             {/* COMBAT STATS SECTION */}
-            <WizardSection title="Estadísticas de Combate">
+            <WizardSection
+                title="Estadísticas de Combate"
+                description={
+                    <span style={{ fontSize: '0.85rem', opacity: 0.9 }}>
+                        🔒 Calculadas automáticamente a partir de tus características — no son editables.
+                    </span>
+                }
+            >
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
                     {data.combatstats?.map((stat, index) => {
                         const [label, val] = stat.split(': ');
@@ -256,7 +263,14 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
             </WizardSection>
 
             {/* OTHER STATS SECTION */}
-            <WizardSection title="Otras Estadísticas">
+            <WizardSection
+                title="Otras Estadísticas"
+                description={
+                    <span style={{ fontSize: '0.85rem', opacity: 0.9 }}>
+                        🔒 Calculadas automáticamente a partir de tus características — no son editables.
+                    </span>
+                }
+            >
                 <div style={{
                     display: 'grid',
                     gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
@@ -305,15 +319,19 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
             {/* WEAPONS SECTION */}
             <WizardSection
                 title="Armas"
+                collapsible
+                defaultCollapsed={(data.weapons?.items?.length ?? 0) === 0}
                 rightContent={
-                    <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', padding: '0.25rem 0.5rem', borderRadius: '0.5rem' }}>
-                        <CostBadge
-                            cost={data.weapons?.items?.reduce((acc: number, item: any) => acc + (parseInt(item.cost) || 0), 0) || 0}
-                            label="PC"
-                            variant="default"
-                            className="text-white"
-                        />
-                    </div>
+                    (data.weapons?.items?.length ?? 0) > 0 ? (
+                        <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', padding: '0.25rem 0.5rem', borderRadius: '0.5rem' }}>
+                            <CostBadge
+                                cost={data.weapons?.items?.reduce((acc: number, item: any) => acc + (parseInt(item.cost) || 0), 0) || 0}
+                                label="PC"
+                                variant="default"
+                                className="text-white"
+                            />
+                        </div>
+                    ) : undefined
                 }
             >
                 <DynamicList
@@ -321,7 +339,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                     onAdd={addWeapon}
                     onRemove={removeWeapon}
                     addButtonLabel="Añadir Arma"
-                    color="#b91c1c"
+                    color="#3b82f6"
                     renderItem={(item, index) => (
                         <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1.5fr 0.8fr 0.8fr 0.8fr 1.5fr 80px', gap: '0.5rem', alignItems: 'start' }}>
                             <WizardField
@@ -387,15 +405,19 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
             {/* EQUIPMENT SECTION (New) */}
             <WizardSection
                 title="Equipo"
+                collapsible
+                defaultCollapsed={(data.equipment?.items?.length ?? 0) === 0}
                 rightContent={
-                    <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', padding: '0.25rem 0.5rem', borderRadius: '0.5rem' }}>
-                        <CostBadge
-                            cost={data.equipment?.items?.reduce((acc: number, item: any) => acc + (parseInt(item.cost) || 0), 0) || 0}
-                            label="PC"
-                            variant="default"
-                            className="text-white"
-                        />
-                    </div>
+                    (data.equipment?.items?.length ?? 0) > 0 ? (
+                        <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', padding: '0.25rem 0.5rem', borderRadius: '0.5rem' }}>
+                            <CostBadge
+                                cost={data.equipment?.items?.reduce((acc: number, item: any) => acc + (parseInt(item.cost) || 0), 0) || 0}
+                                label="PC"
+                                variant="default"
+                                className="text-white"
+                            />
+                        </div>
+                    ) : undefined
                 }
             >
                 <DynamicList
@@ -403,7 +425,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                     onAdd={addEquipment}
                     onRemove={removeEquipment}
                     addButtonLabel="Añadir Equipo"
-                    color="#059669"
+                    color="#3b82f6"
                     renderItem={(item, index) => (
                         <div style={{ display: 'grid', gridTemplateColumns: '2fr 3fr 80px', gap: '1rem', alignItems: 'start' }}>
                             <WizardField
@@ -436,15 +458,19 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
             {/* VEHICLES SECTION */}
             <WizardSection
                 title="Vehículos"
+                collapsible
+                defaultCollapsed={(data.vehicles?.items?.length ?? 0) === 0}
                 rightContent={
-                    <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', padding: '0.25rem 0.5rem', borderRadius: '0.5rem' }}>
-                        <CostBadge
-                            cost={data.vehicles?.items?.reduce((acc: number, item: any) => acc + (parseInt(item.cost) || 0), 0) || 0}
-                            label="PC"
-                            variant="default"
-                            className="text-white"
-                        />
-                    </div>
+                    (data.vehicles?.items?.length ?? 0) > 0 ? (
+                        <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', padding: '0.25rem 0.5rem', borderRadius: '0.5rem' }}>
+                            <CostBadge
+                                cost={data.vehicles?.items?.reduce((acc: number, item: any) => acc + (parseInt(item.cost) || 0), 0) || 0}
+                                label="PC"
+                                variant="default"
+                                className="text-white"
+                            />
+                        </div>
+                    ) : undefined
                 }
             >
                 <DynamicList
@@ -452,7 +478,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                     onAdd={addVehicle}
                     onRemove={removeVehicle}
                     addButtonLabel="Añadir Vehículo"
-                    color="#0891b2"
+                    color="#3b82f6"
                     renderItem={(item, index) => (
                         <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr 80px', gap: '0.75rem', alignItems: 'start' }}>
                             <WizardField
@@ -501,15 +527,19 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
             {/* ARTIFACTS SECTION */}
             <WizardSection
                 title="Artefactos"
+                collapsible
+                defaultCollapsed={(data.artifacts?.items?.length ?? 0) === 0}
                 rightContent={
-                    <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', padding: '0.25rem 0.5rem', borderRadius: '0.5rem' }}>
-                        <CostBadge
-                            cost={data.artifacts?.items?.reduce((acc: number, item: any) => acc + (parseInt(item.cost) || 0), 0) || 0}
-                            label="PC"
-                            variant="default"
-                            className="text-white"
-                        />
-                    </div>
+                    (data.artifacts?.items?.length ?? 0) > 0 ? (
+                        <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', padding: '0.25rem 0.5rem', borderRadius: '0.5rem' }}>
+                            <CostBadge
+                                cost={data.artifacts?.items?.reduce((acc: number, item: any) => acc + (parseInt(item.cost) || 0), 0) || 0}
+                                label="PC"
+                                variant="default"
+                                className="text-white"
+                            />
+                        </div>
+                    ) : undefined
                 }
             >
                 <DynamicList
@@ -517,7 +547,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                     onAdd={addArtifact}
                     onRemove={removeArtifact}
                     addButtonLabel="Añadir Artefacto"
-                    color="#7c3aed"
+                    color="#3b82f6"
                     renderItem={(item, index) => (
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                             <FormSelect
@@ -573,13 +603,17 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
             </WizardSection>
 
             {/* MAGIC OBJECTS SECTION */}
-            <WizardSection title="Objetos Mágicos">
+            <WizardSection
+                title="Objetos Mágicos"
+                collapsible
+                defaultCollapsed={(data.magicObjects?.items?.length ?? 0) === 0}
+            >
                 <DynamicList
                     items={data.magicObjects?.items || []}
                     onAdd={addMagicObject}
                     onRemove={removeMagicObject}
                     addButtonLabel="Añadir Objeto Mágico"
-                    color="#9333ea"
+                    color="#3b82f6"
                     renderItem={(item, index) => (
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                             <FormSelect
