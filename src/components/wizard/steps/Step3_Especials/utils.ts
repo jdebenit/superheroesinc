@@ -217,23 +217,9 @@ export const calculatePowerBaseCost = (power: any, selection: SelectedPower, con
         baseCost += penaltyInfo.cost;
     }
 
-    // 2. Hybrid Penalty
+    // 2. Hybrid Penalty (+3 PC for Parahumano Hybrids taking Alterado powers)
     if (isParahumanoHybrid && selection.origin === 'Alterado') {
-        // This was hardcoded as `isHybridPenalty ? 3 : 0` added to base in original
-        // But original logic line 230: `const penalty = isHybridPenalty ? 3 : 0;`
-        // Then `if (isPenalty) baseCost += penaltyInfo.cost;`
-        // Then misses adding `penalty`? 
-        // Wait, original code: `const penalty = isHybridPenalty ? 3 : 0; ... let baseCost = p.cost; if (isPenalty)...`
-        // It seems `penalty` variable was unused in original `baseCost` calculation logic shown in snippet?
-        // Ah, snippet line 101: `displayBaseCostStr = ... + 3`.
-        // Snippet line 230: `const penalty = ...`.
-        // Snippet line 236: `baseCost += penaltyInfo.cost`.
-        // It seems the original code might have had a bug or implicit behavior not fully shown in snippet 250 lines.
-        // Let's assume we want to apply it.
-        // Actually, looking at previous `PowerRow.tsx`:
-        // `if (isHybridPenalty) displayBaseCostStr = ... + 3`
-        // But for calculation?
-        // I will replicate the "Override" style logic first.
+        baseCost += 3;
     }
 
     // Replicate the big if/else chain from PowerRow for Base Cost
