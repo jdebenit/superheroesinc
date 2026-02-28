@@ -249,10 +249,47 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
 
             {/* OTHER STATS SECTION */}
             <WizardSection title="Otras Estadísticas">
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
+                <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                    gap: '0',
+                    border: '1px solid #ede9fe',
+                    borderRadius: '10px',
+                    overflow: 'hidden'
+                }}>
                     {data.otherstats?.map((stat, index) => {
-                        const [label, val] = stat.split(': ');
-                        return <StatItem key={index} label={label} value={val} theme="purple" />;
+                        const colonIdx = stat.indexOf(': ');
+                        const label = colonIdx !== -1 ? stat.slice(0, colonIdx) : stat;
+                        const val = colonIdx !== -1 ? stat.slice(colonIdx + 2) : '';
+                        const isEven = index % 2 === 0;
+                        return (
+                            <div key={index} style={{
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                                alignItems: 'center',
+                                padding: '0.6rem 1rem',
+                                backgroundColor: isEven ? 'white' : '#faf5ff',
+                                borderBottom: '1px solid #f3e8ff',
+                                gap: '1rem',
+                                minWidth: 0
+                            }}>
+                                <span style={{ fontSize: '0.875rem', color: '#5b21b6', fontWeight: '500', flexShrink: 0 }}>
+                                    {label}
+                                </span>
+                                <span style={{
+                                    fontSize: '0.95rem',
+                                    fontWeight: 'bold',
+                                    color: '#7c3aed',
+                                    background: '#f5f3ff',
+                                    border: '1px solid #ddd6fe',
+                                    borderRadius: '6px',
+                                    padding: '0.15rem 0.6rem',
+                                    whiteSpace: 'nowrap'
+                                }}>
+                                    {val || '-'}
+                                </span>
+                            </div>
+                        );
                     })}
                 </div>
             </WizardSection>
