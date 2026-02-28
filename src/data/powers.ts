@@ -543,6 +543,6 @@ export const POWERS: Power[] = [
         cost: 3,
         skillCalc: "AGI/2",
         types: ["Psíquico", "Físico", "Energético"],
-        origins: ["Alterado", "Mutante", "Guardian", "Vampírico", "Divino", "Sobrenatural"]
+        origins: ["Alterado", "Mutante", "Guardian", "Vampírico", "Divino", "Sobrenatural", "Cósmico"]
     }
 ];
