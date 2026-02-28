@@ -23,6 +23,7 @@ export const VehiclesSection: React.FC<VehiclesSectionProps> = ({ vehicles }) =>
                             { label: 'PE:', value: item.pe || '-' },
                             { label: 'Velocidad:', value: item.speed || '-' },
                             { label: 'Autonomía:', value: item.range || '-' },
+                            { label: 'Maniobrabilidad:', value: item.maneuverability != null ? String(item.maneuverability) : '-' },
                         ]}
                     />
                 ))}

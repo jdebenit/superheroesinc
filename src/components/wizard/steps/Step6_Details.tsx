@@ -480,7 +480,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                     addButtonLabel="Añadir Vehículo"
                     color="#3b82f6"
                     renderItem={(item, index) => (
-                        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr 80px', gap: '0.75rem', alignItems: 'start' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr 1fr 80px', gap: '0.75rem', alignItems: 'start' }}>
                             <WizardField
                                 label="Nombre"
                                 value={item.name}
@@ -509,6 +509,14 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                                 label="Alcance/Autonomía"
                                 value={item.range || ''}
                                 onChange={(val) => updateVehicle(index, 'range', val)}
+                                style={{ marginBottom: 0 }}
+                            />
+                            <WizardField
+                                type="number"
+                                label="Maniobrabilidad"
+                                min="0"
+                                value={item.maneuverability ?? 0}
+                                onChange={(val) => updateVehicle(index, 'maneuverability', Math.max(0, parseInt(val) || 0))}
                                 style={{ marginBottom: 0 }}
                             />
                             <WizardField
