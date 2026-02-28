@@ -5,11 +5,13 @@
     overflow: hidden;
     border: 1px solid var(--wiz-color-gray-200);
     margin-bottom: var(--wiz-spacing-8);
+    overflow-x: auto;
 }
 
 .wizard-table {
     width: 100%;
     border-collapse: collapse;
+    min-width: 600px;
 }
 
 .wizard-table-header {
@@ -21,12 +23,25 @@
     padding: var(--wiz-spacing-4);
     text-align: left;
     color: var(--wiz-color-gray-700);
+    min-width: 150px;
 }
 
 .wizard-table-header-cell {
     padding: var(--wiz-spacing-4);
     text-align: center;
     color: var(--wiz-color-gray-500);
+    white-space: nowrap;
+}
+
+/* Wider cost/rank column for powers table */
+.wizard-table-header-cell:nth-child(2) {
+    min-width: 260px;
+}
+
+/* Compact action column */
+.wizard-table-header-cell:last-child {
+    width: 60px;
+    min-width: 60px;
 }
 
 .wizard-table-footer-row {
