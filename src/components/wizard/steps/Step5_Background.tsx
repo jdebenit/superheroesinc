@@ -70,11 +70,13 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
         <div className="step5-status-card">
             <div className="step5-status-header">
                 <h4 className="step5-status-title">{title}</h4>
-                <CostBadge
-                    cost={currentObj.cost > 0 ? `+${currentObj.cost}` : currentObj.cost}
-                    label="PC"
-                    variant={currentObj.cost === 0 ? "free" : (currentObj.cost > 0 ? "penalty" : "bonus")}
-                />
+                <div className="section-header-badge">
+                    <CostBadge
+                        cost={currentObj.cost > 0 ? `+${currentObj.cost}` : currentObj.cost}
+                        label="PC"
+                        variant={currentObj.cost === 0 ? "free" : (currentObj.cost > 0 ? "penalty" : "bonus")}
+                    />
+                </div>
             </div>
             <FormSelect
                 label=""
