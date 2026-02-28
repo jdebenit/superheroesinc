@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { DeleteRowButton } from './DeleteRowButton';
+import { WizardConfirm } from './WizardDialogs';
 import './DynamicList.css';
 
 interface DynamicListProps<T> {
@@ -23,11 +24,20 @@ export function DynamicList<T>({
     emptyText,
     color = '#3b82f6'
 }: DynamicListProps<T>) {
+    const [itemToDelete, setItemToDelete] = useState<number | null>(null);
+
     // Determine theme class based on color
     let themeClass = 'wizard-dynamic-list-blue';
     if (color === '#dc2626') themeClass = 'wizard-dynamic-list-red';
     else if (color === '#7c3aed' || color === '#9333ea') themeClass = 'wizard-dynamic-list-purple';
     else if (color === '#0891b2') themeClass = 'wizard-dynamic-list-cyan';
+
+    const handleConfirmDelete = () => {
+        if (itemToDelete !== null) {
+            onRemove(itemToDelete);
+            setItemToDelete(null);
+        }
+    };
 
     return (
         <div className="wizard-dynamic-list">
@@ -43,7 +53,7 @@ export function DynamicList<T>({
 
                     <div className="wizard-dynamic-list-item-actions">
                         <DeleteRowButton
-                            onDelete={() => onRemove(index)}
+                            onDelete={() => setItemToDelete(index)}
                             title="Eliminar elemento"
                         />
                     </div>
@@ -57,6 +67,14 @@ export function DynamicList<T>({
             >
                 <span className="wizard-dynamic-list-add-icon">+</span> {addButtonLabel}
             </button>
+
+            {itemToDelete !== null && (
+                <WizardConfirm
+                    message="¿Estás seguro de que quieres eliminar este elemento? Esta acción no se puede deshacer."
+                    onConfirm={handleConfirmDelete}
+                    onCancel={() => setItemToDelete(null)}
+                />
+            )}
         </div>
     );
 }
