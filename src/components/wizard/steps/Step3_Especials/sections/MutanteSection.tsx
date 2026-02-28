@@ -4,6 +4,7 @@ import { SEQUELS } from '../../../../../data/sequels';
 import { getMutantType } from '../utils';
 import { WizardSection } from '../../../shared/WizardSection';
 import { CostBadge } from '../../../shared/CostBadge';
+import { InfoBox } from '../../../shared/InfoBox';
 
 interface SelectedSequel {
     id: string;
@@ -56,17 +57,11 @@ export default function MutanteSection({ mutanteParams, onChange, data }: Mutant
             }
         >
             {mutantType && (
-                <div style={{
-                    backgroundColor: '#fef3c7',
-                    border: '1px solid #fbbf24',
-                    borderRadius: '0.5rem',
-                    padding: '0.75rem',
-                    marginBottom: '1.5rem'
-                }}>
-                    <p style={{ fontSize: '0.875rem', color: '#92400e', margin: 0 }}>
-                        <strong>💡 Selección de poderes:</strong> Puedes elegir poderes de tu tipo ({mutantType}) normalmente,
+                <div style={{ marginBottom: '1.5rem' }}>
+                    <InfoBox variant="warning" icon="💡">
+                        <strong>Selección de poderes:</strong> Puedes elegir poderes de tu tipo ({mutantType}) normalmente,
                         o poderes de otros tipos (Físico, Psíquico, Energético) gastando <strong>+2 PCs adicionales</strong> de coste base por cada poder.
-                    </p>
+                    </InfoBox>
                 </div>
             )}
 

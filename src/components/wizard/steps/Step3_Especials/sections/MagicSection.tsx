@@ -167,9 +167,11 @@ export default function MagicSection({
                         </span>
                     </div>
 
-                    <p className="terrano-magic-table__description">
-                        Puedes intercambiar tus slots de Poder de Guardián por tiradas en esta tabla.
-                    </p>
+                    <div style={{ marginBottom: '1rem' }}>
+                        <InfoBox variant="info" icon="ℹ️">
+                            Puedes intercambiar tus slots de Poder de Guardián por tiradas en esta tabla.
+                        </InfoBox>
+                    </div>
 
                     <div className="terrano-magic-table__options">
                         {TERRANO_TABLE_OPTIONS.map((opt) => (
