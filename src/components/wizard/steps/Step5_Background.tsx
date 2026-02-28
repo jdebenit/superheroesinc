@@ -5,10 +5,10 @@ import {
     sectionTitleStyle,
     innerCardStyle,
     textInputStyle,
-    dangerButtonStyle,
     stepPageTitleStyle,
     stepPageSubtitleStyle,
 } from '../shared/stepStyles';
+import { DeleteRowButton } from '../shared/DeleteRowButton';
 import './Step5_Background.css';
 
 interface Step5Props {
@@ -174,20 +174,20 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
 
                 <div className="step5-items-list">
                     {data.background.items.map((item, index) => (
-                        <div key={index} className="step5-item-row">
+                        <div key={index} className="step5-item-row" style={{ alignItems: 'center' }}>
                             <input
                                 type="text"
                                 value={item}
                                 onChange={(e) => updateBackgroundItem(index, e.target.value)}
-                                style={textInputStyle}
+                                style={{ ...textInputStyle, flex: 1, marginBottom: 0 }}
                                 placeholder="Ej: Trabajo medio/bajo: mecánico"
                             />
-                            <button
-                                onClick={() => removeBackgroundItem(index)}
-                                style={dangerButtonStyle}
-                            >
-                                ✕
-                            </button>
+                            <div style={{ marginLeft: '1rem', display: 'flex' }}>
+                                <DeleteRowButton
+                                    onDelete={() => removeBackgroundItem(index)}
+                                    title="Eliminar elemento"
+                                />
+                            </div>
                         </div>
                     ))}
 
