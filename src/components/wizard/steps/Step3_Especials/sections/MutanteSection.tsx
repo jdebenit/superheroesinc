@@ -47,6 +47,7 @@ export default function MutanteSection({ mutanteParams, onChange, data }: Mutant
     return (
         <WizardSection
             title={`Opciones de Origen: Mutante ${mutantType ? `(${mutantType})` : ''}`}
+            color="#166534"
             description={`Como mutante ${mutantType ? `de tipo ${mutantType}` : ''}, tu cuerpo ha sufrido alteraciones que pueden conllevar secuelas físicas o mentales. Puedes seleccionar secuelas opcionales para obtener puntos de creación extra.`}
             rightContent={
                 <CostBadge

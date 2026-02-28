@@ -21,6 +21,7 @@ export default function MagicalBondsSection({
     return (
         <WizardSection
             title="Vinculaciones Mágicas"
+            color="#4f46e5"
             description="Como Mago, debes elegir al menos una vinculación mágica que canalice tu poder."
             rightContent={
                 <PixelButton onClick={onOpenModal} variant="custom" className="bg-purple-600 text-white hover:bg-purple-700">

@@ -26,6 +26,7 @@ export default function TechModulesSection({
     return (
         <WizardSection
             title="Módulos Tecnológicos"
+            color="#334155"
             description="Instala módulos para aumentar tus capacidades."
             rightContent={
                 <PixelButton

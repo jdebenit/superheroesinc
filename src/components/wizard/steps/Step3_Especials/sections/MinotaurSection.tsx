@@ -10,7 +10,8 @@ export default function MinotaurSection() {
 
     return (
         <WizardSection
-            title="Rasgos de Minotauro"
+            title="Opciones de Origen: Minotauro"
+            color="#b45309"
             description="Efectos pasivos y rasgos especiales derivados de tu origen Arcano / Minotauro."
         >
             <InfoBox variant="warning">

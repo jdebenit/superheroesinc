@@ -112,6 +112,9 @@ export default function MagicSection({
     else if (isHadaEter) divisor = 2;
     const maxEM = emFormula.divisor !== 0 ? calculateEM(data, selectedPowers, divisor) : 0;
 
+    const emExceeded = totalCost > maxEM;
+    const pcPenalty = emExceeded ? (totalCost - maxEM) / 10 : 0;
+
     return (
         <WizardSection
             title="Magia"
@@ -130,7 +133,14 @@ export default function MagicSection({
                         <CostBadge
                             cost={`${totalCost}/${maxEM}`}
                             label="EM"
-                            variant={totalCost > maxEM ? 'penalty' : 'default'}
+                            variant={emExceeded ? 'penalty' : 'default'}
+                        />
+                    )}
+                    {pcPenalty > 0 && (
+                        <CostBadge
+                            cost={`+${pcPenalty}`}
+                            label="PC"
+                            variant="penalty"
                         />
                     )}
                 </div>

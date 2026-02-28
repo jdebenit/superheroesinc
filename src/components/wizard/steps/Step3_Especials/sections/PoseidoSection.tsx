@@ -39,6 +39,7 @@ export default function PoseidoSection({ poseidoParams, onChange }: PoseidoSecti
     return (
         <WizardSection
             title="Opciones de Origen: Poseído"
+            color="#7e22ce"
             rightContent={
                 <CostBadge
                     cost={totalCost > 0 ? `+${totalCost}` : totalCost}

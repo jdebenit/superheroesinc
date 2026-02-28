@@ -62,6 +62,7 @@ export default function ExoskeletonSection({
     return (
         <WizardSection
             title="Exoesqueleto Energético"
+            color="#334155"
             description="Selecciona la configuración del campo energético de tu exoesqueleto."
             rightContent={
                 selected ? (

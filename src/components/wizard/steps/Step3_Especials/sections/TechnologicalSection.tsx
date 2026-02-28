@@ -24,6 +24,7 @@ export default function TechnologicalSection({ techParams, onChange }: Technolog
     return (
         <WizardSection
             title="Tecnológico"
+            color="#334155"
             description="Selecciona cómo financia el personaje su tecnología. Esto afecta al coste en Puntos de Creación."
             rightContent={
                 <CostBadge

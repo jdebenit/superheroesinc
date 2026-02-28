@@ -26,6 +26,7 @@ export default function ParahumanoSection({ parahumanoParams, onChange }: Parahu
     return (
         <WizardSection
             title="Opciones de Origen: Parahumano"
+            color="#166534"
             rightContent={
                 <CostBadge
                     cost={isHybridWithHuman ? "+3" : 0}

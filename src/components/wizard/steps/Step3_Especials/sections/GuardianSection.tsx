@@ -40,6 +40,7 @@ export default function GuardianSection({ guardianParams, onChange }: GuardianSe
     return (
         <WizardSection
             title="Opciones de Origen: Guardián"
+            color="#1e40af"
             rightContent={
                 <CostBadge
                     cost={(selectedQuality?.cost || 0) > 0 ? `+${selectedQuality?.cost}` : (selectedQuality?.cost || 0)}

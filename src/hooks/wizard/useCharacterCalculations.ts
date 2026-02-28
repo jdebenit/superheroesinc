@@ -87,7 +87,7 @@ export function useCharacterCalculations(character: any) {
         }, 0);
 
         if (spellCost > maxEM) {
-            total += (spellCost - maxEM) * 0.1;
+            total += (spellCost - maxEM) / 10;
         }
 
         // 8. EM Formula Cost (for Dotado/Híbrido/Terrano)

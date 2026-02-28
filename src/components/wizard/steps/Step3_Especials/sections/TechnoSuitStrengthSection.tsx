@@ -43,7 +43,8 @@ export default function TechnoSuitStrengthSection({
 
     return (
         <WizardSection
-            title="Fuerza de la Tecnoarmadura"
+            title="Configuración de Tecnoarmadura (Fuerza)"
+            color="#334155"
             description="Selecciona la capacidad de Fuerza aumentada que proporciona tu tecnoarmadura."
             rightContent={
                 selected ? (

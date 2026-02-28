@@ -42,7 +42,8 @@ export default function ExoskeletonArmorSection({
 
     return (
         <WizardSection
-            title="Exoesqueleto / Tecnoarmadura"
+            title="Configuración de Tecnoarmadura (Estadísticas)"
+            color="#334155"
             description="Selecciona el nivel de blindaje y protección de tu armadura o vehículo."
             rightContent={
                 selected ? (

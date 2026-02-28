@@ -19,6 +19,7 @@ export default function VigilanteTraumasSection({
     return (
         <WizardSection
             title="Traumas/Motivaciones del Vigilante"
+            color="#be123c"
             description="Como Vigilante, cada especialidad proviene de un trauma o una motivación profunda. Describe el evento que te llevó a desarrollar estas habilidades."
         >
 

@@ -91,67 +91,67 @@ export default function PowersSection({
     const renderHeaderActions = () => (
         <div className="powers-section-actions">
             {isGuardian && (
-                <PixelButton onClick={() => onOpenModal('Guardian')} variant="primary" className="small">
+                <PixelButton onClick={() => onOpenModal('Guardian')} variant="guardian" className="small">
                     <span>+</span> Guardián
                 </PixelButton>
             )}
             {isAlterado && (
-                <PixelButton onClick={() => onOpenModal('Alterado')} variant="custom" style={{ backgroundColor: '#9333ea', color: 'white' }} className="small">
+                <PixelButton onClick={() => onOpenModal('Alterado')} variant="alterado" className="small">
                     <span>+</span> Alterado
                 </PixelButton>
             )}
             {isVampiro && (
-                <PixelButton onClick={() => onOpenModal('Vampírico')} variant="danger" style={{ backgroundColor: '#b91c1c' }} className="small">
+                <PixelButton onClick={() => onOpenModal('Vampírico')} variant="vampirico" className="small">
                     <span>+</span> Vampírico
                 </PixelButton>
             )}
             {(isSemidemonio || isMaldito || isPoseido) && (
-                <PixelButton onClick={() => onOpenModal('Sobrenatural')} variant="custom" style={{ backgroundColor: '#ea580c', color: 'white' }} className="small">
+                <PixelButton onClick={() => onOpenModal('Sobrenatural')} variant="sobrenatural" className="small">
                     <span>+</span> Sobrenatural
                 </PixelButton>
             )}
             {isThals && (
-                <PixelButton onClick={() => onOpenModal('Thals')} variant="custom" style={{ backgroundColor: '#0d9488', color: 'white' }} className="small">
+                <PixelButton onClick={() => onOpenModal('Thals')} variant="thals" className="small">
                     <span>+</span> Thals
                 </PixelButton>
             )}
             {isDivino && (
-                <PixelButton onClick={() => onOpenModal('Divino')} variant="warning" className="small">
+                <PixelButton onClick={() => onOpenModal('Divino')} variant="divino" className="small">
                     <span>+</span> Divino
                 </PixelButton>
             )}
             {isTerrano && (
-                <PixelButton onClick={() => onOpenModal('Guardian')} variant="custom" style={{ backgroundColor: '#059669', color: 'white' }} className="small">
+                <PixelButton onClick={() => onOpenModal('Guardian')} variant="terrano" className="small">
                     <span>+</span> Terrano (Guardian)
                 </PixelButton>
             )}
             {isEnano && (
-                <PixelButton onClick={() => onOpenModal('Guardian')} variant="custom" style={{ backgroundColor: '#57534e', color: 'white' }} className="small">
+                <PixelButton onClick={() => onOpenModal('Guardian')} variant="guardian" className="small">
                     <span>+</span> Enano (Guardian)
                 </PixelButton>
             )}
             {isDotado && (
-                <PixelButton onClick={() => onOpenModal('Sobrenatural')} variant="custom" style={{ backgroundColor: '#d97706', color: 'white' }} className="small">
+                <PixelButton onClick={() => onOpenModal('Sobrenatural')} variant="dotado" className="small">
                     <span>+</span> Dotado (Sobrenatural)
                 </PixelButton>
             )}
             {isCosmico && (
-                <PixelButton onClick={() => onOpenModal('Cósmico')} variant="custom" style={{ backgroundColor: '#4f46e5', color: 'white' }} className="small">
+                <PixelButton onClick={() => onOpenModal('Cósmico')} variant="cosmico" className="small">
                     <span>+</span> Cósmico
                 </PixelButton>
             )}
             {isMutante && (
-                <PixelButton onClick={() => onOpenModal('Mutante')} variant="custom" style={{ backgroundColor: '#db2777', color: 'white' }} className="small">
+                <PixelButton onClick={() => onOpenModal('Mutante')} variant="mutante" className="small">
                     <span>+</span> Mutante
                 </PixelButton>
             )}
             {isEnte && (
-                <PixelButton onClick={() => onOpenModal('Mutante')} variant="custom" style={{ backgroundColor: '#a855f7', color: 'white' }} className="small">
+                <PixelButton onClick={() => onOpenModal('Mutante')} variant="ente" className="small">
                     <span>+</span> Mutante (Ente)
                 </PixelButton>
             )}
             {isElfoPsiquico && (
-                <PixelButton onClick={() => onOpenModal('Psíquico')} variant="custom" style={{ backgroundColor: '#0891b2', color: 'white' }} className="small">
+                <PixelButton onClick={() => onOpenModal('Psíquico')} variant="psiquico" className="small">
                     <span>+</span> Poderes Psíquicos
                 </PixelButton>
             )}
@@ -161,6 +161,7 @@ export default function PowersSection({
     return (
         <WizardSection
             title="Poderes Especiales"
+            color="#0f172a"
             rightContent={renderHeaderActions()}
         >
 

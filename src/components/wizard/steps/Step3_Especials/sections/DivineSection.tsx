@@ -32,7 +32,8 @@ export default function DivineSection({ divineParams, onChange }: DivineSectionP
 
     return (
         <WizardSection
-            title="Opciones de Origen: Divino"
+            title="Opciones de Origen: Divino / Semidiós"
+            color="#b45309"
             description="Como entidad divina, debes determinar si tu poder requiere un foco para manifestarse o alcanzar su máximo potencial."
             rightContent={
                 <CostBadge

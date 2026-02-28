@@ -70,6 +70,7 @@ export default function MalditoSection({ malditoParams, onChange }: MalditoSecti
     return (
         <WizardSection
             title="Opciones de Origen: Maldito"
+            color="#c2410c"
             rightContent={
                 <CostBadge
                     cost={totalCost > 0 ? `-${totalCost}` : 0}

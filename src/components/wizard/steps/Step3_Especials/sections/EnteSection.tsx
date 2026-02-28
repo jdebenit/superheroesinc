@@ -58,6 +58,7 @@ export default function EnteSection({ enteParams, onChange }: EnteSectionProps) 
     return (
         <WizardSection
             title="Opciones de Origen: Ente"
+            color="#7e22ce"
             rightContent={
                 <CostBadge
                     cost={totalCost > 0 ? `+${totalCost}` : totalCost}

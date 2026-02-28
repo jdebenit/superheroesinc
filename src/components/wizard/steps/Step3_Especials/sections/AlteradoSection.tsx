@@ -83,6 +83,7 @@ export default function AlteradoSection({ alteradoParams, onChange }: AlteradoSe
     return (
         <WizardSection
             title="Opciones de Origen: Alterado"
+            color="#166534"
             rightContent={
                 <CostBadge
                     cost={totalDiscount > 0 ? `-${totalDiscount}` : 0}

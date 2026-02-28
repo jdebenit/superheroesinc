@@ -50,6 +50,7 @@ export const CyborgSection: React.FC<CyborgSectionProps> = ({ implants = [], onC
     return (
         <WizardSection
             title="Implantes Cibernéticos"
+            color="#334155"
             description="Gestiona los implantes y mejoras cibernéticas del personaje."
             rightContent={
                 totalCost > 0 ? (
