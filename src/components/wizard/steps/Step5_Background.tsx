@@ -1,65 +1,34 @@
 import React from 'react';
 import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS, FRIENDS_AND_ASSOCIATES } from '../../../data/backgroundTables';
-import { stepPageTitleStyle, stepPageSubtitleStyle } from '../shared/stepStyles';
 import { WizardSection } from '../shared/WizardSection';
 import { WizardField } from '../shared/WizardField';
 import { DynamicList } from '../shared/DynamicList';
 import { FormSelect } from '../shared/FormSelect';
 import { CostBadge } from '../shared/CostBadge';
+import { useStep5Logic } from '../hooks/useStep5Logic';
 import '../shared/WizardStep.css';
 import './Step5_Background.css';
 
 interface Step5Props {
-    data: {
-        background: {
-            items: string[];
-            prejudiceResistance?: number;
-            economicStatus?: string;
-            legalStatus?: string;
-            socialStatus?: string;
-            friendsAndAssociates?: string;
-        };
-    };
+    data: any;
     onChange: (updates: any) => void;
 }
 
 export default function Step5_Background({ data, onChange }: Step5Props) {
-    const resistanceValue = data.background?.prejudiceResistance || 50;
-    const resistanceCost = (resistanceValue - 50) * 0.1;
-
-    // Get current selections (defaulting if undefined)
-    const currentEconomic = ECONOMIC_STATUS.find(e => e.id === data.background?.economicStatus) || ECONOMIC_STATUS[3];
-    const currentLegal = LEGAL_STATUS.find(l => l.id === data.background?.legalStatus) || LEGAL_STATUS[0];
-    const currentSocial = SOCIAL_STATUS.find(s => s.id === data.background?.socialStatus) || SOCIAL_STATUS[2];
-    const currentFriends = FRIENDS_AND_ASSOCIATES.find(f => f.id === data.background?.friendsAndAssociates) || FRIENDS_AND_ASSOCIATES[2];
-
-    const addBackgroundItem = () => {
-        onChange({
-            background: {
-                ...data.background,
-                items: [...data.background.items, "Nuevo elemento de trasfondo"]
-            }
-        });
-    };
-
-    const updateBackgroundItem = (index: number, value: string) => {
-        const newItems = [...data.background.items];
-        newItems[index] = value;
-        onChange({ background: { ...data.background, items: newItems } });
-    };
-
-    const removeBackgroundItem = (index: number) => {
-        const newItems = [...data.background.items];
-        newItems.splice(index, 1);
-        onChange({ background: { ...data.background, items: newItems } });
-    };
-
-    const handleResistanceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const val = parseInt(e.target.value);
-        if (!isNaN(val) && val >= 1 && val <= 100) {
-            onChange({ background: { ...data.background, prejudiceResistance: val } });
-        }
-    };
+    const {
+        resistanceValue,
+        resistanceCost,
+        currentEconomic,
+        currentLegal,
+        currentSocial,
+        currentFriends,
+        backgroundItems,
+        addBackgroundItem,
+        updateBackgroundItem,
+        removeBackgroundItem,
+        handleResistanceChange,
+        updateStatus
+    } = useStep5Logic(data, onChange);
 
     const renderStatusSelect = (
         title: string,
@@ -82,7 +51,7 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
             <FormSelect
                 label=""
                 value={currentValue || options[0].id}
-                onChange={(val) => onChange({ background: { ...data.background, [field]: val } })}
+                onChange={(val) => updateStatus(field, val)}
                 options={options.map(opt => ({
                     id: opt.id,
                     label: opt.label,
@@ -98,24 +67,21 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
 
     return (
         <div className="wizard-step-container">
-
-
-            {/* Header Description */}
             <WizardSection
                 title="Trasfondo y Personalidad"
                 description="Define la historia, contexto, estatus social y resistencia psicológica de tu personaje."
             />
 
-
-            {/* PREJUDICE RESISTANCE */}
             <WizardSection
                 title="Resistencia a Prejuicios"
                 rightContent={
-                    <div className="section-header-badge"><CostBadge
-                        cost={resistanceCost > 0 ? `+${resistanceCost.toFixed(1)}` : resistanceCost.toFixed(1)}
-                        label="PC"
-                        variant={resistanceCost === 0 ? "default" : (resistanceCost > 0 ? "penalty" : "bonus")}
-                    /></div>
+                    <div className="section-header-badge">
+                        <CostBadge
+                            cost={resistanceCost > 0 ? `+${resistanceCost.toFixed(1)}` : resistanceCost.toFixed(1)}
+                            label="PC"
+                            variant={resistanceCost === 0 ? "default" : (resistanceCost > 0 ? "penalty" : "bonus")}
+                        />
+                    </div>
                 }
                 description={
                     <>
@@ -131,7 +97,7 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
                         min="1"
                         max="100"
                         value={resistanceValue}
-                        onChange={handleResistanceChange}
+                        onChange={(e) => handleResistanceChange(parseInt(e.target.value))}
                         className="step5-range-input"
                     />
                     <span className="step5-range-label">100</span>
@@ -141,13 +107,9 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
                             label=""
                             type="number"
                             min="1"
+                            max="100"
                             value={resistanceValue}
-                            onChange={(val) => {
-                                const parseVal = parseInt(val);
-                                if (!isNaN(parseVal)) {
-                                    handleResistanceChange({ target: { value: val } } as any);
-                                }
-                            }}
+                            onChange={(val) => handleResistanceChange(parseInt(val))}
                             noMargin
                         />
                         <span className="step5-percent-symbol">%</span>
@@ -155,10 +117,7 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
                 </div>
             </WizardSection>
 
-            {/* ADVANCED STATUS OPTIONS */}
-            <WizardSection
-                title="Estatus Social y Legal"
-            >
+            <WizardSection title="Estatus Social y Legal">
                 <div className="step5-status-grid">
                     {renderStatusSelect("Posición Económica", ECONOMIC_STATUS, data.background?.economicStatus, 'economicStatus', currentEconomic)}
                     {renderStatusSelect("Situación Legal", LEGAL_STATUS, data.background?.legalStatus, 'legalStatus', currentLegal)}
@@ -167,10 +126,7 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
                 </div>
             </WizardSection>
 
-            {/* BACKGROUND ITEMS */}
-            <WizardSection
-                title="Notas de Trasfondo"
-            >
+            <WizardSection title="Notas de Trasfondo">
                 <div className="step5-help-notice">
                     <p className="step5-help-title">Ejemplos de trasfondo:</p>
                     <ul className="step5-help-list">
@@ -182,7 +138,7 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
                 </div>
 
                 <DynamicList
-                    items={data.background.items}
+                    items={backgroundItems}
                     onAdd={addBackgroundItem}
                     onRemove={removeBackgroundItem}
                     addButtonLabel="Añadir Elemento de Trasfondo"
