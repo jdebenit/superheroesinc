@@ -1,16 +1,16 @@
 .wizard-section {
     background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 1.5rem;
+    border-radius: var(--wiz-radius-md);
+    box-shadow: var(--wiz-shadow-sm);
+    margin-bottom: var(--wiz-spacing-6);
     overflow: hidden;
 }
 
 .wizard-section-header {
-    padding: 1.5rem;
-    background-color: #f8fafc;
-    border-bottom: 1px solid #e2e8f0;
-    color: #1e293b;
+    padding: var(--wiz-spacing-6);
+    background-color: var(--wiz-color-gray-50);
+    border-bottom: 1px solid var(--wiz-color-gray-200);
+    color: var(--wiz-color-gray-800);
 }
 
 .wizard-section-header-collapsible {
@@ -20,12 +20,12 @@
 }
 
 .wizard-section-header-collapsible:hover {
-    background-color: #f1f5f9;
+    background-color: var(--wiz-color-gray-100);
 }
 
 .wizard-section-chevron {
     font-size: 1.1rem;
-    color: #64748b;
+    color: var(--wiz-color-gray-500);
     transition: transform 0.2s ease;
     display: inline-block;
     line-height: 1;
@@ -37,13 +37,13 @@
 }
 
 .wizard-section-title {
-    font-size: 1.25rem;
+    font-size: var(--wiz-font-size-xl);
     font-weight: bold;
-    color: #0f172a;
+    color: var(--wiz-color-gray-900);
     margin: 0;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: var(--wiz-spacing-2);
 }
 
 .wizard-section-icon {
@@ -51,12 +51,12 @@
 }
 
 .wizard-section-description {
-    margin-top: 0.25rem;
-    font-size: 0.95rem;
-    color: #475569;
+    margin-top: var(--wiz-spacing-1);
+    font-size: var(--wiz-font-size-sm);
+    color: var(--wiz-color-gray-600);
     font-weight: normal;
 }
 
 .wizard-section-content {
-    padding: 1.5rem;
+    padding: var(--wiz-spacing-6);
 }

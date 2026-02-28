@@ -4,60 +4,51 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 4px 10px;
-    border-radius: 6px;
-    font-size: 0.875rem;
-    /* text-sm */
+    padding: var(--wiz-spacing-1) var(--wiz-spacing-3);
+    border-radius: var(--wiz-radius-md);
+    font-size: var(--wiz-font-size-sm);
     font-weight: bold;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    box-shadow: var(--wiz-shadow-sm);
     line-height: 1;
     min-width: 3rem;
     white-space: nowrap;
 }
 
 .cost-badge-default {
-    background-color: #1e293b;
-    /* slate-800 */
+    background-color: var(--wiz-color-gray-800);
     color: white;
 }
 
 .cost-badge-free {
-    background-color: #059669;
-    /* emerald-600 */
+    background-color: var(--wiz-color-success);
     color: white;
 }
 
 .cost-badge-free .cost-badge-subtext {
-    font-size: 0.75rem;
-    /* text-xs */
+    font-size: var(--wiz-font-size-xs);
     font-weight: normal;
-    color: #d1fae5;
-    /* emerald-100 */
-    margin-left: 4px;
+    color: var(--wiz-color-primary-50);
+    margin-left: var(--wiz-spacing-1);
 }
 
 .cost-badge-variable {
-    background-color: #4f46e5;
-    /* indigo-600 */
+    background-color: var(--wiz-color-primary-600);
     color: white;
 }
 
 .cost-badge-variable .cost-badge-subtext {
-    font-size: 0.75rem;
+    font-size: var(--wiz-font-size-xs);
     font-weight: normal;
-    color: #c7d2fe;
-    /* indigo-200 */
-    margin-left: 4px;
+    color: var(--wiz-color-primary-100);
+    margin-left: var(--wiz-spacing-1);
 }
 
 .cost-badge-penalty {
-    background-color: #dc2626;
-    /* red-600 */
+    background-color: var(--wiz-color-danger);
     color: white;
 }
 
 .cost-badge-bonus {
-    background-color: #059669;
-    /* emerald-600 */
+    background-color: var(--wiz-color-success);
     color: white;
 }

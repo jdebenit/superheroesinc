@@ -1,0 +1,74 @@
+/* tokens.css - Design Tokens for the Character Wizard */
+
+:root {
+    /* Colors - Primary (Blue) */
+    --wiz-color-primary-50: #eff6ff;
+    --wiz-color-primary-100: #dbeafe;
+    --wiz-color-primary-200: #bfdbfe;
+    --wiz-color-primary-300: #93c5fd;
+    --wiz-color-primary-400: #60a5fa;
+    --wiz-color-primary-500: #3b82f6;
+    --wiz-color-primary-600: #2563eb;
+    --wiz-color-primary-700: #1d4ed8;
+    --wiz-color-primary-800: #1e40af;
+    --wiz-color-primary-900: #1e3a8a;
+
+    /* Colors - Secondary/Gray */
+    --wiz-color-gray-50: #f9fafb;
+    --wiz-color-gray-100: #f3f4f6;
+    --wiz-color-gray-200: #e5e7eb;
+    --wiz-color-gray-300: #d1d5db;
+    --wiz-color-gray-400: #9ca3af;
+    --wiz-color-gray-500: #6b7280;
+    --wiz-color-gray-600: #4b5563;
+    --wiz-color-gray-700: #374151;
+    --wiz-color-gray-800: #1f2937;
+    --wiz-color-gray-900: #111827;
+
+    /* Colors - Semantic */
+    --wiz-color-success: #10b981;
+    /* emerald-500 */
+    --wiz-color-danger: #ef4444;
+    /* red-500 */
+    --wiz-color-warning: #f59e0b;
+    /* amber-500 */
+    --wiz-color-info: #0ea5e9;
+    /* sky-500 */
+
+    /* Spacing System (8px base) */
+    --wiz-spacing-1: 0.25rem;
+    /* 4px */
+    --wiz-spacing-2: 0.5rem;
+    /* 8px */
+    --wiz-spacing-3: 0.75rem;
+    /* 12px */
+    --wiz-spacing-4: 1rem;
+    /* 16px */
+    --wiz-spacing-6: 1.5rem;
+    /* 24px */
+    --wiz-spacing-8: 2rem;
+    /* 32px */
+    --wiz-spacing-12: 3rem;
+    /* 48px */
+
+    /* Border Radius */
+    --wiz-radius-sm: 4px;
+    --wiz-radius-md: 8px;
+    --wiz-radius-lg: 12px;
+    --wiz-radius-full: 9999px;
+
+    /* Shadows */
+    --wiz-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --wiz-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --wiz-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+    /* Typography */
+    --wiz-font-size-xs: 0.75rem;
+    --wiz-font-size-sm: 0.875rem;
+    --wiz-font-size-base: 1rem;
+    --wiz-font-size-lg: 1.125rem;
+    --wiz-font-size-xl: 1.25rem;
+    --wiz-font-size-2xl: 1.5rem;
+    --wiz-font-size-3xl: 1.875rem;
+    --wiz-font-size-4xl: 2.25rem;
+}

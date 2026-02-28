@@ -1,10 +1,10 @@
 .wizard-table-container {
     background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: var(--wiz-radius-lg);
+    box-shadow: var(--wiz-shadow-md);
     overflow: hidden;
-    border: 1px solid #e5e7eb;
-    margin-bottom: 2rem;
+    border: 1px solid var(--wiz-color-gray-200);
+    margin-bottom: var(--wiz-spacing-8);
 }
 
 .wizard-table {
@@ -13,46 +13,46 @@
 }
 
 .wizard-table-header {
-    background-color: #f9fafb;
-    border-bottom: 2px solid #e5e7eb;
+    background-color: var(--wiz-color-gray-50);
+    border-bottom: 2px solid var(--wiz-color-gray-200);
 }
 
 .wizard-table-header-cell-first {
-    padding: 1rem;
+    padding: var(--wiz-spacing-4);
     text-align: left;
-    color: #374151;
+    color: var(--wiz-color-gray-700);
 }
 
 .wizard-table-header-cell {
-    padding: 1rem;
+    padding: var(--wiz-spacing-4);
     text-align: center;
-    color: #6b7280;
+    color: var(--wiz-color-gray-500);
 }
 
 .wizard-table-footer-row {
-    background-color: #f8fafc;
-    border-top: 2px solid #e2e8f0;
+    background-color: var(--wiz-color-gray-50);
+    border-top: 2px solid var(--wiz-color-gray-200);
 }
 
 .wizard-table-footer-label {
-    padding: 1rem;
+    padding: var(--wiz-spacing-4);
     text-align: right;
     font-weight: bold;
-    color: #475569;
+    color: var(--wiz-color-gray-600);
 }
 
 .wizard-table-footer-value {
-    padding: 1rem;
+    padding: var(--wiz-spacing-4);
     text-align: center;
     font-weight: 900;
-    color: #4f46e5;
+    color: var(--wiz-color-primary-600);
     font-size: 1.1em;
 }
 
 .wizard-table-empty-state {
     text-align: center;
-    padding: 3rem;
-    color: #9ca3af;
+    padding: var(--wiz-spacing-12);
+    color: var(--wiz-color-gray-400);
     font-weight: bold;
     font-style: italic;
 }

@@ -1,61 +1,63 @@
 .wizard-field {
-    margin-bottom: 1rem;
+    margin-bottom: var(--wiz-spacing-4);
 }
 
 .wizard-field-label {
     display: block;
-    margin-bottom: 0.5rem;
+    margin-bottom: var(--wiz-spacing-2);
     font-weight: bold;
-    color: #374151;
+    color: var(--wiz-color-gray-700);
+    font-size: var(--wiz-font-size-sm);
 }
 
 .wizard-field-input {
     width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #d1d5db;
-    border-radius: 4px;
-    font-size: 1rem;
+    padding: var(--wiz-spacing-2);
+    border: 1px solid var(--wiz-color-gray-300);
+    border-radius: var(--wiz-radius-sm);
+    font-size: var(--wiz-font-size-base);
+    background-color: white;
 }
 
 .wizard-field-input:focus {
     outline: none;
-    border-color: #3b82f6;
+    border-color: var(--wiz-color-primary-500);
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
 .wizard-field-textarea {
     width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-    font-size: 0.95rem;
+    padding: var(--wiz-spacing-3);
+    border: 1px solid var(--wiz-color-gray-300);
+    border-radius: var(--wiz-radius-md);
+    font-size: var(--wiz-font-size-sm);
     min-height: 150px;
     resize: vertical;
     font-family: inherit;
     line-height: 1.6;
-    background-color: #fdfcfb;
-    color: #374151;
+    background-color: var(--wiz-color-gray-50);
+    color: var(--wiz-color-gray-800);
 }
 
 .wizard-field-textarea:focus {
     outline: none;
-    border-color: #3b82f6;
+    border-color: var(--wiz-color-primary-500);
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
 .wizard-field-input-error {
-    border-color: #ef4444;
+    border-color: var(--wiz-color-danger);
 }
 
 .wizard-field-input-error:focus {
-    border-color: #ef4444;
+    border-color: var(--wiz-color-danger);
     box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
 }
 
 .wizard-field-error {
-    color: #ef4444;
-    font-size: 0.875rem;
-    margin-top: 0.25rem;
+    color: var(--wiz-color-danger);
+    font-size: var(--wiz-font-size-xs);
+    margin-top: var(--wiz-spacing-1);
     display: block;
 }
 

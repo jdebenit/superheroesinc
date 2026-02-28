@@ -8,88 +8,88 @@ import type { CSSProperties } from 'react';
 // ── Step root ──────────────────────────────────────────────────────────────
 /** Outer wrapper for every step page.  Use CSS class "step-page" instead when possible. */
 export const stepPageStyle: CSSProperties = {
-    padding: '2rem',
+    padding: 'var(--wiz-spacing-8)',
 };
 
 /** h2 page title — identical in every step */
 export const stepPageTitleStyle: CSSProperties = {
-    fontSize: '2rem',
+    fontSize: 'var(--wiz-font-size-3xl)',
     fontWeight: 'bold',
-    marginBottom: '1rem',
+    marginBottom: 'var(--wiz-spacing-4)',
 };
 
 /** p subtitle below the page title */
 export const stepPageSubtitleStyle: CSSProperties = {
-    fontSize: '1.125rem',
-    color: '#666',
-    marginBottom: '1rem',
+    fontSize: 'var(--wiz-font-size-lg)',
+    color: 'var(--wiz-color-gray-500)',
+    marginBottom: 'var(--wiz-spacing-4)',
 };
 
 // ── Section card ───────────────────────────────────────────────────────────
 export const sectionCardStyle: CSSProperties = {
     backgroundColor: 'white',
-    border: '2px solid #e5e7eb',
-    borderRadius: '12px',
-    padding: '1.5rem',
-    boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06)',
+    border: '2px solid var(--wiz-color-gray-200)',
+    borderRadius: 'var(--wiz-radius-lg)',
+    padding: 'var(--wiz-spacing-6)',
+    boxShadow: 'var(--wiz-shadow-md)',
 };
 
 export const sectionTitleStyle: CSSProperties = {
-    fontSize: '1.5rem',
+    fontSize: 'var(--wiz-font-size-2xl)',
     fontWeight: 'bold',
-    color: '#1f2937',
-    marginBottom: '1rem',
-    borderBottom: '2px solid #e5e7eb',
-    paddingBottom: '0.5rem',
+    color: 'var(--wiz-color-gray-800)',
+    marginBottom: 'var(--wiz-spacing-4)',
+    borderBottom: '2px solid var(--wiz-color-gray-200)',
+    paddingBottom: 'var(--wiz-spacing-2)',
     display: 'flex',
     alignItems: 'center',
-    gap: '0.5rem',
+    gap: 'var(--wiz-spacing-2)',
 };
 
 // ── Card inside section ────────────────────────────────────────────────────
 export const innerCardStyle: CSSProperties = {
-    backgroundColor: '#f8fafc',
-    border: '1px solid #e2e8f0',
-    borderRadius: '8px',
-    padding: '1rem',
-    marginBottom: '1rem',
+    backgroundColor: 'var(--wiz-color-gray-50)',
+    border: '1px solid var(--wiz-color-gray-200)',
+    borderRadius: 'var(--wiz-radius-md)',
+    padding: 'var(--wiz-spacing-4)',
+    marginBottom: 'var(--wiz-spacing-4)',
 };
 
 // ── Form elements ──────────────────────────────────────────────────────────
 export const fieldLabelStyle: CSSProperties = {
     display: 'block',
-    fontSize: '0.875rem',
+    fontSize: 'var(--wiz-font-size-sm)',
     fontWeight: 'bold',
-    color: '#4b5563',
-    marginBottom: '0.5rem',
+    color: 'var(--wiz-color-gray-600)',
+    marginBottom: 'var(--wiz-spacing-2)',
 };
 
 export const textInputStyle: CSSProperties = {
     width: '100%',
-    padding: '0.75rem',
-    border: '1px solid #d1d5db',
-    borderRadius: '6px',
-    fontSize: '1rem',
+    padding: 'var(--wiz-spacing-3)',
+    border: '1px solid var(--wiz-color-gray-300)',
+    borderRadius: 'var(--wiz-radius-sm)',
+    fontSize: 'var(--wiz-font-size-base)',
     transition: 'border-color 0.2s',
     boxSizing: 'border-box',
 };
 
 export const selectInputStyle: CSSProperties = {
     width: '100%',
-    padding: '0.75rem',
-    border: '1px solid #d1d5db',
-    borderRadius: '6px',
-    fontSize: '1rem',
+    padding: 'var(--wiz-spacing-3)',
+    border: '1px solid var(--wiz-color-gray-300)',
+    borderRadius: 'var(--wiz-radius-sm)',
+    fontSize: 'var(--wiz-font-size-base)',
     backgroundColor: 'white',
     cursor: 'pointer',
     boxSizing: 'border-box',
 };
 
 export const primaryButtonStyle: CSSProperties = {
-    backgroundColor: '#2563eb',
+    backgroundColor: 'var(--wiz-color-primary-600)',
     color: 'white',
-    padding: '0.5rem 1rem',
-    borderRadius: '6px',
+    padding: 'var(--wiz-spacing-2) var(--wiz-spacing-4)',
+    borderRadius: 'var(--wiz-radius-sm)',
     fontWeight: 'bold',
     cursor: 'pointer',
     border: 'none',
@@ -97,10 +97,10 @@ export const primaryButtonStyle: CSSProperties = {
 };
 
 export const dangerButtonStyle: CSSProperties = {
-    backgroundColor: '#dc2626',
+    backgroundColor: 'var(--wiz-color-danger)',
     color: 'white',
-    padding: '0.5rem 1rem',
-    borderRadius: '6px',
+    padding: 'var(--wiz-spacing-2) var(--wiz-spacing-4)',
+    borderRadius: 'var(--wiz-radius-sm)',
     fontWeight: 'bold',
     cursor: 'pointer',
     border: 'none',
@@ -110,10 +110,10 @@ export const dangerButtonStyle: CSSProperties = {
 // ── Number input (for characteristics) ────────────────────────────────────
 export const numberInputStyle: CSSProperties = {
     width: '100%',
-    padding: '0.75rem',
-    fontSize: '1rem',
-    border: '2px solid #d1d5db',
-    borderRadius: '8px',
+    padding: 'var(--wiz-spacing-3)',
+    fontSize: 'var(--wiz-font-size-base)',
+    border: '2px solid var(--wiz-color-gray-300)',
+    borderRadius: 'var(--wiz-radius-md)',
     textAlign: 'center',
     fontWeight: 'bold',
     boxSizing: 'border-box',
