@@ -186,89 +186,91 @@ export default function Step1_OriginSelection({ data, onChange }: Step1Props) {
                         );
                     })}
                 </div>
-            </WizardSection>
 
+                {/* Subtypes panel — inline, directly below the origin grid */}
+                {selectedOrigins.some(id => {
+                    const cat = getOriginCategory(id);
+                    return cat?.subtypes && Object.keys(cat.subtypes).length > 0;
+                }) && (
+                        <div className="step1-subtypes-inline-panel">
+                            <div className="step1-subtypes-inline-divider">
+                                <span>Tipo / Especialización</span>
+                            </div>
+                            <div className="step1-subtypes-panel">
+                                {selectedOrigins.map(id => {
+                                    const origin = ORIGINS.find(o => o.id === id);
+                                    const category = getOriginCategory(id);
+                                    if (!category?.subtypes || Object.keys(category.subtypes).length === 0) return null;
 
-            {selectedOrigins.some(id => {
-                const cat = getOriginCategory(id);
-                return cat?.subtypes && Object.keys(cat.subtypes).length > 0;
-            }) && (
-                    <WizardSection title="Tipo / Especialización">
-                        <div className="step1-subtypes-panel">
+                                    const isSingleSelection = ['divinos', 'cosmicos', 'parahumanos', 'mutantes'].includes(id);
+                                    const availableSubtypes = Object.keys(category.subtypes).filter(s => !category.disabledSubtypes?.includes(s));
+                                    const needsWarning = (selectedSubtypes[id] || []).filter(s => !category.defaultEffects?.includes(s)).length === 0;
 
-                            {selectedOrigins.map(id => {
-                                const origin = ORIGINS.find(o => o.id === id);
-                                const category = getOriginCategory(id);
-                                if (!category?.subtypes || Object.keys(category.subtypes).length === 0) return null;
-
-                                const isSingleSelection = ['divinos', 'cosmicos', 'parahumanos', 'mutantes'].includes(id);
-                                const availableSubtypes = Object.keys(category.subtypes).filter(s => !category.disabledSubtypes?.includes(s));
-                                const needsWarning = (selectedSubtypes[id] || []).filter(s => !category.defaultEffects?.includes(s)).length === 0;
-
-                                return (
-                                    <div
-                                        key={id}
-                                        className={`step1-subtype-card ${needsWarning ? 'warning' : 'normal'}`}
-                                    >
-                                        {/* Header */}
-                                        <div className="step1-subtype-card-header">
-                                            <img src={origin?.logo} alt={origin?.name} className="step1-subtype-origin-logo" />
-                                            <span className="step1-subtype-origin-name">{origin?.name}</span>
-                                            <span className="step1-subtype-instruction">
-                                                {id === 'vigilantes' ? '— Elige especializaciones' : (isSingleSelection ? '— Elige uno' : '— Elige uno o varios')}
-                                            </span>
-                                            {needsWarning && (
-                                                <span className="step1-subtype-warning-text">
-                                                    ⚠️ Pendiente de elegir
+                                    return (
+                                        <div
+                                            key={id}
+                                            className={`step1-subtype-card ${needsWarning ? 'warning' : 'normal'}`}
+                                        >
+                                            {/* Header */}
+                                            <div className="step1-subtype-card-header">
+                                                <img src={origin?.logo} alt={origin?.name} className="step1-subtype-origin-logo" />
+                                                <span className="step1-subtype-origin-name">{origin?.name}</span>
+                                                <span className="step1-subtype-instruction">
+                                                    {id === 'vigilantes' ? '— Elige especializaciones' : (isSingleSelection ? '— Elige uno' : '— Elige uno o varios')}
                                                 </span>
-                                            )}
-                                        </div>
+                                                {needsWarning && (
+                                                    <span className="step1-subtype-warning-text">
+                                                        ⚠️ Pendiente de elegir
+                                                    </span>
+                                                )}
+                                            </div>
 
-                                        {/* Subtype chips */}
-                                        <div className="step1-subtype-chips-container">
-                                            {availableSubtypes.map(subtype => {
-                                                const isChecked = selectedSubtypes[id]?.includes(subtype) || false;
-                                                const isSubSelected = isSingleSelection ? (selectedSubtypes[id]?.[0] === subtype) : isChecked;
+                                            {/* Subtype chips */}
+                                            <div className="step1-subtype-chips-container">
+                                                {availableSubtypes.map(subtype => {
+                                                    const isChecked = selectedSubtypes[id]?.includes(subtype) || false;
+                                                    const isSubSelected = isSingleSelection ? (selectedSubtypes[id]?.[0] === subtype) : isChecked;
 
-                                                return (
-                                                    <label
-                                                        key={subtype}
-                                                        style={{
-                                                            display: 'inline-flex',
-                                                            alignItems: 'center',
-                                                            gap: '0.4rem',
-                                                            padding: '0.4rem 0.9rem',
-                                                            borderRadius: '999px',
-                                                            border: '2px solid',
-                                                            borderColor: isSubSelected ? '#2563eb' : '#d1d5db',
-                                                            backgroundColor: isSubSelected ? '#dbeafe' : 'white',
-                                                            cursor: 'pointer',
-                                                            transition: 'all 0.15s',
-                                                            fontSize: '0.875rem',
-                                                            fontWeight: isSubSelected ? 700 : 400,
-                                                            color: isSubSelected ? '#1e40af' : '#374151',
-                                                            userSelect: 'none'
-                                                        }}
-                                                    >
-                                                        <input
-                                                            type={isSingleSelection ? 'radio' : 'checkbox'}
-                                                            name={isSingleSelection ? `subtype-${id}` : undefined}
-                                                            checked={isSubSelected}
-                                                            onChange={() => handleToggleSubtype(id, subtype)}
-                                                            style={{ position: 'absolute', opacity: 0, width: 0, height: 0 }}
-                                                        />
-                                                        {isSubSelected && <span style={{ fontSize: '0.75rem' }}>✓</span>}
-                                                        {subtype}
-                                                    </label>
-                                                );
-                                            })}
+                                                    return (
+                                                        <label
+                                                            key={subtype}
+                                                            style={{
+                                                                display: 'inline-flex',
+                                                                alignItems: 'center',
+                                                                gap: '0.4rem',
+                                                                padding: '0.4rem 0.9rem',
+                                                                borderRadius: '999px',
+                                                                border: '2px solid',
+                                                                borderColor: isSubSelected ? '#2563eb' : '#d1d5db',
+                                                                backgroundColor: isSubSelected ? '#dbeafe' : 'white',
+                                                                cursor: 'pointer',
+                                                                transition: 'all 0.15s',
+                                                                fontSize: '0.875rem',
+                                                                fontWeight: isSubSelected ? 700 : 400,
+                                                                color: isSubSelected ? '#1e40af' : '#374151',
+                                                                userSelect: 'none'
+                                                            }}
+                                                        >
+                                                            <input
+                                                                type={isSingleSelection ? 'radio' : 'checkbox'}
+                                                                name={isSingleSelection ? `subtype-${id}` : undefined}
+                                                                checked={isSubSelected}
+                                                                onChange={() => handleToggleSubtype(id, subtype)}
+                                                                style={{ position: 'absolute', opacity: 0, width: 0, height: 0 }}
+                                                            />
+                                                            {isSubSelected && <span style={{ fontSize: '0.75rem' }}>✓</span>}
+                                                            {subtype}
+                                                        </label>
+                                                    );
+                                                })}
+                                            </div>
                                         </div>
-                                    </div>
-                                );
-                            })}
+                                    );
+                                })}
+                            </div>
                         </div>
-                    </WizardSection>
-                )}
+                    )}
+            </WizardSection>
         </div>
     );
 }

@@ -26,12 +26,13 @@
 }
 
 .wizard-field-input:read-only {
-    background-color: var(--wiz-color-gray-50);
-    border-color: var(--wiz-color-gray-200);
-    border-style: dashed;
+    background-color: #fefce8;
+    border-color: var(--wiz-color-gray-300);
+    border-style: solid;
     cursor: default;
     color: var(--wiz-color-gray-600);
 }
+
 
 .wizard-field-input:disabled {
     background-color: var(--wiz-color-gray-100);
