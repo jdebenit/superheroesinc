@@ -4,10 +4,14 @@ import {
     CYBORG_IMPLANT_STRENGTHS,
     type CyborgImplant
 } from '../../../../../data/cyborgImplantConfigs';
-import { SectionContainer } from '../../../shared/SectionContainer';
+import { WizardSection } from '../../../shared/WizardSection';
+import { CostBadge } from '../../../shared/CostBadge';
+import { WizardField } from '../../../shared/WizardField';
+import { FormSelect } from '../../../shared/FormSelect';
 import CyborgImplantRow from './CyborgImplantRow';
 import { TableContainer } from '../../../shared/TableContainer';
 import { EmptyState } from '../../../shared/EmptyState';
+import { PixelButton } from '../../../shared/PixelButton';
 
 interface CyborgSectionProps {
     implants: CyborgImplant[];
@@ -31,7 +35,6 @@ export const CyborgSection: React.FC<CyborgSectionProps> = ({ implants = [], onC
 
         onChange([...implants, newImplant]);
         setNewImplantName('');
-        // Reset selections if desired, or keep them for quick addition of similar implants
     };
 
     const handleDeleteImplant = (id: string) => {
@@ -45,10 +48,14 @@ export const CyborgSection: React.FC<CyborgSectionProps> = ({ implants = [], onC
     }, 0);
 
     return (
-        <SectionContainer
+        <WizardSection
             title="Implantes Cibernéticos"
-            description="Gestiona los implantes y mejoras cibernéticas."
-            theme="blue"
+            description="Gestiona los implantes y mejoras cibernéticas del personaje."
+            rightContent={
+                totalCost > 0 ? (
+                    <CostBadge cost={`+${totalCost}`} label="PC" variant="penalty" />
+                ) : undefined
+            }
         >
             {implants.length > 0 ? (
                 <TableContainer
@@ -73,36 +80,29 @@ export const CyborgSection: React.FC<CyborgSectionProps> = ({ implants = [], onC
             )}
 
             {/* Add New Implant Form */}
-            <div className="add-implant-form" style={{
+            <div style={{
                 backgroundColor: '#f8fafc',
                 border: '1px dashed #94a3b8',
                 borderRadius: '8px',
-                padding: '1.5rem'
+                padding: '1.25rem',
+                borderLeft: '4px solid #3b82f6'
             }}>
-                <h4 style={{ marginTop: 0, marginBottom: '1rem', color: '#475569' }}>Añadir Nuevo Implante</h4>
+                <p style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', color: '#3b82f6', marginBottom: '1rem', marginTop: 0 }}>
+                    Añadir Nuevo Implante
+                </p>
 
-                <div style={{ marginBottom: '1rem' }}>
-                    <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600, color: '#4b5563' }}>Nombre / Ubicación</label>
-                    <input
-                        type="text"
-                        value={newImplantName}
-                        onChange={(e) => setNewImplantName(e.target.value)}
-                        placeholder="Ej: Brazo derecho, Ojo cibernético..."
-                        style={{
-                            width: '100%',
-                            padding: '0.5rem',
-                            borderRadius: '6px',
-                            border: '1px solid #cbd5e1',
-                            fontSize: '1rem'
-                        }}
-                    />
-                </div>
+                <WizardField
+                    label="Nombre / Ubicación"
+                    value={newImplantName}
+                    onChange={(val: string) => setNewImplantName(val)}
+                    placeholder="Ej: Brazo derecho, Ojo cibernético..."
+                />
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginBottom: '1.25rem' }}>
                     {/* Stats Selection Table */}
                     <div>
-                        <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600, color: '#4b5563' }}>Configuración (PV / DA)</label>
-                        <div className="config-table" style={{ border: '1px solid #e2e8f0', borderRadius: '6px', overflow: 'hidden' }}>
+                        <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600, color: '#4b5563', fontSize: '0.875rem' }}>Configuración (PV / DA)</label>
+                        <div style={{ border: '1px solid #e2e8f0', borderRadius: '6px', overflow: 'hidden' }}>
                             <div style={{ display: 'flex', background: '#f1f5f9', padding: '0.5rem', fontWeight: 'bold', fontSize: '0.85rem' }}>
                                 <div style={{ width: '40px' }}></div>
                                 <div style={{ flex: 1 }}>Coste</div>
@@ -136,8 +136,8 @@ export const CyborgSection: React.FC<CyborgSectionProps> = ({ implants = [], onC
 
                     {/* Strength Selection Table */}
                     <div>
-                        <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600, color: '#4b5563' }}>Fuerza</label>
-                        <div className="config-table" style={{ border: '1px solid #e2e8f0', borderRadius: '6px', overflow: 'hidden' }}>
+                        <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 600, color: '#4b5563', fontSize: '0.875rem' }}>Fuerza</label>
+                        <div style={{ border: '1px solid #e2e8f0', borderRadius: '6px', overflow: 'hidden' }}>
                             <div style={{ display: 'flex', background: '#f1f5f9', padding: '0.5rem', fontWeight: 'bold', fontSize: '0.85rem' }}>
                                 <div style={{ width: '40px' }}></div>
                                 <div style={{ flex: 1 }}>Fuerza</div>
@@ -170,24 +170,15 @@ export const CyborgSection: React.FC<CyborgSectionProps> = ({ implants = [], onC
                     </div>
                 </div>
 
-                <button
+                <PixelButton
                     onClick={handleAddImplant}
                     disabled={!newImplantName.trim()}
-                    style={{
-                        width: '100%',
-                        padding: '0.75rem',
-                        backgroundColor: newImplantName.trim() ? '#2563eb' : '#94a3b8',
-                        color: 'white',
-                        border: 'none',
-                        borderRadius: '6px',
-                        fontWeight: 'bold',
-                        cursor: newImplantName.trim() ? 'pointer' : 'not-allowed',
-                        transition: 'background 0.2s'
-                    }}
+                    variant="primary"
+                    className="w-full justify-center"
                 >
                     Añadir Implante
-                </button>
+                </PixelButton>
             </div>
-        </SectionContainer>
+        </WizardSection>
     );
 };

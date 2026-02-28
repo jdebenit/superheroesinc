@@ -1,5 +1,7 @@
 import React from 'react';
 import { ORIGIN_CATEGORIES } from '../../../../../data/originDefinitions';
+import { WizardSection } from '../../../shared/WizardSection';
+import { InfoBox } from '../../../shared/InfoBox';
 
 export default function MinotaurSection() {
     const arcano = ORIGIN_CATEGORIES['Arcano'];
@@ -7,34 +9,36 @@ export default function MinotaurSection() {
     const arcanoEffects = arcano?.defaultEffects || [];
 
     return (
-        <div className="bg-amber-50 border-4 border-amber-900 rounded-xl overflow-hidden shadow-[8px_8px_0px_rgba(0,0,0,0.8)] mb-8">
-            <div className="p-4 border-b-4 border-amber-900 bg-amber-100 flex items-center gap-3">
-                <h3 className="text-xl font-black text-amber-900 uppercase italic font-comic">
-                    Rasgos de Minotauro
-                </h3>
-            </div>
-            <div className="p-6 space-y-4">
-                <div className="bg-white border-2 border-amber-200 p-4 rounded-lg shadow-sm">
-                    <h4 className="font-bold text-amber-800 mb-2 uppercase text-sm border-b border-amber-100 pb-1">Rasgo Físico Distintivo</h4>
-                    <p className="text-gray-800 font-bold text-lg">Tienes cuernos que actuan como arma blanca, se puede adquirir la habilidad de arma especial para usarlos o usarlo directamente con la maniobra de Embestida.</p>
-                </div>
+        <WizardSection
+            title="Rasgos de Minotauro"
+            description="Efectos pasivos y rasgos especiales derivados de tu origen Arcano / Minotauro."
+        >
+            <InfoBox variant="warning">
+                <strong>Rasgo Físico Distintivo:</strong> Tienes cuernos que actuan como arma blanca. Puedes adquirir la habilidad de arma especial para usarlos, o usarlos directamente con la maniobra de Embestida.
+            </InfoBox>
 
-                <div className="bg-white border-2 border-amber-200 p-4 rounded-lg shadow-sm">
-                    <h4 className="font-bold text-amber-800 mb-2 uppercase text-sm border-b border-amber-100 pb-1">Efectos Pasivos (Arcano / Minotauro)</h4>
-                    <ul className="list-none space-y-2 text-gray-700">
+            {(arcanoEffects.length > 0 || minotauroEffects.length > 0) && (
+                <div style={{ marginTop: '1rem' }}>
+                    <p style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em', color: '#6b7280', marginBottom: '0.5rem' }}>
+                        Efectos Pasivos (Arcano / Minotauro)
+                    </p>
+                    <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', paddingLeft: 0, listStyle: 'none', margin: 0 }}>
                         {arcanoEffects.map((effect: string, idx: number) => (
-                            <li key={`arc-${idx}`} className="flex items-start gap-2">
+                            <li key={`arc-${idx}`} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', fontSize: '0.875rem', color: '#374151' }}>
+                                <span style={{ color: '#6366f1', fontWeight: 'bold', flexShrink: 0 }}>•</span>
                                 <span>{effect}</span>
                             </li>
                         ))}
                         {minotauroEffects.map((effect: string, idx: number) => (
-                            <li key={`min-${idx}`} className="flex items-start gap-2">
+                            <li key={`min-${idx}`} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', fontSize: '0.875rem', color: '#374151' }}>
+                                <span style={{ color: '#b45309', fontWeight: 'bold', flexShrink: 0 }}>•</span>
                                 <span>{effect}</span>
                             </li>
                         ))}
                     </ul>
                 </div>
-            </div>
-        </div>
+            )}
+        </WizardSection>
     );
 }
+
