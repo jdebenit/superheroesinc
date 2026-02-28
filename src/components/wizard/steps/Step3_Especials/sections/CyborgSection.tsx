@@ -13,7 +13,7 @@ import CyborgImplantRow from './CyborgImplantRow';
 import { TableContainer } from '../../../shared/TableContainer';
 import { EmptyState } from '../../../shared/EmptyState';
 import { PixelButton } from '../../../shared/PixelButton';
-import { useCyborgSectionLogic } from '../../../hooks/useCyborgSectionLogic';
+import { useCyborgSectionLogic } from '../hooks/useCyborgSectionLogic';
 
 interface CyborgSectionProps {
     implants: CyborgImplant[];

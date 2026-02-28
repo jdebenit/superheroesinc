@@ -1,17 +1,17 @@
 import React from 'react';
-import { MAGIC_OBJECTS } from '../../../data/magicObjects';
-import { ARTIFACTS } from '../../../data/artifacts';
-import { WizardSection } from '../shared/WizardSection';
-import { WizardField } from '../shared/WizardField';
-import { WizardGrid } from '../shared/WizardGrid';
-import { DynamicList } from '../shared/DynamicList';
-import { FormSelect } from '../shared/FormSelect';
-import { InfoBox } from '../shared/InfoBox';
-import { CostBadge } from '../shared/CostBadge';
-import { SectionHeaderBadge } from '../shared/SectionHeaderBadge';
-import { StatItem } from '../shared/StatItem';
-import { useStep6Logic } from '../hooks/useStep6Logic';
-import '../shared/WizardStep.css';
+import { MAGIC_OBJECTS } from '../../../../data/magicObjects';
+import { ARTIFACTS } from '../../../../data/artifacts';
+import { WizardSection } from '../../shared/WizardSection';
+import { WizardField } from '../../shared/WizardField';
+import { WizardGrid } from '../../shared/WizardGrid';
+import { DynamicList } from '../../shared/DynamicList';
+import { FormSelect } from '../../shared/FormSelect';
+import { InfoBox } from '../../shared/InfoBox';
+import { CostBadge } from '../../shared/CostBadge';
+import { SectionHeaderBadge } from '../../shared/SectionHeaderBadge';
+import { StatItem } from '../../shared/StatItem';
+import { useStep6Logic } from './useStep6Logic';
+import '../../shared/WizardStep.css';
 import './Step6_Details.css';
 
 interface Step6Props {

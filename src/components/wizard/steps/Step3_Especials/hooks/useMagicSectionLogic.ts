@@ -1,6 +1,6 @@
-import { SPELLS, type Spell } from '../../../data/spells';
-import { calculateEM, hasSubtype } from '../steps/Step3_Especials/utils';
-import type { SelectedPower } from '../steps/Step3_Especials/types';
+import { SPELLS, type Spell } from '../../../../../data/spells';
+import { calculateEM, hasSubtype } from '../utils';
+import type { SelectedPower } from '../types';
 
 const TERRANO_TABLE_OPTIONS = [
     { id: 'guardian_power', label: 'Acceso a Poder de Guardián', cost: 2, costText: '+2 PC' },

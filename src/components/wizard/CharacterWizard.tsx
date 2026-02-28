@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import CharacterSheet from '../character/CharacterSheet';
-import Step1_OriginSelection from './steps/Step1_OriginSelection';
-import Step2_Characteristics from './steps/Step2_Characteristics';
-import Step3_Especials from './steps/Step3_Especials';
+import Step1_OriginSelection from './steps/Step1_OriginSelection/index';
+import Step2_Characteristics from './steps/Step2_Characteristics/index';
+import Step3_Especials from './steps/Step3_Especials/index';
 import Step4_Skills from './steps/Step4_Skills/index';
-import Step5_Background from './steps/Step5_Background';
-import Step6_Details from './steps/Step6_Details';
-import Step7_Evolution from './steps/Step7_Evolution';
+import Step5_Background from './steps/Step5_Background/index';
+import Step6_Details from './steps/Step6_Details/index';
+import Step7_Evolution from './steps/Step7_Evolution/index';
 import {
     STEPS,
     initialCharacterState

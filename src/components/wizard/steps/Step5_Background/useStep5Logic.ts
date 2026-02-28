@@ -1,5 +1,5 @@
-import { useState, useMemo, useCallback } from 'react';
-import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS, FRIENDS_AND_ASSOCIATES } from '../../../data/backgroundTables';
+import { useMemo, useCallback } from 'react';
+import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS, FRIENDS_AND_ASSOCIATES } from '../../../../data/backgroundTables';
 
 export function useStep5Logic(data: any, onChange: (updates: any) => void) {
     const resistanceValue = data.background?.prejudiceResistance || 50;

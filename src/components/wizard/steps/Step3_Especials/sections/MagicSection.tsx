@@ -10,7 +10,7 @@ import { TableContainer } from '../../../shared/TableContainer';
 import { EmptyState } from '../../../shared/EmptyState';
 import { InfoBox } from '../../../shared/InfoBox';
 import { PixelButton } from '../../../shared/PixelButton';
-import { useMagicSectionLogic } from '../../../hooks/useMagicSectionLogic';
+import { useMagicSectionLogic } from '../hooks/useMagicSectionLogic';
 
 interface MagicSectionProps {
     data: any;

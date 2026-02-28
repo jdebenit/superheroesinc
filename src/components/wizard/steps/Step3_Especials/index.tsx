@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Step3Props } from './types';
 import './Step3_Especials.css';
-import { useStep3Logic } from '../../hooks/useStep3Logic';
+import { useStep3Logic } from './hooks/useStep3Logic';
 
 // Section Components
 import VigilanteTraumasSection from './sections/VigilanteTraumasSection';

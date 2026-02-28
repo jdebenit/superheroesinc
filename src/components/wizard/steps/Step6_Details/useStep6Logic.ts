@@ -1,7 +1,7 @@
 import { useEffect, useCallback } from 'react';
-import { calculateDerivedStats } from '../../../utils/characterCalculations';
-import { ARTIFACTS } from '../../../data/artifacts';
-import { MAGIC_OBJECTS } from '../../../data/magicObjects';
+import { calculateDerivedStats } from '../../../../utils/characterCalculations';
+import { ARTIFACTS } from '../../../../data/artifacts';
+import { MAGIC_OBJECTS } from '../../../../data/magicObjects';
 
 export function useStep6Logic(data: any, onChange: (updates: any) => void) {
     // Derived Stats Effect

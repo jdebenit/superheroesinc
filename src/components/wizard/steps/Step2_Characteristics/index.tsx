@@ -1,10 +1,10 @@
 import React from 'react';
-import { calculateLimits, calculateSpecialtyAllowedCharacteristics } from '../../../utils/characterCalculations';
-import { WizardSection } from '../shared/WizardSection';
-import { WizardField } from '../shared/WizardField';
-import { CostBadge } from '../shared/CostBadge';
-import { CHARACTERISTICS_CONFIG, useStep2Logic } from '../hooks/useStep2Logic';
-import '../shared/WizardStep.css';
+import { calculateLimits, calculateSpecialtyAllowedCharacteristics } from '../../../../utils/characterCalculations';
+import { WizardSection } from '../../shared/WizardSection';
+import { WizardField } from '../../shared/WizardField';
+import { CostBadge } from '../../shared/CostBadge';
+import { CHARACTERISTICS_CONFIG, useStep2Logic } from './useStep2Logic';
+import '../../shared/WizardStep.css';
 import './Step2_Characteristics.css';
 
 interface Step2Props {

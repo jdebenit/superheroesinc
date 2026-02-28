@@ -1,9 +1,9 @@
 import { useState, useMemo, useEffect, useCallback } from 'react';
-import { POWERS } from '../../../data/powers';
-import { SPELLS, type Spell } from '../../../data/spells';
-import { TECH_MODULES } from '../../../data/techModules';
-import { useCharacterAutoEffects } from '../../../hooks/wizard/useCharacterAutoEffects';
-import { useCharacterValidation } from '../../../hooks/wizard/useCharacterValidation';
+import { POWERS } from '../../../../../data/powers';
+import { SPELLS, type Spell } from '../../../../../data/spells';
+import { TECH_MODULES } from '../../../../../data/techModules';
+import { useCharacterAutoEffects } from '../../../../../hooks/wizard/useCharacterAutoEffects';
+import { useCharacterValidation } from '../../../../../hooks/wizard/useCharacterValidation';
 import {
     hasOrigin,
     hasSubtype,
@@ -12,9 +12,9 @@ import {
     isGuardian,
     isMaldito,
     getPowerPenalty
-} from '../steps/Step3_Especials/utils';
-import type { SelectedPower, SelectedSpell, TechModule, ModalType } from '../steps/Step3_Especials/types';
-import type { CyborgImplant } from '../../../data/cyborgImplantConfigs';
+} from '../utils';
+import type { SelectedPower, SelectedSpell, TechModule, ModalType } from '../types';
+import type { CyborgImplant } from '../../../../../data/cyborgImplantConfigs';
 
 export function useStep3Logic(data: any, onChange: (updates: any) => void, onShowToast?: (msg: string, type: 'error' | 'success') => void) {
     const [modalOpen, setModalOpen] = useState(false);

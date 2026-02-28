@@ -1,7 +1,6 @@
 import React from 'react';
-import { WizardSection } from '../shared/WizardSection';
-import '../shared/WizardStep.css';
-
+import { WizardSection } from '../../shared/WizardSection';
+import '../../shared/WizardStep.css';
 import './Step7_Evolution.css';
 
 export default function Step7_Evolution() {
@@ -28,6 +27,5 @@ export default function Step7_Evolution() {
                 </div>
             </WizardSection>
         </div>
-
     );
 }

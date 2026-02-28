@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { POWERS } from '../../../data/powers';
+import { POWERS } from '../../../../data/powers';
 import {
     calculateOriginModifiers,
     calculateLimits,
@@ -11,7 +11,7 @@ import {
     getSpecialtyDistributablePointsInfo,
     calculateSpecialtyAllowedCharacteristics,
     calculateCreationPoints
-} from '../../../utils/characterCalculations';
+} from '../../../../utils/characterCalculations';
 
 export const CHARACTERISTICS_CONFIG = [
     { id: 'fuerza', name: 'Fuerza', abbr: 'FUE' },

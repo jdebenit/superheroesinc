@@ -1,13 +1,13 @@
 import React from 'react';
-import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS, FRIENDS_AND_ASSOCIATES } from '../../../data/backgroundTables';
-import { WizardSection } from '../shared/WizardSection';
-import { SectionHeaderBadge } from '../shared/SectionHeaderBadge';
-import { WizardField } from '../shared/WizardField';
-import { WizardRange } from '../shared/WizardRange';
-import { StatusSelectCard } from '../shared/StatusSelectCard';
-import { DynamicList } from '../shared/DynamicList';
-import { useStep5Logic } from '../hooks/useStep5Logic';
-import '../shared/WizardStep.css';
+import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS, FRIENDS_AND_ASSOCIATES } from '../../../../data/backgroundTables';
+import { WizardSection } from '../../shared/WizardSection';
+import { SectionHeaderBadge } from '../../shared/SectionHeaderBadge';
+import { WizardField } from '../../shared/WizardField';
+import { WizardRange } from '../../shared/WizardRange';
+import { StatusSelectCard } from '../../shared/StatusSelectCard';
+import { DynamicList } from '../../shared/DynamicList';
+import { useStep5Logic } from './useStep5Logic';
+import '../../shared/WizardStep.css';
 import './Step5_Background.css';
 
 interface Step5Props {
@@ -30,8 +30,6 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
         handleResistanceChange,
         updateStatus
     } = useStep5Logic(data, onChange);
-
-    // Using shared Component StatusSelectCard instead of renderStatusSelect inline function
 
     return (
         <div className="wizard-step-container">

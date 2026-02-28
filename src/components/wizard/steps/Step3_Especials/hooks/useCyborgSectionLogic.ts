@@ -3,7 +3,7 @@ import {
     CYBORG_IMPLANT_STATS,
     CYBORG_IMPLANT_STRENGTHS,
     type CyborgImplant
-} from '../../../data/cyborgImplantConfigs';
+} from '../../../../../data/cyborgImplantConfigs';
 
 export function useCyborgSectionLogic(implants: CyborgImplant[] = [], onChange: (implants: CyborgImplant[]) => void) {
     const [newImplantName, setNewImplantName] = useState('');
