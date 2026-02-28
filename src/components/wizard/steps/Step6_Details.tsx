@@ -175,7 +175,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
 
     return (
         <>
-            <div style={{ padding: '2rem' }}>
+            <div className="step6-container">
 
                 {/* Header Description */}
                 <h2 style={stepPageTitleStyle}>

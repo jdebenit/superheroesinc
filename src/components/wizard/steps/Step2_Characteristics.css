@@ -4,6 +4,9 @@
 
 .step2-container {
     padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }
 
 /* --- Bonus Choice Box (origin bonus target) --- */

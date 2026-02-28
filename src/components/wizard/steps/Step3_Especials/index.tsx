@@ -705,8 +705,8 @@ export default function Step3_Especials({ data, onChange, onShowToast }: Step3Pr
     ]);
 
     return (
-        <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-            <h2 style={stepPageTitleStyle}>
+        <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <h2 style={{ ...stepPageTitleStyle, marginBottom: '0.5rem' }}>
                 Poderes y Habilidades Especiales
             </h2>
 

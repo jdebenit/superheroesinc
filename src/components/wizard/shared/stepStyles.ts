@@ -31,7 +31,6 @@ export const sectionCardStyle: CSSProperties = {
     border: '2px solid #e5e7eb',
     borderRadius: '12px',
     padding: '1.5rem',
-    marginBottom: '2rem',
     boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06)',
 };
 

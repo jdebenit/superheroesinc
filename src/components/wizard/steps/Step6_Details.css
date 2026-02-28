@@ -2,6 +2,13 @@
    Step 6 : Final Details
    ========================================================================= */
 
+.step6-container {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
 /* Identity Section */
 .step6-identity-grid {
     display: grid;
