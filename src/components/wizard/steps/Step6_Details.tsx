@@ -233,14 +233,12 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                 </WizardSection>
 
                 {/* COMBAT STATS SECTION */}
-                <WizardSection
-                    title="Estadísticas de Combate"
-                    description={
-                        <span style={{ fontSize: '0.85rem', opacity: 0.9 }}>
-                            🔒 Calculadas automáticamente a partir de tus características — no son editables.
-                        </span>
-                    }
-                >
+                <WizardSection title="Estadísticas de Combate">
+                    <div style={{ marginBottom: '1.5rem' }}>
+                        <InfoBox variant="info" icon="🔒">
+                            Calculadas automáticamente a partir de tus características — no son editables.
+                        </InfoBox>
+                    </div>
                     <div className="step6-combat-stats-grid">
                         {data.combatstats?.map((stat, index) => {
                             const [label, val] = stat.split(': ');
@@ -250,14 +248,12 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                 </WizardSection>
 
                 {/* OTHER STATS SECTION */}
-                <WizardSection
-                    title="Otras Estadísticas"
-                    description={
-                        <span style={{ fontSize: '0.85rem', opacity: 0.9 }}>
-                            🔒 Calculadas automáticamente a partir de tus características — no son editables.
-                        </span>
-                    }
-                >
+                <WizardSection title="Otras Estadísticas">
+                    <div style={{ marginBottom: '1.5rem' }}>
+                        <InfoBox variant="info" icon="🔒">
+                            Calculadas automáticamente a partir de tus características — no son editables.
+                        </InfoBox>
+                    </div>
                     <div className="step6-other-stats-container">
                         {data.otherstats?.map((stat, index) => {
                             const colonIdx = stat.indexOf(': ');

@@ -74,7 +74,7 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
                     <CostBadge
                         cost={currentObj.cost > 0 ? `+${currentObj.cost}` : currentObj.cost}
                         label="PC"
-                        variant={currentObj.cost === 0 ? "free" : (currentObj.cost > 0 ? "penalty" : "bonus")}
+                        variant={currentObj.cost === 0 ? "default" : (currentObj.cost > 0 ? "penalty" : "bonus")}
                     />
                 </div>
             </div>

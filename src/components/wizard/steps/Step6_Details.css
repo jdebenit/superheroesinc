@@ -23,8 +23,9 @@
 /* Notes Section */
 .step6-notes-description {
     font-size: 0.85rem;
-    color: #6b7280;
-    margin-bottom: 0.75rem;
+    color: #475569;
+    /* slate-600 */
+    margin-bottom: 1rem;
     margin-top: 0;
 }
 
@@ -39,55 +40,71 @@
     padding: 1rem;
     border-radius: 8px;
     border: 1px solid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: white;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 }
 
 .stat-item-label {
     display: block;
-    font-size: 0.8rem;
-    font-weight: bold;
+    font-size: 0.75rem;
+    font-weight: 700;
     text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
 }
 
 .stat-item-value {
-    font-size: 1.25rem;
-    font-weight: bold;
+    font-size: 1.5rem;
+    font-weight: 800;
+    line-height: 1;
 }
 
 /* Red Stat Theme */
 .stat-item-red {
-    background-color: #fef2f2;
-    border-color: #fee2e2;
+    border-color: #fca5a5;
+    /* red-300 */
 }
 
 .stat-item-red .stat-item-label {
-    color: #991b1b;
+    color: #b91c1c;
+    /* red-700 */
 }
 
 .stat-item-red .stat-item-value {
-    color: #dc2626;
+    color: #ef4444;
+    /* red-500 */
 }
 
 /* Purple Stat Theme */
 .stat-item-purple {
-    background-color: #f5f3ff;
-    border-color: #ede9fe;
+    border-color: #d8b4fe;
+    /* purple-300 */
 }
 
 .stat-item-purple .stat-item-label {
-    color: #5b21b6;
+    color: #6d28d9;
+    /* purple-700 */
 }
 
 .stat-item-purple .stat-item-value {
-    color: #7c3aed;
+    color: #8b5cf6;
+    /* purple-500 */
 }
 
 /* Other Stats Table */
 .step6-other-stats-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 0;
-    border: 1px solid #ede9fe;
-    border-radius: 10px;
+    gap: 1px;
+    background-color: #e2e8f0;
+    /* slate-200 for inner borders */
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
     overflow: hidden;
 }
 
@@ -95,35 +112,30 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.6rem 1rem;
-    border-bottom: 1px solid #f3e8ff;
-    gap: 1rem;
-    min-width: 0;
-}
-
-.step6-other-stat-row.even {
+    padding: 0.75rem 1rem;
     background-color: white;
-}
-
-.step6-other-stat-row.odd {
-    background-color: #faf5ff;
+    min-width: 0;
 }
 
 .step6-other-stat-label {
     font-size: 0.875rem;
-    color: #5b21b6;
+    color: #334155;
+    /* slate-700 */
     font-weight: 500;
     flex-shrink: 0;
 }
 
 .step6-other-stat-value {
-    font-size: 0.95rem;
-    font-weight: bold;
-    color: #7c3aed;
-    background: #f5f3ff;
-    border: 1px solid #ddd6fe;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #0f172a;
+    /* slate-900 */
+    background: #f1f5f9;
+    /* slate-100 */
+    border: 1px solid #cbd5e1;
+    /* slate-300 */
     border-radius: 6px;
-    padding: 0.15rem 0.6rem;
+    padding: 0.25rem 0.75rem;
     white-space: nowrap;
 }
 
@@ -131,13 +143,13 @@
 .inventory-card {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 1rem;
 }
 
 /* Equipment Grid */
 .equipment-grid {
     display: grid;
-    grid-template-columns: 2fr 3fr 100px;
+    grid-template-columns: 2fr 3fr 120px;
     gap: 1rem;
     align-items: start;
 }
@@ -145,15 +157,15 @@
 /* Vehicles Grid */
 .vehicle-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 100px;
-    gap: 0.75rem;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr 120px;
+    gap: 1rem;
     align-items: start;
 }
 
 /* Artifacts Grid */
 .artifact-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 100px;
+    grid-template-columns: 2fr 1fr 1fr 120px;
     gap: 1rem;
     align-items: start;
 }
@@ -161,37 +173,40 @@
 /* Magic Objects Grid */
 .magic-grid {
     display: grid;
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: 3fr 120px;
     gap: 1rem;
     align-items: start;
 }
 
-/* Weapon Specific (Moved from Inline Style Tag) */
+/* Weapon Specific */
 .weapon-card {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 1rem;
 }
 
 .weapon-row-top {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr 100px;
-    gap: 0.75rem;
+    grid-template-columns: 2fr 1fr 1fr 1fr 120px;
+    gap: 1rem;
     align-items: start;
 }
 
 /* Global Section Header Badge */
 .section-header-badge {
-    background-color: rgba(255, 255, 255, 0.2);
-    padding: 0.25rem 0.5rem;
-    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
 }
 
 /* --- Responsive Adjustments --- */
 @media (max-width: 768px) {
+    .step6-container {
+        padding: 1rem;
+    }
+
     .step6-identity-grid {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+        gap: 1rem;
     }
 
     .equipment-grid {
@@ -215,14 +230,15 @@
     }
 
     .magic-grid {
-        grid-template-columns: 2fr 1fr;
+        grid-template-columns: 1fr;
     }
 
     .weapon-row-top {
         grid-template-columns: 1fr 1fr;
     }
 
-    .weapon-row-top>*:first-child {
+    .weapon-row-top>*:first-child,
+    .weapon-row-top>*:last-child {
         grid-column: 1 / -1;
     }
 }
