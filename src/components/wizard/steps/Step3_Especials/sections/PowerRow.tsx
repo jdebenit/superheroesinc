@@ -1,6 +1,15 @@
 import React from 'react';
 import { POWERS } from '../../../../../data/powers';
-import { calculateSkillBase, getCharacteristicValue, getRankLevel, getPowerPenalty, getPowerCostConfig, calculatePowerBaseCost, getBaseCostAdjustment, type PowerContext } from '../utils';
+import {
+    calculateSkillBase,
+    getCharacteristicValue,
+    getRankLevel,
+    getPowerPenalty,
+    getPowerCostConfig,
+    calculatePowerBaseCost,
+    getBaseCostAdjustment,
+    type PowerContext
+} from '../utils';
 import type { SelectedPower } from '../types';
 import { Badge } from '../../../shared/ui/Badge';
 import { NumberControl } from '../../../shared/forms/NumberControl';
@@ -55,46 +64,48 @@ const ORIGIN_TAG_COLORS: Record<string, "blue" | "purple" | "red" | "orange" | "
     'Elfo Físico': 'green'
 };
 
-export default function PowerRow({
-    selection,
-    data,
-    index,
-    onUpdateRank,
-    onUpdateMod,
-    onUpdateSkillValue,
-    onUpdateOption,
-    onUpdateCustomizations,
-    onRemove,
-    isParahumanoHybrid,
-    isTesKhar,
-    isAtlante,
-    isTroll,
-    isSemidemonio,
-    isThalsDiscount,
-    isThalsFree,
-    isEnano,
-    isGrifo,
-    isElfoFisico,
-    isHadaEter,
-    isHadaAire,
-    isHadaFuego,
-    isHadaAgua,
-    isHadaTierra
-}: PowerRowProps) {
-    const p = POWERS.find(power => power.id === selection.id);
-    if (!p) return null;
+/* ── Sub-components for Cleaner Structure ────────────────────────────────── */
 
-    const context: PowerContext = {
-        isParahumanoHybrid, isTesKhar, isAtlante, isTroll, isSemidemonio,
-        isThalsDiscount, isThalsFree, isEnano, isGrifo, isElfoFisico,
-        isHadaEter, isHadaAire, isHadaFuego, isHadaAgua, isHadaTierra
-    };
+const PowerNameCell: React.FC<{
+    power: any;
+    selection: SelectedPower;
+    index: number;
+    isPenalty: boolean;
+    penaltyLabel?: string;
+    onUpdateOption: (index: number, val: string) => void;
+}> = ({ power: p, selection, index, isPenalty, penaltyLabel, onUpdateOption }) => (
+    <td className="power-cell name-cell">
+        <div className="power-name-container">
+            <span>{p.name}</span>
+            {isPenalty && penaltyLabel && (
+                <Badge label={penaltyLabel} color="yellow" className="power-penalty-badge-inline" />
+            )}
+        </div>
+        {p.options && p.options.length > 0 && (
+            <div className="power-options-container">
+                <WizardField
+                    label=""
+                    placeholder={p.options[0]}
+                    value={selection.selectedOption || ''}
+                    onChange={(val: string) => onUpdateOption(index, val)}
+                    noMargin
+                />
+            </div>
+        )}
+    </td>
+);
 
-    const costConfig = getPowerCostConfig(p, selection, context);
+const PowerRankFormula: React.FC<{
+    power: any;
+    selection: SelectedPower;
+    data: any;
+    index: number;
+    context: PowerContext;
+    costConfig: any;
+    penaltyInfo: any;
+    onUpdateRank: (index: number, val: number) => void;
+}> = ({ power: p, selection, data, index, context, costConfig, penaltyInfo, onUpdateRank }) => {
     const { freeRank, isFixedCost } = costConfig;
-
-    const penaltyInfo = getPowerPenalty(data, p);
-    const isPenalty = penaltyInfo.type !== 'none';
     const adjustment = getBaseCostAdjustment(p, selection, context, penaltyInfo);
 
     let displayBaseCostStr = p.cost.toString();
@@ -103,278 +114,208 @@ export default function PowerRow({
     }
 
     const renderDisplayCost = () => {
-        if (isFixedCost) { // Thals Free
-            return <CostBadge cost={0} variant="free" />;
-        }
+        if (isFixedCost) return <CostBadge cost={0} variant="free" />;
         if (freeRank > 0) {
             return (
-                <div className="flex flex-col items-center">
+                <div className="power-formula-item power-formula-item--free">
                     <CostBadge cost={0} variant="free" />
-                    <span className="text-[9px] text-green-600 mt-0.5">({freeRank} R. Gratis)</span>
+                    <span className="power-free-rank-label">({freeRank} R. Gratis)</span>
                 </div>
             );
         }
-        return <span className='font-bold text-gray-700'>{displayBaseCostStr}</span>;
+        return <span className="power-base-cost-value">{displayBaseCostStr}</span>;
     };
 
+    const minVal = p.skillCalc ? calculateSkillBase(data, p.skillCalc) : 0;
+    const extraPoints = Math.max(0, (selection.skillValue || minVal) - minVal);
+    const custCost = (selection.customizations || []).reduce((sum, c) => sum + (c.cost || 0), 0);
+    const baseCost = calculatePowerBaseCost(p, selection, context, penaltyInfo);
+    const total = baseCost + (selection.rank * 0.1) + (extraPoints * 0.1) + custCost;
+
+    return (
+        <div className="power-cost-formula-layout">
+            <div className="power-cost-formula">
+                <div className="power-formula-item">{renderDisplayCost()}</div>
+                <span className="power-formula-operator">+</span>
+                <NumberControl
+                    value={selection.rank}
+                    onChange={(val) => onUpdateRank(index, val)}
+                    min={1} max={100} label="" description="Rango"
+                />
+                <span className="power-formula-operator">/10</span>
+                {extraPoints > 0 && (
+                    <>
+                        <span className="power-formula-operator">+</span>
+                        <div className="power-formula-item">
+                            <span className="power-formula-value highlight-amber">{extraPoints}</span>
+                            <span className="power-formula-label">Hab.</span>
+                        </div>
+                        <span className="power-formula-operator">/10</span>
+                    </>
+                )}
+                {custCost !== 0 && (
+                    <>
+                        <span className="power-formula-operator">{custCost >= 0 ? '+' : '-'}</span>
+                        <div className="power-formula-item">
+                            <span className={`power-formula-value ${custCost >= 0 ? 'highlight-red' : 'highlight-green'}`}>{Math.abs(custCost)}</span>
+                            <span className="power-formula-label">Pers.</span>
+                        </div>
+                    </>
+                )}
+                <span className="power-formula-operator">=</span>
+                <div className="power-formula-item power-formula-item--total">
+                    <Badge label={Math.max(0, total).toFixed(1)} className="power-badge-total" />
+                    <span className="power-badge-label">Total</span>
+                </div>
+            </div>
+            <span className="power-formula-label font-bold">{getRankLevel(selection.rank)}</span>
+        </div>
+    );
+};
+
+const PowerCharFormula: React.FC<{
+    power: any;
+    selection: SelectedPower;
+    data: any;
+    index: number;
+    context: PowerContext;
+    penaltyInfo: any;
+    isSemidemonio: boolean;
+    onUpdateMod: (index: number, val: number) => void;
+}> = ({ power: p, selection, data, index, context, penaltyInfo, isSemidemonio, onUpdateMod }) => {
+    const charValue = getCharacteristicValue(data, getCharName(p.characteristic || '')) - (selection.powerMod || 0);
+    const effectivePowerMod = isSemidemonio && selection.origin === 'Sobrenatural' ? Math.max(0, (selection.powerMod || 0) - 10) : (selection.powerMod || 0);
+    const modCost = effectivePowerMod / 10;
+    const custCost = (selection.customizations || []).reduce((sum, c) => sum + (c.cost || 0), 0);
+    const baseCost = calculatePowerBaseCost(p, selection, context, penaltyInfo);
+    const adjustment = getBaseCostAdjustment(p, selection, context, penaltyInfo);
+    const total = Math.max(0, baseCost + modCost + custCost);
+
+    return (
+        <div className="power-char-formula-layout">
+            <div className="power-char-info">
+                <div className="power-char-component">
+                    <span className="power-char-value">{charValue}</span>
+                    <span className="power-char-label">{p.characteristic}</span>
+                </div>
+                <span className="power-formula-operator power-operator-aligned">+</span>
+                <NumberControl
+                    value={selection.powerMod || 0}
+                    onChange={(val) => { if (charValue + val <= 200) onUpdateMod(index, val); }}
+                    min={0} max={200} description="Mod. Poder" className="power-char-mod-input"
+                />
+                <span className="power-formula-operator power-operator-aligned">=</span>
+                <div className="power-char-component">
+                    <span className="power-char-value total">{charValue + (selection.powerMod || 0)}</span>
+                    <span className="power-char-label">Total</span>
+                </div>
+            </div>
+            <div className="power-summary-container">
+                {p.cost}
+                {adjustment !== 0 && (
+                    <span className={`power-penalty-value ${adjustment > 0 ? 'penalty-positive' : 'penalty-negative'}`}>
+                        {adjustment > 0 ? ' +' : ' -'} {Math.abs(adjustment)}
+                    </span>
+                )}
+                {' + '}{modCost.toFixed(1)}
+                {isSemidemonio && selection.origin === 'Sobrenatural' && (selection.powerMod || 0) >= 10 && (
+                    <span className="power-discount-label">(-10 gratis)</span>
+                )}
+                {custCost !== 0 && (
+                    <> {custCost >= 0 ? '+' : '-'} {Math.abs(custCost)} <span className="power-summary-label">(Pers.)</span></>
+                )}
+                {' = '}<CostBadge cost={total.toFixed(1)} />
+            </div>
+        </div>
+    );
+};
+
+const PowerCustomizationsList: React.FC<{
+    customizations: { id: string; description: string; cost: number }[];
+    index: number;
+    onUpdateCustomizations: (index: number, val: any[]) => void;
+}> = ({ customizations, index, onUpdateCustomizations }) => (
+    <div className="power-customization-section">
+        {customizations.length > 0 && (
+            <div className="power-customizations-list">
+                {customizations.map((cust, cIdx) => (
+                    <div key={cust.id} className="power-customization-row">
+                        <WizardField
+                            label="" value={cust.description} placeholder="Detalle personalización" noMargin className="flex-grow"
+                            onChange={(val: string) => {
+                                const newCusts = [...customizations];
+                                newCusts[cIdx] = { ...newCusts[cIdx], description: val };
+                                onUpdateCustomizations(index, newCusts);
+                            }}
+                        />
+                        <WizardField
+                            label="" type="number" min="-10" max="10" value={cust.cost} noMargin className="w-20"
+                            onChange={(val: string) => {
+                                const clamped = Math.max(-10, Math.min(10, parseFloat(val) || 0));
+                                const newCusts = [...customizations];
+                                newCusts[cIdx] = { ...newCusts[cIdx], cost: clamped };
+                                onUpdateCustomizations(index, newCusts);
+                            }}
+                        />
+                        <span className="power-customization-pcs">PCs</span>
+                        <button
+                            className="power-remove-customization"
+                            onClick={() => onUpdateCustomizations(index, customizations.filter((_, i) => i !== cIdx))}
+                        >×</button>
+                    </div>
+                ))}
+            </div>
+        )}
+        <button
+            className="power-add-customization-btn"
+            onClick={() => onUpdateCustomizations(index, [...customizations, { id: Date.now().toString(), description: '', cost: 0 }])}
+        >+ Personalización</button>
+    </div>
+);
+
+/* ── Main Component ────────────────────────────────────────────────────────── */
+
+export default function PowerRow({
+    selection, data, index, onUpdateRank, onUpdateMod, onUpdateSkillValue,
+    onUpdateOption, onUpdateCustomizations, onRemove, ...context
+}: PowerRowProps) {
+    const p = POWERS.find(power => power.id === selection.id);
+    if (!p) return null;
+
+    const costConfig = getPowerCostConfig(p, selection, context);
+    const penaltyInfo = getPowerPenalty(data, p);
     const isEven = index % 2 === 0;
 
     return (
-        <tr key={`${selection.id}-${selection.origin}-${index}`} className={`power-row ${isEven ? 'even' : ''}`}>
-            <td className="power-cell name-cell">
-                <div className="power-name-container">
-                    <span>{p.name}</span>
-                    {isPenalty && penaltyInfo.label && (
-                        <Badge label={penaltyInfo.label} color="yellow" className="text-xs" />
-                    )}
-                </div>
-                {p.options && p.options.length > 0 && (
-                    <div className="power-options-container">
-                        <WizardField
-                            label=""
-                            placeholder={p.options[0]}
-                            value={selection.selectedOption || ''}
-                            onChange={(val: string) => onUpdateOption(index, val)}
-                            noMargin
-                        />
-                    </div>
-                )}
-            </td>
+        <tr className={`power-row ${isEven ? 'even' : ''}`}>
+            <PowerNameCell
+                power={p} selection={selection} index={index}
+                isPenalty={penaltyInfo.type !== 'none'} penaltyLabel={penaltyInfo.label}
+                onUpdateOption={onUpdateOption}
+            />
+
             <td className="power-cell">
-                {!p.characteristic ? (
-                    <div className="power-formula-component" style={{ gap: '0.5rem' }}>
-                        <div className="power-cost-formula">
-                            <div className="flex items-center">
-                                {renderDisplayCost()}
-                            </div>
-                            <span className="power-formula-operator">+</span>
-
-                            <NumberControl
-                                value={selection.rank}
-                                onChange={(val) => onUpdateRank(index, val)}
-                                min={1}
-                                max={100}
-                                label=""
-                                description="Rango"
-                            />
-
-                            <span className="power-formula-operator">/10</span>
-
-                            {(() => {
-                                const minVal = p.skillCalc ? calculateSkillBase(data, p.skillCalc) : 0;
-                                const currentVal = selection.skillValue || minVal;
-                                const extraPoints = Math.max(0, currentVal - minVal);
-
-                                if (extraPoints > 0) {
-                                    return (
-                                        <>
-                                            <span className="power-formula-operator">+</span>
-                                            <div className="power-formula-component">
-                                                <span className="power-formula-value highlight-amber">{extraPoints}</span>
-                                                <span className="power-formula-label">Hab.</span>
-                                            </div>
-                                            <span className="power-formula-operator">/10</span>
-                                        </>
-                                    );
-                                }
-                                return null;
-                            })()}
-
-                            {(() => {
-                                // Calculate total customization cost for display
-                                const custCost = (selection.customizations || []).reduce((sum, c) => sum + (c.cost || 0), 0);
-                                if (custCost !== 0) {
-                                    return (
-                                        <>
-                                            <span className="power-formula-operator">{custCost >= 0 ? '+' : '-'}</span>
-                                            <div className="power-formula-component">
-                                                <span className={`power-formula-value ${custCost >= 0 ? 'highlight-red' : 'highlight-green'}`}>{Math.abs(custCost)}</span>
-                                                <span className="power-formula-label">Pers.</span>
-                                            </div>
-                                        </>
-                                    );
-                                }
-                                return null;
-                            })()}
-
-                            <span className="power-formula-operator">=</span>
-
-                            {(() => {
-                                const minVal = p.skillCalc ? calculateSkillBase(data, p.skillCalc) : 0;
-                                const currentVal = selection.skillValue || minVal;
-                                const extraCost = Math.max(0, currentVal - minVal) * 0.1;
-
-                                const baseCost = calculatePowerBaseCost(p, selection, context, penaltyInfo);
-
-                                // Recalculate total
-                                const custCost = (selection.customizations || []).reduce((sum, c) => sum + (c.cost || 0), 0);
-                                const rank = selection.rank || 1;
-                                const rankCost = rank * 0.1;
-
-                                const total = baseCost + rankCost + extraCost + custCost;
-
-                                return (
-                                    <div className="flex flex-col items-center">
-                                        <Badge
-                                            label={Math.max(0, total).toFixed(1)}
-                                            className="text-lg font-bold"
-                                        />
-                                        <span className="text-xs text-gray-400">Total</span>
-                                    </div>
-                                );
-                            })()}
-                        </div>
-
-                        {/* Customizations List */}
-                        {(selection.customizations || []).length > 0 && (
-                            <div className="power-customizations-list">
-                                {selection.customizations?.map((cust, cIdx) => (
-                                    <div key={cust.id} className="power-customization-row">
-                                        <WizardField
-                                            label=""
-                                            value={cust.description}
-                                            placeholder="Detalle personalización"
-                                            onChange={(val: string) => {
-                                                const newCusts = [...(selection.customizations || [])];
-                                                newCusts[cIdx] = { ...newCusts[cIdx], description: val };
-                                                onUpdateCustomizations(index, newCusts);
-                                            }}
-                                            noMargin
-                                            className="flex-grow"
-                                        />
-                                        <WizardField
-                                            label=""
-                                            type="number"
-                                            min="-10"
-                                            max="10"
-                                            value={cust.cost}
-                                            onChange={(val: string) => {
-                                                const newCusts = [...(selection.customizations || [])];
-                                                const parseVal = parseFloat(val) || 0;
-                                                const clamped = Math.max(-10, Math.min(10, parseVal));
-                                                newCusts[cIdx] = { ...newCusts[cIdx], cost: clamped };
-                                                onUpdateCustomizations(index, newCusts);
-                                            }}
-                                            noMargin
-                                            className="w-20"
-                                        />
-                                        <span className="power-customization-pcs">PCs</span>
-                                        <button
-                                            onClick={() => {
-                                                const newCusts = selection.customizations?.filter((_, i) => i !== cIdx) || [];
-                                                onUpdateCustomizations(index, newCusts);
-                                            }}
-                                            className="power-remove-customization"
-                                        >
-                                            ×
-                                        </button>
-                                    </div>
-                                ))}
-                            </div>
-                        )}
-                        <div>
-                            <button
-                                onClick={() => {
-                                    const newCusts = [...(selection.customizations || [])];
-                                    newCusts.push({ id: Date.now().toString(), description: '', cost: 0 });
-                                    onUpdateCustomizations(index, newCusts);
-                                }}
-                                className="power-add-customization-btn"
-                            >
-                                + Personalización
-                            </button>
-                        </div>
-
-                        <span className="power-formula-label font-bold">
-                            {getRankLevel(selection.rank)}
-                        </span>
-                    </div>
-                ) : (
-                    <div className="power-formula-component" style={{ gap: '0.5rem' }}>
-                        <div className="power-char-info">
-                            {/* Characteristic Value */}
-                            <div className="power-char-component">
-                                <span className="power-char-value">
-                                    {getCharacteristicValue(data, getCharName(p.characteristic || '')) - (selection.powerMod || 0)}
-                                </span>
-                                <span className="power-char-label">
-                                    {p.characteristic}
-                                </span>
-                            </div>
-
-                            <span className="power-formula-operator pt-1">+</span>
-
-                            {/* Power Mod Input */}
-                            <NumberControl
-                                value={selection.powerMod || 0}
-                                onChange={(val) => {
-                                    const charValue = getCharacteristicValue(data, getCharName(p.characteristic || '')) - (selection.powerMod || 0);
-                                    const total = charValue + val;
-                                    if (total <= 200) {
-                                        onUpdateMod(index, val);
-                                    }
-                                }}
-                                min={0}
-                                max={200}
-                                description="Mod. Poder"
-                                className="text-green-600"
-                            />
-
-                            <span className="power-formula-operator pt-1">=</span>
-
-                            {/* Total */}
-                            <div className="power-char-component">
-                                <span className="power-char-value total">
-                                    {getCharacteristicValue(data, getCharName(p.characteristic || ''))}
-                                </span>
-                                <span className="power-char-label">
-                                    Total
-                                </span>
-                            </div>
-                        </div>
-                        <span className="power-cost-summary">
-                            <>{(() => {
-                                const powerMod = (selection.powerMod || 0);
-
-                                // Apply Semidemonio discount logic for display
-                                // "10 points free" in value (1 PC worth)
-                                let effectivePowerMod = powerMod;
-                                let discountText = null;
-
-                                if (isSemidemonio && selection.origin === 'Sobrenatural') {
-                                    effectivePowerMod = Math.max(0, powerMod - 10);
-                                    discountText = "(-10 gratis)";
-                                }
-
-                                const modCost = effectivePowerMod / 10;
-                                const custCost = (selection.customizations || []).reduce((sum, c) => sum + (c.cost || 0), 0);
-
-                                const baseCost = calculatePowerBaseCost(p, selection, context, penaltyInfo);
-                                const total = Math.max(0, baseCost + modCost + custCost);
-
-                                let penaltyDisplay = null;
-                                const adjustment = getBaseCostAdjustment(p, selection, context, penaltyInfo);
-                                if (adjustment !== 0) {
-                                    penaltyDisplay = <span style={{ color: adjustment > 0 ? '#92400e' : '#16a34a', fontWeight: 'bold' }}> {adjustment > 0 ? '+' : '-'} {Math.abs(adjustment)}</span>;
-                                }
-
-                                return (
-                                    <div className="flex items-center gap-1">
-                                        {p.cost}
-                                        {penaltyDisplay}
-                                        {' + '}{modCost.toFixed(1)}
-                                        {discountText && <span style={{ color: '#16a34a', marginLeft: '2px', fontSize: '10px' }}>{discountText}</span>}
-                                        {custCost !== 0 && (
-                                            <> {custCost >= 0 ? '+' : '-'} {Math.abs(custCost)} (Pers.)</>
-                                        )}
-                                        {' = '}<CostBadge cost={total.toFixed(1)} />
-                                    </div>
-                                );
-                            })()}</>
-                        </span>
-                    </div>
-                )}
+                <div className="power-formula-container">
+                    {!p.characteristic ? (
+                        <PowerRankFormula
+                            power={p} selection={selection} data={data} index={index}
+                            context={context} costConfig={costConfig} penaltyInfo={penaltyInfo}
+                            onUpdateRank={onUpdateRank}
+                        />
+                    ) : (
+                        <PowerCharFormula
+                            power={p} selection={selection} data={data} index={index}
+                            context={context} penaltyInfo={penaltyInfo}
+                            isSemidemonio={!!context.isSemidemonio} onUpdateMod={onUpdateMod}
+                        />
+                    )}
+                    <PowerCustomizationsList
+                        customizations={selection.customizations || []}
+                        index={index} onUpdateCustomizations={onUpdateCustomizations}
+                    />
+                </div>
             </td>
+
             <td className="power-cell">
                 {p.skillCalc ? (
                     <div className="power-skill-container">
@@ -388,9 +329,7 @@ export default function PowerRow({
                                         min={minVal}
                                         width="60px"
                                     />
-                                    <span className="power-skill-label">
-                                        {p.skillCalc} ({minVal})
-                                    </span>
+                                    <span className="power-skill-label">{p.skillCalc} ({minVal})</span>
                                 </>
                             );
                         })()}
@@ -399,16 +338,14 @@ export default function PowerRow({
                     <span className="power-na-label">N/A</span>
                 )}
             </td>
+
             <td className="power-cell">
-                <Badge
-                    label={selection.origin}
-                    color={ORIGIN_TAG_COLORS[selection.origin] || 'gray'}
-                />
+                <Badge label={selection.origin} color={ORIGIN_TAG_COLORS[selection.origin] || 'gray'} />
             </td>
+
             <td className="power-cell">
                 <DeleteRowButton onDelete={() => onRemove(index)} title="Eliminar poder" />
             </td>
         </tr>
     );
 }
-

@@ -379,55 +379,161 @@
     justify-content: center;
 }
 
-/* --- PowerRow Styles --- */
-
-.power-row {
-    background-color: #f9fafb;
+.wizard-table--powers {
+    table-layout: fixed !important;
+    width: 100% !important;
 }
 
-.power-row.even {
-    background-color: white;
-}
-
-.power-cell {
-    padding: 0.75rem;
-    text-align: center;
-}
-
-.power-cell.name-cell {
-    padding: 1rem;
-    font-weight: bold;
-    color: #1f2937;
+/* Symmetrical column widths for headers and cells */
+.wizard-table--powers th:nth-child(1),
+.wizard-table--powers td:nth-child(1) {
+    width: 25%;
     text-align: left;
 }
 
-.power-name-container {
+.wizard-table--powers th:nth-child(2),
+.wizard-table--powers td:nth-child(2) {
+    width: 40%;
+    text-align: center;
+}
+
+.wizard-table--powers th:nth-child(3),
+.wizard-table--powers td:nth-child(3) {
+    width: 15%;
+    text-align: center;
+}
+
+.wizard-table--powers th:nth-child(4),
+.wizard-table--powers td:nth-child(4) {
+    width: 10%;
+    text-align: center;
+}
+
+.wizard-table--powers th:nth-child(5),
+.wizard-table--powers td:nth-child(5) {
+    width: 10%;
+    text-align: center;
+}
+
+/* Consistent padding for all cells */
+.wizard-table--powers th,
+.wizard-table--powers td {
+    padding: 0.75rem !important;
+    vertical-align: middle !important;
+}
+
+/* Special padding for name cell to match headers */
+.wizard-table--powers .name-cell {
+    padding-left: 1rem !important;
+}
+
+/* --- PowerRow Styles --- */
+
+.power-formula-container {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+}
+
+.power-cost-formula-layout,
+.power-char-formula-layout {
+    display: flex;
+    flex-direction: column;
     align-items: center;
     gap: 0.5rem;
-    flex-wrap: wrap;
+    width: 100%;
 }
 
-.power-options-container {
-    margin-top: 0.5rem;
-}
-
-.power-cost-formula {
+.power-cost-formula,
+.power-char-info {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
     font-size: 0.875rem;
     font-family: monospace;
 }
 
-.power-formula-operator {
-    color: #9ca3af;
-}
-
-.power-formula-component {
+.power-formula-item {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.power-formula-item--free {
+    gap: 0.125rem;
+}
+
+.power-free-rank-label {
+    font-size: 9px;
+    color: #16a34a;
+}
+
+.power-penalty-badge-inline {
+    font-size: 0.75rem !important;
+}
+
+.power-formula-item--total {
+    gap: 0.125rem;
+}
+
+.power-badge-total {
+    font-size: 1.125rem !important;
+    font-weight: bold !important;
+}
+
+.power-badge-label {
+    font-size: 0.75rem;
+    color: #9ca3af;
+}
+
+.power-base-cost-value {
+    font-weight: bold;
+    color: #374151;
+    /* gray-700 */
+}
+
+.power-operator-aligned {
+    padding-top: 0.25rem;
+}
+
+.power-char-mod-input {
+    color: #16a34a !important;
+}
+
+.power-summary-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    font-size: 0.75rem;
+    color: #6b7280;
+    font-family: monospace;
+}
+
+.power-discount-label {
+    color: #16a34a;
+    margin-left: 2px;
+    font-size: 10px;
+}
+
+.power-summary-label {
+    color: #9ca3af;
+    margin-left: 2px;
+}
+
+.power-penalty-value {
+    font-weight: bold;
+}
+
+.penalty-positive {
+    color: #92400e;
+}
+
+.penalty-negative {
+    color: #16a34a;
 }
 
 .power-formula-value {
@@ -451,9 +557,16 @@
     color: #6b7280;
 }
 
+.power-customization-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
 .power-customizations-list {
     width: 100%;
-    margin-top: 0.5rem;
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
@@ -490,14 +603,6 @@
     margin-top: 0.25rem;
 }
 
-.power-char-info {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.5rem;
-    font-size: 0.875rem;
-    font-family: monospace;
-}
-
 .power-char-component {
     display: flex;
     flex-direction: column;
@@ -517,12 +622,6 @@
 .power-char-label {
     font-size: 0.65rem;
     color: #9ca3af;
-}
-
-.power-cost-summary {
-    font-size: 0.75rem;
-    color: #6b7280;
-    font-family: monospace;
 }
 
 .power-skill-container {
