@@ -382,37 +382,56 @@
 .wizard-table--powers {
     table-layout: fixed !important;
     width: 100% !important;
+    border-collapse: collapse !important;
+}
+
+.wizard-table--powers tr {
+    display: table-row !important;
+    width: 100% !important;
 }
 
 /* Symmetrical column widths for headers and cells */
+.wizard-table--powers th,
+.wizard-table--powers td {
+    display: table-cell !important;
+    box-sizing: border-box !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .wizard-table--powers th:nth-child(1),
 .wizard-table--powers td:nth-child(1) {
-    width: 25%;
-    text-align: left;
+    width: 25% !important;
+    min-width: 25% !important;
+    text-align: left !important;
 }
 
 .wizard-table--powers th:nth-child(2),
 .wizard-table--powers td:nth-child(2) {
-    width: 40%;
-    text-align: center;
+    width: 40% !important;
+    min-width: 40% !important;
+    text-align: center !important;
 }
 
 .wizard-table--powers th:nth-child(3),
 .wizard-table--powers td:nth-child(3) {
-    width: 15%;
-    text-align: center;
+    width: 15% !important;
+    min-width: 15% !important;
+    text-align: center !important;
 }
 
 .wizard-table--powers th:nth-child(4),
 .wizard-table--powers td:nth-child(4) {
-    width: 10%;
-    text-align: center;
+    width: 10% !important;
+    min-width: 10% !important;
+    text-align: center !important;
 }
 
 .wizard-table--powers th:nth-child(5),
 .wizard-table--powers td:nth-child(5) {
-    width: 10%;
-    text-align: center;
+    width: 10% !important;
+    min-width: 10% !important;
+    text-align: center !important;
 }
 
 /* Consistent padding for all cells */
@@ -420,11 +439,6 @@
 .wizard-table--powers td {
     padding: 0.75rem !important;
     vertical-align: middle !important;
-}
-
-/* Special padding for name cell to match headers */
-.wizard-table--powers .name-cell {
-    padding-left: 1rem !important;
 }
 
 /* --- PowerRow Styles --- */

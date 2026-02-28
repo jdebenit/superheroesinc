@@ -33,15 +33,12 @@
     white-space: nowrap;
 }
 
-/* Wider cost/rank column — only for powers table */
-.wizard-table--powers .wizard-table-header-cell:nth-child(2) {
-    min-width: 260px;
-}
-
-/* Compact action column — only for powers table */
-.wizard-table--powers .wizard-table-header-cell:last-child {
-    width: 60px;
-    min-width: 60px;
+/* Standardized header styles */
+.wizard-table-header-cell {
+    padding: var(--wiz-spacing-4);
+    text-align: center;
+    color: var(--wiz-color-gray-500);
+    white-space: nowrap;
 }
 
 .wizard-table-footer-row {
