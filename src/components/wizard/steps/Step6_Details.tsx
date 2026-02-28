@@ -350,7 +350,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
                                 placeholder="Nombre del arma"
                             />
                             <FormSelect
-                                label="Habilidad"
+                                label=""
                                 value={item.skillId || ''}
                                 onChange={(val) => updateWeapon(index, 'skillId', val)}
                                 placeholder="Seleccionar..."
