@@ -1,15 +1,11 @@
 import React from 'react';
 import { stepPageTitleStyle, stepPageSubtitleStyle } from '../shared/stepStyles';
+import '../shared/WizardStep.css';
 import './Step7_Evolution.css';
 
-interface Step7Props {
-    data: any;
-    onChange: (updates: any) => void;
-}
-
-export default function Step7_Evolution({ data, onChange }: Step7Props) {
+export default function Step7_Evolution() {
     return (
-        <div className="step7-container">
+        <div className="wizard-step-container">
             <h2 style={stepPageTitleStyle}>Evolución del Personaje</h2>
             <p style={stepPageSubtitleStyle}>
                 Gestiona la subida de nivel de tu personaje

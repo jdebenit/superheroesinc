@@ -6,6 +6,7 @@ import { WizardField } from '../shared/WizardField';
 import { DynamicList } from '../shared/DynamicList';
 import { FormSelect } from '../shared/FormSelect';
 import { CostBadge } from '../shared/CostBadge';
+import '../shared/WizardStep.css';
 import './Step5_Background.css';
 
 interface Step5Props {
@@ -96,7 +97,8 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
     );
 
     return (
-        <div className="step5-container">
+        <div className="wizard-step-container">
+
 
             {/* Header Description */}
             <h2 style={stepPageTitleStyle}>

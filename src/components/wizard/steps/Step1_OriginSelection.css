@@ -2,12 +2,8 @@
    Step 1 : Selección de Origen
    ========================================================================= */
 
-.step1-container {
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
+/* .step1-container is now replaced by .wizard-step-container from shared styles */
+
 
 /* --- Origins Grid --- */
 .step1-origins-grid {

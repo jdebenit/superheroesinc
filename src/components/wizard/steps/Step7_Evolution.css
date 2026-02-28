@@ -2,12 +2,8 @@
    Step 7 : Evolución del Personaje (Work in Progress)
    ========================================================================= */
 
-.step7-container {
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
+/* .step7-container is now replaced by .wizard-step-container from shared styles */
+
 
 .step7-wip-card {
     padding: 3rem 2rem;

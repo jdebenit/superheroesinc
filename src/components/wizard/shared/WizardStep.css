@@ -1,0 +1,20 @@
+/* =========================================================================
+   Wizard shared step container styles
+   ========================================================================= */
+
+.wizard-step-container {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    min-height: 100%;
+    box-sizing: border-box;
+}
+
+/* Responsive adjustments for the main container */
+@media (max-width: 768px) {
+    .wizard-step-container {
+        padding: 1rem;
+        gap: 1.5rem;
+    }
+}

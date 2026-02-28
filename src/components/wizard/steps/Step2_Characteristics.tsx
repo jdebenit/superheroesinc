@@ -30,7 +30,9 @@ import {
     calculateCreationPoints
 } from '../../../utils/characterCalculations';
 import { stepPageTitleStyle, stepPageSubtitleStyle } from '../shared/stepStyles';
+import '../shared/WizardStep.css';
 import './Step2_Characteristics.css';
+
 
 export default function Step2_Characteristics({ data, onChange }: Step2Props) {
     const [characteristics, setCharacteristics] = useState<{
@@ -324,7 +326,8 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
     const { pcValues } = calculateCreationPoints(characteristics, origins);
 
     return (
-        <div style={{ padding: '2rem' }}>
+        <div className="wizard-step-container">
+
             <h2 style={stepPageTitleStyle}>
                 Características del Personaje
             </h2>

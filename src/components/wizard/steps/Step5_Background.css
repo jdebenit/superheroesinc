@@ -2,12 +2,8 @@
    Step 5 : Trasfondo y Personalidad
    ========================================================================= */
 
-.step5-container {
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
+/* .step5-container is now replaced by .wizard-step-container from shared styles */
+
 
 /* --- Controls & Inputs --- */
 

@@ -2,12 +2,8 @@
    Step 6 : Final Details
    ========================================================================= */
 
-.step6-container {
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
+/* .step6-container is now replaced by .wizard-step-container from shared styles */
+
 
 /* Identity Section */
 .step6-identity-grid {

@@ -21,6 +21,8 @@ const ORIGINS = [
 ];
 
 import './Step1_OriginSelection.css';
+import '../shared/WizardStep.css';
+
 
 export default function Step1_OriginSelection({ data, onChange }: Step1Props) {
     const [selectedOrigins, setSelectedOrigins] = useState<string[]>([]);
@@ -139,7 +141,8 @@ export default function Step1_OriginSelection({ data, onChange }: Step1Props) {
     };
 
     return (
-        <div className="step1-container">
+        <div className="wizard-step-container">
+
             <h2 style={stepPageTitleStyle}>
                 Selecciona los Orígenes del Personaje
             </h2>

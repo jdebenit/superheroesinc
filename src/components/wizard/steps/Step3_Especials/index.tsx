@@ -37,6 +37,8 @@ import { CyborgSection } from './sections/CyborgSection';
 import ParahumanoSection from './sections/ParahumanoSection';
 import type { CyborgImplant } from '../../../../data/cyborgImplantConfigs';
 import { stepPageTitleStyle } from '../../shared/stepStyles';
+import '../../shared/WizardStep.css';
+
 
 // Modal Components
 import SelectionModal from './modals/SelectionModal';
@@ -705,7 +707,8 @@ export default function Step3_Especials({ data, onChange, onShowToast }: Step3Pr
     ]);
 
     return (
-        <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <div className="wizard-step-container">
+
             <h2 style={{ ...stepPageTitleStyle, marginBottom: '0.5rem' }}>
                 Poderes y Habilidades Especiales
             </h2>

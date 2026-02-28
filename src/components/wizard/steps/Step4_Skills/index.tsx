@@ -5,7 +5,9 @@ import { SelectedSkillsSection } from './sections/SelectedSkillsSection';
 import { AvailableSkillsSection } from './sections/AvailableSkillsSection';
 import { stepPageTitleStyle, stepPageSubtitleStyle } from '../../shared/stepStyles';
 import { useStep4Logic } from './useStep4Logic';
+import '../../shared/WizardStep.css';
 import './Step4_Skills.css';
+
 
 interface Step4Props {
     data: any;
@@ -41,7 +43,8 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
     } = useStep4Logic(data, onChange);
 
     return (
-        <div className="step4-container">
+        <div className="wizard-step-container">
+
             <h2 style={stepPageTitleStyle}>
                 Habilidades
             </h2>

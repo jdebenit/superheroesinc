@@ -11,7 +11,9 @@ import { FormSelect } from '../shared/FormSelect';
 import { InfoBox } from '../shared/InfoBox';
 import { CostBadge } from '../shared/CostBadge';
 import { stepPageTitleStyle, stepPageSubtitleStyle } from '../shared/stepStyles';
+import '../shared/WizardStep.css';
 import './Step6_Details.css';
+
 
 interface Step6Props {
     data: {
@@ -175,7 +177,8 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
 
     return (
         <>
-            <div className="step6-container">
+            <div className="wizard-step-container">
+
 
                 {/* Header Description */}
                 <h2 style={stepPageTitleStyle}>

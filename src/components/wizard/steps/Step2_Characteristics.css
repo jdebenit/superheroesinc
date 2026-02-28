@@ -2,12 +2,8 @@
    Step 2 : Características del Personaje
    ========================================================================= */
 
-.step2-container {
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
+/* .step2-container is now replaced by .wizard-step-container from shared styles */
+
 
 /* --- Bonus Choice Box (origin bonus target) --- */
 
