@@ -156,6 +156,24 @@ export function useStep3Logic(data: any, onChange: (updates: any) => void, onSho
         }
     }, [isElfoFisico, selectedPowers, updatePowers]);
 
+    useEffect(() => {
+        if (isTroll && !selectedPowers.some(p => p.id === 'regeneracion_de_tejidos')) {
+            const trollPower = POWERS.find(p => p.id === 'regeneracion_de_tejidos');
+            if (trollPower) {
+                updatePowers([...selectedPowers, { id: trollPower.id, origin: 'Arcano', rank: 81, customizations: [] }]);
+            }
+        }
+    }, [isTroll, selectedPowers, updatePowers]);
+
+    useEffect(() => {
+        if (isTesKhar && !selectedPowers.some(p => p.id === 'superhabilidad')) {
+            const tkPower = POWERS.find(p => p.id === 'superhabilidad');
+            if (tkPower) {
+                updatePowers([...selectedPowers, { id: tkPower.id, origin: 'Parahumano', rank: 11, customizations: [] }]);
+            }
+        }
+    }, [isTesKhar, selectedPowers, updatePowers]);
+
     // Handle Hada automatic powers
     useEffect(() => {
         const isHada = isHadaEter || isHadaAire || isHadaFuego || isHadaAgua || isHadaTierra;

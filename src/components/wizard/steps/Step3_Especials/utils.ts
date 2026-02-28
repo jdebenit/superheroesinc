@@ -120,7 +120,6 @@ export interface PowerContext {
  * Configuration returned for power cost display
  */
 export interface PowerCostConfig {
-    isFree: boolean;
     freeRank: number;
     baseCostAdjustment: number; // e.g., -1, -2 for discounts
     isFixedCost: boolean; // if true, cost is 0 (Thals free)
@@ -137,23 +136,17 @@ export const getPowerCostConfig = (power: any, selection: SelectedPower, context
     } = context;
 
     const config: PowerCostConfig = {
-        isFree: false,
         freeRank: 0,
         baseCostAdjustment: 0,
         isFixedCost: false
     };
 
-    // 1. Check for completely free powers (Cost shown as strikethrough or special handling)
-    // Note: The original logic treated these as "isFree" which rendered strikethrough
+    // 1. Check for Free Ranks (Atlante, Grifo, Hadas, Elfo Fisico, Troll, Tes-Khar)
     const isTesKharFree = isTesKhar && power.id === 'superhabilidad';
     const isTrollFree = isTroll && power.id === 'regeneracion_de_tejidos';
     const isElfoFisicoFree = isElfoFisico && power.id === 'supervelocidad';
     const isHadaAireSpeedFree = isHadaAire && power.id === 'supervelocidad';
 
-    if (isTesKharFree || isTrollFree || isElfoFisicoFree || isHadaAireSpeedFree) {
-        config.isFree = true;
-        return config;
-    }
 
     // 2. Check for Thals Free (Cost 0)
     if (isThalsFree) {
@@ -171,7 +164,7 @@ export const getPowerCostConfig = (power: any, selection: SelectedPower, context
     const isAtlanteFree = isAtlante && (power.id === 'superhabilidad' || power.id === 'control_del_agua' || power.id === 'empatia_animal');
     const isGrifoFree = isGrifo && power.id === 'volar';
 
-    if (isAtlanteFree || isGrifoFree || isHadaFlyFree || isHadaFuegoFree || isHadaAguaFree || isHadaTierraFree) {
+    if (isTesKharFree || isTrollFree || isElfoFisicoFree || isHadaAireSpeedFree || isAtlanteFree || isGrifoFree || isHadaFlyFree || isHadaFuegoFree || isHadaAguaFree || isHadaTierraFree) {
         if (power.id === 'control_del_agua' && isAtlante) config.freeRank = 11;
         else if (power.id === 'control_del_agua' && isHadaAgua) config.freeRank = 21;
         else if (power.id === 'control_del_fuego' && isHadaFuego) config.freeRank = 21;
@@ -181,6 +174,9 @@ export const getPowerCostConfig = (power: any, selection: SelectedPower, context
         else if (power.id === 'empatia_animal' && isAtlante) config.freeRank = 11;
         else if (isGrifo && power.id === 'volar') config.freeRank = 11;
         else if (isHadaFlyFree && power.id === 'volar') config.freeRank = 11;
+        else if (isTrollFree) config.freeRank = 81;
+        else if (isTesKharFree) config.freeRank = 11;
+        else if (isElfoFisicoFree || isHadaAireSpeedFree) config.freeRank = 1;
 
         // Base cost adjustment logic for "Free Rank" powers (often -1.1 or similar to offset base cost)
         // This mirrors the original logic: "baseCost = -1.1" etc.
@@ -241,8 +237,7 @@ export const calculatePowerBaseCost = (power: any, selection: SelectedPower, con
     const config = getPowerCostConfig(power, selection, context);
     const { isAtlante, isGrifo } = context;
 
-    // Free powers (handled via config.isFree or isFixedCost in UI, but math-wise?)
-    if (config.isFree) return 0; // Usually treated as 0 or ignored
+    // Free powers (handled via isFixedCost in UI, but math-wise?)
     if (config.isFixedCost) return 0; // Thals free
 
     // Default base
@@ -262,8 +257,20 @@ export const calculatePowerBaseCost = (power: any, selection: SelectedPower, con
     } else if (isGrifo && power.id === 'volar') {
         baseCost = -1.1;
     } else if (config.freeRank > 0) {
-        // If it has a free rank, we often set baseCost to negative to offset the rank cost
-        baseCost = -(config.freeRank * 0.1);
+        // Find if this power uses 'characteristic' or 'skillCalc'
+        if (power.characteristic) {
+            // For characteristic powers, "1 free rank" historically means 1 PC (or 10 points)
+            // But if it's treated just as a free flat power, we want the base cost to be 0 or -X?
+            // Usually, these powers have a base cost (p.cost) that we want to cancel out.
+            // If the user adds +1 to PowerMod, it costs 0.1.
+            // When freeRank = 1, we offset by -0.1? No, if the base cost is normally 0, then we want it to be 0.
+            // We just cancel the base cost.
+            baseCost = -(config.freeRank * 0.1);
+            // Wait! The issue is that `total = Math.max(0, baseCost + rankCost)` works to floor at 0.
+            // But in PowerRow, `Total` is NOT floored. So it shows -0.1.
+        } else {
+            baseCost = -(config.freeRank * 0.1);
+        }
     }
 
     return baseCost;

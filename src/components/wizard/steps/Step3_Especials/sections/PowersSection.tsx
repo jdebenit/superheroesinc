@@ -204,6 +204,9 @@ export default function PowersSection({
                                     isElfoFisico={isElfoFisico}
                                     isHadaEter={isHadaEter}
                                     isHadaAire={isHadaAire}
+                                    isHadaFuego={isHadaFuego}
+                                    isHadaAgua={isHadaAgua}
+                                    isHadaTierra={isHadaTierra}
                                 />
                             );
                         });

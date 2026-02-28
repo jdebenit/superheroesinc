@@ -91,7 +91,7 @@ export default function PowerRow({
     };
 
     const costConfig = getPowerCostConfig(p, selection, context);
-    const { isFree, freeRank, isFixedCost } = costConfig;
+    const { freeRank, isFixedCost } = costConfig;
 
     const penaltyInfo = getPowerPenalty(data, p);
     const isPenalty = penaltyInfo.type !== 'none';
@@ -103,9 +103,6 @@ export default function PowerRow({
     }
 
     const renderDisplayCost = () => {
-        if (isFree) {
-            return <span className="line-through text-red-500">{p.cost}</span>;
-        }
         if (isFixedCost) { // Thals Free
             return <CostBadge cost={0} variant="free" />;
         }
@@ -345,50 +342,46 @@ export default function PowerRow({
                             </div>
                         </div>
                         <span style={{ fontSize: '0.75rem', color: '#6b7280', fontFamily: 'monospace' }}>
-                            {isFree ? (
-                                <span style={{ color: '#10b981', fontWeight: 'bold' }}>¡Poder Gratuito por Origen!</span>
-                            ) : (
-                                <>{(() => {
-                                    const powerMod = (selection.powerMod || 0);
+                            <>{(() => {
+                                const powerMod = (selection.powerMod || 0);
 
-                                    // Apply Semidemonio discount logic for display
-                                    // "10 points free" in value (1 PC worth)
-                                    let effectivePowerMod = powerMod;
-                                    let discountText = null;
+                                // Apply Semidemonio discount logic for display
+                                // "10 points free" in value (1 PC worth)
+                                let effectivePowerMod = powerMod;
+                                let discountText = null;
 
-                                    if (isSemidemonio && selection.origin === 'Sobrenatural') {
-                                        // The first 10 points are free.
-                                        // Cost is based on (powerMod - 10)
-                                        effectivePowerMod = Math.max(0, powerMod - 10);
-                                        discountText = "(-10 gratis)";
-                                    }
+                                if (isSemidemonio && selection.origin === 'Sobrenatural') {
+                                    // The first 10 points are free.
+                                    // Cost is based on (powerMod - 10)
+                                    effectivePowerMod = Math.max(0, powerMod - 10);
+                                    discountText = "(-10 gratis)";
+                                }
 
-                                    const modCost = effectivePowerMod / 10;
-                                    const custCost = (selection.customizations || []).reduce((sum, c) => sum + (c.cost || 0), 0);
+                                const modCost = effectivePowerMod / 10;
+                                const custCost = (selection.customizations || []).reduce((sum, c) => sum + (c.cost || 0), 0);
 
-                                    const baseCost = calculatePowerBaseCost(p, selection, context, penaltyInfo);
-                                    const total = baseCost + modCost + custCost;
+                                const baseCost = calculatePowerBaseCost(p, selection, context, penaltyInfo);
+                                const total = Math.max(0, baseCost + modCost + custCost);
 
-                                    let penaltyDisplay = null;
-                                    const adjustment = getBaseCostAdjustment(p, selection, context, penaltyInfo);
-                                    if (adjustment !== 0) {
-                                        penaltyDisplay = <span style={{ color: adjustment > 0 ? '#92400e' : '#16a34a', fontWeight: 'bold' }}> {adjustment > 0 ? '+' : '-'} {Math.abs(adjustment)}</span>;
-                                    }
+                                let penaltyDisplay = null;
+                                const adjustment = getBaseCostAdjustment(p, selection, context, penaltyInfo);
+                                if (adjustment !== 0) {
+                                    penaltyDisplay = <span style={{ color: adjustment > 0 ? '#92400e' : '#16a34a', fontWeight: 'bold' }}> {adjustment > 0 ? '+' : '-'} {Math.abs(adjustment)}</span>;
+                                }
 
-                                    return (
-                                        <div className="flex items-center gap-1">
-                                            {p.cost}
-                                            {penaltyDisplay}
-                                            {' + '}{modCost.toFixed(1)}
-                                            {discountText && <span style={{ color: '#16a34a', marginLeft: '2px', fontSize: '10px' }}>{discountText}</span>}
-                                            {custCost !== 0 && (
-                                                <> {custCost >= 0 ? '+' : '-'} {Math.abs(custCost)} (Pers.)</>
-                                            )}
-                                            {' = '}<CostBadge cost={total.toFixed(1)} />
-                                        </div>
-                                    );
-                                })()}</>
-                            )}
+                                return (
+                                    <div className="flex items-center gap-1">
+                                        {p.cost}
+                                        {penaltyDisplay}
+                                        {' + '}{modCost.toFixed(1)}
+                                        {discountText && <span style={{ color: '#16a34a', marginLeft: '2px', fontSize: '10px' }}>{discountText}</span>}
+                                        {custCost !== 0 && (
+                                            <> {custCost >= 0 ? '+' : '-'} {Math.abs(custCost)} (Pers.)</>
+                                        )}
+                                        {' = '}<CostBadge cost={total.toFixed(1)} />
+                                    </div>
+                                );
+                            })()}</>
                         </span>
                     </div>
                 )}
