@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import type { ModalType, ViewMode, TechTypeFilter } from '../types';
 import { getPowerPenalty } from '../utils';
+import '../Step3_Especials.css';
 
 const POWER_TYPES = ["Todos", "Físico", "Psíquico", "Energético"];
 
@@ -192,14 +193,9 @@ export default function SelectionModal({
                                                 <h3>{item.name}</h3>
                                                 <div className="power-details">
                                                     {type === 'techModules' ? (
-                                                        <div style={{ display: 'flex', flexDirection: 'row', gap: '8px', alignItems: 'center' }}>
+                                                        <div className="tech-module-info">
                                                             <span className="power-cost">{item.cost} PC</span>
-                                                            <span className="type-tag" style={{
-                                                                width: 'fit-content',
-                                                                backgroundColor: item.type === 'Mejora Interna' ? '#fce7f3' : undefined,
-                                                                color: item.type === 'Mejora Interna' ? '#be123c' : undefined,
-                                                                borderColor: item.type === 'Mejora Interna' ? '#fbcfe8' : undefined
-                                                            }}>
+                                                            <span className={`type-tag type-tag-${item.type === 'Mejora Interna' ? 'internal' : 'general'}`}>
                                                                 {item.type}
                                                             </span>
                                                         </div>
@@ -220,16 +216,7 @@ export default function SelectionModal({
                                                                 const penalty = characterData ? getPowerPenalty(characterData, item) : { cost: 0, label: '', type: 'none' };
                                                                 if (penalty.cost > 0 && penalty.type !== 'none') {
                                                                     return (
-                                                                        <div style={{
-                                                                            marginTop: '0.5rem',
-                                                                            padding: '0.25rem 0.5rem',
-                                                                            backgroundColor: '#fef3c7',
-                                                                            border: '1px solid #fbbf24',
-                                                                            borderRadius: '0.25rem',
-                                                                            fontSize: '0.75rem',
-                                                                            fontWeight: 'bold',
-                                                                            color: '#92400e'
-                                                                        }}>
+                                                                        <div className="power-penalty-badge">
                                                                             {penalty.label}
                                                                         </div>
                                                                     );
@@ -240,13 +227,13 @@ export default function SelectionModal({
                                                     )}
 
                                                     {type === 'spells' && item.requirements && item.requirements !== "No especificado" && (
-                                                        <div className="range-note" style={{ textAlign: 'left', color: 'red' }}>
+                                                        <div className="spell-req-note">
                                                             Req: {item.requirements}
                                                         </div>
                                                     )}
 
                                                     {type === 'techModules' && (
-                                                        <div className="range-note" style={{ textAlign: 'left', color: '#6b7280', fontSize: '0.8em', marginTop: '4px', fontStyle: 'italic' }}>
+                                                        <div className="tech-module-desc-note">
                                                             {item.description}
                                                         </div>
                                                     )}
@@ -263,7 +250,7 @@ export default function SelectionModal({
                                     <table className="powers-table">
                                         <thead>
                                             <tr>
-                                                <th style={{ width: '50px' }}></th>
+                                                <th className="th-checkbox"></th>
                                                 <th>Nombre</th>
                                                 <th>Coste</th>
                                                 {type === 'powers' && <th>Tipos</th>}
@@ -287,7 +274,7 @@ export default function SelectionModal({
                                                                 type="checkbox"
                                                                 checked={isSelected}
                                                                 readOnly
-                                                                style={{ width: '20px', height: '20px' }}
+                                                                className="power-table-checkbox"
                                                             />
                                                         </td>
                                                         <td className="col-name">{item.name}</td>

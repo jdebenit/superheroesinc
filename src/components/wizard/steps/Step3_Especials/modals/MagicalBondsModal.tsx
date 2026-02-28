@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { MAGICAL_BONDS } from '../../../../../data/magicalBonds';
+import '../Step3_Especials.css';
 
 interface MagicalBondsModalProps {
     isOpen: boolean;
@@ -59,7 +60,7 @@ export default function MagicalBondsModal({
                                     {isSelected && <div className="selected-badge">✓</div>}
                                     <h3>{bond.name}</h3>
                                     <div className="power-details">
-                                        <p style={{ margin: 0, fontSize: '0.9rem', color: '#555' }}>
+                                        <p className="magical-bond-desc">
                                             {bond.description}
                                         </p>
                                     </div>

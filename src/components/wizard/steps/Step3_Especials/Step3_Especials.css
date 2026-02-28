@@ -1,0 +1,116 @@
+/* =========================================================================
+   Step 3 : Especialidades (Powers, Tech, Spells)
+   ========================================================================= */
+
+/* --- SelectionModal Styles --- */
+
+.tech-module-info {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+}
+
+.type-tag-internal {
+    background-color: #fce7f3;
+    color: #be123c;
+    border-color: #fbcfe8;
+}
+
+/* Uses default .type-tag from existing CSS if any, or can be extended here */
+
+.power-penalty-badge {
+    margin-top: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    background-color: #fef3c7;
+    border: 1px solid #fbbf24;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: #92400e;
+}
+
+.spell-req-note {
+    text-align: left;
+    color: red;
+}
+
+.tech-module-desc-note {
+    text-align: left;
+    color: #6b7280;
+    font-size: 0.8em;
+    margin-top: 4px;
+    font-style: italic;
+}
+
+.th-checkbox {
+    width: 50px;
+}
+
+.power-table-checkbox {
+    width: 20px;
+    height: 20px;
+}
+
+.magical-bond-desc {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* --- Tech Modules Table --- */
+
+.tech-module-row {
+    background-color: #f9fafb;
+}
+
+.tech-module-row.even {
+    background-color: white;
+}
+
+.tech-module-cell {
+    padding: 0.75rem;
+    text-align: center;
+}
+
+.tech-module-cell.name-cell {
+    padding: 1rem;
+    font-weight: bold;
+    color: #1f2937;
+    text-align: left;
+}
+
+.tech-module-input {
+    padding: 0.25rem 0.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: bold;
+    color: #4f46e5;
+    width: 100%;
+    text-align: center;
+    background-color: white;
+}
+
+.tech-module-cost-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+}
+
+.tech-module-cost-input {
+    width: 60px;
+    padding: 0.125rem 0.25rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.25rem;
+    text-align: center;
+    font-weight: bold;
+    color: #4f46e5;
+}
+
+.tech-module-cost-label {
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: #6b7280;
+}
