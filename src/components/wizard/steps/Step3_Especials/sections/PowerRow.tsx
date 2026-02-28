@@ -110,10 +110,12 @@ export default function PowerRow({
             return <CostBadge cost={0} variant="free" />;
         }
         if (freeRank > 0) {
-            // Logic to show "Gratis" or difference based on rank
-            const diff = (selection.rank || 1) - freeRank;
-            if (diff <= 0) return <CostBadge cost={0} variant="free" />;
-            return <CostBadge cost={p.cost} variant="variable" />;
+            return (
+                <div className="flex flex-col items-center">
+                    <CostBadge cost={0} variant="free" />
+                    <span className="text-[9px] text-green-600 mt-0.5">({freeRank} R. Gratis)</span>
+                </div>
+            );
         }
         return <span className='font-bold text-gray-700'>{displayBaseCostStr}</span>;
     };
