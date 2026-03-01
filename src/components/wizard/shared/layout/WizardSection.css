@@ -69,9 +69,9 @@
     width: 28px;
     height: 28px;
     border-radius: 50%;
-    border: none;
+    border: 1px solid var(--wiz-color-primary, #4f46e5);
     background: transparent;
-    color: var(--wiz-color-gray-400, #9ca3af);
+    color: var(--wiz-color-primary, #4f46e5);
     cursor: pointer;
     transition: all 0.2s ease;
     margin-left: 0.25rem;
@@ -79,9 +79,10 @@
 }
 
 .wizard-section-help-btn:hover {
-    color: var(--wiz-color-primary, #4f46e5);
-    background: var(--wiz-color-gray-100, #f3f4f6);
+    color: white;
+    background: var(--wiz-color-primary, #4f46e5);
     transform: scale(1.05);
+    box-shadow: 0 2px 4px rgba(79, 70, 229, 0.2);
 }
 
 /* =========================================================================
