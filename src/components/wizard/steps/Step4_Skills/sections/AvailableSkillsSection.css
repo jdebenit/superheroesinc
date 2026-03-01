@@ -100,3 +100,33 @@
     background-color: #059669;
     /* emerald-600 */
 }
+
+/* =========================================================================
+   Responsive Overrides
+   ========================================================================= */
+@media (max-width: 640px) {
+    .available-skill-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .available-skill-info {
+        width: 100%;
+    }
+
+    .available-skill-formula {
+        /* Keep formula on its own line on mobile to avoid squeezing */
+        display: block;
+        margin-bottom: 0.25rem;
+    }
+
+    .add-btn-style,
+    .selected-indicator {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0.6rem;
+    }
+}
