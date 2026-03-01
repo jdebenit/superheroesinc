@@ -30,7 +30,7 @@ import '../../shared/layout/WizardStep.css';
 import SelectionModal from './modals/SelectionModal';
 import MagicalBondsModal from './modals/MagicalBondsModal';
 
-export default function Step3_Especials({ data, onChange, onShowToast }: Step3Props) {
+export default function Step3_Especials({ data, onChange, onShowToast, onShowHelp }: Step3Props) {
     const {
         // State
         modalOpen, setModalOpen, modalType, modalOriginFilter,
@@ -90,8 +90,9 @@ export default function Step3_Especials({ data, onChange, onShowToast }: Step3Pr
     return (
         <div className="wizard-step-container">
             <WizardSection
-                title="Poderes y Habilidades Especiales"
-                description="Gestiona los poderes y habilidades especiales derivadas de tus orígenes (Mutante, Arcano, Tecnológico, etc.)."
+                title="Poderes y Especialidades"
+                description="Configura los poderes, características especiales y otras ventajas de tu personaje basándose en sus orígenes."
+                onHelp={onShowHelp}
             >
                 {!hasAnyOrigin && (
                     <div className="wizard-empty-state">

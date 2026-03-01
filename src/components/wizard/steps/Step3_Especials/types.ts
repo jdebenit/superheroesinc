@@ -6,6 +6,7 @@ export interface Step3Props {
     // data.malditoParams, data.enteParams, etc are assumed dynamic
     onChange: (updates: any) => void;
     onShowToast?: (message: string, type?: 'success' | 'error' | 'info') => void;
+    onShowHelp?: () => void;
 }
 
 

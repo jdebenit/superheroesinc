@@ -34,9 +34,10 @@ interface Step6Props {
     };
     onChange: (updates: any) => void;
     totalPCs?: string | number;
+    onShowHelp?: () => void;
 }
 
-export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) {
+export default function Step6_Details({ data, onChange, totalPCs, onShowHelp }: Step6Props) {
     const {
         updateField,
         addItem,
@@ -51,6 +52,7 @@ export default function Step6_Details({ data, onChange, totalPCs }: Step6Props) 
             <WizardSection
                 title="Detalles Finales"
                 description="Define la identidad de tu personaje y equipalo."
+                onHelp={onShowHelp}
             />
 
             <WizardSection title="Identidad">

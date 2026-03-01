@@ -6,6 +6,7 @@ import { stepPageTitleStyle, stepPageSubtitleStyle } from '../../shared/layout/s
 interface Step1Props {
     data: any;
     onChange: (updates: any) => void;
+    onShowHelp?: () => void;
 }
 
 const ORIGINS = [
@@ -25,7 +26,7 @@ import './Step1_OriginSelection.css';
 import '../../shared/layout/WizardStep.css';
 
 
-export default function Step1_OriginSelection({ data, onChange }: Step1Props) {
+export default function Step1_OriginSelection({ data, onChange, onShowHelp }: Step1Props) {
     const [selectedOrigins, setSelectedOrigins] = useState<string[]>([]);
     const [selectedSubtypes, setSelectedSubtypes] = useState<{ [originId: string]: string[] }>({});
 
@@ -147,6 +148,7 @@ export default function Step1_OriginSelection({ data, onChange }: Step1Props) {
             <WizardSection
                 title="Selecciona los Orígenes del Personaje"
                 description="Divino, Cósmico y Parahumano solo pueden elegir un tipo. Los demás pueden elegir múltiples tipos."
+                onHelp={onShowHelp}
             >
                 <div className="step1-origins-grid">
                     {ORIGINS.map((origin) => {

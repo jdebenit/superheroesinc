@@ -13,9 +13,10 @@ import './Step5_Background.css';
 interface Step5Props {
     data: any;
     onChange: (updates: any) => void;
+    onShowHelp?: () => void;
 }
 
-export default function Step5_Background({ data, onChange }: Step5Props) {
+export default function Step5_Background({ data, onChange, onShowHelp }: Step5Props) {
     const {
         resistanceValue,
         resistanceCost,
@@ -36,6 +37,7 @@ export default function Step5_Background({ data, onChange }: Step5Props) {
             <WizardSection
                 title="Trasfondo y Personalidad"
                 description="Define la historia, contexto, estatus social y resistencia psicológica de tu personaje."
+                onHelp={onShowHelp}
             />
 
             <WizardSection

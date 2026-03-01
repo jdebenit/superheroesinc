@@ -10,9 +10,10 @@ import './Step2_Characteristics.css';
 interface Step2Props {
     data: any;
     onChange: (updates: any) => void;
+    onShowHelp?: () => void;
 }
 
-export default function Step2_Characteristics({ data, onChange }: Step2Props) {
+export default function Step2_Characteristics({ data, onChange, onShowHelp }: Step2Props) {
     const {
         characteristics,
         chosenBonusCharacteristic,
@@ -34,6 +35,7 @@ export default function Step2_Characteristics({ data, onChange }: Step2Props) {
                 description={isDistributableMode
                     ? 'Distribuye los puntos de origen entre las características.'
                     : 'Define las características base y sus modificadores.'}
+                onHelp={onShowHelp}
             >
                 {choosableInfo && (
                     <div className="step2-bonus-box">

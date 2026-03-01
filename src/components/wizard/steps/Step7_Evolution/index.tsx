@@ -3,12 +3,17 @@ import { WizardSection } from '../../shared/layout/WizardSection';
 import '../../shared/layout/WizardStep.css';
 import './Step7_Evolution.css';
 
-export default function Step7_Evolution() {
+interface Step7Props {
+    onShowHelp?: () => void;
+}
+
+export default function Step7_Evolution({ onShowHelp }: Step7Props) {
     return (
         <div className="wizard-step-container">
             <WizardSection
                 title="Evolución del Personaje"
                 description="Gestiona la subida de nivel de tu personaje"
+                onHelp={onShowHelp}
             />
 
             <WizardSection

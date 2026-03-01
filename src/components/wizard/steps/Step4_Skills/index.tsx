@@ -12,9 +12,10 @@ import './Step4_Skills.css';
 interface Step4Props {
     data: any;
     onChange: (updates: any) => void;
+    onShowHelp?: () => void;
 }
 
-export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
+export default function Step4_GeneralSkills({ data, onChange, onShowHelp }: Step4Props) {
     const {
         // Calculated values
         skillValues,
@@ -48,6 +49,7 @@ export default function Step4_GeneralSkills({ data, onChange }: Step4Props) {
             <WizardSection
                 title="Habilidades"
                 description="Define las habilidades de tu personaje."
+                onHelp={onShowHelp}
             />
 
             {/* GENERAL SKILLS SECTION */}

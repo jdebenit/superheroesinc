@@ -226,11 +226,11 @@ export default function CharacterWizard() {
 
     const renderStepContent = () => {
         if (currentStep === 1) {
-            return <Step1_OriginSelection data={character} onChange={updateCharacter} />;
+            return <Step1_OriginSelection data={character} onChange={updateCharacter} onShowHelp={() => setShowHelp(true)} />;
         }
 
         if (currentStep === 2) {
-            return <Step2_Characteristics data={character} onChange={updateCharacter} />;
+            return <Step2_Characteristics data={character} onChange={updateCharacter} onShowHelp={() => setShowHelp(true)} />;
         }
 
         if (currentStep === 3) {
@@ -238,23 +238,24 @@ export default function CharacterWizard() {
                 data={character}
                 onChange={updateCharacter}
                 onShowToast={showToast}
+                onShowHelp={() => setShowHelp(true)}
             />;
         }
 
         if (currentStep === 4) {
-            return <Step4_Skills data={character} onChange={updateCharacter} />;
+            return <Step4_Skills data={character} onChange={updateCharacter} onShowHelp={() => setShowHelp(true)} />;
         }
 
         if (currentStep === 5) {
-            return <Step5_Background data={character} onChange={updateCharacter} />;
+            return <Step5_Background data={character} onChange={updateCharacter} onShowHelp={() => setShowHelp(true)} />;
         }
 
         if (currentStep === 6) {
-            return <Step6_Details data={character} onChange={updateCharacter} totalPCs={totalPCs} />;
+            return <Step6_Details data={character} onChange={updateCharacter} totalPCs={totalPCs} onShowHelp={() => setShowHelp(true)} />;
         }
 
         if (currentStep === 7) {
-            return <Step7_Evolution />;
+            return <Step7_Evolution onShowHelp={() => setShowHelp(true)} />;
         }
 
         return (
@@ -282,13 +283,13 @@ export default function CharacterWizard() {
                 >
                     <span className="wizard-topbar-title">
                         <span className="desktop-title">Generador de Fichas</span>
-                        <span className="mobile-title">Paso {currentStep}: {STEPS[currentStep - 1].name} <span className="dropdown-caret">{isMobileMenuOpen ? '▲' : '▼'}</span></span>
+                        <span className="mobile-title">{currentStep}: {STEPS[currentStep - 1].name} <span className="dropdown-caret">{isMobileMenuOpen ? '▲' : '▼'}</span></span>
                     </span>
                     <span className="wizard-topbar-version">{APP_VERSIONS.WIZARD}</span>
                 </div>
 
                 <div className="pc-counter">
-                    PC: <span className="pc-val">{totalPCs}</span>
+                    <span className="pc-val">{totalPCs}</span> PC
                 </div>
 
                 <div className="wizard-topbar-actions">
@@ -303,15 +304,6 @@ export default function CharacterWizard() {
                     {/* Reset */}
                     <button onClick={handleReset} className="btn-base btn-reset" title="Reiniciar personaje">
                         🔄 <span>Reiniciar</span>
-                    </button>
-
-                    {/* Help */}
-                    <button
-                        onClick={() => setShowHelp(true)}
-                        className="btn-icon"
-                        title="Ayuda de este paso"
-                    >
-                        ❓
                     </button>
                 </div>
             </div>
