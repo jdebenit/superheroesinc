@@ -62,8 +62,8 @@ export const ORIGIN_CHARACTERISTIC_MODIFIERS: { [key: string]: OriginCharacteris
         fuerza: { modifier: 60, max: 200, min: 60 },
         constitucion: { modifier: 60, max: 200, min: 60 },
         agilidad: { modifier: 30, max: 130, min: 30 },
-        inteligencia: { modifier: 30, max: 130, min: 30 },
-        percepcion: { modifier: 0, max: 100 },
+        percepcion: { modifier: 30, max: 130, min: 30 },
+        inteligencia: { modifier: 0, max: 100 },
         apariencia: { modifier: 0, max: 100 },
         voluntad: { modifier: 0, max: 100 }
     },

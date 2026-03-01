@@ -125,3 +125,33 @@
     border-color: var(--wiz-color-primary-400);
     box-shadow: 0 0 0 2px var(--wiz-color-primary-100);
 }
+
+/* =========================================================================
+   Responsive Global Overrides (Mobile < 768px)
+   ========================================================================= */
+@media (max-width: 768px) {
+    .wizard-table-container {
+        overflow-x: visible !important;
+        margin-bottom: var(--wiz-spacing-4) !important;
+        background-color: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    .wizard-table {
+        min-width: 0 !important;
+        width: 100% !important;
+    }
+
+    /* Aggressively hide the header entirely on mobile view */
+    .wizard-table-header,
+    .wizard-table-header tr,
+    .wizard-table-header th {
+        display: none !important;
+        height: 0 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        border: none !important;
+        overflow: hidden !important;
+    }
+}

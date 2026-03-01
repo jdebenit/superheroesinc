@@ -379,66 +379,72 @@
     justify-content: center;
 }
 
-.wizard-table--powers {
-    table-layout: fixed !important;
-    width: 100% !important;
-    border-collapse: collapse !important;
-}
+/* =========================================================================
+   Powers Table: Desktop Layout (>= 769px)
+   Enforces strict fixed table layout and symmetrical column widths
+   ========================================================================= */
+@media (min-width: 769px) {
+    .wizard-table--powers {
+        table-layout: fixed !important;
+        width: 100% !important;
+        border-collapse: collapse !important;
+    }
 
-.wizard-table--powers tr {
-    display: table-row !important;
-    width: 100% !important;
-}
+    .wizard-table--powers tr {
+        display: table-row !important;
+        width: 100% !important;
+    }
 
-/* Symmetrical column widths for headers and cells */
-.wizard-table--powers th,
-.wizard-table--powers td {
-    display: table-cell !important;
-    box-sizing: border-box !important;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
+    /* Symmetrical column widths for headers and cells */
+    .wizard-table--powers th,
+    .wizard-table--powers td {
+        display: table-cell !important;
+        box-sizing: border-box !important;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 
-.wizard-table--powers th:nth-child(1),
-.wizard-table--powers td:nth-child(1) {
-    width: 25% !important;
-    min-width: 25% !important;
-    text-align: left !important;
-}
+    .wizard-table--powers th:nth-child(1),
+    .wizard-table--powers td:nth-child(1) {
+        width: 25% !important;
+        min-width: 25% !important;
+        text-align: left !important;
+    }
 
-.wizard-table--powers th:nth-child(2),
-.wizard-table--powers td:nth-child(2) {
-    width: 40% !important;
-    min-width: 40% !important;
-    text-align: center !important;
-}
+    .wizard-table--powers th:nth-child(2),
+    .wizard-table--powers td:nth-child(2) {
+        width: 40% !important;
+        min-width: 40% !important;
+        text-align: center !important;
+    }
 
-.wizard-table--powers th:nth-child(3),
-.wizard-table--powers td:nth-child(3) {
-    width: 15% !important;
-    min-width: 15% !important;
-    text-align: center !important;
-}
+    .wizard-table--powers th:nth-child(3),
+    .wizard-table--powers td:nth-child(3) {
+        width: 15% !important;
+        min-width: 15% !important;
+        text-align: center !important;
+    }
 
-.wizard-table--powers th:nth-child(4),
-.wizard-table--powers td:nth-child(4) {
-    width: 10% !important;
-    min-width: 10% !important;
-    text-align: center !important;
-}
+    .wizard-table--powers th:nth-child(4),
+    .wizard-table--powers td:nth-child(4) {
+        width: 10% !important;
+        min-width: 10% !important;
+        text-align: center !important;
+    }
 
-.wizard-table--powers th:nth-child(5),
-.wizard-table--powers td:nth-child(5) {
-    width: 10% !important;
-    min-width: 10% !important;
-    text-align: center !important;
-}
+    .wizard-table--powers th:nth-child(5),
+    .wizard-table--powers td:nth-child(5) {
+        width: 10% !important;
+        min-width: 10% !important;
+        text-align: center !important;
+    }
 
-/* Consistent padding for all cells */
-.wizard-table--powers th,
-.wizard-table--powers td {
-    padding: 0.75rem !important;
-    vertical-align: middle !important;
+    /* Consistent padding for all cells */
+    .wizard-table--powers th,
+    .wizard-table--powers td {
+        padding: 0.75rem !important;
+        vertical-align: middle !important;
+    }
 }
 
 /* --- PowerRow Styles --- */
@@ -1414,4 +1420,130 @@
     max-width: 500px;
     line-height: 1.6;
     margin-bottom: 2rem;
+}
+
+/* =========================================================================
+   Responsive Design (Mobile < 768px)
+   ========================================================================= */
+@media (max-width: 768px) {
+
+    /* Transform Powers Table to Cards */
+    div.wizard-table-container table.wizard-table--powers,
+    table.wizard-table--powers {
+        display: block !important;
+        width: 100% !important;
+        border: none !important;
+        box-shadow: none !important;
+        background: transparent !important;
+    }
+
+    /* Hide traditional headers */
+    div.wizard-table-container table.wizard-table--powers thead,
+    table.wizard-table--powers thead,
+    table.wizard-table--powers>thead,
+    table.wizard-table--powers thead tr,
+    table.wizard-table--powers thead th {
+        display: none !important;
+        height: 0 !important;
+        width: 0 !important;
+        overflow: hidden !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        border: none !important;
+        opacity: 0 !important;
+    }
+
+    table.wizard-table--powers tbody {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 1rem !important;
+        width: 100% !important;
+    }
+
+    /* Transform rows to cards */
+    div.wizard-table-container table.wizard-table--powers tbody tr,
+    table.wizard-table--powers tr {
+        display: flex !important;
+        flex-direction: column !important;
+        background-color: white !important;
+        /* Stronger borders and shadows for clear separation */
+        border: 2px solid var(--wiz-color-gray-300) !important;
+        border-radius: var(--wiz-radius-lg) !important;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+        padding: 1.25rem !important;
+        gap: 1rem !important;
+        margin-bottom: 1.5rem !important;
+        /* Fallback for flex gap */
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Transform cells */
+    div.wizard-table-container table.wizard-table--powers tbody tr td,
+    table.wizard-table--powers td {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        min-width: 100% !important;
+        padding: 0 !important;
+        text-align: left !important;
+        border: none !important;
+        box-sizing: border-box !important;
+        /* Remove borders between traditional cells */
+    }
+
+    /* Specific Cell Adjustments */
+    .wizard-table--powers .name-cell {
+        padding-bottom: 0.5rem !important;
+        border-bottom: 1px solid var(--wiz-color-gray-100) !important;
+        margin-bottom: 0.25rem;
+    }
+
+    .wizard-table--powers td:nth-child(2) {
+        /* Formula */
+        padding: 0.5rem 0 !important;
+    }
+
+    .wizard-table--powers td:nth-child(3),
+    /* Base Hab */
+    .wizard-table--powers td:nth-child(4) {
+        /* Origen */
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 0.5rem 0 !important;
+    }
+
+    /* Inject labels for non-obvious cells on mobile */
+    .wizard-table--powers td:nth-child(3)::before {
+        content: 'Base Hab:';
+        font-weight: bold;
+        color: var(--wiz-color-gray-600);
+        font-size: 0.875rem;
+    }
+
+    .wizard-table--powers td:nth-child(4)::before {
+        content: 'Origen:';
+        font-weight: bold;
+        color: var(--wiz-color-gray-600);
+        font-size: 0.875rem;
+    }
+
+    .wizard-table--powers td:nth-child(5) {
+        /* Actions */
+        align-items: flex-end !important;
+        padding-top: 0.5rem !important;
+        margin-top: 0.5rem !important;
+        border-top: 1px dashed var(--wiz-color-gray-200) !important;
+    }
+
+    /* Center formula components on mobile for better fit */
+    .power-formula-container {
+        align-items: center;
+    }
+
+    .power-skill-container {
+        flex-direction: row;
+        justify-content: flex-end;
+    }
 }
