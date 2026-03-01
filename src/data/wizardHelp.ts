@@ -15,6 +15,8 @@ export const WIZARD_HELP: { [stepId: number]: HelpContent } = {
     2: {
         title: "Distribución de Características",
         content: [
+            "Empiezas ya con 40 de base en todas las habilidades que es lo mínimo que un humano normal debe tener sin sufrir alguna tara, por eso los PCs utilizados de inicio son 28.",
+            "Puedes reducir la base de las carácteristicas por el mínimo del origen para reservar más PCs pero no es recomendable.",
             "Recuerda que las características base afectan a tus habilidades y estadísticas derivadas (como la Iniciativa o los Puntos de Vida).",
             "El Mod. Origen se aplica cuando por origen tienes algun modificador, si eres tienes diferentes modificadores a la misma caracteristica por diferentes origenes se aplica solo el mas alto.",
             "El Mod. Especialidad se aplica cuando por especialidad de Vigilante tienes algun modificador, tambien se tiene en cuenta el mas alto pero se complementa con el de origen."
