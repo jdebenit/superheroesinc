@@ -249,3 +249,49 @@
     border: 1px solid rgba(255, 255, 255, 0.3);
     white-space: nowrap;
 }
+
+/* =========================================================================
+   Responsive Overrides
+   ========================================================================= */
+@media (max-width: 640px) {
+    .step2-chars-grid {
+        /* Override 350px min-width so cards can fit on 320px screens */
+        grid-template-columns: 1fr;
+    }
+
+    .step2-char-card {
+        padding: 1rem;
+    }
+
+    .step2-char-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .step2-input-grid {
+        /* Force 2 columns on mobile to ensure it doesn't try to fit 3 and overflow */
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem 0.5rem;
+    }
+
+    .step2-input-grid .wizard-field label {
+        /* Allow long labels like "Mod. Especialidad" to wrap */
+        white-space: normal !important;
+        text-align: center;
+        font-size: 0.75rem;
+        line-height: 1.2;
+    }
+
+    .step2-sticky-summary {
+        margin-left: -1rem;
+        margin-right: -1rem;
+        padding: 0.5rem 1rem;
+        justify-content: center;
+    }
+
+    .step2-summary-item {
+        min-width: 40px;
+        padding: 0.2rem 0.4rem;
+    }
+}
