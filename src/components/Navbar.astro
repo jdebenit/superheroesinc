@@ -1,6 +1,5 @@
 ---
 import Search from "../components/Search";
-import { Image } from "astro:assets";
 
 const links = [
   { name: "Inicio", href: "/" },
@@ -16,12 +15,12 @@ const links = [
   <div class="container">
     <div class="nav-header">
       <a href="/" class="logo" style="background-color: transparent;">
-        <Image
+        <img
           src="/logo_SHI.png"
           alt="Superheroes INC Logo"
           class="logo-img"
-          width={60}
-          height={60}
+          width="60"
+          height="60"
         />
         <span class="security-level">NIVEL 7</span>
       </a>

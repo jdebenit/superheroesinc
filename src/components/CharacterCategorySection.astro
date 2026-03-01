@@ -1,6 +1,4 @@
 ---
-import { Image } from "astro:assets";
-
 interface Props {
     title: string;
     intro: string;
@@ -20,12 +18,13 @@ const { title, intro, characters } = Astro.props;
                     <div class="card-inner">
                         <div class="card-front">
                             {char.data.image ? (
-                                <Image
+                                <img
                                     src={char.data.image}
                                     alt={char.data.alias || char.data.name}
                                     class="char-image"
-                                    width={400}
-                                    height={340}
+                                    width="400"
+                                    height="340"
+                                    loading="lazy"
                                 />
                             ) : (
                                 <div class="placeholder-image classified-container">
