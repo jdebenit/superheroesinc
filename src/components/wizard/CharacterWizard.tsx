@@ -25,6 +25,7 @@ import Logger from '../../utils/Logger';
 export default function CharacterWizard() {
     const [currentStep, setCurrentStep] = useState(1);
     const [showHelp, setShowHelp] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     // Global Modal/Toast State
     const [toast, setToast] = useState<{ message: string; type: ToastType } | null>(null);
@@ -273,8 +274,16 @@ export default function CharacterWizard() {
 
             {/* ── TOP BAR ─────────────────────────────── */}
             <div className="wizard-topbar">
-                <div className="wizard-topbar-brand">
-                    <span className="wizard-topbar-title">Generador de Fichas</span>
+                <div
+                    className="wizard-topbar-brand"
+                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                    role="button"
+                    tabIndex={0}
+                >
+                    <span className="wizard-topbar-title">
+                        <span className="desktop-title">Generador de Fichas</span>
+                        <span className="mobile-title">Paso {currentStep}: {STEPS[currentStep - 1].name} <span className="dropdown-caret">{isMobileMenuOpen ? '▲' : '▼'}</span></span>
+                    </span>
                     <span className="wizard-topbar-version">{APP_VERSIONS.WIZARD}</span>
                 </div>
 
@@ -307,7 +316,7 @@ export default function CharacterWizard() {
                 </div>
             </div>
 
-            {/* ── TABS NAV ────────────────────────────── */}
+            {/* ── TABS NAV (Desktop) ────────────────────────────── */}
             <div className="wizard-tabs" role="tablist">
                 {STEPS.map((step) => {
                     const isActive = step.id === currentStep;
@@ -334,6 +343,35 @@ export default function CharacterWizard() {
                     );
                 })}
             </div>
+
+            {/* ── MOBILE DROPDOWN ───────────────────────────────── */}
+            {isMobileMenuOpen && (
+                <>
+                    <div className="mobile-dropdown-overlay" onClick={() => setIsMobileMenuOpen(false)} />
+                    <div className="mobile-dropdown-menu">
+                        {STEPS.map((step) => {
+                            const isActive = step.id === currentStep;
+                            const isCompleted = step.id < currentStep;
+                            let cls = 'mobile-menu-item';
+                            if (isActive) cls += ' active';
+
+                            return (
+                                <button
+                                    key={step.id}
+                                    onClick={() => {
+                                        handleStepClick(step.id);
+                                        setIsMobileMenuOpen(false);
+                                    }}
+                                    className={cls}
+                                >
+                                    <span className="menu-icon">{isCompleted ? '✓' : step.icon}</span>
+                                    <span className="menu-text">{step.name}</span>
+                                </button>
+                            );
+                        })}
+                    </div>
+                </>
+            )}
 
             {/* ── CONTENT AREA ────────────────────────── */}
             <div className="wizard-content" role="tabpanel" ref={contentRef}>
