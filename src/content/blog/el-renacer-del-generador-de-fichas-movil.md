@@ -5,7 +5,7 @@ description: "Hemos rediseñado por completo la estructura del generador de fich
 author: "Jorge Francisco de Benito Montoya"
 tags: ["noticias", "desarrollo", "web"]
 ---
-Cuando un jugador o director de juego se sienta a preparar una partida, lo último que quiere es pelearse con la interfaz de una herramienta. Durante las últimas semanas hemos estado trabajando sin descanso en las entrañas de una de las utilidades más usadas de la web, el generador de fichas.
+Cuando un jugador o director de juego se sienta a preparar una partida, lo último que quiere es pelearse con la interfaz de una herramienta. Durante las últimas semanas hemos estado trabajando sin descanso en las entrañas de una de las utilidades más usadas de la web, el [generador de fichas](/recursos/generador-fichas).
 
 Sabemos perfectamente cómo se prepara una partida de Superhéroes INC hoy en día. Atrás quedaron esas hojas de papel manchadas de borrones o las hojas de cálculo interminables. La realidad es que la inmensa mayoría de nosotros acudimos a preparar nuestros personajes o PNJ con nuestro teléfono móvil en la mano. 
 
