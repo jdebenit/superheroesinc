@@ -5,7 +5,12 @@ const year = new Date().getFullYear();
 
 <footer class="footer">
   <div class="container">
-    <p>&copy; {year} Superheroes INC. Todos los derechos reservados.</p>
+    <p>
+      &copy; {year} Superheroes INC. Todos los derechos reservados. | <a
+        href="/politica-privacidad"
+        class="privacy-link">Política de privacidad</a
+      >
+    </p>
     <p>Web oficial de la Tercera Edición. v{version}</p>
   </div>
 </footer>
@@ -35,5 +40,16 @@ const year = new Date().getFullYear();
     font-size: 0.85rem;
     color: rgba(255, 255, 255, 0.6);
     margin-top: 1rem;
+  }
+
+  .privacy-link {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    transition: color 0.2s ease;
+  }
+
+  .privacy-link:hover {
+    color: var(--color-primary);
   }
 </style>
