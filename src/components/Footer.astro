@@ -1,11 +1,12 @@
 ---
+import { version } from "../../package.json";
 const year = new Date().getFullYear();
 ---
 
 <footer class="footer">
   <div class="container">
     <p>&copy; {year} Superheroes INC. Todos los derechos reservados.</p>
-    <p>Web oficial de la Tercera Edición.</p>
+    <p>Web oficial de la Tercera Edición. v{version}</p>
   </div>
 </footer>
 
@@ -28,5 +29,11 @@ const year = new Date().getFullYear();
   p {
     margin: 0.5rem 0;
     font-family: var(--font-body);
+  }
+
+  .version {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 1rem;
   }
 </style>
