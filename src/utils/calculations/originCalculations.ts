@@ -49,7 +49,7 @@ export function calculateOriginModifiers(
         voluntad: 0
     };
 
-    forEachOriginAndSubtype(origins, (name, data, isSubtype) => {
+    forEachOriginAndSubtype(origins, (_, data) => {
         // Aplicar modificadores de características
         Object.keys(modifiers).forEach(charId => {
             const charMod = data[charId as keyof typeof data];
@@ -82,7 +82,7 @@ export function calculateLimits(
     let minLimit = 40;
     let hasSpecificMin = false;
 
-    forEachOriginAndSubtype(origins, (name, data, isSubtype) => {
+    forEachOriginAndSubtype(origins, (_, data) => {
         const charMod = data[charId as keyof typeof data];
         if (charMod && typeof charMod === 'object' && 'max' in charMod) {
             if (charMod.max && charMod.max > maxLimit) {
@@ -109,7 +109,7 @@ export function hasChoosableCharacteristic(origins: any[]): any | null {
     if (!origins || origins.length === 0) return null;
 
     let result: any = null;
-    forEachOriginAndSubtype(origins, (name, data, isSubtype) => {
+    forEachOriginAndSubtype(origins, (_, data) => {
         if (data.choosableCharacteristic && !result) {
             result = data.choosableCharacteristic;
         }
@@ -125,7 +125,7 @@ export function hasDistributablePoints(origins: any[]): boolean {
     if (!origins || origins.length === 0) return false;
 
     let hasPoints = false;
-    forEachOriginAndSubtype(origins, (name, data, isSubtype) => {
+    forEachOriginAndSubtype(origins, (_, data) => {
         if (data.distributablePoints !== undefined) {
             hasPoints = true;
         }
@@ -145,7 +145,7 @@ export function getDistributablePointsInfo(
     let totalAvailable = 0;
 
     // Calcular total disponible
-    forEachOriginAndSubtype(origins, (name, data, isSubtype) => {
+    forEachOriginAndSubtype(origins, (_, data) => {
         if (data.distributablePoints) {
             totalAvailable += data.distributablePoints;
         }

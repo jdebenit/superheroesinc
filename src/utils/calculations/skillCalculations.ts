@@ -1,5 +1,5 @@
-import { GENERAL_SKILLS, type GeneralSkillDefinition } from '../../data/generalSkills';
-import { SPECIAL_SKILLS, type SpecialSkillDefinition } from '../../data/specialSkills';
+import { GENERAL_SKILLS } from '../../data/generalSkills';
+import { SPECIAL_SKILLS } from '../../data/specialSkills';
 import { ORIGIN_SKILL_MODIFIERS } from '../../data/skillModifiers';
 import Logger from '../Logger';
 
@@ -504,7 +504,7 @@ export function calculateSpecialSkillsPCWithInt(
  */
 export function calculateSkillBase(
     characteristics: { [key: string]: number },
-    origins: any[] | undefined,
+    _origins: any[] | undefined,
     formula: string
 ): number {
     if (!formula) return 0;
