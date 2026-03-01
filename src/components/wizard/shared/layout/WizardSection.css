@@ -61,3 +61,23 @@
 .wizard-section-content {
     padding: var(--wiz-spacing-6);
 }
+
+/* =========================================================================
+   Responsive Overrides
+   ========================================================================= */
+@media (max-width: 768px) {
+    .wizard-section {
+        margin-bottom: var(--wiz-spacing-4);
+        border-left-width: 2px;
+        /* Thinner border to save space */
+    }
+
+    .wizard-section-header {
+        padding: var(--wiz-spacing-3) var(--wiz-spacing-4);
+    }
+
+    .wizard-section-content {
+        padding: var(--wiz-spacing-3);
+        /* Significantly reduce padding to maximize screen width for inner cards */
+    }
+}

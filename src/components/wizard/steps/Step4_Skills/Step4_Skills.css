@@ -14,23 +14,29 @@
 @media (max-width: 768px) {
 
   /* Force TableContainer to let content wrap */
-  .wizard-table-container:has(.wizard-skill-table) {
-    overflow-x: hidden !important;
+  .wizard-skill-table-container {
+    overflow-x: visible !important;
     overflow-y: visible !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
   }
 
   /* Transform Skills Table to Cards */
-  div.wizard-table-container table.wizard-skill-table,
+  div.wizard-skill-table-container table.wizard-skill-table,
   table.wizard-skill-table {
     display: block !important;
     width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    /* Neutralize desktop 800px min-width */
     border: none !important;
     box-shadow: none !important;
     background: transparent !important;
   }
 
   /* Hide traditional headers */
-  div.wizard-table-container table.wizard-skill-table thead,
+  div.wizard-skill-table-container table.wizard-skill-table thead,
   table.wizard-skill-table thead,
   table.wizard-skill-table>thead,
   table.wizard-skill-table thead tr,
@@ -52,10 +58,12 @@
     flex-direction: column !important;
     gap: 1rem !important;
     width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
   }
 
   /* Transform rows to cards */
-  div.wizard-table-container table.wizard-skill-table tbody tr,
+  div.wizard-skill-table-container table.wizard-skill-table tbody tr,
   table.wizard-skill-table tr.wizard-skill-row {
     display: flex !important;
     flex-direction: column !important;
@@ -63,30 +71,39 @@
     border: 2px solid var(--wiz-color-gray-300) !important;
     border-radius: var(--wiz-radius-lg) !important;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
-    padding: 1.25rem !important;
+    padding: 1rem !important;
+    /* Reduced padding from 1.25rem to save space on <360px screens */
     margin-bottom: 1.5rem !important;
     /* Fallback gap */
     width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
     box-sizing: border-box !important;
   }
 
   /* Transform cells */
-  div.wizard-table-container table.wizard-skill-table tbody tr td,
+  div.wizard-skill-table-container table.wizard-skill-table tbody tr td,
   table.wizard-skill-table td.wizard-td-cell,
   table.wizard-skill-table td.wizard-td-name {
     display: flex !important;
     flex-direction: row !important;
+    flex-wrap: wrap !important;
+    /* Allow inputs to drop down if they don't fit */
     /* Row by default for label: value pairs */
     justify-content: space-between !important;
     align-items: center !important;
     width: 100% !important;
+    max-width: 100% !important;
     min-width: 0 !important;
+    gap: 0.25rem !important;
     padding: 0.5rem 0 !important;
     /* Add spacing between "rows" inside the card */
     text-align: left !important;
     border: none !important;
     box-sizing: border-box !important;
     border-bottom: 1px dotted var(--wiz-color-gray-200) !important;
+    word-break: break-word;
+    /* Ensure long words wrap instead of expanding container */
   }
 
   /* Remove border from last cell */
