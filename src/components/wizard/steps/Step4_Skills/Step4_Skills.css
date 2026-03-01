@@ -1,8 +1,195 @@
 /* .step4-container is now replaced by .wizard-step-container from shared styles */
 
-
 /* 
   Removed the massive ecosystem of --s4-* custom CSS variables 
   so that Step 4 components can be unified with the global Wizard design language. 
   Colors like slate-600, blue-600, emerald-600 will be used directly below or in related files.
 */
+
+
+/* =========================================================================
+   Responsive Design (Mobile < 768px)
+   ========================================================================= */
+
+@media (max-width: 768px) {
+
+  /* Force TableContainer to let content wrap */
+  .wizard-table-container:has(.wizard-skill-table) {
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+  }
+
+  /* Transform Skills Table to Cards */
+  div.wizard-table-container table.wizard-skill-table,
+  table.wizard-skill-table {
+    display: block !important;
+    width: 100% !important;
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+  }
+
+  /* Hide traditional headers */
+  div.wizard-table-container table.wizard-skill-table thead,
+  table.wizard-skill-table thead,
+  table.wizard-skill-table>thead,
+  table.wizard-skill-table thead tr,
+  table.wizard-skill-table thead th {
+    display: none !important;
+    height: 0 !important;
+    width: 0 !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    opacity: 0 !important;
+  }
+
+  /* Ensure tbody acts as a flex container for cards */
+  table.wizard-skill-table tbody,
+  .wizard-skill-table tbody {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1rem !important;
+    width: 100% !important;
+  }
+
+  /* Transform rows to cards */
+  div.wizard-table-container table.wizard-skill-table tbody tr,
+  table.wizard-skill-table tr.wizard-skill-row {
+    display: flex !important;
+    flex-direction: column !important;
+    background-color: white !important;
+    border: 2px solid var(--wiz-color-gray-300) !important;
+    border-radius: var(--wiz-radius-lg) !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+    padding: 1.25rem !important;
+    margin-bottom: 1.5rem !important;
+    /* Fallback gap */
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Transform cells */
+  div.wizard-table-container table.wizard-skill-table tbody tr td,
+  table.wizard-skill-table td.wizard-td-cell,
+  table.wizard-skill-table td.wizard-td-name {
+    display: flex !important;
+    flex-direction: row !important;
+    /* Row by default for label: value pairs */
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    padding: 0.5rem 0 !important;
+    /* Add spacing between "rows" inside the card */
+    text-align: left !important;
+    border: none !important;
+    box-sizing: border-box !important;
+    border-bottom: 1px dotted var(--wiz-color-gray-200) !important;
+  }
+
+  /* Remove border from last cell */
+  table.wizard-skill-table td:last-child {
+    border-bottom: none !important;
+  }
+
+  /* Specific Cell Overrides */
+
+  /* Name cell: title style */
+  table.wizard-skill-table td.wizard-td-name {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    border-bottom: 2px solid var(--wiz-color-gray-200) !important;
+    padding-bottom: 0.75rem !important;
+    margin-bottom: 0.5rem !important;
+    font-weight: bold;
+    font-size: 1.1em;
+    color: var(--wiz-color-gray-900);
+  }
+
+  /* Formula cell */
+  table.wizard-skill-table td:nth-child(2)::before {
+    content: 'Fórmula:';
+    font-weight: bold;
+    color: var(--wiz-color-gray-500);
+    margin-right: 1rem;
+  }
+
+  /* Base cell */
+  table.wizard-skill-table td:nth-child(3)::before {
+    content: 'Base:';
+    font-weight: bold;
+    color: var(--wiz-color-gray-500);
+    margin-right: 1rem;
+  }
+
+  /* Origin cell */
+  table.wizard-skill-table td:nth-child(4)::before {
+    content: 'Origen:';
+    font-weight: bold;
+    color: var(--wiz-color-gray-500);
+    margin-right: 1rem;
+  }
+
+  /* Specialty cell */
+  table.wizard-skill-table td:nth-child(5)::before {
+    content: 'Especialidad:';
+    font-weight: bold;
+    color: var(--wiz-color-gray-500);
+    margin-right: 1rem;
+  }
+
+  /* Manual Mod cell */
+  table.wizard-skill-table td:nth-child(6)::before {
+    content: 'Otros:';
+    font-weight: bold;
+    color: var(--wiz-color-gray-500);
+    margin-right: 1rem;
+  }
+
+  /* Total cell */
+  table.wizard-skill-table td.wizard-total-cell {
+    background-color: var(--wiz-color-gray-50) !important;
+    margin-top: 0.5rem;
+    padding: 0.75rem !important;
+    border-radius: var(--wiz-radius-md);
+    border: 1px solid var(--wiz-color-gray-200) !important;
+  }
+
+  table.wizard-skill-table td.wizard-total-cell::before {
+    content: 'TOTAL:';
+    font-weight: 900;
+    color: var(--wiz-color-primary-600);
+    margin-right: 1rem;
+  }
+
+  /* Special Table Extra Columns (PCs and Actions) */
+  table.wizard-skill-table td:nth-child(8)::before {
+    content: 'Coste PCs:';
+    font-weight: bold;
+    color: var(--wiz-color-gray-500);
+    margin-right: 1rem;
+  }
+
+  table.wizard-skill-table td:nth-child(9) {
+    justify-content: flex-end !important;
+    padding-top: 0.75rem !important;
+    border-bottom: none !important;
+  }
+
+  /* Adjust input widths on mobile */
+  .wizard-base-input,
+  .wizard-manual-mod-input {
+    width: 100px;
+    /* Enforce a reasonable width */
+    text-align: right;
+  }
+
+  .wizard-base-input-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+  }
+}
