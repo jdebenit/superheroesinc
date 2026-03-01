@@ -1,7 +1,7 @@
 {
   "name": "shi",
   "type": "module",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -10,19 +10,19 @@
   },
   "dependencies": {
     "@astrojs/react": "^4.4.2",
-    "@astrojs/rss": "^4.0.14",
-    "@astrojs/sitemap": "^3.6.0",
+    "@astrojs/rss": "^4.0.15",
+    "@astrojs/sitemap": "^3.7.0",
     "@types/markdown-it": "^14.1.2",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
-    "astro": "^5.16.1",
+    "astro": "^5.18.0",
     "markdown-it": "^14.1.0",
     "marked": "^17.0.1",
     "pdf-lib": "^1.17.1",
     "prop-types": "^15.8.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "react-vertical-timeline-component": "^3.5.3"
+    "react-vertical-timeline-component": "^4.0.0"
   },
   "devDependencies": {
     "@types/react-vertical-timeline-component": "^3.3.6"
