@@ -1,0 +1,359 @@
+{
+  "name": "Asha de Cindraor",
+  "alias": "La Naga",
+  "notes": [
+    "Chi 7 veces al día",
+    "Cuando usa su chi en su cuerpo este adquiere un brillo verdoso",
+    "El Khopesh se ilumina al colpear cuando esta cargado con chi",
+    "Suele usar el Sheng Biao como ayuda para moverse entre azoteas y zonas elevadas"
+  ],
+  "icon": "icons/la-naga-icon.png",
+  "meta": {
+    "version": "Beta 0.10.5",
+    "generator": "SHI Wizard"
+  },
+  "level": 4,
+  "origin": {
+    "items": [
+      {
+        "Vigilante": [
+          "Disponibilidad de armamento a dificultad reducida",
+          "Recarga rápida",
+          "Recuerdos dolorosos",
+          "Voluntad férrea",
+          "Manipulador",
+          "Artista Marcial con Chi"
+        ]
+      },
+      {
+        "Arcano": [
+          "+20 a la parada mental",
+          "Terrano"
+        ]
+      }
+    ]
+  },
+  "combatstats": [
+    "Acciones por asalto: 3",
+    "Iniciativa y Reflejos: 75",
+    "Puntos de Vida: 90",
+    "Equilibrio Mental: 102"
+  ],
+  "otherstats": [
+    "Inconsciencia: 9",
+    "Recuperación: 2 PV/h",
+    "Resistencia a gases y venenos: 35%",
+    "Modificador de fuerza: 1d10",
+    "Peso Levantado: 500kg",
+    "Daño absorbido físico: 15",
+    "Daño absorbido mental: 40",
+    "Modificador de impacto: 40",
+    "Modificador Psionico: 30",
+    "Parada Fisica: 50",
+    "Parada mental: 75",
+    "Salto (alto / largo): 3,7m / 11,0m"
+  ],
+  "attributes": {
+    "values": {
+      "Fuerza": 100,
+      "Constitución": 105,
+      "Agilidad": 110,
+      "Inteligencia": 102,
+      "Percepción": 110,
+      "Apariencia": 101,
+      "Voluntad": 102
+    },
+    "breakdown": {
+      "fuerza": {
+        "base": 90,
+        "originMod": 10,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "constitucion": {
+        "base": 95,
+        "originMod": 10,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "agilidad": {
+        "base": 50,
+        "originMod": 10,
+        "specialtyMod": 50,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "inteligencia": {
+        "base": 62,
+        "originMod": 10,
+        "specialtyMod": 30,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "percepcion": {
+        "base": 50,
+        "originMod": 10,
+        "specialtyMod": 50,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "apariencia": {
+        "base": 61,
+        "originMod": 10,
+        "specialtyMod": 30,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "voluntad": {
+        "base": 92,
+        "originMod": 10,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      }
+    }
+  },
+  "skills": {
+    "generalItems": [
+      {
+        "name": "Acechar/Discrección",
+        "math": "(AGI+PER)/2",
+        "value": "130%"
+      },
+      {
+        "name": "Comb. cuerpo a cuerpo",
+        "math": "(AGI+PER)/2",
+        "value": "110%"
+      },
+      {
+        "name": "Conocimientos generales",
+        "math": "INT/3",
+        "value": "19%"
+      },
+      {
+        "name": "Esconderse",
+        "math": "(AGI+PER)/4",
+        "value": "55%"
+      },
+      {
+        "name": "Idea",
+        "math": "INT/2",
+        "value": "71%"
+      },
+      {
+        "name": "Influencia",
+        "math": "(INT+APA)/2",
+        "value": "121%"
+      },
+      {
+        "name": "Idioma nativo",
+        "math": "INT",
+        "value": "102%"
+      },
+      {
+        "name": "Investigar",
+        "math": "(INT+PER)/3",
+        "value": "70%"
+      },
+      {
+        "name": "Lanzar",
+        "math": "(FUE+PER)/2",
+        "value": "105%"
+      },
+      {
+        "name": "Primeros auxilios",
+        "math": "INT/2",
+        "value": "51%"
+      },
+      {
+        "name": "Suerte",
+        "math": "(PER+VOL)/4",
+        "value": "53%"
+      },
+      {
+        "name": "Trepar y Saltar",
+        "math": "AGI",
+        "value": "130%"
+      }
+    ],
+    "specialItems": [
+      {
+        "name": "Artes Marciales",
+        "math": "(AGI+PER)/3",
+        "value": "83%"
+      },
+      {
+        "name": "Rastrear",
+        "math": "(INT+PER)/4",
+        "value": "53%"
+      },
+      {
+        "name": "Contemplación",
+        "math": "VOL/2",
+        "value": "51%"
+      },
+      {
+        "name": "Armas blancas",
+        "math": "(AGI+PER)/3",
+        "value": "73%"
+      },
+      {
+        "name": "Otro idioma: Kishvari",
+        "math": "INT/3",
+        "value": "54%"
+      },
+      {
+        "name": "Supervivencia: Bosque",
+        "math": "INT/2",
+        "value": "51%"
+      },
+      {
+        "name": "Arma Especial: Khopesh",
+        "math": "(2xPER)/3",
+        "value": "93%"
+      },
+      {
+        "name": "Arma Especial: Sheng Biao",
+        "math": "(2xPER)/3",
+        "value": "73%"
+      }
+    ],
+    "selected": {
+      "artes_marciales": {
+        "isFree": false,
+        "isRequired": true,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "rastrear": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "contemplacion": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "armas_blancas": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      }
+    },
+    "specified": {
+      "otro_idioma_required_1774896685761": {
+        "skillId": "otro_idioma",
+        "specification": "Kishvari",
+        "isFree": false,
+        "isRequired": true,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "supervivencia_1774896725089": {
+        "skillId": "supervivencia",
+        "specification": "Bosque",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "arma_especial_1774896765588": {
+        "skillId": "arma_especial",
+        "specification": "Khopesh",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "arma_especial_1774896767950": {
+        "skillId": "arma_especial",
+        "specification": "Sheng Biao",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      }
+    }
+  },
+  "background": {
+    "prejudiceResistance": 30,
+    "economicStatus": "clase_baja",
+    "legalStatus": "con_antecedentes",
+    "items": [
+      "Con cobertura legal por la FDM"
+    ]
+  },
+  "weapons": {
+    "items": [
+      {
+        "name": "Khopesh de Tamahagane",
+        "damage": "3d10+30+10+mfue",
+        "dxa": "",
+        "car": "1",
+        "notes": "",
+        "cost": "2",
+        "skillId": "arma_especial"
+      },
+      {
+        "name": "Sheng Biao",
+        "damage": "2d6+20+10+mfue",
+        "dxa": "",
+        "car": "1",
+        "notes": "",
+        "cost": 0,
+        "skillId": "arma_especial"
+      },
+      {
+        "name": "Daga",
+        "damage": "2d6+20+10+mfue",
+        "dxa": "",
+        "car": "2",
+        "notes": "",
+        "cost": 0,
+        "skillId": "armas_blancas"
+      }
+    ]
+  },
+  "magicObjects": {
+    "items": [
+      {
+        "name": "Amuleto de velocidad en combate",
+        "description": "+1 acción en dicha situación.",
+        "em": 130
+      },
+      {
+        "name": "Botas de Lert",
+        "description": "Doblan la capacidad de salto de quien las lleva.",
+        "em": 80
+      },
+      {
+        "name": "Tiara mental",
+        "description": "Refuerza la resistencia psíquica del personaje, reduciendo cualquier ataque a su equilibrio mental al 10% de su daño, o del valor del ataque.",
+        "em": 150
+      }
+    ]
+  },
+  "spells": {
+    "emFormula": {
+      "divisor": 0,
+      "pcCost": -5
+    },
+    "calculatedEM": 78
+  },
+  "magicTableRolls": [
+    "180_EM",
+    "180_EM"
+  ],
+  "profession": "Aventurera",
+  "sexualIdentity": "Mujer",
+  "traumas": {
+    "Manipulador": "Desde mi niñez he sido manipulada por intrigas de la corte y mi madrastra ha confabulado contra mi, he descubierto que las palabras tienen mas poder que los hechizos y las espadas. Los uso en contra de los que se aprovechan de la gente cuando esta debil y desprotegida para evitar lo que me paso a mi.",
+    "Artista Marcial con Chi": "En las tierras profundas de Kish’var la orden de las Nagas me enseño a dominar mi cuerpo y mente, a usar el poder de mis adversarios contra ellos y a entender que el unico enemigo al que debo enfrentarme esta dentro de mi."
+  }
+}

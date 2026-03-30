@@ -7,7 +7,7 @@ updatedDate: 2026-01-23
 publishedDate: 2025-12-13
 birthDate: 2000-06-12
 image: /personajes/la-naga-tierra-zero.png
-rpgId: la-naga
+rpgId: la-naga-n4
 tags:
   - Principales
   - FDM

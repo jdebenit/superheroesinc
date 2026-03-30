@@ -198,6 +198,8 @@
   },
   "active": "2a7beef718c2dc73",
   "lastOpenFiles": [
+    "rpg/la-naga-n4.json",
+    "rpg/la-naga copy.json",
     "blog/diseñar-un-sistema-no-te-protege-de-jugar-mal.md",
     "blog/haciendo-fichas-sin-calculadora.md",
     "blog/un-timeline-para-no-perderte-jugando-y-dirigiendo.md",
@@ -223,7 +225,6 @@
     "timeline/aleister-crowley-y-la-aurora-dorada copy.md",
     "lore/organizaciones/la-orden-de-las-nagas.md",
     "lore/organizaciones/ciss.md",
-    "characters/epsilon-eridiani.md",
     "timeline",
     "lore/cronicas",
     "faq",
@@ -232,7 +233,6 @@
     "rpg/motero-road-reapers copy.yaml",
     "rpg/motero-road-reapers.yaml",
     "rpg/philipe-de-herblay copy.yaml",
-    "rpg/cu-chulainn.yaml",
-    "rpg/medianoche copy.yaml"
+    "rpg/cu-chulainn.yaml"
   ]
 }
