@@ -130,7 +130,17 @@ export default function CharacterWizard() {
     const handleFinish = () => {
         const charName = (character as any).name || 'personaje';
         const filename = `${charName.replace(/\s+/g, '_').toLowerCase()}.json`;
-        const json = JSON.stringify(character, null, 2);
+        
+        // Ensure meta is updated before export
+        const exportCharacter = {
+            ...character,
+            meta: {
+                ...(character as any).meta,
+                version: APP_VERSIONS.WIZARD,
+                generator: 'SHI Wizard'
+            }
+        };
+        const json = JSON.stringify(exportCharacter, null, 2);
         const blob = new Blob([json], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');

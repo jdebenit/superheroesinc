@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import { APP_VERSIONS } from '../../../data/appVersions';
 import { calculateDiff } from '../../../utils/dataCleaner';
 import { initialCharacterState } from '../../../data/wizardConfig';
 import { calculateDerivedStats, formatDerivedStats } from '../../../utils/characterCalculations';
@@ -37,7 +38,11 @@ export const useJsonExport = (
         // This ensures valid import even if values match defaults
         exportData.name = character.name;
         exportData.attributes = character.attributes;
-        exportData.meta = character.meta;
+        exportData.meta = {
+            ...character.meta,
+            version: APP_VERSIONS.WIZARD,
+            generator: 'SHI Wizard'
+        };
 
         const filename = `${(character.name || 'personaje').toLowerCase().replace(/\s+/g, '-')}.json`;
         const jsonStr = JSON.stringify(exportData, null, 2);
