@@ -19,9 +19,7 @@ export const GET: APIRoute = async () => {
         ...loreEntries.map(entry => ({
             title: entry.data.title,
             description: entry.data.description,
-            url: entry.data.category === 'organizaciones'
-                ? `/organizaciones/${entry.slug}`
-                : `/lore/${entry.slug}`,
+            url: `/lore/${entry.slug}`,
             category: entry.data.category === 'organizaciones' ? 'Organizaciones' : 'Lore',
             type: 'lore',
             source: entry.data.source
