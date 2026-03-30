@@ -207,6 +207,7 @@ export function useStep3Logic(data: any, onChange: (updates: any) => void, onSho
     // Selection Handlers
     const togglePowerSelection = (powerId: string) => {
         if (!modalOriginFilter) return;
+
         const validation = validatePowerSelection(powerId, modalOriginFilter);
         if (!validation.allowed) {
             onShowToast?.(validation.message || 'Poder no permitido', 'error');
@@ -266,6 +267,9 @@ export function useStep3Logic(data: any, onChange: (updates: any) => void, onSho
                 if (modalOriginFilter === 'Psíquico') return p.types.includes('Psíquico');
                 if ((isGuardianChar && (modalOriginFilter === 'Guardián' || modalOriginFilter === 'Guardian')) ||
                     (isMalditoChar && modalOriginFilter === 'Sobrenatural')) return true;
+                if (modalOriginFilter === 'Ente') {
+                    return p.origins.includes('Mutante') && p.types.some(t => t === 'Psíquico' || t === 'Energético');
+                }
                 if (modalOriginFilter) {
                     if (modalOriginFilter === 'Guardián' && p.origins.includes('Guardian')) return true;
                     return p.origins.includes(modalOriginFilter);

@@ -146,7 +146,7 @@ export default function PowersSection({
                 </PixelButton>
             )}
             {isEnte && (
-                <PixelButton onClick={() => onOpenModal('Mutante')} variant="ente" className="small">
+                <PixelButton onClick={() => onOpenModal('Ente')} variant="ente" className="small">
                     <span>+</span> Mutante (Ente)
                 </PixelButton>
             )}

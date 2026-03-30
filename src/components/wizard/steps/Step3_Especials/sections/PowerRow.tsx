@@ -61,6 +61,7 @@ const ORIGIN_TAG_COLORS: Record<string, "blue" | "purple" | "red" | "orange" | "
     'Divino': 'yellow',
     'Cósmico': 'indigo',
     'Mutante': 'pink',
+    'Ente': 'pink',
     'Elfo Físico': 'green'
 };
 

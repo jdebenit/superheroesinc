@@ -20,8 +20,21 @@
               "icon": "lucide-file",
               "title": "lanzamiento"
             }
+          },
+          {
+            "id": "2a7beef718c2dc73",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.12.7"
+              },
+              "icon": "lucide-book-up",
+              "title": "Registro de cambios 1.12.7"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -183,7 +196,7 @@
       "bases:Crear nueva base": false
     }
   },
-  "active": "85361f369081eb44",
+  "active": "2a7beef718c2dc73",
   "lastOpenFiles": [
     "blog/diseñar-un-sistema-no-te-protege-de-jugar-mal.md",
     "blog/haciendo-fichas-sin-calculadora.md",
