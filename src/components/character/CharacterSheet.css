@@ -739,6 +739,16 @@
     line-height: 1.5;
 }
 
+.notes-array-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.notes-paragraph {
+    margin: 0;
+}
+
 /* General Layout and Component Styles */
 
 
