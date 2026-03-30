@@ -48,22 +48,40 @@ export const useCharacterSheetData = (character: any) => {
     // Always use live calculated stats to prevent stale data
     const { combatStats, otherStats } = formatDerivedStats(derivedStats);
 
-    // Override calculated Hit Points with saved value from JSON if present and valid
+    // Override calculated stats with saved values from JSON if present and valid
     if (character.combatstats && Array.isArray(character.combatstats)) {
-        const savedPV = character.combatstats.find((s: string) => s && s.startsWith("Puntos de Vida:"));
-        if (savedPV) {
-            const parts = savedPV.split(':');
+        character.combatstats.forEach((savedStat: string) => {
+            if (typeof savedStat !== 'string') return;
+            const parts = savedStat.split(':');
             if (parts.length > 1) {
-                const val = parts[1].trim();
-                // If value is valid (not empty/dash/placeholder), prioritize it over calculation
-                if (val && val !== '-' && val !== '') {
-                    const calculatedIndex = combatStats.findIndex((s: string) => s.startsWith("Puntos de Vida:"));
+                const prefix = parts[0].trim() + ':';
+                const val = parts.slice(1).join(':').trim();
+                // If value is valid (not empty/dash), prioritize it over calculation
+                if (val && val !== '-') {
+                    const calculatedIndex = combatStats.findIndex((s: string) => s.startsWith(prefix));
                     if (calculatedIndex !== -1) {
-                        combatStats[calculatedIndex] = savedPV;
+                        combatStats[calculatedIndex] = savedStat;
                     }
                 }
             }
-        }
+        });
+    }
+
+    if (character.otherstats && Array.isArray(character.otherstats)) {
+        character.otherstats.forEach((savedStat: string) => {
+            if (typeof savedStat !== 'string') return;
+            const parts = savedStat.split(':');
+            if (parts.length > 1) {
+                const prefix = parts[0].trim() + ':';
+                const val = parts.slice(1).join(':').trim();
+                if (val && val !== '-') {
+                    const calculatedIndex = otherStats.findIndex((s: string) => s.startsWith(prefix));
+                    if (calculatedIndex !== -1) {
+                        otherStats[calculatedIndex] = savedStat;
+                    }
+                }
+            }
+        });
     }
 
     // --- PRE-CALCULATE LISTS FOR PDF (Powers, Spells, etc.) ---
