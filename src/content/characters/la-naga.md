@@ -162,8 +162,6 @@ Simplemente respiró y aflojó la columna.
 Una Naga acepta lo inevitable pero nunca deja de observar. Mientras la empujaban hacia el torbellino ancestral lo comprendió con una claridad absoluta. No la desterraban por ser débil ni por error o vergüenza. La desterraban porque después de todo no habían conseguido romperla.
 ## Valladolid (Tierra Zero)
 
-## Gemini ha dicho
-
 El Pozo la escupió como si el mundo la rechazara de golpe. Apareció en mitad de la noche bajo un cielo que no le resultaba familiar y cayó a plomo en el estanque del Campo Grande envuelta en un remolino de agua helada. Durante unos segundos se quedó allí sin saber si estaba viva o muerta o si se había quedado atrapada en algún lugar intermedio.
 
 Era la medianoche del 31 de octubre.
