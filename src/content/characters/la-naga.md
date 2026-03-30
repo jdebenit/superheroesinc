@@ -87,8 +87,6 @@ Cuando Asha abrió los ojos por fin dejó de sentirse defectuosa. La niña basta
 
 ### Catorce años bajo raíces antiguas
 
-## Gemini ha dicho
-
 El bosque terminó por moldearla igual que había hecho con tantas otras antes que ella. Su cuerpo se volvió flexible y firme hasta el punto de poder moverse sin dejar ni rastro de su paso. También su mente cambió porque aprendió a distinguir lo que era un simple impulso de lo que era una intención verdadera. Aquella percepción interior que antes le servía solo para esconderse se transformó en su mejor brújula.
 
 Su intuición se volvió tan fina que era capaz de detectar el miedo o la mentira en los demás con solo ver un pequeño gesto. El Kundalini pasó a ser como una serpiente despierta que estaba lista para subir cuando hiciera falta o para quedarse dormida cuando tocara. Asha aprendió a caminar sin hacer sombra y a escuchar antes de abrir la boca sin dejar que el dolor de su pasado le marcara el camino.
