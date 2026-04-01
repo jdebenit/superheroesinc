@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "lore/organizaciones/orden-de-san-jorge.md",
+                "file": "blog/donde-estoy-yo.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "orden-de-san-jorge"
+              "title": "donde-estoy-yo"
             }
           }
         ]
@@ -185,8 +185,14 @@
   },
   "active": "85361f369081eb44",
   "lastOpenFiles": [
-    "lore/organizaciones/carbonari.md",
+    "blog/crear-campana-rol-superheroes-en-espana-guia-epica-y-lore.md",
+    "blog/el-renacer-del-generador-de-fichas-movil.md",
+    "blog/subir-nivel-no-va-solo-de-numeros.md",
+    "blog/cronicas-entre-dos-tiempos.md",
+    "blog/donde-estoy-yo.md",
+    "blog/psicogeografía-y-memoria-en-el-rol.md",
     "lore/organizaciones/orden-de-san-jorge.md",
+    "lore/organizaciones/carbonari.md",
     "characters/la-naga.md",
     "blog/lanzamiento.md",
     "rpg/la-naga-n4.json",
@@ -201,18 +207,12 @@
     "faq/27-ataque-critico-reflejos-accion-reservada.md",
     "faq/26-daño-arco-ballesta.md",
     "blog/el-futuro-del-lore-se-decide-en-la-mesa.md",
-    "blog/crear-campana-rol-superheroes-en-espana-guia-epica-y-lore.md",
     "blog/actual-plays-superheroes-inc.md",
-    "blog/cronicas-entre-dos-tiempos.md",
     "blog/el-miedo-a-romperse-por-dentro.md",
-    "blog/subir-nivel-no-va-solo-de-numeros.md",
     "lore/organizaciones/sociedad-thule.md",
     "lore/cronicas/aparicion-infernal-en-una-vivienda-de-pueblo-madrileño.md",
     "lore/cronicas/nadie-hablo-de-esto-despues.md",
     "lore/eventos/las-guerras-gamadas.md",
-    "timeline/enfrentamientos-metahumanos-bosque-negro copy.md",
-    "timeline/enfrentamientos-metahumanos-bosque-negro.md",
-    "timeline/enfrentamientos-bosque-negro.md",
     "timeline",
     "lore/cronicas",
     "faq",
