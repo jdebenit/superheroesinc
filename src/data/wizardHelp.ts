@@ -47,7 +47,8 @@ export const WIZARD_HELP: { [stepId: number]: HelpContent } = {
             "Define quién es tu personaje: su estatus social, económico y legal.",
             "Esto afecta a cómo te percibe el mundo y qué recursos iniciales tienes.",
             "Los contactos, aliados y recursos pueden ser tan útiles como un superpoder en ciertas situaciones.",
-            "La 'Resistencia al Prejuicios' indica la capacidad para hacer actos contrarios a los prejuicios sociales, sin perder Equilibrio Mental."
+            "La 'Resistencia a Prejuicios' mide tu coherencia interna.",
+            "Dejarla en 50% dice que eres moralmente ambiguo. Bajarla te da PCs, pero obliga a interpretar dudas y rigidez moral (perderás EQM si actúas mal). Subirla cuesta PCs, pero te hace pragmático ante decisiones crueles."
         ]
     },
     6: {

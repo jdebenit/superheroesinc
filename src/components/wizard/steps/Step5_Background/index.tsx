@@ -51,10 +51,14 @@ export default function Step5_Background({ data, onChange, onShowHelp }: Step5Pr
                     />
                 }
                 description={
-                    <>
-                        La capacidad del personaje para resistir la influencia de prejuicios y estereotipos.<br />
-                        <strong>50</strong> es el valor promedio. Subir cuesta PC, bajar devuelve PC.
-                    </>
+                    <div style={{ textAlign: 'left', lineHeight: '1.4' }}>
+                        Mide la coherencia interna de tu personaje y su capacidad para actuar en contra de sus propios principios morales o la educación recibida, sin sufrir secuelas.<br />
+                        <ul style={{ margin: '0.5rem 0', paddingLeft: '1.25rem', fontSize: '0.85rem' }}>
+                            <li style={{ marginBottom: '0.25rem' }}><strong>{`< 50%`}</strong> (te da PC): Fuerte rigidez moral. Te costará mucho cruzar la línea o ser cuestionable. Si actúas mal perderás Equilibrio Mental (EQM). Condiciona la interpretación hacia el heroísmo clásico o el deber.</li>
+                            <li style={{ marginBottom: '0.25rem' }}><strong>50%</strong> (0 PC): Moralidad ambigua.</li>
+                            <li><strong>{`> 50%`}</strong> (cuesta PC): Pragmatismo. Puedes traicionar creencias, aceptar corrupción o usar violencia extrema con mucha más facilidad y sin desgaste psicológico.</li>
+                        </ul>
+                    </div>
                 }
             >
                 <WizardRange
