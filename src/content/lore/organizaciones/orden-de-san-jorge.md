@@ -5,6 +5,8 @@ category: organizaciones
 source: Superhéroes INC.
 updatedDate: 2026-04-01
 ---
+_"No odiamos al hombre que vuela, odiamos el caos que su sombra proyecta sobre el hombre que camina."_ Máxima del Cónclave de la Orden.
+
 La Orden de San Jorge hunde sus raíces en los siglos más oscuros de la Edad Media, naciendo como una respuesta desesperada de la fe ante la irrupción de lo que sus crónicas denominaban "dragones". Bajo este término, la Orden catalogaba tanto a los primeros metahumanos como a las entidades demoníacas que lograban cruzar desde el reino de **Nigalión**. Con la llegada de la Ilustración y el auge del racionalismo, la organización se vio obligada a sumergirse en la más absoluta clandestinidad para eludir el escrutinio de los gobiernos modernos, operando desde las sombras de la Iglesia.
 
 Sin embargo, el actual estallido de la población metahumana en **Tierra Zero** y las crecientes injerencias de Nigalión han provocado su reactivación total. Para el Cónclave, el nacimiento masivo de individuos con poderes no es un paso evolutivo, sino la rotura de los sellos ancestrales que mantenían el equilibrio dimensional. Lo que durante siglos fue una vigilancia pasiva se ha transformado hoy en una guerra santa, invisible para una opinión pública que ignora cuán cerca está el abismo.
