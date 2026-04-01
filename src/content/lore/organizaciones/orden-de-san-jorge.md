@@ -21,7 +21,7 @@ Por otro lado, la rama eclesiástica, conocida como los **Inquisidores**, se ded
 
 La Orden no reconoce conceptos como la justicia civil o los derechos humanos, su único fin es la preservación de la normalidad a cualquier precio. Su metodología se basa en la supresión absoluta y el borrado de rastro. Cuando los **Custodios** detectan a un metahumano, despliegan tecnología de inhibición de poderes para neutralizar sus capacidades de forma quirúrgica.
 
-Si la amenaza proviene de una entidad de Nigalión, los Inquisidores emplean rituales de sellado y armas consagradas con tecnología mística para expulsar al invasor de nuestra realidad. Tras la captura, los sujetos son trasladados a prisiones de alto secreto o sometidos a protocolos de lavado mental. Para la Orden, el éxito de una misión se mide por la capacidad de hacer que la anomalía parezca que nunca existió.
+Si la amenaza proviene de una entidad de Nigalión, los Inquisidores emplean rituales de sellado y armas consagradas con tecnología mística para expulsar al invasor de nuestra realidad. Tras la captura, los sujetos son trasladados a prisiones de alto secreto. Para la Orden, el éxito de una misión se mide por la capacidad de hacer que la anomalía parezca que nunca existió.
 
 ### LOCALIZACIONES RELEVANTES
 
