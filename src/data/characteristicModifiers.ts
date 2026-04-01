@@ -107,6 +107,7 @@ export const ORIGIN_CHARACTERISTIC_MODIFIERS: { [key: string]: OriginCharacteris
     },
     "Hombre Lobo": allCharacteristics(0, 100),
     "Semidemonio": {
+        distributablePoints: 120,
         fuerza: { modifier: 0, max: 100 },
         constitucion: { modifier: 0, max: 100 },
         agilidad: { modifier: 0, max: 100 },
