@@ -18,7 +18,8 @@ export const WIZARD_HELP: { [stepId: number]: HelpContent } = {
             "Empiezas ya con 40 de base en todas las habilidades que es lo mínimo que un humano normal debe tener sin sufrir alguna tara, por eso los PCs utilizados de inicio son 28.",
             "Puedes reducir la base de las carácteristicas por el mínimo del origen para reservar más PCs pero no es recomendable.",
             "Recuerda que las características base afectan a tus habilidades y estadísticas derivadas (como la Iniciativa o los Puntos de Vida).",
-            "El Mod. Origen se aplica cuando por origen tienes algun modificador, si eres tienes diferentes modificadores a la misma caracteristica por diferentes origenes se aplica solo el mas alto.",
+            "El Mod. Origen se aplica cuando por origen tienes algun modificador. Si tienes diferentes modificadores a la misma característica por diferentes orígenes se aplica solo el más alto.",
+            "Puntos Libres Distribuibles (Origen/Especialidad): Algunos orígenes (ej. Semidemonio, Cósmico) y especialidades (ej. Fanático) te otorgan un saldo de puntos a tu discreción. Verás las casillas Mod. Origen o Mod. Especialidad marcadas con un (✏️) y desbloqueadas. Para usar esos puntos debes ir incrementando el valor de esas casillas manualmente, siempre controlando no excederte del nivel máximo dictado por tu reserva que aparece como un círculo azul de 'Bal.' o 'Esp.' en la parte superior derecha.",
             "El Mod. Especialidad se aplica cuando por especialidad de Vigilante tienes algun modificador, tambien se tiene en cuenta el mas alto pero se complementa con el de origen."
         ]
     },

@@ -32,11 +32,20 @@ export default function Step2_Characteristics({ data, onChange, onShowHelp }: St
         <div className="wizard-step-container">
             <WizardSection
                 title="Características del Personaje"
-                description={isDistributableMode
-                    ? 'Distribuye los puntos de origen entre las características.'
+                description={(isDistributableMode || specialtyPointsInfo)
+                    ? 'Tu origen o especialidad te otorga puntos extra. Repártelos sumando en el modificador que corresponda.'
                     : 'Define las características base y sus modificadores.'}
                 onHelp={onShowHelp}
             >
+                {(isDistributableMode || specialtyPointsInfo) && (
+                    <div className="step2-info-banner">
+                        <span className="info-icon">💡</span>
+                        <p>
+                            <strong>Puntos libres para distribuir</strong>
+                            Tienes puntos extra disponibles por tu Origen o Especialidad. Aumenta los valores numéricos correspondientes en las casillas <strong style={{ display: 'inline' }}>Mod. Origen (✏️)</strong> o <strong style={{ display: 'inline' }}>Mod. Especialidad (✏️)</strong> para gastarlos. Vigila tu reserva total en los indicadores redondos de la derecha.
+                        </p>
+                    </div>
+                )}
                 {choosableInfo && (
                     <div className="step2-bonus-box">
                         <h4 className="step2-bonus-title">
@@ -64,7 +73,7 @@ export default function Step2_Characteristics({ data, onChange, onShowHelp }: St
                         {isDistributableMode && pointsInfo && (
                             <CostBadge
                                 cost={`${pointsInfo.used}/${pointsInfo.total}`}
-                                label="Bal."
+                                label="Ori."
                                 variant={pointsInfo.remaining < 0 ? "penalty" : "default"}
                             />
                         )}
@@ -130,7 +139,7 @@ export default function Step2_Characteristics({ data, onChange, onShowHelp }: St
                                     />
 
                                     <WizardField
-                                        label={isDistributableMode ? 'Mod. Origen' : 'Mod. Origen (Auto)'}
+                                        label={isDistributableMode ? 'Mod. Origen (✏️)' : 'Mod. Origen (Auto)'}
                                         type="number"
                                         min="0"
                                         max="200"
@@ -145,7 +154,7 @@ export default function Step2_Characteristics({ data, onChange, onShowHelp }: St
                                     <WizardField
                                         label={
                                             <>
-                                                Mod. Especialidad
+                                                {specialtyPointsInfo ? 'Mod. Especialidad (✏️)' : 'Mod. Especialidad'}
                                                 {(() => {
                                                     const allowedChars = calculateSpecialtyAllowedCharacteristics(origins);
                                                     if (allowedChars && !allowedChars.includes(char.id)) {

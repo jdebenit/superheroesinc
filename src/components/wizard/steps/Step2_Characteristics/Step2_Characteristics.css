@@ -7,6 +7,38 @@
 
 /* --- Bonus Choice Box (origin bonus target) --- */
 
+.step2-info-banner {
+    margin-bottom: 1.5rem;
+    padding: 1rem 1.25rem;
+    background-color: #f0fdf4;
+    border-left: 4px solid #22c55e;
+    border-radius: 8px;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.step2-info-banner .info-icon {
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+.step2-info-banner p {
+    margin: 0;
+    color: #166534;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.step2-info-banner strong {
+    color: #14532d;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+/* --- Bonus Choice Box (origin bonus target) --- */
+
 .step2-bonus-box {
     margin-bottom: 2rem;
     padding: 1.5rem;
