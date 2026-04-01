@@ -162,3 +162,67 @@ export const FRIENDS_AND_ASSOCIATES: BackgroundOption[] = [
         description: 'Conocido poderoso. Le apoyará debido a alguna deuda pendiente, o a un vínculo fuerte entre ellos.'
     }
 ];
+
+export const BASE_COVERAGE: BackgroundOption[] = [
+    {
+        id: 'no_base',
+        label: 'Sin base',
+        cost: 0,
+        description: 'En el momento de la creación del personaje o grupo éstos carecen de base.'
+    },
+    {
+        id: 'shi_base',
+        label: 'Superhéroes Inc.',
+        cost: 2,
+        description: 'Superhéroes Inc. Tendrán acceso a una base de altas prestaciones.'
+    },
+    {
+        id: 'tercera_persona',
+        label: 'Financiador anónimo',
+        cost: 3,
+        description: 'Una tercera persona financia las actividades del grupo. El Guionista debe determinar de forma cuidadosa cuales son las intenciones de este personaje, deberá crear su ficha de personaje y prestando atención a su resistencia a prejuicios. Tendrán acceso a una base de altas prestaciones.'
+    },
+    {
+        id: 'entidad_altas_prestaciones',
+        label: 'Entidad oficial (altas prestaciones)',
+        cost: 4,
+        description: 'Entidad. Tendrán acceso a una base de altas prestaciones.'
+    },
+    {
+        id: 'entidad_lujo',
+        label: 'Entidad oficial (lujo)',
+        cost: 5,
+        description: 'Entidad. Tendrán acceso a una base de lujo.'
+    },
+    {
+        id: 'independiente_bruto',
+        label: 'Base propia (en bruto)',
+        cost: 6,
+        description: 'No dependerán de ninguna entidad, tercera persona o estamento oficial, pero solo tendrán acceso a una base en bruto.'
+    },
+    {
+        id: 'independiente_altas_prestaciones',
+        label: 'Base propia (altas prestaciones)',
+        cost: 8,
+        description: 'Igual que la anterior, pero tendrán acceso a una base de altas prestaciones.'
+    },
+    {
+        id: 'historial_equipada',
+        label: 'Base por historial (equipada)',
+        cost: 10,
+        description: 'Debido a una situación derivada de su historial disponen de una base equipada sin depender de ninguna entidad, tercera persona o estamento oficial.'
+    },
+    {
+        id: 'historial_altas_prestaciones',
+        label: 'Base por historial (altas prestaciones)',
+        cost: 12,
+        description: 'Igual que la anterior, pero tendrán acceso a una base de altas prestaciones.'
+    },
+    {
+        id: 'historial_lujo',
+        label: 'Base por historial (lujo)',
+        cost: 16,
+        description: 'El grupo o personaje debido a una situación derivada de su historial disponen de una base de lujo sin depender de ninguna entidad, tercera persona o estamento oficial.'
+    }
+];
+

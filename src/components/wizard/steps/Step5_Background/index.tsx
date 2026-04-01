@@ -1,5 +1,5 @@
 import React from 'react';
-import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS, FRIENDS_AND_ASSOCIATES } from '../../../../data/backgroundTables';
+import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS, FRIENDS_AND_ASSOCIATES, BASE_COVERAGE } from '../../../../data/backgroundTables';
 import { WizardSection } from '../../shared/layout/WizardSection';
 import { SectionHeaderBadge } from '../../shared/ui/SectionHeaderBadge';
 import { WizardField } from '../../shared/forms/WizardField';
@@ -24,6 +24,7 @@ export default function Step5_Background({ data, onChange, onShowHelp }: Step5Pr
         currentLegal,
         currentSocial,
         currentFriends,
+        currentBase,
         backgroundItems,
         addBackgroundItem,
         updateBackgroundItem,
@@ -71,6 +72,12 @@ export default function Step5_Background({ data, onChange, onShowHelp }: Step5Pr
                     <StatusSelectCard title="Situación Legal" options={LEGAL_STATUS} currentValue={data.background?.legalStatus} field="legalStatus" currentObj={currentLegal} onChange={(field, val) => updateStatus(field, val)} />
                     <StatusSelectCard title="Posición Social" options={SOCIAL_STATUS} currentValue={data.background?.socialStatus} field="socialStatus" currentObj={currentSocial} onChange={(field, val) => updateStatus(field, val)} />
                     <StatusSelectCard title="Amistades y allegados" options={FRIENDS_AND_ASSOCIATES} currentValue={data.background?.friendsAndAssociates} field="friendsAndAssociates" currentObj={currentFriends} onChange={(field, val) => updateStatus(field, val)} />
+                </div>
+            </WizardSection>
+
+            <WizardSection title="Bases y Cobertura">
+                <div className="step5-status-grid">
+                    <StatusSelectCard title="Tipo de base" options={BASE_COVERAGE} currentValue={data.background?.baseCoverage} field="baseCoverage" currentObj={currentBase} onChange={(field, val) => updateStatus(field, val)} />
                 </div>
             </WizardSection>
 

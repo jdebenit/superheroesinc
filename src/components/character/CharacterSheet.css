@@ -375,6 +375,13 @@
     color: #1f2937;
 }
 
+.background-description {
+    font-size: 0.75rem;
+    color: #6b7280;
+    font-style: italic;
+    margin-top: 0.25rem;
+}
+
 .bg-notes-label {
     display: block;
     font-size: 0.75rem;

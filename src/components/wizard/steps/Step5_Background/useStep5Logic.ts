@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from 'react';
-import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS, FRIENDS_AND_ASSOCIATES } from '../../../../data/backgroundTables';
+import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS, FRIENDS_AND_ASSOCIATES, BASE_COVERAGE } from '../../../../data/backgroundTables';
 
 export function useStep5Logic(data: any, onChange: (updates: any) => void) {
     const resistanceValue = data.background?.prejudiceResistance || 50;
@@ -21,6 +21,10 @@ export function useStep5Logic(data: any, onChange: (updates: any) => void) {
     const currentFriends = useMemo(() =>
         FRIENDS_AND_ASSOCIATES.find(f => f.id === data.background?.friendsAndAssociates) || FRIENDS_AND_ASSOCIATES[2],
         [data.background?.friendsAndAssociates]);
+
+    const currentBase = useMemo(() =>
+        BASE_COVERAGE.find(b => b.id === data.background?.baseCoverage) || BASE_COVERAGE[0],
+        [data.background?.baseCoverage]);
 
     // Handlers
     const addBackgroundItem = useCallback(() => {
@@ -62,6 +66,7 @@ export function useStep5Logic(data: any, onChange: (updates: any) => void) {
         currentLegal,
         currentSocial,
         currentFriends,
+        currentBase,
         backgroundItems: data.background?.items || [],
 
         // Handlers

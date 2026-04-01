@@ -1,5 +1,5 @@
 import React from 'react';
-import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS, FRIENDS_AND_ASSOCIATES } from '../../../data/backgroundTables';
+import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS, FRIENDS_AND_ASSOCIATES, BASE_COVERAGE } from '../../../data/backgroundTables';
 
 interface BackgroundSectionProps {
     character: any;
@@ -16,6 +16,7 @@ export const BackgroundSection: React.FC<BackgroundSectionProps> = ({ character 
             !character.background.economicStatus &&
             !character.background.legalStatus &&
             !character.background.socialStatus &&
+            !character.background.baseCoverage &&
             !character.background.prejudiceResistance
         )) &&
         !character.profession &&
@@ -71,7 +72,7 @@ export const BackgroundSection: React.FC<BackgroundSectionProps> = ({ character 
             <div className="background-col-layout">
 
                 {/* Status Grid */}
-                {(character.background?.economicStatus || character.background?.legalStatus || character.background?.socialStatus || character.background?.friendsAndAssociates || character.profession || character.sexualIdentity) && (
+                {(character.background?.economicStatus || character.background?.legalStatus || character.background?.socialStatus || character.background?.friendsAndAssociates || character.background?.baseCoverage || character.profession || character.sexualIdentity) && (
                     <div className="background-grid">
                         {character.profession && (
                             <div>
@@ -85,30 +86,56 @@ export const BackgroundSection: React.FC<BackgroundSectionProps> = ({ character 
                                 <span className="background-value">{character.sexualIdentity}</span>
                             </div>
                         )}
-                        {character.background?.economicStatus && (
-                            <div>
-                                <span className="background-label">POSICIÓN ECONÓMICA</span>
-                                <span className="background-value">{ECONOMIC_STATUS.find(e => e.id === character.background.economicStatus)?.label}</span>
-                            </div>
-                        )}
-                        {character.background?.legalStatus && (
-                            <div>
-                                <span className="background-label">SITUACIÓN LEGAL</span>
-                                <span className="background-value">{LEGAL_STATUS.find(l => l.id === character.background.legalStatus)?.label}</span>
-                            </div>
-                        )}
-                        {character.background?.socialStatus && (
-                            <div>
-                                <span className="background-label">POSICIÓN SOCIAL</span>
-                                <span className="background-value">{SOCIAL_STATUS.find(s => s.id === character.background.socialStatus)?.label}</span>
-                            </div>
-                        )}
-                        {character.background?.friendsAndAssociates && (
-                            <div>
-                                <span className="background-label">AMISTADES Y ALLEGADOS</span>
-                                <span className="background-value">{FRIENDS_AND_ASSOCIATES.find(f => f.id === character.background.friendsAndAssociates)?.label}</span>
-                            </div>
-                        )}
+                        {character.background?.economicStatus && (() => {
+                            const match = ECONOMIC_STATUS.find(e => e.id === character.background.economicStatus);
+                            return (
+                                <div>
+                                    <span className="background-label">POSICIÓN ECONÓMICA</span>
+                                    <span className="background-value">{match?.label}</span>
+                                    {match?.description && <div className="background-description">{match.description}</div>}
+                                </div>
+                            );
+                        })()}
+                        {character.background?.legalStatus && (() => {
+                            const match = LEGAL_STATUS.find(l => l.id === character.background.legalStatus);
+                            return (
+                                <div>
+                                    <span className="background-label">SITUACIÓN LEGAL</span>
+                                    <span className="background-value">{match?.label}</span>
+                                    {match?.description && <div className="background-description">{match.description}</div>}
+                                </div>
+                            );
+                        })()}
+                        {character.background?.socialStatus && (() => {
+                            const match = SOCIAL_STATUS.find(s => s.id === character.background.socialStatus);
+                            return (
+                                <div>
+                                    <span className="background-label">POSICIÓN SOCIAL</span>
+                                    <span className="background-value">{match?.label}</span>
+                                    {match?.description && <div className="background-description">{match.description}</div>}
+                                </div>
+                            );
+                        })()}
+                        {character.background?.friendsAndAssociates && (() => {
+                            const match = FRIENDS_AND_ASSOCIATES.find(f => f.id === character.background.friendsAndAssociates);
+                            return (
+                                <div>
+                                    <span className="background-label">AMISTADES Y ALLEGADOS</span>
+                                    <span className="background-value">{match?.label}</span>
+                                    {match?.description && <div className="background-description">{match.description}</div>}
+                                </div>
+                            );
+                        })()}
+                        {character.background?.baseCoverage && (() => {
+                            const match = BASE_COVERAGE.find(b => b.id === character.background.baseCoverage);
+                            return (
+                                <div>
+                                    <span className="background-label">BASES Y COBERTURA</span>
+                                    <span className="background-value">{match?.label}</span>
+                                    {match?.description && <div className="background-description">{match.description}</div>}
+                                </div>
+                            );
+                        })()}
                     </div>
                 )}
 

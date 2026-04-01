@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { calculateOriginCost } from '../../data/originCosts.ts';
 import { calculateCreationPoints, calculateGeneralSkillValues, calculateSpecialSkillsPCWithInt } from '../../utils/characterCalculations';
-import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS, FRIENDS_AND_ASSOCIATES } from '../../data/backgroundTables';
+import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS, FRIENDS_AND_ASSOCIATES, BASE_COVERAGE } from '../../data/backgroundTables';
 import { SPELLS } from '../../data/spells';
 import { POWERS } from '../../data/powers';
 import { EXOSKELETON_CONFIGS } from '../../data/exoskeletonConfigs';
@@ -61,8 +61,9 @@ export function useCharacterCalculations(character: any) {
         const legalCost = LEGAL_STATUS.find(l => l.id === character.background?.legalStatus)?.cost || 0;
         const socialCost = SOCIAL_STATUS.find(s => s.id === character.background?.socialStatus)?.cost || 0;
         const friendsCost = FRIENDS_AND_ASSOCIATES.find(f => f.id === character.background?.friendsAndAssociates)?.cost || 0;
+        const baseCoverageCost = BASE_COVERAGE.find(b => b.id === character.background?.baseCoverage)?.cost || 0;
 
-        total += economicCost + legalCost + socialCost + friendsCost;
+        total += economicCost + legalCost + socialCost + friendsCost + baseCoverageCost;
 
         const selectedPowers = character.powers?.selected || [];
 
