@@ -76,14 +76,38 @@ export function useStep2Logic(data: any, onChange: (updates: any) => void) {
         setCharacteristics(prev => {
             const updated = { ...prev };
             let hasChanges = false;
+            
+            const isDist = hasDistributablePoints(origins) || !!hasChoosableCharacteristic(origins);
+            const pInfo = isDist ? getDistributablePointsInfo(origins, prev, chosenBonusCharacteristic) : { total: 0, used: 0 };
+            const sInfo = hasSpecialtyDistributablePoints(origins) ? getSpecialtyDistributablePointsInfo(origins, prev) : { total: 0, used: 0 };
+
+            const keepManualOM = pInfo.used <= pInfo.total && pInfo.total > 0;
+            const keepManualSM = sInfo.used <= sInfo.total && sInfo.total > 0;
+
             Object.keys(updated).forEach(key => {
                 const newOM = originMods[key] || 0;
                 const newSM = specialtyMods[key] || 0;
-                if (updated[key].originMod !== newOM || updated[key].specialtyMod !== newSM) {
+                
+                let targetOM = newOM;
+                let targetSM = newSM;
+                
+                if (keepManualOM && updated[key].originMod > newOM) {
+                    targetOM = updated[key].originMod;
+                } else if (updated[key].originMod < newOM || pInfo.total === 0) {
+                    targetOM = newOM;
+                }
+                
+                if (keepManualSM && updated[key].specialtyMod > newSM) {
+                    targetSM = updated[key].specialtyMod;
+                } else if (updated[key].specialtyMod < newSM || sInfo.total === 0) {
+                    targetSM = newSM;
+                }
+
+                if (updated[key].originMod !== targetOM || updated[key].specialtyMod !== targetSM) {
                     updated[key] = {
                         ...updated[key],
-                        originMod: newOM,
-                        specialtyMod: newSM
+                        originMod: targetOM,
+                        specialtyMod: targetSM
                     };
                     hasChanges = true;
                 }
