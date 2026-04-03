@@ -273,14 +273,12 @@ export function useTerminalStats() {
     };
 
     const resetData = () => {
-        if (confirm('¿Estás seguro de que quieres borrar todos los datos guardados? Esta acción no se puede deshacer.')) {
-            localStorage.removeItem('shi_tpt_persistent_character');
-            localStorage.removeItem('shi_tpt_persistent_stats');
-            localStorage.removeItem('shi_tpt_persistent_history');
-            localStorage.removeItem('shi_tpt_persistent_notes');
-            localStorage.removeItem('shi_tpt_persistent_chi');
-            window.location.reload();
-        }
+        localStorage.removeItem('shi_tpt_persistent_character');
+        localStorage.removeItem('shi_tpt_persistent_stats');
+        localStorage.removeItem('shi_tpt_persistent_history');
+        localStorage.removeItem('shi_tpt_persistent_notes');
+        localStorage.removeItem('shi_tpt_persistent_chi');
+        window.location.reload();
     };
 
     const importData = async (file: File) => {

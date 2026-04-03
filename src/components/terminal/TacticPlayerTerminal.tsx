@@ -17,6 +17,7 @@ import ChiCounter from './components/ChiCounter';
 import { GENERAL_SKILLS } from '../../data/generalSkills';
 import { SPECIAL_SKILLS } from '../../data/specialSkills';
 import { APP_VERSIONS } from '../../data/appVersions';
+import Modal from './components/Modal';
 
 export default function TacticPlayerTerminal() {
     const {
@@ -38,6 +39,7 @@ export default function TacticPlayerTerminal() {
 
     const [showHistoryModal, setShowHistoryModal] = useState(false);
     const [historyType, setHistoryType] = useState<'health' | 'mental' | 'willpower' | 'chi'>('health');
+    const [showResetModal, setShowResetModal] = useState(false);
 
     // Edit Modal State
     const [showEditModal, setShowEditModal] = useState(false);
@@ -217,7 +219,7 @@ export default function TacticPlayerTerminal() {
                 character={character}
                 onImport={handleImportWrapper}
                 onExport={handleExportJSON}
-                onReset={resetData}
+                onReset={() => setShowResetModal(true)}
                 adaptedCharacter={character ? adaptWebCharacter(character) : null}
                 showCharacterSheet={true}
             />
@@ -372,6 +374,29 @@ export default function TacticPlayerTerminal() {
                 initialMode={rollModalData.initialMode}
                 skillType={rollModalData.skillType}
             />
+
+            <Modal isOpen={showResetModal} onClose={() => setShowResetModal(false)} title="Confirmar Reset">
+                <div style={{ padding: '1rem', textAlign: 'center' }}>
+                    <p style={{ marginBottom: '1.5rem', color: '#6b7280' }}>
+                        ¿Estás seguro de que quieres borrar todos los datos guardados de este terminal?
+                        Esta acción borrará la ficha, estadísticas, notas e historial permanentemente.
+                    </p>
+                    <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
+                        <button 
+                            className="secondary-btn" 
+                            onClick={() => setShowResetModal(false)}
+                        >
+                            Cancelar
+                        </button>
+                        <button 
+                            className="reset-btn" 
+                            onClick={resetData}
+                        >
+                            Resetear Todo
+                        </button>
+                    </div>
+                </div>
+            </Modal>
         </div>
     );
 }
