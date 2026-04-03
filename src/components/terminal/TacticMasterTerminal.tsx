@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './TacticMasterTerminal.css';
 import { APP_VERSIONS } from '../../data/appVersions';
-import { useTmtStore, type TmtCharacterEntry } from './hooks/useTmtStore';
+import { useTmtStore, type TmtCharacterEntry, type TmtGroup } from './hooks/useTmtStore';
+import Modal from './components/Modal';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Types (local, for the combat tracker state only)
@@ -43,14 +44,20 @@ function charSubtitle(entry: TmtCharacterEntry): string {
 // ─────────────────────────────────────────────────────────────────────────────
 interface EntityRowProps {
     entry: TmtCharacterEntry;
+    groups: TmtGroup[];
     onRemove: (id: string) => void;
     onToggleRole: (id: string, role: 'pj' | 'pnj') => void;
+    onToggleGroup: (charId: string, groupId: string) => void;
 }
 
-function EntityRow({ entry, onRemove, onToggleRole }: EntityRowProps) {
+function EntityRow({ entry, groups, onRemove, onToggleRole, onToggleGroup }: EntityRowProps) {
+    const [showGroupModal, setShowGroupModal] = useState(false);
     const isNpc = entry.role === 'pnj';
     const displayName = charName(entry);
     const subtitle = charSubtitle(entry);
+
+    // Get group objects for this character
+    const charGroups = groups.filter(g => entry.groupIds.includes(g.id));
 
     return (
         <div className="tmt-entity-card">
@@ -59,9 +66,72 @@ function EntityRow({ entry, onRemove, onToggleRole }: EntityRowProps) {
             </div>
             <div className="tmt-entity-info">
                 <p className="tmt-entity-name">{displayName}</p>
-                {subtitle && <p className="tmt-entity-meta">{subtitle}</p>}
+                <div className="tmt-entity-meta-row">
+                    {subtitle && <span className="tmt-entity-meta">{subtitle}</span>}
+                    {charGroups.map(g => (
+                        <span 
+                            key={g.id} 
+                            className="tmt-group-tag" 
+                            style={{ backgroundColor: g.color || '#4b5563' }}
+                        >
+                            {g.name}
+                        </span>
+                    ))}
+                </div>
             </div>
             <div className="tmt-entity-actions">
+                <div className="tmt-dropdown-wrap">
+                    <button
+                        className={`tmt-icon-btn${showGroupModal ? ' active' : ''}`}
+                        title="Gestionar Grupos"
+                        onClick={() => setShowGroupModal(true)}
+                    >
+                        🏷️
+                    </button>
+                    
+                    <Modal 
+                        isOpen={showGroupModal} 
+                        onClose={() => setShowGroupModal(false)}
+                        title={`Asignar Grupos: ${displayName}`}
+                    >
+                        <div className="tmt-modal-group-list">
+                            <p className="tmt-dropdown-header">Selecciona los grupos:</p>
+                            {groups.length === 0 && (
+                                <p className="tmt-dropdown-empty">
+                                    No hay grupos creados. <br/>
+                                    Ve a la sección superior para crearlos.
+                                </p>
+                            )}
+                            <div className="tmt-groups-selection-grid">
+                                {groups.map(g => (
+                                    <label key={g.id} className="tmt-dropdown-item tmt-modal-item">
+                                        <input 
+                                            type="checkbox" 
+                                            checked={entry.groupIds.includes(g.id)}
+                                            onChange={() => onToggleGroup(entry.id, g.id)}
+                                        />
+                                        <div 
+                                            className="tmt-group-color-dot" 
+                                            style={{ 
+                                                width: '10px', 
+                                                height: '10px', 
+                                                borderRadius: '50%', 
+                                                backgroundColor: g.color || '#4b5563',
+                                                flexShrink: 0
+                                            }} 
+                                        />
+                                        <span className="tmt-group-name-label">{g.name}</span>
+                                    </label>
+                                ))}
+                            </div>
+                            <div className="modal-actions">
+                                <button className="tmt-add-btn" onClick={() => setShowGroupModal(false)} style={{ width: '100%', marginTop: '1rem' }}>
+                                    Cerrar
+                                </button>
+                            </div>
+                        </div>
+                    </Modal>
+                </div>
                 <button
                     className="tmt-icon-btn"
                     title={isNpc ? 'Cambiar a PJ' : 'Cambiar a PNJ'}
@@ -86,16 +156,45 @@ function EntityRow({ entry, onRemove, onToggleRole }: EntityRowProps) {
 // ─────────────────────────────────────────────────────────────────────────────
 interface PersonajesScreenProps {
     characters: TmtCharacterEntry[];
+    groups: TmtGroup[];
     onImport: (characterData: Record<string, any>, role: 'pj' | 'pnj') => void;
     onRemove: (id: string) => void;
     onToggleRole: (id: string, role: 'pj' | 'pnj') => void;
+    onToggleGroup: (charId: string, groupId: string) => void;
+    onAddGroup: (name: string, color?: string) => void;
+    onDeleteGroup: (id: string) => void;
 }
 
-function PersonajesScreen({ characters, onImport, onRemove, onToggleRole }: PersonajesScreenProps) {
+function PersonajesScreen({ 
+    characters, 
+    groups, 
+    onImport, 
+    onRemove, 
+    onToggleRole, 
+    onToggleGroup,
+    onAddGroup,
+    onDeleteGroup
+}: PersonajesScreenProps) {
     const pjInputRef = useRef<HTMLInputElement>(null);
     const pnjInputRef = useRef<HTMLInputElement>(null);
-    const pjs = characters.filter((e) => e.role === 'pj');
-    const pnjs = characters.filter((e) => e.role === 'pnj');
+    const [selectedGroupIds, setSelectedGroupIds] = useState<string[]>([]);
+    const [showGroupManager, setShowGroupManager] = useState(false);
+
+    // Apply filtering
+    const filteredCharacters = characters.filter(c => {
+        if (selectedGroupIds.length === 0) return true;
+        // OR filtering: character must be in ANY of the selected groups
+        return selectedGroupIds.some(gid => c.groupIds.includes(gid));
+    });
+
+    const pjs = filteredCharacters.filter((e) => e.role === 'pj');
+    const pnjs = filteredCharacters.filter((e) => e.role === 'pnj');
+
+    const toggleFilter = (id: string) => {
+        setSelectedGroupIds(prev => 
+            prev.includes(id) ? prev.filter(gid => gid !== id) : [...prev, id]
+        );
+    };
 
     const handleFile = (role: 'pj' | 'pnj') => async (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = Array.from(e.target.files ?? []);
@@ -128,7 +227,87 @@ function PersonajesScreen({ characters, onImport, onRemove, onToggleRole }: Pers
                         <strong>{characters.length}</strong> en total
                     </p>
                 </div>
+                <div className="tmt-banner-actions">
+                    <button 
+                        className={`tmt-header-btn ${showGroupManager ? 'tmt-header-btn--active' : ''}`}
+                        onClick={() => setShowGroupManager(!showGroupManager)}
+                    >
+                        ⚙️ Grupos
+                    </button>
+                </div>
             </div>
+
+            {showGroupManager && (
+                <div className="tmt-section tmt-group-manager-section">
+                    <div className="tmt-section-header">
+                        <span className="tmt-section-title">Gestionar Grupos</span>
+                    </div>
+                    <div className="tmt-group-manager-grid">
+                        <div className="tmt-group-add-form">
+                            <input 
+                                type="text" 
+                                placeholder="Nombre del nuevo grupo..." 
+                                id="new-group-name"
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter') {
+                                        const input = e.currentTarget;
+                                        if (input.value.trim()) {
+                                            onAddGroup(input.value.trim());
+                                            input.value = '';
+                                        }
+                                    }
+                                }}
+                            />
+                            <button onClick={() => {
+                                const input = document.getElementById('new-group-name') as HTMLInputElement;
+                                if (input && input.value.trim()) {
+                                    onAddGroup(input.value.trim());
+                                    input.value = '';
+                                }
+                            }}>Añadir</button>
+                        </div>
+                        <div className="tmt-groups-list">
+                            {groups.map(g => (
+                                <div key={g.id} className="tmt-group-manage-item">
+                                    <span className="tmt-group-manage-name">{g.name}</span>
+                                    <button 
+                                        className="tmt-icon-btn danger" 
+                                        onClick={() => onDeleteGroup(g.id)}
+                                    >
+                                        🗑️
+                                    </button>
+                                </div>
+                            ))}
+                            {groups.length === 0 && <p className="tmt-empty-text">No hay grupos creados.</p>}
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Filter Bar */}
+            {groups.length > 0 && (
+                <div className="tmt-filter-bar">
+                    <span className="tmt-filter-label">Filtrar:</span>
+                    <div className="tmt-filter-tags">
+                        <button 
+                            className={`tmt-filter-tag ${selectedGroupIds.length === 0 ? 'active' : ''}`}
+                            onClick={() => setSelectedGroupIds([])}
+                        >
+                            Todos
+                        </button>
+                        {groups.map(g => (
+                            <button 
+                                key={g.id} 
+                                className={`tmt-filter-tag ${selectedGroupIds.includes(g.id) ? 'active' : ''}`}
+                                onClick={() => toggleFilter(g.id)}
+                                style={selectedGroupIds.includes(g.id) ? { backgroundColor: g.color || '#2563eb' } : {}}
+                            >
+                                {g.name}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+            )}
 
             {/* PJs */}
             <div className="tmt-section">
@@ -163,7 +342,14 @@ function PersonajesScreen({ characters, onImport, onRemove, onToggleRole }: Pers
                     ) : (
                         <div className="tmt-entity-list">
                             {pjs.map((e) => (
-                                <EntityRow key={e.id} entry={e} onRemove={onRemove} onToggleRole={onToggleRole} />
+                                <EntityRow 
+                                    key={e.id} 
+                                    entry={e} 
+                                    groups={groups}
+                                    onRemove={onRemove} 
+                                    onToggleRole={onToggleRole} 
+                                    onToggleGroup={onToggleGroup}
+                                />
                             ))}
                         </div>
                     )}
@@ -204,7 +390,14 @@ function PersonajesScreen({ characters, onImport, onRemove, onToggleRole }: Pers
                     ) : (
                         <div className="tmt-entity-list">
                             {pnjs.map((e) => (
-                                <EntityRow key={e.id} entry={e} onRemove={onRemove} onToggleRole={onToggleRole} />
+                                <EntityRow 
+                                    key={e.id} 
+                                    entry={e} 
+                                    groups={groups}
+                                    onRemove={onRemove} 
+                                    onToggleRole={onToggleRole} 
+                                    onToggleGroup={onToggleGroup}
+                                />
                             ))}
                         </div>
                     )}
@@ -345,9 +538,14 @@ export default function TacticMasterTerminal() {
     const {
         store,
         characters,
+        groups,
         addCharacter,
         removeCharacter,
         updateCharacterRole,
+        toggleCharacterGroup,
+        addGroup,
+        updateGroup,
+        deleteGroup,
         resetStore,
         exportStore,
         importStore,
@@ -455,9 +653,13 @@ export default function TacticMasterTerminal() {
                 {screen === 'personajes' && (
                     <PersonajesScreen
                         characters={characters}
+                        groups={groups}
                         onImport={addCharacter}
                         onRemove={removeCharacter}
                         onToggleRole={updateCharacterRole}
+                        onToggleGroup={toggleCharacterGroup}
+                        onAddGroup={addGroup}
+                        onDeleteGroup={deleteGroup}
                     />
                 )}
                 {screen === 'combate' && <CombateScreen characters={characters} />}

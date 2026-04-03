@@ -10,6 +10,13 @@ export const TMT_STORAGE_KEY = 'shi_tmt_store';
 // Types
 // ─────────────────────────────────────────────────────────────────────────────
 
+/** A group to categorize characters */
+export interface TmtGroup {
+    id: string;
+    name: string;
+    color?: string;
+}
+
 /** A character entry stored inside the TMT session */
 export interface TmtCharacterEntry {
     /** Unique ID for this slot */
@@ -20,6 +27,8 @@ export interface TmtCharacterEntry {
     addedAt: string;
     /** The raw character JSON as exported from the Wizard / CharacterViewer */
     characterData: Record<string, any>;
+    /** IDs of groups this character belongs to */
+    groupIds: string[];
 }
 
 /** Root structure written to localStorage */
@@ -30,6 +39,7 @@ export interface TmtStore {
         generator: 'SHI-TMT';
     };
     characters: TmtCharacterEntry[];
+    groups: TmtGroup[];
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -43,7 +53,8 @@ function buildEmptyStore(): TmtStore {
             savedAt: new Date().toISOString(),
             generator: 'SHI-TMT'
         },
-        characters: []
+        characters: [],
+        groups: []
     };
 }
 
@@ -56,6 +67,14 @@ function readFromStorage(): TmtStore {
         if (!parsed?.meta || !Array.isArray(parsed?.characters)) {
             return buildEmptyStore();
         }
+        // Migration/defaults
+        if (!Array.isArray(parsed.groups)) {
+            parsed.groups = [];
+        }
+        parsed.characters = parsed.characters.map(c => ({
+            ...c,
+            groupIds: Array.isArray(c.groupIds) ? c.groupIds : []
+        }));
         return parsed;
     } catch {
         return buildEmptyStore();
@@ -110,7 +129,8 @@ export function pushCharacterToTmt(
         id,
         role,
         addedAt: new Date().toISOString(),
-        characterData
+        characterData,
+        groupIds: existingIdx >= 0 ? store.characters[existingIdx].groupIds : []
     };
 
     if (existingIdx >= 0) {
@@ -176,6 +196,68 @@ export function useTmtStore() {
         });
     }, []);
 
+    const toggleCharacterGroup = useCallback((characterId: string, groupId: string) => {
+        setStore((prev) => {
+            const updated = {
+                ...prev,
+                characters: prev.characters.map((c) => {
+                    if (c.id !== characterId) return c;
+                    const exists = c.groupIds.includes(groupId);
+                    return {
+                        ...c,
+                        groupIds: exists
+                            ? c.groupIds.filter(id => id !== groupId)
+                            : [...c.groupIds, groupId]
+                    };
+                })
+            };
+            writeToStorage(updated);
+            return updated;
+        });
+    }, []);
+
+    const addGroup = useCallback((name: string, color?: string) => {
+        setStore((prev) => {
+            const newGroup: TmtGroup = {
+                id: 'grp_' + Date.now().toString(36),
+                name,
+                color
+            };
+            const updated = {
+                ...prev,
+                groups: [...prev.groups, newGroup]
+            };
+            writeToStorage(updated);
+            return updated;
+        });
+    }, []);
+
+    const updateGroup = useCallback((id: string, name: string, color?: string) => {
+        setStore((prev) => {
+            const updated = {
+                ...prev,
+                groups: prev.groups.map(g => g.id === id ? { ...g, name, color } : g)
+            };
+            writeToStorage(updated);
+            return updated;
+        });
+    }, []);
+
+    const deleteGroup = useCallback((id: string) => {
+        setStore((prev) => {
+            const updated = {
+                ...prev,
+                groups: prev.groups.filter(g => g.id !== id),
+                characters: prev.characters.map(c => ({
+                    ...c,
+                    groupIds: c.groupIds.filter(gid => gid !== id)
+                }))
+            };
+            writeToStorage(updated);
+            return updated;
+        });
+    }, []);
+
     const resetStore = useCallback(() => {
         const fresh = buildEmptyStore();
         writeToStorage(fresh);
@@ -225,9 +307,14 @@ export function useTmtStore() {
     return {
         store,
         characters: store.characters,
+        groups: store.groups,
         addCharacter,
         removeCharacter,
         updateCharacterRole,
+        toggleCharacterGroup,
+        addGroup,
+        updateGroup,
+        deleteGroup,
         resetStore,
         exportStore,
         importStore,

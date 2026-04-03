@@ -622,3 +622,259 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* ========================================
+   Groups and Filtering
+   ======================================== */
+
+/* Group Tags on Entities */
+.tmt-entity-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.1rem;
+    min-height: 18px;
+}
+
+.tmt-group-tag {
+    display: inline-block;
+    padding: 0.1rem 0.45rem;
+    border-radius: 4px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    pointer-events: none;
+}
+
+/* Group Selection Modal Content */
+.tmt-modal-group-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.tmt-groups-selection-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+}
+
+.tmt-modal-item {
+    border: 1px solid #e5e7eb;
+    background: #f9fafb;
+    padding: 0.75rem;
+    border-radius: 8px;
+    margin: 0;
+    transition: all 0.2s;
+}
+
+.tmt-modal-item:hover {
+    border-color: #3b82f6;
+    background: #eff6ff;
+}
+
+.tmt-group-name-label {
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+/* Base modal overlay from global styles is used */
+
+.tmt-dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.5rem 0.6rem;
+    font-size: 0.85rem;
+    color: #374151;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.15s;
+    user-select: none;
+}
+
+.tmt-dropdown-item:hover {
+    background: #f3f4f6;
+}
+
+.tmt-dropdown-item input[type="checkbox"] {
+    cursor: pointer;
+}
+
+.tmt-dropdown-empty {
+    padding: 1rem 0.6rem;
+    font-size: 0.8rem;
+    color: #9ca3af;
+    text-align: center;
+    margin: 0;
+}
+
+/* Filter Bar */
+.tmt-filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    background: white;
+    padding: 0.75rem 1.5rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.tmt-filter-label {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    flex-shrink: 0;
+}
+
+.tmt-filter-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.tmt-filter-tag {
+    padding: 0.4rem 0.85rem;
+    background: #f3f4f6;
+    border: 1px solid #e5e7eb;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #4b5563;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    outline: none;
+}
+
+.tmt-filter-tag:hover {
+    background: #e5e7eb;
+    border-color: #d1d5db;
+    color: #1f2937;
+}
+
+.tmt-filter-tag.active {
+    background: #2563eb;
+    border-color: #1d4ed8;
+    color: white;
+    box-shadow: 0 2px 4px rgba(37, 99, 235, 0.25);
+}
+
+/* Group Manager Section */
+.tmt-group-manager-section {
+    border: 2px dashed #cbd5e1;
+    background: #f8fafc;
+    animation: tmt-slide-down 0.3s ease-out;
+}
+
+@keyframes tmt-slide-down {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.tmt-group-manager-grid {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.tmt-group-add-form {
+    display: flex;
+    gap: 0.75rem;
+    max-width: 500px;
+}
+
+.tmt-group-add-form input {
+    flex: 1;
+    padding: 0.6rem 0.85rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.tmt-group-add-form input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.tmt-group-add-form button {
+    padding: 0.6rem 1.25rem;
+    background: #1e293b;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.tmt-group-add-form button:hover {
+    background: #0f172a;
+}
+
+.tmt-groups-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.85rem;
+}
+
+.tmt-group-manage-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.65rem 0.85rem;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.tmt-group-manage-item:hover {
+    border-color: #cbd5e1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.tmt-group-manage-name {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #334155;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tmt-banner-actions {
+    margin-left: auto;
+}
+
+.tmt-header-btn--active {
+    background: #1e293b !important;
+    transform: translateY(0) !important;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+.tmt-empty-text {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 2rem;
+    color: #94a3b8;
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+.tmt-icon-btn.active {
+    background: #eff6ff;
+    border-color: #3b82f6;
+    color: #2563eb;
+}
+
