@@ -119,7 +119,7 @@ export default function TacticPlayerTerminal() {
 
         const exportData = {
             meta: {
-                version: APP_VERSIONS.TACTIC_TERMINAL,
+                version: APP_VERSIONS.TACTIC_PLAYER_TERMINAL,
                 generator: 'SHI-TPT'
             },
             character,
