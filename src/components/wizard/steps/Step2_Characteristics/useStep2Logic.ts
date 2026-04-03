@@ -211,7 +211,8 @@ export function useStep2Logic(data: any, onChange: (updates: any) => void) {
             max: (hasPowerMod || unlockManualMod) ? 200 : defaultLimits.max
         };
 
-        let clampedValue = Math.max(0, Math.min(limits.max, numValue));
+        const minAllowed = field === 'otherMod' ? -200 : 0;
+        let clampedValue = Math.max(minAllowed, Math.min(limits.max, numValue));
 
         // Group-wise validation (Specialty Points)
         if (field === 'specialtyMod' && specialtyPointsInfo) {
@@ -260,7 +261,7 @@ export function useStep2Logic(data: any, onChange: (updates: any) => void) {
                 (field !== 'specialtyMod' ? currentChar.specialtyMod : 0) +
                 (field !== 'powerMod' ? currentChar.powerMod : 0) +
                 (field !== 'otherMod' ? (currentChar.otherMod || 0) : 0);
-            clampedValue = Math.max(0, limits.max - otherValues);
+            clampedValue = Math.max(minAllowed, limits.max - otherValues);
         }
 
         setCharacteristics(prev => ({
