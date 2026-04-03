@@ -47,12 +47,12 @@ interface CharacterSheetProps {
     onShowToast?: (message: string, type?: 'success' | 'error' | 'info') => void;
 }
 
-export default function CharacterSheet({ 
-    character, 
-    totalPCs, 
-    mode = 'modal', 
+export default function CharacterSheet({
+    character,
+    totalPCs,
+    mode = 'modal',
     renderTrigger,
-    onShowToast 
+    onShowToast
 }: CharacterSheetProps) {
     // Use the custom hook to get all calculated data
     const sheetData = useCharacterSheetData(character);
@@ -136,7 +136,7 @@ export default function CharacterSheet({
                 <div className="dialog-content">
                     <div className="dialog-header">
                         <div className="header-info">
-                            <span className="dialog-title">{character.name || "Nuevo Personaje"}</span>
+                            <span className="dialog-title">{character.alias || character.name || "Nuevo Personaje"}</span>
                         </div>
                         <div className="dialog-actions">
                             <button onClick={toggleFullScreen} className="action-btn" title={isFullScreen ? "Salir de Pantalla Completa" : "Ver Ficha Completa"}>

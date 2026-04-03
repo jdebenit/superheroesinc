@@ -7,17 +7,22 @@ interface SheetHeaderProps {
 }
 
 export const SheetHeader: React.FC<SheetHeaderProps> = ({ character, totalPCs }) => {
+    const displayName = character.alias || character.name || "Nuevo Personaje";
+    const showRealName = character.alias && character.name;
+
     return (
         <div className="sheet-header">
-            <h3>{character.name || "Nuevo Personaje"}</h3>
-            {character.alias && <h4 className="character-alias">"{character.alias}"</h4>}
+            <div className="header-titles">
+                <h3>{displayName}</h3>
+                {showRealName && <h4 className="character-real-name">{character.name}</h4>}
+            </div>
 
             <div className="header-stats">
                 {character.level && <span className="level-badge">Nivel {character.level}</span>}
                 {(totalPCs || character.totalCost) && (
                     <span className="total-cost">Total PCs: {totalPCs || character.totalCost}</span>
                 )}
-                <span className="sheet-version" style={{ fontSize: '0.75rem', color: '#666', marginLeft: '0.5rem' }}>
+                <span className="sheet-version">
                     v{APP_VERSIONS.CHARACTER_SHEET}
                 </span>
             </div>
