@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "4261c3b0e1f96b36",
+        "id": "47b633c3a7f84f62",
         "type": "tabs",
         "children": [
           {
-            "id": "85361f369081eb44",
+            "id": "d6905c71f195763e",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "blog/donde-estoy-yo.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "donde-estoy-yo"
+              "title": "Nueva pestaña"
             }
           }
         ]
@@ -183,13 +179,14 @@
       "bases:Crear nueva base": false
     }
   },
-  "active": "85361f369081eb44",
+  "active": "d6905c71f195763e",
   "lastOpenFiles": [
+    "blog/SHI-Tactic-Master-Terminal-el-cerebro-de-la-mesa.md",
+    "blog/donde-estoy-yo.md",
     "blog/crear-campana-rol-superheroes-en-espana-guia-epica-y-lore.md",
     "blog/el-renacer-del-generador-de-fichas-movil.md",
     "blog/subir-nivel-no-va-solo-de-numeros.md",
     "blog/cronicas-entre-dos-tiempos.md",
-    "blog/donde-estoy-yo.md",
     "blog/psicogeografía-y-memoria-en-el-rol.md",
     "lore/organizaciones/orden-de-san-jorge.md",
     "lore/organizaciones/carbonari.md",
@@ -212,7 +209,6 @@
     "lore/organizaciones/sociedad-thule.md",
     "lore/cronicas/aparicion-infernal-en-una-vivienda-de-pueblo-madrileño.md",
     "lore/cronicas/nadie-hablo-de-esto-despues.md",
-    "lore/eventos/las-guerras-gamadas.md",
     "timeline",
     "lore/cronicas",
     "faq",
