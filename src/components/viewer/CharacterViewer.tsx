@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import CharacterSheet from '../character/CharacterSheet';
 import { adaptWebCharacter } from '../../utils/characterAdapter';
@@ -125,76 +124,42 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
     const sortedWebChars = [...webCharacters].sort((a, b) => a.data.name.localeCompare(b.data.name));
 
     return (
-        <div className="viewer-layout" style={{
-            display: 'grid',
-            gridTemplateColumns: 'minmax(280px, 1fr) 3fr',
-            gap: '2rem',
-            alignItems: 'start'
-        }}>
+        <div className="viewer-layout">
             {/* Sidebar */}
-            <div className="viewer-sidebar" style={{
-                backgroundColor: 'white',
-                borderRadius: '8px',
-                boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-                overflow: 'hidden',
-                border: '1px solid #e5e7eb',
-                display: 'flex',
-                flexDirection: 'column'
-            }}>
+            <div className="viewer-sidebar">
                 {/* Local Characters Section */}
-                <div style={{ padding: '1rem', borderBottom: '1px solid #e5e7eb', backgroundColor: '#f9fafb', flexShrink: 0 }}>
-                    <h3 style={{ margin: 0, fontSize: '1.1rem', color: '#111827' }}>Mis Fichas</h3>
-                    <div style={{ fontSize: '0.85rem', color: '#6b7280', marginTop: '0.25rem' }}>
+                <div className="sidebar-section-header">
+                    <h3 className="section-title">Mis Fichas</h3>
+                    <div className="section-subtitle">
                         {localCharacters.length} locales
                     </div>
                 </div>
 
-                <div className="local-list" style={{ overflowY: 'auto', flex: '0 0 auto', maxHeight: '50vh', borderBottom: '1px solid #e5e7eb' }}>
+                <div className="local-list">
                     {localCharacters.length === 0 ? (
-                        <div style={{ padding: '1rem', textAlign: 'center', color: '#9ca3af', fontStyle: 'italic', fontSize: '0.9rem' }}>
+                        <div className="empty-list-msg">
                             No hay fichas subidas.
                         </div>
                     ) : (
-                        <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                        <ul className="char-list">
                             {localCharacters.map(char => (
                                 <li
                                     key={char.id}
                                     onClick={() => setSelectedId(char.id)}
-                                    style={{
-                                        padding: '0.75rem 1rem',
-                                        borderBottom: '1px solid #f3f4f6',
-                                        cursor: 'pointer',
-                                        backgroundColor: selectedId === char.id ? '#eff6ff' : 'white',
-                                        borderLeft: selectedId === char.id ? '4px solid #2563eb' : '4px solid transparent',
-                                        transition: 'background-color 0.2s',
-                                        display: 'flex',
-                                        justifyContent: 'space-between',
-                                        alignItems: 'center'
-                                    }}
+                                    className={`list-item ${selectedId === char.id ? 'active' : ''}`}
                                 >
-                                    <div style={{ overflow: 'hidden' }}>
-                                        <div style={{ fontWeight: 'bold', color: selectedId === char.id ? '#1e40af' : '#374151', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                    <div className="list-item-info">
+                                        <div className="char-name">
                                             {char.data.name}
                                         </div>
-                                        <div style={{ fontSize: '0.8rem', color: '#6b7280' }}>
+                                        <div className="char-details">
                                             Nivel {char.data.level || 1}
                                         </div>
                                     </div>
                                     <button
                                         onClick={(e) => handleDelete(char.id, e)}
                                         title="Eliminar"
-                                        style={{
-                                            background: 'none',
-                                            border: 'none',
-                                            color: '#ef4444',
-                                            cursor: 'pointer',
-                                            padding: '4px',
-                                            borderRadius: '4px',
-                                            fontSize: '1rem',
-                                            opacity: 0.6
-                                        }}
-                                        onMouseEnter={e => e.currentTarget.style.opacity = '1'}
-                                        onMouseLeave={e => e.currentTarget.style.opacity = '0.6'}
+                                        className="delete-btn"
                                     >
                                         🗑️
                                     </button>
@@ -204,7 +169,7 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
                     )}
                 </div>
 
-                <div style={{ padding: '0.75rem', borderBottom: '1px solid #e5e7eb', backgroundColor: '#fff', flexShrink: 0 }}>
+                <div className="upload-section">
                     <input
                         type="file"
                         ref={fileInputRef}
@@ -214,26 +179,12 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
                     />
                     <button
                         onClick={triggerFileInput}
-                        style={{
-                            width: '100%',
-                            padding: '0.5rem',
-                            backgroundColor: '#2563eb',
-                            color: 'white',
-                            border: 'none',
-                            borderRadius: '6px',
-                            fontWeight: 'bold',
-                            cursor: 'pointer',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            gap: '0.5rem',
-                            fontSize: '0.9rem'
-                        }}
+                        className="upload-btn"
                     >
                         ➕ Subir JSON
                     </button>
                     {error && (
-                        <div style={{ marginTop: '0.5rem', color: '#dc2626', fontSize: '0.85rem', textAlign: 'left' }}>
+                        <div className="error-msg">
                             {error}
                         </div>
                     )}
@@ -242,63 +193,42 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
                 {/* Web Characters Section */}
                 <div
                     onClick={() => setShowWebCharacters(!showWebCharacters)}
-                    style={{
-                        padding: '1rem',
-                        borderBottom: showWebCharacters ? '1px solid #e5e7eb' : 'none',
-                        backgroundColor: '#f0fdf4',
-                        flexShrink: 0,
-                        borderTop: '4px solid #bbf7d0',
-                        cursor: 'pointer',
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        userSelect: 'none'
-                    }}
+                    className={`web-section-toggle ${showWebCharacters ? 'open' : ''}`}
                 >
                     <div>
-                        <h3 style={{ margin: 0, fontSize: '1.1rem', color: '#166534' }}>Fichas de la Web</h3>
-                        <div style={{ fontSize: '0.85rem', color: '#15803d', marginTop: '0.25rem' }}>
+                        <h3 className="web-section-title">Fichas de la Web</h3>
+                        <div className="web-section-subtitle">
                             {sortedWebChars.length} oficiales
                         </div>
                     </div>
-                    <span style={{ fontSize: '1.2rem', transform: showWebCharacters ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.2s', color: '#166534' }}>
+                    <span className={`toggle-icon ${showWebCharacters ? 'open' : ''}`}>
                         ▼
                     </span>
                 </div>
 
                 {showWebCharacters && (
-                    <div className="web-list" style={{ overflowY: 'auto', flex: '0 0 auto', backgroundColor: '#f0fdf4', maxHeight: '50vh' }}>
+                    <div className="web-list">
                         {sortedWebChars.length === 0 ? (
-                            <div style={{ padding: '1rem', textAlign: 'center', color: '#9ca3af', fontStyle: 'italic', fontSize: '0.9rem' }}>
+                            <div className="empty-list-msg">
                                 Cargando fichas...
                             </div>
                         ) : (
-                            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                            <ul className="char-list">
                                 {sortedWebChars.map(char => (
                                     <li
                                         key={char.id}
                                         onClick={() => setSelectedId(char.id)}
-                                        style={{
-                                            padding: '0.75rem 1rem',
-                                            borderBottom: '1px solid #dcfce7',
-                                            cursor: 'pointer',
-                                            backgroundColor: selectedId === char.id ? '#dcfce7' : 'transparent',
-                                            borderLeft: selectedId === char.id ? '4px solid #16a34a' : '4px solid transparent',
-                                            transition: 'background-color 0.2s',
-                                            display: 'flex',
-                                            justifyContent: 'space-between',
-                                            alignItems: 'center'
-                                        }}
+                                        className={`web-list-item ${selectedId === char.id ? 'active' : ''}`}
                                     >
-                                        <div style={{ overflow: 'hidden' }}>
-                                            <div style={{ fontWeight: 'bold', color: selectedId === char.id ? '#14532d' : '#166534', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                        <div className="list-item-info">
+                                            <div className="web-char-name">
                                                 {char.data.name}
                                             </div>
-                                            <div style={{ fontSize: '0.8rem', color: '#15803d' }}>
+                                            <div className="web-char-details">
                                                 Nivel {char.data.level || 1} • {char.data?.origin?.items?.[0] ? Object.keys(char.data.origin.items[0])[0] : 'Desconocido'}
                                             </div>
                                         </div>
-                                        <span title="Ficha Oficial" style={{ fontSize: '1rem' }}>🌐</span>
+                                        <span title="Ficha Oficial" className="official-badge">🌐</span>
                                     </li>
                                 ))}
                             </ul>
@@ -311,17 +241,12 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
             {/* Main Content */}
             <div className="viewer-content">
                 {selectedCharacter ? (
-                    <div style={{
-                        backgroundColor: 'white',
-                        borderRadius: '8px',
-                        padding: '1rem',
-                        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
-                    }}>
-                        <div style={{ marginBottom: '1rem', paddingBottom: '1rem', borderBottom: '1px solid #e5e7eb', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <h2 style={{ margin: 0, fontSize: '1.5rem', color: '#111827' }}>
+                    <div className="content-card">
+                        <div className="content-header">
+                            <h2 className="content-title">
                                 {selectedCharacter.data.name}
                             </h2>
-                            <span style={{ fontSize: '0.9rem', color: '#6b7280' }}>
+                            <span className="content-source-badge">
                                 {selectedCharacter.source === 'web'
                                     ? '🌐 Ficha Oficial de la Web'
                                     : `Añadido: ${new Date(selectedCharacter.addedAt).toLocaleDateString()}`}
@@ -349,40 +274,15 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
                         </div>
                     </div>
                 ) : (
-                    <div style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        padding: '4rem 2rem',
-                        backgroundColor: 'white',
-                        borderRadius: '8px',
-                        border: '2px dashed #e5e7eb',
-                        color: '#9ca3af',
-                        textAlign: 'center',
-                        minHeight: '400px'
-                    }}>
-                        <div style={{ fontSize: '3rem', marginBottom: '1rem', opacity: 0.5 }}>👈</div>
-                        <h3 style={{ margin: '0 0 0.5rem 0', color: '#6b7280' }}>Selecciona un personaje</h3>
-                        <p style={{ maxWidth: '300px' }}>
+                    <div className="empty-viewer">
+                        <div className="empty-icon">👈</div>
+                        <h3 className="empty-title">Selecciona un personaje</h3>
+                        <p className="empty-text">
                             Selecciona una ficha oficial de la web o importa tus propios archivos JSON.
                         </p>
                     </div>
                 )}
             </div>
-
-            {/* Mobile Responsive Style */}
-            <style>{`
-                @media (max-width: 768px) {
-                    .viewer-layout {
-                        grid-template-columns: 1fr !important;
-                    }
-                    .viewer-sidebar {
-                        margin-bottom: 2rem;
-                        max-height: 50vh;
-                    }
-                }
-            `}</style>
         </div>
     );
 }

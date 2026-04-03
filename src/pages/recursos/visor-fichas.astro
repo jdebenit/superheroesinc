@@ -1,7 +1,8 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import CharacterViewer from "../../components/tools/CharacterViewer";
+import CharacterViewer from "../../components/viewer/CharacterViewer";
 import { getCollection } from "astro:content";
+import { APP_VERSIONS } from "../../data/appVersions";
 
 const rpgCharacters = await getCollection("rpg");
 const webCharacters = rpgCharacters.map((char) => ({
@@ -15,7 +16,7 @@ const webCharacters = rpgCharacters.map((char) => ({
 <Layout title="Visor de Fichas">
     <section class="viewer-page">
         <div class="header-content">
-            <h1 class="page-title">Visor de Fichas (Beta 0.1.5)</h1>
+            <h1 class="page-title">Visor de Fichas ({APP_VERSIONS.CHARACTER_VIEWER})</h1>
             <p class="intro-text">
                 Visualiza y consulta fichas de personaje generadas previamente.
                 Sube tu archivo JSON o explora las fichas oficiales de la web.
