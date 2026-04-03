@@ -225,9 +225,9 @@ export default function TacticPlayerTerminal() {
             {character ? (
                 <div className="terminal-stats-container">
                     <div className="terminal-character-header">
-                        <h2 className="terminal-character-name">{character.name}</h2>
-                        {character.alias && (
-                            <div className="terminal-character-alias">"{character.alias}"</div>
+                        <h2 className="terminal-character-alias">{character.alias}</h2>
+                        {character.name && (
+                            <div className="terminal-character-name">"{character.name}"</div>
                         )}
                     </div>
 

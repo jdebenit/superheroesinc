@@ -111,14 +111,14 @@
     flex-shrink: 0;
 }
 
-.terminal-character-name {
+.terminal-character-alias {
     font-size: 2rem;
     color: #111827;
     margin: 0;
     font-weight: 700;
 }
 
-.terminal-character-alias {
+.terminal-character-name {
     font-size: 1rem;
     color: #6b7280;
     margin-top: 0.25rem;
@@ -1883,11 +1883,11 @@ input[type=number] {
         padding: 1rem;
     }
 
-    .terminal-character-name {
+    .terminal-character-alias {
         font-size: 1.25rem;
     }
 
-    .terminal-character-alias {
+    .terminal-character-name {
         font-size: 0.9rem;
     }
 
