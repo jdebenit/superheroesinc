@@ -300,7 +300,7 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
                                 onClick={() => {
                                     try {
                                         localStorage.setItem('shi_tpt_character', JSON.stringify(adaptWebCharacter(selectedCharacter.data)));
-                                        window.open('/recursos/tactic-player-terminal', '_blank');
+                                        window.open('/recursos/tactic-player-terminal', 'shi_tpt_terminal');
                                     } catch (error) {
                                         Logger.error('Error sending character to terminal:', error);
                                         alert('Error al enviar el personaje al terminal');
@@ -317,7 +317,7 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
                                             adaptWebCharacter(selectedCharacter.data),
                                             'pj'
                                         );
-                                        window.open('/recursos/tactic-master-terminal', '_blank');
+                                        window.open('/recursos/tactic-master-terminal', 'shi_tmt_terminal');
                                     } catch (error) {
                                         Logger.error('Error sending character to TMT:', error);
                                         alert('Error al enviar el personaje al TMT');

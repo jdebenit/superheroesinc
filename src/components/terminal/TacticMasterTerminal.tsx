@@ -471,10 +471,17 @@ function PersonajesScreen({
 // ─────────────────────────────────────────────────────────────────────────────
 interface CombateScreenProps {
     characters: TmtCharacterEntry[];
-    onUpdateInitiative: (id: string, value: number) => void;
+    onUpdateInitiative: (id: string, value: number, roll?: number) => void;
+    onUpdateUsedActions: (id: string, count: number) => void;
+    onResetAllActions: () => void;
 }
 
-function CombateScreen({ characters, onUpdateInitiative }: CombateScreenProps) {
+function CombateScreen({ 
+    characters, 
+    onUpdateInitiative, 
+    onUpdateUsedActions, 
+    onResetAllActions 
+}: CombateScreenProps) {
     const [currentTurn, setCurrentTurn] = useState(0);
     const [showConfirmModal, setShowConfirmModal] = useState(false);
 
@@ -485,10 +492,15 @@ function CombateScreen({ characters, onUpdateInitiative }: CombateScreenProps) {
         characters.forEach(c => {
             const base = getBaseIniciativa(c);
             const roll = Math.floor(Math.random() * 100) + 1;
-            onUpdateInitiative(c.id, base + roll);
+            onUpdateInitiative(c.id, base + roll, roll);
         });
         setCurrentTurn(0); // Reset combat round
         setShowConfirmModal(false);
+    };
+
+    const handleNextRound = () => {
+        onResetAllActions();
+        setCurrentTurn(0);
     };
 
     return (
@@ -507,6 +519,13 @@ function CombateScreen({ characters, onUpdateInitiative }: CombateScreenProps) {
                     <span className="tmt-section-title">Orden de Iniciativa</span>
                     <div className="tmt-initiative-actions-group">
                         <button
+                            className="tmt-header-btn tmt-btn-next-round"
+                            onClick={handleNextRound}
+                            title="Empezar nuevo asalto (resetea acciones)"
+                        >
+                            🔄 Sig. Turno
+                        </button>
+                        <button
                             className="tmt-header-btn tmt-btn-calculate"
                             onClick={() => setShowConfirmModal(true)}
                             title="Tira 1d100 + iniciativa base para todos"
@@ -518,7 +537,7 @@ function CombateScreen({ characters, onUpdateInitiative }: CombateScreenProps) {
                                 className="tmt-add-btn tmt-btn-next-turn"
                                 onClick={() => setCurrentTurn((t) => (t + 1) % sorted.length)}
                             >
-                                Sig. Turno ▶
+                                Sig. Combatiente ▶
                             </button>
                         )}
                     </div>
@@ -557,11 +576,28 @@ function CombateScreen({ characters, onUpdateInitiative }: CombateScreenProps) {
                                     <span className="tmt-initiative-rank">{i + 1}</span>
                                     <span className="tmt-initiative-name">
                                         {charName(e)}
-                                        <span className="tmt-initiative-actions" title="Acciones por asalto">
-                                            🏃 {getAcciones(e)}
-                                        </span>
+                                        <div className="tmt-initiative-actions-tracker" title="Acciones por asalto">
+                                            {Array.from({ length: getAcciones(e) }).map((_, idx) => {
+                                                const isUsed = (e.usedActions || 0) > idx;
+                                                return (
+                                                    <span 
+                                                        key={idx} 
+                                                        className={`tmt-action-dot${isUsed ? ' used' : ''}`}
+                                                        onClick={(ev) => {
+                                                            ev.stopPropagation();
+                                                            onUpdateUsedActions(e.id, isUsed ? idx : idx + 1);
+                                                        }}
+                                                    />
+                                                );
+                                            })}
+                                        </div>
                                     </span>
                                     <div className="tmt-initiative-edit-wrap">
+                                        {e.roll && (
+                                            <span className="tmt-initiative-breakdown" title={`Base ${getBaseIniciativa(e)} + Dado ${e.roll}`}>
+                                                ({getBaseIniciativa(e)} + {e.roll})
+                                            </span>
+                                        )}
                                         <span className="tmt-initiative-icon">⚡</span>
                                         <input 
                                             type="number" 
@@ -655,6 +691,8 @@ export default function TacticMasterTerminal() {
         updateGroup,
         deleteGroup,
         updateCharacterInitiative,
+        updateCharacterUsedActions,
+        resetAllActions,
         resetStore,
         exportStore,
         importStore,
@@ -775,6 +813,8 @@ export default function TacticMasterTerminal() {
                     <CombateScreen 
                         characters={characters} 
                         onUpdateInitiative={updateCharacterInitiative}
+                        onUpdateUsedActions={updateCharacterUsedActions}
+                        onResetAllActions={resetAllActions}
                     />
                 )}
             </main>

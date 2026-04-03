@@ -5,6 +5,9 @@ import { APP_VERSIONS } from '../../../data/appVersions';
 // Constants
 // ─────────────────────────────────────────────────────────────────────────────
 export const TMT_STORAGE_KEY = 'shi_tmt_store';
+export const TMT_BROADCAST_CHANNEL = 'shi_tmt_channel';
+
+const tmtChannel = typeof window !== 'undefined' ? new BroadcastChannel(TMT_BROADCAST_CHANNEL) : null;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Types
@@ -31,6 +34,10 @@ export interface TmtCharacterEntry {
     groupIds: string[];
     /** Current initiative roll/value for the combat tracker */
     initiative?: number;
+    /** The actual roll component (1-100) for transparency */
+    roll?: number;
+    /** Number of actions already spent/used in the current round */
+    usedActions?: number;
 }
 
 /** Root structure written to localStorage */
@@ -75,7 +82,8 @@ function readFromStorage(): TmtStore {
         }
         parsed.characters = parsed.characters.map(c => ({
             ...c,
-            groupIds: Array.isArray(c.groupIds) ? c.groupIds : []
+            groupIds: Array.isArray(c.groupIds) ? c.groupIds : [],
+            usedActions: typeof c.usedActions === 'number' ? c.usedActions : 0
         }));
         return parsed;
     } catch {
@@ -142,6 +150,7 @@ export function pushCharacterToTmt(
     }
 
     writeToStorage(store);
+    tmtChannel?.postMessage({ type: 'SYNC_CHARACTER', id });
     return id;
 }
 
@@ -155,6 +164,18 @@ export function useTmtStore() {
     // Load on mount
     useEffect(() => {
         setStore(readFromStorage());
+    }, []);
+
+    // Listen for broadcast messages (e.g. from Character Viewer)
+    useEffect(() => {
+        if (!tmtChannel) return;
+        const handleMessage = (event: MessageEvent) => {
+            if (event.data?.type === 'SYNC_CHARACTER') {
+                setStore(readFromStorage());
+            }
+        };
+        tmtChannel.addEventListener('message', handleMessage);
+        return () => tmtChannel.removeEventListener('message', handleMessage);
     }, []);
 
     // Persist whenever store changes
@@ -198,13 +219,37 @@ export function useTmtStore() {
         });
     }, []);
 
-    const updateCharacterInitiative = useCallback((id: string, initiative: number) => {
+    const updateCharacterInitiative = useCallback((id: string, initiative: number, roll?: number) => {
         setStore((prev) => {
             const updated = {
                 ...prev,
                 characters: prev.characters.map((c) =>
-                    c.id === id ? { ...c, initiative } : c
+                    c.id === id ? { ...c, initiative, roll } : c
                 )
+            };
+            writeToStorage(updated);
+            return updated;
+        });
+    }, []);
+
+    const updateCharacterUsedActions = useCallback((id: string, usedActions: number) => {
+        setStore((prev) => {
+            const updated = {
+                ...prev,
+                characters: prev.characters.map((c) =>
+                    c.id === id ? { ...c, usedActions } : c
+                )
+            };
+            writeToStorage(updated);
+            return updated;
+        });
+    }, []);
+
+    const resetAllActions = useCallback(() => {
+        setStore((prev) => {
+            const updated = {
+                ...prev,
+                characters: prev.characters.map((c) => ({ ...c, usedActions: 0 }))
             };
             writeToStorage(updated);
             return updated;
@@ -331,6 +376,8 @@ export function useTmtStore() {
         updateGroup,
         deleteGroup,
         updateCharacterInitiative,
+        updateCharacterUsedActions,
+        resetAllActions,
         resetStore,
         exportStore,
         importStore,
