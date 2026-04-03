@@ -302,7 +302,10 @@ export default function TacticPlayerTerminal() {
                         background={character.background}
                     />
 
-                    <PowersPanel powers={character.powers} />
+                    <PowersPanel 
+                        powers={character.powers} 
+                        attributes={character.attributes.values} 
+                    />
 
                     {(character.skills?.generalItems || character.skills?.specialItems) && (
                         <SkillsPanel

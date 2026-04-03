@@ -8,14 +8,16 @@ interface PowersPanelProps {
         selected?: Array<{
             id: string;
             origin: string;
+            name?: string;
             rank: number;
             customizations?: any[];
             skillValue?: number;
         }>;
     };
+    attributes?: Record<string, number>;
 }
 
-export default function PowersPanel({ powers }: PowersPanelProps) {
+export default function PowersPanel({ powers, attributes }: PowersPanelProps) {
     const [selectedPower, setSelectedPower] = useState<{
         name: string;
         value: number;
@@ -25,15 +27,33 @@ export default function PowersPanel({ powers }: PowersPanelProps) {
         return null;
     }
 
+    const calculatePowerSkill = (powerDef: any) => {
+        if (!powerDef?.skillCalc || !attributes) return 0;
+
+        const getVal = (abbr: string) => {
+            const map: Record<string, string> = {
+                'FUE': 'Fuerza', 'AGI': 'Agilidad', 'CON': 'Constitución',
+                'INT': 'Inteligencia', 'PER': 'Percepción', 'VOL': 'Voluntad', 'APA': 'Apariencia'
+            };
+            const fullName = map[abbr];
+            return attributes[fullName] || 0;
+        };
+
+        try {
+            const evalFormula = powerDef.skillCalc.replace(/[A-Z]{3}/g, (match: string) => getVal(match).toString());
+            return Math.floor(new Function('return ' + evalFormula)());
+        } catch (e) {
+            return 0;
+        }
+    };
+
     const handlePowerClick = (power: any, powerDef: any) => {
-        // Only allow clicking if the power has a skillCalc (meaning it can be rolled)
         if (!powerDef?.skillCalc) return;
 
-        // Use skillValue if available, otherwise default to 0
-        const skillValue = power.skillValue || 0;
+        const skillValue = power.skillValue || calculatePowerSkill(powerDef);
 
         setSelectedPower({
-            name: powerDef.name,
+            name: powerDef.name || power.name || power.id,
             value: skillValue
         });
     };
@@ -45,6 +65,7 @@ export default function PowersPanel({ powers }: PowersPanelProps) {
                 {powers.selected.map((power, index) => {
                     const powerDef = POWERS.find(p => p.id === power.id);
                     const hasSkill = powerDef?.skillCalc;
+                    const calculatedSkill = hasSkill ? (power.skillValue || calculatePowerSkill(powerDef)) : 0;
 
                     return (
                         <div
@@ -52,15 +73,15 @@ export default function PowersPanel({ powers }: PowersPanelProps) {
                             className={`power-card ${hasSkill ? 'clickable' : 'non-clickable'}`}
                             onClick={() => hasSkill && handlePowerClick(power, powerDef)}
                         >
-                            <div className="power-name">{powerDef?.name || power.id}</div>
+                            <div className="power-name">{powerDef?.name || power.name || power.id}</div>
                             <div className="power-details">
                                 <span className="power-rank">Rango {power.rank}</span>
                                 {power.origin && (
                                     <span className="power-origin"> • {power.origin}</span>
                                 )}
                             </div>
-                            {hasSkill && power.skillValue !== undefined && power.skillValue > 0 && (
-                                <div className="power-skill-value">{power.skillValue}%</div>
+                            {hasSkill && calculatedSkill > 0 && (
+                                <div className="power-skill-value">{calculatedSkill}%</div>
                             )}
                         </div>
                     );
