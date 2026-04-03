@@ -35,7 +35,8 @@ export default function TacticPlayerTerminal() {
         resetChi,
         deleteHistoryEntry,
         resetData,
-        importData
+        importData,
+        importCharacterJSON
     } = useTerminalStats();
 
     const [showHistoryModal, setShowHistoryModal] = useState(false);
@@ -150,6 +151,14 @@ export default function TacticPlayerTerminal() {
         }
     };
 
+    const handleImportCharacter = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (file) {
+            importCharacterJSON(file);
+            event.target.value = '';
+        }
+    };
+
     const isCombatSkill = (name: string): boolean => {
         const lowerName = name.toLowerCase();
         if (lowerName.includes('artes marciales')) return true;
@@ -219,6 +228,7 @@ export default function TacticPlayerTerminal() {
                 version={APP_VERSIONS.TACTIC_PLAYER_TERMINAL}
                 character={character}
                 onImport={handleImportWrapper}
+                onImportCharacter={handleImportCharacter}
                 onExport={handleExportJSON}
                 onReset={() => setShowResetModal(true)}
                 adaptedCharacter={character ? adaptWebCharacter(character) : null}

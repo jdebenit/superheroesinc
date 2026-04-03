@@ -302,22 +302,48 @@ export function useTerminalStats() {
             const text = await file.text();
             const importedData = JSON.parse(text);
 
-            if (!importedData.character || !importedData.stats) {
-                alert('❌ ERROR: El archivo no tiene el formato correcto');
+            // CASE 1: TPT State Export
+            if (importedData.character && importedData.stats) {
+                setCharacter(importedData.character);
+                setStats(importedData.stats);
+                setHistory(importedData.history || []);
+
+                localStorage.setItem('shi_tpt_persistent_character', JSON.stringify(importedData.character));
+                localStorage.setItem('shi_tpt_persistent_stats', JSON.stringify(importedData.stats));
+                localStorage.setItem('shi_tpt_persistent_history', JSON.stringify(importedData.history || []));
+
+                alert('✅ Estado importado correctamente');
                 return;
             }
 
-            setCharacter(importedData.character);
-            setStats(importedData.stats);
-            setHistory(importedData.history || []);
+            // CASE 2: Raw Character Export
+            if (importedData.name && importedData.attributes) {
+                loadCharacter(importedData);
+                alert('✅ Personaje importado como nueva sesión');
+                return;
+            }
 
-            localStorage.setItem('shi_tpt_persistent_character', JSON.stringify(importedData.character));
-            localStorage.setItem('shi_tpt_persistent_stats', JSON.stringify(importedData.stats));
-            localStorage.setItem('shi_tpt_persistent_history', JSON.stringify(importedData.history || []));
-
-            alert('✅ Datos importados correctamente');
+            alert('❌ ERROR: El archivo no tiene el formato correcto');
         } catch (error) {
             Logger.error('Error importing JSON:', error);
+            alert('❌ ERROR: No se pudo leer el archivo JSON');
+        }
+    };
+
+    const importCharacterJSON = async (file: File) => {
+        try {
+            const text = await file.text();
+            const characterData = JSON.parse(text);
+
+            if (!characterData.name || !characterData.attributes) {
+                alert('❌ ERROR: El archivo no es un personaje válido');
+                return;
+            }
+
+            loadCharacter(characterData);
+            alert('✅ Nuevo personaje cargado correctamente');
+        } catch (error) {
+            Logger.error('Error importing Character JSON:', error);
             alert('❌ ERROR: No se pudo leer el archivo JSON');
         }
     };
@@ -369,6 +395,7 @@ export function useTerminalStats() {
         resetChi,
         deleteHistoryEntry,
         resetData,
-        importData
+        importData,
+        importCharacterJSON
     };
 }

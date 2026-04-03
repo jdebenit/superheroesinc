@@ -599,6 +599,7 @@ export default function TacticMasterTerminal() {
                 title="SHI Tactic Master Terminal"
                 version={APP_VERSIONS.TACTIC_MASTER_TERMINAL}
                 onImport={handleImportWrapper}
+                onImportCharacter={() => {}}
                 onExport={exportStore}
                 onReset={() => setShowResetModal(true)}
                 showCharacterSheet={false}

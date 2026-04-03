@@ -5,6 +5,7 @@ interface TerminalHeaderProps {
     title: string;
     version: string;
     onImport: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onImportCharacter: (event: React.ChangeEvent<HTMLInputElement>) => void;
     onExport?: () => void;
     onReset?: () => void;
     character?: any;
@@ -16,6 +17,7 @@ export default function TerminalHeader({
     title,
     version,
     onImport,
+    onImportCharacter,
     onExport,
     onReset,
     character,
@@ -23,9 +25,14 @@ export default function TerminalHeader({
     showCharacterSheet = false
 }: TerminalHeaderProps) {
     const triggerImportInput = () => {
-        const id = showCharacterSheet ? 'json-import' : 'tmt-json-import';
-        document.getElementById(id)?.click();
+        document.getElementById('tpt-json-import')?.click();
     };
+
+    const triggerCharacterImport = () => {
+        document.getElementById('character-json-import')?.click();
+    };
+
+    const hasCharacter = character !== null && character !== undefined;
 
     return (
         <div className="terminal-header-internal">
@@ -33,23 +40,39 @@ export default function TerminalHeader({
                 {title} <span className="terminal-title-version">({version})</span>
             </h1>
             <div className="terminal-header-actions">
+                {/* Hidden input for TPT State */}
                 <input
                     type="file"
-                    id={showCharacterSheet ? 'json-import' : 'tmt-json-import'}
+                    id="tpt-json-import"
                     accept=".json"
                     onChange={onImport}
                     style={{ display: 'none' }}
-                    multiple={!showCharacterSheet}
                 />
-                <button onClick={triggerImportInput} className="import-btn">
-                    📥 Importar JSON
+                {/* Hidden input for Character JSON */}
+                <input
+                    type="file"
+                    id="character-json-import"
+                    accept=".json"
+                    onChange={onImportCharacter}
+                    style={{ display: 'none' }}
+                />
+
+                <button onClick={triggerImportInput} className="import-btn" title="Importar estado guardado (SHI-TPT)">
+                    📥 Importar TPT
                 </button>
+
+                {!hasCharacter && (
+                    <button onClick={triggerCharacterImport} className="terminal-btn-secondary" title="Importar personaje nuevo para iniciar sesión">
+                        👤 Cargar Personaje
+                    </button>
+                )}
+
                 {showCharacterSheet && adaptedCharacter && (
                     <CharacterSheet
                         character={adaptedCharacter}
                         totalPCs={0}
                         renderTrigger={(open) => (
-                            <button onClick={open} className="terminal-btn-secondary">
+                            <button onClick={open} className="terminal-btn-secondary" title="Ver ficha detallada">
                                 📋 Visualizar Ficha
                             </button>
                         )}

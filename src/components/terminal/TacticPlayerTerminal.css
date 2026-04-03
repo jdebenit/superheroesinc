@@ -406,6 +406,48 @@
     font-size: 1.125rem;
     color: #9ca3af;
     text-align: center;
+    margin-bottom: 2rem;
+}
+
+.terminal-import-explanation {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    max-width: 800px;
+}
+
+.explanation-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: left;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.explanation-card h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #374151;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+}
+
+.explanation-card p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #6b7280;
+    line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+    .terminal-import-explanation {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 0 1rem;
+    }
 }
 
 /* ========================================
