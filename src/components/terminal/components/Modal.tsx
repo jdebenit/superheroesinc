@@ -30,7 +30,7 @@ export default function Modal({
                 onClick={(e) => e.stopPropagation()}
             >
                 <div className="modal-header">
-                    <h2>{title}</h2>
+                    <h3>{title}</h3>
                     <div className="modal-header-actions" style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
                         {headerActions}
                         <button className="close-btn" onClick={onClose}>&times;</button>

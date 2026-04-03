@@ -958,3 +958,107 @@
     display: none !important;
 }
 
+/* Combat Initiative Actions Group */
+.tmt-initiative-actions-group {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.tmt-btn-calculate {
+    background-color: #f59e0b !important; /* Amber-500 */
+    color: white !important;
+    border: none !important;
+    font-weight: 700 !important;
+    padding: 0.5rem 1rem !important;
+    box-shadow: 0 4px 6px -1px rgba(245, 158, 11, 0.3) !important;
+}
+
+.tmt-btn-calculate:hover {
+    background-color: #d97706 !important; /* Amber-600 */
+    transform: translateY(-1px);
+    box-shadow: 0 10px 15px -3px rgba(245, 158, 11, 0.4) !important;
+}
+
+.tmt-btn-next-turn {
+    background-color: #10b981 !important; /* Emerald-500 */
+    padding: 0.5rem 1rem !important;
+    font-weight: 700 !important;
+}
+
+.tmt-btn-next-turn:hover {
+    background-color: #059669 !important; /* Emerald-600 */
+}
+
+/* Confirm Modal Styling */
+.tmt-confirm-modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0.5rem;
+}
+
+.tmt-confirm-modal-body p {
+    margin: 0;
+    line-height: 1.5;
+    color: #374151;
+}
+
+.tmt-confirm-warning {
+    background: #fffbeb;
+    border-left: 4px solid #f59e0b;
+    padding: 0.75rem;
+    font-size: 0.9rem;
+    color: #92400e !important;
+    font-style: italic;
+}
+
+.tmt-modal-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.tmt-cancel-btn {
+    flex: 1;
+    background: #f3f4f6;
+    border: 1px solid #d1d5db;
+    padding: 0.75rem;
+    border-radius: 6px;
+    font-weight: 600;
+    color: #4b5563;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.tmt-cancel-btn:hover {
+    background: #e5e7eb;
+    color: #1f2937;
+}
+
+/* Modal Header Refinement (for TMT) */
+.modal-header {
+    background: #111827 !important; /* Dark Terminal Header */
+    padding: 1.25rem 1.5rem !important;
+    border-bottom: 1px solid #374151 !important;
+}
+
+.modal-header h3 {
+    color: #f9fafb !important;
+    font-size: 1.1rem !important;
+    font-weight: 700 !important;
+    margin: 0 !important;
+    letter-spacing: 0.02em !important;
+    text-transform: none !important;
+}
+
+.modal-header .close-btn {
+    color: #9ca3af !important;
+}
+
+.modal-header .close-btn:hover {
+    color: #f9fafb !important;
+}
+
+
+

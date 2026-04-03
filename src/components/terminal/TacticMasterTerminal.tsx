@@ -476,17 +476,19 @@ interface CombateScreenProps {
 
 function CombateScreen({ characters, onUpdateInitiative }: CombateScreenProps) {
     const [currentTurn, setCurrentTurn] = useState(0);
+    const [showConfirmModal, setShowConfirmModal] = useState(false);
 
     // Sort by initiative descending
     const sorted = [...characters].sort((a, b) => getIniciativa(b) - getIniciativa(a));
 
-    const handleRollAllIniciativas = () => {
+    const handleConfirmRoll = () => {
         characters.forEach(c => {
             const base = getBaseIniciativa(c);
             const roll = Math.floor(Math.random() * 100) + 1;
             onUpdateInitiative(c.id, base + roll);
         });
         setCurrentTurn(0); // Reset combat round
+        setShowConfirmModal(false);
     };
 
     return (
@@ -501,26 +503,41 @@ function CombateScreen({ characters, onUpdateInitiative }: CombateScreenProps) {
 
             {/* Initiative Tracker */}
             <div className="tmt-section">
-                <div className="tmt-section-header">
+                <div className="tmt-section-header initiative-header">
                     <span className="tmt-section-title">Orden de Iniciativa</span>
-                    <div className="tmt-section-actions">
+                    <div className="tmt-initiative-actions-group">
                         <button
-                            className="tmt-header-btn secondary"
-                            onClick={handleRollAllIniciativas}
+                            className="tmt-header-btn tmt-btn-calculate"
+                            onClick={() => setShowConfirmModal(true)}
                             title="Tira 1d100 + iniciativa base para todos"
                         >
                             🎲 Calcular Iniciativas
                         </button>
                         {sorted.length > 0 && (
                             <button
-                                className="tmt-add-btn"
+                                className="tmt-add-btn tmt-btn-next-turn"
                                 onClick={() => setCurrentTurn((t) => (t + 1) % sorted.length)}
                             >
-                                ▶ Siguiente turno
+                                Sig. Turno ▶
                             </button>
                         )}
                     </div>
                 </div>
+
+                <Modal
+                    isOpen={showConfirmModal}
+                    onClose={() => setShowConfirmModal(false)}
+                    title="¡Confirmar Tirada de Iniciativa!"
+                >
+                    <div className="tmt-confirm-modal-body">
+                        <p>¿Estás seguro de que deseas calcular la iniciativa para todos los combatientes?</p>
+                        <p className="tmt-confirm-warning">Esto sobrescribirá los valores actuales de todos los personajes en esta lista.</p>
+                        <div className="tmt-modal-actions">
+                            <button className="tmt-cancel-btn" onClick={() => setShowConfirmModal(false)}>Cancelar</button>
+                            <button className="tmt-add-btn" onClick={handleConfirmRoll}>Calcular Todo</button>
+                        </div>
+                    </div>
+                </Modal>
                 <div className="tmt-section-body">
                     {sorted.length === 0 ? (
                         <div className="tmt-coming-soon">

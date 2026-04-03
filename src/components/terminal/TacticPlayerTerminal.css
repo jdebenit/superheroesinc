@@ -591,14 +591,15 @@
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem;
-    border-bottom: 1px solid #e5e7eb;
+    background: #111827;
+    border-bottom: 1px solid #374151;
 }
 
-.history-modal-header h2 {
+.history-modal-header h3 {
     margin: 0;
     font-size: 1.25rem;
     font-weight: 700;
-    color: #111827;
+    color: #f9fafb;
 }
 
 .close-modal-btn {
@@ -759,14 +760,14 @@
     justify-content: space-between;
     align-items: center;
     padding: 1.25rem 1.5rem;
-    background: #f9fafb;
-    border-bottom: 1px solid #e5e7eb;
+    background: #111827;
+    border-bottom: 1px solid #374151;
 }
 
 .modal-header h3 {
     margin: 0;
     font-size: 1.25rem;
-    color: #111827;
+    color: #f9fafb;
     font-weight: 700;
 }
 
@@ -918,9 +919,10 @@
     max-width: 350px;
 }
 
-.attribute-roll-modal .modal-header h2 {
+.attribute-roll-modal .modal-header h3 {
     font-size: 1.5rem !important;
     margin-bottom: 0;
+    color: #f9fafb !important;
 }
 
 .roll-modal-body {
@@ -1956,8 +1958,9 @@ input[type=number] {
         padding: 0.75rem 1rem;
     }
 
-    .history-modal-header h2 {
+    .history-modal-header h3 {
         font-size: 1.1rem;
+        color: #f9fafb;
     }
 
     .close-modal-btn {
