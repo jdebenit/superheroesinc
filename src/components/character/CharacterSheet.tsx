@@ -29,6 +29,7 @@ import { SkillsLearningSection } from './sections/SkillsLearningSection';
 import { MalditoSection } from './sections/MalditoSection';
 import { BackgroundSection } from './sections/BackgroundSection';
 import { EquipmentSection } from './sections/EquipmentSection';
+import { VariosSection } from './sections/VariosSection';
 import { TechModulesSection } from './sections/TechModulesSection';
 import { ExoskeletonSection } from './sections/ExoskeletonSection';
 import { TechnifiedSection } from './sections/TechnifiedSection';
@@ -94,6 +95,7 @@ export default function CharacterSheet({
                 <MagicObjectsSection magicObjects={character.magicObjects} magicTableRolls={character.magicTableRolls} />
                 <VehiclesSection vehicles={character.vehicles} />
                 <EquipmentSection equipment={character.equipment} />
+                <VariosSection varios={character.varios} />
                 <TechModulesSection techModules={character.techModules?.installed || []} />
                 <ExoskeletonSection character={character} />
                 <TechnifiedSection character={character} />

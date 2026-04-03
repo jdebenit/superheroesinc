@@ -24,6 +24,7 @@ interface Step6Props {
         sexualIdentity?: string;
         notes: string;
         equipment: { items: any[] };
+        varios?: { items: any[] };
         weapons: { items: any[] };
         artifacts: { items: any[] };
         magicObjects: { items: any[] };
@@ -262,6 +263,54 @@ export default function Step6_Details({ data, onChange, totalPCs, onShowHelp }: 
                                 min="0"
                                 value={item.cost || 0}
                                 onChange={(val: string) => updateItem('equipment', index, 'cost', Math.max(0, parseInt(val) || 0).toString())}
+                                noMargin
+                                hideLabelDesktop={true}
+                            />
+                        </WizardGrid>
+                    )}
+                />
+            </WizardSection>
+
+            <WizardSection
+                title="Varios"
+                collapsible
+                defaultCollapsed={(data.varios?.items?.length ?? 0) === 0}
+                rightContent={
+                    (data.varios?.items?.length ?? 0) > 0 ? (
+                        <SectionHeaderBadge
+                            cost={data.varios?.items?.reduce((acc: number, item: any) => acc + (parseInt(item.cost) || 0), 0) || 0}
+                            label="PC"
+                            variant="default"
+                            className="text-white"
+                        />
+                    ) : undefined
+                }
+            >
+                <DynamicList
+                    items={data.varios?.items || []}
+                    onAdd={() => addItem('varios', { description: "Nuevo concepto", cost: 0 })}
+                    onRemove={(idx) => removeItem('varios', idx)}
+                    addButtonLabel="Añadir Item"
+                    color="#3b82f6"
+                    renderItem={(item, index) => (
+                        <WizardGrid
+                            columns="3fr 120px"
+                            headers={['Descripción', 'Coste']}
+                        >
+                            <WizardField
+                                label="Descripción"
+                                value={item.description || ''}
+                                onChange={(val: string) => updateItem('varios', index, 'description', val)}
+                                noMargin
+                                placeholder="Descripción del item..."
+                                hideLabelDesktop={true}
+                            />
+                            <WizardField
+                                type="number"
+                                label="Coste"
+                                min="-200"
+                                value={item.cost || 0}
+                                onChange={(val: string) => updateItem('varios', index, 'cost', (parseInt(val) || 0).toString())}
                                 noMargin
                                 hideLabelDesktop={true}
                             />

@@ -77,6 +77,7 @@ export const initialCharacterState = {
         friendsAndAssociates: 'conocido'
     },
     equipment: { items: [] },
+    varios: { items: [] },
     weapons: { items: [] },
     artifacts: { items: [] },
     magicObjects: { items: [] },

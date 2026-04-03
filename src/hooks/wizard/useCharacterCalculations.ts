@@ -323,6 +323,12 @@ export function useCharacterCalculations(character: any) {
             return acc + (parseInt(item.cost) || 0);
         }, 0);
         total += weaponsCost;
+        
+        // 11b. Miscellaneous Costs (Varios)
+        const variosCost = (character.varios?.items || []).reduce((acc: number, item: any) => {
+            return acc + (parseInt(item.cost) || 0);
+        }, 0);
+        total += variosCost;
 
         // 12. Artifacts Costs
         const artifactsCost = (character.artifacts?.items || []).reduce((acc: number, item: any) => {
