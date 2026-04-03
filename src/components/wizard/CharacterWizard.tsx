@@ -304,7 +304,16 @@ export default function CharacterWizard() {
 
                 <div className="wizard-topbar-actions">
                     {/* Preview / CharacterSheet */}
-                    <CharacterSheet character={character} totalPCs={totalPCs} onShowToast={showToast} />
+                    <CharacterSheet 
+                        character={character} 
+                        totalPCs={totalPCs} 
+                        onShowToast={showToast} 
+                        renderTrigger={(open) => (
+                            <button onClick={open} className="btn-base btn-preview" title="Visualizar Ficha">
+                                📋 <span className="btn-topbar-label">Ficha</span>
+                            </button>
+                        )}
+                    />
 
                     {/* Import JSON */}
                     <button onClick={handleImportJSON} className="btn-base btn-import" title="Importar JSON">

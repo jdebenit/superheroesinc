@@ -334,10 +334,16 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
                             >
                                 ⬇️ Descargar JSON
                             </button>
-                        </div>
-
-                        <div className="character-sheet-container">
-                            <CharacterSheet character={adaptWebCharacter(selectedCharacter.data)} totalPCs={selectedCharacter.data.totalCost} />
+                            
+                            <CharacterSheet 
+                                character={adaptWebCharacter(selectedCharacter.data)} 
+                                totalPCs={selectedCharacter.data.totalCost} 
+                                renderTrigger={(open) => (
+                                    <button onClick={open} className="tmt-header-btn" style={{ background: '#f3f4f6', color: '#374151' }}>
+                                        📋 Ficha Detallada
+                                    </button>
+                                )}
+                            />
                         </div>
                     </div>
                 ) : (

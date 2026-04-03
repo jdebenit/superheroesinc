@@ -42,11 +42,18 @@ import { NotesSection } from './sections/NotesSection';
 interface CharacterSheetProps {
     character: any;
     totalPCs?: number | string;
-    mode?: 'modal' | 'inline'; // New prop to control rendering mode
+    mode?: 'modal' | 'inline';
+    renderTrigger?: (openModal: () => void) => React.ReactNode;
     onShowToast?: (message: string, type?: 'success' | 'error' | 'info') => void;
 }
 
-export default function CharacterSheet({ character, totalPCs, mode = 'modal', onShowToast }: CharacterSheetProps) {
+export default function CharacterSheet({ 
+    character, 
+    totalPCs, 
+    mode = 'modal', 
+    renderTrigger,
+    onShowToast 
+}: CharacterSheetProps) {
     // Use the custom hook to get all calculated data
     const sheetData = useCharacterSheetData(character);
     const {
@@ -114,12 +121,16 @@ export default function CharacterSheet({ character, totalPCs, mode = 'modal', on
     // Modal mode: render button + dialog (original behavior)
     return (
         <>
-            <button
-                onClick={openModal}
-                className="visualize-btn"
-            >
-                📋 <span className="visualize-label">Visualizar Ficha</span>
-            </button>
+            {renderTrigger ? (
+                renderTrigger(openModal)
+            ) : (
+                <button
+                    onClick={openModal}
+                    className="visualize-btn"
+                >
+                    📋 <span className="visualize-label">Visualizar Ficha</span>
+                </button>
+            )}
 
             <dialog ref={dialogRef} className={`character-dialog ${isFullScreen ? 'full-screen' : ''}`}>
                 <div className="dialog-content">

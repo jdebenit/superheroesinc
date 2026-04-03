@@ -180,6 +180,11 @@
     color: #fff;
 }
 
+.btn-preview {
+    background: #3b82f6;
+    color: #fff;
+}
+
 .btn-primary {
     background: var(--c-primary);
     color: #fff;

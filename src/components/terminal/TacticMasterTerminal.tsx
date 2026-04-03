@@ -134,7 +134,14 @@ function EntityRow({ entry, groups, onRemove, onToggleRole, onToggleGroup }: Ent
                 >
                     🎮
                 </button>
-                <CharacterSheet character={entry.characterData} mode="modal" />
+                <CharacterSheet 
+                    character={entry.characterData} 
+                    renderTrigger={(open) => (
+                        <button className="tmt-icon-btn" title="Ficha Detallada" onClick={open}>
+                            📋
+                        </button>
+                    )}
+                />
                 <button className="tmt-icon-btn" onClick={() => onToggleRole(entry.id, isNpc ? 'pj' : 'pnj')}>
                     {isNpc ? '🧑‍🦸' : '👾'}
                 </button>

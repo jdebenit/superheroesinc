@@ -48,6 +48,11 @@ export default function TerminalHeader({
                     <CharacterSheet
                         character={adaptedCharacter}
                         totalPCs={0}
+                        renderTrigger={(open) => (
+                            <button onClick={open} className="terminal-btn-secondary">
+                                📋 Visualizar Ficha
+                            </button>
+                        )}
                     />
                 )}
                 {onExport && (
