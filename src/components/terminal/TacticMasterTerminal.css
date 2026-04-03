@@ -577,6 +577,56 @@
     font-size: 0.88rem;
     font-weight: 600;
     color: #374151;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.tmt-initiative-actions {
+    font-size: 0.75rem;
+    color: #6b7280;
+    background: #f3f4f6;
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.tmt-initiative-edit-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    background: #f3f4f6;
+    padding: 0.1rem 0.35rem;
+    border-radius: 4px;
+    border: 1px solid #e5e7eb;
+}
+
+.tmt-initiative-icon {
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+.tmt-initiative-input {
+    width: 45px;
+    background: transparent;
+    border: none;
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #111827;
+    padding: 0;
+    text-align: center;
+    outline: none;
+}
+
+.tmt-initiative-input::-webkit-inner-spin-button,
+.tmt-initiative-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.tmt-initiative-input:focus {
+    color: #2563eb;
 }
 
 .tmt-initiative-score {
@@ -876,5 +926,35 @@
     background: #eff6ff;
     border-color: #3b82f6;
     color: #2563eb;
+}
+
+/* Character Sheet Button styling inside TMT */
+.tmt-entity-actions .visualize-btn {
+    background: white !important;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 6px !important;
+    width: 30px !important;
+    height: 30px !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 0.9rem !important;
+    cursor: pointer !important;
+    transition: all 0.2s !important;
+    color: #6b7280 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    min-width: 0 !important;
+}
+
+.tmt-entity-actions .visualize-btn:hover {
+    background: #f3f4f6 !important;
+    border-color: #d1d5db !important;
+    color: #374151 !important;
+}
+
+.tmt-entity-actions .visualize-btn .visualize-label {
+    display: none !important;
 }
 

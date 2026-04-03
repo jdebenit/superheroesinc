@@ -3,6 +3,7 @@ import './TacticMasterTerminal.css';
 import { APP_VERSIONS } from '../../data/appVersions';
 import { useTmtStore, type TmtCharacterEntry, type TmtGroup } from './hooks/useTmtStore';
 import Modal from './components/Modal';
+import CharacterSheet from '../character/CharacterSheet';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Types (local, for the combat tracker state only)
@@ -37,6 +38,59 @@ function charSubtitle(entry: TmtCharacterEntry): string {
     if (alias && name) parts.push(name);
     if (level) parts.push(`Nv. ${level}`);
     return parts.join(' · ');
+}
+
+function getIniciativa(entry: TmtCharacterEntry): number {
+    if (typeof entry.initiative === 'number') return entry.initiative;
+    
+    const cd = entry.characterData;
+    // 1. Try to find it in combatstats (it's an array of strings like "Iniciativa y Reflejos: 25")
+    if (Array.isArray(cd?.combatstats)) {
+        const statStr = cd.combatstats.find((s: any) => typeof s === 'string' && s.includes('Iniciativa y Reflejos'));
+        if (statStr) {
+            const val = parseInt(statStr.split(':')[1]?.trim());
+            if (!isNaN(val)) return val;
+        }
+    }
+    // 2. Fallback to manual calculation: (AGI + PER) / 4
+    const agi = cd?.attributes?.values?.Agilidad || 0;
+    const per = cd?.attributes?.values?.Percepción || 0;
+    return Math.floor((agi + per) / 4);
+}
+
+// Add another helper to get the calculation base explicitly
+function getBaseIniciativa(entry: TmtCharacterEntry): number {
+    const cd = entry.characterData;
+    if (Array.isArray(cd?.combatstats)) {
+        const statStr = cd.combatstats.find((s: any) => typeof s === 'string' && s.includes('Iniciativa y Reflejos'));
+        if (statStr) {
+            const val = parseInt(statStr.split(':')[1]?.trim());
+            if (!isNaN(val)) return val;
+        }
+    }
+    const agi = cd?.attributes?.values?.Agilidad || 0;
+    const per = cd?.attributes?.values?.Percepción || 0;
+    return Math.floor((agi + per) / 4);
+}
+
+function getAcciones(entry: TmtCharacterEntry): number {
+    const cd = entry.characterData;
+    // 1. Try to find it in combatstats
+    if (Array.isArray(cd?.combatstats)) {
+        const statStr = cd.combatstats.find((s: any) => typeof s === 'string' && s.includes('Acciones por asalto'));
+        if (statStr) {
+            const val = parseInt(statStr.split(':')[1]?.trim());
+            if (!isNaN(val)) return val;
+        }
+    }
+    // 2. Fallback to calculation based on Agility
+    const agi = cd?.attributes?.values?.Agilidad || 0;
+    if (agi <= 75) return 1;
+    if (agi <= 90) return 2;
+    if (agi <= 130) return 3;
+    if (agi <= 175) return 4;
+    if (agi <= 199) return 5;
+    return 6;
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -132,6 +186,11 @@ function EntityRow({ entry, groups, onRemove, onToggleRole, onToggleGroup }: Ent
                         </div>
                     </Modal>
                 </div>
+                <CharacterSheet 
+                    character={entry.characterData} 
+                    totalPCs={entry.characterData?.meta?.totalCost || entry.characterData?.totalCost}
+                    mode="modal"
+                />
                 <button
                     className="tmt-icon-btn"
                     title={isNpc ? 'Cambiar a PJ' : 'Cambiar a PNJ'}
@@ -412,13 +471,23 @@ function PersonajesScreen({
 // ─────────────────────────────────────────────────────────────────────────────
 interface CombateScreenProps {
     characters: TmtCharacterEntry[];
+    onUpdateInitiative: (id: string, value: number) => void;
 }
 
-function CombateScreen({ characters }: CombateScreenProps) {
+function CombateScreen({ characters, onUpdateInitiative }: CombateScreenProps) {
     const [currentTurn, setCurrentTurn] = useState(0);
 
-    // For now, order is insertion order (initiatives to be added later)
-    const sorted = [...characters];
+    // Sort by initiative descending
+    const sorted = [...characters].sort((a, b) => getIniciativa(b) - getIniciativa(a));
+
+    const handleRollAllIniciativas = () => {
+        characters.forEach(c => {
+            const base = getBaseIniciativa(c);
+            const roll = Math.floor(Math.random() * 100) + 1;
+            onUpdateInitiative(c.id, base + roll);
+        });
+        setCurrentTurn(0); // Reset combat round
+    };
 
     return (
         <>
@@ -434,14 +503,23 @@ function CombateScreen({ characters }: CombateScreenProps) {
             <div className="tmt-section">
                 <div className="tmt-section-header">
                     <span className="tmt-section-title">Orden de Iniciativa</span>
-                    {sorted.length > 0 && (
+                    <div className="tmt-section-actions">
                         <button
-                            className="tmt-add-btn"
-                            onClick={() => setCurrentTurn((t) => (t + 1) % sorted.length)}
+                            className="tmt-header-btn secondary"
+                            onClick={handleRollAllIniciativas}
+                            title="Tira 1d100 + iniciativa base para todos"
                         >
-                            ▶ Siguiente turno
+                            🎲 Calcular Iniciativas
                         </button>
-                    )}
+                        {sorted.length > 0 && (
+                            <button
+                                className="tmt-add-btn"
+                                onClick={() => setCurrentTurn((t) => (t + 1) % sorted.length)}
+                            >
+                                ▶ Siguiente turno
+                            </button>
+                        )}
+                    </div>
                 </div>
                 <div className="tmt-section-body">
                     {sorted.length === 0 ? (
@@ -462,7 +540,20 @@ function CombateScreen({ characters }: CombateScreenProps) {
                                     <span className="tmt-initiative-rank">{i + 1}</span>
                                     <span className="tmt-initiative-name">
                                         {charName(e)}
+                                        <span className="tmt-initiative-actions" title="Acciones por asalto">
+                                            🏃 {getAcciones(e)}
+                                        </span>
                                     </span>
+                                    <div className="tmt-initiative-edit-wrap">
+                                        <span className="tmt-initiative-icon">⚡</span>
+                                        <input 
+                                            type="number" 
+                                            className="tmt-initiative-input"
+                                            value={getIniciativa(e)}
+                                            onChange={(ev) => onUpdateInitiative(e.id, parseInt(ev.target.value) || 0)}
+                                            onFocus={(ev) => ev.target.select()}
+                                        />
+                                    </div>
                                     <span className={`tmt-combat-card-badge${e.role === 'pnj' ? ' npc' : ''}`}>
                                         {e.role.toUpperCase()}
                                     </span>
@@ -546,6 +637,7 @@ export default function TacticMasterTerminal() {
         addGroup,
         updateGroup,
         deleteGroup,
+        updateCharacterInitiative,
         resetStore,
         exportStore,
         importStore,
@@ -662,7 +754,12 @@ export default function TacticMasterTerminal() {
                         onDeleteGroup={deleteGroup}
                     />
                 )}
-                {screen === 'combate' && <CombateScreen characters={characters} />}
+                {screen === 'combate' && (
+                    <CombateScreen 
+                        characters={characters} 
+                        onUpdateInitiative={updateCharacterInitiative}
+                    />
+                )}
             </main>
         </div>
     );

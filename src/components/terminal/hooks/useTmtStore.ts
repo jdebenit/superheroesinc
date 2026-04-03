@@ -29,6 +29,8 @@ export interface TmtCharacterEntry {
     characterData: Record<string, any>;
     /** IDs of groups this character belongs to */
     groupIds: string[];
+    /** Current initiative roll/value for the combat tracker */
+    initiative?: number;
 }
 
 /** Root structure written to localStorage */
@@ -196,6 +198,19 @@ export function useTmtStore() {
         });
     }, []);
 
+    const updateCharacterInitiative = useCallback((id: string, initiative: number) => {
+        setStore((prev) => {
+            const updated = {
+                ...prev,
+                characters: prev.characters.map((c) =>
+                    c.id === id ? { ...c, initiative } : c
+                )
+            };
+            writeToStorage(updated);
+            return updated;
+        });
+    }, []);
+
     const toggleCharacterGroup = useCallback((characterId: string, groupId: string) => {
         setStore((prev) => {
             const updated = {
@@ -315,6 +330,7 @@ export function useTmtStore() {
         addGroup,
         updateGroup,
         deleteGroup,
+        updateCharacterInitiative,
         resetStore,
         exportStore,
         importStore,
