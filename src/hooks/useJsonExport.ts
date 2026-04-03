@@ -40,8 +40,13 @@ export const useJsonExport = (
 
         // Force critical fields to always be present
         // This ensures valid import even if values match defaults
-        exportData.name = character.name;
+        exportData.name = character.name || character.alias || "Nuevo Personaje";
+        exportData.alias = character.alias || "";
         exportData.attributes = character.attributes;
+        exportData.origin = character.origin;
+        exportData.skills = character.skills;
+        exportData.powers = character.powers;
+        
         exportData.meta = {
             ...character.meta,
             version: APP_VERSIONS.WIZARD,

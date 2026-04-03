@@ -71,15 +71,19 @@
 }
 
 .list-item {
-    padding: 0.75rem 1rem;
     border-bottom: 1px solid #f3f4f6;
-    cursor: pointer;
     background-color: white;
     border-left: 4px solid transparent;
     transition: background-color 0.2s;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    align-items: stretch;
+}
+
+.list-item-clickable {
+    flex: 1;
+    padding: 0.75rem 0.5rem 0.75rem 1rem;
+    cursor: pointer;
+    overflow: hidden;
 }
 
 .list-item.active {
@@ -113,15 +117,33 @@
     border: none;
     color: #ef4444;
     cursor: pointer;
-    padding: 4px;
-    border-radius: 4px;
+    padding: 0 1rem;
     font-size: 1rem;
     opacity: 0.6;
-    transition: opacity 0.2s;
+    transition: all 0.2s;
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    border-left: 1px solid #f3f4f6;
 }
 
 .delete-btn:hover {
     opacity: 1;
+    background-color: #fee2e2;
+}
+
+.delete-btn.confirm-mode {
+    background-color: #ef4444;
+    color: white;
+    opacity: 1;
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding: 0 0.75rem;
+}
+
+.list-item.deleting {
+    background-color: #fff1f2;
 }
 
 .upload-section {

@@ -3,6 +3,8 @@ import CharacterSheet from '../character/CharacterSheet';
 import { adaptWebCharacter } from '../../utils/characterAdapter';
 import { useJsonExport } from '../../hooks/useJsonExport';
 import { pushCharacterToTmt } from '../terminal/hooks/useTmtStore';
+import { initialCharacterState } from '../../data/wizardConfig';
+import { mergeWithDefaults } from '../../utils/dataCleaner';
 import './CharacterViewer.css';
 import Logger from '../../utils/Logger';
 
@@ -21,6 +23,7 @@ interface CharacterViewerProps {
 export default function CharacterViewer({ webCharacters = [] }: CharacterViewerProps) {
     const [localCharacters, setLocalCharacters] = useState<StoredCharacter[]>([]);
     const [selectedId, setSelectedId] = useState<string | null>(null);
+    const [deletingId, setDeletingId] = useState<string | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [showWebCharacters, setShowWebCharacters] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -60,59 +63,101 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
         const file = event.target.files?.[0];
         if (!file) return;
 
+        Logger.info("--- Iniciando subida de archivo ---", file.name);
+        
         try {
             const text = await file.text();
+            Logger.info("Contenido del archivo leído correctamente");
+            
             let parsed;
             try {
                 parsed = JSON.parse(text);
             } catch (e) {
+                Logger.error("Error al parsear JSON", e);
                 throw new Error("El archivo no es un JSON válido.");
             }
 
-            // Basic validation
-            if (!parsed || typeof parsed !== 'object' || !parsed.attributes) {
-                throw new Error("El archivo JSON no tiene la estructura de un personaje válido.");
+            Logger.info("JSON parseado:", parsed);
+
+            // Minimal validation - just check if it's an object
+            if (!parsed || typeof parsed !== 'object') {
+                throw new Error("El archivo no es un objeto válido.");
+            }
+
+            // Fallback for missing attributes OR skills
+            if (!parsed.attributes) {
+                parsed.attributes = { values: {} };
+            }
+            if (!parsed.skills) {
+                parsed.skills = { items: [] };
             }
 
             // Fallback for missing name
-            if (!parsed.name) {
+            if (!parsed.name && !parsed.alias) {
                 parsed.name = file.name.replace(/\.json$/i, '') || "Sin Nombre";
             }
 
+            // CRITICAL: Merge with defaults to avoid "blank" characters if the JSON was too clean
+            const fullData = mergeWithDefaults(parsed, initialCharacterState);
+
             setError(null);
+            Logger.info("Validación superada. Personaje procesado.");
 
             // Create new stored character
-            // Use timestamp + random for ID to avoid collisions
             const newChar: StoredCharacter = {
                 id: 'local_' + Date.now().toString() + Math.random().toString(36).substr(2, 9),
-                data: parsed,
+                data: fullData, // Use the merged data
                 addedAt: Date.now(),
                 source: 'local'
             };
 
-            setLocalCharacters(prev => [newChar, ...prev]);
+            setLocalCharacters(prev => {
+                Logger.info("Actualizando lista de personajes locales (prev count:", prev.length, ")");
+                return [newChar, ...prev];
+            });
             setSelectedId(newChar.id);
+            Logger.info("Subida completada con éxito. ID seleccionado:", newChar.id);
 
         } catch (err: any) {
-            Logger.error(err);
+            Logger.error("Error crítico en handleFileChange:", err);
             setError(err.message || "Error al leer el archivo.");
+            // Alerta de emergencia si falla en silencio
+            if (!err.message) alert("Error fatal al subir: " + String(err));
         }
 
-        // Reset input so same file can be selected again if needed
+        // Reset input
         if (event.target) {
             event.target.value = '';
         }
     };
 
-    const handleDelete = (id: string, e: React.MouseEvent) => {
-        e.stopPropagation(); // Prevent selection when clicking delete
-        if (!confirm('¿Seguro que quieres eliminar este personaje de la lista?')) return;
+    const handleDelete = React.useCallback((id: string, e: React.MouseEvent) => {
+        e.stopPropagation();
+        e.preventDefault();
+        
+        if (deletingId !== id) {
+            setDeletingId(id);
+            // Auto-cancel after 3 seconds
+            setTimeout(() => setDeletingId(null), 3000);
+            return;
+        }
 
-        setLocalCharacters(prev => prev.filter(c => c.id !== id));
+        // Second click -> Actual delete
+        setLocalCharacters(prev => {
+            const newList = prev.filter(c => c.id !== id);
+            try {
+                localStorage.setItem('shi_viewer_characters', JSON.stringify(newList));
+            } catch (err) {
+                Logger.error("Error saving after delete:", err);
+            }
+            return newList;
+        });
+
         if (selectedId === id) {
             setSelectedId(null);
         }
-    };
+        setDeletingId(null);
+    }, [deletingId, selectedId]);
 
     const triggerFileInput = () => {
         fileInputRef.current?.click();
@@ -151,30 +196,32 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
                             {localCharacters.map(char => (
                                 <li
                                     key={char.id}
-                                    onClick={() => setSelectedId(char.id)}
-                                    className={`list-item ${selectedId === char.id ? 'active' : ''}`}
+                                    className={`list-item ${selectedId === char.id ? 'active' : ''} ${deletingId === char.id ? 'deleting' : ''}`}
                                 >
-                                    <div className="list-item-info">
-                                        <div className="char-name">
-                                            {char.data.alias ? (
-                                                <>
-                                                    {char.data.alias}
-                                                    {char.data.name && <div className="secondary-name">{char.data.name}</div>}
-                                                </>
-                                            ) : (
-                                                char.data.name
-                                            )}
-                                        </div>
-                                        <div className="char-details">
-                                            Nivel {char.data.level || 1}
+                                    <div className="list-item-clickable" onClick={() => setSelectedId(char.id)}>
+                                        <div className="list-item-info">
+                                            <div className="char-name">
+                                                {char.data.alias ? (
+                                                    <>
+                                                        {char.data.alias}
+                                                        {char.data.name && <div className="secondary-name">{char.data.name}</div>}
+                                                    </>
+                                                ) : (
+                                                    char.data.name
+                                                )}
+                                            </div>
+                                            <div className="char-details">
+                                                Nivel {char.data.level || 1}
+                                            </div>
                                         </div>
                                     </div>
                                     <button
+                                        type="button"
                                         onClick={(e) => handleDelete(char.id, e)}
-                                        title="Eliminar"
-                                        className="delete-btn"
+                                        title={deletingId === char.id ? "Click para confirmar borrado" : "Eliminar"}
+                                        className={`delete-btn ${deletingId === char.id ? 'confirm-mode' : ''}`}
                                     >
-                                        🗑️
+                                        {deletingId === char.id ? '⚠️ OK?' : '🗑️'}
                                     </button>
                                 </li>
                             ))}
