@@ -158,6 +158,10 @@ interface PersonajesScreenProps {
 function PersonajesScreen({ characters, groups, onImport, onRemove, onToggleRole, onToggleGroup, onAddGroup, onDeleteGroup }: PersonajesScreenProps) {
     const [selectedGroupIds, setSelectedGroupIds] = useState<string[]>([]);
     const [showGroupManager, setShowGroupManager] = useState(false);
+    const [newGroupName, setNewGroupName] = useState('');
+    const [newGroupColor, setNewGroupColor] = useState('#3b82f6');
+
+    const PRESET_COLORS = ['#3b82f6', '#ef4444', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899', '#6366f1', '#14b8a6'];
 
     const filtered = characters.filter(c => selectedGroupIds.length === 0 || selectedGroupIds.some(gid => c.groupIds.includes(gid)));
     const pjs = filtered.filter(e => e.role === 'pj');
@@ -188,24 +192,96 @@ function PersonajesScreen({ characters, groups, onImport, onRemove, onToggleRole
             </div>
 
             {showGroupManager && (
-                <div className="tmt-section">
-                    <div className="tmt-section-header"><span className="tmt-section-title">Grupos</span></div>
-                    <div className="tmt-group-manager-grid">
+                <div className="tmt-section tmt-group-manager-section">
+                    <div className="tmt-section-header">
+                        <span className="tmt-section-title">Gestión de Grupos</span>
+                        <button className="tmt-icon-btn" onClick={() => setShowGroupManager(false)}>✕</button>
+                    </div>
+                    <div className="tmt-group-manager-content">
                         <div className="tmt-group-add-form">
-                            <input type="text" placeholder="Nuevo grupo..." id="new-group-name" />
-                            <button onClick={() => {
-                                const input = document.getElementById('new-group-name') as HTMLInputElement;
-                                if (input.value.trim()) { onAddGroup(input.value.trim()); input.value = ''; }
-                            }}>Añadir</button>
+                            <div className="tmt-input-group">
+                                <input 
+                                    type="text" 
+                                    placeholder="Nombre del grupo..." 
+                                    value={newGroupName}
+                                    onChange={(e) => setNewGroupName(e.target.value)}
+                                    onKeyPress={(e) => {
+                                        if (e.key === 'Enter' && newGroupName.trim()) {
+                                            onAddGroup(newGroupName.trim(), newGroupColor);
+                                            setNewGroupName('');
+                                        }
+                                    }}
+                                />
+                                <input 
+                                    type="color" 
+                                    value={newGroupColor}
+                                    onChange={(e) => setNewGroupColor(e.target.value)}
+                                    className="tmt-color-picker"
+                                />
+                                <button 
+                                    className="tmt-add-btn"
+                                    onClick={() => {
+                                        if (newGroupName.trim()) {
+                                            onAddGroup(newGroupName.trim(), newGroupColor);
+                                            setNewGroupName('');
+                                        }
+                                    }}
+                                >
+                                    Añadir
+                                </button>
+                            </div>
+                            <div className="tmt-preset-colors">
+                                {PRESET_COLORS.map(c => (
+                                    <button 
+                                        key={c}
+                                        className={`tmt-preset-color-btn ${newGroupColor === c ? 'active' : ''}`}
+                                        style={{ backgroundColor: c }}
+                                        onClick={() => setNewGroupColor(c)}
+                                    />
+                                ))}
+                            </div>
                         </div>
-                        <div className="tmt-groups-list">
+
+                        <div className="tmt-groups-grid">
                             {groups.map(g => (
-                                <div key={g.id} className="tmt-group-manage-item">
-                                    <span>{g.name}</span>
-                                    <button className="tmt-icon-btn danger" onClick={() => onDeleteGroup(g.id)}>🗑️</button>
+                                <div key={g.id} className="tmt-group-chip-edit">
+                                    <span className="tmt-group-chip-color" style={{ backgroundColor: g.color }} />
+                                    <span className="tmt-group-chip-name">{g.name}</span>
+                                    <button className="tmt-group-chip-delete" onClick={() => onDeleteGroup(g.id)}>✕</button>
                                 </div>
                             ))}
+                            {groups.length === 0 && <p className="tmt-empty-msg">No hay grupos creados todavía.</p>}
                         </div>
+                    </div>
+                </div>
+            )}
+
+            {groups.length > 0 && !showGroupManager && (
+                <div className="tmt-section tmt-filter-section">
+                    <div className="tmt-section-header">
+                        <span className="tmt-section-title">Filtrar Vista</span>
+                        {selectedGroupIds.length > 0 && <button className="tmt-link-btn" onClick={() => setSelectedGroupIds([])}>Limpiar filtros</button>}
+                    </div>
+                    <div className="tmt-groups-filter-bar">
+                        {groups.map(g => {
+                            const active = selectedGroupIds.includes(g.id);
+                            return (
+                                <button 
+                                    key={g.id} 
+                                    className={`tmt-group-filter-tag ${active ? 'active' : ''}`}
+                                    onClick={() => {
+                                        if (active) setSelectedGroupIds(prev => prev.filter(id => id !== g.id));
+                                        else setSelectedGroupIds(prev => [...prev, g.id]);
+                                    }}
+                                    style={{ 
+                                        backgroundColor: active ? (g.color || '#3b82f6') : '#f1f5f9',
+                                        color: active ? '#fff' : '#64748b'
+                                    }}
+                                >
+                                    {g.name}
+                                </button>
+                            );
+                        })}
                     </div>
                 </div>
             )}
