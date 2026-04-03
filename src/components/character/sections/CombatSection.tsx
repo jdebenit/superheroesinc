@@ -1,7 +1,12 @@
 import React from 'react';
 
+interface CombatStat {
+    label: string;
+    value: string;
+}
+
 interface CombatSectionProps {
-    combatStats: string[];
+    combatStats: CombatStat[];
 }
 
 export const CombatSection: React.FC<CombatSectionProps> = ({ combatStats }) => {
@@ -13,15 +18,12 @@ export const CombatSection: React.FC<CombatSectionProps> = ({ combatStats }) => 
                 <h4>Resumen de Combate</h4>
             </div>
             <div className="combat-grid">
-                {combatStats.map((item: string, i: number) => {
-                    const [label, value] = item.split(':').map(s => s.trim());
-                    return (
-                        <div key={i} className="combat-stat-box">
-                            <span className="stat-label">{label}</span>
-                            <span className="stat-value">{value}</span>
-                        </div>
-                    );
-                })}
+                {combatStats.map((item, i) => (
+                    <div key={i} className="combat-stat-box">
+                        <span className="stat-label">{item.label}</span>
+                        <span className="stat-value">{item.value}</span>
+                    </div>
+                ))}
             </div>
         </div>
     );

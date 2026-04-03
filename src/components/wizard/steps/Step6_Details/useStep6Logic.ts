@@ -1,5 +1,5 @@
 import { useEffect, useCallback } from 'react';
-import { calculateDerivedStats } from '../../../../utils/characterCalculations';
+import { calculateDerivedStats, formatDerivedStats } from '../../../../utils/characterCalculations';
 import { ARTIFACTS } from '../../../../data/artifacts';
 import { MAGIC_OBJECTS } from '../../../../data/magicObjects';
 
@@ -7,38 +7,17 @@ export function useStep6Logic(data: any, onChange: (updates: any) => void) {
     // Derived Stats Effect
     useEffect(() => {
         const stats = calculateDerivedStats(data.attributes.values, data.origin?.items, data.skills);
-
-        const combatStatsList = [
-            `Acciones por asalto: ${stats.combat.acciones}`,
-            `Iniciativa y Reflejos: ${stats.combat.iniciativa}`,
-            `Puntos de Vida: ${stats.combat.pv}`,
-            `Equilibrio Mental: ${stats.combat.equilibrio}`
-        ];
-
-        const otherStatsList = [
-            `Inconsciencia: ${stats.other.inconsciencia}`,
-            `Recuperación: ${stats.other.recuperacion}`,
-            `Resistencia a gases y venenos: ${stats.other.resistenciaGases}`,
-            `Modificador de fuerza: ${stats.other.modFuerza}`,
-            `Peso Levantado: ${stats.other.pesoLevantado}`,
-            `Daño absorbido físico: ${stats.other.daAbsorbidoFisico}`,
-            `Daño absorbido mental: ${stats.other.daAbsorbidoMental}`,
-            `Modificador de impacto: ${stats.other.modImpacto}`,
-            `Modificador Psionico: ${stats.other.modPsionico}`,
-            `Parada Fisica: ${stats.other.paradaFisica}`,
-            `Parada mental: ${stats.other.paradaMental}`,
-            `Salto (alto / largo): ${stats.other.salto}`
-        ];
+        const { combatStats: newCombat, otherStats: newOther } = formatDerivedStats(stats);
 
         const currentCombat = JSON.stringify(data.combatstats);
-        const newCombat = JSON.stringify(combatStatsList);
+        const nextCombat = JSON.stringify(newCombat);
         const currentOther = JSON.stringify(data.otherstats);
-        const newOther = JSON.stringify(otherStatsList);
+        const nextOther = JSON.stringify(newOther);
 
-        if (currentCombat !== newCombat || currentOther !== newOther) {
+        if (currentCombat !== nextCombat || currentOther !== nextOther) {
             onChange({
-                combatstats: combatStatsList,
-                otherstats: otherStatsList
+                combatstats: newCombat,
+                otherstats: newOther
             });
         }
     }, [data.attributes.values, data.origin?.items, data.skills, data.combatstats, data.otherstats, onChange]);

@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { APP_VERSIONS } from '../data/appVersions';
 import { calculateDiff } from '../utils/dataCleaner';
 import { initialCharacterState } from '../data/wizardConfig';
-import { calculateDerivedStats, formatDerivedStats } from '../utils/characterCalculations';
+import { calculateDerivedStats, formatDerivedStats, applyStatsOverrides } from '../utils/characterCalculations';
 import Logger from '../utils/Logger';
 
 /**
@@ -24,7 +24,11 @@ export const useJsonExport = (
             character.origin?.items || [],
             character.skills || {}
         );
-        const { combatStats, otherStats } = formatDerivedStats(derivedStats);
+        const { combatStats: calculatedCombatStats, otherStats: calculatedOtherStats } = formatDerivedStats(derivedStats);
+        
+        // Apply overrides to export current values (stable format)
+        const combatStats = applyStatsOverrides(calculatedCombatStats, character.combatstats);
+        const otherStats = applyStatsOverrides(calculatedOtherStats, character.otherstats);
 
         // 3. Prepare export object
         // Use 'any' to allow adding properties easily
@@ -44,7 +48,8 @@ export const useJsonExport = (
             generator: 'SHI Wizard'
         };
 
-        const filename = `${(character.name || 'personaje').toLowerCase().replace(/\s+/g, '-')}.json`;
+        const baseName = (character.alias || character.name || 'personaje');
+        const filename = `${baseName.toLowerCase().trim().replace(/\s+/g, '-')}.json`;
         const jsonStr = JSON.stringify(exportData, null, 2);
 
         // Try using the File System Access API

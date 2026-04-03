@@ -21,6 +21,7 @@ import { WizardToast, WizardConfirm, type ToastType } from './shared/layout/Wiza
 
 import { APP_VERSIONS } from '../../data/appVersions';
 import Logger from '../../utils/Logger';
+import { useJsonExport } from '../../hooks/useJsonExport';
 
 export default function CharacterWizard() {
     const [currentStep, setCurrentStep] = useState(1);
@@ -34,6 +35,10 @@ export default function CharacterWizard() {
     // Refs for scroll-position memory per step
     const contentRef = useRef<HTMLDivElement>(null);
     const scrollPositions = useRef<Map<number, number>>(new Map());
+    const showToast = useCallback((message: string, type: ToastType = 'info') => {
+        setToast({ message, type });
+        setTimeout(() => setToast(null), 3000);
+    }, []);
 
     // Initialize with default state to prevent hydration mismatch
     const [character, setCharacter] = useState(initialCharacterState);
@@ -104,6 +109,7 @@ export default function CharacterWizard() {
 
     // Calculate total PCs using custom hook
     const { totalPCs } = useCharacterCalculations(character);
+    const { downloadJson } = useJsonExport(character, showToast);
 
     const goToStep = useCallback((nextStep: number) => {
         // Save current scroll before leaving
@@ -127,36 +133,13 @@ export default function CharacterWizard() {
         if (currentStep > 1) goToStep(currentStep - 1);
     };
 
-    const handleFinish = () => {
-        const charName = (character as any).name || 'personaje';
-        const filename = `${charName.replace(/\s+/g, '_').toLowerCase()}.json`;
-        
-        // Ensure meta is updated before export
-        const exportCharacter = {
-            ...character,
-            meta: {
-                ...(character as any).meta,
-                version: APP_VERSIONS.WIZARD,
-                generator: 'SHI Wizard'
-            }
-        };
-        const json = JSON.stringify(exportCharacter, null, 2);
-        const blob = new Blob([json], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = filename;
-        a.click();
-        URL.revokeObjectURL(url);
-    };
+    const handleFinish = useCallback(() => {
+        downloadJson();
+    }, [downloadJson]);
 
     const handleStepClick = (stepId: number) => {
         goToStep(stepId);
     };
-    const showToast = useCallback((message: string, type: ToastType = 'info') => {
-        setToast({ message, type });
-        setTimeout(() => setToast(null), 3000);
-    }, []);
 
     const handleStepChange = (field: string, value: any) => {
         Logger.log('🔄 handleStepChange:', field, value);

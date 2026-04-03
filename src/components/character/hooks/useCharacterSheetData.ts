@@ -1,7 +1,7 @@
 import { SPELLS } from '../../../data/spells';
 import { POWERS } from '../../../data/powers';
 import { calculateEM } from '../../wizard/steps/Step3_Especials/utils';
-import { calculateDerivedStats, calculateSkillBase, formatDerivedStats } from '../../../utils/characterCalculations';
+import { calculateDerivedStats, calculateSkillBase, formatDerivedStats, applyStatsOverrides } from '../../../utils/characterCalculations';
 import { calculateGeneralSkillValues, calculateSpecialSkillValues } from '../../../utils/calculations/skillCalculations';
 
 const calculatePowerSkillBase = (char: any, formula: string): number => {
@@ -46,43 +46,18 @@ export const useCharacterSheetData = (character: any) => {
 
     // Format stats for display
     // Always use live calculated stats to prevent stale data
-    const { combatStats, otherStats } = formatDerivedStats(derivedStats);
+    const { 
+        combatStats: calculatedCombatStats, 
+        otherStats: calculatedOtherStats 
+    } = formatDerivedStats(derivedStats);
 
-    // Override calculated stats with saved values from JSON if present and valid
-    if (character.combatstats && Array.isArray(character.combatstats)) {
-        character.combatstats.forEach((savedStat: string) => {
-            if (typeof savedStat !== 'string') return;
-            const parts = savedStat.split(':');
-            if (parts.length > 1) {
-                const prefix = parts[0].trim() + ':';
-                const val = parts.slice(1).join(':').trim();
-                // If value is valid (not empty/dash), prioritize it over calculation
-                if (val && val !== '-') {
-                    const calculatedIndex = combatStats.findIndex((s: string) => s.startsWith(prefix));
-                    if (calculatedIndex !== -1) {
-                        combatStats[calculatedIndex] = savedStat;
-                    }
-                }
-            }
-        });
-    }
+    // Apply overrides using the centralized utility
+    const finalCombatStats = applyStatsOverrides(calculatedCombatStats, character.combatstats);
+    const finalOtherStats = applyStatsOverrides(calculatedOtherStats, character.otherstats);
 
-    if (character.otherstats && Array.isArray(character.otherstats)) {
-        character.otherstats.forEach((savedStat: string) => {
-            if (typeof savedStat !== 'string') return;
-            const parts = savedStat.split(':');
-            if (parts.length > 1) {
-                const prefix = parts[0].trim() + ':';
-                const val = parts.slice(1).join(':').trim();
-                if (val && val !== '-') {
-                    const calculatedIndex = otherStats.findIndex((s: string) => s.startsWith(prefix));
-                    if (calculatedIndex !== -1) {
-                        otherStats[calculatedIndex] = savedStat;
-                    }
-                }
-            }
-        });
-    }
+    // Normalize to array of objects for display components
+    const combatStats = Object.entries(finalCombatStats).map(([label, value]) => ({ label, value }));
+    const otherStats = Object.entries(finalOtherStats).map(([label, value]) => ({ label, value }));
 
     // --- PRE-CALCULATE LISTS FOR PDF (Powers, Spells, etc.) ---
 

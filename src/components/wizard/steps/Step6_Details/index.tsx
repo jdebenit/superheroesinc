@@ -29,8 +29,8 @@ interface Step6Props {
         magicObjects: { items: any[] };
         vehicles: { items: any[] };
         skills?: any;
-        combatstats?: string[];
-        otherstats?: string[];
+        combatstats?: Record<string, string>;
+        otherstats?: Record<string, string>;
     };
     onChange: (updates: any) => void;
     totalPCs?: string | number;
@@ -107,10 +107,9 @@ export default function Step6_Details({ data, onChange, totalPCs, onShowHelp }: 
                     </InfoBox>
                 </div>
                 <div className="step6-combat-stats-grid">
-                    {data.combatstats?.map((stat, index) => {
-                        const [label, val] = stat.split(': ');
-                        return <StatItem key={index} label={label} value={val} theme="red" />;
-                    })}
+                    {data.combatstats && Object.entries(data.combatstats).map(([label, val], index) => (
+                        <StatItem key={index} label={label} value={val} theme="red" />
+                    ))}
                 </div>
             </WizardSection>
 
@@ -121,10 +120,7 @@ export default function Step6_Details({ data, onChange, totalPCs, onShowHelp }: 
                     </InfoBox>
                 </div>
                 <div className="step6-other-stats-container">
-                    {data.otherstats?.map((stat, index) => {
-                        const colonIdx = stat.indexOf(': ');
-                        const label = colonIdx !== -1 ? stat.slice(0, colonIdx) : stat;
-                        const val = colonIdx !== -1 ? stat.slice(colonIdx + 2) : '';
+                    {data.otherstats && Object.entries(data.otherstats).map(([label, val], index) => {
                         const isEven = index % 2 === 0;
                         return (
                             <div key={index} className={`step6-other-stat-row ${isEven ? 'even' : 'odd'}`}>
@@ -135,6 +131,7 @@ export default function Step6_Details({ data, onChange, totalPCs, onShowHelp }: 
                     })}
                 </div>
             </WizardSection>
+
 
             <WizardSection
                 title="Armas"

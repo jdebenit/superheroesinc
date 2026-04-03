@@ -1,7 +1,12 @@
 import React from 'react';
 
+interface OtherStat {
+    label: string;
+    value: string;
+}
+
 interface OtherStatsSectionProps {
-    otherStats: string[];
+    otherStats: OtherStat[];
 }
 
 import { SheetSection } from '../common/SheetSection';
@@ -13,19 +18,16 @@ export const OtherStatsSection: React.FC<OtherStatsSectionProps> = ({ otherStats
     return (
         <SheetSection title="Datos de Combate" className="other-stats">
             <ul className="clean-list">
-                {otherStats.map((item: string, i: number) => {
-                    const [label, value] = item.split(':').map(s => s.trim());
-                    return (
-                        <li key={i} className="no-bullet-item skill-item">
-                            <DetailRow
-                                className="skill-row"
-                                label={<span className="skill-name">{label}</span>}
-                                value={<span className="skill-value">{value}</span>}
-                                valueClassName=""
-                            />
-                        </li>
-                    );
-                })}
+                {otherStats.map((item, i) => (
+                    <li key={i} className="no-bullet-item skill-item">
+                        <DetailRow
+                            className="skill-row"
+                            label={<span className="skill-name">{item.label}</span>}
+                            value={<span className="skill-value">{item.value}</span>}
+                            valueClassName=""
+                        />
+                    </li>
+                ))}
             </ul>
         </SheetSection>
     );

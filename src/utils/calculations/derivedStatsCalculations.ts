@@ -454,30 +454,64 @@ export function calculateDerivedStats(
 }
 
 /**
- * Formats derived stats object into standard string arrays for JSON/Display
+ * Formats derived stats object into standard objects for JSON/Display
+ * Optimized for stability as requested by the user
  */
 export function formatDerivedStats(stats: any) {
-    const combatStats = [
-        `Acciones por asalto: ${stats.combat.acciones}`,
-        `Iniciativa y Reflejos: ${stats.combat.iniciativa}`,
-        `Puntos de Vida: ${stats.combat.pv}`,
-        `Equilibrio Mental: ${stats.combat.equilibrio}`
-    ];
+    const combatStats: Record<string, string> = {
+        "Acciones por asalto": stats.combat.acciones,
+        "Iniciativa y Reflejos": stats.combat.iniciativa,
+        "Puntos de Vida": stats.combat.pv,
+        "Equilibrio Mental": stats.combat.equilibrio
+    };
 
-    const otherStats = [
-        `Inconsciencia: ${stats.other.inconsciencia}`,
-        `Recuperación: ${stats.other.recuperacion}`,
-        `Resistencia a gases y venenos: ${stats.other.resistenciaGases}`,
-        `Modificador de fuerza: ${stats.other.modFuerza}`,
-        `Peso Levantado: ${stats.other.pesoLevantado}`,
-        `Daño absorbido físico: ${stats.other.daAbsorbidoFisico}`,
-        `Daño absorbido mental: ${stats.other.daAbsorbidoMental}`,
-        `Modificador de impacto: ${stats.other.modImpacto}`,
-        `Modificador Psionico: ${stats.other.modPsionico}`,
-        `Parada Fisica: ${stats.other.paradaFisica}`,
-        `Parada mental: ${stats.other.paradaMental}`,
-        `Salto (alto / largo): ${stats.other.salto}`
-    ];
+    const otherStats: Record<string, string> = {
+        "Inconsciencia": stats.other.inconsciencia,
+        "Recuperación": stats.other.recuperacion,
+        "Resistencia a gases y venenos": stats.other.resistenciaGases,
+        "Modificador de fuerza": stats.other.modFuerza,
+        "Peso Levantado": stats.other.pesoLevantado,
+        "Daño absorbido físico": stats.other.daAbsorbidoFisico,
+        "Daño absorbido mental": stats.other.daAbsorbidoMental,
+        "Modificador de impacto": stats.other.modImpacto,
+        "Modificador Psionico": stats.other.modPsionico,
+        "Parada Fisica": stats.other.paradaFisica,
+        "Parada mental": stats.other.paradaMental,
+        "Salto (alto / largo)": stats.other.salto
+    };
 
     return { combatStats, otherStats };
+}
+
+/**
+ * Utility to apply overrides from JSON (supports both old string array and new object format)
+ * This ensures that if a user manually modified a stat in the JSON, it is preserved.
+ */
+export function applyStatsOverrides(baseStats: Record<string, string>, savedStats: any): Record<string, string> {
+    const result = { ...baseStats };
+    if (!savedStats) return result;
+
+    if (Array.isArray(savedStats)) {
+        // Old format: ["Label: Value", ...]
+        savedStats.forEach((item: any) => {
+            if (typeof item !== 'string') return;
+            const parts = item.split(':');
+            if (parts.length > 1) {
+                const label = parts[0].trim();
+                const value = parts.slice(1).join(':').trim();
+                // If value is valid (not empty/dash) and key exists in base, prioritize it
+                if (value && value !== '-' && result.hasOwnProperty(label)) {
+                    result[label] = value;
+                }
+            }
+        });
+    } else if (typeof savedStats === 'object' && savedStats !== null) {
+        // New format: { "Label": "Value", ... }
+        Object.entries(savedStats).forEach(([label, value]) => {
+            if (typeof value === 'string' && value && value !== '-' && result.hasOwnProperty(label)) {
+                result[label] = value;
+            }
+        });
+    }
+    return result;
 }

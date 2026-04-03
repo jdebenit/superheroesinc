@@ -19,26 +19,26 @@ export const initialCharacterState = {
     totalCost: "",
     level: 1,
     origin: { items: [] },
-    combatstats: [
-        "Acciones por asalto: -",
-        "Iniciativa y Reflejos: -",
-        "Puntos de Vida: -",
-        "Equilibrio Mental: -"
-    ],
-    otherstats: [
-        "Inconsciencia: -",
-        "Recuperación: - PV/h",
-        "Resistencia a gases y venenos: -",
-        "Modificador de fuerza: -",
-        "Peso Levantado: -",
-        "Daño absorbido físico: -",
-        "Daño absorbido mental: -",
-        "Modificador de impacto: -",
-        "Modificador Psionico: -",
-        "Parada Fisica: -",
-        "Parada mental: -",
-        "Salto (alto / largo): -"
-    ],
+    combatstats: {
+        "Acciones por asalto": "-",
+        "Iniciativa y Reflejos": "-",
+        "Puntos de Vida": "-",
+        "Equilibrio Mental": "-"
+    },
+    otherstats: {
+        "Inconsciencia": "-",
+        "Recuperación": "- PV/h",
+        "Resistencia a gases y venenos": "-",
+        "Modificador de fuerza": "-",
+        "Peso Levantado": "-",
+        "Daño absorbido físico": "-",
+        "Daño absorbido mental": "-",
+        "Modificador de impacto": "-",
+        "Modificador Psionico": "-",
+        "Parada Fisica": "-",
+        "Parada mental": "-",
+        "Salto (alto / largo)": "-"
+    },
     attributes: {
         values: {
             "Fuerza": 40,
