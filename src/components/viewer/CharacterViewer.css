@@ -334,5 +334,48 @@
 .viewer-actions {
     display: flex;
     gap: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.secondary-name {
+    opacity: 0.7;
+    font-size: 0.85em;
+    margin-top: 0.15rem;
+}
+
+.secondary-title {
+    font-size: 0.7em;
+    color: #6b7280;
+    margin-top: 0.25rem;
+    font-weight: normal;
+}
+
+.character-summary {
+    padding: 1rem;
+    background-color: #f9fafb;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    border: 1px solid #e5e7eb;
+}
+
+.summary-title {
+    margin: 0 0 0.75rem 0;
+    color: #374151;
+    font-size: 1rem;
+}
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    font-size: 0.9rem;
+    color: #4b5563;
+}
+
+.version-badge {
+    font-family: monospace;
+    background-color: #e5e7eb;
+    padding: 2px 6px;
+    border-radius: 4px;
 }
