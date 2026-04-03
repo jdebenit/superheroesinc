@@ -22,7 +22,10 @@ export const adaptWebCharacter = (webChar: any): any => {
         origin: { ...baseState.origin, ...webChar.origin },
         attributes: {
             ...baseState.attributes,
-            values: webChar.attributes?.values || baseState.attributes.values
+            ...webChar.attributes,
+            values: webChar.attributes?.values || baseState.attributes.values,
+            manualBonuses: webChar.attributes?.manualBonuses || baseState.attributes.manualBonuses,
+            breakdown: webChar.attributes?.breakdown || baseState.attributes.breakdown
         }
     };
 
@@ -60,8 +63,12 @@ export const adaptWebCharacter = (webChar: any): any => {
             }
         });
 
-        adapted.skills.generalItems = generalItems;
-        adapted.skills.specialItems = specialItems;
+        adapted.skills = {
+            ...baseState.skills,
+            ...webChar.skills,
+            generalItems,
+            specialItems
+        };
 
         // Also pull specialskills if they exist separately in webChar (some files like Lawyer have them)
         if (webChar.specialskills?.items) {

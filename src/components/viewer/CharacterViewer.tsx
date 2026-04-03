@@ -159,6 +159,19 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
         setDeletingId(null);
     }, [deletingId, selectedId]);
 
+    const handleEditInWizard = () => {
+        if (!selectedCharacter) return;
+        try {
+            // Adapt to wizard format to ensure compatibility
+            const adapted = adaptWebCharacter(selectedCharacter.data);
+            localStorage.setItem('characterWizardState', JSON.stringify(adapted));
+            window.location.href = '/recursos/wizard-fullscreen';
+        } catch (error) {
+            Logger.error('Error sending character to wizard:', error);
+            alert('Error al abrir el personaje en el editor');
+        }
+    };
+
     const triggerFileInput = () => {
         fileInputRef.current?.click();
     };
@@ -380,6 +393,14 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
                                 title="Descargar ficha como JSON"
                             >
                                 ⬇️ Descargar JSON
+                            </button>
+
+                            <button
+                                onClick={handleEditInWizard}
+                                className="tpt-button edit-wizard-btn"
+                                title="Abrir en el Generador"
+                            >
+                                🛠️ Editar en Wizard
                             </button>
                             
                             <CharacterSheet 
