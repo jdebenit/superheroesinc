@@ -119,6 +119,20 @@ function EntityRow({ entry, groups, onRemove, onToggleRole, onToggleGroup }: Ent
             </div>
             <div className="tmt-entity-actions">
                 <button className="tmt-icon-btn" title="Grupos" onClick={() => setShowGroupModal(true)}>🏷️</button>
+                <button 
+                    className="tmt-icon-btn" 
+                    title="Abrir en SHI TPT" 
+                    onClick={() => {
+                        try {
+                            localStorage.setItem('shi_tpt_character', JSON.stringify(entry.characterData));
+                            window.open('/recursos/tactic-player-terminal', 'shi_tpt_terminal');
+                        } catch (err) {
+                            Logger.error('Error sending character to TPT:', err);
+                        }
+                    }}
+                >
+                    🎮
+                </button>
                 <CharacterSheet character={entry.characterData} mode="modal" />
                 <button className="tmt-icon-btn" onClick={() => onToggleRole(entry.id, isNpc ? 'pj' : 'pnj')}>
                     {isNpc ? '🧑‍🦸' : '👾'}
