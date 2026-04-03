@@ -12,6 +12,9 @@ export const useStep4Logic = (data: any, onChange: (updates: any) => void) => {
         data.skills?.manualBases || {}
     );
     const [nativeLanguage, setNativeLanguage] = useState<string>(data.skills?.nativeLanguage || '');
+    const [unlockManualMod, setUnlockManualMod] = useState<boolean>(
+        !!data.uiState?.unlockManualSkills
+    );
 
     // Special skills - with isRequired flag
     const [selectedSkills, setSelectedSkills] = useState<{ [skillId: string]: { isFree: boolean; isRequired: boolean; manualMods: number; manualBases: number } }>(
@@ -261,6 +264,17 @@ export const useStep4Logic = (data: any, onChange: (updates: any) => void) => {
         handleRemoveSkill,
         handleAddSpecifiedSkill,
         handleSpecificationChange,
-        handleRemoveSpecifiedSkill
+        handleRemoveSpecifiedSkill,
+        unlockManualMod,
+        setUnlockManualMod: (value: boolean) => {
+            setUnlockManualMod(value);
+            onChange({
+                ...data,
+                uiState: {
+                    ...data.uiState,
+                    unlockManualSkills: value
+                }
+            });
+        }
     };
 };

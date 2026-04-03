@@ -22,6 +22,7 @@ interface SkillRowProps {
     totalPCCost?: number;
     isFree?: boolean;
     isRequired?: boolean;
+    unlockManualMod?: boolean;
 
     // Handlers
     onBaseChange: (val: string) => void;
@@ -44,6 +45,7 @@ export const SkillRow: React.FC<SkillRowProps> = ({
     totalPCCost = 0,
     isFree = false,
     isRequired = false,
+    unlockManualMod = false,
     onBaseChange,
     onModChange,
     onRemove
@@ -101,7 +103,8 @@ export const SkillRow: React.FC<SkillRowProps> = ({
                     value={manualMod || ''}
                     onChange={(e) => onModChange(e.target.value)}
                     placeholder="0"
-                    className="wizard-manual-mod-input"
+                    className={`wizard-manual-mod-input ${unlockManualMod ? 'unlocked-field' : ''}`}
+                    disabled={!unlockManualMod}
                 />
             </td>
 

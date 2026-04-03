@@ -40,7 +40,9 @@ export default function Step4_GeneralSkills({ data, onChange, onShowHelp }: Step
         handleRemoveSpecifiedSkill,
         handleSpecificationChange,
         handleAddSkill,
-        handleAddSpecifiedSkill
+        handleAddSpecifiedSkill,
+        unlockManualMod,
+        setUnlockManualMod
     } = useStep4Logic(data, onChange);
 
     return (
@@ -48,9 +50,29 @@ export default function Step4_GeneralSkills({ data, onChange, onShowHelp }: Step
 
             <WizardSection
                 title="Habilidades"
-                description="Define las habilidades de tu personaje."
+                description="Estas habilidades dependen de tus características y origen. Algunas son automáticas y otras requieren aprendizaje."
                 onHelp={onShowHelp}
-            />
+            >
+                <div className="wizard-unlock-container">
+                    <div className="wizard-unlock-header">
+                        <label className="wizard-unlock-label">
+                            <input
+                                type="checkbox"
+                                checked={unlockManualMod}
+                                onChange={(e) => setUnlockManualMod(e.target.checked)}
+                                className="wizard-unlock-checkbox"
+                            />
+                            🔓 Desbloquear Modificadores Manuales
+                        </label>
+                        <span className="wizard-unlock-badge">Avanzado</span>
+                    </div>
+                    {unlockManualMod && (
+                        <p className="wizard-unlock-description">
+                            Usa esta opción para aplicar bonos o penalizadores manuales (objetos, ajustes del DJ o dotes no automáticas) en la casilla <strong>Otros</strong> de cada habilidad. Estos puntos no consumen PC.
+                        </p>
+                    )}
+                </div>
+            </WizardSection>
 
             {/* GENERAL SKILLS SECTION */}
             <GeneralSkillsSection
@@ -58,6 +80,7 @@ export default function Step4_GeneralSkills({ data, onChange, onShowHelp }: Step
                 manualMods={manualMods}
                 nativeLanguage={nativeLanguage}
                 isHeraldoCosmico={isHeraldoCosmico || false}
+                unlockManualMod={unlockManualMod}
                 onNativeLanguageChange={handleNativeLanguageChange}
                 onBaseChange={handleBaseChange}
                 onModChange={handleModChange}
@@ -75,6 +98,7 @@ export default function Step4_GeneralSkills({ data, onChange, onShowHelp }: Step
                     specifiedSpecialSkills={specifiedSpecialSkills}
                     specialSkillsPC={specialSkillsPC}
                     skillBaseCost={skillBaseCost}
+                    unlockManualMod={unlockManualMod}
                     onSpecialBaseChange={handleSpecialBaseChange}
                     onSpecialModChange={handleSpecialModChange}
                     onRemoveSkill={handleRemoveSkill}

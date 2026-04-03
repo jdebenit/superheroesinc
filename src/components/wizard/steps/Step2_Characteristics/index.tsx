@@ -90,21 +90,21 @@ export default function Step2_Characteristics({ data, onChange, onShowHelp }: St
                     </div>
                 }
             >
-                <div className="step2-unlock-container">
-                    <div className="step2-unlock-header">
-                        <label className="step2-unlock-label">
+                <div className="wizard-unlock-container">
+                    <div className="wizard-unlock-header">
+                        <label className="wizard-unlock-label">
                             <input
                                 type="checkbox"
                                 checked={unlockManualMod}
                                 onChange={(e) => setUnlockManualMod(e.target.checked)}
-                                className="step2-unlock-checkbox"
+                                className="wizard-unlock-checkbox"
                             />
                             🔓 Desbloquear Modificadores Manuales
                         </label>
-                        <span className="step2-unlock-badge">Avanzado</span>
+                        <span className="wizard-unlock-badge">Avanzado</span>
                     </div>
                     {unlockManualMod && (
-                        <p className="step2-unlock-description">
+                        <p className="wizard-unlock-description">
                             Usa esta opción para aplicar bonos o penalizadores manuales (objetos mágicos, ajustes del DJ o dotes no automáticas) en la casilla <strong>Mod. Otros</strong> de cada característica. Estos puntos no consumen PC.
                         </p>
                     )}
@@ -231,7 +231,7 @@ export default function Step2_Characteristics({ data, onChange, onShowHelp }: St
                                         noMargin
                                         inputWidth="70px"
                                         textAlign="center"
-                                        className={unlockManualMod ? 'unlocked-field' : ''}
+                                        className={unlockManualMod ? 'unlocked-field-wrapper' : ''}
                                     />
                                 </div>
 

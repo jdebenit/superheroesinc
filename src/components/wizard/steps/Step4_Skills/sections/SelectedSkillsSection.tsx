@@ -12,6 +12,7 @@ interface SelectedSkillsSectionProps {
     specifiedSpecialSkills: any;
     specialSkillsPC: { totalSkills: number; freeSkills: number; intBonusSkills: number; paidSkills: number; totalPC: number };
     skillBaseCost: number;
+    unlockManualMod: boolean;
     onSpecialBaseChange: (id: string, value: string, minLimit: number, isSpecified?: boolean) => void;
     onSpecialModChange: (id: string, value: string, isSpecified?: boolean) => void;
     onRemoveSkill: (skillId: string) => void;
@@ -26,6 +27,7 @@ export const SelectedSkillsSection: React.FC<SelectedSkillsSectionProps> = ({
     specifiedSpecialSkills,
     specialSkillsPC,
     skillBaseCost,
+    unlockManualMod,
     onSpecialBaseChange,
     onSpecialModChange,
     onRemoveSkill,
@@ -85,6 +87,7 @@ export const SelectedSkillsSection: React.FC<SelectedSkillsSectionProps> = ({
                                     totalPCCost={totalCost}
                                     isFree={skillData.isFree}
                                     isRequired={skillData.isRequired}
+                                    unlockManualMod={unlockManualMod}
                                     onBaseChange={(v: string) => onSpecialBaseChange(skillId, v, val.minBase, false)}
                                     onModChange={(v: string) => onSpecialModChange(skillId, v, false)}
                                     onRemove={() => onRemoveSkill(skillId)}
@@ -131,6 +134,7 @@ export const SelectedSkillsSection: React.FC<SelectedSkillsSectionProps> = ({
                                     totalPCCost={totalCost}
                                     isFree={spec.isFree}
                                     isRequired={spec.isRequired}
+                                    unlockManualMod={unlockManualMod}
                                     onBaseChange={(v: string) => onSpecialBaseChange(uniqueId, v, val.minBase, true)}
                                     onModChange={(v: string) => onSpecialModChange(uniqueId, v, true)}
                                     onRemove={() => onRemoveSpecifiedSkill(uniqueId)}

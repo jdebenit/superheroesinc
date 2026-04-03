@@ -10,6 +10,7 @@ interface GeneralSkillsSectionProps {
     manualMods: { [key: string]: number };
     nativeLanguage: string;
     isHeraldoCosmico: boolean;
+    unlockManualMod: boolean;
     onNativeLanguageChange: (value: string) => void;
     onBaseChange: (skillId: string, value: string, minLimit: number) => void;
     onModChange: (skillId: string, value: string) => void;
@@ -20,6 +21,7 @@ export const GeneralSkillsSection: React.FC<GeneralSkillsSectionProps> = ({
     manualMods,
     nativeLanguage,
     isHeraldoCosmico,
+    unlockManualMod,
     onNativeLanguageChange,
     onBaseChange,
     onModChange
@@ -69,6 +71,7 @@ export const GeneralSkillsSection: React.FC<GeneralSkillsSectionProps> = ({
                             manualMod={manualMods[skill.id] || 0}
                             total={val.total}
                             calcPCCost={val.pcCost}
+                            unlockManualMod={unlockManualMod}
                             onBaseChange={(v) => onBaseChange(skill.id, v, val.minBase)}
                             onModChange={(v) => onModChange(skill.id, v)}
                         />
