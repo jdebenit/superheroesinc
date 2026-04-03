@@ -326,7 +326,7 @@ export function useCharacterCalculations(character: any) {
         
         // 11b. Miscellaneous Costs (Varios)
         const variosCost = (character.varios?.items || []).reduce((acc: number, item: any) => {
-            return acc + (parseInt(item.cost) || 0);
+            return acc + (parseFloat(item.cost) || 0);
         }, 0);
         total += variosCost;
 

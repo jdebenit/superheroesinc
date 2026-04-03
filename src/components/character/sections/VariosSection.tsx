@@ -8,13 +8,13 @@ interface VariosSectionProps {
 export const VariosSection: React.FC<VariosSectionProps> = ({ varios }) => {
     if (!varios || !varios.items || varios.items.length === 0) return null;
 
-    const totalCost = varios.items.reduce((acc: number, item: any) => acc + (parseInt(item.cost) || 0), 0);
+    const totalCost = varios.items.reduce((acc: number, item: any) => acc + (parseFloat(item.cost) || 0), 0);
 
     return (
         <SheetSection
             title="Varios"
             className="varios"
-            cost={totalCost > 0 ? `(${totalCost} PCs)` : undefined}
+            cost={totalCost !== 0 ? `(${totalCost} PCs)` : undefined}
         >
             <div className="varios-container">
                 {varios.items.map((item: any, i: number) => (
@@ -22,7 +22,7 @@ export const VariosSection: React.FC<VariosSectionProps> = ({ varios }) => {
                         <div className="varios-description">
                             {item.description}
                         </div>
-                        {item.cost && parseInt(item.cost) !== 0 && (
+                        {item.cost && parseFloat(item.cost) !== 0 && (
                             <div className="varios-item-cost">
                                 {item.cost} PCs
                             </div>

@@ -341,56 +341,6 @@ export default function Step6_Details({ data, onChange, totalPCs, onShowHelp }: 
             </WizardSection>
 
             <WizardSection
-                title="Varios"
-                collapsible
-                defaultCollapsed={(data.varios?.items?.length ?? 0) === 0}
-                rightContent={
-                    (data.varios?.items?.length ?? 0) > 0 ? (
-                        <SectionHeaderBadge
-                            cost={data.varios?.items?.reduce((acc: number, item: any) => acc + (parseInt(item.cost) || 0), 0) || 0}
-                            label="PC"
-                            variant="default"
-                            className="text-white"
-                        />
-                    ) : undefined
-                }
-            >
-                <DynamicList
-                    items={data.varios?.items || []}
-                    onAdd={() => addItem('varios', { description: "Nuevo concepto", cost: 0 })}
-                    onRemove={(idx) => removeItem('varios', idx)}
-                    addButtonLabel="Añadir Item"
-                    color="#3b82f6"
-                    renderItem={(item, index) => (
-                        <WizardGrid
-                            columns="3fr 120px"
-                            headers={['Descripción', 'Coste']}
-                        >
-                            <WizardField
-                                type="textarea"
-                                label="Descripción"
-                                value={item.description || ''}
-                                onChange={(val: string) => updateItem('varios', index, 'description', val)}
-                                noMargin
-                                placeholder="Descripción del item..."
-                                hideLabelDesktop={true}
-                                className="step6-textarea-field"
-                            />
-                            <WizardField
-                                type="number"
-                                label="Coste"
-                                min="-200"
-                                value={item.cost || 0}
-                                onChange={(val: string) => updateItem('varios', index, 'cost', (parseInt(val) || 0).toString())}
-                                noMargin
-                                hideLabelDesktop={true}
-                            />
-                        </WizardGrid>
-                    )}
-                />
-            </WizardSection>
-
-            <WizardSection
                 title="Vehículos"
                 collapsible
                 defaultCollapsed={(data.vehicles?.items?.length ?? 0) === 0}
@@ -610,6 +560,57 @@ export default function Step6_Details({ data, onChange, totalPCs, onShowHelp }: 
                                 className="step6-margin-top"
                             />
                         </div>
+                    )}
+                />
+            </WizardSection>
+
+            <WizardSection
+                title="Varios"
+                collapsible
+                defaultCollapsed={(data.varios?.items?.length ?? 0) === 0}
+                rightContent={
+                    (data.varios?.items?.length ?? 0) > 0 ? (
+                        <SectionHeaderBadge
+                            cost={data.varios?.items?.reduce((acc: number, item: any) => acc + (parseFloat(item.cost) || 0), 0) || 0}
+                            label="PC"
+                            variant="default"
+                            className="text-white"
+                        />
+                    ) : undefined
+                }
+            >
+                <DynamicList
+                    items={data.varios?.items || []}
+                    onAdd={() => addItem('varios', { description: "Nuevo concepto", cost: 0 })}
+                    onRemove={(idx) => removeItem('varios', idx)}
+                    addButtonLabel="Añadir..."
+                    color="#3b82f6"
+                    renderItem={(item, index) => (
+                        <WizardGrid
+                            columns="3fr 120px"
+                            headers={['Descripción', 'Coste']}
+                        >
+                            <WizardField
+                                type="textarea"
+                                label="Descripción"
+                                value={item.description || ''}
+                                onChange={(val: string) => updateItem('varios', index, 'description', val)}
+                                noMargin
+                                placeholder="Descripción..."
+                                hideLabelDesktop={true}
+                                className="step6-textarea-field"
+                            />
+                            <WizardField
+                                type="number"
+                                label="Coste"
+                                min="-200"
+                                step="0.1"
+                                value={item.cost || 0}
+                                onChange={(val: string) => updateItem('varios', index, 'cost', val)}
+                                noMargin
+                                hideLabelDesktop={true}
+                            />
+                        </WizardGrid>
                     )}
                 />
             </WizardSection>

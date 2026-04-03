@@ -13,6 +13,7 @@ interface WizardFieldProps {
     style?: React.CSSProperties;
     min?: string | number;
     max?: string | number;
+    step?: string | number;
     noMargin?: boolean;
     inputWidth?: string;
     textAlign?: 'left' | 'center' | 'right';
@@ -32,6 +33,7 @@ export const WizardField: React.FC<WizardFieldProps> = ({
     style,
     min,
     max,
+    step,
     noMargin = false,
     inputWidth,
     textAlign = 'left',
@@ -47,6 +49,7 @@ export const WizardField: React.FC<WizardFieldProps> = ({
         className: `wizard-field-input ${error ? 'wizard-field-input-error' : ''}`,
         min,
         max,
+        step,
         style: {
             width: inputWidth,
             textAlign
