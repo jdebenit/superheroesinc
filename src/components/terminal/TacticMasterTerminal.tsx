@@ -562,8 +562,6 @@ export default function TacticMasterTerminal() {
         resetAllActions, resetStore, exportStore, reload 
     } = useTmtStore();
 
-    useEffect(() => { reload(); }, [reload]);
-
     // Character Sync from Viewer
     useEffect(() => {
         const channel = new BroadcastChannel('tmt_sync');

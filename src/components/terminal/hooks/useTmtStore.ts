@@ -215,12 +215,7 @@ export function pushCharacterToTmt(
 // ─────────────────────────────────────────────────────────────────────────────
 
 export function useTmtStore() {
-    const [store, setStore] = useState<TmtStore>(buildEmptyStore);
-
-    // Load on mount
-    useEffect(() => {
-        setStore(readFromStorage());
-    }, []);
+    const [store, setStore] = useState<TmtStore>(readFromStorage);
 
     // Listen for broadcast messages (e.g. from Character Viewer)
     useEffect(() => {
