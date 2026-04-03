@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import CharacterSheet from '../character/CharacterSheet';
 import { adaptWebCharacter } from '../../utils/characterAdapter';
+import { useJsonExport } from '../../hooks/useJsonExport';
 import './CharacterViewer.css';
 import Logger from '../../utils/Logger';
 
@@ -122,6 +123,10 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
 
     // Sort web characters alphabetically
     const sortedWebChars = [...webCharacters].sort((a, b) => a.data.name.localeCompare(b.data.name));
+
+    // JSON export using the same hook as CharacterSheet
+    const adaptedForExport = selectedCharacter ? adaptWebCharacter(selectedCharacter.data) : null;
+    const { downloadJson } = useJsonExport(adaptedForExport ?? {});
 
     return (
         <div className="viewer-layout">
@@ -306,6 +311,13 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
                             </button>
                             <button className="tpt-button" disabled={true}>
                                 🎯 Enviar a SHI TMT
+                            </button>
+                            <button
+                                onClick={downloadJson}
+                                className="tpt-button download-btn"
+                                title="Descargar ficha como JSON"
+                            >
+                                ⬇️ Descargar JSON
                             </button>
                         </div>
 

@@ -1,9 +1,9 @@
 import { useCallback } from 'react';
-import { APP_VERSIONS } from '../../../data/appVersions';
-import { calculateDiff } from '../../../utils/dataCleaner';
-import { initialCharacterState } from '../../../data/wizardConfig';
-import { calculateDerivedStats, formatDerivedStats } from '../../../utils/characterCalculations';
-import Logger from '../../../utils/Logger';
+import { APP_VERSIONS } from '../data/appVersions';
+import { calculateDiff } from '../utils/dataCleaner';
+import { initialCharacterState } from '../data/wizardConfig';
+import { calculateDerivedStats, formatDerivedStats } from '../utils/characterCalculations';
+import Logger from '../utils/Logger';
 
 /**
  * Custom hook for handling JSON export functionality

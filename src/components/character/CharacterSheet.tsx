@@ -2,7 +2,7 @@ import React from 'react';
 import './CharacterSheet.css';
 
 import { useCharacterSheetData } from './hooks/useCharacterSheetData';
-import { useJsonExport } from './hooks/useJsonExport';
+import { useJsonExport } from '../../hooks/useJsonExport';
 import { usePdfExport } from './hooks/usePdfExport';
 import { useModal } from './hooks/useModal';
 import { ActionButtons } from './common/ActionButtons';
