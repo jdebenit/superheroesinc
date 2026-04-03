@@ -7,8 +7,8 @@ export interface CharacterData {
     alias?: string;
     level?: number;
     origin?: { items?: Array<{ [key: string]: any }> };
-    combatstats: string[];
-    otherstats?: string[];
+    combatstats: string[] | Record<string, string>;
+    otherstats?: string[] | Record<string, string>;
     attributes: {
         values: {
             [key: string]: number;
@@ -154,18 +154,34 @@ export function useTerminalStats() {
         }
     }, []);
 
-    const loadCharacter = (data: CharacterData) => {
+    const loadCharacter = (data: any) => {
         if (!data.name || !data.combatstats || !data.attributes) {
             alert('❌ ERROR: El archivo no es un personaje válido');
             return;
         }
 
-        const healthStat = data.combatstats.find(stat => stat.includes('Puntos de Vida'));
-        const mentalBalanceStat = data.combatstats.find(stat => stat.includes('Equilibrio Mental'));
+        const getRawStat = (source: any, term: string): string | undefined => {
+            if (!source) return undefined;
+            if (Array.isArray(source)) {
+                return source.find(s => s.toLowerCase().includes(term.toLowerCase()));
+            }
+            // If it's an object, find key that matches term
+            const matchingKey = Object.keys(source).find(k => k.toLowerCase().includes(term.toLowerCase()));
+            if (matchingKey) {
+                return `${matchingKey}: ${source[matchingKey]}`;
+            }
+            return undefined;
+        };
+
+        const healthStat = getRawStat(data.combatstats, 'Puntos de Vida');
+        const mentalBalanceStat = getRawStat(data.combatstats, 'Equilibrio Mental');
 
         const maxHealth = healthStat ? parseInt(healthStat.split(':')[1]?.trim() || '0') : 0;
         const maxMentalBalance = mentalBalanceStat ? parseInt(mentalBalanceStat.split(':')[1]?.trim() || '0') : 0;
         const willpower = data.attributes.values.Voluntad || 0;
+
+        const unconsciousnessStat = getRawStat(data.otherstats, 'Inconsciencia');
+        const unconsciousnessPoints = unconsciousnessStat ? parseInt(unconsciousnessStat.split(':')[1]?.trim().split(' ')[0] || '0') : 0;
 
         setCharacter(data);
         setStats({
@@ -175,7 +191,7 @@ export function useTerminalStats() {
             currentMentalBalance: maxMentalBalance,
             willpower,
             usedWillpower: 0,
-            unconsciousnessPoints: (data.otherstats?.find(s => s.includes('Inconsciencia'))?.split(':')[1]?.trim().split(' ')[0]) ? parseInt(data.otherstats.find(s => s.includes('Inconsciencia'))!.split(':')[1].trim()) : 0
+            unconsciousnessPoints
         });
     };
 

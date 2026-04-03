@@ -5,8 +5,8 @@ import InitiativeCalculatorModal from './InitiativeCalculatorModal';
 import DamageRollModal from './DamageRollModal';
 
 interface OtherStatsPanelProps {
-    combatstats?: string[];
-    otherstats?: string[];
+    combatstats?: string[] | Record<string, string>;
+    otherstats?: string[] | Record<string, string>;
     background?: {
         prejudiceResistance?: number;
         [key: string]: any;
@@ -88,9 +88,20 @@ export default function OtherStatsPanel({ combatstats, otherstats, background }:
             // Fallback to otherstats
             if (otherstats) {
                 for (const term of stat.searchTerms) {
-                    const statString = otherstats.find(s =>
-                        s.toLowerCase().includes(term.toLowerCase())
-                    );
+                    let statString: string | undefined;
+                    
+                    if (Array.isArray(otherstats)) {
+                        statString = otherstats.find(s =>
+                            s.toLowerCase().includes(term.toLowerCase())
+                        );
+                    } else {
+                        const matchingKey = Object.keys(otherstats).find(k =>
+                            k.toLowerCase().includes(term.toLowerCase())
+                        );
+                        if (matchingKey) {
+                            statString = `${matchingKey}: ${otherstats[matchingKey]}`;
+                        }
+                    }
 
                     if (statString) {
                         const percentMatch = statString.match(/(\d+)%/);
@@ -103,30 +114,46 @@ export default function OtherStatsPanel({ combatstats, otherstats, background }:
         }
 
         // Handle combat and other sources
-        const sourceArray = stat.source === 'combat' ? combatstats : otherstats;
-        if (!sourceArray) return 0;
+        const source = stat.source === 'combat' ? combatstats : otherstats;
+        if (!source) return 0;
 
-        for (const term of stat.searchTerms) {
-            const statString = sourceArray.find(s =>
-                s.toLowerCase().includes(term.toLowerCase())
-            );
+        let statString: string | undefined;
 
-            if (statString) {
-                // If it is a dice roll stat (like strength mod), we want the full value part (e.g. "1d4" or "1d100+30")
-                if (stat.isDiceRoll) {
-                    // Extract part after colon
-                    const colonPart = statString.split(':')[1]?.trim();
-                    if (colonPart) return colonPart;
-                }
-
-                // Try to extract percentage first (e.g., "66%")
-                const percentMatch = statString.match(/(\d+)%/);
-                if (percentMatch) return parseInt(percentMatch[1]);
-
-                // Try to extract number after colon (e.g., "Iniciativa y Reflejos: 55")
-                const colonMatch = statString.split(':')[1]?.trim().match(/(\d+)/);
-                if (colonMatch) return parseInt(colonMatch[1]);
+        if (Array.isArray(source)) {
+            for (const term of stat.searchTerms) {
+                statString = source.find(s =>
+                    s.toLowerCase().includes(term.toLowerCase())
+                );
+                if (statString) break;
             }
+        } else {
+            // Object case
+            for (const term of stat.searchTerms) {
+                const matchingKey = Object.keys(source).find(k =>
+                    k.toLowerCase().includes(term.toLowerCase())
+                );
+                if (matchingKey) {
+                    statString = `${matchingKey}: ${source[matchingKey]}`;
+                    break;
+                }
+            }
+        }
+
+        if (statString) {
+            // If it is a dice roll stat (like strength mod), we want the full value part (e.g. "1d4" or "1d100+30")
+            if (stat.isDiceRoll) {
+                // Extract part after colon
+                const colonPart = statString.split(':')[1]?.trim();
+                if (colonPart) return colonPart;
+            }
+
+            // Try to extract percentage first (e.g., "66%")
+            const percentMatch = statString.match(/(\d+)%/);
+            if (percentMatch) return parseInt(percentMatch[1]);
+
+            // Try to extract number after colon (e.g., "Iniciativa y Reflejos: 55")
+            const colonMatch = statString.split(':')[1]?.trim().match(/(\d+)/);
+            if (colonMatch) return parseInt(colonMatch[1]);
         }
 
         return 0;
