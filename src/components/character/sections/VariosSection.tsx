@@ -16,14 +16,20 @@ export const VariosSection: React.FC<VariosSectionProps> = ({ varios }) => {
             className="varios"
             cost={totalCost > 0 ? `(${totalCost} PCs)` : undefined}
         >
-            <ul className="varios-list">
+            <div className="varios-container">
                 {varios.items.map((item: any, i: number) => (
-                    <li key={i} className="varios-item">
-                        <span>{item.description}</span>
-                        {item.cost > 0 && <span className="item-cost" style={{ marginLeft: '6px', color: '#666', fontSize: '0.85em' }}>({item.cost} PCs)</span>}
-                    </li>
+                    <div key={i} className="varios-item-block">
+                        <div className="varios-description">
+                            {item.description}
+                        </div>
+                        {item.cost && parseInt(item.cost) !== 0 && (
+                            <div className="varios-item-cost">
+                                {item.cost} PCs
+                            </div>
+                        )}
+                    </div>
                 ))}
-            </ul>
+            </div>
         </SheetSection>
     );
 };
