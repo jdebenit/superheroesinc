@@ -339,7 +339,18 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
                         </div>
                         
                         <div className="character-summary">
-                            <h4 className="summary-title">Resumen de Ficha</h4>
+                            <div className="summary-header">
+                                <h4 className="summary-title">Resumen de Ficha</h4>
+                                <CharacterSheet 
+                                    character={adaptWebCharacter(selectedCharacter.data)} 
+                                    totalPCs={selectedCharacter.data.totalCost} 
+                                    renderTrigger={(open) => (
+                                        <button onClick={open} className="expand-summary-btn" title="Ver ficha completa">
+                                            🔍 Ficha Completa
+                                        </button>
+                                    )}
+                                />
+                            </div>
                             <div className="summary-grid">
                                 <div>
                                     <strong>Nivel:</strong> {selectedCharacter.data.level || 1}
@@ -402,16 +413,6 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
                             >
                                 🛠️ Editar en Wizard
                             </button>
-                            
-                            <CharacterSheet 
-                                character={adaptWebCharacter(selectedCharacter.data)} 
-                                totalPCs={selectedCharacter.data.totalCost} 
-                                renderTrigger={(open) => (
-                                    <button onClick={open} className="tmt-header-btn" style={{ background: '#f3f4f6', color: '#374151' }}>
-                                        📋 Ficha Detallada
-                                    </button>
-                                )}
-                            />
                         </div>
                     </div>
                 ) : (
