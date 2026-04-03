@@ -212,11 +212,14 @@ export default function TacticPlayerTerminal() {
     return (
         <div className="tactic-player-terminal">
             <TerminalHeader
+                title="SHI Tactic Player Terminal"
+                version={APP_VERSIONS.TACTIC_PLAYER_TERMINAL}
                 character={character}
                 onImport={handleImportWrapper}
                 onExport={handleExportJSON}
                 onReset={resetData}
                 adaptedCharacter={character ? adaptWebCharacter(character) : null}
+                showCharacterSheet={true}
             />
 
             {character ? (

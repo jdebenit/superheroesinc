@@ -4,6 +4,9 @@ import { APP_VERSIONS } from '../../data/appVersions';
 import Modal from './components/Modal';
 import HistoryModal from './components/HistoryModal';
 import EditStatModal from './components/EditStatModal';
+import TerminalHeader from './components/TerminalHeader';
+import MiniStatCard from './components/MiniStatCard';
+import EmptyState from './components/EmptyState';
 import CharacterSheet from '../character/CharacterSheet';
 import { 
     useTmtStore, 
@@ -27,11 +30,6 @@ function initials(name: string): string {
         .slice(0, 2)
         .map((w) => w[0]?.toUpperCase() ?? '')
         .join('');
-}
-
-function pct(current: number, max: number): number {
-    if (max <= 0) return 0;
-    return Math.max(0, Math.min(100, Math.round((current / max) * 100)));
 }
 
 function charName(entry: TmtCharacterEntry): string {
@@ -158,8 +156,6 @@ interface PersonajesScreenProps {
 }
 
 function PersonajesScreen({ characters, groups, onImport, onRemove, onToggleRole, onToggleGroup, onAddGroup, onDeleteGroup }: PersonajesScreenProps) {
-    const pjInputRef = useRef<HTMLInputElement>(null);
-    const pnjInputRef = useRef<HTMLInputElement>(null);
     const [selectedGroupIds, setSelectedGroupIds] = useState<string[]>([]);
     const [showGroupManager, setShowGroupManager] = useState(false);
 
@@ -181,7 +177,7 @@ function PersonajesScreen({ characters, groups, onImport, onRemove, onToggleRole
     };
 
     return (
-        <>
+        <div className="tmt-screen">
             <div className="tmt-screen-banner">
                 <span className="tmt-screen-banner-icon">🎭</span>
                 <div className="tmt-screen-banner-text">
@@ -217,25 +213,33 @@ function PersonajesScreen({ characters, groups, onImport, onRemove, onToggleRole
             <div className="tmt-section">
                 <div className="tmt-section-header">
                     <span className="tmt-section-title">🧑‍🦸 PJs ({pjs.length})</span>
-                    <button className="tmt-add-btn" onClick={() => pjInputRef.current?.click()}>📂 Importar</button>
-                    <input ref={pjInputRef} type="file" multiple hidden onChange={handleFile('pj')} />
+                    <button className="tmt-add-btn" onClick={() => (document.getElementById('pj-import-input') as HTMLInputElement).click()}>📂 Importar</button>
+                    <input id="pj-import-input" type="file" multiple hidden onChange={handleFile('pj')} />
                 </div>
                 <div className="tmt-entity-list">
-                    {pjs.map(e => <EntityRow key={e.id} entry={e} groups={groups} onRemove={onRemove} onToggleRole={onToggleRole} onToggleGroup={onToggleGroup} />)}
+                    {pjs.length === 0 ? (
+                        <p className="tmt-empty-msg">No hay PJs cargados.</p>
+                    ) : (
+                        pjs.map(e => <EntityRow key={e.id} entry={e} groups={groups} onRemove={onRemove} onToggleRole={onToggleRole} onToggleGroup={onToggleGroup} />)
+                    )}
                 </div>
             </div>
 
             <div className="tmt-section">
                 <div className="tmt-section-header">
                     <span className="tmt-section-title">👾 PNJs ({pnjs.length})</span>
-                    <button className="tmt-add-btn tmt-add-btn--npc" onClick={() => pnjInputRef.current?.click()}>📂 Importar</button>
-                    <input ref={pnjInputRef} type="file" multiple hidden onChange={handleFile('pnj')} />
+                    <button className="tmt-add-btn tmt-add-btn--npc" onClick={() => (document.getElementById('pnj-import-input') as HTMLInputElement).click()}>📂 Importar</button>
+                    <input id="pnj-import-input" type="file" multiple hidden onChange={handleFile('pnj')} />
                 </div>
                 <div className="tmt-entity-list">
-                    {pnjs.map(e => <EntityRow key={e.id} entry={e} groups={groups} onRemove={onRemove} onToggleRole={onToggleRole} onToggleGroup={onToggleGroup} />)}
+                    {pnjs.length === 0 ? (
+                        <p className="tmt-empty-msg">No hay PNJs cargados.</p>
+                    ) : (
+                        pnjs.map(e => <EntityRow key={e.id} entry={e} groups={groups} onRemove={onRemove} onToggleRole={onToggleRole} onToggleGroup={onToggleGroup} />)
+                    )}
                 </div>
             </div>
-        </>
+        </div>
     );
 }
 
@@ -306,7 +310,7 @@ function CombateScreen({
     };
 
     return (
-        <>
+        <div className="tmt-screen">
             <div className="tmt-screen-banner">
                 <span className="tmt-screen-banner-icon">⚔️</span>
                 <div className="tmt-screen-banner-text">
@@ -321,7 +325,7 @@ function CombateScreen({
                         <span className="tmt-section-title">Filtrar por Grupo</span>
                         <button className="tmt-header-btn" onClick={() => onUpdateActiveGroups([])} style={{ fontSize: '0.7rem', padding: '0.2rem 0.6rem' }}>Limpiar Filtros</button>
                     </div>
-                    <div className="tmt-groups-filter-bar" style={{ padding: '0.75rem 1.5rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                    <div className="tmt-groups-filter-bar">
                         {groups.map(g => {
                             const active = activeGroupIds.includes(g.id);
                             return (
@@ -331,14 +335,7 @@ function CombateScreen({
                                     onClick={() => toggleGroup(g.id)}
                                     style={{ 
                                         backgroundColor: active ? (g.color || '#3b82f6') : '#f1f5f9',
-                                        color: active ? '#fff' : '#64748b',
-                                        border: 'none',
-                                        padding: '0.3rem 0.8rem',
-                                        borderRadius: '20px',
-                                        fontSize: '0.8rem',
-                                        fontWeight: '600',
-                                        cursor: 'pointer',
-                                        transition: 'all 0.2s'
+                                        color: active ? '#fff' : '#64748b'
                                     }}
                                 >
                                     {g.name}
@@ -351,7 +348,7 @@ function CombateScreen({
 
             <div className="tmt-section">
                 <div className="tmt-section-header">
-                    <span className="tmt-section-title">Tracker</span>
+                    <span className="tmt-section-title">Tracker de Iniciativa</span>
                     <div className="tmt-initiative-actions-group">
                         <button className="tmt-header-btn tmt-btn-next-round" onClick={() => { onResetAllActions(); setCurrentTurn(0); }}>🔄 Sig. Turno</button>
                         <button className="tmt-header-btn tmt-btn-calculate" onClick={() => setShowConfirmModal(true)}>🎲 Iniciativas</button>
@@ -363,8 +360,8 @@ function CombateScreen({
                     {sorted.map((e, i) => (
                         <div key={e.id} className={`tmt-initiative-row${i === currentTurn ? ' current' : ''}`}>
                             <span className="tmt-initiative-rank">{i + 1}</span>
-                            <div className="tmt-initiative-main-info" style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                                <div style={{ minWidth: '150px' }}>
+                            <div className="tmt-initiative-main-info">
+                                <div>
                                     <div className="tmt-initiative-name">{charName(e)}</div>
                                     <div className="tmt-initiative-actions-tracker">
                                         {Array.from({ length: getAcciones(e) }).map((_, idx) => (
@@ -390,14 +387,6 @@ function CombateScreen({
                                         const roll = Math.floor(Math.random() * 100) + 1;
                                         onUpdateInitiative(e.id, getBaseIniciativa(e) + roll, roll);
                                     }}
-                                    style={{
-                                        background: 'transparent',
-                                        border: 'none',
-                                        cursor: 'pointer',
-                                        fontSize: '0.9rem',
-                                        padding: '0 4px',
-                                        transition: 'transform 0.1s'
-                                    }}
                                 >
                                     🎲
                                 </button>
@@ -406,11 +395,12 @@ function CombateScreen({
                             </div>
                         </div>
                     ))}
+                    {sorted.length === 0 && <p style={{ textAlign: 'center', padding: '2rem', color: '#94a3b8' }}>No hay combatientes en los grupos seleccionados.</p>}
                 </div>
             </div>
 
             <div className="tmt-section">
-                <div className="tmt-section-header"><span className="tmt-section-title">Status Cards</span></div>
+                <div className="tmt-section-header"><span className="tmt-section-title">Tarjetas de Combate</span></div>
                 <div className="tmt-combat-grid">
                     {sorted.map(e => (
                         <div key={e.id} className="tmt-combat-card">
@@ -419,16 +409,22 @@ function CombateScreen({
                                 <div><p className="tmt-combat-card-name">{charName(e)}</p><span className={`tmt-combat-card-badge ${e.role}`}>{e.role.toUpperCase()}</span></div>
                             </div>
                             <div className="tmt-combat-card-body">
-                                <div className="tmt-stat-row clickable" onClick={() => openEdit(e.id, 'health')} onDoubleClick={() => openHistory(e.id, 'health')}>
-                                    <span className="tmt-stat-row-label">PV</span>
-                                    <div className="tmt-stat-bar-wrap"><div className="tmt-stat-bar-fill health" style={{ width: `${pct(e.currentHealth || 0, e.maxHealth || 1)}%` }} /></div>
-                                    <span className="tmt-stat-row-value">{e.currentHealth}/{e.maxHealth}</span>
-                                </div>
-                                <div className="tmt-stat-row clickable" onClick={() => openEdit(e.id, 'mental')} onDoubleClick={() => openHistory(e.id, 'mental')}>
-                                    <span className="tmt-stat-row-label">EQM</span>
-                                    <div className="tmt-stat-bar-wrap"><div className="tmt-stat-bar-fill mental" style={{ width: `${pct(e.currentMental || 0, e.maxMental || 1)}%` }} /></div>
-                                    <span className="tmt-stat-row-value">{e.currentMental}/{e.maxMental}</span>
-                                </div>
+                                <MiniStatCard 
+                                    label="PVs"
+                                    max={e.maxHealth || 1}
+                                    current={e.currentHealth || 0}
+                                    type="health"
+                                    onEdit={() => openEdit(e.id, 'health')}
+                                    onViewHistory={() => openHistory(e.id, 'health')}
+                                />
+                                <MiniStatCard 
+                                    label="EQM"
+                                    max={e.maxMental || 1}
+                                    current={e.currentMental || 0}
+                                    type="mental"
+                                    onEdit={() => openEdit(e.id, 'mental')}
+                                    onViewHistory={() => openHistory(e.id, 'mental')}
+                                />
                             </div>
                         </div>
                     ))}
@@ -459,7 +455,7 @@ function CombateScreen({
                     onDeleteEntry={(entry) => onDeleteHistoryEntry(selectedChar.id, entry)}
                 />
             )}
-        </>
+        </div>
     );
 }
 
@@ -473,22 +469,52 @@ export default function TacticMasterTerminal() {
         addCharacter, removeCharacter, updateCharacterRole, toggleCharacterGroup, 
         addGroup, deleteGroup, updateCharacterInitiative, updateCharacterUsedActions, 
         updateCharacterStat, updateActiveCombatGroups, deleteCharacterHistoryEntry, 
-        resetAllActions, reload 
+        resetAllActions, resetStore, exportStore, reload 
     } = useTmtStore();
 
     useEffect(() => { reload(); }, [reload]);
 
+    // Character Sync from Viewer
+    useEffect(() => {
+        const channel = new BroadcastChannel('tmt_sync');
+        channel.onmessage = (event) => {
+            if (event.data === 'reload') reload();
+        };
+        return () => channel.close();
+    }, [reload]);
+
+    const handleImportWrapper = async (event: React.ChangeEvent<HTMLInputElement>) => {
+        const files = Array.from(event.target.files ?? []);
+        event.target.value = '';
+        for (const file of files) {
+            try {
+                const text = await file.text();
+                const parsed = JSON.parse(text);
+                const data = parsed?.character ?? parsed?.characterData ?? parsed;
+                if (data?.name) addCharacter(data, 'pnj');
+            } catch (err) { Logger.error('Error importing character', err); }
+        }
+    };
+
     return (
-        <div className="tmt-container">
-            <header className="tmt-header">
-                <div className="tmt-header-left"><h1>SHI Tactic Master Terminal</h1><span className="tmt-version">v{APP_VERSIONS.TACTIC_MASTER_TERMINAL}</span></div>
+        <div className="tmt-container tactic-player-terminal">
+            <TerminalHeader
+                title="SHI Tactic Master Terminal"
+                version={APP_VERSIONS.TACTIC_MASTER_TERMINAL}
+                onImport={handleImportWrapper}
+                onExport={exportStore}
+                onReset={resetStore}
+                showCharacterSheet={false}
+            />
+
+            <div className="tmt-navbar-wrapper">
                 <div className="tmt-nav">
                     <button className={`tmt-nav-btn ${screen === 'personajes' ? 'active' : ''}`} onClick={() => setScreen('personajes')}>🎭 Personajes</button>
                     <button className={`tmt-nav-btn ${screen === 'combate' ? 'active' : ''}`} onClick={() => setScreen('combate')}>⚔️ Combate</button>
                 </div>
-            </header>
+            </div>
 
-            <main className="tmt-main">
+            <main className="tmt-main-content">
                 {screen === 'personajes' ? (
                     <PersonajesScreen 
                         characters={characters} groups={groups} onImport={addCharacter} onRemove={removeCharacter}
