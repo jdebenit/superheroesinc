@@ -9,11 +9,11 @@ import TerminalHeader from './components/TerminalHeader';
 import MiniStatCard from './components/MiniStatCard';
 import EmptyState from './components/EmptyState';
 import CharacterSheet from '../character/CharacterSheet';
-import { 
-    useTmtStore, 
-    type TmtCharacterEntry, 
+import {
+    useTmtStore,
+    type TmtCharacterEntry,
     type TmtGroup,
-    type HistoryEntry 
+    type HistoryEntry
 } from './hooks/useTmtStore';
 import Logger from '../../utils/Logger';
 
@@ -120,9 +120,9 @@ function EntityRow({ entry, groups, onRemove, onToggleRole, onToggleGroup }: Ent
             </div>
             <div className="tmt-entity-actions">
                 <button className="tmt-icon-btn" title="Grupos" onClick={() => setShowGroupModal(true)}>🏷️</button>
-                <button 
-                    className="tmt-icon-btn" 
-                    title="Abrir en SHI TPT" 
+                <button
+                    className="tmt-icon-btn"
+                    title="Abrir en SHI TPT"
                     onClick={() => {
                         try {
                             localStorage.setItem('shi_tpt_character', JSON.stringify(entry.characterData));
@@ -134,8 +134,8 @@ function EntityRow({ entry, groups, onRemove, onToggleRole, onToggleGroup }: Ent
                 >
                     🎮
                 </button>
-                <CharacterSheet 
-                    character={entry.characterData} 
+                <CharacterSheet
+                    character={entry.characterData}
                     renderTrigger={(open) => (
                         <button className="tmt-icon-btn" title="Ficha Detallada" onClick={open}>
                             📋
@@ -222,9 +222,9 @@ function PersonajesScreen({ characters, groups, onImport, onRemove, onToggleRole
                     <div className="tmt-group-manager-content">
                         <div className="tmt-group-add-form">
                             <div className="tmt-input-group">
-                                <input 
-                                    type="text" 
-                                    placeholder="Nombre del grupo..." 
+                                <input
+                                    type="text"
+                                    placeholder="Nombre del grupo..."
                                     value={newGroupName}
                                     onChange={(e) => setNewGroupName(e.target.value)}
                                     onKeyPress={(e) => {
@@ -234,13 +234,13 @@ function PersonajesScreen({ characters, groups, onImport, onRemove, onToggleRole
                                         }
                                     }}
                                 />
-                                <input 
-                                    type="color" 
+                                <input
+                                    type="color"
                                     value={newGroupColor}
                                     onChange={(e) => setNewGroupColor(e.target.value)}
                                     className="tmt-color-picker"
                                 />
-                                <button 
+                                <button
                                     className="tmt-add-btn"
                                     onClick={() => {
                                         if (newGroupName.trim()) {
@@ -254,7 +254,7 @@ function PersonajesScreen({ characters, groups, onImport, onRemove, onToggleRole
                             </div>
                             <div className="tmt-preset-colors">
                                 {PRESET_COLORS.map(c => (
-                                    <button 
+                                    <button
                                         key={c}
                                         className={`tmt-preset-color-btn ${newGroupColor === c ? 'active' : ''}`}
                                         style={{ backgroundColor: c }}
@@ -288,14 +288,14 @@ function PersonajesScreen({ characters, groups, onImport, onRemove, onToggleRole
                         {groups.map(g => {
                             const active = selectedGroupIds.includes(g.id);
                             return (
-                                <button 
-                                    key={g.id} 
+                                <button
+                                    key={g.id}
                                     className={`tmt-group-filter-tag ${active ? 'active' : ''}`}
                                     onClick={() => {
                                         if (active) setSelectedGroupIds(prev => prev.filter(id => id !== g.id));
                                         else setSelectedGroupIds(prev => [...prev, g.id]);
                                     }}
-                                    style={{ 
+                                    style={{
                                         backgroundColor: active ? (g.color || '#3b82f6') : '#f1f5f9',
                                         color: active ? '#fff' : '#64748b'
                                     }}
@@ -311,7 +311,7 @@ function PersonajesScreen({ characters, groups, onImport, onRemove, onToggleRole
             <div className="tmt-section">
                 <div className="tmt-section-header">
                     <span className="tmt-section-title">🧑‍🦸 PJs ({pjs.length})</span>
-                    <button className="tmt-add-btn" onClick={() => (document.getElementById('pj-import-input') as HTMLInputElement).click()}>📂 Importar</button>
+                    <button className="tmt-add-btn" onClick={() => (document.getElementById('pj-import-input') as HTMLInputElement).click()}>👤 Cargar Personajes</button>
                     <input id="pj-import-input" type="file" multiple hidden onChange={handleFile('pj')} />
                 </div>
                 <div className="tmt-entity-list">
@@ -326,7 +326,7 @@ function PersonajesScreen({ characters, groups, onImport, onRemove, onToggleRole
             <div className="tmt-section">
                 <div className="tmt-section-header">
                     <span className="tmt-section-title">👾 PNJs ({pnjs.length})</span>
-                    <button className="tmt-add-btn tmt-add-btn--npc" onClick={() => (document.getElementById('pnj-import-input') as HTMLInputElement).click()}>📂 Importar</button>
+                    <button className="tmt-add-btn tmt-add-btn--npc" onClick={() => (document.getElementById('pnj-import-input') as HTMLInputElement).click()}>👤 Cargar Personajes</button>
                     <input id="pnj-import-input" type="file" multiple hidden onChange={handleFile('pnj')} />
                 </div>
                 <div className="tmt-entity-list">
@@ -356,16 +356,16 @@ interface CombateScreenProps {
     onResetAllActions: () => void;
 }
 
-function CombateScreen({ 
-    characters, 
+function CombateScreen({
+    characters,
     groups,
     activeGroupIds,
     onUpdateActiveGroups,
-    onUpdateInitiative, 
-    onUpdateUsedActions, 
-    onUpdateStat, 
-    onDeleteHistoryEntry, 
-    onResetAllActions 
+    onUpdateInitiative,
+    onUpdateUsedActions,
+    onUpdateStat,
+    onDeleteHistoryEntry,
+    onResetAllActions
 }: CombateScreenProps) {
     const [currentTurn, setCurrentTurn] = useState(0);
     const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -427,11 +427,11 @@ function CombateScreen({
                         {groups.map(g => {
                             const active = activeGroupIds.includes(g.id);
                             return (
-                                <button 
-                                    key={g.id} 
+                                <button
+                                    key={g.id}
                                     className={`tmt-group-filter-tag ${active ? 'active' : ''}`}
                                     onClick={() => toggleGroup(g.id)}
-                                    style={{ 
+                                    style={{
                                         backgroundColor: active ? (g.color || '#3b82f6') : '#f1f5f9',
                                         color: active ? '#fff' : '#64748b'
                                     }}
@@ -478,8 +478,8 @@ function CombateScreen({
                             </div>
                             <div className="tmt-initiative-edit-wrap">
                                 {e.roll && <span className="tmt-initiative-breakdown">({getBaseIniciativa(e)} + {e.roll})</span>}
-                                <button 
-                                    className="tmt-dice-btn" 
+                                <button
+                                    className="tmt-dice-btn"
                                     title="Lanzar iniciativa individual"
                                     onClick={() => {
                                         const roll = Math.floor(Math.random() * 100) + 1;
@@ -507,7 +507,7 @@ function CombateScreen({
                                 <div><p className="tmt-combat-card-name">{charName(e)}</p><span className={`tmt-combat-card-badge ${e.role}`}>{e.role.toUpperCase()}</span></div>
                             </div>
                             <div className="tmt-combat-card-body">
-                                <MiniStatCard 
+                                <MiniStatCard
                                     label="PVs"
                                     max={e.maxHealth || 1}
                                     current={e.currentHealth || 0}
@@ -515,7 +515,7 @@ function CombateScreen({
                                     onEdit={() => openEdit(e.id, 'health')}
                                     onViewHistory={() => openHistory(e.id, 'health')}
                                 />
-                                <MiniStatCard 
+                                <MiniStatCard
                                     label="EQM"
                                     max={e.maxMental || 1}
                                     current={e.currentMental || 0}
@@ -538,8 +538,8 @@ function CombateScreen({
             </Modal>
 
             {editModal.isOpen && selectedChar && (
-                <EditStatModal 
-                    isOpen={editModal.isOpen} onClose={() => setEditModal(m => ({ ...m, isOpen: false }))} 
+                <EditStatModal
+                    isOpen={editModal.isOpen} onClose={() => setEditModal(m => ({ ...m, isOpen: false }))}
                     title={editModal.type === 'health' ? 'Puntos de Vida' : 'Equilibrio Mental'}
                     currentValue={editModal.type === 'health' ? (selectedChar.currentHealth || 0) : (selectedChar.currentMental || 0)}
                     changeValue={changeVal} notes={notes} onChangeValueChange={setChangeVal} onNotesChange={setNotes} onApply={handleApply}
@@ -547,7 +547,7 @@ function CombateScreen({
             )}
 
             {historyModal.isOpen && selectedChar && (
-                <HistoryModal 
+                <HistoryModal
                     show={historyModal.isOpen} onClose={() => setHistoryModal(m => ({ ...m, isOpen: false }))}
                     type={historyModal.type} history={selectedChar.history || []}
                     onDeleteEntry={(entry) => onDeleteHistoryEntry(selectedChar.id, entry)}
@@ -563,12 +563,12 @@ function CombateScreen({
 export default function TacticMasterTerminal() {
     const [screen, setScreen] = useState<Screen>('personajes');
     const [showResetModal, setShowResetModal] = useState(false);
-    const { 
-        store, characters, groups, 
-        addCharacter, removeCharacter, updateCharacterRole, toggleCharacterGroup, 
-        addGroup, deleteGroup, updateCharacterInitiative, updateCharacterUsedActions, 
-        updateCharacterStat, updateActiveCombatGroups, deleteCharacterHistoryEntry, 
-        resetAllActions, resetStore, exportStore, reload 
+    const {
+        store, characters, groups,
+        addCharacter, removeCharacter, updateCharacterRole, toggleCharacterGroup,
+        addGroup, deleteGroup, updateCharacterInitiative, updateCharacterUsedActions,
+        updateCharacterStat, updateActiveCombatGroups, deleteCharacterHistoryEntry,
+        resetAllActions, resetStore, exportStore, reload
     } = useTmtStore();
 
     // Character Sync from Viewer
@@ -594,12 +594,12 @@ export default function TacticMasterTerminal() {
     };
 
     return (
-        <div className="tmt-container tactic-player-terminal">
+        <div className="tactic-terminal">
             <TerminalHeader
                 title="SHI Tactic Master Terminal"
                 version={APP_VERSIONS.TACTIC_MASTER_TERMINAL}
                 onImport={handleImportWrapper}
-                onImportCharacter={() => {}}
+                onImportCharacter={() => { }}
                 onExport={exportStore}
                 onReset={() => setShowResetModal(true)}
                 showCharacterSheet={false}
@@ -614,20 +614,20 @@ export default function TacticMasterTerminal() {
 
             <main className="tmt-main-content">
                 {screen === 'personajes' ? (
-                    <PersonajesScreen 
+                    <PersonajesScreen
                         characters={characters} groups={groups} onImport={addCharacter} onRemove={removeCharacter}
                         onToggleRole={updateCharacterRole} onToggleGroup={toggleCharacterGroup} onAddGroup={addGroup} onDeleteGroup={deleteGroup}
                     />
                 ) : (
-                    <CombateScreen 
+                    <CombateScreen
                         characters={characters}
                         groups={groups}
                         activeGroupIds={store.activeCombatGroupIds || []}
                         onUpdateActiveGroups={updateActiveCombatGroups}
                         onUpdateInitiative={updateCharacterInitiative}
-                        onUpdateUsedActions={updateCharacterUsedActions} 
+                        onUpdateUsedActions={updateCharacterUsedActions}
                         onUpdateStat={updateCharacterStat}
-                        onDeleteHistoryEntry={deleteCharacterHistoryEntry} 
+                        onDeleteHistoryEntry={deleteCharacterHistoryEntry}
                         onResetAllActions={resetAllActions}
                     />
                 )}
@@ -640,14 +640,14 @@ export default function TacticMasterTerminal() {
                         Esta acción borrará todos los personajes (PJs/PNJs), grupos y el estado de combate actual.
                     </p>
                     <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
-                        <button 
-                            className="terminal-btn-secondary" 
+                        <button
+                            className="terminal-btn-secondary"
                             onClick={() => setShowResetModal(false)}
                         >
                             Cancelar
                         </button>
-                        <button 
-                            className="terminal-btn-danger" 
+                        <button
+                            className="terminal-btn-danger"
                             onClick={() => {
                                 resetStore();
                                 setShowResetModal(false);

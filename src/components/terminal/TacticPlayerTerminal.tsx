@@ -222,7 +222,7 @@ export default function TacticPlayerTerminal() {
     };
 
     return (
-        <div className="tactic-player-terminal">
+        <div className="tactic-terminal">
             <TerminalHeader
                 title="SHI Tactic Player Terminal"
                 version={APP_VERSIONS.TACTIC_PLAYER_TERMINAL}
@@ -312,9 +312,9 @@ export default function TacticPlayerTerminal() {
                         background={character.background}
                     />
 
-                    <PowersPanel 
-                        powers={character.powers} 
-                        attributes={character.attributes.values} 
+                    <PowersPanel
+                        powers={character.powers}
+                        attributes={character.attributes.values}
                     />
 
                     {(character.skills?.generalItems || character.skills?.specialItems) && (
@@ -396,14 +396,14 @@ export default function TacticPlayerTerminal() {
                         Esta acción borrará la ficha, estadísticas, notas e historial permanentemente.
                     </p>
                     <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
-                        <button 
-                            className="terminal-btn-secondary" 
+                        <button
+                            className="terminal-btn-secondary"
                             onClick={() => setShowResetModal(false)}
                         >
                             Cancelar
                         </button>
-                        <button 
-                            className="terminal-btn-danger" 
+                        <button
+                            className="terminal-btn-danger"
                             onClick={resetData}
                         >
                             Resetear Todo

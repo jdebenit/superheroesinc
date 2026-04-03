@@ -83,6 +83,36 @@ function buildEmptyStore(): TmtStore {
     };
 }
 
+function extractVitals(characterData: any) {
+    const combatStats = characterData?.combatstats;
+    let maxH = 0;
+    let maxM = 0;
+
+    if (Array.isArray(combatStats)) {
+        // Old format: ["Label: Value", ...]
+        const healthLine = combatStats.find((s: any) => typeof s === 'string' && (s.includes('Puntos de Vida') || s.includes('PV')));
+        const mentalLine = combatStats.find((s: any) => typeof s === 'string' && (s.includes('Equilibrio Mental') || s.includes('EQM')));
+        
+        maxH = healthLine ? parseInt(healthLine.split(':')[1]?.trim()) : 0;
+        maxM = mentalLine ? parseInt(mentalLine.split(':')[1]?.trim()) : 0;
+    } else if (typeof combatStats === 'object' && combatStats !== null) {
+        // New format: { "Label": "Value", ... }
+        maxH = parseInt(combatStats['Puntos de Vida'] || combatStats['PV']) || 0;
+        maxM = parseInt(combatStats['Equilibrio Mental'] || combatStats['EQM']) || 0;
+    }
+
+    // Fallbacks if not found (basic calculation)
+    if (maxH === 0) {
+        const con = characterData?.attributes?.values?.Constitución || 0;
+        maxH = con > 0 ? (con <= 100 ? Math.floor(con/2) : con - 45) : 0;
+    }
+    if (maxM === 0) {
+        maxM = characterData?.attributes?.values?.Inteligencia || 0;
+    }
+
+    return { maxH, maxM };
+}
+
 function readFromStorage(): TmtStore {
     try {
         const raw = localStorage.getItem(TMT_STORAGE_KEY);
@@ -107,16 +137,12 @@ function readFromStorage(): TmtStore {
                 history: Array.isArray(c.history) ? c.history : []
             };
 
-            // Initialize PV/EQM if missing
-            if (typeof entry.currentHealth === 'undefined') {
-                const combatStats = entry.characterData?.combatstats;
-                if (Array.isArray(combatStats)) {
-                    const healthLine = combatStats.find((s: any) => typeof s === 'string' && s.includes('Puntos de Vida'));
-                    const mentalLine = combatStats.find((s: any) => typeof s === 'string' && s.includes('Equilibrio Mental'));
-                    
-                    const maxH = healthLine ? parseInt(healthLine.split(':')[1]?.trim()) : 0;
-                    const maxM = mentalLine ? parseInt(mentalLine.split(':')[1]?.trim()) : 0;
-
+            // Initialize PV/EQM if missing or failed to detect (0/0)
+            if (typeof entry.currentHealth === 'undefined' || (entry.maxHealth === 0 && entry.maxMental === 0)) {
+                const { maxH, maxM } = extractVitals(entry.characterData);
+                
+                // Only overwrite if we actually found something better than 0/0
+                if (maxH !== 0 || maxM !== 0) {
                     entry.maxHealth = maxH;
                     entry.currentHealth = maxH;
                     entry.maxMental = maxM;
@@ -186,18 +212,11 @@ export function pushCharacterToTmt(
     };
 
     // Auto-detect max stats for the new entry
-    if (Array.isArray(characterData.combatstats)) {
-        const healthLine = characterData.combatstats.find((s: any) => typeof s === 'string' && s.includes('Puntos de Vida'));
-        const mentalLine = characterData.combatstats.find((s: any) => typeof s === 'string' && s.includes('Equilibrio Mental'));
-        
-        const maxH = healthLine ? parseInt(healthLine.split(':')[1]?.trim()) : 0;
-        const maxM = mentalLine ? parseInt(mentalLine.split(':')[1]?.trim()) : 0;
-
-        entry.maxHealth = maxH;
-        entry.currentHealth = maxH;
-        entry.maxMental = maxM;
-        entry.currentMental = maxM;
-    }
+    const { maxH, maxM } = extractVitals(characterData);
+    entry.maxHealth = maxH;
+    entry.currentHealth = maxH;
+    entry.maxMental = maxM;
+    entry.currentMental = maxM;
 
     if (existingIdx >= 0) {
         store.characters[existingIdx] = entry;
