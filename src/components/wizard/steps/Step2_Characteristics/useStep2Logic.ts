@@ -208,7 +208,7 @@ export function useStep2Logic(data: any, onChange: (updates: any) => void) {
         const hasPowerMod = characteristics[charId].powerMod > 0;
         const limits = {
             min: defaultLimits.min,
-            max: hasPowerMod ? 200 : defaultLimits.max
+            max: (hasPowerMod || unlockManualMod) ? 200 : defaultLimits.max
         };
 
         let clampedValue = Math.max(0, Math.min(limits.max, numValue));

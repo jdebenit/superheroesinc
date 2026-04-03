@@ -118,9 +118,10 @@ export default function Step2_Characteristics({ data, onChange, onShowHelp }: St
                         // Limit Override Logic in Render
                         const defaultLimits = calculateLimits(origins, char.id);
                         const hasPowerMod = c.powerMod > 0;
+                        const unlockedLimit = hasPowerMod || unlockManualMod;
                         const charLimits = {
                             min: defaultLimits.min,
-                            max: hasPowerMod ? 200 : defaultLimits.max
+                            max: unlockedLimit ? 200 : defaultLimits.max
                         };
 
                         return (
@@ -140,8 +141,8 @@ export default function Step2_Characteristics({ data, onChange, onShowHelp }: St
                                         </div>
                                         <div className="step2-char-limits">
                                             <div style={{ color: '#dc2626' }}>Min: {charLimits.min}</div>
-                                            <div style={{ color: hasPowerMod ? '#9333ea' : '#16a34a' }}>
-                                                Max: {charLimits.max} {hasPowerMod && '⚡'}
+                                            <div style={{ color: unlockedLimit ? (hasPowerMod ? '#9333ea' : '#2563eb') : '#16a34a' }}>
+                                                Max: {charLimits.max} {hasPowerMod && '⚡'}{(!hasPowerMod && unlockManualMod) && '🔓'}
                                             </div>
                                         </div>
                                     </div>
