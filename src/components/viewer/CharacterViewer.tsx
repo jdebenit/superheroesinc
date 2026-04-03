@@ -64,11 +64,11 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
         if (!file) return;
 
         Logger.info("--- Iniciando subida de archivo ---", file.name);
-        
+
         try {
             const text = await file.text();
             Logger.info("Contenido del archivo leído correctamente");
-            
+
             let parsed;
             try {
                 parsed = JSON.parse(text);
@@ -134,7 +134,7 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
     const handleDelete = React.useCallback((id: string, e: React.MouseEvent) => {
         e.stopPropagation();
         e.preventDefault();
-        
+
         if (deletingId !== id) {
             setDeletingId(id);
             // Auto-cancel after 3 seconds
@@ -326,7 +326,7 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
                             <h2 className="content-title">
                                 {selectedCharacter.data.alias ? selectedCharacter.data.alias : selectedCharacter.data.name}
                                 {selectedCharacter.data.alias && selectedCharacter.data.name && (
-                                    <div className="secondary-title">
+                                    <div className="content-subtitle">
                                         {selectedCharacter.data.name}
                                     </div>
                                 )}
@@ -337,13 +337,13 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
                                     : `Añadido: ${new Date(selectedCharacter.addedAt).toLocaleDateString()}`}
                             </span>
                         </div>
-                        
+
                         <div className="character-summary">
                             <div className="summary-header">
                                 <h4 className="summary-title">Resumen de Ficha</h4>
-                                <CharacterSheet 
-                                    character={adaptWebCharacter(selectedCharacter.data)} 
-                                    totalPCs={selectedCharacter.data.totalCost} 
+                                <CharacterSheet
+                                    character={adaptWebCharacter(selectedCharacter.data)}
+                                    totalPCs={selectedCharacter.data.totalCost}
                                     renderTrigger={(open) => (
                                         <button onClick={open} className="expand-summary-btn" title="Ver ficha completa">
                                             🔍 Ficha Completa
@@ -377,7 +377,7 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
                                         alert('Error al enviar el personaje al terminal');
                                     }
                                 }}
-                                className="tpt-button"
+                                className="viewer-button btn-primary"
                             >
                                 🎮 Abrir en SHI TPT
                             </button>
@@ -394,13 +394,13 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
                                         alert('Error al enviar el personaje al TMT');
                                     }
                                 }}
-                                className="tpt-button"
+                                className="viewer-button btn-primary"
                             >
-                                🎯 Enviar a SHI TMT
+                                🎯 Abrir en SHI TMT
                             </button>
                             <button
                                 onClick={downloadJson}
-                                className="tpt-button download-btn"
+                                className="viewer-button download-btn"
                                 title="Descargar ficha como JSON"
                             >
                                 ⬇️ Descargar JSON
@@ -408,7 +408,7 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
 
                             <button
                                 onClick={handleEditInWizard}
-                                className="tpt-button edit-wizard-btn"
+                                className="viewer-button edit-wizard-btn"
                                 title="Abrir en el Generador"
                             >
                                 🛠️ Editar en Wizard

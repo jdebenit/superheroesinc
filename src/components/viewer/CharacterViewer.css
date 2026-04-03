@@ -42,12 +42,14 @@
     margin-top: 0.25rem;
 }
 
-.local-list, .web-list {
+.local-list,
+.web-list {
     background-color: white;
     border: 1px solid #e5e7eb;
     border-radius: 0 0 8px 8px;
     overflow: hidden;
-    margin-top: -1.5rem; /* Ajuste para pegar al header */
+    margin-top: -1.5rem;
+    /* Ajuste para pegar al header */
 }
 
 /* LISTAS */
@@ -79,7 +81,8 @@
     cursor: pointer;
 }
 
-.char-name, .web-char-name {
+.char-name,
+.web-char-name {
     font-weight: 700;
     color: #111827;
     font-size: 1rem;
@@ -91,7 +94,8 @@
     font-weight: normal;
 }
 
-.char-details, .web-char-details {
+.char-details,
+.web-char-details {
     font-size: 0.8rem;
     color: #6b7280;
     margin-top: 0.25rem;
@@ -203,6 +207,13 @@
     font-weight: 900;
 }
 
+.content-subtitle {
+    font-size: 1rem;
+    color: #6b7280;
+    font-weight: 300;
+    margin-top: 0.5rem;
+}
+
 .content-source-badge {
     font-size: 0.85rem;
     color: #6b7280;
@@ -261,7 +272,7 @@
     flex-wrap: wrap;
 }
 
-.tpt-button {
+.viewer-button {
     padding: 0.75rem 1.25rem;
     border-radius: 8px;
     border: none;
@@ -274,11 +285,21 @@
     font-size: 0.9rem;
 }
 
-.download-btn { background-color: #334155; }
-.edit-wizard-btn { background-color: #f59e0b; }
+.download-btn {
+    background-color: #334155;
+}
 
-.btn-primary { background-color: #059669; }
-.btn-secondary { background-color: #0284c7; }
+.edit-wizard-btn {
+    background-color: #f59e0b;
+}
+
+.btn-primary {
+    background-color: #059669;
+}
+
+.btn-secondary {
+    background-color: #0284c7;
+}
 
 /* GLOBALES */
 .version-badge {
