@@ -826,6 +826,26 @@
     transform: scale(1.1);
 }
 
+.action-btn .btn-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    display: block;
+}
+
+.action-btn.pdf-btn {
+    padding: 0;
+}
+
+.inline-actions .action-btn.pdf-btn {
+    padding: 0.5rem 1rem !important;
+}
+
+.inline-actions .action-btn.pdf-btn .btn-icon {
+    width: 18px;
+    height: 18px;
+}
+
 .close-btn {
     background: none;
     border: none;

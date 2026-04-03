@@ -21,8 +21,9 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
                 <button onClick={onDownloadJson} className="action-btn" title="Descargar JSON">
                     💾 Descargar JSON
                 </button>
-                <button onClick={onExportPdf} className="action-btn" title="Exportar PDF">
-                    📥 Exportar PDF
+                <button onClick={onExportPdf} className="action-btn pdf-btn" title="Exportar PDF">
+                    <img src="/icons/descargar-pdf.png" alt="PDF" className="btn-icon" />
+                    <span>Exportar PDF</span>
                 </button>
             </div>
         );
@@ -34,8 +35,8 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
             <button onClick={onDownloadJson} className="action-btn" title="Descargar JSON">
                 💾
             </button>
-            <button onClick={onExportPdf} className="action-btn" title="Exportar PDF">
-                📥
+            <button onClick={onExportPdf} className="action-btn pdf-btn" title="Exportar PDF">
+                <img src="/icons/descargar-pdf.png" alt="PDF" className="btn-icon" />
             </button>
         </>
     );

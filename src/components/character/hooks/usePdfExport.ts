@@ -50,7 +50,8 @@ export const usePdfExport = (
                 preCalculatedData
             );
 
-            const sanitizedName = (character.name || 'Personaje')
+            const nameForFile = character.alias || character.name || 'Personaje';
+            const sanitizedName = nameForFile
                 .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // Remove accents
                 .replace(/[^a-zA-Z0-9\s-_]/g, "") // Remove special chars
                 .replace(/\s+/g, '_'); // Spaces to underscores
