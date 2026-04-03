@@ -1,23 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './TacticMasterTerminal.css';
 import { APP_VERSIONS } from '../../data/appVersions';
+import { useTmtStore, type TmtCharacterEntry } from './hooks/useTmtStore';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Types
+// Types (local, for the combat tracker state only)
 // ─────────────────────────────────────────────────────────────────────────────
 type Screen = 'personajes' | 'combate';
-
-interface Entity {
-    id: string;
-    name: string;
-    alias?: string;
-    type: 'pj' | 'pnj';
-    maxHealth: number;
-    currentHealth: number;
-    maxMental: number;
-    currentMental: number;
-    initiative?: number;
-}
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Helpers
@@ -35,34 +24,55 @@ function pct(current: number, max: number): number {
     return Math.max(0, Math.min(100, Math.round((current / max) * 100)));
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// PersonajesScreen — PJs + PNJs unificados en dos secciones
-// ─────────────────────────────────────────────────────────────────────────────
-interface PersonajesScreenProps {
-    entities: Entity[];
-    onAdd: (type: 'pj' | 'pnj') => void;
-    onRemove: (id: string) => void;
+function charName(entry: TmtCharacterEntry): string {
+    return entry.characterData?.alias || entry.characterData?.name || '(Sin nombre)';
 }
 
-function EntityRow({ entity, onRemove }: { entity: Entity; onRemove: (id: string) => void }) {
-    const isNpc = entity.type === 'pnj';
+function charSubtitle(entry: TmtCharacterEntry): string {
+    const alias = entry.characterData?.alias;
+    const name = entry.characterData?.name;
+    const level = entry.characterData?.level ?? entry.characterData?.meta?.level;
+    const parts: string[] = [];
+    if (alias && name) parts.push(name);
+    if (level) parts.push(`Nv. ${level}`);
+    return parts.join(' · ');
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// EntityRow
+// ─────────────────────────────────────────────────────────────────────────────
+interface EntityRowProps {
+    entry: TmtCharacterEntry;
+    onRemove: (id: string) => void;
+    onToggleRole: (id: string, role: 'pj' | 'pnj') => void;
+}
+
+function EntityRow({ entry, onRemove, onToggleRole }: EntityRowProps) {
+    const isNpc = entry.role === 'pnj';
+    const displayName = charName(entry);
+    const subtitle = charSubtitle(entry);
+
     return (
         <div className="tmt-entity-card">
             <div className={`tmt-entity-avatar${isNpc ? ' npc' : ''}`}>
-                {initials(entity.name)}
+                {initials(displayName)}
             </div>
             <div className="tmt-entity-info">
-                <p className="tmt-entity-name">{entity.name}</p>
-                <p className="tmt-entity-meta">
-                    {entity.alias ? `"${entity.alias}" · ` : ''}
-                    PVs: {entity.currentHealth}/{entity.maxHealth}
-                </p>
+                <p className="tmt-entity-name">{displayName}</p>
+                {subtitle && <p className="tmt-entity-meta">{subtitle}</p>}
             </div>
             <div className="tmt-entity-actions">
                 <button
+                    className="tmt-icon-btn"
+                    title={isNpc ? 'Cambiar a PJ' : 'Cambiar a PNJ'}
+                    onClick={() => onToggleRole(entry.id, isNpc ? 'pj' : 'pnj')}
+                >
+                    {isNpc ? '🧑‍🦸' : '👾'}
+                </button>
+                <button
                     className="tmt-icon-btn danger"
                     title="Eliminar"
-                    onClick={() => onRemove(entity.id)}
+                    onClick={() => onRemove(entry.id)}
                 >
                     🗑️
                 </button>
@@ -71,9 +81,41 @@ function EntityRow({ entity, onRemove }: { entity: Entity; onRemove: (id: string
     );
 }
 
-function PersonajesScreen({ entities, onAdd, onRemove }: PersonajesScreenProps) {
-    const pjs = entities.filter((e) => e.type === 'pj');
-    const pnjs = entities.filter((e) => e.type === 'pnj');
+// ─────────────────────────────────────────────────────────────────────────────
+// PersonajesScreen
+// ─────────────────────────────────────────────────────────────────────────────
+interface PersonajesScreenProps {
+    characters: TmtCharacterEntry[];
+    onImport: (characterData: Record<string, any>, role: 'pj' | 'pnj') => void;
+    onRemove: (id: string) => void;
+    onToggleRole: (id: string, role: 'pj' | 'pnj') => void;
+}
+
+function PersonajesScreen({ characters, onImport, onRemove, onToggleRole }: PersonajesScreenProps) {
+    const pjInputRef = useRef<HTMLInputElement>(null);
+    const pnjInputRef = useRef<HTMLInputElement>(null);
+    const pjs = characters.filter((e) => e.role === 'pj');
+    const pnjs = characters.filter((e) => e.role === 'pnj');
+
+    const handleFile = (role: 'pj' | 'pnj') => async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const files = Array.from(e.target.files ?? []);
+        e.target.value = '';
+        for (const file of files) {
+            try {
+                const text = await file.text();
+                const parsed = JSON.parse(text);
+                // Accept both raw character JSON and wrapped (wizard export) JSON
+                const characterData = parsed?.character ?? parsed?.characterData ?? parsed;
+                if (!characterData || typeof characterData !== 'object' || !characterData.name) {
+                    alert(`«${file.name}» no parece un JSON de personaje válido (falta el campo name).`);
+                    continue;
+                }
+                onImport(characterData, role);
+            } catch {
+                alert(`Error al leer «${file.name}»: no es un JSON válido.`);
+            }
+        }
+    };
 
     return (
         <>
@@ -81,18 +123,32 @@ function PersonajesScreen({ entities, onAdd, onRemove }: PersonajesScreenProps) 
                 <span className="tmt-screen-banner-icon">🎭</span>
                 <div className="tmt-screen-banner-text">
                     <h2>Personajes</h2>
-                    <p>PJs y PNJs de esta sesión</p>
+                    <p>
+                        PJs y PNJs enviados al TMT desde el Visor de Fichas —{' '}
+                        <strong>{characters.length}</strong> en total
+                    </p>
                 </div>
             </div>
 
             {/* PJs */}
             <div className="tmt-section">
+                <input
+                    ref={pjInputRef}
+                    type="file"
+                    accept=".json"
+                    multiple
+                    style={{ display: 'none' }}
+                    onChange={handleFile('pj')}
+                />
                 <div className="tmt-section-header">
                     <span className="tmt-section-title">
                         🧑‍🦸 Personajes Jugadores — {pjs.length}
                     </span>
-                    <button className="tmt-add-btn" onClick={() => onAdd('pj')}>
-                        ＋ Añadir PJ
+                    <button
+                        className="tmt-add-btn"
+                        onClick={() => pjInputRef.current?.click()}
+                    >
+                        📂 Importar JSON
                     </button>
                 </div>
                 <div className="tmt-section-body">
@@ -101,13 +157,13 @@ function PersonajesScreen({ entities, onAdd, onRemove }: PersonajesScreenProps) 
                             <span className="tmt-coming-soon-icon">🧑‍🦸</span>
                             <p className="tmt-coming-soon-title">Sin PJs añadidos</p>
                             <p className="tmt-coming-soon-subtitle">
-                                Pulsa «Añadir PJ» para incorporar a los personajes del grupo.
+                                Usa el botón «🎯 Enviar a SHI TMT» en el Visor de Fichas para añadir personajes jugadores.
                             </p>
                         </div>
                     ) : (
                         <div className="tmt-entity-list">
                             {pjs.map((e) => (
-                                <EntityRow key={e.id} entity={e} onRemove={onRemove} />
+                                <EntityRow key={e.id} entry={e} onRemove={onRemove} onToggleRole={onToggleRole} />
                             ))}
                         </div>
                     )}
@@ -116,12 +172,23 @@ function PersonajesScreen({ entities, onAdd, onRemove }: PersonajesScreenProps) 
 
             {/* PNJs */}
             <div className="tmt-section">
+                <input
+                    ref={pnjInputRef}
+                    type="file"
+                    accept=".json"
+                    multiple
+                    style={{ display: 'none' }}
+                    onChange={handleFile('pnj')}
+                />
                 <div className="tmt-section-header">
                     <span className="tmt-section-title">
                         👾 Personajes No Jugadores — {pnjs.length}
                     </span>
-                    <button className="tmt-add-btn tmt-add-btn--npc" onClick={() => onAdd('pnj')}>
-                        ＋ Añadir PNJ
+                    <button
+                        className="tmt-add-btn tmt-add-btn--npc"
+                        onClick={() => pnjInputRef.current?.click()}
+                    >
+                        📂 Importar JSON
                     </button>
                 </div>
                 <div className="tmt-section-body">
@@ -130,13 +197,14 @@ function PersonajesScreen({ entities, onAdd, onRemove }: PersonajesScreenProps) 
                             <span className="tmt-coming-soon-icon">👾</span>
                             <p className="tmt-coming-soon-title">Sin PNJs añadidos</p>
                             <p className="tmt-coming-soon-subtitle">
-                                Pulsa «Añadir PNJ» para incorporar enemigos, aliados o figuras del escenario.
+                                Usa el botón «🎯 Enviar a SHI TMT» en el Visor de Fichas y cambia
+                                el rol con el botón 👾 para convertirlos en PNJs.
                             </p>
                         </div>
                     ) : (
                         <div className="tmt-entity-list">
                             {pnjs.map((e) => (
-                                <EntityRow key={e.id} entity={e} onRemove={onRemove} />
+                                <EntityRow key={e.id} entry={e} onRemove={onRemove} onToggleRole={onToggleRole} />
                             ))}
                         </div>
                     )}
@@ -150,15 +218,14 @@ function PersonajesScreen({ entities, onAdd, onRemove }: PersonajesScreenProps) 
 // CombateScreen
 // ─────────────────────────────────────────────────────────────────────────────
 interface CombateScreenProps {
-    entities: Entity[];
+    characters: TmtCharacterEntry[];
 }
 
-function CombateScreen({ entities }: CombateScreenProps) {
+function CombateScreen({ characters }: CombateScreenProps) {
     const [currentTurn, setCurrentTurn] = useState(0);
 
-    const sorted = [...entities].sort(
-        (a, b) => (b.initiative ?? 0) - (a.initiative ?? 0)
-    );
+    // For now, order is insertion order (initiatives to be added later)
+    const sorted = [...characters];
 
     return (
         <>
@@ -166,7 +233,7 @@ function CombateScreen({ entities }: CombateScreenProps) {
                 <span className="tmt-screen-banner-icon">⚔️</span>
                 <div className="tmt-screen-banner-text">
                     <h2>Combate</h2>
-                    <p>Seguimiento de turnos, PVs y estado de los combatientes</p>
+                    <p>Seguimiento de turnos y estado de los combatientes</p>
                 </div>
             </div>
 
@@ -201,11 +268,10 @@ function CombateScreen({ entities }: CombateScreenProps) {
                                 >
                                     <span className="tmt-initiative-rank">{i + 1}</span>
                                     <span className="tmt-initiative-name">
-                                        {e.name}
-                                        {e.alias ? ` "${e.alias}"` : ''}
+                                        {charName(e)}
                                     </span>
-                                    <span className="tmt-initiative-score">
-                                        Ini: {e.initiative ?? '?'}
+                                    <span className={`tmt-combat-card-badge${e.role === 'pnj' ? ' npc' : ''}`}>
+                                        {e.role.toUpperCase()}
                                     </span>
                                 </div>
                             ))}
@@ -222,45 +288,46 @@ function CombateScreen({ entities }: CombateScreenProps) {
                     </div>
                     <div className="tmt-section-body">
                         <div className="tmt-combat-grid">
-                            {sorted.map((e) => (
-                                <div key={e.id} className="tmt-combat-card">
-                                    <div className="tmt-combat-card-header">
-                                        <div className={`tmt-entity-avatar${e.type === 'pnj' ? ' npc' : ''}`}>
-                                            {initials(e.name)}
-                                        </div>
-                                        <p className="tmt-combat-card-name">{e.name}</p>
-                                        <span className={`tmt-combat-card-badge${e.type === 'pnj' ? ' npc' : ''}`}>
-                                            {e.type.toUpperCase()}
-                                        </span>
-                                    </div>
-                                    <div className="tmt-combat-card-body">
-                                        <div className="tmt-stat-row">
-                                            <span className="tmt-stat-row-label">PVs</span>
-                                            <div className="tmt-stat-bar-wrap">
-                                                <div
-                                                    className="tmt-stat-bar-fill health"
-                                                    style={{ width: `${pct(e.currentHealth, e.maxHealth)}%` }}
-                                                />
+                            {sorted.map((e) => {
+                                const cd = e.characterData;
+                                const maxPV = cd?.combatstats?.life ?? cd?.stats?.maxHealth ?? 10;
+                                const maxEQM = cd?.combatstats?.mentalBalance ?? cd?.stats?.maxMentalBalance ?? 10;
+                                return (
+                                    <div key={e.id} className="tmt-combat-card">
+                                        <div className="tmt-combat-card-header">
+                                            <div className={`tmt-entity-avatar${e.role === 'pnj' ? ' npc' : ''}`}>
+                                                {initials(charName(e))}
                                             </div>
-                                            <span className="tmt-stat-row-value">
-                                                {e.currentHealth}/{e.maxHealth}
+                                            <p className="tmt-combat-card-name">{charName(e)}</p>
+                                            <span className={`tmt-combat-card-badge${e.role === 'pnj' ? ' npc' : ''}`}>
+                                                {e.role.toUpperCase()}
                                             </span>
                                         </div>
-                                        <div className="tmt-stat-row">
-                                            <span className="tmt-stat-row-label">EQM</span>
-                                            <div className="tmt-stat-bar-wrap">
-                                                <div
-                                                    className="tmt-stat-bar-fill mental"
-                                                    style={{ width: `${pct(e.currentMental, e.maxMental)}%` }}
-                                                />
+                                        <div className="tmt-combat-card-body">
+                                            <div className="tmt-stat-row">
+                                                <span className="tmt-stat-row-label">PVs</span>
+                                                <div className="tmt-stat-bar-wrap">
+                                                    <div
+                                                        className="tmt-stat-bar-fill health"
+                                                        style={{ width: `${pct(maxPV, maxPV)}%` }}
+                                                    />
+                                                </div>
+                                                <span className="tmt-stat-row-value">{maxPV}/{maxPV}</span>
                                             </div>
-                                            <span className="tmt-stat-row-value">
-                                                {e.currentMental}/{e.maxMental}
-                                            </span>
+                                            <div className="tmt-stat-row">
+                                                <span className="tmt-stat-row-label">EQM</span>
+                                                <div className="tmt-stat-bar-wrap">
+                                                    <div
+                                                        className="tmt-stat-bar-fill mental"
+                                                        style={{ width: `${pct(maxEQM, maxEQM)}%` }}
+                                                    />
+                                                </div>
+                                                <span className="tmt-stat-row-value">{maxEQM}/{maxEQM}</span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            ))}
+                                );
+                            })}
                         </div>
                     </div>
                 </div>
@@ -274,29 +341,40 @@ function CombateScreen({ entities }: CombateScreenProps) {
 // ─────────────────────────────────────────────────────────────────────────────
 export default function TacticMasterTerminal() {
     const [screen, setScreen] = useState<Screen>('personajes');
-    const [entities, setEntities] = useState<Entity[]>([]);
+    const importRef = useRef<HTMLInputElement>(null);
+    const {
+        store,
+        characters,
+        addCharacter,
+        removeCharacter,
+        updateCharacterRole,
+        resetStore,
+        exportStore,
+        importStore,
+        reload
+    } = useTmtStore();
 
-    const addEntity = (type: 'pj' | 'pnj') => {
-        const name = window.prompt(
-            `Nombre del ${type === 'pj' ? 'Personaje Jugador' : 'PNJ'}:`
-        );
-        if (!name?.trim()) return;
-
-        const newEntity: Entity = {
-            id: crypto.randomUUID(),
-            name: name.trim(),
-            type,
-            maxHealth: 10,
-            currentHealth: 10,
-            maxMental: 10,
-            currentMental: 10,
-            initiative: 0
+    // Poll for external writes (e.g. from CharacterViewer in another tab)
+    useEffect(() => {
+        const onStorage = (e: StorageEvent) => {
+            if (e.key === 'shi_tmt_store') reload();
         };
-        setEntities((prev) => [...prev, newEntity]);
+        window.addEventListener('storage', onStorage);
+        return () => window.removeEventListener('storage', onStorage);
+    }, [reload]);
+
+    const handleImportFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            importStore(file);
+            e.target.value = '';
+        }
     };
 
-    const removeEntity = (id: string) => {
-        setEntities((prev) => prev.filter((e) => e.id !== id));
+    const handleReset = () => {
+        if (confirm('¿Resetear todo el TMT? Se perderán todos los personajes y datos de sesión.')) {
+            resetStore();
+        }
     };
 
     const NAV_TABS: { id: Screen; label: string; icon: string }[] = [
@@ -315,6 +393,35 @@ export default function TacticMasterTerminal() {
                     </span>
                 </h1>
                 <div className="tmt-header-actions">
+                    {/* Hidden file input for import */}
+                    <input
+                        ref={importRef}
+                        type="file"
+                        accept=".json"
+                        style={{ display: 'none' }}
+                        onChange={handleImportFile}
+                    />
+                    <button
+                        className="tmt-header-btn tmt-header-btn--import"
+                        onClick={() => importRef.current?.click()}
+                        title="Importar sesión TMT (JSON)"
+                    >
+                        📥 Importar
+                    </button>
+                    <button
+                        className="tmt-header-btn tmt-header-btn--export"
+                        onClick={exportStore}
+                        title="Exportar sesión TMT (JSON)"
+                    >
+                        💾 Exportar
+                    </button>
+                    <button
+                        className="tmt-header-btn tmt-header-btn--reset"
+                        onClick={handleReset}
+                        title="Resetear sesión"
+                    >
+                        🔄 Reset
+                    </button>
                     <a href="/recursos" className="tmt-exit-btn">
                         ✕ Salir
                     </a>
@@ -331,20 +438,29 @@ export default function TacticMasterTerminal() {
                     >
                         <span className="tmt-nav-tab-icon">{tab.icon}</span>
                         {tab.label}
+                        {tab.id === 'personajes' && characters.length > 0 && (
+                            <span className="tmt-nav-badge">{characters.length}</span>
+                        )}
                     </button>
                 ))}
+                <div className="tmt-nav-meta">
+                    Guardado: {store.meta.savedAt
+                        ? new Date(store.meta.savedAt).toLocaleTimeString()
+                        : '—'}
+                </div>
             </nav>
 
             {/* Screen */}
             <main className="tmt-screen">
                 {screen === 'personajes' && (
                     <PersonajesScreen
-                        entities={entities}
-                        onAdd={addEntity}
-                        onRemove={removeEntity}
+                        characters={characters}
+                        onImport={addCharacter}
+                        onRemove={removeCharacter}
+                        onToggleRole={updateCharacterRole}
                     />
                 )}
-                {screen === 'combate' && <CombateScreen entities={entities} />}
+                {screen === 'combate' && <CombateScreen characters={characters} />}
             </main>
         </div>
     );

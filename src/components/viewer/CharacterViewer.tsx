@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import CharacterSheet from '../character/CharacterSheet';
 import { adaptWebCharacter } from '../../utils/characterAdapter';
 import { useJsonExport } from '../../hooks/useJsonExport';
+import { pushCharacterToTmt } from '../terminal/hooks/useTmtStore';
 import './CharacterViewer.css';
 import Logger from '../../utils/Logger';
 
@@ -309,7 +310,21 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
                             >
                                 🎮 Abrir en SHI TPT
                             </button>
-                            <button className="tpt-button" disabled={true}>
+                            <button
+                                onClick={() => {
+                                    try {
+                                        pushCharacterToTmt(
+                                            adaptWebCharacter(selectedCharacter.data),
+                                            'pj'
+                                        );
+                                        window.open('/recursos/tactic-master-terminal', '_blank');
+                                    } catch (error) {
+                                        Logger.error('Error sending character to TMT:', error);
+                                        alert('Error al enviar el personaje al TMT');
+                                    }
+                                }}
+                                className="tpt-button"
+                            >
                                 🎯 Enviar a SHI TMT
                             </button>
                             <button
