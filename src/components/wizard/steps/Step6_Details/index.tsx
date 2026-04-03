@@ -45,7 +45,13 @@ export default function Step6_Details({ data, onChange, totalPCs, onShowHelp }: 
         updateItem,
         removeItem,
         applyArtifactPreset,
-        applyMagicPreset
+        applyMagicPreset,
+        unlockCombatStats,
+        setUnlockCombatStats,
+        unlockOtherStats,
+        setUnlockOtherStats,
+        updateCombatStat,
+        updateOtherStat
     } = useStep6Logic(data, onChange);
 
     return (
@@ -102,27 +108,90 @@ export default function Step6_Details({ data, onChange, totalPCs, onShowHelp }: 
             </WizardSection>
 
             <WizardSection title="Estadísticas de Combate">
+                <div className="wizard-unlock-container" style={{ marginBottom: '1rem' }}>
+                    <div className="wizard-unlock-header">
+                        <label className="wizard-unlock-label">
+                            <input
+                                type="checkbox"
+                                checked={unlockCombatStats}
+                                onChange={(e) => setUnlockCombatStats(e.target.checked)}
+                                className="wizard-unlock-checkbox"
+                            />
+                            🔓 Desbloquear Combate (Libre)
+                        </label>
+                        <span className="wizard-unlock-badge">Avanzado</span>
+                    </div>
+                </div>
+
                 <div className="step6-margin-bottom">
-                    <InfoBox variant="info" icon="🔒">
-                        Calculadas automáticamente a partir de tus características — no son editables.
+                    <InfoBox variant="info" icon={unlockCombatStats ? "✏️" : "🔒"}>
+                        {unlockCombatStats
+                            ? "Modo manual activado para combate. Los valores no se recalcularán automáticamente."
+                            : "Calculadas automáticamente a partir de tus características — no son editables."
+                        }
                     </InfoBox>
                 </div>
                 <div className="step6-combat-stats-grid">
                     {data.combatstats && Object.entries(data.combatstats).map(([label, val], index) => (
-                        <StatItem key={index} label={label} value={val} theme="red" />
+                        unlockCombatStats ? (
+                            <WizardField
+                                key={label}
+                                label={label}
+                                value={val as string}
+                                onChange={(newVal) => updateCombatStat(label, newVal)}
+                                noMargin
+                                className="step6-manual-stat-field"
+                            />
+                        ) : (
+                            <StatItem key={index} label={label} value={val as string} theme="red" />
+                        )
                     ))}
                 </div>
             </WizardSection>
 
             <WizardSection title="Otras Estadísticas">
+                <div className="wizard-unlock-container" style={{ marginBottom: '1rem' }}>
+                    <div className="wizard-unlock-header">
+                        <label className="wizard-unlock-label">
+                            <input
+                                type="checkbox"
+                                checked={unlockOtherStats}
+                                onChange={(e) => setUnlockOtherStats(e.target.checked)}
+                                className="wizard-unlock-checkbox"
+                            />
+                            🔓 Desbloquear Otros (Libre)
+                        </label>
+                        <span className="wizard-unlock-badge">Avanzado</span>
+                    </div>
+                </div>
+
                 <div className="step6-margin-bottom">
-                    <InfoBox variant="info" icon="🔒">
-                        Calculadas automáticamente a partir de tus características — no son editables.
+                    <InfoBox variant="info" icon={unlockOtherStats ? "✏️" : "🔒"}>
+                        {unlockOtherStats
+                            ? "Modo manual activado para estadísticas secundarias. Los valores no se recalcularán automáticamente."
+                            : "Calculadas automáticamente a partir de tus características — no son editables."
+                        }
                     </InfoBox>
                 </div>
+
                 <div className="step6-other-stats-container">
                     {data.otherstats && Object.entries(data.otherstats).map(([label, val], index) => {
                         const isEven = index % 2 === 0;
+
+                        if (unlockOtherStats) {
+                            return (
+                                <div key={label} className="step6-manual-other-row">
+                                    <WizardField
+                                        label={label}
+                                        value={val as string}
+                                        onChange={(newVal) => updateOtherStat(label, newVal)}
+                                        noMargin
+                                        inputWidth="100%"
+                                    />
+                                </div>
+                            );
+                        }
+
                         return (
                             <div key={index} className={`step6-other-stat-row ${isEven ? 'even' : 'odd'}`}>
                                 <span className="step6-other-stat-label">{label}</span>
@@ -298,12 +367,14 @@ export default function Step6_Details({ data, onChange, totalPCs, onShowHelp }: 
                             headers={['Descripción', 'Coste']}
                         >
                             <WizardField
+                                type="textarea"
                                 label="Descripción"
                                 value={item.description || ''}
                                 onChange={(val: string) => updateItem('varios', index, 'description', val)}
                                 noMargin
                                 placeholder="Descripción del item..."
                                 hideLabelDesktop={true}
+                                className="step6-textarea-field"
                             />
                             <WizardField
                                 type="number"

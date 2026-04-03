@@ -1,31 +1,73 @@
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, useState } from 'react';
 import { calculateDerivedStats, formatDerivedStats } from '../../../../utils/characterCalculations';
 import { ARTIFACTS } from '../../../../data/artifacts';
 import { MAGIC_OBJECTS } from '../../../../data/magicObjects';
 
 export function useStep6Logic(data: any, onChange: (updates: any) => void) {
+    const [unlockCombatStats, setUnlockCombatStats] = useState<boolean>(() => {
+        return !!data.uiState?.unlockCombatStats;
+    });
+
+    const [unlockOtherStats, setUnlockOtherStats] = useState<boolean>(() => {
+        return !!data.uiState?.unlockOtherStats;
+    });
+
     // Derived Stats Effect
     useEffect(() => {
+        // Only run if at least ONE section is locked
+        if (unlockCombatStats && unlockOtherStats) return;
+
         const stats = calculateDerivedStats(data.attributes.values, data.origin?.items, data.skills);
         const { combatStats: newCombat, otherStats: newOther } = formatDerivedStats(stats);
 
-        const currentCombat = JSON.stringify(data.combatstats);
-        const nextCombat = JSON.stringify(newCombat);
-        const currentOther = JSON.stringify(data.otherstats);
-        const nextOther = JSON.stringify(newOther);
+        const currentCombatStr = JSON.stringify(data.combatstats);
+        const nextCombatStr = JSON.stringify(newCombat);
+        const currentOtherStr = JSON.stringify(data.otherstats);
+        const nextOtherStr = JSON.stringify(newOther);
 
-        if (currentCombat !== nextCombat || currentOther !== nextOther) {
-            onChange({
-                combatstats: newCombat,
-                otherstats: newOther
-            });
+        const updates: any = {};
+        let hasChanges = false;
+
+        // Selective update for Combat Stats
+        if (!unlockCombatStats && currentCombatStr !== nextCombatStr) {
+            updates.combatstats = newCombat;
+            hasChanges = true;
         }
-    }, [data.attributes.values, data.origin?.items, data.skills, data.combatstats, data.otherstats, onChange]);
+
+        // Selective update for Other Stats
+        if (!unlockOtherStats && currentOtherStr !== nextOtherStr) {
+            updates.otherstats = newOther;
+            hasChanges = true;
+        }
+
+        if (hasChanges) {
+            onChange(updates);
+        }
+    }, [data.attributes.values, data.origin?.items, data.skills, data.combatstats, data.otherstats, onChange, unlockCombatStats, unlockOtherStats]);
 
     // Identity Handlers
     const updateField = useCallback((field: string, value: string) => {
         onChange({ [field]: value });
     }, [onChange]);
+
+    // Manual Stat Handlers
+    const updateCombatStat = useCallback((field: string, value: string) => {
+        onChange({
+            combatstats: {
+                ...data.combatstats,
+                [field]: value
+            }
+        });
+    }, [data.combatstats, onChange]);
+
+    const updateOtherStat = useCallback((field: string, value: string) => {
+        onChange({
+            otherstats: {
+                ...data.otherstats,
+                [field]: value
+            }
+        });
+    }, [data.otherstats, onChange]);
 
     // Generic List Handlers
     const addItem = useCallback((key: string, initialItem: any) => {
@@ -91,6 +133,28 @@ export function useStep6Logic(data: any, onChange: (updates: any) => void) {
         updateItem,
         removeItem,
         applyArtifactPreset,
-        applyMagicPreset
+        applyMagicPreset,
+        unlockCombatStats,
+        setUnlockCombatStats: (value: boolean) => {
+            setUnlockCombatStats(value);
+            onChange({
+                uiState: {
+                    ...data.uiState,
+                    unlockCombatStats: value
+                }
+            });
+        },
+        unlockOtherStats,
+        setUnlockOtherStats: (value: boolean) => {
+            setUnlockOtherStats(value);
+            onChange({
+                uiState: {
+                    ...data.uiState,
+                    unlockOtherStats: value
+                }
+            });
+        },
+        updateCombatStat,
+        updateOtherStat
     };
 }
