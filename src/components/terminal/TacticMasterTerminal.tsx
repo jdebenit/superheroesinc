@@ -22,6 +22,14 @@ import Logger from '../../utils/Logger';
 // ─────────────────────────────────────────────────────────────────────────────
 type Screen = 'personajes' | 'combate' | 'detalles';
 
+const INITIATIVE_MODS = [
+    { label: 'Ninguno', value: 0 },
+    { label: 'Sorprendido', value: -50 },
+    { label: 'Aturdido', value: -30 },
+    { label: 'Caído', value: -15 },
+    { label: 'Concentrado', value: -20 },
+];
+
 // ─────────────────────────────────────────────────────────────────────────────
 // Helpers
 // ─────────────────────────────────────────────────────────────────────────────
@@ -350,6 +358,7 @@ interface CombateScreenProps {
     activeGroupIds: string[];
     onUpdateActiveGroups: (ids: string[]) => void;
     onUpdateInitiative: (id: string, value: number, roll?: number) => void;
+    onUpdateInitiativeMod: (id: string, mod: number) => void;
     onUpdateUsedActions: (id: string, count: number) => void;
     onUpdateStat: (id: string, type: 'health' | 'mental', change: number, notes: string) => void;
     onDeleteHistoryEntry: (charId: string, entry: HistoryEntry) => void;
@@ -362,6 +371,7 @@ function CombateScreen({
     activeGroupIds,
     onUpdateActiveGroups,
     onUpdateInitiative,
+    onUpdateInitiativeMod,
     onUpdateUsedActions,
     onUpdateStat,
     onDeleteHistoryEntry,
@@ -400,9 +410,10 @@ function CombateScreen({
     };
 
     const handleConfirmInic = () => {
-        characters.forEach(c => {
+        filtered.forEach(c => {
             const roll = Math.floor(Math.random() * 100) + 1;
-            onUpdateInitiative(c.id, getBaseIniciativa(c) + roll, roll);
+            const mod = c.initiativeMod || 0;
+            onUpdateInitiative(c.id, getBaseIniciativa(c) + roll + mod, roll);
         });
         setCurrentTurn(0); setShowConfirmModal(false);
     };
@@ -477,13 +488,26 @@ function CombateScreen({
                                 </div>
                             </div>
                             <div className="tmt-initiative-edit-wrap">
-                                {e.roll && <span className="tmt-initiative-breakdown">({getBaseIniciativa(e)} + {e.roll})</span>}
+                                {e.roll && <span className="tmt-initiative-breakdown">({getBaseIniciativa(e)} + {e.roll}{e.initiativeMod ? ` ${e.initiativeMod > 0 ? '+' : ''}${e.initiativeMod}` : ''})</span>}
+                                
+                                <select 
+                                    className="tmt-initiative-mod-select"
+                                    value={e.initiativeMod || 0}
+                                    onChange={(ev) => onUpdateInitiativeMod(e.id, parseInt(ev.target.value))}
+                                    title="Modificador de Estado"
+                                >
+                                    {INITIATIVE_MODS.map(m => (
+                                        <option key={m.label} value={m.value}>{m.label} ({m.value > 0 ? '+' : ''}{m.value})</option>
+                                    ))}
+                                </select>
+
                                 <button
                                     className="tmt-dice-btn"
                                     title="Lanzar iniciativa individual"
                                     onClick={() => {
                                         const roll = Math.floor(Math.random() * 100) + 1;
-                                        onUpdateInitiative(e.id, getBaseIniciativa(e) + roll, roll);
+                                        const mod = e.initiativeMod || 0;
+                                        onUpdateInitiative(e.id, getBaseIniciativa(e) + roll + mod, roll);
                                     }}
                                 >
                                     🎲
@@ -629,9 +653,10 @@ export default function TacticMasterTerminal() {
     const {
         store, characters, groups,
         addCharacter, removeCharacter, updateCharacterRole, toggleCharacterGroup,
-        addGroup, deleteGroup, updateCharacterInitiative, updateCharacterUsedActions,
-        updateCharacterStat, updateActiveCombatGroups, deleteCharacterHistoryEntry,
-        updateDetails, resetAllActions, resetStore, exportStore, importStore, reload
+        addGroup, deleteGroup, updateCharacterInitiative, updateCharacterInitiativeMod,
+        updateCharacterUsedActions, updateCharacterStat, updateActiveCombatGroups,
+        deleteCharacterHistoryEntry, updateDetails, resetAllActions, resetStore,
+        exportStore, importStore, reload
     } = useTmtStore();
 
     // Character Sync from Viewer
@@ -698,6 +723,7 @@ export default function TacticMasterTerminal() {
                         activeGroupIds={store.activeCombatGroupIds || []}
                         onUpdateActiveGroups={updateActiveCombatGroups}
                         onUpdateInitiative={updateCharacterInitiative}
+                        onUpdateInitiativeMod={updateCharacterInitiativeMod}
                         onUpdateUsedActions={updateCharacterUsedActions}
                         onUpdateStat={updateCharacterStat}
                         onDeleteHistoryEntry={deleteCharacterHistoryEntry}

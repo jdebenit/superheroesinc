@@ -46,6 +46,8 @@ export interface TmtCharacterEntry {
     roll?: number;
     /** Number of actions already spent/used in the current round */
     usedActions?: number;
+    /** Modifier for initiative rolls (Surprised, Stunned, etc.) */
+    initiativeMod?: number;
     /** Health & Vitals Tracking */
     currentHealth?: number;
     maxHealth?: number;
@@ -315,6 +317,19 @@ export function useTmtStore() {
         });
     }, []);
 
+    const updateCharacterInitiativeMod = useCallback((id: string, initiativeMod: number) => {
+        setStore((prev) => {
+            const updated = {
+                ...prev,
+                characters: prev.characters.map((c) =>
+                    c.id === id ? { ...c, initiativeMod } : c
+                )
+            };
+            writeToStorage(updated);
+            return updated;
+        });
+    }, []);
+
     const updateCharacterUsedActions = useCallback((id: string, usedActions: number) => {
         setStore((prev) => {
             const updated = {
@@ -552,6 +567,7 @@ export function useTmtStore() {
         updateGroup,
         deleteGroup,
         updateCharacterInitiative,
+        updateCharacterInitiativeMod,
         updateCharacterUsedActions,
         updateCharacterStat,
         updateActiveCombatGroups,
