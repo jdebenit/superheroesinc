@@ -383,13 +383,13 @@ export default function TacticPlayerTerminal() {
                     </p>
                     <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
                         <button 
-                            className="secondary-btn" 
+                            className="terminal-btn-secondary" 
                             onClick={() => setShowResetModal(false)}
                         >
                             Cancelar
                         </button>
                         <button 
-                            className="reset-btn" 
+                            className="terminal-btn-danger" 
                             onClick={resetData}
                         >
                             Resetear Todo

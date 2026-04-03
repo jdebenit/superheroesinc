@@ -554,6 +554,7 @@ function CombateScreen({
 // ─────────────────────────────────────────────────────────────────────────────
 export default function TacticMasterTerminal() {
     const [screen, setScreen] = useState<Screen>('personajes');
+    const [showResetModal, setShowResetModal] = useState(false);
     const { 
         store, characters, groups, 
         addCharacter, removeCharacter, updateCharacterRole, toggleCharacterGroup, 
@@ -591,7 +592,7 @@ export default function TacticMasterTerminal() {
                 version={APP_VERSIONS.TACTIC_MASTER_TERMINAL}
                 onImport={handleImportWrapper}
                 onExport={exportStore}
-                onReset={resetStore}
+                onReset={() => setShowResetModal(true)}
                 showCharacterSheet={false}
             />
 
@@ -622,6 +623,32 @@ export default function TacticMasterTerminal() {
                     />
                 )}
             </main>
+
+            <Modal isOpen={showResetModal} onClose={() => setShowResetModal(false)} title="Confirmar Reset Master">
+                <div style={{ padding: '1rem', textAlign: 'center' }}>
+                    <p style={{ marginBottom: '1.5rem', color: '#6b7280' }}>
+                        ¿Estás seguro de que quieres borrar todos los datos de esta sesión Master?
+                        Esta acción borrará todos los personajes (PJs/PNJs), grupos y el estado de combate actual.
+                    </p>
+                    <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
+                        <button 
+                            className="terminal-btn-secondary" 
+                            onClick={() => setShowResetModal(false)}
+                        >
+                            Cancelar
+                        </button>
+                        <button 
+                            className="terminal-btn-danger" 
+                            onClick={() => {
+                                resetStore();
+                                setShowResetModal(false);
+                            }}
+                        >
+                            Resetear Todo
+                        </button>
+                    </div>
+                </div>
+            </Modal>
         </div>
     );
 }

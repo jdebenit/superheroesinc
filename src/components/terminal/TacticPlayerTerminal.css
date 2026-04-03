@@ -81,7 +81,8 @@
 .export-btn,
 .import-btn,
 .reset-btn,
-.secondary-btn {
+.terminal-btn-secondary,
+.terminal-btn-danger {
     color: white;
     border: none;
     padding: 0.5rem 1.25rem;
@@ -97,21 +98,30 @@
     gap: 0.5rem;
 }
 
-.secondary-btn {
+.terminal-btn-secondary {
     background: #f1f5f9;
     color: #475569;
     border: 1px solid #e2e8f0;
 }
 
-.secondary-btn:hover {
+.terminal-btn-secondary:hover {
     background: #f8fafc;
     border-color: #cbd5e1;
     color: #1e293b;
 }
 
+.terminal-btn-danger {
+    background: #dc2626;
+}
+
+.terminal-btn-danger:hover {
+    background: #b91c1c;
+}
+
 .export-btn:hover,
 .import-btn:hover,
-.reset-btn:hover {
+.reset-btn:hover,
+.terminal-btn-danger:hover {
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     transform: translateY(-1px);
     filter: brightness(0.95);

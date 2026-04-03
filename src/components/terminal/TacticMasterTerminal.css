@@ -180,6 +180,47 @@
     border-color: #dc2626;
 }
 
+.terminal-btn-secondary,
+.terminal-btn-danger {
+    color: white;
+    border: none;
+    padding: 0.5rem 1.25rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: inherit;
+}
+
+.terminal-btn-secondary {
+    background: #f1f5f9;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+}
+
+.terminal-btn-secondary:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+    color: #1e293b;
+}
+
+.terminal-btn-danger {
+    background: #dc2626;
+}
+
+.terminal-btn-danger:hover {
+    background: #b91c1c;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+    filter: brightness(0.95);
+}
+
 .tmt-initiative-actions-group {
     display: flex;
     align-items: center;
