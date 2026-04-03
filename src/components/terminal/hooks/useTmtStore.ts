@@ -20,6 +20,14 @@ export interface TmtGroup {
     color?: string;
 }
 
+export interface HistoryEntry {
+    timestamp: string;
+    type: 'health' | 'mental' | 'willpower' | 'chi';
+    change: number;
+    newValue: number;
+    notes: string;
+}
+
 /** A character entry stored inside the TMT session */
 export interface TmtCharacterEntry {
     /** Unique ID for this slot */
@@ -38,6 +46,12 @@ export interface TmtCharacterEntry {
     roll?: number;
     /** Number of actions already spent/used in the current round */
     usedActions?: number;
+    /** Health & Vitals Tracking */
+    currentHealth?: number;
+    maxHealth?: number;
+    currentMental?: number;
+    maxMental?: number;
+    history?: HistoryEntry[];
 }
 
 /** Root structure written to localStorage */
@@ -49,6 +63,7 @@ export interface TmtStore {
     };
     characters: TmtCharacterEntry[];
     groups: TmtGroup[];
+    activeCombatGroupIds?: string[];
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -63,7 +78,8 @@ function buildEmptyStore(): TmtStore {
             generator: 'SHI-TMT'
         },
         characters: [],
-        groups: []
+        groups: [],
+        activeCombatGroupIds: []
     };
 }
 
@@ -80,11 +96,36 @@ function readFromStorage(): TmtStore {
         if (!Array.isArray(parsed.groups)) {
             parsed.groups = [];
         }
-        parsed.characters = parsed.characters.map(c => ({
-            ...c,
-            groupIds: Array.isArray(c.groupIds) ? c.groupIds : [],
-            usedActions: typeof c.usedActions === 'number' ? c.usedActions : 0
-        }));
+        if (!Array.isArray(parsed.activeCombatGroupIds)) {
+            parsed.activeCombatGroupIds = [];
+        }
+        parsed.characters = parsed.characters.map(c => {
+            const entry = {
+                ...c,
+                groupIds: Array.isArray(c.groupIds) ? c.groupIds : [],
+                usedActions: typeof c.usedActions === 'number' ? c.usedActions : 0,
+                history: Array.isArray(c.history) ? c.history : []
+            };
+
+            // Initialize PV/EQM if missing
+            if (typeof entry.currentHealth === 'undefined') {
+                const combatStats = entry.characterData?.combatstats;
+                if (Array.isArray(combatStats)) {
+                    const healthLine = combatStats.find((s: any) => typeof s === 'string' && s.includes('Puntos de Vida'));
+                    const mentalLine = combatStats.find((s: any) => typeof s === 'string' && s.includes('Equilibrio Mental'));
+                    
+                    const maxH = healthLine ? parseInt(healthLine.split(':')[1]?.trim()) : 0;
+                    const maxM = mentalLine ? parseInt(mentalLine.split(':')[1]?.trim()) : 0;
+
+                    entry.maxHealth = maxH;
+                    entry.currentHealth = maxH;
+                    entry.maxMental = maxM;
+                    entry.currentMental = maxM;
+                }
+            }
+
+            return entry;
+        });
         return parsed;
     } catch {
         return buildEmptyStore();
@@ -140,8 +181,23 @@ export function pushCharacterToTmt(
         role,
         addedAt: new Date().toISOString(),
         characterData,
-        groupIds: existingIdx >= 0 ? store.characters[existingIdx].groupIds : []
+        groupIds: existingIdx >= 0 ? store.characters[existingIdx].groupIds : [],
+        history: [] // New characters always start with clean history
     };
+
+    // Auto-detect max stats for the new entry
+    if (Array.isArray(characterData.combatstats)) {
+        const healthLine = characterData.combatstats.find((s: any) => typeof s === 'string' && s.includes('Puntos de Vida'));
+        const mentalLine = characterData.combatstats.find((s: any) => typeof s === 'string' && s.includes('Equilibrio Mental'));
+        
+        const maxH = healthLine ? parseInt(healthLine.split(':')[1]?.trim()) : 0;
+        const maxM = mentalLine ? parseInt(mentalLine.split(':')[1]?.trim()) : 0;
+
+        entry.maxHealth = maxH;
+        entry.currentHealth = maxH;
+        entry.maxMental = maxM;
+        entry.currentMental = maxM;
+    }
 
     if (existingIdx >= 0) {
         store.characters[existingIdx] = entry;
@@ -239,6 +295,88 @@ export function useTmtStore() {
                 characters: prev.characters.map((c) =>
                     c.id === id ? { ...c, usedActions } : c
                 )
+            };
+            writeToStorage(updated);
+            return updated;
+        });
+    }, []);
+
+    const updateCharacterStat = useCallback((
+        charId: string, 
+        type: 'health' | 'mental', 
+        change: number, 
+        notes: string
+    ) => {
+        if (change === 0) return;
+
+        setStore((prev) => {
+            const updated = {
+                ...prev,
+                characters: prev.characters.map((c) => {
+                    if (c.id !== charId) return c;
+
+                    const current = type === 'health' ? (c.currentHealth || 0) : (c.currentMental || 0);
+                    const max = type === 'health' ? (c.maxHealth || 0) : (c.maxMental || 0);
+                    const newValue = Math.max(0, Math.min(max, current + change));
+
+                    const entry: HistoryEntry = {
+                        timestamp: new Date().toISOString(),
+                        type: type === 'health' ? 'health' : 'mental',
+                        change,
+                        newValue,
+                        notes: notes.trim()
+                    };
+
+                    return {
+                        ...c,
+                        [type === 'health' ? 'currentHealth' : 'currentMental']: newValue,
+                        history: [entry, ...(c.history || [])]
+                    };
+                })
+            };
+            writeToStorage(updated);
+            return updated;
+        });
+    }, []);
+
+    const updateActiveCombatGroups = useCallback((groupIds: string[]) => {
+        setStore((prev) => {
+            const updated = { ...prev, activeCombatGroupIds: groupIds };
+            writeToStorage(updated);
+            return updated;
+        });
+    }, []);
+
+    const deleteCharacterHistoryEntry = useCallback((charId: string, entryToDelete: HistoryEntry) => {
+        setStore((prev) => {
+            const updated = {
+                ...prev,
+                characters: prev.characters.map((c) => {
+                    if (c.id !== charId) return c;
+
+                    const newHistory = (c.history || []).filter(h => h !== entryToDelete);
+                    const reverseChange = -entryToDelete.change;
+
+                    // Recalculate current value
+                    if (entryToDelete.type === 'health') {
+                        const max = c.maxHealth || 0;
+                        const current = c.currentHealth || 0;
+                        return {
+                            ...c,
+                            currentHealth: Math.max(0, Math.min(max, current + reverseChange)),
+                            history: newHistory
+                        };
+                    } else if (entryToDelete.type === 'mental') {
+                        const max = c.maxMental || 0;
+                        const current = c.currentMental || 0;
+                        return {
+                            ...c,
+                            currentMental: Math.max(0, Math.min(max, current + reverseChange)),
+                            history: newHistory
+                        };
+                    }
+                    return { ...c, history: newHistory };
+                })
             };
             writeToStorage(updated);
             return updated;
@@ -377,6 +515,9 @@ export function useTmtStore() {
         deleteGroup,
         updateCharacterInitiative,
         updateCharacterUsedActions,
+        updateCharacterStat,
+        updateActiveCombatGroups,
+        deleteCharacterHistoryEntry,
         resetAllActions,
         resetStore,
         exportStore,
