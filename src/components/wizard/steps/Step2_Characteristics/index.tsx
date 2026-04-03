@@ -25,7 +25,9 @@ export default function Step2_Characteristics({ data, onChange, onShowHelp }: St
         pcValues,
         getTotal,
         handleCharacteristicChange,
-        origins
+        origins,
+        unlockManualMod,
+        setUnlockManualMod
     } = useStep2Logic(data, onChange);
 
     return (
@@ -88,6 +90,26 @@ export default function Step2_Characteristics({ data, onChange, onShowHelp }: St
                     </div>
                 }
             >
+                <div className="step2-unlock-container">
+                    <div className="step2-unlock-header">
+                        <label className="step2-unlock-label">
+                            <input
+                                type="checkbox"
+                                checked={unlockManualMod}
+                                onChange={(e) => setUnlockManualMod(e.target.checked)}
+                                className="step2-unlock-checkbox"
+                            />
+                            🔓 Desbloquear Modificadores Manuales
+                        </label>
+                        <span className="step2-unlock-badge">Avanzado</span>
+                    </div>
+                    {unlockManualMod && (
+                        <p className="step2-unlock-description">
+                            Usa esta opción para aplicar bonos o penalizadores manuales (objetos mágicos, ajustes del DJ o dotes no automáticas) en la casilla <strong>Mod. Otros</strong> de cada característica. Estos puntos no consumen PC.
+                        </p>
+                    )}
+                </div>
+
                 <div className="step2-chars-grid">
                     {CHARACTERISTICS_CONFIG.map((char) => {
                         const total = getTotal(char.id);
@@ -203,11 +225,13 @@ export default function Step2_Characteristics({ data, onChange, onShowHelp }: St
                                         min="-200"
                                         max="200"
                                         value={c.otherMod || 0}
-                                        disabled={true}
+                                        readOnly={!unlockManualMod}
+                                        disabled={!unlockManualMod}
                                         onChange={(val) => handleCharacteristicChange(char.id, 'otherMod', val)}
                                         noMargin
                                         inputWidth="70px"
                                         textAlign="center"
+                                        className={unlockManualMod ? 'unlocked-field' : ''}
                                     />
                                 </div>
 

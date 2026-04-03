@@ -53,6 +53,10 @@ export function useStep2Logic(data: any, onChange: (updates: any) => void) {
         };
     });
 
+    const [unlockManualMod, setUnlockManualMod] = useState<boolean>(() => {
+        return !!data.uiState?.unlockManualCharacteristics;
+    });
+
     const [chosenBonusCharacteristic, setChosenBonusCharacteristic] = useState<string | null>(null);
 
     // Derived values
@@ -276,6 +280,17 @@ export function useStep2Logic(data: any, onChange: (updates: any) => void) {
         pcValues,
         getTotal,
         handleCharacteristicChange,
-        origins
+        origins,
+        unlockManualMod,
+        setUnlockManualMod: (value: boolean) => {
+            setUnlockManualMod(value);
+            onChange({
+                ...data,
+                uiState: {
+                    ...data.uiState,
+                    unlockManualCharacteristics: value
+                }
+            });
+        }
     };
 }
