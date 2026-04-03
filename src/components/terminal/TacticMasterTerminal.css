@@ -476,3 +476,56 @@
 .tmt-modal-actions { display: flex; gap: 1rem; margin-top: 1.5rem; justify-content: flex-end; }
 .tmt-cancel-btn { background: #f1f5f9; color: #64748b; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; }
 .tmt-cancel-btn:hover { background: #e2e8f0; color: #334151; }
+ 
+/* ========================================
+   Details Screen
+   ======================================== */
+.tmt-details-form {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.tmt-input-group-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.tmt-input-group-vertical label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+}
+
+.tmt-input-group-vertical input,
+.tmt-input-group-vertical textarea,
+.tmt-notes-textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    transition: all 0.2s;
+    color: #1e293b;
+    background: #f8fafc;
+}
+
+.tmt-input-group-vertical input:focus,
+.tmt-input-group-vertical textarea:focus,
+.tmt-notes-textarea:focus {
+    outline: none;
+    border-color: #3b82f6;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.tmt-notes-textarea {
+    resize: vertical;
+    min-height: 300px;
+    line-height: 1.6;
+}

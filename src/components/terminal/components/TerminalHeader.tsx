@@ -4,12 +4,13 @@ import CharacterSheet from '../../character/CharacterSheet';
 interface TerminalHeaderProps {
     title: string;
     version: string;
-    onImport: (event: React.ChangeEvent<HTMLInputElement>) => void;
-    onImportCharacter: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onImport?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onImportCharacter?: (event: React.ChangeEvent<HTMLInputElement>) => void;
     onExport?: () => void;
     onReset?: () => void;
     character?: any;
     adaptedCharacter?: any;
+    importLabel?: string;
     showCharacterSheet?: boolean;
 }
 
@@ -22,6 +23,7 @@ export default function TerminalHeader({
     onReset,
     character,
     adaptedCharacter,
+    importLabel = "Importar TPT",
     showCharacterSheet = false
 }: TerminalHeaderProps) {
     const triggerImportInput = () => {
@@ -40,7 +42,7 @@ export default function TerminalHeader({
                 {title} <span className="terminal-title-version">({version})</span>
             </h1>
             <div className="terminal-header-actions">
-                {/* Hidden input for TPT State */}
+                {/* Hidden input for TPT/TMT State */}
                 <input
                     type="file"
                     id="tpt-json-import"
@@ -57,11 +59,13 @@ export default function TerminalHeader({
                     style={{ display: 'none' }}
                 />
 
-                <button onClick={triggerImportInput} className="import-btn" title="Importar estado guardado (SHI-TPT)">
-                    📥 Importar TPT
-                </button>
+                {onImport && (
+                    <button onClick={triggerImportInput} className="import-btn" title="Importar estado guardado">
+                        📥 {importLabel}
+                    </button>
+                )}
 
-                {!hasCharacter && (
+                {!hasCharacter && onImportCharacter && (
                     <button onClick={triggerCharacterImport} className="terminal-btn-secondary" title="Importar personaje nuevo para iniciar sesión">
                         👤 Cargar Personaje
                     </button>

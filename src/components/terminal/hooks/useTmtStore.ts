@@ -64,6 +64,11 @@ export interface TmtStore {
     characters: TmtCharacterEntry[];
     groups: TmtGroup[];
     activeCombatGroupIds?: string[];
+    details?: {
+        name: string;
+        description: string;
+        notes: string;
+    };
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -79,7 +84,12 @@ function buildEmptyStore(): TmtStore {
         },
         characters: [],
         groups: [],
-        activeCombatGroupIds: []
+        activeCombatGroupIds: [],
+        details: {
+            name: '',
+            description: '',
+            notes: ''
+        }
     };
 }
 
@@ -92,7 +102,7 @@ function extractVitals(characterData: any) {
         // Old format: ["Label: Value", ...]
         const healthLine = combatStats.find((s: any) => typeof s === 'string' && (s.includes('Puntos de Vida') || s.includes('PV')));
         const mentalLine = combatStats.find((s: any) => typeof s === 'string' && (s.includes('Equilibrio Mental') || s.includes('EQM')));
-        
+
         maxH = healthLine ? parseInt(healthLine.split(':')[1]?.trim()) : 0;
         maxM = mentalLine ? parseInt(mentalLine.split(':')[1]?.trim()) : 0;
     } else if (typeof combatStats === 'object' && combatStats !== null) {
@@ -104,7 +114,7 @@ function extractVitals(characterData: any) {
     // Fallbacks if not found (basic calculation)
     if (maxH === 0) {
         const con = characterData?.attributes?.values?.Constitución || 0;
-        maxH = con > 0 ? (con <= 100 ? Math.floor(con/2) : con - 45) : 0;
+        maxH = con > 0 ? (con <= 100 ? Math.floor(con / 2) : con - 45) : 0;
     }
     if (maxM === 0) {
         maxM = characterData?.attributes?.values?.Inteligencia || 0;
@@ -129,6 +139,9 @@ function readFromStorage(): TmtStore {
         if (!Array.isArray(parsed.activeCombatGroupIds)) {
             parsed.activeCombatGroupIds = [];
         }
+        if (!parsed.details) {
+            parsed.details = { name: '', description: '', notes: '' };
+        }
         parsed.characters = parsed.characters.map(c => {
             const entry = {
                 ...c,
@@ -140,7 +153,7 @@ function readFromStorage(): TmtStore {
             // Initialize PV/EQM if missing or failed to detect (0/0)
             if (typeof entry.currentHealth === 'undefined' || (entry.maxHealth === 0 && entry.maxMental === 0)) {
                 const { maxH, maxM } = extractVitals(entry.characterData);
-                
+
                 // Only overwrite if we actually found something better than 0/0
                 if (maxH !== 0 || maxM !== 0) {
                     entry.maxHealth = maxH;
@@ -316,9 +329,9 @@ export function useTmtStore() {
     }, []);
 
     const updateCharacterStat = useCallback((
-        charId: string, 
-        type: 'health' | 'mental', 
-        change: number, 
+        charId: string,
+        type: 'health' | 'mental',
+        change: number,
         notes: string
     ) => {
         if (change === 0) return;
@@ -470,6 +483,14 @@ export function useTmtStore() {
         });
     }, []);
 
+    const updateDetails = useCallback((details: { name: string, description: string, notes: string }) => {
+        setStore((prev) => {
+            const updated = { ...prev, details };
+            writeToStorage(updated);
+            return updated;
+        });
+    }, []);
+
     const resetStore = useCallback(() => {
         const fresh = buildEmptyStore();
         writeToStorage(fresh);
@@ -480,13 +501,16 @@ export function useTmtStore() {
 
     const exportStore = useCallback(() => {
         const current = readFromStorage();
+        const sessionName = current.details?.name || new Date().toISOString().slice(0, 10);
+        const fileName = `SHI-TMT-${sessionName.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.json`;
+
         const blob = new Blob([JSON.stringify(current, null, 2)], {
             type: 'application/json'
         });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `SHI-TMT-export-${new Date().toISOString().slice(0, 10)}.json`;
+        a.download = fileName;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
@@ -532,6 +556,7 @@ export function useTmtStore() {
         updateCharacterStat,
         updateActiveCombatGroups,
         deleteCharacterHistoryEntry,
+        updateDetails,
         resetAllActions,
         resetStore,
         exportStore,

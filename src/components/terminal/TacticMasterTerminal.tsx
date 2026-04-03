@@ -20,7 +20,7 @@ import Logger from '../../utils/Logger';
 // ─────────────────────────────────────────────────────────────────────────────
 // Types (local, for the combat tracker state only)
 // ─────────────────────────────────────────────────────────────────────────────
-type Screen = 'personajes' | 'combate';
+type Screen = 'personajes' | 'combate' | 'detalles';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Helpers
@@ -557,6 +557,69 @@ function CombateScreen({
     );
 }
 
+interface DetallesScreenProps {
+    details: { name: string; description: string; notes: string };
+    onUpdateDetails: (details: { name: string; description: string; notes: string }) => void;
+}
+
+function DetallesScreen({ details, onUpdateDetails }: DetallesScreenProps) {
+    const handleChange = (field: string, value: string) => {
+        onUpdateDetails({ ...details, [field]: value });
+    };
+
+    return (
+        <div className="tmt-screen">
+            <div className="tmt-screen-banner">
+                <span className="tmt-screen-banner-icon">📝</span>
+                <div className="tmt-screen-banner-text">
+                    <h2>Detalles de la Sesión</h2>
+                    <p>Información general y notas de la partida</p>
+                </div>
+            </div>
+
+            <div className="tmt-section">
+                <div className="tmt-section-header">
+                    <span className="tmt-section-title">Información Principal</span>
+                </div>
+                <div className="tmt-details-form">
+                    <div className="tmt-input-group-vertical">
+                        <label>Nombre de la Sesión</label>
+                        <input 
+                            type="text" 
+                            placeholder="Ej: Misión Alfa, Partida de Viernes..." 
+                            value={details.name}
+                            onChange={(e) => handleChange('name', e.target.value)}
+                        />
+                    </div>
+                    <div className="tmt-input-group-vertical">
+                        <label>Descripción / Sinopsis</label>
+                        <textarea 
+                            placeholder="Breve descripción de la aventura..." 
+                            value={details.description}
+                            onChange={(e) => handleChange('description', e.target.value)}
+                            rows={3}
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div className="tmt-section">
+                <div className="tmt-section-header">
+                    <span className="tmt-section-title">Notas del Master</span>
+                </div>
+                <div className="tmt-details-form">
+                    <textarea 
+                        className="tmt-notes-textarea"
+                        placeholder="Notas privadas, recordatorios, cronología..." 
+                        value={details.notes}
+                        onChange={(e) => handleChange('notes', e.target.value)}
+                    />
+                </div>
+            </div>
+        </div>
+    );
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 // Main TMT
 // ─────────────────────────────────────────────────────────────────────────────
@@ -568,7 +631,7 @@ export default function TacticMasterTerminal() {
         addCharacter, removeCharacter, updateCharacterRole, toggleCharacterGroup,
         addGroup, deleteGroup, updateCharacterInitiative, updateCharacterUsedActions,
         updateCharacterStat, updateActiveCombatGroups, deleteCharacterHistoryEntry,
-        resetAllActions, resetStore, exportStore, reload
+        updateDetails, resetAllActions, resetStore, exportStore, importStore, reload
     } = useTmtStore();
 
     // Character Sync from Viewer
@@ -580,7 +643,15 @@ export default function TacticMasterTerminal() {
         return () => channel.close();
     }, [reload]);
 
-    const handleImportWrapper = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleSessionImport = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (file) {
+            importStore(file);
+            event.target.value = '';
+        }
+    };
+
+    const handleAddCharacters = async (event: React.ChangeEvent<HTMLInputElement>) => {
         const files = Array.from(event.target.files ?? []);
         event.target.value = '';
         for (const file of files) {
@@ -598,10 +669,10 @@ export default function TacticMasterTerminal() {
             <TerminalHeader
                 title="SHI Tactic Master Terminal"
                 version={APP_VERSIONS.TACTIC_MASTER_TERMINAL}
-                onImport={handleImportWrapper}
-                onImportCharacter={() => { }}
+                onImport={handleSessionImport}
                 onExport={exportStore}
                 onReset={() => setShowResetModal(true)}
+                importLabel="Importar TMT"
                 showCharacterSheet={false}
             />
 
@@ -609,16 +680,18 @@ export default function TacticMasterTerminal() {
                 <div className="tmt-nav">
                     <button className={`tmt-nav-btn ${screen === 'personajes' ? 'active' : ''}`} onClick={() => setScreen('personajes')}>🎭 Personajes</button>
                     <button className={`tmt-nav-btn ${screen === 'combate' ? 'active' : ''}`} onClick={() => setScreen('combate')}>⚔️ Combate</button>
+                    <button className={`tmt-nav-btn ${screen === 'detalles' ? 'active' : ''}`} onClick={() => setScreen('detalles')}>📝 Detalles</button>
                 </div>
             </div>
 
             <main className="tmt-main-content">
-                {screen === 'personajes' ? (
+                {screen === 'personajes' && (
                     <PersonajesScreen
                         characters={characters} groups={groups} onImport={addCharacter} onRemove={removeCharacter}
                         onToggleRole={updateCharacterRole} onToggleGroup={toggleCharacterGroup} onAddGroup={addGroup} onDeleteGroup={deleteGroup}
                     />
-                ) : (
+                )}
+                {screen === 'combate' && (
                     <CombateScreen
                         characters={characters}
                         groups={groups}
@@ -629,6 +702,12 @@ export default function TacticMasterTerminal() {
                         onUpdateStat={updateCharacterStat}
                         onDeleteHistoryEntry={deleteCharacterHistoryEntry}
                         onResetAllActions={resetAllActions}
+                    />
+                )}
+                {screen === 'detalles' && (
+                    <DetallesScreen
+                        details={store.details || { name: '', description: '', notes: '' }}
+                        onUpdateDetails={updateDetails}
                     />
                 )}
             </main>
