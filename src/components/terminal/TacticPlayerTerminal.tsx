@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './TacticPlayerTerminal.css';
+import './CommonTerminal.css';
 import { adaptWebCharacter } from '../../utils/characterAdapter';
 import TerminalHeader from './components/TerminalHeader';
 import StatCard from './components/StatCard';

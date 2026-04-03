@@ -1,5 +1,5 @@
 import React from 'react';
-import '../TacticPlayerTerminal.css';
+import '../CommonTerminal.css';
 
 interface ModalProps {
     isOpen: boolean;

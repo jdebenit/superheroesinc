@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './TacticMasterTerminal.css';
+import './CommonTerminal.css';
 import { APP_VERSIONS } from '../../data/appVersions';
 import Modal from './components/Modal';
 import HistoryModal from './components/HistoryModal';

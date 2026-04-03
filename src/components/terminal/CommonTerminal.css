@@ -1,0 +1,223 @@
+/* CommonTerminal.css - Shared Styles for Tactic Terminal Suite */
+
+/* ========================================
+   Base Terminal Layout
+   ======================================== */
+.tactic-player-terminal,
+.tmt-container {
+    width: 100%;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    background: #f3f4f6;
+    overflow: hidden;
+}
+
+/* ========================================
+   Terminal Header Actions
+   ======================================== */
+.terminal-header-internal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: white;
+    border-bottom: 1px solid #e5e7eb;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+}
+
+.terminal-title-internal {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+    color: #111827;
+}
+
+.terminal-title-version {
+    font-size: 0.85rem;
+    color: #6b7280;
+    font-weight: 400;
+}
+
+.terminal-header-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+/* ========================================
+   Button System
+   ======================================== */
+.terminal-action-btn,
+.export-btn,
+.import-btn,
+.reset-btn,
+.terminal-btn-secondary,
+.terminal-btn-danger,
+.tmt-add-btn,
+.tmt-header-btn {
+    color: white;
+    border: none;
+    padding: 0.5rem 1.25rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: inherit;
+}
+
+/* Specific button colors */
+.import-btn,
+.tmt-add-btn {
+    background: #2563eb;
+}
+
+.import-btn:hover,
+.tmt-add-btn:hover {
+    background: #1d4ed8;
+}
+
+.export-btn {
+    background: #16a34a;
+}
+
+.export-btn:hover {
+    background: #15803d;
+}
+
+.reset-btn,
+.terminal-btn-danger {
+    background: #dc2626;
+}
+
+.reset-btn:hover,
+.terminal-btn-danger:hover {
+    background: #b91c1c;
+}
+
+.terminal-btn-secondary,
+.tmt-header-btn {
+    background: #f1f5f9;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+}
+
+.terminal-btn-secondary:hover,
+.tmt-header-btn:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+    color: #1e293b;
+}
+
+/* Shared hover interactions */
+.terminal-action-btn:hover,
+.export-btn:hover,
+.import-btn:hover,
+.reset-btn:hover,
+.terminal-btn-secondary:hover,
+.terminal-btn-danger:hover,
+.tmt-add-btn:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+}
+
+.terminal-btn-danger:hover {
+    filter: brightness(0.95);
+}
+
+/* ========================================
+   Modal System
+   ======================================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.modal-header {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: white;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    line-height: 1;
+    color: #9ca3af;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-btn:hover {
+    color: #4b5563;
+}
+
+/* ========================================
+   Empty States
+   ======================================== */
+.empty-state-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    text-align: center;
+    color: #9ca3af;
+}
+
+.empty-state-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.5;
+}
+
+.empty-state-msg {
+    font-size: 1rem;
+    font-weight: 500;
+    max-width: 400px;
+}

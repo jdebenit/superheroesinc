@@ -1,131 +1,12 @@
-/* TacticPlayerTerminal.css - Dashboard Style */
-
-.tactic-player-terminal {
-    width: 100%;
-    height: 100dvh;
-    display: flex;
-    flex-direction: column;
-    background: #f3f4f6;
-    overflow: hidden;
-}
+/* Base layout handles by CommonTerminal.css (.tactic-player-terminal) */
 
 /* ========================================
    Header
    ======================================== */
-.terminal-header-internal {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    background: white;
-    border-bottom: 1px solid #e5e7eb;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    flex-shrink: 0;
-}
-
-.terminal-title-internal {
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin: 0;
-    color: #111827;
-}
-
-.terminal-header-actions {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-}
+/* Header actions handled by CommonTerminal.css */
 
 /* Base de los botones de acción del header */
-.terminal-action-btn {
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-}
-
-.terminal-action-btn:hover {
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    transform: translateY(-1px);
-}
-
-.export-btn {
-    background: #16a34a;
-}
-
-.export-btn:hover {
-    background: #15803d;
-}
-
-.import-btn {
-    background: #2563eb;
-}
-
-.import-btn:hover {
-    background: #1d4ed8;
-}
-
-.reset-btn {
-    background: #dc2626;
-}
-
-.reset-btn:hover {
-    background: #b91c1c;
-}
-
-.export-btn,
-.import-btn,
-.reset-btn,
-.terminal-btn-secondary,
-.terminal-btn-danger {
-    color: white;
-    border: none;
-    padding: 0.5rem 1.25rem;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-}
-
-.terminal-btn-secondary {
-    background: #f1f5f9;
-    color: #475569;
-    border: 1px solid #e2e8f0;
-}
-
-.terminal-btn-secondary:hover {
-    background: #f8fafc;
-    border-color: #cbd5e1;
-    color: #1e293b;
-}
-
-.terminal-btn-danger {
-    background: #dc2626;
-}
-
-.terminal-btn-danger:hover {
-    background: #b91c1c;
-}
-
-.export-btn:hover,
-.import-btn:hover,
-.reset-btn:hover,
-.terminal-btn-danger:hover {
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    transform: translateY(-1px);
-    filter: brightness(0.95);
-}
+/* Button system handled by CommonTerminal.css */
 
 /* ========================================
    Character Header
@@ -749,72 +630,10 @@
 /* ========================================
    Modal Overlay & Content
    ======================================== */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.6);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2000;
-    padding: 1rem;
-    backdrop-filter: blur(2px);
-}
-
-.modal-content {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    max-height: 90vh;
-    width: 90%;
-    max-width: 500px;
-}
-
+/* Modal styles handled by CommonTerminal.css */
 .modal-content.advanced-combat-modal {
-    /* Only extends max-width from base */
     max-width: none;
     width: 100%;
-}
-
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.25rem 1.5rem;
-    background: #111827;
-    border-bottom: 1px solid #374151;
-}
-
-.modal-header h3 {
-    margin: 0;
-    font-size: 1.25rem;
-    color: #f9fafb;
-    font-weight: 700;
-}
-
-.close-btn {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    color: #9ca3af;
-    cursor: pointer;
-    transition: color 0.2s;
-}
-
-.close-btn:hover {
-    color: #1f2937;
-}
-
-.modal-body {
-    padding: 1.5rem;
-    overflow-y: auto;
-    flex: 1;
 }
 
 .modal-actions {
