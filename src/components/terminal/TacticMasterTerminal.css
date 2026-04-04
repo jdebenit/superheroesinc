@@ -141,6 +141,96 @@
 }
 
 /* ========================================
+   Group Manager & Color Palette
+   ======================================== */
+.tmt-group-admin {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.tmt-group-badges {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    padding: 0.5rem 0;
+}
+
+.tmt-group-badge-item {
+    border: 1px solid rgba(0,0,0,0.1);
+    padding: 0.45rem 1.1rem;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.tmt-group-badge-item:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    filter: brightness(1.1);
+}
+
+.tmt-group-badges-container {
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.tmt-color-palette {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 0.5rem;
+    margin: 0.75rem 0;
+    padding: 0.75rem;
+    background: #f8fafc;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+}
+
+.tmt-palette-btn {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 6px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.tmt-palette-btn:hover {
+    transform: scale(1.15);
+    z-index: 1;
+}
+
+.tmt-palette-btn.active {
+    border-color: #1e293b;
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.tmt-group-list-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: #f8fafc;
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    margin-bottom: 0.5rem;
+}
+
+.tmt-group-list-item .tmt-group-color-preview {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    flex-shrink: 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* ========================================
    Filters
    ======================================== */
 .tmt-groups-filter-bar {
@@ -301,6 +391,15 @@
     color: #ef4444;
 }
 
+.tmt-add-btn {
+    padding: 0.5rem 1rem;
+    font-weight: 700;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
 /* ========================================
    Entity List (Characters Screen)
    ======================================== */
@@ -371,6 +470,23 @@
     background: white; border: 1px solid #e2e8f0; border-radius: 6px; width: 32px; height: 32px; 
     display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s;
 }
+
+.tmt-icon-btn.premium {
+    background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+    border-color: #cbd5e1;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.8);
+    width: 38px;
+    height: 38px;
+    font-size: 1.2rem;
+}
+
+.tmt-icon-btn.premium:hover {
+    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+    border-color: #94a3b8;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
 .tmt-icon-btn:hover { background: #f1f5f9; border-color: #cbd5e1; }
 .tmt-icon-btn.danger:hover { background: #fee2e2; border-color: #ef4444; color: #ef4444; }
 

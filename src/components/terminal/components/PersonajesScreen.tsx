@@ -40,6 +40,7 @@ export default function PersonajesScreen({
 }: PersonajesScreenProps) {
     const [showGroupAdmin, setShowGroupAdmin] = useState(false);
     const [newGroupName, setNewGroupName] = useState('');
+    const [selectedColor, setSelectedColor] = useState(PRESET_COLORS[0]);
     const pjInputRef = useRef<HTMLInputElement>(null);
     const pnjInputRef = useRef<HTMLInputElement>(null);
 
@@ -72,25 +73,24 @@ export default function PersonajesScreen({
                     <h2>Personajes y Grupos</h2>
                 </div>
                 <div className="tmt-screen-actions">
-                    <button className="tmt-icon-btn" title="Administrar Grupos" onClick={() => setShowGroupAdmin(true)}>🏷️</button>
+                    <button className="tmt-add-btn" onClick={() => setShowGroupAdmin(true)}>
+                        🏷️ Administrar Grupos
+                    </button>
                 </div>
             </div>
 
             {groups.length > 0 && (
-                <div className="tmt-section" style={{ marginBottom: '2rem' }}>
+                <div className="tmt-section tmt-group-badges-container" style={{ padding: '0.75rem 1.5rem', background: '#f8fafc' }}>
                     <div className="tmt-group-badges">
                         {groups.map(g => (
-                            <button
-                                key={g.id}
-                                className="tmt-group-badge-item"
+                            <div 
+                                key={g.id} 
+                                className="tmt-group-badge-item" 
                                 style={{ backgroundColor: g.color || '#4b5563' }}
-                                onClick={() => {
-                                    setNewGroupName(g.name);
-                                    setShowGroupAdmin(true);
-                                }}
+                                onClick={() => setShowGroupAdmin(true)}
                             >
                                 {g.name}
-                            </button>
+                            </div>
                         ))}
                     </div>
                 </div>
@@ -126,17 +126,37 @@ export default function PersonajesScreen({
                 </div>
             </div>
 
-            <Modal isOpen={showGroupAdmin} onClose={() => setShowGroupAdmin(false)} title="Categorías y Grupos">
+            <Modal isOpen={showGroupAdmin} onClose={() => setShowGroupAdmin(false)} title="Administrar Grupos">
                 <div className="tmt-group-admin">
-                    <div className="tmt-add-group-form" style={{ marginBottom: '1.5rem', display: 'flex', gap: '0.5rem' }}>
-                        <input className="tmt-details-input" placeholder="Nombre del grupo..." value={newGroupName} onChange={(e) => setNewGroupName(e.target.value)} style={{ flex: 1 }} />
-                        <button className="tmt-add-btn" onClick={() => { if (newGroupName) { onAddGroup(newGroupName); setNewGroupName(''); } }}>+</button>
+                    <div className="tmt-add-group-form">
+                        <p style={{ margin: '0 0 0.5rem 0', fontSize: '0.85rem', fontWeight: 700, color: '#64748b' }}>NUEVO GRUPO</p>
+                        <div style={{ display: 'flex', gap: '0.5rem' }}>
+                            <input className="tmt-details-input" placeholder="Nombre del grupo..." value={newGroupName} onChange={(e) => setNewGroupName(e.target.value)} style={{ flex: 1 }} />
+                            <button className="tmt-add-btn" onClick={() => { 
+                                if (newGroupName) { 
+                                    onAddGroup(newGroupName, selectedColor); 
+                                    setNewGroupName(''); 
+                                } 
+                            }}>Añadir</button>
+                        </div>
+                        <div className="tmt-color-palette">
+                            {PRESET_COLORS.map(c => (
+                                <button 
+                                    key={c} 
+                                    className={`tmt-palette-btn${selectedColor === c ? ' active' : ''}`} 
+                                    style={{ backgroundColor: c }} 
+                                    onClick={() => setSelectedColor(c)}
+                                />
+                            ))}
+                        </div>
                     </div>
+
                     <div className="tmt-group-list">
+                        <p style={{ margin: '0 0 1rem 0', fontSize: '0.85rem', fontWeight: 700, color: '#64748b' }}>GRUPOS EXISTENTES</p>
                         {groups.map(g => (
                             <div key={g.id} className="tmt-group-list-item">
-                                <input type="color" className="tmt-color-picker" value={g.color || '#4b5563'} onChange={(e) => onUpdateGroup(g.id, g.name, e.target.value)} />
-                                <span className="tmt-group-name">{g.name}</span>
+                                <div className="tmt-group-color-preview" style={{ backgroundColor: g.color || '#4b5563' }} />
+                                <span className="tmt-group-name" style={{ flex: 1, fontWeight: 700 }}>{g.name}</span>
                                 <button className="tmt-icon-btn danger" onClick={() => onDeleteGroup(g.id)}>🗑️</button>
                             </div>
                         ))}
