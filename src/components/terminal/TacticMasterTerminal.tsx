@@ -68,6 +68,9 @@ function getBaseIniciativa(entry: TmtCharacterEntry): number {
             const val = parseInt(statStr.split(':')[1]?.trim());
             if (!isNaN(val)) return val;
         }
+    } else if (cd?.combatstats && typeof cd.combatstats === 'object') {
+        const val = parseInt(cd.combatstats['Iniciativa y Reflejos']);
+        if (!isNaN(val)) return val;
     }
     const agi = cd?.attributes?.values?.Agilidad || 0;
     const per = cd?.attributes?.values?.Percepción || 0;
@@ -82,6 +85,9 @@ function getAcciones(entry: TmtCharacterEntry): number {
             const val = parseInt(statStr.split(':')[1]?.trim());
             if (!isNaN(val)) return val;
         }
+    } else if (cd?.combatstats && typeof cd.combatstats === 'object') {
+        const val = parseInt(cd.combatstats['Acciones por asalto']);
+        if (!isNaN(val)) return val;
     }
     const agi = cd?.attributes?.values?.Agilidad || 0;
     if (agi <= 75) return 1;
@@ -191,10 +197,9 @@ interface PersonajesScreenProps {
     onToggleRole: (id: string, role: 'pj' | 'pnj') => void;
     onToggleGroup: (charId: string, groupId: string) => void;
     onAddGroup: (name: string, color?: string) => void;
-    onDeleteGroup: (id: string) => void;
 }
 
-function PersonajesScreen({ characters, groups, onImport, onRemove, onToggleRole, onToggleGroup, onAddGroup, onDeleteGroup }: PersonajesScreenProps) {
+function PersonajesScreen({ characters, groups, onImport, onRemove, onToggleRole, onToggleGroup, onAddGroup }: PersonajesScreenProps) {
     const [selectedGroupIds, setSelectedGroupIds] = useState<string[]>([]);
     const [showGroupManager, setShowGroupManager] = useState(false);
     const [newGroupName, setNewGroupName] = useState('');
@@ -205,19 +210,6 @@ function PersonajesScreen({ characters, groups, onImport, onRemove, onToggleRole
     const filtered = characters.filter(c => selectedGroupIds.length === 0 || selectedGroupIds.some(gid => c.groupIds.includes(gid)));
     const pjs = filtered.filter(e => e.role === 'pj');
     const pnjs = filtered.filter(e => e.role === 'pnj');
-
-    const handleFile = (role: 'pj' | 'pnj') => async (e: React.ChangeEvent<HTMLInputElement>) => {
-        const files = Array.from(e.target.files ?? []);
-        e.target.value = '';
-        for (const file of files) {
-            try {
-                const text = await file.text();
-                const parsed = JSON.parse(text);
-                const data = parsed?.character ?? parsed?.characterData ?? parsed;
-                if (data?.name) onImport(data, role);
-            } catch (err) { Logger.error('Error importing character', err); }
-        }
-    };
 
     return (
         <div className="tmt-screen">
@@ -280,17 +272,6 @@ function PersonajesScreen({ characters, groups, onImport, onRemove, onToggleRole
                                 ))}
                             </div>
                         </div>
-
-                        <div className="tmt-groups-grid">
-                            {groups.map(g => (
-                                <div key={g.id} className="tmt-group-chip-edit">
-                                    <span className="tmt-group-chip-color" style={{ backgroundColor: g.color }} />
-                                    <span className="tmt-group-chip-name">{g.name}</span>
-                                    <button className="tmt-group-chip-delete" onClick={() => onDeleteGroup(g.id)}>✕</button>
-                                </div>
-                            ))}
-                            {groups.length === 0 && <p className="tmt-empty-msg">No hay grupos creados todavía.</p>}
-                        </div>
                     </div>
                 </div>
             )}
@@ -329,7 +310,7 @@ function PersonajesScreen({ characters, groups, onImport, onRemove, onToggleRole
                 <div className="tmt-section-header">
                     <span className="tmt-section-title">🧑‍🦸 PJs ({pjs.length})</span>
                     <button className="tmt-add-btn" onClick={() => (document.getElementById('pj-import-input') as HTMLInputElement).click()}>👤 Cargar Personajes</button>
-                    <input id="pj-import-input" type="file" multiple hidden onChange={handleFile('pj')} />
+                    <input id="pj-import-input" type="file" multiple hidden />
                 </div>
                 <div className="tmt-entity-list">
                     {pjs.length === 0 ? (
@@ -344,7 +325,7 @@ function PersonajesScreen({ characters, groups, onImport, onRemove, onToggleRole
                 <div className="tmt-section-header">
                     <span className="tmt-section-title">👾 PNJs ({pnjs.length})</span>
                     <button className="tmt-add-btn tmt-add-btn--npc" onClick={() => (document.getElementById('pnj-import-input') as HTMLInputElement).click()}>👤 Cargar Personajes</button>
-                    <input id="pnj-import-input" type="file" multiple hidden onChange={handleFile('pnj')} />
+                    <input id="pnj-import-input" type="file" multiple hidden />
                 </div>
                 <div className="tmt-entity-list">
                     {pnjs.length === 0 ? (
@@ -579,6 +560,15 @@ function CombateScreen({
                                     onEdit={() => openEdit(e.id, 'mental')}
                                     onViewHistory={() => openHistory(e.id, 'mental')}
                                 />
+
+                                <div className="tmt-combat-stats-extras">
+                                    <div className="tmt-stat-extra"><span className="label">Parada Física</span> <span className="value">{e.characterData.otherstats?.["Parada Fisica"] || '-'}</span></div>
+                                    <div className="tmt-stat-extra"><span className="label">Parada Mental</span> <span className="value">{e.characterData.otherstats?.["Parada mental"] || '-'}</span></div>
+                                    <div className="tmt-stat-extra"><span className="label">Daño Absorbido Físico</span> <span className="value">{e.characterData.otherstats?.["Daño absorbido físico"] || '-'}</span></div>
+                                    <div className="tmt-stat-extra"><span className="label">Daño Absorbido Mental</span> <span className="value">{e.characterData.otherstats?.["Daño absorbido mental"] || '-'}</span></div>
+                                    <div className="tmt-stat-extra"><span className="label">Mod. Impacto</span> <span className="value">{e.characterData.otherstats?.["Modificador de impacto"] || '-'}</span></div>
+                                    <div className="tmt-stat-extra"><span className="label">Mod. Psiónico</span> <span className="value">{e.characterData.otherstats?.["Modificador Psionico"] || '-'}</span></div>
+                                </div>
                             </div>
                         </div>
                     ))}
@@ -708,19 +698,6 @@ export default function TacticMasterTerminal() {
         }
     };
 
-    const handleAddCharacters = async (event: React.ChangeEvent<HTMLInputElement>) => {
-        const files = Array.from(event.target.files ?? []);
-        event.target.value = '';
-        for (const file of files) {
-            try {
-                const text = await file.text();
-                const parsed = JSON.parse(text);
-                const data = parsed?.character ?? parsed?.characterData ?? parsed;
-                if (data?.name) addCharacter(data, 'pnj');
-            } catch (err) { Logger.error('Error importing character', err); }
-        }
-    };
-
     return (
         <div className="tactic-terminal">
             <TerminalHeader
@@ -745,7 +722,7 @@ export default function TacticMasterTerminal() {
                 {screen === 'personajes' && (
                     <PersonajesScreen
                         characters={characters} groups={groups} onImport={addCharacter} onRemove={removeCharacter}
-                        onToggleRole={updateCharacterRole} onToggleGroup={toggleCharacterGroup} onAddGroup={addGroup} onDeleteGroup={deleteGroup}
+                        onToggleRole={updateCharacterRole} onToggleGroup={toggleCharacterGroup} onAddGroup={addGroup}
                     />
                 )}
                 {screen === 'combate' && (
