@@ -212,8 +212,6 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
 
     // JSON export using the same hook as CharacterSheet
     const adaptedForExport = selectedCharacter ? adaptWebCharacter(selectedCharacter.data) : null;
-    console.log("Selected Character:", selectedCharacter);
-    console.log("Adapted for Export:", adaptedForExport);
     const { downloadJson } = useJsonExport(adaptedForExport ?? {});
 
     return (
@@ -376,6 +374,14 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
                 {selectedCharacter ? (
                     <div className="content-card">
                         <div className="content-header">
+                            <h2 className="content-title">
+                                {getCharDisplayName(selectedCharacter.data)}
+                                {selectedCharacter.data.alias && selectedCharacter.data.name && (
+                                    <div className="content-subtitle">
+                                        {selectedCharacter.data.name}
+                                    </div>
+                                )}
+                            </h2>
                             <span className="content-source-badge">
                                 {selectedCharacter.source === 'web'
                                     ? '🌐 Ficha Oficial de la Web'
@@ -399,6 +405,18 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
                             <div className="summary-grid">
                                 <div>
                                     <strong>Nivel:</strong> {selectedCharacter.data.level || 1}
+                                </div>
+                                <div>
+                                    <strong>Alias:</strong> {selectedCharacter.data.alias || '-'}
+                                </div>
+                                <div>
+                                    <strong>Nombre:</strong> {selectedCharacter.data.name || '-'}
+                                </div>
+                                <div>
+                                    <strong>Puntos de Vida:</strong> {selectedCharacter.data.combatstats?.["Puntos de Vida"] || '-'}
+                                </div>
+                                <div>
+                                    <strong>Equilibrio Mental:</strong> {selectedCharacter.data.combatstats?.["Equilibrio Mental"] || '-'}
                                 </div>
                                 <div>
                                     <strong>Origen:</strong> {selectedCharacter.data?.origin?.items?.[0] ? Object.keys(selectedCharacter.data.origin.items[0])[0] : 'Desconocido'}
