@@ -20,6 +20,23 @@ interface CharacterViewerProps {
     webCharacters?: StoredCharacter[];
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Helpers
+// ─────────────────────────────────────────────────────────────────────────────
+function initials(name: string): string {
+    if (!name) return '?';
+    return name
+        .split(' ')
+        .filter(Boolean)
+        .slice(0, 2)
+        .map((w) => w[0]?.toUpperCase() ?? '')
+        .join('');
+}
+
+function getCharDisplayName(data: any): string {
+    return data.alias || data.name || '(Sin nombre)';
+}
+
 export default function CharacterViewer({ webCharacters = [] }: CharacterViewerProps) {
     const [localCharacters, setLocalCharacters] = useState<StoredCharacter[]>([]);
     const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -212,6 +229,18 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
                                     className={`list-item ${selectedId === char.id ? 'active' : ''} ${deletingId === char.id ? 'deleting' : ''}`}
                                 >
                                     <div className="list-item-clickable" onClick={() => setSelectedId(char.id)}>
+                                        <div className={`char-avatar ${char.source || 'local'}`}>
+                                            {char.data.icon ? (
+                                                <img 
+                                                    src={char.data.icon.startsWith('http') || char.data.icon.startsWith('/') || char.data.icon.startsWith('data:') 
+                                                        ? char.data.icon 
+                                                        : `/${char.data.icon}`} 
+                                                    alt={getCharDisplayName(char.data)} 
+                                                />
+                                            ) : (
+                                                initials(getCharDisplayName(char.data))
+                                            )}
+                                        </div>
                                         <div className="list-item-info">
                                             <div className="char-name">
                                                 {char.data.alias ? (
@@ -293,6 +322,18 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
                                         onClick={() => setSelectedId(char.id)}
                                         className={`web-list-item ${selectedId === char.id ? 'active' : ''}`}
                                     >
+                                        <div className={`char-avatar web`}>
+                                            {char.data.icon ? (
+                                                <img 
+                                                    src={char.data.icon.startsWith('http') || char.data.icon.startsWith('/') || char.data.icon.startsWith('data:') 
+                                                        ? char.data.icon 
+                                                        : `/${char.data.icon}`} 
+                                                    alt={getCharDisplayName(char.data)} 
+                                                />
+                                            ) : (
+                                                initials(getCharDisplayName(char.data))
+                                            )}
+                                        </div>
                                         <div className="list-item-info">
                                             <div className="web-char-name">
                                                 {char.data.alias ? (
