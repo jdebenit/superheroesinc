@@ -75,15 +75,26 @@ export default function EntityRow({ entry, groups, onRemove, onToggleRole, onTog
                 <button className="tmt-icon-btn danger" onClick={() => onRemove(entry.id)}>🗑️</button>
 
                 <Modal isOpen={showGroupModal} onClose={() => setShowGroupModal(false)} title={`Grupos: ${displayName}`}>
-                    <div className="tmt-modal-group-list">
-                        {groups.map(g => (
-                            <label key={g.id} className="tmt-dropdown-item tmt-modal-item">
-                                <input type="checkbox" checked={entry.groupIds.includes(g.id)} onChange={() => onToggleGroup(entry.id, g.id)} />
-                                <span className="tmt-group-name-label">{g.name}</span>
-                            </label>
-                        ))}
-                        <button className="tmt-add-btn" onClick={() => setShowGroupModal(false)} style={{ width: '100%', marginTop: '1rem' }}>Cerrar</button>
+                    <div className="tmt-group-select-grid">
+                        {groups.map(g => {
+                            const isActive = entry.groupIds.includes(g.id);
+                            return (
+                                <label 
+                                    key={g.id} 
+                                    className={`tmt-group-select-chip${isActive ? ' active' : ''}`}
+                                    style={{ '--group-color': g.color || '#4b5563' } as React.CSSProperties}
+                                >
+                                    <input 
+                                        type="checkbox" 
+                                        checked={isActive} 
+                                        onChange={() => onToggleGroup(entry.id, g.id)} 
+                                    />
+                                    <span className="tmt-group-select-label">{g.name}</span>
+                                </label>
+                            );
+                        })}
                     </div>
+                    <button className="tmt-add-btn" onClick={() => setShowGroupModal(false)} style={{ width: '100%', marginTop: '1rem' }}>Cerrar</button>
                 </Modal>
             </div>
         </div>
