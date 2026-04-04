@@ -1,17 +1,17 @@
 {
   "name": "León Rojo",
-  "combatstats": [
-    "Acciones por asalto: 3",
-    "Iniciativa y Reflejos: 50",
-    "Puntos de Vida: 150"
-  ],
-  "otherstats": [
-    "Modificador de fuerza: 1d100+30",
-    "Peso Levantado: 20 Toneladas",
-    "Daño absorbido físico: 120",
-    "Parada Fisica: 25",
-    "Salto (alto / largo): 33m/100m"
-  ],
+  "combatstats": {
+    "Acciones por asalto": "3",
+    "Iniciativa y Reflejos": "50",
+    "Puntos de Vida": "150"
+  },
+  "otherstats": {
+    "Modificador de fuerza": "1d100+30",
+    "Peso Levantado": "20 Toneladas",
+    "Daño absorbido físico": "120",
+    "Parada Fisica": "25",
+    "Salto (alto / largo)": "33m/100m"
+  },
   "attributes": {
     "values": {
       "Fuerza": 150,

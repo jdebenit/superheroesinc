@@ -1,26 +1,26 @@
 {
   "name": "Agente de Policia",
-  "combatstats": [
-    "Acciones por asalto: 2",
-    "Iniciativa y Reflejos: 39",
-    "Puntos de Vida: 65",
-    "Equilibrio Mental: 70"
-  ],
-  "otherstats": [
-    "Inconsciencia: 6",
-    "Recuperación: 1 PV/h",
-    "Resistencia a gases y venenos: 26%",
-    "Resistencia a prejuicios: 20%",
-    "Modificador de fuerza: 1d6",
-    "Peso Levantado: 160 Kg.",
-    "Daño absorbido físico: 0 (20)",
-    "Daño absorbido mental: 0",
-    "Modificador de impacto: 0",
-    "Modificador Psionico: 0",
-    "Parada Fisica: 19",
-    "Parada mental: 10",
-    "Salto (alto / largo): 2,3m/6,9m"
-  ],
+  "combatstats": {
+    "Acciones por asalto": "2",
+    "Iniciativa y Reflejos": "39",
+    "Puntos de Vida": "65",
+    "Equilibrio Mental": "70"
+  },
+  "otherstats": {
+    "Inconsciencia": "6",
+    "Recuperación": "1 PV/h",
+    "Resistencia a gases y venenos": "26%",
+    "Resistencia a prejuicios": "20%",
+    "Modificador de fuerza": "1d6",
+    "Peso Levantado": "160 Kg.",
+    "Daño absorbido físico": "0 (20)",
+    "Daño absorbido mental": "0",
+    "Modificador de impacto": "0",
+    "Modificador Psionico": "0",
+    "Parada Fisica": "19",
+    "Parada mental": "10",
+    "Salto (alto / largo)": "2,3m/6,9m"
+  },
   "attributes": {
     "values": {
       "Fuerza": 80,

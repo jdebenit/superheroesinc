@@ -2,27 +2,27 @@
   "name": "Motero Road Reapers",
   "level": 1,
   "icon": "/icons/motera.png",
-  "combatstats": [
-    "Acciones por asalto: 2",
-    "Iniciativa y Reflejos: 42",
-    "Puntos de Vida: 35",
-    "Equilibrio Mental: 60"
-  ],
-  "otherstats": [
-    "Inconsciencia: 3",
-    "Recuperación: 1 PV/h",
-    "Resistencia a gases y venenos: 23%",
-    "Resistencia a prejuicios: 60%",
-    "Modificador de fuerza: 1d6",
-    "Peso Levantado: 160Kg",
-    "Daño absorbido físico: 0",
-    "Daño absorbido mental: 0",
-    "Modificador de impacto: 0",
-    "Modificador Psionico: -50",
-    "Parada Fisica: 22",
-    "Parada mental: -25",
-    "Salto (alto / largo): 2,6m/8m"
-  ],
+  "combatstats": {
+    "Acciones por asalto": "2",
+    "Iniciativa y Reflejos": "42",
+    "Puntos de Vida": "35",
+    "Equilibrio Mental": "60"
+  },
+  "otherstats": {
+    "Inconsciencia": "3",
+    "Recuperación": "1 PV/h",
+    "Resistencia a gases y venenos": "23%",
+    "Resistencia a prejuicios": "60%",
+    "Modificador de fuerza": "1d6",
+    "Peso Levantado": "160Kg",
+    "Daño absorbido físico": "0",
+    "Daño absorbido mental": "0",
+    "Modificador de impacto": "0",
+    "Modificador Psionico": "-50",
+    "Parada Fisica": "22",
+    "Parada mental": "-25",
+    "Salto (alto / largo)": "2,6m/8m"
+  },
   "attributes": {
     "values": {
       "Fuerza": 80,

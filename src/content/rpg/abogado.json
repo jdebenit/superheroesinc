@@ -1,26 +1,26 @@
 {
   "name": "Abogado",
-  "combatstats": [
-    "Acciones por asalto: 1",
-    "Iniciativa y Reflejos: 32",
-    "Puntos de Vida: 55",
-    "Equilibrio Mental: 80"
-  ],
-  "otherstats": [
-    "Inconsciencia: 5",
-    "Recuperación: 1 PV/h",
-    "Resistencia a gases y venenos: 23%",
-    "Resistencia a prejuicios: 30%",
-    "Modificador de fuerza: 1d4",
-    "Peso Levantado: 65 Kg.",
-    "Daño absorbido físico: 0",
-    "Daño absorbido mental: 0",
-    "Modificador de impacto: 0",
-    "Modificador Psionico: 0",
-    "Parada Fisica: 15",
-    "Parada mental: 10",
-    "Salto (alto / largo): 1,8m/5,4m"
-  ],
+  "combatstats": {
+    "Acciones por asalto": "1",
+    "Iniciativa y Reflejos": "32",
+    "Puntos de Vida": "55",
+    "Equilibrio Mental": "80"
+  },
+  "otherstats": {
+    "Inconsciencia": "5",
+    "Recuperación": "1 PV/h",
+    "Resistencia a gases y venenos": "23%",
+    "Resistencia a prejuicios": "30%",
+    "Modificador de fuerza": "1d4",
+    "Peso Levantado": "65 Kg.",
+    "Daño absorbido físico": "0",
+    "Daño absorbido mental": "0",
+    "Modificador de impacto": "0",
+    "Modificador Psionico": "0",
+    "Parada Fisica": "15",
+    "Parada mental": "10",
+    "Salto (alto / largo)": "1,8m/5,4m"
+  },
   "attributes": {
     "values": {
       "Fuerza": 65,

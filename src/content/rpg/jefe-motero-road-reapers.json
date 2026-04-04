@@ -2,27 +2,27 @@
   "name": "Jefe Motero Road Reapers",
   "level": 3,
   "icon": "/icons/jefe-moteros.png",
-  "combatstats": [
-    "Acciones por asalto: 1",
-    "Iniciativa y Reflejos: 40",
-    "Puntos de Vida: 60",
-    "Equilibrio Mental: 80"
-  ],
-  "otherstats": [
-    "Inconsciencia: 6",
-    "Recuperación: 1 PV/h",
-    "Resistencia a gases y venenos: 33%",
-    "Resistencia a prejuicios: 60%",
-    "Modificador de fuerza: 1d8",
-    "Peso Levantado: 297Kg",
-    "Daño absorbido físico: 0",
-    "Daño absorbido mental: 0",
-    "Modificador de impacto: 0",
-    "Modificador Psionico: -10",
-    "Parada Fisica: 18",
-    "Parada mental: 0",
-    "Salto (alto / largo): 2m/6m"
-  ],
+  "combatstats": {
+    "Acciones por asalto": "1",
+    "Iniciativa y Reflejos": "40",
+    "Puntos de Vida": "60",
+    "Equilibrio Mental": "80"
+  },
+  "otherstats": {
+    "Inconsciencia": "6",
+    "Recuperación": "1 PV/h",
+    "Resistencia a gases y venenos": "33%",
+    "Resistencia a prejuicios": "60%",
+    "Modificador de fuerza": "1d8",
+    "Peso Levantado": "297Kg",
+    "Daño absorbido físico": "0",
+    "Daño absorbido mental": "0",
+    "Modificador de impacto": "0",
+    "Modificador Psionico": "-10",
+    "Parada Fisica": "18",
+    "Parada mental": "0",
+    "Salto (alto / largo)": "2m/6m"
+  },
   "attributes": {
     "values": {
       "Fuerza": 99,

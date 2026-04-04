@@ -11,27 +11,27 @@
       }
     ]
   },
-  "combatstats": [
-    "Acciones por asalto: 3",
-    "Iniciativa y Reflejos: 56",
-    "Puntos de Vida: 102",
-    "Equilibrio Mental: 65"
-  ],
-  "otherstats": [
-    "Inconsciencia: 10",
-    "Recuperación: 1 PV/h",
-    "Resistencia a gases y venenos: 328%",
-    "Resistencia a prejuicios: 25%",
-    "Modificador de fuerza: 1d10",
-    "Peso Levantado: 500Kg",
-    "Daño absorbido físico: (50)",
-    "Daño absorbido mental: 0",
-    "Modificador de impacto: 10",
-    "Modificador Psionico: 25",
-    "Parada Fisica: 30",
-    "Parada mental: 50+20",
-    "Salto (alto / largo): 3,6m/11m"
-  ],
+  "combatstats": {
+    "Acciones por asalto": "3",
+    "Iniciativa y Reflejos": "56",
+    "Puntos de Vida": "102",
+    "Equilibrio Mental": "65"
+  },
+  "otherstats": {
+    "Inconsciencia": "10",
+    "Recuperación": "1 PV/h",
+    "Resistencia a gases y venenos": "328%",
+    "Resistencia a prejuicios": "25%",
+    "Modificador de fuerza": "1d10",
+    "Peso Levantado": "500Kg",
+    "Daño absorbido físico": "(50)",
+    "Daño absorbido mental": "0",
+    "Modificador de impacto": "10",
+    "Modificador Psionico": "25",
+    "Parada Fisica": "30",
+    "Parada mental": "50+20",
+    "Salto (alto / largo)": "3,6m/11m"
+  },
   "attributes": {
     "values": {
       "Fuerza": 100,
