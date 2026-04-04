@@ -1,6 +1,6 @@
 {
-  "name": "Centurion",
-  "level": 710,
+  "name": "Castaphilo",
+  "level": 10,
   "origin": {
     "items": [
       {
@@ -231,7 +231,7 @@
       }
     ]
   },
-  "alias": "",
+  "alias": "Centurion",
   "notes": "",
   "totalCost": "",
   "background": {

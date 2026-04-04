@@ -84,6 +84,7 @@ const rpgCollection = defineCollection({
     type: 'data',
     schema: z.object({
         name: z.string().optional(),
+        alias: z.string().optional(),
         totalCost: z.union([z.number(), z.string()]).optional(),
         level: z.union([z.number(), z.string()]).optional(),
         origin: z.object({
@@ -163,12 +164,21 @@ const rpgCollection = defineCollection({
             items: z.array(z.any())
         }).optional(),
         magicTableRolls: z.array(z.any()).optional(),
-        combatstats: z.array(z.string()).optional(),
-        otherstats: z.array(z.string()).optional(),
+        // Stats - handle both old array and new object formats
+        combatstats: z.union([z.array(z.string()), z.record(z.string(), z.any())]).optional(),
+        otherstats: z.union([z.array(z.string()), z.record(z.string(), z.any())]).optional(),
         notes: z.union([z.string(), z.array(z.string())]).optional(),
         traumas: z.record(z.string(), z.string()).optional(),
         icon: z.string().optional(),
         exoskeletonConfig: z.string().optional(),
+        meta: z.object({
+            version: z.string().optional(),
+            generator: z.string().optional()
+        }).optional(),
+        uiState: z.any().optional(),
+        varios: z.object({
+            items: z.array(z.any())
+        }).optional(),
     }),
 });
 

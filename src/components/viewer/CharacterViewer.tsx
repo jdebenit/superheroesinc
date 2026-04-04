@@ -45,6 +45,14 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
     const [showWebCharacters, setShowWebCharacters] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
+    // Normalize and adapt web characters from props
+    const adaptedWebChars = React.useMemo(() => {
+        return webCharacters.map(char => ({
+            ...char,
+            data: adaptWebCharacter(char.data)
+        }));
+    }, [webCharacters]);
+
     // Load from localStorage on mount
     useEffect(() => {
         try {
@@ -194,11 +202,13 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
     };
 
     // Combine lists for selection finding
-    const allCharacters = [...localCharacters, ...webCharacters];
+    const allCharacters = [...localCharacters, ...adaptedWebChars];
     const selectedCharacter = allCharacters.find(c => c.id === selectedId);
 
-    // Sort web characters alphabetically
-    const sortedWebChars = [...webCharacters].sort((a, b) => a.data.name.localeCompare(b.data.name));
+    // Sort web characters alphabetically by Display Name
+    const sortedWebChars = [...adaptedWebChars].sort((a, b) => 
+        getCharDisplayName(a.data).localeCompare(getCharDisplayName(b.data))
+    );
 
     // JSON export using the same hook as CharacterSheet
     const adaptedForExport = selectedCharacter ? adaptWebCharacter(selectedCharacter.data) : null;
@@ -366,14 +376,6 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
                 {selectedCharacter ? (
                     <div className="content-card">
                         <div className="content-header">
-                            <h2 className="content-title">
-                                {selectedCharacter.data.alias ? selectedCharacter.data.alias : selectedCharacter.data.name}
-                                {selectedCharacter.data.alias && selectedCharacter.data.name && (
-                                    <div className="content-subtitle">
-                                        {selectedCharacter.data.name}
-                                    </div>
-                                )}
-                            </h2>
                             <span className="content-source-badge">
                                 {selectedCharacter.source === 'web'
                                     ? '🌐 Ficha Oficial de la Web'
