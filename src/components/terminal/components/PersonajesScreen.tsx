@@ -19,6 +19,11 @@ interface PersonajesScreenProps {
     onResetStore: () => void;
 }
 
+const PRESET_COLORS = [
+    '#ef4444', '#f59e0b', '#10b981', '#3b82f6', '#6366f1', '#a855f7',
+    '#ec4899', '#06b6d4', '#84cc16', '#f97316', '#64748b', '#1e293b'
+];
+
 export default function PersonajesScreen({
     characters,
     groups,
@@ -62,15 +67,12 @@ export default function PersonajesScreen({
     return (
         <div className="tmt-screen">
             <div className="tmt-screen-banner">
-                <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                    <span className="tmt-screen-title" style={{ margin: 0, padding: 0, border: 'none' }}>📦 Gestión de Personajes</span>
+                <span className="tmt-screen-banner-icon">🎭</span>
+                <div className="tmt-screen-banner-text">
+                    <h2>Personajes y Grupos</h2>
                 </div>
                 <div className="tmt-screen-actions">
                     <button className="tmt-icon-btn" title="Administrar Grupos" onClick={() => setShowGroupAdmin(true)}>🏷️</button>
-                    <button className="tmt-icon-btn" title="Exportar Sesión" onClick={onExportStore}>📤</button>
-                    <button className="tmt-icon-btn" title="Importar Sesión" onClick={() => (document.getElementById('tmt-import-store-global') as HTMLInputElement).click()}>📥</button>
-                    <input id="tmt-import-store-global" type="file" hidden onChange={(e) => e.target.files?.[0] && onImportStore(e.target.files[0])} />
-                    <button className="tmt-icon-btn danger" title="Resetear Terminal" onClick={() => window.confirm('¿Borrar TODO?') && onResetStore()}>☢️</button>
                 </div>
             </div>
 
@@ -78,9 +80,9 @@ export default function PersonajesScreen({
                 <div className="tmt-section" style={{ marginBottom: '2rem' }}>
                     <div className="tmt-group-badges">
                         {groups.map(g => (
-                            <button 
-                                key={g.id} 
-                                className="tmt-group-badge-item" 
+                            <button
+                                key={g.id}
+                                className="tmt-group-badge-item"
                                 style={{ backgroundColor: g.color || '#4b5563' }}
                                 onClick={() => {
                                     setNewGroupName(g.name);
