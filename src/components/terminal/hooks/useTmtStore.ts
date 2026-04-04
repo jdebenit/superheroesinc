@@ -204,12 +204,12 @@ export function pushCharacterToTmt(
 ): string {
     const store = readFromStorage();
 
-    // De-duplicate: if same character (same name) already exists as same role, update it
+    // De-duplicate: if same character (same name or alias) already exists as same role, update it
     const existingIdx = store.characters.findIndex(
         (c) =>
             c.role === role &&
-            c.characterData?.name &&
-            c.characterData.name === characterData?.name
+            ((c.characterData?.name && c.characterData.name === characterData?.name) ||
+             (c.characterData?.alias && c.characterData.alias === characterData?.alias))
     );
 
     const id =
@@ -251,24 +251,31 @@ export function pushCharacterToTmt(
 export function useTmtStore() {
     const [store, setStore] = useState<TmtStore>(readFromStorage);
 
-    // Listen for broadcast messages (e.g. from Character Viewer)
+    // Listen for broadcast messages AND storage events (standard sync)
     useEffect(() => {
-        if (!tmtChannel) return;
         const handleMessage = (event: MessageEvent) => {
             if (event.data?.type === 'SYNC_CHARACTER') {
                 setStore(readFromStorage());
             }
         };
-        tmtChannel.addEventListener('message', handleMessage);
-        return () => tmtChannel.removeEventListener('message', handleMessage);
+
+        const handleStorage = (e: StorageEvent) => {
+            if (e.key === TMT_STORAGE_KEY) {
+                setStore(readFromStorage());
+            }
+        };
+
+        if (tmtChannel) {
+            tmtChannel.addEventListener('message', handleMessage);
+        }
+        window.addEventListener('storage', handleStorage);
+
+        return () => {
+            if (tmtChannel) tmtChannel.removeEventListener('message', handleMessage);
+            window.removeEventListener('storage', handleStorage);
+        };
     }, []);
 
-    // Persist whenever store changes
-    useEffect(() => {
-        writeToStorage(store);
-    }, [store]);
-
-    // ── Mutations ──────────────────────────────────────────────────────────
 
     const addCharacter = useCallback(
         (characterData: Record<string, any>, role: 'pj' | 'pnj') => {

@@ -202,6 +202,8 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
 
     // JSON export using the same hook as CharacterSheet
     const adaptedForExport = selectedCharacter ? adaptWebCharacter(selectedCharacter.data) : null;
+    console.log("Selected Character:", selectedCharacter);
+    console.log("Adapted for Export:", adaptedForExport);
     const { downloadJson } = useJsonExport(adaptedForExport ?? {});
 
     return (
@@ -231,11 +233,11 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
                                     <div className="list-item-clickable" onClick={() => setSelectedId(char.id)}>
                                         <div className={`char-avatar ${char.source || 'local'}`}>
                                             {char.data.icon ? (
-                                                <img 
-                                                    src={char.data.icon.startsWith('http') || char.data.icon.startsWith('/') || char.data.icon.startsWith('data:') 
-                                                        ? char.data.icon 
-                                                        : `/${char.data.icon}`} 
-                                                    alt={getCharDisplayName(char.data)} 
+                                                <img
+                                                    src={char.data.icon.startsWith('http') || char.data.icon.startsWith('/') || char.data.icon.startsWith('data:')
+                                                        ? char.data.icon
+                                                        : `/${char.data.icon}`}
+                                                    alt={getCharDisplayName(char.data)}
                                                 />
                                             ) : (
                                                 initials(getCharDisplayName(char.data))
@@ -324,11 +326,11 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
                                     >
                                         <div className={`char-avatar web`}>
                                             {char.data.icon ? (
-                                                <img 
-                                                    src={char.data.icon.startsWith('http') || char.data.icon.startsWith('/') || char.data.icon.startsWith('data:') 
-                                                        ? char.data.icon 
-                                                        : `/${char.data.icon}`} 
-                                                    alt={getCharDisplayName(char.data)} 
+                                                <img
+                                                    src={char.data.icon.startsWith('http') || char.data.icon.startsWith('/') || char.data.icon.startsWith('data:')
+                                                        ? char.data.icon
+                                                        : `/${char.data.icon}`}
+                                                    alt={getCharDisplayName(char.data)}
                                                 />
                                             ) : (
                                                 initials(getCharDisplayName(char.data))
@@ -346,7 +348,7 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
                                                 )}
                                             </div>
                                             <div className="web-char-details">
-                                                Nivel {char.data.level || 1} • {char.data?.origin?.items?.[0] ? Object.keys(char.data.origin.items[0])[0] : 'Desconocido'}
+                                                Nivel {char.data.level || 1}
                                             </div>
                                         </div>
                                         <span title="Ficha Oficial" className="official-badge">🌐</span>
