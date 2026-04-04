@@ -1,6 +1,7 @@
 {
   "name": "Jefe Motero Road Reapers",
   "level": 3,
+  "icon": "/icons/jefe-moteros.png",
   "combatstats": [
     "Acciones por asalto: 1",
     "Iniciativa y Reflejos: 40",

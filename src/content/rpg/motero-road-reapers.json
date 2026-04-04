@@ -1,6 +1,7 @@
 {
   "name": "Motero Road Reapers",
   "level": 1,
+  "icon": "/icons/motera.png",
   "combatstats": [
     "Acciones por asalto: 2",
     "Iniciativa y Reflejos: 42",

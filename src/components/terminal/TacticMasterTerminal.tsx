@@ -113,7 +113,16 @@ function EntityRow({ entry, groups, onRemove, onToggleRole, onToggleGroup }: Ent
     return (
         <div className="tmt-entity-card">
             <div className={`tmt-entity-avatar${isNpc ? ' npc' : ''}`}>
-                {initials(displayName)}
+                {entry.characterData.icon ? (
+                    <img 
+                        src={entry.characterData.icon.startsWith('http') || entry.characterData.icon.startsWith('/') || entry.characterData.icon.startsWith('data:') 
+                            ? entry.characterData.icon 
+                            : `/${entry.characterData.icon}`} 
+                        alt={displayName} 
+                    />
+                ) : (
+                    initials(displayName)
+                )}
             </div>
             <div className="tmt-entity-info">
                 <p className="tmt-entity-name">{displayName}</p>
@@ -470,6 +479,18 @@ function CombateScreen({
                         <div key={e.id} className={`tmt-initiative-row${i === currentTurn ? ' current' : ''}`}>
                             <span className="tmt-initiative-rank">{i + 1}</span>
                             <div className="tmt-initiative-main-info">
+                                <div className={`tmt-entity-avatar tmt-avatar-mini${e.role === 'pnj' ? ' npc' : ''}`}>
+                                    {e.characterData.icon ? (
+                                        <img 
+                                            src={e.characterData.icon.startsWith('http') || e.characterData.icon.startsWith('/') || e.characterData.icon.startsWith('data:') 
+                                                ? e.characterData.icon 
+                                                : `/${e.characterData.icon}`} 
+                                            alt={charName(e)} 
+                                        />
+                                    ) : (
+                                        initials(charName(e))
+                                    )}
+                                </div>
                                 <div>
                                     <div className="tmt-initiative-name">{charName(e)}</div>
                                     <div className="tmt-initiative-actions-tracker">
@@ -489,8 +510,8 @@ function CombateScreen({
                             </div>
                             <div className="tmt-initiative-edit-wrap">
                                 {e.roll && <span className="tmt-initiative-breakdown">({getBaseIniciativa(e)} + {e.roll}{e.initiativeMod ? ` ${e.initiativeMod > 0 ? '+' : ''}${e.initiativeMod}` : ''})</span>}
-                                
-                                <select 
+
+                                <select
                                     className="tmt-initiative-mod-select"
                                     value={e.initiativeMod || 0}
                                     onChange={(ev) => onUpdateInitiativeMod(e.id, parseInt(ev.target.value))}
@@ -527,7 +548,18 @@ function CombateScreen({
                     {sorted.map(e => (
                         <div key={e.id} className="tmt-combat-card">
                             <div className="tmt-combat-card-header">
-                                <div className={`tmt-entity-avatar${e.role === 'pnj' ? ' npc' : ''}`}>{initials(charName(e))}</div>
+                                <div className={`tmt-entity-avatar${e.role === 'pnj' ? ' npc' : ''}`}>
+                                    {e.characterData.icon ? (
+                                        <img 
+                                            src={e.characterData.icon.startsWith('http') || e.characterData.icon.startsWith('/') || e.characterData.icon.startsWith('data:') 
+                                                ? e.characterData.icon 
+                                                : `/${e.characterData.icon}`} 
+                                            alt={charName(e)} 
+                                        />
+                                    ) : (
+                                        initials(charName(e))
+                                    )}
+                                </div>
                                 <div><p className="tmt-combat-card-name">{charName(e)}</p><span className={`tmt-combat-card-badge ${e.role}`}>{e.role.toUpperCase()}</span></div>
                             </div>
                             <div className="tmt-combat-card-body">
@@ -565,7 +597,7 @@ function CombateScreen({
                 <EditStatModal
                     isOpen={editModal.isOpen} onClose={() => setEditModal(m => ({ ...m, isOpen: false }))}
                     title={editModal.type === 'health' ? 'Puntos de Vida' : 'Equilibrio Mental'}
-                    currentValue={editModal.type === 'health' ? (selectedChar.currentHealth || 0) : (selectedChar.currentMental || 0)}
+                    currentValue={selectedChar ? (editModal.type === 'health' ? (selectedChar.currentHealth || 0) : (selectedChar.currentMental || 0)) : 0}
                     changeValue={changeVal} notes={notes} onChangeValueChange={setChangeVal} onNotesChange={setNotes} onApply={handleApply}
                 />
             )}
@@ -574,7 +606,7 @@ function CombateScreen({
                 <HistoryModal
                     show={historyModal.isOpen} onClose={() => setHistoryModal(m => ({ ...m, isOpen: false }))}
                     type={historyModal.type} history={selectedChar.history || []}
-                    onDeleteEntry={(entry) => onDeleteHistoryEntry(selectedChar.id, entry)}
+                    onDeleteEntry={(entry) => selectedChar && onDeleteHistoryEntry(selectedChar.id, entry)}
                 />
             )}
         </div>
@@ -608,17 +640,17 @@ function DetallesScreen({ details, onUpdateDetails }: DetallesScreenProps) {
                 <div className="tmt-details-form">
                     <div className="tmt-input-group-vertical">
                         <label>Nombre de la Sesión</label>
-                        <input 
-                            type="text" 
-                            placeholder="Ej: Misión Alfa, Partida de Viernes..." 
+                        <input
+                            type="text"
+                            placeholder="Ej: Misión Alfa, Partida de Viernes..."
                             value={details.name}
                             onChange={(e) => handleChange('name', e.target.value)}
                         />
                     </div>
                     <div className="tmt-input-group-vertical">
                         <label>Descripción / Sinopsis</label>
-                        <textarea 
-                            placeholder="Breve descripción de la aventura..." 
+                        <textarea
+                            placeholder="Breve descripción de la aventura..."
                             value={details.description}
                             onChange={(e) => handleChange('description', e.target.value)}
                             rows={3}
@@ -632,9 +664,9 @@ function DetallesScreen({ details, onUpdateDetails }: DetallesScreenProps) {
                     <span className="tmt-section-title">Notas del Master</span>
                 </div>
                 <div className="tmt-details-form">
-                    <textarea 
+                    <textarea
                         className="tmt-notes-textarea"
-                        placeholder="Notas privadas, recordatorios, cronología..." 
+                        placeholder="Notas privadas, recordatorios, cronología..."
                         value={details.notes}
                         onChange={(e) => handleChange('notes', e.target.value)}
                     />
