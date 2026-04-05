@@ -201,26 +201,26 @@ export const BASE_COVERAGE: BackgroundOption[] = [
         description: 'No dependerán de ninguna entidad, tercera persona o estamento oficial, pero solo tendrán acceso a una base en bruto.'
     },
     {
-        id: 'independiente_altas_prestaciones',
-        label: 'Base propia (altas prestaciones)',
+        id: 'independiente_bajas_prestaciones',
+        label: 'Base propia (bajas prestaciones)',
         cost: 8,
-        description: 'Igual que la anterior, pero tendrán acceso a una base de altas prestaciones.'
+        description: 'Igual que la anterior, pero tendrán acceso a una base de bajas prestaciones.'
     },
     {
-        id: 'historial_equipada',
-        label: 'Base por historial (equipada)',
+        id: 'independiente_equipada',
+        label: 'Base propia (equipada)',
         cost: 10,
         description: 'Debido a una situación derivada de su historial disponen de una base equipada sin depender de ninguna entidad, tercera persona o estamento oficial.'
     },
     {
-        id: 'historial_altas_prestaciones',
-        label: 'Base por historial (altas prestaciones)',
+        id: 'independiente_altas_prestaciones',
+        label: 'Base propia (altas prestaciones)',
         cost: 12,
         description: 'Igual que la anterior, pero tendrán acceso a una base de altas prestaciones.'
     },
     {
-        id: 'historial_lujo',
-        label: 'Base por historial (lujo)',
+        id: 'independiente_lujo',
+        label: 'Base propia (lujo)',
         cost: 16,
         description: 'El grupo o personaje debido a una situación derivada de su historial disponen de una base de lujo sin depender de ninguna entidad, tercera persona o estamento oficial.'
     }
