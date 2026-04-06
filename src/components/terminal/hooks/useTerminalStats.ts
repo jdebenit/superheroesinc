@@ -434,6 +434,19 @@ export function useTerminalStats() {
         }
     };
 
+    const softReset = () => {
+        setStats(prev => ({
+            ...prev,
+            currentHealth: prev.maxHealth,
+            currentMentalBalance: prev.maxMentalBalance,
+            usedWillpower: 0
+        }));
+        setUsedChi(0);
+        setHistory([]);
+        setNotes('');
+    };
+
+
     return {
         character,
         stats,
@@ -447,6 +460,7 @@ export function useTerminalStats() {
         updateWillpower,
         updateWillpowerFromMaster,
         syncHistoryFromMaster,
+        softReset,
         updateNotes,
         updateChi,
         resetChi,
@@ -456,4 +470,5 @@ export function useTerminalStats() {
         importCharacterJSON
     };
 }
+
 

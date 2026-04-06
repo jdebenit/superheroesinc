@@ -51,7 +51,7 @@ export function useTmtSync() {
     };
 
     // Update Master's store from Player Terminal
-    const updateCharacterStatInTmt = (charName: string, type: 'health' | 'mental' | 'willpower', newValue: number) => {
+    const updateCharacterStatInTmt = (charName: string, type: 'health' | 'mental' | 'willpower', newValue: number, notes?: string) => {
         const saved = localStorage.getItem(TMT_STORAGE_KEY);
         if (!saved) return;
 
@@ -71,8 +71,9 @@ export function useTmtSync() {
                             type,
                             change,
                             newValue,
-                            notes: 'Actualizado por el Jugador'
+                            notes: notes || 'Actualizado por el Jugador'
                         };
+
 
                         if (type === 'health') c.currentHealth = newValue;
                         else if (type === 'mental') c.currentMental = newValue;

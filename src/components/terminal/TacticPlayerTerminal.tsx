@@ -36,7 +36,9 @@ export default function TacticPlayerTerminal() {
         updateWillpower,
         updateWillpowerFromMaster,
         syncHistoryFromMaster,
+        softReset,
         updateNotes,
+
 
 
         updateChi,
@@ -118,9 +120,12 @@ export default function TacticPlayerTerminal() {
             if (meInTmt.history) {
                 syncHistoryFromMaster(meInTmt.history);
             }
+        } else if (tmtStore && tmtStore.characters.length === 0) {
+            // Master Reset detected
+            softReset();
         }
-
     }, [tmtStore, character]);
+
  // No incluimos 'stats' para evitar bucles de retroalimentación
 
 
@@ -136,17 +141,22 @@ export default function TacticPlayerTerminal() {
         if (meInTmt) {
             // Solo enviamos si el valor local es DISTINTO al del Master (evita bucles)
             if (meInTmt.currentHealth !== stats.currentHealth) {
-                updateCharacterStatInTmt(myName, 'health', stats.currentHealth);
+                const lastNotes = history.find(e => e.type === 'health')?.notes;
+                updateCharacterStatInTmt(myName, 'health', stats.currentHealth, lastNotes);
             }
             if (meInTmt.currentMental !== stats.currentMentalBalance) {
-                updateCharacterStatInTmt(myName, 'mental', stats.currentMentalBalance);
+                const lastNotes = history.find(e => e.type === 'mental')?.notes;
+                updateCharacterStatInTmt(myName, 'mental', stats.currentMentalBalance, lastNotes);
             }
             const currentWillpower = stats.willpower - stats.usedWillpower;
             if (meInTmt.currentWillpower !== currentWillpower) {
-                updateCharacterStatInTmt(myName, 'willpower', currentWillpower);
+                const lastNotes = history.find(e => e.type === 'willpower')?.notes;
+                updateCharacterStatInTmt(myName, 'willpower', currentWillpower, lastNotes);
             }
         }
     }, [stats.currentHealth, stats.currentMentalBalance, stats.usedWillpower, stats.willpower, character]);
+
+
  // Eliminamos tmtStore de dependencias para evitar carreras
 
 
