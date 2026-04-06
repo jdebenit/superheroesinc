@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import CharacterSheet from '../character/CharacterSheet';
 import { adaptWebCharacter } from '../../utils/characterAdapter';
 import { useJsonExport } from '../../hooks/useJsonExport';
-import { pushCharacterToTmt } from '../terminal/hooks/useTmtStore';
+import { pushCharacterToTmt } from '../terminal/utils/tmtStorage';
 import { initialCharacterState } from '../../data/wizardConfig';
 import { mergeWithDefaults } from '../../utils/dataCleaner';
 import './CharacterViewer.css';

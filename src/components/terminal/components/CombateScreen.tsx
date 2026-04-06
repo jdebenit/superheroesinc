@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { type TmtCharacterEntry, type TmtGroup, type HistoryEntry } from '../hooks/useTmtStore';
 import { getIniciativa, getBaseIniciativa } from '../utils/tmtUtils';
+import GroupFilterBar from './GroupFilterBar';
 import InitiativeRow from './InitiativeRow';
 import CombatCard from './CombatCard';
 import EditStatModal from './EditStatModal';
@@ -82,33 +83,17 @@ export default function CombateScreen({
                 <span className="tmt-screen-banner-icon">⚔️</span>
                 <div className="tmt-screen-banner-text">
                     <h2>Combate</h2>
-                    <p>Grupos activos: <strong>{activeGroupIds.length === 0 ? 'Todos' : groups.filter(g => activeGroupIds.includes(g.id)).map(g => g.name).join(', ')}</strong></p>
+                    <p>Combatientes activos: <strong>{filtered.length}</strong></p>
                 </div>
             </div>
 
-            {groups.length > 0 && (
-                <div className="tmt-section" style={{ marginBottom: '1rem' }}>
-                    <div className="tmt-section-header">
-                        <span className="tmt-section-title">Filtrar por Grupo</span>
-                        <button className="tmt-header-btn" onClick={() => onUpdateActiveGroups([])} style={{ fontSize: '0.7rem', padding: '0.2rem 0.6rem' }}>Limpiar Filtros</button>
-                    </div>
-                    <div className="tmt-groups-filter-bar">
-                        {groups.map(g => {
-                            const active = activeGroupIds.includes(g.id);
-                            return (
-                                <button
-                                    key={g.id}
-                                    className={`tmt-group-filter-tag ${active ? 'active' : ''}`}
-                                    onClick={() => toggleGroup(g.id)}
-                                    style={{ '--group-color': g.color || '#3b82f6' } as React.CSSProperties}
-                                >
-                                    {g.name}
-                                </button>
-                            );
-                        })}
-                    </div>
-                </div>
-            )}
+            <GroupFilterBar 
+                groups={groups}
+                selectedGroupIds={activeGroupIds}
+                onToggleGroup={toggleGroup}
+                onClearFilters={() => onUpdateActiveGroups([])}
+            />
+
 
             <div className="tmt-section">
                 <div className="tmt-section-header">

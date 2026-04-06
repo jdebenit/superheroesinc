@@ -183,6 +183,38 @@
 .role-indicator.pj { background: #3b82f6; }
 .role-indicator.pnj { background: #f59e0b; }
 
+.char-avatar-mini {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 2px solid white;
+    box-shadow: 0 0 0 1px #e2e8f0;
+}
+
+.char-avatar-mini img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.char-avatar-mini span {
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: #64748b;
+}
+
+.char-name-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 .value-cell {
     text-align: center;
     font-weight: 700;

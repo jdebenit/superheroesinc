@@ -22,14 +22,8 @@ export default function TacticMasterTerminal() {
         exportStore, importStore, reload
     } = useTmtStore();
 
-    // Character Sync from Viewer
-    useEffect(() => {
-        const channel = new BroadcastChannel('tmt_sync');
-        channel.onmessage = (event) => {
-            if (event.data === 'reload') reload();
-        };
-        return () => channel.close();
-    }, [reload]);
+    // El sistema de sincronización ahora se gestiona internamente en useTmtStore
+    // mediante shi_tmt_channel y el evento 'storage'.
 
     return (
         <div className="tactic-terminal">
