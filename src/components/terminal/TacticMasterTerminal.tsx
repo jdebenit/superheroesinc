@@ -17,10 +17,12 @@ export default function TacticMasterTerminal() {
         store, characters, groups,
         addCharacter, removeCharacter, updateCharacterRole, toggleCharacterGroup,
         addGroup, updateGroup, deleteGroup, updateCharacterInitiative, updateCharacterInitiativeMod,
-        updateCharacterUsedActions, updateCharacterStat, updateActiveCombatGroups,
-        deleteCharacterHistoryEntry, updateDetails, resetAllActions, resetStore,
+        updateCharacterUsedActions, updateCharacterStat, updateActiveCombatGroups, toggleCharacterVisibility,
+        deleteCharacterHistoryEntry, updateDetails, updateCombatState, resetAllActions, resetStore,
+
         exportStore, importStore, reload
     } = useTmtStore();
+
 
     // El sistema de sincronización ahora se gestiona internamente en useTmtStore
     // mediante shi_tmt_channel y el evento 'storage'.
@@ -99,8 +101,14 @@ export default function TacticMasterTerminal() {
                         onUpdateStat={updateCharacterStat}
                         onDeleteHistoryEntry={deleteCharacterHistoryEntry}
                         onResetAllActions={resetAllActions}
+                        onToggleVisibility={toggleCharacterVisibility}
+                        currentTurn={store.currentTurn || 0}
+                        currentRound={store.currentRound || 1}
+                        onUpdateCombatState={updateCombatState}
                     />
                 )}
+
+
                 {screen === 'detalles' && (
                     <DetallesScreen
                         details={store.details || { name: '', description: '', notes: '' }}

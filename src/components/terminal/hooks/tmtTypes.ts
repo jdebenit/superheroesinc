@@ -39,7 +39,10 @@ export interface TmtCharacterEntry {
     currentMental?: number;
     maxMental?: number;
     history?: HistoryEntry[];
+    /** Master Privacy */
+    isHidden?: boolean;
 }
+
 
 /** Root structure written to localStorage */
 export interface TmtStore {
@@ -56,4 +59,7 @@ export interface TmtStore {
         description: string;
         notes: string;
     };
+    currentTurn?: number;
+    currentRound?: number;
 }
+

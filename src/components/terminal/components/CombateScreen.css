@@ -221,3 +221,41 @@
 }
 
 .text-center { text-align: center !important; }
+
+/* Visibility Button */
+.tmt-visibility-btn {
+    background: transparent;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    font-size: 1.1rem;
+}
+
+.tmt-visibility-btn:hover {
+    background: #f1f5f9;
+    border-color: #cbd5e1;
+}
+
+.tmt-visibility-btn.hidden {
+    opacity: 0.5;
+    background: #f8fafc;
+}
+
+.is-hidden-dm {
+    border-left: 4px solid #94a3b8 !important;
+}
+
+.hidden-label {
+    font-size: 0.65rem;
+    color: #94a3b8;
+    font-weight: 700;
+    margin-left: 0.5rem;
+    text-transform: uppercase;
+}
+

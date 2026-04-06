@@ -19,6 +19,8 @@ import { GENERAL_SKILLS } from '../../data/generalSkills';
 import { SPECIAL_SKILLS } from '../../data/specialSkills';
 import { APP_VERSIONS } from '../../data/appVersions';
 import Modal from './components/Modal';
+import { useTmtSync } from './hooks/useTmtSync';
+import PlayerCombatScreen from './components/PlayerCombatScreen';
 
 export default function TacticPlayerTerminal() {
     const {
@@ -38,6 +40,14 @@ export default function TacticPlayerTerminal() {
         importData,
         importCharacterJSON
     } = useTerminalStats();
+
+    const { 
+        tmtStore, 
+        publicCharacters, 
+        isCombatActive 
+    } = useTmtSync();
+
+    const [currentView, setCurrentView] = useState<'sheet' | 'combat'>('sheet');
 
     const [showHistoryModal, setShowHistoryModal] = useState(false);
     const [historyType, setHistoryType] = useState<'health' | 'mental' | 'willpower' | 'chi'>('health');
@@ -98,15 +108,7 @@ export default function TacticPlayerTerminal() {
         updateMental(change, mentalNotes);
         setMentalChange('');
         setMentalNotes('');
-        setShowEditModal(false); // Should close? Original didn't for mental/willpower, but probably should.
-        // Checking original: applyHealthChange closed it. applyMentalChange did NOT. applyWillpowerChange did NOT.
-        // I will follow original behavior for now regarding closing, but actually it's better UX to close it or provide feedback.
-        // Let's stick to original behavior strictly first to avoid confusion: Health closed, others didn't.
-        // Wait, looking at original code:
-        // applyHealthChange: setShowEditModal(false);
-        // applyMentalChange: NO
-        // applyWillpowerChange: NO
-        // This seems like a bug or inconsistency in the original code. I will fix it to close for all.
+        setShowEditModal(false);
         setShowEditModal(false);
     };
 
@@ -163,17 +165,13 @@ export default function TacticPlayerTerminal() {
         const lowerName = name.toLowerCase();
         if (lowerName.includes('artes marciales')) return true;
 
-        // Check normal name
-        const gen = GENERAL_SKILLS.find(s => s.name.toLowerCase() === name.toLowerCase());
+        const gen = GENERAL_SKILLS.find((s: any) => s.name.toLowerCase() === name.toLowerCase());
         if (gen) return gen.category === 'combat';
 
-        const spec = SPECIAL_SKILLS.find(s => s.name.toLowerCase() === name.toLowerCase());
+        const spec = SPECIAL_SKILLS.find((s: any) => s.name.toLowerCase() === name.toLowerCase());
         if (spec) return spec.category === 'combat';
 
-        // Check if it's a specialization e.g. "Arma Especial: Espada"
-        // Most combat special skills start with "Armas ..." or generic name.
-        // Let's iterate special skills and see if the name starts with any combat skill name
-        const combatSpecs = SPECIAL_SKILLS.filter(s => s.category === 'combat');
+        const combatSpecs = SPECIAL_SKILLS.filter((s: any) => s.category === 'combat');
         for (const cs of combatSpecs) {
             if (name.toLowerCase().startsWith(cs.name.toLowerCase())) return true;
         }
@@ -182,22 +180,20 @@ export default function TacticPlayerTerminal() {
     };
 
     const handleSkillClick = (skill: any) => {
-        // Find skill definition to get the type
-        const generalSkill = GENERAL_SKILLS.find(s => s.name === skill.name);
-        const specialSkill = SPECIAL_SKILLS.find(s =>
+        const generalSkill = GENERAL_SKILLS.find((s: any) => s.name === skill.name);
+        const specialSkill = SPECIAL_SKILLS.find((s: any) =>
             s.name === skill.name ||
             (skill.id && s.id === skill.id) ||
             skill.name.toLowerCase().startsWith(s.name.toLowerCase() + ':') ||
-            skill.name.toLowerCase().startsWith(s.name.toLowerCase() + ' (') // Handle variants like "Name (Spec)"
+            skill.name.toLowerCase().startsWith(s.name.toLowerCase() + ' (') 
         );
 
-        let type = 'cac'; // Default
+        let type = 'cac'; 
         if (generalSkill?.type) type = generalSkill.type;
         if (specialSkill?.type) type = specialSkill.type;
 
-        // Artes Marciales exception if not explicitly set in data (though it should be 'both' or 'cac' now)
         if (skill.name.toLowerCase().includes('artes marciales')) {
-            if (!type || type === 'cac') type = 'both'; // Or check if data already has it
+            if (!type || type === 'cac') type = 'both'; 
         }
 
         const isCombat = isCombatSkill(skill.name);
@@ -235,101 +231,140 @@ export default function TacticPlayerTerminal() {
                 showCharacterSheet={true}
             />
 
-            {character ? (
-                <div className="terminal-stats-container">
-                    <div className="terminal-character-header">
-                        <h2 className="terminal-character-alias">{character.alias}</h2>
-                        {character.name && (
-                            <div className="terminal-character-name">"{character.name}"</div>
-                        )}
-                    </div>
-
-                    <div className="terminal-stats-grid">
-                        <StatCard
-                            label="PVs"
-                            max={stats.maxHealth}
-                            current={stats.currentHealth}
-                            type="health"
-                            onViewHistory={() => openHistoryModal('health')}
-                            unconsciousness={stats.unconsciousnessPoints}
-                            onEdit={() => openEditModal('health')}
-                        />
-
-                        <StatCard
-                            label="EQM"
-                            max={stats.maxMentalBalance}
-                            current={stats.currentMentalBalance}
-                            type="mental"
-                            onViewHistory={() => openHistoryModal('mental')}
-                            onEdit={() => openEditModal('mental')}
-                            onRoll={handleMentalRoll}
-                        />
-
-                        <StatCard
-                            label="VOLUNTAD"
-                            max={stats.willpower}
-                            current={stats.willpower - stats.usedWillpower}
-                            type="willpower"
-                            onViewHistory={() => openHistoryModal('willpower')}
-                            onEdit={() => openEditModal('willpower')}
-                        />
-
-                        {/* Chi card — only for Artista Marcial con Chi */}
-                        {(() => {
-                            const CHI_TERM = 'artista marcial con chi';
-                            const char = character as any;
-                            const isArtistaConChi =
-                                char.origin?.items?.some((item: any) => {
-                                    const keys = Object.keys(item);
-                                    if (keys.some((k: string) => k.toLowerCase().includes(CHI_TERM))) return true;
-                                    return keys.some((k: string) => {
-                                        const val = item[k];
-                                        return Array.isArray(val) && val.some((v: any) =>
-                                            typeof v === 'string' && v.toLowerCase().includes(CHI_TERM)
-                                        );
-                                    });
-                                }) ||
-                                (char.traumas && Object.keys(char.traumas).some((k: string) =>
-                                    k.toLowerCase().includes(CHI_TERM)
-                                ));
-                            return isArtistaConChi ? (
-                                <ChiCounter
-                                    level={character.level ?? 1}
-                                    usedChi={usedChi}
-                                    onUpdate={updateChi}
-                                    onReset={resetChi}
-                                    onViewHistory={() => openHistoryModal('chi')}
-                                />
-                            ) : null;
-                        })()}
-                    </div>
-
-                    <AttributesPanel attributes={character.attributes.values} />
-
-                    <OtherStatsPanel
-                        combatstats={character.combatstats}
-                        otherstats={character.otherstats}
-                        background={character.background}
-                    />
-
-                    <PowersPanel
-                        powers={character.powers}
-                        attributes={character.attributes.values}
-                    />
-
-                    {(character.skills?.generalItems || character.skills?.specialItems) && (
-                        <SkillsPanel
-                            generalSkills={character.skills?.generalItems}
-                            learningSkills={character.skills?.specialItems}
-                            onSkillClick={handleSkillClick}
-                        />
-                    )}
-
-
-                    <NotesPanel notes={notes} onChange={updateNotes} />
+            <div className="terminal-nav-wrapper">
+                <div className="terminal-nav">
+                    <button 
+                        className={`terminal-nav-btn ${currentView === 'sheet' ? 'active' : ''}`}
+                        onClick={() => setCurrentView('sheet')}
+                    >
+                        🎭 Ficha de Personaje
+                    </button>
+                    <button 
+                        className={`terminal-nav-btn ${currentView === 'combat' ? 'active' : ''}`}
+                        onClick={() => setCurrentView('combat')}
+                    >
+                        ⚔️ Tracker de Combate
+                        {isCombatActive && <span className="active-dot" title="¡Combate en curso!" />}
+                    </button>
                 </div>
+            </div>
+
+            {character ? (
+                <>
+                {currentView === 'sheet' ? (
+                    <div className="terminal-stats-container">
+                        <div className="terminal-character-header">
+                            <h2 className="terminal-character-alias">{character.alias}</h2>
+                            {character.name && (
+                                <div className="terminal-character-name">"{character.name}"</div>
+                            )}
+                        </div>
+
+                        <div className="terminal-stats-grid">
+                            <StatCard
+                                label="PVs"
+                                max={stats.maxHealth}
+                                current={stats.currentHealth}
+                                type="health"
+                                onViewHistory={() => openHistoryModal('health')}
+                                unconsciousness={stats.unconsciousnessPoints}
+                                onEdit={() => openEditModal('health')}
+                            />
+
+                            <StatCard
+                                label="EQM"
+                                max={stats.maxMentalBalance}
+                                current={stats.currentMentalBalance}
+                                type="mental"
+                                onViewHistory={() => openHistoryModal('mental')}
+                                onEdit={() => openEditModal('mental')}
+                                onRoll={handleMentalRoll}
+                            />
+
+                            <StatCard
+                                label="VOLUNTAD"
+                                max={stats.willpower}
+                                current={stats.willpower - stats.usedWillpower}
+                                type="willpower"
+                                onViewHistory={() => openHistoryModal('willpower')}
+                                onEdit={() => openEditModal('willpower')}
+                            />
+
+                            {(() => {
+                                const CHI_TERM = 'artista marcial con chi';
+                                const char = character as any;
+                                const isArtistaConChi =
+                                    char.origin?.items?.some((item: any) => {
+                                        const keys = Object.keys(item);
+                                        if (keys.some((k: string) => k.toLowerCase().includes(CHI_TERM))) return true;
+                                        return keys.some((k: string) => {
+                                            const val = item[k];
+                                            return Array.isArray(val) && val.some((v: any) =>
+                                                typeof v === 'string' && v.toLowerCase().includes(CHI_TERM)
+                                            );
+                                        });
+                                    }) ||
+                                    (char.traumas && Object.keys(char.traumas).some((k: string) =>
+                                        k.toLowerCase().includes(CHI_TERM)
+                                    ));
+                                return isArtistaConChi ? (
+                                    <ChiCounter
+                                        level={character.level ?? 1}
+                                        usedChi={usedChi}
+                                        onUpdate={updateChi}
+                                        onReset={resetChi}
+                                        onViewHistory={() => openHistoryModal('chi')}
+                                    />
+                                ) : null;
+                            })()}
+                        </div>
+
+                        <AttributesPanel attributes={character.attributes.values} />
+
+                        <OtherStatsPanel
+                            combatstats={character.combatstats}
+                            otherstats={character.otherstats}
+                            background={character.background}
+                        />
+
+                        <PowersPanel
+                            powers={character.powers}
+                            attributes={character.attributes.values}
+                        />
+
+                        {(character.skills?.generalItems || character.skills?.specialItems) && (
+                            <SkillsPanel
+                                generalSkills={character.skills?.generalItems}
+                                learningSkills={character.skills?.specialItems}
+                                onSkillClick={handleSkillClick}
+                            />
+                        )}
+
+                        <NotesPanel notes={notes} onChange={updateNotes} />
+                    </div>
+                ) : (
+                    <PlayerCombatScreen 
+                        characters={publicCharacters}
+                        currentTurn={tmtStore?.currentTurn || 0}
+                        currentRound={tmtStore?.currentRound || 1}
+                        playerCharacterName={character.alias || character.name}
+                    />
+
+                )}
+                </>
             ) : (
-                <EmptyState />
+                <div className="terminal-stats-container">
+                    {currentView === 'combat' ? (
+                        <PlayerCombatScreen 
+                            characters={publicCharacters}
+                            currentTurn={tmtStore?.currentTurn || 0}
+                            currentRound={tmtStore?.currentRound || 1}
+                        />
+                    ) : (
+
+                        <EmptyState />
+                    )}
+                </div>
             )}
 
             <HistoryModal

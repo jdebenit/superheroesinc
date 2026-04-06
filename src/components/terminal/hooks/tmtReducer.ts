@@ -11,11 +11,13 @@ export type TmtAction =
     | { type: 'UPDATE_CHARACTER_STAT'; charId: string; statType: 'health' | 'mental'; change: number; notes: string }
     | { type: 'DELETE_CHARACTER_HISTORY_ENTRY'; charId: string; entry: HistoryEntry }
     | { type: 'TOGGLE_CHARACTER_GROUP'; characterId: string; groupId: string }
+    | { type: 'TOGGLE_CHARACTER_VISIBILITY'; id: string }
     | { type: 'ADD_GROUP'; name: string; color?: string }
     | { type: 'UPDATE_GROUP'; id: string; name: string; color?: string }
     | { type: 'DELETE_GROUP'; id: string }
     | { type: 'UPDATE_ACTIVE_COMBAT_GROUPS'; groupIds: string[] }
     | { type: 'UPDATE_DETAILS'; details: { name: string; description: string; notes: string } }
+    | { type: 'UPDATE_COMBAT_STATE'; turn: number; round?: number }
     | { type: 'RESET_ALL_ACTIONS' }
     | { type: 'RESET_STORE'; emptyStore: TmtStore }
     | { type: 'SET_STORE'; store: TmtStore };
@@ -159,6 +161,14 @@ export function tmtReducer(state: TmtStore, action: TmtAction): TmtStore {
                 })
             };
 
+        case 'TOGGLE_CHARACTER_VISIBILITY':
+            return {
+                ...state,
+                characters: state.characters.map(c => 
+                    c.id === action.id ? { ...c, isHidden: !c.isHidden } : c
+                )
+            };
+
         case 'ADD_GROUP': {
             const newGroup: TmtGroup = {
                 id: 'grp_' + Date.now().toString(36),
@@ -189,6 +199,13 @@ export function tmtReducer(state: TmtStore, action: TmtAction): TmtStore {
 
         case 'UPDATE_DETAILS':
             return { ...state, details: action.details };
+
+        case 'UPDATE_COMBAT_STATE':
+            return { 
+                ...state, 
+                currentTurn: action.turn, 
+                currentRound: action.round !== undefined ? action.round : (state.currentRound || 1) 
+            };
 
         case 'RESET_ALL_ACTIONS':
             return {

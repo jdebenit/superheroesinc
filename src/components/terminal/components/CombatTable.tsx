@@ -7,14 +7,18 @@ interface CombatTableProps {
     currentTurn: number;
     onOpenEdit: (id: string, type: 'health' | 'mental') => void;
     onOpenHistory: (id: string, type: 'health' | 'mental') => void;
+    onToggleVisibility: (id: string) => void;
 }
+
 
 export default function CombatTable({ 
     characters, 
     currentTurn,
     onOpenEdit,
-    onOpenHistory
+    onOpenHistory,
+    onToggleVisibility
 }: CombatTableProps) {
+
 
     
     const renderStatBar = (current: number, max: number, type: 'health' | 'mental') => {
@@ -100,10 +104,14 @@ export default function CombatTable({
 
                                 <td className="row-actions-cell">
                                     <div className="row-actions">
+                                        <button className="row-action-btn" onClick={() => onToggleVisibility(c.id)} title={c.isHidden ? "Mostrar a Jugadores" : "Ocultar a Jugadores"}>
+                                            {c.isHidden ? '👁️‍🗨️' : '👁️'}
+                                        </button>
                                         <button className="row-action-btn" onClick={() => onOpenHistory(c.id, 'health')} title="Historial PV">📋</button>
                                         <button className="row-action-btn" onClick={() => onOpenHistory(c.id, 'mental')} title="Historial EQM">🧠</button>
                                     </div>
                                 </td>
+
                             </tr>
                         );
                     })}

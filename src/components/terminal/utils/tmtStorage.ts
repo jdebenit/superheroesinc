@@ -21,9 +21,12 @@ export function buildEmptyStore(): TmtStore {
             name: '',
             description: '',
             notes: ''
-        }
+        },
+        currentTurn: 0,
+        currentRound: 1
     };
 }
+
 
 export function sanitizeStore(parsed: any): TmtStore {
     const empty = buildEmptyStore();
@@ -40,8 +43,11 @@ export function sanitizeStore(parsed: any): TmtStore {
         details: {
             ...empty.details,
             ...(parsed.details || {})
-        }
+        },
+        currentTurn: typeof parsed.currentTurn === 'number' ? parsed.currentTurn : empty.currentTurn,
+        currentRound: typeof parsed.currentRound === 'number' ? parsed.currentRound : empty.currentRound
     };
+
 
     sanitized.characters = sanitized.characters.map(c => {
         const entry = {

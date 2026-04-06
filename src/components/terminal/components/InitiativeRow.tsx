@@ -11,6 +11,7 @@ interface InitiativeRowProps {
     onOpenHistory: (id: string, type: 'health' | 'mental') => void;
     onUpdateInitiative: (id: string, value: number, roll?: number) => void;
     onUpdateModifier: (id: string, value: number) => void;
+    onToggleVisibility: (id: string) => void;
 }
 
 export default function InitiativeRow({
@@ -21,13 +22,14 @@ export default function InitiativeRow({
     onOpenEdit,
     onOpenHistory,
     onUpdateInitiative,
-    onUpdateModifier
+    onUpdateModifier,
+    onToggleVisibility
 }: InitiativeRowProps) {
     const isNpc = entry.role === 'pnj';
     const displayName = charName(entry);
 
     return (
-        <div className={`tmt-initiative-row${isCurrent ? ' current' : ''}`}>
+        <div className={`tmt-initiative-row${isCurrent ? ' current' : ''} ${entry.isHidden ? 'is-hidden-dm' : ''}`}>
             <span className="tmt-initiative-rank">{index + 1}</span>
             <div className="tmt-initiative-main-info">
                 <div className={`tmt-entity-avatar tmt-avatar-mini${isNpc ? ' npc' : ''}`}>
@@ -43,7 +45,7 @@ export default function InitiativeRow({
                     )}
                 </div>
                 <div>
-                    <div className="tmt-initiative-name">{displayName}</div>
+                    <div className="tmt-initiative-name">{displayName} {entry.isHidden && <span className="hidden-label">(Oculto)</span>}</div>
                     <div className="tmt-initiative-actions-tracker">
                         {Array.from({ length: getAcciones(entry) }).map((_, idx) => (
                             <span 
@@ -70,6 +72,7 @@ export default function InitiativeRow({
                         {entry.initiativeMod ? ` ${entry.initiativeMod > 0 ? '+' : ''}${entry.initiativeMod}` : ''})
                     </span>
                 )}
+                
                 <button
                     className="tmt-dice-btn"
                     title="Lanzar iniciativa individual"
@@ -80,6 +83,15 @@ export default function InitiativeRow({
                 >
                     🎲
                 </button>
+
+                <button 
+                    className={`tmt-visibility-btn ${entry.isHidden ? 'hidden' : 'visible'}`}
+                    onClick={() => onToggleVisibility(entry.id)}
+                    title={entry.isHidden ? 'Oculto para jugadores' : 'Visible para jugadores'}
+                >
+                    {entry.isHidden ? '👁️‍🗨️' : '👁️'}
+                </button>
+
                 <select 
                     className="tmt-initiative-mod-select"
                     value={entry.initiativeMod || 0}

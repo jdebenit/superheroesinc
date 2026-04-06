@@ -14,6 +14,8 @@ interface CombateScreenProps {
     characters: TmtCharacterEntry[];
     groups: TmtGroup[];
     activeGroupIds: string[];
+    currentTurn: number;
+    currentRound: number;
     onUpdateActiveGroups: (ids: string[]) => void;
     onUpdateInitiative: (id: string, value: number, roll?: number) => void;
     onUpdateUsedActions: (id: string, count: number) => void;
@@ -21,21 +23,26 @@ interface CombateScreenProps {
     onDeleteHistoryEntry: (charId: string, entry: HistoryEntry) => void;
     onUpdateInitiativeMod: (id: string, value: number) => void;
     onResetAllActions: () => void;
+    onToggleVisibility: (id: string) => void;
+    onUpdateCombatState: (turn: number, round?: number) => void;
 }
 
 export default function CombateScreen({
     characters,
     groups,
     activeGroupIds,
+    currentTurn,
+    currentRound,
     onUpdateActiveGroups,
     onUpdateInitiative,
     onUpdateUsedActions,
     onUpdateStat,
     onDeleteHistoryEntry,
     onUpdateInitiativeMod,
-    onResetAllActions
+    onResetAllActions,
+    onToggleVisibility,
+    onUpdateCombatState
 }: CombateScreenProps) {
-    const [currentTurn, setCurrentTurn] = useState(0);
     const [viewMode, setViewMode] = useState<'cards' | 'table'>('table');
     const [showConfirmModal, setShowConfirmModal] = useState(false);
     const [editModal, setEditModal] = useState<{ isOpen: boolean; charId: string; type: 'health' | 'mental' }>({ 
@@ -77,7 +84,18 @@ export default function CombateScreen({
             const roll = Math.floor(Math.random() * 100) + 1;
             onUpdateInitiative(c.id, getBaseIniciativa(c) + roll, roll);
         });
-        setCurrentTurn(0); setShowConfirmModal(false);
+        onUpdateCombatState(0);
+        setShowConfirmModal(false);
+    };
+
+    const handleNextTurn = () => {
+        if (sorted.length === 0) return;
+        const nextTurn = (currentTurn + 1) % sorted.length;
+        if (nextTurn === 0) {
+            onUpdateCombatState(0, currentRound + 1);
+        } else {
+            onUpdateCombatState(nextTurn);
+        }
     };
 
     return (
@@ -85,8 +103,8 @@ export default function CombateScreen({
             <div className="tmt-screen-banner">
                 <span className="tmt-screen-banner-icon">⚔️</span>
                 <div className="tmt-screen-banner-text">
-                    <h2>Combate</h2>
-                    <p>Combatientes activos: <strong>{filtered.length}</strong></p>
+                    <h2>Combate - Asalto {currentRound}</h2>
+                    <p>Combatientes activos: <strong>{filtered.length}</strong> | Turno: {currentTurn + 1} / {sorted.length || 1}</p>
                 </div>
             </div>
 
@@ -100,11 +118,11 @@ export default function CombateScreen({
 
             <div className="tmt-section">
                 <div className="tmt-section-header">
-                    <span className="tmt-section-title">Tracker de Iniciativa</span>
+                    <span className="tmt-section-title">Tracker de Iniciativa (Asalto {currentRound})</span>
                     <div className="tmt-initiative-actions-group">
-                        <button className="tmt-header-btn tmt-btn-next-round" onClick={() => { onResetAllActions(); setCurrentTurn(0); }}>🔄 Sig. Turno</button>
+                        <button className="tmt-header-btn tmt-btn-next-round" onClick={() => { onResetAllActions(); onUpdateCombatState(0, currentRound + 1); }}>🔄 Sig. Asalto</button>
                         <button className="tmt-header-btn tmt-btn-calculate" onClick={() => setShowConfirmModal(true)}>🎲 Iniciativas</button>
-                        {sorted.length > 0 && <button className="tmt-add-btn" onClick={() => setCurrentTurn((t) => (t + 1) % sorted.length)}>Sig. Combatiente ▶</button>}
+                        {sorted.length > 0 && <button className="tmt-add-btn" onClick={handleNextTurn}>Sig. Combatiente ▶</button>}
                     </div>
                 </div>
 
@@ -120,6 +138,7 @@ export default function CombateScreen({
                             onOpenHistory={openHistory}
                             onUpdateInitiative={onUpdateInitiative}
                             onUpdateModifier={onUpdateInitiativeMod}
+                            onToggleVisibility={onToggleVisibility}
                         />
                     ))}
                     {sorted.length === 0 && <p style={{ textAlign: 'center', padding: '2rem', color: '#94a3b8' }}>No hay combatientes en los grupos seleccionados.</p>}
@@ -156,9 +175,9 @@ export default function CombateScreen({
                     <CombatTable 
                         characters={sorted}
                         currentTurn={currentTurn}
-                        onUpdateUsedActions={onUpdateUsedActions}
                         onOpenEdit={openEdit}
                         onOpenHistory={openHistory}
+                        onToggleVisibility={onToggleVisibility}
                     />
                 )}
             </div>

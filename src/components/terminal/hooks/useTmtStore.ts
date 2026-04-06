@@ -69,11 +69,13 @@ export function useTmtStore() {
     const updateCharacterStat = (charId: string, statType: any, change: number, notes: string) => wrapAction({ type: 'UPDATE_CHARACTER_STAT', charId, statType, change, notes });
     const deleteCharacterHistoryEntry = (charId: string, entry: HistoryEntry) => wrapAction({ type: 'DELETE_CHARACTER_HISTORY_ENTRY', charId, entry });
     const toggleCharacterGroup = (characterId: string, groupId: string) => wrapAction({ type: 'TOGGLE_CHARACTER_GROUP', characterId, groupId });
+    const toggleCharacterVisibility = (id: string) => wrapAction({ type: 'TOGGLE_CHARACTER_VISIBILITY', id });
     const addGroup = (name: string, color?: string) => wrapAction({ type: 'ADD_GROUP', name, color });
     const updateGroup = (id: string, name: string, color?: string) => wrapAction({ type: 'UPDATE_GROUP', id, name, color });
     const deleteGroup = (id: string) => wrapAction({ type: 'DELETE_GROUP', id });
     const updateActiveCombatGroups = (groupIds: string[]) => wrapAction({ type: 'UPDATE_ACTIVE_COMBAT_GROUPS', groupIds });
     const updateDetails = (details: any) => wrapAction({ type: 'UPDATE_DETAILS', details });
+    const updateCombatState = (turn: number, round?: number) => wrapAction({ type: 'UPDATE_COMBAT_STATE', turn, round });
     const resetAllActions = () => wrapAction({ type: 'RESET_ALL_ACTIONS' });
     const resetStore = () => wrapAction({ type: 'RESET_STORE', emptyStore: buildEmptyStore() });
     const reload = () => dispatch({ type: 'SET_STORE', store: readFromStorage() });
@@ -104,10 +106,10 @@ export function useTmtStore() {
 
     return {
         store, characters: store.characters, groups: store.groups,
-        addCharacter, removeCharacter, updateCharacterRole, toggleCharacterGroup,
+        addCharacter, removeCharacter, updateCharacterRole, toggleCharacterGroup, toggleCharacterVisibility,
         addGroup, updateGroup, deleteGroup, updateCharacterInitiative, updateCharacterInitiativeMod,
         updateCharacterUsedActions, updateCharacterStat, updateActiveCombatGroups,
-        deleteCharacterHistoryEntry, updateDetails, resetAllActions, resetStore,
+        deleteCharacterHistoryEntry, updateDetails, updateCombatState, resetAllActions, resetStore,
         exportStore, importStore, reload
     };
 }
