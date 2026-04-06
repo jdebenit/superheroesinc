@@ -428,6 +428,12 @@ export function useTerminalStats() {
         setUsedChi(0);
     };
 
+    const syncHistoryFromMaster = (newHistory: any[]) => {
+        if (JSON.stringify(newHistory) !== JSON.stringify(history)) {
+            setHistory(newHistory);
+        }
+    };
+
     return {
         character,
         stats,
@@ -440,6 +446,7 @@ export function useTerminalStats() {
         updateMentalFromMaster,
         updateWillpower,
         updateWillpowerFromMaster,
+        syncHistoryFromMaster,
         updateNotes,
         updateChi,
         resetChi,
@@ -449,3 +456,4 @@ export function useTerminalStats() {
         importCharacterJSON
     };
 }
+

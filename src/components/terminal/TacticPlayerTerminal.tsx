@@ -35,7 +35,9 @@ export default function TacticPlayerTerminal() {
         updateMentalFromMaster,
         updateWillpower,
         updateWillpowerFromMaster,
+        syncHistoryFromMaster,
         updateNotes,
+
 
         updateChi,
         resetChi,
@@ -112,7 +114,12 @@ export default function TacticPlayerTerminal() {
                     updateWillpowerFromMaster(meInTmt.currentWillpower);
                 }
             }
+            // Sincronizar Historial completo
+            if (meInTmt.history) {
+                syncHistoryFromMaster(meInTmt.history);
+            }
         }
+
     }, [tmtStore, character]);
  // No incluimos 'stats' para evitar bucles de retroalimentación
 

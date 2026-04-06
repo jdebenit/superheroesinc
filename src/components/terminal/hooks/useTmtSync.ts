@@ -62,16 +62,26 @@ export function useTmtSync() {
             currentStore.characters = currentStore.characters.map(c => {
                 const name = (c.characterData.alias || c.characterData.name || '').toLowerCase();
                 if (name === charName.toLowerCase()) {
-                    if (type === 'health' && c.currentHealth !== newValue) {
-                        c.currentHealth = newValue;
-                        changed = true;
-                    } else if (type === 'mental' && c.currentMental !== newValue) {
-                        c.currentMental = newValue;
-                        changed = true;
-                    } else if (type === 'willpower' && c.currentWillpower !== newValue) {
-                        c.currentWillpower = newValue;
+                    const oldVal = type === 'health' ? c.currentHealth : (type === 'mental' ? c.currentMental : c.currentWillpower);
+                    const change = newValue - (oldVal || 0);
+
+                    if (change !== 0) {
+                        const entry = {
+                            timestamp: new Date().toISOString(),
+                            type,
+                            change,
+                            newValue,
+                            notes: 'Actualizado por el Jugador'
+                        };
+
+                        if (type === 'health') c.currentHealth = newValue;
+                        else if (type === 'mental') c.currentMental = newValue;
+                        else if (type === 'willpower') c.currentWillpower = newValue;
+
+                        c.history = [entry, ...(c.history || [])];
                         changed = true;
                     }
+
 
                 }
                 return c;
