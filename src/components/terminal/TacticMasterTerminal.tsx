@@ -23,6 +23,16 @@ export default function TacticMasterTerminal() {
         exportStore, importStore, reload
     } = useTmtStore();
 
+    useEffect(() => {
+        const sessionName = store.details?.name;
+        if (sessionName) {
+            document.title = `${sessionName} | SHI TMT`;
+        } else {
+            document.title = "SHI Tactic Master Terminal";
+        }
+    }, [store.details?.name]);
+
+
 
     // El sistema de sincronización ahora se gestiona internamente en useTmtStore
     // mediante shi_tmt_channel y el evento 'storage'.
