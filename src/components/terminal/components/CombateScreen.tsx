@@ -173,6 +173,8 @@ export default function CombateScreen({
                                 onOpenEdit={openEdit}
                                 onOpenHistory={openHistory}
                             />
+
+
                         ))}
                     </div>
                 ) : (

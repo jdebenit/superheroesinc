@@ -11,12 +11,14 @@ interface CombatCardProps {
 
 
 export default function CombatCard({ entry, onOpenEdit, onOpenHistory }: CombatCardProps) {
+
+
     const isNpc = entry.role === 'pnj';
     const displayName = charName(entry);
     const os = entry.characterData.otherstats;
 
     return (
-        <div className="tmt-combat-card">
+        <div className={`tmt-combat-card`}>
             <div className="tmt-combat-card-header">
                 <div className={`tmt-entity-avatar${isNpc ? ' npc' : ''}`}>
                     {entry.characterData.icon ? (
@@ -30,13 +32,22 @@ export default function CombatCard({ entry, onOpenEdit, onOpenHistory }: CombatC
                         initials(displayName)
                     )}
                 </div>
-                <div>
-                    <p className="tmt-combat-card-name">{displayName}</p>
+                <div style={{ flex: 1 }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <p className="tmt-combat-card-name">{displayName}</p>
+                        <div className="row-actions">
+                            <button className="row-action-btn" onClick={() => onOpenHistory(entry.id, 'health')} title="Historial PV">📋</button>
+                            <button className="row-action-btn" onClick={() => onOpenHistory(entry.id, 'mental')} title="Historial EQM">🧠</button>
+                            <button className="row-action-btn" onClick={() => onOpenHistory(entry.id, 'willpower')} title="Historial VLT">✨</button>
+                        </div>
+                    </div>
                     <span className={`tmt-combat-card-badge ${entry.role}`}>
                         {entry.role.toUpperCase()}
                     </span>
                 </div>
             </div>
+
+
             <div className="tmt-combat-card-body">
                 <MiniStatCard
                     label="PVs"

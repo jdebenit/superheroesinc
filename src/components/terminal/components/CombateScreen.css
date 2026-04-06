@@ -251,7 +251,15 @@
 
 .is-hidden-dm {
     border-left: 4px solid #94a3b8 !important;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
 }
+
+.tmt-combat-card.is-hidden-dm {
+    background-color: #f8fafc;
+    border-color: #cbd5e1;
+}
+
 
 .hidden-label {
     font-size: 0.65rem;
