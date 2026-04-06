@@ -213,10 +213,14 @@
 }
 
 .attr-cell { color: #2563eb; background: rgba(37, 99, 235, 0.02); }
+.combat-cell { color: #dc2626; background: rgba(220, 38, 38, 0.02); }
+.other-cell { color: #0891b2; background: rgba(8, 145, 178, 0.02); }
 .skill-cell { color: #059669; background: rgba(5, 150, 105, 0.02); }
 .power-cell { color: #d97706; background: rgba(217, 119, 6, 0.02); }
 
 .attr-header { border-top: 3px solid #3b82f6; }
+.combat-header { border-top: 3px solid #ef4444; }
+.other-header { border-top: 3px solid #06b6d4; }
 .skill-header { border-top: 3px solid #10b981; }
 .power-header { border-top: 3px solid #f59e0b; }
 

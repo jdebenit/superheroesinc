@@ -9,12 +9,12 @@ interface ComparativaScreenProps {
     groups: TmtGroup[];
 }
 
-type Section = 'attributes' | 'skills' | 'powers';
+type Section = 'attributes' | 'skills' | 'powers' | 'combat' | 'other';
 
 export default function ComparativaScreen({ characters, groups }: ComparativaScreenProps) {
     const [selectedRole, setSelectedRole] = useState<'all' | 'pj' | 'pnj'>('all');
     const [selectedGroupIds, setSelectedGroupIds] = useState<string[]>([]);
-    const [visibleSections, setVisibleSections] = useState<Section[]>(['attributes', 'skills', 'powers']);
+    const [visibleSections, setVisibleSections] = useState<Section[]>(['attributes', 'combat', 'other', 'skills', 'powers']);
 
     // Filters
     const filteredCharacters = useMemo(() => {
@@ -56,6 +56,38 @@ export default function ComparativaScreen({ characters, groups }: ComparativaScr
             });
         });
         return Array.from(powers).sort();
+    }, [characters]);
+
+    const allCombatStats = useMemo(() => {
+        const stats = new Set<string>();
+        characters.forEach(c => {
+            const combat = c.characterData?.combatstats;
+            if (Array.isArray(combat)) {
+                combat.forEach((s: string) => {
+                    const label = s.split(':')[0]?.trim();
+                    if (label) stats.add(label);
+                });
+            } else if (combat && typeof combat === 'object') {
+                Object.keys(combat).forEach(k => stats.add(k));
+            }
+        });
+        return Array.from(stats).sort();
+    }, [characters]);
+
+    const allOtherStats = useMemo(() => {
+        const stats = new Set<string>();
+        characters.forEach(c => {
+            const other = c.characterData?.otherstats;
+            if (Array.isArray(other)) {
+                other.forEach((s: string) => {
+                    const label = s.split(':')[0]?.trim();
+                    if (label) stats.add(label);
+                });
+            } else if (other && typeof other === 'object') {
+                Object.keys(other).forEach(k => stats.add(k));
+            }
+        });
+        return Array.from(stats).sort();
     }, [characters]);
 
     const toggleGroup = (id: string) => {
@@ -111,6 +143,8 @@ export default function ComparativaScreen({ characters, groups }: ComparativaScr
                 <div className="section-toggles">
                     <label>VER SECCIONES:</label>
                     <button className={visibleSections.includes('attributes') ? 'active' : ''} onClick={() => toggleSection('attributes')}>Atributos</button>
+                    <button className={visibleSections.includes('combat') ? 'active' : ''} onClick={() => toggleSection('combat')}>Combate</button>
+                    <button className={visibleSections.includes('other') ? 'active' : ''} onClick={() => toggleSection('other')}>Otros</button>
                     <button className={visibleSections.includes('skills') ? 'active' : ''} onClick={() => toggleSection('skills')}>Habilidades</button>
                     <button className={visibleSections.includes('powers') ? 'active' : ''} onClick={() => toggleSection('powers')}>Poderes</button>
                 </div>
@@ -122,6 +156,8 @@ export default function ComparativaScreen({ characters, groups }: ComparativaScr
                         <tr>
                             <th className="sticky-col">Personaje</th>
                             {visibleSections.includes('attributes') && allAttributes.map(a => <th key={a} className="attr-header">{a.slice(0,3).toUpperCase()}</th>)}
+                            {visibleSections.includes('combat') && allCombatStats.map(s => <th key={s} className="combat-header">{s}</th>)}
+                            {visibleSections.includes('other') && allOtherStats.map(s => <th key={s} className="other-header">{s}</th>)}
                             {visibleSections.includes('skills') && allSkills.map(s => <th key={s} className="skill-header">{s}</th>)}
                             {visibleSections.includes('powers') && allPowers.map(p => <th key={p} className="power-header">{p}</th>)}
                         </tr>
@@ -132,6 +168,16 @@ export default function ComparativaScreen({ characters, groups }: ComparativaScr
                             const charAttrs = data?.attributes?.values || {};
                             const charSkills = [...(data?.skills?.generalItems || []), ...(data?.skills?.specialItems || [])];
                             const charPowers = data?.powers?.selected || [];
+                            const charCombat = data?.combatstats || {};
+                            const charOther = data?.otherstats || {};
+
+                            const getStatValue = (source: any, label: string) => {
+                                if (Array.isArray(source)) {
+                                    const entry = source.find((s: string) => s.startsWith(`${label}:`));
+                                    return entry ? entry.split(':')[1]?.trim() : '-';
+                                }
+                                return source[label] || '-';
+                            };
 
                             return (
                                 <tr key={c.id}>
@@ -143,6 +189,12 @@ export default function ComparativaScreen({ characters, groups }: ComparativaScr
                                     </td>
                                     {visibleSections.includes('attributes') && allAttributes.map(a => (
                                         <td key={a} className="value-cell attr-cell">{charAttrs[a] || '-'}</td>
+                                    ))}
+                                    {visibleSections.includes('combat') && allCombatStats.map(s => (
+                                        <td key={s} className="value-cell combat-cell">{getStatValue(charCombat, s)}</td>
+                                    ))}
+                                    {visibleSections.includes('other') && allOtherStats.map(s => (
+                                        <td key={s} className="value-cell other-cell">{getStatValue(charOther, s)}</td>
                                     ))}
                                     {visibleSections.includes('skills') && allSkills.map(s => {
                                         const skill = charSkills.find((sk: any) => sk.name === s);
