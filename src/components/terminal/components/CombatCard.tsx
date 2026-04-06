@@ -5,9 +5,10 @@ import MiniStatCard from './MiniStatCard';
 
 interface CombatCardProps {
     entry: TmtCharacterEntry;
-    onOpenEdit: (id: string, type: 'health' | 'mental') => void;
-    onOpenHistory: (id: string, type: 'health' | 'mental') => void;
+    onOpenEdit: (id: string, type: 'health' | 'mental' | 'willpower') => void;
+    onOpenHistory: (id: string, type: 'health' | 'mental' | 'willpower') => void;
 }
+
 
 export default function CombatCard({ entry, onOpenEdit, onOpenHistory }: CombatCardProps) {
     const isNpc = entry.role === 'pnj';
@@ -53,6 +54,16 @@ export default function CombatCard({ entry, onOpenEdit, onOpenHistory }: CombatC
                     onEdit={() => onOpenEdit(entry.id, 'mental')}
                     onViewHistory={() => onOpenHistory(entry.id, 'mental')}
                 />
+                <MiniStatCard
+                    label="VLT"
+                    max={entry.maxWillpower || 0}
+                    current={entry.currentWillpower || 0}
+                    type="willpower"
+                    onEdit={() => onOpenEdit(entry.id, 'willpower')}
+                    onViewHistory={() => onOpenHistory(entry.id, 'willpower')}
+                    color="#9b59b6"
+                />
+
 
                 <div className="tmt-combat-stats-extras">
                     <div className="tmt-stat-extra"><span className="label">Parada Física</span> <span className="value">{getStatValue(os, "Parada Física")}</span></div>

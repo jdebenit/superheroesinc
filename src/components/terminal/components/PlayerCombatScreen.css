@@ -161,6 +161,8 @@
 
 .player-view-bar-fill.health { background: #ef4444; }
 .player-view-bar-fill.mental { background: #3b82f6; }
+.player-view-bar-fill.willpower { background: #9b59b6; }
+
 
 .player-view-bar-value {
     font-size: 0.65rem;

@@ -50,26 +50,22 @@ export function sanitizeStore(parsed: any): TmtStore {
 
 
     sanitized.characters = sanitized.characters.map(c => {
-        const entry = {
+        const { maxH, maxM, maxV } = extractVitals(c.characterData);
+        
+        return {
             ...c,
             groupIds: Array.isArray(c.groupIds) ? c.groupIds : [],
             usedActions: typeof c.usedActions === 'number' ? c.usedActions : 0,
-            history: Array.isArray(c.history) ? c.history : []
+            history: Array.isArray(c.history) ? c.history : [],
+            maxHealth: c.maxHealth || maxH,
+            currentHealth: typeof c.currentHealth === 'number' ? c.currentHealth : maxH,
+            maxMental: c.maxMental || maxM,
+            currentMental: typeof c.currentMental === 'number' ? c.currentMental : maxM,
+            maxWillpower: c.maxWillpower || maxV,
+            currentWillpower: typeof c.currentWillpower === 'number' ? c.currentWillpower : maxV
         };
-
-        // Initialize PV/EQM if missing or failed to detect (0/0)
-        // This is important for imported characters from old Wizard versions or clean JSONs
-        if (typeof entry.currentHealth === 'undefined' || (entry.maxHealth === 0 && entry.maxMental === 0)) {
-            const { maxH, maxM } = extractVitals(entry.characterData);
-            if (maxH !== 0 || maxM !== 0) {
-                entry.maxHealth = maxH;
-                entry.currentHealth = maxH;
-                entry.maxMental = maxM;
-                entry.currentMental = maxM;
-            }
-        }
-        return entry;
     });
+
 
     return sanitized;
 }
@@ -134,11 +130,14 @@ export function pushCharacterToTmt(
     };
 
     // Auto-detect max stats for the new entry
-    const { maxH, maxM } = extractVitals(characterData);
+    const { maxH, maxM, maxV } = extractVitals(characterData);
     entry.maxHealth = maxH;
     entry.currentHealth = maxH;
     entry.maxMental = maxM;
     entry.currentMental = maxM;
+    entry.maxWillpower = maxV;
+    entry.currentWillpower = maxV;
+
 
     if (existingIdx >= 0) {
         store.characters[existingIdx] = entry;

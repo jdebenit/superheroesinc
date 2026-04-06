@@ -6,9 +6,10 @@ import { charName, initials, getIniciativa, getStatValue, openPlayerTerminal } f
 interface CombatTableProps {
     characters: TmtCharacterEntry[];
     currentTurn: number;
-    onOpenEdit: (id: string, type: 'health' | 'mental') => void;
-    onOpenHistory: (id: string, type: 'health' | 'mental') => void;
+    onOpenEdit: (id: string, type: 'health' | 'mental' | 'willpower') => void;
+    onOpenHistory: (id: string, type: 'health' | 'mental' | 'willpower') => void;
     onToggleVisibility: (id: string) => void;
+
 }
 
 
@@ -22,9 +23,10 @@ export default function CombatTable({
 
 
 
-    const renderStatBar = (charId: string, current: number, max: number, type: 'health' | 'mental') => {
+    const renderStatBar = (charId: string, current: number, max: number, type: 'health' | 'mental' | 'willpower') => {
         const percentage = Math.max(0, Math.min(100, (current / (max || 1)) * 100));
-        const colorClass = type === 'health' ? 'health' : 'mental';
+        const colorClass = type === 'health' ? 'health' : (type === 'mental' ? 'mental' : 'willpower');
+
 
         return (
             <div className="combat-table-stat-cell" onClick={() => onOpenEdit(charId, type)}>
@@ -48,10 +50,11 @@ export default function CombatTable({
                 <thead>
                     <tr>
                         <th className="sticky-col">Combatiente</th>
-                        <th>INI</th>
                         <th>PVs</th>
                         <th>EQM</th>
+                        <th>Voluntad</th>
                         <th>Otros</th>
+
                         <th className="text-center">Acciones</th>
                     </tr>
                 </thead>
@@ -85,9 +88,6 @@ export default function CombatTable({
                                     </div>
                                 </td>
 
-                                <td className="ini-cell">
-                                    <span className="ini-badge">{getIniciativa(c)}</span>
-                                </td>
                                 <td>
                                     <div className="clickable-cell">
                                         {renderStatBar(c.id, c.currentHealth || 0, c.maxHealth || 1, 'health')}
@@ -98,6 +98,12 @@ export default function CombatTable({
                                         {renderStatBar(c.id, c.currentMental || 0, c.maxMental || 1, 'mental')}
                                     </div>
                                 </td>
+                                <td>
+                                    <div className="clickable-cell">
+                                        {renderStatBar(c.id, c.currentWillpower || 0, c.maxWillpower || 1, 'willpower')}
+                                    </div>
+                                </td>
+
 
                                 <td className="defenses-cell">
                                     <div className="defense-badges">
@@ -113,13 +119,12 @@ export default function CombatTable({
 
                                 <td className="row-actions-cell">
                                     <div className="row-actions">
-                                        <button className="row-action-btn" onClick={() => onToggleVisibility(c.id)} title={c.isHidden ? "Mostrar a Jugadores" : "Ocultar a Jugadores"}>
-                                            {c.isHidden ? '👁️‍🗨️' : '👁️'}
-                                        </button>
                                         <button className="row-action-btn" onClick={() => onOpenHistory(c.id, 'health')} title="Historial PV">📋</button>
                                         <button className="row-action-btn" onClick={() => onOpenHistory(c.id, 'mental')} title="Historial EQM">🧠</button>
+                                        <button className="row-action-btn" onClick={() => onOpenHistory(c.id, 'willpower')} title="Historial VLT">✨</button>
                                     </div>
                                 </td>
+
 
                             </tr>
                         );

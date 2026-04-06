@@ -8,8 +8,9 @@ interface InitiativeRowProps {
     index: number;
     isCurrent: boolean;
     onUpdateUsedActions: (id: string, count: number) => void;
-    onOpenEdit: (id: string, type: 'health' | 'mental') => void;
-    onOpenHistory: (id: string, type: 'health' | 'mental') => void;
+    onOpenEdit: (id: string, type: 'health' | 'mental' | 'willpower') => void;
+    onOpenHistory: (id: string, type: 'health' | 'mental' | 'willpower') => void;
+
     onUpdateInitiative: (id: string, value: number, roll?: number) => void;
     onUpdateModifier: (id: string, value: number) => void;
     onToggleVisibility: (id: string) => void;
@@ -74,6 +75,10 @@ export default function InitiativeRow({
                     <div className="tmt-vital-badge mental" onClick={() => onOpenEdit(entry.id, 'mental')} onDoubleClick={() => onOpenHistory(entry.id, 'mental')}>
                         <span className="label">EQM</span> <span className="value">{entry.currentMental}/{entry.maxMental}</span>
                     </div>
+                    <div className="tmt-vital-badge willpower" onClick={() => onOpenEdit(entry.id, 'willpower')} onDoubleClick={() => onOpenHistory(entry.id, 'willpower')}>
+                        <span className="label">VLT</span> <span className="value">{entry.currentWillpower}/{entry.maxWillpower}</span>
+                    </div>
+
                 </div>
             </div>
             <div className="tmt-initiative-edit-wrap">

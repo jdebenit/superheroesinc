@@ -28,11 +28,34 @@ export function extractVitals(characterData: any) {
         maxH = con > 0 ? (con <= 100 ? Math.floor(con / 2) : con - 45) : 0;
     }
     if (maxM === 0) {
-        maxM = characterData?.attributes?.values?.Inteligencia || 0;
+        const int = characterData?.attributes?.values?.Inteligencia || 0;
+        maxM = int || 0;
     }
 
-    return { maxH, maxM };
+    // Willpower (Voluntad) extraction - Very robust
+    let maxV = characterData?.attributes?.values?.Voluntad || characterData?.attributes?.Voluntad || 0;
+    
+    if (maxV === 0) {
+        // Search in combatstats / otherstats if not in attributes or if it was 0 there
+        const findInAny = (src: any) => {
+            if (!src) return 0;
+            if (Array.isArray(src)) {
+                const line = src.find((s: any) => typeof s === 'string' && s.toLowerCase().includes('voluntad'));
+                return line ? parseInt(line.split(':')[1]?.trim()) : 0;
+            }
+            if (typeof src === 'object') {
+                const key = Object.keys(src).find(k => k.toLowerCase().includes('voluntad'));
+                return key ? parseInt(src[key]) : 0;
+            }
+            return 0;
+        };
+        maxV = findInAny(characterData?.combatstats) || findInAny(characterData?.otherstats) || 0;
+    }
+
+    return { maxH, maxM, maxV };
 }
+
+
 
 /**
  * Calculates current health/mental after a change, considering max values.

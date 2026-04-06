@@ -8,8 +8,9 @@ export type TmtAction =
     | { type: 'UPDATE_CHARACTER_INITIATIVE'; id: string; initiative: number; roll?: number }
     | { type: 'UPDATE_CHARACTER_INITIATIVE_MOD'; id: string; initiativeMod: number }
     | { type: 'UPDATE_CHARACTER_USED_ACTIONS'; id: string; usedActions: number }
-    | { type: 'UPDATE_CHARACTER_STAT'; charId: string; statType: 'health' | 'mental'; change: number; notes: string }
+    | { type: 'UPDATE_CHARACTER_STAT'; charId: string; statType: 'health' | 'mental' | 'willpower'; change: number; notes: string }
     | { type: 'DELETE_CHARACTER_HISTORY_ENTRY'; charId: string; entry: HistoryEntry }
+
     | { type: 'TOGGLE_CHARACTER_GROUP'; characterId: string; groupId: string }
     | { type: 'TOGGLE_CHARACTER_VISIBILITY'; id: string }
     | { type: 'ADD_GROUP'; name: string; color?: string }
@@ -36,7 +37,7 @@ export function tmtReducer(state: TmtStore, action: TmtAction): TmtStore {
                         (c.characterData?.alias && c.characterData.alias === characterData?.alias))
             );
 
-            const { maxH, maxM } = extractVitals(characterData);
+            const { maxH, maxM, maxV } = extractVitals(characterData);
             const entry: TmtCharacterEntry = {
                 id: newId,
                 role,
@@ -47,8 +48,11 @@ export function tmtReducer(state: TmtStore, action: TmtAction): TmtStore {
                 maxHealth: maxH,
                 currentHealth: maxH,
                 maxMental: maxM,
-                currentMental: maxM
+                currentMental: maxM,
+                maxWillpower: maxV,
+                currentWillpower: maxV
             };
+
 
             const newCharacters = [...state.characters];
             if (existingIdx >= 0) {
@@ -101,8 +105,24 @@ export function tmtReducer(state: TmtStore, action: TmtAction): TmtStore {
                 characters: state.characters.map((c) => {
                     if (c.id !== action.charId) return c;
 
-                    const current = action.statType === 'health' ? (c.currentHealth || 0) : (c.currentMental || 0);
-                    const max = action.statType === 'health' ? (c.maxHealth || 0) : (c.maxMental || 0);
+                    let current = 0;
+                    let max = 0;
+                    let field = '';
+
+                    if (action.statType === 'health') {
+                        current = c.currentHealth || 0;
+                        max = c.maxHealth || 0;
+                        field = 'currentHealth';
+                    } else if (action.statType === 'mental') {
+                        current = c.currentMental || 0;
+                        max = c.maxMental || 0;
+                        field = 'currentMental';
+                    } else if (action.statType === 'willpower') {
+                        current = c.currentWillpower || 0;
+                        max = c.maxWillpower || 0;
+                        field = 'currentWillpower';
+                    }
+
                     const newValue = calculateStatChange(current, max, action.change);
 
                     const entry: HistoryEntry = {
@@ -115,10 +135,11 @@ export function tmtReducer(state: TmtStore, action: TmtAction): TmtStore {
 
                     return {
                         ...c,
-                        [action.statType === 'health' ? 'currentHealth' : 'currentMental']: newValue,
+                        [field]: newValue,
                         history: [entry, ...(c.history || [])]
                     };
                 })
+
             };
 
         case 'DELETE_CHARACTER_HISTORY_ENTRY':
@@ -141,7 +162,14 @@ export function tmtReducer(state: TmtStore, action: TmtAction): TmtStore {
                             currentMental: calculateStatChange(c.currentMental || 0, c.maxMental || 0, reverseChange),
                             history: newHistory
                         };
+                    } else if (action.entry.type === 'willpower') {
+                        return {
+                            ...c,
+                            currentWillpower: calculateStatChange(c.currentWillpower || 0, c.maxWillpower || 0, reverseChange),
+                            history: newHistory
+                        };
                     }
+
                     return { ...c, history: newHistory };
                 })
             };

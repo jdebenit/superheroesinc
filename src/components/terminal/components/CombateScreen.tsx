@@ -19,8 +19,9 @@ interface CombateScreenProps {
     onUpdateActiveGroups: (ids: string[]) => void;
     onUpdateInitiative: (id: string, value: number, roll?: number) => void;
     onUpdateUsedActions: (id: string, count: number) => void;
-    onUpdateStat: (id: string, type: 'health' | 'mental', change: number, notes: string) => void;
+    onUpdateStat: (id: string, type: 'health' | 'mental' | 'willpower', change: number, notes: string) => void;
     onDeleteHistoryEntry: (charId: string, entry: HistoryEntry) => void;
+
     onUpdateInitiativeMod: (id: string, value: number) => void;
     onResetAllActions: () => void;
     onToggleVisibility: (id: string) => void;
@@ -45,12 +46,13 @@ export default function CombateScreen({
 }: CombateScreenProps) {
     const [viewMode, setViewMode] = useState<'cards' | 'table'>('table');
     const [showConfirmModal, setShowConfirmModal] = useState(false);
-    const [editModal, setEditModal] = useState<{ isOpen: boolean; charId: string; type: 'health' | 'mental' }>({ 
+    const [editModal, setEditModal] = useState<{ isOpen: boolean; charId: string; type: 'health' | 'mental' | 'willpower' }>({ 
         isOpen: false, charId: '', type: 'health' 
     });
-    const [historyModal, setHistoryModal] = useState<{ isOpen: boolean; charId: string; type: 'health' | 'mental' }>({ 
+    const [historyModal, setHistoryModal] = useState<{ isOpen: boolean; charId: string; type: 'health' | 'mental' | 'willpower' }>({ 
         isOpen: false, charId: '', type: 'health' 
     });
+
     const [changeVal, setChangeVal] = useState('');
     const [notes, setNotes] = useState('');
 
@@ -65,14 +67,16 @@ export default function CombateScreen({
         onUpdateActiveGroups(next);
     };
 
-    const openEdit = (id: string, type: 'health' | 'mental') => {
+    const openEdit = (id: string, type: 'health' | 'mental' | 'willpower') => {
         setEditModal({ isOpen: true, charId: id, type });
         setChangeVal(''); setNotes('');
     };
 
-    const openHistory = (id: string, type: 'health' | 'mental') => {
+
+    const openHistory = (id: string, type: 'health' | 'mental' | 'willpower') => {
         setHistoryModal({ isOpen: true, charId: id, type });
     };
+
 
     const handleApply = () => {
         onUpdateStat(editModal.charId, editModal.type, parseInt(changeVal) || 0, notes);
@@ -194,8 +198,11 @@ export default function CombateScreen({
                 <EditStatModal
                     isOpen={editModal.isOpen} 
                     onClose={() => setEditModal(m => ({ ...m, isOpen: false }))}
-                    title={editModal.type === 'health' ? 'Puntos de Vida' : 'Equilibrio Mental'}
-                    currentValue={editModal.type === 'health' ? (selectedChar.currentHealth || 0) : (selectedChar.currentMental || 0)}
+                    title={editModal.type === 'health' ? 'Puntos de Vida' : (editModal.type === 'mental' ? 'Equilibrio Mental' : 'Voluntad Temporal')}
+                    currentValue={
+                        editModal.type === 'health' ? (selectedChar.currentHealth || 0) : 
+                        (editModal.type === 'mental' ? (selectedChar.currentMental || 0) : (selectedChar.currentWillpower || 0))
+                    }
                     changeValue={changeVal} 
                     notes={notes} 
                     onChangeValueChange={setChangeVal} 

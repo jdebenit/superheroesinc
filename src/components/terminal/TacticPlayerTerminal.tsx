@@ -34,7 +34,9 @@ export default function TacticPlayerTerminal() {
         updateHealthFromMaster,
         updateMentalFromMaster,
         updateWillpower,
+        updateWillpowerFromMaster,
         updateNotes,
+
         updateChi,
         resetChi,
         deleteHistoryEntry,
@@ -104,8 +106,15 @@ export default function TacticPlayerTerminal() {
             if (typeof meInTmt.currentMental === 'number' && meInTmt.currentMental !== stats.currentMentalBalance) {
                 updateMentalFromMaster(meInTmt.currentMental);
             }
+            if (typeof meInTmt.currentWillpower === 'number') {
+                const currentWillpower = stats.willpower - stats.usedWillpower;
+                if (meInTmt.currentWillpower !== currentWillpower) {
+                    updateWillpowerFromMaster(meInTmt.currentWillpower);
+                }
+            }
         }
-    }, [tmtStore, character]); // No incluimos 'stats' para evitar bucles de retroalimentación
+    }, [tmtStore, character]);
+ // No incluimos 'stats' para evitar bucles de retroalimentación
 
 
     // 2. Sync: Player -> Master
@@ -125,8 +134,13 @@ export default function TacticPlayerTerminal() {
             if (meInTmt.currentMental !== stats.currentMentalBalance) {
                 updateCharacterStatInTmt(myName, 'mental', stats.currentMentalBalance);
             }
+            const currentWillpower = stats.willpower - stats.usedWillpower;
+            if (meInTmt.currentWillpower !== currentWillpower) {
+                updateCharacterStatInTmt(myName, 'willpower', currentWillpower);
+            }
         }
-    }, [stats.currentHealth, stats.currentMentalBalance, character]); // Eliminamos tmtStore de dependencias para evitar carreras
+    }, [stats.currentHealth, stats.currentMentalBalance, stats.usedWillpower, stats.willpower, character]);
+ // Eliminamos tmtStore de dependencias para evitar carreras
 
 
 

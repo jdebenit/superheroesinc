@@ -624,6 +624,8 @@
 .tmt-vital-badge:hover { background: #f1f5f9; transform: translateY(-1px); }
 .tmt-vital-badge.health { border-left-color: #ef4444; color: #b91c1c; }
 .tmt-vital-badge.mental { border-left-color: #0ea5e9; color: #075985; }
+.tmt-vital-badge.willpower { border-left-color: #9b59b6; color: #6b21a8; }
+
 .tmt-vital-badge .label { font-weight: 800; opacity: 0.6; }
 .tmt-vital-badge .value { font-weight: 700; font-family: var(--font-mono, monospace); }
 
@@ -714,6 +716,11 @@
     border-radius: 10px;
     overflow: hidden;
 }
+
+.terminal-stat-bar-fill.health { background: #ef4444; }
+.terminal-stat-bar-fill.mental { background: #3b82f6; }
+.terminal-stat-bar-fill.willpower { background: #9b59b6; }
+
 
 /* Advanced Tactical Stats Layout */
 .tmt-combat-stats-extras {

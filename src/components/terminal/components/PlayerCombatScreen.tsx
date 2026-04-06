@@ -38,6 +38,13 @@ export default function PlayerCombatScreen({
                     </div>
                     {isPlayer && <span className="player-view-bar-value">{c.currentMental} / {c.maxMental}</span>}
                 </div>
+                <div className="player-view-bar-group">
+                    <div className="player-view-bar-bg">
+                        <div className="player-view-bar-fill willpower" style={{ width: `${Math.max(0, Math.min(100, (c.currentWillpower || 0) / (c.maxWillpower || 1) * 100))}%` }} />
+                    </div>
+                    {isPlayer && <span className="player-view-bar-value">{c.currentWillpower} / {c.maxWillpower}</span>}
+                </div>
+
             </div>
         );
     };

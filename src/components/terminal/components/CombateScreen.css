@@ -131,6 +131,8 @@
 
 .combat-table-bar-fill.health { background: #ef4444; }
 .combat-table-bar-fill.mental { background: #3b82f6; }
+.combat-table-bar-fill.willpower { background: #9b59b6; }
+
 
 /* Actions Column */
 .actions-counter {

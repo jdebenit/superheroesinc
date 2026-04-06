@@ -4,9 +4,10 @@ interface MiniStatCardProps {
     label: string;
     max: number;
     current: number;
-    type: 'health' | 'mental';
+    type: 'health' | 'mental' | 'willpower';
     onEdit: () => void;
     onViewHistory: () => void;
+    color?: string;
 }
 
 export default function MiniStatCard({
@@ -15,10 +16,11 @@ export default function MiniStatCard({
     current,
     type,
     onEdit,
-    onViewHistory
+    onViewHistory,
+    color
 }: MiniStatCardProps) {
-    const barFillClass = type === 'mental' ? 'mental' : 'health';
-    const percentage = Math.max(0, Math.min(100, (current / max) * 100));
+    const barFillClass = type === 'mental' ? 'mental' : (type === 'willpower' ? 'willpower' : 'health');
+    const percentage = Math.max(0, Math.min(100, (current / (max || 1)) * 100));
 
     return (
         <div className="terminal-mini-stat-card" onClick={onEdit} onDoubleClick={(e) => {
@@ -34,9 +36,13 @@ export default function MiniStatCard({
             <div className="terminal-stat-bar mini">
                 <div
                     className={`terminal-stat-bar-fill ${barFillClass}`}
-                    style={{ width: `${percentage}%` }}
+                    style={{ 
+                        width: `${percentage}%`,
+                        backgroundColor: color || undefined
+                    }}
                 />
             </div>
         </div>
     );
 }
+

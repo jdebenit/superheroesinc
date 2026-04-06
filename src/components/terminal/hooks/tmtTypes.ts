@@ -38,10 +38,13 @@ export interface TmtCharacterEntry {
     maxHealth?: number;
     currentMental?: number;
     maxMental?: number;
+    currentWillpower?: number;
+    maxWillpower?: number;
     history?: HistoryEntry[];
     /** Master Privacy */
     isHidden?: boolean;
 }
+
 
 
 /** Root structure written to localStorage */

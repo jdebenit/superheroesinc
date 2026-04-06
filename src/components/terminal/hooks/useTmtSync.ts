@@ -51,7 +51,7 @@ export function useTmtSync() {
     };
 
     // Update Master's store from Player Terminal
-    const updateCharacterStatInTmt = (charName: string, type: 'health' | 'mental', newValue: number) => {
+    const updateCharacterStatInTmt = (charName: string, type: 'health' | 'mental' | 'willpower', newValue: number) => {
         const saved = localStorage.getItem(TMT_STORAGE_KEY);
         if (!saved) return;
 
@@ -68,10 +68,15 @@ export function useTmtSync() {
                     } else if (type === 'mental' && c.currentMental !== newValue) {
                         c.currentMental = newValue;
                         changed = true;
+                    } else if (type === 'willpower' && c.currentWillpower !== newValue) {
+                        c.currentWillpower = newValue;
+                        changed = true;
                     }
+
                 }
                 return c;
             });
+
 
             if (changed) {
                 localStorage.setItem(TMT_STORAGE_KEY, JSON.stringify(currentStore));

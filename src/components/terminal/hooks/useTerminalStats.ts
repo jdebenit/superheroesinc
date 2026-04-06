@@ -273,6 +273,25 @@ export function useTerminalStats() {
         setStats(prev => ({ ...prev, usedWillpower: newUsed }));
     };
 
+    const updateWillpowerFromMaster = (newCurrent: number) => {
+        const currentVal = stats.willpower - stats.usedWillpower;
+        if (newCurrent === currentVal) return;
+        
+        const change = newCurrent - currentVal;
+        const newUsed = stats.willpower - newCurrent;
+        
+        const entry: HistoryEntry = {
+            timestamp: new Date().toISOString(),
+            type: 'willpower',
+            change,
+            newValue: newCurrent,
+            notes: 'Sincronizado por el Máster'
+        };
+        
+        setHistory(prev => [entry, ...prev]);
+        setStats(prev => ({ ...prev, usedWillpower: newUsed }));
+    };
+
     const deleteHistoryEntry = (entryToDelete: HistoryEntry) => {
         const newHistory = history.filter(entry => entry !== entryToDelete);
         setHistory(newHistory);
@@ -420,6 +439,7 @@ export function useTerminalStats() {
         updateHealthFromMaster,
         updateMentalFromMaster,
         updateWillpower,
+        updateWillpowerFromMaster,
         updateNotes,
         updateChi,
         resetChi,
