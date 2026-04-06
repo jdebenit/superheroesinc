@@ -12,8 +12,8 @@ interface CombatTableProps {
 }
 
 
-export default function CombatTable({ 
-    characters, 
+export default function CombatTable({
+    characters,
     currentTurn,
     onOpenEdit,
     onOpenHistory,
@@ -21,20 +21,20 @@ export default function CombatTable({
 }: CombatTableProps) {
 
 
-    
+
     const renderStatBar = (charId: string, current: number, max: number, type: 'health' | 'mental') => {
         const percentage = Math.max(0, Math.min(100, (current / (max || 1)) * 100));
         const colorClass = type === 'health' ? 'health' : 'mental';
-        
+
         return (
             <div className="combat-table-stat-cell" onClick={() => onOpenEdit(charId, type)}>
-                 <div className="combat-table-stat-values">
+                <div className="combat-table-stat-values">
 
                     {current} / {max}
                 </div>
                 <div className="combat-table-bar-bg">
-                    <div 
-                        className={`combat-table-bar-fill ${colorClass}`} 
+                    <div
+                        className={`combat-table-bar-fill ${colorClass}`}
                         style={{ width: `${percentage}%` }}
                     />
                 </div>
@@ -49,9 +49,9 @@ export default function CombatTable({
                     <tr>
                         <th className="sticky-col">Combatiente</th>
                         <th>INI</th>
-                        <th>Salud (PV)</th>
-                        <th>Mental (EQM)</th>
-                        <th>Defensas</th>
+                        <th>PVs</th>
+                        <th>EQM</th>
+                        <th>Otros</th>
                         <th className="text-center">Acciones</th>
                     </tr>
                 </thead>
@@ -63,8 +63,8 @@ export default function CombatTable({
                         return (
                             <tr key={c.id} className={isCurrent ? 'current-turn-row' : ''}>
                                 <td className="sticky-col">
-                                    <div 
-                                        className="char-name-wrapper" 
+                                    <div
+                                        className="char-name-wrapper"
                                         onClick={() => openPlayerTerminal(c)}
                                         style={{ cursor: 'pointer' }}
                                         title="Abrir terminal del jugador"
@@ -72,10 +72,10 @@ export default function CombatTable({
                                         <span className={`role-indicator ${c.role}`}>{c.role === 'pj' ? 'P' : 'N'}</span>
                                         <div className="char-avatar-mini">
                                             {c.characterData.icon ? (
-                                                <img 
-                                                    src={c.characterData.icon.startsWith('http') || c.characterData.icon.startsWith('/') || c.characterData.icon.startsWith('data:') 
-                                                        ? c.characterData.icon : `/${c.characterData.icon}`} 
-                                                    alt="" 
+                                                <img
+                                                    src={c.characterData.icon.startsWith('http') || c.characterData.icon.startsWith('/') || c.characterData.icon.startsWith('data:')
+                                                        ? c.characterData.icon : `/${c.characterData.icon}`}
+                                                    alt=""
                                                 />
                                             ) : (
                                                 <span>{initials(charName(c))}</span>
