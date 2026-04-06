@@ -6,9 +6,10 @@ import TerminalHeader from './components/TerminalHeader';
 import PersonajesScreen from './components/PersonajesScreen';
 import CombateScreen from './components/CombateScreen';
 import DetallesScreen from './components/DetallesScreen';
+import ComparativaScreen from './components/ComparativaScreen';
 import { useTmtStore } from './hooks/useTmtStore';
 
-type Screen = 'personajes' | 'combate' | 'detalles';
+type Screen = 'personajes' | 'combate' | 'detalles' | 'comparativa';
 
 export default function TacticMasterTerminal() {
     const [screen, setScreen] = useState<Screen>('personajes');
@@ -66,6 +67,12 @@ export default function TacticMasterTerminal() {
                     >
                         📝 Detalles
                     </button>
+                    <button 
+                        className={`tmt-nav-btn ${screen === 'comparativa' ? 'active' : ''}`} 
+                        onClick={() => setScreen('comparativa')}
+                    >
+                        📊 Comparativa
+                    </button>
                 </div>
             </div>
 
@@ -104,6 +111,12 @@ export default function TacticMasterTerminal() {
                     <DetallesScreen
                         details={store.details || { name: '', description: '', notes: '' }}
                         onUpdateDetails={updateDetails}
+                    />
+                )}
+                {screen === 'comparativa' && (
+                    <ComparativaScreen
+                        characters={characters}
+                        groups={groups}
                     />
                 )}
             </main>
