@@ -21,8 +21,10 @@ interface PersonajesScreenProps {
 
 const PRESET_COLORS = [
     '#ef4444', '#f59e0b', '#10b981', '#3b82f6', '#6366f1', '#a855f7',
-    '#ec4899', '#06b6d4', '#84cc16', '#f97316', '#64748b', '#1e293b'
+    '#ec4899', '#06b6d4', '#84cc16', '#f97316', '#64748b', '#1e293b',
+    '#14b8a6', '#78350f', '#1e3a8a', '#701a75'
 ];
+
 
 export default function PersonajesScreen({
     characters,
