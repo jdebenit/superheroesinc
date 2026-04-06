@@ -227,6 +227,34 @@ export function useTerminalStats() {
         setStats(prev => ({ ...prev, currentMentalBalance: newValue }));
     };
 
+    const updateHealthFromMaster = (newValue: number) => {
+        if (newValue === stats.currentHealth) return;
+        const change = newValue - stats.currentHealth;
+        const entry: HistoryEntry = {
+            timestamp: new Date().toISOString(),
+            type: 'health',
+            change,
+            newValue,
+            notes: 'Sincronizado por el Máster'
+        };
+        setHistory(prev => [entry, ...prev]);
+        setStats(prev => ({ ...prev, currentHealth: newValue }));
+    };
+
+    const updateMentalFromMaster = (newValue: number) => {
+        if (newValue === stats.currentMentalBalance) return;
+        const change = newValue - stats.currentMentalBalance;
+        const entry: HistoryEntry = {
+            timestamp: new Date().toISOString(),
+            type: 'mental',
+            change,
+            newValue,
+            notes: 'Sincronizado por el Máster'
+        };
+        setHistory(prev => [entry, ...prev]);
+        setStats(prev => ({ ...prev, currentMentalBalance: newValue }));
+    };
+
     const updateWillpower = (change: number, notes: string) => {
         if (change === 0) return;
         const currentWillpower = stats.willpower - stats.usedWillpower;
@@ -389,6 +417,8 @@ export function useTerminalStats() {
         usedChi,
         updateHealth,
         updateMental,
+        updateHealthFromMaster,
+        updateMentalFromMaster,
         updateWillpower,
         updateNotes,
         updateChi,

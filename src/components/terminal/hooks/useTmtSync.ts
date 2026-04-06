@@ -50,9 +50,47 @@ export function useTmtSync() {
         return tmtStore.characters.filter(c => !c.isHidden);
     };
 
+    // Update Master's store from Player Terminal
+    const updateCharacterStatInTmt = (charName: string, type: 'health' | 'mental', newValue: number) => {
+        const saved = localStorage.getItem(TMT_STORAGE_KEY);
+        if (!saved) return;
+
+        try {
+            const currentStore: TmtStore = JSON.parse(saved);
+            let changed = false;
+
+            currentStore.characters = currentStore.characters.map(c => {
+                const name = (c.characterData.alias || c.characterData.name || '').toLowerCase();
+                if (name === charName.toLowerCase()) {
+                    if (type === 'health' && c.currentHealth !== newValue) {
+                        c.currentHealth = newValue;
+                        changed = true;
+                    } else if (type === 'mental' && c.currentMental !== newValue) {
+                        c.currentMental = newValue;
+                        changed = true;
+                    }
+                }
+                return c;
+            });
+
+            if (changed) {
+                localStorage.setItem(TMT_STORAGE_KEY, JSON.stringify(currentStore));
+                // Broadcast change so other tabs (like the Master Terminal) see it immediately
+                const channel = new BroadcastChannel('shi_tmt_channel');
+                channel.postMessage({ type: 'SYNC_CHARACTER' });
+                channel.close();
+                setTmtStore(currentStore);
+            }
+        } catch (err) {
+            console.error('Error updating Master store from Player:', err);
+        }
+    };
+
     return {
         tmtStore,
         publicCharacters: getPublicCharacters(),
-        isCombatActive: (tmtStore?.characters?.length || 0) > 0
+        isCombatActive: (tmtStore?.characters?.length || 0) > 0,
+        updateCharacterStatInTmt
     };
 }
+

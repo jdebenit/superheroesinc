@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './TacticPlayerTerminal.css';
 import './CommonTerminal.css';
 import { adaptWebCharacter } from '../../utils/characterAdapter';
@@ -31,6 +31,8 @@ export default function TacticPlayerTerminal() {
         usedChi,
         updateHealth,
         updateMental,
+        updateHealthFromMaster,
+        updateMentalFromMaster,
         updateWillpower,
         updateNotes,
         updateChi,
@@ -44,8 +46,10 @@ export default function TacticPlayerTerminal() {
     const { 
         tmtStore, 
         publicCharacters, 
-        isCombatActive 
+        isCombatActive,
+        updateCharacterStatInTmt
     } = useTmtSync();
+
 
     const [currentView, setCurrentView] = useState<'sheet' | 'combat'>('sheet');
 
@@ -79,6 +83,52 @@ export default function TacticPlayerTerminal() {
         initialMode: 'basic',
         skillType: 'cac'
     });
+
+    // ─────────────────────────────────────────────────────────────────────────────
+    // BI-DIRECTIONAL SYNC (TMT <-> TPT)
+    // ─────────────────────────────────────────────────────────────────────────────
+    
+    // 1. Sync: Master -> Player
+    useEffect(() => {
+        if (!character || !tmtStore) return;
+        const myName = (character.alias || character.name || '').toLowerCase();
+        const meInTmt = tmtStore.characters.find(c => 
+            (c.characterData.alias || c.characterData.name || '').toLowerCase() === myName
+        );
+
+        if (meInTmt) {
+            // Solo actualizamos localmente si hay diferencia real
+            if (typeof meInTmt.currentHealth === 'number' && meInTmt.currentHealth !== stats.currentHealth) {
+                updateHealthFromMaster(meInTmt.currentHealth);
+            }
+            if (typeof meInTmt.currentMental === 'number' && meInTmt.currentMental !== stats.currentMentalBalance) {
+                updateMentalFromMaster(meInTmt.currentMental);
+            }
+        }
+    }, [tmtStore, character]); // No incluimos 'stats' para evitar bucles de retroalimentación
+
+
+    // 2. Sync: Player -> Master
+    useEffect(() => {
+        if (!character || !tmtStore) return;
+        const myName = (character.alias || character.name || '');
+        
+        const meInTmt = tmtStore.characters.find(c => 
+            (c.characterData.alias || c.characterData.name || '').toLowerCase() === myName.toLowerCase()
+        );
+
+        if (meInTmt) {
+            // Solo enviamos si el valor local es DISTINTO al del Master (evita bucles)
+            if (meInTmt.currentHealth !== stats.currentHealth) {
+                updateCharacterStatInTmt(myName, 'health', stats.currentHealth);
+            }
+            if (meInTmt.currentMental !== stats.currentMentalBalance) {
+                updateCharacterStatInTmt(myName, 'mental', stats.currentMentalBalance);
+            }
+        }
+    }, [stats.currentHealth, stats.currentMentalBalance, character]); // Eliminamos tmtStore de dependencias para evitar carreras
+
+
 
     const openHistoryModal = (type: 'health' | 'mental' | 'willpower' | 'chi') => {
         setHistoryType(type);
