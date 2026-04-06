@@ -1,6 +1,7 @@
 import React from 'react';
 import { type TmtCharacterEntry } from '../hooks/useTmtStore';
-import { initials, charName, getBaseIniciativa, getIniciativa, getAcciones, INITIATIVE_MODS } from '../utils/tmtUtils';
+import { initials, charName, getBaseIniciativa, getIniciativa, getAcciones, INITIATIVE_MODS, openPlayerTerminal } from '../utils/tmtUtils';
+
 
 interface InitiativeRowProps {
     entry: TmtCharacterEntry;
@@ -39,10 +40,20 @@ export default function InitiativeRow({
                                 ? entry.characterData.icon 
                                 : `/${entry.characterData.icon}`} 
                             alt={displayName} 
+                            onClick={() => openPlayerTerminal(entry)}
+                            style={{ cursor: 'pointer' }}
+                            title="Abrir terminal del jugador"
                         />
                     ) : (
-                        initials(displayName)
+                        <div 
+                            onClick={() => openPlayerTerminal(entry)}
+                            style={{ cursor: 'pointer', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                            title="Abrir terminal del jugador"
+                        >
+                            {initials(displayName)}
+                        </div>
                     )}
+
                 </div>
                 <div>
                     <div className="tmt-initiative-name">{displayName} {entry.isHidden && <span className="hidden-label">(Oculto)</span>}</div>

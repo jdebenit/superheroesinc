@@ -1,6 +1,7 @@
 import React from 'react';
 import { type TmtCharacterEntry, type HistoryEntry } from '../hooks/useTmtStore';
-import { charName, initials, getIniciativa, getStatValue } from '../utils/tmtUtils';
+import { charName, initials, getIniciativa, getStatValue, openPlayerTerminal } from '../utils/tmtUtils';
+
 
 interface CombatTableProps {
     characters: TmtCharacterEntry[];
@@ -21,13 +22,14 @@ export default function CombatTable({
 
 
     
-    const renderStatBar = (current: number, max: number, type: 'health' | 'mental') => {
+    const renderStatBar = (charId: string, current: number, max: number, type: 'health' | 'mental') => {
         const percentage = Math.max(0, Math.min(100, (current / (max || 1)) * 100));
         const colorClass = type === 'health' ? 'health' : 'mental';
         
         return (
-            <div className="combat-table-stat-cell" onClick={() => onOpenEdit(characters[0].id, type)}>
+            <div className="combat-table-stat-cell" onClick={() => onOpenEdit(charId, type)}>
                  <div className="combat-table-stat-values">
+
                     {current} / {max}
                 </div>
                 <div className="combat-table-bar-bg">
@@ -61,7 +63,12 @@ export default function CombatTable({
                         return (
                             <tr key={c.id} className={isCurrent ? 'current-turn-row' : ''}>
                                 <td className="sticky-col">
-                                    <div className="char-name-wrapper">
+                                    <div 
+                                        className="char-name-wrapper" 
+                                        onClick={() => openPlayerTerminal(c)}
+                                        style={{ cursor: 'pointer' }}
+                                        title="Abrir terminal del jugador"
+                                    >
                                         <span className={`role-indicator ${c.role}`}>{c.role === 'pj' ? 'P' : 'N'}</span>
                                         <div className="char-avatar-mini">
                                             {c.characterData.icon ? (
@@ -77,19 +84,21 @@ export default function CombatTable({
                                         <span className="char-name-text">{charName(c)}</span>
                                     </div>
                                 </td>
+
                                 <td className="ini-cell">
                                     <span className="ini-badge">{getIniciativa(c)}</span>
                                 </td>
                                 <td>
-                                    <div className="clickable-cell" onClick={() => onOpenEdit(c.id, 'health')}>
-                                        {renderStatBar(c.currentHealth || 0, c.maxHealth || 1, 'health')}
+                                    <div className="clickable-cell">
+                                        {renderStatBar(c.id, c.currentHealth || 0, c.maxHealth || 1, 'health')}
                                     </div>
                                 </td>
                                 <td>
-                                    <div className="clickable-cell" onClick={() => onOpenEdit(c.id, 'mental')}>
-                                        {renderStatBar(c.currentMental || 0, c.maxMental || 1, 'mental')}
+                                    <div className="clickable-cell">
+                                        {renderStatBar(c.id, c.currentMental || 0, c.maxMental || 1, 'mental')}
                                     </div>
                                 </td>
+
                                 <td className="defenses-cell">
                                     <div className="defense-badges">
                                         <span className="def-badge phys" title="Parada Física">PF: {getStatValue(os, "Parada Física")}</span>

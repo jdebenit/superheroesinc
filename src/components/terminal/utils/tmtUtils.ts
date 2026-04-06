@@ -136,3 +136,30 @@ export function getStatValue(source: any, label: string): string {
 }
 
 
+
+/**
+ * Opens the Tactic Player Terminal for the given character entry.
+ * It prepares the character data in localStorage and opens a new named window.
+ */
+export function openPlayerTerminal(entry: TmtCharacterEntry): void {
+    if (typeof window === 'undefined') return;
+    
+    const characterData = entry.characterData;
+    if (!characterData) return;
+
+    // Prepare data for TPT to pick up on mount
+    localStorage.setItem('shi_tpt_character', JSON.stringify(characterData));
+    
+    // Create a unique window name for this character (to focus if already open)
+    const windowId = (characterData.alias || characterData.name || entry.id)
+        .replace(/[^a-z0-9]/gi, '_')
+        .toLowerCase();
+    
+    const url = '/recursos/tactic-player-terminal';
+    const win = window.open(url, `tpt_${windowId}`);
+    
+    // Some browsers prevent programmatic focus, but we try
+    if (win) {
+        win.focus();
+    }
+}
