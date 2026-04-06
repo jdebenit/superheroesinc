@@ -1,6 +1,6 @@
 import React from 'react';
 import { type TmtCharacterEntry } from '../hooks/useTmtStore';
-import { initials, charName, getStatValue } from '../utils/tmtUtils';
+import { initials, charName, getStatValue, openPlayerTerminal } from '../utils/tmtUtils';
 import MiniStatCard from './MiniStatCard';
 
 interface CombatCardProps {
@@ -20,7 +20,12 @@ export default function CombatCard({ entry, onOpenEdit, onOpenHistory }: CombatC
     return (
         <div className={`tmt-combat-card`}>
             <div className="tmt-combat-card-header">
-                <div className={`tmt-entity-avatar${isNpc ? ' npc' : ''}`}>
+                <div 
+                    className={`tmt-entity-avatar${isNpc ? ' npc' : ''}`}
+                    onClick={() => openPlayerTerminal(entry)}
+                    style={{ cursor: 'pointer' }}
+                    title="Abrir terminal del jugador"
+                >
                     {entry.characterData.icon ? (
                         <img 
                             src={entry.characterData.icon.startsWith('http') || entry.characterData.icon.startsWith('/') || entry.characterData.icon.startsWith('data:') 
@@ -32,9 +37,16 @@ export default function CombatCard({ entry, onOpenEdit, onOpenHistory }: CombatC
                         initials(displayName)
                     )}
                 </div>
+
                 <div style={{ flex: 1 }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <p className="tmt-combat-card-name">{displayName}</p>
+                        <p 
+                            className="tmt-combat-card-name" 
+                            onClick={() => openPlayerTerminal(entry)} 
+                            style={{ cursor: 'pointer' }}
+                            title="Abrir terminal del jugador"
+                        >{displayName}</p>
+
                         <div className="row-actions">
                             <button className="row-action-btn" onClick={() => onOpenHistory(entry.id, 'health')} title="Historial PV">📋</button>
                             <button className="row-action-btn" onClick={() => onOpenHistory(entry.id, 'mental')} title="Historial EQM">🧠</button>
