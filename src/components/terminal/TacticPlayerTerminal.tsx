@@ -49,9 +49,9 @@ export default function TacticPlayerTerminal() {
         importCharacterJSON
     } = useTerminalStats();
 
-    const { 
-        tmtStore, 
-        publicCharacters, 
+    const {
+        tmtStore,
+        publicCharacters,
         isCombatActive,
         updateCharacterStatInTmt
     } = useTmtSync();
@@ -62,6 +62,16 @@ export default function TacticPlayerTerminal() {
     const [showHistoryModal, setShowHistoryModal] = useState(false);
     const [historyType, setHistoryType] = useState<'health' | 'mental' | 'willpower' | 'chi'>('health');
     const [showResetModal, setShowResetModal] = useState(false);
+
+    useEffect(() => {
+        const charNameStr = character?.alias || character?.name;
+        if (charNameStr) {
+            document.title = `${charNameStr} | SHI TPT`;
+        } else {
+            document.title = "SHI Tactic Player Terminal";
+        }
+    }, [character]);
+
 
     // Edit Modal State
     const [showEditModal, setShowEditModal] = useState(false);
@@ -93,12 +103,12 @@ export default function TacticPlayerTerminal() {
     // ─────────────────────────────────────────────────────────────────────────────
     // BI-DIRECTIONAL SYNC (TMT <-> TPT)
     // ─────────────────────────────────────────────────────────────────────────────
-    
+
     // 1. Sync: Master -> Player
     useEffect(() => {
         if (!character || !tmtStore) return;
         const myName = (character.alias || character.name || '').toLowerCase();
-        const meInTmt = tmtStore.characters.find(c => 
+        const meInTmt = tmtStore.characters.find(c =>
             (c.characterData.alias || c.characterData.name || '').toLowerCase() === myName
         );
 
@@ -126,15 +136,15 @@ export default function TacticPlayerTerminal() {
         }
     }, [tmtStore, character]);
 
- // No incluimos 'stats' para evitar bucles de retroalimentación
+    // No incluimos 'stats' para evitar bucles de retroalimentación
 
 
     // 2. Sync: Player -> Master
     useEffect(() => {
         if (!character || !tmtStore) return;
         const myName = (character.alias || character.name || '');
-        
-        const meInTmt = tmtStore.characters.find(c => 
+
+        const meInTmt = tmtStore.characters.find(c =>
             (c.characterData.alias || c.characterData.name || '').toLowerCase() === myName.toLowerCase()
         );
 
@@ -157,7 +167,7 @@ export default function TacticPlayerTerminal() {
     }, [stats.currentHealth, stats.currentMentalBalance, stats.usedWillpower, stats.willpower, character]);
 
 
- // Eliminamos tmtStore de dependencias para evitar carreras
+    // Eliminamos tmtStore de dependencias para evitar carreras
 
 
 
@@ -266,15 +276,15 @@ export default function TacticPlayerTerminal() {
             s.name === skill.name ||
             (skill.id && s.id === skill.id) ||
             skill.name.toLowerCase().startsWith(s.name.toLowerCase() + ':') ||
-            skill.name.toLowerCase().startsWith(s.name.toLowerCase() + ' (') 
+            skill.name.toLowerCase().startsWith(s.name.toLowerCase() + ' (')
         );
 
-        let type = 'cac'; 
+        let type = 'cac';
         if (generalSkill?.type) type = generalSkill.type;
         if (specialSkill?.type) type = specialSkill.type;
 
         if (skill.name.toLowerCase().includes('artes marciales')) {
-            if (!type || type === 'cac') type = 'both'; 
+            if (!type || type === 'cac') type = 'both';
         }
 
         const isCombat = isCombatSkill(skill.name);
@@ -314,13 +324,13 @@ export default function TacticPlayerTerminal() {
 
             <div className="terminal-nav-wrapper">
                 <div className="terminal-nav">
-                    <button 
+                    <button
                         className={`terminal-nav-btn ${currentView === 'sheet' ? 'active' : ''}`}
                         onClick={() => setCurrentView('sheet')}
                     >
                         🎭 Ficha de Personaje
                     </button>
-                    <button 
+                    <button
                         className={`terminal-nav-btn ${currentView === 'combat' ? 'active' : ''}`}
                         onClick={() => setCurrentView('combat')}
                     >
@@ -332,111 +342,111 @@ export default function TacticPlayerTerminal() {
 
             {character ? (
                 <>
-                {currentView === 'sheet' ? (
-                    <div className="terminal-stats-container">
-                        <div className="terminal-character-header">
-                            <h2 className="terminal-character-alias">{character.alias}</h2>
-                            {character.name && (
-                                <div className="terminal-character-name">"{character.name}"</div>
+                    {currentView === 'sheet' ? (
+                        <div className="terminal-stats-container">
+                            <div className="terminal-character-header">
+                                <h2 className="terminal-character-alias">{character.alias}</h2>
+                                {character.name && (
+                                    <div className="terminal-character-name">"{character.name}"</div>
+                                )}
+                            </div>
+
+                            <div className="terminal-stats-grid">
+                                <StatCard
+                                    label="PVs"
+                                    max={stats.maxHealth}
+                                    current={stats.currentHealth}
+                                    type="health"
+                                    onViewHistory={() => openHistoryModal('health')}
+                                    unconsciousness={stats.unconsciousnessPoints}
+                                    onEdit={() => openEditModal('health')}
+                                />
+
+                                <StatCard
+                                    label="EQM"
+                                    max={stats.maxMentalBalance}
+                                    current={stats.currentMentalBalance}
+                                    type="mental"
+                                    onViewHistory={() => openHistoryModal('mental')}
+                                    onEdit={() => openEditModal('mental')}
+                                    onRoll={handleMentalRoll}
+                                />
+
+                                <StatCard
+                                    label="VOLUNTAD"
+                                    max={stats.willpower}
+                                    current={stats.willpower - stats.usedWillpower}
+                                    type="willpower"
+                                    onViewHistory={() => openHistoryModal('willpower')}
+                                    onEdit={() => openEditModal('willpower')}
+                                />
+
+                                {(() => {
+                                    const CHI_TERM = 'artista marcial con chi';
+                                    const char = character as any;
+                                    const isArtistaConChi =
+                                        char.origin?.items?.some((item: any) => {
+                                            const keys = Object.keys(item);
+                                            if (keys.some((k: string) => k.toLowerCase().includes(CHI_TERM))) return true;
+                                            return keys.some((k: string) => {
+                                                const val = item[k];
+                                                return Array.isArray(val) && val.some((v: any) =>
+                                                    typeof v === 'string' && v.toLowerCase().includes(CHI_TERM)
+                                                );
+                                            });
+                                        }) ||
+                                        (char.traumas && Object.keys(char.traumas).some((k: string) =>
+                                            k.toLowerCase().includes(CHI_TERM)
+                                        ));
+                                    return isArtistaConChi ? (
+                                        <ChiCounter
+                                            level={character.level ?? 1}
+                                            usedChi={usedChi}
+                                            onUpdate={updateChi}
+                                            onReset={resetChi}
+                                            onViewHistory={() => openHistoryModal('chi')}
+                                        />
+                                    ) : null;
+                                })()}
+                            </div>
+
+                            <AttributesPanel attributes={character.attributes.values} />
+
+                            <OtherStatsPanel
+                                combatstats={character.combatstats}
+                                otherstats={character.otherstats}
+                                background={character.background}
+                            />
+
+                            <PowersPanel
+                                powers={character.powers}
+                                attributes={character.attributes.values}
+                            />
+
+                            {(character.skills?.generalItems || character.skills?.specialItems) && (
+                                <SkillsPanel
+                                    generalSkills={character.skills?.generalItems}
+                                    learningSkills={character.skills?.specialItems}
+                                    onSkillClick={handleSkillClick}
+                                />
                             )}
+
+                            <NotesPanel notes={notes} onChange={updateNotes} />
                         </div>
-
-                        <div className="terminal-stats-grid">
-                            <StatCard
-                                label="PVs"
-                                max={stats.maxHealth}
-                                current={stats.currentHealth}
-                                type="health"
-                                onViewHistory={() => openHistoryModal('health')}
-                                unconsciousness={stats.unconsciousnessPoints}
-                                onEdit={() => openEditModal('health')}
-                            />
-
-                            <StatCard
-                                label="EQM"
-                                max={stats.maxMentalBalance}
-                                current={stats.currentMentalBalance}
-                                type="mental"
-                                onViewHistory={() => openHistoryModal('mental')}
-                                onEdit={() => openEditModal('mental')}
-                                onRoll={handleMentalRoll}
-                            />
-
-                            <StatCard
-                                label="VOLUNTAD"
-                                max={stats.willpower}
-                                current={stats.willpower - stats.usedWillpower}
-                                type="willpower"
-                                onViewHistory={() => openHistoryModal('willpower')}
-                                onEdit={() => openEditModal('willpower')}
-                            />
-
-                            {(() => {
-                                const CHI_TERM = 'artista marcial con chi';
-                                const char = character as any;
-                                const isArtistaConChi =
-                                    char.origin?.items?.some((item: any) => {
-                                        const keys = Object.keys(item);
-                                        if (keys.some((k: string) => k.toLowerCase().includes(CHI_TERM))) return true;
-                                        return keys.some((k: string) => {
-                                            const val = item[k];
-                                            return Array.isArray(val) && val.some((v: any) =>
-                                                typeof v === 'string' && v.toLowerCase().includes(CHI_TERM)
-                                            );
-                                        });
-                                    }) ||
-                                    (char.traumas && Object.keys(char.traumas).some((k: string) =>
-                                        k.toLowerCase().includes(CHI_TERM)
-                                    ));
-                                return isArtistaConChi ? (
-                                    <ChiCounter
-                                        level={character.level ?? 1}
-                                        usedChi={usedChi}
-                                        onUpdate={updateChi}
-                                        onReset={resetChi}
-                                        onViewHistory={() => openHistoryModal('chi')}
-                                    />
-                                ) : null;
-                            })()}
-                        </div>
-
-                        <AttributesPanel attributes={character.attributes.values} />
-
-                        <OtherStatsPanel
-                            combatstats={character.combatstats}
-                            otherstats={character.otherstats}
-                            background={character.background}
+                    ) : (
+                        <PlayerCombatScreen
+                            characters={publicCharacters}
+                            currentTurn={tmtStore?.currentTurn || 0}
+                            currentRound={tmtStore?.currentRound || 1}
+                            playerCharacterName={character.alias || character.name}
                         />
 
-                        <PowersPanel
-                            powers={character.powers}
-                            attributes={character.attributes.values}
-                        />
-
-                        {(character.skills?.generalItems || character.skills?.specialItems) && (
-                            <SkillsPanel
-                                generalSkills={character.skills?.generalItems}
-                                learningSkills={character.skills?.specialItems}
-                                onSkillClick={handleSkillClick}
-                            />
-                        )}
-
-                        <NotesPanel notes={notes} onChange={updateNotes} />
-                    </div>
-                ) : (
-                    <PlayerCombatScreen 
-                        characters={publicCharacters}
-                        currentTurn={tmtStore?.currentTurn || 0}
-                        currentRound={tmtStore?.currentRound || 1}
-                        playerCharacterName={character.alias || character.name}
-                    />
-
-                )}
+                    )}
                 </>
             ) : (
                 <div className="terminal-stats-container">
                     {currentView === 'combat' ? (
-                        <PlayerCombatScreen 
+                        <PlayerCombatScreen
                             characters={publicCharacters}
                             currentTurn={tmtStore?.currentTurn || 0}
                             currentRound={tmtStore?.currentRound || 1}
