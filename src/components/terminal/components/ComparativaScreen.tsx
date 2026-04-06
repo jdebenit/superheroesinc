@@ -128,7 +128,7 @@ export default function ComparativaScreen({ characters, groups }: ComparativaScr
                             {groups.map(g => (
                                 <button 
                                     key={g.id} 
-                                    className={`group-chip ${selectedGroupIds.includes(g.id) ? 'active' : ''}`}
+                                    className={`tmt-group-filter-tag ${selectedGroupIds.includes(g.id) ? 'active' : ''}`}
                                     style={{ '--group-color': g.color || '#4b5563' } as React.CSSProperties}
                                     onClick={() => toggleGroup(g.id)}
                                 >

@@ -100,10 +100,7 @@ export default function CombateScreen({
                                     key={g.id}
                                     className={`tmt-group-filter-tag ${active ? 'active' : ''}`}
                                     onClick={() => toggleGroup(g.id)}
-                                    style={{
-                                        backgroundColor: active ? (g.color || '#3b82f6') : '#f1f5f9',
-                                        color: active ? '#fff' : '#64748b'
-                                    }}
+                                    style={{ '--group-color': g.color || '#3b82f6' } as React.CSSProperties}
                                 >
                                     {g.name}
                                 </button>

@@ -169,6 +169,38 @@
     text-shadow: 0 1px 2px rgba(0,0,0,0.2);
 }
 
+.tmt-group-filter-tag {
+    border: 1px solid rgba(0,0,0,0.1);
+    padding: 0.45rem 1.1rem;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    background-color: var(--group-color, #4b5563);
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    user-select: none;
+    display: inline-flex;
+    align-items: center;
+    opacity: 0.4; /* Muted when inactive */
+    transform: scale(0.95);
+}
+
+.tmt-group-filter-tag:hover {
+    opacity: 0.8;
+    transform: translateY(-1px) scale(1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.tmt-group-filter-tag.active {
+    opacity: 1; /* Full color when active */
+    transform: scale(1.05); /* Slightly larger to stand out */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
 .tmt-group-badge-item:hover {
     transform: translateY(-2px) scale(1.02);
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
@@ -315,19 +347,8 @@
     background: white;
 }
 
-.tmt-group-filter-tag {
-    border: none;
-    padding: 0.35rem 0.9rem;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-}
-
 .tmt-group-filter-tag:hover {
-    transform: translateY(-1px);
+    transform: translateY(-2px);
     filter: brightness(0.95);
 }
 
