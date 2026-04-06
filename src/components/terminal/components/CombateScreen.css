@@ -1,0 +1,223 @@
+/* CombateScreen.css */
+
+.tmt-view-toggle {
+    display: flex;
+    gap: 0.25rem;
+    background: #f1f5f9;
+    padding: 0.25rem;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+.tmt-toggle-btn {
+    padding: 0.4rem 0.85rem;
+    border: none;
+    background: transparent;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #64748b;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.tmt-toggle-btn:hover {
+    color: #1e293b;
+}
+
+.tmt-toggle-btn.active {
+    background: white;
+    color: #2563eb;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Combat Table Styles */
+.combat-table-container {
+    padding: 1rem;
+    overflow-x: auto;
+}
+
+.combat-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 0.85rem;
+}
+
+.combat-table th, .combat-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #f1f5f9;
+    text-align: left;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+.combat-table th {
+    background: #f8fafc;
+    color: #64748b;
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.combat-table .sticky-col {
+    position: sticky;
+    left: 0;
+    background: white;
+    z-index: 10;
+    border-right: 1px solid #e5e7eb;
+    min-width: 250px;
+}
+
+.combat-table th.sticky-col {
+    background: #f8fafc;
+}
+
+.current-turn-row td {
+    background: #f0f7ff !important;
+}
+
+.current-turn-row .sticky-col {
+    background: #f0f7ff !important;
+}
+
+.current-turn-row {
+    outline: 2px solid #3b82f6;
+    outline-offset: -2px;
+}
+
+/* Indicators in Table */
+.ini-badge {
+    background: #1e293b;
+    color: white;
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    font-weight: 800;
+    font-size: 0.85rem;
+    display: inline-block;
+    min-width: 32px;
+    text-align: center;
+}
+
+.combat-table-stat-cell {
+    width: 140px;
+    cursor: pointer;
+}
+
+.combat-table-stat-values {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.combat-table-bar-bg {
+    height: 6px;
+    background: #e2e8f0;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.combat-table-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.3s ease;
+}
+
+.combat-table-bar-fill.health { background: #ef4444; }
+.combat-table-bar-fill.mental { background: #3b82f6; }
+
+/* Actions Column */
+.actions-counter {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.action-step-btn {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    border: 1px solid #e2e8f0;
+    background: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: #64748b;
+}
+
+.action-step-btn:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+}
+
+.action-count {
+    font-weight: 800;
+    min-width: 45px;
+    text-align: center;
+}
+
+.action-count.exhausted {
+    color: #ef4444;
+}
+
+/* Defenses Column */
+.defense-badges {
+    display: flex;
+    gap: 0.4rem;
+}
+
+.def-badge {
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    border: 1px solid transparent;
+}
+
+.def-badge.phys { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
+.def-badge.ment { background: #e0f2fe; color: #075985; border-color: #7dd3fc; }
+.def-badge.da-phys { background: #fef2f2; color: #b91c1c; border-color: #fecaca; border-style: dashed; }
+.def-badge.da-ment { background: #f0f9ff; color: #0369a1; border-color: #bae6fd; border-style: dashed; }
+.def-badge.impact { background: #fef3c7; color: #92400e; border-color: #fcd34d; }
+.def-badge.psionic { background: #f3e8ff; color: #6b21a8; border-color: #e9d5ff; }
+
+
+/* Row Actions */
+.row-actions {
+    display: flex;
+    gap: 0.4rem;
+    justify-content: center;
+}
+
+.row-action-btn {
+    width: 32px;
+    height: 32px;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.row-action-btn:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+    transform: translateY(-1px);
+}
+
+.clickable-cell:hover {
+    opacity: 0.8;
+}
+
+.text-center { text-align: center !important; }

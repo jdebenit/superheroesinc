@@ -1,6 +1,6 @@
 import React from 'react';
 import { type TmtCharacterEntry } from '../hooks/useTmtStore';
-import { initials, charName } from '../utils/tmtUtils';
+import { initials, charName, getStatValue } from '../utils/tmtUtils';
 import MiniStatCard from './MiniStatCard';
 
 interface CombatCardProps {
@@ -12,6 +12,7 @@ interface CombatCardProps {
 export default function CombatCard({ entry, onOpenEdit, onOpenHistory }: CombatCardProps) {
     const isNpc = entry.role === 'pnj';
     const displayName = charName(entry);
+    const os = entry.characterData.otherstats;
 
     return (
         <div className="tmt-combat-card">
@@ -54,14 +55,15 @@ export default function CombatCard({ entry, onOpenEdit, onOpenHistory }: CombatC
                 />
 
                 <div className="tmt-combat-stats-extras">
-                    <div className="tmt-stat-extra"><span className="label">Parada Física</span> <span className="value">{entry.characterData.otherstats?.["Parada Fisica"] || '-'}</span></div>
-                    <div className="tmt-stat-extra"><span className="label">Parada Mental</span> <span className="value">{entry.characterData.otherstats?.["Parada mental"] || '-'}</span></div>
-                    <div className="tmt-stat-extra"><span className="label">D.A. Físico</span> <span className="value">{entry.characterData.otherstats?.["Daño absorbido físico"] || '-'}</span></div>
-                    <div className="tmt-stat-extra"><span className="label">D.A. Mental</span> <span className="value">{entry.characterData.otherstats?.["Daño absorbido mental"] || '-'}</span></div>
-                    <div className="tmt-stat-extra"><span className="label">Mod. Impacto</span> <span className="value">{entry.characterData.otherstats?.["Modificador de impacto"] || '-'}</span></div>
-                    <div className="tmt-stat-extra"><span className="label">Mod. Psiónico</span> <span className="value">{entry.characterData.otherstats?.["Modificador Psionico"] || '-'}</span></div>
+                    <div className="tmt-stat-extra"><span className="label">Parada Física</span> <span className="value">{getStatValue(os, "Parada Física")}</span></div>
+                    <div className="tmt-stat-extra"><span className="label">Parada Mental</span> <span className="value">{getStatValue(os, "Parada Mental")}</span></div>
+                    <div className="tmt-stat-extra"><span className="label">D.A. Físico</span> <span className="value">{getStatValue(os, "Daño absorbido físico")}</span></div>
+                    <div className="tmt-stat-extra"><span className="label">D.A. Mental</span> <span className="value">{getStatValue(os, "Daño absorbido mental")}</span></div>
+                    <div className="tmt-stat-extra"><span className="label">Mod. Impacto</span> <span className="value">{getStatValue(os, "Modificador de impacto")}</span></div>
+                    <div className="tmt-stat-extra"><span className="label">Mod. Psiónico</span> <span className="value">{getStatValue(os, "Modificador Psiónico")}</span></div>
                 </div>
             </div>
         </div>
     );
 }
+

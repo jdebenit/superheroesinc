@@ -4,9 +4,11 @@ import { getIniciativa, getBaseIniciativa } from '../utils/tmtUtils';
 import GroupFilterBar from './GroupFilterBar';
 import InitiativeRow from './InitiativeRow';
 import CombatCard from './CombatCard';
+import CombatTable from './CombatTable';
 import EditStatModal from './EditStatModal';
 import HistoryModal from './HistoryModal';
 import Modal from './Modal';
+import './CombateScreen.css';
 
 interface CombateScreenProps {
     characters: TmtCharacterEntry[];
@@ -34,6 +36,7 @@ export default function CombateScreen({
     onResetAllActions
 }: CombateScreenProps) {
     const [currentTurn, setCurrentTurn] = useState(0);
+    const [viewMode, setViewMode] = useState<'cards' | 'table'>('table');
     const [showConfirmModal, setShowConfirmModal] = useState(false);
     const [editModal, setEditModal] = useState<{ isOpen: boolean; charId: string; type: 'health' | 'mental' }>({ 
         isOpen: false, charId: '', type: 'health' 
@@ -124,17 +127,40 @@ export default function CombateScreen({
             </div>
 
             <div className="tmt-section">
-                <div className="tmt-section-header"><span className="tmt-section-title">Tarjetas de Combate</span></div>
-                <div className="tmt-combat-grid">
-                    {sorted.map(e => (
-                        <CombatCard 
-                            key={e.id}
-                            entry={e}
-                            onOpenEdit={openEdit}
-                            onOpenHistory={openHistory}
-                        />
-                    ))}
+                <div className="tmt-section-header">
+                    <span className="tmt-section-title">Combatientes</span>
+                    <div className="tmt-view-toggle">
+                        <button 
+                            className={`tmt-toggle-btn ${viewMode === 'cards' ? 'active' : ''}`}
+                            onClick={() => setViewMode('cards')}
+                        >🎴 Tarjetas</button>
+                        <button 
+                            className={`tmt-toggle-btn ${viewMode === 'table' ? 'active' : ''}`}
+                            onClick={() => setViewMode('table')}
+                        >📊 Tabla</button>
+                    </div>
                 </div>
+
+                {viewMode === 'cards' ? (
+                    <div className="tmt-combat-grid">
+                        {sorted.map(e => (
+                            <CombatCard 
+                                key={e.id}
+                                entry={e}
+                                onOpenEdit={openEdit}
+                                onOpenHistory={openHistory}
+                            />
+                        ))}
+                    </div>
+                ) : (
+                    <CombatTable 
+                        characters={sorted}
+                        currentTurn={currentTurn}
+                        onUpdateUsedActions={onUpdateUsedActions}
+                        onOpenEdit={openEdit}
+                        onOpenHistory={openHistory}
+                    />
+                )}
             </div>
 
             <Modal isOpen={showConfirmModal} onClose={() => setShowConfirmModal(false)} title="Confirmar Iniciativas">

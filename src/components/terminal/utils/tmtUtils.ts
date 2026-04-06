@@ -98,3 +98,41 @@ export function getAcciones(entry: TmtCharacterEntry): number {
     if (agi <= 199) return 5;
     return 6;
 }
+
+/**
+ * Robustly extract a value from a stat source (Object or Array of "Key: Value" strings).
+ */
+export function getStatValue(source: any, label: string): string {
+    if (!source) return '-';
+    
+    const normalize = (str: string) => 
+        str.toLowerCase()
+           .normalize("NFD")
+           .replace(/[\u0300-\u036f]/g, "") // remove accents
+           .replace(/[^\w\s]/g, "")        // remove punctuation/special chars
+           .trim();
+
+    const target = normalize(label);
+
+    if (Array.isArray(source)) {
+        const entry = source.find((s: string) => {
+            if (typeof s !== 'string') return false;
+            const parts = s.split(':');
+            return parts[0] && normalize(parts[0]) === target;
+        });
+        if (entry) {
+            return entry.split(':')[1]?.trim() || '0';
+        }
+        return '-';
+    }
+
+    if (typeof source === 'object') {
+        const keys = Object.keys(source);
+        const match = keys.find(k => normalize(k) === target);
+        return match ? source[match] : '-';
+    }
+    
+    return '-';
+}
+
+
