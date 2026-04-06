@@ -163,6 +163,7 @@
     top: 0;
     z-index: 10;
     border-bottom: 2px solid #e5e7eb;
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.05);
 }
 
 .sticky-col {
@@ -172,6 +173,10 @@
     z-index: 20;
     min-width: 220px;
     border-right: 1px solid #e5e7eb;
+}
+
+.comparativa-table th.sticky-col {
+    z-index: 30;
 }
 
 .comparativa-table td.sticky-col {

@@ -49,29 +49,29 @@ export default function TacticMasterTerminal() {
 
             <div className="tmt-navbar-wrapper">
                 <div className="tmt-nav">
-                    <button 
-                        className={`tmt-nav-btn ${screen === 'personajes' ? 'active' : ''}`} 
+                    <button
+                        className={`tmt-nav-btn ${screen === 'personajes' ? 'active' : ''}`}
                         onClick={() => setScreen('personajes')}
                     >
                         🎭 Personajes
                     </button>
-                    <button 
-                        className={`tmt-nav-btn ${screen === 'combate' ? 'active' : ''}`} 
+                    <button
+                        className={`tmt-nav-btn ${screen === 'combate' ? 'active' : ''}`}
                         onClick={() => setScreen('combate')}
                     >
                         ⚔️ Combate
                     </button>
-                    <button 
-                        className={`tmt-nav-btn ${screen === 'detalles' ? 'active' : ''}`} 
-                        onClick={() => setScreen('detalles')}
-                    >
-                        📝 Detalles
-                    </button>
-                    <button 
-                        className={`tmt-nav-btn ${screen === 'comparativa' ? 'active' : ''}`} 
+                    <button
+                        className={`tmt-nav-btn ${screen === 'comparativa' ? 'active' : ''}`}
                         onClick={() => setScreen('comparativa')}
                     >
                         📊 Comparativa
+                    </button>
+                    <button
+                        className={`tmt-nav-btn ${screen === 'detalles' ? 'active' : ''}`}
+                        onClick={() => setScreen('detalles')}
+                    >
+                        📝 Detalles
                     </button>
                 </div>
             </div>
