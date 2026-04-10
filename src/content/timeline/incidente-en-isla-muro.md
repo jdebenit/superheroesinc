@@ -6,5 +6,5 @@ description: "El ejército soviético detona una arma nuclear en la isla Muró p
 reality: "Tierra Zero"
 icon: "tech"
 tags: 
-    - Isla Muró
+    - Isla-Muró
 ---
