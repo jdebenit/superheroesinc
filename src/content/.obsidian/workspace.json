@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "timeline/base-erebus-y-cerbero.md",
+                "file": "timeline/ritual-fin-del-mundo.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "base-erebus-y-cerbero"
+              "title": "ritual-fin-del-mundo"
             }
           }
         ]
@@ -53,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "gamadas",
+                "query": "textos nordi",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -183,8 +183,11 @@
       "bases:Crear nueva base": false
     }
   },
-  "active": "2bf133c1830a0ce8",
+  "active": "d6905c71f195763e",
   "lastOpenFiles": [
+    "timeline/textos-nordicos.md",
+    "timeline/ritual-fin-del-mundo.md",
+    "timeline/base-erebus-y-cerbero.md",
     "timeline/incidente-en-isla-mur.md",
     "timeline/desaparicion-ultima-oportunidad.md",
     "timeline/creacion-ultima-oportunidad.md",
@@ -205,12 +208,9 @@
     "timeline/informes-sobre-flecha-roja.md",
     "timeline/comienzo-de-las-guerras-gamadas.md",
     "timeline/muerte-de-estrella-y-llegada-de-nigalion.md",
-    "timeline/base-erebus-y-cerbero.md",
     "blog/SHI-Tactic-Master-Terminal-el-cerebro-de-la-mesa.md",
     "blog/donde-estoy-yo.md",
     "blog/crear-campana-rol-superheroes-en-espana-guia-epica-y-lore.md",
-    "blog/el-renacer-del-generador-de-fichas-movil.md",
-    "blog/subir-nivel-no-va-solo-de-numeros.md",
     "rpg/la-naga-n4.json",
     "rpg/la-naga copy.json",
     "timeline",
