@@ -44,6 +44,7 @@ interface PowersSectionProps {
     isHadaFuego?: boolean;
     isHadaAgua?: boolean;
     isHadaTierra?: boolean;
+    isHibrido?: boolean;
 }
 
 export default function PowersSection({
@@ -81,18 +82,19 @@ export default function PowersSection({
     isHadaAire,
     isHadaFuego,
     isHadaAgua,
-    isHadaTierra
+    isHadaTierra,
+    isHibrido
 }: PowersSectionProps) {
     const hasAnyPowerOrigin = isGuardian || isAlterado || isVampiro || isSemidemonio || isMaldito ||
-        isEnte || isThals || isDivino || isTerrano || isDotado || isCosmico || isMutante || isTesKhar || isAtlante || isTroll || isPoseido || isEnano || isGrifo || isElfoFisico || isElfoPsiquico || isHadaEter || isHadaAire || isHadaFuego || isHadaAgua || isHadaTierra;
+        isEnte || isThals || isDivino || isTerrano || isDotado || isCosmico || isMutante || isTesKhar || isAtlante || isTroll || isPoseido || isEnano || isGrifo || isElfoFisico || isElfoPsiquico || isHadaEter || isHadaAire || isHadaFuego || isHadaAgua || isHadaTierra || isHibrido;
 
     if (!hasAnyPowerOrigin) return null;
 
     const renderHeaderActions = () => (
         <div className="powers-section-actions">
-            {isGuardian && (
+            {(isGuardian || isHibrido) && (
                 <PixelButton onClick={() => onOpenModal('Guardian')} variant="guardian" className="small">
-                    <span>+</span> Guardián
+                    <span>+</span> {isHibrido ? 'Guardián (Híbrido)' : 'Guardián'}
                 </PixelButton>
             )}
             {isAlterado && (
@@ -105,9 +107,9 @@ export default function PowersSection({
                     <span>+</span> Vampírico
                 </PixelButton>
             )}
-            {(isSemidemonio || isMaldito || isPoseido) && (
+            {(isSemidemonio || isMaldito || isPoseido || isHibrido) && (
                 <PixelButton onClick={() => onOpenModal('Sobrenatural')} variant="sobrenatural" className="small">
-                    <span>+</span> Sobrenatural
+                    <span>+</span> {isHibrido ? 'Sobrenatural (Híbrido)' : 'Sobrenatural'}
                 </PixelButton>
             )}
             {isThals && (
@@ -131,7 +133,7 @@ export default function PowersSection({
                 </PixelButton>
             )}
             {isDotado && (
-                <PixelButton onClick={() => onOpenModal('Sobrenatural')} variant="dotado" className="small">
+                <PixelButton onClick={() => onOpenModal('Sobrenatural')} variant="sobrenatural" className="small">
                     <span>+</span> Dotado (Sobrenatural)
                 </PixelButton>
             )}

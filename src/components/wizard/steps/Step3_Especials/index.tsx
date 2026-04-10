@@ -262,6 +262,7 @@ export default function Step3_Especials({ data, onChange, onShowToast, onShowHel
                 isHadaFuego={isHadaFuego}
                 isHadaAgua={isHadaAgua}
                 isHadaTierra={isHadaTierra}
+                isHibrido={isHibrido}
             />
 
             {hasEM && (
