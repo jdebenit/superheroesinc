@@ -291,7 +291,7 @@ export const Timeline: React.FC<TimelineProps> = ({ events }) => {
                             boxShadow: '2px 2px 0 rgba(0, 0, 0, 0.1)',
                         }}
                         contentArrowStyle={{ borderRight: '7px solid #fff' }}
-                        date={event.displayDate || event.date.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}
+                        date={event.displayDate || event.date.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })}
                         dateClassName="text-[#1a1a1a] font-bold font-mono"
                         iconStyle={getIconStyle(event.icon)}
                         icon={getIcon(event.icon)}

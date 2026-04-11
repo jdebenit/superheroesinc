@@ -64,9 +64,9 @@ const timelineCollection = defineCollection({
                 const year = parseInt(match[1]);
                 const month = parseInt(match[2]) - 1; // 0-indexed
                 const day = parseInt(match[3]);
-                const date = new Date();
-                date.setFullYear(year, month, day);
-                date.setHours(0, 0, 0, 0);
+                const date = new Date(0);
+                date.setUTCFullYear(year, month, day);
+                date.setUTCHours(0, 0, 0, 0);
                 return date;
             }
             return new Date(val);
@@ -202,9 +202,9 @@ const charactersCollection = defineCollection({
                 const year = parseInt(match[1]);
                 const month = parseInt(match[2]) - 1;
                 const day = parseInt(match[3]);
-                const date = new Date();
-                date.setFullYear(year, month, day);
-                date.setHours(0, 0, 0, 0);
+                const date = new Date(0);
+                date.setUTCFullYear(year, month, day);
+                date.setUTCHours(0, 0, 0, 0);
                 return date;
             }
             return new Date(val);
@@ -217,9 +217,9 @@ const charactersCollection = defineCollection({
                 const year = parseInt(match[1]);
                 const month = parseInt(match[2]) - 1;
                 const day = parseInt(match[3]);
-                const date = new Date();
-                date.setFullYear(year, month, day);
-                date.setHours(0, 0, 0, 0);
+                const date = new Date(0);
+                date.setUTCFullYear(year, month, day);
+                date.setUTCHours(0, 0, 0, 0);
                 return date;
             }
             return new Date(val);
