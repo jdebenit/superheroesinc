@@ -464,6 +464,22 @@ export function useCharacterCalculations(character: any) {
             }
         }
 
+        // 17b. Hibrido Params Cost (DISCOUNT or PENALTY)
+        const isHibrido = hasSubtype(character, 'Arcano', 'Híbrido mitológico');
+        if (isHibrido && character.hibridoParams) {
+            if (character.hibridoParams.sequels && Array.isArray(character.hibridoParams.sequels) && character.hibridoParams.sequels.length > 0) {
+                character.hibridoParams.sequels.forEach((s: any) => {
+                    const seq = SEQUELS.find(d => d.id === s.id);
+                    if (seq) {
+                        total -= seq.cost;
+                    }
+                });
+            } else {
+                // If no sequels selected: +2 PC penalty (just like Alterados)
+                total += 2;
+            }
+        }
+
         // 18. Guardian Params Cost
         if (character.guardianParams && character.guardianParams.quality) {
             const quality = GUARDIAN_QUALITIES.find(q => q.id === character.guardianParams.quality);

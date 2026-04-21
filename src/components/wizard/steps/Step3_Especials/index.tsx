@@ -23,6 +23,7 @@ import TechnoSuitStrengthSection from './sections/TechnoSuitStrengthSection';
 import { CyborgSection } from './sections/CyborgSection';
 import ParahumanoSection from './sections/ParahumanoSection';
 import MinotaurSection from './sections/MinotaurSection';
+import HibridoSection from './sections/HibridoSection';
 import { WizardSection } from '../../shared/layout/WizardSection';
 import '../../shared/layout/WizardStep.css';
 
@@ -156,6 +157,13 @@ export default function Step3_Especials({ data, onChange, onShowToast, onShowHel
                     mutanteParams={data.mutanteParams || { sequels: [] }}
                     onChange={onChange}
                     data={data}
+                />
+            )}
+
+            {isHibrido && (
+                <HibridoSection
+                    hibridoParams={data.hibridoParams || { sequels: [] }}
+                    onChange={onChange}
                 />
             )}
 
