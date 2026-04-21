@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "timeline/ritual-fin-del-mundo.md",
+                "file": "lore/cronicas/dos-cruces-y-ningun-milagro.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "ritual-fin-del-mundo"
+              "title": "dos-cruces-y-ningun-milagro"
             }
           }
         ]
@@ -185,9 +185,13 @@
   },
   "active": "d6905c71f195763e",
   "lastOpenFiles": [
+    "lore/cronicas/aparicion-infernal-en-una-vivienda-de-pueblo-madrileño.md",
+    "lore/cronicas/dos-cruces-y-ningun-milagro.md",
+    "lore/cronicas/el-carnicero-llego-con-la-factura.md",
+    "lore/cronicas/estados-unidos-primero-otra-vez.md",
+    "timeline/ritual-fin-del-mundo.md",
     "Sin título.md",
     "Pasted image 20260416191817.png",
-    "timeline/ritual-fin-del-mundo.md",
     "timeline/textos-nordicos.md",
     "timeline/base-erebus-y-cerbero.md",
     "timeline/incidente-en-isla-mur.md",
@@ -208,9 +212,6 @@
     "timeline/koch-y-flecha-roja.md",
     "timeline/juicios-de-salem-y-samuel-harris.md",
     "timeline/informes-sobre-flecha-roja.md",
-    "timeline/comienzo-de-las-guerras-gamadas.md",
-    "timeline/muerte-de-estrella-y-llegada-de-nigalion.md",
-    "blog/SHI-Tactic-Master-Terminal-el-cerebro-de-la-mesa.md",
     "rpg/la-naga-n4.json",
     "rpg/la-naga copy.json",
     "timeline",
