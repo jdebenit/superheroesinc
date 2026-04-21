@@ -41,7 +41,10 @@ export default function SelectionModal({
 
     const getTitle = () => {
         if (customTitle) return customTitle;
-        if (type === 'powers') return `Seleccionar Poderes (${originFilter})`;
+        if (type === 'powers') {
+            if (originFilter === 'OtroDivino') return 'Seleccionar Poderes de Otro Origen (+3 PC)';
+            return `Seleccionar Poderes (${originFilter})`;
+        }
         if (type === 'techModules') return 'Seleccionar Módulos Tecnológicos';
         return 'Seleccionar Hechizos';
     };

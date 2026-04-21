@@ -222,7 +222,8 @@ export function useStep3Logic(data: any, onChange: (updates: any) => void, onSho
             rank: 1,
             isCrossType: penaltyInfo.type === 'cross-type',
             isCrossOrigin: isGuardianChar && penaltyInfo.type === 'cross-origin',
-            isCrossOriginMaldito: isMalditoChar && penaltyInfo.type === 'cross-origin'
+            isCrossOriginMaldito: isMalditoChar && penaltyInfo.type === 'cross-origin',
+            isCrossOriginDivino: isDivino && penaltyInfo.type === 'cross-origin'
         };
 
         if (powerDef?.options?.length) {
@@ -269,6 +270,10 @@ export function useStep3Logic(data: any, onChange: (updates: any) => void, onSho
                     (isMalditoChar && modalOriginFilter === 'Sobrenatural')) return true;
                 if (modalOriginFilter === 'Ente') {
                     return p.origins.includes('Mutante') && p.types.some(t => t === 'Psíquico' || t === 'Energético');
+                }
+                // Divine cross-origin: show all powers that are NOT from Divino origin
+                if (modalOriginFilter === 'OtroDivino') {
+                    return !p.origins.includes('Divino');
                 }
                 if (modalOriginFilter) {
                     if (modalOriginFilter === 'Guardián' && p.origins.includes('Guardian')) return true;

@@ -18,6 +18,7 @@ import { OriginSection } from './sections/OriginSection';
 import { HybridSection } from './sections/HybridSection';
 import { EnteSection } from './sections/EnteSection';
 import { AlteradoSection } from './sections/AlteradoSection';
+import { HibridoSheetSection } from './sections/HibridoSheetSection';
 import { MutanteSection } from './sections/MutanteSection';
 import { PoseidoSection } from './sections/PoseidoSection';
 import { GuardianSection } from './sections/GuardianSection';
@@ -86,6 +87,7 @@ export default function CharacterSheet({
                 <HybridSection character={character} />
                 <EnteSection character={character} />
                 <AlteradoSection character={character} />
+                <HibridoSheetSection character={character} />
                 <MutanteSection character={character} />
                 <PoseidoSection character={character} />
                 <GuardianSection character={character} />

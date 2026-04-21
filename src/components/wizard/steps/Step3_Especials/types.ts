@@ -20,6 +20,7 @@ export interface SelectedPower {
     isCrossType?: boolean; // For mutants: power is from different type (+2 PC base cost)
     isCrossOrigin?: boolean; // For Guardián: power is from different origin (+3 PC base cost)
     isCrossOriginMaldito?: boolean; // For Maldito: power is from different origin (+1 PC base cost)
+    isCrossOriginDivino?: boolean; // For Divino: power is from different origin (+3 PC base cost)
     customizations?: {
         id: string;
         description: string;

@@ -9,7 +9,7 @@ import { EXOSKELETON_ARMOR_CONFIGS } from '../../data/exoskeletonArmorConfigs';
 import { TECHNOSUIT_STRENGTH_CONFIGS } from '../../data/technoSuitStrengthConfigs';
 import { ENTE_FORMS, ENTE_EFFECTS } from '../../components/wizard/steps/Step3_Especials/sections/EnteSection';
 import { POSEIDO_FORMS } from '../../components/wizard/steps/Step3_Especials/sections/PoseidoSection';
-import { calculateEM, hasSubtype, getPowerPenalty } from '../../components/wizard/steps/Step3_Especials/utils';
+import { calculateEM, hasSubtype, hasOrigin, getPowerPenalty } from '../../components/wizard/steps/Step3_Especials/utils';
 import { INCOME_SOURCES } from '../../data/technologicalOptions';
 import { SEQUELS } from '../../data/sequels';
 import { GUARDIAN_QUALITIES } from '../../data/guardianOptions';
@@ -415,7 +415,8 @@ export function useCharacterCalculations(character: any) {
         }
 
         // 17. Alterado Params Cost
-        if (character.alteradoParams) {
+        const isAlteradoChar = hasOrigin(character, 'Alterado') || (character.isParahumanoHybrid && character.parahumanoParams?.isHybridWithHuman);
+        if (isAlteradoChar) {
             const ALTERADO_AGENTS = [
                 { id: 'nuclear', label: 'Energía nuclear', cost: 0 },
                 { id: 'electromagnetic', label: 'Accidente con energía electromagnética', cost: 0 },
@@ -430,7 +431,7 @@ export function useCharacterCalculations(character: any) {
             ];
 
             // Agent Discount
-            if (character.alteradoParams.agent) {
+            if (character.alteradoParams?.agent) {
                 const agent = ALTERADO_AGENTS.find(a => a.id === character.alteradoParams.agent);
                 if (agent && agent.cost > 0) {
                     total -= agent.cost;
@@ -438,9 +439,10 @@ export function useCharacterCalculations(character: any) {
             }
 
             // Sequels Discount or Penalty
-            if (character.alteradoParams.sequels && Array.isArray(character.alteradoParams.sequels) && character.alteradoParams.sequels.length > 0) {
+            const alteradoSequels = character.alteradoParams?.sequels || [];
+            if (alteradoSequels.length > 0) {
                 // Has sequels: subtract their costs (discount)
-                character.alteradoParams.sequels.forEach((s: any) => {
+                alteradoSequels.forEach((s: any) => {
                     const seq = SEQUELS.find(d => d.id === s.id);
                     if (seq) {
                         total -= seq.cost;
@@ -453,9 +455,11 @@ export function useCharacterCalculations(character: any) {
         }
 
         // 17. Mutante Params Cost (DISCOUNT)
-        if (character.mutanteParams) {
-            if (character.mutanteParams.sequels && Array.isArray(character.mutanteParams.sequels)) {
-                character.mutanteParams.sequels.forEach((s: any) => {
+        const isMutanteChar = hasOrigin(character, 'Mutante');
+        if (isMutanteChar) {
+            const mutanteSequels = character.mutanteParams?.sequels || [];
+            if (mutanteSequels.length > 0) {
+                mutanteSequels.forEach((s: any) => {
                     const seq = SEQUELS.find(d => d.id === s.id);
                     if (seq) {
                         total -= seq.cost;
@@ -466,9 +470,10 @@ export function useCharacterCalculations(character: any) {
 
         // 17b. Hibrido Params Cost (DISCOUNT or PENALTY)
         const isHibrido = hasSubtype(character, 'Arcano', 'Híbrido mitológico');
-        if (isHibrido && character.hibridoParams) {
-            if (character.hibridoParams.sequels && Array.isArray(character.hibridoParams.sequels) && character.hibridoParams.sequels.length > 0) {
-                character.hibridoParams.sequels.forEach((s: any) => {
+        if (isHibrido) {
+            const hibridoSequels = character.hibridoParams?.sequels || [];
+            if (hibridoSequels.length > 0) {
+                hibridoSequels.forEach((s: any) => {
                     const seq = SEQUELS.find(d => d.id === s.id);
                     if (seq) {
                         total -= seq.cost;

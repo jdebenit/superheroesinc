@@ -410,6 +410,23 @@ export const getPowerPenalty = (data: any, power: any): { cost: number; label: s
         }
     }
 
+    // 4. Check Divino Cross-Origin (+3 PC unless hasPhysicalAlteration)
+    const isDivino = hasSubtype(data, 'Divino', 'Dios') ||
+        hasSubtype(data, 'Divino', 'Dios menor') ||
+        hasSubtype(data, 'Divino', 'Semidios');
+    if (isDivino) {
+        const isDivinoPower = power.origins?.includes('Divino');
+        if (!isDivinoPower) {
+            // Physical alteration exempts from the +3 PC cross-origin penalty
+            // but only if the player has actually described what it is
+            const hasPhysicalAlteration = data.divineParams?.hasPhysicalAlteration === true &&
+                (data.divineParams?.physicalAlterationDescription || '').trim().length > 0;
+            if (!hasPhysicalAlteration) {
+                return { cost: 3, label: '+3 PC (Otro origen)', type: 'cross-origin' };
+            }
+        }
+    }
+
     return { cost: 0, label: '', type: 'none' };
 };
 
