@@ -4,6 +4,7 @@ alias: El Profesor
 description: Profesor de filosofía supuestamente alterado por alienígenas
 source: Superhéroes INC. Crossover 1
 updatedDate: 2026-04-14
+publishedDate: 2026-04-14
 tags:
   - Secundarios
 originReality: Tierra Zero

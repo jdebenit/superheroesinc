@@ -4,6 +4,7 @@ alias: La Mano Silente
 description: Atlante, Mano derecha de Varn
 source: Partida Oficial - Una Nueva Era
 updatedDate: 2026-05-15
+publishedDate: 2026-05-15
 image: /personajes/syriel.png
 tags:
   - Principales
