@@ -10,7 +10,7 @@ tags:
 originReality: Tierra Zero
 actualReality: Tierra Zero
 ---
-Pese a ser considerada una de los mejores guerreros de los Atlantes, apenas existen imágenes recientes de ella fuera de las profundidades. La mayor parte de los informes sobre su actividad proceden de incursiones rápidas, capturas de renegados o enfrentamientos con fuerzas de superficie que acabaron antes siquiera de que pudieran desplegar apoyo pesado. Entre los servicios de inteligencia europeos corre el rumor de que pasa meses enteros sin abandonar las ciudades abisales y que solo emerge cuando recibe órdenes directas del alto mando de Varn.
+Pese a ser considerada una de los mejores guerreros de los Atlantes, apenas existen registros de ella fuera de las profundidades. La mayor parte de los informes sobre su actividad proceden de incursiones rápidas, capturas de renegados o enfrentamientos con fuerzas de superficie que acabaron antes siquiera de que pudieran desplegar apoyo pesado. Entre los servicios de inteligencia europeos corre el rumor de que pasa meses enteros sin abandonar las ciudades abisales y que solo emerge cuando recibe órdenes directas del alto mando de Varn.
 
 Su desprecio por los habitantes de la superficie tampoco es precisamente un secreto. Considera a los humanos y a la mayoría de metahumanos terrestres criaturas frágiles, impulsivas y peligrosamente inestables. No suele caer en discursos grandilocuentes sobre la superioridad atlante; simplemente actúa como si fuera un hecho evidente. De hecho, algunos diplomáticos que trataron con ella describieron las conversaciones como “hablar con alguien que observa constantemente a un animal herido intentando parecer digno”.
 

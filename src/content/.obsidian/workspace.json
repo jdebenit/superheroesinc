@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "characters/el-profesor.md",
+                "file": "characters/syriel.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "el-profesor"
+              "title": "syriel"
             }
           }
         ]
@@ -185,6 +185,8 @@
   },
   "active": "d6905c71f195763e",
   "lastOpenFiles": [
+    "characters/el-profesor.md",
+    "characters/syriel.md",
     "characters/wirbelsturm.md",
     "characters/penumbra.md",
     "characters/alpha-woman.md",
@@ -194,8 +196,6 @@
     "characters/eurokid.md",
     "characters/euroman.md",
     "characters/epsilon-eridiani.md",
-    "characters/el-profesor.md",
-    "characters/syriel.md",
     "characters/abogado.md",
     "lore/cronicas/la-dama-blanca-de-san-pedro-de-arlanza.md",
     "lore/cronicas/expediente-stalos-mente-maestra-o-caballo-de-troya.md",
