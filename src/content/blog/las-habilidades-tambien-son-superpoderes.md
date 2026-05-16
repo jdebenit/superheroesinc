@@ -8,7 +8,7 @@ tags:
   - articulos
   - habilidades
 ---
-Este viernes, hablando con Pablo del club de rol Vientos de Erebus de como estaba prearando un personaje para la siguiente parte de la campaña, acabamos cayendo en una conversación que he tenido decenas de veces a lo largo de los años jugando y dirigiendo _Superhéroes INC_. Estábamos revisando poderes y conceptos, comentando esas ideas loquísimas que siempre surgen cuando empiezas una ficha nueva y todavía sientes que puedes hacerlo absolutamente todo. En medio del debate, terminé diciéndole algo que quizá suena raro en un juego de este género, "No te obsesiones tanto con acumular poderes. Mira más las habilidades".
+Este viernes, hablando con Pablo del club de rol Vientos de Erebus, de como estaba prearando un personaje para la siguiente parte de la campaña, acabamos cayendo en una conversación que he tenido decenas de veces a lo largo de los años jugando y dirigiendo _Superhéroes INC_. Estábamos revisando poderes y conceptos, comentando esas ideas loquísimas que siempre surgen cuando empiezas una ficha nueva y todavía sientes que puedes hacerlo absolutamente todo. En medio del debate, terminé diciéndole algo que quizá suena raro en un juego de este género, "No te obsesiones tanto con acumular poderes. Mira más las habilidades".
 
 Pablo, como buen jugador con cierta malicia ya aprendida, estaba intentando "muskinear" un poco la ficha. Quería quitarse puntos de Resistencia a Prejuicios y hacerse mendigo solitario, tirando de esos clásicos apaños de creación que todos hemos visto alguna vez para arañar lo justo y meterse otro poder más. Y ojo, que en esta campaña ya he dado 100 PCs para construir los personajes, así que tampoco estamos hablando de hacer héroes con alambre y cinta aislante.
 
@@ -22,7 +22,7 @@ Con las habilidades ocurre algo distinto y mucho más interesante. Rara vez romp
 
 Aunque, claro, también hay límites. Con uno de mis personajes, La Naga, cogí el idioma Kishvari (el equivalente al rumano de Terra) solo porque había entrenado en una región muy concreta y quería darle ese detalle cultural. El problema es que ese tipo de opciones tan específicas son difíciles de introducir de forma orgánica. Como director intentas hacer ese pequeño _fan service_ y meter alguna escena útil, pero se nota cuando algo está metido con calzador.
 
-Aun así, se infravalora hasta qué punto las habilidades generales sostienen literalmente campañas enteras. Se nota especialmente en Investigar.
+Quitando estos casos excepcionales, se suelen tambien infravalorar las habilidades generales, las cuales son las que sostienen literalmente campañas enteras. Se nota especialmente en Investigar.
 
 Cuanto más tiempo llevo jugando, más valor le doy a los personajes que tienen esta habilidad a porcentajes realmente altos. A veces se nos olvida que en este sistema los modificadores importan muchísimo. La mala iluminación, el exceso de información, el ruido, el estrés o las pruebas manipuladas pueden convertir una tirada aparentemente sencilla en una pesadilla. Ahí es donde un buen porcentaje en Investigar marca la diferencia.
 
