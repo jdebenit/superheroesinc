@@ -8,7 +8,7 @@ tags:
   - articulos
   - habilidades
 ---
-Este viernes, hablando con Pablo del club de rol Vientos de Erebus, de como estaba prearando un personaje para la siguiente parte de la campaña, acabamos cayendo en una conversación que he tenido decenas de veces a lo largo de los años jugando y dirigiendo _Superhéroes INC_. Estábamos revisando poderes y conceptos, comentando esas ideas loquísimas que siempre surgen cuando empiezas una ficha nueva y todavía sientes que puedes hacerlo absolutamente todo. En medio del debate, terminé diciéndole algo que quizá suena raro en un juego de este género, "No te obsesiones tanto con acumular poderes. Mira más las habilidades".
+Este viernes, hablando con Pablo del club de rol Vientos de Erebus, de como estaba preparando un personaje para la siguiente parte de la campaña, acabamos cayendo en una conversación que he tenido decenas de veces a lo largo de los años jugando y dirigiendo _Superhéroes INC_. Estábamos revisando poderes y conceptos, comentando esas ideas loquísimas que siempre surgen cuando empiezas una ficha nueva y todavía sientes que puedes hacerlo absolutamente todo. En medio del debate, terminé diciéndole algo que quizá suena raro en un juego de este género, "No te obsesiones tanto con acumular poderes. Mira más las habilidades".
 
 Pablo, como buen jugador con cierta malicia ya aprendida, estaba intentando "muskinear" un poco la ficha. Quería quitarse puntos de Resistencia a Prejuicios y hacerse mendigo solitario, tirando de esos clásicos apaños de creación que todos hemos visto alguna vez para arañar lo justo y meterse otro poder más. Y ojo, que en esta campaña ya he dado 100 PCs para construir los personajes, así que tampoco estamos hablando de hacer héroes con alambre y cinta aislante.
 
