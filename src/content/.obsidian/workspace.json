@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "characters/el-profesor.md",
+                "file": "blog/las-habilidades-tambien-son-superpoderes.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "el-profesor"
+              "title": "las-habilidades-tambien-son-superpoderes"
             }
           }
         ]
@@ -185,11 +185,11 @@
   },
   "active": "d6905c71f195763e",
   "lastOpenFiles": [
+    "characters/el-profesor.md",
     "blog/las-habilidades-tambien-son-superpoderes.md",
     "blog/donde-estoy-yo.md",
     "characters/amalgama.md",
     "characters/syriel.md",
-    "characters/el-profesor.md",
     "characters/wirbelsturm.md",
     "characters/penumbra.md",
     "characters/alpha-woman.md",

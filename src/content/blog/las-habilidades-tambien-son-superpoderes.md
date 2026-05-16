@@ -6,6 +6,7 @@ author: Jorge Francisco de Benito Montoya
 tags:
   - rol
   - articulos
+  - habilidades
 ---
 Este viernes, hablando con Pablo del club de rol Vientos de Erebus de como estaba prearando un personaje para la siguiente parte de la campaña, acabamos cayendo en una conversación que he tenido decenas de veces a lo largo de los años jugando y dirigiendo _Superhéroes INC_. Estábamos revisando poderes y conceptos, comentando esas ideas loquísimas que siempre surgen cuando empiezas una ficha nueva y todavía sientes que puedes hacerlo absolutamente todo. En medio del debate, terminé diciéndole algo que quizá suena raro en un juego de este género, "No te obsesiones tanto con acumular poderes. Mira más las habilidades".
 
