@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "blog/las-habilidades-tambien-son-superpoderes.md",
+                "file": "timeline/deep-web-interrogatorios-metahumanos.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "las-habilidades-tambien-son-superpoderes"
+              "title": "deep-web-interrogatorios-metahumanos"
             }
           }
         ]
@@ -53,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "aquera",
+                "query": "Ken",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -185,8 +185,16 @@
   },
   "active": "d6905c71f195763e",
   "lastOpenFiles": [
-    "characters/el-profesor.md",
+    "timeline/criaturas-desconocidas-costas-mar-del-norte.md",
+    "timeline/deep-web-interrogatorios-metahumanos.md",
+    "timeline/disturbios-en-marsella.md",
+    "timeline/percance-metahumano-en-groenlandia.md",
+    "timeline/pandemia-2020.md",
+    "timeline/toma-posesion-presidente-estados-unidos.md",
+    "lore/cronicas/estados-unidos-primero-otra-vez.md",
+    "faq/28-errata-apariencia-de-los-enanos.md",
     "blog/las-habilidades-tambien-son-superpoderes.md",
+    "characters/el-profesor.md",
     "blog/donde-estoy-yo.md",
     "characters/amalgama.md",
     "characters/syriel.md",
@@ -203,14 +211,6 @@
     "lore/cronicas/expediente-stalos-mente-maestra-o-caballo-de-troya.md",
     "timeline/abducción-stalos.md",
     "timeline/camara-de-los-ancestros-y-kigala.md",
-    "timeline/blindado-en-aqera.md",
-    "timeline/defcon-zero.md",
-    "lore/cronicas/aparicion-infernal-en-una-vivienda-de-pueblo-madrileño.md",
-    "faq/28-errata-apariencia-de-los-enanos.md",
-    "faq/15-errata-emision-energia-rango-bajo.md",
-    "faq/27-ataque-critico-reflejos-accion-reservada.md",
-    "lore/cronicas/dos-cruces-y-ningun-milagro.md",
-    "lore/cronicas/el-carnicero-llego-con-la-factura.md",
     "Pasted image 20260416191817.png",
     "rpg/la-naga-n4.json",
     "rpg/la-naga copy.json",
