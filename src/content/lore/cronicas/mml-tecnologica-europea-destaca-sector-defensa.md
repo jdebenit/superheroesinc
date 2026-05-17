@@ -1,0 +1,23 @@
+---
+title: El ascenso de MML, empresa tecnológica europea.
+description: Lo que comenzó en 2022 como una pequeña compañía tecnológica prácticamente desconocida se ha convertido en pocos años en uno de los nombres más repetidos dentro de los programas europeos de defensa avanzada. Sin fabricar armamento ni vehículos propios, MML ha construido su crecimiento facilitando acceso a patentes, desarrollos experimentales y nuevas tecnologías para laboratorios y empresas que trabajan directamente con distintos estados europeos. Su rápida expansión y presencia cada vez mayor en proyectos estratégicos ha llevado a muchos dentro del sector a considerarla ya un competidor directo de Laboratorios Lang.
+category: cronicas
+updatedDate: 2026-05-17
+---
+## La tecnológica europea que empieza a destacar en el sector de seguridad y defensa
+
+Cuando el nombre de MML empezó a aparecer en algunos registros públicos de contratación tecnológica allá por 2022, pocos fuera del sector defensa europeo prestaron demasiada atención a aquella empresa de perfil discreto y presencia casi inexistente en medios especializados. En aquel momento parecía otra de tantas compañías tecnológicas surgidas al calor del aumento de inversión pública en automatización, comunicaciones y sistemas de apoyo táctico. Sin embargo, apenas cuatro años después, MML se ha convertido en uno de los actores más comentados dentro de determinados círculos industriales y militares europeos, hasta el punto de que muchos ya la consideran un competidor directo de Laboratorios Lang en varios ámbitos estratégicos.
+
+Parte de la atención que ha despertado la compañía se debe precisamente a su forma de operar, bastante distinta a la de otras grandes corporaciones del sector. MML no fabrica armamento, vehículos ni sistemas militares completos. Su especialidad consiste en desarrollar, registrar y ceder acceso a nuevas tecnologías y patentes que posteriormente son integradas por otras empresas, laboratorios o contratistas vinculados a distintos estados europeos. En otras palabras, la empresa ha construido su crecimiento alrededor de la propiedad intelectual y el desarrollo tecnológico avanzado más que sobre la producción industrial tradicional.
+
+Ese modelo le ha permitido introducirse con rapidez en numerosos programas públicos relacionados con drones tácticos, automatización logística, materiales avanzados, coordinación de sistemas autónomos y plataformas de análisis predictivo. Ingenieros y responsables de varios proyectos europeos destacan que muchas de las soluciones asociadas a MML han reducido notablemente los tiempos de investigación y desarrollo, permitiendo acelerar pruebas que normalmente habrían requerido años de trabajo previo.
+
+El crecimiento de la compañía ha sido especialmente visible en países como Alemania, Francia, Polonia y España, donde su nombre aparece cada vez con más frecuencia asociado a laboratorios de defensa, universidades técnicas y empresas encargadas de modernización militar. En algunos casos la colaboración se limita a licencias tecnológicas concretas, mientras que en otros MML participa como socio estratégico aportando acceso a desarrollos experimentales que luego son adaptados a necesidades específicas de cada programa nacional.
+
+Todo ello ha provocado comparaciones inevitables con Laboratorios Lang, durante años considerada la gran referencia en investigación tecnológica avanzada. Aunque ambas compañías mantienen enfoques bastante distintos, dentro del sector existe la sensación de que MML está ocupando parte del espacio que tradicionalmente dominaba Lang, especialmente en proyectos relacionados con automatización táctica y sistemas de inteligencia aplicada.
+
+Aun así, quienes han trabajado con la empresa coinciden en señalar que el perfil de MML sigue siendo sorprendentemente reservado para el tamaño que ha alcanzado en tan poco tiempo. La compañía apenas concede entrevistas, evita la mayoría de ferias públicas del sector y rara vez anuncia contratos de manera oficial. Su crecimiento se ha ido siguiendo casi más a través de registros administrativos y colaboraciones técnicas que mediante campañas de comunicación o grandes presentaciones corporativas.
+
+En un momento en el que Europa busca reducir dependencia tecnológica exterior y reforzar sus capacidades de defensa tras varios años especialmente convulsos, el ascenso de MML parece reflejar también un cambio más amplio dentro del propio sector. Ya no basta únicamente con fabricar más, sino con desarrollar antes, adaptarse más rápido y convertir el conocimiento tecnológico en un recurso estratégico de primer nivel.
+
+_Publicado originalmente en la revista especializada Defensa y Futuro en su número de abril de 2026_
