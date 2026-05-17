@@ -6,4 +6,5 @@ reality: Tierra Zero
 icon: star
 tags:
   - conspiración
+  - contemporaneo
 ---
