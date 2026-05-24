@@ -9,5 +9,6 @@ tags:
   - alterado
 originReality: Tierra Zero
 actualReality: Tierra Zero
+image: /personajes/siluro.png
 ---
 Héroe, vampiro, bestia. Cuando EuroForce se separó, el tétrico Siluro se fue con Maestro Arcano para ser líder de campo de Fuerza Mundial, el equipo del Consejo Internacional de Superseres, mientras su colega ejercía de asesor y consejero para, juntos, tutelar a una nueva generación de héroes globales.
