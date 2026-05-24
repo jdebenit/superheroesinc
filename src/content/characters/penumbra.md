@@ -7,7 +7,7 @@ updatedDate: 2025-11-26
 image: /personajes/penumbra.png
 tags:
   - Principales
-  - mago
+  - Mago
 originReality: Tierra Zero
 actualReality: Tierra Zero
 ---

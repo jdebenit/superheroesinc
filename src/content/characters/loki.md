@@ -5,7 +5,7 @@ source: Superhéroes INC. Tercera Edición
 updatedDate: 2026-05-24
 tags:
   - Retirado
-  - Dioses
+  - Dios
 originReality: Reinos Divinos
 actualReality: Tierra Zero
 image: /personajes/loki.png

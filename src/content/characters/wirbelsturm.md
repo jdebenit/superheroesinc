@@ -6,7 +6,7 @@ source: Héroe Agenda. Primera Edición
 updatedDate: 2026-02-01
 tags:
   - Secundarios
-  - Desaparecidos
+  - Desaparecido
 originReality: Tierra Zero
 actualReality: Tierra Zero
 ---

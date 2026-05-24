@@ -5,8 +5,8 @@ description: Diosa y Avatar inmortal de Gaia y presidenta del CEAM, decidida a c
 source: Superhéroes INC. Tercera Edición
 updatedDate: 2026-05-24
 tags:
-  - Dioses
-  - cósmico
+  - Dios
+  - Cósmico
   - Principales
 originReality: Reinos Divinos
 actualReality: Tierra Zero

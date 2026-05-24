@@ -6,7 +6,7 @@ source: Superhéroes INC. Tercera Edición
 updatedDate: 2026-05-24
 tags:
   - Principales
-  - Dioses
+  - Dios
 originReality: Reinos Divinos
 actualReality: Tierra Zero
 image: /personajes/Loba-de-invierno.png

@@ -5,7 +5,7 @@ source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-11-26
 image: "/personajes/reina-mona.png"
 tags:
-  - RDesaparecido
+  - Desaparecido
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---

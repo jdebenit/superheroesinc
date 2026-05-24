@@ -5,7 +5,10 @@ source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2026-01-21
 image: /personajes/kigala.png
 rpgId: kigala
-tags: ["Principales", "FDM", "Dioses"]
+tags:
+  - Principales
+  - FDM
+  - Dios
 originReality: "Reinos Divinos"
 actualReality: "Tierra Zero"
 ---

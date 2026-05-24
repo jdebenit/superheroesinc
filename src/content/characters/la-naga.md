@@ -11,8 +11,8 @@ rpgId: la-naga-n4
 tags:
   - Principales
   - FDM
-  - Terranos
-  - Vigilantes
+  - Terrano
+  - Vigilante
 originReality: "Terra"
 actualReality: "Tierra Zero"
 ---

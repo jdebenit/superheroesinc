@@ -5,7 +5,7 @@ description: El fallido Sujeto 16 del Proyecto Euroman se convirtió en un super
 source: Superhéroes INC. Tercera Edición
 updatedDate: 2026-05-24
 tags:
-  - alterado
+  - Alterado
   - Principales
 originReality: Tierra Zero
 actualReality: Tierra Zero

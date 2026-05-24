@@ -5,8 +5,8 @@ source: Superhéroes INC. Tercera Edición
 updatedDate: 2026-05-24
 tags:
   - Principales
-  - terrano
-  - mago
+  - Terrano
+  - Mago
 originReality: Terra
 actualReality: Tierra Zero
 image: /personajes/daemonideus.png
