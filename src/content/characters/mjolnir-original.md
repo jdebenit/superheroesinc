@@ -6,7 +6,8 @@ source: Superhéroes INC. Primera y Segunda Edición
 image: "/personajes/mjolnir-original.png"
 updatedDate: 2025-12-31
 birthDate: 1960-03-04
-tags: ["Secundarios"]
+tags:
+  - Retirado
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---

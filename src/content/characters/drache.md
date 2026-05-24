@@ -5,7 +5,6 @@ description: Terrorista miembro del Escuadrón Blitzkrieg
 source: Héroe Agenda. Primera Edición
 updatedDate: 2026-02-01
 tags:
-  - Secundarios
   - Desaparecidos
 originReality: Tierra Zero
 actualReality: Tierra Zero

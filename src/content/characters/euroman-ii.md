@@ -5,7 +5,8 @@ description: "Sujeto 01 del Proyecto Euroman, de nacionalidad española. Sustitu
 source: "Superhéroes INC. Edición Limitada"
 updatedDate: 2025-11-26
 image: "/personajes/euroman_II.png"
-tags: ["Secundarios"]
+tags:
+  - Fallecido
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---

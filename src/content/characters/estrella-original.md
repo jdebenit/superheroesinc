@@ -5,7 +5,7 @@ source: "Una Estrella de otro mundo y Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2026-01-26
 birthDate: 1592-03-03
 deathDate: 2014-07-16
-tags: ["Secundarios", "Terranos", "Desaparecidos"]
+tags: ["Terranos", "Desaparecidos"]
 originReality: "Terra"
 actualReality: "Tierra Zero"
 ---

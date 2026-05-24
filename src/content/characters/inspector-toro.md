@@ -8,7 +8,9 @@ publishedDate: 2025-11-26
 birthDate: 1986-02-17
 image: "/personajes/toro.png"
 rpgId: inspector-toro
-tags: ["Principales"]
+tags:
+  - Principales
+  - Minotauro
 originReality: "Terra"
 actualReality: "Tierra Zero"
 ---

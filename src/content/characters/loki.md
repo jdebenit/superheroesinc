@@ -4,7 +4,7 @@ description: Último gran superviviente del Ragnarok que hoy regenta un refugio 
 source: Superhéroes INC. Tercera Edición
 updatedDate: 2026-05-24
 tags:
-  - Principales
+  - Retirado
   - Dioses
 originReality: Reinos Divinos
 actualReality: Tierra Zero

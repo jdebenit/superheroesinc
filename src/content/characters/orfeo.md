@@ -6,7 +6,7 @@ source: Superhéroes INC. Tercera Edición
 updatedDate: 2026-05-24
 tags:
   - Mutante
-  - fallecido
+  - Fallecido
 originReality: Tierra Zero
 actualReality: Tierra Zero
 ---

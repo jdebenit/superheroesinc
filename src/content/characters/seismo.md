@@ -5,7 +5,8 @@ description: "El Dios Loco."
 source: "Superhéroes INC. Edición Limitada"
 updatedDate: 2025-12-13
 image: "/personajes/seismo.png"
-tags: ["Secundarios"]
+tags:
+  - Desaparecido
 originReality: "Reinos Divinos"
 actualReality: "Tierra Zero"
 ---

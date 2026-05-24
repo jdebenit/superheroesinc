@@ -6,9 +6,12 @@ source: "Superhéroes INC. Tercera Edición"
 updatedDate: 2026-01-26
 publishedDate: 2026-01-26
 birthDate: 1955-05-29
-tags: ["Secundarios"]
+tags:
+  - Retirado
+  - Enano
 originReality: "Terra"
 actualReality: "Tierra Zero"
+image: "/personajes/thunder.png"
 ---
 
 Antiguo Miembro de fuerza Máxima. Actualmente froma parte del profesorado de [la academia de los jóvenes heroes](/lore/organizaciones/la-academia-de-los-jovenes-heroes/).

@@ -5,7 +5,8 @@ description: "Sujeto 02 del Proyecto Euroman y primer portador conocido del tít
 source: "Superhéroes INC. Tercera Edición"
 updatedDate: 2025-11-26
 image: "/personajes/euroman.png"
-tags: ["Secundarios"]
+tags:
+  - Desaparecido
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---
