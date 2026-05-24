@@ -6,6 +6,7 @@ source: Partida Oficial - Una Nueva Era
 updatedDate: 2026-05-17
 tags:
   - Secundario
+  - Inventor
 originReality: Tierra Zero
 actualReality: Tierra Zero
 ---

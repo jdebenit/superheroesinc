@@ -12,7 +12,7 @@ tags:
   - Principal
   - Terrano
   - Vigilante
-  - Artista MArcial
+  - Artista Marcial
   - Manipulador
 originReality: "Terra"
 actualReality: "Tierra Zero"

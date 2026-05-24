@@ -9,6 +9,8 @@ rpgId: alpha-woman
 tags:
   - Principal
   - Liberado
+  - Vigilante
+  - Manipulador
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---
