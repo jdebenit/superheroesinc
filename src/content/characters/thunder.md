@@ -3,7 +3,7 @@ alias: "Thunder"
 name: "Connor Austin St. John"
 description: "Miembro de Fuerza Máxima."
 source: "Superhéroes INC. Tercera Edición"
-updatedDate: 2026-01-26
+updatedDate: 2026-04-26
 publishedDate: 2026-01-26
 birthDate: 1955-05-29
 tags:
@@ -21,7 +21,7 @@ Años antes, una mujer procedente de Terra había llegado a Tierra Zero huyendo 
 
 Los St. John ocultaron la verdad durante toda su vida. No por egoísmo, sino por cariño. Querían que Connor tuviese una infancia normal, lejos de guerras dimensionales, demonios y profecías imposibles. Y durante bastante tiempo funcionó.
 
-El muchacho creció entre pescadores, temporales y viejas tabernas llenas de humo. Su carácter tranquilo y su sentido del humor hicieron que la gente de la zona terminara aceptándolo como uno más pese a su aspecto poco habitual. Con el tiempo empezó a manifestar una resistencia y una fuerza absurdas incluso para estándares metahumanos. A los veintiún años ganó un concurso local de bebida tras ingerir cuarenta vasos de whisky apenas mostrando un ligero mareo, una historia que todavía sigue circulando por la región como si fuese una leyenda de borrachos.
+El muchacho creció entre pescadores, temporales y viejas tabernas llenas de humo. Su carácter tranquilo y su sentido del humor hicieron que la gente de la zona terminara aceptándolo como uno más pese a su aspecto poco habitual. Con el tiempo empezó a manifestar una resistencia y una fuerza sobrehumana. A los veintiún años ganó un concurso local de bebida tras ingerir cuarenta vasos de whisky apenas mostrando un ligero mareo, una historia que todavía sigue circulando por la región como si fuese una leyenda de borrachos.
 
 Para entonces ya levantaba pesos imposibles y ayudaba en trabajos de carga, rescate marítimo y construcción casi sin esfuerzo.
 
