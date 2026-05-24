@@ -7,7 +7,10 @@ updatedDate: 2025-11-26
 image: /personajes/askany.png
 rpgId: askany
 autor: Alberto Gonzalez Calvo
-tags: ["Principales"]
+tags:
+  - Principales
+  - Dios
+  - Mago
 originReality: "Reinos Divinos"
 actualReality: "Tierra Zero"
 ---

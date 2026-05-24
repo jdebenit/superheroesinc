@@ -6,7 +6,9 @@ birthDate: 1401-08-06
 updatedDate: 2025-12-12
 image: "/personajes/impulso.png"
 rpgId: impulso
-tags: ["Principales"]
+tags:
+  - Principales
+  - Elfo
 originReality: "Reinos Divinos"
 actualReality: "Tierra Zero"
 ---

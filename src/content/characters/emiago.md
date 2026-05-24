@@ -4,7 +4,9 @@ description: "Agente de Recursos Humanos de la Corte Itinerante. Funciones princ
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-13
 image: "/personajes/emiago.png"
-tags: ["Principales"]
+tags:
+  - Principales
+  - Nigalión
 originReality: "Nigalión"
 actualReality: "Tierra Zero"
 ---

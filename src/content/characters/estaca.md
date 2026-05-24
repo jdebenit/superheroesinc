@@ -6,7 +6,9 @@ source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-13
 image: "/personajes/estaca.png"
 rpgId: estaca
-tags: ["Principales"]
+tags:
+  - Principales
+  - Vampiro
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---

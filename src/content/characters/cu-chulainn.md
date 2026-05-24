@@ -6,7 +6,9 @@ source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-11-26
 image: /personajes/cu-chulainn.png
 rpgId: cu-chulainn
-tags: ["Principales"]
+tags:
+  - Principales
+  - Dotado
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---

@@ -5,7 +5,10 @@ description: "Responsable de Logística en la Corte Itinerante. Asociado al dise
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-11-26
 image: "/personajes/el-arquitecto.png"
-tags: ["Principales"]
+tags:
+  - Principales
+  - Semidemonio
+  - Mago
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---

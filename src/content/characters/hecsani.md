@@ -5,7 +5,9 @@ description: "Hecsani es el cerebro logístico de la Corte Itinerante, capaz de 
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-13
 image: "/personajes/hecsani.png"
-tags: ["Principales"]
+tags:
+  - Principales
+  - Demonio
 originReality: "Nigalión"
 actualReality: "Tierra Zero"
 ---

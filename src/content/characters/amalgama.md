@@ -8,6 +8,8 @@ image: /personajes/arkham.png
 rpgId: arkham
 tags:
   - Principales
+  - Alterado
+  - Semidemonio
 originReality: Tierra Zero
 actualReality: Tierra Zero
 ---

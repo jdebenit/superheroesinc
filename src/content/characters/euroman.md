@@ -7,6 +7,7 @@ updatedDate: 2025-11-26
 image: "/personajes/euroman.png"
 tags:
   - Desaparecido
+  - Vigilante
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---

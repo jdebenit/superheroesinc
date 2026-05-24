@@ -5,7 +5,10 @@ source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-11-26
 image: "/personajes/desertor.png"
 rpgId: "desertor"
-tags: ["Principales"]
+tags:
+  - Principales
+  - Vigilante
+  - Artista Marcial
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---

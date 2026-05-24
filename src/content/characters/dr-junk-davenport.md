@@ -5,7 +5,10 @@ description: "Miembro de Triángulo Mortal. Alma desterrada en la red que usa co
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-12
 image: "/personajes/davenport.png"
-tags: ["Principales"]
+tags:
+  - Principales
+  - Poseido
+  - Cyborg
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---

@@ -6,7 +6,9 @@ source: Superhéroes INC. Tercera Edición
 updatedDate: 2025-11-26
 birthDate: 2004-01-14
 image: /personajes/estrella-ii.png
-tags: ["Principales"]
+tags:
+  - Principales
+  - Dotado
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---

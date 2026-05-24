@@ -7,6 +7,7 @@ updatedDate: 2026-05-14
 publishedDate: 2026-04-12
 tags:
   - Secundarios
+  - Alterado
 originReality: Tierra Zero
 actualReality: Tierra Zero
 ---

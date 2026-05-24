@@ -7,6 +7,8 @@ updatedDate: 2025-11-26
 image: "/personajes/euroman_II.png"
 tags:
   - Fallecido
+  - Alterado
+  - Vigilante
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---

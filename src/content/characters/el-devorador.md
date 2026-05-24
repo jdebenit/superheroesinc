@@ -4,7 +4,9 @@ description: "Operativo infernal asignado a la sección de Cobros de la Corte It
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-13
 image: "/personajes/el-devorador.png"
-tags: ["Principales"]
+tags:
+  - Principales
+  - Demonio
 originReality: "Nigalión"
 actualReality: "Tierra Zero"
 ---

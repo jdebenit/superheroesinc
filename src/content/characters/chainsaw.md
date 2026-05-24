@@ -6,7 +6,10 @@ updatedDate: 2025-11-26
 image: /personajes/chainsaw.png
 alias: Chainsaw
 rpgId: chainsaw
-tags: ["Principales"]
+tags:
+  - Principales
+  - Alterado
+  - Guardian
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---

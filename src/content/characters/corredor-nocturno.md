@@ -6,7 +6,9 @@ source: "Aportaciones de fans"
 updatedDate: 2025-12-13
 image: /personajes/corredor-nocturno.png
 rpgId: corredor-nocturno
-tags: ["Principales"]
+tags:
+  - Principales
+  - Alterado
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---
