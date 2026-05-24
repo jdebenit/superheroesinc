@@ -8,6 +8,7 @@ rpgId: "desertor"
 tags:
   - Principal
   - Vigilante
+  - Vengador
   - Artista Marcial
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"

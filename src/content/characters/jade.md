@@ -5,7 +5,9 @@ source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-11-26
 image: /personajes/jade.png
 rpgId: jade
-tags: ["Principales"]
+tags:
+  - Principal
+  - Maldito
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---

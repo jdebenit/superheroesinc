@@ -9,7 +9,7 @@ rpgId: arkham
 tags:
   - Principal
   - Alterado
-  - Semidemonio
+  - Mago
 originReality: Tierra Zero
 actualReality: Tierra Zero
 ---

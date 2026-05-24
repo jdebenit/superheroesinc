@@ -9,6 +9,8 @@ rpgId: cu-chulainn
 tags:
   - Principal
   - Dotado
+  - Espadachin
+  - Vigilante
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---

@@ -5,7 +5,9 @@ description: "Deaza se encarga de gestionar las interacciones directas con los h
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-13
 image: "/personajes/el-seductor.png"
-tags: ["Principales"]
+tags:
+  - Principal
+  - Hibrido Mitológico
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---

@@ -9,7 +9,9 @@ powers:
 image: /personajes/peter-pain.png
 alias: Peter Pain
 rpgId: peter-pain
-tags: ["Principales"]
+tags:
+  - Principal
+  - Alterado
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---

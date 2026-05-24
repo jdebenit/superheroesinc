@@ -5,7 +5,9 @@ description: "Miembro de la Legión Sangrienta. La designación sugiere que es u
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-13
 image: "/personajes/little-red-wolf.png"
-tags: ["Principales"]
+tags:
+  - Principal
+  - Licántropo
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---

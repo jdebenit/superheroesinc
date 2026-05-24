@@ -9,6 +9,7 @@ image: "/personajes/la-artifice.png"
 tags:
   - Principal
   - Enano
+  - Inventor
 originReality: "Reinos Divinos"
 actualReality: "Tierra Zero"
 ---

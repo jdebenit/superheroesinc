@@ -5,7 +5,10 @@ description: "Qital de los Yannin es la encarnación viva de un camino espiritua
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-13
 image: "/personajes/qital.png"
-tags: ["Principales"]
+tags:
+  - Principal
+  - Liberada
+  - Artista Marcial
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---

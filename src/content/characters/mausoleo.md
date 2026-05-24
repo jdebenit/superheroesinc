@@ -4,7 +4,10 @@ description: "Mausoleo es el nigromante que custodia las Torres del Mal con una 
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-13
 image: "/personajes/mausoleo.png"
-tags: ["Principales"]
+tags:
+  - Principal
+  - Semidemonio
+  - Mago
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---

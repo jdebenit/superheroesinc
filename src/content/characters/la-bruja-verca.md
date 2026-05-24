@@ -4,7 +4,9 @@ name: Verca
 description: "Verca es la especialista de la Corte en convertir los deseos humanos en condenas perfectamente formuladas."
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-13
-tags: ["Principales"]
+tags:
+  - Principal
+  - Poseido
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---

@@ -4,7 +4,9 @@ description: "Miembro de la Legión Sangrienta. Su alias hace referencia a un es
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-13
 image: "/personajes/pesanta.png"
-tags: ["Principales"]
+tags:
+  - Principal
+  - Poseido
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---

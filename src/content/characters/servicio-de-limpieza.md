@@ -4,7 +4,9 @@ description: "Responsable de campo del equipo encubierto Antihéroes Ltd. de Sup
 source: "Superhéroes INC. Tercera Edición"
 updatedDate: 2025-11-26
 image: "/personajes/servicio-de-limpieza.png"
-tags: ["Principales"]
+tags:
+  - Principal
+  - Vigilante
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---

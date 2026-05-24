@@ -5,7 +5,10 @@ source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-11-26
 image: /personajes/herblay.png
 rpgId: philipe-de-herblay
-tags: ["Principales"]
+tags:
+  - Principal
+  - Mago
+  - Guardian
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---

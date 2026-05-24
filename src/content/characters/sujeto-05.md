@@ -8,7 +8,9 @@ powers:
   - "Control del fuego"
   - "Superfuerza"
   - "Superconstitución"
-tags: ["Secundarios"]
+tags:
+  - Fallecido
+  - Alterado
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---

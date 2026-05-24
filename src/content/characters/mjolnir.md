@@ -5,7 +5,9 @@ description: Ling√ºista especializada que asume de forma consciente el legado r√
 source: "Crossover: Cruce de caminos"
 image: /personajes/mjolnir.png
 updatedDate: 2025-12-31
-tags: ["Principales"]
+tags:
+  - Principal
+  - Guardian
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---

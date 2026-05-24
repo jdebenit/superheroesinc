@@ -5,7 +5,10 @@ description: "Entidad de alto rango asociada al reino denominado Isla de Verano.
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-13
 image: "/personajes/titania.png"
-tags: ["Principales"]
+tags:
+  - Principal
+  - Dios
+  - Hada
 originReality: "Isla de Verano"
 actualReality: "Tierra Zero"
 ---

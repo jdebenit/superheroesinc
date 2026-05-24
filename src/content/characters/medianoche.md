@@ -5,7 +5,10 @@ source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-08
 image: /personajes/medianoche.png
 rpgId: medianoche
-tags: ["Principales"]
+tags:
+  - Principal
+  - Dotado
+  - Terrano
 originReality: "Terra"
 actualReality: "Tierra Zero"
 ---

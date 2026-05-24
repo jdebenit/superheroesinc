@@ -4,7 +4,9 @@ description: "Ser mitológico vinculado a Las Siete Torres. Se presume función 
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-13
 image: "/personajes/sphynx.png"
-tags: ["Principales"]
+tags:
+  - Principal
+  - Esfinge
 originReality: "Reinos Divinos"
 actualReality: "Tierra Zero"
 ---

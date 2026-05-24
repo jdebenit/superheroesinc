@@ -6,7 +6,8 @@ updatedDate: 2025-11-26
 tags:
   - Principal
   - Alterado
-  - Tecnificado
+  - Cyborg
+  - Tecnoarmadura
 originReality: Tierra Zero
 actualReality: Tierra Zero
 image: /personajes/la-tecnomante.png

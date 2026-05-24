@@ -5,7 +5,9 @@ source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-08
 image: "/personajes/terror.png"
 rpgId: terror
-tags: ["Principales"]
+tags:
+  - Principal
+  - Alterado
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---

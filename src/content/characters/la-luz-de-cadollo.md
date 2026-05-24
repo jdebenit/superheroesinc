@@ -4,7 +4,9 @@ description: "Entidad adscrita a la sección de Infraestructura de la Corte Itin
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-13
 image: "/personajes/la-luz-de-cadollo.png"
-tags: ["Principales"]
+tags:
+  - Principal
+  - Ente
 originReality: "Otros"
 actualReality: "Tierra Zero"
 ---

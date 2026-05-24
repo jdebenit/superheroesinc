@@ -9,6 +9,8 @@ rpgId: corredor-nocturno
 tags:
   - Principal
   - Alterado
+  - Vengador
+  - Vigilante
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---

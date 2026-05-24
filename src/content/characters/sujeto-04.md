@@ -4,7 +4,9 @@ alias: "Sujeto 04"
 description: "Sujeto 04 del Proyecto Euroman, de nacionalidad francesa."
 source: "Superhéroes INC. Edición Limitada"
 updatedDate: 2025-11-26
-tags: ["Secundarios"]
+tags:
+  - Fallecido
+  - Alterado
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---

@@ -4,7 +4,9 @@ description: "Supuesto lider de la Legión Sangrienta. Citado en listados junto 
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-13
 image: "/personajes/julian-provencio.png"
-tags: ["Principales"]
+tags:
+  - Principal
+  - Liberado
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---

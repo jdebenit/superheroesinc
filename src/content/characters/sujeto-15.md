@@ -6,7 +6,9 @@ source: "Superhéroes INC. Edición Limitada"
 updatedDate: 2025-11-26
 powers:
   - "Vuelo"
-tags: ["Secundarios"]
+tags:
+  - Fallecido
+  - Alterado
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---

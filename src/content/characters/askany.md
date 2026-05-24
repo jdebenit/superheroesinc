@@ -9,8 +9,10 @@ rpgId: askany
 autor: Alberto Gonzalez Calvo
 tags:
   - Principal
-  - Dios
+  - Semidios
   - Mago
+  - Vigilante
+  - Manipulador
 originReality: "Reinos Divinos"
 actualReality: "Tierra Zero"
 ---

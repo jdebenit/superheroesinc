@@ -7,8 +7,8 @@ image: /personajes/kigala.png
 rpgId: kigala
 tags:
   - Principal
-  - FDM
   - Dios
+  - Mago
 originReality: "Reinos Divinos"
 actualReality: "Tierra Zero"
 ---

@@ -6,6 +6,9 @@ updatedDate: 2025-11-26
 image: "/personajes/reina-mona.png"
 tags:
   - Desaparecido
+  - Semidios
+  - Artista Marcial
+  - Vigilante
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---

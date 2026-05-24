@@ -5,7 +5,9 @@ description: "Julián Ramos es un técnico convertido en combatiente que usa la 
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-13
 image: "/personajes/vanadio.png"
-tags: ["Principales"]
+tags:
+  - Principal
+  - Tecnoarmadura
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---

@@ -10,9 +10,10 @@ image: /personajes/la-naga-tierra-zero.png
 rpgId: la-naga-n4
 tags:
   - Principal
-  - FDM
   - Terrano
   - Vigilante
+  - Artista MArcial
+  - Manipulador
 originReality: "Terra"
 actualReality: "Tierra Zero"
 ---

@@ -11,6 +11,8 @@ alias: Centurión
 tags:
   - Principal
   - Maldito
+  - Fanático
+  - Vigilante
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---

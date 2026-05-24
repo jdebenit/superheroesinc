@@ -5,7 +5,9 @@ description: "Warlock es el pensador que convirtió la herejía en vigilancia et
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-13
 image: "/personajes/warlock.png"
-tags: ["Principales"]
+tags:
+  - Principal
+  - Mago
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---

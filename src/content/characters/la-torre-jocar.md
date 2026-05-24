@@ -4,7 +4,9 @@ name: Jocar
 description: "La Torre Jocar es el pilar inmóvil sobre el que se sostienen las operaciones materiales de la Corte."
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-13
-tags: ["Principales"]
+tags:
+  - Principal
+  - Alterado
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---

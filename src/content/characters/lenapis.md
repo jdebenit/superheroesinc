@@ -5,7 +5,10 @@ description: "Lenapis, conocida como La Ley, es la consejera legal de la Corte I
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-11-26
 image: "/personajes/lenapis.png"
-tags: ["Principales"]
+tags:
+  - Principal
+  - Medusa
+  - Dotado
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---
