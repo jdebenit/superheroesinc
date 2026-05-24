@@ -37,3 +37,5 @@ A partir de hoy, la web crecerá al ritmo de la comunidad, de las campañas en c
 Este es un proyecto vivo.  
 Y su expansión empieza aquí.
 
+Nos vemos en la siguiente, y gracias por leerme.
+

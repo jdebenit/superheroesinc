@@ -30,4 +30,4 @@ Superhéroes INC siempre ha sido un juego de rol que se recuerda. Las campañas 
 
 Mientras el mundo siga avanzando y el lore continúe creciendo de forma orgánica, Superhéroes INC seguirá siendo lo que siempre ha sido desde el principio. Un juego de rol de superhéroes donde el mundo importa tanto como los personajes que lo habitan.
 
-Gracias por leerme.
+Nos vemos en la siguiente, y gracias por leerme.

@@ -29,4 +29,4 @@ Si vuelvo a bajar a esa pausa para el café y me repiten la pregunta, ya no inte
 
 He acabado entendiendo que, en el diseño de juegos de rol, el demiurgo no es la figura que más manda sobre el relato, sino aquella que tiene la paciencia suficiente para aceptar que la obra ya no le pertenece. Mi mayor satisfacción no es verme reflejado en un personaje con poderes, sino comprobar que otros siguen recorriendo este camino y habitando estas historias sin sentir la necesidad de pedirme permiso para avanzar.
 
-Nos vemos en la siguiente, y gracias por leerme.
+¡Nos vemos en la siguiente y gracias por leerme!

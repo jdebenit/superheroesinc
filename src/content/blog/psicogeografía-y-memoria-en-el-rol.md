@@ -27,4 +27,4 @@ De hecho, muchas veces me encuentro con amigos hablando de partidas que jugamos 
 
 Al final, dirigir o jugar a juegos de rol no va solo de reglas, dados o sistemas. Va de crear experiencias que se queden contigo. De construir historias que no se pierdan al cerrar la sesión y mundos que sigan existiendo cuando la mesa se vacía. Usar la psicogeografía y los espacios reales como parte del diseño narrativo es una forma muy poderosa de lograrlo, tanto en campañas de rol urbano como en partidas contemporáneas o de superhéroes. No es una técnica cerrada ni una receta mágica, pero sí una herramienta muy efectiva para mejorar la inmersión, reforzar la memoria colectiva del grupo y hacer que las partidas de rol se sientan más vivas, más personales y más difíciles de olvidar.
 
-Gracias por leerme.
+Nos vemos en la siguiente, y gracias por leerme.

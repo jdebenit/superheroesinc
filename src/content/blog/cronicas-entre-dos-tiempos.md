@@ -32,4 +32,4 @@ Estamos creando contenido nuevo y vivo que respeta la esencia de Superhéroes IN
 
 Gracias a mis dos directores de juego por este regalo narrativo porque cuando los Ecos de Guerra alcanzan a La Sombra del Enroque el juego deja de ser ficción para convertirse en una leyenda que escribimos sesión a sesión.
 
-Gracias por leerme.
+¡Nos vemos en la siguiente y gracias por leerme!

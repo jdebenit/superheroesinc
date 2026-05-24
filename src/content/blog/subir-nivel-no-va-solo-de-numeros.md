@@ -28,4 +28,4 @@ Y eso, para mí, es subir de nivel. No es solo gastar puntos. Es preparar el ter
 
 ¿Se puede jugar solo a optimizar? Claro. ¿Es menos válido? Para nada. Pero si el sistema te da herramientas de crecimiento, me gusta introducirlas dentro de mi narrativa para crecer también desde la historia y asi que la interpretación de un personaje, (a veces se me hace muy dura), me cueste menos incorporando estos pequeños detalles.
 
-Gracias por leerme.
+Nos vemos en la siguiente, y gracias por leerme.

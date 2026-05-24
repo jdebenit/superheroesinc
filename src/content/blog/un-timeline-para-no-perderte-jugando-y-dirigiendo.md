@@ -32,4 +32,4 @@ Lo que he querido conseguir es que el lore no se convierta en una fuente de ansi
 
 Acceso directo: [https://www.superheroes-inc.es/lore/timeline/](https://www.superheroes-inc.es/lore/timeline/)
 
-Gracias por leerme.
+Nos vemos en la siguiente, y gracias por leerme.

@@ -70,4 +70,4 @@ El generador no viene a sustituir al juego ni a decidir por nadie. Viene a quita
 Gracias por probarlo, por la paciencia y por el tiempo que le estáis dedicando.  
 Esto es solo el principio. Y ahora toca currar para que cada versión sea un poco mejor que la anterior.
 
-Gracias por leerme.
+Nos vemos en la siguiente, y gracias por leerme.

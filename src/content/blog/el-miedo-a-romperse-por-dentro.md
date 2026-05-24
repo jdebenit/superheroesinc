@@ -26,4 +26,4 @@ Algo así encaja muy bien con un elemento que a menudo se infravalora en Superh�
 
 Porque a veces un té con un amigo o una comida casera hecha por una tía levanta el ánimo más que cualquier tirada. Incluso a alguien como Spiderman o Batman. Y convertir eso en una forma de recuperar EQM no solo funciona a nivel de reglas. También le da profundidad emocional al personaje y lo ancla al mundo.
 
-Gracias por leerme.
+¡Nos vemos en la siguiente y gracias por leerme!

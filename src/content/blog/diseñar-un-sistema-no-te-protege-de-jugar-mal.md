@@ -43,4 +43,4 @@ Escribir esto no me ha dado una solución. Tampoco era la idea. Pero sí me ha s
 
 Y con eso, de momento, me basta.
 
-Gracias por leerme.
+¡Nos vemos en la siguiente y gracias por leerme!

@@ -226,4 +226,4 @@ El SHI Replay Script es una herramienta diseñada para que escribir Actual Plays
 
 Con este formato cualquier jugador o Guionista puede documentar una sesión y contribuir al crecimiento del universo de Superhéroes INC.
 
-Gracias por leerme.
+Nos vemos en la siguiente, y gracias por leerme.

@@ -37,4 +37,4 @@ Y eso es lo importante cuando creas una campaña de superhéroes en España. Que
 
 Por eso me gusta tanto dirigir **rol de superhéroes en España**. Porque aquí el heroísmo nunca es cómodo. Siempre hay fricción. Siempre hay alguien mirando. Siempre hay una pregunta sin responder del todo. Y cuando una sesión termina y los jugadores se quedan callados unos segundos, no celebrando sino pensando, revisando lo que han hecho y lo que han provocado, sabes que la campaña está viva. Y que lo que empezó siendo cercano ha terminado dejando huella mucho más lejos de lo que nadie esperaba.
 
-Gracias por leerme.
+¡Nos vemos en la siguiente y gracias por leerme!

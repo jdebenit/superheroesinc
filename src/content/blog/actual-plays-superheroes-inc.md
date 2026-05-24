@@ -82,4 +82,4 @@ Los Actual Plays son una forma de aprender, de jugar y de compartir. Son relatos
 
 Si tienes una partida que merece ser contada, anímate a escribirla. En este juego, cada sesión deja huella. Y compartirla puede hacer que otros encuentren su propio camino en el multiverso de SHI.
 
-Gracias por leerme.
+¡Nos vemos en la siguiente y gracias por leerme!

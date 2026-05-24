@@ -89,4 +89,4 @@ De esos que, pasado un tiempo, siguen volviendo a la conversación como si hubie
 Porque al final, muchas de las mejores sesiones nacen justo ahí.  
 Cuando un personaje tiene que mirarse a sí mismo y decidir si cruza la línea… o no.
 
-Gracias por leerme.
+Nos vemos en la siguiente, y gracias por leerme.

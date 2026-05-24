@@ -60,4 +60,4 @@ Este origen pide compromiso. De quien lo juega y de quien dirige. Pide aceptar q
 El problema no es usar Vigilante.  
 El problema es usarlo como si no pesara. Porque pesa. Siempre ha pesado. Y cuando se le quita ese peso, lo único que queda es un atajo. Y los atajos, en este juego, casi nunca llevan a ningún sitio interesante.
 
-Gracias por leerme.
+Nos vemos en la siguiente, y gracias por leerme.

@@ -24,4 +24,4 @@ La web no pretende decirle a nadie cómo debe dirigir o jugar su partida. Las me
 
 La web se mueve al ritmo de las partidas y de la comunidad. Si algo se pregunta mucho, acabará reflejado ahí. Si algo genera problemas, se revisa. Si algo funciona especialmente bien, se consolida. No sustituye al juego, lo acompaña y mientras Superhéroes INC siga jugándose, la web seguirá ahí para ayudar a que todo encaje un poco mejor.
 
-Gracias por leerme.
+Nos vemos en la siguiente, y gracias por leerme.

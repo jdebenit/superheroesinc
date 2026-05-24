@@ -38,4 +38,4 @@ El universo de Superhéroes INC existe gracias a una comunidad creativa, comprom
 Bienvenidos a la nueva etapa de **Superhéroes INC**.  
 El multiverso se amplía y, a partir de hoy, lo hará a la vista de todos.
 
-Gracias por leerme.
+Nos vemos en la siguiente, y gracias por leerme.
