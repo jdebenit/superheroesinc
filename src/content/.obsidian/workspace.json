@@ -53,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "Aquera",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -74,7 +74,8 @@
               "title": "Marcadores"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -183,7 +184,7 @@
       "bases:Crear nueva base": false
     }
   },
-  "active": "85cf3aa57c8410df",
+  "active": "c6be6e098b63b58a",
   "lastOpenFiles": [
     "lore/localizaciones/aqera.md",
     "lore/localizaciones/avalon.md",

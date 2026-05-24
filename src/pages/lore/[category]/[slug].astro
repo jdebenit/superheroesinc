@@ -11,7 +11,7 @@ import ShareButtons from "../../../components/ShareButtons.astro";
 export async function getStaticPaths() {
   const items = await getCollection("lore");
   return items.map((item) => {
-    // Extract just the filename from the slug (e.g., "localizaciones/aquera" -> "aquera")
+    // Extract just the filename from the slug (e.g., "localizaciones/aqera" -> "aqera")
     const filename = item.slug.split("/").pop() || item.slug;
     return {
       params: { category: item.data.category, slug: filename },

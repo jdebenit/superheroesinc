@@ -18,7 +18,7 @@ Poco después, empezaron las manifestaciones. Primero fueron incidentes menores,
 Desde 1997, el rastro de "El Profesor" se vuelve una mancha de aceite por Europa del Este. Ataques psiónicos, sabotajes a infraestructuras críticas y, lo más aterrador, la manipulación de otros metahumanos inestables. Informes de inteligencia sugieren que Stalos no solo actúa, sino que **instiga**, moviéndose entre las sombras con identidades falsas, como si estuviera preparando el terreno, radicalizando a los nuestros para convertirlos en peones de un tablero galáctico.
 ### El Enigma de Aqera
 
-Cuando finalmente fue capturado, no lo llevaron a una celda común. Fue trasladado a **Aqera**. Esa instalación de máxima seguridad que el gobierno se empeña en negar. Los rumores sobre Aqera erizan la piel, tecnología experimental de origen dudoso y niveles inferiores que, según algunos confidentes, no fueron construidos por manos humanas.
+Cuando finalmente fue capturado, no lo llevaron a una celda común. Fue trasladado a [Aqera](/lore/localizaciones/aqera/). Esa instalación de máxima seguridad que el gobierno se empeña en negar. Los rumores sobre [Aqera](/lore/localizaciones/aqera/) erizan la piel, tecnología experimental de origen dudoso y niveles inferiores que, según algunos confidentes, no fueron construidos por manos humanas.
 
 Stalos estuvo allí. Y luego, simplemente, se esfumó. La fuga fue ocultada durante semanas bajo la excusa de "fallos eléctricos" en el Mediterráneo. Pero seamos realistas: **si Ernest Stalos fue rediseñado por una inteligencia superior, ninguna jaula construida por hombres iba a detenerlo.**
 
