@@ -7,7 +7,7 @@ updatedDate: 2025-12-13
 image: "/personajes/qital.png"
 tags:
   - Principal
-  - Liberada
+  - Liberado
   - Artista Marcial
   - Vigilante
 originReality: "Tierra Zero"
