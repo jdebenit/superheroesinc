@@ -1,7 +1,7 @@
 ---
 name: "Bandera Negra"
 description: "Metahumano italiano capaz de atravesar materia. Miembro de Vértice de Combate (Kampf Scheitel) durante la Guerra Civil Española."
-source: "Superhéroes INC. Tercera Edición"
+source: "Superhéroes INC. Primera Edición"
 updatedDate: 2025-11-30
 tags:
   - Fallecido

@@ -1,7 +1,7 @@
 ---
 name: Eneas Aoubert Eridani
 description: Epsilon Eridani es el soberano recuperado de Transjastán que, tras años de exilio y terrorismo global, vuelve a ostentar el trono para asegurar el control absoluto sobre los valiosos yacimientos de Strenium y el destino de su pueblo.
-source: Superhéroes INC. Tercera Edición
+source: Superhéroes INC. Primera y Segunda Edición
 updatedDate: 2026-02-03
 tags:
   - Principal
