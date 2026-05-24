@@ -5,7 +5,7 @@ source: Superhéroes INC. Tercera Edición
 updatedDate: 2025-11-26
 image: /personajes/smilodon.png
 tags:
-  - Principales
+  - Principal
   - Tes-khar
 originReality: Tierra Zero
 actualReality: Tierra Zero

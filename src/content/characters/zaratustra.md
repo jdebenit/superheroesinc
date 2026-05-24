@@ -5,7 +5,7 @@ source: Superhéroes INC. Tercera Edición
 updatedDate: 2025-11-26
 image: /personajes/zaratustra.png
 tags:
-  - Principales
+  - Principal
   - Arquero
   - Vigilante
 originReality: Tierra Zero

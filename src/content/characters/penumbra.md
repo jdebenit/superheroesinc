@@ -6,7 +6,7 @@ source: Superhéroes INC. Tercera Edición
 updatedDate: 2025-11-26
 image: /personajes/penumbra.png
 tags:
-  - Principales
+  - Principal
   - Mago
 originReality: Tierra Zero
 actualReality: Tierra Zero

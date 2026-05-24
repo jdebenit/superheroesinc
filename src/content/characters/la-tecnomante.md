@@ -4,7 +4,7 @@ description: Audrey Gein trascendió su humanidad gracias a nanobots capaces de 
 source: Superhéroes INC. Tercera Edición
 updatedDate: 2025-11-26
 tags:
-  - Principales
+  - Principal
   - Alterado
   - Tecnificado
 originReality: Tierra Zero

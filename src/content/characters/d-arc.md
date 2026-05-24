@@ -4,7 +4,7 @@ description: Arqueólogo francés transformado en la reencarnación moderna de J
 source: Superhéroes INC. Tercera Edición
 updatedDate: 2026-05-24
 tags:
-  - Principales
+  - Principal
   - Guardián
 originReality: Tierra Zero
 actualReality: Tierra Zero

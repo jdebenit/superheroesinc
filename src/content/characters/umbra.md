@@ -6,7 +6,7 @@ source: "Superhéroes INC. Tercera Edición y Héroe Agenda: Sobrenaturales y Ar
 updatedDate: 2026-01-25
 image: /personajes/umbra.png
 tags:
-  - Principales
+  - Principal
   - Mago
 originReality: Tierra Zero
 actualReality: Tierra Zero

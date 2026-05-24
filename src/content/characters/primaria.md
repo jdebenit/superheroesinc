@@ -7,7 +7,7 @@ updatedDate: 2026-05-24
 tags:
   - Dios
   - Cósmico
-  - Principales
+  - Principal
 originReality: Reinos Divinos
 actualReality: Tierra Zero
 image: /personajes/primaria.png

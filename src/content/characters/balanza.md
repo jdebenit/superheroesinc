@@ -5,7 +5,7 @@ description: Heroína mestiza tes-khar capaz de adoptar formas animales que logr
 source: Superhéroes INC. Tercera Edición
 updatedDate: 2026-05-24
 tags:
-  - Principales
+  - Principal
   - Tes-khar
 originReality: Tierra Zero
 actualReality: Tierra Zero

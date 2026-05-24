@@ -6,7 +6,7 @@ source: Superhéroes INC. Crossover 1
 updatedDate: 2026-05-14
 publishedDate: 2026-04-12
 tags:
-  - Secundarios
+  - Secundario
   - Alterado
 originReality: Tierra Zero
 actualReality: Tierra Zero

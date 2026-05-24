@@ -4,7 +4,8 @@ description: "Agente secreto estandar."
 source: Superherohes INC. Tercera Edición
 updatedDate: 2025-12-17
 rpgId: agente-secreto
-tags: ["Genericos"]
+tags:
+  - Genérico
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---

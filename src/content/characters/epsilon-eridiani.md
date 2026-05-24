@@ -4,7 +4,7 @@ description: Epsilon Eridani es el soberano recuperado de Transjastán que, tras
 source: Superhéroes INC. Tercera Edición
 updatedDate: 2026-02-03
 tags:
-  - Principales
+  - Principal
   - Mutante
 originReality: Tierra Zero
 actualReality: Tierra Zero

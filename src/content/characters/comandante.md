@@ -5,7 +5,7 @@ description: Embajador guímoran ante la ONU y símbolo viviente del exilio de s
 source: Superhéroes INC. Tercera Edición
 updatedDate: 2026-05-24
 tags:
-  - Principales
+  - Principal
   - Guímoran
 originReality: Tierra Zero
 actualReality: Tierra Zero

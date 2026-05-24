@@ -7,7 +7,7 @@ updatedDate: 2025-12-13
 image: "/personajes/estaca.png"
 rpgId: estaca
 tags:
-  - Principales
+  - Principal
   - Vampiro
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"

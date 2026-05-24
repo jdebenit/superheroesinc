@@ -8,7 +8,7 @@ birthDate: "0555-11-11"
 rpgId: aescotan
 image: /personajes/aescotan.png
 tags: 
-  - Principales
+  - Principal
   - Demonio
 originReality: "Nigalión"
 actualReality: "Tierra Zero"

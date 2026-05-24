@@ -5,7 +5,7 @@ description: Cadete Junior de los Exploradores del Limbo. Mutante oriunda de Par
 source: Superherohes INC. Tercera Edición
 updatedDate: 2025-12-17
 tags:
-  - Principales
+  - Principal
   - Mutante
 originReality: Tierra Zero
 actualReality: Tierra Zero

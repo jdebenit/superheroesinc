@@ -9,7 +9,7 @@ birthDate: 2000-06-12
 image: /personajes/la-naga-tierra-zero.png
 rpgId: la-naga-n4
 tags:
-  - Principales
+  - Principal
   - FDM
   - Terrano
   - Vigilante

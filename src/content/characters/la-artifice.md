@@ -7,7 +7,7 @@ updatedDate: 2025-12-13
 birthDate: "1561-12-20"
 image: "/personajes/la-artifice.png"
 tags:
-  - Principales
+  - Principal
   - Enano
 originReality: "Reinos Divinos"
 actualReality: "Tierra Zero"

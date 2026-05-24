@@ -4,7 +4,7 @@ description: El antiguo EuroKid trabaja ahora en las sombras como agente especia
 source: Superhéroes INC. Tercera Edición
 updatedDate: 2025-11-26
 tags:
-  - Principales
+  - Principal
   - Alterado
 originReality: Tierra Zero
 actualReality: Tierra Zero

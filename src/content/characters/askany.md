@@ -8,7 +8,7 @@ image: /personajes/askany.png
 rpgId: askany
 autor: Alberto Gonzalez Calvo
 tags:
-  - Principales
+  - Principal
   - Dios
   - Mago
 originReality: "Reinos Divinos"

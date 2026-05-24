@@ -5,7 +5,7 @@ description: Antiguo portador de Excalibur y veterano Guardián de Gran Bretaña
 source: Superhéroes INC. Tercera Edición
 updatedDate: 2026-05-24
 tags:
-  - Principales
+  - Principal
 originReality: Tierra Zero
 actualReality: Tierra Zero
 image: /personajes/ace_of_spades.png

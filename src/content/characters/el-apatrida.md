@@ -6,7 +6,7 @@ source: Superhéroes INC. Tercera Edición
 updatedDate: 2026-05-24
 tags:
   - Alterado
-  - Principales
+  - Principal
 originReality: Tierra Zero
 actualReality: Tierra Zero
 image: /personajes/el-apatrida.png

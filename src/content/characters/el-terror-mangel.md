@@ -4,7 +4,7 @@ description: "Operativo de Recursos Humanos de la Corte Itinerante, se utiliza p
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-11-26
 tags:
-  - Principales
+  - Principal
   - Demonio
 originReality: "Nigalión"
 actualReality: "Tierra Zero"

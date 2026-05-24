@@ -4,7 +4,7 @@ description: Hijo de Inercia y Onda Expansiva que combina fuego y energía ciné
 source: Superhéroes INC. Tercera Edición
 updatedDate: 2025-11-26
 tags:
-  - Principales
+  - Principal
   - Mutante
 originReality: Tierra Zero
 actualReality: Tierra Zero

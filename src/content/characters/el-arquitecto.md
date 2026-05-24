@@ -6,7 +6,7 @@ source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-11-26
 image: "/personajes/el-arquitecto.png"
 tags:
-  - Principales
+  - Principal
   - Semidemonio
   - Mago
 originReality: "Tierra Zero"

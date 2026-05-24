@@ -7,7 +7,7 @@ rpgId: "alice"
 image: /personajes/alice.png
 birthDate: 1985-05-15
 tags:
-  - Principales
+  - Principal
   - Semidemonio
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"

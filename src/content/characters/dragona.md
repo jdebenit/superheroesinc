@@ -5,7 +5,7 @@ description: Nueva portadora de la armadura de Drac y actual defensora de Catalu
 source: Superhéroes INC. Tercera Edición
 updatedDate: 2026-05-24
 tags:
-  - Principales
+  - Principal
   - Guardián
 originReality: Tierra Zero
 actualReality: Tierra Zero

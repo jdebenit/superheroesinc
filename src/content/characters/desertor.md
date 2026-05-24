@@ -6,7 +6,7 @@ updatedDate: 2025-11-26
 image: "/personajes/desertor.png"
 rpgId: "desertor"
 tags:
-  - Principales
+  - Principal
   - Vigilante
   - Artista Marcial
 originReality: "Tierra Zero"

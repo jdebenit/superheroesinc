@@ -5,7 +5,7 @@ description: El tecnópata responsable de la TecnoGuerra permanece aislado del m
 source: Superhéroes INC. Tercera Edición
 updatedDate: 2026-05-24
 tags:
-  - Principales
+  - Principal
   - Mutante
 originReality: Tierra Zero
 actualReality: Tierra Zero

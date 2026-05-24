@@ -5,7 +5,7 @@ description: Joven héroe marroquí capaz de alterar el tiempo mediante palabras
 source: Superhéroes INC. Tercera Edición
 updatedDate: 2026-05-24
 tags:
-  - Principales
+  - Principal
   - Cósmico
   - Mago
 originReality: Tierra Zero

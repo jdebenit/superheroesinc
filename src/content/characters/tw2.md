@@ -4,7 +4,7 @@ description: Androide consciente creado por La Tecnomante que evoluciona generac
 source: Superhéroes INC. Tercera Edición
 updatedDate: 2025-11-26
 tags:
-  - Principales
+  - Principal
   - Androide
 originReality: Tierra Zero
 actualReality: Tierra Zero

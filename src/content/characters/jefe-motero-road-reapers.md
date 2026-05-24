@@ -5,7 +5,8 @@ source: Partida Oficial - La Sombra del enroque
 image: /lore/road-reapers.png
 updatedDate: 2025-12-04
 rpgId: jefe-motero-road-reapers
-tags: ["Genericos"]
+tags:
+  - Genérico
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---

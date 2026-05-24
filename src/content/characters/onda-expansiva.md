@@ -5,7 +5,7 @@ description: Legendario héroe ucraniano y líder de campo de los Campeones de E
 source: Superhéroes INC. Tercera Edición
 updatedDate: 2026-05-24
 tags:
-  - Principales
+  - Principal
   - Alterado
 originReality: Tierra Zero
 actualReality: Tierra Zero

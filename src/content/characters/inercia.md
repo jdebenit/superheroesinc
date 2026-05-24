@@ -5,7 +5,7 @@ description: Antigua superheroína mutante y actual directora de operaciones de 
 source: Superhéroes INC. Tercera Edición
 updatedDate: 2026-05-24
 tags:
-  - Principales
+  - Principal
   - Mutante
 originReality: Tierra Zero
 actualReality: Tierra Zero

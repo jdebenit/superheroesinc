@@ -7,7 +7,7 @@ updatedDate: 2025-11-26
 image: /personajes/cu-chulainn.png
 rpgId: cu-chulainn
 tags:
-  - Principales
+  - Principal
   - Dotado
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"

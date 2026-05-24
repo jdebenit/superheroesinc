@@ -9,7 +9,7 @@ image: /personajes/centurion.png
 rpgId: centurion
 alias: Centurión
 tags:
-  - Principales
+  - Principal
   - Maldito
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"

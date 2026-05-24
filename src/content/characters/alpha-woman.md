@@ -7,7 +7,7 @@ updatedDate: 2025-12-17
 image: /personajes/alpha-woman.png
 rpgId: alpha-woman
 tags:
-  - Principales
+  - Principal
   - Liberado
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"

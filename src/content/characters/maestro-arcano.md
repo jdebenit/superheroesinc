@@ -5,7 +5,7 @@ description: El mayor protector místico de la Tierra y mentor de generaciones e
 source: Superhéroes INC. Tercera Edición
 updatedDate: 2026-05-24
 tags:
-  - Principales
+  - Principal
   - Mago
 originReality: Tierra Zero
 actualReality: Tierra Zero

@@ -5,7 +5,7 @@ description: Antiguo supervillano velocista reconvertido en piloto extremo y age
 source: Superhéroes INC. Tercera Edición
 updatedDate: 2026-05-24
 tags:
-  - Principales
+  - Principal
   - Mutante
 originReality: Tierra Zero
 actualReality: Tierra Zero

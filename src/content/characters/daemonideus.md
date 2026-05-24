@@ -4,7 +4,7 @@ description: Un mago oscuro desterrado desde Terra que busca someter nuestro mun
 source: Superhéroes INC. Tercera Edición
 updatedDate: 2026-05-24
 tags:
-  - Principales
+  - Principal
   - Terrano
   - Mago
 originReality: Terra

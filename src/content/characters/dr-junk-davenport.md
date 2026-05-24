@@ -6,7 +6,7 @@ source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-12
 image: "/personajes/davenport.png"
 tags:
-  - Principales
+  - Principal
   - Poseido
   - Cyborg
 originReality: "Tierra Zero"

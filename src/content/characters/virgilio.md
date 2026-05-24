@@ -5,7 +5,7 @@ source: Superhéroes INC. Tercera Edición
 updatedDate: 2025-11-26
 image: /personajes/virgilio.png
 tags:
-  - Principales
+  - Principal
   - Mutante
 originReality: Tierra Zero
 actualReality: Tierra Zero

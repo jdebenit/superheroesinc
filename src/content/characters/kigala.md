@@ -6,7 +6,7 @@ updatedDate: 2026-01-21
 image: /personajes/kigala.png
 rpgId: kigala
 tags:
-  - Principales
+  - Principal
   - FDM
   - Dios
 originReality: "Reinos Divinos"

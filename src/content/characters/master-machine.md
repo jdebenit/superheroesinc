@@ -5,7 +5,7 @@ description: Villano Inventor de origen Ruso, actualmente recluido.
 source: Partida Oficial - Una Nueva Era
 updatedDate: 2026-05-17
 tags:
-  - Secundarios
+  - Secundario
 originReality: Tierra Zero
 actualReality: Tierra Zero
 ---

@@ -5,7 +5,7 @@ source: Superhéroes INC. Tercera Edición
 updatedDate: 2026-01-25
 image: /personajes/varn.png
 tags:
-  - Principales
+  - Principal
   - Atlante
 originReality: Tierra Zero
 actualReality: Tierra Zero

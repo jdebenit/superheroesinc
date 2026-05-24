@@ -5,7 +5,7 @@ description: Hija secreta de Thor y guardiana de la herencia rúnica asgardiana 
 source: Superhéroes INC. Tercera Edición
 updatedDate: 2026-05-24
 tags:
-  - Principales
+  - Principal
   - Dios
 originReality: Reinos Divinos
 actualReality: Tierra Zero

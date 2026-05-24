@@ -4,7 +4,8 @@ description: "Abogado estandar."
 source: Superherohes INC. Tercera Edición
 updatedDate: 2025-12-17
 rpgId: abogado
-tags: ["Genericos"]
+tags:
+  - Genérico
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---

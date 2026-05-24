@@ -5,7 +5,7 @@ description: Mercenario y ladrón sin poderes que robó el legado del mítico vi
 source: Superhéroes INC. Tercera Edición
 updatedDate: 2026-05-24
 tags:
-  - Secundarios
+  - Secundario
 originReality: Tierra Zero
 actualReality: Tierra Zero
 image: /personajes/jinete-nocturno-2.png

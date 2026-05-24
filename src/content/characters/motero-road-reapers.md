@@ -5,7 +5,8 @@ source: Partida Oficial - La Sombra del enroque
 updatedDate: 2025-12-04
 image: /lore/road-reapers.png
 rpgId: motero-road-reapers
-tags: ["Genericos"]
+tags:
+  - Genérico
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---

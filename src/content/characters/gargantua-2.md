@@ -6,7 +6,7 @@ source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-12
 image: "/personajes/gargantua-ii.png"
 tags:
-  - Principales
+  - Principal
   - Maldito
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"

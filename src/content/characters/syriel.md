@@ -7,7 +7,7 @@ updatedDate: 2026-05-15
 publishedDate: 2026-05-15
 image: /personajes/syriel.png
 tags:
-  - Principales
+  - Principal
   - Atlante
 originReality: Tierra Zero
 actualReality: Tierra Zero
