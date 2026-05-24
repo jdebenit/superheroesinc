@@ -6,7 +6,9 @@ source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-13
 birthDate: "1561-12-20"
 image: "/personajes/la-artifice.png"
-tags: ["Principales"]
+tags:
+  - Principales
+  - Enano
 originReality: "Reinos Divinos"
 actualReality: "Tierra Zero"
 ---

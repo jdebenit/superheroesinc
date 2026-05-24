@@ -26,14 +26,14 @@ const charactersEntries = await getCollection("characters");
 
 const allEvents = [
     ...loreEntries.map((entry) => ({
-        id: entry.slug,
+        id: entry.id,
         title: entry.data.title,
         date: entry.data.eventDate!,
         description: entry.data.description,
         reality: entry.data.reality || "Tierra Zero",
         type: "lore" as const,
         image: entry.data.image,
-        slug: entry.slug,
+        slug: entry.id,
         tags: entry.data.tags,
     })),
     ...timelineEntries.map((entry) => ({
@@ -52,7 +52,7 @@ const allEvents = [
         const events = [];
         if (entry.data.birthDate) {
             events.push({
-                id: `birth-${entry.slug}`,
+                id: `birth-${entry.id}`,
                 title: `Nacimiento: ${entry.data.name}`,
                 date: entry.data.birthDate,
                 displayDate: formatDate(entry.data.birthDate),
@@ -62,12 +62,12 @@ const allEvents = [
                 image: entry.data.image,
                 icon: "character",
                 tags: entry.data.tags,
-                characterSlug: entry.slug,
+                characterSlug: entry.id,
             });
         }
         if (entry.data.deathDate) {
             events.push({
-                id: `death-${entry.slug}`,
+                id: `death-${entry.id}`,
                 title: `Muerte: ${entry.data.name}`,
                 date: entry.data.deathDate,
                 displayDate: formatDate(entry.data.deathDate),
@@ -77,7 +77,7 @@ const allEvents = [
                 image: entry.data.image,
                 icon: "skull",
                 tags: entry.data.tags,
-                characterSlug: entry.slug,
+                characterSlug: entry.id,
             });
         }
         return events;

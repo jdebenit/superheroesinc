@@ -2,6 +2,8 @@
 import Layout from "../../layouts/Layout.astro";
 import FAQList from "../../components/FAQList";
 import { getCollection } from "astro:content";
+import fs from 'fs';
+import path from 'path';
 
 // Get all FAQ entries
 const faqEntries = await getCollection("faq");
@@ -16,31 +18,27 @@ const sortedFAQs = faqEntries.sort((a, b) => {
     return a.data.question.localeCompare(b.data.question);
 });
 
-// Render FAQ content and prepare data for the component
-const faqs = await Promise.all(
-    sortedFAQs.map(async (entry) => {
-        const { Content } = await entry.render();
+// Prepare data for the component by reading the raw markdown file directly
+const faqs = sortedFAQs.map((entry) => {
+    let htmlContent = "";
+    try {
+        const filePath = path.join(process.cwd(), 'src/content/faq', `${entry.id}.md`);
+        const fileContent = fs.readFileSync(filePath, 'utf8');
+        const parts = fileContent.split(/^---$/m);
+        htmlContent = parts.length >= 3 ? parts.slice(2).join('---').trim() : fileContent.trim();
+    } catch (e) {
+        htmlContent = "";
+    }
 
-        // Render to HTML string
-        let htmlContent = "";
-        try {
-            // Create a temporary div to render the content
-            const tempDiv = await Content({});
-            htmlContent = entry.body; // Use raw markdown for now, will be processed client-side
-        } catch (e) {
-            htmlContent = entry.body;
-        }
-
-        return {
-            id: entry.id,
-            question: entry.data.question,
-            answer: htmlContent,
-            tags: entry.data.tags,
-            category: entry.data.category,
-            order: entry.data.order,
-        };
-    }),
-);
+    return {
+        id: entry.id,
+        question: entry.data.question,
+        answer: htmlContent,
+        tags: entry.data.tags,
+        category: entry.data.category,
+        order: entry.data.order,
+    };
+});
 ---
 
 <Layout title="Preguntas Frecuentes (FAQs) - Superhéroes INC">

@@ -12,14 +12,14 @@ export const GET: APIRoute = async () => {
         ...blogPosts.map(post => ({
             title: post.data.title,
             description: post.data.description,
-            url: `/blog/${post.slug}`,
+            url: `/blog/${post.id}`,
             category: 'Blog',
             type: 'blog'
         })),
         ...loreEntries.map(entry => ({
             title: entry.data.title,
             description: entry.data.description,
-            url: `/lore/${entry.slug}`,
+            url: `/lore/${entry.id}`,
             category: entry.data.category === 'organizaciones' ? 'Organizaciones' : 'Lore',
             type: 'lore',
             source: entry.data.source
@@ -27,7 +27,7 @@ export const GET: APIRoute = async () => {
         ...characters.map(char => ({
             title: char.data.name,
             description: char.data.description,
-            url: `/personajes/${char.slug}`,
+            url: `/personajes/${char.id}`,
             category: 'Personajes',
             type: 'character',
             alias: char.data.alias

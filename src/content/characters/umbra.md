@@ -7,8 +7,9 @@ updatedDate: 2026-01-25
 image: /personajes/umbra.png
 tags:
   - Principales
-originReality: "Tierra Zero"
-actualReality: "Tierra Zero"
+  - Mago
+originReality: Tierra Zero
+actualReality: Tierra Zero
 ---
 Cuando el dios Geb, conocido en [Tierra Zero](/lore/localizaciones/tierra-zero/) como el villano [Seísmo](/personajes/seismo/), desató una guerra mística en Egipto contra su hermana y cuñada, la diosa Isis, el conflicto alcanzó un punto crítico con la apertura de un portal a [Nigalión](/lore/localizaciones/nigalion/). La brecha amenazó con engullir por igual a héroes y villanos, distorsionando la realidad y dejando claro que el enfrentamiento había superado cualquier límite asumible.
 

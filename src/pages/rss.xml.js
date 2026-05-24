@@ -1,6 +1,8 @@
 import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
 import MarkdownIt from 'markdown-it';
+import fs from 'fs';
+import path from 'path';
 
 const parser = new MarkdownIt();
 
@@ -21,16 +23,28 @@ export async function GET(context) {
     stylesheet: '/rss/styles.xsl',
     items: blog
       .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-      .map((post) => ({
-        title: post.data.title,
-        pubDate: post.data.pubDate,
-        description: post.data.description,
-        link: `/blog/${post.slug}/`,
-        author: post.data.author, // Keep standard author for backward compatibility if needed, though often expects email
-        categories: post.data.tags,
-        content: parser.render(post.body),
-        customData: (post.data.image ? `<media:content url="${new URL(post.data.image, context.site).toString()}" medium="image" type="image/jpeg" />` : '') +
-          `<dc:creator>${post.data.author}</dc:creator>`,
-      })),
+      .map((post) => {
+        let rawBody = '';
+        try {
+          const filePath = path.join(process.cwd(), 'src/content/blog', `${post.id}.md`);
+          const fileContent = fs.readFileSync(filePath, 'utf8');
+          const parts = fileContent.split(/^---$/m);
+          rawBody = parts.length >= 3 ? parts.slice(2).join('---').trim() : fileContent.trim();
+        } catch (e) {
+          rawBody = '';
+        }
+
+        return {
+          title: post.data.title,
+          pubDate: post.data.pubDate,
+          description: post.data.description,
+          link: `/blog/${post.id}/`,
+          author: post.data.author,
+          categories: post.data.tags,
+          content: parser.render(rawBody),
+          customData: (post.data.image ? `<media:content url="${new URL(post.data.image, context.site).toString()}" medium="image" type="image/jpeg" />` : '') +
+            `<dc:creator>${post.data.author}</dc:creator>`,
+        };
+      }),
   });
 }

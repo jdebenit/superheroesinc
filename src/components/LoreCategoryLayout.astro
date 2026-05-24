@@ -24,7 +24,7 @@ const { title, description, items, basePath } = Astro.props;
             {
                 items.map((item) => {
                     // Extract just the filename from the slug
-                    const filename = item.slug.split("/").pop() || item.slug;
+                    const filename = item.id.split("/").pop() || item.id;
                     return (
                         <article class="item-card">
                             <a

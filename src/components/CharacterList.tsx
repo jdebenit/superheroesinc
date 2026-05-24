@@ -3,7 +3,7 @@ import ListControls from './shared/ListControls';
 import CharacterCard from './CharacterCard';
 
 interface Character {
-    slug: string;
+    id: string;
     data: {
         name: string;
         alias?: string;
@@ -126,7 +126,7 @@ export default function CharacterList({ initialCharacters }: CharacterListProps)
 
             <div className="characters-grid">
                 {filteredCharacters.map((char) => (
-                    <CharacterCard key={char.slug} slug={char.slug} data={char.data} />
+                    <CharacterCard key={char.id} slug={char.id} data={char.data} />
                 ))}
 
                 {filteredCharacters.length === 0 && (

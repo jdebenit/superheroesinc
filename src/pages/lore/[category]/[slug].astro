@@ -1,5 +1,5 @@
 ---
-import { getCollection, getEntry } from "astro:content";
+import { getCollection, getEntry, render } from "astro:content";
 import Layout from "../../../layouts/Layout.astro";
 import CharacterSheet from "../../../components/character/CharacterSheet";
 import ActualPlayMetadata from "../../../components/ActualPlayMetadata.astro";
@@ -12,7 +12,7 @@ export async function getStaticPaths() {
   const items = await getCollection("lore");
   return items.map((item) => {
     // Extract just the filename from the slug (e.g., "localizaciones/aqera" -> "aqera")
-    const filename = item.slug.split("/").pop() || item.slug;
+    const filename = item.id.split("/").pop() || item.id;
     return {
       params: { category: item.data.category, slug: filename },
       props: item,
@@ -21,7 +21,7 @@ export async function getStaticPaths() {
 }
 
 const item = Astro.props;
-const { Content } = await item.render();
+const { Content } = await render(item);
 
 // Fetch RPG data if rpgId is present (for lore item itself)
 let rpgData = null;

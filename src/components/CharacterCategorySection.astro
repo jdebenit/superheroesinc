@@ -14,7 +14,7 @@ const { title, intro, characters } = Astro.props;
     <div class="characters-grid">
         {
             characters.map((char) => (
-                <a href={`/personajes/${char.slug}`} class="character-card">
+                <a href={`/personajes/${char.id}`} class="character-card">
                     <div class="card-inner">
                         <div class="card-front">
                             {char.data.image ? (

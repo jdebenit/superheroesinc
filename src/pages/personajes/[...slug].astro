@@ -1,6 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { getCollection, getEntry } from "astro:content";
+import { getCollection, getEntry, render } from "astro:content";
 import CharacterSheet from "../../components/character/CharacterSheet";
 import ShareButtons from "../../components/ShareButtons.astro";
 
@@ -8,13 +8,13 @@ export async function getStaticPaths() {
     const characters = await getCollection("characters");
 
     return characters.map((entry) => ({
-        params: { slug: entry.slug },
+        params: { slug: entry.id },
         props: { entry },
     }));
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 
 // Fetch RPG data if available
 let rpgData = null;
@@ -30,7 +30,7 @@ const allChars = (await getCollection("characters")).sort((a, b) =>
     (a.data.alias || a.data.name).localeCompare(b.data.alias || b.data.name),
 );
 
-const currentIndex = allChars.findIndex((char) => char.slug === entry.slug);
+const currentIndex = allChars.findIndex((char) => char.id === entry.id);
 const prevChar = currentIndex > 0 ? allChars[currentIndex - 1] : null;
 const nextChar =
     currentIndex < allChars.length - 1 ? allChars[currentIndex + 1] : null;
@@ -126,7 +126,7 @@ const characterKeywords = [
                     {
                         prevChar && (
                             <a
-                                href={`/personajes/${prevChar.slug}`}
+                                href={`/personajes/${prevChar.id}`}
                                 class="nav-link prev"
                             >
                                 <span class="nav-label">← Anterior</span>
@@ -139,7 +139,7 @@ const characterKeywords = [
                     {
                         nextChar && (
                             <a
-                                href={`/personajes/${nextChar.slug}`}
+                                href={`/personajes/${nextChar.id}`}
                                 class="nav-link next"
                             >
                                 <span class="nav-label">Siguiente →</span>

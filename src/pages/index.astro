@@ -32,7 +32,7 @@ const latestLore = sortedLore.slice(0, 3).map((entry) => ({
         year: "numeric",
       })
     : "",
-  link: `/lore/${entry.slug}`,
+  link: `/lore/${entry.id}`,
   category: entry.data.category,
   categoryLink: `/lore/${entry.data.category}`,
 }));
@@ -48,7 +48,7 @@ const sortedCharacters = allCharacters
   });
 
 const latestCharacters = sortedCharacters.slice(0, 3).map((entry) => ({
-  slug: entry.slug,
+  slug: entry.id,
   data: {
     name: entry.data.name,
     alias: entry.data.alias,
@@ -96,7 +96,7 @@ const news = latestPosts.map((post) => ({
     month: "short",
     year: "numeric",
   }),
-  link: `/blog/${post.slug}`,
+  link: `/blog/${post.id}`,
 }));
 ---
 

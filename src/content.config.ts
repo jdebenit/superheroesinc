@@ -1,7 +1,8 @@
 import { defineCollection, z } from 'astro:content';
+import { glob } from 'astro/loaders';
 
 const blogCollection = defineCollection({
-    type: 'content',
+    loader: glob({ pattern: '**/[^_]*.md', base: './src/content/blog' }),
     schema: z.object({
         title: z.string(),
         pubDate: z.date(),
@@ -13,7 +14,7 @@ const blogCollection = defineCollection({
 });
 
 const loreCollection = defineCollection({
-    type: 'content',
+    loader: glob({ pattern: '**/[^_]*.md', base: './src/content/lore' }),
     schema: z.object({
         title: z.string(),
         description: z.string(),
@@ -53,7 +54,7 @@ const loreCollection = defineCollection({
 });
 
 const timelineCollection = defineCollection({
-    type: 'content',
+    loader: glob({ pattern: '**/[^_]*.md', base: './src/content/timeline' }),
     schema: z.object({
         title: z.string(),
         date: z.union([z.string(), z.date()]).transform((val) => {
@@ -81,7 +82,7 @@ const timelineCollection = defineCollection({
 });
 
 const rpgCollection = defineCollection({
-    type: 'data',
+    loader: glob({ pattern: '**/[^_]*.json', base: './src/content/rpg' }),
     schema: z.object({
         name: z.string().optional(),
         alias: z.string().optional(),
@@ -183,7 +184,7 @@ const rpgCollection = defineCollection({
 });
 
 const charactersCollection = defineCollection({
-    type: 'content',
+    loader: glob({ pattern: '**/[^_]*.md', base: './src/content/characters' }),
     schema: z.object({
         name: z.string(),
         alias: z.string().optional(),
@@ -231,7 +232,7 @@ const charactersCollection = defineCollection({
 });
 
 const faqCollection = defineCollection({
-    type: 'content',
+    loader: glob({ pattern: '**/[^_]*.md', base: './src/content/faq' }),
     schema: z.object({
         question: z.string(),
         tags: z.array(z.string()),
