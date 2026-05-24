@@ -5,7 +5,7 @@ source: Superhéroes INC. Tercera Edición
 updatedDate: 2026-05-24
 tags:
   - Principal
-  - Guardián
+  - Guardian
 originReality: Tierra Zero
 actualReality: Tierra Zero
 alias: D’Arc

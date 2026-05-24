@@ -9,6 +9,7 @@ tags:
   - Principal
   - Liberada
   - Artista Marcial
+  - Vigilante
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---
