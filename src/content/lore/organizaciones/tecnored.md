@@ -1,12 +1,12 @@
 ---
-title: "TecnoRED"
-description: "Proyecto europeo de tecnificación militar diseñado para sustituir a los superhéroes en la defensa del territorio. Su caída provocó uno de los mayores desastres metahumanos de la historia."
-category: "organizaciones"
-source: "Superhéroes INC. Tercera Edición"
+title: TecnoRed
+description: Proyecto europeo de tecnificación militar diseñado para sustituir a los superhéroes en la defensa del territorio. Su caída provocó uno de los mayores desastres metahumanos de la historia.
+category: organizaciones
+source: Superhéroes INC. Tercera Edición
 updatedDate: 2025-11-26
 ---
 
-**TecnoRED** fue la mayor iniciativa militar y tecnológica de la Unión Europea para sustituir a los superhéroes tradicionales por **escuadras de humanos tecnificados**, equipados con servoarmaduras avanzadas. Activa durante más de una década, fue considerada el principal pilar de seguridad metahumana del continente hasta su catastrófica caída durante la **TecnoGuerra**, uno de los mayores desastres de la historia moderna.
+TecnoRed fue la mayor iniciativa militar y tecnológica de la Unión Europea para sustituir a los superhéroes tradicionales por **escuadras de humanos tecnificados**, equipados con servoarmaduras avanzadas. Activa durante más de una década, fue considerada el principal pilar de seguridad metahumana del continente hasta su catastrófica caída durante la **TecnoGuerra**, uno de los mayores desastres de la historia moderna.
 
 Su creación respondió al aumento de supervillanos, conflictos extraplanarios, amenazas divinas y fallos de supergrupos clásicos. Era, para Europa, el intento de recuperar el control frente a seres “demasiado poderosos”.
 
