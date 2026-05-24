@@ -9,6 +9,7 @@ tags:
   - Fallecido
   - Alterado
   - Vigilante
+  - Militar
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---

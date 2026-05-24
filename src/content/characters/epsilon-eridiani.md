@@ -6,6 +6,9 @@ updatedDate: 2026-02-03
 tags:
   - Principal
   - Mutante
+  - Tecnoarmadura
+  - Mente Maestra
+  - Vigilante
 originReality: Tierra Zero
 actualReality: Tierra Zero
 image: /personajes/epsilon-eridiani.png

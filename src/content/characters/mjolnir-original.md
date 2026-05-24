@@ -8,6 +8,7 @@ updatedDate: 2025-12-31
 birthDate: 1960-03-04
 tags:
   - Retirado
+  - Guardian
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---

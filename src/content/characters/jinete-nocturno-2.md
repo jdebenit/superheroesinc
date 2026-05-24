@@ -6,6 +6,7 @@ source: Superhéroes INC. Tercera Edición
 updatedDate: 2026-05-24
 tags:
   - Secundario
+  - Vigilante
 originReality: Tierra Zero
 actualReality: Tierra Zero
 image: /personajes/jinete-nocturno-2.png

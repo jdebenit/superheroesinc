@@ -7,6 +7,7 @@ updatedDate: 2025-12-13
 image: "/personajes/seismo.png"
 tags:
   - Desaparecido
+  - Dios
 originReality: "Reinos Divinos"
 actualReality: "Tierra Zero"
 ---

@@ -5,6 +5,7 @@ source: "Superhéroes INC. Tercera Edición"
 updatedDate: 2025-11-30
 tags:
   - Fallecido
+  - Mutante
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---

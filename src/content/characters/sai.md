@@ -7,6 +7,7 @@ updatedDate: 2026-05-24
 tags:
   - Mutante
   - Principal
+  - Artísta Marcial
 originReality: Tierra Zero
 actualReality: Tierra Zero
 ---

@@ -6,6 +6,8 @@ source: "Superhéroes INC. Tercera Edición"
 updatedDate: 2025-11-26
 tags:
   - Retirado
+  - Vigilante
+  - Vengador
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 ---
