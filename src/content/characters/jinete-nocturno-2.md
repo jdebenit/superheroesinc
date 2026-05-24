@@ -1,7 +1,7 @@
 ---
 name: Desconocido
 alias: Jinete Nocturno 2
-description:
+description: Mercenario y ladrón sin poderes que robó el legado del mítico vigilante nocturno original.
 source: Superhéroes INC. Tercera Edición
 updatedDate: 2026-05-24
 tags:
