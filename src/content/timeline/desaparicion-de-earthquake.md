@@ -4,5 +4,6 @@ date: 1998-04-01
 description: "Desaparece Earthquake, líder de Nature Corps."
 reality: "Tierra Zero"
 icon: "portal"
-tags: ["personaje"]
+tags:
+  - personaje
 ---

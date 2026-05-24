@@ -5,5 +5,7 @@ displayDate: "2009"
 description: "Heimdall, Sif y Loki llegan a la Tierra. Enfrentamiento en la Antártida con Thor y Tyr. Mueren Tyr, Heimdall y Sif. Loki derrota a Thor y salva el mundo."
 reality: "Tierra Zero"
 icon: "battle"
-tags: ["contemporaneo", "búsqueda-orbe-sagrado"]
+tags:
+  - contemporaneo
+  - búsqueda-orbe-sagrado
 ---

@@ -5,5 +5,6 @@ displayDate: "1939"
 description: "Búsquedas gubernamentales de metahumanos para la integración de éstos en programas militares."
 reality: "Tierra Zero"
 icon: "star"
-tags: []
+tags:
+  - política
 ---

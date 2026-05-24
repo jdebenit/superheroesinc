@@ -5,5 +5,6 @@ displayDate: "1925"
 description: "Howard Carter descubre la tumba de Tutankamón. La apertura libera una poderosa entidad atrapada, desatando la 'Maldición de Tutankamón'."
 reality: "Tierra Zero"
 icon: "magic"
-tags: ["búsqueda-orbe-sagrado"]
+tags:
+  - búsqueda-orbe-sagrado
 ---

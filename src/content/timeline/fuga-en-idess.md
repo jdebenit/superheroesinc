@@ -5,5 +5,6 @@ displayDate: "1993"
 description: "Un vampiro escapa de experimentos en IDESS."
 reality: "Tierra Zero"
 icon: "magic"
-tags: []
+tags:
+  - tecnoguerra
 ---

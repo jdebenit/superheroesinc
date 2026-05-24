@@ -5,5 +5,7 @@ displayDate: "2010"
 description: "Grupo metahumano (presumiblemente EEUU) asesina a Dante. Desmantelamiento Winter Office."
 reality: "Tierra Zero"
 icon: "battle"
-tags: ["purgatorio-paraiso", "contemporaneo"]
+tags:
+  - purgatorio-paraiso
+  - contemporaneo
 ---

@@ -5,5 +5,6 @@ displayDate: "1977"
 description: "Nace IDESS en Barcelona, España. Pronto se expande por gran parte del país y de Europa."
 reality: "Tierra Zero"
 icon: "character"
-tags: ["tecnoguerra"]
+tags:
+  - tecnoguerra
 ---

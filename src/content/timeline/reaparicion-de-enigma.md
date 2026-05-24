@@ -5,5 +5,7 @@ displayDate: "1993"
 description: "Enigma reaparece con textos de Cronópolis para entregarlos a Vértice de Combate, pero los destruye."
 reality: "Tierra Zero"
 icon: "battle"
-tags: ["cronopolis", "personaje"]
+tags:
+  - cronopolis
+  - personaje
 ---

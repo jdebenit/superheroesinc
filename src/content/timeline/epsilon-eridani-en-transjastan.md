@@ -5,5 +5,6 @@ displayDate: "1966"
 description: "Subida al poder en Transjastán de Epsilon Eridani."
 reality: "Tierra Zero"
 icon: "star"
-tags: ["iniciativa-epsilon"]
+tags:
+  - iniciativa-epsilon
 ---

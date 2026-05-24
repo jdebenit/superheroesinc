@@ -5,5 +5,6 @@ displayDate: "2018"
 description: "En España se funda UNIT3."
 reality: "Tierra Zero"
 icon: "star"
-tags: ["contemporaneo"]
+tags:
+  - contemporaneo
 ---

@@ -5,5 +5,7 @@ displayDate: "1900-1920"
 description: "Crowley escribe 'El Libro de la Ley' y funda Thelema, afirmando haber contactado con el mago Giordano Bruno. Se publica 'El Kybalion'. Santiago Ramón y Cajal prueba la existencia de metahumanos en España."
 reality: "Tierra Zero"
 icon: "magic"
-tags: []
+tags:
+  - era-mitica
+  - efemerides
 ---

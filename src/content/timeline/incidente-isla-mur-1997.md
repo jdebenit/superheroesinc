@@ -5,5 +5,7 @@ displayDate: "1997"
 description: "Intento desembarco en Isla Muró. Intervención Guerreros del Imperio. Se funda el Grupo Omega. James Lang gravemente herido."
 reality: "Tierra Zero"
 icon: "shield"
-tags: []
+tags:
+  - Isla-Muró
+  - organizaciones
 ---

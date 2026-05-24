@@ -5,5 +5,8 @@ displayDate: "2005"
 description: "Dante desvela ser Edgar Columbus procedente del futuro."
 reality: "Tierra Zero"
 icon: "star"
-tags: ["personaje", "contemporaneo", "purgatorio-paraiso"]
+tags:
+  - personaje
+  - contemporaneo
+  - purgatorio-paraiso
 ---

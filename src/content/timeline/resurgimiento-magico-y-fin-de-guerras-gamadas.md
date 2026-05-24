@@ -5,5 +5,6 @@ displayDate: "1980"
 description: "Resurgimiento del interés en la magia (Crowley, Wicca). Las Guerras Gamadas se declaran finalizadas sobre papel."
 reality: "Tierra Zero"
 icon: "magic"
-tags: ["guerras-gamadas"]
+tags:
+  - guerras-gamadas
 ---

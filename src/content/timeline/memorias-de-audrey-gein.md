@@ -5,5 +5,7 @@ displayDate: "2006"
 description: "Audrey Gein publica 'Yo soy Tech Weapon', revelando su identidad."
 reality: "Tierra Zero"
 icon: "star"
-tags: ["personaje", "contemporaneo"]
+tags:
+  - personaje
+  - contemporaneo
 ---

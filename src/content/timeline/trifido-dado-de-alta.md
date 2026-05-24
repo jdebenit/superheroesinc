@@ -5,5 +5,6 @@ displayDate: "1981"
 description: "Trífido es dado de alta y abandona las instalaciones de IDESS Italia."
 reality: "Tierra Zero"
 icon: "star"
-tags: ["personaje"]
+tags:
+  - personaje
 ---

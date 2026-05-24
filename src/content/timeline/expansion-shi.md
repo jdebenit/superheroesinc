@@ -5,5 +5,7 @@ displayDate: "1989"
 description: "Superheroes INC. Ya tiene sedes en 16 provincias españolas."
 reality: "Tierra Zero"
 icon: "star"
-tags: []
+tags:
+  - organizaciones
+  - efemerides
 ---

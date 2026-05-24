@@ -5,5 +5,7 @@ displayDate: "1899"
 description: "Aleister Crowley se une a la Orden Hermética de la Aurora Dorada, explorando dimensiones ocultas y contactando entidades sobrenaturales."
 reality: "Tierra Zero"
 icon: "shield"
-tags: []
+tags:
+  - organizaciones
+  - era-mitica
 ---

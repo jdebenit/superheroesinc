@@ -5,5 +5,6 @@ displayDate: "2021"
 description: "Se fundan los Irregulares."
 reality: "Tierra Zero"
 icon: "shield"
-tags: ["contemporaneo"]
+tags:
+  - contemporaneo
 ---

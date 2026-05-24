@@ -4,5 +4,7 @@ date: 2020-12-01
 description: "La Llegada de los Jóvenes Dioses a las costas de Irlanda."
 reality: "Tierra Zero"
 icon: "portal"
-tags: ["búsqueda-orbe-sagrado", "contemporaneo"]
+tags:
+  - búsqueda-orbe-sagrado
+  - contemporaneo
 ---

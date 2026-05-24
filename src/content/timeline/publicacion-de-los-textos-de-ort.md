@@ -5,5 +5,7 @@ displayDate: "2001"
 description: "La hechicera Morgan L. Fay, en contra de los designios de la Alianza, publica los textos sagrados de la ciudad de Ort y otros textos arcanos codificados en una serie de novelas."
 reality: "Tierra Zero"
 icon: "deal"
-tags: ["era-mitica", "contemporaneo"]
+tags:
+  - era-mitica
+  - contemporaneo
 ---

@@ -5,5 +5,6 @@ displayDate: "1994"
 description: "Epsilon Eridani es derrocado en operación internacional. Edgard Columbus discurso mundo unido. Nace Frente de Liberación Mutante."
 reality: "Tierra Zero"
 icon: "star"
-tags: ["iniciativa-epsilon"]
+tags:
+  - iniciativa-epsilon
 ---

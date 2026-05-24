@@ -5,5 +5,7 @@ displayDate: "1936"
 description: "Comienzo de la Guerra Civil Española. Eva se exilia a España desde su Polonia natal, durante la invasión germano rusa de 1936."
 reality: "Tierra Zero"
 icon: "battle"
-tags: []
+tags:
+  - personaje
+  - guerras-gamadas
 ---

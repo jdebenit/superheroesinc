@@ -5,5 +5,6 @@ displayDate: "1945"
 description: "Finaliza la IIGM. Desaparece la Lanza del Destino. Aparece la Sociedad de los Susurros, dedicada a rituales antiguos de invocación."
 reality: "Tierra Zero"
 icon: "star"
-tags: ["guerras-gamadas"]
+tags:
+  - guerras-gamadas
 ---

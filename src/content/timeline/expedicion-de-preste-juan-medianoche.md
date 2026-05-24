@@ -5,5 +5,7 @@ displayDate: "Siglo XII (1150)"
 description: "Medianoche, conocido como Preste Juan, lidera una expedición con héroes europeos para capturar a los demonios de Nigalión. Desaparecen tras la batalla, dejando el manuscrito Voynich."
 reality: "Tierra Zero"
 icon: "battle"
-tags: []
+tags:
+  - era-mitica
+  - nigalión
 ---

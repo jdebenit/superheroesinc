@@ -5,5 +5,6 @@ displayDate: "1972"
 description: "Nacimiento de Deborah Angelway, Sacred Spirit."
 reality: "Tierra Zero"
 icon: "character"
-tags: ["personaje"]
+tags:
+  - personaje
 ---

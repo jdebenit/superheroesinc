@@ -5,5 +5,7 @@ displayDate: "1799"
 description: "Lenora lidera en Asgard la rebelión de enanos y elfos unidos luchan contra los dioses perdiendo y siendo desterrada al reino de Jotunheim."
 reality: "Reinos Divinos"
 icon: "battle"
-tags: ["era-mitica", "personaje"]
+tags:
+  - era-mitica
+  - personaje
 ---

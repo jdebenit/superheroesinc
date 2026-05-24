@@ -5,5 +5,6 @@ displayDate: "1958"
 description: "El rey Miguel Alberto vuelve al poder en Transjastán para alejar del ámbito soviético a algunos países de la zona."
 reality: "Tierra Zero"
 icon: "portal"
-tags: ["iniciativa-epsilon"]
+tags:
+  - iniciativa-epsilon
 ---

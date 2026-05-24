@@ -5,5 +5,6 @@ displayDate: "1992"
 description: "Comienzo proyecto Defcon Zero en EEUU."
 reality: "Tierra Zero"
 icon: "star"
-tags: []
+tags:
+  - política
 ---

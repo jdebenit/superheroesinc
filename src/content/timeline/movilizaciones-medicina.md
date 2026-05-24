@@ -5,5 +5,6 @@ displayDate: "1994"
 description: "Christiane de Ugarte, Umbra, encabeza las movilizaciones de estudiantes de Medicina."
 reality: "Tierra Zero"
 icon: "star"
-tags: ["personaje"]
+tags:
+  - personaje
 ---

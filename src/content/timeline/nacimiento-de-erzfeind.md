@@ -5,5 +5,6 @@ displayDate: "1963"
 description: "Nacimiento de Klaus Kirkman, Erzfeind."
 reality: "Tierra Zero"
 icon: "character"
-tags: ["personaje"]
+tags:
+  - personaje
 ---

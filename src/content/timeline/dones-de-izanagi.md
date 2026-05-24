@@ -5,5 +5,7 @@ displayDate: "1650"
 description: "Izanagi otorga tres dones a Miyamoto Musashi."
 reality: "Tierra Zero"
 icon: "star"
-tags: []
+tags:
+  - era-mitica
+  - personaje
 ---

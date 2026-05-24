@@ -5,5 +5,6 @@ displayDate: "1945"
 description: "Se acuña el término superhéroe."
 reality: "Tierra Zero"
 icon: "star"
-tags: ["efemerides"]
+tags:
+  - efemerides
 ---

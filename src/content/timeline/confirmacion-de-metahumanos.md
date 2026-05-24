@@ -5,5 +5,6 @@ displayDate: "1920"
 description: "Confirmación de la existencia de metahumanos."
 reality: "Tierra Zero"
 icon: "star"
-tags: []
+tags:
+  - efemerides
 ---

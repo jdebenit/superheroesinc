@@ -5,5 +5,6 @@ displayDate: "1938"
 description: Comienzan las Guerras Gamadas. Demencia y el Círculo del Nigalión crean horrores. Castáphilo se une al Nacional Socialismo para orientarlos en lo oculto.
 reality: Tierra Zero
 icon: star
-tags: ["guerras-gamadas"]
+tags:
+  - guerras-gamadas
 ---

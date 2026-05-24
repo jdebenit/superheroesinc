@@ -5,5 +5,6 @@ displayDate: "1992"
 description: "Intento de sabotaje de la Expo'92. Los Ancestrales enviados por Seísmo, detenidos por Vértice de Combate. Comienzo proyecto Defcon Zero en EEUU. Trauma de Edgard Columbus."
 reality: "Tierra Zero"
 icon: "battle"
-tags: []
+tags:
+  - efemerides
 ---

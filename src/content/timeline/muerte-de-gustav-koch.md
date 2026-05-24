@@ -5,5 +5,7 @@ displayDate: "1940"
 description: "Muere Koch al despeñarse su coche por una carretera montañosa en Uruguay, donde había sido destinado."
 reality: "Tierra Zero"
 icon: "skull"
-tags: ["personaje", "flecha-roja"]
+tags:
+  - personaje
+  - flecha-roja
 ---

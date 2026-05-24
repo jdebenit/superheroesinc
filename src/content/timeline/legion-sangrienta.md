@@ -5,5 +5,6 @@ displayDate: "2000"
 description: "Lord Brujo crea la Legión Sangrienta."
 reality: "Tierra Zero"
 icon: "star"
-tags: []
+tags:
+  - organizaciones
 ---

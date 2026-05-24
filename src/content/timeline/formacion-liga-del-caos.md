@@ -5,5 +5,6 @@ displayDate: "2014"
 description: "Formación Liga del Caos."
 reality: "Tierra Zero"
 icon: "star"
-tags: ["contemporaneo"]
+tags:
+  - contemporaneo
 ---

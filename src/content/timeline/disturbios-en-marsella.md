@@ -5,6 +5,6 @@ description: Disturbios en Marsella tras la filtración de vídeos donde miembro
 reality: Tierra Zero
 icon: star
 tags:
-  - politica
+  - política
   - contemporaneo
 ---

@@ -5,5 +5,6 @@ displayDate: "1942"
 description: "El comandante Salgado junto a Jaime Arrieta funda la Organización Antares."
 reality: "Tierra Zero"
 icon: "shield"
-tags: []
+tags:
+  - organizaciones
 ---

@@ -4,5 +4,6 @@ date: 1584-05-19
 description: "Nace Miyamoto Musashi."
 reality: "Tierra Zero"
 icon: "character"
-tags: ["personaje"]
+tags:
+  - personaje
 ---

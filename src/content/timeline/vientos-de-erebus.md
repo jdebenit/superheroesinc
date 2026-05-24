@@ -5,5 +5,6 @@ displayDate: "1970"
 description: "Vampiros, Hombres Lobo y Semidemonios firman un pacto en Valladolid para proteger a los seres sobrenaturales, fundando Vientos de Erebus."
 reality: "Tierra Zero"
 icon: "deal"
-tags: []
+tags:
+  - organizaciones
 ---
