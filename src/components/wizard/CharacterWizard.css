@@ -4,6 +4,7 @@
    CSS VARIABLES
    ═══════════════════════════════════════════ */
 .wizard-app {
+    --cache-buster: v3;
     /* Colors */
     --c-primary: #2563eb;
     --c-primary-dark: #1e40af;
