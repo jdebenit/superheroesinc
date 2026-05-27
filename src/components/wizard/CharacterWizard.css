@@ -1,10 +1,41 @@
-/* CharacterWizard.css — App-shell layout — v2 */
+@import "./shared/forms/FormSelect.css";
+@import "./shared/forms/RadioSelectTable.css";
+@import "./shared/forms/SequelsSelector.css";
+@import "./shared/forms/StatusSelectCard.css";
+@import "./shared/forms/WizardField.css";
+@import "./shared/forms/WizardRange.css";
+@import "./shared/layout/DynamicList.css";
+@import "./shared/layout/TableContainer.css";
+@import "./shared/layout/WizardDialogs.css";
+@import "./shared/layout/WizardGrid.css";
+@import "./shared/layout/WizardSection.css";
+@import "./shared/layout/WizardStep.css";
+@import "./shared/ui/CostBadge.css";
+@import "./shared/ui/DeleteRowButton.css";
+@import "./shared/ui/EmptyState.css";
+@import "./shared/ui/InfoBox.css";
+@import "./shared/ui/StatItem.css";
+@import "./shared/ui/WizardButton.css";
+@import "./steps/Step1_OriginSelection/Step1_OriginSelection.css";
+@import "./steps/Step2_Characteristics/Step2_Characteristics.css";
+@import "./steps/Step3_Especials/Step3_Especials.css";
+@import "./steps/Step4_Skills/Step4_Skills.css";
+@import "./steps/Step4_Skills/sections/AvailableSkillsSection.css";
+@import "./steps/Step4_Skills/sections/GeneralSkillsSection.css";
+@import "./steps/Step4_Skills/sections/SelectedSkillsSection.css";
+@import "./steps/Step4_Skills/sections/SkillRow.css";
+@import "./steps/Step4_Skills/sections/SkillTable.css";
+@import "./steps/Step5_Background/Step5_Background.css";
+@import "./steps/Step6_Details/Step6_Details.css";
+@import "./steps/Step7_Evolution/Step7_Evolution.css";
+
+/* CharacterWizard.css — App-shell layout — v4 */
 
 /* ═══════════════════════════════════════════
    CSS VARIABLES
    ═══════════════════════════════════════════ */
 .wizard-app {
-    --cache-buster: v3;
+    --cache-buster: v4;
     /* Colors */
     --c-primary: #2563eb;
     --c-primary-dark: #1e40af;
