@@ -4,6 +4,39 @@ import { calculateEM } from '../../wizard/steps/Step3_Especials/utils';
 import { calculateDerivedStats, calculateSkillBase, formatDerivedStats, applyStatsOverrides } from '../../../utils/characterCalculations';
 import { calculateGeneralSkillValues, calculateSpecialSkillValues } from '../../../utils/calculations/skillCalculations';
 
+const normalizeId = (id: string): string => {
+    if (!id) return '';
+    return id
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .replace(/[^a-z0-9]/g, "")
+        .trim();
+};
+
+const SPELL_ERRATA_MAP: { [key: string]: string } = {
+    "pesudopsi": "pseudo_psi",
+    "proyecciconastral": "proyeccion_del_cuerpo_astral",
+    "proyeccionastral": "proyeccion_del_cuerpo_astral",
+    "percercionmagica": "percepcion_magica",
+    "proyeccionenergiamagica": "proyeccion_de_energia_magica",
+    "proyecciondeenergiamagicadefensa": "proyeccion_de_energia_magica",
+    "cadenasdeltartaro": "cadenas_del_tartaro"
+};
+
+const parseSpellRank = (rankVal: any, maxRank: number = 5): number => {
+    if (rankVal === undefined || rankVal === null) return 1;
+    if (typeof rankVal === 'number') return rankVal;
+    const str = String(rankVal).toLowerCase().trim();
+    if (str === 'maestria') return maxRank;
+    const digits = str.replace(/\D/g, '');
+    if (digits) {
+        const parsed = parseInt(digits, 10);
+        if (!isNaN(parsed)) return parsed;
+    }
+    return 1;
+};
+
 const calculatePowerSkillBase = (char: any, formula: string): number => {
     if (!formula) return 0;
     const getVal = (abbr: string) => {
@@ -63,7 +96,7 @@ export const useCharacterSheetData = (character: any) => {
 
     // Powers
     const powersData = (character.powers?.selected || []).map((p: any) => {
-        const powerData = POWERS.find(data => data.id === p.id);
+        const powerData = POWERS.find(data => normalizeId(data.id) === normalizeId(p.id) || normalizeId(data.name) === normalizeId(p.name || p.id));
         const baseName = powerData ? powerData.name : (p.name || '');
         const displayName = p.selectedOption ? `${baseName} (${p.selectedOption})` : baseName;
 
@@ -147,9 +180,33 @@ export const useCharacterSheetData = (character: any) => {
         };
     });
 
+    // Spells fallback/mapping logic
+    let rawSpells = character.spells?.selected;
+    if ((!rawSpells || rawSpells.length === 0) && character.spells?.items && Array.isArray(character.spells.items)) {
+        rawSpells = [];
+        character.spells.items.forEach((s: any) => {
+            const nameOrId = s.id || s.name;
+            if (!nameOrId) return;
+            const norm = normalizeId(nameOrId);
+            let correctId = norm;
+            if (SPELL_ERRATA_MAP[norm]) {
+                correctId = normalizeId(SPELL_ERRATA_MAP[norm]);
+            }
+            const spellDef = SPELLS.find(def => normalizeId(def.id) === correctId || normalizeId(def.name) === norm);
+            if (spellDef) {
+                const rank = parseSpellRank(s.rank, spellDef.maxRank);
+                rawSpells.push({
+                    id: spellDef.id,
+                    rank: rank,
+                    selectedOption: s.selectedOption || ''
+                });
+            }
+        });
+    }
+
     // Spells
-    const spellsData = (character.spells?.selected || []).map((s: any) => {
-        const spellDef = SPELLS.find(def => def.id === s.id);
+    const spellsData = (rawSpells || []).map((s: any) => {
+        const spellDef = SPELLS.find(def => normalizeId(def.id) === normalizeId(s.id) || normalizeId(def.name) === normalizeId(s.name || s.id));
         const maxRank = spellDef?.maxRank || 5;
         const isMaestria = s.rank === maxRank + 2;
         const baseCost = spellDef ? (parseInt(spellDef.cost, 10) || 0) : 0;

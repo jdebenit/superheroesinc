@@ -101,53 +101,53 @@
     }
   },
   "spells": {
-    "items": [
+    "selected": [
       {
-        "name": "Pesudo Psi",
-        "rank": "Rango 4"
+        "id": "pseudo_psi",
+        "rank": 4
       },
       {
-        "name": "Percepción mágica",
-        "rank": "Rango 5"
+        "id": "percepcion_magica",
+        "rank": 5
       },
       {
-        "name": "Escudos místicos",
-        "rank": "Rango 5"
+        "id": "escudos_misticos",
+        "rank": 5
       },
       {
-        "name": "Proyección energía mágica",
-        "rank": "Rango 5"
+        "id": "proyeccion_de_energia_magica",
+        "rank": 5
       },
       {
-        "name": "Vedar entrada",
-        "rank": "Rango 1"
+        "id": "vedar_entrada",
+        "rank": 1
       },
       {
-        "name": "Invocar espíritus",
-        "rank": "Rango 3"
+        "id": "invocar_espiritu",
+        "rank": 3
       },
       {
-        "name": "Controlar espíritus",
-        "rank": "Rango 3"
+        "id": "controlar_espiritu",
+        "rank": 3
       },
       {
-        "name": "Proyeccicón astral",
-        "rank": "Rango 2"
+        "id": "proyeccion_del_cuerpo_astral",
+        "rank": 2
       },
       {
-        "name": "Curación",
-        "rank": "Rango 1"
+        "id": "curacion",
+        "rank": 1
       },
       {
-        "name": "Levitar",
-        "rank": "Rango 1"
+        "id": "levitar",
+        "rank": 1
       }
     ]
   },
   "powers": {
     "selected": [
       {
-        "id": "postcognición",
+        "id": "postcognicion",
         "origin": "Mago",
         "rank": 41,
         "customizations": [],

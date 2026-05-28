@@ -4,12 +4,68 @@ import { calculateEM, hasSubtype } from '../../../components/wizard/steps/Step3_
 import { SheetSection } from '../common/SheetSection';
 import { DetailRow } from '../common/DetailRow';
 
+const normalizeId = (id: string): string => {
+    if (!id) return '';
+    return id
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .replace(/[^a-z0-9]/g, "")
+        .trim();
+};
+
+const SPELL_ERRATA_MAP: { [key: string]: string } = {
+    "pesudopsi": "pseudo_psi",
+    "proyecciconastral": "proyeccion_del_cuerpo_astral",
+    "proyeccionastral": "proyeccion_del_cuerpo_astral",
+    "percercionmagica": "percepcion_magica",
+    "proyeccionenergiamagica": "proyeccion_de_energia_magica",
+    "proyecciondeenergiamagicadefensa": "proyeccion_de_energia_magica",
+    "cadenasdeltartaro": "cadenas_del_tartaro"
+};
+
+const parseSpellRank = (rankVal: any, maxRank: number = 5): number => {
+    if (rankVal === undefined || rankVal === null) return 1;
+    if (typeof rankVal === 'number') return rankVal;
+    const str = String(rankVal).toLowerCase().trim();
+    if (str === 'maestria') return maxRank;
+    const digits = str.replace(/\D/g, '');
+    if (digits) {
+        const parsed = parseInt(digits, 10);
+        if (!isNaN(parsed)) return parsed;
+    }
+    return 1;
+};
+
 interface SpellsSectionProps {
     character: any;
 }
 
 export const SpellsSection: React.FC<SpellsSectionProps> = ({ character }) => {
-    if (!character.spells?.selected || character.spells.selected.length === 0) return null;
+    let selectedSpells = character.spells?.selected || [];
+    if (selectedSpells.length === 0 && character.spells?.items && Array.isArray(character.spells.items)) {
+        selectedSpells = [];
+        character.spells.items.forEach((s: any) => {
+            const nameOrId = s.id || s.name;
+            if (!nameOrId) return;
+            const norm = normalizeId(nameOrId);
+            let correctId = norm;
+            if (SPELL_ERRATA_MAP[norm]) {
+                correctId = normalizeId(SPELL_ERRATA_MAP[norm]);
+            }
+            const spellDef = SPELLS.find(def => normalizeId(def.id) === correctId || normalizeId(def.name) === norm);
+            if (spellDef) {
+                const rank = parseSpellRank(s.rank, spellDef.maxRank);
+                selectedSpells.push({
+                    id: spellDef.id,
+                    rank: rank,
+                    selectedOption: s.selectedOption || ''
+                });
+            }
+        });
+    }
+
+    if (selectedSpells.length === 0) return null;
 
     return (
         <SheetSection title="Hechizos" className="spells">
@@ -42,8 +98,8 @@ export const SpellsSection: React.FC<SpellsSectionProps> = ({ character }) => {
                 })()}
             </div>
             <ul className="clean-list">
-                {character.spells.selected.map((spell: any, idx: number) => {
-                    const spellData = SPELLS.find(s => s.id === spell.id);
+                {selectedSpells.map((spell: any, idx: number) => {
+                    const spellData = SPELLS.find(s => normalizeId(s.id) === normalizeId(spell.id) || normalizeId(s.name) === normalizeId(spell.name || spell.id));
                     if (!spellData) return null;
 
                     const maxRank = spellData.maxRank || 1;

@@ -105,17 +105,17 @@
     }
   },
   "spells": {
-    "items": [
+    "selected": [
       {
-        "name": "Anular conjuros",
-        "rank": "Rango 5"
+        "id": "anular_conjuros",
+        "rank": 5
       }
     ]
   },
   "powers": {
     "selected": [
       {
-        "id": "teleportación",
+        "id": "teleportacion",
         "origin": "Terrana",
         "rank": 100,
         "customizations": [],

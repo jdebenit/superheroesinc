@@ -1,6 +1,73 @@
 import { initialCharacterState } from '../data/wizardConfig';
 import { GENERAL_SKILLS } from '../data/generalSkills';
 import { POWERS } from '../data/powers';
+import { SPELLS } from '../data/spells';
+
+const normalizePowerId = (id: string): string => {
+    if (!id) return '';
+    return id
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .replace(/[^a-z0-9]/g, "")
+        .trim();
+};
+
+const findPowerByNameOrId = (nameOrId: string) => {
+    if (!nameOrId) return undefined;
+    const norm = normalizePowerId(nameOrId);
+    return POWERS.find(kp => normalizePowerId(kp.id) === norm || normalizePowerId(kp.name) === norm);
+};
+
+const normalizeSpellId = (id: string): string => {
+    if (!id) return '';
+    return id
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .replace(/[^a-z0-9]/g, "")
+        .trim();
+};
+
+const SPELL_ERRATA_MAP: { [key: string]: string } = {
+    "pesudopsi": "pseudo_psi",
+    "proyecciconastral": "proyeccion_del_cuerpo_astral",
+    "proyeccionastral": "proyeccion_del_cuerpo_astral",
+    "percercionmagica": "percepcion_magica",
+    "proyeccionenergiamagica": "proyeccion_de_energia_magica",
+    "proyecciondeenergiamagicadefensa": "proyeccion_de_energia_magica",
+    "cadenasdeltartaro": "cadenas_del_tartaro"
+};
+
+const findSpellByNameOrId = (nameOrId: string) => {
+    if (!nameOrId) return undefined;
+    const norm = normalizeSpellId(nameOrId);
+    if (SPELL_ERRATA_MAP[norm]) {
+        const correctId = SPELL_ERRATA_MAP[norm];
+        return SPELLS.find(s => s.id === correctId);
+    }
+    const found = SPELLS.find(s => normalizeSpellId(s.id) === norm || normalizeSpellId(s.name) === norm);
+    if (found) return found;
+    return SPELLS.find(s => {
+        const normSpellId = normalizeSpellId(s.id);
+        const normSpellName = normalizeSpellId(s.name);
+        return normSpellId.includes(norm) || norm.includes(normSpellId) ||
+               normSpellName.includes(norm) || norm.includes(normSpellName);
+    });
+};
+
+const parseSpellRank = (rankVal: any, maxRank: number = 5): number => {
+    if (rankVal === undefined || rankVal === null) return 1;
+    if (typeof rankVal === 'number') return rankVal;
+    const str = String(rankVal).toLowerCase().trim();
+    if (str === 'maestria') return maxRank;
+    const digits = str.replace(/\D/g, '');
+    if (digits) {
+        const parsed = parseInt(digits, 10);
+        if (!isNaN(parsed)) return parsed;
+    }
+    return 1;
+};
 
 /**
  * Adapt a character loaded from the web (JSON) to the structure expected by the Character Wizard/Viewer.
@@ -114,10 +181,20 @@ export const adaptWebCharacter = (webChar: any): any => {
     }
 
     // 4. Adapt POWERS
-    if (webChar.powers?.items && Array.isArray(webChar.powers.items)) {
-        adapted.powers.selected = webChar.powers.items.map((p: any) => {
-            const knownPower = POWERS.find(kp => kp.name === p.name);
-            const id = p.id || knownPower?.id || `custom_${Math.random().toString(36).substr(2, 9)}`;
+    let adaptedPowers: any[] = [];
+    if (webChar.powers?.selected && Array.isArray(webChar.powers.selected)) {
+        adaptedPowers = webChar.powers.selected.map((p: any) => {
+            const knownPower = findPowerByNameOrId(p.id || p.name);
+            return {
+                ...p,
+                id: knownPower?.id || p.id,
+                rank: typeof p.rank === 'number' ? p.rank : parseInt(p.rank, 10) || 1
+            };
+        });
+    } else if (webChar.powers?.items && Array.isArray(webChar.powers.items)) {
+        adaptedPowers = webChar.powers.items.map((p: any) => {
+            const knownPower = findPowerByNameOrId(p.name || p.id);
+            const id = knownPower?.id || p.id || `custom_${Math.random().toString(36).substr(2, 9)}`;
 
             let skillValue = 0;
             let powerMod = 0;
@@ -151,6 +228,38 @@ export const adaptWebCharacter = (webChar: any): any => {
             };
         });
     }
+
+    adapted.powers = {
+        ...baseState.powers,
+        ...(webChar.powers || {}),
+        selected: adaptedPowers
+    };
+
+    // 4b. Adapt SPELLS
+    let adaptedSpells: any[] = [];
+    if (webChar.spells) {
+        const rawSpells = webChar.spells.selected || webChar.spells.items;
+        if (Array.isArray(rawSpells)) {
+            rawSpells.forEach((s: any) => {
+                const nameOrId = s.id || s.name;
+                const spellDef = findSpellByNameOrId(nameOrId);
+                if (spellDef) {
+                    const rank = parseSpellRank(s.rank, spellDef.maxRank);
+                    adaptedSpells.push({
+                        id: spellDef.id,
+                        rank: rank,
+                        selectedOption: s.selectedOption || ''
+                    });
+                }
+            });
+        }
+    }
+
+    adapted.spells = {
+        ...baseState.spells,
+        ...(webChar.spells || {}),
+        selected: adaptedSpells
+    };
 
     // 5. Adapt TECH MODULES
     const rawTech = webChar.techModules?.items || webChar.techmodules?.items;

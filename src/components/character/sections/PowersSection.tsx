@@ -1,6 +1,16 @@
 import React from 'react';
 import { POWERS } from '../../../data/powers';
 
+const normalizeId = (id: string): string => {
+    if (!id) return '';
+    return id
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .replace(/[^a-z0-9]/g, "")
+        .trim();
+};
+
 interface PowersSectionProps {
     character: any;
 }
@@ -33,7 +43,7 @@ export const PowersSection: React.FC<PowersSectionProps> = ({ character }) => {
             </div>
             <ul className="clean-list">
                 {character.powers.selected.map((power: any, idx: number) => {
-                    const powerData = POWERS.find(p => p.id === power.id);
+                    const powerData = POWERS.find(p => normalizeId(p.id) === normalizeId(power.id) || normalizeId(p.name) === normalizeId(power.name || power.id));
                     if (!powerData) return null;
 
                     const getRankLevel = (rank: number) => {
