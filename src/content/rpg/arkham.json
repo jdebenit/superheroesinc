@@ -102,42 +102,51 @@
     }
   },
   "spells": {
-    "items": [
+    "selected": [
       {
-        "name": "Abrir portales",
-        "rank": "Rango 5"
+        "id": "abrir_portales",
+        "rank": 5,
+        "selectedOption": ""
       },
       {
-        "name": "Escudos místicos",
-        "rank": "Rango 10"
+        "id": "escudos_misticos",
+        "rank": 10,
+        "selectedOption": ""
       },
       {
-        "name": "Proyeccicón astral",
-        "rank": "Rango 1"
+        "id": "proyeccion_del_cuerpo_astral",
+        "rank": 1,
+        "selectedOption": ""
       },
       {
-        "name": "Crear ilusiones",
-        "rank": "Rango 5"
+        "id": "crear_ilusiones",
+        "rank": 5,
+        "selectedOption": ""
       },
       {
-        "name": "Percepción mágica",
-        "rank": "Rango 1"
+        "id": "percepcion_magica",
+        "rank": 1,
+        "selectedOption": ""
       },
       {
-        "name": "Pseudo Psi",
-        "rank": "Rango 4"
+        "id": "pseudo_psi",
+        "rank": 4,
+        "selectedOption": ""
       },
       {
-        "name": "Revivir muertos",
-        "rank": "Rango 5"
+        "id": "revivir_muertos",
+        "rank": 5,
+        "selectedOption": ""
       },
       {
-        "name": "Animar objetos",
-        "rank": "Rango 4"
+        "id": "animar_objetos",
+        "rank": 4,
+        "selectedOption": ""
       },
       {
-        "name": "Metamorfosis oscura",
-        "rank": "Rango 4"
+        "id": "metamorfosis_oscura",
+        "rank": 4,
+        "selectedOption": ""
       }
     ]
   },

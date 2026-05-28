@@ -13,9 +13,22 @@ const normalizePowerId = (id: string): string => {
         .trim();
 };
 
+const POWER_ERRATA_MAP: { [key: string]: { id: string, option?: string } } = {
+    "control_de_la_energia_cinetica": { id: "control_de_energia", option: "Cinética" },
+    "control_de_la_energia_cinética": { id: "control_de_energia", option: "Cinética" },
+    "controldeenergiacinetica": { id: "control_de_energia", option: "Cinética" },
+    "emision_de_energia_magica": { id: "emision_de_energia", option: "Mágica" },
+    "emisión_de_energía_mágica": { id: "emision_de_energia", option: "Mágica" },
+    "emisiondeenergiamagica": { id: "emision_de_energia", option: "Mágica" }
+};
+
 const findPowerByNameOrId = (nameOrId: string) => {
     if (!nameOrId) return undefined;
     const norm = normalizePowerId(nameOrId);
+    if (POWER_ERRATA_MAP[norm]) {
+        const correct = POWER_ERRATA_MAP[norm];
+        return POWERS.find(kp => kp.id === correct.id);
+    }
     return POWERS.find(kp => normalizePowerId(kp.id) === norm || normalizePowerId(kp.name) === norm);
 };
 
@@ -36,12 +49,15 @@ const SPELL_ERRATA_MAP: { [key: string]: string } = {
     "percercionmagica": "percepcion_magica",
     "proyeccionenergiamagica": "proyeccion_de_energia_magica",
     "proyecciondeenergiamagicadefensa": "proyeccion_de_energia_magica",
-    "cadenasdeltartaro": "cadenas_del_tartaro"
+    "cadenasdeltartaro": "cadenas_del_tartaro",
+    "escantarobjetos": "encantar_objetos"
 };
 
 const findSpellByNameOrId = (nameOrId: string) => {
     if (!nameOrId) return undefined;
-    const norm = normalizeSpellId(nameOrId);
+    // Strip options in parentheses, e.g. "Invocar Elemento (clima)" -> "Invocar Elemento"
+    const cleanNameOrId = nameOrId.replace(/\([^)]+\)/g, '').trim();
+    const norm = normalizeSpellId(cleanNameOrId);
     if (SPELL_ERRATA_MAP[norm]) {
         const correctId = SPELL_ERRATA_MAP[norm];
         return SPELLS.find(s => s.id === correctId);
@@ -185,15 +201,20 @@ export const adaptWebCharacter = (webChar: any): any => {
     if (webChar.powers?.selected && Array.isArray(webChar.powers.selected)) {
         adaptedPowers = webChar.powers.selected.map((p: any) => {
             const knownPower = findPowerByNameOrId(p.id || p.name);
+            const norm = normalizePowerId(p.id || p.name);
+            const errata = POWER_ERRATA_MAP[norm];
             return {
                 ...p,
                 id: knownPower?.id || p.id,
+                selectedOption: p.selectedOption || errata?.option || '',
                 rank: typeof p.rank === 'number' ? p.rank : parseInt(p.rank, 10) || 1
             };
         });
     } else if (webChar.powers?.items && Array.isArray(webChar.powers.items)) {
         adaptedPowers = webChar.powers.items.map((p: any) => {
             const knownPower = findPowerByNameOrId(p.name || p.id);
+            const norm = normalizePowerId(p.name || p.id);
+            const errata = POWER_ERRATA_MAP[norm];
             const id = knownPower?.id || p.id || `custom_${Math.random().toString(36).substr(2, 9)}`;
 
             let skillValue = 0;
@@ -222,7 +243,7 @@ export const adaptWebCharacter = (webChar: any): any => {
                 rank: p.rank || 1,
                 skillValue,
                 powerMod,
-                selectedOption: p.selectedOption || '',
+                selectedOption: p.selectedOption || errata?.option || '',
                 customizations: p.customizations || [],
                 effect: p.notes
             };
@@ -245,10 +266,25 @@ export const adaptWebCharacter = (webChar: any): any => {
                 const spellDef = findSpellByNameOrId(nameOrId);
                 if (spellDef) {
                     const rank = parseSpellRank(s.rank, spellDef.maxRank);
+                    
+                    let selectedOption = s.selectedOption || '';
+                    if (!selectedOption && nameOrId) {
+                        const optionMatch = nameOrId.match(/\(([^)]+)\)/);
+                        if (optionMatch) {
+                            const rawOpt = optionMatch[1].trim().toLowerCase();
+                            const matchedOpt = spellDef.options?.find(o => o.toLowerCase() === rawOpt);
+                            if (matchedOpt) {
+                                selectedOption = matchedOpt;
+                            } else {
+                                selectedOption = optionMatch[1].trim();
+                            }
+                        }
+                    }
+
                     adaptedSpells.push({
                         id: spellDef.id,
                         rank: rank,
-                        selectedOption: s.selectedOption || ''
+                        selectedOption: selectedOption
                     });
                 }
             });

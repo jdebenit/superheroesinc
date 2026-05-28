@@ -105,70 +105,86 @@
     }
   },
   "spells": {
-    "items": [
+    "selected": [
       {
-        "name": "Envejecimiento acelerado",
-        "rank": "Rango 1"
+        "id": "envejecimiento_acelerado",
+        "rank": 1,
+        "selectedOption": ""
       },
       {
-        "name": "Controlar espiritu",
-        "rank": "Rango 5"
+        "id": "controlar_espiritu",
+        "rank": 5,
+        "selectedOption": ""
       },
       {
-        "name": "Cadenas del Tartaro",
-        "rank": "Rango 1"
+        "id": "cadenas_del_tartaro",
+        "rank": 1,
+        "selectedOption": ""
       },
       {
-        "name": "Invocar Espiritu",
-        "rank": "Rango 4"
+        "id": "invocar_espiritu",
+        "rank": 4,
+        "selectedOption": ""
       },
       {
-        "name": "Percerción mágica",
-        "rank": "Rango 5"
+        "id": "percepcion_magica",
+        "rank": 5,
+        "selectedOption": ""
       },
       {
-        "name": "Vedar entrada",
-        "rank": "Rango 1"
+        "id": "vedar_entrada",
+        "rank": 1,
+        "selectedOption": ""
       },
       {
-        "name": "Consumir energia mágica",
-        "rank": "Maestria"
+        "id": "consumir_energia_magica",
+        "rank": 5,
+        "selectedOption": ""
       },
       {
-        "name": "Abrir portales",
-        "rank": "Maestria"
+        "id": "abrir_portales",
+        "rank": 5,
+        "selectedOption": ""
       },
       {
-        "name": "Anular conjuros",
-        "rank": "Rango 6"
+        "id": "anular_conjuros",
+        "rank": 6,
+        "selectedOption": ""
       },
       {
-        "name": "Curación",
-        "rank": "Rango 5"
+        "id": "curacion",
+        "rank": 5,
+        "selectedOption": ""
       },
       {
-        "name": "Levitar",
-        "rank": "Rango 5"
+        "id": "levitar",
+        "rank": 5,
+        "selectedOption": ""
       },
       {
-        "name": "Pseudo psi",
-        "rank": "Rango 4"
+        "id": "pseudo_psi",
+        "rank": 4,
+        "selectedOption": ""
       },
       {
-        "name": "Escudos místicos",
-        "rank": "Rango 10"
+        "id": "escudos_misticos",
+        "rank": 10,
+        "selectedOption": ""
       },
       {
-        "name": "Proyección energía mágica",
-        "rank": "Rango 10"
+        "id": "proyeccion_de_energia_magica",
+        "rank": 10,
+        "selectedOption": ""
       },
       {
-        "name": "Revivir muertos",
-        "rank": "Rango 5"
+        "id": "revivir_muertos",
+        "rank": 5,
+        "selectedOption": ""
       },
       {
-        "name": "Protección",
-        "rank": "Rango 1"
+        "id": "proteccion",
+        "rank": 1,
+        "selectedOption": ""
       }
     ]
   },
@@ -182,7 +198,7 @@
         "skillValue": 0
       },
       {
-        "id": "traducción_de_lenguas",
+        "id": "traduccion_de_lenguas",
         "origin": "Dios",
         "rank": 100,
         "customizations": [],

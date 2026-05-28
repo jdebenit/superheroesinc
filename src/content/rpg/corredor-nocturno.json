@@ -126,11 +126,12 @@
         "skillValue": 0
       },
       {
-        "id": "control_de_la_energía_cinetica",
+        "id": "control_de_energia",
         "origin": "Alterado",
         "rank": 41,
         "customizations": [],
-        "skillValue": 0
+        "skillValue": 0,
+        "selectedOption": "Cinética"
       },
       {
         "id": "campo_de_fuerza",

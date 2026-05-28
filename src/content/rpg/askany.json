@@ -118,30 +118,36 @@
     }
   },
   "spells": {
-    "items": [
+    "selected": [
       {
-        "name": "Escudos Místicos",
-        "rank": "Rango 5"
+        "id": "escudos_misticos",
+        "rank": 5,
+        "selectedOption": ""
       },
       {
-        "name": "Invocar Elemento (clima)",
-        "rank": "Rango 4"
+        "id": "invocar_elemento",
+        "rank": 4,
+        "selectedOption": "Clima"
       },
       {
-        "name": "Curación",
-        "rank": "Rango 2"
+        "id": "curacion",
+        "rank": 2,
+        "selectedOption": ""
       },
       {
-        "name": "Pseudo Psi",
-        "rank": "Rango 4"
+        "id": "pseudo_psi",
+        "rank": 4,
+        "selectedOption": ""
       },
       {
-        "name": "Paralizar",
-        "rank": "Rango 4"
+        "id": "paralizar",
+        "rank": 4,
+        "selectedOption": ""
       },
       {
-        "name": "Abrir Portales",
-        "rank": "Rango 4"
+        "id": "abrir_portales",
+        "rank": 4,
+        "selectedOption": ""
       }
     ]
   },

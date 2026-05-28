@@ -21,7 +21,8 @@ const SPELL_ERRATA_MAP: { [key: string]: string } = {
     "percercionmagica": "percepcion_magica",
     "proyeccionenergiamagica": "proyeccion_de_energia_magica",
     "proyecciondeenergiamagicadefensa": "proyeccion_de_energia_magica",
-    "cadenasdeltartaro": "cadenas_del_tartaro"
+    "cadenasdeltartaro": "cadenas_del_tartaro",
+    "escantarobjetos": "encantar_objetos"
 };
 
 const parseSpellRank = (rankVal: any, maxRank: number = 5): number => {
@@ -187,7 +188,8 @@ export const useCharacterSheetData = (character: any) => {
         character.spells.items.forEach((s: any) => {
             const nameOrId = s.id || s.name;
             if (!nameOrId) return;
-            const norm = normalizeId(nameOrId);
+            const cleanNameOrId = nameOrId.replace(/\([^)]+\)/g, '').trim();
+            const norm = normalizeId(cleanNameOrId);
             let correctId = norm;
             if (SPELL_ERRATA_MAP[norm]) {
                 correctId = normalizeId(SPELL_ERRATA_MAP[norm]);
@@ -195,10 +197,25 @@ export const useCharacterSheetData = (character: any) => {
             const spellDef = SPELLS.find(def => normalizeId(def.id) === correctId || normalizeId(def.name) === norm);
             if (spellDef) {
                 const rank = parseSpellRank(s.rank, spellDef.maxRank);
+                
+                let selectedOption = s.selectedOption || '';
+                if (!selectedOption) {
+                    const optionMatch = nameOrId.match(/\(([^)]+)\)/);
+                    if (optionMatch) {
+                        const rawOpt = optionMatch[1].trim().toLowerCase();
+                        const matchedOpt = spellDef.options?.find(o => o.toLowerCase() === rawOpt);
+                        if (matchedOpt) {
+                            selectedOption = matchedOpt;
+                        } else {
+                            selectedOption = optionMatch[1].trim();
+                        }
+                    }
+                }
+
                 rawSpells.push({
                     id: spellDef.id,
                     rank: rank,
-                    selectedOption: s.selectedOption || ''
+                    selectedOption: selectedOption
                 });
             }
         });

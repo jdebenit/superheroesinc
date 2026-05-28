@@ -116,14 +116,14 @@
   "powers": {
     "selected": [
       {
-        "id": "superpercepción",
+        "id": "superpercepcion",
         "origin": "Vigilante",
         "rank": 1,
         "customizations": [],
         "skillValue": 0
       },
       {
-        "id": "superconstitución",
+        "id": "superconstitucion",
         "origin": "Vigilante",
         "rank": 1,
         "customizations": [],
@@ -139,10 +139,11 @@
     ]
   },
   "spells": {
-    "items": [
+    "selected": [
       {
-        "name": "Escantar objetos",
-        "rank": "Rango 6"
+        "id": "encantar_objetos",
+        "rank": 6,
+        "selectedOption": ""
       }
     ]
   },

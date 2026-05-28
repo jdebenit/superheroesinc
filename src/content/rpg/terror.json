@@ -97,7 +97,7 @@
   "powers": {
     "selected": [
       {
-        "id": "alteracion_de_la_densidad",
+        "id": "cambio_de_la_densidad",
         "origin": "Alterado",
         "rank": 1,
         "customizations": [],
@@ -111,11 +111,12 @@
         "skillValue": 0
       },
       {
-        "id": "emisión_de_energía_mágica",
+        "id": "emision_de_energia",
         "origin": "Alterado",
         "rank": 21,
         "customizations": [],
-        "skillValue": 0
+        "skillValue": 0,
+        "selectedOption": "Mágica"
       }
     ]
   },
