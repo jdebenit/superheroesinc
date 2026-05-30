@@ -16,13 +16,11 @@ groups:
   - euroforce
   - euromen
 ---
-Sofía Venizelos nació en Patras, Grecia, en 1980. Alcanzó cierta popularidad como actriz durante su adolescencia hasta que, en 1995, su vida cambió por completo al entrar en contacto con una antigua hermandad dedicada al culto de Zeus.
+Sofía Venizelos nació en Patras, Grecia, en 1980. Alcanzó cierta popularidad como actriz durante su adolescencia hasta que, en 1995, su vida cambió por completo al entrar en contacto con la antigua hermandad [Acólitos de Zeus](/lore/organizaciones/acolitos-de-zeus).
 
 Los miembros de aquella organización creían haber encontrado a la heredera de Europa, la legendaria reina asociada a los mitos fundacionales de la antigua Grecia. Durante una ceremonia celebrada en un santuario oculto recibió una diadema vinculada a Zeus y quedó envuelta por una poderosa manifestación de energía divina. Tras aquel acontecimiento desarrolló la capacidad de alterar su tamaño a voluntad, pudiendo aumentar o reducir sus dimensiones hasta extremos extraordinarios mientras conservaba su resistencia y fuerza proporcional.
 
-Poco después descubrió que varios grupos vinculados a los antiguos cultos olímpicos pretendían utilizarla para sus propios fines. Su encuentro con los héroes que acabarían formando los Euromen cambió por completo el rumbo de su vida.
-
-Europa se convirtió en uno de los miembros de los **Euromen**, el grupo de héroes que durante años protegió Europa y que serviría de inspiración para las futuras generaciones de superseres del continente. Junto a Atlas, Euroman, Hydrae y Gestein participó en algunas de las mayores crisis internacionales de finales del siglo XX.
+Poco después descubrió que varios grupos vinculados a los antiguos cultos olímpicos pretendían utilizarla para sus propios fines. Su encuentro con los héroes que formabanel grupo **Euromen** cambió por completo el rumbo de su vida. Europa se convirtió en uno de los miembros de los **Euromen**, el grupo de héroes que durante años protegió Europa y que serviría de inspiración para las futuras generaciones de superseres del continente. Junto a Atlas, Euroman, Hydrae y Gestein participó en algunas de las mayores crisis internacionales de finales del siglo XX.
 
 Cuando los Euromen comenzaron a desaparecer o retirarse de la vida activa, Europa participó junto a varios de sus antiguos compañeros en la creación de [Euroforce](/lore/grupos/euroforce), convirtiéndose en una de sus fundadoras. Durante décadas fue una de las figuras más reconocibles del heroísmo europeo y una de las pocas personas que logró mantener vínculos personales con varias generaciones de héroes.
 
