@@ -11,6 +11,8 @@ tags:
   - Guardian
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
+groups:
+  - "fuerza-maxima"
 ---
 Harald Värkaard, (Göteborg, 1960) es un exprofesor de antropología y arqueología que, tras un hallazgo fortuito durante una excavación no autorizada, acabó convertido en uno de los metahumanos más poderosos registrados en Europa. Desde su aparición pública se autodefine como “el dios Thor reencarnado”, aunque esta afirmación es más una interpretación personal que un hecho contrastado.
 

@@ -1,4 +1,5 @@
 ---
+id: "triangulo-mortal"
 title: "Triángulo Mortal"
 description: "Supergrupo de mercenarios, opera desde 1995"
 category: "grupos"

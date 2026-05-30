@@ -10,6 +10,8 @@ tags:
   - Maldito
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
+groups:
+  - "triangulo-mortal"
 ---
 
 Jorge Lebrato, como se hace llamar, no tiene ningún recuerdo de su verdadera identidad. Despertó solo en un bosque, sin memoria, con una pulsera de identificación hospitalaria que llevaba ese nombre. Desde entonces ha intentado recomponer una vida que no recuerda haber vivido. Cuando la policía lo asistió, comprobaron que sus huellas no figuraban en ningún sistema. No había registros, antecedentes ni rastro alguno de quién había sido.

@@ -1,4 +1,5 @@
 ---
+id: "las-siete-torres"
 title: Las Siete Torres
 description: Las Torres no sueñan… recuerdan. Y lo que recuerdan no es nuestro mundo, sino su dueño legítimo. Mientras exista alguien que las escuche despierto, la oscuridad no podrá reclamar su derecho.
 category: grupos

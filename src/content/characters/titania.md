@@ -11,6 +11,8 @@ tags:
   - Hada
 originReality: "Isla de Verano"
 actualReality: "Tierra Zero"
+groups:
+  - "las-siete-torres"
 ---
 
 Titania de la Isla de Verano puede parecer una mujer joven y frágil, pero quien la subestime comete un error fatal. Más de un siervo de Nigalión ha desaparecido tras hacerlo. Bajo esa apariencia ligera se esconde una de las voluntades más firmes y peligrosas que existen.

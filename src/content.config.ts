@@ -16,6 +16,7 @@ const blogCollection = defineCollection({
 const loreCollection = defineCollection({
     loader: glob({ pattern: '**/[^_]*.md', base: './src/content/lore' }),
     schema: z.object({
+        id: z.string().optional(),
         title: z.string(),
         description: z.string(),
         category: z.enum(['localizaciones', 'organizaciones', 'grupos', 'eventos', 'criaturas', 'entidades', 'actual-plays', 'cronicas']),

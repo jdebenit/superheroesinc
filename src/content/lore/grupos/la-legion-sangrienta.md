@@ -1,4 +1,5 @@
 ---
+id: "la-legion-sangrienta"
 title: La Legión Sangrienta
 description: Grupo de inadaptados cuyos objetivos no estan demasiado claros
 category: grupos

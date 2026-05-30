@@ -1,4 +1,5 @@
 ---
+id: "psykosis"
 title: Psykosis
 description: Si el Diablo hubiese querido retratar la locura, el odio, la furia, la muerte y, en general, todas las sombras y deseos insanos que anidan en el corazón humano, no habría logrado un resultado tan perfecto como Psykosis.
 category: grupos

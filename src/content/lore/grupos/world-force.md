@@ -1,5 +1,6 @@
 ---
-title: "World Force (Fuerca Mundial)"
+id: "world-force"
+title: "World Force (Fuerza Mundial)"
 description: "World Force es el supergrupo global impulsado por la ONU para proyectar una imagen unificada y controlada del poder metahumano a escala mundial."
 category: "grupos"
 source: "Superhéroes INC. Tercera Edición"

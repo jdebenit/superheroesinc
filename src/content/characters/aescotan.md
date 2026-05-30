@@ -12,6 +12,8 @@ tags:
   - Demonio
 originReality: "Nigalión"
 actualReality: "Tierra Zero"
+groups:
+  - "la-corte-itinerante"
 ---
 
 Aescotan no es un simple demonio, es una institución en sí mismo dentro de la burocracia infernal. Conocido como el "Señor del No Tiempo", sirve como el brazo ejecutor de la **Corte Itinerante**, una entidad transdimensional encargada de arbitrar y asegurar el cumplimiento de pactos entre mortales y entidades sobrenaturales.

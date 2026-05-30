@@ -15,6 +15,8 @@ tags:
   - Vigilante
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
+groups:
+  - "cazadores-de-sombras"
 ---
 
 > Ah, sí, los tanques y los lanzallamas son muy impresionantes, pero he visto cosas mucho más extraordinarias en mis días con Constantino, Herr Weisthor. Una vez vi una lanza que otorgaba invulnerabilidad a quien la empuñara y unas runas que conferían fuerza divina a quien las pronunciaba en el orden correcto.

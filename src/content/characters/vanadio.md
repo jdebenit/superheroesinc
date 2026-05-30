@@ -10,6 +10,8 @@ tags:
   - Tecnoarmadura
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
+groups:
+  - "los-irregulares"
 ---
 
 Julián Ramos es hijo de Marcos Ramos y Jennifer Williams, figuras reconocidas en los campos de la cibernética y las tecnoarmaduras. Ambos fueron piezas clave en el desarrollo del prototipo Spider de TecnoRed, una de las armaduras tecnológicas más avanzadas de su época y símbolo del potencial que la tecnología podía alcanzar antes de descontrolarse.

@@ -1,4 +1,5 @@
 ---
+id: "euroforce"
 title: "Euroforce"
 description: "Supergrupo oficial de la Unión Europea, formado por algunos de los héroes más poderosos del continente. Fue disuelto tras la TecnoGuerra."
 category: "grupos"

@@ -10,6 +10,8 @@ tags:
   - Mago
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
+groups:
+  - "las-siete-torres"
 ---
 
 Giordano Bruno, conocido en su actual encarnación como Warlock, es el custodio de la Torre Vor’Gorthak, situada en la Toscana italiana. En su vida anterior fue filósofo, matemático y astrónomo, un pensador adelantado a su tiempo cuya negativa a someterse a las creencias establecidas lo enfrentó directamente con la Inquisición. Su desafío intelectual terminó con su ejecución pública en el año 1600, aunque esa no fue realmente su muerte.

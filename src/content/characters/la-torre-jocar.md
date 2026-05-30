@@ -9,6 +9,8 @@ tags:
   - Alterado
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
+groups:
+  - "la-corte-itinerante"
 ---
 
 Jocar tiene como función principal la obtención de los recursos esenciales que mantienen en marcha a la Corte Itinerante. Está especializado en localizar, asegurar y transportar materiales y energías oscuras indispensables para rituales, construcciones y armamento infernal. Nada llega a la Corte sin pasar antes, directa o indirectamente, por su control.

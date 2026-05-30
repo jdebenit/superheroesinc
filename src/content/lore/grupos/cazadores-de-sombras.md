@@ -1,4 +1,5 @@
 ---
+id: "cazadores-de-sombras"
 title: Cazadores de Sombras
 description: Grupo de cazadores sobrenaturales marcados por una rosa negra, unidos por una maldición y responsables de enfrentarse durante décadas a horrores que culminaron en su ruptura con la llegada de Mad Skull.
 category: grupos

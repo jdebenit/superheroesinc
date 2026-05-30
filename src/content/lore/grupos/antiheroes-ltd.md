@@ -1,4 +1,5 @@
 ---
+id: "antiheroes-ltd"
 title: "Antiheroes Ltd."
 description: "Antiheroes Ltd. es una unidad encubierta de Superheroes INC. creada para neutralizar a superhéroes que han perdido el control antes de que se conviertan en una amenaza mayor."
 category: "grupos"

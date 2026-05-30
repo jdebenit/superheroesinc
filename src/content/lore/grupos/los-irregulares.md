@@ -1,4 +1,5 @@
 ---
+id: "los-irregulares"
 title: "Los Irregulares (GOM 28)"
 description: "Grupo Operativo Metahumano de Madrid, formado por superhumanos obligados a servir para redimir daños y delitos menores."
 category: "grupos"

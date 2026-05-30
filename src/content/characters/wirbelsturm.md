@@ -8,6 +8,8 @@ tags:
   - Desaparecido
 originReality: Tierra Zero
 actualReality: Tierra Zero
+groups:
+  - "escuadron-blitzkrieg"
 ---
 Nunca llegó a saberlo, pero Wirbelsturm era el hijo biológico del doctor Meyer. Las circunstancias de su nacimiento nunca fueron esclarecidas y la identidad de su madre permaneció desconocida. Ingresó en un orfanato poco después de nacer.
 

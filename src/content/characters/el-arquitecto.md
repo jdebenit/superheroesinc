@@ -11,6 +11,8 @@ tags:
   - Mago
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
+groups:
+  - "la-corte-itinerante"
 ---
 
 Dave, conocido como el Arquitecto, es un maestro absoluto en la manipulación del espacio y en la ingeniería infernal. Su mente no piensa en términos de lugares, sino de conexiones. Para él, la realidad es un entramado flexible que puede plegarse, abrirse o desmontarse si se conocen los puntos adecuados.

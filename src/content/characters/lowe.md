@@ -8,6 +8,8 @@ tags:
   - Desaparecido
 originReality: Tierra Zero
 actualReality: Tierra Zero
+groups:
+  - "escuadron-blitzkrieg"
 ---
 Al igual que Blinker, Löwe fue uno de los pocos sujetos que salieron del laboratorio de Meyer sin secuelas aparentes. Sin embargo, odiaba transformarse, ya que una vez mutado perdía el control.
 

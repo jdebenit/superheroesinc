@@ -10,6 +10,8 @@ tags:
   - Licántropo
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
+groups:
+  - "la-legion-sangrienta"
 ---
 
 María Jiménez Fuentes acababa de casarse. Había encontrado a la mujer con la que quería compartir el resto de su vida y, por una vez, todo parecía encajar. Decidieron pasar la luna de miel en una villa apartada, cerca del monte Liceo, un lugar tranquilo donde nadie las conocía y donde el mundo parecía quedar lejos.

@@ -12,6 +12,8 @@ tags:
 originReality: "Terra"
 actualReality: "Tierra Zero"
 image: "/personajes/thunder.png"
+groups:
+  - "fuerza-maxima"
 ---
 Durante años se creyó que Thunder era simplemente un extraño caso de mutación genética. Connor Austin St. John nació en 1955 en una pequeña población de las islas Hébridas, en Escocia, y fue criado por una humilde pareja encargada del mantenimiento de un antiguo recinto religioso costero. Los St. John nunca pudieron tener hijos y acogieron al muchacho como propio desde el primer día.
 

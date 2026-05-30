@@ -1,4 +1,5 @@
 ---
+id: "escuadron-blitzkrieg"
 title: Escuadrón Blitzkrieg
 description: El Escuadrón Blitzkrieg fue un grupo de supervillanos de ideología neonazi creado por el doctor Herman Meyer que, tras una única y violenta aparición pública en Europa, desapareció sin dejar rastro, convirtiéndose en uno de los episodios más oscuros y silenciados de la historia superhumana.
 category: grupos

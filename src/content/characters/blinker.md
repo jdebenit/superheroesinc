@@ -8,6 +8,8 @@ tags:
   - Desaparecido
 originReality: Tierra Zero
 actualReality: Tierra Zero
+groups:
+  - "escuadron-blitzkrieg"
 ---
 Angélica recordaba muy poco de su infancia. Nunca supo cómo ni por qué fue separada de su familia y acabó viviendo en la calle. Fue recogida por el doctor Meyer, que la utilizó como sujeto de experimentación.
 

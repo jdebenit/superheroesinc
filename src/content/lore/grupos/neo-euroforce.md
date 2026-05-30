@@ -1,4 +1,5 @@
 ---
+id: "neo-euroforce"
 title: "Neo EuroForce"
 description: "Neo EuroForce es un proyecto independiente liderado por Estrella II, aún en formación, que opera principalmente en Europa al margen de gobiernos y organismos oficiales."
 category: "grupos"

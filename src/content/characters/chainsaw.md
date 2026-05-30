@@ -12,6 +12,8 @@ tags:
   - Guardian
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
+groups:
+  - "psykosis"
 ---
 Eva fue en otro tiempo una mujer de extraordinaria belleza, inmortalidad y dominio sobre los hombres gracias a Entropía. Todo cambió con la batalla de la llegada de [Nigalión](/lore/localizaciones/nigalion/). Su cuerpo, antaño perfecto, quedó destruido y desfigurado. En un acto de cruel ironía, Entropía decidió resucitarla de una forma grotesca, fusionando su torso y su rostro mutilado con los brazos y las piernas de su antiguo compañero Chainsaw, transformándola en una monstruosidad viviente.
 

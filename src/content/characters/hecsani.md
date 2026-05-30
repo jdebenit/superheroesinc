@@ -10,6 +10,8 @@ tags:
   - Demonio
 originReality: "Nigalión"
 actualReality: "Tierra Zero"
+groups:
+  - "la-corte-itinerante"
 ---
 
 Hecsani, conocido como el Rey Goblin, es una figura respetada dentro del departamento de Logística. Su baja estatura y su aspecto engañosamente modesto llevan a muchos a subestimarlo, a menudo con consecuencias graves. Detrás de esa apariencia se esconde una mente extraordinariamente organizada, especializada en coordinar fuerzas numerosas, indisciplinadas y peligrosas.

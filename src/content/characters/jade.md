@@ -10,6 +10,8 @@ tags:
   - Maldito
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
+groups:
+  - "cazadores-de-sombras"
 ---
 > La chica saltó con elegancia y, en plena pirueta, desenvainó ambas katanas con destreza. Su trenza azabache, que colgaba a su espalda, se agitó con gracia, y sus ojos verdes brillaron con rabia mientras sus espadas decapitaban sin piedad.
 

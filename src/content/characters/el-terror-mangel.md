@@ -8,6 +8,8 @@ tags:
   - Demonio
 originReality: "Nigalión"
 actualReality: "Tierra Zero"
+groups:
+  - "la-corte-itinerante"
 ---
 
 Es un demonio aterrador cuya existencia ha estado marcada por siglos de encierro. Sus propios congéneres lo confinaron tras cometer crímenes tan graves que ni siquiera el Infierno estaba dispuesto a tolerarlos. No fue un castigo rápido ni piadoso. Fue aislamiento. Tiempo infinito sin voces, sin combate, sin propósito.

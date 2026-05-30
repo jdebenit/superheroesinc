@@ -11,6 +11,8 @@ tags:
   - Guardian
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
+groups:
+  - "euroforce"
 ---
 
 Antigua Miembro de Euromen y Euroforce.

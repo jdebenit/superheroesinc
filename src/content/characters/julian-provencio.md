@@ -9,6 +9,8 @@ tags:
   - Liberado
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
+groups:
+  - "la-legion-sangrienta"
 ---
 
 Julián Provencio es un liberado cuya existencia está marcada por las memorias de vidas pasadas. No las recuerda como relatos completos, sino como fragmentos, sensaciones y escenas que emergen sin aviso. Son ecos de otras épocas, de decisiones tomadas y errores cometidos, y con el tiempo le han otorgado una comprensión profunda del delicado equilibrio entre la luz y la sombra.

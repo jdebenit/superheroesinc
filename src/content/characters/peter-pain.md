@@ -14,6 +14,8 @@ tags:
   - Alterado
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
+groups:
+  - "psykosis"
 ---
 Se barajan varias hipótesis acerca del origen de Peter. Algunos creen que se trata de un niño corrompido por la magia de [Arkham](/personajes/amalgama/), otros piensan que es su hermano menor vuelto de la tumba, y hay incluso quien afirma que es hijo de [Eva](/personajes/chiansaw/).
 

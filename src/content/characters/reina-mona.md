@@ -11,6 +11,8 @@ tags:
   - Vigilante
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
+groups:
+  - "los-irregulares"
 ---
 
 Esta joven programadora de videojuegos, apasionada del manga, los juegos de rol y las artes marciales, desconoce sus verdaderos orígenes y está convencida de que es una mutante. Creció en un pequeño pueblo al norte de Madrid como hija única de una familia que, desde fuera, parecía perfectamente normal. Su madre trabajaba como diseñadora de videojuegos y era una otaku declarada. Su padre llevaba una vida bohemia como amo de casa, experto en artes marciales, con ausencias ocasionales que nunca llegaban a explicarse del todo.

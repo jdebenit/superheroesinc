@@ -11,6 +11,8 @@ tags:
   - Guardian
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
+groups:
+  - "cazadores-de-sombras"
 ---
 
 > Un buen vino y una conversación amena arreglan casi cualquier problema.  

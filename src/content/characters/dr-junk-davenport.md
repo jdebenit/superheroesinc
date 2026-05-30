@@ -11,6 +11,8 @@ tags:
   - Cyborg
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
+groups:
+  - "triangulo-mortal"
 ---
 
 El Dr. Junk, conocido también como Davenfort, ha acumulado una larga historia de cuerpos. Cada uno ha sido más prescindible que el anterior. Con el paso del tiempo ha perfeccionado su capacidad para crear nuevos recipientes para sí mismo, alcanzando lo que podría considerarse una forma de inmortalidad técnica.

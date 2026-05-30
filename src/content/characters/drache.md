@@ -8,6 +8,8 @@ tags:
   - Desaparecido
 originReality: Tierra Zero
 actualReality: Tierra Zero
+groups:
+  - "escuadron-blitzkrieg"
 ---
 Quedó huérfano a los once años y desde entonces tuvo que sobrevivir por su cuenta en los barrios más pobres de Buenos Aires. Ya en aquella época mostraba un carácter violento y un profundo desprecio tanto por la sociedad en general como por los más débiles en particular. A los dieciocho años era el cabecilla de una pequeña banda de delincuentes juveniles y se había ganado una reputación por su crueldad extrema.
 

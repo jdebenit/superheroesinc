@@ -11,6 +11,8 @@ tags:
   - Terrano
 originReality: "Terra"
 actualReality: "Tierra Zero"
+groups:
+  - "cazadores-de-sombras"
 ---
 Medianoche, nacida en Terra, creció en las sombras de la clandestinidad debido a las circunstancias de su nacimiento. Vino al mundo dentro del Nexo de Terra mientras su madre huía de un ataque. Desde ese mismo instante fue criada en secreto, pues su familia y la orden de sacerdotes que la protegían sabían que su vida y su destino estaban en peligro. El ritual que la consagró como sacerdotisa, en el que recibió el tatuaje mágico, se realizó bajo el más absoluto sigilo. El mapa tatuado en su piel era una llave capaz de abrir el paso a todos los lugares, esferas y tiempos.
 

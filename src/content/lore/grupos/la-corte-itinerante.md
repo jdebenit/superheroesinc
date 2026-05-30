@@ -1,4 +1,5 @@
 ---
+id: "la-corte-itinerante"
 title: La Corte Itinerante
 description: La Corte Itinerante es una organización infernal estructurada como una corporación, formada por demonios, entidades y humanos poseídos, que opera en las sombras para sembrar el caos y preparar la llegada de las reinas de Nigalión a la Tierra.
 category: grupos

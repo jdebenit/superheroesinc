@@ -15,6 +15,8 @@ tags:
   - Manipulador
 originReality: "Reinos Divinos"
 actualReality: "Tierra Zero"
+groups:
+  - "los-irregulares"
 ---
 
 Askany es un ser de dualidades. Divino y mortal, místico y terrenal. Criado en un reino de leyenda pero forzado a servir en el mundo moderno, busca desesperadamente su lugar en el cosmos mientras paga por los errores de su pasado.

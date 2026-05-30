@@ -12,6 +12,8 @@ tags:
   - Mago
 originReality: Tierra Zero
 actualReality: Tierra Zero
+groups:
+  - "psykosis"
 ---
 
 Desde pequeño, su pasatiempo favorito era causar dolor. Lo hacía sin pestañear, disfrutando cada instante. Aunque sus padres notaron su comportamiento extraño, pensaron que con el tiempo se corregiría. Sin embargo, cuando a los trece años encontraron a Nicholas en la habitación de su hermanito, quedó claro que su caso no tenía solución. Había apuñalado al bebé de tres meses, impulsado por los celos por la atención que recibía de sus padres.

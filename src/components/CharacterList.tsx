@@ -10,17 +10,26 @@ interface Character {
         description: string;
         image?: string;
         tags?: string[];
+        groups?: string[];
+        grupos?: string[];
         source?: string;
         updatedDate?: string | Date;
     };
 }
 
-interface CharacterListProps {
-    initialCharacters: Character[];
+interface GroupInfo {
+    id: string;
+    title: string;
 }
 
-export default function CharacterList({ initialCharacters }: CharacterListProps) {
+interface CharacterListProps {
+    initialCharacters: Character[];
+    allGroups: GroupInfo[];
+}
+
+export default function CharacterList({ initialCharacters, allGroups }: CharacterListProps) {
     const [selectedTags, setSelectedTags] = useState<string[]>(["Todos"]);
+    const [selectedGroup, setSelectedGroup] = useState("Todos");
     const [searchTerm, setSearchTerm] = useState("");
     const [sortBy, setSortBy] = useState<"name" | "recent">("name");
 
@@ -63,9 +72,16 @@ export default function CharacterList({ initialCharacters }: CharacterListProps)
     const filteredCharacters = useMemo(() => {
         const filtered = initialCharacters.filter(char => {
             const charTags = char.data.tags || [];
+            const charGroups = [
+                ...(char.data.groups || []),
+                ...(char.data.grupos || [])
+            ];
 
             const matchesTags = selectedTags.includes("Todos") ||
                 selectedTags.some(tag => charTags.includes(tag));
+
+            const matchesGroup = selectedGroup === "Todos" ||
+                charGroups.includes(selectedGroup);
 
             const searchLower = searchTerm.toLowerCase();
             const matchesSearch =
@@ -73,7 +89,7 @@ export default function CharacterList({ initialCharacters }: CharacterListProps)
                 (char.data.alias && char.data.alias.toLowerCase().includes(searchLower)) ||
                 (char.data.description && char.data.description.toLowerCase().includes(searchLower));
 
-            return matchesTags && matchesSearch;
+            return matchesTags && matchesGroup && matchesSearch;
         });
 
         return filtered.sort((a, b) => {
@@ -87,7 +103,7 @@ export default function CharacterList({ initialCharacters }: CharacterListProps)
                 return nameA.localeCompare(nameB);
             }
         });
-    }, [initialCharacters, selectedTags, searchTerm, sortBy]);
+    }, [initialCharacters, selectedTags, selectedGroup, searchTerm, sortBy]);
 
 
     return (
@@ -105,6 +121,24 @@ export default function CharacterList({ initialCharacters }: CharacterListProps)
                     onToggle: toggleTag
                 }] : []}
             >
+                {allGroups && allGroups.length > 0 && (
+                    <div className="filter-select-group">
+                        <span className="filter-label">Grupo:</span>
+                        <select
+                            value={selectedGroup}
+                            onChange={(e) => setSelectedGroup(e.target.value)}
+                            className="group-select"
+                        >
+                            <option value="Todos">Todos los grupos</option>
+                            {allGroups.map(group => (
+                                <option key={group.id} value={group.id}>
+                                    {group.title}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                )}
+
                 <div className="sort-group">
                     <span className="filter-label">Ordenar:</span>
                     <div className="tag-buttons">
@@ -137,11 +171,35 @@ export default function CharacterList({ initialCharacters }: CharacterListProps)
             </div>
 
             <style>{`
-        .character-list-container {
-          font-family: var(--font-body, system-ui, sans-serif);
-          max-width: 1400px;
-          margin: 0 auto;
-        }
+         .character-list-container {
+           font-family: var(--font-body, system-ui, sans-serif);
+           max-width: 1400px;
+           margin: 0 auto;
+         }
+
+         .filter-select-group {
+             display: flex;
+             align-items: center;
+             gap: 0.5rem;
+         }
+
+         .group-select {
+             padding: 0.5rem 1rem;
+             border: 2px solid var(--color-secondary, #000);
+             background: white;
+             font-family: var(--font-body, system-ui, sans-serif);
+             font-weight: bold;
+             border-radius: 20px;
+             font-size: 0.9rem;
+             cursor: pointer;
+             outline: none;
+             text-transform: capitalize;
+             transition: all 0.2s;
+         }
+
+         .group-select:hover {
+             background: #f5f5f5;
+         }
 
         .characters-grid {
             display: grid;

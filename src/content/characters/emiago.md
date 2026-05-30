@@ -9,6 +9,8 @@ tags:
   - Demonio
 originReality: "Nigalión"
 actualReality: "Tierra Zero"
+groups:
+  - "la-corte-itinerante"
 ---
 
 Emiago es el demonio encargado de la vigilancia y la recopilación de información. Su tamaño reducido y su aspecto casi insignificante hacen que muchos lo subestimen, un error que rara vez se comete dos veces. Pequeño y escurridizo, se desliza con naturalidad entre sombras, grietas y espacios olvidados, espiando tanto en el interior de la Corte como en el mundo humano.

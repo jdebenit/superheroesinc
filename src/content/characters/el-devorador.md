@@ -9,6 +9,8 @@ tags:
   - Demonio
 originReality: "Nigalión"
 actualReality: "Tierra Zero"
+groups:
+  - "la-corte-itinerante"
 ---
 
 Este demonio gigantesco y deforme posee un cuerpo cubierto de bocas. No son simples heridas ni mutaciones al azar. Cada una se abre, susurra y observa. Cuando devora a una víctima no se limita a consumir su carne. Absorbe también sus recuerdos, sus miedos, sus secretos más íntimos. Todo lo que esa persona fue termina integrado en él.

@@ -11,6 +11,8 @@ tags:
   - Elfo
 originReality: "Reinos Divinos"
 actualReality: "Tierra Zero"
+groups:
+  - "triangulo-mortal"
 ---
 La elfa Sylvana y la enana [Lenora](/personajes/la-artifice) abandonaron Asgard en busca de aventuras en cuanto [cayó la Gran Barrera](/lore/eventos/la-caida-de-la-gran-barrera/). Durante un tiempo compartieron un vínculo fuerte, nacido de su amor por la libertad y de la sensación de estar ante un mundo nuevo, abierto y lleno de posibilidades. Pero ese vínculo no tardó en resquebrajarse.
 
