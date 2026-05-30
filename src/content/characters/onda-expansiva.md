@@ -9,6 +9,8 @@ tags:
   - Alterado
 originReality: Tierra Zero
 actualReality: Tierra Zero
+groups:
+  - "campeones-de-europa"
 ---
 Mijail Medenko, más conocido como Onda Expansiva, vio su destino truncado durante el terrible “accidente” de la central nuclear soviética de Chernóbil. Trabajaba allí como técnico cuando ocurrió el desastre y, aunque nunca se aclaró oficialmente qué sucedió realmente aquella noche, las brutales emisiones de radiación transformaron su cuerpo en algo imposible. Tras ser recuperado, los análisis médicos determinaron que estaba científicamente muerto. No presentaba pulso, actividad cerebral ni signos vitales reconocibles, y aun así seguía caminando.
 

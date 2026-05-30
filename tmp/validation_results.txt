@@ -1,0 +1,346 @@
+=== INICIANDO ANÁLISIS DE CONTENIDO ===
+
+- Cargadas 27 fichas RPG.
+- Cargados 113 personajes.
+- Cargados 82 archivos de lore.
+- Cargados 210 eventos del timeline.
+
+======================================
+=== RESULTADOS DE LA VALIDACIÓN ===
+======================================
+
+## 1. Referencias Rotas de RPG en Personajes (0):
+   Ninguna.
+
+## 2. Referencias Rotas de Imagen (0):
+   Ninguna.
+
+## 3. Personajes sin Ficha RPG vinculada (87):
+   - [as-de-picas.md]
+   - [balanza.md]
+   - [bandera-negra.md]
+   - [blinker.md]
+   - [comandante.md]
+   - [coraza.md]
+   - [d-arc.md]
+   - [daemonideus.md]
+   - [dr-junk-davenport.md]
+   - [drache.md]
+   - [dragona.md]
+   - [el-apatrida.md]
+   - [el-arquitecto.md]
+   - [el-devorador.md]
+   - [el-h4ck3r.md]
+   - [el-profesor.md]
+   - [el-seductor.md]
+   - [el-terror-mangel.md]
+   - [emiago.md]
+   - [epsilon-eridiani.md]
+   - [estrella-ii.md]
+   - [estrella-original.md]
+   - [eurokid.md]
+   - [euroman-ii.md]
+   - [euroman.md]
+   - [europa.md]
+   - [gargantua-2.md]
+   - [gran-turismo.md]
+   - [hecsani.md]
+   - [inercia.md]
+   - [jinete-nocturno-2.md]
+   - [jinete-nocturno.md]
+   - [julian-provencio.md]
+   - [kalimat.md]
+   - [la-artifice.md]
+   - [la-bruja-verca.md]
+   - [la-luz-de-cadollo.md]
+   - [la-tecnomante.md]
+   - [la-torre-jocar.md]
+   - [las-ishara.md]
+   - [lenapis.md]
+   - [little-red-wolf.md]
+   - [loba-de-invierno.md]
+   - [loki.md]
+   - [lowe.md]
+   - [maestro-arcano.md]
+   - [master-machine.md]
+   - [mausoleo.md]
+   - [mjolnir-original.md]
+   - [mjolnir.md]
+   - [onda-expansiva.md]
+   - [orfeo.md]
+   - [penumbra.md]
+   - [pesanta.md]
+   - [primaria.md]
+   - [qital.md]
+   - [reina-mona.md]
+   - [sai.md]
+   - [seismo.md]
+   - [servicio-de-limpieza.md]
+   - [shiafo.md]
+   - [siluro.md]
+   - [smilodon.md]
+   - [sphynx.md]
+   - [sujeto-03.md]
+   - [sujeto-04.md]
+   - [sujeto-05.md]
+   - [sujeto-06.md]
+   - [sujeto-07.md]
+   - [sujeto-08.md]
+   - [sujeto-09.md]
+   - [sujeto-12.md]
+   - [sujeto-13.md]
+   - [sujeto-14.md]
+   - [sujeto-15.md]
+   - [syriel.md]
+   - [termodinamo.md]
+   - [thunder.md]
+   - [titania.md]
+   - [tw2.md]
+   - [umbra.md]
+   - [vanadio.md]
+   - [varn.md]
+   - [virgilio.md]
+   - [warlock.md]
+   - [wirbelsturm.md]
+   - [zaratustra.md]
+
+## 4. Fichas RPG huérfanas (sin personaje vinculado) (1):
+   - [leon-rojo.json]
+
+## 5. Personajes con descripción o contenido muy breve/vacío (17):
+   - [abogado.md]: (24 palabras)
+   - [agente-de-policia.md]: (8 palabras)
+   - [agente-secreto.md]: (20 palabras)
+   - [europa.md]: (6 palabras)
+   - [jefe-motero-road-reapers.md]: (12 palabras)
+   - [seismo.md]: (3 palabras)
+   - [sujeto-03.md]: (19 palabras)
+   - [sujeto-04.md]: (19 palabras)
+   - [sujeto-05.md]: (25 palabras)
+   - [sujeto-06.md]: (24 palabras)
+   - [sujeto-07.md]: (21 palabras)
+   - [sujeto-08.md]: (19 palabras)
+   - [sujeto-09.md]: (22 palabras)
+   - [sujeto-12.md]: (24 palabras)
+   - [sujeto-13.md]: (22 palabras)
+   - [sujeto-14.md]: (27 palabras)
+   - [sujeto-15.md]: (20 palabras)
+
+## 6. Duplicados del Timeline o nombres sospechosos (0):
+   Ninguno.
+
+## 7. Lore incompleto o muy breve (1):
+   - [lore\criaturas\leon-rojo.md]: (12 palabras)
+
+## 8. Elementos de Timeline muy breves o sin fecha (210 breves, 0 sin fecha):
+   - Eventos muy cortos:
+     - [abducción-stalos.md] (0 palabras)
+     - [aleister-crowley-y-la-aurora-dorada.md] (0 palabras)
+     - [ancient-gods.md] (0 palabras)
+     - [antiheroes-limited.md] (0 palabras)
+     - [aparicion-de-flecha-roja.md] (0 palabras)
+     - [aparicion-de-lince.md] (0 palabras)
+     - [aparicion-de-supervillanos.md] (0 palabras)
+     - [aparicion-pareja-superheroes-madrid.md] (0 palabras)
+     - [apertura-porta-a-tierra-zero.md] (0 palabras)
+     - [asesinato-de-euroman.md] (0 palabras)
+     - [asunto-pyros-y-devastacion-de-harnia.md] (0 palabras)
+     - [ataque-estacion-freedom.md] (0 palabras)
+     - [atentado-ciss-ginebra.md] (0 palabras)
+     - [auge-de-la-inquisicion.md] (0 palabras)
+     - [base-erebus-y-cerbero.md] (0 palabras)
+     - [base-lunar-y-cieno.md] (0 palabras)
+     - [base-lunar.md] (0 palabras)
+     - [batalla-del-heraldo-de-gea.md] (0 palabras)
+     - [blindado-en-aqera.md] (0 palabras)
+     - [blindado.md] (0 palabras)
+     - [blue-royals.md] (0 palabras)
+     - [brazo-ejecutor.md] (0 palabras)
+     - [brexit-y-ciss.md] (0 palabras)
+     - [brote-pseudovampirismo.md] (0 palabras)
+     - [busquedas-gubernamentales.md] (0 palabras)
+     - [caida-de-epsilon-eridani.md] (0 palabras)
+     - [caida-de-la-muralla-de-ra.md] (0 palabras)
+     - [camara-de-los-ancestros-y-kigala.md] (0 palabras)
+     - [captura-de-flecha-roja.md] (0 palabras)
+     - [carrera-espacial-metahumana.md] (0 palabras)
+     - [cazadores-de-sombras.md] (0 palabras)
+     - [cieno.md] (0 palabras)
+     - [comienzo-de-las-guerras-gamadas.md] (0 palabras)
+     - [comportamiento-discolo-de-lince.md] (0 palabras)
+     - [confirmacion-de-metahumanos.md] (0 palabras)
+     - [cosmos-e-iris.md] (0 palabras)
+     - [creacion-de-igneus.md] (0 palabras)
+     - [creacion-ultima-oportunidad.md] (0 palabras)
+     - [criaturas-desconocidas-costas-mar-del-norte.md] (0 palabras)
+     - [cruzada-de-kigala.md] (0 palabras)
+     - [dante-crea-purgatorio.md] (0 palabras)
+     - [deep-web-interrogatorios-metahumanos.md] (0 palabras)
+     - [defcon-zero.md] (0 palabras)
+     - [derrota-de-k-sser.md] (0 palabras)
+     - [desaparici-n-de-jaime-arrieta.md] (0 palabras)
+     - [desaparici-n-de-la-novena-legi-n.md] (0 palabras)
+     - [desaparicion-de-earthquake.md] (0 palabras)
+     - [desaparicion-de-enigma-e-invasion-k-sser.md] (0 palabras)
+     - [desaparicion-de-heinrich-krauss.md] (0 palabras)
+     - [desaparicion-de-la-novena-legion.md] (0 palabras)
+     - [desaparicion-ultima-oportunidad.md] (0 palabras)
+     - [descubrimiento-de-la-torre-del-mal.md] (0 palabras)
+     - [descubrimiento-del-strenium.md] (0 palabras)
+     - [desercion-de-calibre.md] (0 palabras)
+     - [destierro-de-asha-de-cindraor.md] (0 palabras)
+     - [detencion-de-jaguar.md] (0 palabras)
+     - [diplomacia-avalon-reino-unido.md] (0 palabras)
+     - [disolucion-goa-17.md] (0 palabras)
+     - [disolucion-grupos-metahumanos.md] (0 palabras)
+     - [disturbios-en-marsella.md] (0 palabras)
+     - [dones-de-izanagi.md] (0 palabras)
+     - [eeuu-abandona-ciss.md] (0 palabras)
+     - [ejecucion-de-giordano-bruno.md] (0 palabras)
+     - [el-baron.md] (0 palabras)
+     - [el-camino-de-myrddin.md] (0 palabras)
+     - [el-libro-de-la-ley-y-thelema.md] (0 palabras)
+     - [el-ocultamiento-de-la-biblioteca-de-alejandria.md] (0 palabras)
+     - [el-orbe-sagrado-y-la-gran-barrera.md] (0 palabras)
+     - [el-poeta-quin-jao-sen.md] (0 palabras)
+     - [enfrentamientos-metahumanos-bosque-negro.md] (0 palabras)
+     - [enigma-cronopolis.md] (0 palabras)
+     - [epsilon-eridani-en-transjastan.md] (0 palabras)
+     - [eridiani-libro-de-los-muertos.md] (0 palabras)
+     - [estallido-de-energia-magica.md] (0 palabras)
+     - [estrella-recibe-herencia.md] (0 palabras)
+     - [evento-inframundo.md] (0 palabras)
+     - [exilio-de-eva.md] (0 palabras)
+     - [expansion-shi.md] (0 palabras)
+     - [expedicion-de-preste-juan-medianoche.md] (0 palabras)
+     - [explosion-mutante.md] (0 palabras)
+     - [fin-de-la-iigm-y-sociedad-de-los-susurros.md] (0 palabras)
+     - [formacion-del-ciss.md] (0 palabras)
+     - [formacion-liga-del-caos.md] (0 palabras)
+     - [fuga-en-idess.md] (0 palabras)
+     - [fundacion-de-los-illuminati.md] (0 palabras)
+     - [fundacion-de-los-irregulares.md] (0 palabras)
+     - [fundacion-de-talion.md] (0 palabras)
+     - [fundacion-de-zortek.md] (0 palabras)
+     - [fundacion-frente-liberacion-mutante.md] (0 palabras)
+     - [fundacion-organizacion-antares.md] (0 palabras)
+     - [fundacion-temple-of-set.md] (0 palabras)
+     - [giordano-bruno-y-el-v-rtice-temporal.md] (0 palabras)
+     - [giordano-bruno-y-el-vortice-temporal.md] (0 palabras)
+     - [grietas-en-la-gran-barrera.md] (0 palabras)
+     - [grimorio-en-islandia.md] (0 palabras)
+     - [guerra-de-la-media-noche.md] (0 palabras)
+     - [guerreros-del-imperio.md] (0 palabras)
+     - [hallazgo-del-orbe-y-vientos-de-erebus.md] (0 palabras)
+     - [huida-de-flecha-roja.md] (0 palabras)
+     - [huida-de-herman-meyer.md] (0 palabras)
+     - [huida-de-medianoche.md] (0 palabras)
+     - [igneus-en-cadiz.md] (0 palabras)
+     - [incidente-apolo-xiii.md] (0 palabras)
+     - [incidente-en-cerde-a-y-rescate-de-flecha-roja.md] (0 palabras)
+     - [incidente-en-isla-mur.md] (0 palabras)
+     - [incidente-en-isla-muro.md] (0 palabras)
+     - [incidente-isla-mur-1997.md] (0 palabras)
+     - [incidente-isla-mur.md] (0 palabras)
+     - [inercia-directora-shi.md] (0 palabras)
+     - [informes-sobre-flecha-roja.md] (0 palabras)
+     - [intento-fuga-master-machine.md] (0 palabras)
+     - [juicios-de-salem-y-samuel-harris.md] (0 palabras)
+     - [k-sser-intento-de-conquista.md] (0 palabras)
+     - [king-s-knights.md] (0 palabras)
+     - [koch-y-flecha-roja.md] (0 palabras)
+     - [la-iglesia-de-satan.md] (0 palabras)
+     - [la-llegada-de-los-jovenes-dioses.md] (0 palabras)
+     - [la-noche-de-los-siete-martillos.md] (0 palabras)
+     - [la-peste-negra-y-la-caza-de-brujas.md] (0 palabras)
+     - [la-princesa-estrella-vuelve-a-casa.md] (0 palabras)
+     - [la-tecnoguerra.md] (0 palabras)
+     - [la-tecnomante-y-ceam.md] (0 palabras)
+     - [la-trampa-de-mad-skull.md] (0 palabras)
+     - [legion-sangrienta.md] (0 palabras)
+     - [ley-de-regulaci-n-metahumana.md] (0 palabras)
+     - [llegada-a-cronopolis.md] (0 palabras)
+     - [llegada-de-connor.md] (0 palabras)
+     - [llegada-de-los-k-rnai.md] (0 palabras)
+     - [lord-brujo-y-mad-skull.md] (0 palabras)
+     - [los-arcontes-y-tratado-de-no-agresion.md] (0 palabras)
+     - [los-buscadores-del-orbe.md] (0 palabras)
+     - [los-carbonarios.md] (0 palabras)
+     - [los-ultimos-buscadores-en-stonehenge.md] (0 palabras)
+     - [maldicion-de-castaphilo.md] (0 palabras)
+     - [maldicion-de-tutankamon.md] (0 palabras)
+     - [manifestaciones-antifascistas-en-madrid.md] (0 palabras)
+     - [memorias-de-audrey-gein.md] (0 palabras)
+     - [metahumanos-en-policia-y-ejercito.md] (0 palabras)
+     - [movilizaciones-medicina.md] (0 palabras)
+     - [muerder-unlimited-realiza-su-ultimo-asesinato.md] (0 palabras)
+     - [muerte-de-estrella-y-llegada-de-nigalion.md] (0 palabras)
+     - [muerte-de-gustav-koch.md] (0 palabras)
+     - [muerte-de-heroes-europeos.md] (0 palabras)
+     - [muerte-de-lince.md] (0 palabras)
+     - [muerte-de-tsunami.md] (0 palabras)
+     - [myrddin-wyllt-y-el-pacto-de-las-edades.md] (0 palabras)
+     - [nace-la-fundiacion-divina-mundial.md] (0 palabras)
+     - [nacimiento-de-erzfeind.md] (0 palabras)
+     - [nacimiento-de-herman-meyer.md] (0 palabras)
+     - [nacimiento-de-idess.md] (0 palabras)
+     - [nacimiento-de-miyamoto-musashi.md] (0 palabras)
+     - [nacimiento-de-ola-salvaje.md] (0 palabras)
+     - [nacimiento-de-paraiso.md] (0 palabras)
+     - [nacimiento-de-sacred-spirit.md] (0 palabras)
+     - [nature-corps.md] (0 palabras)
+     - [nuevos-cazadores-de-sombras.md] (0 palabras)
+     - [operacion-tormenta-del-desierto.md] (0 palabras)
+     - [operativo-antracita.md] (0 palabras)
+     - [origen-de-lince-padres.md] (0 palabras)
+     - [pandemia-2020.md] (0 palabras)
+     - [percance-metahumano-en-groenlandia.md] (0 palabras)
+     - [piotr-kandinski-en-vulkan.md] (0 palabras)
+     - [plan-mcgrady.md] (0 palabras)
+     - [pravlenko-en-transjastan.md] (0 palabras)
+     - [preparacion-para-las-guerras-gamadas.md] (0 palabras)
+     - [presentacion-de-vertice-de-combate.md] (0 palabras)
+     - [princesa-estrella-en-la-nave-dorkan.md] (0 palabras)
+     - [profecia-de-sibila-a-umbra.md] (0 palabras)
+     - [propaganda-de-superheroes.md] (0 palabras)
+     - [proyecto-tecnored.md] (0 palabras)
+     - [publicacion-de-daemonologie.md] (0 palabras)
+     - [publicacion-de-los-textos-de-ort.md] (0 palabras)
+     - [reaparicion-de-enigma.md] (0 palabras)
+     - [reaparicion-del-baron-en-lisboa.md] (0 palabras)
+     - [rebelion-los-enanos-y-elfos.md] (0 palabras)
+     - [renacimiento-de-la-magia-moderna.md] (0 palabras)
+     - [repeblica-popular-de-la-antartida.md] (0 palabras)
+     - [rescate-de-angel-carreras.md] (0 palabras)
+     - [resurgimiento-magico-y-fin-de-guerras-gamadas.md] (0 palabras)
+     - [retiro-de-jinete-nocturno.md] (0 palabras)
+     - [retorno-de-miguel-alberto.md] (0 palabras)
+     - [revelacion-de-dante.md] (0 palabras)
+     - [revelacion-de-los-dioses.md] (0 palabras)
+     - [ritual-fin-del-mundo.md] (0 palabras)
+     - [sabotaje-expo-92.md] (0 palabras)
+     - [se-recupera-la-mascara-de-tsang-tseng.md] (0 palabras)
+     - [segunda-invasion-k-sser.md] (0 palabras)
+     - [segundo-ragnarok.md] (0 palabras)
+     - [sociedad-latinoamericana.md] (0 palabras)
+     - [sucesos-de-nigalion.md] (0 palabras)
+     - [superheroes-inc-registro.md] (0 palabras)
+     - [tercer-conflicto-ecuador-purgatorio.md] (0 palabras)
+     - [termino-superheroe.md] (0 palabras)
+     - [terremoto-de-kobe-y-tri-ngulo-mortal.md] (0 palabras)
+     - [textos-nordicos.md] (0 palabras)
+     - [thor-y-la-gran-barrera.md] (0 palabras)
+     - [toma-posesion-presidente-estados-unidos.md] (0 palabras)
+     - [traicion-de-penumbra.md] (0 palabras)
+     - [tratado-de-carmarthen.md] (0 palabras)
+     - [trauma-edgar-columbus.md] (0 palabras)
+     - [trifido-dado-de-alta.md] (0 palabras)
+     - [tsunamis.md] (0 palabras)
+     - [tumba-del-chaman.md] (0 palabras)
+     - [umbra-enterprises.md] (0 palabras)
+     - [unificacion-italiana-y-carbonarios.md] (0 palabras)
+     - [unit3.md] (0 palabras)
+     - [vida-de-giordano-bruno.md] (0 palabras)
+     - [vientos-de-erebus.md] (0 palabras)
+     - [violencia-racial.md] (0 palabras)
+     - [warlock-contra-t-kaarnal.md] (0 palabras)

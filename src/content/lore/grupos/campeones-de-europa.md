@@ -1,4 +1,5 @@
 ---
+id: "campeones-de-europa"
 title: "Campeones de Europa"
 description: "Los Campeones de Europa son un supergrupo oficial creado y financiado por el CEAM para actuar como símbolo de orden y control, operando en toda la UE bajo supervisión directa del Consejo Europeo de Asuntos Metahumanos."
 category: "grupos"

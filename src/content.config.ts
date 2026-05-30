@@ -228,6 +228,8 @@ const charactersCollection = defineCollection({
         originReality: z.string().optional(),
         actualReality: z.string().optional(),
         tags: z.array(z.string()).optional(),
+        groups: z.array(z.string()).optional(),
+        grupos: z.array(z.string()).optional(),
     }),
 });
 

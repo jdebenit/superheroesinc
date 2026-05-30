@@ -6,6 +6,7 @@ import ActualPlayMetadata from "../../../components/ActualPlayMetadata.astro";
 import ReplayModeSelector from "../../../components/ReplayModeSelector.astro";
 import Logger from "../../../utils/Logger";
 import ShareButtons from "../../../components/ShareButtons.astro";
+import CharacterCard from "../../../components/CharacterCard";
 
 
 export async function getStaticPaths() {
@@ -80,6 +81,20 @@ if (item.data.category === "actual-plays") {
       }
     }
   }
+}
+
+// Fetch group members if category is groups
+let groupMembers = [];
+if (item.data.category === "grupos") {
+  const groupId = Astro.params.slug;
+  const allCharacters = await getCollection("characters");
+  groupMembers = allCharacters.filter((char) => {
+    const charGroups = [
+      ...(char.data.groups || []),
+      ...(char.data.grupos || [])
+    ];
+    return charGroups.includes(groupId);
+  }).sort((a, b) => (a.data.alias || a.data.name).localeCompare(b.data.alias || b.data.name));
 }
 ---
 
@@ -199,6 +214,17 @@ if (item.data.category === "actual-plays") {
         <div class="lore-text" data-category={item.data.category}>
           <Content />
         </div>
+
+        {groupMembers && groupMembers.length > 0 && (
+          <div class="group-members-section">
+            <h2 class="section-title">Miembros del Grupo</h2>
+            <div class="characters-grid">
+              {groupMembers.map((char) => (
+                <CharacterCard slug={char.id} data={char.data} />
+              ))}
+            </div>
+          </div>
+        )}
 
         {rpgData && <CharacterSheet client:load character={rpgData} mode="inline" />}
 
@@ -777,4 +803,33 @@ if (item.data.category === "actual-plays") {
     .lore-title {
       font-size: 2.5rem;
     }
+  }
+
+  .group-members-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 3px solid var(--color-secondary);
+  }
+
+  .section-title {
+    font-family: var(--font-comic);
+    font-size: 2.5rem;
+    color: var(--color-primary);
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+  }
+
+  .characters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--spacing-xl, 2rem);
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    .characters-grid {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-lg, 1.5rem);
+    }
+  }
 </style>
