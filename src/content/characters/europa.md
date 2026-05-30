@@ -13,6 +13,7 @@ originReality: Tierra Zero
 actualReality: Tierra Zero
 groups:
   - euroforce
+  - euromen
 ---
 Sofía Venizelos nació en Patras, Grecia, en 1980. Alcanzó cierta popularidad como actriz durante su adolescencia hasta que, en 1995, su vida cambió por completo al entrar en contacto con una antigua hermandad dedicada al culto de Zeus.
 
@@ -22,12 +23,12 @@ Poco después descubrió que varios grupos vinculados a los antiguos cultos olí
 
 Europa se convirtió en uno de los miembros de los **Euromen**, el grupo de héroes que durante años protegió Europa y que serviría de inspiración para las futuras generaciones de superseres del continente. Junto a Atlas, Euroman, Hydrae y Gestein participó en algunas de las mayores crisis internacionales de finales del siglo XX.
 
-Cuando los Euromen comenzaron a desaparecer o retirarse de la vida activa, Europa participó junto a varios de sus antiguos compañeros en la creación de **Euroforce**, convirtiéndose en una de sus fundadoras. Durante décadas fue una de las figuras más reconocibles del heroísmo europeo y una de las pocas personas que logró mantener vínculos personales con varias generaciones de héroes.
+Cuando los Euromen comenzaron a desaparecer o retirarse de la vida activa, Europa participó junto a varios de sus antiguos compañeros en la creación de [Euroforce](/lore/grupos/euroforce), convirtiéndose en una de sus fundadoras. Durante décadas fue una de las figuras más reconocibles del heroísmo europeo y una de las pocas personas que logró mantener vínculos personales con varias generaciones de héroes.
 
-Su relación con Esteban Martín, Euroman II, se convirtió en una de las más conocidas del ámbito superheroico internacional. Ambos compartieron años de servicio y acabaron teniendo una hija, Diana Martín. Conscientes de los peligros que rodeaban sus vidas, decidieron que la niña fuese criada lejos de la atención pública por David Martín, el antiguo vigilante conocido como Jinete Nocturno y primo de Euroman II.
+Su relación con Esteban Martín, [Euroman II](/personajes/euroman-ii), se convirtió en una de las más conocidas del ámbito superheroico internacional. Ambos compartieron años de servicio y acabaron teniendo una hija, [Diana Martín](/personajes/estrella-ii). Conscientes de los peligros que rodeaban sus vidas, decidieron que la niña fuese criada lejos de la atención pública por David Martín, el antiguo vigilante conocido como [Jinete Nocturno](/personajes/jinete-nocturno) y primo de Euroman II.
 
 La trayectoria de Europa cambió de forma significativa tras la muerte de **Atlas**, uno de los héroes más poderosos de los Euromen. Antes de fallecer, Atlas le confió el Torque de Atlas, un antiguo artefacto que actuaba como foco y amplificador de sus poderes.
 
 A través del torque, Europa heredó parte de las capacidades que habían convertido a Atlas en una leyenda. Además de sus poderes originales de cambio de tamaño, obtuvo una fuerza física muy superior a la que ya poseía, una resistencia extraordinaria capaz de rivalizar con la de los superseres más poderosos del planeta y una notable agilidad. Durante los años siguientes fue considerada una de las heroínas más poderosas de Europa y una de las principales defensoras del continente.
 
-La muerte de Euroman II a manos de El Apátrida marcó el final de una era. Poco después de aquel acontecimiento, Europa desapareció de la vida pública.
+La muerte de [Euroman II](/personajes/euroman-ii) a manos de [El Apátrida](/personajes/el-apatrida) marcó profundamente a Sofía. Poco después de aquel acontecimiento, Europa desapareció.
