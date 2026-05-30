@@ -1,6 +1,6 @@
 ---
 id: fuerza-maxima
-title: Fuerza del Futuro
+title: Fuerza Máxima
 description: Mucho antes de que el regreso de los dioses alterara el mundo, antes de las grandes crisis que sacudirían Tierra Zero y cuando la mayoría de la humanidad todavía ignoraba la verdadera magnitud de lo desconocido, ya había un pequeño grupo de metahumanos recorriendo las fronteras del misterio, explorando ruinas olvidadas, compartiendo historias en tabernas de puerto y enfrentándose a peligros que casi nadie más era capaz de comprender. Esta es la verdadera historia de Fuerza Máxima.
 category: grupos
 source: Superhéroes INC. Primera y Segunda Edición
