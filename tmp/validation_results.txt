@@ -2,7 +2,7 @@
 
 - Cargadas 27 fichas RPG.
 - Cargados 113 personajes.
-- Cargados 82 archivos de lore.
+- Cargados 85 archivos de lore.
 - Cargados 210 eventos del timeline.
 
 ======================================
@@ -107,13 +107,11 @@
 ## 4. Fichas RPG huérfanas (sin personaje vinculado) (1):
    - [leon-rojo.json]
 
-## 5. Personajes con descripción o contenido muy breve/vacío (17):
+## 5. Personajes con descripción o contenido muy breve/vacío (15):
    - [abogado.md]: (24 palabras)
    - [agente-de-policia.md]: (8 palabras)
    - [agente-secreto.md]: (20 palabras)
-   - [europa.md]: (6 palabras)
    - [jefe-motero-road-reapers.md]: (12 palabras)
-   - [seismo.md]: (3 palabras)
    - [sujeto-03.md]: (19 palabras)
    - [sujeto-04.md]: (19 palabras)
    - [sujeto-05.md]: (25 palabras)
