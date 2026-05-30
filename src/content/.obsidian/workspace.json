@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "characters/europa.md",
+                "file": "timeline/blindado.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "europa"
+              "title": "blindado"
             }
           }
         ]
@@ -185,9 +185,14 @@
   },
   "active": "f886d1426c77abef",
   "lastOpenFiles": [
+    "timeline/crisis-de-corcega.md",
+    "timeline/base-lunar 1.md",
+    "timeline/base-lunar.md",
+    "lore/grupos/fuerza-maxima.md",
+    "lore/grupos/fuerza-del-futuro.md",
+    "characters/europa.md",
     "characters/seismo.md",
     "lore/grupos/euroforce.md",
-    "lore/grupos/fuerza-del-futuro.md",
     "lore/grupos/euromen.md",
     "characters/epsilon-eridiani.md",
     "lore/organizaciones/acolitos-de-zeus.md",
@@ -198,7 +203,6 @@
     "lore/organizaciones/comision-omega.md",
     "lore/organizaciones/ciss.md",
     "lore/organizaciones/ceam.md",
-    "characters/europa.md",
     "characters/eurokid.md",
     "characters/zaratustra.md",
     "characters/smilodon.md",
@@ -207,11 +211,7 @@
     "characters/varn.md",
     "characters/termodinamo.md",
     "characters/umbra.md",
-    "characters/tw2.md",
-    "characters/la-tecnomante.md",
-    "personajes/euroman.md",
     "personajes",
-    "characters/sujeto-03.md",
     "Pasted image 20260416191817.png",
     "rpg/la-naga-n4.json",
     "rpg/la-naga copy.json",
