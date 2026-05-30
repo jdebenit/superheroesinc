@@ -28,7 +28,7 @@ Las víctimas de esta moda son numerosas.
 
 Thunder, fundador de Fuerza Máxima, declaró recientemente que nunca le gustó demasiado el nombre.
 
-> "Yo propuse Los Cuatro de Córcega."
+> Yo propuse Los Cuatro de Córcega.
 > 
 > La propuesta fue rechazada.
 > 
