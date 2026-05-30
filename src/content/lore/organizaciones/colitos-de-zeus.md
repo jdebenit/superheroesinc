@@ -1,0 +1,22 @@
+---
+title: Acólitos de Zeus
+description: Antigua hermandad griega dedicada a preservar las reliquias, conocimientos y tradiciones vinculadas a los dioses olímpicos. Durante siglos ha operado desde las sombras mediante redes académicas, religiosas y arqueológicas repartidas por todo el Mediterráneo.
+category: organizaciones
+source: Superheroes INC. Primera Edicion
+updatedDate: 2026-05-30
+---
+Los Acólitos de Zeus son una antigua organización surgida en Grecia durante los siglos posteriores a la desaparición de los cultos olímpicos tradicionales. A diferencia de muchas otras sociedades religiosas de la Antigüedad, lograron sobrevivir ocultando su verdadera naturaleza tras asociaciones culturales, fundaciones históricas, círculos académicos y pequeñas fraternidades repartidas por todo el Mediterráneo.
+
+Su propósito original era preservar los conocimientos, reliquias y tradiciones vinculadas al padre de los dioses olímpicos hasta el momento en que los dioses volviesen a caminar entre los mortales. Durante siglos recopilaron textos, protegieron santuarios olvidados y rastrearon artefactos relacionados con la antigua Grecia, convencidos de que el destino de su pueblo estaba ligado al regreso de los Olímpicos y al restablecimiento de su influencia sobre el mundo.
+
+A lo largo de su historia han mantenido una relación ambigua con los propios dioses. Aunque se consideran servidores de Zeus y guardianes de su legado, no todos los habitantes del Olimpo comparten sus objetivos ni aprueban sus métodos. Algunos héroes y semidioses colaboraron ocasionalmente con ellos, mientras que otros siempre los consideraron fanáticos obsesionados con recuperar un pasado que ya no podía regresar.
+
+Su influencia es especialmente notable en Grecia, Chipre y diversas comunidades helénicas repartidas por Europa. Gracias a una extensa red de mecenas, arqueólogos, historiadores y coleccionistas privados, han conseguido acceder a importantes excavaciones, archivos históricos y reliquias de gran valor sobrenatural. En más de una ocasión recuperaron artefactos perdidos antes que gobiernos, universidades o instituciones internacionales.
+
+El acontecimiento más conocido relacionado con la organización fue el hallazgo de Sofía Venizelos en 1995. Convencidos de haber encontrado a la heredera espiritual de Europa, organizaron el ritual que transformó a la joven actriz en la heroína conocida como Europa. Sin embargo, la relación entre ambas partes terminó rompiéndose cuando Sofía descubrió que algunos de los dirigentes de la organización pretendían utilizar el regreso de los dioses y las reliquias olímpicas para acumular poder e influencia política. Su abandono fue considerado una traición imperdonable por los sectores más radicales de la hermandad, que desde entonces la señalaron como enemiga de la causa.
+
+La aparición pública de los dioses tras la Revelación provocó una profunda crisis interna. Muchos miembros interpretaron aquellos acontecimientos como la confirmación definitiva de sus creencias, mientras que otros comenzaron a cuestionar décadas de dogmas y tradiciones. Las disputas derivadas de este proceso acabaron provocando varias escisiones. Algunos de sus miembros abandonaron la organización y terminaron integrándose en los Carbonari, atraídos por su enfoque más pragmático en la búsqueda y recuperación de artefactos sobrenaturales.
+
+La creación de la Fundación Divina Mundial agravó todavía más estas tensiones. Los Acólitos consideran que la FDM ha convertido a los dioses en figuras dependientes de estructuras burocráticas y acuerdos políticos ajenos a la tradición olímpica. Aunque rara vez se enfrentan de forma abierta, ambas organizaciones mantienen una rivalidad constante por el control de reliquias, lugares sagrados, información histórica y la influencia sobre campeones vinculados a los antiguos panteones. Dentro de ciertos círculos académicos y religiosos se les considera uno de los antagonistas silenciosos más persistentes de la Fundación.
+
+Actualmente los Acólitos de Zeus continúan activos. Custodian reliquias, investigan manifestaciones relacionadas con el panteón olímpico y mantienen una extensa red de contactos dentro de instituciones culturales, religiosas y académicas. Aunque oficialmente se presentan como una organización dedicada a la conservación del patrimonio helénico, pocos dudan de que siguen persiguiendo objetivos mucho más antiguos, vinculados al destino de los dioses olímpicos y al papel que estos deberían ocupar en el mundo moderno.
