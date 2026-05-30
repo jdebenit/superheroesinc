@@ -44,6 +44,33 @@ const characterKeywords = [
 ]
     .filter(Boolean)
     .join(", ");
+
+// Fetch groups for the character
+const charGroups = [
+    ...(entry.data.groups || []),
+    ...(entry.data.grupos || [])
+];
+
+const groupsData = [];
+if (charGroups.length > 0) {
+    const allGroups = await getCollection("lore", (item) => item.data.category === "grupos");
+    for (const groupName of charGroups) {
+        const groupEntry = allGroups.find(
+            (g) => g.id.split("/").pop() === groupName
+        );
+        if (groupEntry) {
+            groupsData.push({
+                title: groupEntry.data.title,
+                url: `/lore/grupos/${groupName}`
+            });
+        } else {
+            groupsData.push({
+                title: groupName.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase()),
+                url: `/lore/grupos/${groupName}`
+            });
+        }
+    }
+}
 ---
 
 <Layout
@@ -104,6 +131,23 @@ const characterKeywords = [
                                         day: "numeric",
                                     })}
                                 </time>
+                            </div>
+                        )
+                    }
+                    {
+                        groupsData.length > 0 && (
+                            <div class="metadata-item">
+                                <span class="label">Grupos:</span>
+                                <span class="value">
+                                    {groupsData.map((group, index) => (
+                                        <>
+                                            <a href={group.url}>
+                                                {group.title}
+                                            </a>
+                                            {index < groupsData.length - 1 && ", "}
+                                        </>
+                                    ))}
+                                </span>
                             </div>
                         )
                     }
