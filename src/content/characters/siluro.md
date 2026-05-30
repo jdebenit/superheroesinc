@@ -13,6 +13,7 @@ image: /personajes/siluro.png
 groups:
   - "world-force"
   - "euroforce"
+  - "fuerza-del-futuro"
   
 ---
 Enrique Gutiérrez, conocido como Siluro, fue en otro tiempo miembro de la policía de Salamanca y oficialmente consta como fallecido en acto de servicio. La verdad, sin embargo, es bastante más oscura. Durante una intervención quedó gravemente herido y completamente paralítico. IDESS aprovechó entonces la situación para utilizar su cuerpo en uno de sus experimentos clandestinos, intentando “recargar” un organismo prácticamente muerto mediante energía metahumana.

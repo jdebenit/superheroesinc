@@ -10,6 +10,9 @@ tags:
   - Vigilante
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
+groups:
+  - "euromen"
+  - "fuerza-del-futuro"
 ---
 
 Sujeto 02 del Proyecto Euroman y primer portador conocido del título Euroman. Su sangre alterada permitió la activación de EuroKid mediante trasplante de médula. El paradero actual de Torrens se clasifica como desconocido.
