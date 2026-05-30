@@ -5,6 +5,5 @@ description: "Los k'rnai llegan a la tierra en el bólido de Tunguska."
 reality: "Tierra Zero"
 icon: "portal"
 tags:
-  - invasion-ksser
   - alienigenas
 ---

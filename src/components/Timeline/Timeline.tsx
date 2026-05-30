@@ -2,6 +2,13 @@ import React, { useState, useMemo } from 'react';
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 import ListControls from '../shared/ListControls';
+import MarkdownIt from 'markdown-it';
+
+const md = new MarkdownIt({
+    html: true,
+    linkify: true,
+    typographer: true,
+});
 
 export interface TimelineEvent {
     id: string;
@@ -16,6 +23,7 @@ export interface TimelineEvent {
     displayDate?: string;
     tags?: string[];
     characterSlug?: string;
+    body?: string;
 }
 
 interface TimelineProps {
@@ -125,6 +133,14 @@ export const Timeline: React.FC<TimelineProps> = ({ events }) => {
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
     const [searchTerm, setSearchTerm] = useState("");
+    const [expandedEvents, setExpandedEvents] = useState<Record<string, boolean>>({});
+
+    const toggleExpand = (id: string) => {
+        setExpandedEvents(prev => ({
+            ...prev,
+            [id]: !prev[id]
+        }));
+    };
 
     // Get unique realities from events, defaulting to 'Principal' if not found
     const realities = useMemo(() => {
@@ -361,6 +377,29 @@ export const Timeline: React.FC<TimelineProps> = ({ events }) => {
                             textAlign: 'justify'
                         }}>
                             <p>{event.description}</p>
+
+                            {event.body && event.body.trim().length > 0 && (
+                                <div style={{ marginTop: '1rem' }}>
+                                    <button
+                                        onClick={() => toggleExpand(event.id)}
+                                        className="text-xs bg-[#c41e3a] hover:bg-[#a01830] text-white px-3 py-1.5 uppercase font-bold tracking-wider transition-colors border border-black shadow-[2px_2px_0px_rgba(0,0,0,1)] active:translate-y-[1px] active:shadow-none cursor-pointer"
+                                        style={{ fontFamily: 'var(--font-heading), monospace' }}
+                                    >
+                                        {expandedEvents[event.id] ? '▲ Ocultar Detalles' : '▼ Ampliar Detalles'}
+                                    </button>
+                                </div>
+                            )}
+
+                            {expandedEvents[event.id] && event.body && (
+                                <div 
+                                    className="timeline-expanded-content mt-4 pt-4 border-t border-dashed border-[#ccc] text-sm text-[#333]"
+                                    dangerouslySetInnerHTML={{ __html: md.render(event.body) }}
+                                    style={{
+                                        fontFamily: 'var(--font-body, system-ui, sans-serif)',
+                                        textAlign: 'left'
+                                    }}
+                                />
+                            )}
                         </div>
 
                         {event.image && (
@@ -427,6 +466,46 @@ export const Timeline: React.FC<TimelineProps> = ({ events }) => {
                     -- [ NO SE ENCONTRARON EVENTOS CON ESTOS CRITERIOS ] --
                 </div>
             )}
+
+            <style dangerouslySetInnerHTML={{ __html: `
+                .timeline-expanded-content p {
+                    margin-bottom: 1rem;
+                    line-height: 1.6;
+                }
+                .timeline-expanded-content ul, .timeline-expanded-content ol {
+                    margin-left: 1.5rem;
+                    margin-bottom: 1rem;
+                    list-style-type: disc;
+                }
+                .timeline-expanded-content li {
+                    margin-bottom: 0.5rem;
+                }
+                .timeline-expanded-content strong {
+                    font-weight: bold;
+                    color: #c41e3a;
+                }
+                .timeline-expanded-content a {
+                    color: #2c5f8d;
+                    text-decoration: underline;
+                }
+                .timeline-expanded-content a:hover {
+                    color: #c41e3a;
+                }
+                .timeline-expanded-content blockquote {
+                    border-left: 3px solid #c41e3a;
+                    background: #fcfcf9;
+                    padding: 0.5rem 1rem;
+                    margin: 1rem 0;
+                    font-style: italic;
+                }
+                .timeline-expanded-content img {
+                    max-width: 100%;
+                    height: auto;
+                    border: 2px solid #1a1a1a;
+                    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+                    margin: 1rem 0;
+                }
+            `}} />
         </div>
     );
 };

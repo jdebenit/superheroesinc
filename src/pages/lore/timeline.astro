@@ -35,6 +35,7 @@ const allEvents = [
         image: entry.data.image,
         slug: entry.id,
         tags: entry.data.tags,
+        body: entry.body,
     })),
     ...timelineEntries.map((entry) => ({
         id: entry.id,
@@ -47,6 +48,7 @@ const allEvents = [
         icon: entry.data.icon,
         displayDate: entry.data.displayDate,
         tags: entry.data.tags,
+        body: entry.body,
     })),
     ...charactersEntries.flatMap((entry) => {
         const events = [];
