@@ -109,7 +109,8 @@
         "origin": "Demonio",
         "rank": 21,
         "customizations": [],
-        "skillValue": 0
+        "skillValue": 0,
+        "selectedOption": "Arma Natural - Garras"
       },
       {
         "id": "incremento_vital",
@@ -123,7 +124,8 @@
         "origin": "Demonio",
         "rank": 81,
         "customizations": [],
-        "skillValue": 0
+        "skillValue": 0,
+        "selectedOption": "Poderes Psíquicos"
       }
     ]
   },
