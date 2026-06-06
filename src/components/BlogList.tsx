@@ -3,7 +3,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import ComicCard from './ComicCard';
 
 interface BlogPost {
-  slug: string;
+  id: string;
   data: {
     title: string;
     description: string;
@@ -96,7 +96,7 @@ export default function BlogList({ posts }: BlogListProps) {
         <div className="posts-grid">
           {paginatedPosts.map((post) => (
             <ComicCard
-              key={post.slug}
+              key={post.id}
               title={post.data.title}
               excerpt={post.data.description}
               date={new Date(post.data.pubDate).toLocaleDateString("es-ES", {
@@ -105,7 +105,7 @@ export default function BlogList({ posts }: BlogListProps) {
                 day: "numeric",
               })}
               image={post.data.image}
-              link={`/blog/${post.slug}`}
+              link={`/blog/${post.id}`}
             />
           ))}
         </div>
