@@ -7,7 +7,7 @@ updatedDate: 2025-12-13
 image: "/personajes/el-seductor.png"
 tags:
   - Principal
-  - Hibrido Mitológico
+  - HibridoMitologico
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 groups:
