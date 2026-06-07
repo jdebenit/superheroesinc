@@ -149,6 +149,14 @@ const news = latestPosts.map((post) => ({
         <div class="access-divider-label">OPCIONES DE ACCESO</div>
 
         <div class="access-option">
+          <a href="/iniciacion" class="comic-button recruit-button-wrapper">
+            <span class="priority-badge accent-badge">EMPEZAR AQUÍ</span>
+            ¿NUEVO EN EL JUEGO?
+          </a>
+          <span class="access-note">Guía de iniciación para novatos</span>
+        </div>
+
+        <div class="access-option">
           <a href="/lore" class="comic-button"> ACCEDER AL ARCHIVO </a>
           <span class="access-note">Consulta de datos historicos</span>
         </div>
@@ -433,6 +441,11 @@ const news = latestPosts.map((post) => ({
     transform: rotate(6deg);
     border: 1px solid var(--color-primary-dark);
     box-shadow: var(--shadow-sm);
+  }
+
+  .accent-badge {
+    background-color: var(--color-accent) !important;
+    border-color: var(--color-accent) !important;
   }
   .section-footer {
     display: flex;

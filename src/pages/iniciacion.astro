@@ -1,0 +1,370 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ComicCard from "../components/ComicCard";
+import { getCollection } from "astro:content";
+
+const cleanTag = (tag: string) =>
+  tag
+    .trim()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+
+// Fetch blog entries that have the tag "iniciación" or "iniciacion"
+const blogPosts = await getCollection("blog", (entry) => {
+  const tags = entry.data.tags || [];
+  return tags.some((tag) => cleanTag(tag) === "iniciacion");
+});
+
+// Fetch lore entries that have the tag "iniciación" or "iniciacion"
+const lorePosts = await getCollection("lore", (entry) => {
+  const tags = entry.data.tags || [];
+  return tags.some((tag) => cleanTag(tag) === "iniciacion");
+});
+
+// Combine and map them to the same format as ComicCard
+const allInitiationPosts = [
+  ...blogPosts.map((post) => ({
+    title: post.data.title,
+    excerpt: post.data.description,
+    date: post.data.pubDate
+      ? new Date(post.data.pubDate).toLocaleDateString("es-ES", {
+          day: "numeric",
+          month: "short",
+          year: "numeric",
+        })
+      : "",
+    link: `/blog/${post.id}`,
+    image: post.data.image,
+    category: "Blog",
+    categoryLink: "/blog",
+  })),
+  ...lorePosts.map((entry) => ({
+    title: entry.data.title,
+    excerpt: entry.data.description,
+    date: entry.data.updatedDate
+      ? new Date(entry.data.updatedDate).toLocaleDateString("es-ES", {
+          day: "numeric",
+          month: "short",
+          year: "numeric",
+        })
+      : "",
+    link: `/lore/${entry.id}`,
+    image: entry.data.image,
+    category: entry.data.category,
+    categoryLink: `/lore/${entry.data.category}`,
+  })),
+];
+---
+
+<Layout
+  title="Guía de Iniciación - Nuevo en Superheroes INC"
+  description="¿Eres nuevo en Superheroes INC.? Empieza aquí para conocer el sistema de rol, crear tu personaje metahumano, explorar el lore y unirte a la comunidad."
+  keywords="iniciacion superheroes inc, nuevo juego rol superheroes, guia novatos rol, crear personaje metahumano, superheroes inc 3a edicion"
+>
+  <section class="initiation-page">
+    <div class="initiation-welcome">
+      <div class="stamp-classified accent-stamp stamp-badge">
+        NIVEL: RECLUTA
+      </div>
+      <h1 class="page-title">Guía de Iniciación</h1>
+      <p class="intro-text">
+        ¡Bienvenido al Archivo Desclasificado! Si acabas de descubrir <strong
+          >Superheroes INC.</strong
+        > o es tu primera vez en este universo de rol de superhéroes, has llegado
+        al lugar adecuado. Esta guía rápida te orientará para que sepas por dónde
+        empezar.
+      </p>
+
+      <div class="about-section">
+        <h2>¿Qué es Superheroes INC.?</h2>
+        <p>
+          Es el juego de rol de superhéroes en español por antonomasia.
+          Ambientado en un universo rico, conspiranoico y a menudo oscuro, te
+          permite interpretar a metahumanos (héroes, villanos o antihéroes) que
+          han obtenido habilidades extraordinarias por diversos orígenes:
+          mutaciones genéticas, experimentos científicos, cibernética,
+          tecnología o incluso magia ancestral.
+        </p>
+      </div>
+    </div>
+
+    <div class="guide-grid">
+      <div class="guide-step">
+        <div class="step-number">PASO 1</div>
+        <h2>Aprende las Reglas</h2>
+        <p>
+          Familiarízate con los poderes, tecnologías y hechizos del universo.
+          Tienes a tu disposición listas interactivas completas con todos los
+          costes y detalles para diseñar tu héroe:
+        </p>
+        <ul>
+          <li>
+            Consulta el catálogo completo de <a href="/recursos/poderes"
+              >Poderes Metahumanos</a
+            >.
+          </li>
+          <li>
+            Revisa las mejoras de implantes en la <a
+              href="/recursos/modulos-tecnologicos"
+              >Lista de Módulos Tecnológicos</a
+            >.
+          </li>
+          <li>
+            Estudia los misterios mágicos en la <a href="/recursos/hechizos"
+              >Lista de Hechizos</a
+            >.
+          </li>
+        </ul>
+      </div>
+
+      <div class="guide-step">
+        <div class="step-number">PASO 2</div>
+        <h2>Crea tu Personaje</h2>
+        <p>
+          ¿Listo para la acción? Utiliza nuestro generador interactivo para
+          construir tu metahumano paso a paso:
+        </p>
+        <p>
+          El <a href="/recursos/generador-fichas">Generador de Fichas Oficial</a
+          > te guiará a través de la elección de origen, reparto de atributos, selección
+          de habilidades y poderes, y te permitirá exportar tu ficha en PDF o en JSON
+          listo para visualizar en la web.
+        </p>
+        <p>
+          Inspirate explorando el extenso catálogo de <a href="/personajes"
+            >Personajes Oficiales</a
+          >
+        </p>
+      </div>
+
+      <div class="guide-step">
+        <div class="step-number">PASO 3</div>
+        <h2>Explora el Lore</h2>
+        <p>
+          El universo de SHI está vivo y lleno de organizaciones y eventos que
+          han ido apareciendo durante estos años. Te recomendamos sumergirte en
+          el archivo para conocer el terreno:
+        </p>
+        <ul>
+          <li>
+            Descubre los principales <a href="/lore/grupos"
+              >Grupos de Superhéroes</a
+            > del mundo.
+          </li>
+          <li>
+            Investiga a las misteriosas <a href="/lore/organizaciones"
+              >Organizaciones</a
+            >.
+          </li>
+          <li>
+            Conoce los principales <a href="/lore/eventos">Eventos</a> que han ocurrido
+            en el mundo.
+          </li>
+        </ul>
+      </div>
+
+      <div class="guide-step">
+        <div class="step-number">PASO 4</div>
+        <h2>Únete a la Comunidad</h2>
+        <p>
+          El rol se disfruta mejor acompañado. Tenemos un canal de comunicación
+          muy activo donde la comunidad comparte partidas, resuelve dudas sobre
+          reglas, debate sobre lore y ayuda a los nuevos jugadores a dar sus
+          primeros pasos:
+        </p>
+        <p>
+          Conéctate al <a
+            href="https://discord.gg/Ed438ZpHFR"
+            target="_blank"
+            rel="noopener noreferrer">Servidor Oficial de Discord</a
+          > para charlar con otros directores de juego (Guionistas) y jugadores.
+        </p>
+      </div>
+    </div>
+
+    {
+      allInitiationPosts.length > 0 && (
+        <div class="articles-section">
+          <h2 class="section-title">Artículos de Iniciación</h2>
+          <div class="articles-grid">
+            {allInitiationPosts.map((post) => (
+              <ComicCard {...post} client:load />
+            ))}
+          </div>
+        </div>
+      )
+    }
+  </section>
+</Layout>
+
+<style>
+  .initiation-page {
+    padding: var(--spacing-lg) var(--spacing-lg);
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .initiation-welcome {
+    background: white;
+    border: 3px solid var(--color-secondary);
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-md);
+    margin-bottom: var(--spacing-xl);
+    position: relative;
+  }
+
+  .stamp-badge {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    .stamp-badge {
+      position: static;
+      margin-bottom: 1rem;
+    }
+  }
+
+  .accent-stamp {
+    color: var(--color-accent) !important;
+    border-color: var(--color-accent) !important;
+  }
+
+  .page-title {
+    font-size: var(--text-5xl);
+    font-weight: 800;
+    margin-bottom: var(--spacing-md);
+    color: var(--color-secondary);
+    text-shadow: 3px 3px 0px var(--color-primary);
+  }
+
+  .intro-text {
+    font-size: var(--text-xl);
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-xl);
+    line-height: 1.8;
+  }
+
+  .about-section h2 {
+    font-size: var(--text-2xl);
+    color: var(--color-secondary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .about-section p {
+    font-size: var(--text-base);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .guide-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  @media (max-width: 900px) {
+    .guide-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .guide-step {
+    border: 3px solid var(--color-secondary);
+    padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-lg);
+    background: white;
+    box-shadow: var(--shadow-md);
+    position: relative;
+  }
+
+  .step-number {
+    position: absolute;
+    top: -15px;
+    left: 20px;
+    background: var(--color-secondary);
+    color: white;
+    font-family: var(--font-heading);
+    font-weight: bold;
+    padding: 2px 10px;
+    font-size: 0.9rem;
+    border: 1px solid var(--color-secondary);
+    transform: rotate(-3deg);
+  }
+
+  .guide-step h2 {
+    font-size: var(--text-2xl);
+    margin-top: 0.5rem;
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-accent);
+  }
+
+  .guide-step p {
+    font-size: var(--text-base);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .guide-step ul {
+    margin: 0.5rem 0 0 1.25rem;
+    padding: 0;
+  }
+
+  .guide-step li {
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+  }
+
+  .guide-step a {
+    font-weight: bold;
+    color: var(--color-accent);
+  }
+
+  .articles-section {
+    margin-top: var(--spacing-2xl);
+  }
+
+  .section-title {
+    font-size: var(--text-4xl);
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-secondary);
+    position: relative;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-bottom: 2px solid var(--color-secondary);
+    display: inline-block;
+    padding-bottom: 0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .section-title::before {
+    content: "///";
+    margin-right: 1rem;
+    color: var(--color-primary);
+  }
+
+  .section-title::after {
+    content: "///";
+    margin-left: 1rem;
+    color: var(--color-primary);
+  }
+
+  .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-xl);
+  }
+
+  @media (max-width: 768px) {
+    .articles-grid {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-lg);
+    }
+  }
+</style>
