@@ -8,7 +8,7 @@ image: "/personajes/qital.png"
 tags:
   - Principal
   - Liberado
-  - Artista Marcial
+  - ArtistaMarcial
   - Vigilante
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"

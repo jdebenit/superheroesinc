@@ -9,7 +9,7 @@ tags:
   - Principal
   - Vigilante
   - Vengador
-  - Artista Marcial
+  - ArtistaMarcial
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 groups:

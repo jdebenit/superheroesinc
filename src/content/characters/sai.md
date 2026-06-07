@@ -7,7 +7,7 @@ updatedDate: 2026-05-24
 tags:
   - Mutante
   - Principal
-  - Artista Marcial
+  - ArtistaMarcial
   - Vigilante
 originReality: Tierra Zero
 actualReality: Tierra Zero

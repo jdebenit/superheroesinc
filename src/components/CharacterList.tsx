@@ -14,6 +14,7 @@ interface Character {
         grupos?: string[];
         source?: string;
         updatedDate?: string | Date;
+        rpgId?: string;
     };
 }
 
@@ -32,6 +33,7 @@ export default function CharacterList({ initialCharacters, allGroups }: Characte
     const [selectedGroup, setSelectedGroup] = useState("Todos");
     const [searchTerm, setSearchTerm] = useState("");
     const [sortBy, setSortBy] = useState<"name" | "recent">("name");
+    const [onlyWithRpg, setOnlyWithRpg] = useState(false);
 
 
     // Extract unique tags from all characters
@@ -83,13 +85,15 @@ export default function CharacterList({ initialCharacters, allGroups }: Characte
             const matchesGroup = selectedGroup === "Todos" ||
                 charGroups.includes(selectedGroup);
 
+            const matchesRpg = !onlyWithRpg || !!char.data.rpgId;
+
             const searchLower = searchTerm.toLowerCase();
             const matchesSearch =
                 char.data.name.toLowerCase().includes(searchLower) ||
                 (char.data.alias && char.data.alias.toLowerCase().includes(searchLower)) ||
                 (char.data.description && char.data.description.toLowerCase().includes(searchLower));
 
-            return matchesTags && matchesGroup && matchesSearch;
+            return matchesTags && matchesGroup && matchesSearch && matchesRpg;
         });
 
         return filtered.sort((a, b) => {
@@ -103,7 +107,7 @@ export default function CharacterList({ initialCharacters, allGroups }: Characte
                 return nameA.localeCompare(nameB);
             }
         });
-    }, [initialCharacters, selectedTags, selectedGroup, searchTerm, sortBy]);
+    }, [initialCharacters, selectedTags, selectedGroup, searchTerm, sortBy, onlyWithRpg]);
 
 
     return (
@@ -138,6 +142,18 @@ export default function CharacterList({ initialCharacters, allGroups }: Characte
                         </select>
                     </div>
                 )}
+
+                <div className="rpg-filter-group">
+                    <label className="checkbox-container">
+                        <input
+                            type="checkbox"
+                            checked={onlyWithRpg}
+                            onChange={(e) => setOnlyWithRpg(e.target.checked)}
+                            className="rpg-checkbox"
+                        />
+                        <span className="checkbox-text">Ficha disponible</span>
+                    </label>
+                </div>
 
                 <div className="sort-group">
                     <span className="filter-label">Ordenar:</span>
@@ -199,6 +215,58 @@ export default function CharacterList({ initialCharacters, allGroups }: Characte
 
          .group-select:hover {
              background: #f5f5f5;
+         }
+
+         .rpg-filter-group {
+             display: flex;
+             align-items: center;
+         }
+
+         .checkbox-container {
+             display: flex;
+             align-items: center;
+             gap: 0.5rem;
+             cursor: pointer;
+             user-select: none;
+         }
+
+         .rpg-checkbox {
+             appearance: none;
+             -webkit-appearance: none;
+             width: 18px;
+             height: 18px;
+             border: 2px solid var(--color-secondary, #000);
+             background: white;
+             border-radius: 4px;
+             cursor: pointer;
+             position: relative;
+             transition: all 0.2s;
+             outline: none;
+             margin: 0;
+         }
+
+         .rpg-checkbox:checked {
+             background: var(--color-accent, #2c5f8d);
+             border-color: var(--color-secondary, #000);
+         }
+
+         .rpg-checkbox:checked::after {
+             content: "✓";
+             position: absolute;
+             color: white;
+             font-size: 0.75rem;
+             font-weight: bold;
+             top: 50%;
+             left: 50%;
+             transform: translate(-50%, -50%);
+         }
+
+         .checkbox-text {
+             font-size: 0.9rem;
+             font-weight: bold;
+             text-transform: uppercase;
+             font-family: var(--font-heading, monospace);
+             color: var(--color-text, #000);
          }
 
         .characters-grid {

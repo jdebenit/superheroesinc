@@ -8,6 +8,7 @@ interface CharacterCardProps {
         description: string;
         image?: string;
         source?: string;
+        rpgId?: string;
     };
 }
 
@@ -16,6 +17,11 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ slug, data }) => {
         <a href={`/personajes/${slug}`} className="character-card">
             <div className="card-inner">
                 <div className="card-front">
+                    {data.rpgId && (
+                        <div className="rpg-badge" title="Ficha RPG disponible">
+                            🎲 FICHA
+                        </div>
+                    )}
                     {data.image ? (
                         <img
                             src={data.image}
@@ -222,6 +228,24 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ slug, data }) => {
                     opacity: 0.5;
                     font-weight: bold;
                     font-family: var(--font-display, sans-serif);
+                }
+
+                .rpg-badge {
+                    position: absolute;
+                    top: 15px;
+                    right: 15px;
+                    background-color: var(--color-accent, #2c5f8d);
+                    color: white;
+                    border: 2px solid var(--color-secondary, #1a1a1a);
+                    font-family: var(--font-heading, monospace);
+                    font-size: 0.7rem;
+                    font-weight: 700;
+                    padding: 0.2rem 0.5rem;
+                    transform: rotate(5deg);
+                    z-index: 10;
+                    box-shadow: 2px 2px 0px var(--color-secondary, #1a1a1a);
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
                 }
             `}</style>
         </a>
