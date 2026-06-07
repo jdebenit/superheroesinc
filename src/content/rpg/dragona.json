@@ -196,7 +196,7 @@
     "specified": {
       "otro_idioma_1780845893038": {
         "skillId": "otro_idioma",
-        "specification": "Español",
+        "specification": "Castellano",
         "isFree": false,
         "isRequired": false,
         "manualMods": 0,
@@ -232,7 +232,8 @@
   "background": {
     "prejudiceResistance": 15,
     "economicStatus": "clase_medio_baja",
-    "socialStatus": "heroe_pueblo"
+    "socialStatus": "heroe_pueblo",
+    "friendsAndAssociates": "solo_familia"
   },
   "weapons": {
     "items": [
