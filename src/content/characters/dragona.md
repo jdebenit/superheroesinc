@@ -4,6 +4,7 @@ alias: Dragona
 description: Nueva portadora de la armadura de Drac y actual defensora de Cataluña bajo una identidad totalmente secreta.
 source: Superhéroes INC. Tercera Edición
 updatedDate: 2026-05-24
+rpgId: dragona
 tags:
   - Principal
   - Guardian

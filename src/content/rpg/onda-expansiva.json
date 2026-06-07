@@ -1,0 +1,288 @@
+{
+  "name": "Mïjail Medenko",
+  "alias": "Onda Expansiva",
+  "level": 10,
+  "notes": "Onda Expansiva es un hombre enorme, de musculatura descomunal y aspecto claramente alterado. Su piel pálida, con un ligero tono azulado, contrasta con unos ojos completamente rojos que le confieren una mirada inquietante. Sus rasgos son duros y angulosos, con una expresión feroz que rara vez abandona su rostro.\n\nLleva el cabello negro peinado hacia atrás y suele vestir una chaqueta de cuero negro de cuello alto sobre ropa oscura. Su presencia impone incluso antes de que haga uso de sus poderes; da la sensación de estar contemplando una fuerza devastadora atrapada en forma humana.",
+  "origin": {
+    "items": [
+      {
+        "Alterado": [
+          "Acceso a poderes de alterados"
+        ]
+      }
+    ]
+  },
+  "combatstats": {
+    "Acciones por asalto": "2",
+    "Iniciativa y Reflejos": "40",
+    "Puntos de Vida": "260",
+    "Equilibrio Mental": "78"
+  },
+  "otherstats": {
+    "Inconsciencia": "26",
+    "Recuperación": "6 PV/h",
+    "Resistencia a gases y venenos": "60%",
+    "Modificador de fuerza": "1d100+30",
+    "Peso Levantado": "30 t",
+    "Daño absorbido físico": "120",
+    "Daño absorbido mental": "0",
+    "Modificador de impacto": "0",
+    "Modificador Psionico": "10",
+    "Parada Fisica": "21",
+    "Parada mental": "25",
+    "Salto (alto / largo)": "12,9m / 38,6m"
+  },
+  "attributes": {
+    "values": {
+      "Fuerza": 130,
+      "Constitución": 180,
+      "Agilidad": 85,
+      "Inteligencia": 78,
+      "Percepción": 75,
+      "Apariencia": 70,
+      "Voluntad": 83
+    },
+    "breakdown": {
+      "fuerza": {
+        "base": 100,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 30,
+        "otherMod": 0
+      },
+      "constitucion": {
+        "base": 100,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 80,
+        "otherMod": 0
+      },
+      "agilidad": {
+        "base": 85,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "inteligencia": {
+        "base": 78,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "percepcion": {
+        "base": 75,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "apariencia": {
+        "base": 70,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "voluntad": {
+        "base": 83,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      }
+    }
+  },
+  "skills": {
+    "generalItems": [
+      {
+        "name": "Acechar/Discrección",
+        "math": "(AGI+PER)/2",
+        "value": "90%"
+      },
+      {
+        "name": "Comb. cuerpo a cuerpo",
+        "math": "(AGI+PER)/2",
+        "value": "110%"
+      },
+      {
+        "name": "Conocimientos generales",
+        "math": "INT/3",
+        "value": "66%"
+      },
+      {
+        "name": "Esconderse",
+        "math": "(AGI+PER)/4",
+        "value": "60%"
+      },
+      {
+        "name": "Idea",
+        "math": "INT/2",
+        "value": "39%"
+      },
+      {
+        "name": "Influencia",
+        "math": "(INT+APA)/2",
+        "value": "74%"
+      },
+      {
+        "name": "Idioma nativo (Ucraniano)",
+        "math": "INT",
+        "value": "78%"
+      },
+      {
+        "name": "Investigar",
+        "math": "(INT+PER)/3",
+        "value": "81%"
+      },
+      {
+        "name": "Lanzar",
+        "math": "(FUE+PER)/2",
+        "value": "102%"
+      },
+      {
+        "name": "Primeros auxilios",
+        "math": "INT/2",
+        "value": "39%"
+      },
+      {
+        "name": "Suerte",
+        "math": "(PER+VOL)/4",
+        "value": "39%"
+      },
+      {
+        "name": "Trepar y Saltar",
+        "math": "AGI",
+        "value": "85%"
+      }
+    ],
+    "specialItems": [
+      {
+        "name": "Mecánica",
+        "math": "INT/2",
+        "value": "39%"
+      },
+      {
+        "name": "Ciencia: Física",
+        "math": "INT/3",
+        "value": "26%"
+      },
+      {
+        "name": "Otro idioma: Ruso",
+        "math": "INT/3",
+        "value": "70%"
+      },
+      {
+        "name": "Otro idioma: Inglés",
+        "math": "INT/3",
+        "value": "40%"
+      },
+      {
+        "name": "Otro idioma: Español",
+        "math": "INT/3",
+        "value": "70%"
+      }
+    ],
+    "generalManualMods": {},
+    "manualBases": {},
+    "selected": {
+      "mecanica": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      }
+    },
+    "specified": {
+      "ciencia_1780847027287": {
+        "skillId": "ciencia",
+        "specification": "Física",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "otro_idioma_1780847038789": {
+        "skillId": "otro_idioma",
+        "specification": "Ruso",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 70
+      },
+      "otro_idioma_1780847040117": {
+        "skillId": "otro_idioma",
+        "specification": "Inglés",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 40
+      },
+      "otro_idioma_1780847054471": {
+        "skillId": "otro_idioma",
+        "specification": "Español",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 70
+      }
+    },
+    "nativeLanguage": "Ucraniano"
+  },
+  "background": {
+    "prejudiceResistance": 40,
+    "economicStatus": "clase_baja",
+    "socialStatus": "heroe_reconocido",
+    "friendsAndAssociates": "lazos_todos"
+  },
+  "powers": {
+    "selected": [
+      {
+        "id": "absorcion_de_energia",
+        "origin": "Alterado",
+        "rank": 100,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false,
+        "selectedOption": "cinética"
+      },
+      {
+        "id": "superconstitucion",
+        "origin": "Alterado",
+        "rank": 1,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false,
+        "powerMod": 80
+      },
+      {
+        "id": "superfuerza",
+        "origin": "Alterado",
+        "rank": 1,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false,
+        "powerMod": 30
+      }
+    ]
+  },
+  "alteradoParams": {
+    "agent": "nuclear",
+    "sequels": [
+      {
+        "id": "no_vitals",
+        "description": "No tiene pulso, ni actividad cerebral"
+      }
+    ]
+  },
+  "profession": "Ex Técnico",
+  "sexualIdentity": "Hombre Heterosexual",
+  "meta": {
+    "version": "Beta 0.15.5",
+    "generator": "SHI Wizard"
+  }
+}

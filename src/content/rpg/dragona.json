@@ -1,0 +1,320 @@
+{
+  "name": "Arlet Vidal",
+  "alias": "Dragona",
+  "notes": "Dragona es una joven de constitución atlética y porte seguro cuya identidad permanece oculta bajo la legendaria armadura de Drac. La armadura, de metal oscuro con detalles rojizos y ornamentación inspirada en la tradición catalana, se adapta a su figura con líneas más estilizadas y ágiles que las de anteriores portadores.\n\nSu rasgo más distintivo es el yelmo coronado por grandes astas curvadas, que le otorgan una apariencia inconfundible y casi mítica. Sobre el hombro luce la Rosa de Sant Jordi, símbolo del legado que representa, mientras que suele combatir empuñando la espada flamígera de Sant Jordi, cuyas llamas iluminan la armadura con reflejos anaranjados.\n\nSu presencia recuerda más a una caballero legendaria salida de las viejas sagas europeas que a un metahumano convencional, combinando elegancia y una imponente aura heroica.",
+  "origin": {
+    "items": [
+      {
+        "Guardián": [
+          "Acceso a poderes de guardianes"
+        ]
+      }
+    ]
+  },
+  "combatstats": {
+    "Acciones por asalto": "2",
+    "Iniciativa y Reflejos": "42",
+    "Puntos de Vida": "140",
+    "Equilibrio Mental": "84"
+  },
+  "otherstats": {
+    "Inconsciencia": "14",
+    "Recuperación": "20 PV/h",
+    "Resistencia a gases y venenos": "53%",
+    "Modificador de fuerza": "1d100+30",
+    "Peso Levantado": "30 t",
+    "Daño absorbido físico": "90",
+    "Daño absorbido mental": "0",
+    "Modificador de impacto": "0",
+    "Modificador Psionico": "0",
+    "Parada Fisica": "21",
+    "Parada mental": "10",
+    "Salto (alto / largo)": "13,0m / 39,1m"
+  },
+  "attributes": {
+    "values": {
+      "Fuerza": 130,
+      "Constitución": 160,
+      "Agilidad": 86,
+      "Inteligencia": 84,
+      "Percepción": 84,
+      "Apariencia": 76,
+      "Voluntad": 80
+    },
+    "breakdown": {
+      "fuerza": {
+        "base": 58,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 72,
+        "otherMod": 0
+      },
+      "constitucion": {
+        "base": 72,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 88,
+        "otherMod": 0
+      },
+      "agilidad": {
+        "base": 86,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "inteligencia": {
+        "base": 84,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "percepcion": {
+        "base": 84,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "apariencia": {
+        "base": 76,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "voluntad": {
+        "base": 80,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      }
+    }
+  },
+  "skills": {
+    "generalItems": [
+      {
+        "name": "Acechar/Discrección",
+        "math": "(AGI+PER)/2",
+        "value": "85%"
+      },
+      {
+        "name": "Comb. cuerpo a cuerpo",
+        "math": "(AGI+PER)/2",
+        "value": "85%"
+      },
+      {
+        "name": "Conocimientos generales",
+        "math": "INT/3",
+        "value": "28%"
+      },
+      {
+        "name": "Esconderse",
+        "math": "(AGI+PER)/4",
+        "value": "42%"
+      },
+      {
+        "name": "Idea",
+        "math": "INT/2",
+        "value": "42%"
+      },
+      {
+        "name": "Influencia",
+        "math": "(INT+APA)/2",
+        "value": "80%"
+      },
+      {
+        "name": "Idioma nativo (Catalan)",
+        "math": "INT",
+        "value": "84%"
+      },
+      {
+        "name": "Investigar",
+        "math": "(INT+PER)/3",
+        "value": "56%"
+      },
+      {
+        "name": "Lanzar",
+        "math": "(FUE+PER)/2",
+        "value": "107%"
+      },
+      {
+        "name": "Primeros auxilios",
+        "math": "INT/2",
+        "value": "42%"
+      },
+      {
+        "name": "Suerte",
+        "math": "(PER+VOL)/4",
+        "value": "41%"
+      },
+      {
+        "name": "Trepar y Saltar",
+        "math": "AGI",
+        "value": "86%"
+      }
+    ],
+    "specialItems": [
+      {
+        "name": "Armas blancas",
+        "math": "(AGI+PER)/3",
+        "value": "56%"
+      },
+      {
+        "name": "Otro idioma: Español",
+        "math": "INT/3",
+        "value": "70%"
+      },
+      {
+        "name": "Otro idioma: Inglés",
+        "math": "INT/3",
+        "value": "28%"
+      },
+      {
+        "name": "Conducir: Coche",
+        "math": "(INT+PER)/4",
+        "value": "42%"
+      },
+      {
+        "name": "Ciencia: Derecho",
+        "math": "INT/3",
+        "value": "28%"
+      }
+    ],
+    "generalManualMods": {},
+    "manualBases": {},
+    "selected": {
+      "armas_blancas": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      }
+    },
+    "specified": {
+      "otro_idioma_1780845893038": {
+        "skillId": "otro_idioma",
+        "specification": "Español",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 70
+      },
+      "otro_idioma_1780845894682": {
+        "skillId": "otro_idioma",
+        "specification": "Inglés",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "conducir_1780846488819": {
+        "skillId": "conducir",
+        "specification": "Coche",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "ciencia_1780846557918": {
+        "skillId": "ciencia",
+        "specification": "Derecho",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      }
+    },
+    "nativeLanguage": "Catalan"
+  },
+  "background": {
+    "prejudiceResistance": 15,
+    "economicStatus": "clase_medio_baja",
+    "socialStatus": "heroe_pueblo"
+  },
+  "weapons": {
+    "items": [
+      {
+        "name": "Espada de flamígera de Sant Jordi",
+        "damage": "2d10+30+1d100+30",
+        "dxa": "",
+        "car": "",
+        "notes": "Proyecta el fuego desde la Espada",
+        "cost": 0
+      }
+    ]
+  },
+  "powers": {
+    "selected": [
+      {
+        "id": "volar",
+        "origin": "Guardian",
+        "rank": 21,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false
+      },
+      {
+        "id": "control_del_fuego",
+        "origin": "Guardian",
+        "rank": 41,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false,
+        "customizations": [
+          {
+            "id": "1780845838452",
+            "description": "Emite el fuego por la espada",
+            "cost": 0
+          }
+        ]
+      },
+      {
+        "id": "invulnerabilidad",
+        "origin": "Guardian",
+        "rank": 71,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false,
+        "selectedOption": "Magia"
+      },
+      {
+        "id": "superconstitucion",
+        "origin": "Guardian",
+        "rank": 1,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false,
+        "powerMod": 88
+      },
+      {
+        "id": "superfuerza",
+        "origin": "Guardian",
+        "rank": 1,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false,
+        "powerMod": 72
+      }
+    ]
+  },
+  "guardianParams": {
+    "quality": "object_bonded",
+    "objectType": "armor",
+    "feature": "alien_shape",
+    "transformation": "no_change_persists"
+  },
+  "sexualIdentity": "Mujer",
+  "profession": "Abogada",
+  "meta": {
+    "version": "Beta 0.15.5",
+    "generator": "SHI Wizard"
+  }
+}

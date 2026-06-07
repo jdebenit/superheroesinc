@@ -5,6 +5,7 @@ description: Lingüista especializada que asume de forma consciente el legado r�
 source: "Crossover: Cruce de caminos"
 image: /personajes/mjolnir.png
 updatedDate: 2025-12-31
+rpgId: mjölnir
 tags:
   - Principal
   - Guardian

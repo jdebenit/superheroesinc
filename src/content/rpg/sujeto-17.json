@@ -1,0 +1,492 @@
+{
+  "name": "Eugenio Córdoba",
+  "alias": "Sujeto 17",
+  "level": 3,
+  "notes": "Sujeto 17 es un joven de aspecto atlético y fibroso, moldeado por años de entrenamiento y operaciones encubiertas. Aunque conserva parte de la imagen del antiguo EuroKid, la inocencia y el entusiasmo de aquella etapa han desaparecido casi por completo. Sus movimientos son precisos, medidos y silenciosos, propios de alguien acostumbrado a trabajar desde las sombras.\n\nSu cabello oscuro suele llevarlo corto y práctico, mientras que su expresión permanece seria y difícil de interpretar. Sus facciones son juveniles, pero la mirada transmite una experiencia impropia de su edad, como si hubiera visto demasiado pronto las partes menos heroicas del mundo.\n\nViste un uniforme táctico discreto en tonos oscuros, diseñado para infiltración y operaciones especiales más que para exhibiciones públicas. Sin capas, emblemas llamativos ni colores brillantes, Sujeto 17 representa la evolución de EuroKid desde símbolo juvenil de una generación de héroes a agente especializado de Superhéroes INC. que actúa lejos de los focos.",
+  "origin": {
+    "items": [
+      {
+        "Alterado": [
+          "Acceso a poderes de alterados"
+        ]
+      },
+      {
+        "Vigilante": [
+          "Disponibilidad de armamento a dificultad reducida",
+          "Recarga rápida",
+          "Recuerdos dolorosos",
+          "Voluntad férrea",
+          "Artista Marcial",
+          "Espia/Ladrón"
+        ]
+      }
+    ]
+  },
+  "combatstats": {
+    "Acciones por asalto": "3",
+    "Iniciativa y Reflejos": "70",
+    "Puntos de Vida": "270",
+    "Equilibrio Mental": "96"
+  },
+  "otherstats": {
+    "Inconsciencia": "-",
+    "Recuperación": "2 PV/h",
+    "Resistencia a gases y venenos": "63%",
+    "Modificador de fuerza": "1d10",
+    "Peso Levantado": "500kg",
+    "Daño absorbido físico": "0",
+    "Daño absorbido mental": "0",
+    "Modificador de impacto": "30",
+    "Modificador Psionico": "25",
+    "Parada Fisica": "45",
+    "Parada mental": "50",
+    "Salto (alto / largo)": "3,3m / 10,0m"
+  },
+  "attributes": {
+    "values": {
+      "Fuerza": 100,
+      "Constitución": 100,
+      "Agilidad": 100,
+      "Inteligencia": 96,
+      "Percepción": 100,
+      "Apariencia": 92,
+      "Voluntad": 100
+    },
+    "breakdown": {
+      "fuerza": {
+        "base": 100,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "constitucion": {
+        "base": 100,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "agilidad": {
+        "base": 50,
+        "originMod": 0,
+        "specialtyMod": 50,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "inteligencia": {
+        "base": 96,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "percepcion": {
+        "base": 50,
+        "originMod": 0,
+        "specialtyMod": 50,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "apariencia": {
+        "base": 92,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "voluntad": {
+        "base": 100,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      }
+    }
+  },
+  "skills": {
+    "generalItems": [
+      {
+        "name": "Acechar/Discrección",
+        "math": "(AGI+PER)/2",
+        "value": "120%"
+      },
+      {
+        "name": "Comb. cuerpo a cuerpo",
+        "math": "(AGI+PER)/2",
+        "value": "100%"
+      },
+      {
+        "name": "Conocimientos generales",
+        "math": "INT/3",
+        "value": "32%"
+      },
+      {
+        "name": "Esconderse",
+        "math": "(AGI+PER)/4",
+        "value": "70%"
+      },
+      {
+        "name": "Idea",
+        "math": "INT/2",
+        "value": "48%"
+      },
+      {
+        "name": "Influencia",
+        "math": "(INT+APA)/2",
+        "value": "94%"
+      },
+      {
+        "name": "Idioma nativo",
+        "math": "INT",
+        "value": "96%"
+      },
+      {
+        "name": "Investigar",
+        "math": "(INT+PER)/3",
+        "value": "65%"
+      },
+      {
+        "name": "Lanzar",
+        "math": "(FUE+PER)/2",
+        "value": "100%"
+      },
+      {
+        "name": "Primeros auxilios",
+        "math": "INT/2",
+        "value": "48%"
+      },
+      {
+        "name": "Suerte",
+        "math": "(PER+VOL)/4",
+        "value": "50%"
+      },
+      {
+        "name": "Trepar y Saltar",
+        "math": "AGI",
+        "value": "120%"
+      }
+    ],
+    "specialItems": [
+      {
+        "name": "Artes Marciales",
+        "math": "(AGI+PER)/3",
+        "value": "86%"
+      },
+      {
+        "name": "Robar",
+        "math": "AGI/2",
+        "value": "70%"
+      },
+      {
+        "name": "Trampas",
+        "math": "INT/2",
+        "value": "48%"
+      },
+      {
+        "name": "Cerrajería",
+        "math": "INT/2",
+        "value": "48%"
+      },
+      {
+        "name": "Computadoras / Comunicaciones",
+        "math": "INT/2",
+        "value": "48%"
+      },
+      {
+        "name": "Rastrear",
+        "math": "(INT+PER)/4",
+        "value": "49%"
+      },
+      {
+        "name": "Nadar / Bucear",
+        "math": "(FUE+AGI)/2",
+        "value": "100%"
+      },
+      {
+        "name": "Armas cortas",
+        "math": "(2xPER)/3",
+        "value": "66%"
+      },
+      {
+        "name": "Armas largas",
+        "math": "(2xPER)/3",
+        "value": "66%"
+      },
+      {
+        "name": "Armas blancas",
+        "math": "(AGI+PER)/3",
+        "value": "66%"
+      },
+      {
+        "name": "Explosivos",
+        "math": "INT/2",
+        "value": "48%"
+      },
+      {
+        "name": "Conducir: Aeronave",
+        "math": "(INT+PER)/4",
+        "value": "49%"
+      },
+      {
+        "name": "Otro idioma: Inglés",
+        "math": "INT/3",
+        "value": "70%"
+      },
+      {
+        "name": "Otro idioma: Italiano",
+        "math": "INT/3",
+        "value": "70%"
+      },
+      {
+        "name": "Otro idioma: Ruso",
+        "math": "INT/3",
+        "value": "70%"
+      },
+      {
+        "name": "Supervivencia: Bajos fondos",
+        "math": "INT/2",
+        "value": "48%"
+      },
+      {
+        "name": "Conducir: Coche",
+        "math": "(INT+PER)/4",
+        "value": "49%"
+      },
+      {
+        "name": "Conducir: Motocicleta",
+        "math": "(INT+PER)/4",
+        "value": "49%"
+      },
+      {
+        "name": "Otro idioma: Alemán",
+        "math": "INT/3",
+        "value": "70%"
+      },
+      {
+        "name": "Otro idioma: Frances",
+        "math": "INT/3",
+        "value": "70%"
+      }
+    ],
+    "generalManualMods": {},
+    "manualBases": {},
+    "selected": {
+      "artes_marciales": {
+        "isFree": false,
+        "isRequired": true,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "robar": {
+        "isFree": false,
+        "isRequired": true,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "trampas": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "cerrajeria": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "computadoras": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "rastrear": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "nadar": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "armas_cortas": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "armas_largas": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "armas_blancas": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "explosivos": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      }
+    },
+    "specified": {
+      "conducir_1780848658516": {
+        "skillId": "conducir",
+        "specification": "Aeronave",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "otro_idioma_1780848664170": {
+        "skillId": "otro_idioma",
+        "specification": "Inglés",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 70
+      },
+      "otro_idioma_1780848665040": {
+        "skillId": "otro_idioma",
+        "specification": "Italiano",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 70
+      },
+      "otro_idioma_1780848666876": {
+        "skillId": "otro_idioma",
+        "specification": "Ruso",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 70
+      },
+      "supervivencia_1780848679332": {
+        "skillId": "supervivencia",
+        "specification": "Bajos fondos",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "conducir_1780849452446": {
+        "skillId": "conducir",
+        "specification": "Coche",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "conducir_1780849453316": {
+        "skillId": "conducir",
+        "specification": "Motocicleta",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "otro_idioma_1780849570221": {
+        "skillId": "otro_idioma",
+        "specification": "Alemán",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 70
+      },
+      "otro_idioma_1780849570781": {
+        "skillId": "otro_idioma",
+        "specification": "Frances",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 70
+      }
+    },
+    "nativeLanguage": ""
+  },
+  "background": {
+    "prejudiceResistance": 30,
+    "economicStatus": "clase_media_alta",
+    "friendsAndAssociates": "solitario"
+  },
+  "equipment": {
+    "items": [
+      {
+        "name": "Traje de Twaron",
+        "notes": "+50 a la DA",
+        "cost": 0
+      }
+    ]
+  },
+  "weapons": {
+    "items": [
+      {
+        "name": "DLK Speed",
+        "damage": "1d10x2 Pot:62",
+        "dxa": "",
+        "car": "40",
+        "notes": "",
+        "cost": 0
+      },
+      {
+        "name": "DLK 45",
+        "damage": "2d10 Pot:24",
+        "dxa": "2",
+        "car": "",
+        "notes": "",
+        "cost": 0
+      },
+      {
+        "name": "Cuchillos de Zynex",
+        "damage": "1d6+40",
+        "dxa": "",
+        "car": "2",
+        "notes": "",
+        "cost": 0
+      }
+    ]
+  },
+  "powers": {
+    "selected": [
+      {
+        "id": "regeneracion_de_tejidos",
+        "origin": "Alterado",
+        "rank": 1,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false
+      },
+      {
+        "id": "incremento_vital",
+        "origin": "Alterado",
+        "rank": 41,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false
+      }
+    ]
+  },
+  "traumas": {
+    "Espia/Ladrón": "Ha sido entrenado para labores de espionaje, su duro entrenamiento es debido a la necesidad extrema de convertirse en el nuevo Euroman para honrar el legado que lelva dentro.",
+    "Artista Marcial": "Un fuerte entrenamiento en todo tipo de artes marciales y siendo entrenado por los mejores maestros del planeta para superar los estandares de cualquier ser humano y cumplir su objetivo de ser el legado de euroman"
+  },
+  "profession": "Agente del gobierno",
+  "sexualIdentity": "Hombre",
+  "meta": {
+    "version": "Beta 0.15.5",
+    "generator": "SHI Wizard"
+  }
+}

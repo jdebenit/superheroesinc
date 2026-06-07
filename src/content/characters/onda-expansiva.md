@@ -4,6 +4,7 @@ alias: Onda Expansiva
 description: Legendario héroe ucraniano y líder de campo de los Campeones de Europa.
 source: Superhéroes INC. Tercera Edición
 updatedDate: 2026-05-24
+rpgId: onda-expansiva
 tags:
   - Principal
   - Alterado

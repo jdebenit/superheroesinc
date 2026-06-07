@@ -10,6 +10,7 @@ originReality: Tierra Zero
 actualReality: Tierra Zero
 image: /personajes/eurokid.png
 alias: Sujeto 17 / EuroKid
+rpgId: sujeto-17
 groups:
   - "campeones-de-europa"
 ---

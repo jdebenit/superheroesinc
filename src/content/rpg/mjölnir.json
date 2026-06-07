@@ -1,0 +1,305 @@
+{
+  "name": "Solveig Andersson",
+  "alias": "Mjölnir",
+  "notes": "Solveig Andersson es una mujer escandinava alta, de constitución atlética y rasgos marcadamente nórdicos. Su cabello rubio cae sobre los hombros en una melena larga y despeinada por el viento, mientras que sus ojos claros suelen transmitir una mezcla de inteligencia, disciplina y determinación. Fuera de combate presenta la apariencia de una académica en excelente forma física, fuerte pero lejos de resultar sobrehumana a simple vista.\n\nCuando invoca el legado de Mjölnir, unos enormes guanteletes de uru cubiertos de runas ancestrales se materializan sobre sus brazos. La transformación no se limita al equipo: su cuerpo entero responde a la energía contenida en el metal. Su estatura aumenta varios centímetros, sus hombros se ensanchan y la musculatura de todo su cuerpo se desarrolla hasta alcanzar proporciones claramente sobrehumanas. Los músculos de brazos, espalda y piernas adquieren una definición propia de una estatua heroica de la mitología nórdica, transmitiendo una sensación de fuerza contenida difícil de ignorar.\n\nEn ese estado, Solveig conserva sus facciones y personalidad, pero su presencia cambia por completo. Donde antes había una investigadora especializada en antiguas tradiciones escandinavas, ahora parece una auténtica campeona de las sagas: una figura poderosa, casi legendaria, capaz de rivalizar físicamente con algunos de los metahumanos más fuertes del planeta. Los guanteletes recorren sus brazos con destellos de energía eléctrica y cada movimiento parece acompañado por la sensación de que una tormenta está a punto de desatarse.",
+  "meta": {
+    "version": "Beta 0.15.5",
+    "generator": "SHI Wizard"
+  },
+  "origin": {
+    "items": [
+      {
+        "Guardián": [
+          "Acceso a poderes de guardianes"
+        ]
+      }
+    ]
+  },
+  "combatstats": {
+    "Acciones por asalto": "2",
+    "Iniciativa y Reflejos": "45",
+    "Puntos de Vida": "125",
+    "Equilibrio Mental": "99"
+  },
+  "otherstats": {
+    "Inconsciencia": "12",
+    "Recuperación": "15 PV/h",
+    "Resistencia a gases y venenos": "50%",
+    "Modificador de fuerza": "1d100+75",
+    "Peso Levantado": "75 t",
+    "Daño absorbido físico": "75",
+    "Daño absorbido mental": "0",
+    "Modificador de impacto": "0",
+    "Modificador Psionico": "10",
+    "Parada Fisica": "21",
+    "Parada mental": "25",
+    "Salto (alto / largo)": "50,9m / 152,7m"
+  },
+  "attributes": {
+    "values": {
+      "Fuerza": 175,
+      "Constitución": 150,
+      "Agilidad": 84,
+      "Inteligencia": 99,
+      "Percepción": 96,
+      "Apariencia": 94,
+      "Voluntad": 87
+    },
+    "breakdown": {
+      "fuerza": {
+        "base": 55,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 120,
+        "otherMod": 0
+      },
+      "constitucion": {
+        "base": 65,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 85,
+        "otherMod": 0
+      },
+      "agilidad": {
+        "base": 84,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "inteligencia": {
+        "base": 99,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "percepcion": {
+        "base": 96,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "apariencia": {
+        "base": 94,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "voluntad": {
+        "base": 87,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      }
+    },
+    "manualBonuses": {
+      "Fuerza": 0,
+      "Agilidad": 0,
+      "Constitución": 0,
+      "Inteligencia": 0,
+      "Percepción": 0,
+      "Voluntad": 0,
+      "Apariencia": 0
+    }
+  },
+  "skills": {
+    "generalItems": [
+      {
+        "name": "Acechar/Discrección",
+        "math": "(AGI+PER)/2",
+        "value": "90%"
+      },
+      {
+        "name": "Comb. cuerpo a cuerpo",
+        "math": "(AGI+PER)/2",
+        "value": "90%"
+      },
+      {
+        "name": "Conocimientos generales",
+        "math": "INT/3",
+        "value": "33%"
+      },
+      {
+        "name": "Esconderse",
+        "math": "(AGI+PER)/4",
+        "value": "45%"
+      },
+      {
+        "name": "Idea",
+        "math": "INT/2",
+        "value": "49%"
+      },
+      {
+        "name": "Influencia",
+        "math": "(INT+APA)/2",
+        "value": "96%"
+      },
+      {
+        "name": "Idioma nativo (Sueco)",
+        "math": "INT",
+        "value": "99%"
+      },
+      {
+        "name": "Investigar",
+        "math": "(INT+PER)/3",
+        "value": "65%"
+      },
+      {
+        "name": "Lanzar",
+        "math": "(FUE+PER)/2",
+        "value": "135%"
+      },
+      {
+        "name": "Primeros auxilios",
+        "math": "INT/2",
+        "value": "49%"
+      },
+      {
+        "name": "Suerte",
+        "math": "(PER+VOL)/4",
+        "value": "45%"
+      },
+      {
+        "name": "Trepar y Saltar",
+        "math": "AGI",
+        "value": "84%"
+      }
+    ],
+    "specialItems": [
+      {
+        "name": "Otro idioma: Inglés",
+        "math": "INT/3",
+        "value": "70%"
+      },
+      {
+        "name": "Otro idioma: Asgardiano",
+        "math": "INT/3",
+        "value": "33%"
+      },
+      {
+        "name": "Otro idioma: Español",
+        "math": "INT/3",
+        "value": "33%"
+      },
+      {
+        "name": "Ciencia: Mitología",
+        "math": "INT/3",
+        "value": "33%"
+      },
+      {
+        "name": "Otro idioma: Aleman",
+        "math": "INT/3",
+        "value": "33%"
+      }
+    ],
+    "generalManualMods": {},
+    "manualBases": {},
+    "selected": {},
+    "specified": {
+      "otro_idioma_1780843698981": {
+        "skillId": "otro_idioma",
+        "specification": "Inglés",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 70
+      },
+      "otro_idioma_1780843700184": {
+        "skillId": "otro_idioma",
+        "specification": "Asgardiano",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "otro_idioma_1780843701434": {
+        "skillId": "otro_idioma",
+        "specification": "Español",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "ciencia_1780843713334": {
+        "skillId": "ciencia",
+        "specification": "Mitología",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "otro_idioma_1780844110801": {
+        "skillId": "otro_idioma",
+        "specification": "Aleman",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      }
+    },
+    "nativeLanguage": "Sueco"
+  },
+  "background": {
+    "prejudiceResistance": 17,
+    "economicStatus": "clase_media_alta",
+    "socialStatus": "heroe_pueblo",
+    "friendsAndAssociates": "solo_familia"
+  },
+  "weapons": {
+    "items": [
+      {
+        "name": "Guanteletes de Uru",
+        "damage": "1d100+75+40",
+        "dxa": "",
+        "car": "",
+        "notes": "Es capaz de intercambiar un punto de vida por 2 puntos de daño electrico para añadirlo al daño creado al golpear con los guanteletes",
+        "cost": 0
+      }
+    ]
+  },
+  "powers": {
+    "selected": [
+      {
+        "id": "superfuerza",
+        "origin": "Guardian",
+        "rank": 1,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false,
+        "powerMod": 120
+      },
+      {
+        "id": "superconstitucion",
+        "origin": "Guardian",
+        "rank": 1,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false,
+        "powerMod": 85
+      },
+      {
+        "id": "incremento_vital",
+        "origin": "Guardian",
+        "rank": 1,
+        "isCrossType": false,
+        "isCrossOrigin": true,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false
+      }
+    ]
+  },
+  "guardianParams": {
+    "quality": "object_bonded",
+    "objectType": "otro",
+    "feature": "inscriptions",
+    "transformation": "transform_permanent"
+  },
+  "sexualIdentity": "Mujer",
+  "profession": "Lingüista en la Universidad"
+}

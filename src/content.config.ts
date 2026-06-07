@@ -91,7 +91,7 @@ const rpgCollection = defineCollection({
         level: z.union([z.number(), z.string()]).optional(),
         origin: z.object({
             cost: z.union([z.number(), z.string()]).optional(),
-            items: z.array(z.any())
+            items: z.array(z.any()).optional().default([])
         }).optional(),
         other: z.array(z.string()).optional(),
         attributes: z.object({
@@ -113,13 +113,13 @@ const rpgCollection = defineCollection({
         }).optional(),
         specialskills: z.object({
             cost: z.union([z.number(), z.string()]).optional(),
-            items: z.array(z.any())
+            items: z.array(z.any()).optional().default([])
         }).optional(),
         profession: z.string().optional(),
         sexualIdentity: z.string().optional(),
         background: z.object({
             cost: z.union([z.number(), z.string()]).optional(),
-            items: z.array(z.any()),
+            items: z.array(z.any()).optional().default([]),
             prejudiceResistance: z.number().optional(),
             economicStatus: z.string().optional(),
             legalStatus: z.string().optional(),
@@ -128,7 +128,7 @@ const rpgCollection = defineCollection({
         }).optional(),
         equipment: z.object({
             cost: z.union([z.number(), z.string()]).optional(),
-            items: z.array(z.any())
+            items: z.array(z.any()).optional().default([])
         }).optional(),
         // Powers - support both old and new formats
         powers: z.object({
@@ -143,27 +143,27 @@ const rpgCollection = defineCollection({
         }).optional(),
         weapons: z.object({
             cost: z.union([z.number(), z.string()]).optional(),
-            items: z.array(z.any())
+            items: z.array(z.any()).optional().default([])
         }).optional(),
         // Tech modules - support both old and new formats
         techmodules: z.object({
             cost: z.union([z.number(), z.string()]).optional(),
-            items: z.array(z.any())
+            items: z.array(z.any()).optional().default([])
         }).optional(),
         techModules: z.object({
             installed: z.array(z.any()).optional(),
         }).optional(),
         artifacts: z.object({
             cost: z.union([z.number(), z.string()]).optional(),
-            items: z.array(z.any())
+            items: z.array(z.any()).optional().default([])
         }).optional(),
         vehicles: z.object({
             cost: z.union([z.number(), z.string()]).optional(),
-            items: z.array(z.any())
+            items: z.array(z.any()).optional().default([])
         }).optional(),
         magicObjects: z.object({
             cost: z.union([z.number(), z.string()]).optional(),
-            items: z.array(z.any())
+            items: z.array(z.any()).optional().default([])
         }).optional(),
         magicTableRolls: z.array(z.any()).optional(),
         // Stats - handle both old array and new object formats
@@ -179,7 +179,7 @@ const rpgCollection = defineCollection({
         }).optional(),
         uiState: z.any().optional(),
         varios: z.object({
-            items: z.array(z.any())
+            items: z.array(z.any()).optional().default([])
         }).optional(),
     }),
 });
