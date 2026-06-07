@@ -1,6 +1,7 @@
 {
   "name": "Avalia Wyllt",
   "alias": "Flecha Roja II",
+  "notes": "Avalia es una mujer joven de apariencia completamente humana. De estatura media y constitución atlética, posee la agilidad de alguien acostumbrada a moverse constantemente más que la musculatura de una combatiente de primera línea. Su rostro es atractivo sin resultar llamativo, con facciones equilibradas que le permiten pasar desapercibida en casi cualquier ciudad europea.\n\nTiene el cabello negro, largo y liso, normalmente recogido en una coleta o dejado caer sobre los hombros cuando no está de servicio. Sus ojos verdes contrastan con el tono oscuro de su pelo y suelen transmitir una mezcla de determinación y cautela, como si estuviera acostumbrada a medir cada palabra antes de pronunciarla.\n\nComo Flecha Roja 2 viste un uniforme rojo de líneas modernas y funcionales, diseñado para la movilidad y el combate. A simple vista parece una superheroína europea más, algo que ella considera una ventaja. Tras años sintiéndose observada por ser mestiza, prefiere que la juzguen por sus actos y no por el mundo del que procede.\n\nFuera del uniforme resulta difícil asociarla con una aventurera interdimensional. Tiene el aspecto de una joven corriente, una apariencia que cultiva deliberadamente porque sabe que, en ocasiones, pasar inadvertida es tan útil como cualquier superpoder.",
   "origin": {
     "items": [
       {
@@ -178,7 +179,7 @@
         "value": "26%"
       },
       {
-        "name": "Supervivencia: Bosques",
+        "name": "Supervivencia: Caminos de Myrddin",
         "math": "INT/2",
         "value": "39%"
       },
@@ -221,7 +222,7 @@
       },
       "supervivencia_1780853903243": {
         "skillId": "supervivencia",
-        "specification": "Bosques",
+        "specification": "Caminos de Myrddin",
         "isFree": false,
         "isRequired": false,
         "manualMods": 0,
@@ -242,6 +243,23 @@
     "prejudiceResistance": 10,
     "economicStatus": "clase_baja",
     "friendsAndAssociates": "solitario"
+  },
+  "equipment": {
+    "items": [
+      {
+        "name": "Traje de Twaron",
+        "notes": "+50 a la DA",
+        "cost": 0
+      }
+    ]
+  },
+  "varios": {
+    "items": [
+      {
+        "description": "La Habilidad Supervivencia: Caminos de Myrddin. Le permite encontrar usando su percepción mágica grietas o caminos que lleguen a avalón y puede viajar por ellos con poca dificultad de Avalon a Tierra Zero sin perderse",
+        "cost": 0
+      }
+    ]
   },
   "spells": {
     "selected": [
