@@ -14,7 +14,7 @@ groups:
   - campeones-de-europa
 ---
 
-Avalia Wyllt nació en Avalon varios años antes de la firma del Tratado de Carmarthen. Su padre pertenecía a uno de los antiguos linajes élficos vinculados a los Caminos de Myrddin y su madre era una feérica de la Corte Itinerante. Como muchos mestizos de Avalon creció en una posición incómoda. Nunca fue considerada completamente una de los suyos por ninguno de los dos pueblos que habían dado origen a su sangre.
+Avalia Wyllt nació en Avalon varios años antes de la firma del Tratado de Carmarthen. Su padre pertenecía a uno de los antiguos linajes élficos vinculados a los Caminos de Myrddin y su madre era una feérica de la Primavera Naciente. Como muchos mestizos de Avalon creció en una posición incómoda. Nunca fue considerada completamente una de los suyos por ninguno de los dos pueblos que habían dado origen a su sangre.
 
 Desde pequeña mostró una afinidad excepcional para percibir los senderos ocultos que conectaban Avalon con otros lugares de la Manifestación. Mientras otros aprendían a recorrerlos, ella parecía escucharlos. Decía que cada camino tenía una voz diferente, un eco propio que podía distinguir con facilidad. Aquella sensibilidad llamó la atención de los Sacerdotes de los Caminos, una orden encargada de custodiar los accesos entre reinos y vigilar que nadie utilizase los antiguos senderos para fines indebidos.
 
