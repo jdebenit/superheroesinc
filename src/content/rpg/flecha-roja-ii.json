@@ -1,0 +1,318 @@
+{
+  "name": "Avalia Wyllt",
+  "alias": "Flecha Roja II",
+  "origin": {
+    "items": [
+      {
+        "Arcano": [
+          "+20 a la parada mental",
+          "Híbrido mitológico"
+        ]
+      }
+    ]
+  },
+  "combatstats": {
+    "Acciones por asalto": "5",
+    "Iniciativa y Reflejos": "72",
+    "Puntos de Vida": "41",
+    "Equilibrio Mental": "78"
+  },
+  "otherstats": {
+    "Inconsciencia": "4",
+    "Recuperación": "1 PV/h",
+    "Resistencia a gases y venenos": "27%",
+    "Modificador de fuerza": "1d6",
+    "Peso Levantado": "160kg",
+    "Daño absorbido físico": "0",
+    "Daño absorbido mental": "0",
+    "Modificador de impacto": "92",
+    "Modificador Psionico": "0",
+    "Parada Fisica": "70",
+    "Parada mental": "30",
+    "Salto (alto / largo)": "10,7m / 32,0m"
+  },
+  "attributes": {
+    "values": {
+      "Fuerza": 80,
+      "Constitución": 83,
+      "Agilidad": 192,
+      "Inteligencia": 78,
+      "Percepción": 98,
+      "Apariencia": 82,
+      "Voluntad": 74
+    },
+    "breakdown": {
+      "fuerza": {
+        "base": 80,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "constitucion": {
+        "base": 83,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "agilidad": {
+        "base": 100,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 92,
+        "otherMod": 0
+      },
+      "inteligencia": {
+        "base": 78,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "percepcion": {
+        "base": 98,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "apariencia": {
+        "base": 82,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "voluntad": {
+        "base": 74,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      }
+    }
+  },
+  "skills": {
+    "generalItems": [
+      {
+        "name": "Acechar/Discrección",
+        "math": "(AGI+PER)/2",
+        "value": "145%"
+      },
+      {
+        "name": "Comb. cuerpo a cuerpo",
+        "math": "(AGI+PER)/2",
+        "value": "145%"
+      },
+      {
+        "name": "Conocimientos generales",
+        "math": "INT/3",
+        "value": "26%"
+      },
+      {
+        "name": "Esconderse",
+        "math": "(AGI+PER)/4",
+        "value": "72%"
+      },
+      {
+        "name": "Idea",
+        "math": "INT/2",
+        "value": "39%"
+      },
+      {
+        "name": "Influencia",
+        "math": "(INT+APA)/2",
+        "value": "80%"
+      },
+      {
+        "name": "Idioma nativo (Avalon)",
+        "math": "INT",
+        "value": "78%"
+      },
+      {
+        "name": "Investigar",
+        "math": "(INT+PER)/3",
+        "value": "58%"
+      },
+      {
+        "name": "Lanzar",
+        "math": "(FUE+PER)/2",
+        "value": "89%"
+      },
+      {
+        "name": "Primeros auxilios",
+        "math": "INT/2",
+        "value": "39%"
+      },
+      {
+        "name": "Suerte",
+        "math": "(PER+VOL)/4",
+        "value": "43%"
+      },
+      {
+        "name": "Trepar y Saltar",
+        "math": "AGI",
+        "value": "192%"
+      }
+    ],
+    "specialItems": [
+      {
+        "name": "Nadar / Bucear",
+        "math": "(FUE+AGI)/2",
+        "value": "136%"
+      },
+      {
+        "name": "Magia",
+        "math": "(INT+PER)/2",
+        "value": "88%"
+      },
+      {
+        "name": "Rastrear",
+        "math": "(INT+PER)/4",
+        "value": "44%"
+      },
+      {
+        "name": "Otro idioma: Castellano",
+        "math": "INT/3",
+        "value": "26%"
+      },
+      {
+        "name": "Supervivencia: Bosques",
+        "math": "INT/2",
+        "value": "39%"
+      },
+      {
+        "name": "Interpretar: Baile",
+        "math": "(APR+PER)/3",
+        "value": "60%"
+      }
+    ],
+    "generalManualMods": {},
+    "manualBases": {},
+    "selected": {
+      "nadar": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "magia": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "rastrear": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      }
+    },
+    "specified": {
+      "otro_idioma_1780853895091": {
+        "skillId": "otro_idioma",
+        "specification": "Castellano",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "supervivencia_1780853903243": {
+        "skillId": "supervivencia",
+        "specification": "Bosques",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "interpretar_1780853997218": {
+        "skillId": "interpretar",
+        "specification": "Baile",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      }
+    },
+    "nativeLanguage": "Avalon"
+  },
+  "background": {
+    "prejudiceResistance": 10,
+    "economicStatus": "clase_baja",
+    "friendsAndAssociates": "solitario"
+  },
+  "spells": {
+    "selected": [
+      {
+        "id": "percepcion_magica",
+        "rank": 1
+      },
+      {
+        "id": "proyeccion_de_energia_magica",
+        "rank": 1
+      }
+    ],
+    "emFormula": {
+      "pcCost": 7
+    },
+    "calculatedEM": 62
+  },
+  "powers": {
+    "selected": [
+      {
+        "id": "regeneracion_de_tejidos",
+        "origin": "Sobrenatural",
+        "rank": 21,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false
+      },
+      {
+        "id": "invulnerabilidad",
+        "origin": "Sobrenatural",
+        "rank": 1,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false,
+        "selectedOption": "cínética"
+      },
+      {
+        "id": "volar",
+        "origin": "Guardian",
+        "rank": 41,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false
+      },
+      {
+        "id": "supervelocidad",
+        "origin": "Guardian",
+        "rank": 1,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false,
+        "powerMod": 92
+      }
+    ]
+  },
+  "hibridoParams": {
+    "sequels": [
+      {
+        "id": "dependency",
+        "description": "Necesita ingerir grandes cantidades de comida, si pasa sin comer mas de 8 horas, sus poderes se desvanecen."
+      }
+    ]
+  },
+  "profession": "Sacerdotisa de los Caminos",
+  "sexualIdentity": "Mujer",
+  "meta": {
+    "version": "Beta 0.15.5",
+    "generator": "SHI Wizard"
+  }
+}
