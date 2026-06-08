@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "characters/enigma.md",
+                "file": "timeline/desaparicion-de-enigma.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "enigma"
+              "title": "desaparicion-de-enigma"
             }
           }
         ]
@@ -184,10 +184,10 @@
       "bases:Crear nueva base": false
     }
   },
-  "active": "c6be6e098b63b58a",
+  "active": "d101106a4f64eb58",
   "lastOpenFiles": [
-    "characters/desertor.md",
     "characters/enigma.md",
+    "characters/desertor.md",
     "timeline/fin-de-la-iigm-y-sociedad-de-los-susurros.md",
     "timeline/formacion-liga-del-caos.md",
     "timeline/eridiani-libro-de-los-muertos.md",

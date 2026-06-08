@@ -13,6 +13,7 @@ groups:
   - centinelas-de-la-libertad
   - axis
 alias: Enigma
+birthDate: 1902-12-21
 ---
 Harold Theodor Simmons nació en Brighton en 1902, en una época en la que el Imperio Británico todavía parecía una realidad inmutable y la mayoría de las personas asumían que el mundo ya había sido explicado de forma satisfactoria por sacerdotes, académicos y políticos. Su padre pertenecía precisamente a esa generación de hombres convencidos de que la curiosidad era una virtud respetable siempre que no condujera demasiado lejos. Harold, por el contrario, desarrolló desde muy joven una inclinación natural hacia todo aquello que permanecía oculto, mal comprendido o deliberadamente olvidado.
 
