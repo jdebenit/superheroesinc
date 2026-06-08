@@ -8,4 +8,5 @@ icon: start
 tags:
   - contemporaneo
   - política
+  - purgatorio-paraiso
 ---
