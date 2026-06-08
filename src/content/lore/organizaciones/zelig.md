@@ -5,7 +5,6 @@ category: "organizaciones"
 source: "Superhéroes INC. Tercera Edición"
 updatedDate: 2025-11-26
 ---
-
 **Zelig** es una **empresa privada**, registrada como Sociedad Anónima, cuya actividad exacta **no aparece documentada públicamente** en los archivos oficiales del universo de *Superhéroes INC*. Aun así, su nombre figura en el listado de organizaciones relevantes, lo que indica que mantiene algún tipo de **relación estructural o indirecta** con el ecosistema metahumano.
 
 Su presencia es especialmente destacada por un hecho:  
