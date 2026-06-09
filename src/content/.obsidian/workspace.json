@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "lore/grupos/axis.md",
+                "file": "lore/eventos/bienvenido-al-universo.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "axis"
+              "title": "bienvenido-al-universo"
             }
           }
         ]
@@ -185,8 +185,14 @@
   },
   "active": "d101106a4f64eb58",
   "lastOpenFiles": [
-    "lore/organizaciones/zelig.md",
+    "lore/eventos/cronologia-resumida.md",
+    "lore/eventos/bienvenido-al-universo.md",
+    "lore/eventos/bienvenido-al-mundo-de-superheroes-inc 1.md",
+    "lore/eventos/la-caida-de-la-gran-barrera.md",
+    "lore/eventos/Guia breve del mundo.md",
+    "lore/eventos/el-colapso-del-nexo.md",
     "lore/grupos/axis.md",
+    "lore/organizaciones/zelig.md",
     "lore/grupos/campeones-de-europa.md",
     "lore/grupos/antiheroes-ltd.md",
     "timeline/desaparicion-de-enigma.md",
@@ -205,12 +211,6 @@
     "timeline/disolucion-grupos-metahumanos.md",
     "timeline/disturbios-en-marsella.md",
     "timeline/confirmacion-de-metahumanos.md",
-    "timeline/comportamiento-discolo-de-lince.md",
-    "timeline/desaparicion-de-heinrich-krauss.md",
-    "timeline/desaparicion-de-earthquake.md",
-    "timeline/desaparici-n-de-jaime-arrieta.md",
-    "timeline/derrota-de-k-sser.md",
-    "timeline/desaparicion-europa.md",
     "rpg/flecha-roja-ii.json",
     "personajes",
     "Pasted image 20260416191817.png",
