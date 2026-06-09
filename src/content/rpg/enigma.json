@@ -1,0 +1,374 @@
+{
+  "name": "Harold t.. Simmons",
+  "level": 18,
+  "alias": "Enigma",
+  "notes": "Enigma aparenta encontrarse entre los sesenta y los setenta años, aunque su edad real supera ampliamente los noventa. Su estancia en Cronópolis alteró de algún modo su envejecimiento, permitiéndole conservar una vitalidad impropia de un hombre nacido a principios del siglo XX.\n\nAlto, de hombros anchos y complexión todavía atlética, mantiene el porte distinguido que en otro tiempo le convirtió en una estrella de Hollywood. Las arrugas alrededor de los ojos y las canas que se abren paso entre su cabello oscuro delatan el paso de los años, aunque su aspecto sigue resultando sorprendentemente vigoroso.\n\nSus ojos suelen transmitir una mezcla de serenidad y melancolía difícil de ignorar. Hay en su mirada algo propio de quien ha sobrevivido a varias generaciones y contempla el mundo desde una perspectiva distinta. Cuando actúa como Enigma viste un uniforme oscuro acompañado por una larga capa, una imagen que recuerda más a los aventureros y héroes misteriosos de los años cuarenta que a los coloridos superseres de épocas posteriores.",
+  "meta": {
+    "version": "Beta 0.15.5",
+    "generator": "SHI Wizard"
+  },
+  "origin": {
+    "items": [
+      {
+        "Guardián": [
+          "Acceso a poderes de guardianes"
+        ]
+      }
+    ]
+  },
+  "combatstats": {
+    "Acciones por asalto": "3",
+    "Iniciativa y Reflejos": "45",
+    "Puntos de Vida": "158",
+    "Equilibrio Mental": "60"
+  },
+  "otherstats": {
+    "Inconsciencia": "15",
+    "Recuperación": "1 PV/h",
+    "Resistencia a gases y venenos": "26%",
+    "Modificador de fuerza": "1d4",
+    "Peso Levantado": "70kg",
+    "Daño absorbido físico": "0",
+    "Daño absorbido mental": "0",
+    "Modificador de impacto": "0",
+    "Modificador Psionico": "25",
+    "Parada Fisica": "23",
+    "Parada mental": "50",
+    "Salto (alto / largo)": "3,1m / 9,2m"
+  },
+  "attributes": {
+    "values": {
+      "Fuerza": 70,
+      "Constitución": 80,
+      "Agilidad": 92,
+      "Inteligencia": 75,
+      "Percepción": 90,
+      "Apariencia": 60,
+      "Voluntad": 100
+    },
+    "breakdown": {
+      "fuerza": {
+        "base": 70,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "constitucion": {
+        "base": 80,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "agilidad": {
+        "base": 92,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "inteligencia": {
+        "base": 75,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "percepcion": {
+        "base": 90,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "apariencia": {
+        "base": 60,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "voluntad": {
+        "base": 100,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      }
+    },
+    "manualBonuses": {
+      "Fuerza": 0,
+      "Agilidad": 0,
+      "Constitución": 0,
+      "Inteligencia": 0,
+      "Percepción": 0,
+      "Voluntad": 0,
+      "Apariencia": 0
+    }
+  },
+  "skills": {
+    "generalItems": [
+      {
+        "name": "Acechar/Discrección",
+        "math": "(AGI+PER)/2",
+        "value": "91%"
+      },
+      {
+        "name": "Comb. cuerpo a cuerpo",
+        "math": "(AGI+PER)/2",
+        "value": "100%"
+      },
+      {
+        "name": "Conocimientos generales",
+        "math": "INT/3",
+        "value": "40%"
+      },
+      {
+        "name": "Esconderse",
+        "math": "(AGI+PER)/4",
+        "value": "45%"
+      },
+      {
+        "name": "Idea",
+        "math": "INT/2",
+        "value": "37%"
+      },
+      {
+        "name": "Influencia",
+        "math": "(INT+APA)/2",
+        "value": "67%"
+      },
+      {
+        "name": "Idioma nativo (Ingés)",
+        "math": "INT",
+        "value": "75%"
+      },
+      {
+        "name": "Investigar",
+        "math": "(INT+PER)/3",
+        "value": "70%"
+      },
+      {
+        "name": "Lanzar",
+        "math": "(FUE+PER)/2",
+        "value": "80%"
+      },
+      {
+        "name": "Primeros auxilios",
+        "math": "INT/2",
+        "value": "37%"
+      },
+      {
+        "name": "Suerte",
+        "math": "(PER+VOL)/4",
+        "value": "47%"
+      },
+      {
+        "name": "Trepar y Saltar",
+        "math": "AGI",
+        "value": "92%"
+      }
+    ],
+    "specialItems": [
+      {
+        "name": "Supervivencia: Campos de batalla",
+        "math": "INT/2",
+        "value": "45%"
+      },
+      {
+        "name": "Otro idioma: Frances",
+        "math": "INT/3",
+        "value": "60%"
+      },
+      {
+        "name": "Otro idioma: Español",
+        "math": "INT/3",
+        "value": "50%"
+      },
+      {
+        "name": "Otro idioma: Suajili",
+        "math": "INT/3",
+        "value": "25%"
+      },
+      {
+        "name": "Otro idioma: Hindu",
+        "math": "INT/3",
+        "value": "25%"
+      },
+      {
+        "name": "Otro idioma: Dogón",
+        "math": "INT/3",
+        "value": "40%"
+      },
+      {
+        "name": "Interpretar: Dramaturgia",
+        "math": "(APR+PER)/3",
+        "value": "70%"
+      },
+      {
+        "name": "Conducir: Coche",
+        "math": "(INT+PER)/4",
+        "value": "41%"
+      },
+      {
+        "name": "Ciencia: Ocultismo",
+        "math": "INT/3",
+        "value": "85%"
+      },
+      {
+        "name": "Ciencia: Historia",
+        "math": "INT/3",
+        "value": "85%"
+      }
+    ],
+    "generalManualMods": {},
+    "manualBases": {
+      "investigar": 70,
+      "combate": 100,
+      "conocimientos": 40
+    },
+    "selected": {},
+    "specified": {
+      "supervivencia_1781034811568": {
+        "skillId": "supervivencia",
+        "specification": "Campos de batalla",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 45
+      },
+      "otro_idioma_1781034814863": {
+        "skillId": "otro_idioma",
+        "specification": "Frances",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 60
+      },
+      "otro_idioma_1781034815592": {
+        "skillId": "otro_idioma",
+        "specification": "Español",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 50
+      },
+      "otro_idioma_1781034816326": {
+        "skillId": "otro_idioma",
+        "specification": "Suajili",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "otro_idioma_1781034817010": {
+        "skillId": "otro_idioma",
+        "specification": "Hindu",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "otro_idioma_1781034817650": {
+        "skillId": "otro_idioma",
+        "specification": "Dogón",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 40
+      },
+      "interpretar_1781034818332": {
+        "skillId": "interpretar",
+        "specification": "Dramaturgia",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 70
+      },
+      "conducir_1781034825288": {
+        "skillId": "conducir",
+        "specification": "Coche",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "ciencia_1781034830868": {
+        "skillId": "ciencia",
+        "specification": "Ocultismo",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 85
+      },
+      "ciencia_1781034832070": {
+        "skillId": "ciencia",
+        "specification": "Historia",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 85
+      }
+    },
+    "nativeLanguage": "Ingés"
+  },
+  "background": {
+    "prejudiceResistance": 15,
+    "economicStatus": "clase_baja",
+    "socialStatus": "heroe_reconocido",
+    "friendsAndAssociates": "grupo_reducido"
+  },
+  "equipment": {
+    "items": [
+      {
+        "name": "Traje de Twaron",
+        "notes": "+50 a la DA",
+        "cost": 0
+      }
+    ]
+  },
+  "powers": {
+    "selected": [
+      {
+        "id": "teleportacion",
+        "origin": "Guardian",
+        "rank": 71,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false
+      },
+      {
+        "id": "emision_de_energia",
+        "origin": "Guardian",
+        "rank": 100,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false
+      },
+      {
+        "id": "campo_de_fuerza",
+        "origin": "Guardian",
+        "rank": 100,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false
+      }
+    ]
+  },
+  "guardianParams": {
+    "quality": "object_grants_powers",
+    "objectType": "otro",
+    "feature": "glowing",
+    "transformation": "no_change_persists"
+  },
+  "profession": "Ex Actor",
+  "sexualIdentity": "Hombre",
+  "uiState": {
+    "unlockCombatStats": true,
+    "unlockOtherStats": true
+  }
+}
