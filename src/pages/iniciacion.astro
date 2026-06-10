@@ -91,7 +91,7 @@ const allInitiationPosts = [
 
     <div class="guide-grid">
       <div class="guide-step">
-        <div class="step-number">PASO 1</div>
+        <div class="step-number">REGLAS</div>
         <h2>Aprende las Reglas</h2>
         <p>
           Familiarízate con los poderes, tecnologías y hechizos del universo.
@@ -119,7 +119,7 @@ const allInitiationPosts = [
       </div>
 
       <div class="guide-step">
-        <div class="step-number">PASO 2</div>
+        <div class="step-number">PERSONAJES</div>
         <h2>Crea tu Personaje</h2>
         <p>
           ¿Listo para la acción? Utiliza nuestro generador interactivo para
@@ -139,7 +139,7 @@ const allInitiationPosts = [
       </div>
 
       <div class="guide-step">
-        <div class="step-number">PASO 3</div>
+        <div class="step-number">LORE</div>
         <h2>Explora el Lore</h2>
         <p>
           El universo de SHI está vivo y lleno de organizaciones y eventos que
@@ -171,7 +171,7 @@ const allInitiationPosts = [
       </div>
 
       <div class="guide-step">
-        <div class="step-number">PASO 4</div>
+        <div class="step-number">COMUNIDAD</div>
         <h2>Únete a la Comunidad</h2>
         <p>
           El rol se disfruta mejor acompañado. Tenemos un canal de comunicación
@@ -192,7 +192,7 @@ const allInitiationPosts = [
     {
       allInitiationPosts.length > 0 && (
         <div class="articles-section">
-          <h2 class="section-title">Artículos de Iniciación</h2>
+          <h2 class="section-title">Contenidos de Iniciación</h2>
           <div class="articles-grid">
             {allInitiationPosts.map((post) => (
               <ComicCard {...post} client:load />
