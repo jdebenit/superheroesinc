@@ -32,7 +32,7 @@ npcs:
     color: "blue"
   - name: "Subinspector Cortes"
     color: "brown"
-tags: ["aprende a jugar"]
+tags: ["iniciacion"]
 ---
 
 # Introducción
@@ -54,7 +54,7 @@ ROLL[La Naga]: Tengo Acechar 130%; 1d100 → 24; ÉXITO.
 
 RULE[SHI-p285]: Resolución de acciones, Libro SHI 3ª Edición, página 285.
 
-META: Solo hubiera fallado con una pifia, un 01. Podría haberse tratado como acción automática, pero así calentamos los dados.
+META: Solo hubiera fallado con una pifia, un 99 o un 00. Podría haberse tratado como acción automática, pero así calentamos los dados.
 
 NARR: Al acercarse, Asha distingue a tres moteros armados. Dos llevan cadenas, y el tercero empuña una de esas armas de pólvora que ha visto en los “espejos que muestran imágenes” de este mundo. Dos intentan meter a una mujer por la fuerza en la parte trasera de un vehículo metálico.
 
