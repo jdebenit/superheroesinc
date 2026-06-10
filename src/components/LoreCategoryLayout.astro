@@ -37,22 +37,26 @@ const { title, description, items, basePath } = Astro.props;
                                     {item.data.description}
                                 </p>
                                 <div class="item-meta">
-                                    <span class="item-source">
-                                        {item.data.source}
-                                    </span>
-                                    <span class="item-reading-time">
-                                        ⏱️ {getReadingTime(item.body)} min
-                                    </span>
-                                    {item.data.updatedDate && (
-                                        <time class="item-date">
-                                            {new Date(
-                                                item.data.updatedDate,
-                                            ).toLocaleDateString("es-ES", {
-                                                year: "numeric",
-                                                month: "2-digit",
-                                                day: "2-digit",
-                                            })}
-                                        </time>
+                                    <div class="meta-row">
+                                        <span class="item-reading-time">
+                                            ⏱️ {getReadingTime(item.body)} min
+                                        </span>
+                                        {item.data.updatedDate && (
+                                            <time class="item-date">
+                                                {new Date(
+                                                    item.data.updatedDate,
+                                                ).toLocaleDateString("es-ES", {
+                                                    year: "numeric",
+                                                    month: "2-digit",
+                                                    day: "2-digit",
+                                                })}
+                                            </time>
+                                        )}
+                                    </div>
+                                    {item.data.source && (
+                                        <div class="item-source">
+                                            {item.data.source}
+                                        </div>
                                     )}
                                 </div>
                             </a>
@@ -153,18 +157,24 @@ const { title, description, items, basePath } = Astro.props;
 
     .item-meta {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: var(--spacing-sm);
+        flex-direction: column;
+        gap: 0.5rem;
         padding-top: var(--spacing-sm);
         border-top: 1px solid var(--color-border);
         font-size: var(--text-sm);
     }
 
+    .meta-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
     .item-source {
         color: var(--color-text-light);
         font-weight: 600;
-        flex: 1;
+        line-height: 1.4;
     }
 
     .item-reading-time {
@@ -188,9 +198,5 @@ const { title, description, items, basePath } = Astro.props;
             font-size: var(--text-4xl);
         }
 
-        .item-meta {
-            flex-direction: column;
-            align-items: flex-start;
-        }
     }
 </style>
