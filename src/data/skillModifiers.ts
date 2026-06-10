@@ -104,7 +104,7 @@ export const ORIGIN_SKILL_MODIFIERS: OriginSkillModifiers = {
         { skillId: 'otro_idioma', value: 20, description: 'Aplica a un idioma especifico' }
     ],
 
-    "Mente maestra": [
+    "Mente Maestra": [
         { skillId: 'investigar', value: 20 },
         { skillId: 'conocimientos', value: 20 },
         { skillId: 'idea', value: 20 },

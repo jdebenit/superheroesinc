@@ -1,6 +1,6 @@
 
 export const APP_VERSIONS = {
-    WIZARD: 'Beta 0.15.5',
+    WIZARD: 'Beta 0.15.1',
     TACTIC_PLAYER_TERMINAL: 'Beta 0.4.0',
     TACTIC_MASTER_TERMINAL: 'Beta 0.6.0',
     CHARACTER_SHEET: 'Beta 0.3.8',
