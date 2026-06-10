@@ -1,0 +1,407 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout
+    title="Guía Rápida de Reglas - Superheroes INC."
+    description="Resumen de las reglas esenciales de Superheroes INC. Tercera Edición: tiradas básicas, combate, daño y salud."
+>
+    <section class="rules-page">
+        <div class="rules-header">
+            <div class="stamp-classified accent-stamp">DESCLASIFICADO</div>
+            <h1 class="page-title">Guía Rápida de Reglas</h1>
+            <p class="intro-text">
+                Resumen operativo de mecánicas y protocolos de juego para
+                agentes de campo. Revisado y desclasificado para consulta
+                rápida.
+            </p>
+            <a href="/recursos" class="back-link">← Volver a Recursos</a>
+        </div>
+
+        <div class="rules-container paper-card">
+            {/* Paper clip visual */}
+            <div
+                class="absolute -top-3 left-8 w-4 h-10 border-2 border-gray-400 rounded-full z-10 bg-transparent"
+            >
+            </div>
+
+            <nav class="rules-index">
+                <h3>Índice del Archivo</h3>
+                <ul>
+                    <li>
+                        <a href="#sistema-basico">1. El Sistema Básico (d100)</a
+                        >
+                    </li>
+                    <li>
+                        <a href="#tiradas-enfrentadas">2. Tiradas Enfrentadas</a
+                        >
+                    </li>
+                    <li><a href="#combate">3. Combate</a></li>
+                    <li>
+                        <a href="#daño-salud">4. Daño, Daño Absorbido y Vida</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="rules-content">
+                {/* SECTION 1 */}
+                <article id="sistema-basico" class="rules-section">
+                    <h2>1. El Sistema Básico (Tiradas d100)</h2>
+                    <p>
+                        Cualquier acción cuyo resultado sea incierto se resuelve
+                        realizando una tirada de
+                        <strong>dados percentiles (d100)</strong> contra el valor
+                        del Atributo o Habilidad relevante.
+                    </p>
+
+                    <div class="formula-box">
+                        <strong>Fórmula Básica:</strong><br />
+                        Tirada (d100) ≤ Valor de Habilidad + Modificador de Dificultad
+                        = ÉXITO
+                    </div>
+
+                    <h3>Grados de Éxito y Fracaso</h3>
+                    <table class="rules-table">
+                        <thead>
+                            <tr>
+                                <th>Resultado d100</th>
+                                <th>Efecto</th>
+                                <th>Descripción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-primary font-bold"
+                                    >01 o 10% del valor</td
+                                >
+                                <td>Éxito Crítico</td>
+                                <td
+                                    >El personaje logra su objetivo de manera
+                                    sobresaliente, obteniendo ventajas
+                                    adicionales.</td
+                                >
+                            </tr>
+                            <tr>
+                                <td>≤ Habilidad</td>
+                                <td>Éxito Estándar</td>
+                                <td
+                                    >La acción se realiza de forma
+                                    satisfactoria.</td
+                                >
+                            </tr>
+                            <tr>
+                                <td>> Habilidad</td>
+                                <td>Fallo Estándar</td>
+                                <td
+                                    >No se logra el objetivo, sin consecuencias
+                                    catastróficas adicionales.</td
+                                >
+                            </tr>
+                            <tr>
+                                <td class="text-primary font-bold">99 - 00</td>
+                                <td>Pifia</td>
+                                <td
+                                    >Un fallo crítico que complica gravemente la
+                                    situación o daña al personaje.</td
+                                >
+                            </tr>
+                        </tbody>
+                    </table>
+                </article>
+
+                <hr class="rules-divider" />
+
+                {/* SECTION 2 */}
+                <article id="tiradas-enfrentadas" class="rules-section">
+                    <h2>2. Tiradas Enfrentadas</h2>
+                    <p>
+                        Cuando dos personajes compiten directamente por un
+                        resultado (por ejemplo, forcejear o intentar pasar
+                        desapercibido frente a un vigilante), se calcula el
+                        porcentaje de éxito adaptado para el atacante.
+                    </p>
+
+                    <div class="formula-box">
+                        <strong>Fórmula de Tirada Enfrentada:</strong><br />
+                        Probabilidad de Éxito = 50% + (Habilidad del Atacante - Habilidad
+                        del Defensor)
+                    </div>
+
+                    <p>
+                        El atacante lanza d100. Si el resultado es menor o igual
+                        que la probabilidad calculada, el atacante gana el
+                        enfrentamiento. Si es mayor, el defensor tiene éxito en
+                        su resistencia.
+                    </p>
+                </article>
+
+                <hr class="rules-divider" />
+
+                {/* SECTION 3 */}
+                <article id="combate" class="rules-section">
+                    <h2>3. Combate</h2>
+                    <p>
+                        El combate se organiza en <strong>Asaltos</strong>.
+                        Durante cada asalto, el orden de actuación se determina
+                        por la <strong>Iniciativa</strong>+ 1d100 que se tirara
+                        al inicio de combate.
+                    </p>
+
+                    <h3>Acciones por Asalto</h3>
+                    <p>
+                        Por defecto, cada personaje dispone de <strong
+                            >acciones por asalto</strong
+                        > (indicadas en su ficha). Estas acciones se pueden gastar
+                        en atacar, moverse, activar poderes o reservar para esquivas
+                        o usarlas para interrumpir una acción o intervenir en un momento
+                        determinado.
+                    </p>
+
+                    <h3>Adelantar Iniciativa</h3>
+                    <p>
+                        Si se decide no actuar ese asalto se puede adelantar en
+                        la tabla de iniciativa a la primera posicion para el
+                        siguiente asalto.
+                    </p>
+
+                    <h3>Combate Cuerpo a Cuerpo</h3>
+                    <div class="formula-box">
+                        <strong>Resolución Cuerpo a Cuerpo:</strong><br />
+                        Porcentaje de Éxito = Habilidad + Modificadores Situacionales
+                        - Parada Física del Defensor
+                    </div>
+
+                    <h3>Combate a Distancia</h3>
+                    <div class="formula-box">
+                        <strong>Resolución a Distancia:</strong><br />
+                        Porcentaje de Éxito = Base Habilidad + Modificador Rango +
+                        Modificador Situación - Cobertura - Modificador de Impacto
+                        del Defensor
+                    </div>
+                    <ul>
+                        <li>
+                            <strong>Cobertura</strong>: Elementos físicos que
+                            protegen al defensor restan porcentaje de éxito al
+                            atacante.
+                        </li>
+                        <li>
+                            <strong>Esquiva</strong>: Si se tiene una accion
+                            reservada con una tirada de Reflejos se podra
+                            esquivar.
+                        </li>
+                    </ul>
+                </article>
+
+                <hr class="rules-divider" />
+
+                {/* SECTION 4 */}
+                <article id="daño-salud" class="rules-section">
+                    <h2>4. Daño, Daño Absorbido y Vida</h2>
+                    <p>
+                        Cuando un ataque tiene éxito y el defensor no logra
+                        pararlo o esquivarlo, se aplica el daño del arma o del
+                        poder.
+                    </p>
+
+                    <h3>Daño Absorbido</h3>
+                    <p>
+                        El Daño Abosrbido del personaje (Físico o Mental) resta
+                        daño del total infligido.
+                    </p>
+                    <div class="formula-box">
+                        <strong
+                            >Daño Neto Recibido = Daño del Ataque - Daño
+                            Absorbido del Defensor</strong
+                        >
+                    </div>
+
+                    <h3>Estado del Personaje</h3>
+                    <ul>
+                        <li>
+                            <strong>Puntos de Vida (PV)</strong>: Miden el
+                            aguante físico. Si llegan a 0 esta al borde de la
+                            muerte.
+                        </li>
+                        <li>
+                            <strong>Equilibrio Mental (EQM)</strong>: Mide el
+                            estrés psíquico y traumas. Si el EQM llega a 0, el
+                            personaje sufre un colapso mental y trauma grave.
+                        </li>
+                    </ul>
+                </article>
+            </div>
+        </div>
+    </section>
+</Layout>
+
+<style>
+    .rules-page {
+        padding: var(--spacing-lg) var(--spacing-sm);
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .rules-header {
+        margin-bottom: var(--spacing-xl);
+        position: relative;
+    }
+
+    .page-title {
+        font-size: var(--text-5xl);
+        color: var(--color-secondary);
+        margin-bottom: var(--spacing-sm);
+        text-shadow: 2px 2px 0px var(--color-primary);
+    }
+
+    .intro-text {
+        font-size: var(--text-lg);
+        color: var(--color-text-light);
+        margin-bottom: var(--spacing-md);
+        line-height: 1.8;
+    }
+
+    .back-link {
+        display: inline-block;
+        color: var(--color-secondary);
+        font-weight: 700;
+        text-decoration: none;
+        font-family: var(--font-heading);
+        border-bottom: 2px solid transparent;
+        transition: border-color 0.2s;
+    }
+
+    .back-link:hover {
+        border-bottom-color: var(--color-secondary);
+    }
+
+    .accent-stamp {
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform: rotate(4deg);
+        font-size: 1.1rem;
+    }
+
+    .rules-container {
+        background: white;
+        padding: var(--spacing-xl);
+        border: 4px solid var(--color-secondary);
+        box-shadow: 8px 8px 0px var(--color-secondary);
+        position: relative;
+    }
+
+    .rules-index {
+        background: var(--color-background-alt);
+        padding: var(--spacing-md);
+        border: 1px dashed var(--color-secondary);
+        margin-bottom: var(--spacing-xl);
+    }
+
+    .rules-index h3 {
+        margin-bottom: var(--spacing-sm);
+        font-size: var(--text-xl);
+    }
+
+    .rules-index ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .rules-index li {
+        margin-bottom: 0.5rem;
+    }
+
+    .rules-index a {
+        color: var(--color-accent);
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .rules-index a:hover {
+        text-decoration: underline;
+        color: var(--color-primary);
+    }
+
+    .rules-section {
+        margin-bottom: var(--spacing-xl);
+    }
+
+    .rules-section h2 {
+        font-size: var(--text-3xl);
+        color: var(--color-secondary);
+        margin-bottom: var(--spacing-md);
+        border-bottom: 2px solid var(--color-secondary);
+        padding-bottom: 0.25rem;
+    }
+
+    .rules-section h3 {
+        font-size: var(--text-xl);
+        color: var(--color-primary-dark);
+        margin-top: var(--spacing-md);
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .rules-section p {
+        line-height: 1.8;
+        margin-bottom: var(--spacing-md);
+    }
+
+    .formula-box {
+        background: var(--color-background);
+        border-left: 4px solid var(--color-primary);
+        padding: var(--spacing-md);
+        margin: var(--spacing-md) 0;
+        font-family: var(--font-body);
+        font-size: var(--text-base);
+    }
+
+    .rules-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: var(--spacing-md) 0;
+        font-size: var(--text-sm);
+    }
+
+    .rules-table th,
+    .rules-table td {
+        border: 1px solid var(--color-border);
+        padding: var(--spacing-sm);
+        text-align: left;
+    }
+
+    .rules-table th {
+        background: var(--color-secondary);
+        color: white;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    .rules-table tr:nth-child(even) {
+        background: var(--color-background-alt);
+    }
+
+    .rules-divider {
+        border: none;
+        border-top: 2px dashed var(--color-border);
+        margin: var(--spacing-xl) 0;
+    }
+
+    @media (max-width: 768px) {
+        .accent-stamp {
+            position: static;
+            display: block;
+            margin-bottom: var(--spacing-md);
+            width: fit-content;
+        }
+
+        .rules-container {
+            padding: var(--spacing-md);
+        }
+
+        .rules-table {
+            display: block;
+            overflow-x: auto;
+        }
+    }
+</style>
