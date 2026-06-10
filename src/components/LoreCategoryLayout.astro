@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { getReadingTime } from "../utils/readingTime";
 
 interface Props {
     title: string;
@@ -38,6 +39,9 @@ const { title, description, items, basePath } = Astro.props;
                                 <div class="item-meta">
                                     <span class="item-source">
                                         {item.data.source}
+                                    </span>
+                                    <span class="item-reading-time">
+                                        ⏱️ {getReadingTime(item.body)} min
                                     </span>
                                     {item.data.updatedDate && (
                                         <time class="item-date">
@@ -161,6 +165,12 @@ const { title, description, items, basePath } = Astro.props;
         color: var(--color-text-light);
         font-weight: 600;
         flex: 1;
+    }
+
+    .item-reading-time {
+        color: var(--color-text-light);
+        font-weight: 500;
+        white-space: nowrap;
     }
 
     .item-date {

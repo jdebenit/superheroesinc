@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import ComicCard from "../components/ComicCard";
 import { getCollection } from "astro:content";
+import { getReadingTime } from "../utils/readingTime";
 
 const cleanTag = (tag: string) =>
   tag
@@ -38,6 +39,7 @@ const allInitiationPosts = [
     image: post.data.image,
     category: "Blog",
     categoryLink: "/blog",
+    readingTime: getReadingTime(post.body),
   })),
   ...lorePosts.map((entry) => ({
     title: entry.data.title,
@@ -53,6 +55,7 @@ const allInitiationPosts = [
     image: entry.data.image,
     category: entry.data.category,
     categoryLink: `/lore/${entry.data.category}`,
+    readingTime: getReadingTime(entry.body),
   })),
 ];
 ---

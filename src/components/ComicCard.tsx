@@ -9,9 +9,10 @@ interface ComicCardProps {
     link: string;
     category?: string;
     categoryLink?: string;
+    readingTime?: number;
 }
 
-const ComicCard: React.FC<ComicCardProps> = ({ title, excerpt, date, image, link, category, categoryLink }) => {
+const ComicCard: React.FC<ComicCardProps> = ({ title, excerpt, date, image, link, category, categoryLink, readingTime }) => {
     return (
         <a href={link} className="block group h-full" style={{ textDecoration: 'none', backgroundColor: 'transparent' }}>
             <article className="paper-card h-full flex flex-col transition-all transform hover:-translate-y-1 hover:shadow-lg relative bg-white border border-[#d3d0c2]">
@@ -69,6 +70,12 @@ const ComicCard: React.FC<ComicCardProps> = ({ title, excerpt, date, image, link
                     <p className="text-sm text-gray-700 flex-grow leading-relaxed font-mono mb-4" style={{ fontFamily: 'var(--font-body)' }}>
                         {excerpt}
                     </p>
+
+                    {readingTime && (
+                        <div className="text-xs font-mono text-secondary font-bold uppercase mb-3">
+                            ⏱️ Tiempo de lectura: <span className="text-primary">{readingTime} min</span>
+                        </div>
+                    )}
 
                     <div className="mt-auto flex flex-col sm:flex-row items-start sm:items-center justify-between border-t border-secondary pt-3 gap-3">
                         <ShareButtons title={title} url={link} className="origin-left" />

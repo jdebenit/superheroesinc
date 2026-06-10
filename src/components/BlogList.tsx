@@ -11,6 +11,7 @@ interface BlogPost {
     image?: string;
     tags?: string[];
   };
+  readingTime?: number;
 }
 
 interface BlogListProps {
@@ -106,6 +107,7 @@ export default function BlogList({ posts }: BlogListProps) {
               })}
               image={post.data.image}
               link={`/blog/${post.id}`}
+              readingTime={post.readingTime}
             />
           ))}
         </div>

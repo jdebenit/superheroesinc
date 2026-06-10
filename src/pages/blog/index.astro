@@ -3,10 +3,11 @@ import Layout from "../../layouts/Layout.astro";
 import ComicCard from "../../components/ComicCard";
 import BlogList from "../../components/BlogList";
 import { getCollection } from "astro:content";
+import { getReadingTime } from "../../utils/readingTime";
 
-const posts = (await getCollection("blog")).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+const posts = (await getCollection("blog"))
+	.map((post) => ({ ...post, readingTime: getReadingTime(post.body) }))
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
 <Layout

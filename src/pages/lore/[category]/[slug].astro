@@ -7,6 +7,7 @@ import ReplayModeSelector from "../../../components/ReplayModeSelector.astro";
 import Logger from "../../../utils/Logger";
 import ShareButtons from "../../../components/ShareButtons.astro";
 import CharacterCard from "../../../components/CharacterCard";
+import { getReadingTime } from "../../../utils/readingTime";
 
 
 export async function getStaticPaths() {
@@ -23,6 +24,7 @@ export async function getStaticPaths() {
 
 const item = Astro.props;
 const { Content } = await render(item);
+const readingTime = getReadingTime(item.body);
 
 // Fetch RPG data if rpgId is present (for lore item itself)
 let rpgData = null;
@@ -131,9 +133,13 @@ if (item.data.category === "grupos") {
 
         {
           item.data.category === "actual-plays" ? (
-            <ActualPlayMetadata item={item} rpgDataMap={rpgDataMap} />
+            <ActualPlayMetadata item={item} rpgDataMap={rpgDataMap} readingTime={readingTime} />
           ) : (
             <div class="lore-metadata">
+              <div class="metadata-item">
+                <span class="label">Tiempo de lectura:</span>
+                <span class="value">{readingTime} min</span>
+              </div>
               {item.data.source && (
                 <div class="metadata-item">
                   <span class="label">Fuente:</span>

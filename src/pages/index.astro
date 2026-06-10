@@ -4,6 +4,7 @@ import ComicCard from "../components/ComicCard";
 import CharacterCard from "../components/CharacterCard";
 
 import { getCollection } from "astro:content";
+import { getReadingTime } from "../utils/readingTime";
 
 // Fetch latest blog posts
 const allPosts = await getCollection("blog");
@@ -35,6 +36,7 @@ const latestLore = sortedLore.slice(0, 3).map((entry) => ({
   link: `/lore/${entry.id}`,
   category: entry.data.category,
   categoryLink: `/lore/${entry.data.category}`,
+  readingTime: getReadingTime(entry.body),
 }));
 
 // Fetch latest character updates
@@ -98,6 +100,7 @@ const news = latestPosts.map((post) => ({
     year: "numeric",
   }),
   link: `/blog/${post.id}`,
+  readingTime: getReadingTime(post.body),
 }));
 ---
 

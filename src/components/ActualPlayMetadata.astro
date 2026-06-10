@@ -4,9 +4,10 @@ import CharacterSheet from "./character/CharacterSheet";
 interface Props {
     item: any;
     rpgDataMap?: Record<string, any>;
+    readingTime?: number;
 }
 
-const { item, rpgDataMap = {} } = Astro.props;
+const { item, rpgDataMap = {}, readingTime } = Astro.props;
 ---
 
 <div class="actual-play-metadata">
@@ -24,6 +25,14 @@ const { item, rpgDataMap = {} } = Astro.props;
                 <span class="detail-label">Guionista:</span>
                 <span class="detail-value">{item.data.gm}</span>
             </div>
+            {
+                readingTime && (
+                    <div class="detail-item">
+                        <span class="detail-label">Tiempo de lectura:</span>
+                        <span class="detail-value">{readingTime} min</span>
+                    </div>
+                )
+            }
             {
                 item.data.datePlayed && (
                     <div class="detail-item">
