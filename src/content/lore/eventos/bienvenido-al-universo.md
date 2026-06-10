@@ -2,7 +2,7 @@
 title: Bienvenido al universo de Superhéroes INC
 description: Breve iniciación al mundo de superheroes INC. rápida de leer.
 category: eventos
-source: Web
+source: Superheroes INC - Guia de Inicio (3ª Edición)
 updatedDate: 2026-06-09
 pubDate: 2026-06-09
 eventDate: 1995-01-01
