@@ -143,8 +143,8 @@ import Layout from "../../layouts/Layout.astro";
                     <p>
                         El combate se organiza en <strong>Asaltos</strong>.
                         Durante cada asalto, el orden de actuación se determina
-                        por la <strong>Iniciativa</strong>+ 1d100 que se tirara
-                        al inicio de combate.
+                        por la <strong>Iniciativa + 1d100</strong> que se tirara al
+                        inicio de combate.
                     </p>
 
                     <h3>Acciones por Asalto</h3>
@@ -174,9 +174,8 @@ import Layout from "../../layouts/Layout.astro";
                     <h3>Combate a Distancia</h3>
                     <div class="formula-box">
                         <strong>Resolución a Distancia:</strong><br />
-                        Porcentaje de Éxito = Base Habilidad + Modificador Rango +
-                        Modificador Situación - Cobertura - Modificador de Impacto
-                        del Defensor
+                        Porcentaje de Éxito = Habilidad + Modificador Rango - Cobertura
+                        - Modificador de Impacto del Defensor
                     </div>
                     <ul>
                         <li>
@@ -188,6 +187,16 @@ import Layout from "../../layouts/Layout.astro";
                             <strong>Esquiva</strong>: Si se tiene una accion
                             reservada con una tirada de Reflejos se podra
                             esquivar.
+                        </li>
+                        <li>
+                            <strong>Parada física</strong>: valor por defecto
+                            determinado por tu agilidad y poderes que te ayuda a
+                            evitar que te golpeen.
+                        </li>
+                        <li>
+                            <strong>Modificador de impacto</strong>: valor por
+                            defecto determinado por tus poderes y entrenamiento
+                            que te ayuda a evitar que te impacten a distancia.
                         </li>
                     </ul>
                 </article>
