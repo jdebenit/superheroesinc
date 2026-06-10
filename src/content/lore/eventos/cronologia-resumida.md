@@ -28,12 +28,6 @@ La aparición de los grandes grupos superheroicos transformó el mundo.
 
 Equipos como Euroforce, Fuerza Máxima, los Euromen y muchos otros se convirtieron en símbolos de esperanza para millones de personas. Fue una época marcada por la expansión del fenómeno metahumano, la cooperación internacional y la sensación de que los héroes podían enfrentarse a cualquier amenaza.
 
-### Fundación de Paraíso
-
-La aparición de la República de Paraíso marcó el nacimiento de la primera gran nación metahumana moderna.
-
-Su existencia transformó la política internacional y cambió para siempre la relación entre gobiernos y superseres.
-
 ## Revelación de los dioses (comienzos de los años 2000)
 
 Durante siglos, la existencia de dioses, magia, criaturas sobrenaturales y otros reinos permaneció oculta para la mayoría de la humanidad.
@@ -45,6 +39,12 @@ Todo cambió cuando esos secretos salieron finalmente a la luz. Lo que antes era
 La muerte de Ra y la crisis de los reinos divinos alteraron el equilibrio sobrenatural del mundo.
 
 Antiguas estructuras que habían permanecido estables durante milenios comenzaron a derrumbarse, aparecieron los llamados dioses jóvenes y los conflictos entre panteones adquirieron una importancia sin precedentes.
+
+## Fundación de Paraíso (finales de la década de 2000 y comienzos de la década de 2010)
+
+La aparición de la República de Paraíso marcó el nacimiento de la primera gran nación metahumana moderna.
+
+Su existencia transformó la política internacional y cambió para siempre la relación entre gobiernos y superseres.
 
 ## Tecnoguerra (comienzos de la década de 2010)
 
