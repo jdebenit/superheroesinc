@@ -10,17 +10,17 @@ reality: Tierra Zero
 tags:
   - iniciacion
 ---
-Si vienes de los cómics de superhéroes, este mundo te resultará familiar... hasta que mires un poco más de cerca.
+Si vienes de los cómics de superhéroes, muchas cosas te resultarán familiares... al menos al principio.
 
-Aquí existen héroes, villanos, metahumanos, organizaciones secretas y amenazas capaces de poner en peligro ciudades enteras. Pero también existen dioses, criaturas mitológicas, magia, conspiraciones, dimensiones paralelas y demasiadas cosas imposibles como para seguir llamándolas imposibles.
+Aquí existen héroes, villanos, metahumanos, organizaciones secretas y amenazas capaces de poner en peligro ciudades enteras. Pero también existen dioses, criaturas mitológicas, magia, conspiraciones centenarias, dimensiones paralelas y demasiadas cosas imposibles como para seguir llamándolas imposibles.
 
-Lo importante es entender una cosa: para la mayoría de la gente, todo esto ya forma parte de la normalidad.
+Lo primero que debes entender es que, para la mayoría de la gente, todo esto forma parte de la realidad cotidiana.
 
-Tus padres probablemente recuerden cuándo aparecieron los primeros superseres. Tus abuelos vivieron un mundo donde nada de esto existía. Tú, en cambio, has crecido viendo héroes en las noticias, metahumanos en las redes sociales y crisis internacionales provocadas por seres capaces de destruir edificios con las manos.
+Los superheroes no aparecieron ayer. Ya existían durante la Guerra Civil Española, la Segunda Guerra Mundial y otros grandes acontecimientos del siglo XX. Sin embargo, durante mucho tiempo fueron figuras escasas, mal comprendidas y rodeadas de rumores, propaganda y secretismo.
 
-La humanidad no vive al borde del colapso.
+Tus abuelos crecieron en un mundo donde la existencia de los metahumanos era una rareza. Tus padres vieron cómo se convertían en una realidad cada vez más visible. Tú, en cambio, has crecido viendo héroes en las noticias, metahumanos en las redes sociales, dioses concediendo entrevistas y crisis internacionales provocadas por individuos capaces de derribar un edificio con sus propias manos.
 
-Simplemente se ha acostumbrado a convivir con lo extraordinario.
+La humanidad no vive al borde del colapso, simplemente ha aprendido a convivir con lo extraordinario.
 
 ## Los metahumanos
 
