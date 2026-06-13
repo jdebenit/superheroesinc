@@ -6,10 +6,13 @@ updatedDate: 2026-05-24
 tags:
   - Principal
   - Guardian
+  - Arquero
+  - Vigilante
 originReality: Tierra Zero
 actualReality: Tierra Zero
 alias: D’Arc
 image: /personajes/darc.png
+rpgId: d-arc
 groups:
   - "antiheroes-ltd"
 ---

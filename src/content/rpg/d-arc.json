@@ -1,0 +1,285 @@
+{
+  "name": "Paul Claude Ganter",
+  "alias": "D’Arc",
+  "origin": {
+    "items": [
+      {
+        "Guardián": [
+          "Acceso a poderes de guardianes"
+        ]
+      },
+      {
+        "Vigilante": [
+          "Disponibilidad de armamento a dificultad reducida",
+          "Recarga rápida",
+          "Recuerdos dolorosos",
+          "Voluntad férrea",
+          "Arquero"
+        ]
+      }
+    ]
+  },
+  "combatstats": {
+    "Acciones por asalto": "3",
+    "Iniciativa y Reflejos": "50",
+    "Puntos de Vida": "65",
+    "Equilibrio Mental": "85"
+  },
+  "otherstats": {
+    "Inconsciencia": "6",
+    "Recuperación": "1 PV/h",
+    "Resistencia a gases y venenos": "26%",
+    "Modificador de fuerza": "1d6",
+    "Peso Levantado": "168kg",
+    "Daño absorbido físico": "0",
+    "Daño absorbido mental": "0",
+    "Modificador de impacto": "20",
+    "Modificador Psionico": "25",
+    "Parada Fisica": "25",
+    "Parada mental": "50",
+    "Salto (alto / largo)": "3,3m / 10,0m"
+  },
+  "attributes": {
+    "values": {
+      "Fuerza": 84,
+      "Constitución": 80,
+      "Agilidad": 100,
+      "Inteligencia": 90,
+      "Percepción": 100,
+      "Apariencia": 78,
+      "Voluntad": 99
+    },
+    "breakdown": {
+      "fuerza": {
+        "base": 84,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "constitucion": {
+        "base": 80,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "agilidad": {
+        "base": 70,
+        "originMod": 0,
+        "specialtyMod": 30,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "inteligencia": {
+        "base": 90,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "percepcion": {
+        "base": 70,
+        "originMod": 0,
+        "specialtyMod": 30,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "apariencia": {
+        "base": 78,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "voluntad": {
+        "base": 99,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      }
+    }
+  },
+  "skills": {
+    "generalItems": [
+      {
+        "name": "Acechar/Discrección",
+        "math": "(AGI+PER)/2",
+        "value": "120%"
+      },
+      {
+        "name": "Comb. cuerpo a cuerpo",
+        "math": "(AGI+PER)/2",
+        "value": "100%"
+      },
+      {
+        "name": "Conocimientos generales",
+        "math": "INT/3",
+        "value": "50%"
+      },
+      {
+        "name": "Esconderse",
+        "math": "(AGI+PER)/4",
+        "value": "100%"
+      },
+      {
+        "name": "Idea",
+        "math": "INT/2",
+        "value": "45%"
+      },
+      {
+        "name": "Influencia",
+        "math": "(INT+APA)/2",
+        "value": "84%"
+      },
+      {
+        "name": "Idioma nativo (Francés)",
+        "math": "INT",
+        "value": "90%"
+      },
+      {
+        "name": "Investigar",
+        "math": "(INT+PER)/3",
+        "value": "63%"
+      },
+      {
+        "name": "Lanzar",
+        "math": "(FUE+PER)/2",
+        "value": "99%"
+      },
+      {
+        "name": "Primeros auxilios",
+        "math": "INT/2",
+        "value": "45%"
+      },
+      {
+        "name": "Suerte",
+        "math": "(PER+VOL)/4",
+        "value": "49%"
+      },
+      {
+        "name": "Trepar y Saltar",
+        "math": "AGI",
+        "value": "100%"
+      }
+    ],
+    "specialItems": [
+      {
+        "name": "Arcos / Ballestas",
+        "math": "(2xPER)/3",
+        "value": "125%"
+      },
+      {
+        "name": "Ciencia: Arqueologia",
+        "math": "INT/3",
+        "value": "80%"
+      },
+      {
+        "name": "Otro idioma: Español",
+        "math": "INT/3",
+        "value": "30%"
+      }
+    ],
+    "generalManualMods": {
+      "esconderse": 50,
+      "lanzar": 7,
+      "conocimientos": 20
+    },
+    "manualBases": {},
+    "selected": {
+      "arcos": {
+        "isFree": false,
+        "isRequired": true,
+        "manualMods": 39,
+        "manualBases": 66
+      }
+    },
+    "specified": {
+      "ciencia_1781350417073": {
+        "skillId": "ciencia",
+        "specification": "Arqueologia",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 50,
+        "manualBases": 0
+      },
+      "otro_idioma_1781350432581": {
+        "skillId": "otro_idioma",
+        "specification": "Español",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      }
+    },
+    "nativeLanguage": "Francés"
+  },
+  "background": {
+    "prejudiceResistance": 67,
+    "economicStatus": "clase_media_alta",
+    "friendsAndAssociates": "grupo_reducido"
+  },
+  "equipment": {
+    "items": [
+      {
+        "name": "Traje de Kevlar",
+        "notes": "+40 DA",
+        "cost": 0
+      }
+    ]
+  },
+  "weapons": {
+    "items": [
+      {
+        "name": "Arco mágico",
+        "damage": "",
+        "dxa": "",
+        "car": "",
+        "notes": "Puede emitir una flecha por asalto con el daño máximo, 2 por asalto con la mitad del daño o 3 por asalto con un tercio del daño",
+        "cost": 0
+      }
+    ]
+  },
+  "powers": {
+    "selected": [
+      {
+        "id": "emision_de_energia",
+        "origin": "Guardian",
+        "rank": 81,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false,
+        "customizations": [
+          {
+            "id": "1781350860532",
+            "description": "Puede dividir el daño cuando usa el poder mas veces por asalto",
+            "cost": 0
+          }
+        ],
+        "skillValue": 125
+      }
+    ]
+  },
+  "guardianParams": {
+    "quality": "object_has_powers",
+    "objectType": "weapon",
+    "feature": "glowing",
+    "transformation": "no_change_psyche"
+  },
+  "traumas": {
+    "Arquero": "Recuerdos de otros portadores del Arco le han hecho adquirir una determinación y perseverancia impropia de su edad, convirtiendole en un Arquero diestro y sin miedo a lo que le venga en la batalla"
+  },
+  "profession": "Arqueologo",
+  "sexualIdentity": "Hombre",
+  "uiState": {
+    "unlockManualSkills": true,
+    "unlockCombatStats": true,
+    "unlockOtherStats": true
+  },
+  "meta": {
+    "version": "Beta 0.15.1",
+    "generator": "SHI Wizard"
+  }
+}
