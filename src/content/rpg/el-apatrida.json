@@ -1,0 +1,444 @@
+{
+  "name": "Desconocido",
+  "alias": "El Apatrida",
+  "level": "4",
+  "origin": {
+    "items": [
+      {
+        "Vigilante": [
+          "Disponibilidad de armamento a dificultad reducida",
+          "Recarga rápida",
+          "Recuerdos dolorosos",
+          "Voluntad férrea",
+          "Fanático/Vengador",
+          "Artista Marcial"
+        ]
+      },
+      {
+        "Alterado": [
+          "Acceso a poderes de alterados"
+        ]
+      }
+    ]
+  },
+  "combatstats": {
+    "Acciones por asalto": "4",
+    "Iniciativa y Reflejos": "80",
+    "Puntos de Vida": "100",
+    "Equilibrio Mental": "100"
+  },
+  "otherstats": {
+    "Inconsciencia": "10",
+    "Recuperación": "4 PV/h",
+    "Resistencia a gases y venenos": "40%",
+    "Modificador de fuerza": "5d10+20",
+    "Peso Levantado": "19 t",
+    "Daño absorbido físico": "30",
+    "Daño absorbido mental": "0",
+    "Modificador de impacto": "70",
+    "Modificador Psionico": "25",
+    "Parada Fisica": "70",
+    "Parada mental": "50",
+    "Salto (alto / largo)": "10,4m / 31,1m"
+  },
+  "attributes": {
+    "values": {
+      "Fuerza": 119,
+      "Constitución": 120,
+      "Agilidad": 140,
+      "Inteligencia": 100,
+      "Percepción": 100,
+      "Apariencia": 100,
+      "Voluntad": 100
+    },
+    "breakdown": {
+      "fuerza": {
+        "base": 100,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 19,
+        "otherMod": 0
+      },
+      "constitucion": {
+        "base": 100,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 20,
+        "otherMod": 0
+      },
+      "agilidad": {
+        "base": 50,
+        "originMod": 0,
+        "specialtyMod": 50,
+        "powerMod": 40,
+        "otherMod": 0
+      },
+      "inteligencia": {
+        "base": 100,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "percepcion": {
+        "base": 50,
+        "originMod": 0,
+        "specialtyMod": 50,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "apariencia": {
+        "base": 100,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "voluntad": {
+        "base": 90,
+        "originMod": 0,
+        "specialtyMod": 10,
+        "powerMod": 0,
+        "otherMod": 0
+      }
+    }
+  },
+  "skills": {
+    "generalItems": [
+      {
+        "name": "Acechar/Discrección",
+        "math": "(AGI+PER)/2",
+        "value": "140%"
+      },
+      {
+        "name": "Comb. cuerpo a cuerpo",
+        "math": "(AGI+PER)/2",
+        "value": "120%"
+      },
+      {
+        "name": "Conocimientos generales",
+        "math": "INT/3",
+        "value": "33%"
+      },
+      {
+        "name": "Esconderse",
+        "math": "(AGI+PER)/4",
+        "value": "60%"
+      },
+      {
+        "name": "Idea",
+        "math": "INT/2",
+        "value": "50%"
+      },
+      {
+        "name": "Influencia",
+        "math": "(INT+APA)/2",
+        "value": "100%"
+      },
+      {
+        "name": "Idioma nativo",
+        "math": "INT",
+        "value": "100%"
+      },
+      {
+        "name": "Investigar",
+        "math": "(INT+PER)/3",
+        "value": "66%"
+      },
+      {
+        "name": "Lanzar",
+        "math": "(FUE+PER)/2",
+        "value": "109%"
+      },
+      {
+        "name": "Primeros auxilios",
+        "math": "INT/2",
+        "value": "50%"
+      },
+      {
+        "name": "Suerte",
+        "math": "(PER+VOL)/4",
+        "value": "50%"
+      },
+      {
+        "name": "Trepar y Saltar",
+        "math": "AGI",
+        "value": "160%"
+      }
+    ],
+    "specialItems": [
+      {
+        "name": "Artes Marciales",
+        "math": "(AGI+PER)/3",
+        "value": "90%"
+      },
+      {
+        "name": "Armas blancas",
+        "math": "(AGI+PER)/3",
+        "value": "100%"
+      },
+      {
+        "name": "Armas cortas",
+        "math": "(2xPER)/3",
+        "value": "96%"
+      },
+      {
+        "name": "Armas largas",
+        "math": "(2xPER)/3",
+        "value": "96%"
+      },
+      {
+        "name": "Armas militares",
+        "math": "PER/3",
+        "value": "53%"
+      },
+      {
+        "name": "Explosivos",
+        "math": "INT/2",
+        "value": "50%"
+      },
+      {
+        "name": "Trampas",
+        "math": "INT/2",
+        "value": "50%"
+      },
+      {
+        "name": "Rastrear",
+        "math": "(INT+PER)/4",
+        "value": "50%"
+      },
+      {
+        "name": "Otro idioma: Inglés",
+        "math": "INT/3",
+        "value": "73%"
+      },
+      {
+        "name": "Conducir: Coche",
+        "math": "(INT+PER)/4",
+        "value": "50%"
+      },
+      {
+        "name": "Conducir: Moto",
+        "math": "(INT+PER)/4",
+        "value": "50%"
+      },
+      {
+        "name": "Otro idioma: Ruso",
+        "math": "INT/3",
+        "value": "63%"
+      },
+      {
+        "name": "Supervivencia: Bajos Fondos",
+        "math": "INT/2",
+        "value": "50%"
+      }
+    ],
+    "generalManualMods": {},
+    "manualBases": {},
+    "selected": {
+      "artes_marciales": {
+        "isFree": false,
+        "isRequired": true,
+        "manualMods": 10,
+        "manualBases": 0
+      },
+      "armas_blancas": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 20,
+        "manualBases": 0
+      },
+      "armas_cortas": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 30,
+        "manualBases": 0
+      },
+      "armas_largas": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 30,
+        "manualBases": 0
+      },
+      "armas_militares": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 20,
+        "manualBases": 0
+      },
+      "explosivos": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "trampas": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "rastrear": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      }
+    },
+    "specified": {
+      "otro_idioma_1781344639291": {
+        "skillId": "otro_idioma",
+        "specification": "Inglés",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 40,
+        "manualBases": 0
+      },
+      "conducir_1781344673407": {
+        "skillId": "conducir",
+        "specification": "Coche",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "conducir_1781344676229": {
+        "skillId": "conducir",
+        "specification": "Moto",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "otro_idioma_1781344700011": {
+        "skillId": "otro_idioma",
+        "specification": "Ruso",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 30,
+        "manualBases": 0
+      },
+      "supervivencia_1781344704767": {
+        "skillId": "supervivencia",
+        "specification": "Bajos Fondos",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      }
+    },
+    "nativeLanguage": ""
+  },
+  "background": {
+    "prejudiceResistance": 99,
+    "economicStatus": "clase_alta",
+    "legalStatus": "enemigo_publico",
+    "socialStatus": "supervillano",
+    "friendsAndAssociates": "conocido_poderoso"
+  },
+  "equipment": {
+    "items": [
+      {
+        "name": "Traje de Twaron",
+        "notes": "+50 DA",
+        "cost": 0
+      }
+    ]
+  },
+  "weapons": {
+    "items": [
+      {
+        "name": "Katana",
+        "damage": "3d10+30+15",
+        "dxa": "",
+        "car": "",
+        "notes": "",
+        "cost": 0
+      },
+      {
+        "name": "Fusil comb. A.P.",
+        "damage": "1d10+3 + P75",
+        "dxa": "1",
+        "car": "100",
+        "notes": "",
+        "cost": 0
+      },
+      {
+        "name": "Pistola comb Pot 38",
+        "damage": "2d10 + P38",
+        "dxa": "3",
+        "car": "",
+        "notes": "",
+        "cost": 0
+      }
+    ]
+  },
+  "artifacts": {
+    "items": [
+      {
+        "name": "Chip intracraneal amortiguador mental",
+        "reliability": "100%",
+        "value": "",
+        "cost": 24,
+        "notes": "El portador recibe los beneficios del poder Invulnerabilidad a poderes psíquicos a rango alto."
+      }
+    ]
+  },
+  "powers": {
+    "selected": [
+      {
+        "id": "superagilidad",
+        "origin": "Alterado",
+        "rank": 1,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false,
+        "powerMod": 40
+      },
+      {
+        "id": "superfuerza",
+        "origin": "Alterado",
+        "rank": 1,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false,
+        "powerMod": 19
+      },
+      {
+        "id": "superconstitucion",
+        "origin": "Alterado",
+        "rank": 1,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false,
+        "powerMod": 20
+      }
+    ]
+  },
+  "alteradoParams": {
+    "agent": "mutagen",
+    "sequels": [
+      {
+        "id": "character_inversion",
+        "description": "Su mente se ha desestabilizado"
+      }
+    ]
+  },
+  "traumas": {
+    "Fanático/Vengador": "Odia el proyecto Euroman y solo desea ver destruidos a toda la estirpe que porte la matriz de Euroman",
+    "Artista Marcial": "Ha entrenado con multitud de maestros en difentes disciplinas para perfeccionar su cuerpo y mente con solo una mision en la cabeza destruir la estirpe de Euroman"
+  },
+  "uiState": {
+    "unlockManualSkills": true,
+    "unlockCombatStats": true
+  },
+  "sexualIdentity": "Hombre",
+  "profession": "Terrorista",
+  "meta": {
+    "version": "Beta 0.15.1",
+    "generator": "SHI Wizard"
+  }
+}
