@@ -1,6 +1,7 @@
 {
   "name": "Virgil Columbus",
   "alias": "Virgilio",
+  "level": 3,
   "origin": {
     "items": [
       {
@@ -223,7 +224,8 @@
         "isCrossType": false,
         "isCrossOrigin": false,
         "isCrossOriginMaldito": false,
-        "isCrossOriginDivino": false
+        "isCrossOriginDivino": false,
+        "skillValue": 96
       },
       {
         "id": "empatia_mental",
@@ -232,7 +234,8 @@
         "isCrossType": false,
         "isCrossOrigin": false,
         "isCrossOriginMaldito": false,
-        "isCrossOriginDivino": false
+        "isCrossOriginDivino": false,
+        "skillValue": 96
       },
       {
         "id": "dominacion_mental",
