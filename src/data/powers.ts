@@ -136,7 +136,7 @@ export const POWERS: Power[] = [
         formula: "5+(Rango/10)",
         cost: 5,
         skillCalc: "VOL/2",
-        options: ["Control de energía", "Control de energía", "Control de energía"],
+        options: ["Cinética", "Luz", "Sonido"],
         types: ["Energético"],
         origins: ["Alterado", "Mutante", "Guardian"]
     },
@@ -254,6 +254,7 @@ export const POWERS: Power[] = [
         formula: "5+(Rango/10)",
         cost: 5,
         skillCalc: "PER/2",
+        options: ["Cinética", "Luz", "Sonido"],
         types: ["Energético"],
         origins: ["Alterado", "Mutante", "Guardian", "Cósmico", "Divino", "Sobrenatural"]
     },
