@@ -1,0 +1,253 @@
+{
+  "name": "Veronica de Ugarte",
+  "alias": "Penumbra",
+  "origin": {
+    "items": [
+      {
+        "Arcano": [
+          "+20 a la parada mental",
+          "Mago"
+        ]
+      }
+    ]
+  },
+  "combatstats": {
+    "Acciones por asalto": "1",
+    "Iniciativa y Reflejos": "40",
+    "Puntos de Vida": "49",
+    "Equilibrio Mental": "99"
+  },
+  "otherstats": {
+    "Inconsciencia": "4",
+    "Recuperación": "1 PV/h",
+    "Resistencia a gases y venenos": "22%",
+    "Modificador de fuerza": "1d4",
+    "Peso Levantado": "55kg",
+    "Daño absorbido físico": "0",
+    "Daño absorbido mental": "0",
+    "Modificador de impacto": "0",
+    "Modificador Psionico": "25",
+    "Parada Fisica": "16",
+    "Parada mental": "70",
+    "Salto (alto / largo)": "1,8m / 5,4m"
+  },
+  "attributes": {
+    "values": {
+      "Fuerza": 55,
+      "Constitución": 68,
+      "Agilidad": 65,
+      "Inteligencia": 99,
+      "Percepción": 96,
+      "Apariencia": 71,
+      "Voluntad": 95
+    },
+    "breakdown": {
+      "fuerza": {
+        "base": 55,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "constitucion": {
+        "base": 68,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "agilidad": {
+        "base": 65,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "inteligencia": {
+        "base": 99,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "percepcion": {
+        "base": 96,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "apariencia": {
+        "base": 71,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "voluntad": {
+        "base": 95,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      }
+    }
+  },
+  "skills": {
+    "generalItems": [
+      {
+        "name": "Acechar/Discrección",
+        "math": "(AGI+PER)/2",
+        "value": "80%"
+      },
+      {
+        "name": "Comb. cuerpo a cuerpo",
+        "math": "(AGI+PER)/2",
+        "value": "80%"
+      },
+      {
+        "name": "Conocimientos generales",
+        "math": "INT/3",
+        "value": "33%"
+      },
+      {
+        "name": "Esconderse",
+        "math": "(AGI+PER)/4",
+        "value": "40%"
+      },
+      {
+        "name": "Idea",
+        "math": "INT/2",
+        "value": "49%"
+      },
+      {
+        "name": "Influencia",
+        "math": "(INT+APA)/2",
+        "value": "85%"
+      },
+      {
+        "name": "Idioma nativo",
+        "math": "INT",
+        "value": "99%"
+      },
+      {
+        "name": "Investigar",
+        "math": "(INT+PER)/3",
+        "value": "65%"
+      },
+      {
+        "name": "Lanzar",
+        "math": "(FUE+PER)/2",
+        "value": "75%"
+      },
+      {
+        "name": "Primeros auxilios",
+        "math": "INT/2",
+        "value": "49%"
+      },
+      {
+        "name": "Suerte",
+        "math": "(PER+VOL)/4",
+        "value": "47%"
+      },
+      {
+        "name": "Trepar y Saltar",
+        "math": "AGI",
+        "value": "65%"
+      }
+    ],
+    "specialItems": [
+      {
+        "name": "Magia",
+        "math": "(INT+PER)/2",
+        "value": "97%"
+      },
+      {
+        "name": "Otro idioma: Latín",
+        "math": "INT/3",
+        "value": "40%"
+      }
+    ],
+    "generalManualMods": {},
+    "manualBases": {},
+    "selected": {
+      "magia": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      }
+    },
+    "specified": {
+      "otro_idioma_1781341858949": {
+        "skillId": "otro_idioma",
+        "specification": "Latín",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 40
+      }
+    },
+    "nativeLanguage": ""
+  },
+  "background": {
+    "prejudiceResistance": 39,
+    "economicStatus": "clase_media_alta",
+    "legalStatus": "con_antecedentes",
+    "friendsAndAssociates": "grupo_reducido"
+  },
+  "magicObjects": {
+    "items": [
+      {
+        "name": "Medallón de protección",
+        "description": "Tiene un colgante que otorga un Daño Absorbido Físico y Mental de 45",
+        "em": 130
+      }
+    ]
+  },
+  "spells": {
+    "selected": [
+      {
+        "id": "abrir_portales",
+        "rank": 3
+      },
+      {
+        "id": "levitar",
+        "rank": 3
+      },
+      {
+        "id": "percepcion_magica",
+        "rank": 3
+      },
+      {
+        "id": "escudos_misticos",
+        "rank": 5
+      },
+      {
+        "id": "proyeccion_de_energia_magica",
+        "rank": 5
+      },
+      {
+        "id": "invocar_elemento",
+        "rank": 3,
+        "selectedOption": "Fuego"
+      },
+      {
+        "id": "pseudo_psi",
+        "rank": 3
+      }
+    ],
+    "calculatedEM": 290
+  },
+  "magicalBondsCustomName": "Vínculo de Sangre: El Legado de los De Ugarte",
+  "magicalBondsCustomDescription": "La magia corre por las venas de los De Ugarte desde hace generaciones. Aunque la mayoría de sus miembros ignoraron o reprimieron ese don, algunos llegaron a convertirse en poderosos practicantes de las artes arcanas.\nVerónica heredó esa misma afinidad natural. Desde niña fue capaz de percibir energías, presencias y fenómenos que pasaban desapercibidos para otros. Bajo la tutela de Umbra aprendió a desarrollar un talento que parecía formar parte de ella desde su nacimiento.\nSin embargo, el legado de los De Ugarte no solo transmite poder, también una pesada herencia. Verónica está decidida a demostrar que la misma sangre que dio origen a Umbra puede emplearse para algo mejor.",
+  "profession": "Esudiosa de lo Oculto",
+  "sexualIdentity": "Mujer",
+  "powers": {
+    "selected": []
+  },
+  "meta": {
+    "version": "Beta 0.15.1",
+    "generator": "SHI Wizard"
+  }
+}

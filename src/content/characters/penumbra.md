@@ -10,6 +10,7 @@ tags:
   - Mago
 originReality: Tierra Zero
 actualReality: Tierra Zero
+rpgId: penumbra
 groups:
   - "antiheroes-ltd"
 ---

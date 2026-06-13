@@ -1,0 +1,257 @@
+{
+  "name": "Desconocido",
+  "alias": "Pesanta",
+  "level": 3,
+  "origin": {
+    "items": [
+      {
+        "Sobrenatural": [
+          "Poseido"
+        ]
+      }
+    ]
+  },
+  "combatstats": {
+    "Acciones por asalto": "2",
+    "Iniciativa y Reflejos": "36",
+    "Puntos de Vida": "31",
+    "Equilibrio Mental": "40"
+  },
+  "otherstats": {
+    "Inconsciencia": "3",
+    "Recuperación": "1 PV/h",
+    "Resistencia a gases y venenos": "20%",
+    "Modificador de fuerza": "1d4",
+    "Peso Levantado": "55kg",
+    "Daño absorbido físico": "0",
+    "Daño absorbido mental": "0",
+    "Modificador de impacto": "0",
+    "Modificador Psionico": "0",
+    "Parada Fisica": "20",
+    "Parada mental": "30",
+    "Salto (alto / largo)": "2,4m / 7,3m"
+  },
+  "attributes": {
+    "values": {
+      "Fuerza": 55,
+      "Constitución": 62,
+      "Agilidad": 80,
+      "Inteligencia": 60,
+      "Percepción": 66,
+      "Apariencia": 20,
+      "Voluntad": 71
+    },
+    "breakdown": {
+      "fuerza": {
+        "base": 55,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "constitucion": {
+        "base": 62,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "agilidad": {
+        "base": 80,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "inteligencia": {
+        "base": 60,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "percepcion": {
+        "base": 66,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "apariencia": {
+        "base": 20,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "voluntad": {
+        "base": 71,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      }
+    }
+  },
+  "skills": {
+    "generalItems": [
+      {
+        "name": "Acechar/Discrección",
+        "math": "(AGI+PER)/2",
+        "value": "73%"
+      },
+      {
+        "name": "Comb. cuerpo a cuerpo",
+        "math": "(AGI+PER)/2",
+        "value": "73%"
+      },
+      {
+        "name": "Conocimientos generales",
+        "math": "INT/3",
+        "value": "20%"
+      },
+      {
+        "name": "Esconderse",
+        "math": "(AGI+PER)/4",
+        "value": "36%"
+      },
+      {
+        "name": "Idea",
+        "math": "INT/2",
+        "value": "30%"
+      },
+      {
+        "name": "Influencia",
+        "math": "(INT+APA)/2",
+        "value": "40%"
+      },
+      {
+        "name": "Idioma nativo",
+        "math": "INT",
+        "value": "60%"
+      },
+      {
+        "name": "Investigar",
+        "math": "(INT+PER)/3",
+        "value": "42%"
+      },
+      {
+        "name": "Lanzar",
+        "math": "(FUE+PER)/2",
+        "value": "60%"
+      },
+      {
+        "name": "Primeros auxilios",
+        "math": "INT/2",
+        "value": "30%"
+      },
+      {
+        "name": "Suerte",
+        "math": "(PER+VOL)/4",
+        "value": "34%"
+      },
+      {
+        "name": "Trepar y Saltar",
+        "math": "AGI",
+        "value": "80%"
+      }
+    ],
+    "specialItems": [
+      {
+        "name": "Magia",
+        "math": "(INT+PER)/2",
+        "value": "65%"
+      }
+    ],
+    "generalManualMods": {},
+    "manualBases": {},
+    "selected": {
+      "magia": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      }
+    },
+    "specified": {},
+    "nativeLanguage": ""
+  },
+  "background": {
+    "prejudiceResistance": 96,
+    "economicStatus": "mendigo",
+    "socialStatus": "amenaza_publica",
+    "friendsAndAssociates": "solitario"
+  },
+  "spells": {
+    "selected": [
+      {
+        "id": "percepcion_magica",
+        "rank": 2
+      },
+      {
+        "id": "pseudo_psi",
+        "rank": 2
+      },
+      {
+        "id": "levitar",
+        "rank": 2
+      },
+      {
+        "id": "proyeccion_del_cuerpo_astral",
+        "rank": 1
+      },
+      {
+        "id": "escudos_misticos",
+        "rank": 1
+      }
+    ],
+    "emFormula": {
+      "divisor": 2,
+      "pcCost": 3
+    },
+    "calculatedEM": 98
+  },
+  "powers": {
+    "selected": [
+      {
+        "id": "vincular",
+        "origin": "Sobrenatural",
+        "rank": 41,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false,
+        "skillValue": 65
+      },
+      {
+        "id": "telequinesis",
+        "origin": "Otro",
+        "rank": 1,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false,
+        "skillValue": 75
+      },
+      {
+        "id": "agresion_psionica",
+        "origin": "Otro",
+        "rank": 1,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false,
+        "skillValue": 70
+      }
+    ]
+  },
+  "poseidoParams": {
+    "formType": "cambia_forma"
+  },
+  "profession": "Espiritu Parasito",
+  "sexualIdentity": "No Aplicable",
+  "meta": {
+    "version": "Beta 0.15.1",
+    "generator": "SHI Wizard"
+  }
+}

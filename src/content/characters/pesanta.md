@@ -9,6 +9,7 @@ tags:
   - Poseido
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
+rpgId: pesanta
 groups:
   - "la-legion-sangrienta"
 ---
