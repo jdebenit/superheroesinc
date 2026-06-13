@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "lore/eventos/bienvenido-al-universo.md",
+                "file": "blog/volviendo-realmente-al-juego.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "bienvenido-al-universo"
+              "title": "volviendo-realmente-al-juego"
             }
           }
         ]
@@ -185,8 +185,10 @@
   },
   "active": "d101106a4f64eb58",
   "lastOpenFiles": [
-    "lore/eventos/cronologia-resumida.md",
+    "blog/abrir-las-puertas.md",
+    "blog/volviendo-realmente-al-juego.md",
     "lore/eventos/bienvenido-al-universo.md",
+    "lore/eventos/cronologia-resumida.md",
     "lore/eventos/bienvenido-al-mundo-de-superheroes-inc 1.md",
     "lore/eventos/la-caida-de-la-gran-barrera.md",
     "lore/eventos/Guia breve del mundo.md",
@@ -209,8 +211,6 @@
     "timeline/detencion-de-jaguar.md",
     "timeline/diplomacia-avalon-reino-unido.md",
     "timeline/disolucion-grupos-metahumanos.md",
-    "timeline/disturbios-en-marsella.md",
-    "timeline/confirmacion-de-metahumanos.md",
     "rpg/flecha-roja-ii.json",
     "personajes",
     "Pasted image 20260416191817.png",
