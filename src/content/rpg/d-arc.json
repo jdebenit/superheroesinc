@@ -251,6 +251,7 @@
         "isCrossOrigin": false,
         "isCrossOriginMaldito": false,
         "isCrossOriginDivino": false,
+        "selectedOption": "Mágica",
         "customizations": [
           {
             "id": "1781350860532",
