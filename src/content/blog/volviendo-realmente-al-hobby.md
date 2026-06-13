@@ -1,5 +1,5 @@
 ---
-title: Volviendo realmente al juego
+title: Volviendo realmente al hobby
 pubDate: 2026-06-14
 description: Hay partidas que recuerdas por la historia, otras por los personajes y algunas por las risas. Esta no fue especial por nada de eso. Lo fue porque, después de mucho tiempo, volví a sentarme detrás de la pantalla y descubrí que seguía siendo capaz de disfrutar sin que la nostalgia ocupase el lugar principal. Quizá este artículo no vaya realmente de rol, sino de lo que ocurre cuando uno vuelve a encontrar un refugio que creía haber perdido.
 author: Jorge Francisco de Benito Montoya
