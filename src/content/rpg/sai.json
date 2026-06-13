@@ -1,0 +1,321 @@
+{
+  "name": "Tetsu Hideyoshi",
+  "alias": "Sai",
+  "origin": {
+    "items": [
+      {
+        "Vigilante": [
+          "Disponibilidad de armamento a dificultad reducida",
+          "Recarga rápida",
+          "Recuerdos dolorosos",
+          "Voluntad férrea",
+          "Artista Marcial con Chi"
+        ]
+      },
+      {
+        "Mutante": [
+          "Energético"
+        ]
+      }
+    ]
+  },
+  "combatstats": {
+    "Acciones por asalto": "3",
+    "Iniciativa y Reflejos": "69",
+    "Puntos de Vida": "245",
+    "Equilibrio Mental": "96"
+  },
+  "otherstats": {
+    "Inconsciencia": "4",
+    "Recuperación": "1 PV/h",
+    "Resistencia a gases y venenos": "32%",
+    "Modificador de fuerza": "1d6",
+    "Peso Levantado": "170kg",
+    "Daño absorbido físico": "0",
+    "Daño absorbido mental": "0",
+    "Modificador de impacto": "30",
+    "Modificador Psionico": "25",
+    "Parada Fisica": "45",
+    "Parada mental": "50",
+    "Salto (alto / largo)": "3,3m / 10,0m"
+  },
+  "attributes": {
+    "values": {
+      "Fuerza": 85,
+      "Constitución": 98,
+      "Agilidad": 100,
+      "Inteligencia": 96,
+      "Percepción": 97,
+      "Apariencia": 98,
+      "Voluntad": 100
+    },
+    "breakdown": {
+      "fuerza": {
+        "base": 85,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "constitucion": {
+        "base": 98,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "agilidad": {
+        "base": 50,
+        "originMod": 0,
+        "specialtyMod": 50,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "inteligencia": {
+        "base": 96,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "percepcion": {
+        "base": 47,
+        "originMod": 0,
+        "specialtyMod": 50,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "apariencia": {
+        "base": 98,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "voluntad": {
+        "base": 100,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      }
+    }
+  },
+  "skills": {
+    "generalItems": [
+      {
+        "name": "Acechar/Discrección",
+        "math": "(AGI+PER)/2",
+        "value": "118%"
+      },
+      {
+        "name": "Comb. cuerpo a cuerpo",
+        "math": "(AGI+PER)/2",
+        "value": "98%"
+      },
+      {
+        "name": "Conocimientos generales",
+        "math": "INT/3",
+        "value": "32%"
+      },
+      {
+        "name": "Esconderse",
+        "math": "(AGI+PER)/4",
+        "value": "49%"
+      },
+      {
+        "name": "Idea",
+        "math": "INT/2",
+        "value": "48%"
+      },
+      {
+        "name": "Influencia",
+        "math": "(INT+APA)/2",
+        "value": "97%"
+      },
+      {
+        "name": "Idioma nativo (Japones)",
+        "math": "INT",
+        "value": "96%"
+      },
+      {
+        "name": "Investigar",
+        "math": "(INT+PER)/3",
+        "value": "64%"
+      },
+      {
+        "name": "Lanzar",
+        "math": "(FUE+PER)/2",
+        "value": "91%"
+      },
+      {
+        "name": "Primeros auxilios",
+        "math": "INT/2",
+        "value": "48%"
+      },
+      {
+        "name": "Suerte",
+        "math": "(PER+VOL)/4",
+        "value": "49%"
+      },
+      {
+        "name": "Trepar y Saltar",
+        "math": "AGI",
+        "value": "120%"
+      }
+    ],
+    "specialItems": [
+      {
+        "name": "Artes Marciales",
+        "math": "(AGI+PER)/3",
+        "value": "65%"
+      },
+      {
+        "name": "Armas blancas",
+        "math": "(AGI+PER)/3",
+        "value": "65%"
+      },
+      {
+        "name": "Mecánica",
+        "math": "INT/2",
+        "value": "48%"
+      },
+      {
+        "name": "Rastrear",
+        "math": "(INT+PER)/4",
+        "value": "48%"
+      },
+      {
+        "name": "Otro idioma: Inglés",
+        "math": "INT/3",
+        "value": "32%"
+      },
+      {
+        "name": "Arma Especial: Sai",
+        "math": "(2xPER)/3",
+        "value": "64%"
+      },
+      {
+        "name": "Conducir: Motocicleta",
+        "math": "(INT+PER)/4",
+        "value": "48%"
+      }
+    ],
+    "generalManualMods": {},
+    "manualBases": {},
+    "selected": {
+      "artes_marciales": {
+        "isFree": false,
+        "isRequired": true,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "armas_blancas": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "mecanica": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "rastrear": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      }
+    },
+    "specified": {
+      "otro_idioma_1781346453444": {
+        "skillId": "otro_idioma",
+        "specification": "Inglés",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "arma_especial_1781346460090": {
+        "skillId": "arma_especial",
+        "specification": "Sai",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "conducir_1781346467958": {
+        "skillId": "conducir",
+        "specification": "Motocicleta",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      }
+    },
+    "nativeLanguage": "Japones"
+  },
+  "background": {
+    "prejudiceResistance": 36,
+    "economicStatus": "clase_alta",
+    "socialStatus": "heroe_pueblo",
+    "friendsAndAssociates": "conocido_poderoso"
+  },
+  "weapons": {
+    "items": [
+      {
+        "name": "Katana",
+        "damage": "3d10+30+5",
+        "dxa": "",
+        "car": "",
+        "notes": "",
+        "cost": 0
+      },
+      {
+        "name": "Sai",
+        "damage": "2d6+25+5",
+        "dxa": "",
+        "car": "2",
+        "notes": "+5 a la parada física por cada Sai",
+        "cost": 0
+      }
+    ]
+  },
+  "powers": {
+    "selected": [
+      {
+        "id": "incremento_vital",
+        "origin": "Mutante",
+        "rank": 41,
+        "isCrossType": true,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false
+      },
+      {
+        "id": "invulnerabilidad",
+        "origin": "Mutante",
+        "rank": 1,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false,
+        "selectedOption": "cinetico"
+      }
+    ]
+  },
+  "traumas": {
+    "Artista Marcial con Chi": "Ha recibido entrenamiento para proseguir con el legado de su madre, aprendiendo todos sus movimientos y técnicas de ella."
+  },
+  "sexualIdentity": "Mujer",
+  "profession": "Aventurera",
+  "uiState": {
+    "unlockCombatStats": true
+  },
+  "meta": {
+    "version": "Beta 0.15.1",
+    "generator": "SHI Wizard"
+  }
+}

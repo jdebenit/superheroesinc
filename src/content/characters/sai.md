@@ -11,6 +11,7 @@ tags:
   - Vigilante
 originReality: Tierra Zero
 actualReality: Tierra Zero
+rpgId: sai
 groups:
   - "world-force"
 ---
