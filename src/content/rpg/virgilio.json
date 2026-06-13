@@ -1,0 +1,268 @@
+{
+  "name": "Virgil Columbus",
+  "alias": "Virgilio",
+  "origin": {
+    "items": [
+      {
+        "Mutante": [
+          "Psíquico"
+        ]
+      }
+    ]
+  },
+  "combatstats": {
+    "Acciones por asalto": "2",
+    "Iniciativa y Reflejos": "45",
+    "Puntos de Vida": "60",
+    "Equilibrio Mental": "82"
+  },
+  "otherstats": {
+    "Inconsciencia": "6",
+    "Recuperación": "1 PV/h",
+    "Resistencia a gases y venenos": "26%",
+    "Modificador de fuerza": "1d4",
+    "Peso Levantado": "75kg",
+    "Daño absorbido físico": "0",
+    "Daño absorbido mental": "0",
+    "Modificador de impacto": "0",
+    "Modificador Psionico": "25",
+    "Parada Fisica": "21",
+    "Parada mental": "50",
+    "Salto (alto / largo)": "2,5m / 7,6m"
+  },
+  "attributes": {
+    "values": {
+      "Fuerza": 75,
+      "Constitución": 80,
+      "Agilidad": 84,
+      "Inteligencia": 82,
+      "Percepción": 96,
+      "Apariencia": 82,
+      "Voluntad": 91
+    },
+    "breakdown": {
+      "fuerza": {
+        "base": 75,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "constitucion": {
+        "base": 80,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "agilidad": {
+        "base": 84,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "inteligencia": {
+        "base": 82,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "percepcion": {
+        "base": 96,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "apariencia": {
+        "base": 82,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "voluntad": {
+        "base": 91,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      }
+    }
+  },
+  "skills": {
+    "generalItems": [
+      {
+        "name": "Acechar/Discrección",
+        "math": "(AGI+PER)/2",
+        "value": "90%"
+      },
+      {
+        "name": "Comb. cuerpo a cuerpo",
+        "math": "(AGI+PER)/2",
+        "value": "90%"
+      },
+      {
+        "name": "Conocimientos generales",
+        "math": "INT/3",
+        "value": "74%"
+      },
+      {
+        "name": "Esconderse",
+        "math": "(AGI+PER)/4",
+        "value": "45%"
+      },
+      {
+        "name": "Idea",
+        "math": "INT/2",
+        "value": "41%"
+      },
+      {
+        "name": "Influencia",
+        "math": "(INT+APA)/2",
+        "value": "184%"
+      },
+      {
+        "name": "Idioma nativo (Español)",
+        "math": "INT",
+        "value": "82%"
+      },
+      {
+        "name": "Investigar",
+        "math": "(INT+PER)/3",
+        "value": "59%"
+      },
+      {
+        "name": "Lanzar",
+        "math": "(FUE+PER)/2",
+        "value": "85%"
+      },
+      {
+        "name": "Primeros auxilios",
+        "math": "INT/2",
+        "value": "41%"
+      },
+      {
+        "name": "Suerte",
+        "math": "(PER+VOL)/4",
+        "value": "46%"
+      },
+      {
+        "name": "Trepar y Saltar",
+        "math": "AGI",
+        "value": "84%"
+      }
+    ],
+    "specialItems": [
+      {
+        "name": "Otro idioma: Inglés",
+        "math": "INT/3",
+        "value": "27%"
+      },
+      {
+        "name": "Ciencia: Psícología",
+        "math": "INT/3",
+        "value": "27%"
+      },
+      {
+        "name": "Conducir: Aeronave",
+        "math": "(INT+PER)/4",
+        "value": "44%"
+      }
+    ],
+    "generalManualMods": {
+      "influencia": 102,
+      "conocimientos": 47
+    },
+    "manualBases": {},
+    "selected": {},
+    "specified": {
+      "otro_idioma_1781353268278": {
+        "skillId": "otro_idioma",
+        "specification": "Inglés",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "ciencia_1781353289761": {
+        "skillId": "ciencia",
+        "specification": "Psícología",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "conducir_1781353314389": {
+        "skillId": "conducir",
+        "specification": "Aeronave",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      }
+    },
+    "nativeLanguage": "Español"
+  },
+  "background": {
+    "prejudiceResistance": 56,
+    "economicStatus": "multimillonario",
+    "legalStatus": "buscado",
+    "socialStatus": "amenaza_publica",
+    "friendsAndAssociates": "lazos_todos",
+    "baseCoverage": "independiente_lujo"
+  },
+  "powers": {
+    "selected": [
+      {
+        "id": "telepatia",
+        "origin": "Mutante",
+        "rank": 71,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false
+      },
+      {
+        "id": "empatia_mental",
+        "origin": "Mutante",
+        "rank": 41,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false
+      },
+      {
+        "id": "dominacion_mental",
+        "origin": "Mutante",
+        "rank": 21,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false
+      },
+      {
+        "id": "agresion_psionica",
+        "origin": "Mutante",
+        "rank": 21,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false
+      }
+    ]
+  },
+  "uiState": {
+    "unlockManualSkills": true,
+    "unlockCombatStats": true,
+    "unlockOtherStats": true
+  },
+  "profession": "Comandante en Jefe",
+  "sexualIdentity": "Hombre",
+  "meta": {
+    "version": "Beta 0.15.2",
+    "generator": "SHI Wizard"
+  }
+}

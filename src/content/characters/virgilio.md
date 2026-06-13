@@ -2,7 +2,8 @@
 name: Virgil Columbus
 description: Uno de los psíquicos más poderosos de Paraíso y comandante de los Arcángeles.
 source: Superhéroes INC. Tercera Edición
-updatedDate: 2025-11-26
+publishedDate: 2025-11-26
+updatedDate: 2026-06-13
 image: /personajes/virgilio.png
 tags:
   - Principal
@@ -10,6 +11,7 @@ tags:
 originReality: Tierra Zero
 actualReality: Tierra Zero
 alias: Virgilio
+rpgId: virgilio
 groups:
  - arcangeles
 ---
