@@ -1,0 +1,258 @@
+{
+  "name": "Fera de Oliveira",
+  "alias": "Balanza",
+  "origin": {
+    "items": [
+      {
+        "Parahumano": [
+          "Tes-khar"
+        ]
+      }
+    ]
+  },
+  "combatstats": {
+    "Acciones por asalto": "4",
+    "Iniciativa y Reflejos": "62",
+    "Puntos de Vida": "90",
+    "Equilibrio Mental": "75"
+  },
+  "otherstats": {
+    "Inconsciencia": "9",
+    "Recuperación": "6 PV/h",
+    "Resistencia a gases y venenos": "41%",
+    "Modificador de fuerza": "5d10+8",
+    "Peso Levantado": "14 t",
+    "Daño absorbido físico": "45",
+    "Daño absorbido mental": "0",
+    "Modificador de impacto": "40",
+    "Modificador Psionico": "0",
+    "Parada Fisica": "50",
+    "Parada mental": "10",
+    "Salto (alto / largo)": "10,4m / 31,1m"
+  },
+  "attributes": {
+    "values": {
+      "Fuerza": 115,
+      "Constitución": 125,
+      "Agilidad": 140,
+      "Inteligencia": 75,
+      "Percepción": 110,
+      "Apariencia": 85,
+      "Voluntad": 80
+    },
+    "breakdown": {
+      "fuerza": {
+        "base": 95,
+        "originMod": 20,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "constitucion": {
+        "base": 95,
+        "originMod": 30,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "agilidad": {
+        "base": 100,
+        "originMod": 40,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "inteligencia": {
+        "base": 75,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "percepcion": {
+        "base": 90,
+        "originMod": 20,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "apariencia": {
+        "base": 85,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "voluntad": {
+        "base": 80,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      }
+    }
+  },
+  "skills": {
+    "generalItems": [
+      {
+        "name": "Acechar/Discrección",
+        "math": "(AGI+PER)/2",
+        "value": "125%"
+      },
+      {
+        "name": "Comb. cuerpo a cuerpo",
+        "math": "(AGI+PER)/2",
+        "value": "125%"
+      },
+      {
+        "name": "Conocimientos generales",
+        "math": "INT/3",
+        "value": "25%"
+      },
+      {
+        "name": "Esconderse",
+        "math": "(AGI+PER)/4",
+        "value": "142%"
+      },
+      {
+        "name": "Idea",
+        "math": "INT/2",
+        "value": "37%"
+      },
+      {
+        "name": "Influencia",
+        "math": "(INT+APA)/2",
+        "value": "80%"
+      },
+      {
+        "name": "Idioma nativo",
+        "math": "INT",
+        "value": "75%"
+      },
+      {
+        "name": "Investigar",
+        "math": "(INT+PER)/3",
+        "value": "61%"
+      },
+      {
+        "name": "Lanzar",
+        "math": "(FUE+PER)/2",
+        "value": "112%"
+      },
+      {
+        "name": "Primeros auxilios",
+        "math": "INT/2",
+        "value": "37%"
+      },
+      {
+        "name": "Suerte",
+        "math": "(PER+VOL)/4",
+        "value": "47%"
+      },
+      {
+        "name": "Trepar y Saltar",
+        "math": "AGI",
+        "value": "140%"
+      }
+    ],
+    "specialItems": [
+      {
+        "name": "Trampas",
+        "math": "INT/2",
+        "value": "37%"
+      },
+      {
+        "name": "Farmacología",
+        "math": "INT/2",
+        "value": "37%"
+      },
+      {
+        "name": "Otro idioma: Inglés",
+        "math": "INT/3",
+        "value": "25%"
+      },
+      {
+        "name": "Otro idioma: Español",
+        "math": "INT/3",
+        "value": "45%"
+      }
+    ],
+    "generalManualMods": {
+      "esconderse": 80
+    },
+    "manualBases": {
+      "esconderse": 62
+    },
+    "selected": {
+      "trampas": {
+        "isFree": true,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "farmacologia": {
+        "isFree": true,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      }
+    },
+    "specified": {
+      "otro_idioma_1781342916346": {
+        "skillId": "otro_idioma",
+        "specification": "Inglés",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "otro_idioma_1781342917165": {
+        "skillId": "otro_idioma",
+        "specification": "Español",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 45
+      }
+    },
+    "nativeLanguage": ""
+  },
+  "background": {
+    "prejudiceResistance": 30,
+    "socialStatus": "heroe_pueblo",
+    "friendsAndAssociates": "conocido_poderoso"
+  },
+  "powers": {
+    "selected": [
+      {
+        "id": "superhabilidad",
+        "origin": "Parahumano",
+        "rank": 81,
+        "customizations": [],
+        "selectedOption": "Esconderse"
+      },
+      {
+        "id": "multiformidad",
+        "origin": "Alterado",
+        "rank": 21,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false,
+        "selectedOption": "Animales"
+      }
+    ]
+  },
+  "parahumanoParams": {
+    "isHybridWithHuman": true
+  },
+  "profession": "Aventurera",
+  "sexualIdentity": "Mujer",
+  "uiState": {
+    "unlockManualSkills": true
+  },
+  "meta": {
+    "version": "Beta 0.15.1",
+    "generator": "SHI Wizard"
+  }
+}

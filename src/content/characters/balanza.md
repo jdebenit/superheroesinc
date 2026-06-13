@@ -9,6 +9,7 @@ tags:
   - Tes-khar
 originReality: Tierra Zero
 actualReality: Tierra Zero
+rpgId: balanza
 image: /personajes/balanza.png
 groups:
   - "world-force"

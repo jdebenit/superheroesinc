@@ -1,0 +1,420 @@
+{
+  "name": "Varn",
+  "alias": "Varn",
+  "level": "4",
+  "origin": {
+    "items": [
+      {
+        "Guardián": [
+          "Acceso a poderes de guardianes"
+        ]
+      },
+      {
+        "Parahumano": [
+          "Atlante"
+        ]
+      }
+    ]
+  },
+  "combatstats": {
+    "Acciones por asalto": "4",
+    "Iniciativa y Reflejos": "64",
+    "Puntos de Vida": "165",
+    "Equilibrio Mental": "140"
+  },
+  "otherstats": {
+    "Inconsciencia": "14",
+    "Recuperación": "20 PV/h",
+    "Resistencia a gases y venenos": "53%",
+    "Modificador de fuerza": "1d100+20",
+    "Peso Levantado": "20 t",
+    "Daño absorbido físico": "90",
+    "Daño absorbido mental": "60",
+    "Modificador de impacto": "35",
+    "Modificador Psionico": "10",
+    "Parada Fisica": "50",
+    "Parada mental": "25",
+    "Salto (alto / largo)": "10,0m / 30,0m"
+  },
+  "attributes": {
+    "values": {
+      "Fuerza": 120,
+      "Constitución": 160,
+      "Agilidad": 135,
+      "Inteligencia": 140,
+      "Percepción": 121,
+      "Apariencia": 120,
+      "Voluntad": 85
+    },
+    "breakdown": {
+      "fuerza": {
+        "base": 100,
+        "originMod": 20,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "constitucion": {
+        "base": 100,
+        "originMod": 60,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "agilidad": {
+        "base": 95,
+        "originMod": 40,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "inteligencia": {
+        "base": 80,
+        "originMod": 60,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "percepcion": {
+        "base": 91,
+        "originMod": 30,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "apariencia": {
+        "base": 90,
+        "originMod": 30,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "voluntad": {
+        "base": 85,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      }
+    }
+  },
+  "skills": {
+    "generalItems": [
+      {
+        "name": "Acechar/Discrección",
+        "math": "(AGI+PER)/2",
+        "value": "128%"
+      },
+      {
+        "name": "Comb. cuerpo a cuerpo",
+        "math": "(AGI+PER)/2",
+        "value": "128%"
+      },
+      {
+        "name": "Conocimientos generales",
+        "math": "INT/3",
+        "value": "46%"
+      },
+      {
+        "name": "Esconderse",
+        "math": "(AGI+PER)/4",
+        "value": "64%"
+      },
+      {
+        "name": "Idea",
+        "math": "INT/2",
+        "value": "70%"
+      },
+      {
+        "name": "Influencia",
+        "math": "(INT+APA)/2",
+        "value": "130%"
+      },
+      {
+        "name": "Idioma nativo (Atlante)",
+        "math": "INT",
+        "value": "140%"
+      },
+      {
+        "name": "Investigar",
+        "math": "(INT+PER)/3",
+        "value": "87%"
+      },
+      {
+        "name": "Lanzar",
+        "math": "(FUE+PER)/2",
+        "value": "120%"
+      },
+      {
+        "name": "Primeros auxilios",
+        "math": "INT/2",
+        "value": "70%"
+      },
+      {
+        "name": "Suerte",
+        "math": "(PER+VOL)/4",
+        "value": "51%"
+      },
+      {
+        "name": "Trepar y Saltar",
+        "math": "AGI",
+        "value": "135%"
+      }
+    ],
+    "specialItems": [
+      {
+        "name": "Nadar / Bucear",
+        "math": "(FUE+AGI)/2",
+        "value": "127%"
+      },
+      {
+        "name": "Arma Especial: Tridente",
+        "math": "(2xPER)/3",
+        "value": "100%"
+      },
+      {
+        "name": "Ciencia: Mitologia",
+        "math": "INT/3",
+        "value": "66%"
+      },
+      {
+        "name": "Arma Especial: Lanza Atlante",
+        "math": "(2xPER)/3",
+        "value": "80%"
+      },
+      {
+        "name": "Otro idioma: Swahilli",
+        "math": "INT/3",
+        "value": "46%"
+      },
+      {
+        "name": "Otro idioma: Aleman",
+        "math": "INT/3",
+        "value": "46%"
+      },
+      {
+        "name": "Otro idioma: Portugues",
+        "math": "INT/3",
+        "value": "46%"
+      },
+      {
+        "name": "Otro idioma: Ruso",
+        "math": "INT/3",
+        "value": "46%"
+      },
+      {
+        "name": "Otro idioma: Chino",
+        "math": "INT/3",
+        "value": "46%"
+      },
+      {
+        "name": "Otro idioma: Arabe",
+        "math": "INT/3",
+        "value": "46%"
+      },
+      {
+        "name": "Otro idioma: Español",
+        "math": "INT/3",
+        "value": "46%"
+      },
+      {
+        "name": "Otro idioma: Francés",
+        "math": "INT/3",
+        "value": "46%"
+      },
+      {
+        "name": "Otro idioma: Inglés",
+        "math": "INT/3",
+        "value": "46%"
+      }
+    ],
+    "generalManualMods": {},
+    "manualBases": {},
+    "selected": {
+      "nadar": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      }
+    },
+    "specified": {
+      "arma_especial_1781343706135": {
+        "skillId": "arma_especial",
+        "specification": "Tridente",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 20,
+        "manualBases": 80
+      },
+      "ciencia_1781343750878": {
+        "skillId": "ciencia",
+        "specification": "Mitologia",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 20,
+        "manualBases": 0
+      },
+      "arma_especial_1781343759680": {
+        "skillId": "arma_especial",
+        "specification": "Lanza Atlante",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "otro_idioma_1781343764496": {
+        "skillId": "otro_idioma",
+        "specification": "Swahilli",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "otro_idioma_1781343764968": {
+        "skillId": "otro_idioma",
+        "specification": "Aleman",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "otro_idioma_1781343765466": {
+        "skillId": "otro_idioma",
+        "specification": "Portugues",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "otro_idioma_1781343766054": {
+        "skillId": "otro_idioma",
+        "specification": "Ruso",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "otro_idioma_1781343766976": {
+        "skillId": "otro_idioma",
+        "specification": "Chino",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "otro_idioma_1781343767728": {
+        "skillId": "otro_idioma",
+        "specification": "Arabe",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "otro_idioma_1781343768410": {
+        "skillId": "otro_idioma",
+        "specification": "Español",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "otro_idioma_1781343769070": {
+        "skillId": "otro_idioma",
+        "specification": "Francés",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "otro_idioma_1781343769688": {
+        "skillId": "otro_idioma",
+        "specification": "Inglés",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      }
+    },
+    "nativeLanguage": "Atlante"
+  },
+  "background": {
+    "prejudiceResistance": 75,
+    "economicStatus": "multimillonario",
+    "socialStatus": "heroe_reconocido",
+    "friendsAndAssociates": "conocido_poderoso",
+    "baseCoverage": "independiente_lujo"
+  },
+  "equipment": {
+    "items": [
+      {
+        "name": "Traje de supervivencia en superficie",
+        "notes": "Anula en 41 de sus modificadores negativos bajo el agua",
+        "cost": "6"
+      }
+    ]
+  },
+  "powers": {
+    "selected": [
+      {
+        "id": "control_del_agua",
+        "origin": "Parahumano",
+        "rank": 11,
+        "skillValue": 128
+      },
+      {
+        "id": "superhabilidad",
+        "origin": "Parahumano",
+        "rank": 41,
+        "skillValue": 0,
+        "selectedOption": "Idioma nativo"
+      },
+      {
+        "id": "superhabilidad",
+        "origin": "Parahumano",
+        "rank": 81,
+        "skillValue": 0,
+        "selectedOption": "Nadar"
+      },
+      {
+        "id": "empatia_animal",
+        "origin": "Parahumano",
+        "rank": 11,
+        "skillValue": 0,
+        "customizations": [
+          {
+            "id": "atlante_cetaceos",
+            "description": "Hablar solo con cetáceos",
+            "cost": 0
+          }
+        ]
+      },
+      {
+        "id": "control_del_agua",
+        "origin": "Guardian",
+        "rank": 100,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false,
+        "skillValue": 128
+      }
+    ]
+  },
+  "guardianParams": {
+    "quality": "object_grants_powers",
+    "objectType": "weapon",
+    "feature": "inscriptions",
+    "transformation": "no_change_persists"
+  },
+  "uiState": {
+    "unlockManualSkills": true,
+    "unlockCombatStats": true
+  },
+  "profession": "General y Representante Atlante",
+  "sexualIdentity": "Hombre",
+  "meta": {
+    "version": "Beta 0.15.1",
+    "generator": "SHI Wizard"
+  }
+}

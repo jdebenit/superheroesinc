@@ -7,7 +7,9 @@ image: /personajes/varn.png
 tags:
   - Principal
   - Atlante
+  - Guardian
 originReality: Tierra Zero
 actualReality: Tierra Zero
+rpgId: varn
 ---
 Cuando la Nación de Atlantis solicitó un asiento en la Organización de Naciones Unidas y, más tarde, en el Consejo Internacional de Superseguridad, eligieron como representante al que fuera su campeón y mayor héroe, Varn. Antiguo General de los Ejércitos de Atlantis, Varn porta un poderoso tridente, reliquia de su pueblo de tiempos antiguos, que dicen perteneció a un olvidado dios marino.
