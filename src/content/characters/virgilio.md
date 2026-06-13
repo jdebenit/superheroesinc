@@ -10,7 +10,7 @@ tags:
 originReality: Tierra Zero
 actualReality: Tierra Zero
 alias: Virgilio
-group:
+groups:
  - arcangeles
 ---
 Hijo natural de Dante y uno de los psíquicos más poderosos de Paraíso, Virgil Columbus nunca estuvo interesado en gobernar, por lo que dejó que su hermano adoptivo, Orfeo, sucediera a su padre en el papel de líder de la nación mutante. Mientras, Virgilio se convirtió en el Comandante en Jefe de los Arcángeles, el enorme grupo organizado oficial de mutantes de Paraíso.
