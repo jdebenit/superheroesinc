@@ -11,6 +11,7 @@ tags:
   - Dios
 originReality: Reinos Divinos
 actualReality: Tierra Zero
+rpgId: seismo
 ---
 Mucho antes de convertirse en uno de los metahumanos más peligrosos de la Tierra, Seísmo fue conocido por otro nombre. En los antiguos reinos divinos era Geb, dios de la Tierra y heredero de una de las ramas más poderosas del panteón egipcio.
 

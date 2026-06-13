@@ -1,0 +1,258 @@
+{
+  "name": "Geb",
+  "alias": "Seismo",
+  "level": "10",
+  "origin": {
+    "items": [
+      {
+        "Divino": [
+          "Dios"
+        ]
+      }
+    ]
+  },
+  "combatstats": {
+    "Acciones por asalto": "3",
+    "Iniciativa y Reflejos": "48",
+    "Puntos de Vida": "280",
+    "Equilibrio Mental": "40"
+  },
+  "otherstats": {
+    "Inconsciencia": "28",
+    "Recuperación": "40 PV/h",
+    "Resistencia a gases y venenos": "66%",
+    "Modificador de fuerza": "1d100+100",
+    "Peso Levantado": "100 t",
+    "Daño absorbido físico": "150",
+    "Daño absorbido mental": "0",
+    "Modificador de impacto": "0",
+    "Modificador Psionico": "10",
+    "Parada Fisica": "24",
+    "Parada mental": "50",
+    "Salto (alto / largo)": "330,0m / 990,0m"
+  },
+  "attributes": {
+    "values": {
+      "Fuerza": 200,
+      "Constitución": 200,
+      "Agilidad": 99,
+      "Inteligencia": 75,
+      "Percepción": 96,
+      "Apariencia": 35,
+      "Voluntad": 85
+    },
+    "breakdown": {
+      "fuerza": {
+        "base": 100,
+        "originMod": 100,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "constitucion": {
+        "base": 100,
+        "originMod": 100,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "agilidad": {
+        "base": 99,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "inteligencia": {
+        "base": 75,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "percepcion": {
+        "base": 96,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "apariencia": {
+        "base": 35,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "voluntad": {
+        "base": 85,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      }
+    }
+  },
+  "skills": {
+    "generalItems": [
+      {
+        "name": "Acechar/Discrección",
+        "math": "(AGI+PER)/2",
+        "value": "97%"
+      },
+      {
+        "name": "Comb. cuerpo a cuerpo",
+        "math": "(AGI+PER)/2",
+        "value": "97%"
+      },
+      {
+        "name": "Conocimientos generales",
+        "math": "INT/3",
+        "value": "35%"
+      },
+      {
+        "name": "Esconderse",
+        "math": "(AGI+PER)/4",
+        "value": "48%"
+      },
+      {
+        "name": "Idea",
+        "math": "INT/2",
+        "value": "37%"
+      },
+      {
+        "name": "Influencia",
+        "math": "(INT+APA)/2",
+        "value": "75%"
+      },
+      {
+        "name": "Idioma nativo (Egipcio)",
+        "math": "INT",
+        "value": "75%"
+      },
+      {
+        "name": "Investigar",
+        "math": "(INT+PER)/3",
+        "value": "57%"
+      },
+      {
+        "name": "Lanzar",
+        "math": "(FUE+PER)/2",
+        "value": "148%"
+      },
+      {
+        "name": "Primeros auxilios",
+        "math": "INT/2",
+        "value": "37%"
+      },
+      {
+        "name": "Suerte",
+        "math": "(PER+VOL)/4",
+        "value": "45%"
+      },
+      {
+        "name": "Trepar y Saltar",
+        "math": "AGI",
+        "value": "99%"
+      }
+    ],
+    "specialItems": [
+      {
+        "name": "Otro idioma: Inglés",
+        "math": "INT/3",
+        "value": "25%"
+      },
+      {
+        "name": "Otro idioma: Español",
+        "math": "INT/3",
+        "value": "25%"
+      },
+      {
+        "name": "Otro idioma: Arabe",
+        "math": "INT/3",
+        "value": "25%"
+      },
+      {
+        "name": "Montar Animal: T-Rex",
+        "math": "AGI/2",
+        "value": "49%"
+      }
+    ],
+    "generalManualMods": {
+      "conocimientos": 25,
+      "influencia": 20
+    },
+    "manualBases": {},
+    "selected": {},
+    "specified": {
+      "otro_idioma_1781345675218": {
+        "skillId": "otro_idioma",
+        "specification": "Inglés",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "otro_idioma_1781345676006": {
+        "skillId": "otro_idioma",
+        "specification": "Español",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "otro_idioma_1781345676956": {
+        "skillId": "otro_idioma",
+        "specification": "Arabe",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "montar_1781345679456": {
+        "skillId": "montar",
+        "specification": "T-Rex",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      }
+    },
+    "nativeLanguage": "Egipcio"
+  },
+  "background": {
+    "prejudiceResistance": 91,
+    "economicStatus": "multimillonario",
+    "legalStatus": "terrorista",
+    "socialStatus": "supervillano",
+    "friendsAndAssociates": "conocido_poderoso",
+    "baseCoverage": "independiente_lujo"
+  },
+  "powers": {
+    "selected": [
+      {
+        "id": "control_de_la_geodinamica",
+        "origin": "Divino",
+        "rank": 100,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false
+      }
+    ]
+  },
+  "divineParams": {
+    "focus": "no_focus"
+  },
+  "uiState": {
+    "unlockManualSkills": true,
+    "unlockCombatStats": true,
+    "unlockOtherStats": true
+  },
+  "profession": "Conquistador",
+  "sexualIdentity": "Hombre",
+  "meta": {
+    "version": "Beta 0.15.1",
+    "generator": "SHI Wizard"
+  }
+}
