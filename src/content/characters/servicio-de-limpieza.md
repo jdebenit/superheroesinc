@@ -8,6 +8,9 @@ image: "/personajes/servicio-de-limpieza.png"
 tags:
   - Principal
   - Vigilante
+  - Fanático
+  - Francotirador
+  - ArtistaMarcial
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 rpgId: servicio-de-limpieza

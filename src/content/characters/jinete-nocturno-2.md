@@ -8,6 +8,9 @@ updatedDate: 2026-06-15
 tags:
   - Secundario
   - Vigilante
+  - ArtistaMarcial
+  - Arquero
+  - Espia/Ladrón
 originReality: Tierra Zero
 actualReality: Tierra Zero
 rpgId: jinete-nocturno-2
