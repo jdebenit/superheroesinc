@@ -13,6 +13,8 @@ La naturaleza del plano es difícil de describir con términos humanos. En Nigal
 
 Es un plano nacido de la mas corrupta esencia de [Entropia](/lore/entidades/entropia/), incompatible con la lógica humana. Allí, pensamiento, voluntad y miedo no son estados mentales, sino fuerzas que pueden adquirir forma física. No es un infierno en el sentido clásico, pero muchos de sus habitantes y fenómenos se parecen demasiado a lo que distintas culturas han descrito como tal.
 
+Incluso la lengua que se habla en esta esfera _el Naglo_ es corrupto, cuando es escuchado hace que tu cordura se desvanezca poco a poco.
+
 Nigalión alberga una gran variedad de entidades hostiles. Sombras vivientes, criaturas que se alimentan de energía emocional, depredadores que imitan formas humanas para confundir o atraer, y demonios cuyo objetivo principal es infiltrarse en otros planos. La mayoría de estos seres solo pueden manifestarse de forma parcial en [Tierra Zero](/lore/localizaciones/tierra-zero/), pero cuando logran establecer un anclaje sólido, una torre, un portal estable o un santuario debilitado, las consecuencias suelen ser catastróficas.
 
 La relación entre Nigalión y [Tierra Zero](/lore/localizaciones/tierra-zero/) se articula principalmente a través de las conocidas como Siete Torres del Mal. Cada una de estas torres tiene una contraparte o reflejo en Nigalión, funcionando como puntos de resonancia entre ambos planos. A través de ellas fluye de manera constante energía oscura, y si una torre cae o se corrompe, la región asociada queda expuesta a incursiones directas.

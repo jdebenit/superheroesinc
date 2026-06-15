@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "blog/volviendo-realmente-al-hobby.md",
+                "file": "lore/localizaciones/nigalion.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "volviendo-realmente-al-hobby"
+              "title": "nigalion"
             }
           }
         ]
@@ -185,8 +185,12 @@
   },
   "active": "d101106a4f64eb58",
   "lastOpenFiles": [
-    "blog/abrir-las-puertas.md",
+    "lore/localizaciones/kishvar.md",
+    "lore/localizaciones/terra.md",
+    "lore/localizaciones/nigalion.md",
     "blog/volviendo-realmente-al-hobby.md",
+    "blog/mantener-tono-partida.md",
+    "blog/abrir-las-puertas.md",
     "lore/eventos/bienvenido-al-universo.md",
     "lore/eventos/cronologia-resumida.md",
     "lore/eventos/bienvenido-al-mundo-de-superheroes-inc 1.md",
@@ -207,10 +211,6 @@
     "timeline/descubrimiento-de-la-torre-del-mal.md",
     "timeline/desaparicion-ultima-oportunidad.md",
     "timeline/desercion-de-calibre.md",
-    "timeline/destierro-de-asha-de-cindraor.md",
-    "timeline/detencion-de-jaguar.md",
-    "timeline/diplomacia-avalon-reino-unido.md",
-    "timeline/disolucion-grupos-metahumanos.md",
     "rpg/flecha-roja-ii.json",
     "personajes",
     "Pasted image 20260416191817.png",
