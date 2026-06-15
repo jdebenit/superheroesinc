@@ -2,7 +2,8 @@
 name: "Servicio de Limpieza"
 description: "Responsable de campo del equipo encubierto Antihéroes Ltd. de Superhéroes INC. Viste mono de trabajo y utiliza un cinturón con herramientas y artefactos."
 source: "Superhéroes INC. Tercera Edición"
-updatedDate: 2025-11-26
+publishedDate: 2025-11-26
+updatedDate: 2026-06-15
 image: "/personajes/servicio-de-limpieza.png"
 tags:
   - Principal

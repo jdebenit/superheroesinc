@@ -2,7 +2,8 @@
 name: Daemonideus
 description: Un mago oscuro desterrado desde Terra que busca someter nuestro mundo mediante poder arcano y ambición desmedida.
 source: Superhéroes INC. Tercera Edición
-updatedDate: 2026-05-24
+publishedDate: 2026-05-24
+updatedDate: 2026-06-15
 tags:
   - Principal
   - Terrano

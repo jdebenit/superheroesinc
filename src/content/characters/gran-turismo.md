@@ -3,7 +3,8 @@ name: Desconocido
 alias: Gran Turismo, (Fórmula 0)
 description: Antiguo supervillano velocista reconvertido en piloto extremo y agente de Antiheroes Ltd.
 source: Superhéroes INC. Tercera Edición
-updatedDate: 2026-05-24
+publishedDate: 2026-05-24
+updatedDate: 2026-06-15
 tags:
   - Principal
   - Mutante
