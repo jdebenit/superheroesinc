@@ -1,0 +1,275 @@
+{
+  "name": "Desconocido",
+  "alias": "Gran Turismo",
+  "origin": {
+    "items": [
+      {
+        "Mutante": [
+          "Físico"
+        ]
+      }
+    ]
+  },
+  "combatstats": {
+    "Acciones por asalto": "6",
+    "Iniciativa y Reflejos": "87",
+    "Puntos de Vida": "73",
+    "Equilibrio Mental": "62"
+  },
+  "otherstats": {
+    "Inconsciencia": "7",
+    "Recuperación": "1 PV/h",
+    "Resistencia a gases y venenos": "30%",
+    "Modificador de fuerza": "1d8",
+    "Peso Levantado": "285kg",
+    "Daño absorbido físico": "0",
+    "Daño absorbido mental": "0",
+    "Modificador de impacto": "100",
+    "Modificador Psionico": "-10",
+    "Parada Fisica": "80",
+    "Parada mental": "0",
+    "Salto (alto / largo)": "16,7m / 50,0m"
+  },
+  "attributes": {
+    "values": {
+      "Fuerza": 95,
+      "Constitución": 90,
+      "Agilidad": 200,
+      "Inteligencia": 74,
+      "Percepción": 150,
+      "Apariencia": 62,
+      "Voluntad": 68
+    },
+    "breakdown": {
+      "fuerza": {
+        "base": 95,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "constitucion": {
+        "base": 90,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "agilidad": {
+        "base": 100,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 100,
+        "otherMod": 0
+      },
+      "inteligencia": {
+        "base": 74,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "percepcion": {
+        "base": 100,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 50,
+        "otherMod": 0
+      },
+      "apariencia": {
+        "base": 62,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "voluntad": {
+        "base": 68,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      }
+    }
+  },
+  "skills": {
+    "generalItems": [
+      {
+        "name": "Acechar/Discrección",
+        "math": "(AGI+PER)/2",
+        "value": "175%"
+      },
+      {
+        "name": "Comb. cuerpo a cuerpo",
+        "math": "(AGI+PER)/2",
+        "value": "175%"
+      },
+      {
+        "name": "Conocimientos generales",
+        "math": "INT/3",
+        "value": "24%"
+      },
+      {
+        "name": "Esconderse",
+        "math": "(AGI+PER)/4",
+        "value": "87%"
+      },
+      {
+        "name": "Idea",
+        "math": "INT/2",
+        "value": "37%"
+      },
+      {
+        "name": "Influencia",
+        "math": "(INT+APA)/2",
+        "value": "68%"
+      },
+      {
+        "name": "Idioma nativo (Argelino)",
+        "math": "INT",
+        "value": "74%"
+      },
+      {
+        "name": "Investigar",
+        "math": "(INT+PER)/3",
+        "value": "74%"
+      },
+      {
+        "name": "Lanzar",
+        "math": "(FUE+PER)/2",
+        "value": "122%"
+      },
+      {
+        "name": "Primeros auxilios",
+        "math": "INT/2",
+        "value": "37%"
+      },
+      {
+        "name": "Suerte",
+        "math": "(PER+VOL)/4",
+        "value": "54%"
+      },
+      {
+        "name": "Trepar y Saltar",
+        "math": "AGI",
+        "value": "200%"
+      }
+    ],
+    "specialItems": [
+      {
+        "name": "Mecánica",
+        "math": "INT/2",
+        "value": "81%"
+      },
+      {
+        "name": "Conducir: Coche",
+        "math": "(INT+PER)/4",
+        "value": "142%"
+      },
+      {
+        "name": "Otro idioma: Frances",
+        "math": "INT/3",
+        "value": "60%"
+      }
+    ],
+    "generalManualMods": {
+      "trepar": 0
+    },
+    "manualBases": {},
+    "selected": {
+      "mecanica": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 44,
+        "manualBases": 0
+      }
+    },
+    "specified": {
+      "conducir_1781547411758": {
+        "skillId": "conducir",
+        "specification": "Coche",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 86,
+        "manualBases": 0
+      },
+      "otro_idioma_1781547603649": {
+        "skillId": "otro_idioma",
+        "specification": "Frances",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 36,
+        "manualBases": 0
+      }
+    },
+    "nativeLanguage": "Argelino"
+  },
+  "background": {
+    "prejudiceResistance": 73,
+    "economicStatus": "clase_alta",
+    "legalStatus": "con_antecedentes",
+    "socialStatus": "amenaza_publica",
+    "friendsAndAssociates": "lazos_todos"
+  },
+  "vehicles": {
+    "items": [
+      {
+        "name": "Muscle Car",
+        "armor": "40",
+        "pe": "300",
+        "speed": "500 Km/h",
+        "range": "1200",
+        "cost": 0,
+        "maneuverability": 30
+      }
+    ]
+  },
+  "powers": {
+    "selected": [
+      {
+        "id": "supervelocidad",
+        "origin": "Mutante",
+        "rank": 1,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false,
+        "powerMod": 100
+      },
+      {
+        "id": "superpercepcion",
+        "origin": "Mutante",
+        "rank": 1,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false,
+        "powerMod": 50,
+        "customizations": [
+          {
+            "id": "1781547302365",
+            "description": "Solo vista",
+            "cost": 0
+          }
+        ]
+      }
+    ]
+  },
+  "mutanteParams": {
+    "sequels": [
+      {
+        "id": "disability_4",
+        "description": "Debido a un accidente no puede hacer uso de sus poernas y tendra un modificador de -100 a todas las tiradas que implique el uso de las mismas, y un -50 a las acciones que impliquen un uso secundario"
+      }
+    ]
+  },
+  "uiState": {
+    "unlockManualSkills": true
+  },
+  "profession": "Conductor",
+  "sexualIdentity": "Hombre",
+  "meta": {
+    "version": "Beta 0.15.2",
+    "generator": "SHI Wizard"
+  }
+}

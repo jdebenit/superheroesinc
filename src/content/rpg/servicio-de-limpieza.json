@@ -1,0 +1,275 @@
+{
+  "name": "Desconocido",
+  "alias": "Servicio de Limpieza",
+  "origin": {
+    "items": [
+      {
+        "Vigilante": [
+          "Disponibilidad de armamento a dificultad reducida",
+          "Recarga rápida",
+          "Recuerdos dolorosos",
+          "Voluntad férrea",
+          "Fanático/Vengador",
+          "Francotirador",
+          "Artista Marcial"
+        ]
+      }
+    ]
+  },
+  "combatstats": {
+    "Acciones por asalto": "3",
+    "Iniciativa y Reflejos": "70",
+    "Puntos de Vida": "85",
+    "Equilibrio Mental": "76"
+  },
+  "otherstats": {
+    "Inconsciencia": "8",
+    "Recuperación": "1 PV/h",
+    "Resistencia a gases y venenos": "32%",
+    "Modificador de fuerza": "1d8",
+    "Peso Levantado": "285kg",
+    "Daño absorbido físico": "0",
+    "Daño absorbido mental": "0",
+    "Modificador de impacto": "30",
+    "Modificador Psionico": "25",
+    "Parada Fisica": "45",
+    "Parada mental": "50",
+    "Salto (alto / largo)": "3,3m / 10,0m"
+  },
+  "attributes": {
+    "values": {
+      "Fuerza": 95,
+      "Constitución": 98,
+      "Agilidad": 100,
+      "Inteligencia": 93,
+      "Percepción": 100,
+      "Apariencia": 65,
+      "Voluntad": 100
+    },
+    "breakdown": {
+      "fuerza": {
+        "base": 95,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "constitucion": {
+        "base": 78,
+        "originMod": 0,
+        "specialtyMod": 20,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "agilidad": {
+        "base": 50,
+        "originMod": 0,
+        "specialtyMod": 50,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "inteligencia": {
+        "base": 93,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "percepcion": {
+        "base": 50,
+        "originMod": 0,
+        "specialtyMod": 50,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "apariencia": {
+        "base": 65,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "voluntad": {
+        "base": 90,
+        "originMod": 0,
+        "specialtyMod": 10,
+        "powerMod": 0,
+        "otherMod": 0
+      }
+    }
+  },
+  "skills": {
+    "generalItems": [
+      {
+        "name": "Acechar/Discrección",
+        "math": "(AGI+PER)/2",
+        "value": "120%"
+      },
+      {
+        "name": "Comb. cuerpo a cuerpo",
+        "math": "(AGI+PER)/2",
+        "value": "100%"
+      },
+      {
+        "name": "Conocimientos generales",
+        "math": "INT/3",
+        "value": "31%"
+      },
+      {
+        "name": "Esconderse",
+        "math": "(AGI+PER)/4",
+        "value": "70%"
+      },
+      {
+        "name": "Idea",
+        "math": "INT/2",
+        "value": "46%"
+      },
+      {
+        "name": "Influencia",
+        "math": "(INT+APA)/2",
+        "value": "79%"
+      },
+      {
+        "name": "Idioma nativo (Castellano)",
+        "math": "INT",
+        "value": "93%"
+      },
+      {
+        "name": "Investigar",
+        "math": "(INT+PER)/3",
+        "value": "64%"
+      },
+      {
+        "name": "Lanzar",
+        "math": "(FUE+PER)/2",
+        "value": "97%"
+      },
+      {
+        "name": "Primeros auxilios",
+        "math": "INT/2",
+        "value": "46%"
+      },
+      {
+        "name": "Suerte",
+        "math": "(PER+VOL)/4",
+        "value": "50%"
+      },
+      {
+        "name": "Trepar y Saltar",
+        "math": "AGI",
+        "value": "120%"
+      }
+    ],
+    "specialItems": [
+      {
+        "name": "Armas largas",
+        "math": "(2xPER)/3",
+        "value": "100%"
+      },
+      {
+        "name": "Artes Marciales",
+        "math": "(AGI+PER)/3",
+        "value": "100%"
+      },
+      {
+        "name": "Armas cortas",
+        "math": "(2xPER)/3",
+        "value": "100%"
+      },
+      {
+        "name": "Armas militares",
+        "math": "PER/3",
+        "value": "100%"
+      },
+      {
+        "name": "Armas blancas",
+        "math": "(AGI+PER)/3",
+        "value": "100%"
+      }
+    ],
+    "generalManualMods": {},
+    "manualBases": {},
+    "selected": {
+      "armas_largas": {
+        "isFree": false,
+        "isRequired": true,
+        "manualMods": 0,
+        "manualBases": 80
+      },
+      "artes_marciales": {
+        "isFree": false,
+        "isRequired": true,
+        "manualMods": 0,
+        "manualBases": 100
+      },
+      "armas_cortas": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 100
+      },
+      "armas_militares": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 100
+      },
+      "armas_blancas": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 100
+      }
+    },
+    "specified": {},
+    "nativeLanguage": "Castellano"
+  },
+  "background": {
+    "prejudiceResistance": 99,
+    "economicStatus": "clase_alta",
+    "friendsAndAssociates": "conocido_poderoso",
+    "baseCoverage": "independiente_lujo"
+  },
+  "equipment": {
+    "items": [
+      {
+        "name": "Traje de Twaron",
+        "notes": "+50 a la DA",
+        "cost": 0
+      }
+    ]
+  },
+  "artifacts": {
+    "items": [
+      {
+        "name": "Gorra con Protector Psiquico",
+        "reliability": "100%",
+        "value": "",
+        "cost": "0",
+        "notes": "El portador recibe los beneficios del poder Invulnerabilidad a poderes psíquicos a rango cosmico"
+      },
+      {
+        "name": "Lentillas ForgetMeNot",
+        "reliability": "100",
+        "value": "",
+        "cost": 0,
+        "notes": "Lentillas capaces de evitar en sistemas biologicos como elctronicos  la retencion de la imagen de quien la porta. Un ser con sistema nervioso olvidara en 10 minutos y una parato electrónico no podra grabar en su memoria la cara del personaje que las lleve puestas"
+      }
+    ]
+  },
+  "traumas": {
+    "Fanático/Vengador": "No se sabe nada de el",
+    "Francotirador": "No se sabe nada de el",
+    "Artista Marcial": "No se sabe donde estudio artes marciales"
+  },
+  "profession": "Desconocida",
+  "sexualIdentity": "Hombre",
+  "powers": {
+    "selected": []
+  },
+  "meta": {
+    "version": "Beta 0.15.2",
+    "generator": "SHI Wizard"
+  }
+}

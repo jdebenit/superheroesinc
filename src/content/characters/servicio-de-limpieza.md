@@ -9,6 +9,7 @@ tags:
   - Vigilante
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
+rpgId: servicio-de-limpieza
 groups:
   - "antiheroes-ltd"
 ---

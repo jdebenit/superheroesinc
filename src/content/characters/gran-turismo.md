@@ -10,6 +10,7 @@ tags:
 originReality: Tierra Zero
 actualReality: Tierra Zero
 image: /personajes/gran_turismo.png
+rpgId: gran-turismo
 groups:
   - "antiheroes-ltd"
 ---

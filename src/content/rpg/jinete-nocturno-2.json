@@ -1,0 +1,402 @@
+{
+  "name": "Desconocido",
+  "alias": "Jinete Nocturno 2",
+  "origin": {
+    "items": [
+      {
+        "Vigilante": [
+          "Disponibilidad de armamento a dificultad reducida",
+          "Recarga rápida",
+          "Recuerdos dolorosos",
+          "Voluntad férrea",
+          "Espia/Ladrón",
+          "Arquero",
+          "Artista Marcial"
+        ]
+      }
+    ]
+  },
+  "combatstats": {
+    "Acciones por asalto": "3",
+    "Iniciativa y Reflejos": "69",
+    "Puntos de Vida": "84",
+    "Equilibrio Mental": "96"
+  },
+  "otherstats": {
+    "Inconsciencia": "8",
+    "Recuperación": "1 PV/h",
+    "Resistencia a gases y venenos": "29%",
+    "Modificador de fuerza": "1d8",
+    "Peso Levantado": "285kg",
+    "Daño absorbido físico": "0",
+    "Daño absorbido mental": "0",
+    "Modificador de impacto": "30",
+    "Modificador Psionico": "25",
+    "Parada Fisica": "45",
+    "Parada mental": "50",
+    "Salto (alto / largo)": "3,3m / 10,0m"
+  },
+  "attributes": {
+    "values": {
+      "Fuerza": 95,
+      "Constitución": 88,
+      "Agilidad": 100,
+      "Inteligencia": 100,
+      "Percepción": 99,
+      "Apariencia": 71,
+      "Voluntad": 97
+    },
+    "breakdown": {
+      "fuerza": {
+        "base": 95,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "constitucion": {
+        "base": 88,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "agilidad": {
+        "base": 50,
+        "originMod": 0,
+        "specialtyMod": 50,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "inteligencia": {
+        "base": 100,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "percepcion": {
+        "base": 49,
+        "originMod": 0,
+        "specialtyMod": 50,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "apariencia": {
+        "base": 71,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "voluntad": {
+        "base": 97,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      }
+    }
+  },
+  "skills": {
+    "generalItems": [
+      {
+        "name": "Acechar/Discrección",
+        "math": "(AGI+PER)/2",
+        "value": "119%"
+      },
+      {
+        "name": "Comb. cuerpo a cuerpo",
+        "math": "(AGI+PER)/2",
+        "value": "99%"
+      },
+      {
+        "name": "Conocimientos generales",
+        "math": "INT/3",
+        "value": "33%"
+      },
+      {
+        "name": "Esconderse",
+        "math": "(AGI+PER)/4",
+        "value": "69%"
+      },
+      {
+        "name": "Idea",
+        "math": "INT/2",
+        "value": "50%"
+      },
+      {
+        "name": "Influencia",
+        "math": "(INT+APA)/2",
+        "value": "85%"
+      },
+      {
+        "name": "Idioma nativo",
+        "math": "INT",
+        "value": "100%"
+      },
+      {
+        "name": "Investigar",
+        "math": "(INT+PER)/3",
+        "value": "66%"
+      },
+      {
+        "name": "Lanzar",
+        "math": "(FUE+PER)/2",
+        "value": "97%"
+      },
+      {
+        "name": "Primeros auxilios",
+        "math": "INT/2",
+        "value": "50%"
+      },
+      {
+        "name": "Suerte",
+        "math": "(PER+VOL)/4",
+        "value": "49%"
+      },
+      {
+        "name": "Trepar y Saltar",
+        "math": "AGI",
+        "value": "120%"
+      }
+    ],
+    "specialItems": [
+      {
+        "name": "Robar",
+        "math": "AGI/2",
+        "value": "100%"
+      },
+      {
+        "name": "Arcos / Ballestas",
+        "math": "(2xPER)/3",
+        "value": "126%"
+      },
+      {
+        "name": "Artes Marciales",
+        "math": "(AGI+PER)/3",
+        "value": "96%"
+      },
+      {
+        "name": "Cerrajería",
+        "math": "INT/2",
+        "value": "50%"
+      },
+      {
+        "name": "Computadoras / Comunicaciones",
+        "math": "INT/2",
+        "value": "50%"
+      },
+      {
+        "name": "Mecánica",
+        "math": "INT/2",
+        "value": "50%"
+      },
+      {
+        "name": "Rastrear",
+        "math": "(INT+PER)/4",
+        "value": "59%"
+      },
+      {
+        "name": "Explosivos",
+        "math": "INT/2",
+        "value": "50%"
+      },
+      {
+        "name": "Armas largas",
+        "math": "(2xPER)/3",
+        "value": "76%"
+      },
+      {
+        "name": "Armas cortas",
+        "math": "(2xPER)/3",
+        "value": "96%"
+      },
+      {
+        "name": "Armas blancas",
+        "math": "(AGI+PER)/3",
+        "value": "86%"
+      },
+      {
+        "name": "Conducir: Moto",
+        "math": "(INT+PER)/4",
+        "value": "69%"
+      },
+      {
+        "name": "Otro idioma: Inglés",
+        "math": "INT/3",
+        "value": "33%"
+      },
+      {
+        "name": "Montar Animal: Caballo",
+        "math": "AGI/2",
+        "value": "50%"
+      },
+      {
+        "name": "Supervivencia: Bajos fondos",
+        "math": "INT/2",
+        "value": "50%"
+      }
+    ],
+    "generalManualMods": {},
+    "manualBases": {},
+    "selected": {
+      "robar": {
+        "isFree": false,
+        "isRequired": true,
+        "manualMods": 0,
+        "manualBases": 80
+      },
+      "arcos": {
+        "isFree": false,
+        "isRequired": true,
+        "manualMods": 0,
+        "manualBases": 106
+      },
+      "artes_marciales": {
+        "isFree": false,
+        "isRequired": true,
+        "manualMods": 0,
+        "manualBases": 96
+      },
+      "cerrajeria": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "computadoras": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "mecanica": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "rastrear": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 59
+      },
+      "explosivos": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "armas_largas": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 76
+      },
+      "armas_cortas": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 96
+      },
+      "armas_blancas": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 86
+      }
+    },
+    "specified": {
+      "conducir_1781548958486": {
+        "skillId": "conducir",
+        "specification": "Moto",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 69
+      },
+      "otro_idioma_1781548963354": {
+        "skillId": "otro_idioma",
+        "specification": "Inglés",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "montar_1781548970296": {
+        "skillId": "montar",
+        "specification": "Caballo",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "supervivencia_1781548973308": {
+        "skillId": "supervivencia",
+        "specification": "Bajos fondos",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      }
+    },
+    "nativeLanguage": ""
+  },
+  "background": {
+    "prejudiceResistance": 90,
+    "economicStatus": "clase_alta",
+    "legalStatus": "enemigo_publico",
+    "socialStatus": "amenaza_publica",
+    "friendsAndAssociates": "conocido_poderoso",
+    "baseCoverage": "independiente_equipada"
+  },
+  "weapons": {
+    "items": [
+      {
+        "name": "Pow E9",
+        "damage": "3d10 Pot 40",
+        "dxa": "2",
+        "car": "6",
+        "notes": "",
+        "cost": 0
+      },
+      {
+        "name": "DLK Giant",
+        "damage": "1d10x2 Pot 26",
+        "dxa": "2",
+        "car": "6",
+        "notes": "",
+        "cost": 0
+      }
+    ]
+  },
+  "vehicles": {
+    "items": [
+      {
+        "name": "Kawasaki Z H2",
+        "armor": "5",
+        "pe": "45",
+        "speed": "265km/h",
+        "range": "245km",
+        "cost": 0,
+        "maneuverability": 10
+      }
+    ]
+  },
+  "traumas": {
+    "Espia/Ladrón": "Para el un robo es un reto de habilidad,, intenta probarse día a día con algo nuevo",
+    "Arquero": "Su sueño de ser el arquero mas certero se trunco en una pelea de bar al dañarse el ojo, ahora quiere demostrar que es el mejor aunque tenga un leve defecto.",
+    "Artista Marcial": "Piensa en su cuerpo como una maquina bien engrasada, que necesita entrenamiento constante y actualizaciones constantes con nuevas habilidades de combate"
+  },
+  "profession": "Ladrón",
+  "sexualIdentity": "Hombre",
+  "powers": {
+    "selected": []
+  },
+  "meta": {
+    "version": "Beta 0.15.2",
+    "generator": "SHI Wizard"
+  }
+}

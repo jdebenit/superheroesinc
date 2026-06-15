@@ -1,0 +1,369 @@
+{
+  "name": "Daemonideus",
+  "alias": "Daemonideus",
+  "level": 6,
+  "origin": {
+    "items": [
+      {
+        "Arcano": [
+          "+20 a la parada mental",
+          "Mago",
+          "Terrano"
+        ]
+      }
+    ]
+  },
+  "combatstats": {
+    "Acciones por asalto": "3",
+    "Iniciativa y Reflejos": "46",
+    "Puntos de Vida": "95",
+    "Equilibrio Mental": "84"
+  },
+  "otherstats": {
+    "Inconsciencia": "9",
+    "Recuperación": "1 PV/h",
+    "Resistencia a gases y venenos": "23%",
+    "Modificador de fuerza": "1d4",
+    "Peso Levantado": "66kg",
+    "Daño absorbido físico": "0",
+    "Daño absorbido mental": "40",
+    "Modificador de impacto": "0",
+    "Modificador Psionico": "30",
+    "Parada Fisica": "23",
+    "Parada mental": "75",
+    "Salto (alto / largo)": "3,1m / 9,3m"
+  },
+  "attributes": {
+    "values": {
+      "Fuerza": 66,
+      "Constitución": 70,
+      "Agilidad": 93,
+      "Inteligencia": 104,
+      "Percepción": 94,
+      "Apariencia": 81,
+      "Voluntad": 102
+    },
+    "breakdown": {
+      "fuerza": {
+        "base": 56,
+        "originMod": 10,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "constitucion": {
+        "base": 60,
+        "originMod": 10,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "agilidad": {
+        "base": 83,
+        "originMod": 10,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "inteligencia": {
+        "base": 94,
+        "originMod": 10,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "percepcion": {
+        "base": 84,
+        "originMod": 10,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "apariencia": {
+        "base": 71,
+        "originMod": 10,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "voluntad": {
+        "base": 92,
+        "originMod": 10,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      }
+    }
+  },
+  "skills": {
+    "generalItems": [
+      {
+        "name": "Acechar/Discrección",
+        "math": "(AGI+PER)/2",
+        "value": "93%"
+      },
+      {
+        "name": "Comb. cuerpo a cuerpo",
+        "math": "(AGI+PER)/2",
+        "value": "93%"
+      },
+      {
+        "name": "Conocimientos generales",
+        "math": "INT/3",
+        "value": "35%"
+      },
+      {
+        "name": "Esconderse",
+        "math": "(AGI+PER)/4",
+        "value": "58%"
+      },
+      {
+        "name": "Idea",
+        "math": "INT/2",
+        "value": "60%"
+      },
+      {
+        "name": "Influencia",
+        "math": "(INT+APA)/2",
+        "value": "100%"
+      },
+      {
+        "name": "Idioma nativo (Español)",
+        "math": "INT",
+        "value": "104%"
+      },
+      {
+        "name": "Investigar",
+        "math": "(INT+PER)/3",
+        "value": "95%"
+      },
+      {
+        "name": "Lanzar",
+        "math": "(FUE+PER)/2",
+        "value": "80%"
+      },
+      {
+        "name": "Primeros auxilios",
+        "math": "INT/2",
+        "value": "52%"
+      },
+      {
+        "name": "Suerte",
+        "math": "(PER+VOL)/4",
+        "value": "49%"
+      },
+      {
+        "name": "Trepar y Saltar",
+        "math": "AGI",
+        "value": "93%"
+      }
+    ],
+    "specialItems": [
+      {
+        "name": "Farmacología",
+        "math": "INT/2",
+        "value": "52%"
+      },
+      {
+        "name": "Contemplación",
+        "math": "VOL/2",
+        "value": "61%"
+      },
+      {
+        "name": "Magia",
+        "math": "(INT+PER)/2",
+        "value": "99%"
+      },
+      {
+        "name": "Otro idioma: Inglés",
+        "math": "INT/3",
+        "value": "74%"
+      },
+      {
+        "name": "Otro idioma: Naglo",
+        "math": "INT/3",
+        "value": "54%"
+      },
+      {
+        "name": "Otro idioma: KishvariI",
+        "math": "INT/3",
+        "value": "34%"
+      },
+      {
+        "name": "Interpretar: Música",
+        "math": "(APR+PER)/3",
+        "value": "88%"
+      },
+      {
+        "name": "Trato animal: Aves rapaces",
+        "math": "(VOL+INT)/4",
+        "value": "51%"
+      },
+      {
+        "name": "Montar Animal: Caballo",
+        "math": "AGI/2",
+        "value": "46%"
+      },
+      {
+        "name": "Supervivencia: Gobierno y Corte",
+        "math": "INT/2",
+        "value": "82%"
+      }
+    ],
+    "generalManualMods": {},
+    "manualBases": {
+      "influencia": 100,
+      "conocimientos": 50,
+      "esconderse": 58,
+      "idea": 60,
+      "investigar": 95
+    },
+    "selected": {
+      "farmacologia": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "contemplacion": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 61
+      },
+      "magia": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 99
+      }
+    },
+    "specified": {
+      "otro_idioma_1781550011340": {
+        "skillId": "otro_idioma",
+        "specification": "Inglés",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 74
+      },
+      "otro_idioma_1781550012436": {
+        "skillId": "otro_idioma",
+        "specification": "Naglo",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 54
+      },
+      "otro_idioma_1781550013510": {
+        "skillId": "otro_idioma",
+        "specification": "KishvariI",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "interpretar_1781550017772": {
+        "skillId": "interpretar",
+        "specification": "Música",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 88
+      },
+      "trato_animal_1781550020796": {
+        "skillId": "trato_animal",
+        "specification": "Aves rapaces",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "montar_1781550027546": {
+        "skillId": "montar",
+        "specification": "Caballo",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "supervivencia_1781550046552": {
+        "skillId": "supervivencia",
+        "specification": "Gobierno y Corte",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 82
+      }
+    },
+    "nativeLanguage": "Español"
+  },
+  "background": {
+    "prejudiceResistance": 96,
+    "economicStatus": "clase_alta",
+    "friendsAndAssociates": "conocido_poderoso"
+  },
+  "spells": {
+    "selected": [
+      {
+        "id": "escudos_misticos",
+        "rank": 3
+      },
+      {
+        "id": "liberar_retonos",
+        "rank": 5
+      },
+      {
+        "id": "animar_objetos",
+        "rank": 5
+      },
+      {
+        "id": "levitar",
+        "rank": 5
+      },
+      {
+        "id": "metamorfosis_oscura",
+        "rank": 3
+      },
+      {
+        "id": "proyeccion_del_cuerpo_astral",
+        "rank": 3
+      },
+      {
+        "id": "transformar_materiales",
+        "rank": 1
+      },
+      {
+        "id": "invocar_animales",
+        "rank": 7
+      },
+      {
+        "id": "inmaterializar_cuerpo",
+        "rank": 2
+      },
+      {
+        "id": "proyeccion_de_energia_magica",
+        "rank": 2
+      }
+    ],
+    "calculatedEM": 300
+  },
+  "magicalBondsCustomName": "Pacto oscuro con Nemesis",
+  "magicalBondsCustomDescription": "Siempre que provoque confrontaciones entre diferentes fuerzas será fiel a sus vínculo",
+  "magicTableRolls": [
+    "none"
+  ],
+  "sexualIdentity": "Hombre",
+  "profession": "Cortesano",
+  "uiState": {
+    "unlockCombatStats": true,
+    "unlockOtherStats": true
+  },
+  "powers": {
+    "selected": []
+  },
+  "meta": {
+    "version": "Beta 0.15.2",
+    "generator": "SHI Wizard"
+  }
+}
