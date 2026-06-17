@@ -100,7 +100,7 @@ export const ORIGIN_COSTS: { [key: string]: OriginCosts } = {
     "Vigilante": {
         base: 1,  // Ser vigilante cuesta 1 PC base
         subtypes: {
-            "Acrobata": 2,
+            "Acróbata": 2,
             "Arquero": 3,
             "Cazador": 3,
             "Espadachín": 3,

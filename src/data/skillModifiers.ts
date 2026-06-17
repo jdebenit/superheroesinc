@@ -54,7 +54,7 @@ export const ORIGIN_SKILL_MODIFIERS: OriginSkillModifiers = {
     // ==========================================
     // VIGILANTE - ESPECIALIDADES
     // ==========================================
-    "Acrobata": [
+    "Acróbata": [
         { skillId: 'trepar', value: 20 },
         { skillId: 'suerte', value: 20 }
     ],

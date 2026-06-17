@@ -130,7 +130,7 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
             "Voluntad férrea"
         ],
         subtypes: {
-            "Acrobata": [],
+            "Acróbata": [],
             "Arquero": [
                 "Solo tarda un asalto en apuntar con un arco."
             ],
@@ -162,7 +162,7 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
             ],
         },
         subtypeModifiers: {
-            "Acrobata": { modImpacto: 30 },
+            "Acróbata": { modImpacto: 30 },
             "Artista Marcial": { modImpacto: 30 },
             "Artista Marcial con Chi": { modImpacto: 30 },
             "Arquero": { modImpacto: 20 },

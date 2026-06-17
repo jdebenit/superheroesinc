@@ -306,7 +306,7 @@ export interface SpecialtyCharacteristicModifiers {
 }
 
 export const VIGILANTE_SPECIALTY_MODIFIERS: { [key: string]: SpecialtyCharacteristicModifiers } = {
-    "Acrobata": {
+    "Acróbata": {
         agilidad: 40,
         percepcion: 20
     },
