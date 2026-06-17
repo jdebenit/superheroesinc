@@ -1,0 +1,267 @@
+{
+  "name": "Desconocido",
+  "alias": "Loba de Invierno",
+  "level": 1,
+  "meta": {
+    "version": "Beta 0.15.3",
+    "generator": "SHI Wizard"
+  },
+  "origin": {
+    "items": [
+      {
+        "Divino": [
+          "Dios menor"
+        ]
+      }
+    ]
+  },
+  "combatstats": {
+    "Acciones por asalto": "2",
+    "Iniciativa y Reflejos": "41",
+    "Puntos de Vida": "123",
+    "Equilibrio Mental": "90"
+  },
+  "otherstats": {
+    "Inconsciencia": "12",
+    "Recuperación": "15 PV/h",
+    "Resistencia a gases y venenos": "49%",
+    "Modificador de fuerza": "1d100+52",
+    "Peso Levantado": "52 t",
+    "Daño absorbido físico": "75",
+    "Daño absorbido mental": "0",
+    "Modificador de impacto": "0",
+    "Modificador Psionico": "25",
+    "Parada Fisica": "21",
+    "Parada mental": "75",
+    "Salto (alto / largo)": "25,5m / 76,4m"
+  },
+  "attributes": {
+    "values": {
+      "Fuerza": 152,
+      "Constitución": 148,
+      "Agilidad": 84,
+      "Inteligencia": 90,
+      "Percepción": 80,
+      "Apariencia": 74,
+      "Voluntad": 92
+    },
+    "breakdown": {
+      "fuerza": {
+        "base": 52,
+        "originMod": 100,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "constitucion": {
+        "base": 48,
+        "originMod": 100,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "agilidad": {
+        "base": 84,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "inteligencia": {
+        "base": 90,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "percepcion": {
+        "base": 80,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "apariencia": {
+        "base": 74,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "voluntad": {
+        "base": 92,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      }
+    }
+  },
+  "skills": {
+    "generalItems": [
+      {
+        "name": "Acechar/Discrección",
+        "math": "(AGI+PER)/2",
+        "value": "82%"
+      },
+      {
+        "name": "Comb. cuerpo a cuerpo",
+        "math": "(AGI+PER)/2",
+        "value": "82%"
+      },
+      {
+        "name": "Conocimientos generales",
+        "math": "INT/3",
+        "value": "15%"
+      },
+      {
+        "name": "Esconderse",
+        "math": "(AGI+PER)/4",
+        "value": "41%"
+      },
+      {
+        "name": "Idea",
+        "math": "INT/2",
+        "value": "45%"
+      },
+      {
+        "name": "Influencia",
+        "math": "(INT+APA)/2",
+        "value": "82%"
+      },
+      {
+        "name": "Idioma nativo (Nordico)",
+        "math": "INT",
+        "value": "90%"
+      },
+      {
+        "name": "Investigar",
+        "math": "(INT+PER)/3",
+        "value": "56%"
+      },
+      {
+        "name": "Lanzar",
+        "math": "(FUE+PER)/2",
+        "value": "116%"
+      },
+      {
+        "name": "Primeros auxilios",
+        "math": "INT/2",
+        "value": "45%"
+      },
+      {
+        "name": "Suerte",
+        "math": "(PER+VOL)/4",
+        "value": "43%"
+      },
+      {
+        "name": "Trepar y Saltar",
+        "math": "AGI",
+        "value": "84%"
+      }
+    ],
+    "specialItems": [
+      {
+        "name": "Arma Especial: Lanza",
+        "math": "(2xPER)/3",
+        "value": "53%"
+      }
+    ],
+    "generalManualMods": {},
+    "manualBases": {},
+    "selected": {},
+    "specified": {
+      "arma_especial_1781728070390": {
+        "skillId": "arma_especial",
+        "specification": "Lanza",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "montar_1781728083378": {
+        "skillId": "montar",
+        "specification": "Lobo",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "ciencia_1781728459419": {
+        "skillId": "ciencia",
+        "specification": "Mitólogia",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      }
+    },
+    "nativeLanguage": "Nordico"
+  },
+  "background": {
+    "economicStatus": "clase_baja",
+    "friendsAndAssociates": "conocido_poderoso"
+  },
+  "powers": {
+    "selected": [
+      {
+        "id": "empatia_animal",
+        "origin": "Divino",
+        "rank": 1,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false
+      },
+      {
+        "id": "superhabilidad",
+        "origin": "OtroDivino",
+        "rank": 41,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": true,
+        "selectedOption": "Lanza Gungnir"
+      },
+      {
+        "id": "superhabilidad",
+        "origin": "OtroDivino",
+        "rank": 100,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": true,
+        "selectedOption": "Conocimientos generales",
+        "customizations": [
+          {
+            "id": "1781728527650",
+            "description": "Tiene conocimientos de todas las épocas, tiempos y esferas",
+            "cost": 0
+          },
+          {
+            "id": "1781728573025",
+            "description": "Adquiere Traducción de lenguas",
+            "cost": 0
+          }
+        ]
+      },
+      {
+        "id": "traduccion_de_lenguas",
+        "origin": "OtroDivino",
+        "rank": 1,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": true
+      }
+    ]
+  },
+  "divineParams": {
+    "focus": "focus_required"
+  },
+  "uiState": {
+    "unlockManualSkills": false
+  },
+  "sexualIdentity": "Mujer",
+  "profession": "Aventurera"
+}
