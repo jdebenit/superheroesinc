@@ -181,7 +181,7 @@ const rpgCollection = defineCollection({
         varios: z.object({
             items: z.array(z.any()).optional().default([])
         }).optional(),
-    }),
+    }).passthrough(),
 });
 
 const charactersCollection = defineCollection({
