@@ -642,6 +642,9 @@
 .power-name {
     font-weight: bold;
     color: #059669;
+    flex-shrink: 1;
+    min-width: 0;
+    word-break: break-word;
 }
 
 .power-option {
@@ -654,8 +657,11 @@
 .power-customizations {
     font-size: 0.75rem;
     color: #065f46;
-    margin-top: 0.1rem;
+    margin-top: 0.15rem;
     font-style: italic;
+    padding-left: 0.75rem;
+    display: block;
+    line-height: 1.25;
 }
 
 .power-rank {

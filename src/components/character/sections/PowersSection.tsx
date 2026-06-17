@@ -56,31 +56,16 @@ export const PowersSection: React.FC<PowersSectionProps> = ({ character }) => {
 
                     return (
                         <li key={`${power.id}-${idx}`} className="power-item">
-
                             <div className="power-row">
-                                <span className="power-name-container">
-                                    <span className="power-name">
-                                        {powerData.name}
-                                        {power.selectedOption && (
-                                            <span className="power-option">
-                                                ({power.selectedOption})
-                                            </span>
-                                        )}
-                                    </span>
-                                    {power.customizations && power.customizations.length > 0 && (
-                                        <div className="power-customizations">
-                                            {power.customizations.map((c: any) => `${c.description} (${c.cost > 0 ? '+' : ''}${c.cost})`).join(', ')}
-                                        </div>
+                                <span className="power-name">
+                                    {powerData.name}
+                                    {power.selectedOption && (
+                                        <span className="power-option">
+                                            ({power.selectedOption})
+                                        </span>
                                     )}
                                 </span>
-                                <span style={{
-                                    flexGrow: 1,
-                                    borderBottom: '1px dotted #ccc',
-                                    margin: '0 0.5rem',
-                                    position: 'relative',
-                                    top: '-4px',
-                                    minWidth: '20px'
-                                }}></span>
+                                <span className="flex-spacer-dotted"></span>
                                 <span className="power-rank">
                                     {!powerData.characteristic ? (
                                         <>
@@ -96,6 +81,11 @@ export const PowersSection: React.FC<PowersSectionProps> = ({ character }) => {
                                     </span>
                                 )}
                             </div>
+                            {power.customizations && power.customizations.length > 0 && (
+                                <div className="power-customizations">
+                                    {power.customizations.map((c: any) => `${c.description} (${c.cost > 0 ? '+' : ''}${c.cost})`).join(', ')}
+                                </div>
+                            )}
                         </li>
                     );
                 })}

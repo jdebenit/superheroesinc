@@ -1,7 +1,6 @@
 {
   "name": "Desconocido",
   "alias": "Loba de Invierno",
-  "level": 1,
   "meta": {
     "version": "Beta 0.15.3",
     "generator": "SHI Wizard"
@@ -162,6 +161,11 @@
     ],
     "specialItems": [
       {
+        "name": "Nadar / Bucear",
+        "math": "(FUE+AGI)/2",
+        "value": "118%"
+      },
+      {
         "name": "Arma Especial: Lanza",
         "math": "(2xPER)/3",
         "value": "53%"
@@ -169,27 +173,18 @@
     ],
     "generalManualMods": {},
     "manualBases": {},
-    "selected": {},
+    "selected": {
+      "nadar": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      }
+    },
     "specified": {
       "arma_especial_1781728070390": {
         "skillId": "arma_especial",
         "specification": "Lanza",
-        "isFree": false,
-        "isRequired": false,
-        "manualMods": 0,
-        "manualBases": 0
-      },
-      "montar_1781728083378": {
-        "skillId": "montar",
-        "specification": "Lobo",
-        "isFree": false,
-        "isRequired": false,
-        "manualMods": 0,
-        "manualBases": 0
-      },
-      "ciencia_1781728459419": {
-        "skillId": "ciencia",
-        "specification": "Mitólogia",
         "isFree": false,
         "isRequired": false,
         "manualMods": 0,
@@ -231,7 +226,7 @@
         "isCrossOrigin": false,
         "isCrossOriginMaldito": false,
         "isCrossOriginDivino": true,
-        "selectedOption": "Conocimientos generales",
+        "selectedOption": "Conocimientos Generales",
         "customizations": [
           {
             "id": "1781728527650",
