@@ -10,6 +10,12 @@ export interface Spell {
     hasRequirements: boolean;
 }
 
+export interface SpellDetail {
+    description: string;
+    ranks: string[];
+    mastery?: string;
+}
+
 export const SPELLS: Spell[] = [
     {
         id: "abrir_portales",
