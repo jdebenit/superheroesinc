@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "lore/localizaciones/nigalion.md",
+                "file": "lore/cronicas/diablo-segador-historia-incomoda.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "nigalion"
+              "title": "diablo-segador-historia-incomoda"
             }
           }
         ]
@@ -185,9 +185,11 @@
   },
   "active": "d101106a4f64eb58",
   "lastOpenFiles": [
+    "lore/cronicas/expediente-stalos-mente-maestra-o-caballo-de-troya.md",
+    "lore/cronicas/diablo-segador-historia-incomoda.md",
+    "lore/localizaciones/nigalion.md",
     "lore/localizaciones/kishvar.md",
     "lore/localizaciones/terra.md",
-    "lore/localizaciones/nigalion.md",
     "blog/volviendo-realmente-al-hobby.md",
     "blog/mantener-tono-partida.md",
     "blog/abrir-las-puertas.md",
@@ -209,8 +211,6 @@
     "timeline/eridiani-libro-de-los-muertos.md",
     "timeline/epsilon-eridani-en-transjastan.md",
     "timeline/descubrimiento-de-la-torre-del-mal.md",
-    "timeline/desaparicion-ultima-oportunidad.md",
-    "timeline/desercion-de-calibre.md",
     "rpg/flecha-roja-ii.json",
     "personajes",
     "Pasted image 20260416191817.png",
