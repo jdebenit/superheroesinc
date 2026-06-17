@@ -3,7 +3,8 @@ name: Desconocido
 alias: Loba de Invierno
 description: Hija secreta de Thor y guardiana de la herencia rúnica asgardiana tras el Segundo Ragnarok.
 source: Superhéroes INC. Tercera Edición
-updatedDate: 2026-05-24
+publishedDate: 2026-05-24
+updatedDate: 2026-06-17
 tags:
   - Principal
   - Dios
