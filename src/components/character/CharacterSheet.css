@@ -1182,9 +1182,12 @@ ul {
     width: 100%;
 }
 
-.flex-row-baseline > span:first-child,
-.flex-row-baseline > span:last-child {
+.flex-row-baseline > span:first-child {
     flex-shrink: 0;
+}
+
+.flex-row-baseline > span:last-child {
+    flex-shrink: 1;
 }
 
 .flex-spacer-dotted {
