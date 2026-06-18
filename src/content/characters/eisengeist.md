@@ -2,7 +2,7 @@
 alias: Eisengeist
 name: Klaus Richter
 description: Klaus Richter, alias Eisengeist, murió durante la campaña del Este y fue devuelto a la existencia por Valquiria Negra. Su cuerpo fue reconstruido con metal y artes ocultas, sustituyendo su corazón por un Contenedor de Alma. Las cicatrices y el metal que emerge de su carne son el recordatorio de que debería estar muerto.
-source: Web
+source: Partida Oficial - Hijos del Eje
 updatedDate: 2026-06-18
 rpgId: eisengeist
 tags:

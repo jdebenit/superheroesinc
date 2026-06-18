@@ -2,7 +2,7 @@
 alias: Schwarze Walküre
 name: Irmgard Weiss
 description: Irmgard Weiss, la Valquiria Negra, es una necronauta inmortal que ha explorado durante décadas los secretos ocultos tras la realidad. Sus viajes la han alejado tanto de la humanidad que ya no considera la vida y la muerte más que estados transitorios de una existencia mucho mayor. Obsesionada con comprender esa verdad, persigue conocimientos que ningún ser humano debería poseer.
-source: Web
+source: Partida Oficial - Hijos del Eje
 updatedDate: 2026-06-18
 tags:
   - Secundario
