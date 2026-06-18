@@ -1,0 +1,298 @@
+{
+  "name": "Ignacio Costa",
+  "alias": "Löwe",
+  "level": 1,
+  "origin": {
+    "items": [
+      {
+        "Alterado": [
+          "Acceso a poderes de alterados"
+        ]
+      }
+    ]
+  },
+  "combatstats": {
+    "Acciones por asalto": "4",
+    "Iniciativa y Reflejos": "55",
+    "Puntos de Vida": "110",
+    "Equilibrio Mental": "35"
+  },
+  "otherstats": {
+    "Inconsciencia": "11",
+    "Recuperación": "10 PV/h",
+    "Resistencia a gases y venenos": "46%",
+    "Modificador de fuerza": "1d8",
+    "Peso Levantado": "297kg",
+    "Daño absorbido físico": "60",
+    "Daño absorbido mental": "0",
+    "Modificador de impacto": "35",
+    "Modificador Psionico": "0",
+    "Parada Fisica": "50",
+    "Parada mental": "10",
+    "Salto (alto / largo)": "5,0m / 15,0m"
+  },
+  "attributes": {
+    "values": {
+      "Fuerza": 99,
+      "Constitución": 140,
+      "Agilidad": 135,
+      "Inteligencia": 35,
+      "Percepción": 85,
+      "Apariencia": 60,
+      "Voluntad": 71
+    },
+    "breakdown": {
+      "fuerza": {
+        "base": 99,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "constitucion": {
+        "base": 60,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 80,
+        "otherMod": 0
+      },
+      "agilidad": {
+        "base": 90,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 45,
+        "otherMod": 0
+      },
+      "inteligencia": {
+        "base": 35,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "percepcion": {
+        "base": 85,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "apariencia": {
+        "base": 60,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "voluntad": {
+        "base": 71,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      }
+    }
+  },
+  "skills": {
+    "generalItems": [
+      {
+        "name": "Acechar/Discrección",
+        "math": "(AGI+PER)/2",
+        "value": "110%"
+      },
+      {
+        "name": "Comb. cuerpo a cuerpo",
+        "math": "(AGI+PER)/2",
+        "value": "110%"
+      },
+      {
+        "name": "Conocimientos generales",
+        "math": "INT/3",
+        "value": "11%"
+      },
+      {
+        "name": "Esconderse",
+        "math": "(AGI+PER)/4",
+        "value": "55%"
+      },
+      {
+        "name": "Idea",
+        "math": "INT/2",
+        "value": "17%"
+      },
+      {
+        "name": "Influencia",
+        "math": "(INT+APA)/2",
+        "value": "47%"
+      },
+      {
+        "name": "Idioma nativo (Español)",
+        "math": "INT",
+        "value": "35%"
+      },
+      {
+        "name": "Investigar",
+        "math": "(INT+PER)/3",
+        "value": "40%"
+      },
+      {
+        "name": "Lanzar",
+        "math": "(FUE+PER)/2",
+        "value": "92%"
+      },
+      {
+        "name": "Primeros auxilios",
+        "math": "INT/2",
+        "value": "17%"
+      },
+      {
+        "name": "Suerte",
+        "math": "(PER+VOL)/4",
+        "value": "39%"
+      },
+      {
+        "name": "Trepar y Saltar",
+        "math": "AGI",
+        "value": "135%"
+      }
+    ],
+    "specialItems": [
+      {
+        "name": "Trampas",
+        "math": "INT/2",
+        "value": "17%"
+      },
+      {
+        "name": "Computadoras / Comunicaciones",
+        "math": "INT/2",
+        "value": "17%"
+      },
+      {
+        "name": "Arma Especial: Garras",
+        "math": "(2xPER)/3",
+        "value": "56%"
+      },
+      {
+        "name": "Ciencia: Veterinaria",
+        "math": "INT/3",
+        "value": "11%"
+      },
+      {
+        "name": "Otro idioma: Alemán",
+        "math": "INT/3",
+        "value": "11%"
+      }
+    ],
+    "generalManualMods": {},
+    "manualBases": {},
+    "selected": {
+      "trampas": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "computadoras": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      }
+    },
+    "specified": {
+      "arma_especial_1781807304926": {
+        "skillId": "arma_especial",
+        "specification": "Garras",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "ciencia_1781807313236": {
+        "skillId": "ciencia",
+        "specification": "Veterinaria",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "otro_idioma_1781807319536": {
+        "skillId": "otro_idioma",
+        "specification": "Alemán",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      }
+    },
+    "nativeLanguage": "Español"
+  },
+  "background": {
+    "prejudiceResistance": 70,
+    "economicStatus": "mendigo",
+    "legalStatus": "terrorista",
+    "socialStatus": "supervillano",
+    "friendsAndAssociates": "solo_familia"
+  },
+  "weapons": {
+    "items": [
+      {
+        "name": "Garras",
+        "damage": "3d10+10+Mod Fue",
+        "dxa": "",
+        "car": "",
+        "notes": "",
+        "cost": 0
+      }
+    ]
+  },
+  "powers": {
+    "selected": [
+      {
+        "id": "supervelocidad",
+        "origin": "Alterado",
+        "rank": 1,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false,
+        "powerMod": 45
+      },
+      {
+        "id": "superconstitucion",
+        "origin": "Alterado",
+        "rank": 1,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false,
+        "powerMod": 80
+      },
+      {
+        "id": "ataque_especial",
+        "origin": "Alterado",
+        "rank": 1,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false,
+        "selectedOption": "Arma Natural: Garras"
+      }
+    ]
+  },
+  "alteradoParams": {
+    "agent": "mutagen",
+    "sequels": [
+      {
+        "id": "involuntary_transformation",
+        "description": "Se transforma en medio león medio humano, baja su inteligencia y aparecen sus poderes"
+      }
+    ]
+  },
+  "profession": "Terrorista",
+  "sexualIdentity": "Hombre",
+  "meta": {
+    "version": "Beta 0.15.3",
+    "generator": "SHI Wizard"
+  }
+}

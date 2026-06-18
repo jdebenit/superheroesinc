@@ -1,0 +1,282 @@
+{
+  "name": "Angélica Montes",
+  "alias": "Blinker",
+  "level": 1,
+  "notes": "Sus poderes de portales funcionan solo cerca de ella, fisicamente abre con sus manos el portal y lo mantiene abierto, cuando quita sus manos este se cierra",
+  "origin": {
+    "items": [
+      {
+        "Alterado": [
+          "Acceso a poderes de alterados"
+        ]
+      }
+    ]
+  },
+  "combatstats": {
+    "Acciones por asalto": "3",
+    "Iniciativa y Reflejos": "67",
+    "Puntos de Vida": "37",
+    "Equilibrio Mental": "80"
+  },
+  "otherstats": {
+    "Inconsciencia": "3",
+    "Recuperación": "1 PV/h",
+    "Resistencia a gases y venenos": "25%",
+    "Modificador de fuerza": "1d4",
+    "Peso Levantado": "60kg",
+    "Daño absorbido físico": "0",
+    "Daño absorbido mental": "0",
+    "Modificador de impacto": "0",
+    "Modificador Psionico": "0",
+    "Parada Fisica": "22",
+    "Parada mental": "10",
+    "Salto (alto / largo)": "3,0m / 9,1m"
+  },
+  "attributes": {
+    "values": {
+      "Fuerza": 60,
+      "Constitución": 75,
+      "Agilidad": 91,
+      "Inteligencia": 80,
+      "Percepción": 180,
+      "Apariencia": 85,
+      "Voluntad": 79
+    },
+    "breakdown": {
+      "fuerza": {
+        "base": 60,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "constitucion": {
+        "base": 75,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "agilidad": {
+        "base": 91,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "inteligencia": {
+        "base": 80,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "percepcion": {
+        "base": 100,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 80,
+        "otherMod": 0
+      },
+      "apariencia": {
+        "base": 85,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "voluntad": {
+        "base": 79,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      }
+    }
+  },
+  "skills": {
+    "generalItems": [
+      {
+        "name": "Acechar/Discrección",
+        "math": "(AGI+PER)/2",
+        "value": "135%"
+      },
+      {
+        "name": "Comb. cuerpo a cuerpo",
+        "math": "(AGI+PER)/2",
+        "value": "135%"
+      },
+      {
+        "name": "Conocimientos generales",
+        "math": "INT/3",
+        "value": "26%"
+      },
+      {
+        "name": "Esconderse",
+        "math": "(AGI+PER)/4",
+        "value": "67%"
+      },
+      {
+        "name": "Idea",
+        "math": "INT/2",
+        "value": "40%"
+      },
+      {
+        "name": "Influencia",
+        "math": "(INT+APA)/2",
+        "value": "82%"
+      },
+      {
+        "name": "Idioma nativo (Castellano)",
+        "math": "INT",
+        "value": "80%"
+      },
+      {
+        "name": "Investigar",
+        "math": "(INT+PER)/3",
+        "value": "86%"
+      },
+      {
+        "name": "Lanzar",
+        "math": "(FUE+PER)/2",
+        "value": "120%"
+      },
+      {
+        "name": "Primeros auxilios",
+        "math": "INT/2",
+        "value": "40%"
+      },
+      {
+        "name": "Suerte",
+        "math": "(PER+VOL)/4",
+        "value": "64%"
+      },
+      {
+        "name": "Trepar y Saltar",
+        "math": "AGI",
+        "value": "91%"
+      }
+    ],
+    "specialItems": [
+      {
+        "name": "Computadoras / Comunicaciones",
+        "math": "INT/2",
+        "value": "40%"
+      },
+      {
+        "name": "Armas cortas",
+        "math": "(2xPER)/3",
+        "value": "120%"
+      },
+      {
+        "name": "Cerrajería",
+        "math": "INT/2",
+        "value": "40%"
+      },
+      {
+        "name": "Conducir: Avión",
+        "math": "(INT+PER)/4",
+        "value": "65%"
+      },
+      {
+        "name": "Otro idioma: Alemán",
+        "math": "INT/3",
+        "value": "26%"
+      }
+    ],
+    "generalManualMods": {},
+    "manualBases": {},
+    "selected": {
+      "computadoras": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "armas_cortas": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "cerrajeria": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      }
+    },
+    "specified": {
+      "conducir_1781806773990": {
+        "skillId": "conducir",
+        "specification": "Avión",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "otro_idioma_1781806803086": {
+        "skillId": "otro_idioma",
+        "specification": "Alemán",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      }
+    },
+    "nativeLanguage": "Castellano"
+  },
+  "background": {
+    "economicStatus": "mendigo",
+    "legalStatus": "terrorista",
+    "socialStatus": "supervillano",
+    "friendsAndAssociates": "solo_familia"
+  },
+  "powers": {
+    "selected": [
+      {
+        "id": "teleportacion",
+        "origin": "Alterado",
+        "rank": 41,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false,
+        "customizations": [
+          {
+            "id": "1781806827981",
+            "description": "portales",
+            "cost": 0
+          }
+        ]
+      },
+      {
+        "id": "superpercepcion",
+        "origin": "Alterado",
+        "rank": 1,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false,
+        "powerMod": 80,
+        "customizations": [
+          {
+            "id": "1781806693041",
+            "description": "Visual",
+            "cost": 0
+          }
+        ]
+      }
+    ]
+  },
+  "alteradoParams": {
+    "agent": "mutagen",
+    "sequels": []
+  },
+  "sexualIdentity": "Mujer",
+  "profession": "Terrorista",
+  "meta": {
+    "version": "Beta 0.15.3",
+    "generator": "SHI Wizard"
+  }
+}

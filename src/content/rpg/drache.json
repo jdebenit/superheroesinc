@@ -1,0 +1,258 @@
+{
+  "name": "Enrique Alvarez",
+  "alias": "Drache",
+  "level": 4,
+  "origin": {
+    "items": [
+      {
+        "Alterado": [
+          "Acceso a poderes de alterados"
+        ]
+      }
+    ]
+  },
+  "combatstats": {
+    "Acciones por asalto": "2",
+    "Iniciativa y Reflejos": "41",
+    "Puntos de Vida": "70",
+    "Equilibrio Mental": "65"
+  },
+  "otherstats": {
+    "Inconsciencia": "7",
+    "Recuperación": "1 PV/h",
+    "Resistencia a gases y venenos": "33%",
+    "Modificador de fuerza": "1d100+50",
+    "Peso Levantado": "50 t",
+    "Daño absorbido físico": "0",
+    "Daño absorbido mental": "0",
+    "Modificador de impacto": "0",
+    "Modificador Psionico": "-10",
+    "Parada Fisica": "21",
+    "Parada mental": "0",
+    "Salto (alto / largo)": "25,8m / 77,3m"
+  },
+  "attributes": {
+    "values": {
+      "Fuerza": 150,
+      "Constitución": 99,
+      "Agilidad": 85,
+      "Inteligencia": 65,
+      "Percepción": 80,
+      "Apariencia": 50,
+      "Voluntad": 61
+    },
+    "breakdown": {
+      "fuerza": {
+        "base": 100,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 50,
+        "otherMod": 0
+      },
+      "constitucion": {
+        "base": 99,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "agilidad": {
+        "base": 85,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "inteligencia": {
+        "base": 65,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "percepcion": {
+        "base": 80,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "apariencia": {
+        "base": 50,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "voluntad": {
+        "base": 61,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      }
+    }
+  },
+  "skills": {
+    "generalItems": [
+      {
+        "name": "Acechar/Discrección",
+        "math": "(AGI+PER)/2",
+        "value": "82%"
+      },
+      {
+        "name": "Comb. cuerpo a cuerpo",
+        "math": "(AGI+PER)/2",
+        "value": "82%"
+      },
+      {
+        "name": "Conocimientos generales",
+        "math": "INT/3",
+        "value": "21%"
+      },
+      {
+        "name": "Esconderse",
+        "math": "(AGI+PER)/4",
+        "value": "41%"
+      },
+      {
+        "name": "Idea",
+        "math": "INT/2",
+        "value": "32%"
+      },
+      {
+        "name": "Influencia",
+        "math": "(INT+APA)/2",
+        "value": "57%"
+      },
+      {
+        "name": "Idioma nativo (Castellano)",
+        "math": "INT",
+        "value": "65%"
+      },
+      {
+        "name": "Investigar",
+        "math": "(INT+PER)/3",
+        "value": "48%"
+      },
+      {
+        "name": "Lanzar",
+        "math": "(FUE+PER)/2",
+        "value": "115%"
+      },
+      {
+        "name": "Primeros auxilios",
+        "math": "INT/2",
+        "value": "32%"
+      },
+      {
+        "name": "Suerte",
+        "math": "(PER+VOL)/4",
+        "value": "35%"
+      },
+      {
+        "name": "Trepar y Saltar",
+        "math": "AGI",
+        "value": "85%"
+      }
+    ],
+    "specialItems": [
+      {
+        "name": "Armas cortas",
+        "math": "(2xPER)/3",
+        "value": "53%"
+      },
+      {
+        "name": "Ciencia: Alemán",
+        "math": "INT/3",
+        "value": "21%"
+      }
+    ],
+    "generalManualMods": {},
+    "manualBases": {},
+    "selected": {
+      "armas_cortas": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      }
+    },
+    "specified": {
+      "ciencia_1781807769200": {
+        "skillId": "ciencia",
+        "specification": "Alemán",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      }
+    },
+    "nativeLanguage": "Castellano"
+  },
+  "background": {
+    "prejudiceResistance": 90,
+    "economicStatus": "mendigo",
+    "legalStatus": "terrorista",
+    "socialStatus": "supervillano",
+    "friendsAndAssociates": "solo_familia"
+  },
+  "equipment": {
+    "items": [
+      {
+        "name": "Kevlar",
+        "notes": "+30 DA Físico",
+        "cost": 0
+      }
+    ]
+  },
+  "powers": {
+    "selected": [
+      {
+        "id": "volar",
+        "origin": "Alterado",
+        "rank": 71,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false,
+        "skillValue": 53
+      },
+      {
+        "id": "superfuerza",
+        "origin": "Alterado",
+        "rank": 1,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false,
+        "powerMod": 50
+      },
+      {
+        "id": "emision_de_energia",
+        "origin": "Alterado",
+        "rank": 41,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false,
+        "selectedOption": "Microondas",
+        "skillValue": 55
+      }
+    ]
+  },
+  "alteradoParams": {
+    "agent": "mutagen",
+    "sequels": []
+  },
+  "profession": "Terrorista",
+  "sexualIdentity": "Hombre",
+  "uiState": {
+    "unlockCombatStats": true,
+    "unlockOtherStats": true
+  },
+  "meta": {
+    "version": "Beta 0.15.3",
+    "generator": "SHI Wizard"
+  }
+}

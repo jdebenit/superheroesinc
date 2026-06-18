@@ -1,0 +1,233 @@
+{
+  "name": "Adolfo Meyer",
+  "alias": "Wirbelsturm",
+  "level": 4,
+  "origin": {
+    "items": [
+      {
+        "Mutante": [
+          "Energético"
+        ]
+      }
+    ]
+  },
+  "combatstats": {
+    "Acciones por asalto": "2",
+    "Iniciativa y Reflejos": "42",
+    "Puntos de Vida": "63",
+    "Equilibrio Mental": "69"
+  },
+  "otherstats": {
+    "Inconsciencia": "6",
+    "Recuperación": "1 PV/h",
+    "Resistencia a gases y venenos": "30%",
+    "Modificador de fuerza": "1d6",
+    "Peso Levantado": "158kg",
+    "Daño absorbido físico": "0",
+    "Daño absorbido mental": "0",
+    "Modificador de impacto": "0",
+    "Modificador Psionico": "25",
+    "Parada Fisica": "20",
+    "Parada mental": "50",
+    "Salto (alto / largo)": "2,4m / 7,3m"
+  },
+  "attributes": {
+    "values": {
+      "Fuerza": 79,
+      "Constitución": 90,
+      "Agilidad": 80,
+      "Inteligencia": 69,
+      "Percepción": 90,
+      "Apariencia": 70,
+      "Voluntad": 99
+    },
+    "breakdown": {
+      "fuerza": {
+        "base": 79,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "constitucion": {
+        "base": 90,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "agilidad": {
+        "base": 80,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "inteligencia": {
+        "base": 69,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "percepcion": {
+        "base": 90,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "apariencia": {
+        "base": 70,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "voluntad": {
+        "base": 99,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      }
+    }
+  },
+  "skills": {
+    "generalItems": [
+      {
+        "name": "Acechar/Discrección",
+        "math": "(AGI+PER)/2",
+        "value": "85%"
+      },
+      {
+        "name": "Comb. cuerpo a cuerpo",
+        "math": "(AGI+PER)/2",
+        "value": "85%"
+      },
+      {
+        "name": "Conocimientos generales",
+        "math": "INT/3",
+        "value": "23%"
+      },
+      {
+        "name": "Esconderse",
+        "math": "(AGI+PER)/4",
+        "value": "42%"
+      },
+      {
+        "name": "Idea",
+        "math": "INT/2",
+        "value": "34%"
+      },
+      {
+        "name": "Influencia",
+        "math": "(INT+APA)/2",
+        "value": "69%"
+      },
+      {
+        "name": "Idioma nativo",
+        "math": "INT",
+        "value": "69%"
+      },
+      {
+        "name": "Investigar",
+        "math": "(INT+PER)/3",
+        "value": "53%"
+      },
+      {
+        "name": "Lanzar",
+        "math": "(FUE+PER)/2",
+        "value": "84%"
+      },
+      {
+        "name": "Primeros auxilios",
+        "math": "INT/2",
+        "value": "34%"
+      },
+      {
+        "name": "Suerte",
+        "math": "(PER+VOL)/4",
+        "value": "47%"
+      },
+      {
+        "name": "Trepar y Saltar",
+        "math": "AGI",
+        "value": "80%"
+      }
+    ],
+    "specialItems": [
+      {
+        "name": "Armas largas",
+        "math": "(2xPER)/3",
+        "value": "60%"
+      },
+      {
+        "name": "Ciencia: Alemán",
+        "math": "INT/3",
+        "value": "23%"
+      }
+    ],
+    "generalManualMods": {},
+    "manualBases": {},
+    "selected": {
+      "armas_largas": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      }
+    },
+    "specified": {
+      "ciencia_1781808094126": {
+        "skillId": "ciencia",
+        "specification": "Alemán",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 23
+      }
+    },
+    "nativeLanguage": ""
+  },
+  "background": {
+    "prejudiceResistance": 95,
+    "economicStatus": "mendigo",
+    "legalStatus": "terrorista",
+    "socialStatus": "supervillano",
+    "friendsAndAssociates": "solitario"
+  },
+  "powers": {
+    "selected": [
+      {
+        "id": "control_del_clima",
+        "origin": "Mutante",
+        "rank": 65,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false
+      },
+      {
+        "id": "volar",
+        "origin": "Mutante",
+        "rank": 65,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false,
+        "skillValue": 55
+      }
+    ]
+  },
+  "profession": "Terrorista",
+  "sexualIdentity": "Hombre",
+  "uiState": {
+    "unlockCombatStats": true,
+    "unlockOtherStats": true
+  },
+  "meta": {
+    "version": "Beta 0.15.3",
+    "generator": "SHI Wizard"
+  }
+}

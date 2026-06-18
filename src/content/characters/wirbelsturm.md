@@ -8,6 +8,7 @@ tags:
   - Desaparecido
 originReality: Tierra Zero
 actualReality: Tierra Zero
+rpgId: wirbelsturm
 groups:
   - "escuadron-blitzkrieg"
 ---
@@ -16,3 +17,5 @@ Nunca llegó a saberlo, pero Wirbelsturm era el hijo biológico del doctor Meyer
 Su infancia fue especialmente dura. Los demás niños le consideraban extraño y distante. No sonreía, no lloraba, apenas hablaba y su mirada resultaba inquietantemente fría. A los catorce años comenzó a manifestar habilidades relacionadas con el clima, provocando buen o mal tiempo en función de su estado emocional.
 
 El desprecio inicial que Herman Meyer sentía hacia su vástago se transformó en interés científico. Finalmente lo adoptó y le ayudó a comprender y controlar sus poderes, aunque jamás le reveló la verdad sobre su parentesco.
+
+En 1999 desaparecio sin dejar rastro.
