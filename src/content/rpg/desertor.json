@@ -254,8 +254,10 @@
     "items": [
       {
         "name": "Mandoble mágico",
-        "value": "66%",
-        "notes": "Puede elegir no matar con el y solo deja inconsciente al objetivo. Daño 4d10+65+Mod Fue."
+        "damage": "4d10+65+Mod Fue.",
+        "dxa": "",
+        "car": "",
+        "notes": "Puede elegir no matar con el y solo deja inconsciente al objetivo"
       }
     ]
   },
@@ -317,9 +319,7 @@
   "exoskeletonArmorConfig": null,
   "technoSuitStrengthConfig": null,
   "magicTableRolls": [],
-  "techModules": {
-    "installed": []
-  },
+  "techModules": [],
   "cyborgImplants": [],
   "isParahumanoHybrid": false
 }

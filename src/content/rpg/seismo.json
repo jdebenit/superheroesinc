@@ -91,6 +91,15 @@
         "powerMod": 0,
         "otherMod": 0
       }
+    },
+    "manualBonuses": {
+      "Fuerza": 0,
+      "Agilidad": 0,
+      "Constitución": 0,
+      "Inteligencia": 0,
+      "Percepción": 0,
+      "Voluntad": 0,
+      "Apariencia": 0
     }
   },
   "skills": {
@@ -226,7 +235,8 @@
     "legalStatus": "terrorista",
     "socialStatus": "supervillano",
     "friendsAndAssociates": "conocido_poderoso",
-    "baseCoverage": "independiente_lujo"
+    "baseCoverage": "independiente_lujo",
+    "items": []
   },
   "powers": {
     "selected": [
@@ -234,10 +244,8 @@
         "id": "control_de_la_geodinamica",
         "origin": "Divino",
         "rank": 100,
-        "isCrossType": false,
-        "isCrossOrigin": false,
-        "isCrossOriginMaldito": false,
-        "isCrossOriginDivino": false
+        "customizations": [],
+        "skillValue": 0
       }
     ]
   },
@@ -254,5 +262,59 @@
   "meta": {
     "version": "Beta 0.15.1",
     "generator": "SHI Wizard"
-  }
+  },
+  "notes": "",
+  "totalCost": "",
+  "equipment": {
+    "items": []
+  },
+  "weapons": {
+    "items": []
+  },
+  "artifacts": {
+    "items": []
+  },
+  "magicObjects": {
+    "items": []
+  },
+  "vehicles": {
+    "items": []
+  },
+  "spells": {
+    "selected": [],
+    "emFormula": {
+      "divisor": 4,
+      "pcCost": 0
+    }
+  },
+  "magicalBonds": [],
+  "magicalBondsCustomName": "",
+  "magicalBondsCustomDescription": "",
+  "specialskills": {
+    "items": []
+  },
+  "enteParams": {
+    "formType": null,
+    "visualEffect": null
+  },
+  "malditoParams": {
+    "magnitude": null,
+    "source": null
+  },
+  "poseidoParams": {
+    "formType": null
+  },
+  "alteradoParams": null,
+  "mutanteParams": null,
+  "guardianParams": null,
+  "techParams": {
+    "incomeSource": "agencia_priv"
+  },
+  "exoskeletonArmorConfig": null,
+  "technoSuitStrengthConfig": null,
+  "exoskeletonConfig": "",
+  "magicTableRolls": [],
+  "techModules": [],
+  "cyborgImplants": [],
+  "isParahumanoHybrid": false
 }

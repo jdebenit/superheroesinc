@@ -241,7 +241,7 @@ export const useCharacterSheetData = (character: any) => {
     });
 
     // Tech Modules
-    const techData = (character.techModules?.installed || []).map((m: any) => ({
+    const techData = (character.techModules || []).map((m: any) => ({
         name: m.name || m.definitionId || '',
         location: m.location || '',
         notes: m.notes || ''

@@ -92,6 +92,15 @@
         "powerMod": 0,
         "otherMod": 0
       }
+    },
+    "manualBonuses": {
+      "Fuerza": 0,
+      "Agilidad": 0,
+      "Constitución": 0,
+      "Inteligencia": 0,
+      "Percepción": 0,
+      "Voluntad": 0,
+      "Apariencia": 0
     }
   },
   "skills": {
@@ -234,7 +243,9 @@
     "prejudiceResistance": 40,
     "economicStatus": "clase_baja",
     "socialStatus": "heroe_reconocido",
-    "friendsAndAssociates": "lazos_todos"
+    "friendsAndAssociates": "lazos_todos",
+    "items": [],
+    "legalStatus": "sin_antecedentes"
   },
   "powers": {
     "selected": [
@@ -242,31 +253,22 @@
         "id": "absorcion_de_energia",
         "origin": "Alterado",
         "rank": 100,
-        "isCrossType": false,
-        "isCrossOrigin": false,
-        "isCrossOriginMaldito": false,
-        "isCrossOriginDivino": false,
-        "selectedOption": "cinética"
+        "customizations": [],
+        "skillValue": 0
       },
       {
         "id": "superconstitucion",
         "origin": "Alterado",
         "rank": 1,
-        "isCrossType": false,
-        "isCrossOrigin": false,
-        "isCrossOriginMaldito": false,
-        "isCrossOriginDivino": false,
-        "powerMod": 80
+        "customizations": [],
+        "skillValue": 0
       },
       {
         "id": "superfuerza",
         "origin": "Alterado",
         "rank": 1,
-        "isCrossType": false,
-        "isCrossOrigin": false,
-        "isCrossOriginMaldito": false,
-        "isCrossOriginDivino": false,
-        "powerMod": 30
+        "customizations": [],
+        "skillValue": 0
       }
     ]
   },
@@ -284,5 +286,58 @@
   "meta": {
     "version": "Beta 0.15.5",
     "generator": "SHI Wizard"
-  }
+  },
+  "totalCost": "",
+  "equipment": {
+    "items": []
+  },
+  "weapons": {
+    "items": []
+  },
+  "artifacts": {
+    "items": []
+  },
+  "magicObjects": {
+    "items": []
+  },
+  "vehicles": {
+    "items": []
+  },
+  "spells": {
+    "selected": [],
+    "emFormula": {
+      "divisor": 4,
+      "pcCost": 0
+    }
+  },
+  "magicalBonds": [],
+  "magicalBondsCustomName": "",
+  "magicalBondsCustomDescription": "",
+  "specialskills": {
+    "items": []
+  },
+  "enteParams": {
+    "formType": null,
+    "visualEffect": null
+  },
+  "malditoParams": {
+    "magnitude": null,
+    "source": null
+  },
+  "poseidoParams": {
+    "formType": null
+  },
+  "mutanteParams": null,
+  "guardianParams": null,
+  "divineParams": null,
+  "techParams": {
+    "incomeSource": "agencia_priv"
+  },
+  "exoskeletonArmorConfig": null,
+  "technoSuitStrengthConfig": null,
+  "exoskeletonConfig": "",
+  "magicTableRolls": [],
+  "techModules": [],
+  "cyborgImplants": [],
+  "isParahumanoHybrid": false
 }

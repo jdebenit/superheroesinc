@@ -1,5 +1,6 @@
 ---
 import CharacterSheet from "./character/CharacterSheet";
+import { adaptWebCharacter } from "../utils/characterAdapter";
 
 interface Props {
     item: any;
@@ -124,9 +125,9 @@ const { item, rpgDataMap = {}, readingTime } = Astro.props;
                                             <div class="dialog-body">
                                                 <CharacterSheet
                                                     client:load
-                                                    character={
+                                                    character={adaptWebCharacter(
                                                         rpgDataMap[player.rpgId]
-                                                    }
+                                                    )}
                                                     mode="inline"
                                                 />
                                             </div>
@@ -209,9 +210,9 @@ const { item, rpgDataMap = {}, readingTime } = Astro.props;
                                             <div class="dialog-body">
                                                 <CharacterSheet
                                                     client:load
-                                                    character={
+                                                    character={adaptWebCharacter(
                                                         rpgDataMap[npc.rpgId]
-                                                    }
+                                                    )}
                                                     mode="inline"
                                                 />
                                             </div>

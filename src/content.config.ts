@@ -150,9 +150,7 @@ const rpgCollection = defineCollection({
             cost: z.union([z.number(), z.string()]).optional(),
             items: z.array(z.any()).optional().default([])
         }).optional(),
-        techModules: z.object({
-            installed: z.array(z.any()).optional(),
-        }).passthrough().optional(),
+        techModules: z.array(z.any()).optional(),
         artifacts: z.object({
             cost: z.union([z.number(), z.string()]).optional(),
             items: z.array(z.any()).optional().default([])

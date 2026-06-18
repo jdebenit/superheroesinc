@@ -112,9 +112,7 @@ const WIZARD_DEFAULTS = {
     guardianParams: null,
     magicTableRolls: [],
     divineParams: null,
-    techModules: {
-        installed: []
-    },
+    techModules: [],
     techParams: { incomeSource: 'agencia_priv' },
     exoskeletonConfig: "",
     exoskeletonArmorConfig: null,
@@ -400,9 +398,15 @@ function migrateJSON(data: any): { migrated: any; changes: string[] } {
     if (!migrated.magicTableRolls) {
         migrated.magicTableRolls = [];
     }
-    // techModules must be object with installed array, not plain array
-    if (!migrated.techModules || Array.isArray(migrated.techModules)) {
-        migrated.techModules = { installed: Array.isArray(migrated.techModules) ? migrated.techModules : [] };
+    // techModules must be plain array, not object with installed array
+    if (migrated.techModules && !Array.isArray(migrated.techModules)) {
+        migrated.techModules = Array.isArray(migrated.techModules.installed)
+            ? migrated.techModules.installed
+            : (Array.isArray(migrated.techModules.items) ? migrated.techModules.items : []);
+        changes.push("Converted 'techModules' structure from object to flat array");
+    } else if (!migrated.techModules) {
+        migrated.techModules = [];
+        changes.push("Added empty 'techModules' array");
     }
     if (!migrated.cyborgImplants) {
         migrated.cyborgImplants = [];

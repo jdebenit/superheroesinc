@@ -90,6 +90,15 @@
         "powerMod": 0,
         "otherMod": 0
       }
+    },
+    "manualBonuses": {
+      "Fuerza": 0,
+      "Agilidad": 0,
+      "Constitución": 0,
+      "Inteligencia": 0,
+      "Percepción": 0,
+      "Voluntad": 0,
+      "Apariencia": 0
     }
   },
   "skills": {
@@ -209,7 +218,8 @@
     "economicStatus": "clase_alta",
     "legalStatus": "con_antecedentes",
     "socialStatus": "amenaza_publica",
-    "friendsAndAssociates": "lazos_todos"
+    "friendsAndAssociates": "lazos_todos",
+    "items": []
   },
   "vehicles": {
     "items": [
@@ -230,28 +240,21 @@
         "id": "supervelocidad",
         "origin": "Mutante",
         "rank": 1,
-        "isCrossType": false,
-        "isCrossOrigin": false,
-        "isCrossOriginMaldito": false,
-        "isCrossOriginDivino": false,
-        "powerMod": 100
+        "customizations": [],
+        "skillValue": 0
       },
       {
         "id": "superpercepcion",
         "origin": "Mutante",
         "rank": 1,
-        "isCrossType": false,
-        "isCrossOrigin": false,
-        "isCrossOriginMaldito": false,
-        "isCrossOriginDivino": false,
-        "powerMod": 50,
         "customizations": [
           {
             "id": "1781547302365",
             "description": "Solo vista",
             "cost": 0
           }
-        ]
+        ],
+        "skillValue": 0
       }
     ]
   },
@@ -271,5 +274,57 @@
   "meta": {
     "version": "Beta 0.15.2",
     "generator": "SHI Wizard"
-  }
+  },
+  "notes": "",
+  "totalCost": "",
+  "level": 1,
+  "equipment": {
+    "items": []
+  },
+  "weapons": {
+    "items": []
+  },
+  "artifacts": {
+    "items": []
+  },
+  "magicObjects": {
+    "items": []
+  },
+  "spells": {
+    "selected": [],
+    "emFormula": {
+      "divisor": 4,
+      "pcCost": 0
+    }
+  },
+  "magicalBonds": [],
+  "magicalBondsCustomName": "",
+  "magicalBondsCustomDescription": "",
+  "specialskills": {
+    "items": []
+  },
+  "enteParams": {
+    "formType": null,
+    "visualEffect": null
+  },
+  "malditoParams": {
+    "magnitude": null,
+    "source": null
+  },
+  "poseidoParams": {
+    "formType": null
+  },
+  "alteradoParams": null,
+  "guardianParams": null,
+  "divineParams": null,
+  "techParams": {
+    "incomeSource": "agencia_priv"
+  },
+  "exoskeletonArmorConfig": null,
+  "technoSuitStrengthConfig": null,
+  "exoskeletonConfig": "",
+  "magicTableRolls": [],
+  "techModules": [],
+  "cyborgImplants": [],
+  "isParahumanoHybrid": false
 }

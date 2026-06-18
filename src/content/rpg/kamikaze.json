@@ -247,24 +247,22 @@
       }
     ]
   },
-  "techModules": {
-    "installed": [
-      {
-        "id": "tm_0iffbbpth",
-        "name": "Tecnoimplante Ojo",
-        "location": "",
-        "notes": "+5PV. 60 al Daño Absorbido Físico en la cabeza",
-        "pcCost": 0
-      },
-      {
-        "id": "tm_uihbjiv8f",
-        "name": "Percepcion avanzada",
-        "location": "",
-        "notes": "110 percepción. Visual. Localización en el Tecnoimplante Ojo",
-        "pcCost": 0
-      }
-    ]
-  },
+  "techModules": [
+    {
+      "id": "tm_0iffbbpth",
+      "name": "Tecnoimplante Ojo",
+      "location": "",
+      "notes": "+5PV. 60 al Daño Absorbido Físico en la cabeza",
+      "pcCost": 0
+    },
+    {
+      "id": "tm_uihbjiv8f",
+      "name": "Percepcion avanzada",
+      "location": "",
+      "notes": "110 percepción. Visual. Localización en el Tecnoimplante Ojo",
+      "pcCost": 0
+    }
+  ],
   "alias": "",
   "notes": "",
   "totalCost": "",

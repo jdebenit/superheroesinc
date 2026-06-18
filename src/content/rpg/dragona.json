@@ -91,6 +91,15 @@
         "powerMod": 0,
         "otherMod": 0
       }
+    },
+    "manualBonuses": {
+      "Fuerza": 0,
+      "Agilidad": 0,
+      "Constitución": 0,
+      "Inteligencia": 0,
+      "Percepción": 0,
+      "Voluntad": 0,
+      "Apariencia": 0
     }
   },
   "skills": {
@@ -233,7 +242,9 @@
     "prejudiceResistance": 15,
     "economicStatus": "clase_medio_baja",
     "socialStatus": "heroe_pueblo",
-    "friendsAndAssociates": "solo_familia"
+    "friendsAndAssociates": "solo_familia",
+    "items": [],
+    "legalStatus": "sin_antecedentes"
   },
   "weapons": {
     "items": [
@@ -253,56 +264,42 @@
         "id": "volar",
         "origin": "Guardian",
         "rank": 21,
-        "isCrossType": false,
-        "isCrossOrigin": false,
-        "isCrossOriginMaldito": false,
-        "isCrossOriginDivino": false
+        "customizations": [],
+        "skillValue": 0
       },
       {
         "id": "control_del_fuego",
         "origin": "Guardian",
         "rank": 41,
-        "isCrossType": false,
-        "isCrossOrigin": false,
-        "isCrossOriginMaldito": false,
-        "isCrossOriginDivino": false,
         "customizations": [
           {
             "id": "1780845838452",
             "description": "Emite el fuego por la espada",
             "cost": 0
           }
-        ]
+        ],
+        "skillValue": 0
       },
       {
         "id": "invulnerabilidad",
         "origin": "Guardian",
         "rank": 71,
-        "isCrossType": false,
-        "isCrossOrigin": false,
-        "isCrossOriginMaldito": false,
-        "isCrossOriginDivino": false,
-        "selectedOption": "Magia"
+        "customizations": [],
+        "skillValue": 0
       },
       {
         "id": "superconstitucion",
         "origin": "Guardian",
         "rank": 1,
-        "isCrossType": false,
-        "isCrossOrigin": false,
-        "isCrossOriginMaldito": false,
-        "isCrossOriginDivino": false,
-        "powerMod": 88
+        "customizations": [],
+        "skillValue": 0
       },
       {
         "id": "superfuerza",
         "origin": "Guardian",
         "rank": 1,
-        "isCrossType": false,
-        "isCrossOrigin": false,
-        "isCrossOriginMaldito": false,
-        "isCrossOriginDivino": false,
-        "powerMod": 72
+        "customizations": [],
+        "skillValue": 0
       }
     ]
   },
@@ -317,5 +314,56 @@
   "meta": {
     "version": "Beta 0.15.5",
     "generator": "SHI Wizard"
-  }
+  },
+  "totalCost": "",
+  "level": 1,
+  "equipment": {
+    "items": []
+  },
+  "artifacts": {
+    "items": []
+  },
+  "magicObjects": {
+    "items": []
+  },
+  "vehicles": {
+    "items": []
+  },
+  "spells": {
+    "selected": [],
+    "emFormula": {
+      "divisor": 4,
+      "pcCost": 0
+    }
+  },
+  "magicalBonds": [],
+  "magicalBondsCustomName": "",
+  "magicalBondsCustomDescription": "",
+  "specialskills": {
+    "items": []
+  },
+  "enteParams": {
+    "formType": null,
+    "visualEffect": null
+  },
+  "malditoParams": {
+    "magnitude": null,
+    "source": null
+  },
+  "poseidoParams": {
+    "formType": null
+  },
+  "alteradoParams": null,
+  "mutanteParams": null,
+  "divineParams": null,
+  "techParams": {
+    "incomeSource": "agencia_priv"
+  },
+  "exoskeletonArmorConfig": null,
+  "technoSuitStrengthConfig": null,
+  "exoskeletonConfig": "",
+  "magicTableRolls": [],
+  "techModules": [],
+  "cyborgImplants": [],
+  "isParahumanoHybrid": false
 }

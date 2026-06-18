@@ -90,6 +90,15 @@
         "powerMod": 0,
         "otherMod": 0
       }
+    },
+    "manualBonuses": {
+      "Fuerza": 0,
+      "Agilidad": 0,
+      "Constitución": 0,
+      "Inteligencia": 0,
+      "Percepción": 0,
+      "Voluntad": 0,
+      "Apariencia": 0
     }
   },
   "skills": {
@@ -220,7 +229,10 @@
   "background": {
     "prejudiceResistance": 30,
     "socialStatus": "heroe_pueblo",
-    "friendsAndAssociates": "conocido_poderoso"
+    "friendsAndAssociates": "conocido_poderoso",
+    "items": [],
+    "economicStatus": "clase_media",
+    "legalStatus": "sin_antecedentes"
   },
   "powers": {
     "selected": [
@@ -229,17 +241,14 @@
         "origin": "Parahumano",
         "rank": 81,
         "customizations": [],
-        "selectedOption": "Esconderse"
+        "skillValue": 0
       },
       {
         "id": "multiformidad",
         "origin": "Alterado",
         "rank": 21,
-        "isCrossType": false,
-        "isCrossOrigin": false,
-        "isCrossOriginMaldito": false,
-        "isCrossOriginDivino": false,
-        "selectedOption": "Animales"
+        "customizations": [],
+        "skillValue": 0
       }
     ]
   },
@@ -254,5 +263,61 @@
   "meta": {
     "version": "Beta 0.15.1",
     "generator": "SHI Wizard"
-  }
+  },
+  "notes": "",
+  "totalCost": "",
+  "level": 1,
+  "equipment": {
+    "items": []
+  },
+  "weapons": {
+    "items": []
+  },
+  "artifacts": {
+    "items": []
+  },
+  "magicObjects": {
+    "items": []
+  },
+  "vehicles": {
+    "items": []
+  },
+  "spells": {
+    "selected": [],
+    "emFormula": {
+      "divisor": 4,
+      "pcCost": 0
+    }
+  },
+  "magicalBonds": [],
+  "magicalBondsCustomName": "",
+  "magicalBondsCustomDescription": "",
+  "specialskills": {
+    "items": []
+  },
+  "enteParams": {
+    "formType": null,
+    "visualEffect": null
+  },
+  "malditoParams": {
+    "magnitude": null,
+    "source": null
+  },
+  "poseidoParams": {
+    "formType": null
+  },
+  "alteradoParams": null,
+  "mutanteParams": null,
+  "guardianParams": null,
+  "divineParams": null,
+  "techParams": {
+    "incomeSource": "agencia_priv"
+  },
+  "exoskeletonArmorConfig": null,
+  "technoSuitStrengthConfig": null,
+  "exoskeletonConfig": "",
+  "magicTableRolls": [],
+  "techModules": [],
+  "cyborgImplants": [],
+  "isParahumanoHybrid": false
 }

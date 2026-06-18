@@ -130,8 +130,7 @@
         "origin": "Alterado",
         "rank": 41,
         "customizations": [],
-        "skillValue": 0,
-        "selectedOption": "Cinética"
+        "skillValue": 0
       },
       {
         "id": "campo_de_fuerza",
@@ -289,9 +288,7 @@
   "exoskeletonArmorConfig": null,
   "technoSuitStrengthConfig": null,
   "magicTableRolls": [],
-  "techModules": {
-    "installed": []
-  },
+  "techModules": [],
   "cyborgImplants": [],
   "isParahumanoHybrid": false
 }

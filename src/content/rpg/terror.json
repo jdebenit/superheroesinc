@@ -115,8 +115,7 @@
         "origin": "Alterado",
         "rank": 21,
         "customizations": [],
-        "skillValue": 0,
-        "selectedOption": "Mágica"
+        "skillValue": 0
       }
     ]
   },
@@ -261,9 +260,7 @@
   "exoskeletonArmorConfig": null,
   "technoSuitStrengthConfig": null,
   "magicTableRolls": [],
-  "techModules": {
-    "installed": []
-  },
+  "techModules": [],
   "cyborgImplants": [],
   "isParahumanoHybrid": false
 }

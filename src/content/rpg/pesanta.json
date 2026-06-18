@@ -91,6 +91,15 @@
         "powerMod": 0,
         "otherMod": 0
       }
+    },
+    "manualBonuses": {
+      "Fuerza": 0,
+      "Agilidad": 0,
+      "Constitución": 0,
+      "Inteligencia": 0,
+      "Percepción": 0,
+      "Voluntad": 0,
+      "Apariencia": 0
     }
   },
   "skills": {
@@ -180,7 +189,9 @@
     "prejudiceResistance": 96,
     "economicStatus": "mendigo",
     "socialStatus": "amenaza_publica",
-    "friendsAndAssociates": "solitario"
+    "friendsAndAssociates": "solitario",
+    "items": [],
+    "legalStatus": "sin_antecedentes"
   },
   "spells": {
     "selected": [
@@ -217,30 +228,21 @@
         "id": "vincular",
         "origin": "Sobrenatural",
         "rank": 41,
-        "isCrossType": false,
-        "isCrossOrigin": false,
-        "isCrossOriginMaldito": false,
-        "isCrossOriginDivino": false,
+        "customizations": [],
         "skillValue": 65
       },
       {
         "id": "telequinesis",
         "origin": "Otro",
         "rank": 1,
-        "isCrossType": false,
-        "isCrossOrigin": false,
-        "isCrossOriginMaldito": false,
-        "isCrossOriginDivino": false,
+        "customizations": [],
         "skillValue": 75
       },
       {
         "id": "agresion_psionica",
         "origin": "Otro",
         "rank": 1,
-        "isCrossType": false,
-        "isCrossOrigin": false,
-        "isCrossOriginMaldito": false,
-        "isCrossOriginDivino": false,
+        "customizations": [],
         "skillValue": 70
       }
     ]
@@ -253,5 +255,50 @@
   "meta": {
     "version": "Beta 0.15.1",
     "generator": "SHI Wizard"
-  }
+  },
+  "notes": "",
+  "totalCost": "",
+  "equipment": {
+    "items": []
+  },
+  "weapons": {
+    "items": []
+  },
+  "artifacts": {
+    "items": []
+  },
+  "magicObjects": {
+    "items": []
+  },
+  "vehicles": {
+    "items": []
+  },
+  "magicalBonds": [],
+  "magicalBondsCustomName": "",
+  "magicalBondsCustomDescription": "",
+  "specialskills": {
+    "items": []
+  },
+  "enteParams": {
+    "formType": null,
+    "visualEffect": null
+  },
+  "malditoParams": {
+    "magnitude": null,
+    "source": null
+  },
+  "alteradoParams": null,
+  "mutanteParams": null,
+  "guardianParams": null,
+  "divineParams": null,
+  "techParams": {
+    "incomeSource": "agencia_priv"
+  },
+  "exoskeletonArmorConfig": null,
+  "technoSuitStrengthConfig": null,
+  "exoskeletonConfig": "",
+  "magicTableRolls": [],
+  "techModules": [],
+  "cyborgImplants": [],
+  "isParahumanoHybrid": false
 }

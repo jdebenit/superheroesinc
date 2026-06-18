@@ -94,6 +94,15 @@
         "powerMod": 0,
         "otherMod": 0
       }
+    },
+    "manualBonuses": {
+      "Fuerza": 0,
+      "Agilidad": 0,
+      "Constitución": 0,
+      "Inteligencia": 0,
+      "Percepción": 0,
+      "Voluntad": 0,
+      "Apariencia": 0
     }
   },
   "skills": {
@@ -195,7 +204,11 @@
   },
   "background": {
     "economicStatus": "clase_baja",
-    "friendsAndAssociates": "conocido_poderoso"
+    "friendsAndAssociates": "conocido_poderoso",
+    "items": [],
+    "prejudiceResistance": 50,
+    "legalStatus": "sin_antecedentes",
+    "socialStatus": "anonimo"
   },
   "powers": {
     "selected": [
@@ -203,30 +216,20 @@
         "id": "empatia_animal",
         "origin": "Divino",
         "rank": 1,
-        "isCrossType": false,
-        "isCrossOrigin": false,
-        "isCrossOriginMaldito": false,
-        "isCrossOriginDivino": false
+        "customizations": [],
+        "skillValue": 0
       },
       {
         "id": "superhabilidad",
         "origin": "OtroDivino",
         "rank": 41,
-        "isCrossType": false,
-        "isCrossOrigin": false,
-        "isCrossOriginMaldito": false,
-        "isCrossOriginDivino": true,
-        "selectedOption": "Lanza Gungnir"
+        "customizations": [],
+        "skillValue": 0
       },
       {
         "id": "superhabilidad",
         "origin": "OtroDivino",
         "rank": 100,
-        "isCrossType": false,
-        "isCrossOrigin": false,
-        "isCrossOriginMaldito": false,
-        "isCrossOriginDivino": true,
-        "selectedOption": "Conocimientos Generales",
         "customizations": [
           {
             "id": "1781728527650",
@@ -238,16 +241,15 @@
             "description": "Adquiere Traducción de lenguas",
             "cost": 0
           }
-        ]
+        ],
+        "skillValue": 0
       },
       {
         "id": "traduccion_de_lenguas",
         "origin": "OtroDivino",
         "rank": 1,
-        "isCrossType": false,
-        "isCrossOrigin": false,
-        "isCrossOriginMaldito": false,
-        "isCrossOriginDivino": true
+        "customizations": [],
+        "skillValue": 0
       }
     ]
   },
@@ -258,5 +260,60 @@
     "unlockManualSkills": false
   },
   "sexualIdentity": "Mujer",
-  "profession": "Aventurera"
+  "profession": "Aventurera",
+  "notes": "",
+  "totalCost": "",
+  "level": 1,
+  "equipment": {
+    "items": []
+  },
+  "weapons": {
+    "items": []
+  },
+  "artifacts": {
+    "items": []
+  },
+  "magicObjects": {
+    "items": []
+  },
+  "vehicles": {
+    "items": []
+  },
+  "spells": {
+    "selected": [],
+    "emFormula": {
+      "divisor": 4,
+      "pcCost": 0
+    }
+  },
+  "magicalBonds": [],
+  "magicalBondsCustomName": "",
+  "magicalBondsCustomDescription": "",
+  "specialskills": {
+    "items": []
+  },
+  "enteParams": {
+    "formType": null,
+    "visualEffect": null
+  },
+  "malditoParams": {
+    "magnitude": null,
+    "source": null
+  },
+  "poseidoParams": {
+    "formType": null
+  },
+  "alteradoParams": null,
+  "mutanteParams": null,
+  "guardianParams": null,
+  "techParams": {
+    "incomeSource": "agencia_priv"
+  },
+  "exoskeletonArmorConfig": null,
+  "technoSuitStrengthConfig": null,
+  "exoskeletonConfig": "",
+  "magicTableRolls": [],
+  "techModules": [],
+  "cyborgImplants": [],
+  "isParahumanoHybrid": false
 }

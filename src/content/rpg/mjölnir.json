@@ -247,7 +247,9 @@
     "prejudiceResistance": 17,
     "economicStatus": "clase_media_alta",
     "socialStatus": "heroe_pueblo",
-    "friendsAndAssociates": "solo_familia"
+    "friendsAndAssociates": "solo_familia",
+    "items": [],
+    "legalStatus": "sin_antecedentes"
   },
   "weapons": {
     "items": [
@@ -267,30 +269,22 @@
         "id": "superfuerza",
         "origin": "Guardian",
         "rank": 1,
-        "isCrossType": false,
-        "isCrossOrigin": false,
-        "isCrossOriginMaldito": false,
-        "isCrossOriginDivino": false,
-        "powerMod": 120
+        "customizations": [],
+        "skillValue": 0
       },
       {
         "id": "superconstitucion",
         "origin": "Guardian",
         "rank": 1,
-        "isCrossType": false,
-        "isCrossOrigin": false,
-        "isCrossOriginMaldito": false,
-        "isCrossOriginDivino": false,
-        "powerMod": 85
+        "customizations": [],
+        "skillValue": 0
       },
       {
         "id": "incremento_vital",
         "origin": "Guardian",
         "rank": 1,
-        "isCrossType": false,
-        "isCrossOrigin": true,
-        "isCrossOriginMaldito": false,
-        "isCrossOriginDivino": false
+        "customizations": [],
+        "skillValue": 0
       }
     ]
   },
@@ -301,5 +295,56 @@
     "transformation": "transform_permanent"
   },
   "sexualIdentity": "Mujer",
-  "profession": "Lingüista en la Universidad"
+  "profession": "Lingüista en la Universidad",
+  "totalCost": "",
+  "level": 1,
+  "equipment": {
+    "items": []
+  },
+  "artifacts": {
+    "items": []
+  },
+  "magicObjects": {
+    "items": []
+  },
+  "vehicles": {
+    "items": []
+  },
+  "spells": {
+    "selected": [],
+    "emFormula": {
+      "divisor": 4,
+      "pcCost": 0
+    }
+  },
+  "magicalBonds": [],
+  "magicalBondsCustomName": "",
+  "magicalBondsCustomDescription": "",
+  "specialskills": {
+    "items": []
+  },
+  "enteParams": {
+    "formType": null,
+    "visualEffect": null
+  },
+  "malditoParams": {
+    "magnitude": null,
+    "source": null
+  },
+  "poseidoParams": {
+    "formType": null
+  },
+  "alteradoParams": null,
+  "mutanteParams": null,
+  "divineParams": null,
+  "techParams": {
+    "incomeSource": "agencia_priv"
+  },
+  "exoskeletonArmorConfig": null,
+  "technoSuitStrengthConfig": null,
+  "exoskeletonConfig": "",
+  "magicTableRolls": [],
+  "techModules": [],
+  "cyborgImplants": [],
+  "isParahumanoHybrid": false
 }

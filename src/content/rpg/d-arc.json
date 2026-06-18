@@ -99,6 +99,15 @@
         "powerMod": 0,
         "otherMod": 0
       }
+    },
+    "manualBonuses": {
+      "Fuerza": 0,
+      "Agilidad": 0,
+      "Constitución": 0,
+      "Inteligencia": 0,
+      "Percepción": 0,
+      "Voluntad": 0,
+      "Apariencia": 0
     }
   },
   "skills": {
@@ -218,7 +227,10 @@
   "background": {
     "prejudiceResistance": 67,
     "economicStatus": "clase_media_alta",
-    "friendsAndAssociates": "grupo_reducido"
+    "friendsAndAssociates": "grupo_reducido",
+    "items": [],
+    "legalStatus": "sin_antecedentes",
+    "socialStatus": "anonimo"
   },
   "equipment": {
     "items": [
@@ -247,11 +259,6 @@
         "id": "emision_de_energia",
         "origin": "Guardian",
         "rank": 81,
-        "isCrossType": false,
-        "isCrossOrigin": false,
-        "isCrossOriginMaldito": false,
-        "isCrossOriginDivino": false,
-        "selectedOption": "Mágica",
         "customizations": [
           {
             "id": "1781350860532",
@@ -282,5 +289,54 @@
   "meta": {
     "version": "Beta 0.15.1",
     "generator": "SHI Wizard"
-  }
+  },
+  "notes": "",
+  "totalCost": "",
+  "level": 1,
+  "artifacts": {
+    "items": []
+  },
+  "magicObjects": {
+    "items": []
+  },
+  "vehicles": {
+    "items": []
+  },
+  "spells": {
+    "selected": [],
+    "emFormula": {
+      "divisor": 4,
+      "pcCost": 0
+    }
+  },
+  "magicalBonds": [],
+  "magicalBondsCustomName": "",
+  "magicalBondsCustomDescription": "",
+  "specialskills": {
+    "items": []
+  },
+  "enteParams": {
+    "formType": null,
+    "visualEffect": null
+  },
+  "malditoParams": {
+    "magnitude": null,
+    "source": null
+  },
+  "poseidoParams": {
+    "formType": null
+  },
+  "alteradoParams": null,
+  "mutanteParams": null,
+  "divineParams": null,
+  "techParams": {
+    "incomeSource": "agencia_priv"
+  },
+  "exoskeletonArmorConfig": null,
+  "technoSuitStrengthConfig": null,
+  "exoskeletonConfig": "",
+  "magicTableRolls": [],
+  "techModules": [],
+  "cyborgImplants": [],
+  "isParahumanoHybrid": false
 }

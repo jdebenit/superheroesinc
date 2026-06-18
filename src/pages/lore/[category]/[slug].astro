@@ -8,6 +8,7 @@ import Logger from "../../../utils/Logger";
 import ShareButtons from "../../../components/ShareButtons.astro";
 import CharacterCard from "../../../components/CharacterCard";
 import { getReadingTime } from "../../../utils/readingTime";
+import { adaptWebCharacter } from "../../../utils/characterAdapter";
 
 
 export async function getStaticPaths() {
@@ -232,7 +233,7 @@ if (item.data.category === "grupos") {
           </div>
         )}
 
-        {rpgData && <CharacterSheet client:load character={rpgData} mode="inline" />}
+        {rpgData && <CharacterSheet client:load character={adaptWebCharacter(rpgData)} mode="inline" />}
 
         <ShareButtons title={item.data.title} url={Astro.url.href} />
       </main>

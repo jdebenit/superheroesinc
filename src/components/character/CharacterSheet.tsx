@@ -98,7 +98,7 @@ export default function CharacterSheet({
                 <VehiclesSection vehicles={character.vehicles} />
                 <EquipmentSection equipment={character.equipment} />
                 <VariosSection varios={character.varios} />
-                <TechModulesSection techModules={character.techModules?.installed || []} />
+                <TechModulesSection techModules={character.techModules || []} />
                 <ExoskeletonSection character={character} />
                 <TechnifiedSection character={character} />
                 <MagicalBondsSection character={character} />

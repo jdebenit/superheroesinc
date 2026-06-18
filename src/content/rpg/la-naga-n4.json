@@ -113,6 +113,15 @@
         "powerMod": 0,
         "otherMod": 0
       }
+    },
+    "manualBonuses": {
+      "Fuerza": 0,
+      "Agilidad": 0,
+      "Constitución": 0,
+      "Inteligencia": 0,
+      "Percepción": 0,
+      "Voluntad": 0,
+      "Apariencia": 0
     }
   },
   "skills": {
@@ -279,7 +288,9 @@
         "manualMods": 0,
         "manualBases": 0
       }
-    }
+    },
+    "generalManualMods": {},
+    "manualBases": {}
   },
   "background": {
     "prejudiceResistance": 30,
@@ -287,7 +298,9 @@
     "legalStatus": "con_antecedentes",
     "items": [
       "Con cobertura legal por la FDM"
-    ]
+    ],
+    "socialStatus": "anonimo",
+    "friendsAndAssociates": "conocido"
   },
   "weapons": {
     "items": [
@@ -355,5 +368,48 @@
   "traumas": {
     "Manipulador": "Desde mi niñez he sido manipulada por intrigas de la corte y mi madrastra ha confabulado contra mi, he descubierto que las palabras tienen mas poder que los hechizos y las espadas. Los uso en contra de los que se aprovechan de la gente cuando esta debil y desprotegida para evitar lo que me paso a mi.",
     "Artista Marcial con Chi": "En las tierras profundas de Kish’var la orden de las Nagas me enseño a dominar mi cuerpo y mente, a usar el poder de mis adversarios contra ellos y a entender que el unico enemigo al que debo enfrentarme esta dentro de mi."
-  }
+  },
+  "totalCost": "",
+  "powers": {
+    "selected": []
+  },
+  "equipment": {
+    "items": []
+  },
+  "artifacts": {
+    "items": []
+  },
+  "vehicles": {
+    "items": []
+  },
+  "magicalBonds": [],
+  "magicalBondsCustomName": "",
+  "magicalBondsCustomDescription": "",
+  "specialskills": {
+    "items": []
+  },
+  "enteParams": {
+    "formType": null,
+    "visualEffect": null
+  },
+  "malditoParams": {
+    "magnitude": null,
+    "source": null
+  },
+  "poseidoParams": {
+    "formType": null
+  },
+  "alteradoParams": null,
+  "mutanteParams": null,
+  "guardianParams": null,
+  "divineParams": null,
+  "techParams": {
+    "incomeSource": "agencia_priv"
+  },
+  "exoskeletonArmorConfig": null,
+  "technoSuitStrengthConfig": null,
+  "exoskeletonConfig": "",
+  "techModules": [],
+  "cyborgImplants": [],
+  "isParahumanoHybrid": false
 }

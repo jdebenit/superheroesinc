@@ -102,6 +102,15 @@
         "powerMod": 0,
         "otherMod": 0
       }
+    },
+    "manualBonuses": {
+      "Fuerza": 0,
+      "Agilidad": 0,
+      "Constitución": 0,
+      "Inteligencia": 0,
+      "Percepción": 0,
+      "Voluntad": 0,
+      "Apariencia": 0
     }
   },
   "skills": {
@@ -265,7 +274,10 @@
   "background": {
     "prejudiceResistance": 100,
     "economicStatus": "clase_alta",
-    "friendsAndAssociates": "solitario"
+    "friendsAndAssociates": "solitario",
+    "items": [],
+    "legalStatus": "sin_antecedentes",
+    "socialStatus": "anonimo"
   },
   "weapons": {
     "items": [
@@ -314,10 +326,8 @@
         "id": "incremento_vital",
         "origin": "Sobrenatural",
         "rank": 100,
-        "isCrossType": false,
-        "isCrossOrigin": false,
-        "isCrossOriginMaldito": false,
-        "isCrossOriginDivino": false
+        "customizations": [],
+        "skillValue": 0
       }
     ]
   },
@@ -328,5 +338,49 @@
   "meta": {
     "version": "Beta 0.15.3",
     "generator": "SHI Wizard"
-  }
+  },
+  "totalCost": "",
+  "equipment": {
+    "items": []
+  },
+  "artifacts": {
+    "items": []
+  },
+  "magicObjects": {
+    "items": []
+  },
+  "vehicles": {
+    "items": []
+  },
+  "magicalBonds": [],
+  "magicalBondsCustomName": "",
+  "magicalBondsCustomDescription": "",
+  "specialskills": {
+    "items": []
+  },
+  "enteParams": {
+    "formType": null,
+    "visualEffect": null
+  },
+  "malditoParams": {
+    "magnitude": null,
+    "source": null
+  },
+  "poseidoParams": {
+    "formType": null
+  },
+  "alteradoParams": null,
+  "mutanteParams": null,
+  "guardianParams": null,
+  "divineParams": null,
+  "techParams": {
+    "incomeSource": "agencia_priv"
+  },
+  "exoskeletonArmorConfig": null,
+  "technoSuitStrengthConfig": null,
+  "exoskeletonConfig": "",
+  "magicTableRolls": [],
+  "techModules": [],
+  "cyborgImplants": [],
+  "isParahumanoHybrid": false
 }

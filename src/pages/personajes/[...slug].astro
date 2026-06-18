@@ -3,6 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import { getCollection, getEntry, render } from "astro:content";
 import CharacterSheet from "../../components/character/CharacterSheet";
 import ShareButtons from "../../components/ShareButtons.astro";
+import { adaptWebCharacter } from "../../utils/characterAdapter";
 
 export async function getStaticPaths() {
     const characters = await getCollection("characters");
@@ -242,7 +243,7 @@ if (charGroups.length > 0) {
                     rpgData && (
                         <CharacterSheet
                             client:load
-                            character={rpgData}
+                            character={adaptWebCharacter(rpgData)}
                             mode="inline"
                         />
                     )

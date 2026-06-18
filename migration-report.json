@@ -1,0 +1,682 @@
+[
+  {
+    "file": "abogado.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field",
+      "Added 'totalCost' field",
+      "Converted 'techModules' structure from object to flat array"
+    ]
+  },
+  {
+    "file": "aescotan.json",
+    "status": "success",
+    "changes": [
+      "Added 'notes' field",
+      "Added 'totalCost' field",
+      "Converted powers from old format to new format",
+      "Converted 'techModules' structure from object to flat array"
+    ]
+  },
+  {
+    "file": "agente-de-policia.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field",
+      "Added 'totalCost' field",
+      "Converted 'techModules' structure from object to flat array"
+    ]
+  },
+  {
+    "file": "agente-secreto.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field",
+      "Added 'totalCost' field",
+      "Converted 'techModules' structure from object to flat array"
+    ]
+  },
+  {
+    "file": "alice.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field",
+      "Added 'totalCost' field",
+      "Converted 'techModules' structure from object to flat array"
+    ]
+  },
+  {
+    "file": "alpha-woman.json",
+    "status": "success",
+    "changes": [
+      "Added 'notes' field",
+      "Converted 'techModules' structure from object to flat array"
+    ]
+  },
+  {
+    "file": "arkham.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field",
+      "Added 'totalCost' field",
+      "Converted 'techModules' structure from object to flat array"
+    ]
+  },
+  {
+    "file": "askany.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field",
+      "Added 'totalCost' field",
+      "Converted 'techModules' structure from object to flat array"
+    ]
+  },
+  {
+    "file": "balanza.json",
+    "status": "success",
+    "changes": [
+      "Added 'notes' field",
+      "Added 'totalCost' field",
+      "Added 'level' field",
+      "Added 'attributes.manualBonuses'",
+      "Converted powers from old format to new format",
+      "Added 'equipment' structure",
+      "Added 'weapons' structure",
+      "Added 'artifacts' structure",
+      "Added 'magicObjects' structure",
+      "Added 'vehicles' structure",
+      "Added 'spells' structure",
+      "Added empty 'techModules' array"
+    ]
+  },
+  {
+    "file": "blinker.json",
+    "status": "success",
+    "changes": [
+      "Added 'totalCost' field",
+      "Added 'attributes.manualBonuses'",
+      "Converted powers from old format to new format",
+      "Added 'equipment' structure",
+      "Added 'weapons' structure",
+      "Added 'artifacts' structure",
+      "Added 'magicObjects' structure",
+      "Added 'vehicles' structure",
+      "Added 'spells' structure",
+      "Added empty 'techModules' array"
+    ]
+  },
+  {
+    "file": "centurion.json",
+    "status": "success",
+    "changes": [
+      "Added 'notes' field",
+      "Added 'totalCost' field",
+      "Converted 'techModules' structure from object to flat array"
+    ]
+  },
+  {
+    "file": "chainsaw.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field",
+      "Added 'totalCost' field",
+      "Converted 'techModules' structure from object to flat array"
+    ]
+  },
+  {
+    "file": "corredor-nocturno.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field",
+      "Added 'totalCost' field",
+      "Converted powers from old format to new format",
+      "Converted 'techModules' structure from object to flat array"
+    ]
+  },
+  {
+    "file": "cu-chulainn.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field",
+      "Added 'totalCost' field",
+      "Converted 'techModules' structure from object to flat array"
+    ]
+  },
+  {
+    "file": "d-arc.json",
+    "status": "success",
+    "changes": [
+      "Added 'notes' field",
+      "Added 'totalCost' field",
+      "Added 'level' field",
+      "Added 'attributes.manualBonuses'",
+      "Converted powers from old format to new format",
+      "Added 'artifacts' structure",
+      "Added 'magicObjects' structure",
+      "Added 'vehicles' structure",
+      "Added 'spells' structure",
+      "Added empty 'techModules' array"
+    ]
+  },
+  {
+    "file": "daemonideus.json",
+    "status": "success",
+    "changes": [
+      "Added 'notes' field",
+      "Added 'totalCost' field",
+      "Added 'attributes.manualBonuses'",
+      "Added 'equipment' structure",
+      "Added 'weapons' structure",
+      "Added 'artifacts' structure",
+      "Added 'magicObjects' structure",
+      "Added 'vehicles' structure",
+      "Added empty 'techModules' array"
+    ]
+  },
+  {
+    "file": "desertor.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field",
+      "Added 'totalCost' field",
+      "Converted 'techModules' structure from object to flat array"
+    ]
+  },
+  {
+    "file": "drache.json",
+    "status": "success",
+    "changes": [
+      "Added 'notes' field",
+      "Added 'totalCost' field",
+      "Added 'attributes.manualBonuses'",
+      "Converted powers from old format to new format",
+      "Added 'weapons' structure",
+      "Added 'artifacts' structure",
+      "Added 'magicObjects' structure",
+      "Added 'vehicles' structure",
+      "Added 'spells' structure",
+      "Added empty 'techModules' array"
+    ]
+  },
+  {
+    "file": "dragona.json",
+    "status": "success",
+    "changes": [
+      "Added 'totalCost' field",
+      "Added 'level' field",
+      "Added 'attributes.manualBonuses'",
+      "Converted powers from old format to new format",
+      "Added 'equipment' structure",
+      "Added 'artifacts' structure",
+      "Added 'magicObjects' structure",
+      "Added 'vehicles' structure",
+      "Added 'spells' structure",
+      "Added empty 'techModules' array"
+    ]
+  },
+  {
+    "file": "eisengeist.json",
+    "status": "success",
+    "changes": [
+      "Added 'notes' field",
+      "Added 'totalCost' field",
+      "Added 'attributes.manualBonuses'",
+      "Converted powers from old format to new format",
+      "Added 'equipment' structure",
+      "Added 'weapons' structure",
+      "Added 'artifacts' structure",
+      "Added 'magicObjects' structure",
+      "Added 'vehicles' structure",
+      "Converted 'techModules' structure from object to flat array"
+    ]
+  },
+  {
+    "file": "el-apatrida.json",
+    "status": "success",
+    "changes": [
+      "Added 'notes' field",
+      "Added 'totalCost' field",
+      "Added 'attributes.manualBonuses'",
+      "Converted powers from old format to new format",
+      "Added 'magicObjects' structure",
+      "Added 'vehicles' structure",
+      "Added 'spells' structure",
+      "Added empty 'techModules' array"
+    ]
+  },
+  {
+    "file": "enigma.json",
+    "status": "success",
+    "changes": [
+      "Added 'totalCost' field",
+      "Converted powers from old format to new format",
+      "Added 'weapons' structure",
+      "Added 'artifacts' structure",
+      "Added 'magicObjects' structure",
+      "Added 'vehicles' structure",
+      "Added 'spells' structure",
+      "Added empty 'techModules' array"
+    ]
+  },
+  {
+    "file": "estaca.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field",
+      "Added 'totalCost' field",
+      "Converted 'techModules' structure from object to flat array"
+    ]
+  },
+  {
+    "file": "flecha-roja-ii.json",
+    "status": "success",
+    "changes": [
+      "Added 'totalCost' field",
+      "Added 'level' field",
+      "Added 'attributes.manualBonuses'",
+      "Converted powers from old format to new format",
+      "Added 'weapons' structure",
+      "Added 'artifacts' structure",
+      "Added 'magicObjects' structure",
+      "Added 'vehicles' structure",
+      "Added empty 'techModules' array"
+    ]
+  },
+  {
+    "file": "gran-turismo.json",
+    "status": "success",
+    "changes": [
+      "Added 'notes' field",
+      "Added 'totalCost' field",
+      "Added 'level' field",
+      "Added 'attributes.manualBonuses'",
+      "Converted powers from old format to new format",
+      "Added 'equipment' structure",
+      "Added 'weapons' structure",
+      "Added 'artifacts' structure",
+      "Added 'magicObjects' structure",
+      "Added 'spells' structure",
+      "Added empty 'techModules' array"
+    ]
+  },
+  {
+    "file": "impulso.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field",
+      "Added 'totalCost' field",
+      "Converted 'techModules' structure from object to flat array"
+    ]
+  },
+  {
+    "file": "inspector-toro.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'totalCost' field",
+      "Converted 'techModules' structure from object to flat array"
+    ]
+  },
+  {
+    "file": "jade.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field",
+      "Added 'totalCost' field",
+      "Converted 'techModules' structure from object to flat array"
+    ]
+  },
+  {
+    "file": "jefe-motero-road-reapers.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field",
+      "Added 'totalCost' field",
+      "Converted 'techModules' structure from object to flat array"
+    ]
+  },
+  {
+    "file": "jinete-nocturno-2.json",
+    "status": "success",
+    "changes": [
+      "Added 'notes' field",
+      "Added 'totalCost' field",
+      "Added 'level' field",
+      "Added 'attributes.manualBonuses'",
+      "Added 'equipment' structure",
+      "Added 'artifacts' structure",
+      "Added 'magicObjects' structure",
+      "Added 'spells' structure",
+      "Added empty 'techModules' array"
+    ]
+  },
+  {
+    "file": "kamikaze.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field",
+      "Added 'totalCost' field",
+      "Converted 'techModules' structure from object to flat array"
+    ]
+  },
+  {
+    "file": "kigala.json",
+    "status": "success",
+    "changes": [
+      "Added 'notes' field",
+      "Added 'totalCost' field",
+      "Converted 'techModules' structure from object to flat array"
+    ]
+  },
+  {
+    "file": "la-naga-n4.json",
+    "status": "success",
+    "changes": [
+      "Added 'totalCost' field",
+      "Added 'attributes.manualBonuses'",
+      "Added 'skills.generalManualMods'",
+      "Added 'skills.manualBases'",
+      "Added 'powers' structure",
+      "Added 'equipment' structure",
+      "Added 'artifacts' structure",
+      "Added 'vehicles' structure",
+      "Added empty 'techModules' array"
+    ]
+  },
+  {
+    "file": "leon-rojo.json",
+    "status": "skipped",
+    "changes": [
+      "Category C - requires manual review"
+    ]
+  },
+  {
+    "file": "loba-de-invierno.json",
+    "status": "success",
+    "changes": [
+      "Added 'notes' field",
+      "Added 'totalCost' field",
+      "Added 'level' field",
+      "Added 'attributes.manualBonuses'",
+      "Converted powers from old format to new format",
+      "Added 'equipment' structure",
+      "Added 'weapons' structure",
+      "Added 'artifacts' structure",
+      "Added 'magicObjects' structure",
+      "Added 'vehicles' structure",
+      "Added 'spells' structure",
+      "Added empty 'techModules' array"
+    ]
+  },
+  {
+    "file": "löwe.json",
+    "status": "success",
+    "changes": [
+      "Added 'notes' field",
+      "Added 'totalCost' field",
+      "Added 'attributes.manualBonuses'",
+      "Converted powers from old format to new format",
+      "Added 'equipment' structure",
+      "Added 'artifacts' structure",
+      "Added 'magicObjects' structure",
+      "Added 'vehicles' structure",
+      "Added 'spells' structure",
+      "Added empty 'techModules' array"
+    ]
+  },
+  {
+    "file": "medianoche.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field",
+      "Added 'totalCost' field",
+      "Converted 'techModules' structure from object to flat array"
+    ]
+  },
+  {
+    "file": "mjölnir.json",
+    "status": "success",
+    "changes": [
+      "Added 'totalCost' field",
+      "Added 'level' field",
+      "Converted powers from old format to new format",
+      "Added 'equipment' structure",
+      "Added 'artifacts' structure",
+      "Added 'magicObjects' structure",
+      "Added 'vehicles' structure",
+      "Added 'spells' structure",
+      "Added empty 'techModules' array"
+    ]
+  },
+  {
+    "file": "motero-road-reapers.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field",
+      "Added 'totalCost' field",
+      "Converted 'techModules' structure from object to flat array"
+    ]
+  },
+  {
+    "file": "onda-expansiva.json",
+    "status": "success",
+    "changes": [
+      "Added 'totalCost' field",
+      "Added 'attributes.manualBonuses'",
+      "Converted powers from old format to new format",
+      "Added 'equipment' structure",
+      "Added 'weapons' structure",
+      "Added 'artifacts' structure",
+      "Added 'magicObjects' structure",
+      "Added 'vehicles' structure",
+      "Added 'spells' structure",
+      "Added empty 'techModules' array"
+    ]
+  },
+  {
+    "file": "penumbra.json",
+    "status": "success",
+    "changes": [
+      "Added 'notes' field",
+      "Added 'totalCost' field",
+      "Added 'level' field",
+      "Added 'attributes.manualBonuses'",
+      "Added 'equipment' structure",
+      "Added 'weapons' structure",
+      "Added 'artifacts' structure",
+      "Added 'vehicles' structure",
+      "Added empty 'techModules' array"
+    ]
+  },
+  {
+    "file": "pesanta.json",
+    "status": "success",
+    "changes": [
+      "Added 'notes' field",
+      "Added 'totalCost' field",
+      "Added 'attributes.manualBonuses'",
+      "Converted powers from old format to new format",
+      "Added 'equipment' structure",
+      "Added 'weapons' structure",
+      "Added 'artifacts' structure",
+      "Added 'magicObjects' structure",
+      "Added 'vehicles' structure",
+      "Added empty 'techModules' array"
+    ]
+  },
+  {
+    "file": "peter-pain.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field",
+      "Added 'totalCost' field",
+      "Converted 'techModules' structure from object to flat array"
+    ]
+  },
+  {
+    "file": "philipe-de-herblay.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field",
+      "Added 'totalCost' field",
+      "Converted 'techModules' structure from object to flat array"
+    ]
+  },
+  {
+    "file": "sai.json",
+    "status": "success",
+    "changes": [
+      "Added 'notes' field",
+      "Added 'totalCost' field",
+      "Added 'level' field",
+      "Added 'attributes.manualBonuses'",
+      "Converted powers from old format to new format",
+      "Added 'equipment' structure",
+      "Added 'artifacts' structure",
+      "Added 'magicObjects' structure",
+      "Added 'vehicles' structure",
+      "Added 'spells' structure",
+      "Added empty 'techModules' array"
+    ]
+  },
+  {
+    "file": "schwarze-walküre.json",
+    "status": "success",
+    "changes": [
+      "Added 'totalCost' field",
+      "Added 'attributes.manualBonuses'",
+      "Converted powers from old format to new format",
+      "Added 'equipment' structure",
+      "Added 'artifacts' structure",
+      "Added 'magicObjects' structure",
+      "Added 'vehicles' structure",
+      "Added empty 'techModules' array"
+    ]
+  },
+  {
+    "file": "seismo.json",
+    "status": "success",
+    "changes": [
+      "Added 'notes' field",
+      "Added 'totalCost' field",
+      "Added 'attributes.manualBonuses'",
+      "Converted powers from old format to new format",
+      "Added 'equipment' structure",
+      "Added 'weapons' structure",
+      "Added 'artifacts' structure",
+      "Added 'magicObjects' structure",
+      "Added 'vehicles' structure",
+      "Added 'spells' structure",
+      "Added empty 'techModules' array"
+    ]
+  },
+  {
+    "file": "servicio-de-limpieza.json",
+    "status": "success",
+    "changes": [
+      "Added 'notes' field",
+      "Added 'totalCost' field",
+      "Added 'level' field",
+      "Added 'attributes.manualBonuses'",
+      "Added 'weapons' structure",
+      "Added 'magicObjects' structure",
+      "Added 'vehicles' structure",
+      "Added 'spells' structure",
+      "Added empty 'techModules' array"
+    ]
+  },
+  {
+    "file": "sujeto-17.json",
+    "status": "success",
+    "changes": [
+      "Added 'totalCost' field",
+      "Added 'attributes.manualBonuses'",
+      "Converted powers from old format to new format",
+      "Added 'artifacts' structure",
+      "Added 'magicObjects' structure",
+      "Added 'vehicles' structure",
+      "Added 'spells' structure",
+      "Added empty 'techModules' array"
+    ]
+  },
+  {
+    "file": "terror.json",
+    "status": "success",
+    "changes": [
+      "Added 'alias' field",
+      "Added 'notes' field",
+      "Added 'totalCost' field",
+      "Converted powers from old format to new format",
+      "Converted 'techModules' structure from object to flat array"
+    ]
+  },
+  {
+    "file": "varn.json",
+    "status": "success",
+    "changes": [
+      "Added 'notes' field",
+      "Added 'totalCost' field",
+      "Added 'attributes.manualBonuses'",
+      "Converted powers from old format to new format",
+      "Added 'weapons' structure",
+      "Added 'artifacts' structure",
+      "Added 'magicObjects' structure",
+      "Added 'vehicles' structure",
+      "Added 'spells' structure",
+      "Added empty 'techModules' array"
+    ]
+  },
+  {
+    "file": "virgilio.json",
+    "status": "success",
+    "changes": [
+      "Added 'notes' field",
+      "Added 'totalCost' field",
+      "Added 'attributes.manualBonuses'",
+      "Converted powers from old format to new format",
+      "Added 'equipment' structure",
+      "Added 'weapons' structure",
+      "Added 'artifacts' structure",
+      "Added 'magicObjects' structure",
+      "Added 'vehicles' structure",
+      "Added 'spells' structure",
+      "Added empty 'techModules' array"
+    ]
+  },
+  {
+    "file": "wirbelsturm.json",
+    "status": "success",
+    "changes": [
+      "Added 'notes' field",
+      "Added 'totalCost' field",
+      "Added 'attributes.manualBonuses'",
+      "Converted powers from old format to new format",
+      "Added 'equipment' structure",
+      "Added 'weapons' structure",
+      "Added 'artifacts' structure",
+      "Added 'magicObjects' structure",
+      "Added 'vehicles' structure",
+      "Added 'spells' structure",
+      "Added empty 'techModules' array"
+    ]
+  }
+]

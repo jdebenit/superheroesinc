@@ -238,9 +238,7 @@
   "exoskeletonArmorConfig": null,
   "technoSuitStrengthConfig": null,
   "magicTableRolls": [],
-  "techModules": {
-    "installed": []
-  },
+  "techModules": [],
   "cyborgImplants": [],
   "isParahumanoHybrid": false
 }

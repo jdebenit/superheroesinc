@@ -92,6 +92,15 @@
         "powerMod": 0,
         "otherMod": 0
       }
+    },
+    "manualBonuses": {
+      "Fuerza": 0,
+      "Agilidad": 0,
+      "Constitución": 0,
+      "Inteligencia": 0,
+      "Percepción": 0,
+      "Voluntad": 0,
+      "Apariencia": 0
     }
   },
   "skills": {
@@ -230,7 +239,9 @@
     "economicStatus": "mendigo",
     "legalStatus": "terrorista",
     "socialStatus": "supervillano",
-    "friendsAndAssociates": "solo_familia"
+    "friendsAndAssociates": "solo_familia",
+    "items": [],
+    "prejudiceResistance": 50
   },
   "powers": {
     "selected": [
@@ -238,34 +249,27 @@
         "id": "teleportacion",
         "origin": "Alterado",
         "rank": 41,
-        "isCrossType": false,
-        "isCrossOrigin": false,
-        "isCrossOriginMaldito": false,
-        "isCrossOriginDivino": false,
         "customizations": [
           {
             "id": "1781806827981",
             "description": "portales",
             "cost": 0
           }
-        ]
+        ],
+        "skillValue": 0
       },
       {
         "id": "superpercepcion",
         "origin": "Alterado",
         "rank": 1,
-        "isCrossType": false,
-        "isCrossOrigin": false,
-        "isCrossOriginMaldito": false,
-        "isCrossOriginDivino": false,
-        "powerMod": 80,
         "customizations": [
           {
             "id": "1781806693041",
             "description": "Visual",
             "cost": 0
           }
-        ]
+        ],
+        "skillValue": 0
       }
     ]
   },
@@ -278,5 +282,58 @@
   "meta": {
     "version": "Beta 0.15.3",
     "generator": "SHI Wizard"
-  }
+  },
+  "totalCost": "",
+  "equipment": {
+    "items": []
+  },
+  "weapons": {
+    "items": []
+  },
+  "artifacts": {
+    "items": []
+  },
+  "magicObjects": {
+    "items": []
+  },
+  "vehicles": {
+    "items": []
+  },
+  "spells": {
+    "selected": [],
+    "emFormula": {
+      "divisor": 4,
+      "pcCost": 0
+    }
+  },
+  "magicalBonds": [],
+  "magicalBondsCustomName": "",
+  "magicalBondsCustomDescription": "",
+  "specialskills": {
+    "items": []
+  },
+  "enteParams": {
+    "formType": null,
+    "visualEffect": null
+  },
+  "malditoParams": {
+    "magnitude": null,
+    "source": null
+  },
+  "poseidoParams": {
+    "formType": null
+  },
+  "mutanteParams": null,
+  "guardianParams": null,
+  "divineParams": null,
+  "techParams": {
+    "incomeSource": "agencia_priv"
+  },
+  "exoskeletonArmorConfig": null,
+  "technoSuitStrengthConfig": null,
+  "exoskeletonConfig": "",
+  "magicTableRolls": [],
+  "techModules": [],
+  "cyborgImplants": [],
+  "isParahumanoHybrid": false
 }

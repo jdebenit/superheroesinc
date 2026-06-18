@@ -201,13 +201,17 @@
     "items": [
       {
         "name": "Escopeta POW E9",
-        "value": "80%",
-        "notes": "Daño 3d10+Pot. 40 - 2 DxA"
+        "damage": "3d10+Pot 40",
+        "dxa": "2",
+        "car": "",
+        "notes": ""
       },
       {
         "name": "Cuchillo de combate",
-        "value": "62+30%",
-        "notes": "Daño 2d6+30od.Fue"
+        "damage": "2d6+30+Mod.Fue",
+        "dxa": "",
+        "car": "",
+        "notes": ""
       }
     ]
   },
@@ -271,9 +275,7 @@
   "exoskeletonArmorConfig": null,
   "technoSuitStrengthConfig": null,
   "magicTableRolls": [],
-  "techModules": {
-    "installed": []
-  },
+  "techModules": [],
   "cyborgImplants": [],
   "isParahumanoHybrid": false
 }

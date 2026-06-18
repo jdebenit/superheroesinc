@@ -96,6 +96,15 @@
         "powerMod": 0,
         "otherMod": 0
       }
+    },
+    "manualBonuses": {
+      "Fuerza": 0,
+      "Agilidad": 0,
+      "Constitución": 0,
+      "Inteligencia": 0,
+      "Percepción": 0,
+      "Voluntad": 0,
+      "Apariencia": 0
     }
   },
   "skills": {
@@ -343,7 +352,9 @@
     "economicStatus": "multimillonario",
     "socialStatus": "heroe_reconocido",
     "friendsAndAssociates": "conocido_poderoso",
-    "baseCoverage": "independiente_lujo"
+    "baseCoverage": "independiente_lujo",
+    "items": [],
+    "legalStatus": "sin_antecedentes"
   },
   "equipment": {
     "items": [
@@ -360,43 +371,41 @@
         "id": "control_del_agua",
         "origin": "Parahumano",
         "rank": 11,
+        "customizations": [],
         "skillValue": 128
       },
       {
         "id": "superhabilidad",
         "origin": "Parahumano",
         "rank": 41,
-        "skillValue": 0,
-        "selectedOption": "Idioma nativo"
+        "customizations": [],
+        "skillValue": 0
       },
       {
         "id": "superhabilidad",
         "origin": "Parahumano",
         "rank": 81,
-        "skillValue": 0,
-        "selectedOption": "Nadar"
+        "customizations": [],
+        "skillValue": 0
       },
       {
         "id": "empatia_animal",
         "origin": "Parahumano",
         "rank": 11,
-        "skillValue": 0,
         "customizations": [
           {
             "id": "atlante_cetaceos",
             "description": "Hablar solo con cetáceos",
             "cost": 0
           }
-        ]
+        ],
+        "skillValue": 0
       },
       {
         "id": "control_del_agua",
         "origin": "Guardian",
         "rank": 100,
-        "isCrossType": false,
-        "isCrossOrigin": false,
-        "isCrossOriginMaldito": false,
-        "isCrossOriginDivino": false,
+        "customizations": [],
         "skillValue": 128
       }
     ]
@@ -416,5 +425,56 @@
   "meta": {
     "version": "Beta 0.15.1",
     "generator": "SHI Wizard"
-  }
+  },
+  "notes": "",
+  "totalCost": "",
+  "weapons": {
+    "items": []
+  },
+  "artifacts": {
+    "items": []
+  },
+  "magicObjects": {
+    "items": []
+  },
+  "vehicles": {
+    "items": []
+  },
+  "spells": {
+    "selected": [],
+    "emFormula": {
+      "divisor": 4,
+      "pcCost": 0
+    }
+  },
+  "magicalBonds": [],
+  "magicalBondsCustomName": "",
+  "magicalBondsCustomDescription": "",
+  "specialskills": {
+    "items": []
+  },
+  "enteParams": {
+    "formType": null,
+    "visualEffect": null
+  },
+  "malditoParams": {
+    "magnitude": null,
+    "source": null
+  },
+  "poseidoParams": {
+    "formType": null
+  },
+  "alteradoParams": null,
+  "mutanteParams": null,
+  "divineParams": null,
+  "techParams": {
+    "incomeSource": "agencia_priv"
+  },
+  "exoskeletonArmorConfig": null,
+  "technoSuitStrengthConfig": null,
+  "exoskeletonConfig": "",
+  "magicTableRolls": [],
+  "techModules": [],
+  "cyborgImplants": [],
+  "isParahumanoHybrid": false
 }

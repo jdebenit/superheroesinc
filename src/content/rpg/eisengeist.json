@@ -96,6 +96,15 @@
         "powerMod": 0,
         "otherMod": 0
       }
+    },
+    "manualBonuses": {
+      "Fuerza": 0,
+      "Agilidad": 0,
+      "Constitución": 0,
+      "Inteligencia": 0,
+      "Percepción": 0,
+      "Voluntad": 0,
+      "Apariencia": 0
     }
   },
   "skills": {
@@ -259,7 +268,10 @@
   "background": {
     "prejudiceResistance": 80,
     "economicStatus": "mendigo",
-    "friendsAndAssociates": "solitario"
+    "friendsAndAssociates": "solitario",
+    "items": [],
+    "legalStatus": "sin_antecedentes",
+    "socialStatus": "anonimo"
   },
   "spells": {
     "emFormula": {
@@ -273,38 +285,34 @@
         "id": "absorcion_de_vida",
         "origin": "Sobrenatural",
         "rank": 100,
-        "isCrossType": false,
-        "isCrossOrigin": false,
-        "isCrossOriginMaldito": false,
-        "isCrossOriginDivino": false
+        "customizations": [],
+        "skillValue": 0
       }
     ]
   },
-  "techModules": {
-    "installed": [
-      {
-        "id": "1781810487303",
-        "definitionId": "endomusculos_avanzados",
-        "name": "Endomúsculos avanzados",
-        "location": "Cuerpo completo",
-        "pcCost": 5
-      },
-      {
-        "id": "1781810488567",
-        "definitionId": "endoesqueleto",
-        "name": "Endoesqueleto",
-        "location": "Cuerpo completo",
-        "pcCost": 3
-      },
-      {
-        "id": "1781810510075",
-        "definitionId": "hiperactividad",
-        "name": "Hiperactividad",
-        "location": "Sistema Nervioso",
-        "pcCost": 5
-      }
-    ]
-  },
+  "techModules": [
+    {
+      "id": "1781810487303",
+      "definitionId": "endomusculos_avanzados",
+      "name": "Endomúsculos avanzados",
+      "location": "Cuerpo completo",
+      "pcCost": 5
+    },
+    {
+      "id": "1781810488567",
+      "definitionId": "endoesqueleto",
+      "name": "Endoesqueleto",
+      "location": "Cuerpo completo",
+      "pcCost": 3
+    },
+    {
+      "id": "1781810510075",
+      "definitionId": "hiperactividad",
+      "name": "Hiperactividad",
+      "location": "Sistema Nervioso",
+      "pcCost": 5
+    }
+  ],
   "uiState": {
     "unlockManualCharacteristics": true
   },
@@ -319,5 +327,46 @@
   "meta": {
     "version": "Beta 0.15.3",
     "generator": "SHI Wizard"
-  }
+  },
+  "notes": "",
+  "totalCost": "",
+  "equipment": {
+    "items": []
+  },
+  "weapons": {
+    "items": []
+  },
+  "artifacts": {
+    "items": []
+  },
+  "magicObjects": {
+    "items": []
+  },
+  "vehicles": {
+    "items": []
+  },
+  "magicalBonds": [],
+  "magicalBondsCustomName": "",
+  "magicalBondsCustomDescription": "",
+  "specialskills": {
+    "items": []
+  },
+  "enteParams": {
+    "formType": null,
+    "visualEffect": null
+  },
+  "malditoParams": {
+    "magnitude": null,
+    "source": null
+  },
+  "alteradoParams": null,
+  "mutanteParams": null,
+  "guardianParams": null,
+  "divineParams": null,
+  "exoskeletonArmorConfig": null,
+  "technoSuitStrengthConfig": null,
+  "exoskeletonConfig": "",
+  "magicTableRolls": [],
+  "cyborgImplants": [],
+  "isParahumanoHybrid": false
 }

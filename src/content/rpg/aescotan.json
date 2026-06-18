@@ -109,8 +109,7 @@
         "origin": "Demonio",
         "rank": 21,
         "customizations": [],
-        "skillValue": 0,
-        "selectedOption": "Arma Natural - Garras"
+        "skillValue": 0
       },
       {
         "id": "incremento_vital",
@@ -124,8 +123,7 @@
         "origin": "Demonio",
         "rank": 81,
         "customizations": [],
-        "skillValue": 0,
-        "selectedOption": "Poderes Psíquicos"
+        "skillValue": 0
       }
     ]
   },
@@ -295,9 +293,7 @@
   "exoskeletonArmorConfig": null,
   "technoSuitStrengthConfig": null,
   "magicTableRolls": [],
-  "techModules": {
-    "installed": []
-  },
+  "techModules": [],
   "cyborgImplants": [],
   "isParahumanoHybrid": false
 }

@@ -34,6 +34,7 @@ function initials(name: string): string {
 }
 
 function getCharDisplayName(data: any): string {
+    if (!data) return '(Sin datos)';
     return data.alias || data.name || '(Sin nombre)';
 }
 
@@ -61,12 +62,14 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
                 const parsed = JSON.parse(saved);
                 if (Array.isArray(parsed)) {
                     // MIGRATION: Ensure old stored chars have 'local' source if missing
-                    const migrated = parsed.map((c: any) => ({ ...c, source: 'local' }));
+                    const migrated = parsed
+                        .filter((c: any) => c && c.data)
+                        .map((c: any) => ({ ...c, source: 'local' }));
                     setLocalCharacters(migrated);
 
-                    if (parsed.length > 0 && !selectedId) {
+                    if (migrated.length > 0 && !selectedId) {
                         // Only select if nothing selected yet
-                        setSelectedId(parsed[0].id);
+                        setSelectedId(migrated[0].id);
                     }
                 }
             }
@@ -240,7 +243,7 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
                                 >
                                     <div className="list-item-clickable" onClick={() => setSelectedId(char.id)}>
                                         <div className={`char-avatar ${char.source || 'local'}`}>
-                                            {char.data.icon ? (
+                                            {char.data?.icon ? (
                                                 <img
                                                     src={char.data.icon.startsWith('http') || char.data.icon.startsWith('/') || char.data.icon.startsWith('data:')
                                                         ? char.data.icon
@@ -253,17 +256,17 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
                                         </div>
                                         <div className="list-item-info">
                                             <div className="char-name">
-                                                {char.data.alias ? (
+                                                {char.data?.alias ? (
                                                     <>
                                                         {char.data.alias}
                                                         {char.data.name && <div className="secondary-name">{char.data.name}</div>}
                                                     </>
                                                 ) : (
-                                                    char.data.name
+                                                    char.data?.name || '(Sin nombre)'
                                                 )}
                                             </div>
                                             <div className="char-details">
-                                                Nivel {char.data.level || 1}
+                                                Nivel {char.data?.level || 1}
                                             </div>
                                         </div>
                                     </div>
@@ -333,7 +336,7 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
                                         className={`web-list-item ${selectedId === char.id ? 'active' : ''}`}
                                     >
                                         <div className={`char-avatar web`}>
-                                            {char.data.icon ? (
+                                            {char.data?.icon ? (
                                                 <img
                                                     src={char.data.icon.startsWith('http') || char.data.icon.startsWith('/') || char.data.icon.startsWith('data:')
                                                         ? char.data.icon
@@ -346,17 +349,17 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
                                         </div>
                                         <div className="list-item-info">
                                             <div className="web-char-name">
-                                                {char.data.alias ? (
+                                                {char.data?.alias ? (
                                                     <>
                                                         {char.data.alias}
                                                         {char.data.name && <div className="secondary-name">{char.data.name}</div>}
                                                     </>
                                                 ) : (
-                                                    char.data.name
+                                                    char.data?.name || '(Sin nombre)'
                                                 )}
                                             </div>
                                             <div className="web-char-details">
-                                                Nivel {char.data.level || 1}
+                                                Nivel {char.data?.level || 1}
                                             </div>
                                         </div>
                                         <span title="Ficha Oficial" className="official-badge">🌐</span>
@@ -376,7 +379,7 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
                         <div className="content-header">
                             <h2 className="content-title">
                                 {getCharDisplayName(selectedCharacter.data)}
-                                {selectedCharacter.data.alias && selectedCharacter.data.name && (
+                                {selectedCharacter.data?.alias && selectedCharacter.data?.name && (
                                     <div className="content-subtitle">
                                         {selectedCharacter.data.name}
                                     </div>
@@ -404,24 +407,24 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
                             </div>
                             <div className="summary-grid">
                                 <div>
-                                    <strong>Nivel:</strong> {selectedCharacter.data.level || 1}
+                                    <strong>Nivel:</strong> {selectedCharacter.data?.level || 1}
                                 </div>
                                 <div>
-                                    <strong>Alias:</strong> {selectedCharacter.data.alias || '-'}
+                                    <strong>Alias:</strong> {selectedCharacter.data?.alias || '-'}
                                 </div>
                                 <div>
-                                    <strong>Nombre:</strong> {selectedCharacter.data.name || '-'}
+                                    <strong>Nombre:</strong> {selectedCharacter.data?.name || '-'}
                                 </div>
                                 <div>
-                                    <strong>Puntos de Vida:</strong> {selectedCharacter.data.combatstats?.["Puntos de Vida"] || '-'}
+                                    <strong>Puntos de Vida:</strong> {selectedCharacter.data?.combatstats?.["Puntos de Vida"] || '-'}
                                 </div>
                                 <div>
-                                    <strong>Equilibrio Mental:</strong> {selectedCharacter.data.combatstats?.["Equilibrio Mental"] || '-'}
+                                    <strong>Equilibrio Mental:</strong> {selectedCharacter.data?.combatstats?.["Equilibrio Mental"] || '-'}
                                 </div>
                                 <div>
                                     <strong>Origen:</strong> {selectedCharacter.data?.origin?.items?.[0] ? Object.keys(selectedCharacter.data.origin.items[0])[0] : 'Desconocido'}
                                 </div>
-                                {selectedCharacter.data.meta?.version && (
+                                {selectedCharacter.data?.meta?.version && (
                                     <div>
                                         <strong>Versión Wizard:</strong> <span className="version-badge">{selectedCharacter.data.meta.version}</span>
                                     </div>
