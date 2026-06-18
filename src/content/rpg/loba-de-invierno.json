@@ -180,8 +180,6 @@
         "value": "53%"
       }
     ],
-    "generalManualMods": {},
-    "manualBases": {},
     "selected": {
       "nadar": {
         "isFree": false,
@@ -205,7 +203,6 @@
   "background": {
     "economicStatus": "clase_baja",
     "friendsAndAssociates": "conocido_poderoso",
-    "items": [],
     "prejudiceResistance": 50,
     "legalStatus": "sin_antecedentes",
     "socialStatus": "anonimo"
@@ -216,14 +213,12 @@
         "id": "empatia_animal",
         "origin": "Divino",
         "rank": 1,
-        "customizations": [],
         "skillValue": 0
       },
       {
         "id": "superhabilidad",
         "origin": "OtroDivino",
         "rank": 41,
-        "customizations": [],
         "skillValue": 0
       },
       {
@@ -248,7 +243,6 @@
         "id": "traduccion_de_lenguas",
         "origin": "OtroDivino",
         "rank": 1,
-        "customizations": [],
         "skillValue": 0
       }
     ]
@@ -261,59 +255,11 @@
   },
   "sexualIdentity": "Mujer",
   "profession": "Aventurera",
-  "notes": "",
-  "totalCost": "",
   "level": 1,
-  "equipment": {
-    "items": []
-  },
-  "weapons": {
-    "items": []
-  },
-  "artifacts": {
-    "items": []
-  },
-  "magicObjects": {
-    "items": []
-  },
-  "vehicles": {
-    "items": []
-  },
   "spells": {
-    "selected": [],
     "emFormula": {
       "divisor": 4,
       "pcCost": 0
     }
-  },
-  "magicalBonds": [],
-  "magicalBondsCustomName": "",
-  "magicalBondsCustomDescription": "",
-  "specialskills": {
-    "items": []
-  },
-  "enteParams": {
-    "formType": null,
-    "visualEffect": null
-  },
-  "malditoParams": {
-    "magnitude": null,
-    "source": null
-  },
-  "poseidoParams": {
-    "formType": null
-  },
-  "alteradoParams": null,
-  "mutanteParams": null,
-  "guardianParams": null,
-  "techParams": {
-    "incomeSource": "agencia_priv"
-  },
-  "exoskeletonArmorConfig": null,
-  "technoSuitStrengthConfig": null,
-  "exoskeletonConfig": "",
-  "magicTableRolls": [],
-  "techModules": [],
-  "cyborgImplants": [],
-  "isParahumanoHybrid": false
+  }
 }

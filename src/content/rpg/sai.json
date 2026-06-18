@@ -210,8 +210,6 @@
         "value": "48%"
       }
     ],
-    "generalManualMods": {},
-    "manualBases": {},
     "selected": {
       "artes_marciales": {
         "isFree": false,
@@ -271,7 +269,6 @@
     "economicStatus": "clase_alta",
     "socialStatus": "heroe_pueblo",
     "friendsAndAssociates": "conocido_poderoso",
-    "items": [],
     "legalStatus": "sin_antecedentes"
   },
   "weapons": {
@@ -279,15 +276,11 @@
       {
         "name": "Katana",
         "damage": "3d10+30+5",
-        "dxa": "",
-        "car": "",
-        "notes": "",
         "cost": 0
       },
       {
         "name": "Sai",
         "damage": "2d6+25+5",
-        "dxa": "",
         "car": "2",
         "notes": "+5 a la parada física por cada Sai",
         "cost": 0
@@ -300,14 +293,12 @@
         "id": "incremento_vital",
         "origin": "Mutante",
         "rank": 41,
-        "customizations": [],
         "skillValue": 0
       },
       {
         "id": "invulnerabilidad",
         "origin": "Mutante",
         "rank": 1,
-        "customizations": [],
         "skillValue": 0
       }
     ]
@@ -324,57 +315,11 @@
     "version": "Beta 0.15.1",
     "generator": "SHI Wizard"
   },
-  "notes": "",
-  "totalCost": "",
   "level": 1,
-  "equipment": {
-    "items": []
-  },
-  "artifacts": {
-    "items": []
-  },
-  "magicObjects": {
-    "items": []
-  },
-  "vehicles": {
-    "items": []
-  },
   "spells": {
-    "selected": [],
     "emFormula": {
       "divisor": 4,
       "pcCost": 0
     }
-  },
-  "magicalBonds": [],
-  "magicalBondsCustomName": "",
-  "magicalBondsCustomDescription": "",
-  "specialskills": {
-    "items": []
-  },
-  "enteParams": {
-    "formType": null,
-    "visualEffect": null
-  },
-  "malditoParams": {
-    "magnitude": null,
-    "source": null
-  },
-  "poseidoParams": {
-    "formType": null
-  },
-  "alteradoParams": null,
-  "mutanteParams": null,
-  "guardianParams": null,
-  "divineParams": null,
-  "techParams": {
-    "incomeSource": "agencia_priv"
-  },
-  "exoskeletonArmorConfig": null,
-  "technoSuitStrengthConfig": null,
-  "exoskeletonConfig": "",
-  "magicTableRolls": [],
-  "techModules": [],
-  "cyborgImplants": [],
-  "isParahumanoHybrid": false
+  }
 }

@@ -247,8 +247,6 @@
         "value": "50%"
       }
     ],
-    "generalManualMods": {},
-    "manualBases": {},
     "selected": {
       "robar": {
         "isFree": false,
@@ -350,8 +348,7 @@
         "manualMods": 0,
         "manualBases": 0
       }
-    },
-    "nativeLanguage": ""
+    }
   },
   "background": {
     "prejudiceResistance": 90,
@@ -359,8 +356,7 @@
     "legalStatus": "enemigo_publico",
     "socialStatus": "amenaza_publica",
     "friendsAndAssociates": "conocido_poderoso",
-    "baseCoverage": "independiente_equipada",
-    "items": []
+    "baseCoverage": "independiente_equipada"
   },
   "weapons": {
     "items": [
@@ -369,7 +365,6 @@
         "damage": "3d10 Pot 40",
         "dxa": "2",
         "car": "6",
-        "notes": "",
         "cost": 0
       },
       {
@@ -377,7 +372,6 @@
         "damage": "1d10x2 Pot 26",
         "dxa": "2",
         "car": "6",
-        "notes": "",
         "cost": 0
       }
     ]
@@ -402,61 +396,15 @@
   },
   "profession": "Ladrón",
   "sexualIdentity": "Hombre",
-  "powers": {
-    "selected": []
-  },
   "meta": {
     "version": "Beta 0.15.2",
     "generator": "SHI Wizard"
   },
-  "notes": "",
-  "totalCost": "",
   "level": 1,
-  "equipment": {
-    "items": []
-  },
-  "artifacts": {
-    "items": []
-  },
-  "magicObjects": {
-    "items": []
-  },
   "spells": {
-    "selected": [],
     "emFormula": {
       "divisor": 4,
       "pcCost": 0
     }
-  },
-  "magicalBonds": [],
-  "magicalBondsCustomName": "",
-  "magicalBondsCustomDescription": "",
-  "specialskills": {
-    "items": []
-  },
-  "enteParams": {
-    "formType": null,
-    "visualEffect": null
-  },
-  "malditoParams": {
-    "magnitude": null,
-    "source": null
-  },
-  "poseidoParams": {
-    "formType": null
-  },
-  "alteradoParams": null,
-  "mutanteParams": null,
-  "guardianParams": null,
-  "divineParams": null,
-  "techParams": {
-    "incomeSource": "agencia_priv"
-  },
-  "exoskeletonArmorConfig": null,
-  "technoSuitStrengthConfig": null,
-  "exoskeletonConfig": "",
-  "magicTableRolls": [],
-  "techModules": [],
-  "cyborgImplants": [],
-  "isParahumanoHybrid": false
+  }
 }

@@ -109,7 +109,7 @@ export const initialCharacterState = {
     magicTableRolls: [], // Added for Terrano Magic Table trade-off
     divineParams: null, // Added for Divine origin
     techModules: [],
-    techParams: { incomeSource: 'agencia_priv' }, // Default to 0 PC option
+    techParams: null, // Default to null
     exoskeletonConfig: null,
     exoskeletonArmorConfig: null, // For Tecnoarmadura/Tecnovehiculo
     technoSuitStrengthConfig: null, // For Tecnoarmadura only

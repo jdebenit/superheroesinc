@@ -198,8 +198,6 @@
         "value": "60%"
       }
     ],
-    "generalManualMods": {},
-    "manualBases": {},
     "selected": {
       "nadar": {
         "isFree": false,
@@ -252,7 +250,6 @@
     "prejudiceResistance": 10,
     "economicStatus": "clase_baja",
     "friendsAndAssociates": "solitario",
-    "items": [],
     "legalStatus": "sin_antecedentes",
     "socialStatus": "anonimo"
   },
@@ -295,28 +292,24 @@
         "id": "regeneracion_de_tejidos",
         "origin": "Sobrenatural",
         "rank": 21,
-        "customizations": [],
         "skillValue": 0
       },
       {
         "id": "invulnerabilidad",
         "origin": "Sobrenatural",
         "rank": 1,
-        "customizations": [],
         "skillValue": 0
       },
       {
         "id": "volar",
         "origin": "Guardian",
         "rank": 41,
-        "customizations": [],
         "skillValue": 0
       },
       {
         "id": "supervelocidad",
         "origin": "Guardian",
         "rank": 1,
-        "customizations": [],
         "skillValue": 0
       }
     ]
@@ -335,49 +328,5 @@
     "version": "Beta 0.15.5",
     "generator": "SHI Wizard"
   },
-  "totalCost": "",
-  "level": 1,
-  "weapons": {
-    "items": []
-  },
-  "artifacts": {
-    "items": []
-  },
-  "magicObjects": {
-    "items": []
-  },
-  "vehicles": {
-    "items": []
-  },
-  "magicalBonds": [],
-  "magicalBondsCustomName": "",
-  "magicalBondsCustomDescription": "",
-  "specialskills": {
-    "items": []
-  },
-  "enteParams": {
-    "formType": null,
-    "visualEffect": null
-  },
-  "malditoParams": {
-    "magnitude": null,
-    "source": null
-  },
-  "poseidoParams": {
-    "formType": null
-  },
-  "alteradoParams": null,
-  "mutanteParams": null,
-  "guardianParams": null,
-  "divineParams": null,
-  "techParams": {
-    "incomeSource": "agencia_priv"
-  },
-  "exoskeletonArmorConfig": null,
-  "technoSuitStrengthConfig": null,
-  "exoskeletonConfig": "",
-  "magicTableRolls": [],
-  "techModules": [],
-  "cyborgImplants": [],
-  "isParahumanoHybrid": false
+  "level": 1
 }

@@ -115,28 +115,24 @@
         "id": "superinteligencia",
         "origin": "Alterado",
         "rank": 1,
-        "customizations": [],
         "skillValue": 0
       },
       {
         "id": "supervelocidad",
         "origin": "Alterado",
         "rank": 1,
-        "customizations": [],
         "skillValue": 0
       },
       {
         "id": "control_de_energia",
         "origin": "Alterado",
         "rank": 41,
-        "customizations": [],
         "skillValue": 0
       },
       {
         "id": "campo_de_fuerza",
         "origin": "Alterado",
         "rank": 41,
-        "customizations": [],
         "skillValue": 0
       }
     ]
@@ -215,11 +211,7 @@
         "value": "66%",
         "math": "(2xPER)/3"
       }
-    ],
-    "generalManualMods": {},
-    "manualBases": {},
-    "selected": {},
-    "specified": {}
+    ]
   },
   "weapons": {
     "items": [
@@ -230,65 +222,17 @@
       }
     ]
   },
-  "alias": "",
-  "notes": "",
-  "totalCost": "",
   "background": {
-    "items": [],
     "prejudiceResistance": 50,
     "economicStatus": "clase_media",
     "legalStatus": "sin_antecedentes",
     "socialStatus": "anonimo",
     "friendsAndAssociates": "conocido"
   },
-  "equipment": {
-    "items": []
-  },
-  "artifacts": {
-    "items": []
-  },
-  "magicObjects": {
-    "items": []
-  },
-  "vehicles": {
-    "items": []
-  },
   "spells": {
-    "selected": [],
     "emFormula": {
       "divisor": 4,
       "pcCost": 0
     }
-  },
-  "magicalBonds": [],
-  "magicalBondsCustomName": "",
-  "magicalBondsCustomDescription": "",
-  "specialskills": {
-    "items": []
-  },
-  "enteParams": {
-    "formType": null,
-    "visualEffect": null
-  },
-  "malditoParams": {
-    "magnitude": null,
-    "source": null
-  },
-  "poseidoParams": {
-    "formType": null
-  },
-  "alteradoParams": null,
-  "mutanteParams": null,
-  "guardianParams": null,
-  "divineParams": null,
-  "techParams": {
-    "incomeSource": "agencia_priv"
-  },
-  "exoskeletonConfig": "",
-  "exoskeletonArmorConfig": null,
-  "technoSuitStrengthConfig": null,
-  "magicTableRolls": [],
-  "techModules": [],
-  "cyborgImplants": [],
-  "isParahumanoHybrid": false
+  }
 }

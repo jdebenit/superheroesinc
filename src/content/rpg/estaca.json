@@ -103,14 +103,12 @@
         "id": "absorcion_de_vida",
         "origin": "Vampiro",
         "rank": 21,
-        "customizations": [],
         "skillValue": 0
       },
       {
         "id": "invulnerabilidad",
         "origin": "Vampiro",
         "rank": 81,
-        "customizations": [],
         "skillValue": 0
       }
     ]
@@ -197,74 +195,19 @@
         "name": "Conducir motocicleta",
         "value": "48"
       }
-    ],
-    "generalManualMods": {},
-    "manualBases": {},
-    "selected": {},
-    "specified": {}
+    ]
   },
-  "alias": "",
-  "notes": "",
-  "totalCost": "",
   "background": {
-    "items": [],
     "prejudiceResistance": 50,
     "economicStatus": "clase_media",
     "legalStatus": "sin_antecedentes",
     "socialStatus": "anonimo",
     "friendsAndAssociates": "conocido"
   },
-  "equipment": {
-    "items": []
-  },
-  "weapons": {
-    "items": []
-  },
-  "artifacts": {
-    "items": []
-  },
-  "magicObjects": {
-    "items": []
-  },
-  "vehicles": {
-    "items": []
-  },
   "spells": {
-    "selected": [],
     "emFormula": {
       "divisor": 4,
       "pcCost": 0
     }
-  },
-  "magicalBonds": [],
-  "magicalBondsCustomName": "",
-  "magicalBondsCustomDescription": "",
-  "specialskills": {
-    "items": []
-  },
-  "enteParams": {
-    "formType": null,
-    "visualEffect": null
-  },
-  "malditoParams": {
-    "magnitude": null,
-    "source": null
-  },
-  "poseidoParams": {
-    "formType": null
-  },
-  "alteradoParams": null,
-  "mutanteParams": null,
-  "guardianParams": null,
-  "divineParams": null,
-  "techParams": {
-    "incomeSource": "agencia_priv"
-  },
-  "exoskeletonConfig": "",
-  "exoskeletonArmorConfig": null,
-  "technoSuitStrengthConfig": null,
-  "magicTableRolls": [],
-  "techModules": [],
-  "cyborgImplants": [],
-  "isParahumanoHybrid": false
+  }
 }

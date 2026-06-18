@@ -222,13 +222,11 @@
         "value": "85%"
       }
     ],
-    "generalManualMods": {},
     "manualBases": {
       "investigar": 70,
       "combate": 100,
       "conocimientos": 40
     },
-    "selected": {},
     "specified": {
       "supervivencia_1781034811568": {
         "skillId": "supervivencia",
@@ -318,7 +316,6 @@
     "economicStatus": "clase_baja",
     "socialStatus": "heroe_reconocido",
     "friendsAndAssociates": "grupo_reducido",
-    "items": [],
     "legalStatus": "sin_antecedentes"
   },
   "equipment": {
@@ -336,21 +333,18 @@
         "id": "teleportacion",
         "origin": "Guardian",
         "rank": 71,
-        "customizations": [],
         "skillValue": 0
       },
       {
         "id": "emision_de_energia",
         "origin": "Guardian",
         "rank": 100,
-        "customizations": [],
         "skillValue": 0
       },
       {
         "id": "campo_de_fuerza",
         "origin": "Guardian",
         "rank": 100,
-        "customizations": [],
         "skillValue": 0
       }
     ]
@@ -367,54 +361,10 @@
     "unlockCombatStats": true,
     "unlockOtherStats": true
   },
-  "totalCost": "",
-  "weapons": {
-    "items": []
-  },
-  "artifacts": {
-    "items": []
-  },
-  "magicObjects": {
-    "items": []
-  },
-  "vehicles": {
-    "items": []
-  },
   "spells": {
-    "selected": [],
     "emFormula": {
       "divisor": 4,
       "pcCost": 0
     }
-  },
-  "magicalBonds": [],
-  "magicalBondsCustomName": "",
-  "magicalBondsCustomDescription": "",
-  "specialskills": {
-    "items": []
-  },
-  "enteParams": {
-    "formType": null,
-    "visualEffect": null
-  },
-  "malditoParams": {
-    "magnitude": null,
-    "source": null
-  },
-  "poseidoParams": {
-    "formType": null
-  },
-  "alteradoParams": null,
-  "mutanteParams": null,
-  "divineParams": null,
-  "techParams": {
-    "incomeSource": "agencia_priv"
-  },
-  "exoskeletonArmorConfig": null,
-  "technoSuitStrengthConfig": null,
-  "exoskeletonConfig": "",
-  "magicTableRolls": [],
-  "techModules": [],
-  "cyborgImplants": [],
-  "isParahumanoHybrid": false
+  }
 }

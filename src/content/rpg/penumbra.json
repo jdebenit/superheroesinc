@@ -177,8 +177,6 @@
         "value": "40%"
       }
     ],
-    "generalManualMods": {},
-    "manualBases": {},
     "selected": {
       "magia": {
         "isFree": false,
@@ -196,15 +194,13 @@
         "manualMods": 0,
         "manualBases": 40
       }
-    },
-    "nativeLanguage": ""
+    }
   },
   "background": {
     "prejudiceResistance": 39,
     "economicStatus": "clase_media_alta",
     "legalStatus": "con_antecedentes",
     "friendsAndAssociates": "grupo_reducido",
-    "items": [],
     "socialStatus": "anonimo"
   },
   "magicObjects": {
@@ -254,55 +250,9 @@
   "magicalBondsCustomDescription": "La magia corre por las venas de los De Ugarte desde hace generaciones. Aunque la mayoría de sus miembros ignoraron o reprimieron ese don, algunos llegaron a convertirse en poderosos practicantes de las artes arcanas.\nVerónica heredó esa misma afinidad natural. Desde niña fue capaz de percibir energías, presencias y fenómenos que pasaban desapercibidos para otros. Bajo la tutela de Umbra aprendió a desarrollar un talento que parecía formar parte de ella desde su nacimiento.\nSin embargo, el legado de los De Ugarte no solo transmite poder, también una pesada herencia. Verónica está decidida a demostrar que la misma sangre que dio origen a Umbra puede emplearse para algo mejor.",
   "profession": "Esudiosa de lo Oculto",
   "sexualIdentity": "Mujer",
-  "powers": {
-    "selected": []
-  },
   "meta": {
     "version": "Beta 0.15.1",
     "generator": "SHI Wizard"
   },
-  "notes": "",
-  "totalCost": "",
-  "level": 1,
-  "equipment": {
-    "items": []
-  },
-  "weapons": {
-    "items": []
-  },
-  "artifacts": {
-    "items": []
-  },
-  "vehicles": {
-    "items": []
-  },
-  "magicalBonds": [],
-  "specialskills": {
-    "items": []
-  },
-  "enteParams": {
-    "formType": null,
-    "visualEffect": null
-  },
-  "malditoParams": {
-    "magnitude": null,
-    "source": null
-  },
-  "poseidoParams": {
-    "formType": null
-  },
-  "alteradoParams": null,
-  "mutanteParams": null,
-  "guardianParams": null,
-  "divineParams": null,
-  "techParams": {
-    "incomeSource": "agencia_priv"
-  },
-  "exoskeletonArmorConfig": null,
-  "technoSuitStrengthConfig": null,
-  "exoskeletonConfig": "",
-  "magicTableRolls": [],
-  "techModules": [],
-  "cyborgImplants": [],
-  "isParahumanoHybrid": false
+  "level": 1
 }

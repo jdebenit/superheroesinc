@@ -191,8 +191,6 @@
       "conocimientos": 25,
       "influencia": 20
     },
-    "manualBases": {},
-    "selected": {},
     "specified": {
       "otro_idioma_1781345675218": {
         "skillId": "otro_idioma",
@@ -235,8 +233,7 @@
     "legalStatus": "terrorista",
     "socialStatus": "supervillano",
     "friendsAndAssociates": "conocido_poderoso",
-    "baseCoverage": "independiente_lujo",
-    "items": []
+    "baseCoverage": "independiente_lujo"
   },
   "powers": {
     "selected": [
@@ -244,7 +241,6 @@
         "id": "control_de_la_geodinamica",
         "origin": "Divino",
         "rank": 100,
-        "customizations": [],
         "skillValue": 0
       }
     ]
@@ -263,58 +259,10 @@
     "version": "Beta 0.15.1",
     "generator": "SHI Wizard"
   },
-  "notes": "",
-  "totalCost": "",
-  "equipment": {
-    "items": []
-  },
-  "weapons": {
-    "items": []
-  },
-  "artifacts": {
-    "items": []
-  },
-  "magicObjects": {
-    "items": []
-  },
-  "vehicles": {
-    "items": []
-  },
   "spells": {
-    "selected": [],
     "emFormula": {
       "divisor": 4,
       "pcCost": 0
     }
-  },
-  "magicalBonds": [],
-  "magicalBondsCustomName": "",
-  "magicalBondsCustomDescription": "",
-  "specialskills": {
-    "items": []
-  },
-  "enteParams": {
-    "formType": null,
-    "visualEffect": null
-  },
-  "malditoParams": {
-    "magnitude": null,
-    "source": null
-  },
-  "poseidoParams": {
-    "formType": null
-  },
-  "alteradoParams": null,
-  "mutanteParams": null,
-  "guardianParams": null,
-  "techParams": {
-    "incomeSource": "agencia_priv"
-  },
-  "exoskeletonArmorConfig": null,
-  "technoSuitStrengthConfig": null,
-  "exoskeletonConfig": "",
-  "magicTableRolls": [],
-  "techModules": [],
-  "cyborgImplants": [],
-  "isParahumanoHybrid": false
+  }
 }

@@ -278,8 +278,6 @@
         "value": "70%"
       }
     ],
-    "generalManualMods": {},
-    "manualBases": {},
     "selected": {
       "artes_marciales": {
         "isFree": false,
@@ -428,7 +426,6 @@
     "prejudiceResistance": 30,
     "economicStatus": "clase_media_alta",
     "friendsAndAssociates": "solitario",
-    "items": [],
     "legalStatus": "sin_antecedentes",
     "socialStatus": "anonimo"
   },
@@ -446,25 +443,19 @@
       {
         "name": "DLK Speed",
         "damage": "1d10x2 Pot:62",
-        "dxa": "",
         "car": "40",
-        "notes": "",
         "cost": 0
       },
       {
         "name": "DLK 45",
         "damage": "2d10 Pot:24",
         "dxa": "2",
-        "car": "",
-        "notes": "",
         "cost": 0
       },
       {
         "name": "Cuchillos de Zynex",
         "damage": "1d6+40",
-        "dxa": "",
         "car": "2",
-        "notes": "",
         "cost": 0
       }
     ]
@@ -475,14 +466,12 @@
         "id": "regeneracion_de_tejidos",
         "origin": "Alterado",
         "rank": 1,
-        "customizations": [],
         "skillValue": 0
       },
       {
         "id": "incremento_vital",
         "origin": "Alterado",
         "rank": 41,
-        "customizations": [],
         "skillValue": 0
       }
     ]
@@ -497,52 +486,10 @@
     "version": "Beta 0.15.5",
     "generator": "SHI Wizard"
   },
-  "totalCost": "",
-  "artifacts": {
-    "items": []
-  },
-  "magicObjects": {
-    "items": []
-  },
-  "vehicles": {
-    "items": []
-  },
   "spells": {
-    "selected": [],
     "emFormula": {
       "divisor": 4,
       "pcCost": 0
     }
-  },
-  "magicalBonds": [],
-  "magicalBondsCustomName": "",
-  "magicalBondsCustomDescription": "",
-  "specialskills": {
-    "items": []
-  },
-  "enteParams": {
-    "formType": null,
-    "visualEffect": null
-  },
-  "malditoParams": {
-    "magnitude": null,
-    "source": null
-  },
-  "poseidoParams": {
-    "formType": null
-  },
-  "alteradoParams": null,
-  "mutanteParams": null,
-  "guardianParams": null,
-  "divineParams": null,
-  "techParams": {
-    "incomeSource": "agencia_priv"
-  },
-  "exoskeletonArmorConfig": null,
-  "technoSuitStrengthConfig": null,
-  "exoskeletonConfig": "",
-  "magicTableRolls": [],
-  "techModules": [],
-  "cyborgImplants": [],
-  "isParahumanoHybrid": false
+  }
 }

@@ -195,7 +195,6 @@
       "lanzar": 7,
       "conocimientos": 20
     },
-    "manualBases": {},
     "selected": {
       "arcos": {
         "isFree": false,
@@ -228,7 +227,6 @@
     "prejudiceResistance": 67,
     "economicStatus": "clase_media_alta",
     "friendsAndAssociates": "grupo_reducido",
-    "items": [],
     "legalStatus": "sin_antecedentes",
     "socialStatus": "anonimo"
   },
@@ -245,9 +243,6 @@
     "items": [
       {
         "name": "Arco mágico",
-        "damage": "",
-        "dxa": "",
-        "car": "",
         "notes": "Puede emitir una flecha por asalto con el daño máximo, 2 por asalto con la mitad del daño o 3 por asalto con un tercio del daño",
         "cost": 0
       }
@@ -290,53 +285,11 @@
     "version": "Beta 0.15.1",
     "generator": "SHI Wizard"
   },
-  "notes": "",
-  "totalCost": "",
   "level": 1,
-  "artifacts": {
-    "items": []
-  },
-  "magicObjects": {
-    "items": []
-  },
-  "vehicles": {
-    "items": []
-  },
   "spells": {
-    "selected": [],
     "emFormula": {
       "divisor": 4,
       "pcCost": 0
     }
-  },
-  "magicalBonds": [],
-  "magicalBondsCustomName": "",
-  "magicalBondsCustomDescription": "",
-  "specialskills": {
-    "items": []
-  },
-  "enteParams": {
-    "formType": null,
-    "visualEffect": null
-  },
-  "malditoParams": {
-    "magnitude": null,
-    "source": null
-  },
-  "poseidoParams": {
-    "formType": null
-  },
-  "alteradoParams": null,
-  "mutanteParams": null,
-  "divineParams": null,
-  "techParams": {
-    "incomeSource": "agencia_priv"
-  },
-  "exoskeletonArmorConfig": null,
-  "technoSuitStrengthConfig": null,
-  "exoskeletonConfig": "",
-  "magicTableRolls": [],
-  "techModules": [],
-  "cyborgImplants": [],
-  "isParahumanoHybrid": false
+  }
 }

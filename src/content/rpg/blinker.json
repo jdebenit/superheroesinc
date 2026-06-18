@@ -193,8 +193,6 @@
         "value": "26%"
       }
     ],
-    "generalManualMods": {},
-    "manualBases": {},
     "selected": {
       "computadoras": {
         "isFree": false,
@@ -240,7 +238,6 @@
     "legalStatus": "terrorista",
     "socialStatus": "supervillano",
     "friendsAndAssociates": "solo_familia",
-    "items": [],
     "prejudiceResistance": 50
   },
   "powers": {
@@ -274,8 +271,7 @@
     ]
   },
   "alteradoParams": {
-    "agent": "mutagen",
-    "sequels": []
+    "agent": "mutagen"
   },
   "sexualIdentity": "Mujer",
   "profession": "Terrorista",
@@ -283,57 +279,10 @@
     "version": "Beta 0.15.3",
     "generator": "SHI Wizard"
   },
-  "totalCost": "",
-  "equipment": {
-    "items": []
-  },
-  "weapons": {
-    "items": []
-  },
-  "artifacts": {
-    "items": []
-  },
-  "magicObjects": {
-    "items": []
-  },
-  "vehicles": {
-    "items": []
-  },
   "spells": {
-    "selected": [],
     "emFormula": {
       "divisor": 4,
       "pcCost": 0
     }
-  },
-  "magicalBonds": [],
-  "magicalBondsCustomName": "",
-  "magicalBondsCustomDescription": "",
-  "specialskills": {
-    "items": []
-  },
-  "enteParams": {
-    "formType": null,
-    "visualEffect": null
-  },
-  "malditoParams": {
-    "magnitude": null,
-    "source": null
-  },
-  "poseidoParams": {
-    "formType": null
-  },
-  "mutanteParams": null,
-  "guardianParams": null,
-  "divineParams": null,
-  "techParams": {
-    "incomeSource": "agencia_priv"
-  },
-  "exoskeletonArmorConfig": null,
-  "technoSuitStrengthConfig": null,
-  "exoskeletonConfig": "",
-  "magicTableRolls": [],
-  "techModules": [],
-  "cyborgImplants": [],
-  "isParahumanoHybrid": false
+  }
 }

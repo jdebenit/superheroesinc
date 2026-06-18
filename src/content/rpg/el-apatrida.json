@@ -242,8 +242,6 @@
         "value": "50%"
       }
     ],
-    "generalManualMods": {},
-    "manualBases": {},
     "selected": {
       "artes_marciales": {
         "isFree": false,
@@ -335,16 +333,14 @@
         "manualMods": 0,
         "manualBases": 0
       }
-    },
-    "nativeLanguage": ""
+    }
   },
   "background": {
     "prejudiceResistance": 99,
     "economicStatus": "clase_alta",
     "legalStatus": "enemigo_publico",
     "socialStatus": "supervillano",
-    "friendsAndAssociates": "conocido_poderoso",
-    "items": []
+    "friendsAndAssociates": "conocido_poderoso"
   },
   "equipment": {
     "items": [
@@ -360,9 +356,6 @@
       {
         "name": "Katana",
         "damage": "3d10+30+15",
-        "dxa": "",
-        "car": "",
-        "notes": "",
         "cost": 0
       },
       {
@@ -370,15 +363,12 @@
         "damage": "1d10+3 + P75",
         "dxa": "1",
         "car": "100",
-        "notes": "",
         "cost": 0
       },
       {
         "name": "Pistola comb Pot 38",
         "damage": "2d10 + P38",
         "dxa": "3",
-        "car": "",
-        "notes": "",
         "cost": 0
       }
     ]
@@ -388,7 +378,6 @@
       {
         "name": "Chip intracraneal amortiguador mental",
         "reliability": "100%",
-        "value": "",
         "cost": 24,
         "notes": "El portador recibe los beneficios del poder Invulnerabilidad a poderes psíquicos a rango alto."
       }
@@ -400,21 +389,18 @@
         "id": "superagilidad",
         "origin": "Alterado",
         "rank": 1,
-        "customizations": [],
         "skillValue": 0
       },
       {
         "id": "superfuerza",
         "origin": "Alterado",
         "rank": 1,
-        "customizations": [],
         "skillValue": 0
       },
       {
         "id": "superconstitucion",
         "origin": "Alterado",
         "rank": 1,
-        "customizations": [],
         "skillValue": 0
       }
     ]
@@ -442,49 +428,10 @@
     "version": "Beta 0.15.1",
     "generator": "SHI Wizard"
   },
-  "notes": "",
-  "totalCost": "",
-  "magicObjects": {
-    "items": []
-  },
-  "vehicles": {
-    "items": []
-  },
   "spells": {
-    "selected": [],
     "emFormula": {
       "divisor": 4,
       "pcCost": 0
     }
-  },
-  "magicalBonds": [],
-  "magicalBondsCustomName": "",
-  "magicalBondsCustomDescription": "",
-  "specialskills": {
-    "items": []
-  },
-  "enteParams": {
-    "formType": null,
-    "visualEffect": null
-  },
-  "malditoParams": {
-    "magnitude": null,
-    "source": null
-  },
-  "poseidoParams": {
-    "formType": null
-  },
-  "mutanteParams": null,
-  "guardianParams": null,
-  "divineParams": null,
-  "techParams": {
-    "incomeSource": "agencia_priv"
-  },
-  "exoskeletonArmorConfig": null,
-  "technoSuitStrengthConfig": null,
-  "exoskeletonConfig": "",
-  "magicTableRolls": [],
-  "techModules": [],
-  "cyborgImplants": [],
-  "isParahumanoHybrid": false
+  }
 }

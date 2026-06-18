@@ -196,9 +196,6 @@
         "value": "33%"
       }
     ],
-    "generalManualMods": {},
-    "manualBases": {},
-    "selected": {},
     "specified": {
       "otro_idioma_1780843698981": {
         "skillId": "otro_idioma",
@@ -248,7 +245,6 @@
     "economicStatus": "clase_media_alta",
     "socialStatus": "heroe_pueblo",
     "friendsAndAssociates": "solo_familia",
-    "items": [],
     "legalStatus": "sin_antecedentes"
   },
   "weapons": {
@@ -256,8 +252,6 @@
       {
         "name": "Guanteletes de Uru",
         "damage": "1d100+75+40",
-        "dxa": "",
-        "car": "",
         "notes": "Es capaz de intercambiar un punto de vida por 2 puntos de daño electrico para añadirlo al daño creado al golpear con los guanteletes",
         "cost": 0
       }
@@ -269,21 +263,18 @@
         "id": "superfuerza",
         "origin": "Guardian",
         "rank": 1,
-        "customizations": [],
         "skillValue": 0
       },
       {
         "id": "superconstitucion",
         "origin": "Guardian",
         "rank": 1,
-        "customizations": [],
         "skillValue": 0
       },
       {
         "id": "incremento_vital",
         "origin": "Guardian",
         "rank": 1,
-        "customizations": [],
         "skillValue": 0
       }
     ]
@@ -296,55 +287,11 @@
   },
   "sexualIdentity": "Mujer",
   "profession": "Lingüista en la Universidad",
-  "totalCost": "",
   "level": 1,
-  "equipment": {
-    "items": []
-  },
-  "artifacts": {
-    "items": []
-  },
-  "magicObjects": {
-    "items": []
-  },
-  "vehicles": {
-    "items": []
-  },
   "spells": {
-    "selected": [],
     "emFormula": {
       "divisor": 4,
       "pcCost": 0
     }
-  },
-  "magicalBonds": [],
-  "magicalBondsCustomName": "",
-  "magicalBondsCustomDescription": "",
-  "specialskills": {
-    "items": []
-  },
-  "enteParams": {
-    "formType": null,
-    "visualEffect": null
-  },
-  "malditoParams": {
-    "magnitude": null,
-    "source": null
-  },
-  "poseidoParams": {
-    "formType": null
-  },
-  "alteradoParams": null,
-  "mutanteParams": null,
-  "divineParams": null,
-  "techParams": {
-    "incomeSource": "agencia_priv"
-  },
-  "exoskeletonArmorConfig": null,
-  "technoSuitStrengthConfig": null,
-  "exoskeletonConfig": "",
-  "magicTableRolls": [],
-  "techModules": [],
-  "cyborgImplants": [],
-  "isParahumanoHybrid": false
+  }
 }

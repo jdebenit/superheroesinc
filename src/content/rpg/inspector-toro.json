@@ -183,11 +183,7 @@
         "name": "Arma especial: Cuernos",
         "value": "76%"
       }
-    ],
-    "generalManualMods": {},
-    "manualBases": {},
-    "selected": {},
-    "specified": {}
+    ]
   },
   "equipment": {
     "items": [
@@ -202,80 +198,28 @@
       {
         "name": "Escopeta POW E9",
         "damage": "3d10+Pot 40",
-        "dxa": "2",
-        "car": "",
-        "notes": ""
+        "dxa": "2"
       },
       {
         "name": "Cuchillo de combate",
-        "damage": "2d6+30+Mod.Fue",
-        "dxa": "",
-        "car": "",
-        "notes": ""
+        "damage": "2d6+30+Mod.Fue"
       }
     ]
   },
   "notes": [
     "No se fía de los 'héroes' con capa"
   ],
-  "powers": {
-    "selected": []
-  },
-  "alias": "",
-  "totalCost": "",
   "background": {
-    "items": [],
     "prejudiceResistance": 50,
     "economicStatus": "clase_media",
     "legalStatus": "sin_antecedentes",
     "socialStatus": "anonimo",
     "friendsAndAssociates": "conocido"
   },
-  "artifacts": {
-    "items": []
-  },
-  "magicObjects": {
-    "items": []
-  },
-  "vehicles": {
-    "items": []
-  },
   "spells": {
-    "selected": [],
     "emFormula": {
       "divisor": 4,
       "pcCost": 0
     }
-  },
-  "magicalBonds": [],
-  "magicalBondsCustomName": "",
-  "magicalBondsCustomDescription": "",
-  "specialskills": {
-    "items": []
-  },
-  "enteParams": {
-    "formType": null,
-    "visualEffect": null
-  },
-  "malditoParams": {
-    "magnitude": null,
-    "source": null
-  },
-  "poseidoParams": {
-    "formType": null
-  },
-  "alteradoParams": null,
-  "mutanteParams": null,
-  "guardianParams": null,
-  "divineParams": null,
-  "techParams": {
-    "incomeSource": "agencia_priv"
-  },
-  "exoskeletonConfig": "",
-  "exoskeletonArmorConfig": null,
-  "technoSuitStrengthConfig": null,
-  "magicTableRolls": [],
-  "techModules": [],
-  "cyborgImplants": [],
-  "isParahumanoHybrid": false
+  }
 }

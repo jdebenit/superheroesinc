@@ -207,8 +207,6 @@
         "value": "20%"
       }
     ],
-    "generalManualMods": {},
-    "manualBases": {},
     "selected": {
       "armas_cortas": {
         "isFree": false,
@@ -269,7 +267,6 @@
     "prejudiceResistance": 80,
     "economicStatus": "mendigo",
     "friendsAndAssociates": "solitario",
-    "items": [],
     "legalStatus": "sin_antecedentes",
     "socialStatus": "anonimo"
   },
@@ -285,7 +282,6 @@
         "id": "absorcion_de_vida",
         "origin": "Sobrenatural",
         "rank": 100,
-        "customizations": [],
         "skillValue": 0
       }
     ]
@@ -327,46 +323,5 @@
   "meta": {
     "version": "Beta 0.15.3",
     "generator": "SHI Wizard"
-  },
-  "notes": "",
-  "totalCost": "",
-  "equipment": {
-    "items": []
-  },
-  "weapons": {
-    "items": []
-  },
-  "artifacts": {
-    "items": []
-  },
-  "magicObjects": {
-    "items": []
-  },
-  "vehicles": {
-    "items": []
-  },
-  "magicalBonds": [],
-  "magicalBondsCustomName": "",
-  "magicalBondsCustomDescription": "",
-  "specialskills": {
-    "items": []
-  },
-  "enteParams": {
-    "formType": null,
-    "visualEffect": null
-  },
-  "malditoParams": {
-    "magnitude": null,
-    "source": null
-  },
-  "alteradoParams": null,
-  "mutanteParams": null,
-  "guardianParams": null,
-  "divineParams": null,
-  "exoskeletonArmorConfig": null,
-  "technoSuitStrengthConfig": null,
-  "exoskeletonConfig": "",
-  "magicTableRolls": [],
-  "cyborgImplants": [],
-  "isParahumanoHybrid": false
+  }
 }

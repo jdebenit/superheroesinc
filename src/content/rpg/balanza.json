@@ -223,14 +223,12 @@
         "manualMods": 0,
         "manualBases": 45
       }
-    },
-    "nativeLanguage": ""
+    }
   },
   "background": {
     "prejudiceResistance": 30,
     "socialStatus": "heroe_pueblo",
     "friendsAndAssociates": "conocido_poderoso",
-    "items": [],
     "economicStatus": "clase_media",
     "legalStatus": "sin_antecedentes"
   },
@@ -240,14 +238,12 @@
         "id": "superhabilidad",
         "origin": "Parahumano",
         "rank": 81,
-        "customizations": [],
         "skillValue": 0
       },
       {
         "id": "multiformidad",
         "origin": "Alterado",
         "rank": 21,
-        "customizations": [],
         "skillValue": 0
       }
     ]
@@ -264,60 +260,11 @@
     "version": "Beta 0.15.1",
     "generator": "SHI Wizard"
   },
-  "notes": "",
-  "totalCost": "",
   "level": 1,
-  "equipment": {
-    "items": []
-  },
-  "weapons": {
-    "items": []
-  },
-  "artifacts": {
-    "items": []
-  },
-  "magicObjects": {
-    "items": []
-  },
-  "vehicles": {
-    "items": []
-  },
   "spells": {
-    "selected": [],
     "emFormula": {
       "divisor": 4,
       "pcCost": 0
     }
-  },
-  "magicalBonds": [],
-  "magicalBondsCustomName": "",
-  "magicalBondsCustomDescription": "",
-  "specialskills": {
-    "items": []
-  },
-  "enteParams": {
-    "formType": null,
-    "visualEffect": null
-  },
-  "malditoParams": {
-    "magnitude": null,
-    "source": null
-  },
-  "poseidoParams": {
-    "formType": null
-  },
-  "alteradoParams": null,
-  "mutanteParams": null,
-  "guardianParams": null,
-  "divineParams": null,
-  "techParams": {
-    "incomeSource": "agencia_priv"
-  },
-  "exoskeletonArmorConfig": null,
-  "technoSuitStrengthConfig": null,
-  "exoskeletonConfig": "",
-  "magicTableRolls": [],
-  "techModules": [],
-  "cyborgImplants": [],
-  "isParahumanoHybrid": false
+  }
 }

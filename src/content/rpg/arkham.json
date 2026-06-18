@@ -105,48 +105,39 @@
     "selected": [
       {
         "id": "abrir_portales",
-        "rank": 5,
-        "selectedOption": ""
+        "rank": 5
       },
       {
         "id": "escudos_misticos",
-        "rank": 10,
-        "selectedOption": ""
+        "rank": 10
       },
       {
         "id": "proyeccion_del_cuerpo_astral",
-        "rank": 1,
-        "selectedOption": ""
+        "rank": 1
       },
       {
         "id": "crear_ilusiones",
-        "rank": 5,
-        "selectedOption": ""
+        "rank": 5
       },
       {
         "id": "percepcion_magica",
-        "rank": 1,
-        "selectedOption": ""
+        "rank": 1
       },
       {
         "id": "pseudo_psi",
-        "rank": 4,
-        "selectedOption": ""
+        "rank": 4
       },
       {
         "id": "revivir_muertos",
-        "rank": 5,
-        "selectedOption": ""
+        "rank": 5
       },
       {
         "id": "animar_objetos",
-        "rank": 4,
-        "selectedOption": ""
+        "rank": 4
       },
       {
         "id": "metamorfosis_oscura",
-        "rank": 4,
-        "selectedOption": ""
+        "rank": 4
       }
     ]
   },
@@ -156,14 +147,12 @@
         "id": "empatia_mental",
         "origin": "Mago",
         "rank": 100,
-        "customizations": [],
         "skillValue": 0
       },
       {
         "id": "superinteligencia",
         "origin": "Mago",
         "rank": 1,
-        "customizations": [],
         "skillValue": 0
       }
     ]
@@ -246,67 +235,13 @@
         "value": "75%",
         "math": "(INT/3)"
       }
-    ],
-    "generalManualMods": {},
-    "manualBases": {},
-    "selected": {},
-    "specified": {}
+    ]
   },
-  "alias": "",
-  "notes": "",
-  "totalCost": "",
   "background": {
-    "items": [],
     "prejudiceResistance": 50,
     "economicStatus": "clase_media",
     "legalStatus": "sin_antecedentes",
     "socialStatus": "anonimo",
     "friendsAndAssociates": "conocido"
-  },
-  "equipment": {
-    "items": []
-  },
-  "weapons": {
-    "items": []
-  },
-  "artifacts": {
-    "items": []
-  },
-  "magicObjects": {
-    "items": []
-  },
-  "vehicles": {
-    "items": []
-  },
-  "magicalBonds": [],
-  "magicalBondsCustomName": "",
-  "magicalBondsCustomDescription": "",
-  "specialskills": {
-    "items": []
-  },
-  "enteParams": {
-    "formType": null,
-    "visualEffect": null
-  },
-  "malditoParams": {
-    "magnitude": null,
-    "source": null
-  },
-  "poseidoParams": {
-    "formType": null
-  },
-  "alteradoParams": null,
-  "mutanteParams": null,
-  "guardianParams": null,
-  "divineParams": null,
-  "techParams": {
-    "incomeSource": "agencia_priv"
-  },
-  "exoskeletonConfig": "",
-  "exoskeletonArmorConfig": null,
-  "technoSuitStrengthConfig": null,
-  "magicTableRolls": [],
-  "techModules": [],
-  "cyborgImplants": [],
-  "isParahumanoHybrid": false
+  }
 }

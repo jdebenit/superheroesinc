@@ -172,8 +172,6 @@
         "value": "65%"
       }
     ],
-    "generalManualMods": {},
-    "manualBases": {},
     "selected": {
       "magia": {
         "isFree": false,
@@ -181,16 +179,13 @@
         "manualMods": 0,
         "manualBases": 0
       }
-    },
-    "specified": {},
-    "nativeLanguage": ""
+    }
   },
   "background": {
     "prejudiceResistance": 96,
     "economicStatus": "mendigo",
     "socialStatus": "amenaza_publica",
     "friendsAndAssociates": "solitario",
-    "items": [],
     "legalStatus": "sin_antecedentes"
   },
   "spells": {
@@ -228,21 +223,18 @@
         "id": "vincular",
         "origin": "Sobrenatural",
         "rank": 41,
-        "customizations": [],
         "skillValue": 65
       },
       {
         "id": "telequinesis",
         "origin": "Otro",
         "rank": 1,
-        "customizations": [],
         "skillValue": 75
       },
       {
         "id": "agresion_psionica",
         "origin": "Otro",
         "rank": 1,
-        "customizations": [],
         "skillValue": 70
       }
     ]
@@ -255,50 +247,5 @@
   "meta": {
     "version": "Beta 0.15.1",
     "generator": "SHI Wizard"
-  },
-  "notes": "",
-  "totalCost": "",
-  "equipment": {
-    "items": []
-  },
-  "weapons": {
-    "items": []
-  },
-  "artifacts": {
-    "items": []
-  },
-  "magicObjects": {
-    "items": []
-  },
-  "vehicles": {
-    "items": []
-  },
-  "magicalBonds": [],
-  "magicalBondsCustomName": "",
-  "magicalBondsCustomDescription": "",
-  "specialskills": {
-    "items": []
-  },
-  "enteParams": {
-    "formType": null,
-    "visualEffect": null
-  },
-  "malditoParams": {
-    "magnitude": null,
-    "source": null
-  },
-  "alteradoParams": null,
-  "mutanteParams": null,
-  "guardianParams": null,
-  "divineParams": null,
-  "techParams": {
-    "incomeSource": "agencia_priv"
-  },
-  "exoskeletonArmorConfig": null,
-  "technoSuitStrengthConfig": null,
-  "exoskeletonConfig": "",
-  "magicTableRolls": [],
-  "techModules": [],
-  "cyborgImplants": [],
-  "isParahumanoHybrid": false
+  }
 }

@@ -177,8 +177,6 @@
         "value": "23%"
       }
     ],
-    "generalManualMods": {},
-    "manualBases": {},
     "selected": {
       "armas_largas": {
         "isFree": false,
@@ -196,16 +194,14 @@
         "manualMods": 0,
         "manualBases": 23
       }
-    },
-    "nativeLanguage": ""
+    }
   },
   "background": {
     "prejudiceResistance": 95,
     "economicStatus": "mendigo",
     "legalStatus": "terrorista",
     "socialStatus": "supervillano",
-    "friendsAndAssociates": "solitario",
-    "items": []
+    "friendsAndAssociates": "solitario"
   },
   "powers": {
     "selected": [
@@ -213,14 +209,12 @@
         "id": "control_del_clima",
         "origin": "Mutante",
         "rank": 65,
-        "customizations": [],
         "skillValue": 0
       },
       {
         "id": "volar",
         "origin": "Mutante",
         "rank": 65,
-        "customizations": [],
         "skillValue": 55
       }
     ]
@@ -235,59 +229,10 @@
     "version": "Beta 0.15.3",
     "generator": "SHI Wizard"
   },
-  "notes": "",
-  "totalCost": "",
-  "equipment": {
-    "items": []
-  },
-  "weapons": {
-    "items": []
-  },
-  "artifacts": {
-    "items": []
-  },
-  "magicObjects": {
-    "items": []
-  },
-  "vehicles": {
-    "items": []
-  },
   "spells": {
-    "selected": [],
     "emFormula": {
       "divisor": 4,
       "pcCost": 0
     }
-  },
-  "magicalBonds": [],
-  "magicalBondsCustomName": "",
-  "magicalBondsCustomDescription": "",
-  "specialskills": {
-    "items": []
-  },
-  "enteParams": {
-    "formType": null,
-    "visualEffect": null
-  },
-  "malditoParams": {
-    "magnitude": null,
-    "source": null
-  },
-  "poseidoParams": {
-    "formType": null
-  },
-  "alteradoParams": null,
-  "mutanteParams": null,
-  "guardianParams": null,
-  "divineParams": null,
-  "techParams": {
-    "incomeSource": "agencia_priv"
-  },
-  "exoskeletonArmorConfig": null,
-  "technoSuitStrengthConfig": null,
-  "exoskeletonConfig": "",
-  "magicTableRolls": [],
-  "techModules": [],
-  "cyborgImplants": [],
-  "isParahumanoHybrid": false
+  }
 }

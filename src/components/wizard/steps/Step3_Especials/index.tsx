@@ -192,7 +192,7 @@ export default function Step3_Especials({ data, onChange, onShowToast, onShowHel
             {isTecnologico && (
                 <TechnologicalSection
                     techParams={data.techParams}
-                    onChange={(params) => onChange({ ...data, techParams: { ...data.techParams, ...params } })}
+                    onChange={(params) => onChange({ ...data, techParams: { ...(data.techParams || {}), ...params } })}
                 />
             )}
 

@@ -228,11 +228,7 @@
         "name": "Comp. / Comun.",
         "value": "70%"
       }
-    ],
-    "generalManualMods": {},
-    "manualBases": {},
-    "selected": {},
-    "specified": {}
+    ]
   },
   "equipment": {
     "items": [
@@ -255,71 +251,21 @@
       {
         "name": "Mandoble mágico",
         "damage": "4d10+65+Mod Fue.",
-        "dxa": "",
-        "car": "",
         "notes": "Puede elegir no matar con el y solo deja inconsciente al objetivo"
       }
     ]
   },
-  "powers": {
-    "selected": []
-  },
-  "alias": "",
-  "notes": "",
-  "totalCost": "",
   "background": {
-    "items": [],
     "prejudiceResistance": 50,
     "economicStatus": "clase_media",
     "legalStatus": "sin_antecedentes",
     "socialStatus": "anonimo",
     "friendsAndAssociates": "conocido"
   },
-  "artifacts": {
-    "items": []
-  },
-  "magicObjects": {
-    "items": []
-  },
-  "vehicles": {
-    "items": []
-  },
   "spells": {
-    "selected": [],
     "emFormula": {
       "divisor": 4,
       "pcCost": 0
     }
-  },
-  "magicalBonds": [],
-  "magicalBondsCustomName": "",
-  "magicalBondsCustomDescription": "",
-  "specialskills": {
-    "items": []
-  },
-  "enteParams": {
-    "formType": null,
-    "visualEffect": null
-  },
-  "malditoParams": {
-    "magnitude": null,
-    "source": null
-  },
-  "poseidoParams": {
-    "formType": null
-  },
-  "alteradoParams": null,
-  "mutanteParams": null,
-  "guardianParams": null,
-  "divineParams": null,
-  "techParams": {
-    "incomeSource": "agencia_priv"
-  },
-  "exoskeletonConfig": "",
-  "exoskeletonArmorConfig": null,
-  "technoSuitStrengthConfig": null,
-  "magicTableRolls": [],
-  "techModules": [],
-  "cyborgImplants": [],
-  "isParahumanoHybrid": false
+  }
 }

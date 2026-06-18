@@ -134,6 +134,21 @@ export function useStep3Logic(data: any, onChange: (updates: any) => void, onSho
             });
         }
     }, [hasEM, isMago, isElfoMagico, isHadaEter, emFormula.divisor, data.attributes, selectedPowers]);
+ 
+    // Auto-initialize and cleanup techParams based on isTecnologico
+    useEffect(() => {
+        if (isTecnologico && !data.techParams) {
+            onChange({
+                ...data,
+                techParams: { incomeSource: 'agencia_priv' }
+            });
+        } else if (!isTecnologico && data.techParams !== null) {
+            onChange({
+                ...data,
+                techParams: null
+            });
+        }
+    }, [isTecnologico, data.techParams]);
 
     // Auto-select powers
     useEffect(() => {

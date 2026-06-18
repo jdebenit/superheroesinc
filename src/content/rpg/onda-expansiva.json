@@ -193,8 +193,6 @@
         "value": "70%"
       }
     ],
-    "generalManualMods": {},
-    "manualBases": {},
     "selected": {
       "mecanica": {
         "isFree": false,
@@ -244,7 +242,6 @@
     "economicStatus": "clase_baja",
     "socialStatus": "heroe_reconocido",
     "friendsAndAssociates": "lazos_todos",
-    "items": [],
     "legalStatus": "sin_antecedentes"
   },
   "powers": {
@@ -253,21 +250,18 @@
         "id": "absorcion_de_energia",
         "origin": "Alterado",
         "rank": 100,
-        "customizations": [],
         "skillValue": 0
       },
       {
         "id": "superconstitucion",
         "origin": "Alterado",
         "rank": 1,
-        "customizations": [],
         "skillValue": 0
       },
       {
         "id": "superfuerza",
         "origin": "Alterado",
         "rank": 1,
-        "customizations": [],
         "skillValue": 0
       }
     ]
@@ -287,57 +281,10 @@
     "version": "Beta 0.15.5",
     "generator": "SHI Wizard"
   },
-  "totalCost": "",
-  "equipment": {
-    "items": []
-  },
-  "weapons": {
-    "items": []
-  },
-  "artifacts": {
-    "items": []
-  },
-  "magicObjects": {
-    "items": []
-  },
-  "vehicles": {
-    "items": []
-  },
   "spells": {
-    "selected": [],
     "emFormula": {
       "divisor": 4,
       "pcCost": 0
     }
-  },
-  "magicalBonds": [],
-  "magicalBondsCustomName": "",
-  "magicalBondsCustomDescription": "",
-  "specialskills": {
-    "items": []
-  },
-  "enteParams": {
-    "formType": null,
-    "visualEffect": null
-  },
-  "malditoParams": {
-    "magnitude": null,
-    "source": null
-  },
-  "poseidoParams": {
-    "formType": null
-  },
-  "mutanteParams": null,
-  "guardianParams": null,
-  "divineParams": null,
-  "techParams": {
-    "incomeSource": "agencia_priv"
-  },
-  "exoskeletonArmorConfig": null,
-  "technoSuitStrengthConfig": null,
-  "exoskeletonConfig": "",
-  "magicTableRolls": [],
-  "techModules": [],
-  "cyborgImplants": [],
-  "isParahumanoHybrid": false
+  }
 }

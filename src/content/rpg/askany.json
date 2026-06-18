@@ -121,8 +121,7 @@
     "selected": [
       {
         "id": "escudos_misticos",
-        "rank": 5,
-        "selectedOption": ""
+        "rank": 5
       },
       {
         "id": "invocar_elemento",
@@ -131,23 +130,19 @@
       },
       {
         "id": "curacion",
-        "rank": 2,
-        "selectedOption": ""
+        "rank": 2
       },
       {
         "id": "pseudo_psi",
-        "rank": 4,
-        "selectedOption": ""
+        "rank": 4
       },
       {
         "id": "paralizar",
-        "rank": 4,
-        "selectedOption": ""
+        "rank": 4
       },
       {
         "id": "abrir_portales",
-        "rank": 4,
-        "selectedOption": ""
+        "rank": 4
       }
     ]
   },
@@ -157,14 +152,12 @@
         "id": "superinteligencia",
         "origin": "Semidios",
         "rank": 1,
-        "customizations": [],
         "skillValue": 0
       },
       {
         "id": "supervoluntad",
         "origin": "Semidios",
         "rank": 1,
-        "customizations": [],
         "skillValue": 0
       }
     ]
@@ -252,67 +245,13 @@
         "value": "47%",
         "math": "(INT/3)"
       }
-    ],
-    "generalManualMods": {},
-    "manualBases": {},
-    "selected": {},
-    "specified": {}
+    ]
   },
-  "alias": "",
-  "notes": "",
-  "totalCost": "",
   "background": {
-    "items": [],
     "prejudiceResistance": 50,
     "economicStatus": "clase_media",
     "legalStatus": "sin_antecedentes",
     "socialStatus": "anonimo",
     "friendsAndAssociates": "conocido"
-  },
-  "equipment": {
-    "items": []
-  },
-  "weapons": {
-    "items": []
-  },
-  "artifacts": {
-    "items": []
-  },
-  "magicObjects": {
-    "items": []
-  },
-  "vehicles": {
-    "items": []
-  },
-  "magicalBonds": [],
-  "magicalBondsCustomName": "",
-  "magicalBondsCustomDescription": "",
-  "specialskills": {
-    "items": []
-  },
-  "enteParams": {
-    "formType": null,
-    "visualEffect": null
-  },
-  "malditoParams": {
-    "magnitude": null,
-    "source": null
-  },
-  "poseidoParams": {
-    "formType": null
-  },
-  "alteradoParams": null,
-  "mutanteParams": null,
-  "guardianParams": null,
-  "divineParams": null,
-  "techParams": {
-    "incomeSource": "agencia_priv"
-  },
-  "exoskeletonConfig": "",
-  "exoskeletonArmorConfig": null,
-  "technoSuitStrengthConfig": null,
-  "magicTableRolls": [],
-  "techModules": [],
-  "cyborgImplants": [],
-  "isParahumanoHybrid": false
+  }
 }

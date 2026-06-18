@@ -219,7 +219,6 @@
         "value": "82%"
       }
     ],
-    "generalManualMods": {},
     "manualBases": {
       "influencia": 100,
       "conocimientos": 50,
@@ -311,7 +310,6 @@
     "prejudiceResistance": 96,
     "economicStatus": "clase_alta",
     "friendsAndAssociates": "conocido_poderoso",
-    "items": [],
     "legalStatus": "sin_antecedentes",
     "socialStatus": "anonimo"
   },
@@ -371,56 +369,8 @@
     "unlockCombatStats": true,
     "unlockOtherStats": true
   },
-  "powers": {
-    "selected": []
-  },
   "meta": {
     "version": "Beta 0.15.2",
     "generator": "SHI Wizard"
-  },
-  "notes": "",
-  "totalCost": "",
-  "equipment": {
-    "items": []
-  },
-  "weapons": {
-    "items": []
-  },
-  "artifacts": {
-    "items": []
-  },
-  "magicObjects": {
-    "items": []
-  },
-  "vehicles": {
-    "items": []
-  },
-  "magicalBonds": [],
-  "specialskills": {
-    "items": []
-  },
-  "enteParams": {
-    "formType": null,
-    "visualEffect": null
-  },
-  "malditoParams": {
-    "magnitude": null,
-    "source": null
-  },
-  "poseidoParams": {
-    "formType": null
-  },
-  "alteradoParams": null,
-  "mutanteParams": null,
-  "guardianParams": null,
-  "divineParams": null,
-  "techParams": {
-    "incomeSource": "agencia_priv"
-  },
-  "exoskeletonArmorConfig": null,
-  "technoSuitStrengthConfig": null,
-  "exoskeletonConfig": "",
-  "techModules": [],
-  "cyborgImplants": [],
-  "isParahumanoHybrid": false
+  }
 }

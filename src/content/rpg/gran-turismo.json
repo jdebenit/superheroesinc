@@ -184,7 +184,6 @@
     "generalManualMods": {
       "trepar": 0
     },
-    "manualBases": {},
     "selected": {
       "mecanica": {
         "isFree": false,
@@ -218,8 +217,7 @@
     "economicStatus": "clase_alta",
     "legalStatus": "con_antecedentes",
     "socialStatus": "amenaza_publica",
-    "friendsAndAssociates": "lazos_todos",
-    "items": []
+    "friendsAndAssociates": "lazos_todos"
   },
   "vehicles": {
     "items": [
@@ -240,7 +238,6 @@
         "id": "supervelocidad",
         "origin": "Mutante",
         "rank": 1,
-        "customizations": [],
         "skillValue": 0
       },
       {
@@ -275,56 +272,11 @@
     "version": "Beta 0.15.2",
     "generator": "SHI Wizard"
   },
-  "notes": "",
-  "totalCost": "",
   "level": 1,
-  "equipment": {
-    "items": []
-  },
-  "weapons": {
-    "items": []
-  },
-  "artifacts": {
-    "items": []
-  },
-  "magicObjects": {
-    "items": []
-  },
   "spells": {
-    "selected": [],
     "emFormula": {
       "divisor": 4,
       "pcCost": 0
     }
-  },
-  "magicalBonds": [],
-  "magicalBondsCustomName": "",
-  "magicalBondsCustomDescription": "",
-  "specialskills": {
-    "items": []
-  },
-  "enteParams": {
-    "formType": null,
-    "visualEffect": null
-  },
-  "malditoParams": {
-    "magnitude": null,
-    "source": null
-  },
-  "poseidoParams": {
-    "formType": null
-  },
-  "alteradoParams": null,
-  "guardianParams": null,
-  "divineParams": null,
-  "techParams": {
-    "incomeSource": "agencia_priv"
-  },
-  "exoskeletonArmorConfig": null,
-  "technoSuitStrengthConfig": null,
-  "exoskeletonConfig": "",
-  "magicTableRolls": [],
-  "techModules": [],
-  "cyborgImplants": [],
-  "isParahumanoHybrid": false
+  }
 }

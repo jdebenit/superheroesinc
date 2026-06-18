@@ -108,83 +108,67 @@
     "selected": [
       {
         "id": "envejecimiento_acelerado",
-        "rank": 1,
-        "selectedOption": ""
+        "rank": 1
       },
       {
         "id": "controlar_espiritu",
-        "rank": 5,
-        "selectedOption": ""
+        "rank": 5
       },
       {
         "id": "cadenas_del_tartaro",
-        "rank": 1,
-        "selectedOption": ""
+        "rank": 1
       },
       {
         "id": "invocar_espiritu",
-        "rank": 4,
-        "selectedOption": ""
+        "rank": 4
       },
       {
         "id": "percepcion_magica",
-        "rank": 5,
-        "selectedOption": ""
+        "rank": 5
       },
       {
         "id": "vedar_entrada",
-        "rank": 1,
-        "selectedOption": ""
+        "rank": 1
       },
       {
         "id": "consumir_energia_magica",
-        "rank": 5,
-        "selectedOption": ""
+        "rank": 5
       },
       {
         "id": "abrir_portales",
-        "rank": 5,
-        "selectedOption": ""
+        "rank": 5
       },
       {
         "id": "anular_conjuros",
-        "rank": 6,
-        "selectedOption": ""
+        "rank": 6
       },
       {
         "id": "curacion",
-        "rank": 5,
-        "selectedOption": ""
+        "rank": 5
       },
       {
         "id": "levitar",
-        "rank": 5,
-        "selectedOption": ""
+        "rank": 5
       },
       {
         "id": "pseudo_psi",
-        "rank": 4,
-        "selectedOption": ""
+        "rank": 4
       },
       {
         "id": "escudos_misticos",
-        "rank": 10,
-        "selectedOption": ""
+        "rank": 10
       },
       {
         "id": "proyeccion_de_energia_magica",
-        "rank": 10,
-        "selectedOption": ""
+        "rank": 10
       },
       {
         "id": "revivir_muertos",
-        "rank": 5,
-        "selectedOption": ""
+        "rank": 5
       },
       {
         "id": "proteccion",
-        "rank": 1,
-        "selectedOption": ""
+        "rank": 1
       }
     ]
   },
@@ -194,14 +178,12 @@
         "id": "superinteligencia",
         "origin": "Dios",
         "rank": 1,
-        "customizations": [],
         "skillValue": 0
       },
       {
         "id": "traduccion_de_lenguas",
         "origin": "Dios",
         "rank": 100,
-        "customizations": [],
         "skillValue": 0
       }
     ]
@@ -294,11 +276,7 @@
         "value": "93%",
         "math": "(INT/2)"
       }
-    ],
-    "generalManualMods": {},
-    "manualBases": {},
-    "selected": {},
-    "specified": {}
+    ]
   },
   "equipment": {
     "items": [
@@ -333,57 +311,11 @@
     ]
   },
   "alias": "Kigala",
-  "notes": "",
-  "totalCost": "",
   "background": {
-    "items": [],
     "prejudiceResistance": 50,
     "economicStatus": "clase_media",
     "legalStatus": "sin_antecedentes",
     "socialStatus": "anonimo",
     "friendsAndAssociates": "conocido"
-  },
-  "weapons": {
-    "items": []
-  },
-  "artifacts": {
-    "items": []
-  },
-  "magicObjects": {
-    "items": []
-  },
-  "vehicles": {
-    "items": []
-  },
-  "magicalBonds": [],
-  "magicalBondsCustomName": "",
-  "magicalBondsCustomDescription": "",
-  "specialskills": {
-    "items": []
-  },
-  "enteParams": {
-    "formType": null,
-    "visualEffect": null
-  },
-  "malditoParams": {
-    "magnitude": null,
-    "source": null
-  },
-  "poseidoParams": {
-    "formType": null
-  },
-  "alteradoParams": null,
-  "mutanteParams": null,
-  "guardianParams": null,
-  "divineParams": null,
-  "techParams": {
-    "incomeSource": "agencia_priv"
-  },
-  "exoskeletonConfig": "",
-  "exoskeletonArmorConfig": null,
-  "technoSuitStrengthConfig": null,
-  "magicTableRolls": [],
-  "techModules": [],
-  "cyborgImplants": [],
-  "isParahumanoHybrid": false
+  }
 }

@@ -192,8 +192,6 @@
         "value": "28%"
       }
     ],
-    "generalManualMods": {},
-    "manualBases": {},
     "selected": {
       "armas_blancas": {
         "isFree": false,
@@ -243,7 +241,6 @@
     "economicStatus": "clase_medio_baja",
     "socialStatus": "heroe_pueblo",
     "friendsAndAssociates": "solo_familia",
-    "items": [],
     "legalStatus": "sin_antecedentes"
   },
   "weapons": {
@@ -251,8 +248,6 @@
       {
         "name": "Espada de flamígera de Sant Jordi",
         "damage": "2d10+30+1d100+30",
-        "dxa": "",
-        "car": "",
         "notes": "Proyecta el fuego desde la Espada",
         "cost": 0
       }
@@ -264,7 +259,6 @@
         "id": "volar",
         "origin": "Guardian",
         "rank": 21,
-        "customizations": [],
         "skillValue": 0
       },
       {
@@ -284,21 +278,18 @@
         "id": "invulnerabilidad",
         "origin": "Guardian",
         "rank": 71,
-        "customizations": [],
         "skillValue": 0
       },
       {
         "id": "superconstitucion",
         "origin": "Guardian",
         "rank": 1,
-        "customizations": [],
         "skillValue": 0
       },
       {
         "id": "superfuerza",
         "origin": "Guardian",
         "rank": 1,
-        "customizations": [],
         "skillValue": 0
       }
     ]
@@ -315,55 +306,11 @@
     "version": "Beta 0.15.5",
     "generator": "SHI Wizard"
   },
-  "totalCost": "",
   "level": 1,
-  "equipment": {
-    "items": []
-  },
-  "artifacts": {
-    "items": []
-  },
-  "magicObjects": {
-    "items": []
-  },
-  "vehicles": {
-    "items": []
-  },
   "spells": {
-    "selected": [],
     "emFormula": {
       "divisor": 4,
       "pcCost": 0
     }
-  },
-  "magicalBonds": [],
-  "magicalBondsCustomName": "",
-  "magicalBondsCustomDescription": "",
-  "specialskills": {
-    "items": []
-  },
-  "enteParams": {
-    "formType": null,
-    "visualEffect": null
-  },
-  "malditoParams": {
-    "magnitude": null,
-    "source": null
-  },
-  "poseidoParams": {
-    "formType": null
-  },
-  "alteradoParams": null,
-  "mutanteParams": null,
-  "divineParams": null,
-  "techParams": {
-    "incomeSource": "agencia_priv"
-  },
-  "exoskeletonArmorConfig": null,
-  "technoSuitStrengthConfig": null,
-  "exoskeletonConfig": "",
-  "magicTableRolls": [],
-  "techModules": [],
-  "cyborgImplants": [],
-  "isParahumanoHybrid": false
+  }
 }

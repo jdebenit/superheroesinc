@@ -53,9 +53,45 @@ export const useJsonExport = (
             generator: 'SHI Wizard'
         };
 
+        // Recursive helper to remove null, undefined, empty strings, empty arrays, and isParahumanoHybrid: false from the export object
+        const removeNullValues = (obj: any): any => {
+            if (obj === null || obj === undefined) {
+                return undefined;
+            }
+            if (typeof obj === 'string' && obj.trim() === '') {
+                return undefined;
+            }
+            if (Array.isArray(obj)) {
+                const cleanedArr = obj
+                    .map(item => removeNullValues(item))
+                    .filter(item => item !== undefined && item !== null);
+                return cleanedArr.length > 0 ? cleanedArr : undefined;
+            }
+            if (typeof obj === 'object') {
+                const cleaned: any = {};
+                let hasKeys = false;
+                for (const key in obj) {
+                    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+                        if (key === 'isParahumanoHybrid' && obj[key] === false) {
+                            continue;
+                        }
+                        const val = removeNullValues(obj[key]);
+                        if (val !== undefined && val !== null) {
+                            cleaned[key] = val;
+                            hasKeys = true;
+                        }
+                    }
+                }
+                return hasKeys ? cleaned : undefined;
+            }
+            return obj;
+        };
+
+        const cleanedExportData = removeNullValues(exportData) || {};
+
         const baseName = (character.alias || character.name || 'personaje');
         const filename = `${baseName.toLowerCase().trim().replace(/\s+/g, '-')}.json`;
-        const jsonStr = JSON.stringify(exportData, null, 2);
+        const jsonStr = JSON.stringify(cleanedExportData, null, 2);
 
         // Try using the File System Access API
         if ('showSaveFilePicker' in window) {

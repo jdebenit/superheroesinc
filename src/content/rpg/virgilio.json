@@ -186,8 +186,6 @@
       "influencia": 102,
       "conocimientos": 47
     },
-    "manualBases": {},
-    "selected": {},
     "specified": {
       "otro_idioma_1781353268278": {
         "skillId": "otro_idioma",
@@ -222,8 +220,7 @@
     "legalStatus": "buscado",
     "socialStatus": "amenaza_publica",
     "friendsAndAssociates": "lazos_todos",
-    "baseCoverage": "independiente_lujo",
-    "items": []
+    "baseCoverage": "independiente_lujo"
   },
   "powers": {
     "selected": [
@@ -231,28 +228,24 @@
         "id": "telepatia",
         "origin": "Mutante",
         "rank": 71,
-        "customizations": [],
         "skillValue": 96
       },
       {
         "id": "empatia_mental",
         "origin": "Mutante",
         "rank": 41,
-        "customizations": [],
         "skillValue": 96
       },
       {
         "id": "dominacion_mental",
         "origin": "Mutante",
         "rank": 21,
-        "customizations": [],
         "skillValue": 0
       },
       {
         "id": "agresion_psionica",
         "origin": "Mutante",
         "rank": 21,
-        "customizations": [],
         "skillValue": 0
       }
     ]
@@ -268,59 +261,10 @@
     "version": "Beta 0.15.2",
     "generator": "SHI Wizard"
   },
-  "notes": "",
-  "totalCost": "",
-  "equipment": {
-    "items": []
-  },
-  "weapons": {
-    "items": []
-  },
-  "artifacts": {
-    "items": []
-  },
-  "magicObjects": {
-    "items": []
-  },
-  "vehicles": {
-    "items": []
-  },
   "spells": {
-    "selected": [],
     "emFormula": {
       "divisor": 4,
       "pcCost": 0
     }
-  },
-  "magicalBonds": [],
-  "magicalBondsCustomName": "",
-  "magicalBondsCustomDescription": "",
-  "specialskills": {
-    "items": []
-  },
-  "enteParams": {
-    "formType": null,
-    "visualEffect": null
-  },
-  "malditoParams": {
-    "magnitude": null,
-    "source": null
-  },
-  "poseidoParams": {
-    "formType": null
-  },
-  "alteradoParams": null,
-  "mutanteParams": null,
-  "guardianParams": null,
-  "divineParams": null,
-  "techParams": {
-    "incomeSource": "agencia_priv"
-  },
-  "exoskeletonArmorConfig": null,
-  "technoSuitStrengthConfig": null,
-  "exoskeletonConfig": "",
-  "magicTableRolls": [],
-  "techModules": [],
-  "cyborgImplants": [],
-  "isParahumanoHybrid": false
+  }
 }

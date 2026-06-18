@@ -7,6 +7,9 @@ interface TechParamsSectionProps {
 }
 
 export const TechParamsSection: React.FC<TechParamsSectionProps> = ({ character }) => {
+    const hasTechOrigin = character.origin?.items?.some((i: any) => Object.keys(i)[0] === 'Tecnológico');
+    if (!hasTechOrigin) return null;
+
     const incomeSourceId = character.techParams?.incomeSource;
     if (!incomeSourceId) return null;
 

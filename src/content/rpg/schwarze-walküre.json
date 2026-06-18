@@ -213,8 +213,6 @@
         "value": "33%"
       }
     ],
-    "generalManualMods": {},
-    "manualBases": {},
     "selected": {
       "magia": {
         "isFree": false,
@@ -268,14 +266,12 @@
         "manualMods": 0,
         "manualBases": 0
       }
-    },
-    "nativeLanguage": ""
+    }
   },
   "background": {
     "prejudiceResistance": 100,
     "economicStatus": "clase_alta",
     "friendsAndAssociates": "solitario",
-    "items": [],
     "legalStatus": "sin_antecedentes",
     "socialStatus": "anonimo"
   },
@@ -286,7 +282,6 @@
         "damage": "2d10 Pot 13",
         "dxa": "1",
         "car": "9",
-        "notes": "",
         "cost": 0
       }
     ]
@@ -326,7 +321,6 @@
         "id": "incremento_vital",
         "origin": "Sobrenatural",
         "rank": 100,
-        "customizations": [],
         "skillValue": 0
       }
     ]
@@ -338,49 +332,5 @@
   "meta": {
     "version": "Beta 0.15.3",
     "generator": "SHI Wizard"
-  },
-  "totalCost": "",
-  "equipment": {
-    "items": []
-  },
-  "artifacts": {
-    "items": []
-  },
-  "magicObjects": {
-    "items": []
-  },
-  "vehicles": {
-    "items": []
-  },
-  "magicalBonds": [],
-  "magicalBondsCustomName": "",
-  "magicalBondsCustomDescription": "",
-  "specialskills": {
-    "items": []
-  },
-  "enteParams": {
-    "formType": null,
-    "visualEffect": null
-  },
-  "malditoParams": {
-    "magnitude": null,
-    "source": null
-  },
-  "poseidoParams": {
-    "formType": null
-  },
-  "alteradoParams": null,
-  "mutanteParams": null,
-  "guardianParams": null,
-  "divineParams": null,
-  "techParams": {
-    "incomeSource": "agencia_priv"
-  },
-  "exoskeletonArmorConfig": null,
-  "technoSuitStrengthConfig": null,
-  "exoskeletonConfig": "",
-  "magicTableRolls": [],
-  "techModules": [],
-  "cyborgImplants": [],
-  "isParahumanoHybrid": false
+  }
 }

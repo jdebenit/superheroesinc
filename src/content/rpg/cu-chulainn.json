@@ -119,21 +119,18 @@
         "id": "superpercepcion",
         "origin": "Vigilante",
         "rank": 1,
-        "customizations": [],
         "skillValue": 0
       },
       {
         "id": "superconstitucion",
         "origin": "Vigilante",
         "rank": 1,
-        "customizations": [],
         "skillValue": 0
       },
       {
         "id": "superagilidad",
         "origin": "Vigilante",
         "rank": 1,
-        "customizations": [],
         "skillValue": 0
       }
     ]
@@ -142,8 +139,7 @@
     "selected": [
       {
         "id": "encantar_objetos",
-        "rank": 6,
-        "selectedOption": ""
+        "rank": 6
       }
     ]
   },
@@ -246,11 +242,7 @@
         "name": "Rastrear",
         "value": "61%"
       }
-    ],
-    "generalManualMods": {},
-    "manualBases": {},
-    "selected": {},
-    "specified": {}
+    ]
   },
   "weapons": {
     "items": [
@@ -261,58 +253,11 @@
       }
     ]
   },
-  "alias": "",
-  "notes": "",
-  "totalCost": "",
   "background": {
-    "items": [],
     "prejudiceResistance": 50,
     "economicStatus": "clase_media",
     "legalStatus": "sin_antecedentes",
     "socialStatus": "anonimo",
     "friendsAndAssociates": "conocido"
-  },
-  "equipment": {
-    "items": []
-  },
-  "artifacts": {
-    "items": []
-  },
-  "magicObjects": {
-    "items": []
-  },
-  "vehicles": {
-    "items": []
-  },
-  "magicalBonds": [],
-  "magicalBondsCustomName": "",
-  "magicalBondsCustomDescription": "",
-  "specialskills": {
-    "items": []
-  },
-  "enteParams": {
-    "formType": null,
-    "visualEffect": null
-  },
-  "malditoParams": {
-    "magnitude": null,
-    "source": null
-  },
-  "poseidoParams": {
-    "formType": null
-  },
-  "alteradoParams": null,
-  "mutanteParams": null,
-  "guardianParams": null,
-  "divineParams": null,
-  "techParams": {
-    "incomeSource": "agencia_priv"
-  },
-  "exoskeletonConfig": "",
-  "exoskeletonArmorConfig": null,
-  "technoSuitStrengthConfig": null,
-  "magicTableRolls": [],
-  "techModules": [],
-  "cyborgImplants": [],
-  "isParahumanoHybrid": false
+  }
 }

@@ -177,8 +177,6 @@
         "value": "21%"
       }
     ],
-    "generalManualMods": {},
-    "manualBases": {},
     "selected": {
       "armas_cortas": {
         "isFree": false,
@@ -204,8 +202,7 @@
     "economicStatus": "mendigo",
     "legalStatus": "terrorista",
     "socialStatus": "supervillano",
-    "friendsAndAssociates": "solo_familia",
-    "items": []
+    "friendsAndAssociates": "solo_familia"
   },
   "equipment": {
     "items": [
@@ -222,28 +219,24 @@
         "id": "volar",
         "origin": "Alterado",
         "rank": 71,
-        "customizations": [],
         "skillValue": 53
       },
       {
         "id": "superfuerza",
         "origin": "Alterado",
         "rank": 1,
-        "customizations": [],
         "skillValue": 0
       },
       {
         "id": "emision_de_energia",
         "origin": "Alterado",
         "rank": 41,
-        "customizations": [],
         "skillValue": 55
       }
     ]
   },
   "alteradoParams": {
-    "agent": "mutagen",
-    "sequels": []
+    "agent": "mutagen"
   },
   "profession": "Terrorista",
   "sexualIdentity": "Hombre",
@@ -255,55 +248,10 @@
     "version": "Beta 0.15.3",
     "generator": "SHI Wizard"
   },
-  "notes": "",
-  "totalCost": "",
-  "weapons": {
-    "items": []
-  },
-  "artifacts": {
-    "items": []
-  },
-  "magicObjects": {
-    "items": []
-  },
-  "vehicles": {
-    "items": []
-  },
   "spells": {
-    "selected": [],
     "emFormula": {
       "divisor": 4,
       "pcCost": 0
     }
-  },
-  "magicalBonds": [],
-  "magicalBondsCustomName": "",
-  "magicalBondsCustomDescription": "",
-  "specialskills": {
-    "items": []
-  },
-  "enteParams": {
-    "formType": null,
-    "visualEffect": null
-  },
-  "malditoParams": {
-    "magnitude": null,
-    "source": null
-  },
-  "poseidoParams": {
-    "formType": null
-  },
-  "mutanteParams": null,
-  "guardianParams": null,
-  "divineParams": null,
-  "techParams": {
-    "incomeSource": "agencia_priv"
-  },
-  "exoskeletonArmorConfig": null,
-  "technoSuitStrengthConfig": null,
-  "exoskeletonConfig": "",
-  "magicTableRolls": [],
-  "techModules": [],
-  "cyborgImplants": [],
-  "isParahumanoHybrid": false
+  }
 }

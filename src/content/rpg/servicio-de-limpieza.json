@@ -197,8 +197,6 @@
         "value": "100%"
       }
     ],
-    "generalManualMods": {},
-    "manualBases": {},
     "selected": {
       "armas_largas": {
         "isFree": false,
@@ -231,7 +229,6 @@
         "manualBases": 100
       }
     },
-    "specified": {},
     "nativeLanguage": "Castellano"
   },
   "background": {
@@ -239,7 +236,6 @@
     "economicStatus": "clase_alta",
     "friendsAndAssociates": "conocido_poderoso",
     "baseCoverage": "independiente_lujo",
-    "items": [],
     "legalStatus": "sin_antecedentes",
     "socialStatus": "anonimo"
   },
@@ -257,14 +253,12 @@
       {
         "name": "Gorra con Protector Psiquico",
         "reliability": "100%",
-        "value": "",
         "cost": "0",
         "notes": "El portador recibe los beneficios del poder Invulnerabilidad a poderes psíquicos a rango cosmico"
       },
       {
         "name": "Lentillas ForgetMeNot",
         "reliability": "100",
-        "value": "",
         "cost": 0,
         "notes": "Lentillas capaces de evitar en sistemas biologicos como elctronicos  la retencion de la imagen de quien la porta. Un ser con sistema nervioso olvidara en 10 minutos y una parato electrónico no podra grabar en su memoria la cara del personaje que las lleve puestas"
       }
@@ -277,61 +271,15 @@
   },
   "profession": "Desconocida",
   "sexualIdentity": "Hombre",
-  "powers": {
-    "selected": []
-  },
   "meta": {
     "version": "Beta 0.15.2",
     "generator": "SHI Wizard"
   },
-  "notes": "",
-  "totalCost": "",
   "level": 1,
-  "weapons": {
-    "items": []
-  },
-  "magicObjects": {
-    "items": []
-  },
-  "vehicles": {
-    "items": []
-  },
   "spells": {
-    "selected": [],
     "emFormula": {
       "divisor": 4,
       "pcCost": 0
     }
-  },
-  "magicalBonds": [],
-  "magicalBondsCustomName": "",
-  "magicalBondsCustomDescription": "",
-  "specialskills": {
-    "items": []
-  },
-  "enteParams": {
-    "formType": null,
-    "visualEffect": null
-  },
-  "malditoParams": {
-    "magnitude": null,
-    "source": null
-  },
-  "poseidoParams": {
-    "formType": null
-  },
-  "alteradoParams": null,
-  "mutanteParams": null,
-  "guardianParams": null,
-  "divineParams": null,
-  "techParams": {
-    "incomeSource": "agencia_priv"
-  },
-  "exoskeletonArmorConfig": null,
-  "technoSuitStrengthConfig": null,
-  "exoskeletonConfig": "",
-  "magicTableRolls": [],
-  "techModules": [],
-  "cyborgImplants": [],
-  "isParahumanoHybrid": false
+  }
 }

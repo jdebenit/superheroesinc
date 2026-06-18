@@ -288,9 +288,7 @@
         "manualMods": 0,
         "manualBases": 0
       }
-    },
-    "generalManualMods": {},
-    "manualBases": {}
+    }
   },
   "background": {
     "prejudiceResistance": 30,
@@ -307,27 +305,21 @@
       {
         "name": "Khopesh de Tamahagane",
         "damage": "3d10+30+10+mfue",
-        "dxa": "",
         "car": "1",
-        "notes": "",
         "cost": "2",
         "skillId": "arma_especial"
       },
       {
         "name": "Sheng Biao",
         "damage": "2d6+20+10+mfue",
-        "dxa": "",
         "car": "1",
-        "notes": "",
         "cost": 0,
         "skillId": "arma_especial"
       },
       {
         "name": "Daga",
         "damage": "2d6+20+10+mfue",
-        "dxa": "",
         "car": "2",
-        "notes": "",
         "cost": 0,
         "skillId": "armas_blancas"
       }
@@ -368,48 +360,5 @@
   "traumas": {
     "Manipulador": "Desde mi niñez he sido manipulada por intrigas de la corte y mi madrastra ha confabulado contra mi, he descubierto que las palabras tienen mas poder que los hechizos y las espadas. Los uso en contra de los que se aprovechan de la gente cuando esta debil y desprotegida para evitar lo que me paso a mi.",
     "Artista Marcial con Chi": "En las tierras profundas de Kish’var la orden de las Nagas me enseño a dominar mi cuerpo y mente, a usar el poder de mis adversarios contra ellos y a entender que el unico enemigo al que debo enfrentarme esta dentro de mi."
-  },
-  "totalCost": "",
-  "powers": {
-    "selected": []
-  },
-  "equipment": {
-    "items": []
-  },
-  "artifacts": {
-    "items": []
-  },
-  "vehicles": {
-    "items": []
-  },
-  "magicalBonds": [],
-  "magicalBondsCustomName": "",
-  "magicalBondsCustomDescription": "",
-  "specialskills": {
-    "items": []
-  },
-  "enteParams": {
-    "formType": null,
-    "visualEffect": null
-  },
-  "malditoParams": {
-    "magnitude": null,
-    "source": null
-  },
-  "poseidoParams": {
-    "formType": null
-  },
-  "alteradoParams": null,
-  "mutanteParams": null,
-  "guardianParams": null,
-  "divineParams": null,
-  "techParams": {
-    "incomeSource": "agencia_priv"
-  },
-  "exoskeletonArmorConfig": null,
-  "technoSuitStrengthConfig": null,
-  "exoskeletonConfig": "",
-  "techModules": [],
-  "cyborgImplants": [],
-  "isParahumanoHybrid": false
+  }
 }
