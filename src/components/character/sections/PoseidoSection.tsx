@@ -12,15 +12,15 @@ export const PoseidoSection: React.FC<PoseidoSectionProps> = ({ character }) => 
 
     return (
         <SheetSection title="Poseído" className="poseido-params">
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+            <ul className="clean-list">
                 {(() => {
                     const form = POSEIDO_FORMS.find(f => f.id === character.poseidoParams.formType);
                     return form && (
-                        <li className="no-bullet-item" style={{ marginBottom: '0.5rem' }}>
+                        <li className="no-bullet-item">
                             <DetailRow
-                                label="Tipo de Forma"
+                                label={<span className="poseido-form-label">Tipo de Forma</span>}
                                 value={`${form.label} (${form.cost > 0 ? '+' : ''}${form.cost} PC)`}
-                                valueClassName=""
+                                valueClassName="value-highlight-brown"
                             />
                             <div className="poseido-description">
                                 {form.description}
