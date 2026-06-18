@@ -194,6 +194,12 @@ export const adaptWebCharacter = (webChar: any): any => {
                 });
             });
         }
+    } else {
+        // IDEMPOTENCY: keep existing generalItems / specialItems / selected / specified
+        adapted.skills = {
+            ...baseState.skills,
+            ...webChar.skills
+        };
     }
 
     // 4. Adapt POWERS
@@ -298,15 +304,28 @@ export const adaptWebCharacter = (webChar: any): any => {
     };
 
     // 5. Adapt TECH MODULES
-    const rawTech = webChar.techModules?.items || webChar.techmodules?.items;
-    if (rawTech && Array.isArray(rawTech)) {
+    let rawTech: any[] = [];
+    if (Array.isArray(webChar.techModules)) {
+        rawTech = webChar.techModules;
+    } else if (webChar.techModules?.installed && Array.isArray(webChar.techModules.installed)) {
+        rawTech = webChar.techModules.installed;
+    } else if (webChar.techModules?.items && Array.isArray(webChar.techModules.items)) {
+        rawTech = webChar.techModules.items;
+    } else if (webChar.techmodules?.items && Array.isArray(webChar.techmodules.items)) {
+        rawTech = webChar.techmodules.items;
+    }
+
+    if (rawTech && rawTech.length > 0) {
         adapted.techModules = rawTech.map((tm: any) => ({
-            id: tm.id || `tm_${Math.random()}`,
+            id: tm.id || `tm_${Math.random().toString(36).substr(2, 9)}`,
+            definitionId: tm.definitionId || tm.id || '',
             name: tm.name,
             location: tm.location || '',
-            notes: tm.notes,
-            pcCost: 0
+            notes: tm.notes || '',
+            pcCost: typeof tm.pcCost === 'number' ? tm.pcCost : (typeof tm.cost === 'number' ? tm.cost : 0)
         }));
+    } else {
+        adapted.techModules = [];
     }
 
     // 6. Adapt WEAPONS & EQUIPMENT

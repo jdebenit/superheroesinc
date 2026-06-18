@@ -308,6 +308,12 @@
   "uiState": {
     "unlockManualCharacteristics": true
   },
+  "poseidoParams": {
+    "formType": "no_humana"
+  },
+  "techParams": {
+    "incomeSource": "agencia_gub"
+  },
   "profession": "Capitán",
   "sexualIdentity": "Hombre",
   "meta": {

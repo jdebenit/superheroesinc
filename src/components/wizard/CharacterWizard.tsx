@@ -12,6 +12,7 @@ import {
     initialCharacterState
 } from '../../data/wizardConfig';
 import { mergeWithDefaults } from '../../utils/dataCleaner';
+import { adaptWebCharacter } from '../../utils/characterAdapter';
 import { useCharacterCalculations } from '../../hooks/wizard/useCharacterCalculations';
 import './CharacterWizard.css';
 
@@ -184,8 +185,11 @@ export default function CharacterWizard() {
                 const text = await file.text();
                 const rawImport = JSON.parse(text);
 
+                // Adapt the imported raw JSON to the wizard state format (idempotent for wizard format)
+                const adaptedImport = adaptWebCharacter(rawImport);
+
                 // Use mergeWithDefaults to ensure we have a full state even if importing a "clean" JSON
-                const importedCharacter = mergeWithDefaults(rawImport, initialCharacterState);
+                const importedCharacter = mergeWithDefaults(adaptedImport, initialCharacterState);
 
                 // Validate that it's a character JSON (check for key structure after merge)
                 if (!importedCharacter.name || !importedCharacter.attributes) {
