@@ -31,6 +31,7 @@ import { MalditoSection } from './sections/MalditoSection';
 import { BackgroundSection } from './sections/BackgroundSection';
 import { EquipmentSection } from './sections/EquipmentSection';
 import { VariosSection } from './sections/VariosSection';
+import { TechParamsSection } from './sections/TechParamsSection';
 import { TechModulesSection } from './sections/TechModulesSection';
 import { ExoskeletonSection } from './sections/ExoskeletonSection';
 import { TechnifiedSection } from './sections/TechnifiedSection';
@@ -98,6 +99,7 @@ export default function CharacterSheet({
                 <VehiclesSection vehicles={character.vehicles} />
                 <EquipmentSection equipment={character.equipment} />
                 <VariosSection varios={character.varios} />
+                <TechParamsSection character={character} />
                 <TechModulesSection techModules={character.techModules || []} />
                 <ExoskeletonSection character={character} />
                 <TechnifiedSection character={character} />
