@@ -13,7 +13,7 @@ tags:
   - Mago
   - Vigilante
   - Manipulador
-originReality: "Reinos Divinos"
+originReality: "Tierra Zero - Reinos Divinos"
 actualReality: "Tierra Zero"
 groups:
   - "los-irregulares"

@@ -8,7 +8,7 @@ tags:
   - Dios
   - Cósmico
   - Principal
-originReality: Reinos Divinos
+originReality: "Tierra Zero - Reinos Divinos"
 actualReality: Tierra Zero
 image: /personajes/primaria.png
 groups:

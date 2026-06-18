@@ -10,7 +10,7 @@ tags:
   - Principal
   - Enano
   - Inventor
-originReality: "Reinos Divinos"
+originReality: "Tierra Zero - Reinos Divinos"
 actualReality: "Tierra Zero"
 groups:
   - "las-siete-torres"

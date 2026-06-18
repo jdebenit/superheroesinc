@@ -8,7 +8,7 @@ updatedDate: 2026-06-17
 tags:
   - Principal
   - Dios
-originReality: Reinos Divinos
+originReality: "Tierra Zero - Reinos Divinos"
 actualReality: Tierra Zero
 image: /personajes/Loba-de-invierno.png
 rpgId: loba-de-invierno

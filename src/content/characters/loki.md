@@ -6,7 +6,7 @@ updatedDate: 2026-05-24
 tags:
   - Retirado
   - Dios
-originReality: Reinos Divinos
+originReality: "Tierra Zero - Reinos Divinos"
 actualReality: Tierra Zero
 image: /personajes/loki.png
 ---

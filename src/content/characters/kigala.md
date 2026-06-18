@@ -9,7 +9,7 @@ tags:
   - Principal
   - Dios
   - Mago
-originReality: "Reinos Divinos"
+originReality: "Tierra Zero - Reinos Divinos"
 actualReality: "Tierra Zero"
 ---
 

@@ -7,7 +7,7 @@ image: "/personajes/sphynx.png"
 tags:
   - Principal
   - Esfinge
-originReality: "Reinos Divinos"
+originReality: "Tierra Zero - Reinos Divinos"
 actualReality: "Tierra Zero"
 groups:
   - "las-siete-torres"

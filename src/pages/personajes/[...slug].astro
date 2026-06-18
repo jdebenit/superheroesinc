@@ -111,6 +111,22 @@ if (charGroups.length > 0) {
 
                 <div class="char-metadata">
                     {
+                        entry.data.originReality && (
+                            <div class="metadata-item">
+                                <span class="label">Esfera de origen:</span>
+                                <span class="value">{entry.data.originReality}</span>
+                            </div>
+                        )
+                    }
+                    {
+                        entry.data.actualReality && (
+                            <div class="metadata-item">
+                                <span class="label">Esfera actual:</span>
+                                <span class="value">{entry.data.actualReality}</span>
+                            </div>
+                        )
+                    }
+                    {
                         entry.data.source && (
                             <div class="metadata-item">
                                 <span class="label">Fuente:</span>

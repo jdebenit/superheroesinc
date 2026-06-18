@@ -9,7 +9,7 @@ tags:
   - Principal
   - Medusa
   - Dotado
-originReality: "Reinos Divinos"
+originReality: "Tierra Zero - Reinos Divinos"
 actualReality: "Tierra Zero"
 groups:
   - "la-corte-itinerante"

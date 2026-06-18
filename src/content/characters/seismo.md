@@ -9,7 +9,7 @@ image: /personajes/seismo.png
 tags:
   - Desaparecido
   - Dios
-originReality: Reinos Divinos
+originReality: "Tierra Zero - Reinos Divinos"
 actualReality: Tierra Zero
 rpgId: seismo
 ---
