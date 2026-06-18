@@ -18,4 +18,4 @@ Su infancia fue especialmente dura. Los demás niños le consideraban extraño y
 
 El desprecio inicial que Herman Meyer sentía hacia su vástago se transformó en interés científico. Finalmente lo adoptó y le ayudó a comprender y controlar sus poderes, aunque jamás le reveló la verdad sobre su parentesco.
 
-En 1999 desaparecio sin dejar rastro.
+En 2000 desaparecio sin dejar rastro.

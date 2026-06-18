@@ -16,4 +16,4 @@ Quedó huérfano a los once años y desde entonces tuvo que sobrevivir por su cu
 
 Tras una pelea que terminó de forma especialmente sangrienta, ingresó en el hospital con múltiples heridas de arma blanca. Fue allí donde lo encontró el doctor Meyer, que acostumbraba a buscar nuevos cobayas entre los moribundos. El científico vio en él resistencia física, un carácter autoritario, dotes de mando y un ADN prometedor. Decidió salvarle la vida para convertirlo en el líder del grupo de supervillanos que llevaba años planeando.
 
-En 1999 desaparecio sin dejar rastro.
+En 2000 desaparecio sin dejar rastro.
