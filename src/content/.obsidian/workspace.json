@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "lore/cronicas/diablo-segador-historia-incomoda.md",
+                "file": "characters/eisengeist.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "diablo-segador-historia-incomoda"
+              "title": "eisengeist"
             }
           }
         ]
@@ -185,8 +185,13 @@
   },
   "active": "d101106a4f64eb58",
   "lastOpenFiles": [
-    "lore/cronicas/expediente-stalos-mente-maestra-o-caballo-de-troya.md",
+    "rpg/eisengeist.json",
+    "characters/schwarze-walküre.md",
+    "rpg/schwarze-walküre.json",
+    "characters/eisengeist.md",
+    "characters/vanadio.md",
     "lore/cronicas/diablo-segador-historia-incomoda.md",
+    "lore/cronicas/expediente-stalos-mente-maestra-o-caballo-de-troya.md",
     "lore/localizaciones/nigalion.md",
     "lore/localizaciones/kishvar.md",
     "lore/localizaciones/terra.md",
@@ -207,10 +212,6 @@
     "characters/enigma.md",
     "characters/desertor.md",
     "timeline/fin-de-la-iigm-y-sociedad-de-los-susurros.md",
-    "timeline/formacion-liga-del-caos.md",
-    "timeline/eridiani-libro-de-los-muertos.md",
-    "timeline/epsilon-eridani-en-transjastan.md",
-    "timeline/descubrimiento-de-la-torre-del-mal.md",
     "rpg/flecha-roja-ii.json",
     "personajes",
     "Pasted image 20260416191817.png",
@@ -220,7 +221,6 @@
     "lore/cronicas",
     "faq",
     "rpg/leon-rojo.yaml",
-    "rpg/jefe-motero-road-reapers.yaml",
-    "rpg/motero-road-reapers copy.yaml"
+    "rpg/jefe-motero-road-reapers.yaml"
   ]
 }

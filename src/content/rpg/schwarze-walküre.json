@@ -1,0 +1,332 @@
+{
+  "name": "Irmgard Weiss",
+  "alias": "Schwarze Walküre",
+  "level": 4,
+  "notes": "Valquiria Negra es una joven que aparenta veinticuatro años, alta, esbelta y de porte elegante. Su cabello rubio ceniza y sus ojos azul claro le otorgan una apariencia refinada y serena que contrasta con la firmeza que transmite.\n\nSuele vestir uniformes negros de campaña cuidadosamente adaptados a su figura, abrigos militares largos, botas altas de oficial y guantes de cuero oscuro. Evita las condecoraciones excesivas, pero cada detalle de su indumentaria refleja disciplina, autoridad y una impecable atención al detalle.\n\nHabla con calma, rara vez alza la voz y parece mantener el control de cualquier situación. Lo más llamativo de ella no es su belleza, sino la sensación de que siempre sabe algo que los demás ignoran. Su mirada transmite una inteligencia fría y una confianza absoluta en sí misma que resulta tan fascinante como inquietante.",
+  "origin": {
+    "items": [
+      {
+        "Arcano": [
+          "+20 a la parada mental",
+          "Dotado"
+        ]
+      },
+      {
+        "Vigilante": [
+          "Disponibilidad de armamento a dificultad reducida",
+          "Recarga rápida",
+          "Recuerdos dolorosos",
+          "Voluntad férrea",
+          "Fanático/Vengador"
+        ]
+      }
+    ]
+  },
+  "combatstats": {
+    "Acciones por asalto": "3",
+    "Iniciativa y Reflejos": "49",
+    "Puntos de Vida": "230",
+    "Equilibrio Mental": "100"
+  },
+  "otherstats": {
+    "Inconsciencia": "23",
+    "Recuperación": "1 PV/h",
+    "Resistencia a gases y venenos": "26%",
+    "Modificador de fuerza": "1d4",
+    "Peso Levantado": "65kg",
+    "Daño absorbido físico": "0",
+    "Daño absorbido mental": "0",
+    "Modificador de impacto": "20",
+    "Modificador Psionico": "40",
+    "Parada Fisica": "24",
+    "Parada mental": "85",
+    "Salto (alto / largo)": "3,3m / 9,9m"
+  },
+  "attributes": {
+    "values": {
+      "Fuerza": 65,
+      "Constitución": 80,
+      "Agilidad": 99,
+      "Inteligencia": 100,
+      "Percepción": 100,
+      "Apariencia": 96,
+      "Voluntad": 170
+    },
+    "breakdown": {
+      "fuerza": {
+        "base": 60,
+        "originMod": 0,
+        "specialtyMod": 5,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "constitucion": {
+        "base": 65,
+        "originMod": 0,
+        "specialtyMod": 15,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "agilidad": {
+        "base": 69,
+        "originMod": 0,
+        "specialtyMod": 30,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "inteligencia": {
+        "base": 100,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "percepcion": {
+        "base": 70,
+        "originMod": 0,
+        "specialtyMod": 30,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "apariencia": {
+        "base": 96,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "voluntad": {
+        "base": 160,
+        "originMod": 0,
+        "specialtyMod": 10,
+        "powerMod": 0,
+        "otherMod": 0
+      }
+    }
+  },
+  "skills": {
+    "generalItems": [
+      {
+        "name": "Acechar/Discrección",
+        "math": "(AGI+PER)/2",
+        "value": "99%"
+      },
+      {
+        "name": "Comb. cuerpo a cuerpo",
+        "math": "(AGI+PER)/2",
+        "value": "99%"
+      },
+      {
+        "name": "Conocimientos generales",
+        "math": "INT/3",
+        "value": "33%"
+      },
+      {
+        "name": "Esconderse",
+        "math": "(AGI+PER)/4",
+        "value": "49%"
+      },
+      {
+        "name": "Idea",
+        "math": "INT/2",
+        "value": "50%"
+      },
+      {
+        "name": "Influencia",
+        "math": "(INT+APA)/2",
+        "value": "98%"
+      },
+      {
+        "name": "Idioma nativo",
+        "math": "INT",
+        "value": "100%"
+      },
+      {
+        "name": "Investigar",
+        "math": "(INT+PER)/3",
+        "value": "66%"
+      },
+      {
+        "name": "Lanzar",
+        "math": "(FUE+PER)/2",
+        "value": "82%"
+      },
+      {
+        "name": "Primeros auxilios",
+        "math": "INT/2",
+        "value": "50%"
+      },
+      {
+        "name": "Suerte",
+        "math": "(PER+VOL)/4",
+        "value": "67%"
+      },
+      {
+        "name": "Trepar y Saltar",
+        "math": "AGI",
+        "value": "99%"
+      }
+    ],
+    "specialItems": [
+      {
+        "name": "Magia",
+        "math": "(INT+PER)/2",
+        "value": "100%"
+      },
+      {
+        "name": "Contemplación",
+        "math": "VOL/2",
+        "value": "85%"
+      },
+      {
+        "name": "Armas cortas",
+        "math": "(2xPER)/3",
+        "value": "66%"
+      },
+      {
+        "name": "Otro idioma: Inglés",
+        "math": "INT/3",
+        "value": "33%"
+      },
+      {
+        "name": "Otro idioma: Naglo",
+        "math": "INT/3",
+        "value": "33%"
+      },
+      {
+        "name": "Conducir: Coche",
+        "math": "(INT+PER)/4",
+        "value": "50%"
+      },
+      {
+        "name": "Otro idioma: Español",
+        "math": "INT/3",
+        "value": "33%"
+      }
+    ],
+    "generalManualMods": {},
+    "manualBases": {},
+    "selected": {
+      "magia": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "contemplacion": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "armas_cortas": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      }
+    },
+    "specified": {
+      "otro_idioma_1781809893076": {
+        "skillId": "otro_idioma",
+        "specification": "Inglés",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "otro_idioma_1781809895408": {
+        "skillId": "otro_idioma",
+        "specification": "Naglo",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "conducir_1781809936854": {
+        "skillId": "conducir",
+        "specification": "Coche",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "otro_idioma_1781809958333": {
+        "skillId": "otro_idioma",
+        "specification": "Español",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      }
+    },
+    "nativeLanguage": ""
+  },
+  "background": {
+    "prejudiceResistance": 100,
+    "economicStatus": "clase_alta",
+    "friendsAndAssociates": "solitario"
+  },
+  "weapons": {
+    "items": [
+      {
+        "name": "Luger P08",
+        "damage": "2d10 Pot 13",
+        "dxa": "1",
+        "car": "9",
+        "notes": "",
+        "cost": 0
+      }
+    ]
+  },
+  "spells": {
+    "selected": [
+      {
+        "id": "revivir_muertos",
+        "rank": 5
+      },
+      {
+        "id": "controlar_espiritu",
+        "rank": 1
+      },
+      {
+        "id": "invocar_espiritu",
+        "rank": 3
+      },
+      {
+        "id": "percepcion_magica",
+        "rank": 4
+      },
+      {
+        "id": "levitar",
+        "rank": 2
+      }
+    ],
+    "emFormula": {
+      "divisor": 2,
+      "pcCost": 8
+    },
+    "calculatedEM": 185
+  },
+  "powers": {
+    "selected": [
+      {
+        "id": "incremento_vital",
+        "origin": "Sobrenatural",
+        "rank": 100,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false
+      }
+    ]
+  },
+  "traumas": {
+    "Fanático/Vengador": "considera que la vida y la muerte son límites impuestos a las masas, cadenas que mantienen a la humanidad atrapada en un ciclo interminable de decadencia y reemplazo. Está convencida de que solo unos pocos individuos excepcionales poseen la voluntad, la inteligencia y la disciplina necesarias para trascender esas barreras y convertirse en algo superior. A sus ojos, el futuro pertenece a una nueva élite liberada de las debilidades de la condición humana, destinada a guiar a quienes no son capaces de elevarse por sí mismos."
+  },
+  "profession": "Necronauta",
+  "meta": {
+    "version": "Beta 0.15.3",
+    "generator": "SHI Wizard"
+  }
+}

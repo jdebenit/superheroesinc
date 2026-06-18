@@ -1,0 +1,317 @@
+{
+  "name": "Klaus Richter",
+  "alias": "Eisengeist",
+  "level": 1,
+  "origin": {
+    "items": [
+      {
+        "Tecnológico": [
+          "Cyborg"
+        ]
+      },
+      {
+        "Sobrenatural": [
+          "Poseido"
+        ]
+      }
+    ]
+  },
+  "combatstats": {
+    "Acciones por asalto": "3",
+    "Iniciativa y Reflejos": "50",
+    "Puntos de Vida": "65",
+    "Equilibrio Mental": "60"
+  },
+  "otherstats": {
+    "Inconsciencia": "6",
+    "Recuperación": "2 PV/h",
+    "Resistencia a gases y venenos": "36%",
+    "Modificador de fuerza": "3d10+6",
+    "Peso Levantado": "8 t",
+    "Daño absorbido físico": "15",
+    "Daño absorbido mental": "0",
+    "Modificador de impacto": "10",
+    "Modificador Psionico": "25",
+    "Parada Fisica": "30",
+    "Parada mental": "70",
+    "Salto (alto / largo)": "7,3m / 22,0m"
+  },
+  "attributes": {
+    "values": {
+      "Fuerza": 110,
+      "Constitución": 110,
+      "Agilidad": 110,
+      "Inteligencia": 60,
+      "Percepción": 90,
+      "Apariencia": 30,
+      "Voluntad": 100
+    },
+    "breakdown": {
+      "fuerza": {
+        "base": 40,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 70
+      },
+      "constitucion": {
+        "base": 40,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 70
+      },
+      "agilidad": {
+        "base": 110,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "inteligencia": {
+        "base": 60,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "percepcion": {
+        "base": 90,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "apariencia": {
+        "base": 30,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "voluntad": {
+        "base": 100,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      }
+    }
+  },
+  "skills": {
+    "generalItems": [
+      {
+        "name": "Acechar/Discrección",
+        "math": "(AGI+PER)/2",
+        "value": "100%"
+      },
+      {
+        "name": "Comb. cuerpo a cuerpo",
+        "math": "(AGI+PER)/2",
+        "value": "100%"
+      },
+      {
+        "name": "Conocimientos generales",
+        "math": "INT/3",
+        "value": "20%"
+      },
+      {
+        "name": "Esconderse",
+        "math": "(AGI+PER)/4",
+        "value": "50%"
+      },
+      {
+        "name": "Idea",
+        "math": "INT/2",
+        "value": "30%"
+      },
+      {
+        "name": "Influencia",
+        "math": "(INT+APA)/2",
+        "value": "45%"
+      },
+      {
+        "name": "Idioma nativo (Alemán)",
+        "math": "INT",
+        "value": "60%"
+      },
+      {
+        "name": "Investigar",
+        "math": "(INT+PER)/3",
+        "value": "50%"
+      },
+      {
+        "name": "Lanzar",
+        "math": "(FUE+PER)/2",
+        "value": "100%"
+      },
+      {
+        "name": "Primeros auxilios",
+        "math": "INT/2",
+        "value": "30%"
+      },
+      {
+        "name": "Suerte",
+        "math": "(PER+VOL)/4",
+        "value": "47%"
+      },
+      {
+        "name": "Trepar y Saltar",
+        "math": "AGI",
+        "value": "110%"
+      }
+    ],
+    "specialItems": [
+      {
+        "name": "Armas cortas",
+        "math": "(2xPER)/3",
+        "value": "60%"
+      },
+      {
+        "name": "Armas militares",
+        "math": "PER/3",
+        "value": "30%"
+      },
+      {
+        "name": "Armas largas",
+        "math": "(2xPER)/3",
+        "value": "60%"
+      },
+      {
+        "name": "Supervivencia: Campos de Batalla",
+        "math": "INT/2",
+        "value": "30%"
+      },
+      {
+        "name": "Otro idioma: Inglés",
+        "math": "INT/3",
+        "value": "20%"
+      },
+      {
+        "name": "Otro idioma: Español",
+        "math": "INT/3",
+        "value": "20%"
+      },
+      {
+        "name": "Otro idioma: Ruso",
+        "math": "INT/3",
+        "value": "20%"
+      }
+    ],
+    "generalManualMods": {},
+    "manualBases": {},
+    "selected": {
+      "armas_cortas": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "armas_militares": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "armas_largas": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      }
+    },
+    "specified": {
+      "supervivencia_1781810685442": {
+        "skillId": "supervivencia",
+        "specification": "Campos de Batalla",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "otro_idioma_1781810711622": {
+        "skillId": "otro_idioma",
+        "specification": "Inglés",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "otro_idioma_1781810713008": {
+        "skillId": "otro_idioma",
+        "specification": "Español",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "otro_idioma_1781810746077": {
+        "skillId": "otro_idioma",
+        "specification": "Ruso",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      }
+    },
+    "nativeLanguage": "Alemán"
+  },
+  "background": {
+    "prejudiceResistance": 80,
+    "economicStatus": "mendigo",
+    "friendsAndAssociates": "solitario"
+  },
+  "spells": {
+    "emFormula": {
+      "divisor": 0
+    },
+    "calculatedEM": 62
+  },
+  "powers": {
+    "selected": [
+      {
+        "id": "absorcion_de_vida",
+        "origin": "Sobrenatural",
+        "rank": 100,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false
+      }
+    ]
+  },
+  "techModules": {
+    "installed": [
+      {
+        "id": "1781810487303",
+        "definitionId": "endomusculos_avanzados",
+        "name": "Endomúsculos avanzados",
+        "location": "Cuerpo completo",
+        "pcCost": 5
+      },
+      {
+        "id": "1781810488567",
+        "definitionId": "endoesqueleto",
+        "name": "Endoesqueleto",
+        "location": "Cuerpo completo",
+        "pcCost": 3
+      },
+      {
+        "id": "1781810510075",
+        "definitionId": "hiperactividad",
+        "name": "Hiperactividad",
+        "location": "Sistema Nervioso",
+        "pcCost": 5
+      }
+    ]
+  },
+  "uiState": {
+    "unlockManualCharacteristics": true
+  },
+  "profession": "Capitán",
+  "sexualIdentity": "Hombre",
+  "meta": {
+    "version": "Beta 0.15.3",
+    "generator": "SHI Wizard"
+  }
+}
