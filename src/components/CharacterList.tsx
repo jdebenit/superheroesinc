@@ -269,6 +269,12 @@ export default function CharacterList({ initialCharacters, allGroups }: Characte
              color: var(--color-text, #000);
          }
 
+         .sort-group {
+             display: flex;
+             align-items: center;
+             gap: 0.5rem;
+         }
+
         .characters-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -284,6 +290,15 @@ export default function CharacterList({ initialCharacters, allGroups }: Characte
             
             .controls-section {
                 padding: 1rem;
+            }
+
+            .filter-select-group {
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .group-select {
+                max-width: calc(100% - 75px);
             }
         }
         

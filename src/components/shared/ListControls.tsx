@@ -157,6 +157,19 @@ export default function ListControls({ search, filters, children }: ListControls
                     .toolbar-row {
                         flex-direction: column;
                         align-items: stretch;
+                        gap: 1rem;
+                        max-width: 100%;
+                    }
+                    .search-group {
+                        min-width: 0;
+                        width: 100%;
+                    }
+                    .additional-controls {
+                        flex-direction: column;
+                        align-items: flex-start;
+                        gap: 1rem;
+                        width: 100%;
+                        max-width: 100%;
                     }
                 }
             `}</style>
