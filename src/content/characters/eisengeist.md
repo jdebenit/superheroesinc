@@ -12,7 +12,7 @@ tags:
 originReality: Tierra Zero
 actualReality: Tierra Zero
 ---
-Klaus Richter, alias Eisengeist (Espiritu de Hierro), fue un condecorado oficial alemán dado por muerto durante la campaña del Este. Su cuerpo destrozado fue recuperado por Heinrich Krauss y entregado a Valquiria Negra, quien logró devolverlo a la existencia mediante artes prohibidas cuando ya había cruzado el umbral de la muerte.
+Klaus Richter, alias Eisengeist (Espiritu de Hierro), fue un condecorado oficial alemán dado por muerto durante la campaña del Este. Su cuerpo destrozado fue recuperado por Heinrich Krauss y entregado a [Valquiria Negra](/personajes/schwarze-walküre/), quien logró devolverlo a la existencia mediante artes prohibidas cuando ya había cruzado el umbral de la muerte.
 
 Los científicos alemanes reconstruyeron lo que quedaba de su cadáver reforzando sus huesos con aleaciones metálicas y sustituyendo músculos irreparables por fibras mecánicas y tendones artificiales. Allí donde la carne no pudo salvarse, el acero ocupó su lugar.
 
