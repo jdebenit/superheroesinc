@@ -5,6 +5,7 @@ description: Klaus Richter, alias Eisengeist, murió durante la campaña del Est
 source: Partida Oficial - Hijos del Eje
 updatedDate: 2026-06-18
 rpgId: eisengeist
+image: "/personajes/eisengeist.png"
 tags:
   - Secundario
   - Poseido

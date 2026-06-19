@@ -11,6 +11,7 @@ tags:
 originReality: Tierra Zero
 actualReality: Tierra Zero
 rpgId: schwarze-walküre
+image: "/personajes/valquiria-negra.png"
 ---
 Irmgard Weiss, conocida en los círculos Nazis como la Valquiria Negra, aparenta apenas veinticuatro años pese a haber vivido mucho más tiempo del que cualquier registro oficial reconoce. Dotada desde su nacimiento de una extraña sensibilidad hacia los ecos que habitan más allá de la realidad visible, dedicó décadas a perfeccionar sus capacidades mediante el estudio de las artes ocultas y la exploración de regiones de la existencia que pocos seres humanos han contemplado y conservado la cordura para recordar.
 

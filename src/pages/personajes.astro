@@ -8,11 +8,16 @@ const characters = (await getCollection("characters")).sort((a, b) =>
   (a.data.alias || a.data.name).localeCompare(b.data.alias || b.data.name),
 );
 
-const groups = await getCollection("lore", (item) => item.data.category === "grupos");
-const allGroups = groups.map((g) => ({
-  id: g.data.id || g.id.split("/").pop() || g.id,
-  title: g.data.title,
-})).sort((a, b) => a.title.localeCompare(b.title));
+const groups = await getCollection(
+  "lore",
+  (item) => item.data.category === "grupos",
+);
+const allGroups = groups
+  .map((g) => ({
+    id: g.data.id || g.id.split("/").pop() || g.id,
+    title: g.data.title,
+  }))
+  .sort((a, b) => a.title.localeCompare(b.title));
 ---
 
 <Layout
@@ -26,8 +31,11 @@ const allGroups = groups.map((g) => ({
       Conoce a los héroes, villanos y personajes varios que pueblan el universo
       de Superheroes INC.
     </p>
-
-    <CharacterList client:load initialCharacters={characters} allGroups={allGroups} />
+    <CharacterList
+      client:load
+      initialCharacters={characters}
+      allGroups={allGroups}
+    />
   </section>
 </Layout>
 
