@@ -3,6 +3,7 @@ import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS, FRIENDS_AND_ASSOCIATES } 
 import { ORIGIN_CATEGORIES } from '../data/originDefinitions';
 import { SPECIAL_SKILLS } from '../data/specialSkills';
 import Logger from './Logger';
+import { formatDerivedStats, applyStatsOverrides } from './characterCalculations';
 
 // ... (helpers removed)
 
@@ -76,6 +77,10 @@ export async function generateCharacterSheetPDF(
         other: { inconsciencia: '', recuperacion: '', resistenciaGases: '', modFuerza: '', pesoLevantado: '', daAbsorbidoFisico: '', daAbsorbidoMental: '', modImpacto: '', modPsionico: '', paradaFisica: '', paradaMental: '', salto: '' }
     };
 
+    const { combatStats: calculatedCombatStats, otherStats: calculatedOtherStats } = formatDerivedStats(stats);
+    const finalCombatStats = applyStatsOverrides(calculatedCombatStats, character.combatstats);
+    const finalOtherStats = applyStatsOverrides(calculatedOtherStats, character.otherstats);
+
     // Default empty structures if missing
     const generalSkillsData = preCalculatedData?.generalSkillsData || { skills: {} };
     const specialSkillsData = preCalculatedData?.specialSkillsData || { standard: {}, specified: {} };
@@ -118,10 +123,10 @@ export async function generateCharacterSheetPDF(
         'attr.vol': character.attributes?.values?.["Voluntad"]?.toString(),
 
         // Combate
-        'combat.actions': stats.combat.acciones,
-        'combat.initiative': stats.combat.iniciativa,
-        'combat.hp': stats.combat.pv,
-        'combat.mental': stats.combat.equilibrio,
+        'combat.actions': finalCombatStats["Acciones por asalto"],
+        'combat.initiative': finalCombatStats["Iniciativa y Reflejos"],
+        'combat.hp': finalCombatStats["Puntos de Vida"],
+        'combat.mental': finalCombatStats["Equilibrio Mental"],
 
         // Energia Magica
         'combat.energy': (() => {
@@ -132,18 +137,18 @@ export async function generateCharacterSheetPDF(
         })(),
 
         // Otras Estadísticas
-        'stats.unconscious': stats.other.inconsciencia,
-        'stats.recovery': stats.other.recuperacion,
-        'stats.poison_res': stats.other.resistenciaGases,
-        'stats.lift': stats.other.pesoLevantado,
-        'stats.phys_absorb': stats.other.daAbsorbidoFisico,
-        'stats.ment_absorb': stats.other.daAbsorbidoMental,
-        'stats.phys_block': stats.other.paradaFisica,
-        'stats.ment_block': stats.other.paradaMental,
-        'stats.jump': stats.other.salto,
-        'stats.impact': stats.other.modImpacto,
-        'stats.psionic': stats.other.modPsionico,
-        'stats.strength_mod': stats.other.modFuerza,
+        'stats.unconscious': finalOtherStats["Inconsciencia"],
+        'stats.recovery': finalOtherStats["Recuperación"],
+        'stats.poison_res': finalOtherStats["Resistencia a gases y venenos"],
+        'stats.lift': finalOtherStats["Peso Levantado"],
+        'stats.phys_absorb': finalOtherStats["Daño absorbido físico"],
+        'stats.ment_absorb': finalOtherStats["Daño absorbido mental"],
+        'stats.phys_block': finalOtherStats["Parada Fisica"],
+        'stats.ment_block': finalOtherStats["Parada mental"],
+        'stats.jump': finalOtherStats["Salto (alto / largo)"],
+        'stats.impact': finalOtherStats["Modificador de impacto"],
+        'stats.psionic': finalOtherStats["Modificador Psionico"],
+        'stats.strength_mod': finalOtherStats["Modificador de fuerza"],
 
         // Trasfondo
         'bg.prejudice': character.background?.prejudiceResistance?.toString(),
