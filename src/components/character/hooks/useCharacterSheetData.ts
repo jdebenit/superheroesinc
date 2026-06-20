@@ -146,6 +146,7 @@ export const useCharacterSheetData = (character: any) => {
         const isSemidemonioBonus = isSemidemonio && p.origin === 'Sobrenatural';
 
         let costVal = 0;
+        let finalVal = '';
 
         if (powerData) {
             let baseCost = powerData.cost || 0;
@@ -162,11 +163,13 @@ export const useCharacterSheetData = (character: any) => {
                 const rank = p.rank || 1;
                 const minVal = powerData.skillCalc ? calculateSkillBase(character.attributes?.values || {}, character.origin?.items || [], powerData.skillCalc) : 0;
 
-                const currentVal = p.skillValue !== undefined ? p.skillValue : minVal;
+                const currentVal = p.skillValue || minVal;
                 // Simplified extra cost logic from pdfExport
                 const extraCost = Math.max(0, currentVal - minVal) * 0.1;
                 const custCost = (p.customizations || []).reduce((sum: number, c: any) => sum + (c.cost || 0), 0);
                 costVal = baseCost + penalty + (rank * 0.1) + extraCost + custCost;
+                
+                finalVal = currentVal.toString();
             } else {
                 // Attribute type
                 const powerMod = p.powerMod || 0;
@@ -180,9 +183,12 @@ export const useCharacterSheetData = (character: any) => {
                 costVal = baseCost + penalty + modCost;
                 const custCost = (p.customizations || []).reduce((sum: number, c: any) => sum + (c.cost || 0), 0);
                 costVal += custCost;
+
+                finalVal = powerMod.toString();
             }
         } else {
             costVal = p.cost || 0;
+            finalVal = (p.skillValue !== undefined ? p.skillValue : (p.powerMod || '')).toString();
         }
 
         const formattedRank = (() => {
@@ -201,7 +207,7 @@ export const useCharacterSheetData = (character: any) => {
         return {
             name: finalDisplayName,
             cost: costVal.toFixed(1),
-            val: (p.skillValue !== undefined ? p.skillValue : (p.powerMod || '')).toString(),
+            val: finalVal,
             rank: formattedRank,
             notes: (p.effect || '')
         };
