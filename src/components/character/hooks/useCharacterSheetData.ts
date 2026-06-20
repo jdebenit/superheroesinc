@@ -1,6 +1,6 @@
 import { SPELLS } from '../../../data/spells';
 import { POWERS } from '../../../data/powers';
-import { calculateEM } from '../../wizard/steps/Step3_Especials/utils';
+import { calculateEM, getRankLevel } from '../../wizard/steps/Step3_Especials/utils';
 import { calculateDerivedStats, calculateSkillBase, formatDerivedStats, applyStatsOverrides } from '../../../utils/characterCalculations';
 import { calculateGeneralSkillValues, calculateSpecialSkillValues } from '../../../utils/calculations/skillCalculations';
 
@@ -112,11 +112,24 @@ export const useCharacterSheetData = (character: any) => {
         // If JSON has explicit displayed value/cost, use those directly/trivially
         // Note: The 'value' in JSON for powers is often the calculated % or static value
         if (p.val || p.value) {
+            const formattedRank = (() => {
+                if (powerData?.characteristic) return '';
+                const r = p.rank;
+                if (r !== undefined && r !== null && r !== '') {
+                    const rankNum = Number(r);
+                    if (!isNaN(rankNum)) {
+                        return `${getRankLevel(rankNum)} (${r})`;
+                    }
+                    return r.toString();
+                }
+                return '';
+            })();
+
             return {
                 name: finalDisplayName,
                 cost: (p.cost !== undefined ? p.cost : (powerData?.cost || 0)).toString(),
                 val: (p.value || p.val).toString(),
-                rank: (p.rank || '').toString(),
+                rank: formattedRank,
                 notes: (p.effect || '')
             };
         }
@@ -172,11 +185,24 @@ export const useCharacterSheetData = (character: any) => {
             costVal = p.cost || 0;
         }
 
+        const formattedRank = (() => {
+            if (powerData?.characteristic) return '';
+            const r = p.rank;
+            if (r !== undefined && r !== null && r !== '') {
+                const rankNum = Number(r);
+                if (!isNaN(rankNum)) {
+                    return `${getRankLevel(rankNum)} (${r})`;
+                }
+                return r.toString();
+            }
+            return '';
+        })();
+
         return {
             name: finalDisplayName,
             cost: costVal.toFixed(1),
             val: (p.skillValue !== undefined ? p.skillValue : (p.powerMod || '')).toString(),
-            rank: (p.rank || '').toString(),
+            rank: formattedRank,
             notes: (p.effect || '')
         };
     });
