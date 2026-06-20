@@ -38,7 +38,7 @@ Algunos horrores tempranos y anomalías surgidas durante los primeros compases d
 
 ## Castáphilo y la instrumentalización del saber
 
-[Castáphilo](/personajes/centurion/), bajo distintos nombres y roles, mantuvo contacto indirecto con círculos vinculados al movimiento nacionalsocialista. Su conocimiento fragmentario sobre conflictos sobrenaturales y artefactos antiguos fue utilizado por otros como justificación para profundizar en prácticas que jamás comprendió ni aprobó plenamente.
+[Castáphilo](/personajes/centurion/), bajo distintos nombres y roles, mantuvo contacto indirecto con círculos vinculados al movimiento nacionalsocialista. Su conocimiento fragmentario sobre conflictos sobrenaturales y artefactos antiguos fue utilizado por otros, una de ellos [Valquiria Negra](/personajes/schwarze-walküre/), como justificación para profundizar en prácticas que jamás comprendió ni aprobó plenamente.
 
 No compartía la ideología racial de Thule, pero su experiencia fue instrumentalizada. Parte de la tragedia posterior tiene su raíz en esa colaboración involuntaria, donde información real fue interpretada desde una lógica ideológica y no desde la prudencia.
 

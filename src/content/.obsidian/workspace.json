@@ -11,10 +11,14 @@
             "id": "65b7b2aad12b38b2",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "timeline/desaparicion-de-heinrich-krauss.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "Nueva pestaña"
+              "title": "desaparicion-de-heinrich-krauss"
             }
           }
         ]
@@ -181,6 +185,9 @@
   },
   "active": "65b7b2aad12b38b2",
   "lastOpenFiles": [
+    "timeline/primer-intento-invocacion-heinrich-krauss.md",
+    "timeline/desaparicion-de-heinrich-krauss.md",
+    "lore/organizaciones/sociedad-thule.md",
     "characters/wirbelsturm.md",
     "characters/schwarze-walküre.md",
     "characters/eisengeist.md",
@@ -206,9 +213,6 @@
     "lore/eventos/Guia breve del mundo.md",
     "lore/eventos/el-colapso-del-nexo.md",
     "lore/grupos/axis.md",
-    "lore/organizaciones/zelig.md",
-    "lore/grupos/campeones-de-europa.md",
-    "lore/grupos/antiheroes-ltd.md",
     "rpg/flecha-roja-ii.json",
     "personajes",
     "Pasted image 20260416191817.png",
