@@ -18,10 +18,10 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
     if (variant === 'inline') {
         return (
             <div className="inline-actions">
-                <button onClick={onDownloadJson} className="action-btn" title="Descargar JSON">
+                <button onClick={onDownloadJson} className="inline-action-btn" title="Descargar JSON">
                     💾 Descargar JSON
                 </button>
-                <button onClick={onExportPdf} className="action-btn pdf-btn" title="Exportar PDF">
+                <button onClick={onExportPdf} className="inline-action-btn pdf-btn" title="Exportar PDF">
                     <img src="/icons/descargar-pdf.png" alt="PDF" className="btn-icon" />
                     <span>Exportar PDF</span>
                 </button>
