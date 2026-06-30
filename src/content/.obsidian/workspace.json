@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "timeline/thor-y-la-gran-barrera.md",
+                "file": "timeline/la-rebelion-los-enanos-y-elfos.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "thor-y-la-gran-barrera"
+              "title": "la-rebelion-los-enanos-y-elfos"
             }
           }
         ]
@@ -185,6 +185,10 @@
   },
   "active": "183272bc70890bdb",
   "lastOpenFiles": [
+    "timeline/la-princesa-estrella-vuelve-a-casa.md",
+    "timeline/la-rebelion-los-enanos-y-elfos.md",
+    "timeline/propaganda-de-superheroes.md",
+    "timeline/thor-y-la-gran-barrera.md",
     "timeline/textos-nordicos.md",
     "timeline/se-recupera-la-mascara-de-tsang-tseng.md",
     "timeline/ritual-fin-del-mundo.md",
@@ -207,10 +211,6 @@
     "timeline/los-ultimos-buscadores-en-stonehenge.md",
     "timeline/los-arcontes-y-tratado-de-no-agresion.md",
     "timeline/lord-brujo-y-mad-skull.md",
-    "timeline/la-peste-negra-y-la-caza-de-brujas.md",
-    "timeline/incidente-en-cerde-a-y-rescate-de-flecha-roja.md",
-    "timeline/la-noche-de-los-siete-martillos.md",
-    "timeline/terremoto-de-kobe-y-triangulo-mortal.md",
     "rpg/eisengeist.json",
     "rpg/schwarze-walküre.json",
     "rpg/flecha-roja-ii.json",
