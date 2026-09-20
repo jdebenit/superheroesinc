@@ -3,14 +3,13 @@ name: Farfalla
 description: Farfalla es una pequeña guerrera alada procedente de la Terra del futuro, donde combatía en la Guerra de la Eternidad como miembro del Ejército de Liberación de los Seres Mágicos. Un accidente durante las pruebas de un teleportador la desplazó hasta Tierra Zero y varios siglos hacia el pasado, dejándola atrapada en una época cuya historia conoce demasiado bien. Rápida, impulsiva y dotada de poderes mágicos, terminó uniéndose a Power Generation mientras intenta encontrar su lugar sin alterar un futuro que quizá ya haya comenzado a cambiar.
 source: Superherohes INC. Crossover 1
 updatedDate: 2026-09-20
-rpgId: farfalla
 tags:
   - Secundario
   - Hada
 originReality: Terra
 actualReality: Tierra Zero
 ---
-Farfalla era miembro del Ejército de Liberación de los Seres Mágicos, una de las facciones surgidas durante la Guerra de la Eternidad que tendrá lugar en el futuro de Terra. En medio de un conflicto que parecía no tener fin, se presentó voluntaria para probar un prototipo de teleportador que permitiría a sus tropas entrar y salir rápidamente del campo de batalla. Las primeras pruebas fueron un éxito y, en una fecha que correspondería al 17 de noviembre de 2199 según el calendario de Tierra Zero, se programó una nueva en la que debía activar al mismo tiempo uno de sus escudos místicos. Algo salió mal al combinar ambas energías y Farfalla desapareció sin dejar rastro.
+Farfalla era miembro del Ejército de Liberación de los Seres Mágicos, una de las facciones surgidas durante [la Guerra de la Eternidad](/lore/eventos/la-guerra-de-la-eternidad/) que tendrá lugar en el futuro de Terra. En medio de un conflicto que parecía no tener fin, se presentó voluntaria para probar un prototipo de teleportador que permitiría a sus tropas entrar y salir rápidamente del campo de batalla. Las primeras pruebas fueron un éxito y, en una fecha que correspondería al 17 de noviembre de 2199 según el calendario de Tierra Zero, se programó una nueva en la que debía activar al mismo tiempo uno de sus escudos místicos. Algo salió mal al combinar ambas energías y Farfalla desapareció sin dejar rastro.
 
 Cuando volvió a abrir los ojos se encontró en un mundo que no reconocía. La magia era mucho más débil de lo que estaba acostumbrada y la tecnología resultaba atrasada para alguien de su tiempo. Poco a poco comprendió que el accidente la había llevado desde Terra hasta Tierra Zero y, además, varios siglos hacia el pasado. Para ella apenas habían transcurrido unos instantes, pero su aparición había alterado el equilibrio mágico de aquella realidad lo suficiente para llamar la atención de Umbra, K’sser, Maestro Arcano y Sacred Spirit.
 
