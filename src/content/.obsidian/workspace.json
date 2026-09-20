@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "characters/farfalla.md",
+                "file": "lore/eventos/la-guerra-de-la-eternidad.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "farfalla"
+              "title": "la-guerra-de-la-eternidad"
             }
           }
         ]
@@ -55,7 +55,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "principal",
+                "query": "eternidad",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -187,10 +187,14 @@
   },
   "active": "81f4115ae1fb1d48",
   "lastOpenFiles": [
+    "lore/eventos/Sin título.md",
+    "lore/eventos/la-guerra-de-la-eternidad.md",
+    "lore/eventos/proyecto-euroman.md",
+    "lore/eventos/el-colapso-del-nexo.md",
+    "characters/farfalla.md",
     "characters/titania.md",
     "characters/chainsaw.md",
     "characters/comandante.md",
-    "characters/farfalla.md",
     "characters/abogado.md",
     "timeline/la-princesa-estrella-vuelve-a-casa.md",
     "timeline/la-rebelion-los-enanos-y-elfos.md",
@@ -209,10 +213,6 @@
     "timeline/operativo-antracita.md",
     "timeline/nuevos-cazadores-de-sombras.md",
     "timeline/nature-corps.md",
-    "timeline/nacimiento-de-paraiso.md",
-    "timeline/nacimiento-de-idess.md",
-    "timeline/nacimiento-de-herman-meyer.md",
-    "timeline/muerte-de-heroes-europeos.md",
     "rpg/eisengeist.json",
     "rpg/schwarze-walküre.json",
     "rpg/flecha-roja-ii.json",
