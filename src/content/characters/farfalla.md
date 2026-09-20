@@ -1,6 +1,6 @@
 ---
 name: Farfalla
-description: Abogado estandar.
+description: Farfalla es una pequeña guerrera alada procedente de la Terra del futuro, donde combatía en la Guerra de la Eternidad como miembro del Ejército de Liberación de los Seres Mágicos. Un accidente durante las pruebas de un teleportador la desplazó hasta Tierra Zero y varios siglos hacia el pasado, dejándola atrapada en una época cuya historia conoce demasiado bien. Rápida, impulsiva y dotada de poderes mágicos, terminó uniéndose a Power Generation mientras intenta encontrar su lugar sin alterar un futuro que quizá ya haya comenzado a cambiar.
 source: Superherohes INC. Crossover 1
 updatedDate: 2026-09-20
 rpgId: farfalla
