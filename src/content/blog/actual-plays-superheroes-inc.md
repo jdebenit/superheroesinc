@@ -10,7 +10,7 @@ tags:
 ---
 Los Actual Plays se han convertido en una de las mejores formas de entender qué es Superhéroes INC. Una cosa es leer el manual y otra muy distinta ver cómo una mesa toma decisiones, resuelve acciones y convierte una escena en algo vivo. Por eso estamos dando un espacio especial a este tipo de contenido dentro de la web.
 
-Un Actual Play es una partida real. No es teoría, no es un ejemplo abstracto, no es un relato inventado a posteriori. Son los jugadores y el Guionista reaccionando al momento, usando las reglas, fallando, acertando y construyendo juntos una historia que podría ocurrir en Tierra Zero, en Terra o en cualquier rincón del multiverso.
+Un Actual Play es una partida real. No es teoría, no es un ejemplo abstracto, no es un relato inventado a posteriori. Son los jugadores y el Guionista reaccionando al momento, usando las reglas, fallando, acertando y construyendo juntos una historia que podría ocurrir en [Tierra Zero](/lore/localizaciones/tierra-zero/), en [Terra](/lore/localizaciones/terra/) o en cualquier rincón del multiverso.
 
 ## Qué es exactamente un Actual Play
 

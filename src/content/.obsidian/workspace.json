@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "df39d3e4467584ea",
+        "id": "da1eafb28d78590e",
         "type": "tabs",
         "children": [
           {
-            "id": "81f4115ae1fb1d48",
+            "id": "708775ef5c57b24b",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "lore/eventos/la-guerra-de-la-eternidad.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "la-guerra-de-la-eternidad"
+              "title": "Nueva pestaña"
             }
           }
         ]
@@ -55,7 +51,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "eternidad",
+                "query": "Terra",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -185,15 +181,25 @@
       "bases:Crear nueva base": false
     }
   },
-  "active": "81f4115ae1fb1d48",
+  "active": "708775ef5c57b24b",
   "lastOpenFiles": [
+    "characters/farfalla.md",
+    "blog/actual-plays-superheroes-inc.md",
+    "characters/aescotan.md",
+    "characters/gargantua-2.md",
+    "lore/eventos/tratado-carmarthen.md",
+    "lore/eventos/proyecto-euroman.md",
+    "lore/eventos/las-guerras-gamadas.md",
+    "lore/eventos/la-revelacion.md",
+    "lore/eventos/bienvenido-al-universo.md",
+    "lore/eventos/cronologia-resumida.md",
+    "lore/eventos/el-colapso-del-nexo.md",
+    "lore/eventos/la-caida-de-la-gran-barrera.md",
+    "lore/eventos/la-guerra-de-la-eternidad.md",
+    "lore/eventos/la-llegada-de-nigalion.md",
     "timeline/accidente-farfalla.md",
     "timeline/apertura-porta-a-tierra-zero copy.md",
     "lore/eventos/Sin título.md",
-    "lore/eventos/la-guerra-de-la-eternidad.md",
-    "lore/eventos/proyecto-euroman.md",
-    "lore/eventos/el-colapso-del-nexo.md",
-    "characters/farfalla.md",
     "characters/titania.md",
     "characters/chainsaw.md",
     "characters/comandante.md",
@@ -203,16 +209,6 @@
     "timeline/propaganda-de-superheroes.md",
     "timeline/thor-y-la-gran-barrera.md",
     "timeline/textos-nordicos.md",
-    "timeline/se-recupera-la-mascara-de-tsang-tseng.md",
-    "timeline/ritual-fin-del-mundo.md",
-    "timeline/revelacion-de-los-dioses.md",
-    "timeline/segunda-invasion-k-sser.md",
-    "timeline/preparacion-para-las-guerras-gamadas.md",
-    "timeline/presentacion-de-vertice-de-combate.md",
-    "timeline/princesa-estrella-en-la-nave-dorkan.md",
-    "timeline/profecia-de-sibila-a-umbra.md",
-    "timeline/origen-de-lince-padres.md",
-    "timeline/operativo-antracita.md",
     "rpg/eisengeist.json",
     "rpg/schwarze-walküre.json",
     "rpg/flecha-roja-ii.json",
