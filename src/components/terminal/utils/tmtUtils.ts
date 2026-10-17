@@ -61,7 +61,10 @@ export function getBaseIniciativa(entry: TmtCharacterEntry): number {
             if (!isNaN(val)) return val;
         }
     } else if (cd?.combatstats && typeof cd.combatstats === 'object') {
-        const val = parseInt(cd.combatstats['Iniciativa y Reflejos']);
+        const rawInit = cd.combatstats['Iniciativa y Reflejos'];
+        const val = (rawInit && typeof rawInit === 'object')
+            ? parseInt(String(rawInit.personalizado !== undefined && rawInit.personalizado !== null && String(rawInit.personalizado).trim() !== '' ? rawInit.personalizado : rawInit.total))
+            : parseInt(rawInit);
         if (!isNaN(val)) return val;
     }
 

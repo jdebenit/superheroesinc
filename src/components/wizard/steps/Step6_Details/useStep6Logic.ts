@@ -3,6 +3,7 @@ import { calculateDerivedStats, formatDerivedStats, applyStatBreakdownOverride }
 import { ARTIFACTS } from '../../../../data/artifacts';
 import { MAGIC_OBJECTS } from '../../../../data/magicObjects';
 
+const BREAKDOWN_COMBAT_FIELDS = ['Iniciativa y Reflejos'];
 const BREAKDOWN_STAT_FIELDS = ['Parada mental', 'Parada Fisica', 'Modificador de impacto'];
 
 export function useStep6Logic(data: any, onChange: (updates: any) => void) {
@@ -22,7 +23,15 @@ export function useStep6Logic(data: any, onChange: (updates: any) => void) {
         const stats = calculateDerivedStats(data.attributes.values, data.origin?.items, data.skills);
         const { combatStats: newCombat, otherStats: newOther } = formatDerivedStats(stats);
 
-        // Preserve 'personalizado' in breakdown stats if already set
+        // Preserve 'personalizado' in combat breakdown stats if already set
+        BREAKDOWN_COMBAT_FIELDS.forEach(statKey => {
+            const existingVal = data.combatstats?.[statKey];
+            if (existingVal !== undefined && existingVal !== null && newCombat[statKey]) {
+                newCombat[statKey] = applyStatBreakdownOverride(newCombat[statKey], existingVal);
+            }
+        });
+
+        // Preserve 'personalizado' in other breakdown stats if already set
         BREAKDOWN_STAT_FIELDS.forEach(statKey => {
             const existingVal = data.otherstats?.[statKey];
             if (existingVal !== undefined && existingVal !== null && newOther[statKey]) {
@@ -62,23 +71,65 @@ export function useStep6Logic(data: any, onChange: (updates: any) => void) {
 
     // Manual Stat Handlers
     const updateCombatStat = useCallback((field: string, value: string) => {
+        if (BREAKDOWN_COMBAT_FIELDS.includes(field)) {
+            const current = data.combatstats?.[field];
+            let baseObj: any = { base: 0, habilidades: 0, total: 0 };
+            if (current && typeof current === 'object') {
+                baseObj = {
+                    base: current.base ?? 0,
+                    ...(current.origen !== undefined ? { origen: current.origen } : {}),
+                    ...(current.habilidades !== undefined ? { habilidades: current.habilidades } : {}),
+                    total: current.total ?? 0
+                };
+            } else {
+                const stats = calculateDerivedStats(data.attributes.values, data.origin?.items, data.skills);
+                const { combatStats: formattedCombat } = formatDerivedStats(stats);
+                if (formattedCombat[field] && typeof formattedCombat[field] === 'object') {
+                    baseObj = { ...formattedCombat[field] };
+                }
+            }
+
+            const trimmed = value.trim();
+            let updatedBreakdown: any;
+            if (trimmed === '') {
+                updatedBreakdown = { ...baseObj, personalizado: '' };
+            } else {
+                const parsed = !isNaN(Number(trimmed)) ? Number(trimmed) : value;
+                if (parsed === baseObj.total) {
+                    updatedBreakdown = { ...baseObj };
+                } else {
+                    updatedBreakdown = { ...baseObj, personalizado: parsed };
+                }
+            }
+
+            onChange({
+                combatstats: {
+                    ...data.combatstats,
+                    [field]: updatedBreakdown
+                }
+            });
+            return;
+        }
+
         onChange({
             combatstats: {
                 ...data.combatstats,
                 [field]: value
             }
         });
-    }, [data.combatstats, onChange]);
+    }, [data.combatstats, data.attributes.values, data.origin?.items, data.skills, onChange]);
 
     const updateOtherStat = useCallback((field: string, value: string) => {
         if (BREAKDOWN_STAT_FIELDS.includes(field)) {
             const current = data.otherstats?.[field];
-            let baseObj: any = { base: 0, origen: 0, total: 0 };
+            let baseObj: any = field === 'Parada Fisica'
+                ? { base: 0, habilidades: 0, total: 0 }
+                : { base: 0, origen: 0, total: 0 };
             if (current && typeof current === 'object') {
                 baseObj = {
                     base: current.base ?? 0,
-                    origen: current.origen ?? 0,
-                    ...(current.habilidades ? { habilidades: current.habilidades } : {}),
+                    ...(current.origen !== undefined ? { origen: current.origen } : {}),
+                    ...(current.habilidades !== undefined ? { habilidades: current.habilidades } : {}),
                     total: current.total ?? 0
                 };
             } else {

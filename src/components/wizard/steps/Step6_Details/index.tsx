@@ -30,7 +30,7 @@ interface Step6Props {
         magicObjects: { items: any[] };
         vehicles: { items: any[] };
         skills?: any;
-        combatstats?: Record<string, string>;
+        combatstats?: Record<string, any>;
         otherstats?: Record<string, any>;
     };
     onChange: (updates: any) => void;
@@ -132,20 +132,36 @@ export default function Step6_Details({ data, onChange, totalPCs, onShowHelp }: 
                     </InfoBox>
                 </div>
                 <div className="step6-combat-stats-grid">
-                    {data.combatstats && Object.entries(data.combatstats).map(([label, val], index) => (
-                        unlockCombatStats ? (
-                            <WizardField
-                                key={label}
-                                label={label}
-                                value={val as string}
-                                onChange={(newVal) => updateCombatStat(label, newVal)}
-                                noMargin
-                                className="step6-manual-stat-field"
-                            />
-                        ) : (
-                            <StatItem key={index} label={label} value={val as string} theme="red" />
-                        )
-                    ))}
+                    {data.combatstats && Object.entries(data.combatstats).map(([label, val], index) => {
+                        if (unlockCombatStats) {
+                            const inputValue = (val && typeof val === 'object')
+                                ? (val.personalizado !== undefined && val.personalizado !== null
+                                    ? String(val.personalizado)
+                                    : String(val.total ?? ''))
+                                : String(val ?? '');
+
+                            return (
+                                <WizardField
+                                    key={label}
+                                    label={label}
+                                    value={inputValue}
+                                    onChange={(newVal) => updateCombatStat(label, newVal)}
+                                    noMargin
+                                    className="step6-manual-stat-field"
+                                />
+                            );
+                        }
+
+                        const displayVal = (val && typeof val === 'object')
+                            ? (val.personalizado !== undefined && val.personalizado !== null && String(val.personalizado).trim() !== ''
+                                ? String(val.personalizado)
+                                : String(val.total ?? '-'))
+                            : String(val || '-');
+
+                        return (
+                            <StatItem key={index} label={label} value={displayVal} theme="red" />
+                        );
+                    })}
                 </div>
             </WizardSection>
 

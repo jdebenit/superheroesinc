@@ -133,7 +133,13 @@ export default function OtherStatsPanel({ combatstats, otherstats, background }:
                     k.toLowerCase().includes(term.toLowerCase())
                 );
                 if (matchingKey) {
-                    statString = `${matchingKey}: ${source[matchingKey]}`;
+                    const rawVal = (source as Record<string, any>)[matchingKey];
+                    const resolvedVal = (rawVal && typeof rawVal === 'object')
+                        ? (rawVal.personalizado !== undefined && rawVal.personalizado !== null && String(rawVal.personalizado).trim() !== ''
+                            ? rawVal.personalizado
+                            : rawVal.total)
+                        : rawVal;
+                    statString = `${matchingKey}: ${resolvedVal}`;
                     break;
                 }
             }

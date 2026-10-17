@@ -90,6 +90,7 @@ export function calculateDerivedStats(
 
     // Iniciativa y Reflejos: (AGI + PER) / 4
     let iniciativaReflejos = Math.floor((agi + per) / 4);
+    const iniciativaBase = iniciativaReflejos;
 
     // Check for Artes Marciales skill bonus (can be General or Special)
     const hasMartialArts =
@@ -431,11 +432,19 @@ export function calculateDerivedStats(
     const impactOriginBreakdown: number | Record<string, number> =
         Object.keys(originImpactBonuses).length > 0 ? originImpactBonuses : 0;
 
+    const habilidadesBonusBreakdown: number | Record<string, number> =
+        hasMartialArts ? { "Artes Marciales": 20 } : 0;
+
     const paradaFisicaBreakdown: StatBreakdown = {
         base: paradaFisicaBase,
-        origen: 0,
-        ...(hasMartialArts ? { habilidades: { "Artes Marciales": 20 } } : {}),
+        habilidades: habilidadesBonusBreakdown,
         total: paradaFisica
+    };
+
+    const iniciativaBreakdown: StatBreakdown = {
+        base: iniciativaBase,
+        habilidades: habilidadesBonusBreakdown,
+        total: iniciativaReflejos
     };
 
     const modImpactoBreakdown: StatBreakdown = {
@@ -465,6 +474,7 @@ export function calculateDerivedStats(
         combat: {
             acciones: `${acciones}`,
             iniciativa: `${iniciativaReflejos}`,
+            iniciativaBreakdown,
             pv: `${puntosVida}`,
             equilibrio: `${equilibrioMental}`
         },
@@ -490,8 +500,8 @@ export function calculateDerivedStats(
 
 export interface StatBreakdown {
     base: number;
-    origen: number | Record<string, number>;
-    habilidades?: Record<string, number>;
+    origen?: number | Record<string, number>;
+    habilidades?: number | Record<string, number>;
     total: number;
     personalizado?: number | string;
 }
@@ -517,7 +527,11 @@ export function getStatDisplayValue(val: any): string {
     return str.trim() !== '' ? str : '-';
 }
 
-function normalizeToBreakdown(breakdownObj: any, fallbackVal: any): StatBreakdown {
+function normalizeToBreakdown(
+    breakdownObj: any,
+    fallbackVal: any,
+    bonusKey: 'origen' | 'habilidades' = 'origen'
+): StatBreakdown {
     if (breakdownObj && typeof breakdownObj === 'object') {
         return { ...breakdownObj };
     }
@@ -527,7 +541,7 @@ function normalizeToBreakdown(breakdownObj: any, fallbackVal: any): StatBreakdow
     const num = Number(fallbackVal) || 0;
     return {
         base: num,
-        origen: 0,
+        [bonusKey]: 0,
         total: num
     };
 }
@@ -537,16 +551,18 @@ function normalizeToBreakdown(breakdownObj: any, fallbackVal: any): StatBreakdow
  * Optimized for stability as requested by the user
  */
 export function formatDerivedStats(stats: any) {
-    const combatStats: Record<string, string> = {
+    const iniciativaObj = normalizeToBreakdown(stats.combat?.iniciativaBreakdown, stats.combat?.iniciativa, 'habilidades');
+
+    const combatStats: Record<string, any> = {
         "Acciones por asalto": stats.combat.acciones,
-        "Iniciativa y Reflejos": stats.combat.iniciativa,
+        "Iniciativa y Reflejos": iniciativaObj,
         "Puntos de Vida": stats.combat.pv,
         "Equilibrio Mental": stats.combat.equilibrio
     };
 
-    const modImpactoObj = normalizeToBreakdown(stats.other?.modImpactoBreakdown, stats.other?.modImpacto);
-    const paradaFisicaObj = normalizeToBreakdown(stats.other?.paradaFisicaBreakdown, stats.other?.paradaFisica);
-    const paradaMentalObj = normalizeToBreakdown(stats.other?.paradaMentalBreakdown, stats.other?.paradaMental);
+    const modImpactoObj = normalizeToBreakdown(stats.other?.modImpactoBreakdown, stats.other?.modImpacto, 'origen');
+    const paradaFisicaObj = normalizeToBreakdown(stats.other?.paradaFisicaBreakdown, stats.other?.paradaFisica, 'habilidades');
+    const paradaMentalObj = normalizeToBreakdown(stats.other?.paradaMentalBreakdown, stats.other?.paradaMental, 'origen');
 
     const otherStats: Record<string, any> = {
         "Inconsciencia": stats.other.inconsciencia,
@@ -568,15 +584,25 @@ export function formatDerivedStats(stats: any) {
 
 /**
  * Helper to apply a saved override to a StatBreakdown object.
- * Keeps base, origen, habilidades (if any), and total, and only attaches 'personalizado' if manually modified.
+ * Keeps base, origen/habilidades (if any), and total, and only attaches 'personalizado' if manually modified.
  */
 export function applyStatBreakdownOverride(baseBreakdown: StatBreakdown, savedValue: any): StatBreakdown {
     const cleanBase: StatBreakdown = {
         base: baseBreakdown.base ?? 0,
-        origen: baseBreakdown.origen && typeof baseBreakdown.origen === 'object'
-            ? { ...baseBreakdown.origen }
-            : (baseBreakdown.origen ?? 0),
-        ...(baseBreakdown.habilidades ? { habilidades: { ...baseBreakdown.habilidades } } : {}),
+        ...(baseBreakdown.origen !== undefined
+            ? {
+                origen: baseBreakdown.origen && typeof baseBreakdown.origen === 'object'
+                    ? { ...baseBreakdown.origen }
+                    : baseBreakdown.origen
+            }
+            : {}),
+        ...(baseBreakdown.habilidades !== undefined
+            ? {
+                habilidades: baseBreakdown.habilidades && typeof baseBreakdown.habilidades === 'object'
+                    ? { ...baseBreakdown.habilidades }
+                    : baseBreakdown.habilidades
+            }
+            : {}),
         total: baseBreakdown.total ?? 0
     };
 

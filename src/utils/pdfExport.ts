@@ -111,7 +111,7 @@ export async function generateCharacterSheetPDF(
 
         // Combate
         'combat.actions': finalCombatStats["Acciones por asalto"],
-        'combat.initiative': finalCombatStats["Iniciativa y Reflejos"],
+        'combat.initiative': getStatDisplayValue(finalCombatStats["Iniciativa y Reflejos"]),
         'combat.hp': finalCombatStats["Puntos de Vida"],
         'combat.mental': finalCombatStats["Equilibrio Mental"],
 
