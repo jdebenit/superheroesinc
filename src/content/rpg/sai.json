@@ -21,23 +21,75 @@
   },
   "combatstats": {
     "Acciones por asalto": "3",
-    "Iniciativa y Reflejos": "69",
-    "Puntos de Vida": "245",
-    "Equilibrio Mental": "96"
+    "Iniciativa y Reflejos": {
+      "formula": "(AGI+PER)/4",
+      "base": 49,
+      "habilidades": {
+        "Artes Marciales": 20
+      },
+      "total": 69
+    },
+    "Puntos de Vida": {
+      "formula": "CON/2",
+      "base": 49,
+      "total": 49,
+      "personalizado": 245
+    },
+    "Equilibrio Mental": {
+      "formula": "INT",
+      "base": 96,
+      "total": 96
+    }
   },
   "otherstats": {
-    "Inconsciencia": "4",
+    "Inconsciencia": {
+      "formula": "PV/10",
+      "base": 4,
+      "total": 4
+    },
     "Recuperación": "1 PV/h",
-    "Resistencia a gases y venenos": "32%",
+    "Resistencia a gases y venenos": {
+      "formula": "CON/3",
+      "base": 32,
+      "total": "32%"
+    },
     "Modificador de fuerza": "1d6",
     "Peso Levantado": "170kg",
-    "Daño absorbido físico": "0",
-    "Daño absorbido mental": "0",
-    "Modificador de impacto": "30",
+    "Daño absorbido físico": {
+      "base": 0,
+      "total": 0
+    },
+    "Daño absorbido mental": {
+      "base": 0,
+      "total": 0
+    },
+    "Modificador de impacto": {
+      "base": 0,
+      "origen": {
+        "Artista Marcial con Chi": 30
+      },
+      "total": 30
+    },
     "Modificador Psionico": "25",
-    "Parada Fisica": "45",
-    "Parada mental": "50",
-    "Salto (alto / largo)": "3,3m / 10,0m"
+    "Parada Fisica": {
+      "base": 25,
+      "habilidades": {
+        "Artes Marciales": 20
+      },
+      "total": 45
+    },
+    "Parada mental": {
+      "base": 50,
+      "origen": 0,
+      "total": 50
+    },
+    "Salto (alto / largo)": {
+      "formula": "AGI/10",
+      "multiplicadorFuerza": 1,
+      "alto": "3,3m",
+      "largo": "10,0m",
+      "total": "3,3m / 10,0m"
+    }
   },
   "attributes": {
     "values": {

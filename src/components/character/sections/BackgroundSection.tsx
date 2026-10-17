@@ -1,5 +1,6 @@
 import React from 'react';
 import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS, FRIENDS_AND_ASSOCIATES, BASE_COVERAGE } from '../../../data/backgroundTables';
+import { getEffectiveBackground } from '../../../utils/characterCalculations';
 
 interface BackgroundSectionProps {
     character: any;
@@ -9,15 +10,16 @@ import { SheetSection } from '../common/SheetSection';
 
 export const BackgroundSection: React.FC<BackgroundSectionProps> = ({ character }) => {
     const [isExpanded, setIsExpanded] = React.useState(false);
+    const bg = getEffectiveBackground(character.background, character.level, character.modPerLevel);
 
     if (
-        (!character.background || (
-            !character.background.items?.length &&
-            !character.background.economicStatus &&
-            !character.background.legalStatus &&
-            !character.background.socialStatus &&
-            !character.background.baseCoverage &&
-            !character.background.prejudiceResistance
+        (!bg || (
+            !bg.items?.length &&
+            !bg.economicStatus &&
+            !bg.legalStatus &&
+            !bg.socialStatus &&
+            !bg.baseCoverage &&
+            !bg.prejudiceResistance
         )) &&
         !character.profession &&
         !character.sexualIdentity
@@ -41,7 +43,7 @@ export const BackgroundSection: React.FC<BackgroundSectionProps> = ({ character 
     );
 
     if (!isExpanded) {
-        const resistance = character.background?.prejudiceResistance;
+        const resistance = bg?.prejudiceResistance;
         return (
             <SheetSection
                 title="Historial"
@@ -72,7 +74,7 @@ export const BackgroundSection: React.FC<BackgroundSectionProps> = ({ character 
             <div className="background-col-layout">
 
                 {/* Status Grid */}
-                {(character.background?.economicStatus || character.background?.legalStatus || character.background?.socialStatus || character.background?.friendsAndAssociates || character.background?.baseCoverage || character.profession || character.sexualIdentity) && (
+                {(bg?.economicStatus || bg?.legalStatus || bg?.socialStatus || bg?.friendsAndAssociates || bg?.baseCoverage || character.profession || character.sexualIdentity) && (
                     <div className="background-grid">
                         {character.profession && (
                             <div>
@@ -86,8 +88,8 @@ export const BackgroundSection: React.FC<BackgroundSectionProps> = ({ character 
                                 <span className="background-value">{character.sexualIdentity}</span>
                             </div>
                         )}
-                        {character.background?.economicStatus && (() => {
-                            const match = ECONOMIC_STATUS.find(e => e.id === character.background.economicStatus);
+                        {bg?.economicStatus && (() => {
+                            const match = ECONOMIC_STATUS.find(e => e.id === bg.economicStatus);
                             return (
                                 <div>
                                     <span className="background-label">POSICIÓN ECONÓMICA</span>
@@ -96,8 +98,8 @@ export const BackgroundSection: React.FC<BackgroundSectionProps> = ({ character 
                                 </div>
                             );
                         })()}
-                        {character.background?.legalStatus && (() => {
-                            const match = LEGAL_STATUS.find(l => l.id === character.background.legalStatus);
+                        {bg?.legalStatus && (() => {
+                            const match = LEGAL_STATUS.find(l => l.id === bg.legalStatus);
                             return (
                                 <div>
                                     <span className="background-label">SITUACIÓN LEGAL</span>
@@ -106,8 +108,8 @@ export const BackgroundSection: React.FC<BackgroundSectionProps> = ({ character 
                                 </div>
                             );
                         })()}
-                        {character.background?.socialStatus && (() => {
-                            const match = SOCIAL_STATUS.find(s => s.id === character.background.socialStatus);
+                        {bg?.socialStatus && (() => {
+                            const match = SOCIAL_STATUS.find(s => s.id === bg.socialStatus);
                             return (
                                 <div>
                                     <span className="background-label">POSICIÓN SOCIAL</span>
@@ -116,8 +118,8 @@ export const BackgroundSection: React.FC<BackgroundSectionProps> = ({ character 
                                 </div>
                             );
                         })()}
-                        {character.background?.friendsAndAssociates && (() => {
-                            const match = FRIENDS_AND_ASSOCIATES.find(f => f.id === character.background.friendsAndAssociates);
+                        {bg?.friendsAndAssociates && (() => {
+                            const match = FRIENDS_AND_ASSOCIATES.find(f => f.id === bg.friendsAndAssociates);
                             return (
                                 <div>
                                     <span className="background-label">AMISTADES Y ALLEGADOS</span>
@@ -126,8 +128,8 @@ export const BackgroundSection: React.FC<BackgroundSectionProps> = ({ character 
                                 </div>
                             );
                         })()}
-                        {character.background?.baseCoverage && (() => {
-                            const match = BASE_COVERAGE.find(b => b.id === character.background.baseCoverage);
+                        {bg?.baseCoverage && (() => {
+                            const match = BASE_COVERAGE.find(b => b.id === bg.baseCoverage);
                             return (
                                 <div>
                                     <span className="background-label">BASES Y COBERTURA</span>
@@ -140,11 +142,11 @@ export const BackgroundSection: React.FC<BackgroundSectionProps> = ({ character 
                 )}
 
                 {/* Background Items */}
-                {character.background?.items?.length > 0 && (
+                {bg?.items?.length > 0 && (
                     <div>
                         <span className="bg-notes-label">NOTAS DE TRASFONDO</span>
                         <ul className="bg-notes-list">
-                            {character.background.items.map((item: string, i: number) => (
+                            {bg.items.map((item: string, i: number) => (
                                 <li key={i}>{item}</li>
                             ))}
                         </ul>
@@ -152,14 +154,14 @@ export const BackgroundSection: React.FC<BackgroundSectionProps> = ({ character 
                 )}
 
                 {/* Prejudice Resistance */}
-                {character.background?.prejudiceResistance && (
+                {bg?.prejudiceResistance && (
                     <div className="prejudice-container">
                         <div>
                             <span className="prejudice-label">RESISTENCIA A PREJUICIOS</span>
-                            <span className="prejudice-value">{character.background.prejudiceResistance}%</span>
+                            <span className="prejudice-value">{bg.prejudiceResistance}%</span>
                         </div>
                         <span className="prejudice-cost">
-                            ({((character.background.prejudiceResistance - 50) * 0.1).toFixed(1)} PCs)
+                            ({((bg.prejudiceResistance - 50) * 0.1).toFixed(1)} PCs)
                         </span>
                     </div>
                 )}

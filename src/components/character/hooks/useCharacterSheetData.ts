@@ -61,7 +61,9 @@ export const useCharacterSheetData = (character: any) => {
     const derivedStats = calculateDerivedStats(
         character.attributes?.values || {},
         character.origin?.items || [],
-        character.skills || {}
+        character.skills || {},
+        character.level,
+        character.modPerLevel
     );
 
     const generalSkillsData = calculateGeneralSkillValues(

@@ -29,7 +29,7 @@ export function useStep6Logic(data: any, onChange: (updates: any) => void) {
         // Only run if at least ONE section is locked
         if (unlockCombatStats && unlockOtherStats) return;
 
-        const stats = calculateDerivedStats(data.attributes.values, data.origin?.items, data.skills);
+        const stats = calculateDerivedStats(data.attributes.values, data.origin?.items, data.skills, data.level, data.modPerLevel);
         const { combatStats: newCombat, otherStats: newOther } = formatDerivedStats(stats);
 
         // Preserve 'personalizado' in combat breakdown stats if already set
@@ -71,7 +71,7 @@ export function useStep6Logic(data: any, onChange: (updates: any) => void) {
         if (hasChanges) {
             onChange(updates);
         }
-    }, [data.attributes.values, data.origin?.items, data.skills, data.combatstats, data.otherstats, onChange, unlockCombatStats, unlockOtherStats]);
+    }, [data.attributes.values, data.origin?.items, data.skills, data.level, data.modPerLevel, data.combatstats, data.otherstats, onChange, unlockCombatStats, unlockOtherStats]);
 
     // Identity Handlers
     const updateField = useCallback((field: string, value: string) => {
@@ -89,10 +89,11 @@ export function useStep6Logic(data: any, onChange: (updates: any) => void) {
                     ...(current.base !== undefined ? { base: current.base } : {}),
                     ...(current.origen !== undefined ? { origen: current.origen } : {}),
                     ...(current.habilidades !== undefined ? { habilidades: current.habilidades } : {}),
+                    ...(current.nivel !== undefined ? { nivel: current.nivel } : {}),
                     total: current.total ?? 0
                 };
             } else {
-                const stats = calculateDerivedStats(data.attributes.values, data.origin?.items, data.skills);
+                const stats = calculateDerivedStats(data.attributes.values, data.origin?.items, data.skills, data.level, data.modPerLevel);
                 const { combatStats: formattedCombat } = formatDerivedStats(stats);
                 if (formattedCombat[field] && typeof formattedCombat[field] === 'object') {
                     baseObj = { ...formattedCombat[field] };

@@ -1,6 +1,7 @@
 import React from 'react';
 import { SheetSection } from '../common/SheetSection';
 import { DetailRow } from '../common/DetailRow';
+import { applyLevelModsToSkillItems } from '../../../utils/characterCalculations';
 import Logger from '../../../utils/Logger';
 
 interface SkillsGeneralSectionProps {
@@ -15,10 +16,16 @@ export const SkillsGeneralSection: React.FC<SkillsGeneralSectionProps> = ({ char
 
     if (!character.skills || !character.skills.generalItems || character.skills.generalItems.length === 0) return null;
 
+    const items = applyLevelModsToSkillItems(
+        character.skills.generalItems,
+        character.level,
+        character.modPerLevel
+    );
+
     return (
         <SheetSection title="Habilidades Generales" className="skills-general">
             <ul className="clean-list">
-                {character.skills.generalItems.map((item: any, i: number) => (
+                {items.map((item: any, i: number) => (
                     <li key={i} className="no-bullet-item skill-item">
                         <DetailRow
                             className="skill-row"
@@ -28,7 +35,14 @@ export const SkillsGeneralSection: React.FC<SkillsGeneralSectionProps> = ({ char
                                     {item.math && <span className="skill-math">{item.math}</span>}
                                 </>
                             }
-                            value={<span className="skill-value">{item.value}</span>}
+                            value={
+                                <span
+                                    className="skill-value"
+                                    title={item.levelBonus ? `Base: ${item.baseValue} | Nivel: +${item.levelBonus}%` : undefined}
+                                >
+                                    {item.value}
+                                </span>
+                            }
                             valueClassName=""
                         />
                     </li>

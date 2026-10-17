@@ -8,7 +8,9 @@ import {
     calculateGeneralSkillValues,
     formatDerivedStats,
     applyStatsOverrides,
-    getStatDisplayValue
+    getStatDisplayValue,
+    applyLevelModsToSkillItems,
+    getEffectiveBackground
 } from '../src/utils/characterCalculations';
 
 describe('Cálculos de Origen y Puntos de Creación (PC)', () => {
@@ -286,6 +288,90 @@ describe('Cálculos de Estadísticas Derivadas (d100)', () => {
             },
             total: 50
         });
+
+        // Prueba de progresión por nivel (modPerLevel) estructurado por categorías como en La Naga
+        const categorizedModPerLevel = {
+            '2': {
+                combatstats: { 'Puntos de Vida': 10 },
+                skills: { 'Artes Marciales': 10, 'Arma Especial: Khopesh': 10 },
+                background: { economicStatus: 'clase_baja' }
+            },
+            '3': {
+                combatstats: { 'Puntos de Vida': 10 },
+                skills: { 'Arma Especial: Khopesh': 10 },
+                background: { items: ['Con cobertura legal por la FDM'] }
+            },
+            '4': {
+                combatstats: { 'Puntos de Vida': 10 },
+                background: { friendsAndAssociates: 'conocido' }
+            }
+        };
+        const nagaAttrs = { Fuerza: 100, Constitución: 105, Agilidad: 110, Inteligencia: 102, Percepción: 110, Apariencia: 101, Voluntad: 102 };
+        const nagaLevel4 = formatDerivedStats(calculateDerivedStats(nagaAttrs, [], {}, 4, categorizedModPerLevel));
+        expect(nagaLevel4.combatStats['Puntos de Vida']).toEqual({
+            formula: 'CON-45',
+            base: 60,
+            nivel: 30,
+            total: 90
+        });
+        expect(nagaLevel4.otherStats['Inconsciencia']).toEqual({
+            formula: 'PV/10',
+            base: 9,
+            total: 9
+        });
+
+        // Si se baja el nivel a 2, solo se aplica el bloque "2" (+10 PV -> 70, Inconsciencia -> 7)
+        const nagaLevel2 = formatDerivedStats(calculateDerivedStats(nagaAttrs, [], {}, 2, categorizedModPerLevel));
+        expect(nagaLevel2.combatStats['Puntos de Vida']).toEqual({
+            formula: 'CON-45',
+            base: 60,
+            nivel: 10,
+            total: 70
+        });
+        expect(nagaLevel2.otherStats['Inconsciencia']).toEqual({
+            formula: 'PV/10',
+            base: 7,
+            total: 7
+        });
+
+        // Escalado de habilidades por nivel
+        const baseSkills = [
+            { name: 'Artes Marciales', value: '73%' },
+            { name: 'Arma Especial: Khopesh', value: '73%' }
+        ];
+        const skillsLv4 = applyLevelModsToSkillItems(baseSkills, 4, categorizedModPerLevel);
+        expect(skillsLv4[0].value).toBe('83%');
+        expect(skillsLv4[1].value).toBe('93%');
+
+        const skillsLv2 = applyLevelModsToSkillItems(baseSkills, 2, categorizedModPerLevel);
+        expect(skillsLv2[0].value).toBe('83%');
+        expect(skillsLv2[1].value).toBe('83%');
+
+        // Escalado de trasfondo por nivel (getEffectiveBackground)
+        const baseBackground = {
+            items: [],
+            prejudiceResistance: 30,
+            economicStatus: 'mendigo',
+            legalStatus: 'con_antecedentes',
+            socialStatus: 'anonimo',
+            friendsAndAssociates: 'solitario'
+        };
+        const bgLv4 = getEffectiveBackground(baseBackground, 4, categorizedModPerLevel);
+        expect(bgLv4.economicStatus).toBe('clase_baja');
+        expect(bgLv4.friendsAndAssociates).toBe('conocido');
+        expect(bgLv4.items).toEqual(['Con cobertura legal por la FDM']);
+
+        // A nivel 1 (base pura)
+        const bgLv1 = getEffectiveBackground(baseBackground, 1, categorizedModPerLevel);
+        expect(bgLv1.economicStatus).toBe('mendigo');
+        expect(bgLv1.friendsAndAssociates).toBe('solitario');
+        expect(bgLv1.items).toEqual([]);
+
+        // A nivel 2
+        const bgLv2 = getEffectiveBackground(baseBackground, 2, categorizedModPerLevel);
+        expect(bgLv2.economicStatus).toBe('clase_baja');
+        expect(bgLv2.friendsAndAssociates).toBe('solitario');
+        expect(bgLv2.items).toEqual([]);
     });
 });
 

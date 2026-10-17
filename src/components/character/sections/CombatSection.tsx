@@ -93,6 +93,12 @@ export const CombatSection: React.FC<CombatSectionProps> = ({ combatStats }) => 
                                             <span className="stat-breakdown-val">{renderModifierRecord(b.habilidades)}</span>
                                         </div>
                                     )}
+                                    {b.nivel !== undefined && (
+                                        <div className="stat-breakdown-row">
+                                            <span className="stat-breakdown-key">Nivel:</span>
+                                            <span className="stat-breakdown-val">{renderModifierRecord(b.nivel)}</span>
+                                        </div>
+                                    )}
                                     <div className="stat-breakdown-row stat-breakdown-total-row">
                                         <span className="stat-breakdown-key">Total:</span>
                                         <span className="stat-breakdown-val">{b.total}</span>

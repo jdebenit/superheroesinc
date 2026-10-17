@@ -23,7 +23,9 @@ export const useJsonExport = (
         const derivedStats = calculateDerivedStats(
             character.attributes?.values || {},
             character.origin?.items || [],
-            character.skills || {}
+            character.skills || {},
+            character.level,
+            character.modPerLevel
         );
         const { combatStats: calculatedCombatStats, otherStats: calculatedOtherStats } = formatDerivedStats(derivedStats);
         

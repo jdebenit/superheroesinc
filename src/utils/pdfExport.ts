@@ -3,7 +3,7 @@ import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS, FRIENDS_AND_ASSOCIATES } 
 import { ORIGIN_CATEGORIES } from '../data/originDefinitions';
 import { SPECIAL_SKILLS } from '../data/specialSkills';
 import Logger from './Logger';
-import { formatDerivedStats, applyStatsOverrides, getStatDisplayValue } from './characterCalculations';
+import { formatDerivedStats, applyStatsOverrides, getStatDisplayValue, applyLevelModsToSkillItems, getEffectiveBackground } from './characterCalculations';
 
 // ... (helpers removed)
 
@@ -74,6 +74,7 @@ export async function generateCharacterSheetPDF(
 
     // Lookup functions for background
     const getLabel = (list: any[], id: string) => list.find(i => i.id === id)?.label || id;
+    const effectiveBg = getEffectiveBackground(character.background, character.level, character.modPerLevel);
 
     // 3. Mapear campos
     const fields: Record<string, string> = {
@@ -138,11 +139,11 @@ export async function generateCharacterSheetPDF(
         'stats.strength_mod': getStatDisplayValue(finalOtherStats["Modificador de fuerza"]),
 
         // Trasfondo
-        'bg.prejudice': character.background?.prejudiceResistance?.toString(),
-        'bg.economic': getLabel(ECONOMIC_STATUS, character.background?.economicStatus),
-        'bg.legal': getLabel(LEGAL_STATUS, character.background?.legalStatus),
-        'bg.social': getLabel(SOCIAL_STATUS, character.background?.socialStatus),
-        'bg.friends': getLabel(FRIENDS_AND_ASSOCIATES, character.background?.friendsAndAssociates),
+        'bg.prejudice': effectiveBg?.prejudiceResistance?.toString(),
+        'bg.economic': getLabel(ECONOMIC_STATUS, effectiveBg?.economicStatus),
+        'bg.legal': getLabel(LEGAL_STATUS, effectiveBg?.legalStatus),
+        'bg.social': getLabel(SOCIAL_STATUS, effectiveBg?.socialStatus),
+        'bg.friends': getLabel(FRIENDS_AND_ASSOCIATES, effectiveBg?.friendsAndAssociates),
     };
 
     // Mapear General Skills (Fixed names)
@@ -165,8 +166,12 @@ export async function generateCharacterSheetPDF(
     Logger.log('Source: character.skills.specialItems');
     Logger.log('Data:', character.skills?.specialItems);
 
-    // Get special skills DIRECTLY from character JSON
-    const specialSkillsFromJSON = character.skills?.specialItems || [];
+    // Get special skills DIRECTLY from character JSON and apply level modifiers
+    const specialSkillsFromJSON = applyLevelModsToSkillItems(
+        character.skills?.specialItems || [],
+        character.level,
+        character.modPerLevel
+    );
 
     Logger.log(`Found ${specialSkillsFromJSON.length} special skills in JSON`);
 

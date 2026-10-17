@@ -1,12 +1,126 @@
 import { ORIGIN_CATEGORIES } from '../../data/originDefinitions';
 
+const normalizeModKey = (str: string): string =>
+    (str || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+
+/**
+ * Suma los modificadores de `modPerLevel` para una clave dada (stat o habilidad)
+ * desde el nivel 2 hasta el nivel actual del personaje (`level`).
+ */
+export function getLevelModifierForKey(
+    targetKey: string,
+    level: number | string = 1,
+    modPerLevel?: Record<string, Record<string, number>>
+): number {
+    if (!modPerLevel || typeof modPerLevel !== 'object' || !targetKey) return 0;
+    const maxLevel = Math.max(1, Number(level) || 1);
+    if (maxLevel <= 1) return 0;
+
+    const normTarget = normalizeModKey(targetKey);
+    let totalBonus = 0;
+
+    Object.entries(modPerLevel).forEach(([lvlKey, mods]) => {
+        const lvlNum = Number(lvlKey);
+        if (!isNaN(lvlNum) && lvlNum >= 2 && lvlNum <= maxLevel && mods && typeof mods === 'object') {
+            Object.entries(mods).forEach(([modKey, val]) => {
+                // If it's a sub-category object (e.g. combatstats, skills, otherstats)
+                if (val && typeof val === 'object' && !Array.isArray(val)) {
+                    Object.entries(val).forEach(([subKey, subVal]) => {
+                        if (normalizeModKey(subKey) === normTarget) {
+                            totalBonus += Number(subVal) || 0;
+                        }
+                    });
+                } else if (normalizeModKey(modKey) === normTarget) {
+                    totalBonus += Number(val) || 0;
+                }
+            });
+        }
+    });
+
+    return totalBonus;
+}
+
+/**
+ * Aplica los modificadores por nivel (`modPerLevel`) a una lista de habilidades (`generalItems` o `specialItems`).
+ */
+export function applyLevelModsToSkillItems(
+    items: any[] = [],
+    level: number | string = 1,
+    modPerLevel?: Record<string, Record<string, number>>
+): any[] {
+    if (!Array.isArray(items) || !modPerLevel) return items || [];
+    return items.map(item => {
+        if (!item || !item.name) return item;
+        const levelBonus = getLevelModifierForKey(item.name, level, modPerLevel);
+        if (levelBonus === 0) return item;
+
+        const rawVal = String(item.value ?? '');
+        const hasPercent = rawVal.includes('%');
+        const baseNum = parseInt(rawVal, 10);
+        if (isNaN(baseNum)) return item;
+
+        const finalNum = baseNum + levelBonus;
+        return {
+            ...item,
+            baseValue: item.baseValue ?? `${baseNum}${hasPercent ? '%' : ''}`,
+            levelBonus,
+            value: `${finalNum}${hasPercent ? '%' : ''}`
+        };
+    });
+}
+
+/**
+ * Obtiene el trasfondo efectivo aplicando las modificaciones por nivel hasta el nivel actual.
+ */
+export function getEffectiveBackground(
+    background: any = {},
+    level: number | string = 1,
+    modPerLevel?: Record<string, any>
+): any {
+    if (!background) return {};
+    const result = {
+        ...background,
+        items: Array.isArray(background.items) ? [...background.items] : []
+    };
+    if (!modPerLevel || typeof modPerLevel !== 'object') return result;
+
+    const maxLevel = Math.max(1, Number(level) || 1);
+    if (maxLevel <= 1) return result;
+
+    Object.entries(modPerLevel).forEach(([lvlKey, mods]) => {
+        const lvlNum = Number(lvlKey);
+        if (!isNaN(lvlNum) && lvlNum >= 2 && lvlNum <= maxLevel && mods && typeof mods === 'object') {
+            const bgMods = mods.background;
+            if (bgMods && typeof bgMods === 'object') {
+                if (bgMods.economicStatus !== undefined) result.economicStatus = bgMods.economicStatus;
+                if (bgMods.legalStatus !== undefined) result.legalStatus = bgMods.legalStatus;
+                if (bgMods.socialStatus !== undefined) result.socialStatus = bgMods.socialStatus;
+                if (bgMods.friendsAndAssociates !== undefined) result.friendsAndAssociates = bgMods.friendsAndAssociates;
+                if (bgMods.baseCoverage !== undefined) result.baseCoverage = bgMods.baseCoverage;
+                if (bgMods.prejudiceResistance !== undefined) {
+                    result.prejudiceResistance = (result.prejudiceResistance || 50) + Number(bgMods.prejudiceResistance);
+                }
+                if (Array.isArray(bgMods.items)) {
+                    bgMods.items.forEach((item: string) => {
+                        if (!result.items.includes(item)) result.items.push(item);
+                    });
+                }
+            }
+        }
+    });
+
+    return result;
+}
+
 /**
  * Calcula las estadísticas derivadas para el Paso 6
  */
 export function calculateDerivedStats(
     attributes: { [key: string]: number },
     origins: any[] = [],
-    skills: any = {}
+    skills: any = {},
+    level: number | string = 1,
+    modPerLevel?: Record<string, Record<string, number>>
 ) {
     // Normalizar atributos
     const stats = {
@@ -499,9 +613,17 @@ export function calculateDerivedStats(
         total: paradaMental
     };
 
+    const pvBase = puntosVida;
+    const pvLevelBonus = getLevelModifierForKey('Puntos de Vida', level, modPerLevel);
+    puntosVida = pvBase + pvLevelBonus;
+
+    // Recalculate Inconsciencia with final Puntos de Vida (including level progression)
+    const inconscienciaFinal = Math.floor(puntosVida / 10);
+
     const pvBreakdown: StatBreakdown = {
         formula: pvFormula,
-        base: puntosVida,
+        base: pvBase,
+        ...(pvLevelBonus !== 0 ? { nivel: pvLevelBonus } : {}),
         total: puntosVida
     };
 
@@ -513,8 +635,8 @@ export function calculateDerivedStats(
 
     const inconscienciaBreakdown: StatBreakdown = {
         formula: "PV/10",
-        base: inconsciencia,
-        total: inconsciencia
+        base: inconscienciaFinal,
+        total: inconscienciaFinal
     };
 
     const resistenciaGasesBreakdown: StatBreakdown = {
@@ -565,7 +687,7 @@ export function calculateDerivedStats(
             equilibrioBreakdown
         },
         other: {
-            inconsciencia: `${inconsciencia}`,
+            inconsciencia: `${inconscienciaFinal}`,
             inconscienciaBreakdown,
             recuperacion: `${recuperacion} PV/h`,
             resistenciaGases: `${resistenciaGases}%`,
@@ -597,6 +719,7 @@ export interface StatBreakdown {
     largo?: string;
     origen?: number | Record<string, number>;
     habilidades?: number | Record<string, number>;
+    nivel?: number | Record<string, number>;
     total: number | string;
     personalizado?: number | string;
 }
@@ -687,7 +810,7 @@ export function formatDerivedStats(stats: any) {
 
 /**
  * Helper to apply a saved override to a StatBreakdown object.
- * Keeps formula (if any), base, origen/habilidades (if any), and total, and only attaches 'personalizado' if manually modified.
+ * Keeps formula (if any), base, origen/habilidades/nivel (if any), and total, and only attaches 'personalizado' if manually modified.
  */
 export function applyStatBreakdownOverride(baseBreakdown: StatBreakdown, savedValue: any): StatBreakdown {
     const cleanBase: StatBreakdown = {
@@ -708,6 +831,13 @@ export function applyStatBreakdownOverride(baseBreakdown: StatBreakdown, savedVa
                 habilidades: baseBreakdown.habilidades && typeof baseBreakdown.habilidades === 'object'
                     ? { ...baseBreakdown.habilidades }
                     : baseBreakdown.habilidades
+            }
+            : {}),
+        ...(baseBreakdown.nivel !== undefined
+            ? {
+                nivel: baseBreakdown.nivel && typeof baseBreakdown.nivel === 'object'
+                    ? { ...baseBreakdown.nivel }
+                    : baseBreakdown.nivel
             }
             : {}),
         total: baseBreakdown.total ?? 0

@@ -13,6 +13,41 @@
     "generator": "SHI Wizard"
   },
   "level": 4,
+  "modPerLevel": {
+    "2": {
+      "combatstats": {
+        "Puntos de Vida": 10
+      },
+      "skills": {
+        "Artes Marciales": 10,
+        "Arma Especial: Khopesh": 10
+      },
+      "background": {
+        "items": [
+          "Con cobertura legal por la FDM"
+        ]
+      }
+    },
+    "3": {
+      "combatstats": {
+        "Puntos de Vida": 10
+      },
+      "background": {
+        "economicStatus": "clase_baja"
+      }
+    },
+    "4": {
+      "combatstats": {
+        "Puntos de Vida": 10
+      },
+      "skills": {
+        "Arma Especial: Khopesh": 10
+      },
+      "background": {
+        "friendsAndAssociates": "conocido"
+      }
+    }
+  },
   "origin": {
     "items": [
       {
@@ -35,23 +70,77 @@
   },
   "combatstats": {
     "Acciones por asalto": "3",
-    "Iniciativa y Reflejos": "75",
-    "Puntos de Vida": "90",
-    "Equilibrio Mental": "102"
+    "Iniciativa y Reflejos": {
+      "formula": "(AGI+PER)/4",
+      "base": 55,
+      "habilidades": {
+        "Artes Marciales": 20
+      },
+      "total": 75
+    },
+    "Puntos de Vida": {
+      "formula": "CON-45",
+      "base": 60,
+      "nivel": 30,
+      "total": 90
+    },
+    "Equilibrio Mental": {
+      "formula": "INT",
+      "base": 102,
+      "total": 102
+    }
   },
   "otherstats": {
-    "Inconsciencia": "9",
+    "Inconsciencia": {
+      "formula": "PV/10",
+      "base": 9,
+      "total": 9
+    },
     "Recuperación": "2 PV/h",
-    "Resistencia a gases y venenos": "35%",
+    "Resistencia a gases y venenos": {
+      "formula": "CON/3",
+      "base": 35,
+      "total": "35%"
+    },
     "Modificador de fuerza": "1d10",
     "Peso Levantado": "500kg",
-    "Daño absorbido físico": "15",
-    "Daño absorbido mental": "40",
-    "Modificador de impacto": "40",
+    "Daño absorbido físico": {
+      "base": 15,
+      "total": 15
+    },
+    "Daño absorbido mental": {
+      "base": 40,
+      "total": 40
+    },
+    "Modificador de impacto": {
+      "base": 10,
+      "origen": {
+        "Artista Marcial con Chi": 30
+      },
+      "total": 40
+    },
     "Modificador Psionico": "30",
-    "Parada Fisica": "50",
-    "Parada mental": "75",
-    "Salto (alto / largo)": "3,7m / 11,0m"
+    "Parada Fisica": {
+      "base": 30,
+      "habilidades": {
+        "Artes Marciales": 20
+      },
+      "total": 50
+    },
+    "Parada mental": {
+      "base": 55,
+      "origen": {
+        "Arcano": 20
+      },
+      "total": 75
+    },
+    "Salto (alto / largo)": {
+      "formula": "AGI/10",
+      "multiplicadorFuerza": 1,
+      "alto": "3,7m",
+      "largo": "11,0m",
+      "total": "3,7m / 11,0m"
+    }
   },
   "attributes": {
     "values": {
@@ -191,7 +280,7 @@
       {
         "name": "Artes Marciales",
         "math": "(AGI+PER)/3",
-        "value": "83%"
+        "value": "73%"
       },
       {
         "name": "Rastrear",
@@ -221,7 +310,7 @@
       {
         "name": "Arma Especial: Khopesh",
         "math": "(2xPER)/3",
-        "value": "93%"
+        "value": "73%"
       },
       {
         "name": "Arma Especial: Sheng Biao",
@@ -291,14 +380,12 @@
     }
   },
   "background": {
+    "items": [],
     "prejudiceResistance": 30,
-    "economicStatus": "clase_baja",
+    "economicStatus": "mendigo",
     "legalStatus": "con_antecedentes",
-    "items": [
-      "Con cobertura legal por la FDM"
-    ],
     "socialStatus": "anonimo",
-    "friendsAndAssociates": "conocido"
+    "friendsAndAssociates": "solitario"
   },
   "weapons": {
     "items": [
