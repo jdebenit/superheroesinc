@@ -1,7 +1,9 @@
 import { useEffect, useCallback, useState } from 'react';
-import { calculateDerivedStats, formatDerivedStats } from '../../../../utils/characterCalculations';
+import { calculateDerivedStats, formatDerivedStats, applyStatBreakdownOverride } from '../../../../utils/characterCalculations';
 import { ARTIFACTS } from '../../../../data/artifacts';
 import { MAGIC_OBJECTS } from '../../../../data/magicObjects';
+
+const BREAKDOWN_STAT_FIELDS = ['Parada mental', 'Parada Fisica', 'Modificador de impacto'];
 
 export function useStep6Logic(data: any, onChange: (updates: any) => void) {
     const [unlockCombatStats, setUnlockCombatStats] = useState<boolean>(() => {
@@ -20,35 +22,13 @@ export function useStep6Logic(data: any, onChange: (updates: any) => void) {
         const stats = calculateDerivedStats(data.attributes.values, data.origin?.items, data.skills);
         const { combatStats: newCombat, otherStats: newOther } = formatDerivedStats(stats);
 
-        // Preserve 'personalizado' in Parada mental if it was already set
-        const existingParada = data.otherstats?.["Parada mental"];
-        if (existingParada && typeof existingParada === 'object') {
-            const rawPers = existingParada.personalizado;
-            if (rawPers !== undefined && rawPers !== null && String(rawPers).trim() !== '' && String(rawPers).trim() !== '-') {
-                if (rawPers !== newOther["Parada mental"]?.total) {
-                    newOther["Parada mental"] = {
-                        ...newOther["Parada mental"],
-                        personalizado: rawPers
-                    };
-                }
+        // Preserve 'personalizado' in breakdown stats if already set
+        BREAKDOWN_STAT_FIELDS.forEach(statKey => {
+            const existingVal = data.otherstats?.[statKey];
+            if (existingVal !== undefined && existingVal !== null && newOther[statKey]) {
+                newOther[statKey] = applyStatBreakdownOverride(newOther[statKey], existingVal);
             }
-        } else if (typeof existingParada === 'string' && existingParada.trim() !== '' && existingParada.trim() !== '-') {
-            const strVal = existingParada.trim();
-            const baseObj = newOther["Parada mental"];
-            const maxOrigin = baseObj ? (baseObj.total ?? 0) - (baseObj.base ?? 0) : 0;
-            const compactVal = strVal.replace(/\s+/g, '');
-            if (
-                baseObj &&
-                strVal !== String(baseObj.total) &&
-                !(maxOrigin !== 0 && compactVal === `${baseObj.base}+${maxOrigin}`)
-            ) {
-                const parsed = !isNaN(Number(strVal)) ? Number(strVal) : strVal;
-                newOther["Parada mental"] = {
-                    ...baseObj,
-                    personalizado: parsed
-                };
-            }
-        }
+        });
 
         const currentCombatStr = JSON.stringify(data.combatstats);
         const nextCombatStr = JSON.stringify(newCombat);
@@ -91,39 +71,41 @@ export function useStep6Logic(data: any, onChange: (updates: any) => void) {
     }, [data.combatstats, onChange]);
 
     const updateOtherStat = useCallback((field: string, value: string) => {
-        if (field === 'Parada mental') {
-            const current = data.otherstats?.['Parada mental'];
-            let baseObj: { base: number; origen: number | Record<string, number>; total: number } = { base: 0, origen: 0, total: 0 };
+        if (BREAKDOWN_STAT_FIELDS.includes(field)) {
+            const current = data.otherstats?.[field];
+            let baseObj: any = { base: 0, origen: 0, total: 0 };
             if (current && typeof current === 'object') {
                 baseObj = {
                     base: current.base ?? 0,
                     origen: current.origen ?? 0,
+                    ...(current.habilidades ? { habilidades: current.habilidades } : {}),
                     total: current.total ?? 0
                 };
             } else {
                 const stats = calculateDerivedStats(data.attributes.values, data.origin?.items, data.skills);
-                if (stats.other?.paradaMentalBreakdown) {
-                    baseObj = { ...stats.other.paradaMentalBreakdown };
+                const { otherStats: formattedOther } = formatDerivedStats(stats);
+                if (formattedOther[field] && typeof formattedOther[field] === 'object') {
+                    baseObj = { ...formattedOther[field] };
                 }
             }
 
             const trimmed = value.trim();
-            let updatedParada: any;
+            let updatedBreakdown: any;
             if (trimmed === '') {
-                updatedParada = { ...baseObj, personalizado: '' };
+                updatedBreakdown = { ...baseObj, personalizado: '' };
             } else {
                 const parsed = !isNaN(Number(trimmed)) ? Number(trimmed) : value;
                 if (parsed === baseObj.total) {
-                    updatedParada = { ...baseObj };
+                    updatedBreakdown = { ...baseObj };
                 } else {
-                    updatedParada = { ...baseObj, personalizado: parsed };
+                    updatedBreakdown = { ...baseObj, personalizado: parsed };
                 }
             }
 
             onChange({
                 otherstats: {
                     ...data.otherstats,
-                    [field]: updatedParada
+                    [field]: updatedBreakdown
                 }
             });
             return;

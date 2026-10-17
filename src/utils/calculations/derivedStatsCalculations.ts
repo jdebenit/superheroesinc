@@ -100,7 +100,10 @@ export function calculateDerivedStats(
         skills?.specialItems?.some((skill: any) =>
             skill.name?.toLowerCase().includes('artes marciales') ||
             skill.name?.toLowerCase().includes('arte marcial')
-        ) || false;
+        ) ||
+        Boolean(skills?.selected?.['artes_marciales']) ||
+        Boolean(skills?.learning?.selected?.['artes_marciales']) ||
+        false;
 
     // Equilibrio Mental: INT
     const equilibrioMental = int;
@@ -269,6 +272,7 @@ export function calculateDerivedStats(
         modImpacto = agi - 100;
     }
 
+    const paradaFisicaBase = paradaFisica;
     // Apply Martial Arts bonus to Physical Parry (+20)
     if (hasMartialArts) {
         paradaFisica += 20;
@@ -338,6 +342,7 @@ export function calculateDerivedStats(
     let maxOriginBonus = 0;
     let maxImpactBonus = 0;
     const originMentalBonuses: Record<string, number> = {};
+    const originImpactBonuses: Record<string, number> = {};
 
     // Origins structure: [ { "NombreOrigen": ["efecto1", ...] }, ... ]
     if (origins && origins.length > 0) {
@@ -357,28 +362,28 @@ export function calculateDerivedStats(
                 // 1. Base Category Bonus
                 if (categoryDef.paradaMentalBonus) {
                     currentBonus = categoryDef.paradaMentalBonus;
+                    originMentalBonuses[originCategory] = Math.max(
+                        originMentalBonuses[originCategory] || 0,
+                        categoryDef.paradaMentalBonus
+                    );
                 }
 
-                // 2. Subtype Bonus (if any)
-                // If checking for specific subtype bonus like Thals
+                // 2. Subtype Bonus (if any, e.g. Thals)
                 if (categoryDef.subtypeModifiers) {
                     originDetails.forEach((specialization: string) => {
                         if (!categoryDef.subtypeModifiers) return;
                         const modifier = categoryDef.subtypeModifiers[specialization];
                         if (modifier && modifier.paradaMental) {
+                            originMentalBonuses[specialization] = Math.max(
+                                originMentalBonuses[specialization] || 0,
+                                modifier.paradaMental
+                            );
                             if (modifier.paradaMental > currentBonus) {
                                 currentBonus = modifier.paradaMental;
                             }
                         }
                     });
                 }
-            }
-
-            if (currentBonus > 0) {
-                originMentalBonuses[originCategory] = Math.max(
-                    originMentalBonuses[originCategory] || 0,
-                    currentBonus
-                );
             }
 
             if (currentBonus > maxOriginBonus) {
@@ -397,6 +402,10 @@ export function calculateDerivedStats(
 
                         const modifier = categoryDef.subtypeModifiers[specialization];
                         if (modifier && modifier.modImpacto) {
+                            originImpactBonuses[specialization] = Math.max(
+                                originImpactBonuses[specialization] || 0,
+                                modifier.modImpacto
+                            );
                             if (modifier.modImpacto > currentImpactBonus) {
                                 currentImpactBonus = modifier.modImpacto;
                             }
@@ -412,11 +421,34 @@ export function calculateDerivedStats(
     }
 
     const paradaMentalBase = paradaMental;
+    const modImpactoBase = modImpacto;
     paradaMental += maxOriginBonus;
     modImpacto += maxImpactBonus;
 
-    const origenBreakdownValue: number | Record<string, number> =
+    const mentalOriginBreakdown: number | Record<string, number> =
         Object.keys(originMentalBonuses).length > 0 ? originMentalBonuses : 0;
+
+    const impactOriginBreakdown: number | Record<string, number> =
+        Object.keys(originImpactBonuses).length > 0 ? originImpactBonuses : 0;
+
+    const paradaFisicaBreakdown: StatBreakdown = {
+        base: paradaFisicaBase,
+        origen: 0,
+        ...(hasMartialArts ? { habilidades: { "Artes Marciales": 20 } } : {}),
+        total: paradaFisica
+    };
+
+    const modImpactoBreakdown: StatBreakdown = {
+        base: modImpactoBase,
+        origen: impactOriginBreakdown,
+        total: modImpacto
+    };
+
+    const paradaMentalBreakdown: StatBreakdown = {
+        base: paradaMentalBase,
+        origen: mentalOriginBreakdown,
+        total: paradaMental
+    };
 
     // Salto: 
     // Base from Agility Table applied with Strength Multiplier
@@ -445,28 +477,29 @@ export function calculateDerivedStats(
             daAbsorbidoFisico: `${daFisico}`,
             daAbsorbidoMental: `${daMental}`,
             modImpacto: `${modImpacto}`,
+            modImpactoBreakdown,
             modPsionico: `${modPsionico}`,
             paradaFisica: `${paradaFisica}`,
+            paradaFisicaBreakdown,
             paradaMental: `${paradaMental}`,
-            paradaMentalBreakdown: {
-                base: paradaMentalBase,
-                origen: origenBreakdownValue,
-                total: paradaMental
-            },
+            paradaMentalBreakdown,
             salto: saltoStr.replace(/\./g, ',')
         }
     };
 }
 
-export interface ParadaMentalBreakdown {
+export interface StatBreakdown {
     base: number;
     origen: number | Record<string, number>;
+    habilidades?: Record<string, number>;
     total: number;
     personalizado?: number | string;
 }
 
+export type ParadaMentalBreakdown = StatBreakdown;
+
 /**
- * Extracts the display string for any stat value (supports string, number, or breakdown object like Parada mental).
+ * Extracts the display string for any stat value (supports string, number, or breakdown object).
  * Prioritizes 'personalizado' when present, otherwise falls back to 'total'.
  */
 export function getStatDisplayValue(val: any): string {
@@ -484,6 +517,21 @@ export function getStatDisplayValue(val: any): string {
     return str.trim() !== '' ? str : '-';
 }
 
+function normalizeToBreakdown(breakdownObj: any, fallbackVal: any): StatBreakdown {
+    if (breakdownObj && typeof breakdownObj === 'object') {
+        return { ...breakdownObj };
+    }
+    if (fallbackVal && typeof fallbackVal === 'object') {
+        return { ...fallbackVal };
+    }
+    const num = Number(fallbackVal) || 0;
+    return {
+        base: num,
+        origen: 0,
+        total: num
+    };
+}
+
 /**
  * Formats derived stats object into standard objects for JSON/Display
  * Optimized for stability as requested by the user
@@ -496,15 +544,9 @@ export function formatDerivedStats(stats: any) {
         "Equilibrio Mental": stats.combat.equilibrio
     };
 
-    const paradaMentalObj: ParadaMentalBreakdown = stats.other?.paradaMentalBreakdown
-        ? { ...stats.other.paradaMentalBreakdown }
-        : (stats.other?.paradaMental && typeof stats.other.paradaMental === 'object')
-            ? { ...stats.other.paradaMental }
-            : {
-                base: Number(stats.other?.paradaMental) || 0,
-                origen: 0,
-                total: Number(stats.other?.paradaMental) || 0
-            };
+    const modImpactoObj = normalizeToBreakdown(stats.other?.modImpactoBreakdown, stats.other?.modImpacto);
+    const paradaFisicaObj = normalizeToBreakdown(stats.other?.paradaFisicaBreakdown, stats.other?.paradaFisica);
+    const paradaMentalObj = normalizeToBreakdown(stats.other?.paradaMentalBreakdown, stats.other?.paradaMental);
 
     const otherStats: Record<string, any> = {
         "Inconsciencia": stats.other.inconsciencia,
@@ -514,9 +556,9 @@ export function formatDerivedStats(stats: any) {
         "Peso Levantado": stats.other.pesoLevantado,
         "Daño absorbido físico": stats.other.daAbsorbidoFisico,
         "Daño absorbido mental": stats.other.daAbsorbidoMental,
-        "Modificador de impacto": stats.other.modImpacto,
+        "Modificador de impacto": modImpactoObj,
         "Modificador Psionico": stats.other.modPsionico,
-        "Parada Fisica": stats.other.paradaFisica,
+        "Parada Fisica": paradaFisicaObj,
         "Parada mental": paradaMentalObj,
         "Salto (alto / largo)": stats.other.salto
     };
@@ -525,15 +567,16 @@ export function formatDerivedStats(stats: any) {
 }
 
 /**
- * Helper to apply a saved override to the Parada mental breakdown object.
- * Keeps base, origen, and total (base + maxOrigin), and only attaches 'personalizado' if manually modified.
+ * Helper to apply a saved override to a StatBreakdown object.
+ * Keeps base, origen, habilidades (if any), and total, and only attaches 'personalizado' if manually modified.
  */
-function applyParadaMentalOverride(baseBreakdown: ParadaMentalBreakdown, savedValue: any): ParadaMentalBreakdown {
-    const cleanBase: ParadaMentalBreakdown = {
+export function applyStatBreakdownOverride(baseBreakdown: StatBreakdown, savedValue: any): StatBreakdown {
+    const cleanBase: StatBreakdown = {
         base: baseBreakdown.base ?? 0,
         origen: baseBreakdown.origen && typeof baseBreakdown.origen === 'object'
             ? { ...baseBreakdown.origen }
             : (baseBreakdown.origen ?? 0),
+        ...(baseBreakdown.habilidades ? { habilidades: { ...baseBreakdown.habilidades } } : {}),
         total: baseBreakdown.total ?? 0
     };
 
@@ -558,12 +601,12 @@ function applyParadaMentalOverride(baseBreakdown: ParadaMentalBreakdown, savedVa
         return cleanBase;
     }
 
-    // Ignore if it matches calculated total or legacy "base+origen" notation
-    const maxOrigin = cleanBase.total - cleanBase.base;
+    // Ignore if it matches calculated total or legacy "base+bonus" notation
+    const bonusDiff = cleanBase.total - cleanBase.base;
     const compactVal = strVal.replace(/\s+/g, '');
     if (
         strVal === String(cleanBase.total) ||
-        (maxOrigin !== 0 && compactVal === `${cleanBase.base}+${maxOrigin}`)
+        (bonusDiff !== 0 && compactVal === `${cleanBase.base}+${bonusDiff}`)
     ) {
         return cleanBase;
     }
@@ -592,8 +635,8 @@ export function applyStatsOverrides(baseStats: Record<string, any>, savedStats: 
                 const label = parts[0].trim();
                 const value = parts.slice(1).join(':').trim();
                 if (value && value !== '-' && result.hasOwnProperty(label)) {
-                    if (label === 'Parada mental' && typeof result[label] === 'object') {
-                        result[label] = applyParadaMentalOverride(result[label], value);
+                    if (result[label] && typeof result[label] === 'object' && 'total' in result[label]) {
+                        result[label] = applyStatBreakdownOverride(result[label], value);
                     } else {
                         result[label] = value;
                     }
@@ -605,8 +648,8 @@ export function applyStatsOverrides(baseStats: Record<string, any>, savedStats: 
         Object.entries(savedStats).forEach(([label, value]) => {
             if (!result.hasOwnProperty(label)) return;
 
-            if (label === 'Parada mental' && typeof result[label] === 'object') {
-                result[label] = applyParadaMentalOverride(result[label], value);
+            if (result[label] && typeof result[label] === 'object' && 'total' in result[label]) {
+                result[label] = applyStatBreakdownOverride(result[label], value);
             } else if (typeof value === 'string' && value && value !== '-') {
                 result[label] = value;
             }

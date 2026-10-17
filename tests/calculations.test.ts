@@ -200,6 +200,32 @@ describe('Cálculos de Estadísticas Derivadas (d100)', () => {
             },
             total: 30
         });
+
+        // Prueba de Vigilante con varias especializaciones (Modificador de impacto) y Artes Marciales (Parada Fisica)
+        const vigilanteRaw = calculateDerivedStats(
+            { Fuerza: 60, Constitución: 60, Agilidad: 110, Inteligencia: 60, Percepción: 60, Apariencia: 60, Voluntad: 80 },
+            [{ Vigilante: ['Artista Marcial', 'Pistolero'] }],
+            { specialItems: [{ name: 'Artes Marciales' }] }
+        );
+        const { otherStats: vigilanteOther } = formatDerivedStats(vigilanteRaw);
+
+        expect(vigilanteOther['Modificador de impacto']).toEqual({
+            base: 10,
+            origen: {
+                'Artista Marcial': 30,
+                'Pistolero': 20
+            },
+            total: 40
+        });
+
+        expect(vigilanteOther['Parada Fisica']).toEqual({
+            base: 30,
+            origen: 0,
+            habilidades: {
+                'Artes Marciales': 20
+            },
+            total: 50
+        });
     });
 });
 

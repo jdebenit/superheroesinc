@@ -130,10 +130,10 @@ export async function generateCharacterSheetPDF(
         'stats.lift': finalOtherStats["Peso Levantado"],
         'stats.phys_absorb': finalOtherStats["Daño absorbido físico"],
         'stats.ment_absorb': finalOtherStats["Daño absorbido mental"],
-        'stats.phys_block': finalOtherStats["Parada Fisica"],
+        'stats.phys_block': getStatDisplayValue(finalOtherStats["Parada Fisica"]),
         'stats.ment_block': getStatDisplayValue(finalOtherStats["Parada mental"]),
         'stats.jump': finalOtherStats["Salto (alto / largo)"],
-        'stats.impact': finalOtherStats["Modificador de impacto"],
+        'stats.impact': getStatDisplayValue(finalOtherStats["Modificador de impacto"]),
         'stats.psionic': finalOtherStats["Modificador Psionico"],
         'stats.strength_mod': finalOtherStats["Modificador de fuerza"],
 
