@@ -30,6 +30,9 @@ jobs:
 
       - name: Validate content
         run: npm run validate
+
+      - name: Type check with Astro
+        run: npm run check
         
       - name: Build with Astro
         run: npm run build
