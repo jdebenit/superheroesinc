@@ -224,6 +224,7 @@ export function useCharacterAutoEffects(data: any, onChange: (updates: any) => v
         isMago,
         emFormula.divisor,
         data.attributes,
+        data.level,
         selectedPowers,
         data.spells?.calculatedEM,
         data,

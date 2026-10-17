@@ -133,7 +133,7 @@ export function useStep3Logic(data: any, onChange: (updates: any) => void, onSho
                 spells: { ...data.spells, calculatedEM: calculated }
             });
         }
-    }, [hasEM, isMago, isElfoMagico, isHadaEter, emFormula.divisor, data.attributes, selectedPowers]);
+    }, [hasEM, isMago, isElfoMagico, isHadaEter, emFormula.divisor, data.attributes, data.level, selectedPowers]);
  
     // Auto-initialize and cleanup techParams based on isTecnologico
     useEffect(() => {

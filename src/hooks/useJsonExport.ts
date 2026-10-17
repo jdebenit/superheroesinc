@@ -3,6 +3,7 @@ import { APP_VERSIONS } from '../data/appVersions';
 import { calculateDiff } from '../utils/dataCleaner';
 import { initialCharacterState } from '../data/wizardConfig';
 import { calculateDerivedStats, formatDerivedStats, applyStatsOverrides } from '../utils/characterCalculations';
+import { calculateEM, hasSubtype } from '../components/wizard/steps/Step3_Especials/utils';
 import Logger from '../utils/Logger';
 
 /**
@@ -42,10 +43,30 @@ export const useJsonExport = (
         // This ensures valid import even if values match defaults
         exportData.name = character.name || character.alias || "Nuevo Personaje";
         exportData.alias = character.alias || "";
+        exportData.level = Math.max(1, Number(character.level) || 1);
         exportData.attributes = character.attributes;
         exportData.origin = character.origin;
         exportData.skills = character.skills;
         exportData.powers = character.powers;
+
+        // Keep calculatedEM synchronized with character level & attributes on export
+        if (exportData.spells || character.spells?.calculatedEM !== undefined) {
+            const isMago = hasSubtype(character, 'Arcano', 'Mago');
+            const isElfoMagico = hasSubtype(character, 'Arcano', 'Elfo Mágico');
+            const isHadaEter = hasSubtype(character, 'Arcano', 'Hada Eter');
+            const rawDivisor = character.spells?.emFormula?.divisor ?? 4;
+            const divisor = (isMago || isElfoMagico) ? 1 : isHadaEter ? 2 : rawDivisor;
+            if (divisor > 0 && (character.spells?.calculatedEM !== undefined || isMago || isElfoMagico || isHadaEter)) {
+                exportData.spells = {
+                    ...(exportData.spells || {}),
+                    calculatedEM: calculateEM(
+                        { ...character, level: exportData.level },
+                        character.powers?.selected || [],
+                        divisor
+                    )
+                };
+            }
+        }
         
         exportData.meta = {
             ...character.meta,

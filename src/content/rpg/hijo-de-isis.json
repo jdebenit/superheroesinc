@@ -1,11 +1,11 @@
 {
   "name": "Askany ",
   "alias": "Hijo de Isis",
-  "level": "2",
   "meta": {
-    "version": "Beta 0.16.4",
+    "version": "Beta 0.17.0",
     "generator": "SHI Wizard"
   },
+  "level": 2,
   "origin": {
     "items": [
       {
@@ -291,7 +291,7 @@
     "nativeLanguage": "Avalonense"
   },
   "background": {
-    "prejudiceResistance": 44,
+    "prejudiceResistance": 47,
     "economicStatus": "clase_baja",
     "legalStatus": "con_antecedentes",
     "socialStatus": "amenaza_publica",
@@ -328,7 +328,7 @@
     "emFormula": {
       "divisor": 1
     },
-    "calculatedEM": 442
+    "calculatedEM": 884
   },
   "powers": {
     "selected": [
@@ -355,9 +355,9 @@
     ]
   },
   "magicalBondsCustomName": "Adepto de Avalon",
-  "magicalBondsCustomDescription": "Estudio en Ávalon y recibe sus dones mágicos de la radia que emana ese Reino Divino",
+  "magicalBondsCustomDescription": "Estudio en Ávalon y recibe sus dones mágicos de la fuerza elemental que emana ese Reino Divino",
+  "sexualIdentity": "Hombre",
   "traumas": {
     "Manipulador": "Debido a tener que moverse políticamente entre varios reinos aprendió desde joven que la palabra adecuada en el momento adecuado es el hechizo más poderoso"
-  },
-  "sexualIdentity": "Hombre"
+  }
 }

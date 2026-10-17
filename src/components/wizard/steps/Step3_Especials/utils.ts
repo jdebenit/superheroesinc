@@ -64,8 +64,9 @@ export const calculateEM = (data: any, selectedPowers: any[] = [], divisor: numb
     // If Semidemonio, add CON to the formula
     const isSemidemonio = hasSubtype(data, 'Sobrenatural', 'Semidemonio');
     const conVal = isSemidemonio ? con : 0;
+    const level = Math.max(1, Number(data?.level) || 1);
 
-    return Math.floor((int + per + vol + conVal) / divisor);
+    return Math.floor((int + per + vol + conVal) / divisor) * level;
 };
 
 /**
