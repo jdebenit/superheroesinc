@@ -310,7 +310,8 @@
         "id": "supervelocidad",
         "origin": "Guardian",
         "rank": 1,
-        "skillValue": 0
+        "skillValue": 0,
+        "powerMod": 92
       }
     ]
   },

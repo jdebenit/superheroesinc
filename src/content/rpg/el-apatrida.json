@@ -389,19 +389,22 @@
         "id": "superagilidad",
         "origin": "Alterado",
         "rank": 1,
-        "skillValue": 0
+        "skillValue": 0,
+        "powerMod": 40
       },
       {
         "id": "superfuerza",
         "origin": "Alterado",
         "rank": 1,
-        "skillValue": 0
+        "skillValue": 0,
+        "powerMod": 19
       },
       {
         "id": "superconstitucion",
         "origin": "Alterado",
         "rank": 1,
-        "skillValue": 0
+        "skillValue": 0,
+        "powerMod": 20
       }
     ]
   },

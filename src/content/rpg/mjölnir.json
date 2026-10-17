@@ -263,13 +263,15 @@
         "id": "superfuerza",
         "origin": "Guardian",
         "rank": 1,
-        "skillValue": 0
+        "skillValue": 0,
+        "powerMod": 120
       },
       {
         "id": "superconstitucion",
         "origin": "Guardian",
         "rank": 1,
-        "skillValue": 0
+        "skillValue": 0,
+        "powerMod": 85
       },
       {
         "id": "incremento_vital",

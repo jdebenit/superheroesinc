@@ -266,7 +266,8 @@
             "cost": 0
           }
         ],
-        "skillValue": 0
+        "skillValue": 0,
+        "powerMod": 80
       }
     ]
   },

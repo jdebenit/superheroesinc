@@ -225,7 +225,8 @@
         "id": "superfuerza",
         "origin": "Alterado",
         "rank": 1,
-        "skillValue": 0
+        "skillValue": 0,
+        "powerMod": 50
       },
       {
         "id": "emision_de_energia",

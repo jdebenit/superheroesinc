@@ -256,13 +256,15 @@
         "id": "superconstitucion",
         "origin": "Alterado",
         "rank": 1,
-        "skillValue": 0
+        "skillValue": 0,
+        "powerMod": 80
       },
       {
         "id": "superfuerza",
         "origin": "Alterado",
         "rank": 1,
-        "skillValue": 0
+        "skillValue": 0,
+        "powerMod": 30
       }
     ]
   },

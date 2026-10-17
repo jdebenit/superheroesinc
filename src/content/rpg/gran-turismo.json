@@ -238,7 +238,8 @@
         "id": "supervelocidad",
         "origin": "Mutante",
         "rank": 1,
-        "skillValue": 0
+        "skillValue": 0,
+        "powerMod": 100
       },
       {
         "id": "superpercepcion",
@@ -251,7 +252,8 @@
             "cost": 0
           }
         ],
-        "skillValue": 0
+        "skillValue": 0,
+        "powerMod": 50
       }
     ]
   },
