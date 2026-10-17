@@ -10,7 +10,8 @@
     "check": "astro check",
     "validate": "node scripts/validate-content.js",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "prepare": "git config core.hooksPath .githooks"
   },
   "dependencies": {
     "@astrojs/react": "^5.0.5",
