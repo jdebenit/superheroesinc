@@ -8,7 +8,9 @@
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",
-    "validate": "node scripts/validate-content.js"
+    "validate": "node scripts/validate-content.js",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@astrojs/react": "^5.0.5",
@@ -27,6 +29,7 @@
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@types/react-vertical-timeline-component": "^3.3.6",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "vitest": "^5.0.5"
   }
 }

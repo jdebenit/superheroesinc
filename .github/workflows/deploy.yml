@@ -31,6 +31,9 @@ jobs:
       - name: Validate content
         run: npm run validate
 
+      - name: Run unit tests
+        run: npm test
+
       - name: Type check with Astro
         run: npm run check
         
