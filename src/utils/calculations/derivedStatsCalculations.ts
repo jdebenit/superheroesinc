@@ -337,6 +337,7 @@ export function calculateDerivedStats(
     // Modificador por Origen (Mental Parry & Mod. Impacto)
     let maxOriginBonus = 0;
     let maxImpactBonus = 0;
+    const originMentalBonuses: Record<string, number> = {};
 
     // Origins structure: [ { "NombreOrigen": ["efecto1", ...] }, ... ]
     if (origins && origins.length > 0) {
@@ -365,24 +366,19 @@ export function calculateDerivedStats(
                         if (!categoryDef.subtypeModifiers) return;
                         const modifier = categoryDef.subtypeModifiers[specialization];
                         if (modifier && modifier.paradaMental) {
-                            // If subtype bonus is higher than current, take it? 
-                            // Or add it? Thals logic was: Thals=10. Divino=25. 
-                            // Original logic: if hasThals (10) ELSE check category (20/25).
-                            // So Thals was actually lower than Arcano? No, Thals is Parahumano. Parahumano has no base bonus.
-                            // So we should take the MAX of base vs subtype? Or sum?
-                            // Original logic took maxOriginBonus across all origins. 
-                            // Inside one origin, it did if(Thals) 10 else if (Cat=Divino) 25.
-                            // So it's one or the other per origin.
-
-                            // Let's assume we take the higher of base vs subtype for now to match logic. 
-                            // Parahumano base = 0. Thals = 10. Result = 10.
-                            // Arcano base = 20. Elfo = 0 (in schema). Result = 20.
                             if (modifier.paradaMental > currentBonus) {
                                 currentBonus = modifier.paradaMental;
                             }
                         }
                     });
                 }
+            }
+
+            if (currentBonus > 0) {
+                originMentalBonuses[originCategory] = Math.max(
+                    originMentalBonuses[originCategory] || 0,
+                    currentBonus
+                );
             }
 
             if (currentBonus > maxOriginBonus) {
@@ -415,8 +411,12 @@ export function calculateDerivedStats(
         });
     }
 
+    const paradaMentalBase = paradaMental;
     paradaMental += maxOriginBonus;
     modImpacto += maxImpactBonus;
+
+    const origenBreakdownValue: number | Record<string, number> =
+        Object.keys(originMentalBonuses).length > 0 ? originMentalBonuses : 0;
 
     // Salto: 
     // Base from Agility Table applied with Strength Multiplier
@@ -448,9 +448,40 @@ export function calculateDerivedStats(
             modPsionico: `${modPsionico}`,
             paradaFisica: `${paradaFisica}`,
             paradaMental: `${paradaMental}`,
+            paradaMentalBreakdown: {
+                base: paradaMentalBase,
+                origen: origenBreakdownValue,
+                total: paradaMental
+            },
             salto: saltoStr.replace(/\./g, ',')
         }
     };
+}
+
+export interface ParadaMentalBreakdown {
+    base: number;
+    origen: number | Record<string, number>;
+    total: number;
+    personalizado?: number | string;
+}
+
+/**
+ * Extracts the display string for any stat value (supports string, number, or breakdown object like Parada mental).
+ * Prioritizes 'personalizado' when present, otherwise falls back to 'total'.
+ */
+export function getStatDisplayValue(val: any): string {
+    if (val === null || val === undefined) return '-';
+    if (typeof val === 'object') {
+        if (val.personalizado !== undefined && val.personalizado !== null && String(val.personalizado).trim() !== '') {
+            return String(val.personalizado);
+        }
+        if (val.total !== undefined && val.total !== null) {
+            return String(val.total);
+        }
+        return '-';
+    }
+    const str = String(val);
+    return str.trim() !== '' ? str : '-';
 }
 
 /**
@@ -465,7 +496,17 @@ export function formatDerivedStats(stats: any) {
         "Equilibrio Mental": stats.combat.equilibrio
     };
 
-    const otherStats: Record<string, string> = {
+    const paradaMentalObj: ParadaMentalBreakdown = stats.other?.paradaMentalBreakdown
+        ? { ...stats.other.paradaMentalBreakdown }
+        : (stats.other?.paradaMental && typeof stats.other.paradaMental === 'object')
+            ? { ...stats.other.paradaMental }
+            : {
+                base: Number(stats.other?.paradaMental) || 0,
+                origen: 0,
+                total: Number(stats.other?.paradaMental) || 0
+            };
+
+    const otherStats: Record<string, any> = {
         "Inconsciencia": stats.other.inconsciencia,
         "Recuperación": stats.other.recuperacion,
         "Resistencia a gases y venenos": stats.other.resistenciaGases,
@@ -476,7 +517,7 @@ export function formatDerivedStats(stats: any) {
         "Modificador de impacto": stats.other.modImpacto,
         "Modificador Psionico": stats.other.modPsionico,
         "Parada Fisica": stats.other.paradaFisica,
-        "Parada mental": stats.other.paradaMental,
+        "Parada mental": paradaMentalObj,
         "Salto (alto / largo)": stats.other.salto
     };
 
@@ -484,10 +525,61 @@ export function formatDerivedStats(stats: any) {
 }
 
 /**
+ * Helper to apply a saved override to the Parada mental breakdown object.
+ * Keeps base, origen, and total (base + maxOrigin), and only attaches 'personalizado' if manually modified.
+ */
+function applyParadaMentalOverride(baseBreakdown: ParadaMentalBreakdown, savedValue: any): ParadaMentalBreakdown {
+    const cleanBase: ParadaMentalBreakdown = {
+        base: baseBreakdown.base ?? 0,
+        origen: baseBreakdown.origen && typeof baseBreakdown.origen === 'object'
+            ? { ...baseBreakdown.origen }
+            : (baseBreakdown.origen ?? 0),
+        total: baseBreakdown.total ?? 0
+    };
+
+    if (savedValue === null || savedValue === undefined) {
+        return cleanBase;
+    }
+
+    if (typeof savedValue === 'object') {
+        const rawPers = savedValue.personalizado;
+        if (rawPers !== undefined && rawPers !== null && String(rawPers).trim() !== '' && String(rawPers).trim() !== '-') {
+            const strPers = String(rawPers).trim();
+            const parsedPers = !isNaN(Number(strPers)) ? Number(strPers) : strPers;
+            if (parsedPers !== cleanBase.total) {
+                return { ...cleanBase, personalizado: parsedPers };
+            }
+        }
+        return cleanBase;
+    }
+
+    const strVal = String(savedValue).trim();
+    if (!strVal || strVal === '-') {
+        return cleanBase;
+    }
+
+    // Ignore if it matches calculated total or legacy "base+origen" notation
+    const maxOrigin = cleanBase.total - cleanBase.base;
+    const compactVal = strVal.replace(/\s+/g, '');
+    if (
+        strVal === String(cleanBase.total) ||
+        (maxOrigin !== 0 && compactVal === `${cleanBase.base}+${maxOrigin}`)
+    ) {
+        return cleanBase;
+    }
+
+    const parsed = !isNaN(Number(strVal)) ? Number(strVal) : strVal;
+    return {
+        ...cleanBase,
+        personalizado: parsed
+    };
+}
+
+/**
  * Utility to apply overrides from JSON (supports both old string array and new object format)
  * This ensures that if a user manually modified a stat in the JSON, it is preserved.
  */
-export function applyStatsOverrides(baseStats: Record<string, string>, savedStats: any): Record<string, string> {
+export function applyStatsOverrides(baseStats: Record<string, any>, savedStats: any): Record<string, any> {
     const result = { ...baseStats };
     if (!savedStats) return result;
 
@@ -499,16 +591,23 @@ export function applyStatsOverrides(baseStats: Record<string, string>, savedStat
             if (parts.length > 1) {
                 const label = parts[0].trim();
                 const value = parts.slice(1).join(':').trim();
-                // If value is valid (not empty/dash) and key exists in base, prioritize it
                 if (value && value !== '-' && result.hasOwnProperty(label)) {
-                    result[label] = value;
+                    if (label === 'Parada mental' && typeof result[label] === 'object') {
+                        result[label] = applyParadaMentalOverride(result[label], value);
+                    } else {
+                        result[label] = value;
+                    }
                 }
             }
         });
     } else if (typeof savedStats === 'object' && savedStats !== null) {
-        // New format: { "Label": "Value", ... }
+        // New format: { "Label": "Value" | Object, ... }
         Object.entries(savedStats).forEach(([label, value]) => {
-            if (typeof value === 'string' && value && value !== '-' && result.hasOwnProperty(label)) {
+            if (!result.hasOwnProperty(label)) return;
+
+            if (label === 'Parada mental' && typeof result[label] === 'object') {
+                result[label] = applyParadaMentalOverride(result[label], value);
+            } else if (typeof value === 'string' && value && value !== '-') {
                 result[label] = value;
             }
         });

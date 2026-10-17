@@ -1,7 +1,7 @@
 import { SPELLS } from '../../../data/spells';
 import { POWERS } from '../../../data/powers';
 import { calculateEM, getRankLevel } from '../../wizard/steps/Step3_Especials/utils';
-import { calculateDerivedStats, calculateSkillBase, formatDerivedStats, applyStatsOverrides } from '../../../utils/characterCalculations';
+import { calculateDerivedStats, calculateSkillBase, formatDerivedStats, applyStatsOverrides, getStatDisplayValue } from '../../../utils/characterCalculations';
 import { calculateGeneralSkillValues, calculateSpecialSkillValues } from '../../../utils/calculations/skillCalculations';
 
 const normalizeId = (id: string): string => {
@@ -90,8 +90,8 @@ export const useCharacterSheetData = (character: any) => {
     const finalOtherStats = applyStatsOverrides(calculatedOtherStats, character.otherstats);
 
     // Normalize to array of objects for display components
-    const combatStats = Object.entries(finalCombatStats).map(([label, value]) => ({ label, value }));
-    const otherStats = Object.entries(finalOtherStats).map(([label, value]) => ({ label, value }));
+    const combatStats = Object.entries(finalCombatStats).map(([label, value]) => ({ label, value: getStatDisplayValue(value) }));
+    const otherStats = Object.entries(finalOtherStats).map(([label, value]) => ({ label, value: getStatDisplayValue(value) }));
 
     // --- PRE-CALCULATE LISTS FOR PDF (Powers, Spells, etc.) ---
 

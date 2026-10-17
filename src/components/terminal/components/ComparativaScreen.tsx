@@ -168,7 +168,14 @@ export default function ComparativaScreen({ characters, groups }: ComparativaScr
                                     const entry = source.find((s: string) => s.startsWith(`${label}:`));
                                     return entry ? entry.split(':')[1]?.trim() : '-';
                                 }
-                                return source[label] || '-';
+                                const val = source[label];
+                                if (val && typeof val === 'object') {
+                                    if (val.personalizado !== undefined && val.personalizado !== null && String(val.personalizado).trim() !== '') {
+                                        return String(val.personalizado);
+                                    }
+                                    return val.total !== undefined && val.total !== null ? String(val.total) : '-';
+                                }
+                                return val || '-';
                             };
 
                             return (

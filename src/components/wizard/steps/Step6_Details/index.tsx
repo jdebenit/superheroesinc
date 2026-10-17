@@ -31,7 +31,7 @@ interface Step6Props {
         vehicles: { items: any[] };
         skills?: any;
         combatstats?: Record<string, string>;
-        otherstats?: Record<string, string>;
+        otherstats?: Record<string, any>;
     };
     onChange: (updates: any) => void;
     totalPCs?: string | number;
@@ -179,11 +179,17 @@ export default function Step6_Details({ data, onChange, totalPCs, onShowHelp }: 
                         const isEven = index % 2 === 0;
 
                         if (unlockOtherStats) {
+                            const inputValue = (val && typeof val === 'object')
+                                ? (val.personalizado !== undefined && val.personalizado !== null
+                                    ? String(val.personalizado)
+                                    : String(val.total ?? ''))
+                                : String(val ?? '');
+
                             return (
                                 <div key={label} className="step6-manual-other-row">
                                     <WizardField
                                         label={label}
-                                        value={val as string}
+                                        value={inputValue}
                                         onChange={(newVal) => updateOtherStat(label, newVal)}
                                         noMargin
                                         inputWidth="100%"
@@ -192,10 +198,16 @@ export default function Step6_Details({ data, onChange, totalPCs, onShowHelp }: 
                             );
                         }
 
+                        const displayVal = (val && typeof val === 'object')
+                            ? (val.personalizado !== undefined && val.personalizado !== null && String(val.personalizado).trim() !== ''
+                                ? String(val.personalizado)
+                                : String(val.total ?? '-'))
+                            : (val || '-');
+
                         return (
                             <div key={index} className={`step6-other-stat-row ${isEven ? 'even' : 'odd'}`}>
                                 <span className="step6-other-stat-label">{label}</span>
-                                <span className="step6-other-stat-value">{val || '-'}</span>
+                                <span className="step6-other-stat-value">{displayVal}</span>
                             </div>
                         );
                     })}

@@ -3,7 +3,7 @@ import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS, FRIENDS_AND_ASSOCIATES } 
 import { ORIGIN_CATEGORIES } from '../data/originDefinitions';
 import { SPECIAL_SKILLS } from '../data/specialSkills';
 import Logger from './Logger';
-import { formatDerivedStats, applyStatsOverrides } from './characterCalculations';
+import { formatDerivedStats, applyStatsOverrides, getStatDisplayValue } from './characterCalculations';
 
 // ... (helpers removed)
 
@@ -131,7 +131,7 @@ export async function generateCharacterSheetPDF(
         'stats.phys_absorb': finalOtherStats["Daño absorbido físico"],
         'stats.ment_absorb': finalOtherStats["Daño absorbido mental"],
         'stats.phys_block': finalOtherStats["Parada Fisica"],
-        'stats.ment_block': finalOtherStats["Parada mental"],
+        'stats.ment_block': getStatDisplayValue(finalOtherStats["Parada mental"]),
         'stats.jump': finalOtherStats["Salto (alto / largo)"],
         'stats.impact': finalOtherStats["Modificador de impacto"],
         'stats.psionic': finalOtherStats["Modificador Psionico"],

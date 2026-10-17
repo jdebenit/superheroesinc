@@ -129,7 +129,15 @@ export function getStatValue(source: any, label: string): string {
     if (typeof source === 'object') {
         const keys = Object.keys(source);
         const match = keys.find(k => normalize(k) === target);
-        return match ? source[match] : '-';
+        if (!match) return '-';
+        const val = source[match];
+        if (val && typeof val === 'object') {
+            if (val.personalizado !== undefined && val.personalizado !== null && String(val.personalizado).trim() !== '') {
+                return String(val.personalizado);
+            }
+            return val.total !== undefined && val.total !== null ? String(val.total) : '-';
+        }
+        return val !== undefined && val !== null ? String(val) : '-';
     }
     
     return '-';

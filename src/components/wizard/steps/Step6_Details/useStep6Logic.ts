@@ -20,6 +20,36 @@ export function useStep6Logic(data: any, onChange: (updates: any) => void) {
         const stats = calculateDerivedStats(data.attributes.values, data.origin?.items, data.skills);
         const { combatStats: newCombat, otherStats: newOther } = formatDerivedStats(stats);
 
+        // Preserve 'personalizado' in Parada mental if it was already set
+        const existingParada = data.otherstats?.["Parada mental"];
+        if (existingParada && typeof existingParada === 'object') {
+            const rawPers = existingParada.personalizado;
+            if (rawPers !== undefined && rawPers !== null && String(rawPers).trim() !== '' && String(rawPers).trim() !== '-') {
+                if (rawPers !== newOther["Parada mental"]?.total) {
+                    newOther["Parada mental"] = {
+                        ...newOther["Parada mental"],
+                        personalizado: rawPers
+                    };
+                }
+            }
+        } else if (typeof existingParada === 'string' && existingParada.trim() !== '' && existingParada.trim() !== '-') {
+            const strVal = existingParada.trim();
+            const baseObj = newOther["Parada mental"];
+            const maxOrigin = baseObj ? (baseObj.total ?? 0) - (baseObj.base ?? 0) : 0;
+            const compactVal = strVal.replace(/\s+/g, '');
+            if (
+                baseObj &&
+                strVal !== String(baseObj.total) &&
+                !(maxOrigin !== 0 && compactVal === `${baseObj.base}+${maxOrigin}`)
+            ) {
+                const parsed = !isNaN(Number(strVal)) ? Number(strVal) : strVal;
+                newOther["Parada mental"] = {
+                    ...baseObj,
+                    personalizado: parsed
+                };
+            }
+        }
+
         const currentCombatStr = JSON.stringify(data.combatstats);
         const nextCombatStr = JSON.stringify(newCombat);
         const currentOtherStr = JSON.stringify(data.otherstats);
@@ -61,13 +91,51 @@ export function useStep6Logic(data: any, onChange: (updates: any) => void) {
     }, [data.combatstats, onChange]);
 
     const updateOtherStat = useCallback((field: string, value: string) => {
+        if (field === 'Parada mental') {
+            const current = data.otherstats?.['Parada mental'];
+            let baseObj: { base: number; origen: number | Record<string, number>; total: number } = { base: 0, origen: 0, total: 0 };
+            if (current && typeof current === 'object') {
+                baseObj = {
+                    base: current.base ?? 0,
+                    origen: current.origen ?? 0,
+                    total: current.total ?? 0
+                };
+            } else {
+                const stats = calculateDerivedStats(data.attributes.values, data.origin?.items, data.skills);
+                if (stats.other?.paradaMentalBreakdown) {
+                    baseObj = { ...stats.other.paradaMentalBreakdown };
+                }
+            }
+
+            const trimmed = value.trim();
+            let updatedParada: any;
+            if (trimmed === '') {
+                updatedParada = { ...baseObj, personalizado: '' };
+            } else {
+                const parsed = !isNaN(Number(trimmed)) ? Number(trimmed) : value;
+                if (parsed === baseObj.total) {
+                    updatedParada = { ...baseObj };
+                } else {
+                    updatedParada = { ...baseObj, personalizado: parsed };
+                }
+            }
+
+            onChange({
+                otherstats: {
+                    ...data.otherstats,
+                    [field]: updatedParada
+                }
+            });
+            return;
+        }
+
         onChange({
             otherstats: {
                 ...data.otherstats,
                 [field]: value
             }
         });
-    }, [data.otherstats, onChange]);
+    }, [data.otherstats, data.attributes.values, data.origin?.items, data.skills, onChange]);
 
     // Generic List Handlers
     const addItem = useCallback((key: string, initialItem: any) => {

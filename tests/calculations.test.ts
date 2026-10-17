@@ -7,7 +7,8 @@ import {
     calculateDerivedStats,
     calculateGeneralSkillValues,
     formatDerivedStats,
-    applyStatsOverrides
+    applyStatsOverrides,
+    getStatDisplayValue
 } from '../src/utils/characterCalculations';
 
 describe('Cálculos de Origen y Puntos de Creación (PC)', () => {
@@ -148,18 +149,57 @@ describe('Cálculos de Estadísticas Derivadas (d100)', () => {
         expect(stats.other.modPsionico).toBe('25');
     });
 
-    it('formatea y aplica overrides de estadísticas correctamente', () => {
+    it('formatea y aplica overrides de estadísticas correctamente, incluyendo el desglose de Parada mental por orígenes', () => {
         const raw = calculateDerivedStats(
-            { Fuerza: 60, Constitución: 60, Agilidad: 60, Inteligencia: 60, Percepción: 60, Apariencia: 60, Voluntad: 60 },
-            [],
+            { Fuerza: 60, Constitución: 60, Agilidad: 60, Inteligencia: 60, Percepción: 60, Apariencia: 60, Voluntad: 80 },
+            [{ Parahumano: ['Thals'] }, { Arcano: ['Mago'] }],
             {}
         );
-        const { combatStats } = formatDerivedStats(raw);
+        const { combatStats, otherStats } = formatDerivedStats(raw);
         expect(combatStats['Puntos de Vida']).toBe('30');
+
+        // VOL 80 -> base 10; orígenes: Parahumano (Thals) = 10, Arcano = 20; total = base (10) + max(10, 20) = 30
+        expect(otherStats['Parada mental']).toEqual({
+            base: 10,
+            origen: {
+                Parahumano: 10,
+                Arcano: 20
+            },
+            total: 30
+        });
+        expect(getStatDisplayValue(otherStats['Parada mental'])).toBe('30');
 
         const overridden = applyStatsOverrides(combatStats, { 'Puntos de Vida': '99' });
         expect(overridden['Puntos de Vida']).toBe('99');
         expect(overridden['Equilibrio Mental']).toBe('60');
+
+        // Si en el JSON viene un valor personalizado (como objeto o como string antiguo), se añade 'personalizado'
+        const otherWithCustomObj = applyStatsOverrides(otherStats, {
+            'Parada mental': { base: 10, origen: { Parahumano: 10, Arcano: 20 }, total: 30, personalizado: 90 }
+        });
+        expect(otherWithCustomObj['Parada mental']).toEqual({
+            base: 10,
+            origen: {
+                Parahumano: 10,
+                Arcano: 20
+            },
+            total: 30,
+            personalizado: 90
+        });
+        expect(getStatDisplayValue(otherWithCustomObj['Parada mental'])).toBe('90');
+
+        // Compatibilidad con string igual al total: no añade 'personalizado'
+        const otherWithSameString = applyStatsOverrides(otherStats, {
+            'Parada mental': '30'
+        });
+        expect(otherWithSameString['Parada mental']).toEqual({
+            base: 10,
+            origen: {
+                Parahumano: 10,
+                Arcano: 20
+            },
+            total: 30
+        });
     });
 });
 
