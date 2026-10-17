@@ -10,7 +10,7 @@ const normalizeModKey = (str: string): string =>
 export function getLevelModifierForKey(
     targetKey: string,
     level: number | string = 1,
-    modPerLevel?: Record<string, Record<string, number>>
+    modPerLevel?: Record<string, any>
 ): number {
     if (!modPerLevel || typeof modPerLevel !== 'object' || !targetKey) return 0;
     const maxLevel = Math.max(1, Number(level) || 1);
@@ -46,7 +46,7 @@ export function getLevelModifierForKey(
 export function applyLevelModsToSkillItems(
     items: any[] = [],
     level: number | string = 1,
-    modPerLevel?: Record<string, Record<string, number>>
+    modPerLevel?: Record<string, any>
 ): any[] {
     if (!Array.isArray(items) || !modPerLevel) return items || [];
     return items.map(item => {
@@ -120,7 +120,7 @@ export function calculateDerivedStats(
     origins: any[] = [],
     skills: any = {},
     level: number | string = 1,
-    modPerLevel?: Record<string, Record<string, number>>
+    modPerLevel?: Record<string, any>
 ) {
     // Normalizar atributos
     const stats = {

@@ -172,14 +172,13 @@ export default function CharacterSheet({
                     <div className="dialog-body">
                         {renderSheetContent()}
                     </div>
+                    <LevelHistoryModal
+                        character={character}
+                        isOpen={isLevelHistoryOpen}
+                        onClose={() => setIsLevelHistoryOpen(false)}
+                    />
                 </div>
             </dialog>
-
-            <LevelHistoryModal
-                character={character}
-                isOpen={isLevelHistoryOpen}
-                onClose={() => setIsLevelHistoryOpen(false)}
-            />
         </>
     );
 }

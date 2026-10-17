@@ -5,6 +5,7 @@ import { useJsonExport } from '../../hooks/useJsonExport';
 import { pushCharacterToTmt } from '../terminal/utils/tmtStorage';
 import { initialCharacterState } from '../../data/wizardConfig';
 import { mergeWithDefaults } from '../../utils/dataCleaner';
+import { getStatDisplayValue } from '../../utils/characterCalculations';
 import './CharacterViewer.css';
 import Logger from '../../utils/Logger';
 
@@ -416,10 +417,10 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
                                     <strong>Nombre:</strong> {selectedCharacter.data?.name || '-'}
                                 </div>
                                 <div>
-                                    <strong>Puntos de Vida:</strong> {selectedCharacter.data?.combatstats?.["Puntos de Vida"] || '-'}
+                                    <strong>Puntos de Vida:</strong> {getStatDisplayValue(selectedCharacter.data?.combatstats?.["Puntos de Vida"])}
                                 </div>
                                 <div>
-                                    <strong>Equilibrio Mental:</strong> {selectedCharacter.data?.combatstats?.["Equilibrio Mental"] || '-'}
+                                    <strong>Equilibrio Mental:</strong> {getStatDisplayValue(selectedCharacter.data?.combatstats?.["Equilibrio Mental"])}
                                 </div>
                                 <div>
                                     <strong>Origen:</strong> {selectedCharacter.data?.origin?.items?.[0] ? Object.keys(selectedCharacter.data.origin.items[0])[0] : 'Desconocido'}
