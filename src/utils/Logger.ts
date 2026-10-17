@@ -4,7 +4,11 @@
  * Allows enabling/disabling logs globally.
  */
 class Logger {
-    private static isEnabled = true;
+    private static isEnabled = import.meta.env?.DEV ?? false;
+
+    static isDebugEnabled(): boolean {
+        return this.isEnabled;
+    }
 
     // Levels could be expanded, but for now we basically want On/Off
     static enable() {

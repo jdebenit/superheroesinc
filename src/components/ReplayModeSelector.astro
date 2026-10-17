@@ -715,84 +715,86 @@ const characterData = JSON.stringify({
             // Update content visibility
             if (replayContent) {
                 replayContent.className = `lore-text mode-${mode}`;
-                Logger.log(`Mode changed to: ${mode}`);
-                Logger.log(`Content class: ${replayContent.className}`);
+                if (Logger.isDebugEnabled()) {
+                    Logger.log(`Mode changed to: ${mode}`);
+                    Logger.log(`Content class: ${replayContent.className}`);
 
-                // Count visible paragraphs
-                const allP = replayContent.querySelectorAll("p");
+                    // Count visible paragraphs
+                    const allP = replayContent.querySelectorAll("p");
 
-                // DEBUG: Check if paragraphs have data-type
-                const withDataType = Array.from(allP).filter((p) =>
-                    p.hasAttribute("data-type"),
-                );
-                Logger.log(
-                    `Paragraphs with data-type: ${withDataType.length} / ${allP.length}`,
-                );
-                if (withDataType.length > 0) {
-                    Logger.log(
-                        "Sample data-types:",
-                        withDataType
-                            .slice(0, 3)
-                            .map((p) => p.getAttribute("data-type"))
-                            .join(", "),
+                    // DEBUG: Check if paragraphs have data-type
+                    const withDataType = Array.from(allP).filter((p) =>
+                        p.hasAttribute("data-type"),
                     );
-                }
-
-                const visibleP = Array.from(allP).filter((p) => {
-                    const style = window.getComputedStyle(p);
-                    return style.display !== "none";
-                });
-                Logger.log(
-                    `Visible paragraphs: ${visibleP.length} / ${allP.length}`,
-                );
-
-                // DEBUG: Check CSS for a paragraph that should be hidden
-                if (mode !== "completo" && withDataType.length > 0) {
-                    const shouldBeHidden = Array.from(allP).find((p) => {
-                        const type = p.getAttribute("data-type");
-                        if (mode === "novela" && type)
-                            return [
-                                "player",
-                                "gm",
-                                "roll",
-                                "rule",
-                                "meta",
-                            ].includes(type);
-                        if (mode === "mesa" && type)
-                            return ["roll", "rule", "meta"].includes(type);
-                        if (mode === "reglas" && type)
-                            return ["char", "player", "gm", "meta"].includes(
-                                type,
-                            );
-                        return false;
-                    });
-
-                    if (shouldBeHidden) {
-                        const computedStyle =
-                            window.getComputedStyle(shouldBeHidden);
-                        Logger.log("DEBUG: Paragraph that should be hidden:");
+                    Logger.log(
+                        `Paragraphs with data-type: ${withDataType.length} / ${allP.length}`,
+                    );
+                    if (withDataType.length > 0) {
                         Logger.log(
-                            "  data-type:",
-                            shouldBeHidden.getAttribute("data-type"),
-                        );
-                        Logger.log("  display:", computedStyle.display);
-                        Logger.log("  visibility:", computedStyle.visibility);
-                        Logger.log("  classes:", shouldBeHidden.className);
-                        Logger.log(
-                            "  parent classes:",
-                            shouldBeHidden.parentElement?.className,
+                            "Sample data-types:",
+                            withDataType
+                                .slice(0, 3)
+                                .map((p) => p.getAttribute("data-type"))
+                                .join(", "),
                         );
                     }
-                }
 
-                // Debug: show first few visible paragraphs
-                if (visibleP.length < allP.length) {
-                    Logger.log("Sample visible paragraphs:");
-                    visibleP.slice(0, 3).forEach((p, i) => {
-                        Logger.log(
-                            `  ${i}: ${p.getAttribute("data-type")} - ${p.textContent?.substring(0, 40)}...`,
-                        );
+                    const visibleP = Array.from(allP).filter((p) => {
+                        const style = window.getComputedStyle(p);
+                        return style.display !== "none";
                     });
+                    Logger.log(
+                        `Visible paragraphs: ${visibleP.length} / ${allP.length}`,
+                    );
+
+                    // DEBUG: Check CSS for a paragraph that should be hidden
+                    if (mode !== "completo" && withDataType.length > 0) {
+                        const shouldBeHidden = Array.from(allP).find((p) => {
+                            const type = p.getAttribute("data-type");
+                            if (mode === "novela" && type)
+                                return [
+                                    "player",
+                                    "gm",
+                                    "roll",
+                                    "rule",
+                                    "meta",
+                                ].includes(type);
+                            if (mode === "mesa" && type)
+                                return ["roll", "rule", "meta"].includes(type);
+                            if (mode === "reglas" && type)
+                                return ["char", "player", "gm", "meta"].includes(
+                                    type,
+                                );
+                            return false;
+                        });
+
+                        if (shouldBeHidden) {
+                            const computedStyle =
+                                window.getComputedStyle(shouldBeHidden);
+                            Logger.log("DEBUG: Paragraph that should be hidden:");
+                            Logger.log(
+                                "  data-type:",
+                                shouldBeHidden.getAttribute("data-type"),
+                            );
+                            Logger.log("  display:", computedStyle.display);
+                            Logger.log("  visibility:", computedStyle.visibility);
+                            Logger.log("  classes:", shouldBeHidden.className);
+                            Logger.log(
+                                "  parent classes:",
+                                shouldBeHidden.parentElement?.className,
+                            );
+                        }
+                    }
+
+                    // Debug: show first few visible paragraphs
+                    if (visibleP.length < allP.length) {
+                        Logger.log("Sample visible paragraphs:");
+                        visibleP.slice(0, 3).forEach((p, i) => {
+                            Logger.log(
+                                `  ${i}: ${p.getAttribute("data-type")} - ${p.textContent?.substring(0, 40)}...`,
+                            );
+                        });
+                    }
                 }
             } else {
                 Logger.error("Replay content element not found!");

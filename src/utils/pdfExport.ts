@@ -68,9 +68,11 @@ export async function generateCharacterSheetPDF(
 
     // 2. Obtener el formulario
     const form = pdfDoc.getForm();
-    Logger.log('--- DEBUG: PDF Form Fields ---');
-    Logger.log(form.getFields().map(f => f.getName()).sort());
-    Logger.log('------------------------------');
+    if (Logger.isDebugEnabled()) {
+        Logger.log('--- DEBUG: PDF Form Fields ---');
+        Logger.log(form.getFields().map(f => f.getName()).sort());
+        Logger.log('------------------------------');
+    }
 
     const stats = preCalculatedData?.derivedStats || {
         combat: { acciones: '', iniciativa: '', pv: '', equilibrio: '' },
