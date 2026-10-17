@@ -36,7 +36,7 @@
       "Fuerza": 60,
       "Constitución": 65,
       "Agilidad": 200,
-      "Inteligencia": 7735,
+      "Inteligencia": 73,
       "Percepción": 80,
       "Apariencia": 55,
       "Voluntad": 65
@@ -61,7 +61,7 @@
         "powerMod": 0
       },
       "inteligencia": {
-        "base": 7735,
+        "base": 73,
         "originMod": 0,
         "specialtyMod": 0,
         "powerMod": 0

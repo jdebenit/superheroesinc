@@ -88,7 +88,7 @@
         "Divino": 25,
         "Arcano": 20
       },
-      "total": 100
+      "total": 120
     },
     "Salto (alto / largo)": {
       "formula": "AGI/10",

@@ -12,7 +12,7 @@
         ]
       },
       {
-        "Espadachin": [
+        "Espadachín": [
           "+20 Armas blancas",
           "+20 Combate cuerpo a cuerpo",
           "+20 Mod. de Impacto",
@@ -44,7 +44,7 @@
     "Daño absorbido físico": "30",
     "Daño absorbido mental": "0",
     "Modificador de impacto": "50",
-    "Modificador Psionico": "505",
+    "Modificador Psionico": "50",
     "Parada Fisica": "40",
     "Parada mental": "75+20",
     "Salto (alto / largo)": "4,8m/14m"

@@ -4,7 +4,7 @@
   "origin": {
     "items": [
       {
-        "Maldita": [
+        "Maldito": [
           "Porta el tatuaje de rosa negra, condenada a una existencia de caza eterna contra criaturas sobrenaturales.",
           "+20 a la parada mental"
         ]
@@ -20,7 +20,11 @@
   "otherstats": {
     "Inconsciencia": "10",
     "Recuperación": "1 PV/h",
-    "Resistencia a gases y venenos": "328%",
+    "Resistencia a gases y venenos": {
+      "formula": "CON/3",
+      "base": 28,
+      "total": "28%"
+    },
     "Resistencia a prejuicios": "25%",
     "Modificador de fuerza": "1d10",
     "Peso Levantado": "500Kg",
