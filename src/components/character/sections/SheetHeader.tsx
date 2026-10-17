@@ -4,9 +4,10 @@ import { APP_VERSIONS } from '../../../data/appVersions';
 interface SheetHeaderProps {
     character: any;
     totalPCs?: number | string;
+    onLevelClick?: () => void;
 }
 
-export const SheetHeader: React.FC<SheetHeaderProps> = ({ character, totalPCs }) => {
+export const SheetHeader: React.FC<SheetHeaderProps> = ({ character, totalPCs, onLevelClick }) => {
     const displayName = character.alias || character.name || "Nuevo Personaje";
     const showRealName = character.alias && character.name;
 
@@ -18,7 +19,18 @@ export const SheetHeader: React.FC<SheetHeaderProps> = ({ character, totalPCs })
             </div>
 
             <div className="header-stats">
-                {character.level && <span className="level-badge">Nivel {character.level}</span>}
+                {character.level && (
+                    <span
+                        className={`level-badge ${onLevelClick ? 'clickable' : ''}`}
+                        onClick={onLevelClick}
+                        title={onLevelClick ? "Haz clic para ver el historial de cambios por nivel" : undefined}
+                        role={onLevelClick ? "button" : undefined}
+                        tabIndex={onLevelClick ? 0 : undefined}
+                        onKeyDown={onLevelClick ? (e) => { if (e.key === 'Enter' || e.key === ' ') onLevelClick(); } : undefined}
+                    >
+                        Nivel {character.level}
+                    </span>
+                )}
                 {(totalPCs || character.totalCost) && (
                     <span className="total-cost">Total PCs: {totalPCs || character.totalCost}</span>
                 )}

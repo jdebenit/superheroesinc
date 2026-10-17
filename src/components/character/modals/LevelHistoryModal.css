@@ -1,0 +1,282 @@
+/* LevelHistoryModal.css */
+.level-history-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.65);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    padding: 1rem;
+    backdrop-filter: blur(2px);
+}
+
+.level-history-modal {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 650px;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #d3d0c2;
+    animation: fadeInModal 0.2s ease-out;
+}
+
+@keyframes fadeInModal {
+    from {
+        opacity: 0;
+        transform: translateY(-10px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.level-history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    border-bottom: 2px solid #8B4513;
+    background-color: #faf7f2;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.level-history-title-area {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.level-history-title-area h3 {
+    margin: 0;
+    font-size: 1.15rem;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.level-history-badge {
+    background: #d32f2f;
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+}
+
+.level-history-close-btn {
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    cursor: pointer;
+    color: #666;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.level-history-close-btn:hover {
+    color: #000;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.level-history-body {
+    padding: 1.25rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: #fdfaf6;
+}
+
+/* Timeline Cards */
+.level-timeline-card {
+    background: #fff;
+    border: 1px solid #e5e0d8;
+    border-radius: 6px;
+    padding: 1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    position: relative;
+    border-left: 4px solid #8B4513;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.level-timeline-card:hover {
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+}
+
+.level-timeline-card.base-level {
+    border-left-color: #64748b;
+    background: #f8fafc;
+}
+
+.level-timeline-card.current-level {
+    border-left-color: #d32f2f;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(211, 47, 47, 0.15);
+}
+
+.level-timeline-card.future-level {
+    opacity: 0.65;
+    border-left-color: #cbd5e1;
+}
+
+.level-timeline-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #8B4513;
+    margin-bottom: 0.5rem;
+}
+
+.level-timeline-card.base-level .level-timeline-badge {
+    color: #475569;
+}
+
+.level-timeline-card.current-level .level-timeline-badge {
+    color: #d32f2f;
+}
+
+.level-current-tag {
+    background: #ef4444;
+    color: white;
+    font-size: 0.7rem;
+    padding: 0.1rem 0.4rem;
+    border-radius: 3px;
+    text-transform: uppercase;
+}
+
+.level-card-title {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.95rem;
+    color: #1f2937;
+}
+
+.level-card-description {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.85rem;
+    color: #64748b;
+    font-style: italic;
+}
+
+/* Subgroups */
+.level-subgroup {
+    margin-top: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+    background: #fafaf9;
+    border: 1px solid #f1f0ee;
+}
+
+.level-subgroup.combat {
+    background: #fff5f5;
+    border-color: #fed7d7;
+}
+
+.level-subgroup.skills {
+    background: #f0fdf4;
+    border-color: #dcfce7;
+}
+
+.level-subgroup.background {
+    background: #fefce8;
+    border-color: #fef08a;
+}
+
+.level-subgroup-title {
+    display: block;
+    font-weight: bold;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: #4b5563;
+    margin-bottom: 0.25rem;
+}
+
+.level-subgroup.combat .level-subgroup-title {
+    color: #991b1b;
+}
+
+.level-subgroup.skills .level-subgroup-title {
+    color: #166534;
+}
+
+.level-subgroup.background .level-subgroup-title {
+    color: #854d0e;
+}
+
+.level-change-list {
+    margin: 0;
+    padding-left: 1.25rem;
+    font-size: 0.85rem;
+    color: #374151;
+}
+
+.level-change-list li {
+    margin-bottom: 0.2rem;
+}
+
+.stat-name {
+    margin-right: 0.35rem;
+}
+
+.stat-mod {
+    font-weight: bold;
+}
+
+.stat-mod.positive {
+    color: #15803d;
+}
+
+.stat-mod.highlight {
+    color: #854d0e;
+}
+
+.level-history-empty {
+    text-align: center;
+    padding: 2rem;
+    color: #6b7280;
+    font-style: italic;
+}
+
+.level-history-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.85rem 1.25rem;
+    border-top: 1px solid #e5e0d8;
+    background-color: #faf7f2;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.level-history-note {
+    font-size: 0.8rem;
+    color: #64748b;
+}
+
+.level-history-confirm-btn {
+    background: #8B4513;
+    color: white;
+    border: none;
+    padding: 0.4rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.85rem;
+    transition: background-color 0.2s;
+}
+
+.level-history-confirm-btn:hover {
+    background: #6d3410;
+}

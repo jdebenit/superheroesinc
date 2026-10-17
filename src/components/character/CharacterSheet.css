@@ -968,6 +968,23 @@
     border-radius: 2px;
     font-weight: bold;
     text-transform: uppercase;
+    transition: all 0.2s ease;
+}
+
+.level-badge.clickable {
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    user-select: none;
+}
+
+.level-badge.clickable:hover {
+    background: #b71c1c;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+}
+
+.level-badge.clickable:active {
+    transform: translateY(0);
 }
 
 .total-cost {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './CharacterSheet.css';
 
 import { useCharacterSheetData } from './hooks/useCharacterSheetData';
@@ -6,6 +6,7 @@ import { useJsonExport } from '../../hooks/useJsonExport';
 import { usePdfExport } from './hooks/usePdfExport';
 import { useModal } from './hooks/useModal';
 import { ActionButtons } from './common/ActionButtons';
+import { LevelHistoryModal } from './modals/LevelHistoryModal';
 
 // Section Components
 import { SheetHeader } from './sections/SheetHeader';
@@ -68,11 +69,16 @@ export default function CharacterSheet({
     const { downloadJson } = useJsonExport(character, onShowToast);
     const { handleExportPDF } = usePdfExport(character, totalPCs, sheetData);
     const { dialogRef, isFullScreen, openModal, closeModal, toggleFullScreen } = useModal();
+    const [isLevelHistoryOpen, setIsLevelHistoryOpen] = useState(false);
 
     // Render the sheet content (reusable for both modes)
     const renderSheetContent = () => (
         <div className="character-sheet">
-            <SheetHeader character={character} totalPCs={totalPCs} />
+            <SheetHeader
+                character={character}
+                totalPCs={totalPCs}
+                onLevelClick={() => setIsLevelHistoryOpen(true)}
+            />
 
             <div className="sheet-grid">
                 <OriginSection character={character} />
@@ -120,6 +126,11 @@ export default function CharacterSheet({
                     variant="inline"
                 />
                 {renderSheetContent()}
+                <LevelHistoryModal
+                    character={character}
+                    isOpen={isLevelHistoryOpen}
+                    onClose={() => setIsLevelHistoryOpen(false)}
+                />
             </div>
         );
     }
@@ -163,6 +174,12 @@ export default function CharacterSheet({
                     </div>
                 </div>
             </dialog>
+
+            <LevelHistoryModal
+                character={character}
+                isOpen={isLevelHistoryOpen}
+                onClose={() => setIsLevelHistoryOpen(false)}
+            />
         </>
     );
 }
