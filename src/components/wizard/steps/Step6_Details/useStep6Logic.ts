@@ -73,9 +73,10 @@ export function useStep6Logic(data: any, onChange: (updates: any) => void) {
     const updateCombatStat = useCallback((field: string, value: string) => {
         if (BREAKDOWN_COMBAT_FIELDS.includes(field)) {
             const current = data.combatstats?.[field];
-            let baseObj: any = { base: 0, habilidades: 0, total: 0 };
+            let baseObj: any = { formula: "(AGI+PER)/4", base: 0, habilidades: 0, total: 0 };
             if (current && typeof current === 'object') {
                 baseObj = {
+                    ...(current.formula ? { formula: current.formula } : {}),
                     base: current.base ?? 0,
                     ...(current.origen !== undefined ? { origen: current.origen } : {}),
                     ...(current.habilidades !== undefined ? { habilidades: current.habilidades } : {}),

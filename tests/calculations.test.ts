@@ -138,8 +138,16 @@ describe('Cálculos de Estadísticas Derivadas (d100)', () => {
         expect(stats.combat.acciones).toBe('3');
         expect(stats.other.modImpacto).toBe('15');
 
-        // Iniciativa: floor((115 + 85) / 4) = 50 + 20 (Artes Marciales) = 70
-        expect(stats.combat.iniciativa).toBe('70');
+        // Iniciativa: INT 130 (>= 121) sustituye a PER 85 -> floor((115 + 130) / 4) = 61 + 20 (Artes Marciales) = 81
+        expect(stats.combat.iniciativa).toBe('81');
+        expect(stats.combat.iniciativaBreakdown).toEqual({
+            formula: '(AGI+INT)/4',
+            base: 61,
+            habilidades: {
+                'Artes Marciales': 20
+            },
+            total: 81
+        });
 
         // INT 130 (121..140): DA Mental = 60
         expect(stats.other.daAbsorbidoMental).toBe('60');
@@ -210,11 +218,26 @@ describe('Cálculos de Estadísticas Derivadas (d100)', () => {
         const { combatStats: vigilanteCombat, otherStats: vigilanteOther } = formatDerivedStats(vigilanteRaw);
 
         expect(vigilanteCombat['Iniciativa y Reflejos']).toEqual({
+            formula: '(AGI+PER)/4',
             base: 42,
             habilidades: {
                 'Artes Marciales': 20
             },
             total: 62
+        });
+
+        // Prueba cuando INT >= 121 sustituye a AGI (AGI < PER) -> (INT+PER)/4
+        const intSustituyeAgiRaw = calculateDerivedStats(
+            { Fuerza: 60, Constitución: 60, Agilidad: 70, Inteligencia: 140, Percepción: 100, Apariencia: 60, Voluntad: 80 },
+            [],
+            {}
+        );
+        const { combatStats: intSustituyeAgiCombat } = formatDerivedStats(intSustituyeAgiRaw);
+        expect(intSustituyeAgiCombat['Iniciativa y Reflejos']).toEqual({
+            formula: '(INT+PER)/4',
+            base: 60,
+            habilidades: 0,
+            total: 60
         });
 
         expect(vigilanteOther['Modificador de impacto']).toEqual({

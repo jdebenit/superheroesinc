@@ -68,9 +68,13 @@ export function getBaseIniciativa(entry: TmtCharacterEntry): number {
         if (!isNaN(val)) return val;
     }
 
-    // Calculation fallback: (Agility + Perception) / 4
+    // Calculation fallback: (Agility + Perception) / 4 (or INT >= 121 substitution)
     const agi = cd?.attributes?.values?.Agilidad || 0;
     const per = cd?.attributes?.values?.Percepción || 0;
+    const int = cd?.attributes?.values?.Inteligencia || 0;
+    if (int >= 121 && int > Math.min(agi, per)) {
+        return Math.floor((int + Math.max(agi, per)) / 4);
+    }
     return Math.floor((agi + per) / 4);
 }
 

@@ -89,7 +89,19 @@ export function calculateDerivedStats(
     }
 
     // Iniciativa y Reflejos: (AGI + PER) / 4
+    // Excepción: si INT >= 121, sustituye a la menor entre AGI y PER si INT es mayor que ella
+    let iniciativaFormula = "(AGI+PER)/4";
     let iniciativaReflejos = Math.floor((agi + per) / 4);
+
+    if (int >= 121 && int > Math.min(agi, per)) {
+        if (agi <= per) {
+            iniciativaFormula = "(INT+PER)/4";
+            iniciativaReflejos = Math.floor((int + per) / 4);
+        } else {
+            iniciativaFormula = "(AGI+INT)/4";
+            iniciativaReflejos = Math.floor((agi + int) / 4);
+        }
+    }
     const iniciativaBase = iniciativaReflejos;
 
     // Check for Artes Marciales skill bonus (can be General or Special)
@@ -442,6 +454,7 @@ export function calculateDerivedStats(
     };
 
     const iniciativaBreakdown: StatBreakdown = {
+        formula: iniciativaFormula,
         base: iniciativaBase,
         habilidades: habilidadesBonusBreakdown,
         total: iniciativaReflejos
@@ -499,6 +512,7 @@ export function calculateDerivedStats(
 }
 
 export interface StatBreakdown {
+    formula?: string;
     base: number;
     origen?: number | Record<string, number>;
     habilidades?: number | Record<string, number>;
@@ -540,6 +554,7 @@ function normalizeToBreakdown(
     }
     const num = Number(fallbackVal) || 0;
     return {
+        ...(bonusKey === 'habilidades' ? {} : {}),
         base: num,
         [bonusKey]: 0,
         total: num
@@ -584,10 +599,11 @@ export function formatDerivedStats(stats: any) {
 
 /**
  * Helper to apply a saved override to a StatBreakdown object.
- * Keeps base, origen/habilidades (if any), and total, and only attaches 'personalizado' if manually modified.
+ * Keeps formula (if any), base, origen/habilidades (if any), and total, and only attaches 'personalizado' if manually modified.
  */
 export function applyStatBreakdownOverride(baseBreakdown: StatBreakdown, savedValue: any): StatBreakdown {
     const cleanBase: StatBreakdown = {
+        ...(baseBreakdown.formula ? { formula: baseBreakdown.formula } : {}),
         base: baseBreakdown.base ?? 0,
         ...(baseBreakdown.origen !== undefined
             ? {
