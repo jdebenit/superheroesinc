@@ -458,9 +458,11 @@ export function calculateDerivedStats(
         });
     }
 
+    const totalMentalOriginBonus = Object.values(originMentalBonuses).reduce((sum, val) => sum + val, 0);
+
     const paradaMentalBase = paradaMental;
     const modImpactoBase = modImpacto;
-    paradaMental += maxOriginBonus;
+    paradaMental += totalMentalOriginBonus;
     modImpacto += maxImpactBonus;
 
     const mentalOriginBreakdown: number | Record<string, number> =

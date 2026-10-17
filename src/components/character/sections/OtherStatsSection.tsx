@@ -25,7 +25,7 @@ export const OtherStatsSection: React.FC<OtherStatsSectionProps> = ({ otherStats
         }));
     };
 
-    const renderModifierRecord = (mod: Record<string, number> | number) => {
+    const renderModifierRecord = (mod: Record<string, number> | number, isMaxOnly: boolean = false) => {
         if (typeof mod === 'number') return <span>{mod}</span>;
         const entries = Object.entries(mod);
         if (entries.length === 0) return <span>0</span>;
@@ -36,7 +36,7 @@ export const OtherStatsSection: React.FC<OtherStatsSectionProps> = ({ otherStats
                         {k}: {v >= 0 ? `+${v}` : v}{idx < entries.length - 1 ? ', ' : ''}
                     </span>
                 ))}
-                {entries.length > 1 && <span className="stat-breakdown-hint"> (se aplica el mayor)</span>}
+                {isMaxOnly && entries.length > 1 && <span className="stat-breakdown-hint"> (se aplica el mayor)</span>}
             </span>
         );
     };
@@ -109,7 +109,7 @@ export const OtherStatsSection: React.FC<OtherStatsSectionProps> = ({ otherStats
                                     {b.origen !== undefined && (
                                         <div className="stat-breakdown-row">
                                             <span className="stat-breakdown-key">Origen:</span>
-                                            <span className="stat-breakdown-val">{renderModifierRecord(b.origen)}</span>
+                                            <span className="stat-breakdown-val">{renderModifierRecord(b.origen, item.label === 'Modificador de impacto')}</span>
                                         </div>
                                     )}
                                     {b.habilidades !== undefined && (

@@ -187,16 +187,16 @@ describe('Cálculos de Estadísticas Derivadas (d100)', () => {
             total: '0,6m / 1,8m'
         });
 
-        // VOL 80 -> base 10; orígenes: Parahumano (Thals) = 10, Arcano = 20; total = base (10) + max(10, 20) = 30
+        // VOL 80 -> base 10; orígenes acumulativos: Parahumano (Thals) = 10, Arcano = 20; total = base (10) + 10 + 20 = 40
         expect(otherStats['Parada mental']).toEqual({
             base: 10,
             origen: {
                 Parahumano: 10,
                 Arcano: 20
             },
-            total: 30
+            total: 40
         });
-        expect(getStatDisplayValue(otherStats['Parada mental'])).toBe('30');
+        expect(getStatDisplayValue(otherStats['Parada mental'])).toBe('40');
 
         const overridden = applyStatsOverrides(combatStats, { 'Puntos de Vida': '99' });
         expect(overridden['Puntos de Vida']).toEqual({
@@ -213,7 +213,7 @@ describe('Cálculos de Estadísticas Derivadas (d100)', () => {
 
         // Si en el JSON viene un valor personalizado (como objeto o como string antiguo), se añade 'personalizado'
         const otherWithCustomObj = applyStatsOverrides(otherStats, {
-            'Parada mental': { base: 10, origen: { Parahumano: 10, Arcano: 20 }, total: 30, personalizado: 90 }
+            'Parada mental': { base: 10, origen: { Parahumano: 10, Arcano: 20 }, total: 40, personalizado: 90 }
         });
         expect(otherWithCustomObj['Parada mental']).toEqual({
             base: 10,
@@ -221,14 +221,14 @@ describe('Cálculos de Estadísticas Derivadas (d100)', () => {
                 Parahumano: 10,
                 Arcano: 20
             },
-            total: 30,
+            total: 40,
             personalizado: 90
         });
         expect(getStatDisplayValue(otherWithCustomObj['Parada mental'])).toBe('90');
 
         // Compatibilidad con string igual al total: no añade 'personalizado'
         const otherWithSameString = applyStatsOverrides(otherStats, {
-            'Parada mental': '30'
+            'Parada mental': '40'
         });
         expect(otherWithSameString['Parada mental']).toEqual({
             base: 10,
@@ -236,7 +236,7 @@ describe('Cálculos de Estadísticas Derivadas (d100)', () => {
                 Parahumano: 10,
                 Arcano: 20
             },
-            total: 30
+            total: 40
         });
 
         // Prueba de Vigilante con varias especializaciones (Modificador de impacto) y Artes Marciales (Parada Fisica e Iniciativa y Reflejos)
