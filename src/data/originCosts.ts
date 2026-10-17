@@ -125,6 +125,12 @@ export const ORIGIN_COSTS: { [key: string]: OriginCosts } = {
     },
     "Mutante": {
         base: 5
+    },
+    "Alienígena": {
+        base: 0,
+        subtypes: {
+            "Ursino Nativo": 20,
+        }
     }
 };
 

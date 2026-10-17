@@ -180,5 +180,22 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
             "Energético": ["Acceso a tabla de poderes mutantes de tipo energético"],
             "Físico": ["Acceso a tabla de poderes mutantes de tipo físico"],
         }
+    },
+    "Alienígena": {
+        name: "Alienígena",
+        paradaMentalBonus: 10,
+        disabledSubtypes: ["Dorkan", "Ghilan", "Guimoran", "Hijo de otro mundo", "K´rnai", "Nómada", "Ursino Híbrido", "Ursino Nativo", "Vampiro Estelar", "Vuldai"],
+        subtypes: {
+            "Dorkan": ["+10 a la parada mental"],
+            "Ghilan": ["+10 a la parada mental"],
+            "Guimoran": ["+10 a la parada mental"],
+            "Hijo de otro mundo": ["+10 a la parada mental"],
+            "K´rnai": ["+10 a la parada mental"],
+            "Nómada": ["+10 a la parada mental"],
+            "Ursino Híbrido": ["+10 a la parada mental"],
+            "Ursino Nativo": ["Desconexión cultural", "Mente colmena"],
+            "Vampiro Estelar": ["+10 a la parada mental"],
+            "Vuldai": ["+10 a la parada mental"]
+        }
     }
 };
