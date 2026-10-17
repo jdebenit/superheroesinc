@@ -191,25 +191,13 @@ function analyze() {
         }
     }
 
-    // 3. Fichas RPG sin personajes
-    const unusedRpgs = [];
-    const charRpgIds = new Set(charFiles.map(f => {
-        const fileContent = fs.readFileSync(f, 'utf8');
-        return parseFrontmatter(fileContent).data.rpgId;
-    }).filter(Boolean));
-
-    for (const id of rpgIds) {
-        if (!charRpgIds.has(id)) {
-            unusedRpgs.push(id);
-        }
-    }
-
-    // 4. Analizar Lore
+    // 3. Analizar Lore
     const loreFiles = getFiles(path.join(CONTENT_DIR, 'lore')).filter(f => f.endsWith('.md'));
     const loreIssues = {
         emptyOrShort: [],
         missingMetadata: []
     };
+    const loreRpgIds = new Set();
     outputText += `- Cargados ${loreFiles.length} archivos de lore.\n`;
 
     for (const f of loreFiles) {
@@ -227,9 +215,48 @@ function analyze() {
             loreIssues.missingMetadata.push({ file: filename, field: 'category' });
         }
 
+        // Check image in lore
+        if (data.image) {
+            const imagePath = path.join(PUBLIC_DIR, data.image);
+            if (!fs.existsSync(imagePath)) {
+                issues.brokenImageRefs.push({
+                    file: filename,
+                    image: data.image,
+                    type: 'La imagen referenciada en el frontmatter de lore no existe'
+                });
+            }
+        }
+
+        // Check rpgId in lore (both top-level and nested in players/npcs)
+        const rpgMatches = [...content.matchAll(/^\s*rpgId:\s*["']?([a-zA-Z0-9_-]+)["']?/gm)];
+        for (const m of rpgMatches) {
+            const refId = m[1];
+            loreRpgIds.add(refId);
+            if (!rpgIds.has(refId)) {
+                issues.brokenRpgRefs.push({
+                    file: filename,
+                    rpgId: refId,
+                    type: 'El rpgId referenciado en lore no existe en src/content/rpg/'
+                });
+            }
+        }
+
         const wordCount = body.split(/\s+/).filter(Boolean).length;
         if (wordCount < 20) {
             loreIssues.emptyOrShort.push({ file: filename, words: wordCount });
+        }
+    }
+
+    // 4. Fichas RPG sin personajes ni lore vinculado
+    const unusedRpgs = [];
+    const charRpgIds = new Set(charFiles.map(f => {
+        const fileContent = fs.readFileSync(f, 'utf8');
+        return parseFrontmatter(fileContent).data.rpgId;
+    }).filter(Boolean));
+
+    for (const id of rpgIds) {
+        if (!charRpgIds.has(id) && !loreRpgIds.has(id)) {
+            unusedRpgs.push(id);
         }
     }
 
@@ -274,7 +301,7 @@ function analyze() {
     outputText += '=== RESULTADOS DE LA VALIDACIÓN ===\n';
     outputText += '======================================\n\n';
 
-    outputText += `## 1. Referencias Rotas de RPG en Personajes (${issues.brokenRpgRefs.length}):\n`;
+    outputText += `## 1. Referencias Rotas de RPG (${issues.brokenRpgRefs.length}):\n`;
     if (issues.brokenRpgRefs.length === 0) outputText += '   Ninguna.\n';
     else issues.brokenRpgRefs.forEach(i => outputText += `   - [${i.file}]: rpgId "${i.rpgId}" no existe en src/content/rpg/\n`);
 
@@ -287,7 +314,7 @@ function analyze() {
     if (missingRpg.length === 0) outputText += '   Ninguno.\n';
     else missingRpg.forEach(i => outputText += `   - [${i.file}]\n`);
 
-    outputText += `\n## 4. Fichas RPG huérfanas (sin personaje vinculado) (${unusedRpgs.length}):\n`;
+    outputText += `\n## 4. Fichas RPG huérfanas (sin personaje ni lore vinculado) (${unusedRpgs.length}):\n`;
     if (unusedRpgs.length === 0) outputText += '   Ninguna.\n';
     else unusedRpgs.forEach(i => outputText += `   - [${i}.json]\n`);
 
@@ -317,7 +344,26 @@ function analyze() {
         fs.mkdirSync('./tmp');
     }
     fs.writeFileSync('./tmp/validation_results.txt', outputText, 'utf8');
-    console.log('Análisis completo. Escrito en ./tmp/validation_results.txt');
+
+    const criticalMissingCharMeta = issues.missingMetadata.filter(m => m.field === 'name' || m.field === 'description');
+    const criticalErrorsCount =
+        issues.brokenRpgRefs.length +
+        issues.brokenImageRefs.length +
+        criticalMissingCharMeta.length +
+        loreIssues.missingMetadata.length +
+        timelineIssues.weirdDates.length +
+        timelineIssues.duplicates.length;
+
+    console.log(`✅ Validación completada (${rpgIds.size} RPGs, ${charFiles.length} personajes, ${loreFiles.length} lore, ${timelineFiles.length} timeline).`);
+    console.log(`   - Referencias RPG rotas: ${issues.brokenRpgRefs.length}`);
+    console.log(`   - Imágenes rotas: ${issues.brokenImageRefs.length}`);
+    console.log(`   - Fichas RPG huérfanas: ${unusedRpgs.length}`);
+    console.log(`   - Reporte detallado en: ./tmp/validation_results.txt`);
+
+    if (criticalErrorsCount > 0) {
+        console.error(`❌ Se encontraron ${criticalErrorsCount} errores críticos de contenido. Revisa ./tmp/validation_results.txt`);
+        process.exit(1);
+    }
 }
 
 analyze();

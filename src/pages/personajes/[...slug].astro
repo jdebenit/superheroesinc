@@ -47,10 +47,7 @@ const characterKeywords = [
     .join(", ");
 
 // Fetch groups for the character
-const charGroups = [
-    ...(entry.data.groups || []),
-    ...(entry.data.grupos || [])
-];
+const charGroups = entry.data.groups || [];
 
 const groupsData = [];
 if (charGroups.length > 0) {

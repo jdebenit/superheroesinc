@@ -1,8 +1,6 @@
 import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
 import MarkdownIt from 'markdown-it';
-import fs from 'fs';
-import path from 'path';
 
 const parser = new MarkdownIt();
 
@@ -24,15 +22,7 @@ export async function GET(context) {
     items: blog
       .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
       .map((post) => {
-        let rawBody = '';
-        try {
-          const filePath = path.join(process.cwd(), 'src/content/blog', `${post.id}.md`);
-          const fileContent = fs.readFileSync(filePath, 'utf8');
-          const parts = fileContent.split(/^---$/m);
-          rawBody = parts.length >= 3 ? parts.slice(2).join('---').trim() : fileContent.trim();
-        } catch (e) {
-          rawBody = '';
-        }
+        const rawBody = post.body || '';
 
         return {
           title: post.data.title,

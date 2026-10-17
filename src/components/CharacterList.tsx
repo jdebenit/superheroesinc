@@ -74,10 +74,7 @@ export default function CharacterList({ initialCharacters, allGroups }: Characte
     const filteredCharacters = useMemo(() => {
         const filtered = initialCharacters.filter(char => {
             const charTags = char.data.tags || [];
-            const charGroups = [
-                ...(char.data.groups || []),
-                ...(char.data.grupos || [])
-            ];
+            const charGroups = char.data.groups || [];
 
             const matchesTags = selectedTags.includes("Todos") ||
                 selectedTags.some(tag => charTags.includes(tag));

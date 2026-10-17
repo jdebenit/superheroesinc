@@ -9,7 +9,7 @@ const webCharacters = rpgCharacters.map((char) => ({
     id: `web_${char.id}`,
     data: char.data,
     addedAt: Date.now(), // Not used for sorting web chars but required by type
-    source: "web",
+    source: "web" as const,
 }));
 ---
 

@@ -48,7 +48,7 @@ export default function HibridoSection({ hibridoParams, onChange }: HibridoSecti
                 <SectionHeaderBadge
                     cost={totalDiscount > 0 ? `-${totalDiscount}` : (sequels.length === 0 ? "+2" : 0)}
                     label="PC"
-                    variant={sequels.length === 0 ? "danger" : "bonus"}
+                    variant={sequels.length === 0 ? "penalty" : "bonus"}
                 />
             }
         >

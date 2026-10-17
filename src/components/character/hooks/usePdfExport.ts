@@ -26,7 +26,6 @@ export const usePdfExport = (
     const handleExportPDF = useCallback(async () => {
         try {
             const { downloadPDF, generateCharacterSheetPDF } = await import('../../../utils/pdfExport');
-            const { PDF_TEMPLATE_BASE64 } = await import('../../../data/pdfTemplate');
 
             // Pass pre-calculated data to avoid re-calculation in PDF export
             const preCalculatedData = {
@@ -42,9 +41,8 @@ export const usePdfExport = (
                 equipmentData: sheetData.equipmentData
             };
 
-            // @ts-ignore - Argument count mismatch until pdfExport is updated
             const pdfBytes = await generateCharacterSheetPDF(
-                PDF_TEMPLATE_BASE64, // Use embedded Base64
+                '/ficha_template.pdf',
                 character,
                 totalPCs || 0,
                 preCalculatedData

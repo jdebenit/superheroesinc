@@ -49,33 +49,10 @@ if (item.data.category === "actual-plays") {
   ];
 
   for (const char of allCharacters) {
-    if (char.rpgId) {
+    if (char.rpgId && !rpgDataMap[char.rpgId]) {
       try {
-        const potentialIds = [
-            char.rpgId, // Exact match
-            char.rpgId.replace(/_/g, '-').toLowerCase(), // underscores to dashes
-            char.rpgId.replace(/\./g, '-').toLowerCase(), // dots to dashes (motero-road.reapers -> motero-road-reapers)
-            char.rpgId.toLowerCase().replace(/\s+/g, '-'), // spaces to dashes (Jefe Moteros -> jefe-moteros)
-            // Special case handling if needed or broader search
-        ];
-        
-        let entry = null;
-        for (const id of potentialIds) {
-            if (id === "jefe-moteros") { // Hardcode mapping if generic slug fails for specific known edge cases or try to match filenames if possible
-                 // Note: 'Jefe Moteros' -> 'jefe-moteros', but file is 'jefe-motero-road-reapers'.
-                 // We can't easily loose-match against all files without listing them all, 
-                 // but for now let's try to find an entry that *starts with* the slug if exact fail.
-            }
-            
-            entry = await getEntry("rpg", id);
-            if (entry) break;
-        }
-
-        // Special fallback: generic mapping for known mismatches if getEntry failed
-        if (!entry && char.rpgId === "Jefe Moteros") {
-            entry = await getEntry("rpg", "jefe-motero-road-reapers");
-        }
-
+        const normalizedId = char.rpgId.toLowerCase().replace(/[._\s]+/g, '-');
+        const entry = (await getEntry("rpg", char.rpgId)) || (await getEntry("rpg", normalizedId));
         if (entry) {
           rpgDataMap[char.rpgId] = entry.data;
         }
@@ -87,18 +64,14 @@ if (item.data.category === "actual-plays") {
 }
 
 // Fetch group members if category is groups
-let groupMembers = [];
-if (item.data.category === "grupos") {
-  const groupId = Astro.params.slug;
-  const allCharacters = await getCollection("characters");
-  groupMembers = allCharacters.filter((char) => {
-    const charGroups = [
-      ...(char.data.groups || []),
-      ...(char.data.grupos || [])
-    ];
-    return charGroups.includes(groupId);
-  }).sort((a, b) => (a.data.alias || a.data.name).localeCompare(b.data.alias || b.data.name));
-}
+const allCharactersForGroup = item.data.category === "grupos"
+  ? await getCollection("characters")
+  : [];
+const groupId = Astro.params.slug || "";
+const groupMembers = allCharactersForGroup.filter((char) => {
+  const charGroups = char.data.groups || [];
+  return charGroups.includes(groupId);
+}).sort((a, b) => (a.data.alias || a.data.name).localeCompare(b.data.alias || b.data.name));
 ---
 
 <Layout title={item.data.title}>

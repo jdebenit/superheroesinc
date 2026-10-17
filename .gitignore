@@ -25,5 +25,6 @@ pnpm-debug.log*
 .idea/
 .vscode/
 
-# ai scripts
+# ai scripts & local virtualenvs
 .ai_scripts/
+.venv/

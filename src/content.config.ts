@@ -1,6 +1,27 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
+const parseHistoricalDate = (val: string | Date) => {
+    if (val instanceof Date) return val;
+    // Handle negative years manually
+    const match = val.match(/^(-?\d+)-(\d{2})-(\d{2})/);
+    if (match) {
+        const year = parseInt(match[1]);
+        const month = parseInt(match[2]) - 1; // 0-indexed
+        const day = parseInt(match[3]);
+        const date = new Date(0);
+        date.setUTCFullYear(year, month, day);
+        date.setUTCHours(0, 0, 0, 0);
+        return date;
+    }
+    return new Date(val);
+};
+
+const optionalHistoricalDate = z.union([z.string(), z.date()]).transform((val) => {
+    if (!val) return undefined;
+    return parseHistoricalDate(val);
+}).optional();
+
 const blogCollection = defineCollection({
     loader: glob({ pattern: '**/[^_]*.md', base: './src/content/blog' }),
     schema: z.object({
@@ -49,7 +70,7 @@ const loreCollection = defineCollection({
         })).optional(),
         tags: z.array(z.string()).optional(),
         summary: z.string().optional(),
-        reality: z.string().optional().default('Principal'),
+        reality: z.string().optional().default('Tierra Zero'),
         showInTimeline: z.boolean().optional().default(true),
     }),
 });
@@ -58,24 +79,10 @@ const timelineCollection = defineCollection({
     loader: glob({ pattern: '**/[^_]*.md', base: './src/content/timeline' }),
     schema: z.object({
         title: z.string(),
-        date: z.union([z.string(), z.date()]).transform((val) => {
-            if (val instanceof Date) return val;
-            // Handle negative years manually
-            const match = val.match(/^(-?\d+)-(\d{2})-(\d{2})/);
-            if (match) {
-                const year = parseInt(match[1]);
-                const month = parseInt(match[2]) - 1; // 0-indexed
-                const day = parseInt(match[3]);
-                const date = new Date(0);
-                date.setUTCFullYear(year, month, day);
-                date.setUTCHours(0, 0, 0, 0);
-                return date;
-            }
-            return new Date(val);
-        }),
+        date: z.union([z.string(), z.date()]).transform(parseHistoricalDate),
         displayDate: z.string().optional(),
         description: z.string(),
-        reality: z.string().optional().default('Principal'),
+        reality: z.string().optional().default('Tierra Zero'),
         image: z.string().optional(),
         icon: z.string().optional(), // 'star', 'work', 'military', etc.
         tags: z.array(z.string()).optional(),
@@ -194,42 +201,17 @@ const charactersCollection = defineCollection({
         updatedDate: z.date().optional(),
         // Reference to RPG data
         rpgId: z.string().optional(),
-        birthDate: z.union([z.string(), z.date()]).transform((val) => {
-            if (!val) return undefined;
-            if (val instanceof Date) return val;
-            const match = val.match(/^(-?\d+)-(\d{2})-(\d{2})/);
-            if (match) {
-                const year = parseInt(match[1]);
-                const month = parseInt(match[2]) - 1;
-                const day = parseInt(match[3]);
-                const date = new Date(0);
-                date.setUTCFullYear(year, month, day);
-                date.setUTCHours(0, 0, 0, 0);
-                return date;
-            }
-            return new Date(val);
-        }).optional(),
-        deathDate: z.union([z.string(), z.date()]).transform((val) => {
-            if (!val) return undefined;
-            if (val instanceof Date) return val;
-            const match = val.match(/^(-?\d+)-(\d{2})-(\d{2})/);
-            if (match) {
-                const year = parseInt(match[1]);
-                const month = parseInt(match[2]) - 1;
-                const day = parseInt(match[3]);
-                const date = new Date(0);
-                date.setUTCFullYear(year, month, day);
-                date.setUTCHours(0, 0, 0, 0);
-                return date;
-            }
-            return new Date(val);
-        }).optional(),
+        birthDate: optionalHistoricalDate,
+        deathDate: optionalHistoricalDate,
         originReality: z.string().optional(),
         actualReality: z.string().optional(),
         tags: z.array(z.string()).optional(),
         groups: z.array(z.string()).optional(),
         grupos: z.array(z.string()).optional(),
-    }),
+    }).transform((data) => ({
+        ...data,
+        groups: Array.from(new Set([...(data.groups || []), ...(data.grupos || [])])),
+    })),
 });
 
 const faqCollection = defineCollection({

@@ -123,7 +123,7 @@ export default function PowersSection({
                 </PixelButton>
             )}
             {isDivino && (
-                <PixelButton onClick={() => onOpenModal('OtroDivino')} variant="default" className="small">
+                <PixelButton onClick={() => onOpenModal('OtroDivino')} variant="secondary" className="small">
                     <span>+</span> Otro origen (+3 PC)
                 </PixelButton>
             )}

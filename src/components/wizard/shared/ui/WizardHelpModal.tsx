@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import type { HelpContent } from '../../../data/wizardHelp';
+import type { HelpContent } from '../../../../data/wizardHelp';
 
 interface WizardHelpModalProps {
     isOpen: boolean;

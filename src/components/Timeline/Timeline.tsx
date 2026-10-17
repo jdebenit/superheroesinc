@@ -142,15 +142,15 @@ export const Timeline: React.FC<TimelineProps> = ({ events }) => {
         }));
     };
 
-    // Get unique realities from events, defaulting to 'Principal' if not found
+    // Get unique realities from events, defaulting to 'Tierra Zero' if not found
     const realities = useMemo(() => {
-        const allRealities = events.map(e => e.reality || 'Principal');
+        const allRealities = events.map(e => e.reality || 'Tierra Zero');
         return Array.from(new Set(allRealities)).sort();
     }, [events]);
 
     const [selectedRealities, setSelectedRealities] = useState<string[]>(() => {
         if (realities.includes('Tierra Zero')) return ['Tierra Zero'];
-        return realities.length > 0 ? [realities[0]] : ['Principal'];
+        return realities.length > 0 ? [realities[0]] : ['Tierra Zero'];
     });
 
     const toggleReality = (reality: string) => {
@@ -201,7 +201,7 @@ export const Timeline: React.FC<TimelineProps> = ({ events }) => {
     const filteredEvents = useMemo(() => {
         return events.filter(e => {
             // Reality Filter
-            const matchesReality = selectedRealities.includes(e.reality || 'Principal');
+            const matchesReality = selectedRealities.includes(e.reality || 'Tierra Zero');
             if (!matchesReality) return false;
 
             // Tag Filter
