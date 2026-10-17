@@ -1,0 +1,68 @@
+.share-buttons-react {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.share-btn-react {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    color: #ffffff;
+    border: 2px solid #000000;
+    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 0;
+}
+
+.share-btn-react:hover {
+    color: #ffffff;
+    transform: translate(-1px, -2px);
+    box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.5);
+}
+
+.share-btn-react:active {
+    transform: translate(1px, 1px);
+    box-shadow: none;
+}
+
+.share-btn-react.twitter {
+    background-color: #000000;
+}
+
+.share-btn-react.facebook {
+    background-color: #1877f2;
+}
+
+.share-btn-react.whatsapp {
+    background-color: #25d366;
+}
+
+.share-btn-react.copy-link {
+    background-color: var(--color-secondary, #1a1a1a);
+}
+
+.share-copy-tooltip {
+    position: absolute;
+    top: -32px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #000000;
+    color: #ffffff;
+    font-size: 10px;
+    font-family: var(--font-heading, monospace);
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    z-index: 50;
+    pointer-events: none;
+    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.3);
+}

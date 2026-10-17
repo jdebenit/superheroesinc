@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './ShareButtons.css';
 
 interface ShareButtonsProps {
     title: string;
@@ -42,15 +43,14 @@ const ShareButtons: React.FC<ShareButtonsProps> = ({
 
     return (
         <div
-            className={`flex items-center flex-wrap ${className}`}
-            style={{ display: 'flex', gap: '1.5rem' }}
+            className={`share-buttons-react ${className}`.trim()}
             onClick={handleShareClick}
         >
             <a
                 href={shareLinks.twitter}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-10 h-10 rounded-full text-white bg-black border border-black shadow-[2px_2px_0px_rgba(0,0,0,0.5)] hover:-translate-y-0.5 hover:shadow-[3px_3px_0px_rgba(0,0,0,0.5)] active:translate-y-0.5 active:shadow-none transition-all mr-4 last:mr-0"
+                className="share-btn-react twitter"
                 aria-label="Compartir en Twitter/X"
             >
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -62,7 +62,7 @@ const ShareButtons: React.FC<ShareButtonsProps> = ({
                 href={shareLinks.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-10 h-10 rounded-full text-white bg-[#1877F2] border border-black shadow-[2px_2px_0px_rgba(0,0,0,0.5)] hover:-translate-y-0.5 hover:shadow-[3px_3px_0px_rgba(0,0,0,0.5)] active:translate-y-0.5 active:shadow-none transition-all mr-4 last:mr-0"
+                className="share-btn-react facebook"
                 aria-label="Compartir en Facebook"
             >
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -74,7 +74,7 @@ const ShareButtons: React.FC<ShareButtonsProps> = ({
                 href={shareLinks.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-10 h-10 rounded-full text-white bg-[#25D366] border border-black shadow-[2px_2px_0px_rgba(0,0,0,0.5)] hover:-translate-y-0.5 hover:shadow-[3px_3px_0px_rgba(0,0,0,0.5)] active:translate-y-0.5 active:shadow-none transition-all mr-4 last:mr-0"
+                className="share-btn-react whatsapp"
                 aria-label="Compartir en WhatsApp"
             >
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -83,8 +83,9 @@ const ShareButtons: React.FC<ShareButtonsProps> = ({
             </a>
 
             <button
+                type="button"
                 onClick={handleCopy}
-                className="relative flex items-center justify-center w-10 h-10 rounded-full text-white bg-[var(--color-secondary)] border border-black shadow-[2px_2px_0px_rgba(0,0,0,0.5)] hover:-translate-y-0.5 hover:shadow-[3px_3px_0px_rgba(0,0,0,0.5)] active:translate-y-0.5 active:shadow-none transition-all mr-4 last:mr-0"
+                className="share-btn-react copy-link"
                 aria-label="Copiar enlace"
             >
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -93,7 +94,7 @@ const ShareButtons: React.FC<ShareButtonsProps> = ({
                 </svg>
 
                 {showFeedback && (
-                    <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-black text-white text-[10px] px-2 py-1 rounded whitespace-nowrap z-50 animate-fade-in-up">
+                    <span className="share-copy-tooltip">
                         ¡Copiado!
                     </span>
                 )}

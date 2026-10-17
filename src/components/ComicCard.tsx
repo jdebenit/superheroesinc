@@ -1,5 +1,6 @@
 import React from 'react';
 import ShareButtons from './ShareButtons';
+import './ComicCard.css';
 
 interface ComicCardProps {
     title: string;
@@ -21,45 +22,48 @@ const getEvidenceId = (str: string): number => {
 };
 
 const ComicCard: React.FC<ComicCardProps> = ({ title, excerpt, date, image, link, category, categoryLink, readingTime }) => {
+    const handleCardClick = (e: React.MouseEvent<HTMLElement>) => {
+        const target = e.target as HTMLElement;
+        if (target.closest('a, button')) return;
+        window.location.href = link;
+    };
+
     return (
-        <a href={link} className="block group h-full" style={{ textDecoration: 'none', backgroundColor: 'transparent' }}>
-            <article className="paper-card h-full flex flex-col transition-all transform hover:-translate-y-1 hover:shadow-lg relative bg-white border border-[#d3d0c2]">
+        <div className="comic-card-wrapper" onClick={handleCardClick}>
+            <article className="paper-card comic-card-article">
                 {/* Paper clip visual */}
-                <div className="absolute -top-3 left-8 w-4 h-10 border-2 border-gray-400 rounded-full z-10 bg-transparent"></div>
+                <div className="comic-card-clip"></div>
 
                 {image && (
-                    <div className="h-48 overflow-hidden relative border-b-2 border-secondary mb-4 grayscale group-hover:grayscale-0 transition-all duration-500">
+                    <div className="comic-card-image-wrap">
                         <img
                             src={image}
                             alt={title}
-                            className="w-full h-full object-cover"
+                            className="comic-card-image"
                             loading="lazy"
                             decoding="async"
                         />
-                        <div className="absolute top-2 right-2 border-2 border-white text-white px-2 py-0.5 font-bold text-xs uppercase tracking-wider bg-black/50 backdrop-blur-sm">
+                        <div className="comic-card-evidence">
                             EVIDENCIA #{getEvidenceId(link || title)}
                         </div>
                     </div>
                 )}
 
-                <div className="flex-grow flex flex-col relative">
-                    <div className="flex justify-between items-start mb-4 border-b border-dashed border-gray-300 pb-2 w-full">
-                        <div className="flex flex-col w-full">
-                            {category && categoryLink && (
-                                <div className="w-full mb-1">
-                                    <a
-                                        href={categoryLink}
-                                        className="inline-block bg-gray-100 border border-gray-300 px-2 py-0.5 text-[10px] uppercase tracking-widest font-bold text-gray-600 hover:bg-secondary hover:text-white hover:border-secondary transition-colors duration-300 w-fit"
-                                        style={{ fontFamily: 'var(--font-mono)' }}
-                                        onClick={(e) => e.stopPropagation()}
-                                    >
-                                        ARCH: {category}
-                                    </a>
-                                </div>
-                            )}
-                            <div className="w-full text-right">
-                                <time className="text-xs font-mono text-gray-500 uppercase whitespace-nowrap">REF: {date}</time>
+                <div className="comic-card-body">
+                    <div className="comic-card-meta">
+                        {category && categoryLink && (
+                            <div>
+                                <a
+                                    href={categoryLink}
+                                    className="comic-card-category-link"
+                                    onClick={(e) => e.stopPropagation()}
+                                >
+                                    ARCH: {category}
+                                </a>
                             </div>
+                        )}
+                        <div className="comic-card-date-wrap">
+                            <time className="comic-card-date">REF: {date}</time>
                         </div>
                     </div>
 
@@ -77,35 +81,37 @@ const ComicCard: React.FC<ComicCardProps> = ({ title, excerpt, date, image, link
                         CLASIFICADO
                     </div>
 
-                    <h3 className="text-xl font-bold mb-3 leading-tight text-secondary group-hover:text-primary transition-colors uppercase" style={{ fontFamily: 'var(--font-heading)' }}>
-                        {title}
+                    <h3 className="comic-card-title">
+                        <a href={link} className="comic-card-title-link">
+                            {title}
+                        </a>
                     </h3>
 
-                    <p className="text-sm text-gray-700 flex-grow leading-relaxed font-mono mb-4" style={{ fontFamily: 'var(--font-body)' }}>
+                    <p className="comic-card-excerpt">
                         {excerpt}
                     </p>
 
                     {readingTime && (
-                        <div className="text-xs font-mono text-secondary font-bold uppercase mb-3">
-                            ⏱️ Tiempo de lectura: <span className="text-primary">{readingTime} min</span>
+                        <div className="comic-card-reading-time">
+                            ⏱️ Tiempo de lectura: <span>{readingTime} min</span>
                         </div>
                     )}
 
-                    <div className="mt-auto flex flex-col sm:flex-row items-start sm:items-center justify-between border-t border-secondary pt-3 gap-3">
-                        <ShareButtons title={title} url={link} className="origin-left" />
-                        <div className="flex items-center text-secondary font-bold text-xs uppercase tracking-wide self-end sm:self-auto">
-                            <span className="group-hover:underline">VER EXPEDIENTE</span>
-                            <span className="ml-1">→</span>
-                        </div>
+                    <div className="comic-card-footer">
+                        <ShareButtons title={title} url={link} />
+                        <a href={link} className="comic-card-cta">
+                            <span className="comic-card-cta-text">VER EXPEDIENTE</span>
+                            <span className="comic-card-cta-arrow">→</span>
+                        </a>
                     </div>
                 </div>
 
                 {/* Stamp effect on hover */}
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-2 border-primary text-primary px-4 py-1 text-xl font-bold uppercase opacity-0 group-hover:opacity-20 rotate-12 transition-opacity duration-300 pointer-events-none whitespace-nowrap" style={{ fontFamily: 'var(--font-display)' }}>
+                <div className="comic-card-access-stamp">
                     ACCESO CONCEDIDO
                 </div>
             </article>
-        </a>
+        </div>
     );
 };
 
