@@ -2,116 +2,16 @@
 import "../styles/global.css";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
-import Schema from "../components/SEO/Schema.astro";
+import BaseHead, { type Props as BaseHeadProps } from "../components/SEO/BaseHead.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 
-interface Props {
-	title: string;
-	description?: string;
-	keywords?: string;
-	image?: string;
-	type?: "website" | "article";
-	publishedTime?: string;
-	modifiedTime?: string;
-	author?: string;
-}
-
-const {
-	title,
-	description = "Superheroes INC. Tercera Edición - El juego de rol de superhéroes más completo. Crea personajes únicos, vive aventuras épicas y descubre un sistema de rol completo con poderes, organizaciones y un universo único.",
-	keywords = "juego rol superheroes, juego de rol de superheroes, juego rol superhéroes, juego de rol superhéroes, superheroes inc, manual rol superheroes, sistema rol superheroes, crear personaje superheroe, partidas superheroes, juego mesa superheroes",
-	image = "/og-image.jpg",
-	type = "website",
-	publishedTime,
-	modifiedTime,
-	author = "Superheroes INC.",
-} = Astro.props;
-
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const ogImage = new URL(image, Astro.site);
-const fullTitle = `${title} | Superheroes INC.`;
+type Props = BaseHeadProps;
 ---
 
 <!doctype html>
 <html lang="es">
 	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta name="generator" content={Astro.generator} />
-
-		<!-- Primary Meta Tags -->
-		<title>{fullTitle}</title>
-		<meta name="title" content={fullTitle} />
-		<meta name="description" content={description} />
-		<meta name="keywords" content={keywords} />
-		<meta name="author" content={author} />
-		<link rel="canonical" href={canonicalURL} />
-
-		<!-- Favicon -->
-		<link rel="icon" type="image/png" href="/logo_SHI.png" />
-
-		<!-- Open Graph / Facebook -->
-		<meta property="og:type" content={type} />
-		<meta property="og:url" content={canonicalURL} />
-		<meta property="og:title" content={fullTitle} />
-		<meta property="og:description" content={description} />
-		<meta property="og:image" content={ogImage} />
-		<meta property="og:site_name" content="Superheroes INC." />
-		<meta property="og:locale" content="es_ES" />
-		{
-			publishedTime && (
-				<meta
-					property="article:published_time"
-					content={publishedTime}
-				/>
-			)
-		}
-		{
-			modifiedTime && (
-				<meta property="article:modified_time" content={modifiedTime} />
-			)
-		}
-		{
-			author && type === "article" && (
-				<meta property="article:author" content={author} />
-			)
-		}
-
-		<!-- Twitter -->
-		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:url" content={canonicalURL} />
-		<meta name="twitter:title" content={fullTitle} />
-		<meta name="twitter:description" content={description} />
-		<meta name="twitter:image" content={ogImage} />
-
-		<!-- Mobile & UI -->
-		<meta name="theme-color" content="#ffffff" />
-		<link rel="apple-touch-icon" href="/logo_SHI.png" />
-
-		<!-- Geo Tags (Spain) -->
-		<meta name="geo.region" content="ES" />
-		<meta name="geo.placename" content="España" />
-
-		<!-- Additional SEO -->
-		<meta
-			name="robots"
-			content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
-		/>
-		<meta
-			name="googlebot"
-			content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
-		/>
-		<meta name="language" content="Spanish" />
-		<meta name="revisit-after" content="7 days" />
-
-		<Schema
-			title={title}
-			description={description}
-			image={image}
-			type={type === "article" ? "article" : "website"}
-			publishDate={publishedTime}
-			author={author}
-		/>
+		<BaseHead {...Astro.props} />
 	</head>
 	<body>
 		<div class="stamp-top-secret">TOP SECRET</div>
@@ -124,12 +24,6 @@ const fullTitle = `${title} | Superheroes INC.`;
 			<slot />
 		</main>
 		<Footer />
-
-		<!-- GoatCounter Analytics -->
-		<script
-			data-goatcounter="https://jdebenit.goatcounter.com/count"
-			async
-			src="//gc.zgo.at/count.js"></script>
 	</body>
 </html>
 
