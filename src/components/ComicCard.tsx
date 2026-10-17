@@ -12,6 +12,14 @@ interface ComicCardProps {
     readingTime?: number;
 }
 
+const getEvidenceId = (str: string): number => {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+        hash = (hash * 31 + str.charCodeAt(i)) % 900;
+    }
+    return hash + 100;
+};
+
 const ComicCard: React.FC<ComicCardProps> = ({ title, excerpt, date, image, link, category, categoryLink, readingTime }) => {
     return (
         <a href={link} className="block group h-full" style={{ textDecoration: 'none', backgroundColor: 'transparent' }}>
@@ -21,9 +29,15 @@ const ComicCard: React.FC<ComicCardProps> = ({ title, excerpt, date, image, link
 
                 {image && (
                     <div className="h-48 overflow-hidden relative border-b-2 border-secondary mb-4 grayscale group-hover:grayscale-0 transition-all duration-500">
-                        <img src={image} alt={title} className="w-full h-full object-cover" />
+                        <img
+                            src={image}
+                            alt={title}
+                            className="w-full h-full object-cover"
+                            loading="lazy"
+                            decoding="async"
+                        />
                         <div className="absolute top-2 right-2 border-2 border-white text-white px-2 py-0.5 font-bold text-xs uppercase tracking-wider bg-black/50 backdrop-blur-sm">
-                            EVIDENCIA #{(Math.random() * 1000).toFixed(0)}
+                            EVIDENCIA #{getEvidenceId(link || title)}
                         </div>
                     </div>
                 )}
