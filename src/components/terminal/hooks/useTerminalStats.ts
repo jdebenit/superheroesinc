@@ -168,7 +168,11 @@ export function useTerminalStats() {
             // If it's an object, find key that matches term
             const matchingKey = Object.keys(source).find(k => k.toLowerCase().includes(term.toLowerCase()));
             if (matchingKey) {
-                return `${matchingKey}: ${source[matchingKey]}`;
+                const rawVal = source[matchingKey];
+                const resolvedVal = (rawVal && typeof rawVal === 'object')
+                    ? (rawVal.personalizado !== undefined && rawVal.personalizado !== null && rawVal.personalizado !== '' ? rawVal.personalizado : rawVal.total)
+                    : rawVal;
+                return `${matchingKey}: ${resolvedVal}`;
             }
             return undefined;
         };

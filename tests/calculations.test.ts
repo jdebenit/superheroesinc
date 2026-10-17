@@ -164,7 +164,28 @@ describe('Cálculos de Estadísticas Derivadas (d100)', () => {
             {}
         );
         const { combatStats, otherStats } = formatDerivedStats(raw);
-        expect(combatStats['Puntos de Vida']).toBe('30');
+        expect(combatStats['Puntos de Vida']).toEqual({
+            formula: 'CON/2',
+            base: 30,
+            total: 30
+        });
+        expect(otherStats['Inconsciencia']).toEqual({
+            formula: 'PV/10',
+            base: 3,
+            total: 3
+        });
+        expect(otherStats['Resistencia a gases y venenos']).toEqual({
+            formula: 'CON/3',
+            base: 20,
+            total: '20%'
+        });
+        expect(otherStats['Salto (alto / largo)']).toEqual({
+            formula: 'AGI/10',
+            multiplicadorFuerza: 1,
+            alto: '0,6m',
+            largo: '1,8m',
+            total: '0,6m / 1,8m'
+        });
 
         // VOL 80 -> base 10; orígenes: Parahumano (Thals) = 10, Arcano = 20; total = base (10) + max(10, 20) = 30
         expect(otherStats['Parada mental']).toEqual({
@@ -178,8 +199,17 @@ describe('Cálculos de Estadísticas Derivadas (d100)', () => {
         expect(getStatDisplayValue(otherStats['Parada mental'])).toBe('30');
 
         const overridden = applyStatsOverrides(combatStats, { 'Puntos de Vida': '99' });
-        expect(overridden['Puntos de Vida']).toBe('99');
-        expect(overridden['Equilibrio Mental']).toBe('60');
+        expect(overridden['Puntos de Vida']).toEqual({
+            formula: 'CON/2',
+            base: 30,
+            total: 30,
+            personalizado: 99
+        });
+        expect(overridden['Equilibrio Mental']).toEqual({
+            formula: 'INT',
+            base: 60,
+            total: 60
+        });
 
         // Si en el JSON viene un valor personalizado (como objeto o como string antiguo), se añade 'personalizado'
         const otherWithCustomObj = applyStatsOverrides(otherStats, {

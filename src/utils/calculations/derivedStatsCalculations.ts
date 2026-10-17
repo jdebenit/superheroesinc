@@ -37,53 +37,65 @@ export function calculateDerivedStats(
 
     // Puntos de Vida
     let puntosVida = 0;
+    let pvFormula = "CON/2";
     let recuperacion = 0;
     let daFisico = 0;
 
     // --- TABLE CALCULATIONS (CONSTITUCIÓN) ---
     if (con <= 100) {
         puntosVida = Math.floor(con / 2);
+        pvFormula = "CON/2";
         daFisico = 0;
         recuperacion = 1;
     } else if (con <= 110) {
         puntosVida = con - 45;
+        pvFormula = "CON-45";
         daFisico = 15;
         recuperacion = 2;
     } else if (con <= 120) {
         puntosVida = con - 40;
+        pvFormula = "CON-40";
         daFisico = 30;
         recuperacion = 4;
     } else if (con <= 130) {
         puntosVida = con - 35;
+        pvFormula = "CON-35";
         daFisico = 45;
         recuperacion = 6;
     } else if (con <= 140) {
         puntosVida = con - 30;
+        pvFormula = "CON-30";
         daFisico = 60;
         recuperacion = 10;
     } else if (con <= 150) {
         puntosVida = con - 25;
+        pvFormula = "CON-25";
         daFisico = 75;
         recuperacion = 15;
     } else if (con <= 160) {
         puntosVida = con - 20;
+        pvFormula = "CON-20";
         daFisico = 90;
         recuperacion = 20;
     } else if (con <= 170) {
         puntosVida = con - 15;
+        pvFormula = "CON-15";
         daFisico = 105;
         recuperacion = 25;
     } else if (con <= 180) {
         puntosVida = con - 10;
+        pvFormula = "CON-10";
         daFisico = 120;
         recuperacion = 30;
     } else if (con <= 190) {
         puntosVida = con - 5;
+        pvFormula = "CON-5";
         daFisico = 135;
         recuperacion = 35;
     } else {
         // 191-200+
         puntosVida = con;
+        pvFormula = "CON";
         daFisico = 150;
         recuperacion = 40;
     }
@@ -472,6 +484,40 @@ export function calculateDerivedStats(
         total: paradaMental
     };
 
+    const pvBreakdown: StatBreakdown = {
+        formula: pvFormula,
+        base: puntosVida,
+        total: puntosVida
+    };
+
+    const equilibrioBreakdown: StatBreakdown = {
+        formula: "INT",
+        base: equilibrioMental,
+        total: equilibrioMental
+    };
+
+    const inconscienciaBreakdown: StatBreakdown = {
+        formula: "PV/10",
+        base: inconsciencia,
+        total: inconsciencia
+    };
+
+    const resistenciaGasesBreakdown: StatBreakdown = {
+        formula: "CON/3",
+        base: resistenciaGases,
+        total: `${resistenciaGases}%`
+    };
+
+    const daFisicoBreakdown: StatBreakdown = {
+        base: daFisico,
+        total: daFisico
+    };
+
+    const daMentalBreakdown: StatBreakdown = {
+        base: daMental,
+        total: daMental
+    };
+
     // Salto: 
     // Base from Agility Table applied with Strength Multiplier
     const saltoBase = agi / jumpDivisor;
@@ -482,6 +528,16 @@ export function calculateDerivedStats(
     const saltoAlto = saltoAltoVal.toFixed(1);
 
     const saltoStr = `${saltoAlto}m / ${saltoLargo}m`;
+    const saltoTotalFormatted = saltoStr.replace(/\./g, ',');
+    const jumpFormula = jumpMod > 1 ? `(AGI/${jumpDivisor})*${jumpMod}` : `AGI/${jumpDivisor}`;
+
+    const saltoBreakdown: StatBreakdown = {
+        formula: jumpFormula,
+        multiplicadorFuerza: jumpMod,
+        alto: `${saltoAlto.replace(/\./g, ',')}m`,
+        largo: `${saltoLargo.replace(/\./g, ',')}m`,
+        total: saltoTotalFormatted
+    };
 
     return {
         combat: {
@@ -489,16 +545,22 @@ export function calculateDerivedStats(
             iniciativa: `${iniciativaReflejos}`,
             iniciativaBreakdown,
             pv: `${puntosVida}`,
-            equilibrio: `${equilibrioMental}`
+            pvBreakdown,
+            equilibrio: `${equilibrioMental}`,
+            equilibrioBreakdown
         },
         other: {
             inconsciencia: `${inconsciencia}`,
+            inconscienciaBreakdown,
             recuperacion: `${recuperacion} PV/h`,
             resistenciaGases: `${resistenciaGases}%`,
+            resistenciaGasesBreakdown,
             modFuerza: modFuerzaStr,
             pesoLevantado: pesoLevantadoStr,
             daAbsorbidoFisico: `${daFisico}`,
+            daFisicoBreakdown,
             daAbsorbidoMental: `${daMental}`,
+            daMentalBreakdown,
             modImpacto: `${modImpacto}`,
             modImpactoBreakdown,
             modPsionico: `${modPsionico}`,
@@ -506,17 +568,21 @@ export function calculateDerivedStats(
             paradaFisicaBreakdown,
             paradaMental: `${paradaMental}`,
             paradaMentalBreakdown,
-            salto: saltoStr.replace(/\./g, ',')
+            salto: saltoTotalFormatted,
+            saltoBreakdown
         }
     };
 }
 
 export interface StatBreakdown {
     formula?: string;
-    base: number;
+    base?: number;
+    multiplicadorFuerza?: number;
+    alto?: string;
+    largo?: string;
     origen?: number | Record<string, number>;
     habilidades?: number | Record<string, number>;
-    total: number;
+    total: number | string;
     personalizado?: number | string;
 }
 
@@ -544,7 +610,7 @@ export function getStatDisplayValue(val: any): string {
 function normalizeToBreakdown(
     breakdownObj: any,
     fallbackVal: any,
-    bonusKey: 'origen' | 'habilidades' = 'origen'
+    bonusKey?: 'origen' | 'habilidades'
 ): StatBreakdown {
     if (breakdownObj && typeof breakdownObj === 'object') {
         return { ...breakdownObj };
@@ -552,12 +618,12 @@ function normalizeToBreakdown(
     if (fallbackVal && typeof fallbackVal === 'object') {
         return { ...fallbackVal };
     }
+    const isStringVal = typeof fallbackVal === 'string' && isNaN(Number(fallbackVal));
     const num = Number(fallbackVal) || 0;
     return {
-        ...(bonusKey === 'habilidades' ? {} : {}),
         base: num,
-        [bonusKey]: 0,
-        total: num
+        ...(bonusKey ? { [bonusKey]: 0 } : {}),
+        total: isStringVal ? fallbackVal : num
     };
 }
 
@@ -567,31 +633,38 @@ function normalizeToBreakdown(
  */
 export function formatDerivedStats(stats: any) {
     const iniciativaObj = normalizeToBreakdown(stats.combat?.iniciativaBreakdown, stats.combat?.iniciativa, 'habilidades');
+    const pvObj = normalizeToBreakdown(stats.combat?.pvBreakdown, stats.combat?.pv);
+    const equilibrioObj = normalizeToBreakdown(stats.combat?.equilibrioBreakdown, stats.combat?.equilibrio);
 
     const combatStats: Record<string, any> = {
         "Acciones por asalto": stats.combat.acciones,
         "Iniciativa y Reflejos": iniciativaObj,
-        "Puntos de Vida": stats.combat.pv,
-        "Equilibrio Mental": stats.combat.equilibrio
+        "Puntos de Vida": pvObj,
+        "Equilibrio Mental": equilibrioObj
     };
 
+    const inconscienciaObj = normalizeToBreakdown(stats.other?.inconscienciaBreakdown, stats.other?.inconsciencia);
+    const resistenciaGasesObj = normalizeToBreakdown(stats.other?.resistenciaGasesBreakdown, stats.other?.resistenciaGases);
+    const daFisicoObj = normalizeToBreakdown(stats.other?.daFisicoBreakdown, stats.other?.daAbsorbidoFisico);
+    const daMentalObj = normalizeToBreakdown(stats.other?.daMentalBreakdown, stats.other?.daAbsorbidoMental);
     const modImpactoObj = normalizeToBreakdown(stats.other?.modImpactoBreakdown, stats.other?.modImpacto, 'origen');
     const paradaFisicaObj = normalizeToBreakdown(stats.other?.paradaFisicaBreakdown, stats.other?.paradaFisica, 'habilidades');
     const paradaMentalObj = normalizeToBreakdown(stats.other?.paradaMentalBreakdown, stats.other?.paradaMental, 'origen');
+    const saltoObj = normalizeToBreakdown(stats.other?.saltoBreakdown, stats.other?.salto);
 
     const otherStats: Record<string, any> = {
-        "Inconsciencia": stats.other.inconsciencia,
+        "Inconsciencia": inconscienciaObj,
         "Recuperación": stats.other.recuperacion,
-        "Resistencia a gases y venenos": stats.other.resistenciaGases,
+        "Resistencia a gases y venenos": resistenciaGasesObj,
         "Modificador de fuerza": stats.other.modFuerza,
         "Peso Levantado": stats.other.pesoLevantado,
-        "Daño absorbido físico": stats.other.daAbsorbidoFisico,
-        "Daño absorbido mental": stats.other.daAbsorbidoMental,
+        "Daño absorbido físico": daFisicoObj,
+        "Daño absorbido mental": daMentalObj,
         "Modificador de impacto": modImpactoObj,
         "Modificador Psionico": stats.other.modPsionico,
         "Parada Fisica": paradaFisicaObj,
         "Parada mental": paradaMentalObj,
-        "Salto (alto / largo)": stats.other.salto
+        "Salto (alto / largo)": saltoObj
     };
 
     return { combatStats, otherStats };
@@ -604,7 +677,10 @@ export function formatDerivedStats(stats: any) {
 export function applyStatBreakdownOverride(baseBreakdown: StatBreakdown, savedValue: any): StatBreakdown {
     const cleanBase: StatBreakdown = {
         ...(baseBreakdown.formula ? { formula: baseBreakdown.formula } : {}),
-        base: baseBreakdown.base ?? 0,
+        ...(baseBreakdown.base !== undefined ? { base: baseBreakdown.base } : {}),
+        ...(baseBreakdown.multiplicadorFuerza !== undefined ? { multiplicadorFuerza: baseBreakdown.multiplicadorFuerza } : {}),
+        ...(baseBreakdown.alto !== undefined ? { alto: baseBreakdown.alto } : {}),
+        ...(baseBreakdown.largo !== undefined ? { largo: baseBreakdown.largo } : {}),
         ...(baseBreakdown.origen !== undefined
             ? {
                 origen: baseBreakdown.origen && typeof baseBreakdown.origen === 'object'
@@ -626,12 +702,14 @@ export function applyStatBreakdownOverride(baseBreakdown: StatBreakdown, savedVa
         return cleanBase;
     }
 
+    const totalCompact = String(cleanBase.total).replace(/\s+/g, '');
+
     if (typeof savedValue === 'object') {
         const rawPers = savedValue.personalizado;
         if (rawPers !== undefined && rawPers !== null && String(rawPers).trim() !== '' && String(rawPers).trim() !== '-') {
             const strPers = String(rawPers).trim();
             const parsedPers = !isNaN(Number(strPers)) ? Number(strPers) : strPers;
-            if (parsedPers !== cleanBase.total) {
+            if (parsedPers !== cleanBase.total && String(parsedPers).replace(/\s+/g, '') !== totalCompact) {
                 return { ...cleanBase, personalizado: parsedPers };
             }
         }
@@ -644,10 +722,13 @@ export function applyStatBreakdownOverride(baseBreakdown: StatBreakdown, savedVa
     }
 
     // Ignore if it matches calculated total or legacy "base+bonus" notation
-    const bonusDiff = cleanBase.total - cleanBase.base;
+    const bonusDiff = (typeof cleanBase.total === 'number' && typeof cleanBase.base === 'number')
+        ? cleanBase.total - cleanBase.base
+        : 0;
     const compactVal = strVal.replace(/\s+/g, '');
     if (
         strVal === String(cleanBase.total) ||
+        compactVal === totalCompact ||
         (bonusDiff !== 0 && compactVal === `${cleanBase.base}+${bonusDiff}`)
     ) {
         return cleanBase;

@@ -110,10 +110,10 @@ export async function generateCharacterSheetPDF(
         'attr.vol': character.attributes?.values?.["Voluntad"]?.toString(),
 
         // Combate
-        'combat.actions': finalCombatStats["Acciones por asalto"],
+        'combat.actions': getStatDisplayValue(finalCombatStats["Acciones por asalto"]),
         'combat.initiative': getStatDisplayValue(finalCombatStats["Iniciativa y Reflejos"]),
-        'combat.hp': finalCombatStats["Puntos de Vida"],
-        'combat.mental': finalCombatStats["Equilibrio Mental"],
+        'combat.hp': getStatDisplayValue(finalCombatStats["Puntos de Vida"]),
+        'combat.mental': getStatDisplayValue(finalCombatStats["Equilibrio Mental"]),
 
         // Energia Magica
         'combat.energy': (() => {
@@ -124,18 +124,18 @@ export async function generateCharacterSheetPDF(
         })(),
 
         // Otras Estadísticas
-        'stats.unconscious': finalOtherStats["Inconsciencia"],
-        'stats.recovery': finalOtherStats["Recuperación"],
-        'stats.poison_res': finalOtherStats["Resistencia a gases y venenos"],
-        'stats.lift': finalOtherStats["Peso Levantado"],
-        'stats.phys_absorb': finalOtherStats["Daño absorbido físico"],
-        'stats.ment_absorb': finalOtherStats["Daño absorbido mental"],
+        'stats.unconscious': getStatDisplayValue(finalOtherStats["Inconsciencia"]),
+        'stats.recovery': getStatDisplayValue(finalOtherStats["Recuperación"]),
+        'stats.poison_res': getStatDisplayValue(finalOtherStats["Resistencia a gases y venenos"]),
+        'stats.lift': getStatDisplayValue(finalOtherStats["Peso Levantado"]),
+        'stats.phys_absorb': getStatDisplayValue(finalOtherStats["Daño absorbido físico"]),
+        'stats.ment_absorb': getStatDisplayValue(finalOtherStats["Daño absorbido mental"]),
         'stats.phys_block': getStatDisplayValue(finalOtherStats["Parada Fisica"]),
         'stats.ment_block': getStatDisplayValue(finalOtherStats["Parada mental"]),
-        'stats.jump': finalOtherStats["Salto (alto / largo)"],
+        'stats.jump': getStatDisplayValue(finalOtherStats["Salto (alto / largo)"]),
         'stats.impact': getStatDisplayValue(finalOtherStats["Modificador de impacto"]),
-        'stats.psionic': finalOtherStats["Modificador Psionico"],
-        'stats.strength_mod': finalOtherStats["Modificador de fuerza"],
+        'stats.psionic': getStatDisplayValue(finalOtherStats["Modificador Psionico"]),
+        'stats.strength_mod': getStatDisplayValue(finalOtherStats["Modificador de fuerza"]),
 
         // Trasfondo
         'bg.prejudice': character.background?.prejudiceResistance?.toString(),

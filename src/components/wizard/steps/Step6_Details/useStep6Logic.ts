@@ -3,8 +3,17 @@ import { calculateDerivedStats, formatDerivedStats, applyStatBreakdownOverride }
 import { ARTIFACTS } from '../../../../data/artifacts';
 import { MAGIC_OBJECTS } from '../../../../data/magicObjects';
 
-const BREAKDOWN_COMBAT_FIELDS = ['Iniciativa y Reflejos'];
-const BREAKDOWN_STAT_FIELDS = ['Parada mental', 'Parada Fisica', 'Modificador de impacto'];
+const BREAKDOWN_COMBAT_FIELDS = ['Iniciativa y Reflejos', 'Puntos de Vida', 'Equilibrio Mental'];
+const BREAKDOWN_STAT_FIELDS = [
+    'Inconsciencia',
+    'Resistencia a gases y venenos',
+    'Daño absorbido físico',
+    'Daño absorbido mental',
+    'Modificador de impacto',
+    'Parada Fisica',
+    'Parada mental',
+    'Salto (alto / largo)'
+];
 
 export function useStep6Logic(data: any, onChange: (updates: any) => void) {
     const [unlockCombatStats, setUnlockCombatStats] = useState<boolean>(() => {
@@ -73,11 +82,11 @@ export function useStep6Logic(data: any, onChange: (updates: any) => void) {
     const updateCombatStat = useCallback((field: string, value: string) => {
         if (BREAKDOWN_COMBAT_FIELDS.includes(field)) {
             const current = data.combatstats?.[field];
-            let baseObj: any = { formula: "(AGI+PER)/4", base: 0, habilidades: 0, total: 0 };
+            let baseObj: any = { base: 0, total: 0 };
             if (current && typeof current === 'object') {
                 baseObj = {
                     ...(current.formula ? { formula: current.formula } : {}),
-                    base: current.base ?? 0,
+                    ...(current.base !== undefined ? { base: current.base } : {}),
                     ...(current.origen !== undefined ? { origen: current.origen } : {}),
                     ...(current.habilidades !== undefined ? { habilidades: current.habilidades } : {}),
                     total: current.total ?? 0
@@ -96,7 +105,7 @@ export function useStep6Logic(data: any, onChange: (updates: any) => void) {
                 updatedBreakdown = { ...baseObj, personalizado: '' };
             } else {
                 const parsed = !isNaN(Number(trimmed)) ? Number(trimmed) : value;
-                if (parsed === baseObj.total) {
+                if (String(parsed) === String(baseObj.total)) {
                     updatedBreakdown = { ...baseObj };
                 } else {
                     updatedBreakdown = { ...baseObj, personalizado: parsed };
@@ -123,12 +132,14 @@ export function useStep6Logic(data: any, onChange: (updates: any) => void) {
     const updateOtherStat = useCallback((field: string, value: string) => {
         if (BREAKDOWN_STAT_FIELDS.includes(field)) {
             const current = data.otherstats?.[field];
-            let baseObj: any = field === 'Parada Fisica'
-                ? { base: 0, habilidades: 0, total: 0 }
-                : { base: 0, origen: 0, total: 0 };
+            let baseObj: any = { base: 0, total: 0 };
             if (current && typeof current === 'object') {
                 baseObj = {
-                    base: current.base ?? 0,
+                    ...(current.formula ? { formula: current.formula } : {}),
+                    ...(current.base !== undefined ? { base: current.base } : {}),
+                    ...(current.multiplicadorFuerza !== undefined ? { multiplicadorFuerza: current.multiplicadorFuerza } : {}),
+                    ...(current.alto !== undefined ? { alto: current.alto } : {}),
+                    ...(current.largo !== undefined ? { largo: current.largo } : {}),
                     ...(current.origen !== undefined ? { origen: current.origen } : {}),
                     ...(current.habilidades !== undefined ? { habilidades: current.habilidades } : {}),
                     total: current.total ?? 0
@@ -147,7 +158,7 @@ export function useStep6Logic(data: any, onChange: (updates: any) => void) {
                 updatedBreakdown = { ...baseObj, personalizado: '' };
             } else {
                 const parsed = !isNaN(Number(trimmed)) ? Number(trimmed) : value;
-                if (parsed === baseObj.total) {
+                if (String(parsed) === String(baseObj.total)) {
                     updatedBreakdown = { ...baseObj };
                 } else {
                     updatedBreakdown = { ...baseObj, personalizado: parsed };

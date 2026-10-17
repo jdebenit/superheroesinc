@@ -17,9 +17,17 @@ export function extractVitals(characterData: any) {
         maxH = healthLine ? parseInt(healthLine.split(':')[1]?.trim()) : 0;
         maxM = mentalLine ? parseInt(mentalLine.split(':')[1]?.trim()) : 0;
     } else if (typeof combatStats === 'object' && combatStats !== null) {
-        // New format: { "Label": "Value", ... }
-        maxH = parseInt(combatStats['Puntos de Vida'] || combatStats['PV']) || 0;
-        maxM = parseInt(combatStats['Equilibrio Mental'] || combatStats['EQM']) || 0;
+        // New format: { "Label": "Value" | StatBreakdown, ... }
+        const resolveStat = (val: any) => {
+            if (val && typeof val === 'object') {
+                return val.personalizado !== undefined && val.personalizado !== null && val.personalizado !== ''
+                    ? val.personalizado
+                    : val.total;
+            }
+            return val;
+        };
+        maxH = parseInt(String(resolveStat(combatStats['Puntos de Vida'] ?? combatStats['PV']) ?? '')) || 0;
+        maxM = parseInt(String(resolveStat(combatStats['Equilibrio Mental'] ?? combatStats['EQM']) ?? '')) || 0;
     }
 
     // Fallbacks if not found (basic calculation)
