@@ -180,11 +180,11 @@ describe('Cálculos de Estadísticas Derivadas (d100)', () => {
             total: '20%'
         });
         expect(otherStats['Salto (alto / largo)']).toEqual({
-            formula: 'AGI/10',
+            formula: 'AGI/12',
             multiplicadorFuerza: 1,
-            alto: '0,6m',
-            largo: '1,8m',
-            total: '0,6m / 1,8m'
+            alto: '1,7m',
+            largo: '5,0m',
+            total: '1,7m / 5,0m'
         });
 
         // VOL 80 -> base 10; orígenes acumulativos: Parahumano (Thals) = 10, Arcano = 20; total = base (10) + 10 + 20 = 40
