@@ -372,43 +372,59 @@ export function calculateDerivedStats(
     // Origins structure: [ { "NombreOrigen": ["efecto1", ...] }, ... ]
     if (origins && origins.length > 0) {
         origins.forEach(originObj => {
-            // The key is the origin category (e.g. "Parahumano", "Divino")
-            // The value is an array (e.g. ["Thals"], ["Poder divino"])
-            const originCategory = Object.keys(originObj)[0];
-            const originDetails = originObj[originCategory] || [];
-            if (!originCategory) return;
+            // The key can be the origin category (e.g. "Parahumano", "Divino")
+            // OR directly a subtype name in legacy/exported JSONs (e.g. "Semidios", "Mago", "Manipulador")
+            const originKey = Object.keys(originObj)[0];
+            const originDetails = originObj[originKey] || [];
+            if (!originKey) return;
+
+            let categoryDef = ORIGIN_CATEGORIES[originKey];
+            let effectiveSpecializations: string[] = Array.isArray(originDetails) ? [...originDetails] : [];
+
+            // Fallback: if originKey is actually a subtype (e.g. "Semidios", "Mago", "Thals", "Artista Marcial")
+            if (!categoryDef) {
+                const parentEntry = Object.entries(ORIGIN_CATEGORIES).find(([, def]) =>
+                    (def.subtypes && Object.prototype.hasOwnProperty.call(def.subtypes, originKey)) ||
+                    (def.subtypeModifiers && Object.prototype.hasOwnProperty.call(def.subtypeModifiers, originKey))
+                );
+                if (parentEntry) {
+                    categoryDef = parentEntry[1];
+                    if (!effectiveSpecializations.includes(originKey)) {
+                        effectiveSpecializations.push(originKey);
+                    }
+                }
+            }
+
+            if (!categoryDef) return;
 
             // --- Mental Parry Bonus ---
             let currentBonus = 0;
 
-            if (ORIGIN_CATEGORIES[originCategory]) {
-                const categoryDef = ORIGIN_CATEGORIES[originCategory];
+            // 1. Base Category Bonus
+            if (categoryDef.paradaMentalBonus) {
+                currentBonus = categoryDef.paradaMentalBonus;
+                originMentalBonuses[originKey] = Math.max(
+                    originMentalBonuses[originKey] || 0,
+                    categoryDef.paradaMentalBonus
+                );
+            }
 
-                // 1. Base Category Bonus
-                if (categoryDef.paradaMentalBonus) {
-                    currentBonus = categoryDef.paradaMentalBonus;
-                    originMentalBonuses[originCategory] = Math.max(
-                        originMentalBonuses[originCategory] || 0,
-                        categoryDef.paradaMentalBonus
-                    );
-                }
-
-                // 2. Subtype Bonus (if any, e.g. Thals)
-                if (categoryDef.subtypeModifiers) {
-                    originDetails.forEach((specialization: string) => {
-                        if (!categoryDef.subtypeModifiers) return;
-                        const modifier = categoryDef.subtypeModifiers[specialization];
-                        if (modifier && modifier.paradaMental) {
-                            originMentalBonuses[specialization] = Math.max(
-                                originMentalBonuses[specialization] || 0,
-                                modifier.paradaMental
-                            );
-                            if (modifier.paradaMental > currentBonus) {
-                                currentBonus = modifier.paradaMental;
-                            }
+            // 2. Subtype Bonus (if any, e.g. Thals)
+            if (categoryDef.subtypeModifiers) {
+                effectiveSpecializations.forEach((specialization: string) => {
+                    if (!categoryDef.subtypeModifiers) return;
+                    const modifier = categoryDef.subtypeModifiers[specialization];
+                    if (modifier && modifier.paradaMental) {
+                        const bonusKey = ORIGIN_CATEGORIES[originKey] ? originKey : specialization;
+                        originMentalBonuses[bonusKey] = Math.max(
+                            originMentalBonuses[bonusKey] || 0,
+                            modifier.paradaMental
+                        );
+                        if (modifier.paradaMental > currentBonus) {
+                            currentBonus = modifier.paradaMental;
                         }
-                    });
-                }
+                    }
+                });
             }
 
             if (currentBonus > maxOriginBonus) {
@@ -416,30 +432,27 @@ export function calculateDerivedStats(
             }
 
             // --- Impact Bonus (Generic via subtypeModifiers) ---
-            if (originCategory) {
-                const categoryDef = ORIGIN_CATEGORIES[originCategory];
-                if (categoryDef && categoryDef.subtypeModifiers) {
-                    let currentImpactBonus = 0;
+            if (categoryDef.subtypeModifiers) {
+                let currentImpactBonus = 0;
 
-                    // Iterate over all specializations the character has in this category
-                    originDetails.forEach((specialization: string) => {
-                        if (!categoryDef.subtypeModifiers) return;
+                // Iterate over all specializations the character has in this category
+                effectiveSpecializations.forEach((specialization: string) => {
+                    if (!categoryDef.subtypeModifiers) return;
 
-                        const modifier = categoryDef.subtypeModifiers[specialization];
-                        if (modifier && modifier.modImpacto) {
-                            originImpactBonuses[specialization] = Math.max(
-                                originImpactBonuses[specialization] || 0,
-                                modifier.modImpacto
-                            );
-                            if (modifier.modImpacto > currentImpactBonus) {
-                                currentImpactBonus = modifier.modImpacto;
-                            }
+                    const modifier = categoryDef.subtypeModifiers[specialization];
+                    if (modifier && modifier.modImpacto) {
+                        originImpactBonuses[specialization] = Math.max(
+                            originImpactBonuses[specialization] || 0,
+                            modifier.modImpacto
+                        );
+                        if (modifier.modImpacto > currentImpactBonus) {
+                            currentImpactBonus = modifier.modImpacto;
                         }
-                    });
-
-                    if (currentImpactBonus > maxImpactBonus) {
-                        maxImpactBonus = currentImpactBonus;
                     }
+                });
+
+                if (currentImpactBonus > maxImpactBonus) {
+                    maxImpactBonus = currentImpactBonus;
                 }
             }
         });

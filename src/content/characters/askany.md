@@ -5,7 +5,7 @@ description: "Integrante del GOM 28 'Los Irregulares', metahumano empleado por e
 source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-11-26
 image: /personajes/askany.png
-rpgId: askany
+rpgId: hijo-de-isis
 autor: Alberto Gonzalez Calvo
 tags:
   - Principal

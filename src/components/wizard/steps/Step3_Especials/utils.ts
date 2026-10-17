@@ -37,16 +37,25 @@ export const calculateEM = (data: any, selectedPowers: any[] = [], divisor: numb
     let vol = Number(getCharacteristicValue(data, 'Voluntad')) || 0;
     let con = Number(getCharacteristicValue(data, 'Constitución')) || 0;
 
-    // Apply power modifiers
-    if (selectedPowers) {
+    // Apply power modifiers (subtracting any powerMod already baked into attributes.values via breakdown)
+    if (selectedPowers && selectedPowers.length > 0) {
+        const breakdown = data.attributes?.breakdown;
+        if (breakdown) {
+            int -= Number(breakdown.inteligencia?.powerMod) || 0;
+            per -= Number(breakdown.percepcion?.powerMod) || 0;
+            vol -= Number(breakdown.voluntad?.powerMod) || 0;
+            con -= Number(breakdown.constitucion?.powerMod) || 0;
+        }
+
         selectedPowers.forEach(p => {
             const powerData = POWERS.find(power => power.id === p.id);
             if (powerData?.characteristic && p.powerMod) {
+                const mod = Number(p.powerMod) || 0;
                 switch (powerData.characteristic) {
-                    case 'INT': int += p.powerMod; break;
-                    case 'PER': per += p.powerMod; break;
-                    case 'VOL': vol += p.powerMod; break;
-                    case 'CON': con += p.powerMod; break;
+                    case 'INT': int += mod; break;
+                    case 'PER': per += mod; break;
+                    case 'VOL': vol += mod; break;
+                    case 'CON': con += mod; break;
                 }
             }
         });

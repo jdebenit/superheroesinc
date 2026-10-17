@@ -1,0 +1,363 @@
+{
+  "name": "Askany ",
+  "alias": "Hijo de Isis",
+  "level": "2",
+  "meta": {
+    "version": "Beta 0.16.4",
+    "generator": "SHI Wizard"
+  },
+  "origin": {
+    "items": [
+      {
+        "Divino": [
+          "Semidios"
+        ]
+      },
+      {
+        "Vigilante": [
+          "Disponibilidad de armamento a dificultad reducida",
+          "Recarga rápida",
+          "Recuerdos dolorosos",
+          "Voluntad férrea",
+          "Manipulador"
+        ]
+      },
+      {
+        "Arcano": [
+          "+20 a la parada mental",
+          "Mago"
+        ]
+      }
+    ]
+  },
+  "combatstats": {
+    "Acciones por asalto": "3",
+    "Iniciativa y Reflejos": {
+      "formula": "(INT+PER)/4",
+      "base": 67,
+      "habilidades": 0,
+      "total": 67
+    },
+    "Puntos de Vida": {
+      "formula": "CON/2",
+      "base": 40,
+      "total": 40
+    },
+    "Equilibrio Mental": {
+      "formula": "INT",
+      "base": 141,
+      "total": 141
+    }
+  },
+  "otherstats": {
+    "Inconsciencia": {
+      "formula": "PV/10",
+      "base": 4,
+      "total": 4
+    },
+    "Recuperación": "1 PV/h",
+    "Resistencia a gases y venenos": {
+      "formula": "CON/3",
+      "base": 26,
+      "total": "26%"
+    },
+    "Modificador de fuerza": "1d4",
+    "Peso Levantado": "60kg",
+    "Daño absorbido físico": {
+      "base": 0,
+      "total": 0
+    },
+    "Daño absorbido mental": {
+      "base": 80,
+      "total": 80
+    },
+    "Modificador de impacto": {
+      "base": 1,
+      "origen": 0,
+      "total": 1
+    },
+    "Modificador Psionico": "50",
+    "Parada Fisica": {
+      "base": 30,
+      "habilidades": 0,
+      "total": 30
+    },
+    "Parada mental": {
+      "base": 75,
+      "origen": {
+        "Divino": 25,
+        "Arcano": 20
+      },
+      "total": 100
+    },
+    "Salto (alto / largo)": {
+      "formula": "AGI/10",
+      "multiplicadorFuerza": 1,
+      "alto": "3,4m",
+      "largo": "10,1m",
+      "total": "3,4m / 10,1m"
+    }
+  },
+  "attributes": {
+    "values": {
+      "Fuerza": 60,
+      "Constitución": 80,
+      "Agilidad": 101,
+      "Inteligencia": 141,
+      "Percepción": 130,
+      "Apariencia": 40,
+      "Voluntad": 171
+    },
+    "breakdown": {
+      "fuerza": {
+        "base": 0,
+        "originMod": 60,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "constitucion": {
+        "base": 20,
+        "originMod": 60,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "agilidad": {
+        "base": 71,
+        "originMod": 30,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "inteligencia": {
+        "base": 70,
+        "originMod": 0,
+        "specialtyMod": 30,
+        "powerMod": 41,
+        "otherMod": 0
+      },
+      "percepcion": {
+        "base": 100,
+        "originMod": 30,
+        "specialtyMod": 0,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "apariencia": {
+        "base": 10,
+        "originMod": 0,
+        "specialtyMod": 30,
+        "powerMod": 0,
+        "otherMod": 0
+      },
+      "voluntad": {
+        "base": 100,
+        "originMod": 0,
+        "specialtyMod": 0,
+        "powerMod": 71,
+        "otherMod": 0
+      }
+    },
+    "manualBonuses": {
+      "Fuerza": 0,
+      "Agilidad": 0,
+      "Constitución": 0,
+      "Inteligencia": 0,
+      "Percepción": 0,
+      "Voluntad": 0,
+      "Apariencia": 0
+    }
+  },
+  "skills": {
+    "generalItems": [
+      {
+        "name": "Acechar/Discrección",
+        "math": "(AGI+PER)/2",
+        "value": "115%"
+      },
+      {
+        "name": "Comb. cuerpo a cuerpo",
+        "math": "(AGI+PER)/2",
+        "value": "115%"
+      },
+      {
+        "name": "Conocimientos generales",
+        "math": "INT/3",
+        "value": "47%"
+      },
+      {
+        "name": "Esconderse",
+        "math": "(AGI+PER)/4",
+        "value": "57%"
+      },
+      {
+        "name": "Idea",
+        "math": "INT/2",
+        "value": "90%"
+      },
+      {
+        "name": "Influencia",
+        "math": "(INT+APA)/2",
+        "value": "110%"
+      },
+      {
+        "name": "Idioma nativo (Avalonense)",
+        "math": "INT",
+        "value": "141%"
+      },
+      {
+        "name": "Investigar",
+        "math": "(INT+PER)/3",
+        "value": "90%"
+      },
+      {
+        "name": "Lanzar",
+        "math": "(FUE+PER)/2",
+        "value": "95%"
+      },
+      {
+        "name": "Primeros auxilios",
+        "math": "INT/2",
+        "value": "70%"
+      },
+      {
+        "name": "Suerte",
+        "math": "(PER+VOL)/4",
+        "value": "75%"
+      },
+      {
+        "name": "Trepar y Saltar",
+        "math": "AGI",
+        "value": "101%"
+      }
+    ],
+    "specialItems": [
+      {
+        "name": "Magia",
+        "math": "(INT+PER)/2",
+        "value": "135%"
+      },
+      {
+        "name": "Otro idioma: Castellano",
+        "math": "INT/3",
+        "value": "67%"
+      },
+      {
+        "name": "Ciencia: Historia",
+        "math": "INT/3",
+        "value": "47%"
+      },
+      {
+        "name": "Ciencia: Mitología",
+        "math": "INT/3",
+        "value": "47%"
+      }
+    ],
+    "selected": {
+      "magia": {
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      }
+    },
+    "specified": {
+      "otro_idioma_required_1792258970046": {
+        "skillId": "otro_idioma",
+        "specification": "Castellano",
+        "isFree": false,
+        "isRequired": true,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "ciencia_1792259052276": {
+        "skillId": "ciencia",
+        "specification": "Historia",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      },
+      "ciencia_1792259055572": {
+        "skillId": "ciencia",
+        "specification": "Mitología",
+        "isFree": false,
+        "isRequired": false,
+        "manualMods": 0,
+        "manualBases": 0
+      }
+    },
+    "nativeLanguage": "Avalonense"
+  },
+  "background": {
+    "prejudiceResistance": 44,
+    "economicStatus": "clase_baja",
+    "legalStatus": "con_antecedentes",
+    "socialStatus": "amenaza_publica",
+    "friendsAndAssociates": "solo_familia"
+  },
+  "spells": {
+    "selected": [
+      {
+        "id": "abrir_portales",
+        "rank": 4
+      },
+      {
+        "id": "curacion",
+        "rank": 2
+      },
+      {
+        "id": "escudos_misticos",
+        "rank": 5
+      },
+      {
+        "id": "invocar_elemento",
+        "rank": 4,
+        "selectedOption": "Clima"
+      },
+      {
+        "id": "pseudo_psi",
+        "rank": 4
+      },
+      {
+        "id": "paralizar",
+        "rank": 4
+      }
+    ],
+    "emFormula": {
+      "divisor": 1
+    },
+    "calculatedEM": 442
+  },
+  "powers": {
+    "selected": [
+      {
+        "id": "superinteligencia",
+        "origin": "Divino",
+        "rank": 1,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": false,
+        "powerMod": 41
+      },
+      {
+        "id": "supervoluntad",
+        "origin": "OtroDivino",
+        "rank": 1,
+        "isCrossType": false,
+        "isCrossOrigin": false,
+        "isCrossOriginMaldito": false,
+        "isCrossOriginDivino": true,
+        "powerMod": 71
+      }
+    ]
+  },
+  "magicalBondsCustomName": "Adepto de Avalon",
+  "magicalBondsCustomDescription": "Estudio en Ávalon y recibe sus dones mágicos de la radia que emana ese Reino Divino",
+  "traumas": {
+    "Manipulador": "Debido a tener que moverse políticamente entre varios reinos aprendió desde joven que la palabra adecuada en el momento adecuado es el hechizo más poderoso"
+  },
+  "sexualIdentity": "Hombre"
+}
