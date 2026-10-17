@@ -1029,6 +1029,7 @@
     flex-wrap: wrap;
     gap: 1rem;
     justify-content: space-between;
+    align-items: flex-start;
 }
 
 .combat-stat-box {
@@ -1041,6 +1042,22 @@
     padding: 0.5rem;
     background: white;
     border-radius: 4px;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.combat-stat-box.clickable-stat-box {
+    cursor: pointer;
+    user-select: none;
+}
+
+.combat-stat-box.clickable-stat-box:hover {
+    border-color: #8B4513;
+    background-color: #fdfaf6;
+}
+
+.combat-stat-box.clickable-stat-box.expanded {
+    border-color: #8B4513;
+    box-shadow: 0 2px 6px rgba(139, 69, 19, 0.12);
 }
 
 .stat-label {
@@ -1055,6 +1072,113 @@
     font-size: 1.2rem;
     font-weight: bold;
     color: #333;
+}
+
+.stat-value-custom {
+    color: #b45309 !important;
+}
+
+.stat-toggle-indicator {
+    font-size: 0.7em;
+    color: #8B4513;
+    opacity: 0.65;
+    margin-left: 0.25rem;
+}
+
+.clickable-stat-item {
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 0.15rem 0.25rem;
+    margin-left: -0.25rem !important;
+    margin-right: -0.25rem !important;
+    transition: background-color 0.15s ease;
+}
+
+.clickable-stat-item:hover {
+    background-color: rgba(139, 69, 19, 0.06);
+}
+
+.stat-breakdown-panel {
+    width: 100%;
+    margin-top: 0.4rem;
+    padding: 0.5rem 0.65rem;
+    background-color: #faf7f2;
+    border: 1px solid #e5dccb;
+    border-left: 3px solid #8B4513;
+    border-radius: 4px;
+    font-size: 0.78rem;
+    color: #374151;
+    box-sizing: border-box;
+    cursor: default;
+}
+
+.combat-breakdown-panel {
+    margin-top: 0.5rem;
+    text-align: left;
+}
+
+.other-breakdown-panel {
+    margin-bottom: 0.35rem;
+}
+
+.stat-breakdown-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.5rem;
+    padding: 0.12rem 0;
+}
+
+.stat-breakdown-key {
+    color: #6b7280;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.stat-breakdown-val {
+    font-weight: 600;
+    color: #1f2937;
+    text-align: right;
+}
+
+.stat-breakdown-formula {
+    font-family: monospace;
+    font-size: 0.75rem;
+    background-color: #f3ede2;
+    color: #78350f;
+    padding: 0.05rem 0.35rem;
+    border-radius: 3px;
+    border: 1px solid #e2d5c1;
+}
+
+.stat-breakdown-tag {
+    color: #1f2937;
+}
+
+.stat-breakdown-hint {
+    font-size: 0.7rem;
+    color: #6b7280;
+    font-weight: normal;
+    font-style: italic;
+}
+
+.stat-breakdown-total-row {
+    margin-top: 0.2rem;
+    padding-top: 0.2rem;
+    border-top: 1px dashed #d6cbb9;
+    color: #8B4513;
+}
+
+.stat-breakdown-total-row .stat-breakdown-key,
+.stat-breakdown-total-row .stat-breakdown-val {
+    color: #8B4513;
+    font-weight: 700;
+}
+
+.stat-breakdown-custom-row .stat-breakdown-key,
+.stat-breakdown-custom-row .stat-breakdown-val {
+    color: #b45309;
+    font-weight: 700;
 }
 
 /* Attributes Grid */

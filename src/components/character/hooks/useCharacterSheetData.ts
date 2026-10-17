@@ -89,9 +89,17 @@ export const useCharacterSheetData = (character: any) => {
     const finalCombatStats = applyStatsOverrides(calculatedCombatStats, character.combatstats);
     const finalOtherStats = applyStatsOverrides(calculatedOtherStats, character.otherstats);
 
-    // Normalize to array of objects for display components
-    const combatStats = Object.entries(finalCombatStats).map(([label, value]) => ({ label, value: getStatDisplayValue(value) }));
-    const otherStats = Object.entries(finalOtherStats).map(([label, value]) => ({ label, value: getStatDisplayValue(value) }));
+    // Normalize to array of objects for display components (including raw breakdown if object)
+    const combatStats = Object.entries(finalCombatStats).map(([label, value]) => ({
+        label,
+        value: getStatDisplayValue(value),
+        breakdown: value && typeof value === 'object' ? value : undefined
+    }));
+    const otherStats = Object.entries(finalOtherStats).map(([label, value]) => ({
+        label,
+        value: getStatDisplayValue(value),
+        breakdown: value && typeof value === 'object' ? value : undefined
+    }));
 
     // --- PRE-CALCULATE LISTS FOR PDF (Powers, Spells, etc.) ---
 
