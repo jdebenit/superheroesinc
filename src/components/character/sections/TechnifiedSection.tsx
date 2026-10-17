@@ -8,7 +8,8 @@ interface TechnifiedSectionProps {
 }
 
 export const TechnifiedSection: React.FC<TechnifiedSectionProps> = ({ character }) => {
-    if (!character.exoskeletonArmorConfig && !character.technoSuitStrengthConfig) return null;
+    const hasCyborgImplants = Array.isArray(character.cyborgImplants) && character.cyborgImplants.length > 0;
+    if (!character.exoskeletonArmorConfig && !character.technoSuitStrengthConfig && !hasCyborgImplants) return null;
 
     return (
         <div className="sheet-section tech-armor-strength">
@@ -23,6 +24,14 @@ export const TechnifiedSection: React.FC<TechnifiedSectionProps> = ({ character 
                     if (character.technoSuitStrengthConfig) {
                         const str = TECHNOSUIT_STRENGTH_CONFIGS.find(c => c.id === character.technoSuitStrengthConfig);
                         if (str) cost += str.pcCost;
+                    }
+                    if (hasCyborgImplants) {
+                        character.cyborgImplants.forEach((implant: any) => {
+                            const stat = CYBORG_IMPLANT_STATS.find(s => s.id === implant.statConfigId);
+                            const str = CYBORG_IMPLANT_STRENGTHS.find(s => s.id === implant.strengthConfigId);
+                            if (stat) cost += stat.pcCost;
+                            if (str) cost += str.pcCost;
+                        });
                     }
                     return <span className="cost">({cost} PCs)</span>;
                 })()}
@@ -78,7 +87,7 @@ export const TechnifiedSection: React.FC<TechnifiedSectionProps> = ({ character 
                 })()}
 
                 {/* Cyborg Implants */}
-                {character.cyborgImplants && character.cyborgImplants.length > 0 && (
+                {hasCyborgImplants && (
                     <div className="cyborg-container">
                         <div className="tech-card-header">
                             Implantes Cibernéticos
@@ -93,7 +102,7 @@ export const TechnifiedSection: React.FC<TechnifiedSectionProps> = ({ character 
                                             <span className="cyborg-name">{implant.name}</span>
                                             <div className="cyborg-details">
                                                 {stat && `PV +${stat.pvBonus} / DA ${stat.daFisico}`}
-                                                {str && str.pcCost > 0 && ` • FUE ${str.fuerza}`}
+                                                {str && `${stat ? ' • ' : ''}FUE ${str.fuerza}`}
                                             </div>
                                         </div>
                                         {/* Sum cost of stat + strength */}

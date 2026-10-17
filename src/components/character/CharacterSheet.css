@@ -598,6 +598,10 @@
     margin-top: 0.5rem;
 }
 
+.cyborg-container:first-child {
+    margin-top: 0;
+}
+
 .cyborg-item {
     display: flex;
     justify-content: space-between;
