@@ -6,7 +6,7 @@ author: Jorge Francisco de Benito Montoya
 tags:
   - articulos
   - rol
-  - web
+  - premios
 ---
 Ayer, a las 23:58, recibí un whatsapp de José Luis, mi editor en Suseya Ediciones, para decirme que _Héroe Agenda, Sobrenaturales y Arcanos_ había ganado el **Premio Ignotus 2026 al mejor juego de rol**. Mi primera reacción fue de sorpresa, y no solo porque hubiésemos ganado. Con la memoria que tengo, se me había olvidado hasta que el libro estaba nominado, así que os podéis imaginar cómo me quedé cuando recibí la noticia, prácticamente a medianoche y sin esperármela en absoluto.
 
