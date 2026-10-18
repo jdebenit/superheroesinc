@@ -1,7 +1,7 @@
 ---
 title: Héroe Agenda ha ganado el Ignotus 2026. Y todavía me cuesta creérmelo
 pubDate: 2026-10-18
-description: Héroe Agenda: Sobrenaturales y Arcanos ha ganado el Premio Ignotus 2026 al mejor juego de rol, una noticia que todavía me cuesta creer. Un reconocimiento que quiero compartir con todos los que hicieron posible el libro, especialmente Los Irregulares, José Luis, Anna y el recuerdo de Ramsao. Y esto no termina aquí, porque ya estamos trabajando en dos nuevos suplementos para seguir ampliando el universo de Superhéroes INC.
+description: "Héroe Agenda: Sobrenaturales y Arcanos ha ganado el Premio Ignotus 2026 al mejor juego de rol, una noticia que todavía me cuesta creer. Un reconocimiento que quiero compartir con todos los que hicieron posible el libro, especialmente Los Irregulares, José Luis, Anna y el recuerdo de Ramsao. Y esto no termina aquí, porque ya estamos trabajando en dos nuevos suplementos para seguir ampliando el universo de Superhéroes INC."
 author: Jorge Francisco de Benito Montoya
 tags:
   - articulos
