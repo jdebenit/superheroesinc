@@ -4,31 +4,9 @@ import type { SelectedPower } from '../../components/wizard/steps/Step3_Especial
 import { hasSubtype, hasOrigin, calculateEM } from '../../components/wizard/steps/Step3_Especials/utils';
 import { getFreeSkillsForOrigins } from '../../data/freeOriginSkills';
 import { getRequiredSkillsForOrigins } from '../../data/requiredSpecialtySkills';
-import { SPECIAL_SKILLS } from '../../data/specialSkills';
+import { SPECIAL_SKILLS, isSkillAllowed } from '../../data/specialSkills';
 import { GENERAL_SKILLS } from '../../data/generalSkills';
 
-// Helper to check if skill is allowed
-const isSkillAllowed = (skill: any, originItems: any[]) => {
-    if (!skill.allowedCriteria || skill.allowedCriteria.length === 0) return true;
-
-    return skill.allowedCriteria.some((criteria: any) => {
-        if (criteria.origin) {
-            const hasOrigin = originItems.some(item => Object.keys(item)[0] === criteria.origin);
-            if (!hasOrigin) return false;
-        }
-
-        if (criteria.subtype) {
-            const hasSubtype = originItems.some(item => {
-                const originName = Object.keys(item)[0];
-                const subtypes = item[originName];
-                return Array.isArray(subtypes) && subtypes.includes(criteria.subtype);
-            });
-            if (!hasSubtype) return false;
-        }
-
-        return true;
-    });
-};
 
 export function useCharacterAutoEffects(data: any, onChange: (updates: any) => void) {
     // --- STEP 3 EFFECTS ---
@@ -429,7 +407,7 @@ export function useSkillAutoEffects(data: any, selectedSkills: any, specifiedSki
 
         Object.keys(newSelected).forEach(skillId => {
             const skillDef = SPECIAL_SKILLS.find(s => s.id === skillId);
-            if (skillDef && !isSkillAllowed(skillDef, originItems)) {
+            if (skillDef && !isSkillAllowed(skillDef, originItems, data)) {
                 delete newSelected[skillId];
                 hasChanges = true;
             }
@@ -438,7 +416,7 @@ export function useSkillAutoEffects(data: any, selectedSkills: any, specifiedSki
         Object.keys(newSpecified).forEach(uniqueId => {
             const skillId = newSpecified[uniqueId].skillId;
             const skillDef = SPECIAL_SKILLS.find(s => s.id === skillId);
-            if (skillDef && !isSkillAllowed(skillDef, originItems)) {
+            if (skillDef && !isSkillAllowed(skillDef, originItems, data)) {
                 delete newSpecified[uniqueId];
                 hasChanges = true;
             }
@@ -448,5 +426,5 @@ export function useSkillAutoEffects(data: any, selectedSkills: any, specifiedSki
             setSelectedSkills(newSelected);
             setSpecifiedSkills(newSpecified);
         }
-    }, [JSON.stringify(data.origin?.items), selectedSkills, specifiedSkills, setSelectedSkills, setSpecifiedSkills]);
+    }, [JSON.stringify(data.origin?.items), JSON.stringify(data.liberadoParams), selectedSkills, specifiedSkills, setSelectedSkills, setSpecifiedSkills]);
 }

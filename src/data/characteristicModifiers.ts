@@ -14,7 +14,10 @@ export interface OriginCharacteristicModifiers {
     distributablePoints?: number;
     // Si tiene choosableCharacteristic, el usuario elige una característica para aplicar el bonus fijo
     choosableCharacteristic?: {
-        bonus: number;  // Bonus fijo que se aplica a la característica elegida
+        bonus?: number;  // Bonus fijo que se aplica a la característica elegida
+        maxLimitBonus?: number;  // Bonus al límite máximo (ej. Liberados +30 -> 130)
+        allowedCharacteristics?: string[];  // Subconjunto de características permitidas
+        title?: string;  // Título personalizado para el selector
         distributablePoints?: number;  // Puntos adicionales que se pueden distribuir
     };
     // Modificadores fijos por característica
@@ -81,6 +84,8 @@ export const ORIGIN_CHARACTERISTIC_MODIFIERS: { [key: string]: OriginCharacteris
     },
     "Heraldo Cósmico": {
         choosableCharacteristic: {
+            title: "Heraldo Cósmico: Elige la característica para el bonus de +100",
+            allowedCharacteristics: ['fuerza', 'constitucion', 'agilidad', 'inteligencia', 'percepcion', 'apariencia', 'voluntad'],
             bonus: 100,
             distributablePoints: 100
         },
@@ -116,9 +121,33 @@ export const ORIGIN_CHARACTERISTIC_MODIFIERS: { [key: string]: OriginCharacteris
         apariencia: { modifier: 0, max: 100 },
         voluntad: { modifier: 0, max: 100 },
     },
-    "Liberado de Unidad": allCharacteristics(0, 100),
-    "Liberado de Equidad": allCharacteristics(0, 100),
-    "Liberado de Entropia": allCharacteristics(0, 100),
+    "Liberado de Unidad": {
+        distributablePoints: 120,
+        choosableCharacteristic: {
+            title: "Senda de Unidad: Elige la característica que supera el límite normal (+30, hasta 130)",
+            allowedCharacteristics: ['agilidad', 'apariencia', 'voluntad'],
+            maxLimitBonus: 30
+        },
+        ...allCharacteristics(0, 100)
+    },
+    "Liberado de Equidad": {
+        distributablePoints: 120,
+        choosableCharacteristic: {
+            title: "Senda de Equidad: Elige la característica que supera el límite normal (+30, hasta 130)",
+            allowedCharacteristics: ['inteligencia', 'percepcion', 'voluntad'],
+            maxLimitBonus: 30
+        },
+        ...allCharacteristics(0, 100)
+    },
+    "Liberado de Entropía": {
+        distributablePoints: 120,
+        choosableCharacteristic: {
+            title: "Senda de Entropía: Elige la característica que supera el límite normal (+30, hasta 130)",
+            allowedCharacteristics: ['fuerza', 'constitucion', 'voluntad'],
+            maxLimitBonus: 30
+        },
+        ...allCharacteristics(0, 100)
+    },
 
     // Arcano
     "Mago": allCharacteristics(0, 100),

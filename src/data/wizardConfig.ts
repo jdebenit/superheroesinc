@@ -115,4 +115,7 @@ export const initialCharacterState = {
     technoSuitStrengthConfig: null, // For Tecnoarmadura only
     cyborgImplants: [], // For Cyborg only
     isParahumanoHybrid: false, // Checkbox state for Parahumano hybrid with human
+    liberadoParams: null,
+    chosenBonusCharacteristic: null,
+    chosenCharacteristics: {},
 };

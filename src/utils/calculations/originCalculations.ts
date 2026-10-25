@@ -35,9 +35,22 @@ export function forEachOriginAndSubtype(
  * Calcula los modificadores de origen para todas las características
  * Usa el MÁXIMO entre múltiples orígenes, no suma
  */
+/**
+ * Obtiene la característica elegida para un origen específico,
+ * soportando tanto el formato nuevo Record<string, string> como el antiguo string | null.
+ */
+function getChosenForOrigin(
+    chosen: Record<string, string> | string | null | undefined,
+    originKey: string
+): string | null {
+    if (!chosen) return null;
+    if (typeof chosen === 'string') return chosen;
+    return chosen[originKey] || null;
+}
+
 export function calculateOriginModifiers(
     origins: any[],
-    chosenBonusCharacteristic: string | null
+    chosenBonusCharacteristic: Record<string, string> | string | null
 ): { [key: string]: number } {
     const modifiers: { [key: string]: number } = {
         fuerza: 0,
@@ -49,7 +62,7 @@ export function calculateOriginModifiers(
         voluntad: 0
     };
 
-    forEachOriginAndSubtype(origins, (_, data) => {
+    forEachOriginAndSubtype(origins, (originName, data) => {
         // Aplicar modificadores de características
         Object.keys(modifiers).forEach(charId => {
             const charMod = data[charId as keyof typeof data];
@@ -58,12 +71,15 @@ export function calculateOriginModifiers(
             }
         });
 
-        // Aplicar bonus de característica elegible
-        if (data.choosableCharacteristic && chosenBonusCharacteristic) {
-            modifiers[chosenBonusCharacteristic] = Math.max(
-                modifiers[chosenBonusCharacteristic],
-                data.choosableCharacteristic.bonus
-            );
+        // Aplicar bonus de característica elegible para este origen
+        if (data.choosableCharacteristic && data.choosableCharacteristic.bonus) {
+            const chosen = getChosenForOrigin(chosenBonusCharacteristic, originName);
+            if (chosen && modifiers[chosen] !== undefined) {
+                modifiers[chosen] = Math.max(
+                    modifiers[chosen],
+                    data.choosableCharacteristic.bonus
+                );
+            }
         }
     });
 
@@ -76,13 +92,15 @@ export function calculateOriginModifiers(
  */
 export function calculateLimits(
     origins: any[],
-    charId: string
+    charId: string,
+    chosenBonusCharacteristic?: Record<string, string> | string | null,
+    liberadoParams?: any
 ): { min: number; max: number } {
     let maxLimit = 100;
     let minLimit = 40;
     let hasSpecificMin = false;
 
-    forEachOriginAndSubtype(origins, (_, data) => {
+    forEachOriginAndSubtype(origins, (originName, data) => {
         const charMod = data[charId as keyof typeof data];
         if (charMod && typeof charMod === 'object' && 'max' in charMod) {
             if (charMod.max && charMod.max > maxLimit) {
@@ -97,6 +115,33 @@ export function calculateLimits(
                 }
             }
         }
+
+        // Si la característica coincide con la elegida en choosableCharacteristic y otorga límite aumentado
+        if (data.choosableCharacteristic?.maxLimitBonus) {
+            const chosen = getChosenForOrigin(chosenBonusCharacteristic, originName);
+            const isFirstChosen = chosen === charId;
+            const hasComprensionSenda = Array.isArray(liberadoParams?.gifts) ? liberadoParams.gifts.includes('comprension_senda') : liberadoParams?.gift === 'comprension_senda';
+
+            if (isFirstChosen) {
+                if (hasComprensionSenda && liberadoParams?.comprensionChoice === 'no_limit') {
+                    maxLimit = Math.max(maxLimit, 200);
+                } else {
+                    const boostedLimit = 100 + data.choosableCharacteristic.maxLimitBonus;
+                    if (boostedLimit > maxLimit) {
+                        maxLimit = boostedLimit;
+                    }
+                }
+            } else if (
+                hasComprensionSenda &&
+                liberadoParams?.comprensionChoice === 'second_characteristic' &&
+                liberadoParams?.secondCharacteristic === charId
+            ) {
+                const boostedLimit = 100 + data.choosableCharacteristic.maxLimitBonus;
+                if (boostedLimit > maxLimit) {
+                    maxLimit = boostedLimit;
+                }
+            }
+        }
     });
 
     return { min: minLimit, max: maxLimit };
@@ -105,17 +150,40 @@ export function calculateLimits(
 /**
  * Detecta si algún origen tiene característica elegible (choosableCharacteristic)
  */
-export function hasChoosableCharacteristic(origins: any[]): any | null {
-    if (!origins || origins.length === 0) return null;
+export interface ChoosableCharacteristicEntry {
+    originKey: string;
+    bonus?: number;
+    maxLimitBonus?: number;
+    allowedCharacteristics?: string[];
+    title?: string;
+    distributablePoints?: number;
+}
 
-    let result: any = null;
-    forEachOriginAndSubtype(origins, (_, data) => {
-        if (data.choosableCharacteristic && !result) {
-            result = data.choosableCharacteristic;
+/**
+ * Obtiene todos los orígenes/subtipos seleccionados que requieren elegir una característica
+ */
+export function getChoosableCharacteristics(origins: any[]): ChoosableCharacteristicEntry[] {
+    if (!origins || origins.length === 0) return [];
+
+    const entries: ChoosableCharacteristicEntry[] = [];
+    forEachOriginAndSubtype(origins, (originName, data) => {
+        if (data.choosableCharacteristic) {
+            entries.push({
+                originKey: originName,
+                ...data.choosableCharacteristic
+            });
         }
     });
 
-    return result;
+    return entries;
+}
+
+/**
+ * Detecta si algún origen tiene característica elegible (choosableCharacteristic)
+ */
+export function hasChoosableCharacteristic(origins: any[]): any | null {
+    const list = getChoosableCharacteristics(origins);
+    return list.length > 0 ? list[0] : null;
 }
 
 /**
@@ -140,7 +208,7 @@ export function hasDistributablePoints(origins: any[]): boolean {
 export function getDistributablePointsInfo(
     origins: any[],
     characteristics: any,
-    chosenBonusCharacteristic: string | null
+    chosenBonusCharacteristic: Record<string, string> | string | null
 ): { total: number; used: number; remaining: number } {
     let totalAvailable = 0;
 

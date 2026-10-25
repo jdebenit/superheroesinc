@@ -25,6 +25,7 @@ interface MagicSectionProps {
     isPoseido?: boolean;
     isElfoMagico?: boolean;
     isHadaEter?: boolean;
+    isLiberado?: boolean;
     onOpenSpellModal: () => void;
     onUpdateEMFormula: (divisor: number, pcCost: number) => void;
     onUpdateSpellRank: (index: number, rank: number) => void;
@@ -49,6 +50,7 @@ export default function MagicSection({
     isPoseido,
     isElfoMagico,
     isHadaEter,
+    isLiberado,
     onOpenSpellModal,
     onUpdateEMFormula,
     onUpdateSpellRank,
@@ -67,7 +69,9 @@ export default function MagicSection({
         totalCost,
         maxEM,
         emExceeded,
-        pcPenalty
+        pcPenalty,
+        hasBaseEMOrigin,
+        isSpellAccessAllowed
     } = useMagicSectionLogic({
         data,
         selectedSpells,
@@ -79,7 +83,8 @@ export default function MagicSection({
         isTerrano,
         isPoseido,
         isElfoMagico,
-        isHadaEter
+        isHadaEter,
+        isLiberado
     });
 
     return (
@@ -90,13 +95,13 @@ export default function MagicSection({
                 <div className="magic-section-header-actions">
                     <PixelButton
                         onClick={onOpenSpellModal}
-                        disabled={emFormula.divisor === 0}
+                        disabled={!isSpellAccessAllowed}
                         variant="primary"
                         className="small"
                     >
                         + Lista de Hechizos
                     </PixelButton>
-                    {emFormula.divisor !== 0 && (
+                    {isSpellAccessAllowed && (
                         <CostBadge
                             cost={`${totalCost}/${maxEM}`}
                             label="EM"
@@ -113,6 +118,14 @@ export default function MagicSection({
                 </div>
             }
         >
+            {isLiberado && !hasBaseEMOrigin && (
+                <div className="wizard-margin-bottom">
+                    <InfoBox variant="info" icon="✨">
+                        Los Liberados no poseen Reserva de EM de base (0 EM). Los hechizos adquiridos se pagan en Puntos de Creación a razón de 1 PC por cada 10 EM.
+                    </InfoBox>
+                </div>
+            )}
+
             {/* EM Formula Selector (for Dotado/Híbrido/Terrano/Poseido, not Mago) */}
             {hasEMFormula && emFormulaOptions.length > 0 && (
                 <FormSelect

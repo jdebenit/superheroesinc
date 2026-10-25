@@ -326,3 +326,76 @@
         padding: 0.2rem 0.4rem;
     }
 }
+
+
+/* --- Helper Classes for Clean Layout & Badges --- */
+
+.step2-header-badges {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.step2-char-header-right {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.step2-char-limit-min {
+    color: #dc2626;
+}
+
+.step2-char-limit-max.normal {
+    color: #16a34a;
+}
+
+.step2-char-limit-max.power {
+    color: #9333ea;
+}
+
+.step2-char-limit-max.manual {
+    color: #2563eb;
+}
+
+.step2-char-total-highlight {
+    color: #2563eb;
+}
+
+.step2-specialty-locked-icon {
+    color: #dc2626;
+    margin-left: 0.5rem;
+}
+
+.step2-summary-spacer {
+    flex: 1;
+}
+
+.step2-summary-abbr {
+    color: #93c5fd;
+    font-size: 0.65rem;
+    font-weight: bold;
+}
+
+.step2-summary-value {
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    line-height: 1.1;
+}
+
+.step2-summary-value.invalid {
+    color: #fca5a5;
+}
+
+.step2-summary-total-label {
+    color: #bfdbfe;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+.step2-summary-total-val {
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+}

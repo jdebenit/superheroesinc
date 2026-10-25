@@ -333,6 +333,112 @@
     color: #c2410c;
 }
 
+
+/* Liberado Section */
+.liberado-cards-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.liberado-card {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid #e2e8f0;
+    border-left: 3px solid #7c3aed;
+    border-radius: 4px;
+    padding: 0.6rem 0.75rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+    transition: all 0.15s ease;
+}
+
+.liberado-card.liberado-card-entropia {
+    border-left-color: #8b5cf6;
+    background: linear-gradient(to right, rgba(245, 243, 255, 0.65), rgba(255, 255, 255, 0.85));
+}
+
+.liberado-card.liberado-card-unidad {
+    border-left-color: #0ea5e9;
+    background: linear-gradient(to right, rgba(240, 249, 255, 0.65), rgba(255, 255, 255, 0.85));
+}
+
+.liberado-card.liberado-card-equidad {
+    border-left-color: #f59e0b;
+    background: linear-gradient(to right, rgba(255, 251, 235, 0.65), rgba(255, 255, 255, 0.85));
+}
+
+.liberado-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.35rem;
+    gap: 0.5rem;
+}
+
+.liberado-card-title {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #1f2937;
+}
+
+.liberado-badge {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.15rem 0.5rem;
+    border-radius: 9999px;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+.liberado-badge-innate {
+    background: #ede9fe;
+    color: #6d28d9;
+    border: 1px solid #ddd6fe;
+}
+
+.liberado-badge-cost {
+    background: #fef3c7;
+    color: #92400e;
+    border: 1px solid #fde68a;
+}
+
+.liberado-card-desc {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #4b5563;
+    line-height: 1.45;
+}
+
+.liberado-subchoice-box {
+    margin-top: 0.5rem;
+    padding: 0.4rem 0.6rem;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px dashed #cbd5e1;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+}
+
+.liberado-subchoice-label {
+    font-weight: 700;
+    color: #475569;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    letter-spacing: 0.03em;
+}
+
+.liberado-subchoice-val {
+    color: #1e293b;
+    font-weight: 500;
+}
+
 /* Background Section */
 .background.collapsed.clickable {
     cursor: pointer;

@@ -1,42 +1,24 @@
 import React from 'react';
-import { SKILL_CATEGORIES } from '../../../../../data/specialSkills';
+import { SKILL_CATEGORIES, isSkillAllowed } from '../../../../../data/specialSkills';
 import { WizardButton } from '../../../shared/ui/WizardButton';
 import './AvailableSkillsSection.css';
 
 interface AvailableSkillsSectionProps {
     skillsByCategory: { [category: string]: any[] };
     originItems: any[];
+    characterData?: any;
     selectedSkills: { [skillId: string]: any };
     skillBaseCost: number;
     onAddSkill: (skillId: string) => void;
     onAddSpecifiedSkill: (skillId: string) => void;
 }
 
-const isSkillAllowed = (skill: any, originItems: any[]) => {
-    if (!skill.allowedCriteria || skill.allowedCriteria.length === 0) return true;
 
-    return skill.allowedCriteria.some((criteria: any) => {
-        if (criteria.origin) {
-            const hasOrigin = originItems.some(item => Object.keys(item)[0] === criteria.origin);
-            if (!hasOrigin) return false;
-        }
-
-        if (criteria.subtype) {
-            const hasSubtype = originItems.some(item => {
-                const originName = Object.keys(item)[0];
-                const subtypes = item[originName];
-                return Array.isArray(subtypes) && subtypes.includes(criteria.subtype);
-            });
-            if (!hasSubtype) return false;
-        }
-
-        return true;
-    });
-};
 
 export const AvailableSkillsSection: React.FC<AvailableSkillsSectionProps> = ({
     skillsByCategory,
     originItems,
+    characterData,
     selectedSkills,
     skillBaseCost,
     onAddSkill,
@@ -55,7 +37,7 @@ export const AvailableSkillsSection: React.FC<AvailableSkillsSectionProps> = ({
                     </h4>
 
                     <div className="available-skills-list">
-                        {skills.filter(skill => isSkillAllowed(skill, originItems)).map(skill => {
+                        {skills.filter(skill => isSkillAllowed(skill, originItems, characterData)).map(skill => {
                             const isSelected = selectedSkills[skill.id] !== undefined;
                             const isParametrizable = skill.requiresSpecification;
                             const displayCost = `${skillBaseCost} PC`;

@@ -1422,6 +1422,141 @@
     margin-bottom: 2rem;
 }
 
+/* --- Liberado Section --- */
+.liberado-dones-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+}
+
+.liberado-gift-card {
+    display: flex;
+    flex-direction: column;
+    padding: 0.875rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--wiz-color-gray-200, #e2e8f0);
+    background-color: #ffffff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.liberado-gift-card:hover {
+    border-color: #c4b5fd;
+    background-color: #faf5ff;
+}
+
+.liberado-gift-card.selected {
+    border: 2px solid #7c3aed;
+    background-color: #faf5ff;
+    box-shadow: 0 1px 3px rgba(124, 58, 237, 0.08);
+}
+
+.liberado-gift-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.liberado-gift-title-group {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+}
+
+.liberado-gift-checkbox {
+    width: 1.15rem;
+    height: 1.15rem;
+    cursor: pointer;
+    accent-color: #7c3aed;
+}
+
+.liberado-gift-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--wiz-color-gray-900, #1e293b);
+}
+
+.liberado-gift-card.selected .liberado-gift-title {
+    color: #581c87;
+}
+
+.liberado-gift-description {
+    margin: 0.25rem 0 0 1.8rem;
+    font-size: 0.85rem;
+    color: var(--wiz-color-gray-600, #475569);
+    line-height: 1.45;
+}
+
+.liberado-subpanel {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #f8fafc;
+    border: 1.5px dashed #8b5cf6;
+    border-radius: 0.5rem;
+}
+
+.liberado-subpanel-title {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #6b21a8;
+    margin-bottom: 0.5rem;
+}
+
+.liberado-subpanel-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
+.liberado-radio-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+    color: var(--wiz-color-gray-800, #1e293b);
+}
+
+.liberado-radio-label input {
+    accent-color: #7c3aed;
+    width: 1rem;
+    height: 1rem;
+}
+
+.liberado-char-btn-grid {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-left: 1.65rem;
+    margin-top: 0.35rem;
+}
+
+.liberado-char-btn {
+    padding: 0.35rem 0.75rem;
+    border-radius: 0.375rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+    background-color: #ffffff;
+    border: 1px solid var(--wiz-color-gray-300, #cbd5e1);
+    color: var(--wiz-color-gray-700, #334155);
+    font-weight: 500;
+    transition: all 0.15s ease;
+}
+
+.liberado-char-btn:hover {
+    border-color: #a855f7;
+    background-color: #faf5ff;
+}
+
+.liberado-char-btn.selected {
+    background-color: #7c3aed;
+    border-color: #6d28d9;
+    color: #ffffff;
+    font-weight: 700;
+}
+
 /* =========================================================================
    Responsive Design (Mobile < 768px)
    ========================================================================= */

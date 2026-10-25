@@ -58,6 +58,18 @@ export function useStep3Logic(data: any, onChange: (updates: any) => void, onSho
     const isElfoPsiquico = hasSubtype(data, 'Arcano', 'Elfo Psíquico');
     const isTesKhar = hasSubtype(data, 'Parahumano', 'Tes-khar');
     const isAtlante = hasSubtype(data, 'Parahumano', 'Atlante');
+    const isLiberadoEntropia = hasSubtype(data, 'Sobrenatural', 'Liberado de Entropía');
+    const isLiberadoUnidad = hasSubtype(data, 'Sobrenatural', 'Liberado de Unidad');
+    const isLiberadoEquidad = hasSubtype(data, 'Sobrenatural', 'Liberado de Equidad');
+    const isLiberado = isLiberadoEntropia || isLiberadoUnidad || isLiberadoEquidad;
+    const isAlterado = hasOrigin(data, 'Alterado');
+    const hasConocimientoEsferas = isLiberado && (Array.isArray(data.liberadoParams?.gifts) ? data.liberadoParams.gifts.includes('conocimiento_esferas') : data.liberadoParams?.gift === 'conocimiento_esferas');
+
+    const activeLiberados = useMemo(() => [
+        isLiberadoEntropia ? 'Liberado de Entropía' : null,
+        isLiberadoUnidad ? 'Liberado de Unidad' : null,
+        isLiberadoEquidad ? 'Liberado de Equidad' : null
+    ].filter(Boolean) as string[], [isLiberadoEntropia, isLiberadoUnidad, isLiberadoEquidad]);
 
     // Technological
     const isTecnologico = hasOrigin(data, 'Tecnológico');
@@ -107,13 +119,20 @@ export function useStep3Logic(data: any, onChange: (updates: any) => void, onSho
     }, [data, onChange]);
 
     // EM Logic
+    const hasBaseEMOrigin = isMago || isElfoMagico || isHadaEter || isDotado || isHibrido || isTerrano || isPoseido;
     const rawEmFormula = data.spells?.emFormula || (isPoseido ? { divisor: 0, pcCost: 0 } : { divisor: 4, pcCost: 0 });
     let emFormula = rawEmFormula;
     if (isMago || isElfoMagico) emFormula = { divisor: 1, pcCost: 0 };
     else if (isHadaEter) emFormula = { divisor: 2, pcCost: 0 };
+    else if (!hasBaseEMOrigin && isLiberado) emFormula = { divisor: 0, pcCost: 0 };
 
     const hasEMFormula = !isMago && !isElfoMagico && !isHadaEter && (isDotado || isHibrido || isTerrano || isPoseido);
-    const hasEM = isMago || isElfoMagico || isHadaEter || isDotado || isHibrido || isTerrano || isPoseido;
+    const hasEM = hasBaseEMOrigin || isLiberado;
+
+    const hasAnyOrigin = isGuardianChar || isAlterado || hasEM || isVampiro || isSemidemonio || isMalditoChar ||
+        isEnte || isThals || isDivino || isCosmico || isMutante || isVigilante || isTechnological || isExoskeleton ||
+        isTesKhar || isAtlante || isParahumano || isTroll || isMinotauro || isPoseido || isEnano || isGrifo ||
+        isElfoFisico || isElfoPsiquico || isHadaEter || isHadaAire || isHadaFuego || isHadaAgua || isHadaTierra || isLiberado;
 
     // Auto-effects for EM and Powers
     useEffect(() => {
@@ -124,6 +143,15 @@ export function useStep3Logic(data: any, onChange: (updates: any) => void, onSho
 
     useEffect(() => {
         if (!hasEM) return;
+        if (!hasBaseEMOrigin) {
+            if (data.spells?.calculatedEM !== 0) {
+                onChange({
+                    ...data,
+                    spells: { ...data.spells, calculatedEM: 0 }
+                });
+            }
+            return;
+        }
         const divisor = (isMago || isElfoMagico) ? 1 : isHadaEter ? 2 : emFormula.divisor;
         if (divisor === 0) return;
         const calculated = calculateEM(data, selectedPowers, divisor);
@@ -133,7 +161,7 @@ export function useStep3Logic(data: any, onChange: (updates: any) => void, onSho
                 spells: { ...data.spells, calculatedEM: calculated }
             });
         }
-    }, [hasEM, isMago, isElfoMagico, isHadaEter, emFormula.divisor, data.attributes, data.level, selectedPowers]);
+    }, [hasEM, hasBaseEMOrigin, isMago, isElfoMagico, isHadaEter, emFormula.divisor, data.attributes, data.level, selectedPowers]);
  
     // Auto-initialize and cleanup techParams based on isTecnologico
     useEffect(() => {
@@ -320,6 +348,8 @@ export function useStep3Logic(data: any, onChange: (updates: any) => void, onSho
         isDios, isDiosMenor, isSemidios, isDivino, isCosmico, isMutante, isVigilante,
         isTecnologico, isTecnoarmadura, isCyborg, isTecnovehiculo, isExoskeleton, isInventor, isTechnological,
         isTesKhar, isAtlante, isTroll, isMinotauro, isEnano, isElfoPsiquico,
+        isLiberado, isLiberadoEntropia, isLiberadoUnidad, isLiberadoEquidad, activeLiberados,
+        isAlterado, hasAnyOrigin,
 
         // Data
         selectedPowers,
@@ -335,6 +365,7 @@ export function useStep3Logic(data: any, onChange: (updates: any) => void, onSho
         emFormula,
         hasEMFormula,
         hasEM,
+        hasBaseEMOrigin,
         vigilanteSpecialties: getVigilanteSpecialties(data),
         modalItems,
 

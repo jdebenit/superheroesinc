@@ -29,6 +29,7 @@ import { AttributesSection } from './sections/AttributesSection';
 import { SkillsGeneralSection } from './sections/SkillsGeneralSection';
 import { SkillsLearningSection } from './sections/SkillsLearningSection';
 import { MalditoSection } from './sections/MalditoSection';
+import { LiberadoSection } from './sections/LiberadoSection';
 import { BackgroundSection } from './sections/BackgroundSection';
 import { EquipmentSection } from './sections/EquipmentSection';
 import { VariosSection } from './sections/VariosSection';
@@ -100,6 +101,7 @@ export default function CharacterSheet({
                 <GuardianSection character={character} />
                 <DivineSection character={character} />
                 <MalditoSection character={character} />
+                <LiberadoSection character={character} />
                 <ArtifactsSection artifacts={character.artifacts} />
                 <MagicObjectsSection magicObjects={character.magicObjects} magicTableRolls={character.magicTableRolls} />
                 <VehiclesSection vehicles={character.vehicles} />

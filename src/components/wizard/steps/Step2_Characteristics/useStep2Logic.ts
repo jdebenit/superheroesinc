@@ -1,9 +1,9 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { POWERS } from '../../../../data/powers';
 import {
     calculateOriginModifiers,
     calculateLimits,
-    hasChoosableCharacteristic,
+    getChoosableCharacteristics,
     hasDistributablePoints,
     getDistributablePointsInfo,
     calculateSpecialtyModifiers,
@@ -57,15 +57,26 @@ export function useStep2Logic(data: any, onChange: (updates: any) => void) {
         return !!data.uiState?.unlockManualCharacteristics;
     });
 
-    const [chosenBonusCharacteristic, setChosenBonusCharacteristic] = useState<string | null>(null);
-
-    // Derived values
     const origins = data.origin?.items || [];
-    const isDistributableMode = hasDistributablePoints(origins) || !!hasChoosableCharacteristic(origins);
-    const pointsInfo = isDistributableMode ? getDistributablePointsInfo(origins, characteristics, chosenBonusCharacteristic) : null;
-    const choosableInfo = hasChoosableCharacteristic(origins);
+    const choosableEntries = getChoosableCharacteristics(origins);
+
+    const [chosenCharacteristics, setChosenCharacteristics] = useState<Record<string, string>>(() => {
+        const init: Record<string, string> = { ...(data.chosenCharacteristics || {}) };
+        if (data.chosenBonusCharacteristic) {
+            if (choosableEntries.length > 0 && !init[choosableEntries[0].originKey]) {
+                init[choosableEntries[0].originKey] = data.chosenBonusCharacteristic;
+            }
+        }
+        return init;
+    });
+
+    const prevOriginModsRef = useRef<{ [key: string]: number }>(calculateOriginModifiers(origins, chosenCharacteristics));
+    const prevSpecialtyModsRef = useRef<{ [key: string]: number }>(calculateSpecialtyModifiers(origins));
+    const isDistributableMode = hasDistributablePoints(origins) || choosableEntries.length > 0;
+    const pointsInfo = isDistributableMode ? getDistributablePointsInfo(origins, characteristics, chosenCharacteristics) : null;
+    const choosableInfo = choosableEntries.length > 0 ? choosableEntries[0] : null;
     const specialtyPointsInfo = hasSpecialtyDistributablePoints(origins) ? getSpecialtyDistributablePointsInfo(origins, characteristics) : null;
-    const { pcValues } = calculateCreationPoints(characteristics, origins);
+    const { pcValues, totalPC } = calculateCreationPoints(characteristics, origins);
 
     const getTotal = useCallback((charId: string) => {
         const c = characteristics[charId];
@@ -74,37 +85,46 @@ export function useStep2Logic(data: any, onChange: (updates: any) => void) {
 
     // Update modifiers when origins or chosen bonus changes
     useEffect(() => {
-        const originMods = calculateOriginModifiers(origins, chosenBonusCharacteristic);
+        const originMods = calculateOriginModifiers(origins, chosenCharacteristics);
         const specialtyMods = calculateSpecialtyModifiers(origins);
+        const oldOriginMods = prevOriginModsRef.current;
+        const oldSpecialtyMods = prevSpecialtyModsRef.current;
 
         setCharacteristics(prev => {
             const updated = { ...prev };
             let hasChanges = false;
             
-            const isDist = hasDistributablePoints(origins) || !!hasChoosableCharacteristic(origins);
-            const pInfo = isDist ? getDistributablePointsInfo(origins, prev, chosenBonusCharacteristic) : { total: 0, used: 0 };
+            const isDist = hasDistributablePoints(origins) || choosableEntries.length > 0;
+            const pInfo = isDist ? getDistributablePointsInfo(origins, prev, chosenCharacteristics) : { total: 0, used: 0 };
             const sInfo = hasSpecialtyDistributablePoints(origins) ? getSpecialtyDistributablePointsInfo(origins, prev) : { total: 0, used: 0 };
 
-            const keepManualOM = pInfo.used <= pInfo.total && pInfo.total > 0;
-            const keepManualSM = sInfo.used <= sInfo.total && sInfo.total > 0;
+            const isManualOMAllowed = pInfo.total > 0;
+            const isManualSMAllowed = sInfo.total > 0;
 
             Object.keys(updated).forEach(key => {
                 const newOM = originMods[key] || 0;
+                const oldOM = oldOriginMods[key] || 0;
                 const newSM = specialtyMods[key] || 0;
+                const oldSM = oldSpecialtyMods[key] || 0;
                 
-                let targetOM = newOM;
-                let targetSM = newSM;
-                
-                if (keepManualOM && updated[key].originMod > newOM) {
-                    targetOM = updated[key].originMod;
-                } else if (updated[key].originMod < newOM || pInfo.total === 0) {
-                    targetOM = newOM;
-                }
-                
-                if (keepManualSM && updated[key].specialtyMod > newSM) {
-                    targetSM = updated[key].specialtyMod;
-                } else if (updated[key].specialtyMod < newSM || sInfo.total === 0) {
-                    targetSM = newSM;
+                // Calcular puntos manuales previos (descontando el automod que tenía antes de este cambio)
+                const prevManualOM = isManualOMAllowed ? Math.max(0, updated[key].originMod - oldOM) : 0;
+                const prevManualSM = isManualSMAllowed ? Math.max(0, updated[key].specialtyMod - oldSM) : 0;
+
+                let targetOM = newOM + prevManualOM;
+                let targetSM = newSM + prevManualSM;
+
+                // Si la característica excede su límite al cambiar la senda/origen, ajustar
+                const limits = calculateLimits(origins, key, chosenCharacteristics, data.liberadoParams);
+                const projectedTotal = updated[key].base + targetOM + targetSM + updated[key].powerMod + (updated[key].otherMod || 0);
+                if (projectedTotal > limits.max && !unlockManualMod && updated[key].powerMod === 0) {
+                    const excess = projectedTotal - limits.max;
+                    const reduceOM = Math.min(targetOM, excess);
+                    targetOM -= reduceOM;
+                    const remainingExcess = excess - reduceOM;
+                    if (remainingExcess > 0) {
+                        updated[key].base = Math.max(0, updated[key].base - remainingExcess);
+                    }
                 }
 
                 if (updated[key].originMod !== targetOM || updated[key].specialtyMod !== targetSM) {
@@ -118,7 +138,10 @@ export function useStep2Logic(data: any, onChange: (updates: any) => void) {
             });
             return hasChanges ? updated : prev;
         });
-    }, [data.origin, chosenBonusCharacteristic]);
+
+        prevOriginModsRef.current = originMods;
+        prevSpecialtyModsRef.current = specialtyMods;
+    }, [data.origin, chosenCharacteristics]);
 
     // Update power modifiers
     useEffect(() => {
@@ -204,7 +227,7 @@ export function useStep2Logic(data: any, onChange: (updates: any) => void) {
 
     const handleCharacteristicChange = (charId: string, field: string, value: string) => {
         const numValue = parseInt(value) || 0;
-        const defaultLimits = calculateLimits(origins, charId);
+        const defaultLimits = calculateLimits(origins, charId, chosenCharacteristics, data.liberadoParams);
         const hasPowerMod = characteristics[charId].powerMod > 0;
         const limits = {
             min: defaultLimits.min,
@@ -232,12 +255,12 @@ export function useStep2Logic(data: any, onChange: (updates: any) => void) {
 
         // Group-wise validation (Origin Points)
         if (field === 'originMod' && isDistributableMode) {
-            const fixedOriginMods = calculateOriginModifiers(origins, chosenBonusCharacteristic);
+            const fixedOriginMods = calculateOriginModifiers(origins, chosenCharacteristics);
             const minAllowed = fixedOriginMods[charId] || 0;
             if (clampedValue < minAllowed) clampedValue = minAllowed;
 
             const currentOriginMod = characteristics[charId].originMod;
-            const pointsInfoCurrent = getDistributablePointsInfo(origins, characteristics, chosenBonusCharacteristic);
+            const pointsInfoCurrent = getDistributablePointsInfo(origins, characteristics, chosenCharacteristics);
             const difference = clampedValue - currentOriginMod;
 
             if (pointsInfoCurrent.used + difference > pointsInfoCurrent.total) {
@@ -270,15 +293,36 @@ export function useStep2Logic(data: any, onChange: (updates: any) => void) {
         }));
     };
 
+    const handleSetChosenCharacteristic = (originKey: string, charId: string) => {
+        const updated = {
+            ...chosenCharacteristics,
+            [originKey]: charId
+        };
+        setChosenCharacteristics(updated);
+        onChange({
+            ...data,
+            chosenCharacteristics: updated,
+            chosenBonusCharacteristic: charId
+        });
+    };
+
     return {
         characteristics,
-        chosenBonusCharacteristic,
-        setChosenBonusCharacteristic,
+        chosenCharacteristics,
+        choosableEntries,
+        setChosenCharacteristic: handleSetChosenCharacteristic,
+        chosenBonusCharacteristic: choosableEntries.length > 0 ? (chosenCharacteristics[choosableEntries[0].originKey] || null) : null,
+        setChosenBonusCharacteristic: (charId: string) => {
+            if (choosableEntries.length > 0) {
+                handleSetChosenCharacteristic(choosableEntries[0].originKey, charId);
+            }
+        },
         isDistributableMode,
         pointsInfo,
         choosableInfo,
         specialtyPointsInfo,
         pcValues,
+        totalPC,
         getTotal,
         handleCharacteristicChange,
         origins,

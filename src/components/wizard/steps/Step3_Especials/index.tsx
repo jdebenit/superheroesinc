@@ -24,6 +24,7 @@ import { CyborgSection } from './sections/CyborgSection';
 import ParahumanoSection from './sections/ParahumanoSection';
 import MinotaurSection from './sections/MinotaurSection';
 import HibridoSection from './sections/HibridoSection';
+import LiberadoSection from './sections/LiberadoSection';
 import { WizardSection } from '../../shared/layout/WizardSection';
 import '../../shared/layout/WizardStep.css';
 
@@ -43,7 +44,7 @@ export default function Step3_Especials({ data, onChange, onShowToast, onShowHel
         isGrifo, isElfoFisico, isVampiro, isSemidemonio, isEnte, isThals,
         isDios, isDiosMenor, isSemidios, isDivino, isCosmico, isMutante, isVigilante,
         isTecnologico, isTecnoarmadura, isCyborg, isTecnovehiculo, isExoskeleton, isTechnological,
-        isTesKhar, isAtlante, isTroll, isMinotauro, isEnano, isElfoPsiquico,
+        isTesKhar, isAtlante, isTroll, isMinotauro, isEnano, isElfoPsiquico, isLiberado, activeLiberados, isAlterado, hasAnyOrigin,
 
         // Data
         selectedPowers,
@@ -81,12 +82,7 @@ export default function Step3_Especials({ data, onChange, onShowToast, onShowHel
         toggleMagicalBond
     } = useStep3Logic(data, onChange, onShowToast);
 
-    const hasAnyOrigin = isGuardianChar || hasOrigin(data, 'Alterado') || hasEM || isVampiro || isSemidemonio || isMalditoChar ||
-        isEnte || isThals || isDivino || isCosmico || isMutante || isVigilante || isTechnological || isExoskeleton || isTesKhar || isAtlante || isParahumano || isTroll || isMinotauro || isPoseido || isEnano || isGrifo || isElfoFisico || isElfoPsiquico || isHadaEter || isHadaAire || isHadaFuego || isHadaAgua || isHadaTierra;
 
-    function hasOrigin(data: any, name: string) {
-        return data.origin?.items?.some((item: any) => Object.keys(item)[0] === name);
-    }
 
     return (
         <div className="wizard-step-container">
@@ -138,6 +134,17 @@ export default function Step3_Especials({ data, onChange, onShowToast, onShowHel
                 />
             )}
 
+            {activeLiberados.map(subtype => (
+                <LiberadoSection
+                    key={subtype}
+                    subtype={subtype}
+                    liberadoParams={data.liberadoParams || { gift: 'none' }}
+                    chosenBonusCharacteristic={data.chosenCharacteristics?.[subtype] || data.chosenBonusCharacteristic}
+                    onChange={onChange}
+                    onShowToast={onShowToast}
+                />
+            ))}
+
             {isPoseido && (
                 <PoseidoSection
                     poseidoParams={data.poseidoParams || { formType: null }}
@@ -145,7 +152,7 @@ export default function Step3_Especials({ data, onChange, onShowToast, onShowHel
                 />
             )}
 
-            {hasOrigin(data, 'Alterado') && (
+            {isAlterado && (
                 <AlteradoSection
                     alteradoParams={data.alteradoParams || { agent: null, sequels: [] }}
                     onChange={onChange}
@@ -245,7 +252,7 @@ export default function Step3_Especials({ data, onChange, onShowToast, onShowHel
                 onUpdateCustomizations={updatePowerCustomizations}
                 onRemove={removePower}
                 isGuardian={isGuardianChar}
-                isAlterado={hasOrigin(data, 'Alterado') || isParahumanoHybrid}
+                isAlterado={isAlterado || isParahumanoHybrid}
                 isVampiro={isVampiro}
                 isSemidemonio={isSemidemonio}
                 isMaldito={isMalditoChar}
@@ -287,6 +294,7 @@ export default function Step3_Especials({ data, onChange, onShowToast, onShowHel
                     isPoseido={isPoseido}
                     isElfoMagico={isElfoMagico}
                     isHadaEter={isHadaEter}
+                    isLiberado={isLiberado}
                     onOpenSpellModal={() => openModal('spells')}
                     onUpdateEMFormula={updateEMFormula}
                     onUpdateSpellRank={updateSpellRank}

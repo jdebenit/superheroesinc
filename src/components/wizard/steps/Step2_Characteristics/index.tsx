@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { calculateLimits, calculateSpecialtyAllowedCharacteristics } from '../../../../utils/characterCalculations';
 import { WizardSection } from '../../shared/layout/WizardSection';
 import { WizardField } from '../../shared/forms/WizardField';
@@ -17,18 +17,24 @@ export default function Step2_Characteristics({ data, onChange, onShowHelp }: St
     const {
         characteristics,
         chosenBonusCharacteristic,
-        setChosenBonusCharacteristic,
+        chosenCharacteristics,
+        choosableEntries,
+        setChosenCharacteristic,
         isDistributableMode,
         pointsInfo,
-        choosableInfo,
         specialtyPointsInfo,
         pcValues,
+        totalPC,
         getTotal,
         handleCharacteristicChange,
         origins,
         unlockManualMod,
         setUnlockManualMod
     } = useStep2Logic(data, onChange);
+
+    const allowedSpecialtyChars = useMemo(() => {
+        return calculateSpecialtyAllowedCharacteristics(origins);
+    }, [origins]);
 
     return (
         <div className="wizard-step-container">
@@ -48,30 +54,39 @@ export default function Step2_Characteristics({ data, onChange, onShowHelp }: St
                         </p>
                     </div>
                 )}
-                {choosableInfo && (
-                    <div className="step2-bonus-box">
-                        <h4 className="step2-bonus-title">
-                            ⭐ Elige la característica para el bonus de +{choosableInfo.bonus}
-                        </h4>
-                        <div className="step2-bonus-grid">
-                            {CHARACTERISTICS_CONFIG.map(char => (
-                                <button
-                                    key={char.id}
-                                    onClick={() => setChosenBonusCharacteristic(char.id)}
-                                    className={`step2-bonus-btn ${chosenBonusCharacteristic === char.id ? 'selected' : 'unselected'}`}
-                                >
-                                    {char.name} {chosenBonusCharacteristic === char.id && '✓'}
-                                </button>
-                            ))}
+                {choosableEntries.map(entry => {
+                    const selectedChar = chosenCharacteristics[entry.originKey] || (choosableEntries.length === 1 ? chosenBonusCharacteristic : null);
+                    return (
+                        <div key={entry.originKey} className="step2-bonus-box">
+                            <h4 className="step2-bonus-title">
+                                ⭐ {entry.title || (entry.bonus ? `${entry.originKey}: Elige la característica para el bonus de +${entry.bonus}` : `${entry.originKey}: Elige la característica para el bonus de límite (+${entry.maxLimitBonus})`)}
+                            </h4>
+                            <div className="step2-bonus-grid">
+                                {CHARACTERISTICS_CONFIG
+                                    .filter(char => !entry.allowedCharacteristics || entry.allowedCharacteristics.includes(char.id))
+                                    .map(char => {
+                                        const isSelected = selectedChar === char.id;
+                                        return (
+                                            <button
+                                                key={char.id}
+                                                type="button"
+                                                onClick={() => setChosenCharacteristic(entry.originKey, char.id)}
+                                                className={`step2-bonus-btn ${isSelected ? 'selected' : 'unselected'}`}
+                                            >
+                                                {char.name} {isSelected && (entry.maxLimitBonus ? `✓ (Máx. ${100 + entry.maxLimitBonus})` : '✓')}
+                                            </button>
+                                        );
+                                })}
+                            </div>
                         </div>
-                    </div>
-                )}
+                    );
+                })}
             </WizardSection>
 
             <WizardSection
                 title="Características"
                 rightContent={
-                    <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                    <div className="step2-header-badges">
                         {isDistributableMode && pointsInfo && (
                             <CostBadge
                                 cost={`${pointsInfo.used}/${pointsInfo.total}`}
@@ -86,7 +101,7 @@ export default function Step2_Characteristics({ data, onChange, onShowHelp }: St
                                 variant={specialtyPointsInfo.remaining < 0 ? "penalty" : "default"}
                             />
                         )}
-                        <CostBadge cost={pcValues.total} label="PC" variant="penalty" />
+                        <CostBadge cost={totalPC} label="PC" variant="penalty" />
                     </div>
                 }
             >
@@ -116,13 +131,15 @@ export default function Step2_Characteristics({ data, onChange, onShowHelp }: St
                         const c = characteristics[char.id];
 
                         // Limit Override Logic in Render
-                        const defaultLimits = calculateLimits(origins, char.id);
+                        const defaultLimits = calculateLimits(origins, char.id, chosenCharacteristics, data.liberadoParams);
                         const hasPowerMod = c.powerMod > 0;
                         const unlockedLimit = hasPowerMod || unlockManualMod;
                         const charLimits = {
                             min: defaultLimits.min,
                             max: unlockedLimit ? 200 : defaultLimits.max
                         };
+
+                        const isSpecialtyBlocked = !specialtyPointsInfo || (allowedSpecialtyChars ? !allowedSpecialtyChars.includes(char.id) : false);
 
                         return (
                             <div key={char.id} className="step2-char-card">
@@ -135,13 +152,13 @@ export default function Step2_Characteristics({ data, onChange, onShowHelp }: St
                                             ({char.abbr})
                                         </span>
                                     </div>
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                    <div className="step2-char-header-right">
                                         <div className="step2-char-total-badge">
                                             {total}
                                         </div>
                                         <div className="step2-char-limits">
-                                            <div style={{ color: '#dc2626' }}>Min: {charLimits.min}</div>
-                                            <div style={{ color: unlockedLimit ? (hasPowerMod ? '#9333ea' : '#2563eb') : '#16a34a' }}>
+                                            <div className="step2-char-limit-min">Min: {charLimits.min}</div>
+                                            <div className={`step2-char-limit-max ${unlockedLimit ? (hasPowerMod ? 'power' : 'manual') : 'normal'}`}>
                                                 Max: {charLimits.max} {hasPowerMod && '⚡'}{(!hasPowerMod && unlockManualMod) && '🔓'}
                                             </div>
                                         </div>
@@ -178,29 +195,17 @@ export default function Step2_Characteristics({ data, onChange, onShowHelp }: St
                                         label={
                                             <>
                                                 {specialtyPointsInfo ? 'Mod. Especialidad (✏️)' : 'Mod. Especialidad'}
-                                                {(() => {
-                                                    const allowedChars = calculateSpecialtyAllowedCharacteristics(origins);
-                                                    if (allowedChars && !allowedChars.includes(char.id)) {
-                                                        return <span style={{ color: '#dc2626', marginLeft: '0.5rem' }}>🔒</span>;
-                                                    }
-                                                    return null;
-                                                })()}
+                                                {allowedSpecialtyChars && !allowedSpecialtyChars.includes(char.id) && (
+                                                    <span className="step2-specialty-locked-icon">🔒</span>
+                                                )}
                                             </>
                                         }
                                         type="number"
                                         min="0"
                                         max="200"
                                         value={c.specialtyMod}
-                                        readOnly={(() => {
-                                            if (!specialtyPointsInfo) return true;
-                                            const allowedChars = calculateSpecialtyAllowedCharacteristics(origins);
-                                            return allowedChars ? !allowedChars.includes(char.id) : false;
-                                        })()}
-                                        disabled={(() => {
-                                            if (!specialtyPointsInfo) return true;
-                                            const allowedChars = calculateSpecialtyAllowedCharacteristics(origins);
-                                            return allowedChars ? !allowedChars.includes(char.id) : false;
-                                        })()}
+                                        readOnly={isSpecialtyBlocked}
+                                        disabled={isSpecialtyBlocked}
                                         onChange={(val) => handleCharacteristicChange(char.id, 'specialtyMod', val)}
                                         noMargin
                                         inputWidth="70px"
@@ -238,7 +243,7 @@ export default function Step2_Characteristics({ data, onChange, onShowHelp }: St
 
                                 <div className="step2-char-footer">
                                     <span className="step2-formula-text">
-                                        {c.base} + {c.originMod} + {c.specialtyMod} + {c.powerMod} + {c.otherMod || 0} = <strong style={{ color: '#2563eb' }}>{total}</strong>
+                                        {c.base} + {c.originMod} + {c.specialtyMod} + {c.powerMod} + {c.otherMod || 0} = <strong className="step2-char-total-highlight">{total}</strong>
                                     </span>
                                     <CostBadge
                                         cost={pcValues[char.id].toFixed(1)}
@@ -254,20 +259,20 @@ export default function Step2_Characteristics({ data, onChange, onShowHelp }: St
                 <div className="step2-sticky-summary">
                     {CHARACTERISTICS_CONFIG.map(char => {
                         const total = getTotal(char.id);
-                        const limits = calculateLimits(origins, char.id);
+                        const limits = calculateLimits(origins, char.id, chosenCharacteristics, data.liberadoParams);
                         const isValid = total >= limits.min && total <= limits.max;
                         return (
                             <div key={char.id} className={`step2-summary-item ${isValid ? 'valid' : 'invalid'}`}>
-                                <span style={{ color: '#93c5fd', fontSize: '0.65rem', fontWeight: 'bold' }}>{char.abbr}</span>
-                                <span style={{ color: isValid ? 'white' : '#fca5a5', fontWeight: 'bold', fontSize: '1rem', lineHeight: 1.1 }}>{total}</span>
+                                <span className="step2-summary-abbr">{char.abbr}</span>
+                                <span className={`step2-summary-value ${isValid ? '' : 'invalid'}`}>{total}</span>
                             </div>
                         );
                     })}
-                    <div style={{ flex: 1 }} />
+                    <div className="step2-summary-spacer" />
                     <div className="step2-summary-total">
-                        <span style={{ color: '#bfdbfe', fontSize: '0.75rem', fontWeight: 'bold' }}>Total</span>
-                        <span style={{ color: 'white', fontWeight: 'bold', fontSize: '1rem' }}>
-                            {Object.values(pcValues).reduce((a: number, b: number) => a + Number(b), 0).toFixed(1)} PC
+                        <span className="step2-summary-total-label">Total</span>
+                        <span className="step2-summary-total-val">
+                            {totalPC.toFixed(1)} PC
                         </span>
                     </div>
                 </div>

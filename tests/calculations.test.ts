@@ -1,9 +1,13 @@
 import { describe, it, expect } from 'vitest';
+import { useMagicSectionLogic } from '../src/components/wizard/steps/Step3_Especials/hooks/useMagicSectionLogic';
 import { calculateOriginCost } from '../src/data/originCosts';
+import { SPECIAL_SKILLS, isSkillAllowed, hasConocimientoEsferas } from '../src/data/specialSkills';
 import {
     calculateCreationPoints,
     calculateOriginModifiers,
     calculateLimits,
+    getChoosableCharacteristics,
+    getDistributablePointsInfo,
     calculateDerivedStats,
     calculateGeneralSkillValues,
     formatDerivedStats,
@@ -25,7 +29,67 @@ describe('Cálculos de Origen y Puntos de Creación (PC)', () => {
         expect(calculateOriginCost([{ Mutante: [] }, { 'Tecnológico': ['Cyborg'] }])).toBe(10);
     });
 
-    it('calcula los PCs de características base (1 PC por cada 10 puntos)', () => {
+    it('comprueba que los Liberados tienen base 0 EM pero pueden adquirir hechizos con coste a los EM (1 PC por cada 10 EM)', () => {
+        const data = {
+            attributes: {
+                values: {
+                    Inteligencia: 60,
+                    Percepción: 60,
+                    Voluntad: 60,
+                    Constitución: 60
+                }
+            }
+        };
+
+        // 1. Liberado puro (sin otro origen con EM de base)
+        const liberadoResult = useMagicSectionLogic({
+            data,
+            selectedSpells: [
+                { id: 'rayo', name: 'Rayo', cost: '10', rank: 2, maxRank: 5, requirements: 'Ninguno' } as any
+            ],
+            selectedPowers: [],
+            emFormula: { divisor: 0, pcCost: 0 },
+            isMago: false,
+            isDotado: false,
+            isHibrido: false,
+            isTerrano: false,
+            isLiberado: true
+        });
+
+        // EM base es 0
+        expect(liberadoResult.maxEM).toBe(0);
+        // Coste total de hechizos: 10 * 2 = 20 EM
+        expect(liberadoResult.totalCost).toBe(20);
+        // Excede la EM base
+        expect(liberadoResult.emExceeded).toBe(true);
+        // Penalización: 20 / 10 = 2 PC
+        expect(liberadoResult.pcPenalty).toBe(2);
+        // Acceso permitido
+        expect(liberadoResult.isSpellAccessAllowed).toBe(true);
+
+        // 2. Liberado multiorigen con Mago (Arcano)
+        const liberadoMagoResult = useMagicSectionLogic({
+            data,
+            selectedSpells: [
+                { id: 'rayo', name: 'Rayo', cost: '10', rank: 2, maxRank: 5, requirements: 'Ninguno' } as any
+            ],
+            selectedPowers: [],
+            emFormula: { divisor: 1, pcCost: 0 },
+            isMago: true,
+            isDotado: false,
+            isHibrido: false,
+            isTerrano: false,
+            isLiberado: true
+        });
+
+        // EM base calculada por Mago: (INT+PER+VOL)/1 = 180 EM
+        expect(liberadoMagoResult.maxEM).toBe(180);
+        expect(liberadoMagoResult.totalCost).toBe(20);
+        expect(liberadoMagoResult.emExceeded).toBe(false);
+        expect(liberadoMagoResult.pcPenalty).toBe(0);
+    });
+
+        it('calcula los PCs de características base (1 PC por cada 10 puntos)', () => {
         const breakdown = {
             fuerza: { base: 60, powerMod: 0 },
             constitucion: { base: 50, powerMod: 0 },
@@ -65,6 +129,154 @@ describe('Cálculos de Origen y Puntos de Creación (PC)', () => {
 
         const modifiers = calculateOriginModifiers([{ Sobrenatural: ['Vampiro'] }], null);
         expect(modifiers.fuerza).toBeGreaterThanOrEqual(0);
+    });
+
+    it('calcula límites correctamente para Liberado de Entropía según la característica elegida y el don', () => {
+        const origins = [{ Sobrenatural: ['Liberado de Entropía'] }];
+
+        // Sin selección previa, el límite base es 100
+        expect(calculateLimits(origins, 'fuerza', null).max).toBe(100);
+        expect(calculateLimits(origins, 'constitucion', null).max).toBe(100);
+        expect(calculateLimits(origins, 'voluntad', null).max).toBe(100);
+
+        // Si elige fuerza, SOLO fuerza sube a 130; las demás permanecen en 100
+        expect(calculateLimits(origins, 'fuerza', 'fuerza').max).toBe(130);
+        expect(calculateLimits(origins, 'constitucion', 'fuerza').max).toBe(100);
+        expect(calculateLimits(origins, 'voluntad', 'fuerza').max).toBe(100);
+        expect(calculateLimits(origins, 'agilidad', 'fuerza').max).toBe(100);
+
+        // Con el don Comprensión de la Senda en formato array (segunda característica: constitucion)
+        const paramsSecond = {
+            gifts: ['comprension_senda', 'conocimiento_esferas'],
+            comprensionChoice: 'second_characteristic',
+            secondCharacteristic: 'constitucion'
+        };
+        expect(calculateLimits(origins, 'fuerza', 'fuerza', paramsSecond).max).toBe(130);
+        expect(calculateLimits(origins, 'constitucion', 'fuerza', paramsSecond).max).toBe(130);
+        expect(calculateLimits(origins, 'voluntad', 'fuerza', paramsSecond).max).toBe(100);
+
+        // Con el don Comprensión de la Senda (sin restricciones en la elegida)
+        const paramsNoLimit = {
+            gift: 'comprension_senda',
+            comprensionChoice: 'no_limit'
+        };
+        expect(calculateLimits(origins, 'fuerza', 'fuerza', paramsNoLimit).max).toBe(200);
+        expect(calculateLimits(origins, 'constitucion', 'fuerza', paramsNoLimit).max).toBe(100);
+    });
+
+    it('calcula límites correctamente para Liberado de Unidad según la característica elegida y el don', () => {
+        const origins = [{ Sobrenatural: ['Liberado de Unidad'] }];
+
+        // Sin selección previa, el límite base es 100
+        expect(calculateLimits(origins, 'agilidad', null).max).toBe(100);
+        expect(calculateLimits(origins, 'apariencia', null).max).toBe(100);
+        expect(calculateLimits(origins, 'voluntad', null).max).toBe(100);
+
+        // Si elige agilidad, SOLO agilidad sube a 130
+        expect(calculateLimits(origins, 'agilidad', 'agilidad').max).toBe(130);
+        expect(calculateLimits(origins, 'apariencia', 'agilidad').max).toBe(100);
+        expect(calculateLimits(origins, 'voluntad', 'agilidad').max).toBe(100);
+        expect(calculateLimits(origins, 'fuerza', 'agilidad').max).toBe(100);
+
+        // Con el don Comprensión de la Senda (segunda característica: apariencia)
+        const paramsSecond = {
+            gifts: ['comprension_senda'],
+            comprensionChoice: 'second_characteristic',
+            secondCharacteristic: 'apariencia'
+        };
+        expect(calculateLimits(origins, 'agilidad', 'agilidad', paramsSecond).max).toBe(130);
+        expect(calculateLimits(origins, 'apariencia', 'agilidad', paramsSecond).max).toBe(130);
+        expect(calculateLimits(origins, 'voluntad', 'agilidad', paramsSecond).max).toBe(100);
+
+        // Con el don Comprensión de la Senda (sin restricciones en la elegida)
+        const paramsNoLimit = {
+            gift: 'comprension_senda',
+            comprensionChoice: 'no_limit'
+        };
+        expect(calculateLimits(origins, 'agilidad', 'agilidad', paramsNoLimit).max).toBe(200);
+        expect(calculateLimits(origins, 'apariencia', 'agilidad', paramsNoLimit).max).toBe(100);
+    });
+
+    it('calcula límites correctamente para Liberado de Equidad según la característica elegida y el don', () => {
+        const origins = [{ Sobrenatural: ['Liberado de Equidad'] }];
+
+        // Sin selección previa, el límite base es 100
+        expect(calculateLimits(origins, 'inteligencia', null).max).toBe(100);
+        expect(calculateLimits(origins, 'percepcion', null).max).toBe(100);
+        expect(calculateLimits(origins, 'voluntad', null).max).toBe(100);
+
+        // Si elige inteligencia, SOLO inteligencia sube a 130
+        expect(calculateLimits(origins, 'inteligencia', 'inteligencia').max).toBe(130);
+        expect(calculateLimits(origins, 'percepcion', 'inteligencia').max).toBe(100);
+        expect(calculateLimits(origins, 'voluntad', 'inteligencia').max).toBe(100);
+
+        // Con el don Comprensión de la Senda (segunda característica: percepcion)
+        const paramsSecond = {
+            gifts: ['comprension_senda'],
+            comprensionChoice: 'second_characteristic',
+            secondCharacteristic: 'percepcion'
+        };
+        expect(calculateLimits(origins, 'inteligencia', 'inteligencia', paramsSecond).max).toBe(130);
+        expect(calculateLimits(origins, 'percepcion', 'inteligencia', paramsSecond).max).toBe(130);
+        expect(calculateLimits(origins, 'voluntad', 'inteligencia', paramsSecond).max).toBe(100);
+
+        // Con el don Comprensión de la Senda (sin restricciones en la elegida)
+        const paramsNoLimit = {
+            gift: 'comprension_senda',
+            comprensionChoice: 'no_limit'
+        };
+        expect(calculateLimits(origins, 'inteligencia', 'inteligencia', paramsNoLimit).max).toBe(200);
+        expect(calculateLimits(origins, 'percepcion', 'inteligencia', paramsNoLimit).max).toBe(100);
+    });
+
+        it('soporta multiorigen limpio: Heraldo Cósmico + Liberado de Entropía simultáneamente', () => {
+        const origins = [
+            { Cósmico: ['Heraldo Cósmico'] },
+            { Sobrenatural: ['Liberado de Entropía'] }
+        ];
+
+        // 1. Detecta ambos orígenes choosable independientemente
+        const entries = getChoosableCharacteristics(origins);
+        expect(entries.length).toBe(2);
+        expect(entries[0].originKey).toBe('Heraldo Cósmico');
+        expect(entries[0].bonus).toBe(100);
+        expect(entries[1].originKey).toBe('Liberado de Entropía');
+        expect(entries[1].maxLimitBonus).toBe(30);
+
+        // 2. Elección separada e independiente para cada origen
+        const chosen = {
+            'Heraldo Cósmico': 'inteligencia',
+            'Liberado de Entropía': 'fuerza'
+        };
+
+        // Modificadores: INT recibe +100 por Heraldo, FUE no recibe flat bonus
+        const mods = calculateOriginModifiers(origins, chosen);
+        expect(mods.inteligencia).toBe(100);
+        expect(mods.fuerza).toBe(0);
+
+        // Puntos distribuibles: 100 (Heraldo) + 120 (Liberado) = 220
+        const pointsInfo = getDistributablePointsInfo(origins, {
+            fuerza: { originMod: 0 },
+            constitucion: { originMod: 0 },
+            agilidad: { originMod: 0 },
+            inteligencia: { originMod: 100 },
+            percepcion: { originMod: 0 },
+            apariencia: { originMod: 0 },
+            voluntad: { originMod: 0 }
+        }, chosen);
+        expect(pointsInfo.total).toBe(220);
+        expect(pointsInfo.used).toBe(0); // 100 en INT es autoMod del Heraldo
+
+        // 3. Al cambiar la característica del Heraldo (de INT a CON),
+        // el bonus de +100 se traslada limpiamente sin dejar residuos
+        const chosenChanged = {
+            'Heraldo Cósmico': 'constitucion',
+            'Liberado de Entropía': 'fuerza'
+        };
+        const modsChanged = calculateOriginModifiers(origins, chosenChanged);
+        expect(modsChanged.constitucion).toBe(100);
+        expect(modsChanged.inteligencia).toBe(0);
+        expect(modsChanged.fuerza).toBe(0);
     });
 });
 
@@ -410,5 +622,42 @@ describe('Cálculos de Habilidades Generales', () => {
         expect(result.skills.conocimientos.base).toBe(45);
         expect(result.skills.conocimientos.pcCost).toBeCloseTo(1.5);
         expect(result.totalPC).toBeCloseTo(1.5);
+    });
+
+    it('comprueba el acceso a la habilidad especial Magia según origen y dones de Liberado', () => {
+        const magiaDef = SPECIAL_SKILLS.find(s => s.id === 'magia');
+        expect(magiaDef).toBeDefined();
+
+        // 1. Origen Arcano siempre tiene acceso
+        expect(isSkillAllowed(magiaDef, [{ Arcano: [] }])).toBe(true);
+
+        // 2. Origen Sobrenatural -> Poseído tiene acceso
+        expect(isSkillAllowed(magiaDef, [{ Sobrenatural: ['Poseído'] }])).toBe(true);
+        expect(isSkillAllowed(magiaDef, [{ Sobrenatural: ['Poseido'] }])).toBe(true);
+
+        // 3. Origen sin magia ni don (ej. Mutante o Liberado sin don)
+        expect(isSkillAllowed(magiaDef, [{ Mutante: [] }])).toBe(false);
+
+        const liberadoSinDon = {
+            origin: { items: [{ 'Liberado de Entropía': [] }] },
+            liberadoParams: { gifts: ['comprension_senda'] }
+        };
+        expect(isSkillAllowed(magiaDef, liberadoSinDon.origin.items, liberadoSinDon)).toBe(false);
+
+        // 4. Liberado con don 'conocimiento_esferas' (tanto con Sobrenatural como directo)
+        const liberadoConDon = {
+            origin: { items: [{ Sobrenatural: ['Liberado de Entropía'] }] },
+            liberadoParams: { gifts: ['conocimiento_esferas'] }
+        };
+        expect(hasConocimientoEsferas(liberadoConDon)).toBe(true);
+        expect(isSkillAllowed(magiaDef, liberadoConDon.origin.items, liberadoConDon)).toBe(true);
+
+        // 5. Liberado de Unidad con don en gift (formato singular)
+        const liberadoUnidad = {
+            origin: { items: [{ 'Liberado de Unidad': [] }] },
+            liberadoParams: { gift: 'conocimiento_esferas' }
+        };
+        expect(hasConocimientoEsferas(liberadoUnidad)).toBe(true);
+        expect(isSkillAllowed(magiaDef, liberadoUnidad.origin.items, liberadoUnidad)).toBe(true);
     });
 });

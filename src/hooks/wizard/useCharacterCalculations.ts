@@ -69,14 +69,22 @@ export function useCharacterCalculations(character: any) {
 
         // 7. Coste de Exceso de Magia (EM)
         // Por cada 1 punto de EM que se pase del total disponible: +0.1 PC
-        // If Mago, divisor is always 1
         const isMago = hasSubtype(character, 'Arcano', 'Mago');
+        const isElfoMagico = hasSubtype(character, 'Arcano', 'Elfo Mágico');
+        const isHadaEter = hasSubtype(character, 'Arcano', 'Hada Eter');
+        const isDotado = hasSubtype(character, 'Arcano', 'Dotado');
+        const isHibrido = hasSubtype(character, 'Arcano', 'Híbrido mitológico');
+        const isTerrano = hasSubtype(character, 'Arcano', 'Terrano');
+        const isPoseido = hasSubtype(character, 'Sobrenatural', 'Poseidó') || hasSubtype(character, 'Sobrenatural', 'Poseido');
+        const hasBaseEMOrigin = isMago || isElfoMagico || isHadaEter || isDotado || isHibrido || isTerrano || isPoseido;
 
-        let emDivisor = character.spells?.emFormula?.divisor || 1;
-        if (isMago) emDivisor = 1;
-
-        // Use shared calculateEM to ensure power modifiers are included
-        const maxEM = calculateEM(character, selectedPowers, emDivisor);
+        let maxEM = 0;
+        if (hasBaseEMOrigin) {
+            let emDivisor = character.spells?.emFormula?.divisor || 1;
+            if (isMago || isElfoMagico) emDivisor = 1;
+            else if (isHadaEter) emDivisor = 2;
+            maxEM = calculateEM(character, selectedPowers, emDivisor);
+        }
 
         const selectedSpells = character.spells?.selected || [];
         // Spells are now objects with { id, rank }
@@ -469,7 +477,6 @@ export function useCharacterCalculations(character: any) {
         }
 
         // 17b. Hibrido Params Cost (DISCOUNT or PENALTY)
-        const isHibrido = hasSubtype(character, 'Arcano', 'Híbrido mitológico');
         if (isHibrido) {
             const hibridoSequels = character.hibridoParams?.sequels || [];
             if (hibridoSequels.length > 0) {
@@ -498,6 +505,22 @@ export function useCharacterCalculations(character: any) {
             const focus = DIVINE_FOCUS_OPTIONS.find(f => f.id === character.divineParams.focus);
             if (focus) {
                 total += focus.cost;
+            }
+        }
+
+        // 20. Liberado Params Cost (Dones adicionales)
+        if (character.liberadoParams) {
+            const LIBERADO_DONES_COST: Record<string, number> = {
+                'conocimiento_esferas': 1,
+                'comprension_senda': 2,
+                'maestro_senda': 3
+            };
+            if (Array.isArray(character.liberadoParams.gifts)) {
+                character.liberadoParams.gifts.forEach((g: string) => {
+                    total += LIBERADO_DONES_COST[g] || 0;
+                });
+            } else if (character.liberadoParams.gift) {
+                total += LIBERADO_DONES_COST[character.liberadoParams.gift] || 0;
             }
         }
 

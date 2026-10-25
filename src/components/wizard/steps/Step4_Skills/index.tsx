@@ -109,6 +109,7 @@ export default function Step4_GeneralSkills({ data, onChange, onShowHelp }: Step
                 <AvailableSkillsSection
                     skillsByCategory={skillsByCategory}
                     originItems={data.origin?.items || []}
+                    characterData={data}
                     selectedSkills={selectedSkills}
                     skillBaseCost={skillBaseCost}
                     onAddSkill={handleAddSkill}

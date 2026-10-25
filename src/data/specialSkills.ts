@@ -382,3 +382,58 @@ export function getSkillsByCategory() {
 
     return grouped;
 }
+
+
+/**
+ * Comprueba si el personaje es un Liberado y tiene el don "Conocimiento de las esferas"
+ */
+export function hasConocimientoEsferas(characterData?: any): boolean {
+    if (!characterData) return false;
+    const origins = characterData.origin?.items || characterData.origins || [];
+    const isLiberado = origins.some((item: any) => {
+        const originName = Object.keys(item)[0];
+        if (typeof originName === 'string' && originName.startsWith('Liberado')) return true;
+        const content = item[originName];
+        return Array.isArray(content) && content.some((s: string) => typeof s === 'string' && s.startsWith('Liberado'));
+    });
+    if (!isLiberado) return false;
+
+    const gifts = characterData.liberadoParams?.gifts;
+    if (Array.isArray(gifts)) {
+        return gifts.includes('conocimiento_esferas');
+    }
+    return characterData.liberadoParams?.gift === 'conocimiento_esferas';
+}
+
+/**
+ * Determina si una habilidad especial está permitida según los orígenes y condiciones especiales del personaje
+ */
+export function isSkillAllowed(skill: any, originItems: any[] = [], characterData?: any): boolean {
+    // Si la habilidad es Magia y el personaje es un Liberado con Conocimiento de las esferas, tiene acceso
+    if (skill.id === 'magia' && characterData && hasConocimientoEsferas(characterData)) {
+        return true;
+    }
+
+    if (!skill.allowedCriteria || skill.allowedCriteria.length === 0) return true;
+
+    return skill.allowedCriteria.some((criteria: any) => {
+        if (criteria.origin) {
+            const hasOrigin = originItems.some(item => Object.keys(item)[0] === criteria.origin);
+            if (!hasOrigin) return false;
+        }
+
+        if (criteria.subtype) {
+            const hasSubtype = originItems.some(item => {
+                const originName = Object.keys(item)[0];
+                const subtypes = item[originName];
+                return Array.isArray(subtypes) && (
+                    subtypes.includes(criteria.subtype) ||
+                    (criteria.subtype === 'Poseido' && (subtypes.includes('Poseído') || subtypes.includes('Poseidó') || subtypes.includes('Poseido')))
+                );
+            });
+            if (!hasSubtype) return false;
+        }
+
+        return true;
+    });
+}
