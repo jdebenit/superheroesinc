@@ -1,6 +1,6 @@
 import React from 'react';
 import { SheetSection } from '../common/SheetSection';
-import { getLiberadoConfig, getLiberadoDones } from '../../wizard/steps/Step3_Especials/sections/LiberadoSection';
+import { getLiberadoConfig, getLiberadoDones } from '../../../data/originOptions';
 
 interface LiberadoSectionProps {
     character: any;

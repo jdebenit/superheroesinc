@@ -50,7 +50,7 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
             "Vampiro": ["+20 a la parada mental"],
             "Hombre Lobo": ["+20 a la parada mental"],
             "Semidemonio": ["+20 a la parada mental"],
-            "Poseido": ["+20 a la parada mental"],
+            "Poseído": ["+20 a la parada mental"],
             "Ente": ["+20 a la parada mental"],
             "Maldito": ["+20 a la parada mental"],
             "Liberado de Unidad": ["+20 a la parada mental"],

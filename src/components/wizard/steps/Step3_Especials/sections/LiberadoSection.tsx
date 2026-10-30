@@ -2,83 +2,16 @@ import React, { useMemo } from 'react';
 import { WizardSection } from '../../../shared/layout/WizardSection';
 import { SectionHeaderBadge } from '../../../shared/ui/SectionHeaderBadge';
 import { CostBadge } from '../../../shared/ui/CostBadge';
+import {
+    LIBERADO_CONFIGS,
+    LIBERADO_DONES,
+    getLiberadoConfig,
+    getLiberadoDones,
+    type LiberadoConfig
+} from '../../../../../data/originOptions';
+import type { LiberadoParams } from '../../../../../types/character';
 
-export interface LiberadoParams {
-    gifts?: string[];
-    gift?: string | null;
-    comprensionChoice?: 'second_characteristic' | 'no_limit' | null;
-    secondCharacteristic?: string | null;
-}
-
-export interface LiberadoConfig {
-    name: string;
-    entityName: string;
-    sendaName: string;
-    characteristics: Array<{ id: string; name: string }>;
-}
-
-export const LIBERADO_CONFIGS: Record<string, LiberadoConfig> = {
-    'Liberado de Entropía': {
-        name: 'Liberado de Entropía',
-        entityName: 'Entropía',
-        sendaName: 'Senda de Entropía',
-        characteristics: [
-            { id: 'fuerza', name: 'Fuerza (FUE)' },
-            { id: 'constitucion', name: 'Constitución (CON)' },
-            { id: 'voluntad', name: 'Voluntad (VOL)' }
-        ]
-    },
-    'Liberado de Unidad': {
-        name: 'Liberado de Unidad',
-        entityName: 'Unidad',
-        sendaName: 'Senda de Unidad',
-        characteristics: [
-            { id: 'agilidad', name: 'Agilidad (AGI)' },
-            { id: 'apariencia', name: 'Apariencia (APA)' },
-            { id: 'voluntad', name: 'Voluntad (VOL)' }
-        ]
-    },
-    'Liberado de Equidad': {
-        name: 'Liberado de Equidad',
-        entityName: 'Equidad',
-        sendaName: 'Senda de Equidad',
-        characteristics: [
-            { id: 'inteligencia', name: 'Inteligencia (INT)' },
-            { id: 'percepcion', name: 'Percepción (PER)' },
-            { id: 'voluntad', name: 'Voluntad (VOL)' }
-        ]
-    }
-};
-
-export function getLiberadoConfig(subtype?: string): LiberadoConfig {
-    if (subtype && LIBERADO_CONFIGS[subtype]) {
-        return LIBERADO_CONFIGS[subtype];
-    }
-    return LIBERADO_CONFIGS['Liberado de Entropía'];
-}
-
-export const getLiberadoDones = (config: LiberadoConfig) => [
-    {
-        id: 'conocimiento_esferas',
-        name: 'Conocimiento de las esferas',
-        cost: 1,
-        description: 'Acceso a la magia sin necesidad de los requisitos habituales. Cada PC invertido en magia otorga 10 EM.'
-    },
-    {
-        id: 'comprension_senda',
-        name: 'Comprensión de la senda',
-        cost: 2,
-        description: 'Permite superar el límite en una segunda característica de su senda (+30, hasta 130) o superar el límite sin restricciones en la elegida (hasta 200).'
-    },
-    {
-        id: 'maestro_senda',
-        name: 'Maestro de la senda',
-        cost: 3,
-        description: `Conexión directa con ${config.entityName} cósmica: puede formular una pregunta diaria a ${config.entityName} para discernir verdades universales.`
-    }
-];
-
-export const LIBERADO_DONES = getLiberadoDones(LIBERADO_CONFIGS['Liberado de Entropía']);
+export { LIBERADO_CONFIGS, LIBERADO_DONES, getLiberadoConfig, getLiberadoDones, type LiberadoConfig, type LiberadoParams };
 
 interface LiberadoSectionProps {
     liberadoParams: LiberadoParams;

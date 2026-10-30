@@ -2,28 +2,11 @@ import React, { useMemo } from 'react';
 import SequelsSelector from '../../../shared/forms/SequelsSelector';
 import { SEQUELS } from '../../../../../data/sequels';
 import { WizardSection } from '../../../shared/layout/WizardSection';
-import { CostBadge } from '../../../shared/ui/CostBadge';
 import { SectionHeaderBadge } from '../../../shared/ui/SectionHeaderBadge';
 import { FormSelect } from '../../../shared/forms/FormSelect';
+import { ALTERADO_AGENTS, ALTERADO_SEQUELS, ALTERADO_DATA } from '../../../../../data/originOptions';
 
-// --- Data Constants ---
-
-export const ALTERADO_AGENTS = [
-    { id: 'nuclear', label: 'Energía nuclear', cost: 0 },
-    { id: 'electromagnetic', label: 'Accidente con energía electromagnética', cost: 0 },
-    { id: 'space_energy', label: 'Energía espacial desconocida', cost: 0 },
-    { id: 'other_energy', label: 'Otras energías', cost: 0 },
-    { id: 'radiation', label: 'Radiación diversa', cost: 0 },
-    { id: 'biological', label: 'Agente biológico', cost: 0 },
-    { id: 'mutagen', label: 'Agente mutágeno', cost: 0 },
-    { id: 'chemical', label: 'Sustancia química', cost: 0 },
-    { id: 'treatment', label: 'Tratamiento', cost: 2 }, // Disadvantage: -2 PC effectively
-    { id: 'other', label: 'Otro (a determinar con el Guionista)', cost: 0 },
-];
-
-export const ALTERADO_SEQUELS = SEQUELS;
-
-// --- Types ---
+export { ALTERADO_AGENTS, ALTERADO_SEQUELS, ALTERADO_DATA };
 
 interface SelectedSequel {
     id: string;
@@ -39,13 +22,6 @@ interface AlteradoSectionProps {
     alteradoParams: AlteradoParams;
     onChange: (updates: any) => void;
 }
-
-export const ALTERADO_DATA = {
-    AGENTS: ALTERADO_AGENTS,
-    SEQUELS: ALTERADO_SEQUELS
-};
-
-// --- Component ---
 
 export default function AlteradoSection({ alteradoParams, onChange }: AlteradoSectionProps) {
     const { agent, sequels = [] } = alteradoParams;
@@ -103,7 +79,6 @@ export default function AlteradoSection({ alteradoParams, onChange }: AlteradoSe
                 showCostInOption={false}
             />
 
-            {/* SEQUELS SELECTOR */}
             <SequelsSelector
                 selectedSequels={sequels}
                 onChange={handleSequelsChange}
@@ -113,6 +88,3 @@ export default function AlteradoSection({ alteradoParams, onChange }: AlteradoSe
         </WizardSection>
     );
 }
-
-
-

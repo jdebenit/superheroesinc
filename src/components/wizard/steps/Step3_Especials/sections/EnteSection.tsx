@@ -1,20 +1,10 @@
 import React, { useMemo } from 'react';
 import { WizardSection } from '../../../shared/layout/WizardSection';
 import { FormSelect } from '../../../shared/forms/FormSelect';
-import { CostBadge } from '../../../shared/ui/CostBadge';
 import { SectionHeaderBadge } from '../../../shared/ui/SectionHeaderBadge';
+import { ENTE_FORMS, ENTE_EFFECTS } from '../../../../../data/originOptions';
 
-export const ENTE_FORMS = [
-    { id: 'humanoid', label: 'Humanoide', cost: 1, description: 'Aspecto humanoide en el plano' },
-    { id: 'animal_major', label: 'Animal mayor', cost: 0, description: 'Oso, ciervo, toro...' },
-    { id: 'animal_minor', label: 'Animal menor', cost: -1, description: 'Perro, gato, zorro...' }
-];
-
-export const ENTE_EFFECTS = [
-    { id: 'hidden', label: 'Fácil ocultación', cost: 2, description: 'Ojos con brillo, mechones de pelo de otro color...' },
-    { id: 'evident', label: 'Más evidentes', cost: 1, description: 'Cola, cuernos, pelaje de otro color llamativo...' },
-    { id: 'obvious', label: 'Difíciles de ocultar', cost: 0, description: 'Emite vapor, alas, múltiples apéndices, aura brillante...' }
-];
+export { ENTE_FORMS, ENTE_EFFECTS };
 
 interface EnteSectionProps {
     enteParams: {
@@ -90,7 +80,3 @@ export default function EnteSection({ enteParams, onChange }: EnteSectionProps) 
         </WizardSection>
     );
 }
-
-
-
-

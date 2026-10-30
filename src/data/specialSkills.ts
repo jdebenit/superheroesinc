@@ -285,7 +285,7 @@ export const SPECIAL_SKILLS: SpecialSkillDefinition[] = [
         formula: (stats) => (stats['inteligencia'] + stats['percepcion']) / 2,
         formulaText: '(INT+PER)/2',
         description: 'Capacidad para lanzar hechizos',
-        allowedCriteria: [{ origin: 'Arcano' }, { subtype: 'Poseido' }]
+        allowedCriteria: [{ origin: 'Arcano' }, { subtype: 'Poseído' }]
     },
     {
         id: 'artes_marciales',
@@ -427,8 +427,7 @@ export function isSkillAllowed(skill: any, originItems: any[] = [], characterDat
                 const originName = Object.keys(item)[0];
                 const subtypes = item[originName];
                 return Array.isArray(subtypes) && (
-                    subtypes.includes(criteria.subtype) ||
-                    (criteria.subtype === 'Poseido' && (subtypes.includes('Poseído') || subtypes.includes('Poseidó') || subtypes.includes('Poseido')))
+                    subtypes.includes(criteria.subtype)
                 );
             });
             if (!hasSubtype) return false;

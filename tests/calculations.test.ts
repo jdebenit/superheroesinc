@@ -676,7 +676,6 @@ describe('Cálculos de Habilidades Generales', () => {
 
         // 2. Origen Sobrenatural -> Poseído tiene acceso
         expect(isSkillAllowed(magiaDef, [{ Sobrenatural: ['Poseído'] }])).toBe(true);
-        expect(isSkillAllowed(magiaDef, [{ Sobrenatural: ['Poseido'] }])).toBe(true);
 
         // 3. Origen sin magia ni don (ej. Mutante o Liberado sin don)
         expect(isSkillAllowed(magiaDef, [{ Mutante: [] }])).toBe(false);

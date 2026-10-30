@@ -36,7 +36,7 @@ export const ORIGIN_COSTS: { [key: string]: OriginCosts } = {
             "Vampiro": 16,
             "Hombre Lobo": 16,
             "Semidemonio": 25,
-            "Poseido": 15,
+            "Poseído": 15,
             "Ente": 30,
             "Maldito": 5,
             "Liberado de Unidad": 15,
@@ -105,6 +105,7 @@ export const ORIGIN_COSTS: { [key: string]: OriginCosts } = {
             "Cazador": 3,
             "Espadachín": 3,
             "Espia/Ladrón": 2,
+            "Fanático/Vengador": 3,
             "Fánatico/Vengador": 3,
             "Francotirador": 3,
             "Manipulador": 2,
@@ -118,6 +119,9 @@ export const ORIGIN_COSTS: { [key: string]: OriginCosts } = {
 
     // Orígenes sin subtipos
     "Guardián": {
+        base: 5
+    },
+    "Guardian": {
         base: 5
     },
     "Alterado": {

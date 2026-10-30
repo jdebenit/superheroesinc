@@ -1,5 +1,5 @@
 import React from 'react';
-import { POSEIDO_FORMS } from '../../../components/wizard/steps/Step3_Especials/sections/PoseidoSection';
+import { POSEIDO_FORMS } from '../../../data/originOptions';
 import { SheetSection } from '../common/SheetSection';
 import { DetailRow } from '../common/DetailRow';
 

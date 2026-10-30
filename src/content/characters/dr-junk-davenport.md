@@ -7,7 +7,7 @@ updatedDate: 2025-12-12
 image: "/personajes/davenport.png"
 tags:
   - Principal
-  - Poseido
+  - Poseído
   - Cyborg
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"

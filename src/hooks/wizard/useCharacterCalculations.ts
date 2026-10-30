@@ -76,7 +76,7 @@ export function useCharacterCalculations(character: any) {
         const isDotado = hasSubtype(character, 'Arcano', 'Dotado');
         const isHibrido = hasSubtype(character, 'Arcano', 'Híbrido mitológico');
         const isTerrano = hasSubtype(character, 'Arcano', 'Terrano');
-        const isPoseido = hasSubtype(character, 'Sobrenatural', 'Poseidó') || hasSubtype(character, 'Sobrenatural', 'Poseido');
+        const isPoseido = hasSubtype(character, 'Sobrenatural', 'Poseído');
         const hasBaseEMOrigin = isMago || isElfoMagico || isHadaEter || isDotado || isHibrido || isTerrano || isPoseido;
 
         let maxEM = 0;
@@ -433,7 +433,7 @@ export function useCharacterCalculations(character: any) {
             if (mag) total += mag.cost;
         }
 
-        // 16. Poseido Params Cost
+        // 16. Poseído Params Cost
         if (character.poseidoParams && character.poseidoParams.formType) {
             const form = POSEIDO_FORMS.find(f => f.id === character.poseidoParams.formType);
             if (form) total += form.cost;

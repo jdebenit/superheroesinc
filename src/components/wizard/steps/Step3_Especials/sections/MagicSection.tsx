@@ -126,7 +126,7 @@ export default function MagicSection({
                 </div>
             )}
 
-            {/* EM Formula Selector (for Dotado/Híbrido/Terrano/Poseido, not Mago) */}
+            {/* EM Formula Selector (for Dotado/Híbrido/Terrano/Poseído, not Mago) */}
             {hasEMFormula && emFormulaOptions.length > 0 && (
                 <FormSelect
                     label="Fórmula de Energía Mágica"

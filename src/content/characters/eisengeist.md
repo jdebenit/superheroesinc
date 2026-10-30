@@ -8,7 +8,7 @@ rpgId: eisengeist
 image: "/personajes/eisengeist.png"
 tags:
   - Secundario
-  - Poseido
+  - Poseído
   - Cyborg
 originReality: Tierra Zero
 actualReality: Tierra Zero

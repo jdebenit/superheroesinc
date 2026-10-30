@@ -1,5 +1,5 @@
 import React from 'react';
-import { MALDITO_DATA } from '../../../components/wizard/steps/Step3_Especials/sections/MalditoSection';
+import { MALDITO_DATA } from '../../../data/originOptions';
 import { SheetSection } from '../common/SheetSection';
 import { DetailRow } from '../common/DetailRow';
 

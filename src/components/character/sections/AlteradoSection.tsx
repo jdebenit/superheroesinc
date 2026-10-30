@@ -1,5 +1,5 @@
 import React from 'react';
-import { ALTERADO_DATA } from '../../../components/wizard/steps/Step3_Especials/sections/AlteradoSection';
+import { ALTERADO_DATA } from '../../../data/originOptions';
 import { SEQUELS } from '../../../data/sequels';
 import { SheetSection } from '../common/SheetSection';
 import { DetailRow } from '../common/DetailRow';
@@ -54,7 +54,7 @@ export const AlteradoSection: React.FC<AlteradoSectionProps> = ({ character }) =
                                             ) : def.description}
                                         </div>
                                     </li>
-                                )
+                                );
                             })}
                         </ul>
                     </li>

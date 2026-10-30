@@ -6,7 +6,7 @@ source: "Héroe Agenda: Sobrenaturales y Arcanos"
 updatedDate: 2025-12-13
 tags:
   - Principal
-  - Poseido
+  - Poseído
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 groups:

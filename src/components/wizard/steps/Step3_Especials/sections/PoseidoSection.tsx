@@ -1,8 +1,10 @@
 import React, { useMemo } from 'react';
 import { WizardSection } from '../../../shared/layout/WizardSection';
 import { FormSelect } from '../../../shared/forms/FormSelect';
-import { CostBadge } from '../../../shared/ui/CostBadge';
 import { SectionHeaderBadge } from '../../../shared/ui/SectionHeaderBadge';
+import { POSEIDO_FORMS } from '../../../../../data/originOptions';
+
+export { POSEIDO_FORMS };
 
 interface PoseidoParams {
     formType: string | null;
@@ -12,12 +14,6 @@ interface PoseidoSectionProps {
     poseidoParams: PoseidoParams;
     onChange: (updates: any) => void;
 }
-
-export const POSEIDO_FORMS = [
-    { id: 'humano', label: 'Humano', cost: 3, description: 'Apariencia completamente humana.' },
-    { id: 'cambia_forma', label: 'Cambia de forma', cost: 0, description: 'Puede alternar entre forma humana y otra forma.' },
-    { id: 'no_humana', label: 'Forma no humana', cost: -3, description: 'Apariencia monstruosa o extraña permanentemente. (Descuento de 3 PC)' },
-];
 
 export default function PoseidoSection({ poseidoParams, onChange }: PoseidoSectionProps) {
     const handleFormChange = (value: string) => {
@@ -60,7 +56,3 @@ export default function PoseidoSection({ poseidoParams, onChange }: PoseidoSecti
         </WizardSection>
     );
 }
-
-
-
-

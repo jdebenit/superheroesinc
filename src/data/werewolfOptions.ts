@@ -367,8 +367,6 @@ export function hasOtherSobrenaturalPowerOrigin(characterData?: any): boolean {
     const allowedSubtypes = [
         'Semidemonio',
         'Maldito',
-        'Poseidó',
-        'Poseido',
         'Poseído',
         'Híbrido mitológico',
         'Dotado',

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ENTE_FORMS, ENTE_EFFECTS } from '../../../components/wizard/steps/Step3_Especials/sections/EnteSection';
+import { ENTE_FORMS, ENTE_EFFECTS } from '../../../data/originOptions';
 import { SheetSection } from '../common/SheetSection';
 import { DetailRow } from '../common/DetailRow';
 

@@ -7,7 +7,7 @@ updatedDate: 2025-12-13
 image: "/personajes/las-ishara.png"
 tags:
   - Principal
-  - Poseido
+  - Poseído
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 groups:

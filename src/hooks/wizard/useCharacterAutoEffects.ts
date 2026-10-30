@@ -19,7 +19,7 @@ export function useCharacterAutoEffects(data: any, onChange: (updates: any) => v
     const isDotado = hasSubtype(data, 'Arcano', 'Dotado');
     const isHibrido = hasSubtype(data, 'Arcano', 'Híbrido mitológico');
     const isTerrano = hasSubtype(data, 'Arcano', 'Terrano');
-    const isPoseido = hasSubtype(data, 'Sobrenatural', 'Poseidó') || hasSubtype(data, 'Sobrenatural', 'Poseido');
+    const isPoseido = hasSubtype(data, 'Sobrenatural', 'Poseído');
 
     const selectedPowers = data.powers?.selected || [];
     const emFormula = data.spells?.emFormula || { divisor: 4, pcCost: 0 };
@@ -176,7 +176,7 @@ export function useCharacterAutoEffects(data: any, onChange: (updates: any) => v
         }
     }, [JSON.stringify(data.origin?.items), data.werewolfParams?.subtype, data.attributes?.values?.Voluntad, JSON.stringify(data.attributes?.breakdown), selectedPowers, onChange, data]);
 
-    // Auto-correct EM formula for Poseido
+    // Auto-correct EM formula for Poseído
     useEffect(() => {
         if (isPoseido && emFormula.divisor === 4) {
             onChange({

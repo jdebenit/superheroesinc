@@ -6,7 +6,7 @@ updatedDate: 2025-12-13
 image: "/personajes/pesanta.png"
 tags:
   - Principal
-  - Poseido
+  - Poseído
 originReality: "Tierra Zero"
 actualReality: "Tierra Zero"
 rpgId: pesanta
