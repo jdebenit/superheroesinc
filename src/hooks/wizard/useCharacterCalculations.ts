@@ -10,6 +10,7 @@ import { TECHNOSUIT_STRENGTH_CONFIGS } from '../../data/technoSuitStrengthConfig
 import { ENTE_FORMS, ENTE_EFFECTS } from '../../components/wizard/steps/Step3_Especials/sections/EnteSection';
 import { POSEIDO_FORMS } from '../../components/wizard/steps/Step3_Especials/sections/PoseidoSection';
 import { calculateEM, hasSubtype, hasOrigin, getPowerPenalty } from '../../components/wizard/steps/Step3_Especials/utils';
+import { getCharacterMaxEM, calculateSelectedSpellsEMCost } from '../../utils/calculations/magicCalculations';
 import { INCOME_SOURCES } from '../../data/technologicalOptions';
 import { SEQUELS } from '../../data/sequels';
 import { GUARDIAN_QUALITIES } from '../../data/guardianOptions';

@@ -1,37 +1,13 @@
 import React from 'react';
-import { POWERS } from '../../../data/powers';
-
-const normalizeId = (id: string): string => {
-    if (!id) return '';
-    return id
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .toLowerCase()
-        .replace(/[^a-z0-9]/g, "")
-        .trim();
-};
+import {
+    findPowerByNameOrId,
+    calculatePowerSkillBase,
+    getRankLevel
+} from '../../../utils/calculations/powerCalculations';
 
 interface PowersSectionProps {
     character: any;
 }
-
-const calculatePowerSkillBase = (char: any, formula: string): number => {
-    if (!formula) return 0;
-    const getVal = (abbr: string) => {
-        const map: Record<string, string> = {
-            'FUE': 'Fuerza', 'AGI': 'Agilidad', 'CON': 'Constitución',
-            'INT': 'Inteligencia', 'PER': 'Percepción', 'VOL': 'Voluntad', 'APA': 'Apariencia'
-        };
-        const fullKey = map[abbr];
-        return char.attributes?.values?.[fullKey] || 0;
-    };
-    try {
-        const evalFormula = formula.replace(/[A-Z]{3}/g, (match) => getVal(match).toString());
-        return Math.floor(new Function('return ' + evalFormula)()) || 0;
-    } catch (e) {
-        return 0;
-    }
-};
 
 export const PowersSection: React.FC<PowersSectionProps> = ({ character }) => {
     if (!character.powers?.selected || character.powers.selected.length === 0) return null;
@@ -43,16 +19,8 @@ export const PowersSection: React.FC<PowersSectionProps> = ({ character }) => {
             </div>
             <ul className="clean-list">
                 {character.powers.selected.map((power: any, idx: number) => {
-                    const powerData = POWERS.find(p => normalizeId(p.id) === normalizeId(power.id) || normalizeId(p.name) === normalizeId(power.name || power.id));
+                    const powerData = findPowerByNameOrId(power.id || power.name);
                     if (!powerData) return null;
-
-                    const getRankLevel = (rank: number) => {
-                        if (rank <= 20) return 'Bajo';
-                        if (rank <= 40) return 'Medio';
-                        if (rank <= 70) return 'Elevado';
-                        if (rank <= 95) return 'Alto';
-                        return 'Cósmico';
-                    };
 
                     return (
                         <li key={`${power.id}-${idx}`} className="power-item">

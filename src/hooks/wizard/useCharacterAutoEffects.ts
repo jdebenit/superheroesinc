@@ -1,13 +1,11 @@
 import { useEffect } from 'react';
 import { POWERS } from '../../data/powers';
 import type { SelectedPower } from '../../components/wizard/steps/Step3_Especials/types';
-import { hasSubtype, hasOrigin, calculateEM } from '../../components/wizard/steps/Step3_Especials/utils';
+import { hasSubtype } from '../../components/wizard/steps/Step3_Especials/utils';
 import { getFreeSkillsForOrigins } from '../../data/freeOriginSkills';
 import { getRequiredSkillsForOrigins } from '../../data/requiredSpecialtySkills';
 import { SPECIAL_SKILLS, isSkillAllowed } from '../../data/specialSkills';
 import { syncWerewolfState } from '../../data/werewolfOptions';
-import { GENERAL_SKILLS } from '../../data/generalSkills';
-
 
 export function useCharacterAutoEffects(data: any, onChange: (updates: any) => void) {
     // --- STEP 3 EFFECTS ---
@@ -15,15 +13,8 @@ export function useCharacterAutoEffects(data: any, onChange: (updates: any) => v
     const isAtlante = hasSubtype(data, 'Parahumano', 'Atlante');
     const isTroll = hasSubtype(data, 'Arcano', 'Troll');
     const isGrifo = hasSubtype(data, 'Arcano', 'Grifo');
-    const isMago = hasSubtype(data, 'Arcano', 'Mago');
-    const isDotado = hasSubtype(data, 'Arcano', 'Dotado');
-    const isHibrido = hasSubtype(data, 'Arcano', 'Híbrido mitológico');
-    const isTerrano = hasSubtype(data, 'Arcano', 'Terrano');
-    const isPoseido = hasSubtype(data, 'Sobrenatural', 'Poseído');
 
     const selectedPowers = data.powers?.selected || [];
-    const emFormula = data.spells?.emFormula || { divisor: 4, pcCost: 0 };
-    const hasEM = isMago || isDotado || isHibrido || isTerrano || isPoseido;
 
     // Auto-add Superhabilidad for Tes-khar
     useEffect(() => {
@@ -56,7 +47,7 @@ export function useCharacterAutoEffects(data: any, onChange: (updates: any) => v
             const hasSwimming = selectedPowers.some((p: any) => p.id === 'superhabilidad' && p.selectedOption === 'Nadar');
             const hasAnimalEmpathy = selectedPowers.some((p: any) => p.id === 'empatia_animal');
 
-            let newPowers: SelectedPower[] = [];
+            const newPowers: SelectedPower[] = [];
 
             if (!hasWaterControl) {
                 newPowers.push({
@@ -148,7 +139,7 @@ export function useCharacterAutoEffects(data: any, onChange: (updates: any) => v
                         rank: 11,
                         customizations: [{
                             id: Date.now().toString(),
-                            description: "Tiene alas para volar",
+                            description: 'Tiene alas para volar',
                             cost: 0
                         }]
                     };
@@ -164,7 +155,6 @@ export function useCharacterAutoEffects(data: any, onChange: (updates: any) => v
         }
     }, [isGrifo, selectedPowers, onChange, data]);
 
-
     // Auto-sync Hombre Lobo state (werewolfParams, transition form, and innate powers)
     useEffect(() => {
         const updates = syncWerewolfState(data);
@@ -176,65 +166,19 @@ export function useCharacterAutoEffects(data: any, onChange: (updates: any) => v
         }
     }, [JSON.stringify(data.origin?.items), data.werewolfParams?.subtype, data.attributes?.values?.Voluntad, JSON.stringify(data.attributes?.breakdown), selectedPowers, onChange, data]);
 
-    // Auto-correct EM formula for Poseído
-    useEffect(() => {
-        if (isPoseido && emFormula.divisor === 4) {
-            onChange({
-                ...data,
-                spells: {
-                    ...data.spells,
-                    emFormula: { divisor: 0, pcCost: 0 },
-                    selected: [] // Clear spells if defaulting to no access
-                }
-            });
-        }
-    }, [isPoseido, emFormula.divisor, data, onChange]);
-
-    // Calculate and store EM in state
-    useEffect(() => {
-        if (!hasEM) return;
-
-        let divisor = emFormula.divisor;
-        if (isMago) divisor = 1;
-
-        if (divisor === 0) return;
-
-        const calculated = calculateEM(data, selectedPowers, divisor);
-
-        if (data.spells?.calculatedEM !== calculated) {
-            onChange({
-                ...data,
-                spells: {
-                    ...data.spells,
-                    calculatedEM: calculated,
-                }
-            });
-        }
-    }, [
-        hasEM,
-        isMago,
-        emFormula.divisor,
-        data.attributes,
-        data.level,
-        selectedPowers,
-        data.spells?.calculatedEM,
-        data,
-        onChange
-    ]);
-
     // Auto-update Attributes when Powers change (Power Mods)
     useEffect(() => {
         if (!data.attributes?.breakdown) return;
 
         const powerMods: { [key: string]: number } = {};
         const charMap: Record<string, string> = {
-            'FUE': 'fuerza',
-            'AGI': 'agilidad',
-            'CON': 'constitucion',
-            'INT': 'inteligencia',
-            'PER': 'percepcion',
-            'APA': 'apariencia',
-            'VOL': 'voluntad'
+            FUE: 'fuerza',
+            AGI: 'agilidad',
+            CON: 'constitucion',
+            INT: 'inteligencia',
+            PER: 'percepcion',
+            APA: 'apariencia',
+            VOL: 'voluntad'
         };
 
         const CHARACTERISTICS = [
@@ -262,15 +206,15 @@ export function useCharacterAutoEffects(data: any, onChange: (updates: any) => v
         // Check if update is needed
         let hasChanges = false;
         const newBreakdown = { ...data.attributes.breakdown };
-        
+
         CHARACTERISTICS.forEach(char => {
             const charId = char.id;
             const currentMod = newBreakdown[charId]?.powerMod || 0;
             const newMod = powerMods[charId] || 0;
-            
+
             if (currentMod !== newMod) {
                 hasChanges = true;
-                if (!newBreakdown[charId]) { // Just in case
+                if (!newBreakdown[charId]) {
                     newBreakdown[charId] = { base: 40, originMod: 0, specialtyMod: 0, powerMod: 0, otherMod: 0 };
                 }
                 newBreakdown[charId] = {
@@ -281,7 +225,6 @@ export function useCharacterAutoEffects(data: any, onChange: (updates: any) => v
         });
 
         if (hasChanges) {
-            // Recalculate values
             const newValues: { [key: string]: number } = {};
 
             CHARACTERISTICS.forEach(char => {
@@ -291,7 +234,7 @@ export function useCharacterAutoEffects(data: any, onChange: (updates: any) => v
                 const specialty = c.specialtyMod || 0;
                 const power = c.powerMod || 0;
                 const other = c.otherMod || 0;
-                
+
                 newValues[char.name] = base + origin + specialty + power + other;
             });
 
@@ -304,7 +247,7 @@ export function useCharacterAutoEffects(data: any, onChange: (updates: any) => v
                 }
             });
         }
-    }, [selectedPowers, data.attributes?.breakdown, onChange, data]); // specific dependencies are important
+    }, [selectedPowers, data.attributes?.breakdown, onChange, data]);
 }
 
 export function useSkillAutoEffects(data: any, selectedSkills: any, specifiedSkills: any, setSelectedSkills: any, setSpecifiedSkills: any) {

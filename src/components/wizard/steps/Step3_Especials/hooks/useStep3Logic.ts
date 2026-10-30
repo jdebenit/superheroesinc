@@ -14,6 +14,7 @@ import {
     isMaldito,
     getPowerPenalty
 } from '../utils';
+import { getEMFormulaOptions } from '../../../../../utils/calculations/magicCalculations';
 import type { SelectedPower, SelectedSpell, TechModule, ModalType } from '../types';
 import type { CyborgImplant } from '../../../../../data/cyborgImplantConfigs';
 
@@ -115,14 +116,14 @@ export function useStep3Logic(data: any, onChange: (updates: any) => void, onSho
             spells: {
                 ...data.spells,
                 emFormula: { divisor, pcCost },
-                selected: divisor === 0 ? [] : data.spells.selected
+                selected: (divisor === 0 && !isLiberado) ? [] : data.spells.selected
             }
         });
-    }, [data, onChange]);
+    }, [data, onChange, isLiberado]);
 
     // EM Logic
     const hasBaseEMOrigin = isMago || isElfoMagico || isHadaEter || isDotado || isHibrido || isTerrano || isPoseido;
-    const rawEmFormula = data.spells?.emFormula || (isPoseido ? { divisor: 0, pcCost: 0 } : { divisor: 4, pcCost: 0 });
+    const rawEmFormula = data.spells?.emFormula || (isPoseido && !isDotado && !isHibrido && !isTerrano ? { divisor: 0, pcCost: 0 } : { divisor: 4, pcCost: 0 });
     let emFormula = rawEmFormula;
     if (isMago || isElfoMagico) emFormula = { divisor: 1, pcCost: 0 };
     else if (isHadaEter) emFormula = { divisor: 2, pcCost: 0 };
@@ -138,25 +139,35 @@ export function useStep3Logic(data: any, onChange: (updates: any) => void, onSho
 
     // Auto-effects for EM and Powers
     useEffect(() => {
-        if (isPoseido && rawEmFormula.divisor === 4) updateEMFormula(0, 0);
-        if ((isMago || isElfoMagico) && (rawEmFormula.divisor !== 1 || rawEmFormula.pcCost !== 0)) updateEMFormula(1, 0);
-        if (isHadaEter && (rawEmFormula.divisor !== 2 || rawEmFormula.pcCost !== 0)) updateEMFormula(2, 0);
-    }, [isPoseido, isMago, isElfoMagico, isHadaEter, rawEmFormula]);
+        if (isMago || isElfoMagico) {
+            if (rawEmFormula.divisor !== 1 || rawEmFormula.pcCost !== 0) updateEMFormula(1, 0);
+            return;
+        }
+        if (isHadaEter) {
+            if (rawEmFormula.divisor !== 2 || rawEmFormula.pcCost !== 0) updateEMFormula(2, 0);
+            return;
+        }
+        if (hasEMFormula) {
+            const validOptions = getEMFormulaOptions({ isDotado, isHibrido, isTerrano, isPoseido });
+            const currentId = `${rawEmFormula.divisor}|${rawEmFormula.pcCost}`;
+            if (validOptions.length > 0 && !validOptions.some(o => o.id === currentId)) {
+                const defaultOpt = validOptions.find(o => o.cost === 0) || validOptions[0];
+                const [div, cost] = defaultOpt.id.split('|').map(Number);
+                updateEMFormula(div, cost);
+            }
+        }
+    }, [isPoseido, isDotado, isHibrido, isTerrano, isMago, isElfoMagico, isHadaEter, hasEMFormula, rawEmFormula]);
 
     useEffect(() => {
         if (!hasEM) return;
-        if (!hasBaseEMOrigin) {
-            if (data.spells?.calculatedEM !== 0) {
-                onChange({
-                    ...data,
-                    spells: { ...data.spells, calculatedEM: 0 }
-                });
-            }
-            return;
-        }
-        const divisor = (isMago || isElfoMagico) ? 1 : isHadaEter ? 2 : emFormula.divisor;
-        if (divisor === 0) return;
-        const calculated = calculateEM(data, selectedPowers, divisor);
+        const divisor = !hasBaseEMOrigin
+            ? 0
+            : (isMago || isElfoMagico)
+                ? 1
+                : isHadaEter
+                    ? 2
+                    : emFormula.divisor;
+        const calculated = divisor > 0 ? calculateEM(data, selectedPowers, divisor) : 0;
         if (data.spells?.calculatedEM !== calculated) {
             onChange({
                 ...data,

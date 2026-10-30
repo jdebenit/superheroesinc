@@ -1,34 +1,11 @@
-import { SPELLS, type Spell } from '../../../../../data/spells';
-import { calculateEM, hasSubtype } from '../utils';
+import { type Spell } from '../../../../../data/spells';
+import {
+    calculateEM,
+    calculateSelectedSpellsEMCost,
+    TERRANO_TABLE_OPTIONS,
+    getEMFormulaOptions
+} from '../../../../../utils/calculations/magicCalculations';
 import type { SelectedPower } from '../types';
-
-const TERRANO_TABLE_OPTIONS = [
-    { id: 'guardian_power', label: 'Acceso a Poder de Guardián', cost: 2, costText: '+2 PC' },
-    { id: '180_EM', label: 'Acceso a objetos de 180 EM', cost: 1, costText: '+1 PC' },
-    { id: '120_EM', label: 'Acceso a objetos de 120 EM', cost: 0, costText: '+0 PC' },
-    { id: '60_EM', label: 'Acceso a objetos de 60 EM', cost: -1, costText: '-1 PC' },
-    { id: 'none', label: 'Ningún objeto', cost: -2, costText: '-2 PC' },
-];
-
-const EM_FORMULA_OPTIONS_DOTADO = [
-    { id: '2|8', label: 'Dotado: (PER+INT+VOL)/2 → +8 PCs', cost: 8 },
-    { id: '3|3', label: 'Dotado: (PER+INT+VOL)/3 → +3 PCs', cost: 3 },
-    { id: '4|0', label: 'Dotado: (PER+INT+VOL)/4 → +0 PCs', cost: 0 },
-];
-const EM_FORMULA_OPTIONS_HIBRIDO = [
-    { id: '2|15', label: 'Híbrido: (PER+INT+VOL)/2 → +15 PCs', cost: 15 },
-    { id: '3|10', label: 'Híbrido: (PER+INT+VOL)/3 → +10 PCs', cost: 10 },
-    { id: '4|7', label: 'Híbrido: (PER+INT+VOL)/4 → +7 PCs', cost: 7 },
-    { id: '0|0', label: 'Híbrido: No EM', cost: 0 },
-];
-const EM_FORMULA_OPTIONS_TERRANO = [
-    { id: '4|0', label: 'Terrano: (PER+INT+VOL)/4 → +0 PCs', cost: 0 },
-    { id: '0|-5', label: 'Terrano Ajeno: No EM → -5 PCs', cost: -5 },
-];
-const EM_FORMULA_OPTIONS_POSEIDO = [
-    { id: '2|3', label: 'Poseído: (INT+PER+VOL)/2 → +3 PCs', cost: 3 },
-    { id: '0|0', label: 'Poseído: No accede a hechizos → +0 PCs', cost: 0 },
-];
 
 export interface UseMagicSectionLogicProps {
     data: any;
@@ -63,23 +40,17 @@ export function useMagicSectionLogic({
     const getRollLabel = (id: string) => TERRANO_TABLE_OPTIONS.find((o) => o.id === id)?.label || id;
     const getRollCost = (id: string) => TERRANO_TABLE_OPTIONS.find((o) => o.id === id)?.costText || '';
 
-    // Build em formula options for FormSelect
-    const emFormulaOptions = isDotado
-        ? EM_FORMULA_OPTIONS_DOTADO
-        : isHibrido
-            ? EM_FORMULA_OPTIONS_HIBRIDO
-            : isTerrano
-                ? EM_FORMULA_OPTIONS_TERRANO
-                : isPoseido
-                    ? EM_FORMULA_OPTIONS_POSEIDO
-                    : [];
+    // Build EM formula options combining all active EM-formula origins
+    const emFormulaOptions = getEMFormulaOptions({
+        isDotado,
+        isHibrido,
+        isTerrano,
+        isPoseido
+    });
 
     const emFormulaValue = `${emFormula.divisor}|${emFormula.pcCost}`;
 
-    const totalCost = selectedSpells.reduce((acc, s) => {
-        const baseCost = parseInt(s.cost, 10) || 0;
-        return acc + baseCost * s.rank;
-    }, 0);
+    const totalCost = calculateSelectedSpellsEMCost(selectedSpells);
 
     const hasBaseEMOrigin = isMago || isElfoMagico || isHadaEter || isDotado || isHibrido || isTerrano || isPoseido;
     let maxEM = 0;
@@ -90,7 +61,7 @@ export function useMagicSectionLogic({
         maxEM = calculateEM(data, selectedPowers, divisor);
     }
 
-    const isSpellAccessAllowed = hasBaseEMOrigin ? emFormula.divisor !== 0 : !!isLiberado;
+    const isSpellAccessAllowed = (hasBaseEMOrigin && emFormula.divisor !== 0) || !!isLiberado;
     const emExceeded = totalCost > maxEM;
     const pcPenalty = emExceeded ? (totalCost - maxEM) / 10 : 0;
 
