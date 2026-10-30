@@ -99,12 +99,18 @@ export function calculateLimits(
     let maxLimit = 100;
     let minLimit = 40;
     let hasSpecificMin = false;
+    let hasSpecificMax = false;
 
     forEachOriginAndSubtype(origins, (originName, data) => {
         const charMod = data[charId as keyof typeof data];
         if (charMod && typeof charMod === 'object' && 'max' in charMod) {
-            if (charMod.max && charMod.max > maxLimit) {
-                maxLimit = charMod.max;
+            if (charMod.max !== undefined) {
+                if (!hasSpecificMax) {
+                    maxLimit = charMod.max;
+                    hasSpecificMax = true;
+                } else if (charMod.max > maxLimit) {
+                    maxLimit = charMod.max;
+                }
             }
             if (charMod.min !== undefined) {
                 if (!hasSpecificMin) {

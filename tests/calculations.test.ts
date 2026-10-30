@@ -3,6 +3,13 @@ import { useMagicSectionLogic } from '../src/components/wizard/steps/Step3_Espec
 import { calculateOriginCost } from '../src/data/originCosts';
 import { SPECIAL_SKILLS, isSkillAllowed, hasConocimientoEsferas } from '../src/data/specialSkills';
 import {
+    WEREWOLF_SUBTYPES,
+    buildWerewolfTransitionForm,
+    syncWerewolfState,
+    getCharacterForActiveForm
+} from '../src/data/werewolfOptions';
+import { getPowerCostConfig } from '../src/components/wizard/steps/Step3_Especials/utils';
+import {
     calculateCreationPoints,
     calculateOriginModifiers,
     calculateLimits,
@@ -129,6 +136,12 @@ describe('Cálculos de Origen y Puntos de Creación (PC)', () => {
 
         const modifiers = calculateOriginModifiers([{ Sobrenatural: ['Vampiro'] }], null);
         expect(modifiers.fuerza).toBeGreaterThanOrEqual(0);
+
+        // Elfo tiene límite máximo inferior a 100 en Fuerza (60-90) y Constitución (50-90)
+        expect(calculateLimits([{ Arcano: ['Elfo Físico'] }], 'fuerza')).toEqual({ min: 60, max: 90 });
+        expect(calculateLimits([{ Arcano: ['Elfo Físico'] }], 'constitucion')).toEqual({ min: 50, max: 90 });
+        expect(calculateLimits([{ Arcano: ['Elfo Psíquico'] }], 'fuerza')).toEqual({ min: 60, max: 90 });
+        expect(calculateLimits([{ Arcano: ['Elfo Mágico'] }], 'constitucion')).toEqual({ min: 50, max: 90 });
     });
 
     it('calcula límites correctamente para Liberado de Entropía según la característica elegida y el don', () => {
@@ -659,5 +672,109 @@ describe('Cálculos de Habilidades Generales', () => {
         };
         expect(hasConocimientoEsferas(liberadoUnidad)).toBe(true);
         expect(isSkillAllowed(magiaDef, liberadoUnidad.origin.items, liberadoUnidad)).toBe(true);
+    });
+
+    it('calcula correctamente el ejemplo oficial de Nikos (Hombre Lobo Renegado = 70 PCs) y el cambio de forma activa', () => {
+        // 1. Origen Hombre Lobo = 16 PCs
+        const origins = [{ Sobrenatural: ['Hombre Lobo'] }];
+        const originPC = calculateOriginCost(origins);
+        expect(originPC).toBe(16);
+
+        // 2. Casta Renegado = +9 PCs
+        const castaPC = WEREWOLF_SUBTYPES.renegado.cost;
+        expect(castaPC).toBe(9);
+
+        // 3. Características Forma Humana de Nikos: FUE 40, CON 40, AGI 60, INT 70, PER 40, APA 40, VOL 60 = 35 PCs
+        const humanBreakdown = {
+            fuerza: { base: 40, powerMod: 0 },
+            constitucion: { base: 40, powerMod: 0 },
+            agilidad: { base: 60, powerMod: 0 },
+            inteligencia: { base: 70, powerMod: 0 },
+            percepcion: { base: 40, powerMod: 0 },
+            apariencia: { base: 40, powerMod: 0 },
+            voluntad: { base: 60, powerMod: 0 }
+        };
+        const { totalPC: humanPC } = calculateCreationPoints(humanBreakdown, origins);
+        expect(humanPC).toBe(35);
+
+        // 4. Características Forma de Transición de Nikos (Renegado):
+        // FUE 130 (Base 100 + 30 -> 3 PC), CON 130 (Base 100 + 30 -> 3 PC), AGI 120 (Base 100 + 20 -> 2 PC),
+        // INT 40 (Base 40 + 0 -> 0 PC), PER 120 (Base 100 + 20 -> 2 PC), APA 20 (Base 20 + 0 -> 0 PC), VOL 60 (fija humana -> 0 PC)
+        const transitionForm = buildWerewolfTransitionForm('renegado', 60, {
+            id: 'werewolf_transition',
+            name: 'Forma de Transición (Renegado)',
+            source: 'Hombre Lobo',
+            subtype: 'renegado',
+            cost: 0,
+            attributes: {
+                values: {
+                    Fuerza: 130,
+                    Constitución: 130,
+                    Agilidad: 120,
+                    Inteligencia: 40,
+                    Percepción: 120,
+                    Apariencia: 20,
+                    Voluntad: 60
+                }
+            }
+        });
+        expect(transitionForm.cost).toBe(10);
+
+        // Total exacto del ejemplo del manual: 16 + 9 + 35 + 10 = 70 PCs
+        expect(originPC + castaPC + humanPC + transitionForm.cost).toBe(70);
+
+        // 5. Poderes innatos gratuitos para Puro, Híbrido y Renegado
+        const puroPowers = syncWerewolfState({
+            origin: { items: origins },
+            werewolfParams: { subtype: 'puro' },
+            attributes: { values: { Voluntad: 60 } },
+            powers: { selected: [] },
+            forms: []
+        });
+        expect(puroPowers?.powers.selected.length).toBe(5);
+        expect(getPowerCostConfig({ id: 'empatia_animal' }, { id: 'empatia_animal', rank: 21, isWerewolfInnate: true } as any, { isHombreLobo: true, werewolfSubtype: 'puro' } as any).freeRank).toBe(21);
+        expect(getPowerCostConfig({ id: 'donacion_de_vida' }, { id: 'donacion_de_vida', rank: 41, isWerewolfInnate: true } as any, { isHombreLobo: true, werewolfSubtype: 'puro' } as any).freeRank).toBe(41);
+        expect(getPowerCostConfig({ id: 'regeneracion_de_tejidos' }, { id: 'regeneracion_de_tejidos', rank: 71, isWerewolfInnate: true } as any, { isHombreLobo: true, werewolfSubtype: 'renegado' } as any).freeRank).toBe(71);
+
+        // 6. Cambio de forma activa recalcula características y estadísticas derivadas en tiempo real
+        const nikosChar = {
+            name: 'Nikos',
+            origin: { items: origins },
+            attributes: {
+                values: {
+                    Fuerza: 40,
+                    Constitución: 40,
+                    Agilidad: 60,
+                    Inteligencia: 70,
+                    Percepción: 40,
+                    Apariencia: 40,
+                    Voluntad: 60
+                }
+            },
+            forms: [transitionForm],
+            skills: {}
+        };
+        const activeBase = getCharacterForActiveForm(nikosChar, 'base');
+        expect(activeBase.attributes.values.Fuerza).toBe(40);
+
+        const activeTransition = getCharacterForActiveForm(nikosChar, 'werewolf_transition');
+        expect(activeTransition.attributes.values.Fuerza).toBe(130);
+        // En Forma de Transición (CON 130): PV = 130 - 35 = 95
+        expect(activeTransition.combatstats['Puntos de Vida'].total).toBe(95);
+
+        // 7. Multiorigen / Especialización: hereda originMod, specialtyMod y powerMod de la Forma Humana
+        const multioriginBreakdown = {
+            fuerza: { base: 60, originMod: 20, specialtyMod: 0, powerMod: 10, otherMod: 0 },
+            agilidad: { base: 60, originMod: 0, specialtyMod: 15, powerMod: 0, otherMod: 0 }
+        };
+        const multiForm = buildWerewolfTransitionForm('hibrido', 60, null, multioriginBreakdown);
+        // Fuerza Híbrido: Base 100 + originMod 20 + powerMod 10 = 130 (Coste Transición: 0 PC porque Base = 100)
+        expect(multiForm.attributes.breakdown?.fuerza.originMod).toBe(20);
+        expect(multiForm.attributes.breakdown?.fuerza.powerMod).toBe(10);
+        expect(multiForm.attributes.values.Fuerza).toBe(130);
+        // Agilidad Híbrido: Base 100 + specialtyMod 15 = 115
+        expect(multiForm.attributes.breakdown?.agilidad.specialtyMod).toBe(15);
+        expect(multiForm.attributes.values.Agilidad).toBe(115);
+        expect(multiForm.cost).toBe(0);
     });
 });

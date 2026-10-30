@@ -124,6 +124,9 @@ export interface PowerContext {
     isHadaFuego?: boolean;
     isHadaAgua?: boolean;
     isHadaTierra?: boolean;
+    isHombreLobo?: boolean;
+    werewolfSubtype?: string;
+    canModifySobrenatural?: boolean;
 }
 
 /**
@@ -150,6 +153,31 @@ export const getPowerCostConfig = (power: any, selection: SelectedPower, context
         baseCostAdjustment: 0,
         isFixedCost: false
     };
+
+        // Check Hombre Lobo innate powers
+    if (selection.isWerewolfInnate || context.isHombreLobo) {
+        const sub = context.werewolfSubtype || 'hibrido';
+        if (power.id === 'multiformidad' && selection.isWerewolfInnate) {
+            config.freeRank = 41;
+            return config;
+        }
+        if (power.id === 'regeneracion_de_tejidos' && selection.isWerewolfInnate) {
+            config.freeRank = sub === 'renegado' ? 71 : 41;
+            return config;
+        }
+        if (power.id === 'ataque_especial' && (selection.isWerewolfInnate || selection.selectedOption === 'Arma Natural')) {
+            config.freeRank = sub === 'renegado' ? 21 : 1;
+            return config;
+        }
+        if (power.id === 'empatia_animal' && (selection.isWerewolfInnate || sub === 'puro')) {
+            config.freeRank = 21;
+            return config;
+        }
+        if (power.id === 'donacion_de_vida' && (selection.isWerewolfInnate || sub === 'puro')) {
+            config.freeRank = 41;
+            return config;
+        }
+    }
 
     // 1. Check for Free Ranks (Atlante, Grifo, Hadas, Elfo Fisico, Troll, Tes-Khar)
     const isTesKharFree = isTesKhar && power.id === 'superhabilidad';

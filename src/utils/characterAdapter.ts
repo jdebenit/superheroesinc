@@ -2,6 +2,7 @@ import { initialCharacterState } from '../data/wizardConfig';
 import { GENERAL_SKILLS } from '../data/generalSkills';
 import { POWERS } from '../data/powers';
 import { SPELLS } from '../data/spells';
+import { hasHombreLobo, syncWerewolfState } from '../data/werewolfOptions';
 
 const normalizePowerId = (id: string): string => {
     if (!id) return '';
@@ -155,7 +156,15 @@ export const adaptWebCharacter = (webChar: any): any => {
         uiState: {
             ...baseState.uiState,
             ...webChar.uiState
-        }
+        },
+        werewolfParams: webChar.werewolfParams || baseState.werewolfParams,
+        forms: Array.isArray(webChar.forms)
+            ? webChar.forms.map((form: any) => ({
+                ...form,
+                combatstats: form.combatstats ? normalizeStats(form.combatstats, baseState.combatstats) : undefined,
+                otherstats: form.otherstats ? normalizeStats(form.otherstats, baseState.otherstats) : undefined
+            }))
+            : baseState.forms
     };
 
     // 3. Adapt SKILLS
@@ -355,6 +364,14 @@ export const adaptWebCharacter = (webChar: any): any => {
     if (webChar.sexualIdentity) adapted.sexualIdentity = webChar.sexualIdentity;
     if (typeof webChar.notes === 'string') adapted.notes = webChar.notes;
     if (Array.isArray(webChar.notes)) adapted.notes = webChar.notes.join('\n');
+
+    // 10. Sync Hombre Lobo state if the character has Hombre Lobo origin
+    if (hasHombreLobo(adapted)) {
+        const synced = syncWerewolfState(adapted);
+        if (synced) {
+            Object.assign(adapted, synced);
+        }
+    }
 
     return adapted;
 };

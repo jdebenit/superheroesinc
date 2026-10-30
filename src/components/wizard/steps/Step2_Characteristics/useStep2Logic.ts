@@ -111,25 +111,27 @@ export function useStep2Logic(data: any, onChange: (updates: any) => void) {
                 const prevManualOM = isManualOMAllowed ? Math.max(0, updated[key].originMod - oldOM) : 0;
                 const prevManualSM = isManualSMAllowed ? Math.max(0, updated[key].specialtyMod - oldSM) : 0;
 
+                let targetBase = updated[key].base;
                 let targetOM = newOM + prevManualOM;
                 let targetSM = newSM + prevManualSM;
 
                 // Si la característica excede su límite al cambiar la senda/origen, ajustar
                 const limits = calculateLimits(origins, key, chosenCharacteristics, data.liberadoParams);
-                const projectedTotal = updated[key].base + targetOM + targetSM + updated[key].powerMod + (updated[key].otherMod || 0);
+                const projectedTotal = targetBase + targetOM + targetSM + updated[key].powerMod + (updated[key].otherMod || 0);
                 if (projectedTotal > limits.max && !unlockManualMod && updated[key].powerMod === 0) {
                     const excess = projectedTotal - limits.max;
                     const reduceOM = Math.min(targetOM, excess);
                     targetOM -= reduceOM;
                     const remainingExcess = excess - reduceOM;
                     if (remainingExcess > 0) {
-                        updated[key].base = Math.max(0, updated[key].base - remainingExcess);
+                        targetBase = Math.max(0, targetBase - remainingExcess);
                     }
                 }
 
-                if (updated[key].originMod !== targetOM || updated[key].specialtyMod !== targetSM) {
+                if (updated[key].base !== targetBase || updated[key].originMod !== targetOM || updated[key].specialtyMod !== targetSM) {
                     updated[key] = {
                         ...updated[key],
+                        base: targetBase,
                         originMod: targetOM,
                         specialtyMod: targetSM
                     };

@@ -25,6 +25,7 @@ import ParahumanoSection from './sections/ParahumanoSection';
 import MinotaurSection from './sections/MinotaurSection';
 import HibridoSection from './sections/HibridoSection';
 import LiberadoSection from './sections/LiberadoSection';
+import WerewolfSection from './sections/WerewolfSection';
 import { WizardSection } from '../../shared/layout/WizardSection';
 import '../../shared/layout/WizardStep.css';
 
@@ -41,7 +42,7 @@ export default function Step3_Especials({ data, onChange, onShowToast, onShowHel
         isGuardianChar, isMalditoChar, isParahumano, isParahumanoHybrid,
         isMago, isDotado, isHibrido, isTerrano, isPoseido, isElfoMagico,
         isHadaEter, isHadaAire, isHadaFuego, isHadaAgua, isHadaTierra,
-        isGrifo, isElfoFisico, isVampiro, isSemidemonio, isEnte, isThals,
+        isGrifo, isElfoFisico, isVampiro, isHombreLobo, isSemidemonio, isEnte, isThals,
         isDios, isDiosMenor, isSemidios, isDivino, isCosmico, isMutante, isVigilante,
         isTecnologico, isTecnoarmadura, isCyborg, isTecnovehiculo, isExoskeleton, isTechnological,
         isTesKhar, isAtlante, isTroll, isMinotauro, isEnano, isElfoPsiquico, isLiberado, activeLiberados, isAlterado, hasAnyOrigin,
@@ -144,6 +145,13 @@ export default function Step3_Especials({ data, onChange, onShowToast, onShowHel
                     onShowToast={onShowToast}
                 />
             ))}
+
+            {isHombreLobo && (
+                <WerewolfSection
+                    data={data}
+                    onChange={onChange}
+                />
+            )}
 
             {isPoseido && (
                 <PoseidoSection
@@ -254,6 +262,8 @@ export default function Step3_Especials({ data, onChange, onShowToast, onShowHel
                 isGuardian={isGuardianChar}
                 isAlterado={isAlterado || isParahumanoHybrid}
                 isVampiro={isVampiro}
+                isHombreLobo={isHombreLobo}
+                werewolfSubtype={data.werewolfParams?.subtype}
                 isSemidemonio={isSemidemonio}
                 isMaldito={isMalditoChar}
                 isEnte={isEnte}

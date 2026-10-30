@@ -1682,3 +1682,139 @@
         justify-content: flex-end;
     }
 }
+
+
+/* --- Werewolf Section (Hombre Lobo) --- */
+
+.step3-werewolf-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.step3-werewolf-card {
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 1rem;
+    background: #ffffff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.step3-werewolf-card:hover {
+    border-color: #cbd5e1;
+    background: #f8fafc;
+}
+
+.step3-werewolf-card.selected {
+    border-color: #d97706;
+    background: #fffbeb;
+    box-shadow: 0 2px 8px rgba(217, 119, 6, 0.14);
+}
+
+.step3-werewolf-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.step3-werewolf-title {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #1f2937;
+}
+
+.step3-werewolf-desc {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #4b5563;
+    line-height: 1.45;
+}
+
+.step3-werewolf-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-top: 0.35rem;
+    padding-top: 0.5rem;
+    border-top: 1px dashed #e2e8f0;
+    font-size: 0.8rem;
+    color: #374151;
+    line-height: 1.4;
+}
+
+.step3-werewolf-detail-item.alert {
+    color: #b91c1c;
+}
+
+.step3-werewolf-detail-item.warning {
+    color: #92400e;
+}
+
+.step3-werewolf-transition-summary {
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.step3-werewolf-summary-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.step3-werewolf-summary-title {
+    margin: 0 0 0.2rem 0;
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #1e293b;
+}
+
+.step3-werewolf-summary-sub {
+    margin: 0;
+    font-size: 0.82rem;
+    color: #64748b;
+}
+
+.step3-werewolf-stats-strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 0.5rem;
+}
+
+.step3-werewolf-stat-pill {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 0.45rem 0.6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.ww-pill-abbr {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #64748b;
+}
+
+.ww-pill-val {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.ww-pill-limit {
+    font-size: 0.68rem;
+    color: #94a3b8;
+}

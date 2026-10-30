@@ -45,7 +45,7 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
     "Sobrenatural": {
         name: "Sobrenatural",
         paradaMentalBonus: 20,
-        disabledSubtypes: ["Hombre Lobo"],
+        disabledSubtypes: [],
         subtypes: {
             "Vampiro": ["+20 a la parada mental"],
             "Hombre Lobo": ["+20 a la parada mental"],

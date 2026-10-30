@@ -51,6 +51,29 @@ export const useJsonExport = (
         exportData.skills = character.skills;
         exportData.powers = character.powers;
 
+        // 4b. Pre-calculate combatstats & otherstats for alternative forms (e.g. Werewolf Transition Form)
+        if (Array.isArray(character.forms) && character.forms.length > 0) {
+            exportData.forms = character.forms.map((form: any) => {
+                const formDerived = calculateDerivedStats(
+                    form.attributes?.values || {},
+                    character.origin?.items || [],
+                    character.skills || {},
+                    character.level,
+                    character.modPerLevel
+                );
+                const { combatStats: formCalcCombat, otherStats: formCalcOther } = formatDerivedStats(formDerived);
+                return {
+                    ...form,
+                    combatstats: applyStatsOverrides(formCalcCombat, form.combatstats),
+                    otherstats: applyStatsOverrides(formCalcOther, form.otherstats)
+                };
+            });
+        }
+
+        if (character.werewolfParams) {
+            exportData.werewolfParams = character.werewolfParams;
+        }
+
         // Keep calculatedEM synchronized with character level & attributes on export
         if (exportData.spells || character.spells?.calculatedEM !== undefined) {
             const isMago = hasSubtype(character, 'Arcano', 'Mago');

@@ -1916,3 +1916,100 @@ ul {
         padding: 0.2rem 0.5rem;
     }
 }
+
+
+/* Form Switcher & Werewolf Sheet Section */
+.sheet-form-switcher {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 0.65rem 1rem;
+    margin-bottom: 1.25rem;
+    background: linear-gradient(to right, #fffbeb, #fef3c7);
+    border: 1px solid #f59e0b;
+    border-radius: 6px;
+}
+
+.sheet-form-switcher-label {
+    font-weight: 700;
+    color: #92400e;
+    font-size: 0.9rem;
+}
+
+.sheet-form-switcher-buttons {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.sheet-form-btn {
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    border: 1px solid #d97706;
+    background: #ffffff;
+    color: #92400e;
+    font-weight: 700;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.sheet-form-btn:hover {
+    background: #fef3c7;
+}
+
+.sheet-form-btn.active {
+    background: #d97706;
+    color: #ffffff;
+    box-shadow: 0 1px 4px rgba(217, 119, 6, 0.3);
+}
+
+.sheet-werewolf-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(56px, 1fr));
+    gap: 0.4rem;
+    margin-top: 0.4rem;
+}
+
+.sheet-werewolf-stat-box {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #fde68a;
+    border-radius: 4px;
+    padding: 0.25rem 0.35rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.sheet-ww-abbr {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: #92400e;
+}
+
+.sheet-ww-val {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #1f2937;
+}
+
+.sheet-ww-footnote {
+    font-size: 0.72rem;
+    color: #6b7280;
+    font-style: italic;
+    margin-top: 0.35rem;
+}
+
+.liberado-card.werewolf-card-silver {
+    border-left-color: #dc2626;
+    background: linear-gradient(to right, rgba(254, 242, 242, 0.65), rgba(255, 255, 255, 0.85));
+}
+
+.werewolf-badge-alert {
+    background: #fee2e2;
+    color: #b91c1c;
+    border: 1px solid #fecaca;
+}

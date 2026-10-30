@@ -14,6 +14,7 @@ import {
 import { mergeWithDefaults } from '../../utils/dataCleaner';
 import { adaptWebCharacter } from '../../utils/characterAdapter';
 import { useCharacterCalculations } from '../../hooks/wizard/useCharacterCalculations';
+import { syncWerewolfState } from '../../data/werewolfOptions';
 import './CharacterWizard.css';
 
 import { WizardHelpModal } from './shared/ui/WizardHelpModal';
@@ -107,6 +108,18 @@ export default function CharacterWizard() {
         });
     }, []);
 
+
+
+    // Keep Hombre Lobo state (transition form, casta params, and innate powers) synchronized across all steps
+    useEffect(() => {
+        const updates = syncWerewolfState(character);
+        if (updates) {
+            setCharacter((prev: any) => ({
+                ...prev,
+                ...updates
+            }));
+        }
+    }, [JSON.stringify(character.origin?.items), character.werewolfParams?.subtype, character.attributes?.values?.Voluntad]);
 
     // Calculate total PCs using custom hook
     const { totalPCs } = useCharacterCalculations(character);

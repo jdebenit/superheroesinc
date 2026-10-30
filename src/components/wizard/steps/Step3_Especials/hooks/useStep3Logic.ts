@@ -4,6 +4,7 @@ import { SPELLS, type Spell } from '../../../../../data/spells';
 import { TECH_MODULES } from '../../../../../data/techModules';
 import { useCharacterAutoEffects } from '../../../../../hooks/wizard/useCharacterAutoEffects';
 import { useCharacterValidation } from './useCharacterValidation';
+import { hasOtherSobrenaturalPowerOrigin } from '../../../../../data/werewolfOptions';
 import {
     hasOrigin,
     hasSubtype,
@@ -42,6 +43,7 @@ export function useStep3Logic(data: any, onChange: (updates: any) => void, onSho
     const isGrifo = hasSubtype(data, 'Arcano', 'Grifo');
     const isElfoFisico = hasSubtype(data, 'Arcano', 'Elfo Físico');
     const isVampiro = hasSubtype(data, 'Sobrenatural', 'Vampiro');
+    const isHombreLobo = hasSubtype(data, 'Sobrenatural', 'Hombre Lobo');
     const isSemidemonio = hasSubtype(data, 'Sobrenatural', 'Semidemonio');
     const isEnte = hasSubtype(data, 'Sobrenatural', 'Ente');
     const isThals = hasSubtype(data, 'Parahumano', 'Thals');
@@ -132,7 +134,7 @@ export function useStep3Logic(data: any, onChange: (updates: any) => void, onSho
     const hasAnyOrigin = isGuardianChar || isAlterado || hasEM || isVampiro || isSemidemonio || isMalditoChar ||
         isEnte || isThals || isDivino || isCosmico || isMutante || isVigilante || isTechnological || isExoskeleton ||
         isTesKhar || isAtlante || isParahumano || isTroll || isMinotauro || isPoseido || isEnano || isGrifo ||
-        isElfoFisico || isElfoPsiquico || isHadaEter || isHadaAire || isHadaFuego || isHadaAgua || isHadaTierra || isLiberado;
+        isElfoFisico || isElfoPsiquico || isHadaEter || isHadaAire || isHadaFuego || isHadaAgua || isHadaTierra || isLiberado || isHombreLobo;
 
     // Auto-effects for EM and Powers
     useEffect(() => {
@@ -344,7 +346,7 @@ export function useStep3Logic(data: any, onChange: (updates: any) => void, onSho
         isGuardianChar, isMalditoChar, isParahumano, isParahumanoHybrid,
         isMago, isDotado, isHibrido, isTerrano, isPoseido, isElfoMagico,
         isHadaEter, isHadaAire, isHadaFuego, isHadaAgua, isHadaTierra,
-        isGrifo, isElfoFisico, isVampiro, isSemidemonio, isEnte, isThals,
+        isGrifo, isElfoFisico, isVampiro, isHombreLobo, isSemidemonio, isEnte, isThals,
         isDios, isDiosMenor, isSemidios, isDivino, isCosmico, isMutante, isVigilante,
         isTecnologico, isTecnoarmadura, isCyborg, isTecnovehiculo, isExoskeleton, isInventor, isTechnological,
         isTesKhar, isAtlante, isTroll, isMinotauro, isEnano, isElfoPsiquico,
@@ -381,7 +383,13 @@ export function useStep3Logic(data: any, onChange: (updates: any) => void, onSho
         // Specific updates
         updatePowerRank: (idx: number, rank: number) => {
             const next = [...selectedPowers];
-            if (next[idx]) { next[idx] = { ...next[idx], rank: Math.max(1, Math.min(100, rank)) }; updatePowers(next); }
+            if (next[idx]) {
+                if (next[idx].isWerewolfInnate && !hasOtherSobrenaturalPowerOrigin(data)) {
+                    return;
+                }
+                next[idx] = { ...next[idx], rank: Math.max(1, Math.min(100, rank)) };
+                updatePowers(next);
+            }
         },
         updatePowerMod: (idx: number, mod: number) => {
             const next = [...selectedPowers];

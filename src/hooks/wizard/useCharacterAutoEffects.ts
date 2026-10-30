@@ -5,6 +5,7 @@ import { hasSubtype, hasOrigin, calculateEM } from '../../components/wizard/step
 import { getFreeSkillsForOrigins } from '../../data/freeOriginSkills';
 import { getRequiredSkillsForOrigins } from '../../data/requiredSpecialtySkills';
 import { SPECIAL_SKILLS, isSkillAllowed } from '../../data/specialSkills';
+import { syncWerewolfState } from '../../data/werewolfOptions';
 import { GENERAL_SKILLS } from '../../data/generalSkills';
 
 
@@ -162,6 +163,18 @@ export function useCharacterAutoEffects(data: any, onChange: (updates: any) => v
             }
         }
     }, [isGrifo, selectedPowers, onChange, data]);
+
+
+    // Auto-sync Hombre Lobo state (werewolfParams, transition form, and innate powers)
+    useEffect(() => {
+        const updates = syncWerewolfState(data);
+        if (updates) {
+            onChange({
+                ...data,
+                ...updates
+            });
+        }
+    }, [JSON.stringify(data.origin?.items), data.werewolfParams?.subtype, data.attributes?.values?.Voluntad, JSON.stringify(data.attributes?.breakdown), selectedPowers, onChange, data]);
 
     // Auto-correct EM formula for Poseido
     useEffect(() => {

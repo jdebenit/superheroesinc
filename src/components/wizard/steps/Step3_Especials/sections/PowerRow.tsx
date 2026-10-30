@@ -42,6 +42,9 @@ interface PowerRowProps {
     isHadaFuego?: boolean;
     isHadaAgua?: boolean;
     isHadaTierra?: boolean;
+    isHombreLobo?: boolean;
+    werewolfSubtype?: string;
+    canModifySobrenatural?: boolean;
 }
 
 const getCharName = (abbr: string): string => {
@@ -88,6 +91,8 @@ const PowerNameCell: React.FC<{
                     label=""
                     placeholder={p.options[0]}
                     value={selection.selectedOption || ''}
+                    readOnly={!!selection.isWerewolfInnate}
+                    disabled={!!selection.isWerewolfInnate}
                     onChange={(val: string) => onUpdateOption(index, val)}
                     noMargin
                 />
@@ -138,11 +143,18 @@ const PowerRankFormula: React.FC<{
             <div className="power-cost-formula">
                 <div className="power-formula-item">{renderDisplayCost()}</div>
                 <span className="power-formula-operator">+</span>
-                <NumberControl
-                    value={selection.rank}
-                    onChange={(val) => onUpdateRank(index, val)}
-                    min={1} max={100} label="" description="Rango"
-                />
+                {(selection.isWerewolfInnate && !context.canModifySobrenatural) ? (
+                    <div className="power-formula-item">
+                        <span className="power-formula-value">{selection.rank}</span>
+                        <span className="power-formula-label">Rango (Fijo)</span>
+                    </div>
+                ) : (
+                    <NumberControl
+                        value={selection.rank}
+                        onChange={(val) => onUpdateRank(index, val)}
+                        min={selection.isWerewolfInnate ? (freeRank || 1) : 1} max={100} label="" description="Rango"
+                    />
+                )}
                 <span className="power-formula-operator">/10</span>
                 {extraPoints > 0 && (
                     <>
@@ -345,7 +357,11 @@ export default function PowerRow({
             </td>
 
             <td className="power-cell">
-                <DeleteRowButton onDelete={() => onRemove(index)} title="Eliminar poder" />
+                {selection.isWerewolfInnate ? (
+                    <Badge label="Innato" color="gray" />
+                ) : (
+                    <DeleteRowButton onDelete={() => onRemove(index)} title="Eliminar poder" />
+                )}
             </td>
         </tr>
     );

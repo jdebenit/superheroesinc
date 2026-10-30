@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import './CharacterSheet.css';
 
 import { useCharacterSheetData } from './hooks/useCharacterSheetData';
@@ -7,6 +7,13 @@ import { usePdfExport } from './hooks/usePdfExport';
 import { useModal } from './hooks/useModal';
 import { ActionButtons } from './common/ActionButtons';
 import { LevelHistoryModal } from './modals/LevelHistoryModal';
+import {
+    hasHombreLobo,
+    buildWerewolfTransitionForm,
+    getCharacterForActiveForm,
+    WEREWOLF_TRANSITION_FORM_ID,
+    type CharacterForm
+} from '../../data/werewolfOptions';
 
 // Section Components
 import { SheetHeader } from './sections/SheetHeader';
@@ -30,6 +37,7 @@ import { SkillsGeneralSection } from './sections/SkillsGeneralSection';
 import { SkillsLearningSection } from './sections/SkillsLearningSection';
 import { MalditoSection } from './sections/MalditoSection';
 import { LiberadoSection } from './sections/LiberadoSection';
+import { WerewolfSheetSection } from './sections/WerewolfSheetSection';
 import { BackgroundSection } from './sections/BackgroundSection';
 import { EquipmentSection } from './sections/EquipmentSection';
 import { VariosSection } from './sections/VariosSection';
@@ -59,16 +67,43 @@ export default function CharacterSheet({
     renderTrigger,
     onShowToast
 }: CharacterSheetProps) {
-    // Use the custom hook to get all calculated data
-    const sheetData = useCharacterSheetData(character);
+    const [activeFormId, setActiveFormId] = useState<string>('base');
+
+    // Ensure forms array includes werewolf transition form if character is Hombre Lobo
+    const availableForms: CharacterForm[] = useMemo(() => {
+        const formsList: CharacterForm[] = Array.isArray(character?.forms) ? [...character.forms] : [];
+        if (hasHombreLobo(character) && !formsList.some(f => f.id === WEREWOLF_TRANSITION_FORM_ID)) {
+            const sub = character?.werewolfParams?.subtype || 'hibrido';
+            const vol = Number(character?.attributes?.values?.Voluntad) || 40;
+            formsList.unshift(buildWerewolfTransitionForm(sub, vol, null, character?.attributes?.breakdown));
+        }
+        return formsList;
+    }, [character]);
+
+    const effectiveFormId = useMemo(() => {
+        if (activeFormId === 'base') return 'base';
+        return availableForms.some(f => f.id === activeFormId) ? activeFormId : 'base';
+    }, [activeFormId, availableForms]);
+
+    const characterWithForms = useMemo(() => {
+        if (availableForms.length === 0) return character;
+        return { ...character, forms: availableForms };
+    }, [character, availableForms]);
+
+    const activeCharacter = useMemo(() => {
+        return getCharacterForActiveForm(characterWithForms, effectiveFormId);
+    }, [characterWithForms, effectiveFormId]);
+
+    // Use the custom hook to get all calculated data for the active form
+    const sheetData = useCharacterSheetData(activeCharacter);
     const {
         combatStats,
         otherStats
     } = sheetData;
 
     // Use custom hooks for export functionality
-    const { downloadJson } = useJsonExport(character, onShowToast);
-    const { handleExportPDF } = usePdfExport(character, totalPCs, sheetData);
+    const { downloadJson } = useJsonExport(characterWithForms, onShowToast);
+    const { handleExportPDF } = usePdfExport(activeCharacter, totalPCs, sheetData);
     const { dialogRef, isFullScreen, openModal, closeModal, toggleFullScreen } = useModal();
     const [isLevelHistoryOpen, setIsLevelHistoryOpen] = useState(false);
 
@@ -76,44 +111,70 @@ export default function CharacterSheet({
     const renderSheetContent = () => (
         <div className="character-sheet">
             <SheetHeader
-                character={character}
+                character={activeCharacter}
                 totalPCs={totalPCs}
                 onLevelClick={() => setIsLevelHistoryOpen(true)}
             />
 
+            {availableForms.length > 0 && (
+                <div className="sheet-form-switcher">
+                    <span className="sheet-form-switcher-label">🔄 Forma Activa:</span>
+                    <div className="sheet-form-switcher-buttons">
+                        <button
+                            type="button"
+                            onClick={() => setActiveFormId('base')}
+                            className={`sheet-form-btn ${effectiveFormId === 'base' ? 'active' : ''}`}
+                        >
+                            👤 Forma Base / Humana
+                        </button>
+                        {availableForms.map(form => (
+                            <button
+                                key={form.id}
+                                type="button"
+                                onClick={() => setActiveFormId(form.id)}
+                                className={`sheet-form-btn ${effectiveFormId === form.id ? 'active' : ''}`}
+                            >
+                                🐺 {form.name}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+            )}
+
             <div className="sheet-grid">
-                <OriginSection character={character} />
-                <BackgroundSection character={character} />
-                <AttributesSection character={character} />
+                <OriginSection character={activeCharacter} />
+                <BackgroundSection character={activeCharacter} />
+                <AttributesSection character={activeCharacter} />
                 <CombatSection combatStats={combatStats} />
                 <OtherStatsSection otherStats={otherStats} />
-                <SkillsGeneralSection character={character} />
-                <SkillsLearningSection character={character} />
-                <PowersSection character={character} />
-                <SpellsSection character={character} />
-                <WeaponsSection weapons={character.weapons} />
-                <HybridSection character={character} />
-                <EnteSection character={character} />
-                <AlteradoSection character={character} />
-                <HibridoSheetSection character={character} />
-                <MutanteSection character={character} />
-                <PoseidoSection character={character} />
-                <GuardianSection character={character} />
-                <DivineSection character={character} />
-                <MalditoSection character={character} />
-                <LiberadoSection character={character} />
-                <ArtifactsSection artifacts={character.artifacts} />
-                <MagicObjectsSection magicObjects={character.magicObjects} magicTableRolls={character.magicTableRolls} />
-                <VehiclesSection vehicles={character.vehicles} />
-                <EquipmentSection equipment={character.equipment} />
-                <VariosSection varios={character.varios} />
-                <TechParamsSection character={character} />
-                <TechModulesSection techModules={character.techModules || []} />
-                <ExoskeletonSection character={character} />
-                <TechnifiedSection character={character} />
-                <MagicalBondsSection character={character} />
-                <TraumasSection character={character} />
-                <NotesSection character={character} />
+                <SkillsGeneralSection character={activeCharacter} />
+                <SkillsLearningSection character={activeCharacter} />
+                <PowersSection character={activeCharacter} />
+                <SpellsSection character={activeCharacter} />
+                <WeaponsSection weapons={activeCharacter.weapons} />
+                <HybridSection character={activeCharacter} />
+                <EnteSection character={activeCharacter} />
+                <AlteradoSection character={activeCharacter} />
+                <HibridoSheetSection character={activeCharacter} />
+                <MutanteSection character={activeCharacter} />
+                <PoseidoSection character={activeCharacter} />
+                <GuardianSection character={activeCharacter} />
+                <DivineSection character={activeCharacter} />
+                <MalditoSection character={activeCharacter} />
+                <LiberadoSection character={activeCharacter} />
+                <WerewolfSheetSection character={activeCharacter} baseCharacter={characterWithForms} />
+                <ArtifactsSection artifacts={activeCharacter.artifacts} />
+                <MagicObjectsSection magicObjects={activeCharacter.magicObjects} magicTableRolls={activeCharacter.magicTableRolls} />
+                <VehiclesSection vehicles={activeCharacter.vehicles} />
+                <EquipmentSection equipment={activeCharacter.equipment} />
+                <VariosSection varios={activeCharacter.varios} />
+                <TechParamsSection character={activeCharacter} />
+                <TechModulesSection techModules={activeCharacter.techModules || []} />
+                <ExoskeletonSection character={activeCharacter} />
+                <TechnifiedSection character={activeCharacter} />
+                <MagicalBondsSection character={activeCharacter} />
+                <TraumasSection character={activeCharacter} />
+                <NotesSection character={activeCharacter} />
             </div>
         </div>
     );

@@ -111,4 +111,62 @@ describe('Adaptador de Fichas Web (characterAdapter)', () => {
         // Corrige errata de hechizo ("pesudopsi" -> "pseudo_psi")
         expect(adapted.spells.selected[0].id).toBe('pseudo_psi');
     });
+
+    it('inicializa y preserva forms y werewolfParams al adaptar un personaje Hombre Lobo', () => {
+        const nikosJson = {
+            name: 'Nikos',
+            origin: {
+                items: [{ Sobrenatural: ['Hombre Lobo'] }]
+            },
+            werewolfParams: {
+                subtype: 'renegado'
+            },
+            attributes: {
+                values: {
+                    Fuerza: 40,
+                    Constitución: 40,
+                    Agilidad: 60,
+                    Inteligencia: 70,
+                    Percepción: 40,
+                    Apariencia: 40,
+                    Voluntad: 60
+                }
+            },
+            forms: [
+                {
+                    id: 'werewolf_transition',
+                    name: 'Forma de Transición (Renegado)',
+                    source: 'Hombre Lobo',
+                    subtype: 'renegado',
+                    cost: 10,
+                    attributes: {
+                        values: {
+                            Fuerza: 130,
+                            Constitución: 130,
+                            Agilidad: 120,
+                            Inteligencia: 40,
+                            Percepción: 120,
+                            Apariencia: 20,
+                            Voluntad: 60
+                        }
+                    },
+                    combatstats: {
+                        'Puntos de Vida': { formula: 'CON-40', base: 90, total: 90 }
+                    }
+                }
+            ]
+        };
+
+        const adapted = adaptWebCharacter(nikosJson);
+        expect(adapted.werewolfParams?.subtype).toBe('renegado');
+        expect(adapted.forms.length).toBe(1);
+        expect(adapted.forms[0].id).toBe('werewolf_transition');
+        expect(adapted.forms[0].attributes.values.Fuerza).toBe(130);
+        expect(adapted.forms[0].cost).toBe(10);
+        // Innate powers for Renegado are automatically synced
+        const powerIds = adapted.powers.selected.map((p: any) => p.id);
+        expect(powerIds).toContain('multiformidad');
+        expect(powerIds).toContain('regeneracion_de_tejidos');
+        expect(powerIds).toContain('ataque_especial');
+    });
 });

@@ -45,6 +45,8 @@ interface PowersSectionProps {
     isHadaAgua?: boolean;
     isHadaTierra?: boolean;
     isHibrido?: boolean;
+    isHombreLobo?: boolean;
+    werewolfSubtype?: string;
 }
 
 export default function PowersSection({
@@ -83,10 +85,12 @@ export default function PowersSection({
     isHadaFuego,
     isHadaAgua,
     isHadaTierra,
-    isHibrido
+    isHibrido,
+    isHombreLobo,
+    werewolfSubtype
 }: PowersSectionProps) {
     const hasAnyPowerOrigin = isGuardian || isAlterado || isVampiro || isSemidemonio || isMaldito ||
-        isEnte || isThals || isDivino || isTerrano || isDotado || isCosmico || isMutante || isTesKhar || isAtlante || isTroll || isPoseido || isEnano || isGrifo || isElfoFisico || isElfoPsiquico || isHadaEter || isHadaAire || isHadaFuego || isHadaAgua || isHadaTierra || isHibrido;
+        isEnte || isThals || isDivino || isTerrano || isDotado || isCosmico || isMutante || isTesKhar || isAtlante || isTroll || isPoseido || isEnano || isGrifo || isElfoFisico || isElfoPsiquico || isHadaEter || isHadaAire || isHadaFuego || isHadaAgua || isHadaTierra || isHibrido || isHombreLobo;
 
     if (!hasAnyPowerOrigin) return null;
 
@@ -214,6 +218,9 @@ export default function PowersSection({
                                     isHadaFuego={isHadaFuego}
                                     isHadaAgua={isHadaAgua}
                                     isHadaTierra={isHadaTierra}
+                                    isHombreLobo={isHombreLobo}
+                                    werewolfSubtype={werewolfSubtype}
+                                    canModifySobrenatural={isSemidemonio || isMaldito || isPoseido || isHibrido || isDotado || isDivino}
                                 />
                             );
                         });

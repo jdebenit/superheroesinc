@@ -16,6 +16,7 @@ import { GUARDIAN_QUALITIES } from '../../data/guardianOptions';
 import { DIVINE_FOCUS_OPTIONS } from '../../data/divineOptions';
 import { CYBORG_IMPLANT_STATS, CYBORG_IMPLANT_STRENGTHS } from '../../data/cyborgImplantConfigs';
 import type { CyborgImplant } from '../../data/cyborgImplantConfigs';
+import { hasHombreLobo, getWerewolfSubtypeConfig, WEREWOLF_TRANSITION_FORM_ID } from '../../data/werewolfOptions';
 
 export function useCharacterCalculations(character: any) {
     const totalPCs = useMemo(() => {
@@ -213,6 +214,22 @@ export function useCharacterCalculations(character: any) {
             if (isGrifo && power.id === 'volar') {
                 const rankDiff = (power.rank || 1) - 11;
                 return acc + (rankDiff * 0.1);
+            }
+
+            if (hasHombreLobo(character) && power.isWerewolfInnate) {
+                const wwSubtype = character.werewolfParams?.subtype || 'hibrido';
+                let freeRank = 0;
+                if (power.id === 'multiformidad') freeRank = 41;
+                else if (power.id === 'regeneracion_de_tejidos') freeRank = wwSubtype === 'renegado' ? 71 : 41;
+                else if (power.id === 'ataque_especial') freeRank = wwSubtype === 'renegado' ? 21 : 1;
+                else if (power.id === 'empatia_animal' && wwSubtype === 'puro') freeRank = 21;
+                else if (power.id === 'donacion_de_vida' && wwSubtype === 'puro') freeRank = 41;
+
+                if (freeRank > 0) {
+                    const rankDiff = Math.max(0, (power.rank || freeRank) - freeRank);
+                    const custCost = (power.customizations || []).reduce((sum: number, c: any) => sum + (c.cost || 0), 0);
+                    return acc + (rankDiff * 0.1) + custCost;
+                }
             }
 
             // Base cost
@@ -522,6 +539,20 @@ export function useCharacterCalculations(character: any) {
             } else if (character.liberadoParams.gift) {
                 total += LIBERADO_DONES_COST[character.liberadoParams.gift] || 0;
             }
+        }
+
+        // 21. Hombre Lobo Casta y Formas Alternativas
+        const isWerewolf = hasHombreLobo(character);
+        if (isWerewolf) {
+            const wwConfig = getWerewolfSubtypeConfig(character.werewolfParams?.subtype);
+            total += wwConfig.cost;
+        }
+
+        if (Array.isArray(character.forms)) {
+            character.forms.forEach((form: any) => {
+                if (form.id === WEREWOLF_TRANSITION_FORM_ID && !isWerewolf) return;
+                total += Number(form.cost) || 0;
+            });
         }
 
         return Math.round(total * 10) / 10;

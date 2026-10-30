@@ -237,7 +237,7 @@ export const POWERS: Power[] = [
         cost: 4,
         skillCalc: "CON",
         types: ["Energético"],
-        origins: ["Alterado", "Mutante", "Cósmico", "Divino"]
+        origins: ["Alterado", "Mutante", "Cósmico", "Divino", "Sobrenatural"]
     },
     {
         id: "elasticidad",

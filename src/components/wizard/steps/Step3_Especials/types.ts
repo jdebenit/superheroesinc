@@ -21,6 +21,7 @@ export interface SelectedPower {
     isCrossOrigin?: boolean; // For Guardián: power is from different origin (+3 PC base cost)
     isCrossOriginMaldito?: boolean; // For Maldito: power is from different origin (+1 PC base cost)
     isCrossOriginDivino?: boolean; // For Divino: power is from different origin (+3 PC base cost)
+    isWerewolfInnate?: boolean; // For Hombre Lobo innate powers (free up to base rank)
     customizations?: {
         id: string;
         description: string;
