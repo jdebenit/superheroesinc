@@ -719,3 +719,226 @@ export const formatPowersForDisplay = (
         };
     });
 };
+
+/**
+ * Sincroniza de forma determinista y en una sola pasada todos los poderes automáticos
+ * otorgados por orígenes/subtipos (Tes-khar, Atlante, Troll, Grifo, Elfo Físico y Hadas).
+ * Devuelve el nuevo array `selectedPowers` si hubo adiciones, o `null` si no hubo cambios.
+ */
+export const syncOriginAutoPowers = (data: any): SelectedPower[] | null => {
+    const currentPowers: SelectedPower[] = Array.isArray(data?.powers?.selected) ? data.powers.selected : [];
+    const nextPowers: SelectedPower[] = [...currentPowers];
+    let changed = false;
+
+    const isTesKhar = hasSubtype(data, 'Parahumano', 'Tes-khar');
+    const isAtlante = hasSubtype(data, 'Parahumano', 'Atlante');
+    const isTroll = hasSubtype(data, 'Arcano', 'Troll');
+    const isGrifo = hasSubtype(data, 'Arcano', 'Grifo');
+    const isElfoFisico = hasSubtype(data, 'Arcano', 'Elfo Físico');
+    const isHadaEter = hasSubtype(data, 'Arcano', 'Hada Eter');
+    const isHadaAire = hasSubtype(data, 'Arcano', 'Hada Aire');
+    const isHadaFuego = hasSubtype(data, 'Arcano', 'Hada Fuego');
+    const isHadaAgua = hasSubtype(data, 'Arcano', 'Hada Agua');
+    const isHadaTierra = hasSubtype(data, 'Arcano', 'Hada Tierra');
+    const isHada = isHadaEter || isHadaAire || isHadaFuego || isHadaAgua || isHadaTierra;
+
+    const ensurePower = (
+        predicate: (p: SelectedPower) => boolean,
+        newPower: SelectedPower
+    ) => {
+        if (!nextPowers.some(predicate) && POWERS.some(p => p.id === newPower.id)) {
+            nextPowers.push(newPower);
+            changed = true;
+        }
+    };
+
+    if (isTesKhar) {
+        ensurePower(
+            p => p.id === 'superhabilidad',
+            {
+                id: 'superhabilidad',
+                origin: 'Parahumano',
+                rank: 80,
+                skillValue: 0,
+                selectedOption: 'Esconderse'
+            }
+        );
+    }
+
+    if (isAtlante) {
+        ensurePower(
+            p => p.id === 'control_del_agua',
+            { id: 'control_del_agua', origin: 'Parahumano', rank: 11, skillValue: 0 }
+        );
+        ensurePower(
+            p => p.id === 'superhabilidad' && p.selectedOption === 'Idioma nativo',
+            { id: 'superhabilidad', origin: 'Parahumano', rank: 41, skillValue: 0, selectedOption: 'Idioma nativo' }
+        );
+        ensurePower(
+            p => p.id === 'superhabilidad' && p.selectedOption === 'Nadar',
+            { id: 'superhabilidad', origin: 'Parahumano', rank: 81, skillValue: 0, selectedOption: 'Nadar' }
+        );
+        ensurePower(
+            p => p.id === 'empatia_animal',
+            {
+                id: 'empatia_animal',
+                origin: 'Parahumano',
+                rank: 11,
+                skillValue: 0,
+                customizations: [{
+                    id: 'atlante_cetaceos',
+                    description: 'Hablar solo con cetáceos',
+                    cost: 0
+                }]
+            }
+        );
+    }
+
+    if (isTroll) {
+        ensurePower(
+            p => p.id === 'regeneracion_de_tejidos',
+            { id: 'regeneracion_de_tejidos', origin: 'Arcano', rank: 81, skillValue: 0 }
+        );
+    }
+
+    if (isGrifo) {
+        ensurePower(
+            p => p.id === 'volar',
+            {
+                id: 'volar',
+                origin: 'Grifo',
+                rank: 11,
+                customizations: [{
+                    id: 'grifo_alas',
+                    description: 'Tiene alas para volar',
+                    cost: 0
+                }]
+            }
+        );
+    }
+
+    if (isElfoFisico) {
+        ensurePower(
+            p => p.id === 'supervelocidad',
+            { id: 'supervelocidad', origin: 'Elfo Físico', rank: 1, customizations: [] }
+        );
+    }
+
+    if (isHada) {
+        ensurePower(
+            p => p.id === 'volar',
+            { id: 'volar', origin: 'Arcano', rank: 11, customizations: [] }
+        );
+        if (isHadaAire) {
+            ensurePower(
+                p => p.id === 'supervelocidad',
+                { id: 'supervelocidad', origin: 'Arcano', rank: 1, customizations: [] }
+            );
+        }
+        if (isHadaFuego) {
+            ensurePower(
+                p => p.id === 'control_del_fuego',
+                { id: 'control_del_fuego', origin: 'Arcano', rank: 21, customizations: [] }
+            );
+        }
+        if (isHadaAgua) {
+            ensurePower(
+                p => p.id === 'control_del_agua',
+                { id: 'control_del_agua', origin: 'Arcano', rank: 21, customizations: [] }
+            );
+        }
+        if (isHadaTierra) {
+            ensurePower(
+                p => p.id === 'control_de_la_vegetacion',
+                { id: 'control_de_la_vegetacion', origin: 'Arcano', rank: 11, customizations: [] }
+            );
+            ensurePower(
+                p => p.id === 'control_de_la_geodinamica',
+                { id: 'control_de_la_geodinamica', origin: 'Arcano', rank: 11, customizations: [] }
+            );
+        }
+    }
+
+    return changed ? nextPowers : null;
+};
+
+/**
+ * Sincroniza de forma pura los modificadores de característica de los poderes (`powerMod`)
+ * dentro de `data.attributes.breakdown` y `data.attributes.values`.
+ * Devuelve el nuevo objeto `attributes` si hubo cambios, o `null` si ya está sincronizado.
+ */
+export const syncPowerModsToAttributes = (data: any): { values: Record<string, number>; breakdown: Record<string, any> } | null => {
+    if (!data?.attributes?.breakdown) return null;
+
+    const selectedPowers: any[] = Array.isArray(data?.powers?.selected) ? data.powers.selected : [];
+    const powerMods: Record<string, number> = {};
+    const charMap: Record<string, string> = {
+        FUE: 'fuerza',
+        AGI: 'agilidad',
+        CON: 'constitucion',
+        INT: 'inteligencia',
+        PER: 'percepcion',
+        APA: 'apariencia',
+        VOL: 'voluntad'
+    };
+
+    const CHARACTERISTICS = [
+        { id: 'fuerza', name: 'Fuerza' },
+        { id: 'constitucion', name: 'Constitución' },
+        { id: 'agilidad', name: 'Agilidad' },
+        { id: 'inteligencia', name: 'Inteligencia' },
+        { id: 'percepcion', name: 'Percepción' },
+        { id: 'apariencia', name: 'Apariencia' },
+        { id: 'voluntad', name: 'Voluntad' }
+    ];
+
+    selectedPowers.forEach((p: any) => {
+        const powerData = POWERS.find(pd => pd.id === p.id);
+        if (powerData?.characteristic) {
+            const charId = charMap[powerData.characteristic];
+            if (charId) {
+                const mod = Number(p.powerMod) || 0;
+                powerMods[charId] = (powerMods[charId] || 0) + mod;
+            }
+        }
+    });
+
+    let hasChanges = false;
+    const newBreakdown: Record<string, any> = { ...data.attributes.breakdown };
+
+    CHARACTERISTICS.forEach(char => {
+        const charId = char.id;
+        const currentMod = newBreakdown[charId]?.powerMod || 0;
+        const newMod = powerMods[charId] || 0;
+
+        if (currentMod !== newMod) {
+            hasChanges = true;
+            if (!newBreakdown[charId]) {
+                newBreakdown[charId] = { base: 40, originMod: 0, specialtyMod: 0, powerMod: 0, otherMod: 0 };
+            }
+            newBreakdown[charId] = {
+                ...newBreakdown[charId],
+                powerMod: newMod
+            };
+        }
+    });
+
+    if (!hasChanges) return null;
+
+    const newValues: Record<string, number> = {};
+    CHARACTERISTICS.forEach(char => {
+        const c = newBreakdown[char.id];
+        const base = c.base || 0;
+        const origin = c.originMod || 0;
+        const specialty = c.specialtyMod || 0;
+        const power = c.powerMod || 0;
+        const other = c.otherMod || 0;
+        newValues[char.name] = base + origin + specialty + power + other;
+    });
+
+    return {
+        ...data.attributes,
+        values: newValues,
+        breakdown: newBreakdown
+    };
+};

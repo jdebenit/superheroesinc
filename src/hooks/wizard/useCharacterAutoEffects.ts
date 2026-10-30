@@ -1,250 +1,53 @@
 import { useEffect } from 'react';
-import { POWERS } from '../../data/powers';
-import type { SelectedPower } from '../../components/wizard/steps/Step3_Especials/types';
-import { hasSubtype } from '../../components/wizard/steps/Step3_Especials/utils';
 import { getFreeSkillsForOrigins } from '../../data/freeOriginSkills';
 import { getRequiredSkillsForOrigins } from '../../data/requiredSpecialtySkills';
 import { SPECIAL_SKILLS, isSkillAllowed } from '../../data/specialSkills';
-import { syncWerewolfState } from '../../data/werewolfOptions';
+import { syncCharacterTransformations } from '../../utils/calculations/formCalculations';
+import { syncOriginAutoPowers, syncPowerModsToAttributes } from '../../utils/calculations/powerCalculations';
 
 export function useCharacterAutoEffects(data: any, onChange: (updates: any) => void) {
-    // --- STEP 3 EFFECTS ---
-    const isTesKhar = hasSubtype(data, 'Parahumano', 'Tes-khar');
-    const isAtlante = hasSubtype(data, 'Parahumano', 'Atlante');
-    const isTroll = hasSubtype(data, 'Arcano', 'Troll');
-    const isGrifo = hasSubtype(data, 'Arcano', 'Grifo');
-
     const selectedPowers = data.powers?.selected || [];
 
-    // Auto-add Superhabilidad for Tes-khar
+    // 1. Auto-add innate origin powers deterministically in a single pass
     useEffect(() => {
-        if (isTesKhar) {
-            const hasSuperhabilidad = selectedPowers.some((p: any) => p.id === 'superhabilidad');
-            if (!hasSuperhabilidad) {
-                const newPower: SelectedPower = {
-                    id: 'superhabilidad',
-                    origin: 'Parahumano',
-                    rank: 80,
-                    skillValue: 0,
-                    selectedOption: 'Esconderse'
-                };
-                onChange({
-                    ...data,
-                    powers: {
-                        ...data.powers,
-                        selected: [...selectedPowers, newPower]
-                    }
-                });
-            }
-        }
-    }, [isTesKhar, selectedPowers, onChange, data]);
-
-    // Auto-add Powers for Atlante
-    useEffect(() => {
-        if (isAtlante) {
-            const hasWaterControl = selectedPowers.some((p: any) => p.id === 'control_del_agua');
-            const hasNativeLanguage = selectedPowers.some((p: any) => p.id === 'superhabilidad' && p.selectedOption === 'Idioma nativo');
-            const hasSwimming = selectedPowers.some((p: any) => p.id === 'superhabilidad' && p.selectedOption === 'Nadar');
-            const hasAnimalEmpathy = selectedPowers.some((p: any) => p.id === 'empatia_animal');
-
-            const newPowers: SelectedPower[] = [];
-
-            if (!hasWaterControl) {
-                newPowers.push({
-                    id: 'control_del_agua',
-                    origin: 'Parahumano',
-                    rank: 11,
-                    skillValue: 0
-                });
-            }
-
-            if (!hasNativeLanguage) {
-                newPowers.push({
-                    id: 'superhabilidad',
-                    origin: 'Parahumano',
-                    rank: 41,
-                    skillValue: 0,
-                    selectedOption: 'Idioma nativo'
-                });
-            }
-
-            if (!hasSwimming) {
-                newPowers.push({
-                    id: 'superhabilidad',
-                    origin: 'Parahumano',
-                    rank: 81,
-                    skillValue: 0,
-                    selectedOption: 'Nadar'
-                });
-            }
-
-            if (!hasAnimalEmpathy) {
-                newPowers.push({
-                    id: 'empatia_animal',
-                    origin: 'Parahumano',
-                    rank: 11,
-                    skillValue: 0,
-                    customizations: [{
-                        id: 'atlante_cetaceos',
-                        description: 'Hablar solo con cetáceos',
-                        cost: 0
-                    }]
-                });
-            }
-
-            if (newPowers.length > 0) {
-                onChange({
-                    ...data,
-                    powers: {
-                        ...data.powers,
-                        selected: [...selectedPowers, ...newPowers]
-                    }
-                });
-            }
-        }
-    }, [isAtlante, selectedPowers, onChange, data]);
-
-    // Auto-add Regeneration for Troll
-    useEffect(() => {
-        if (isTroll) {
-            const hasRegeneration = selectedPowers.some((p: any) => p.id === 'regeneracion_de_tejidos');
-            if (!hasRegeneration) {
-                const newPower: SelectedPower = {
-                    id: 'regeneracion_de_tejidos',
-                    origin: 'Arcano',
-                    rank: 81,
-                    skillValue: 0
-                };
-                onChange({
-                    ...data,
-                    powers: {
-                        ...data.powers,
-                        selected: [...selectedPowers, newPower]
-                    }
-                });
-            }
-        }
-    }, [isTroll, selectedPowers, onChange, data]);
-
-    // Auto-select Volar for Grifo
-    useEffect(() => {
-        if (isGrifo) {
-            const hasVolar = selectedPowers.some((p: any) => p.id === 'volar');
-            if (!hasVolar) {
-                const volarPower = POWERS.find(p => p.id === 'volar');
-                if (volarPower) {
-                    const newPower: SelectedPower = {
-                        id: volarPower.id,
-                        origin: 'Grifo',
-                        rank: 11,
-                        customizations: [{
-                            id: Date.now().toString(),
-                            description: 'Tiene alas para volar',
-                            cost: 0
-                        }]
-                    };
-                    onChange({
-                        ...data,
-                        powers: {
-                            ...data.powers,
-                            selected: [...selectedPowers, newPower]
-                        }
-                    });
+        const updatedPowers = syncOriginAutoPowers(data);
+        if (updatedPowers) {
+            onChange({
+                ...data,
+                powers: {
+                    ...data.powers,
+                    selected: updatedPowers
                 }
-            }
+            });
         }
-    }, [isGrifo, selectedPowers, onChange, data]);
+    }, [JSON.stringify(data.origin?.items), selectedPowers, onChange, data]);
 
-    // Auto-sync Hombre Lobo state (werewolfParams, transition form, and innate powers)
+    // 2. Auto-sync Hombre Lobo state and Power Transformations (e.g. Blindaje Natural)
     useEffect(() => {
-        const updates = syncWerewolfState(data);
+        const updates = syncCharacterTransformations(data);
         if (updates) {
             onChange({
                 ...data,
                 ...updates
             });
         }
-    }, [JSON.stringify(data.origin?.items), data.werewolfParams?.subtype, data.attributes?.values?.Voluntad, JSON.stringify(data.attributes?.breakdown), selectedPowers, onChange, data]);
+    }, [
+        JSON.stringify(data.origin?.items),
+        data.werewolfParams?.subtype,
+        data.attributes?.values?.Voluntad,
+        JSON.stringify(data.attributes?.breakdown),
+        selectedPowers,
+        onChange,
+        data
+    ]);
 
-    // Auto-update Attributes when Powers change (Power Mods)
+    // 3. Auto-update Attributes when Powers change (Power Mods)
     useEffect(() => {
-        if (!data.attributes?.breakdown) return;
-
-        const powerMods: { [key: string]: number } = {};
-        const charMap: Record<string, string> = {
-            FUE: 'fuerza',
-            AGI: 'agilidad',
-            CON: 'constitucion',
-            INT: 'inteligencia',
-            PER: 'percepcion',
-            APA: 'apariencia',
-            VOL: 'voluntad'
-        };
-
-        const CHARACTERISTICS = [
-            { id: 'fuerza', name: 'Fuerza' },
-            { id: 'constitucion', name: 'Constitución' },
-            { id: 'agilidad', name: 'Agilidad' },
-            { id: 'inteligencia', name: 'Inteligencia' },
-            { id: 'percepcion', name: 'Percepción' },
-            { id: 'apariencia', name: 'Apariencia' },
-            { id: 'voluntad', name: 'Voluntad' }
-        ];
-
-        // Calculate expected power mods
-        selectedPowers.forEach((p: any) => {
-            const powerData = POWERS.find(pd => pd.id === p.id);
-            if (powerData?.characteristic) {
-                const charId = charMap[powerData.characteristic];
-                if (charId) {
-                    const mod = Number(p.powerMod) || 0;
-                    powerMods[charId] = (powerMods[charId] || 0) + mod;
-                }
-            }
-        });
-
-        // Check if update is needed
-        let hasChanges = false;
-        const newBreakdown = { ...data.attributes.breakdown };
-
-        CHARACTERISTICS.forEach(char => {
-            const charId = char.id;
-            const currentMod = newBreakdown[charId]?.powerMod || 0;
-            const newMod = powerMods[charId] || 0;
-
-            if (currentMod !== newMod) {
-                hasChanges = true;
-                if (!newBreakdown[charId]) {
-                    newBreakdown[charId] = { base: 40, originMod: 0, specialtyMod: 0, powerMod: 0, otherMod: 0 };
-                }
-                newBreakdown[charId] = {
-                    ...newBreakdown[charId],
-                    powerMod: newMod
-                };
-            }
-        });
-
-        if (hasChanges) {
-            const newValues: { [key: string]: number } = {};
-
-            CHARACTERISTICS.forEach(char => {
-                const c = newBreakdown[char.id];
-                const base = c.base || 0;
-                const origin = c.originMod || 0;
-                const specialty = c.specialtyMod || 0;
-                const power = c.powerMod || 0;
-                const other = c.otherMod || 0;
-
-                newValues[char.name] = base + origin + specialty + power + other;
-            });
-
+        const updatedAttributes = syncPowerModsToAttributes(data);
+        if (updatedAttributes) {
             onChange({
                 ...data,
-                attributes: {
-                    ...data.attributes,
-                    values: newValues,
-                    breakdown: newBreakdown
-                }
+                attributes: updatedAttributes
             });
         }
     }, [selectedPowers, data.attributes?.breakdown, onChange, data]);
