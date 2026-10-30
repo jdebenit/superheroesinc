@@ -7,6 +7,8 @@ import {
     TRANSITION_CHARACTERISTICS_ORDER,
     getWerewolfSubtypeConfig,
     buildWerewolfTransitionForm,
+    getPowerTransformationConfig,
+    buildPowerTransformationForm,
     type WerewolfSubtypeId,
     type CharacterForm
 } from '../../../../data/werewolfOptions';
@@ -17,6 +19,7 @@ interface TransitionFormSectionProps {
     unlockManualMod: boolean;
     setUnlockManualMod: (val: boolean) => void;
     humanBreakdown?: Record<string, any>;
+    formId?: string;
 }
 
 export const TransitionFormSection: React.FC<TransitionFormSectionProps> = ({
@@ -24,9 +27,13 @@ export const TransitionFormSection: React.FC<TransitionFormSectionProps> = ({
     onChange,
     unlockManualMod,
     setUnlockManualMod,
-    humanBreakdown
+    humanBreakdown,
+    formId = WEREWOLF_TRANSITION_FORM_ID
 }) => {
     const effectiveHumanBreakdown = humanBreakdown || data.attributes?.breakdown || {};
+    const powerTransformCfg = getPowerTransformationConfig(formId);
+    const isReadOnlyForm = Boolean(powerTransformCfg?.readOnly);
+
     const currentSubtype: WerewolfSubtypeId = data.werewolfParams?.subtype || 'hibrido';
     const subtypeConfig = getWerewolfSubtypeConfig(currentSubtype);
     const humanVolChar = effectiveHumanBreakdown.voluntad;
@@ -35,10 +42,13 @@ export const TransitionFormSection: React.FC<TransitionFormSectionProps> = ({
         : (Number(data.attributes?.values?.Voluntad) || 40);
 
     const currentForms: CharacterForm[] = Array.isArray(data.forms) ? data.forms : [];
-    const existingForm = currentForms.find(f => f.id === WEREWOLF_TRANSITION_FORM_ID);
-    const transitionForm = buildWerewolfTransitionForm(currentSubtype, humanVoluntad, existingForm, effectiveHumanBreakdown);
+    const existingForm = currentForms.find(f => f.id === formId);
+    const transitionForm = powerTransformCfg
+        ? buildPowerTransformationForm(powerTransformCfg, effectiveHumanBreakdown, data.attributes?.values, existingForm)
+        : buildWerewolfTransitionForm(currentSubtype, humanVoluntad, existingForm, effectiveHumanBreakdown);
 
     const updateCharacteristicField = (charId: string, field: 'base' | 'otherMod', rawVal: string) => {
+        if (isReadOnlyForm) return;
         const numVal = parseInt(rawVal, 10) || 0;
         const statCfg = subtypeConfig.transitionStats[charId];
         if (!statCfg) return;
@@ -109,7 +119,7 @@ export const TransitionFormSection: React.FC<TransitionFormSectionProps> = ({
             }
         };
 
-        const otherForms = currentForms.filter(f => f.id !== WEREWOLF_TRANSITION_FORM_ID);
+        const otherForms = currentForms.filter(f => f.id !== formId);
         onChange({
             ...data,
             forms: [updatedForm, ...otherForms]
@@ -117,51 +127,68 @@ export const TransitionFormSection: React.FC<TransitionFormSectionProps> = ({
     };
 
     const handleResetToBase = () => {
+        if (isReadOnlyForm) return;
         const updatedForm = buildWerewolfTransitionForm(currentSubtype, humanVoluntad, null, effectiveHumanBreakdown);
-        const otherForms = currentForms.filter(f => f.id !== WEREWOLF_TRANSITION_FORM_ID);
+        const otherForms = currentForms.filter(f => f.id !== formId);
         onChange({
             ...data,
             forms: [updatedForm, ...otherForms]
         });
     };
 
+    const sectionTitle = powerTransformCfg
+        ? `Características en ${powerTransformCfg.name}`
+        : `Características en Forma de Transición (${subtypeConfig.name})`;
+
+    const sectionDescription = powerTransformCfg
+        ? powerTransformCfg.description
+        : 'Cada característica parte de su valor mínimo gratuito y hereda los modificadores de otros orígenes, especializaciones y poderes de la Forma Humana. Subir la Base cuesta 1 PC por cada +10 puntos sobre el mínimo. (La casta de Hombre Lobo se elige en el Paso 3).';
+
     return (
         <WizardSection
-            title={`Características en Forma de Transición (${subtypeConfig.name})`}
-            description="Cada característica parte de su valor mínimo gratuito y hereda los modificadores de otros orígenes, especializaciones y poderes de la Forma Humana. Subir la Base cuesta 1 PC por cada +10 puntos sobre el mínimo. (La casta de Hombre Lobo se elige en el Paso 3)."
+            title={sectionTitle}
+            description={sectionDescription}
             rightContent={
                 <div className="step2-werewolf-actions">
-                    <button
-                        type="button"
-                        onClick={handleResetToBase}
-                        className="step2-action-btn reset-btn"
-                        title="Restablece todas las características a su valor mínimo gratuito"
-                    >
-                        ↺ Restablecer a Base
-                    </button>
-                    <CostBadge cost={`+${transitionForm.cost.toFixed(1)}`} label="PC" variant="penalty" />
+                    {!isReadOnlyForm && (
+                        <button
+                            type="button"
+                            onClick={handleResetToBase}
+                            className="step2-action-btn reset-btn"
+                            title="Restablece todas las características a su valor mínimo gratuito"
+                        >
+                            ↺ Restablecer a Base
+                        </button>
+                    )}
+                    <CostBadge
+                        cost={`+${transitionForm.cost.toFixed(1)}`}
+                        label="PC"
+                        variant={transitionForm.cost > 0 ? 'penalty' : 'free'}
+                    />
                 </div>
             }
         >
-            <div className="wizard-unlock-container">
-                <div className="wizard-unlock-header">
-                    <label className="wizard-unlock-label">
-                        <input
-                            type="checkbox"
-                            checked={unlockManualMod}
-                            onChange={(e) => setUnlockManualMod(e.target.checked)}
-                            className="wizard-unlock-checkbox"
-                        />
-                        🔓 Desbloquear Modificadores Manuales
-                    </label>
-                    <span className="wizard-unlock-badge">Avanzado</span>
+            {!isReadOnlyForm && (
+                <div className="wizard-unlock-container">
+                    <div className="wizard-unlock-header">
+                        <label className="wizard-unlock-label">
+                            <input
+                                type="checkbox"
+                                checked={unlockManualMod}
+                                onChange={(e) => setUnlockManualMod(e.target.checked)}
+                                className="wizard-unlock-checkbox"
+                            />
+                            🔓 Desbloquear Modificadores Manuales
+                        </label>
+                        <span className="wizard-unlock-badge">Avanzado</span>
+                    </div>
+                    {unlockManualMod && (
+                        <p className="wizard-unlock-description">
+                            Usa esta opción para aplicar bonos o penalizadores manuales (objetos mágicos, ajustes del DJ o dotes no automáticas) en la casilla <strong>Mod. Otros</strong> de cada característica. Estos puntos no consumen PC.
+                        </p>
+                    )}
                 </div>
-                {unlockManualMod && (
-                    <p className="wizard-unlock-description">
-                        Usa esta opción para aplicar bonos o penalizadores manuales (objetos mágicos, ajustes del DJ o dotes no automáticas) en la casilla <strong>Mod. Otros</strong> de cada característica. Estos puntos no consumen PC.
-                    </p>
-                )}
-            </div>
+            )}
 
             <div className="step2-chars-grid">
                 {TRANSITION_CHARACTERISTICS_ORDER.map(({ id, key, abbr }) => {
@@ -179,10 +206,12 @@ export const TransitionFormSection: React.FC<TransitionFormSectionProps> = ({
                     const powerMod = bd.powerMod || 0;
                     const otherMod = bd.otherMod || 0;
                     const total = baseVal + originMod + specialtyMod + powerMod + otherMod;
-                    const pcCost = Math.max(0, baseVal - cfg.base) / 10;
+                    const minLimit = isReadOnlyForm ? baseVal : cfg.base;
+                    const pcCost = isReadOnlyForm ? 0 : Math.max(0, baseVal - cfg.base) / 10;
                     const hasPowerMod = powerMod > 0;
-                    const unlockedLimit = hasPowerMod || unlockManualMod;
-                    const maxLimit = unlockedLimit ? 200 : cfg.max;
+                    const unlockedLimit = !isReadOnlyForm && (hasPowerMod || unlockManualMod);
+                    const maxLimit = isReadOnlyForm ? baseVal : (unlockedLimit ? 200 : cfg.max);
+                    const powerBonusFromForm = powerTransformCfg?.statBonuses?.[id] || 0;
 
                     return (
                         <div key={id} className="step2-char-card">
@@ -194,10 +223,18 @@ export const TransitionFormSection: React.FC<TransitionFormSectionProps> = ({
                                 <div className="step2-char-header-right">
                                     <div className="step2-char-total-badge">{total}</div>
                                     <div className="step2-char-limits">
-                                        <div className="step2-char-limit-min">Min: {cfg.base}</div>
-                                        <div className={`step2-char-limit-max ${unlockedLimit ? (hasPowerMod ? 'power' : 'manual') : 'normal'}`}>
-                                            Max: {maxLimit} {hasPowerMod && '⚡'}{(!hasPowerMod && unlockManualMod) && '🔓'}
-                                        </div>
+                                        {isReadOnlyForm ? (
+                                            <div className={`step2-char-limit-max ${powerBonusFromForm > 0 ? 'power' : 'normal'}`}>
+                                                {powerBonusFromForm > 0 ? `+${powerBonusFromForm} ⚡` : 'Fijo 🔒'}
+                                            </div>
+                                        ) : (
+                                            <>
+                                                <div className="step2-char-limit-min">Min: {minLimit}</div>
+                                                <div className={`step2-char-limit-max ${unlockedLimit ? (hasPowerMod ? 'power' : 'manual') : 'normal'}`}>
+                                                    Max: {maxLimit} {hasPowerMod && '⚡'}{(!hasPowerMod && unlockManualMod) && '🔓'}
+                                                </div>
+                                            </>
+                                        )}
                                     </div>
                                 </div>
                             </div>
@@ -206,9 +243,11 @@ export const TransitionFormSection: React.FC<TransitionFormSectionProps> = ({
                                 <WizardField
                                     label="Base"
                                     type="number"
-                                    min={String(cfg.base)}
+                                    min={String(minLimit)}
                                     max={String(maxLimit)}
                                     value={baseVal}
+                                    readOnly={isReadOnlyForm}
+                                    disabled={isReadOnlyForm}
                                     onChange={(val) => updateCharacteristicField(id, 'base', val)}
                                     noMargin
                                     inputWidth="70px"
@@ -222,6 +261,7 @@ export const TransitionFormSection: React.FC<TransitionFormSectionProps> = ({
                                     max="200"
                                     value={originMod}
                                     readOnly={true}
+                                    disabled={isReadOnlyForm}
                                     onChange={() => {}}
                                     noMargin
                                     inputWidth="70px"
@@ -235,6 +275,7 @@ export const TransitionFormSection: React.FC<TransitionFormSectionProps> = ({
                                     max="200"
                                     value={specialtyMod}
                                     readOnly={true}
+                                    disabled={isReadOnlyForm}
                                     onChange={() => {}}
                                     noMargin
                                     inputWidth="70px"
@@ -248,6 +289,7 @@ export const TransitionFormSection: React.FC<TransitionFormSectionProps> = ({
                                     max="200"
                                     value={powerMod}
                                     readOnly={true}
+                                    disabled={isReadOnlyForm}
                                     onChange={() => {}}
                                     noMargin
                                     inputWidth="70px"
@@ -260,13 +302,13 @@ export const TransitionFormSection: React.FC<TransitionFormSectionProps> = ({
                                     min="-200"
                                     max="200"
                                     value={otherMod}
-                                    readOnly={!unlockManualMod}
-                                    disabled={!unlockManualMod}
+                                    readOnly={isReadOnlyForm || !unlockManualMod}
+                                    disabled={isReadOnlyForm || !unlockManualMod}
                                     onChange={(val) => updateCharacteristicField(id, 'otherMod', val)}
                                     noMargin
                                     inputWidth="70px"
                                     textAlign="center"
-                                    className={unlockManualMod ? 'unlocked-field-wrapper' : ''}
+                                    className={!isReadOnlyForm && unlockManualMod ? 'unlocked-field-wrapper' : ''}
                                 />
                             </div>
 
@@ -274,7 +316,7 @@ export const TransitionFormSection: React.FC<TransitionFormSectionProps> = ({
                                 <span className="step2-formula-text">
                                     {baseVal} + {originMod} + {specialtyMod} + {powerMod} + {otherMod} = <strong className="step2-char-total-highlight">{total}</strong>
                                 </span>
-                                <CostBadge cost={pcCost.toFixed(1)} label="PC" />
+                                <CostBadge cost={pcCost.toFixed(1)} label="PC" variant={isReadOnlyForm ? 'free' : 'default'} />
                             </div>
                         </div>
                     );
@@ -314,7 +356,7 @@ export const TransitionFormSection: React.FC<TransitionFormSectionProps> = ({
                     const bd = transitionForm.attributes?.breakdown?.[id];
                     const baseVal = bd?.base ?? cfg.base;
                     const maxLimit = unlockManualMod ? 200 : cfg.max;
-                    const isValid = baseVal >= cfg.base && baseVal <= maxLimit;
+                    const isValid = isReadOnlyForm || (baseVal >= cfg.base && baseVal <= maxLimit);
                     return (
                         <div key={id} className={`step2-summary-item ${isValid ? 'valid' : 'invalid'}`}>
                             <span className="step2-summary-abbr">{abbr}</span>

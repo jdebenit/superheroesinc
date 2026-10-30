@@ -4,6 +4,7 @@ import { calculateOriginCost } from '../src/data/originCosts';
 import { SPECIAL_SKILLS, isSkillAllowed, hasConocimientoEsferas } from '../src/data/specialSkills';
 import {
     WEREWOLF_SUBTYPES,
+    BLINDAJE_NATURAL_FORM_ID,
     buildWerewolfTransitionForm,
     syncWerewolfState,
     getCharacterForActiveForm
@@ -805,5 +806,63 @@ describe('Cálculos de Habilidades Generales', () => {
         expect(multiForm.attributes.breakdown?.agilidad.specialtyMod).toBe(15);
         expect(multiForm.attributes.values.Agilidad).toBe(115);
         expect(multiForm.cost).toBe(0);
+    });
+
+    it('genera y sincroniza automáticamente la Forma de Transición para el poder Blindaje Natural (+50 FUE y +50 CON, coste 0 PC)', () => {
+        const mutanteChar = {
+            origin: { items: [{ Mutante: [] }] },
+            attributes: {
+                values: {
+                    Fuerza: 60,
+                    Constitución: 70,
+                    Agilidad: 65,
+                    Inteligencia: 60,
+                    Percepción: 60,
+                    Apariencia: 55,
+                    Voluntad: 60
+                },
+                breakdown: {
+                    fuerza: { base: 60, originMod: 0, specialtyMod: 0, powerMod: 0, otherMod: 0 },
+                    constitucion: { base: 70, originMod: 0, specialtyMod: 0, powerMod: 0, otherMod: 0 },
+                    agilidad: { base: 65, originMod: 0, specialtyMod: 0, powerMod: 0, otherMod: 0 },
+                    inteligencia: { base: 60, originMod: 0, specialtyMod: 0, powerMod: 0, otherMod: 0 },
+                    percepcion: { base: 60, originMod: 0, specialtyMod: 0, powerMod: 0, otherMod: 0 },
+                    apariencia: { base: 55, originMod: 0, specialtyMod: 0, powerMod: 0, otherMod: 0 },
+                    voluntad: { base: 60, originMod: 0, specialtyMod: 0, powerMod: 0, otherMod: 0 }
+                }
+            },
+            powers: {
+                selected: [{ id: 'blindaje_natural', origin: 'Mutante', rank: 21 }]
+            },
+            forms: []
+        };
+
+        const synced = syncWerewolfState(mutanteChar);
+        expect(synced?.forms).toBeDefined();
+        expect(synced?.forms.length).toBe(1);
+
+        const blindajeForm = synced?.forms[0];
+        expect(blindajeForm.id).toBe(BLINDAJE_NATURAL_FORM_ID);
+        expect(blindajeForm.cost).toBe(0);
+        // Fuerza: 60 + 50 = 110; Constitución: 70 + 50 = 120; el resto permanece igual
+        expect(blindajeForm.attributes.values.Fuerza).toBe(110);
+        expect(blindajeForm.attributes.values.Constitución).toBe(120);
+        expect(blindajeForm.attributes.values.Agilidad).toBe(65);
+        expect(blindajeForm.attributes.breakdown.fuerza.powerMod).toBe(50);
+        expect(blindajeForm.attributes.breakdown.constitucion.powerMod).toBe(50);
+
+        // Vista activa con Blindaje Natural recalcula derivadas (CON 120 -> PV = 80)
+        const charWithForm = { ...mutanteChar, forms: synced?.forms };
+        const activeBlindaje = getCharacterForActiveForm(charWithForm, BLINDAJE_NATURAL_FORM_ID);
+        expect(activeBlindaje.attributes.values.Fuerza).toBe(110);
+        expect(activeBlindaje.attributes.values.Constitución).toBe(120);
+        expect(activeBlindaje.combatstats['Puntos de Vida'].total).toBe(80);
+
+        // Si se elimina el poder Blindaje Natural, la forma desaparece automáticamente
+        const removedSync = syncWerewolfState({
+            ...charWithForm,
+            powers: { selected: [] }
+        });
+        expect(removedSync?.forms).toEqual([]);
     });
 });

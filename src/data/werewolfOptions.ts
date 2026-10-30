@@ -70,7 +70,35 @@ export interface WerewolfParams {
     subtype: WerewolfSubtypeId;
 }
 
+export interface PowerTransformationConfig {
+    formId: string;
+    powerId: string;
+    name: string;
+    shortName: string;
+    icon: string;
+    description: string;
+    readOnly: boolean;
+    statBonuses: Partial<Record<string, number>>;
+}
+
 export const WEREWOLF_TRANSITION_FORM_ID = 'werewolf_transition';
+export const BLINDAJE_NATURAL_FORM_ID = 'blindaje_natural';
+
+export const POWER_TRANSFORMATIONS: PowerTransformationConfig[] = [
+    {
+        formId: BLINDAJE_NATURAL_FORM_ID,
+        powerId: 'blindaje_natural',
+        name: 'Forma de Transición (Blindaje Natural)',
+        shortName: 'Blindaje Natural',
+        icon: '🛡️',
+        description: 'Transformación otorgada por el poder Blindaje Natural. Suma +50 a Fuerza y +50 a Constitución sobre las características de la Forma Humana. No permite modificar ningún otro valor.',
+        readOnly: true,
+        statBonuses: {
+            fuerza: 50,
+            constitucion: 50
+        }
+    }
+];
 
 export const TRANSITION_CHARACTERISTICS_ORDER = [
     { id: 'fuerza', key: 'Fuerza', abbr: 'FUE' },
@@ -159,6 +187,84 @@ export function getWerewolfSubtypeConfig(subtype?: string | null): WerewolfSubty
         return WEREWOLF_SUBTYPES[subtype as WerewolfSubtypeId];
     }
     return WEREWOLF_SUBTYPES.hibrido;
+}
+
+export function getPowerTransformationConfig(formId?: string | null): PowerTransformationConfig | undefined {
+    if (!formId) return undefined;
+    return POWER_TRANSFORMATIONS.find(cfg => cfg.formId === formId);
+}
+
+export function hasPowerTransformation(characterData: any, powerId: string): boolean {
+    const selectedPowers: any[] = Array.isArray(characterData?.powers?.selected) ? characterData.powers.selected : [];
+    return selectedPowers.some(p => p && p.id === powerId);
+}
+
+export function getActivePowerTransformations(characterData: any): PowerTransformationConfig[] {
+    return POWER_TRANSFORMATIONS.filter(cfg => hasPowerTransformation(characterData, cfg.powerId));
+}
+
+/**
+ * Construye una forma de transformación basada en un poder (como Blindaje Natural)
+ * sumando los bonificadores fijos del poder sobre las características de la Forma Humana.
+ */
+export function buildPowerTransformationForm(
+    config: PowerTransformationConfig,
+    humanBreakdown?: Record<string, any> | null,
+    humanValues?: Record<string, number> | null,
+    existingForm?: CharacterForm | null
+): CharacterForm {
+    const humanVolChar = humanBreakdown?.voluntad;
+    const humanVoluntad = humanVolChar
+        ? (humanVolChar.base || 0) + (humanVolChar.originMod || 0) + (humanVolChar.specialtyMod || 0) + (humanVolChar.powerMod || 0) + (humanVolChar.otherMod || 0)
+        : (Number(humanValues?.Voluntad) || 40);
+
+    const values: any = {
+        Fuerza: 40,
+        Constitución: 40,
+        Agilidad: 40,
+        Inteligencia: 40,
+        Percepción: 40,
+        Apariencia: 40,
+        Voluntad: humanVoluntad + (config.statBonuses.voluntad || 0)
+    };
+    const breakdown: Record<string, any> = {};
+
+    TRANSITION_CHARACTERISTICS_ORDER.forEach(({ id, key }) => {
+        const humanChar = humanBreakdown?.[id];
+        const fallbackTotal = Number(humanValues?.[key]) || 40;
+        const base = humanChar ? (humanChar.base ?? 40) : fallbackTotal;
+        const originMod = humanChar ? (humanChar.originMod || 0) : 0;
+        const specialtyMod = humanChar ? (humanChar.specialtyMod || 0) : 0;
+        const bonus = config.statBonuses[id] || 0;
+        const powerMod = (humanChar ? (humanChar.powerMod || 0) : 0) + bonus;
+        const otherMod = humanChar ? (humanChar.otherMod || 0) : 0;
+
+        const totalVal = base + originMod + specialtyMod + powerMod + otherMod;
+        values[key] = totalVal;
+
+        breakdown[id] = {
+            base,
+            originMod,
+            specialtyMod,
+            powerMod,
+            otherMod,
+            min: base,
+            max: base
+        };
+    });
+
+    return {
+        ...(existingForm?.combatstats ? { combatstats: existingForm.combatstats } : {}),
+        ...(existingForm?.otherstats ? { otherstats: existingForm.otherstats } : {}),
+        id: config.formId,
+        name: config.name,
+        source: `Poder: ${config.shortName}`,
+        cost: 0,
+        attributes: {
+            values,
+            breakdown
+        }
+    };
 }
 
 /**
@@ -279,7 +385,7 @@ export function hasOtherSobrenaturalPowerOrigin(characterData?: any): boolean {
 }
 
 /**
- * Sincroniza el estado de Hombre Lobo (werewolfParams, forma de transición en forms, y poderes innatos).
+ * Sincroniza el estado de transformaciones (Hombre Lobo y transformaciones por poderes como Blindaje Natural).
  * Devuelve un objeto parcial con los campos actualizados si hubo cambios, o null si ya está sincronizado.
  */
 export function syncWerewolfState(data: any): Record<string, any> | null {
@@ -287,146 +393,172 @@ export function syncWerewolfState(data: any): Record<string, any> | null {
     const currentForms: CharacterForm[] = Array.isArray(data?.forms) ? data.forms : [];
     const currentPowers: any[] = Array.isArray(data?.powers?.selected) ? data.powers.selected : [];
 
+    let changed = false;
+    const updates: Record<string, any> = {};
+    let nextForms: CharacterForm[] = [...currentForms];
+
     if (!isWerewolf) {
-        const hasWerewolfForm = currentForms.some(f => f.id === WEREWOLF_TRANSITION_FORM_ID);
+        const hasWerewolfForm = nextForms.some(f => f.id === WEREWOLF_TRANSITION_FORM_ID);
         const hasWerewolfPowers = currentPowers.some(p => p.isWerewolfInnate);
         const hasParams = data?.werewolfParams !== null && data?.werewolfParams !== undefined;
 
-        if (!hasWerewolfForm && !hasWerewolfPowers && !hasParams) {
-            return null;
+        if (hasParams) {
+            updates.werewolfParams = null;
+            changed = true;
         }
-
-        return {
-            werewolfParams: null,
-            forms: currentForms.filter(f => f.id !== WEREWOLF_TRANSITION_FORM_ID),
-            powers: {
+        if (hasWerewolfForm) {
+            nextForms = nextForms.filter(f => f.id !== WEREWOLF_TRANSITION_FORM_ID);
+        }
+        if (hasWerewolfPowers) {
+            updates.powers = {
                 ...(data?.powers || {}),
                 selected: currentPowers.filter(p => !p.isWerewolfInnate)
+            };
+            changed = true;
+        }
+    } else {
+        const subtype: WerewolfSubtypeId = (data?.werewolfParams?.subtype && data.werewolfParams.subtype in WEREWOLF_SUBTYPES)
+            ? data.werewolfParams.subtype
+            : 'hibrido';
+
+        const config = getWerewolfSubtypeConfig(subtype);
+        const humanVoluntad = Number(data?.attributes?.values?.Voluntad) || 40;
+
+        // 1. Check werewolfParams
+        if (!data?.werewolfParams || data.werewolfParams.subtype !== subtype) {
+            updates.werewolfParams = { subtype };
+            changed = true;
+        }
+
+        // 2. Check werewolf_transition form
+        const existingForm = nextForms.find(f => f.id === WEREWOLF_TRANSITION_FORM_ID);
+        const updatedForm = buildWerewolfTransitionForm(subtype, humanVoluntad, existingForm, data?.attributes?.breakdown);
+        const otherForms = nextForms.filter(f => f.id !== WEREWOLF_TRANSITION_FORM_ID);
+        nextForms = [updatedForm, ...otherForms];
+
+        // 3. Check innate powers
+        const canModifySobrenatural = hasOtherSobrenaturalPowerOrigin(data);
+        let nextPowers = [...currentPowers];
+        let powersChanged = false;
+
+        const ensureInnatePower = (
+            id: string,
+            targetFreeRank: number,
+            extraProps: Record<string, any> = {},
+            prevFreeRanks: number[] = []
+        ) => {
+            const idx = nextPowers.findIndex(p => p.id === id && (p.isWerewolfInnate || p.origin === 'Sobrenatural'));
+            if (idx === -1) {
+                nextPowers.push({
+                    id,
+                    origin: 'Sobrenatural',
+                    rank: targetFreeRank,
+                    skillValue: 0,
+                    isWerewolfInnate: true,
+                    ...extraProps
+                });
+                powersChanged = true;
+            } else {
+                const existing = nextPowers[idx];
+                const desiredRank = canModifySobrenatural
+                    ? (prevFreeRanks.includes(existing.rank) ? targetFreeRank : Math.max(targetFreeRank, existing.rank))
+                    : targetFreeRank;
+                if (!existing.isWerewolfInnate || existing.rank !== desiredRank) {
+                    nextPowers[idx] = {
+                        ...existing,
+                        isWerewolfInnate: true,
+                        rank: desiredRank
+                    };
+                    powersChanged = true;
+                }
             }
         };
-    }
 
-    const subtype: WerewolfSubtypeId = (data?.werewolfParams?.subtype && data.werewolfParams.subtype in WEREWOLF_SUBTYPES)
-        ? data.werewolfParams.subtype
-        : 'hibrido';
+        // Multiformidad (Teriomorfismo: lobo) - Rango Elevado (41)
+        ensureInnatePower('multiformidad', 41, {
+            customizations: [{ id: 'lobo_teriomorfismo', description: 'Teriomorfismo (lobo)', cost: 0 }]
+        });
 
-    const config = getWerewolfSubtypeConfig(subtype);
-    const humanVoluntad = Number(data?.attributes?.values?.Voluntad) || 40;
+        // Regeneración de tejidos - Elevado (41) o Alto (71 para Renegado)
+        ensureInnatePower(
+            'regeneracion_de_tejidos',
+            config.regenRank,
+            {},
+            config.regenRank === 71 ? [41] : [71]
+        );
 
-    let changed = false;
-    const updates: Record<string, any> = {};
+        // Ataque especial (Arma Natural) - Bajo (1) o Medio (21 para Renegado)
+        ensureInnatePower(
+            'ataque_especial',
+            config.naturalWeaponRank,
+            {
+                selectedOption: 'Arma Natural',
+                customizations: [{ id: 'lobo_garras', description: 'Garras y colmillos (en forma híbrida)', cost: 0 }]
+            },
+            config.naturalWeaponRank === 21 ? [1] : [21]
+        );
 
-    // 1. Check werewolfParams
-    if (!data?.werewolfParams || data.werewolfParams.subtype !== subtype) {
-        updates.werewolfParams = { subtype };
-        changed = true;
-    }
-
-    // 2. Check werewolf_transition form
-    const existingForm = currentForms.find(f => f.id === WEREWOLF_TRANSITION_FORM_ID);
-    const updatedForm = buildWerewolfTransitionForm(subtype, humanVoluntad, existingForm, data?.attributes?.breakdown);
-
-    if (
-        !existingForm ||
-        existingForm.subtype !== updatedForm.subtype ||
-        existingForm.cost !== updatedForm.cost ||
-        JSON.stringify(existingForm.attributes) !== JSON.stringify(updatedForm.attributes)
-    ) {
-        const otherForms = currentForms.filter(f => f.id !== WEREWOLF_TRANSITION_FORM_ID);
-        updates.forms = [updatedForm, ...otherForms];
-        changed = true;
-    }
-
-    // 3. Check innate powers
-    const canModifySobrenatural = hasOtherSobrenaturalPowerOrigin(data);
-    let nextPowers = [...currentPowers];
-    let powersChanged = false;
-
-    const ensureInnatePower = (
-        id: string,
-        targetFreeRank: number,
-        extraProps: Record<string, any> = {},
-        prevFreeRanks: number[] = []
-    ) => {
-        const idx = nextPowers.findIndex(p => p.id === id && (p.isWerewolfInnate || p.origin === 'Sobrenatural'));
-        if (idx === -1) {
-            nextPowers.push({
-                id,
-                origin: 'Sobrenatural',
-                rank: targetFreeRank,
-                skillValue: 0,
-                isWerewolfInnate: true,
-                ...extraProps
-            });
-            powersChanged = true;
+        // Poderes exclusivos de Puro: Empatía animal (21) y Donación de vida (41)
+        if (config.hasPurePowers) {
+            ensureInnatePower('empatia_animal', 21);
+            ensureInnatePower('donacion_de_vida', 41);
         } else {
-            const existing = nextPowers[idx];
-            const desiredRank = canModifySobrenatural
-                ? (prevFreeRanks.includes(existing.rank) ? targetFreeRank : Math.max(targetFreeRank, existing.rank))
-                : targetFreeRank;
-            if (!existing.isWerewolfInnate || existing.rank !== desiredRank) {
-                nextPowers[idx] = {
-                    ...existing,
-                    isWerewolfInnate: true,
-                    rank: desiredRank
-                };
+            const beforeLen = nextPowers.length;
+            nextPowers = nextPowers.filter(
+                p => !(p.isWerewolfInnate && (p.id === 'empatia_animal' || p.id === 'donacion_de_vida'))
+            );
+            if (nextPowers.length !== beforeLen) {
                 powersChanged = true;
             }
         }
-    };
 
-    // Multiformidad (Teriomorfismo: lobo) - Rango Elevado (41)
-    ensureInnatePower('multiformidad', 41, {
-        customizations: [{ id: 'lobo_teriomorfismo', description: 'Teriomorfismo (lobo)', cost: 0 }]
+        // Si no tiene otro origen que permita poderes Sobrenaturales, eliminar poderes Sobrenaturales no innatos
+        if (!canModifySobrenatural) {
+            const beforeFilter = nextPowers.length;
+            nextPowers = nextPowers.filter(p => p.origin !== 'Sobrenatural' || p.isWerewolfInnate);
+            if (nextPowers.length !== beforeFilter) {
+                powersChanged = true;
+            }
+        }
+
+        if (powersChanged) {
+            updates.powers = {
+                ...(data?.powers || {}),
+                selected: nextPowers
+            };
+            changed = true;
+        }
+    }
+
+    // 4. Sync Power Transformations (e.g. Blindaje Natural)
+    const effectivePowers = updates.powers?.selected ?? currentPowers;
+    const dataWithEffectivePowers = { ...data, powers: { ...(data?.powers || {}), selected: effectivePowers } };
+    const activePowerConfigs = getActivePowerTransformations(dataWithEffectivePowers);
+    const activePowerFormIds = new Set(activePowerConfigs.map(c => c.formId));
+    const allPowerFormIds = new Set(POWER_TRANSFORMATIONS.map(c => c.formId));
+
+    // Remove inactive power transformation forms
+    nextForms = nextForms.filter(f => !allPowerFormIds.has(f.id) || activePowerFormIds.has(f.id));
+
+    // Add or update active power transformation forms
+    activePowerConfigs.forEach(cfg => {
+        const existingPForm = nextForms.find(f => f.id === cfg.formId);
+        const builtPForm = buildPowerTransformationForm(
+            cfg,
+            data?.attributes?.breakdown,
+            data?.attributes?.values,
+            existingPForm
+        );
+        const idx = nextForms.findIndex(f => f.id === cfg.formId);
+        if (idx === -1) {
+            nextForms.push(builtPForm);
+        } else {
+            nextForms[idx] = builtPForm;
+        }
     });
 
-    // Regeneración de tejidos - Elevado (41) o Alto (71 para Renegado)
-    ensureInnatePower(
-        'regeneracion_de_tejidos',
-        config.regenRank,
-        {},
-        config.regenRank === 71 ? [41] : [71]
-    );
-
-    // Ataque especial (Arma Natural) - Bajo (1) o Medio (21 para Renegado)
-    ensureInnatePower(
-        'ataque_especial',
-        config.naturalWeaponRank,
-        {
-            selectedOption: 'Arma Natural',
-            customizations: [{ id: 'lobo_garras', description: 'Garras y colmillos (en forma híbrida)', cost: 0 }]
-        },
-        config.naturalWeaponRank === 21 ? [1] : [21]
-    );
-
-    // Poderes exclusivos de Puro: Empatía animal (21) y Donación de vida (41)
-    if (config.hasPurePowers) {
-        ensureInnatePower('empatia_animal', 21);
-        ensureInnatePower('donacion_de_vida', 41);
-    } else {
-        const beforeLen = nextPowers.length;
-        nextPowers = nextPowers.filter(
-            p => !(p.isWerewolfInnate && (p.id === 'empatia_animal' || p.id === 'donacion_de_vida'))
-        );
-        if (nextPowers.length !== beforeLen) {
-            powersChanged = true;
-        }
-    }
-
-    // Si no tiene otro origen que permita poderes Sobrenaturales, eliminar poderes Sobrenaturales no innatos
-    if (!canModifySobrenatural) {
-        const beforeFilter = nextPowers.length;
-        nextPowers = nextPowers.filter(p => p.origin !== 'Sobrenatural' || p.isWerewolfInnate);
-        if (nextPowers.length !== beforeFilter) {
-            powersChanged = true;
-        }
-    }
-
-    if (powersChanged) {
-        updates.powers = {
-            ...(data?.powers || {}),
-            selected: nextPowers
-        };
+    if (JSON.stringify(currentForms) !== JSON.stringify(nextForms)) {
+        updates.forms = nextForms;
         changed = true;
     }
 

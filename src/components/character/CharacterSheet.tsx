@@ -10,6 +10,9 @@ import { LevelHistoryModal } from './modals/LevelHistoryModal';
 import {
     hasHombreLobo,
     buildWerewolfTransitionForm,
+    getActivePowerTransformations,
+    buildPowerTransformationForm,
+    getPowerTransformationConfig,
     getCharacterForActiveForm,
     WEREWOLF_TRANSITION_FORM_ID,
     type CharacterForm
@@ -69,7 +72,7 @@ export default function CharacterSheet({
 }: CharacterSheetProps) {
     const [activeFormId, setActiveFormId] = useState<string>('base');
 
-    // Ensure forms array includes werewolf transition form if character is Hombre Lobo
+    // Ensure forms array includes werewolf transition form and any active power transformation forms
     const availableForms: CharacterForm[] = useMemo(() => {
         const formsList: CharacterForm[] = Array.isArray(character?.forms) ? [...character.forms] : [];
         if (hasHombreLobo(character) && !formsList.some(f => f.id === WEREWOLF_TRANSITION_FORM_ID)) {
@@ -77,6 +80,14 @@ export default function CharacterSheet({
             const vol = Number(character?.attributes?.values?.Voluntad) || 40;
             formsList.unshift(buildWerewolfTransitionForm(sub, vol, null, character?.attributes?.breakdown));
         }
+
+        const activePowerConfigs = getActivePowerTransformations(character);
+        activePowerConfigs.forEach(cfg => {
+            if (!formsList.some(f => f.id === cfg.formId)) {
+                formsList.push(buildPowerTransformationForm(cfg, character?.attributes?.breakdown, character?.attributes?.values));
+            }
+        });
+
         return formsList;
     }, [character]);
 
@@ -127,16 +138,20 @@ export default function CharacterSheet({
                         >
                             👤 Forma Base / Humana
                         </button>
-                        {availableForms.map(form => (
-                            <button
-                                key={form.id}
-                                type="button"
-                                onClick={() => setActiveFormId(form.id)}
-                                className={`sheet-form-btn ${effectiveFormId === form.id ? 'active' : ''}`}
-                            >
-                                🐺 {form.name}
-                            </button>
-                        ))}
+                        {availableForms.map(form => {
+                            const powerCfg = getPowerTransformationConfig(form.id);
+                            const icon = form.id === WEREWOLF_TRANSITION_FORM_ID ? '🐺' : (powerCfg?.icon || '🔄');
+                            return (
+                                <button
+                                    key={form.id}
+                                    type="button"
+                                    onClick={() => setActiveFormId(form.id)}
+                                    className={`sheet-form-btn ${effectiveFormId === form.id ? 'active' : ''}`}
+                                >
+                                    {icon} {form.name}
+                                </button>
+                            );
+                        })}
                     </div>
                 </div>
             )}
@@ -179,69 +194,66 @@ export default function CharacterSheet({
         </div>
     );
 
-    // Inline mode: render directly without modal
+    // Inline mode: render directly without dialog
     if (mode === 'inline') {
         return (
-            <div className="character-sheet-inline" id="character-sheet">
+            <>
+                {renderSheetContent()}
                 <ActionButtons
+                    mode="inline"
+                    isFullScreen={isFullScreen}
                     onDownloadJson={downloadJson}
                     onExportPdf={handleExportPDF}
-                    variant="inline"
+                    onToggleFullScreen={toggleFullScreen}
+                    onClose={closeModal}
                 />
-                {renderSheetContent()}
-                <LevelHistoryModal
-                    character={character}
-                    isOpen={isLevelHistoryOpen}
-                    onClose={() => setIsLevelHistoryOpen(false)}
-                />
-            </div>
+                {isLevelHistoryOpen && (
+                    <LevelHistoryModal
+                        character={activeCharacter}
+                        onClose={() => setIsLevelHistoryOpen(false)}
+                    />
+                )}
+            </>
         );
     }
 
-    // Modal mode: render button + dialog (original behavior)
+    // Modal mode: render with trigger and dialog
     return (
         <>
             {renderTrigger ? (
                 renderTrigger(openModal)
             ) : (
-                <button
-                    onClick={openModal}
-                    className="visualize-btn"
-                >
-                    📋 <span className="visualize-label">Visualizar Ficha</span>
+                <button className="sheet-trigger-btn" onClick={openModal}>
+                    📄 Ver Ficha Web
                 </button>
             )}
 
-            <dialog ref={dialogRef} className={`character-dialog ${isFullScreen ? 'full-screen' : ''}`}>
-                <div className="dialog-content">
-                    <div className="dialog-header">
-                        <div className="header-info">
-                            <span className="dialog-title">{character.alias || character.name || "Nuevo Personaje"}</span>
-                        </div>
-                        <div className="dialog-actions">
-                            <button onClick={toggleFullScreen} className="action-btn" title={isFullScreen ? "Salir de Pantalla Completa" : "Ver Ficha Completa"}>
-                                {isFullScreen ? "❎" : "⛶"}
-                            </button>
-                            <ActionButtons
-                                onDownloadJson={downloadJson}
-                                onExportPdf={handleExportPDF}
-                                variant="modal"
-                            />
-                            <button onClick={closeModal} className="close-btn">
-                                ✕
-                            </button>
-                        </div>
-                    </div>
-                    <div className="dialog-body">
-                        {renderSheetContent()}
-                    </div>
-                    <LevelHistoryModal
-                        character={character}
-                        isOpen={isLevelHistoryOpen}
-                        onClose={() => setIsLevelHistoryOpen(false)}
+            <dialog
+                ref={dialogRef}
+                className={`sheet-modal ${isFullScreen ? 'fullscreen' : ''}`}
+                onClick={(e) => {
+                    if (e.target === dialogRef.current) closeModal();
+                }}
+            >
+                <div className="sheet-modal-content">
+                    <ActionButtons
+                        mode="modal"
+                        isFullScreen={isFullScreen}
+                        onDownloadJson={downloadJson}
+                        onExportPdf={handleExportPDF}
+                        onToggleFullScreen={toggleFullScreen}
+                        onClose={closeModal}
                     />
+                    {renderSheetContent()}
                 </div>
             </dialog>
+
+            {isLevelHistoryOpen && (
+                <LevelHistoryModal
+                    character={activeCharacter}
+                    onClose={() => setIsLevelHistoryOpen(false)}
+                />
+            )}
         </>
     );
 }

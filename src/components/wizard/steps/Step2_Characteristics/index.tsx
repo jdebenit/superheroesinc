@@ -5,7 +5,12 @@ import { WizardField } from '../../shared/forms/WizardField';
 import { CostBadge } from '../../shared/ui/CostBadge';
 import { CHARACTERISTICS_CONFIG, useStep2Logic } from './useStep2Logic';
 import { TransitionFormSection } from './TransitionFormSection';
-import { hasHombreLobo, WEREWOLF_TRANSITION_FORM_ID, getWerewolfSubtypeConfig } from '../../../../data/werewolfOptions';
+import {
+    hasHombreLobo,
+    WEREWOLF_TRANSITION_FORM_ID,
+    getWerewolfSubtypeConfig,
+    getActivePowerTransformations
+} from '../../../../data/werewolfOptions';
 import '../../shared/layout/WizardStep.css';
 import './Step2_Characteristics.css';
 
@@ -41,20 +46,47 @@ export default function Step2_Characteristics({ data, onChange, onShowHelp }: St
     }, [origins]);
 
     const isWerewolf = useMemo(() => hasHombreLobo(data), [data]);
-    const transitionForm = useMemo(() => {
-        if (!Array.isArray(data.forms)) return null;
-        return data.forms.find((f: any) => f.id === WEREWOLF_TRANSITION_FORM_ID) || null;
-    }, [data.forms]);
+    const activePowerTransformations = useMemo(() => getActivePowerTransformations(data), [data]);
 
     const wwSubtypeConfig = useMemo(() => {
         return getWerewolfSubtypeConfig(data.werewolfParams?.subtype);
     }, [data.werewolfParams?.subtype]);
 
-    const effectiveTab = (activeFormTab === WEREWOLF_TRANSITION_FORM_ID && !isWerewolf) ? 'base' : activeFormTab;
+    const formTabs = useMemo(() => {
+        const tabs: Array<{ id: string; icon: string; title: string; cost: number }> = [];
+        const formsList: any[] = Array.isArray(data.forms) ? data.forms : [];
+
+        if (isWerewolf) {
+            const wwForm = formsList.find(f => f.id === WEREWOLF_TRANSITION_FORM_ID);
+            tabs.push({
+                id: WEREWOLF_TRANSITION_FORM_ID,
+                icon: '🐺',
+                title: `Forma de Transición (${wwSubtypeConfig.shortName})`,
+                cost: wwForm?.cost || 0
+            });
+        }
+
+        activePowerTransformations.forEach(cfg => {
+            const pForm = formsList.find(f => f.id === cfg.formId);
+            tabs.push({
+                id: cfg.formId,
+                icon: cfg.icon,
+                title: cfg.name,
+                cost: pForm?.cost || 0
+            });
+        });
+
+        return tabs;
+    }, [isWerewolf, wwSubtypeConfig.shortName, activePowerTransformations, data.forms]);
+
+    const hasAlternativeForms = formTabs.length > 0;
+    const effectiveTab = (activeFormTab !== 'base' && !formTabs.some(t => t.id === activeFormTab))
+        ? 'base'
+        : activeFormTab;
 
     return (
         <div className="wizard-step-container">
-            {isWerewolf && (
+            {hasAlternativeForms && (
                 <div className="step2-forms-tabs-bar">
                     <button
                         type="button"
@@ -65,29 +97,31 @@ export default function Step2_Characteristics({ data, onChange, onShowHelp }: St
                         <span className="step2-form-tab-title">Forma Humana / Base</span>
                         <span className="step2-form-tab-cost">{totalPC.toFixed(1)} PC</span>
                     </button>
-                    <button
-                        type="button"
-                        onClick={() => setActiveFormTab(WEREWOLF_TRANSITION_FORM_ID)}
-                        className={`step2-form-tab werewolf-tab ${effectiveTab === WEREWOLF_TRANSITION_FORM_ID ? 'active' : ''}`}
-                    >
-                        <span className="step2-form-tab-icon">🐺</span>
-                        <span className="step2-form-tab-title">
-                            Forma de Transición ({wwSubtypeConfig.shortName})
-                        </span>
-                        <span className="step2-form-tab-cost">
-                            +{(transitionForm?.cost || 0).toFixed(1)} PC
-                        </span>
-                    </button>
+                    {formTabs.map(tab => (
+                        <button
+                            key={tab.id}
+                            type="button"
+                            onClick={() => setActiveFormTab(tab.id)}
+                            className={`step2-form-tab werewolf-tab ${effectiveTab === tab.id ? 'active' : ''}`}
+                        >
+                            <span className="step2-form-tab-icon">{tab.icon}</span>
+                            <span className="step2-form-tab-title">{tab.title}</span>
+                            <span className="step2-form-tab-cost">
+                                +{tab.cost.toFixed(1)} PC
+                            </span>
+                        </button>
+                    ))}
                 </div>
             )}
 
-            {effectiveTab === WEREWOLF_TRANSITION_FORM_ID && isWerewolf ? (
+            {effectiveTab !== 'base' ? (
                 <TransitionFormSection
                     data={data}
                     onChange={onChange}
                     unlockManualMod={unlockManualMod}
                     setUnlockManualMod={setUnlockManualMod}
                     humanBreakdown={characteristics}
+                    formId={effectiveTab}
                 />
             ) : (
                 <>
@@ -137,7 +171,7 @@ export default function Step2_Characteristics({ data, onChange, onShowHelp }: St
                     </WizardSection>
 
                     <WizardSection
-                        title={isWerewolf ? "Características en Forma Humana" : "Características"}
+                        title={hasAlternativeForms ? "Características en Forma Humana" : "Características"}
                         rightContent={
                             <div className="step2-header-badges">
                                 {isDistributableMode && pointsInfo && (
