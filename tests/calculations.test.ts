@@ -17,6 +17,8 @@ import {
     getDistributablePointsInfo,
     calculateDerivedStats,
     calculateGeneralSkillValues,
+    calculateSpecialSkillValues,
+    calculateSpecialSkillsPCWithInt,
     formatDerivedStats,
     applyStatsOverrides,
     getStatDisplayValue,
@@ -96,7 +98,7 @@ describe('Cálculos de Origen y Puntos de Creación (PC)', () => {
         expect(liberadoMagoResult.pcPenalty).toBe(0);
     });
 
-        it('calcula los PCs de características base (1 PC por cada 10 puntos)', () => {
+    it('calcula los PCs de características base (1 PC por cada 10 puntos)', () => {
         const breakdown = {
             fuerza: { base: 60, powerMod: 0 },
             constitucion: { base: 50, powerMod: 0 },
@@ -242,7 +244,7 @@ describe('Cálculos de Origen y Puntos de Creación (PC)', () => {
         expect(calculateLimits(origins, 'percepcion', 'inteligencia', paramsNoLimit).max).toBe(100);
     });
 
-        it('soporta multiorigen limpio: Heraldo Cósmico + Liberado de Entropía simultáneamente', () => {
+    it('soporta multiorigen limpio: Heraldo Cósmico + Liberado de Entropía simultáneamente', () => {
         const origins = [
             { Cósmico: ['Heraldo Cósmico'] },
             { Sobrenatural: ['Liberado de Entropía'] }
@@ -619,7 +621,7 @@ describe('Cálculos de Habilidades Generales', () => {
         expect(heraldo.skills.conocimientos.minBase).toBe(18); // 90 / 5
     });
 
-    it('calcula el coste en PCs al incrementar manualmente la base de una habilidad general', () => {
+    it('calcula el coste en PCs al incrementar manualmente la base de una habilidad general y aplica la mitad de coste para Liberados', () => {
         const chars = {
             Fuerza: 60,
             Constitución: 60,
@@ -635,6 +637,33 @@ describe('Cálculos de Habilidades Generales', () => {
         expect(result.skills.conocimientos.base).toBe(45);
         expect(result.skills.conocimientos.pcCost).toBeCloseTo(1.5);
         expect(result.totalPC).toBeCloseTo(1.5);
+
+        // Con origen Liberado: subir +10 puntos (de 30 a 40) cuesta la mitad (0.5 PC en vez de 1.0 PC)
+        const liberadoOrigins = [{ Sobrenatural: ['Liberado de Entropía'] }];
+        const liberadoGeneral = calculateGeneralSkillValues(chars, liberadoOrigins, {}, { conocimientos: 40 });
+        expect(liberadoGeneral.skills.conocimientos.base).toBe(40);
+        expect(liberadoGeneral.skills.conocimientos.pcCost).toBeCloseTo(0.5);
+        expect(liberadoGeneral.totalPC).toBeCloseTo(0.5);
+
+        // Habilidades de aprendizaje con Liberado: adquirir cuesta 0.5 PC y subir la base +10 puntos cuesta 0.5 PC
+        const liberadoSpecialVals = calculateSpecialSkillValues(
+            chars,
+            liberadoOrigins,
+            { medicina: { manualMods: 0, manualBases: 40 } }, // minBase INT/3 = 30 -> +10 puntos = 0.5 PC
+            { 'ciencia_1': { skillId: 'ciencia', specification: 'Física', manualMods: 0, manualBases: 40 } } // minBase INT/3 = 30 -> +10 puntos = 0.5 PC
+        );
+        expect(liberadoSpecialVals.standard.medicina.pcCost).toBeCloseTo(0.5);
+        expect(liberadoSpecialVals.specified['ciencia_1'].pcCost).toBeCloseTo(0.5);
+        expect(liberadoSpecialVals.totalPC).toBeCloseTo(1.0);
+
+        const liberadoSpecialPC = calculateSpecialSkillsPCWithInt(
+            { medicina: { isFree: false, manualBases: 40 } },
+            { 'ciencia_1': { skillId: 'ciencia', isFree: false, manualBases: 40, specification: 'Física' } },
+            liberadoOrigins,
+            chars
+        );
+        // 2 habilidades pagadas (2 * 0.5 = 1.0 PC) + 2 subidas de base de +10 puntos (2 * 0.5 = 1.0 PC) = 2.0 PC total
+        expect(liberadoSpecialPC.totalPC).toBeCloseTo(2.0);
     });
 
     it('comprueba el acceso a la habilidad especial Magia según origen y dones de Liberado', () => {

@@ -49,7 +49,7 @@ export const SelectedSkillsSection: React.FC<SelectedSkillsSectionProps> = ({
                         ({specialSkillsPC.freeSkills} gratuitas {specialSkillsPC.intBonusSkills > 0 && <span className="pc-bonus-text">[+{specialSkillsPC.intBonusSkills} INT]</span>}, {specialSkillsPC.paidSkills} pagadas)
                     </span>
                     <span className="pc-total-text">
-                        Total: <CostBadge cost={specialSkillsPC.totalPC.toFixed(1).replace('.0', '')} label="PC" variant="default" />
+                        Total: <CostBadge cost={Number(specialSkillsPC.totalPC.toFixed(2)).toString()} label="PC" variant="default" />
                     </span>
                 </div>
             </div>
@@ -147,4 +147,3 @@ export const SelectedSkillsSection: React.FC<SelectedSkillsSectionProps> = ({
         </>
     );
 };
-

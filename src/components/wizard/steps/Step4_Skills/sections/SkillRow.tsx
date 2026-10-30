@@ -30,6 +30,14 @@ interface SkillRowProps {
     onRemove?: () => void;
 }
 
+const formatPCValue = (val: number, keepOneDecimal = false) => {
+    const rounded = Math.round(val * 100) / 100;
+    if (keepOneDecimal && Math.abs(rounded * 10 - Math.round(rounded * 10)) < 1e-6) {
+        return rounded.toFixed(1);
+    }
+    return Number(rounded.toFixed(2)).toString();
+};
+
 export const SkillRow: React.FC<SkillRowProps> = ({
     name,
     formula,
@@ -80,7 +88,7 @@ export const SkillRow: React.FC<SkillRowProps> = ({
                     />
                     {calcPCCost > 0 && (
                         <span className="wizard-cost-text">
-                            {calcPCCost.toFixed(1)} PC
+                            {formatPCValue(calcPCCost, true)} PC
                         </span>
                     )}
                 </div>
@@ -118,11 +126,11 @@ export const SkillRow: React.FC<SkillRowProps> = ({
                 <>
                     <td className="wizard-td-cell">
                         <span className={`wizard-special-col-cost ${totalPCCost > 0 ? 'wizard-cost-paid' : 'wizard-cost-free'}`}>
-                            {totalPCCost > 0 ? `${totalPCCost.toFixed(1).replace('.0', '')} PC` : 'GRATIS'}
+                            {totalPCCost > 0 ? `${formatPCValue(totalPCCost)} PC` : 'GRATIS'}
                         </span>
                         {calcPCCost > 0 && (
                             <div className="wizard-cost-basis-detail">
-                                (Base: +{calcPCCost.toFixed(1)})
+                                (Base: +{formatPCValue(calcPCCost, true)})
                             </div>
                         )}
                         {isRequired && (
@@ -143,4 +151,3 @@ export const SkillRow: React.FC<SkillRowProps> = ({
         </tr>
     );
 };
-

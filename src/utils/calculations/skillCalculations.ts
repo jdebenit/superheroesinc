@@ -4,6 +4,21 @@ import { ORIGIN_SKILL_MODIFIERS } from '../../data/skillModifiers';
 import Logger from '../Logger';
 
 /**
+ * Detecta si el personaje posee algún origen de tipo "Liberado"
+ */
+export function hasLiberadoOrigin(origins: any[] = []): boolean {
+    if (!Array.isArray(origins) || origins.length === 0) return false;
+    return origins.some(item => {
+        if (!item || typeof item !== 'object') return false;
+        const originName = Object.keys(item)[0];
+        if (!originName) return false;
+        if (originName.startsWith('Liberado')) return true;
+        const content = item[originName];
+        return Array.isArray(content) && content.some((s: string) => typeof s === 'string' && s.startsWith('Liberado'));
+    });
+}
+
+/**
  * Calcula el desglose de habilidades generales
  */
 export function calculateGeneralSkillValues(
@@ -29,6 +44,9 @@ export function calculateGeneralSkillValues(
             stats[normalizedKey] = Number(characteristics[key]) || 0;
         });
     }
+
+    const isLiberado = hasLiberadoOrigin(origins);
+    const basePointCost = isLiberado ? 0.05 : 0.1;
 
     const skills: { [key: string]: { base: number; minBase: number; originMod: number; specialtyMod: number; otherMod: number; total: number; pcCost: number } } = {};
     let totalPC = 0;
@@ -62,7 +80,7 @@ export function calculateGeneralSkillValues(
         if (manualBases[skill.id] !== undefined) {
             if (manualBases[skill.id] >= calculatedBase) {
                 base = manualBases[skill.id];
-                pcCost = (base - calculatedBase) * 0.1;
+                pcCost = (base - calculatedBase) * basePointCost;
             } else {
                 base = calculatedBase;
             }
@@ -160,6 +178,9 @@ export function calculateSpecialSkillValues(
         });
     }
 
+    const isLiberado = hasLiberadoOrigin(origins);
+    const basePointCost = isLiberado ? 0.05 : 0.1;
+
     const standard: { [key: string]: { base: number; minBase: number; originMod: number; specialtyMod: number; otherMod: number; total: number; pcCost: number } } = {};
     const specified: { [key: string]: { skillId: string; specification: string; base: number; minBase: number; originMod: number; specialtyMod: number; otherMod: number; total: number; pcCost: number } } = {};
     let totalPC = 0;
@@ -181,7 +202,7 @@ export function calculateSpecialSkillValues(
 
         if (skillData.manualBases && skillData.manualBases >= calculatedBase) {
             base = skillData.manualBases;
-            pcCost = (base - calculatedBase) * 0.1;
+            pcCost = (base - calculatedBase) * basePointCost;
         }
 
         totalPC += pcCost;
@@ -268,7 +289,7 @@ export function calculateSpecialSkillValues(
 
         if (specSkill.manualBases && specSkill.manualBases >= calculatedBase) {
             base = specSkill.manualBases;
-            pcCost = (base - calculatedBase) * 0.1;
+            pcCost = (base - calculatedBase) * basePointCost;
         }
 
         totalPC += pcCost;
@@ -349,16 +370,7 @@ export function calculateSpecialSkillsPC(
     let totalPC = 0;
 
     // Detectar si es Liberado (0.5 PC por habilidad)
-    let isLiberado = false;
-    if (origins && origins.length > 0) {
-        origins.forEach(item => {
-            const originName = Object.keys(item)[0];
-            const content = item[originName] as string[];
-            if (Array.isArray(content) && content.some((s: string) => s.startsWith('Liberado'))) {
-                isLiberado = true;
-            }
-        });
-    }
+    const isLiberado = hasLiberadoOrigin(origins);
 
     const costPerSkill = isLiberado ? 0.5 : 1.0;
 
@@ -390,6 +402,7 @@ export function calculateSpecialSkillsPC(
 /**
  * Calcula el coste en PC de las habilidades de aprendizaje seleccionadas (V2 con Bonus INT)
  * - Cada habilidad cuesta 1 PC (0.5 PC para origen "Liberado")
+ * - Subir la base cuesta 0.1 PC por punto (0.05 PC por punto para origen "Liberado")
  * - Las habilidades gratuitas de origen no cuestan PC
  * - La Inteligencia otorga habilidades gratuitas extra (101-120: 1, 121-140: 2, 141-160: 3, 161+: 4)
  */
@@ -416,19 +429,11 @@ export function calculateSpecialSkillsPCWithInt(
         });
     }
 
-    // 1. Detectar si es Liberado (0.5 PC por habilidad)
-    let isLiberado = false;
-    if (origins && origins.length > 0) {
-        origins.forEach(item => {
-            const originName = Object.keys(item)[0];
-            const content = item[originName] as string[];
-            if (Array.isArray(content) && content.some((s: string) => s.startsWith('Liberado'))) {
-                isLiberado = true;
-            }
-        });
-    }
+    // 1. Detectar si es Liberado (0.5 PC por habilidad y mitad de coste por subir base)
+    const isLiberado = hasLiberadoOrigin(origins);
 
     const costPerSkill = isLiberado ? 0.5 : 1.0;
+    const basePointCost = isLiberado ? 0.05 : 0.1;
 
     // 2. Contar habilidades estándar
     Object.entries(selectedSkills).forEach(([skillId, skill]) => {
@@ -445,7 +450,7 @@ export function calculateSpecialSkillsPCWithInt(
             if (skillDef?.formula) {
                 const calculatedBase = Math.floor(skillDef.formula(stats)) || 0;
                 if (skill.manualBases > calculatedBase) {
-                    baseIncreaseCost += (skill.manualBases - calculatedBase) * 0.1;
+                    baseIncreaseCost += (skill.manualBases - calculatedBase) * basePointCost;
                 }
             }
         }
@@ -466,7 +471,7 @@ export function calculateSpecialSkillsPCWithInt(
             if (skillDef?.formula) {
                 const calculatedBase = Math.floor(skillDef.formula(stats)) || 0;
                 if (skill.manualBases > calculatedBase) {
-                    baseIncreaseCost += (skill.manualBases - calculatedBase) * 0.1;
+                    baseIncreaseCost += (skill.manualBases - calculatedBase) * basePointCost;
                 }
             }
         }
