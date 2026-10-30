@@ -118,6 +118,6 @@ export const initialCharacterState = {
     liberadoParams: null,
     chosenBonusCharacteristic: null,
     chosenCharacteristics: {},
-    werewolfParams: null,
+    werewolfParams: null as any,
     forms: [],
 };

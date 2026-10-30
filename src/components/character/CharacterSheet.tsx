@@ -194,66 +194,69 @@ export default function CharacterSheet({
         </div>
     );
 
-    // Inline mode: render directly without dialog
+    // Inline mode: render directly without modal
     if (mode === 'inline') {
         return (
-            <>
-                {renderSheetContent()}
+            <div className="character-sheet-inline" id="character-sheet">
                 <ActionButtons
-                    mode="inline"
-                    isFullScreen={isFullScreen}
                     onDownloadJson={downloadJson}
                     onExportPdf={handleExportPDF}
-                    onToggleFullScreen={toggleFullScreen}
-                    onClose={closeModal}
+                    variant="inline"
                 />
-                {isLevelHistoryOpen && (
-                    <LevelHistoryModal
-                        character={activeCharacter}
-                        onClose={() => setIsLevelHistoryOpen(false)}
-                    />
-                )}
-            </>
+                {renderSheetContent()}
+                <LevelHistoryModal
+                    character={activeCharacter}
+                    isOpen={isLevelHistoryOpen}
+                    onClose={() => setIsLevelHistoryOpen(false)}
+                />
+            </div>
         );
     }
 
-    // Modal mode: render with trigger and dialog
+    // Modal mode: render button + dialog (original behavior)
     return (
         <>
             {renderTrigger ? (
                 renderTrigger(openModal)
             ) : (
-                <button className="sheet-trigger-btn" onClick={openModal}>
-                    📄 Ver Ficha Web
+                <button
+                    onClick={openModal}
+                    className="visualize-btn"
+                >
+                    📋 <span className="visualize-label">Visualizar Ficha</span>
                 </button>
             )}
 
-            <dialog
-                ref={dialogRef}
-                className={`sheet-modal ${isFullScreen ? 'fullscreen' : ''}`}
-                onClick={(e) => {
-                    if (e.target === dialogRef.current) closeModal();
-                }}
-            >
-                <div className="sheet-modal-content">
-                    <ActionButtons
-                        mode="modal"
-                        isFullScreen={isFullScreen}
-                        onDownloadJson={downloadJson}
-                        onExportPdf={handleExportPDF}
-                        onToggleFullScreen={toggleFullScreen}
-                        onClose={closeModal}
+            <dialog ref={dialogRef} className={`character-dialog ${isFullScreen ? 'full-screen' : ''}`}>
+                <div className="dialog-content">
+                    <div className="dialog-header">
+                        <div className="header-info">
+                            <span className="dialog-title">{character.alias || character.name || "Nuevo Personaje"}</span>
+                        </div>
+                        <div className="dialog-actions">
+                            <button onClick={toggleFullScreen} className="action-btn" title={isFullScreen ? "Salir de Pantalla Completa" : "Ver Ficha Completa"}>
+                                {isFullScreen ? "❎" : "⛶"}
+                            </button>
+                            <ActionButtons
+                                onDownloadJson={downloadJson}
+                                onExportPdf={handleExportPDF}
+                                variant="modal"
+                            />
+                            <button onClick={closeModal} className="close-btn">
+                                ✕
+                            </button>
+                        </div>
+                    </div>
+                    <div className="dialog-body">
+                        {renderSheetContent()}
+                    </div>
+                    <LevelHistoryModal
+                        character={activeCharacter}
+                        isOpen={isLevelHistoryOpen}
+                        onClose={() => setIsLevelHistoryOpen(false)}
                     />
-                    {renderSheetContent()}
                 </div>
             </dialog>
-
-            {isLevelHistoryOpen && (
-                <LevelHistoryModal
-                    character={activeCharacter}
-                    onClose={() => setIsLevelHistoryOpen(false)}
-                />
-            )}
         </>
     );
 }
