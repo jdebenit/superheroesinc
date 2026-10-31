@@ -158,7 +158,7 @@ export const adaptWebCharacter = (webChar: any): any => {
 
     if (rawTech && rawTech.length > 0) {
         adapted.techModules = rawTech.map((tm: any) => ({
-            id: tm.id || `tm_${Math.random().toString(36).substr(2, 9)}`,
+            id: tm.id || `tm_${Math.random().toString(36).slice(2, 11)}`,
             definitionId: tm.definitionId || tm.id || '',
             name: tm.name,
             location: tm.location || '',

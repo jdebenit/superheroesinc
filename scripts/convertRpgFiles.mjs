@@ -124,7 +124,7 @@ function adaptWebCharacter(webChar) {
     if (rawTech && Array.isArray(rawTech)) {
         adapted.techModules = {
             installed: rawTech.map((tm) => ({
-                id: tm.id || `tm_${Math.random().toString(36).substr(2, 9)}`,
+                id: tm.id || `tm_${Math.random().toString(36).slice(2, 11)}`,
                 name: tm.name,
                 location: tm.location || '',
                 notes: tm.notes || '',

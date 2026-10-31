@@ -126,7 +126,7 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
 
             // Create new stored character
             const newChar: StoredCharacter = {
-                id: 'local_' + Date.now().toString() + Math.random().toString(36).substr(2, 9),
+                id: 'local_' + Date.now().toString() + Math.random().toString(36).slice(2, 11),
                 data: fullData, // Use the merged data
                 addedAt: Date.now(),
                 source: 'local'

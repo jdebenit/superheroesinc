@@ -1,9 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import {
     hasOrigin,
-    hasSubtype,
     isGuardian,
-    isMaldito,
     isPoseido,
     getVigilanteSpecialties,
     getActiveLiberadoSubtypes,

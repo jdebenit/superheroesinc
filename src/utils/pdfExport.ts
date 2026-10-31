@@ -1,7 +1,6 @@
 import { PDFDocument } from 'pdf-lib';
 import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS, FRIENDS_AND_ASSOCIATES } from '../data/backgroundTables';
 import { ORIGIN_CATEGORIES } from '../data/originDefinitions';
-import { SPECIAL_SKILLS } from '../data/specialSkills';
 import Logger from './Logger';
 import { formatDerivedStats, applyStatsOverrides, getStatDisplayValue, applyLevelModsToSkillItems, getEffectiveBackground } from './characterCalculations';
 
@@ -70,7 +69,6 @@ export async function generateCharacterSheetPDF(
 
     // Default empty structures if missing
     const generalSkillsData = preCalculatedData?.generalSkillsData || { skills: {} };
-    const specialSkillsData = preCalculatedData?.specialSkillsData || { standard: {}, specified: {} };
 
     // Lookup functions for background
     const getLabel = (list: any[], id: string) => list.find(i => i.id === id)?.label || id;

@@ -75,7 +75,7 @@ export const normalizeCharacterPowers = (powersObj: any): any[] => {
         return powersObj.items.map((p: any) => {
             const knownPower = findPowerByNameOrId(p.name || p.id);
             const errata = getPowerErrata(p.name || p.id);
-            const id = knownPower?.id || p.id || `custom_${Math.random().toString(36).substr(2, 9)}`;
+            const id = knownPower?.id || p.id || `custom_${Math.random().toString(36).slice(2, 11)}`;
 
             let skillValue = 0;
             let powerMod = 0;
@@ -279,7 +279,7 @@ export const getPowerCostConfig = (power: any, selection: SelectedPower, context
 /**
  * Get total base cost adjustment for display and calculation purposes.
  */
-export const getBaseCostAdjustment = (power: any, selection: SelectedPower, context: PowerContext, penaltyInfo: any): number => {
+export const getBaseCostAdjustment = (_power: any, selection: SelectedPower, context: PowerContext, penaltyInfo: any): number => {
     let adjustment = 0;
 
     if (penaltyInfo && penaltyInfo.type !== 'none') {

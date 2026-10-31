@@ -5,7 +5,6 @@ import {
     normalizeCharacterPowers,
     getRankLevel,
     getPowerCostConfig,
-    getBaseCostAdjustment,
     calculatePowerBaseCost,
     getMutantPowerTypes,
     getMutantType,

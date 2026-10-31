@@ -250,9 +250,6 @@ export function calculateDerivedStats(
 
     // --- OTROS STATS ---
 
-    // Inconsciencia: PV / 10
-    const inconsciencia = Math.floor(puntosVida / 10);
-
     // Recuperación calculada en tabla CON
 
     // --- TABLE CALCULATIONS (FUERZA) ---

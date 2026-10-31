@@ -1,5 +1,3 @@
-import { GENERAL_SKILLS } from '../../data/generalSkills';
-import { SPECIAL_SKILLS } from '../../data/specialSkills';
 import {
     WEREWOLF_SUBTYPES,
     POWER_TRANSFORMATIONS,
