@@ -1,26 +1,14 @@
-import React, { useState, useRef, useEffect } from 'react';
-import CharacterSheet from '../character/CharacterSheet';
+import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react';
+import type { StoredCharacter, CharacterViewerProps } from './types';
 import { adaptWebCharacter, validateAndSanitizeCharacter } from '../../utils/characterAdapter';
 import { useJsonExport } from '../../hooks/useJsonExport';
-import { pushCharacterToTmt } from '../terminal/utils/tmtStorage';
 import { initialCharacterState } from '../../data/wizardConfig';
 import { mergeWithDefaults } from '../../utils/dataCleaner';
-import { getStatDisplayValue } from '../../utils/characterCalculations';
-import { getInitials, getCharacterDisplayName, normalizeCharacterIconUrl } from '../../utils/characterDisplay';
-import './CharacterViewer.css';
+import { getCharacterDisplayName } from '../../utils/characterDisplay';
+import { ViewerSidebar } from './sections/ViewerSidebar';
+import { ViewerContent } from './sections/ViewerContent';
 import Logger from '../../utils/Logger';
-
-interface StoredCharacter {
-    id: string;
-    data: any;
-    addedAt: number;
-    source?: 'local' | 'web';
-    totalCost?: string | number;
-}
-
-interface CharacterViewerProps {
-    webCharacters?: StoredCharacter[];
-}
+import './CharacterViewer.css';
 
 export default function CharacterViewer({ webCharacters = [] }: CharacterViewerProps) {
     const [localCharacters, setLocalCharacters] = useState<StoredCharacter[]>([]);
@@ -31,7 +19,7 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     // Normalize and adapt web characters from props
-    const adaptedWebChars = React.useMemo(() => {
+    const adaptedWebChars = useMemo(() => {
         return webCharacters.map(char => ({
             ...char,
             data: adaptWebCharacter(char.data)
@@ -52,7 +40,6 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
                     setLocalCharacters(migrated);
 
                     if (migrated.length > 0 && !selectedId) {
-                        // Only select if nothing selected yet
                         setSelectedId(migrated[0].id);
                     }
                 }
@@ -79,8 +66,6 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
 
         try {
             const text = await file.text();
-            Logger.info("Contenido del archivo leído correctamente");
-
             let parsed;
             try {
                 parsed = JSON.parse(text);
@@ -88,8 +73,6 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
                 Logger.error("Error al parsear JSON", e);
                 throw new Error("El archivo no es un JSON válido.");
             }
-
-            Logger.info("JSON parseado:", parsed);
 
             // Validación y saneamiento estructural
             const validation = validateAndSanitizeCharacter(parsed, file.name);
@@ -101,52 +84,40 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
                 Logger.warn("Advertencias al validar personaje:", validation.warnings);
             }
 
-            // CRITICAL: Merge with defaults to avoid "blank" characters if the JSON was too clean
             const fullData = mergeWithDefaults(validation.character, initialCharacterState);
-
             setError(null);
-            Logger.info("Validación superada. Personaje procesado.");
 
-            // Create new stored character
             const newChar: StoredCharacter = {
                 id: 'local_' + Date.now().toString() + Math.random().toString(36).slice(2, 11),
-                data: fullData, // Use the merged data
+                data: fullData,
                 addedAt: Date.now(),
                 source: 'local'
             };
 
-            setLocalCharacters(prev => {
-                Logger.info("Actualizando lista de personajes locales (prev count:", prev.length, ")");
-                return [newChar, ...prev];
-            });
+            setLocalCharacters(prev => [newChar, ...prev]);
             setSelectedId(newChar.id);
             Logger.info("Subida completada con éxito. ID seleccionado:", newChar.id);
-
         } catch (err: any) {
             Logger.error("Error crítico en handleFileChange:", err);
             setError(err.message || "Error al leer el archivo.");
-            // Alerta de emergencia si falla en silencio
             if (!err.message) alert("Error fatal al subir: " + String(err));
         }
 
-        // Reset input
         if (event.target) {
             event.target.value = '';
         }
     };
 
-    const handleDelete = React.useCallback((id: string, e: React.MouseEvent) => {
+    const handleDelete = useCallback((id: string, e: React.MouseEvent) => {
         e.stopPropagation();
         e.preventDefault();
 
         if (deletingId !== id) {
             setDeletingId(id);
-            // Auto-cancel after 3 seconds
             setTimeout(() => setDeletingId(null), 3000);
             return;
         }
 
-        // Second click -> Actual delete
         setLocalCharacters(prev => {
             const newList = prev.filter(c => c.id !== id);
             try {
@@ -163,10 +134,13 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
         setDeletingId(null);
     }, [deletingId, selectedId]);
 
-    const handleEditInWizard = () => {
+    // Combine lists for selection finding
+    const allCharacters = useMemo(() => [...localCharacters, ...adaptedWebChars], [localCharacters, adaptedWebChars]);
+    const selectedCharacter = useMemo(() => allCharacters.find(c => c.id === selectedId), [allCharacters, selectedId]);
+
+    const handleEditInWizard = useCallback(() => {
         if (!selectedCharacter) return;
         try {
-            // Adapt to wizard format to ensure compatibility
             const adapted = adaptWebCharacter(selectedCharacter.data);
             localStorage.setItem('characterWizardState', JSON.stringify(adapted));
             window.location.href = '/recursos/wizard-fullscreen';
@@ -174,305 +148,44 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
             Logger.error('Error sending character to wizard:', error);
             alert('Error al abrir el personaje en el editor');
         }
-    };
-
-    const triggerFileInput = () => {
-        fileInputRef.current?.click();
-    };
-
-    // Combine lists for selection finding
-    const allCharacters = [...localCharacters, ...adaptedWebChars];
-    const selectedCharacter = allCharacters.find(c => c.id === selectedId);
+    }, [selectedCharacter]);
 
     // Sort web characters alphabetically by Display Name
-    const sortedWebChars = [...adaptedWebChars].sort((a, b) => 
-        getCharacterDisplayName(a.data).localeCompare(getCharacterDisplayName(b.data))
-    );
+    const sortedWebChars = useMemo(() => {
+        return [...adaptedWebChars].sort((a, b) => 
+            getCharacterDisplayName(a.data).localeCompare(getCharacterDisplayName(b.data))
+        );
+    }, [adaptedWebChars]);
 
-    // JSON export using the same hook as CharacterSheet
-    const adaptedForExport = selectedCharacter ? adaptWebCharacter(selectedCharacter.data) : null;
+    // JSON export using hook
+    const adaptedForExport = useMemo(() => {
+        return selectedCharacter ? adaptWebCharacter(selectedCharacter.data) : null;
+    }, [selectedCharacter]);
+
     const { downloadJson } = useJsonExport(adaptedForExport ?? {});
 
     return (
         <div className="viewer-layout">
-            {/* Sidebar */}
-            <div className="viewer-sidebar">
-                {/* Local Characters Section */}
-                <div className="sidebar-section-header">
-                    <h3 className="section-title">Mis Fichas</h3>
-                    <div className="section-subtitle">
-                        {localCharacters.length} locales
-                    </div>
-                </div>
+            <ViewerSidebar
+                localCharacters={localCharacters}
+                webCharacters={sortedWebChars}
+                selectedId={selectedId}
+                deletingId={deletingId}
+                showWebCharacters={showWebCharacters}
+                error={error}
+                fileInputRef={fileInputRef}
+                onSelect={setSelectedId}
+                onDelete={handleDelete}
+                onToggleWebCharacters={() => setShowWebCharacters(!showWebCharacters)}
+                onFileChange={handleFileChange}
+                onTriggerUpload={() => fileInputRef.current?.click()}
+            />
 
-                <div className="local-list">
-                    {localCharacters.length === 0 ? (
-                        <div className="empty-list-msg">
-                            No hay fichas subidas.
-                        </div>
-                    ) : (
-                        <ul className="char-list">
-                            {localCharacters.map(char => {
-                                const displayName = getCharacterDisplayName(char.data);
-                                const iconUrl = normalizeCharacterIconUrl(char.data?.icon);
-
-                                return (
-                                    <li
-                                        key={char.id}
-                                        className={`list-item ${selectedId === char.id ? 'active' : ''} ${deletingId === char.id ? 'deleting' : ''}`}
-                                    >
-                                        <div className="list-item-clickable" onClick={() => setSelectedId(char.id)}>
-                                            <div className={`char-avatar ${char.source || 'local'}`}>
-                                                {iconUrl ? (
-                                                    <img
-                                                        src={iconUrl}
-                                                        alt={displayName}
-                                                    />
-                                                ) : (
-                                                    getInitials(displayName)
-                                                )}
-                                            </div>
-                                            <div className="list-item-info">
-                                            <div className="char-name">
-                                                {char.data?.alias ? (
-                                                    <>
-                                                        {char.data.alias}
-                                                        {char.data.name && <div className="secondary-name">{char.data.name}</div>}
-                                                    </>
-                                                ) : (
-                                                    char.data?.name || '(Sin nombre)'
-                                                )}
-                                            </div>
-                                            <div className="char-details">
-                                                Nivel {char.data?.level || 1}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <button
-                                        type="button"
-                                        onClick={(e) => handleDelete(char.id, e)}
-                                        title={deletingId === char.id ? "Click para confirmar borrado" : "Eliminar"}
-                                        className={`delete-btn ${deletingId === char.id ? 'confirm-mode' : ''}`}
-                                    >
-                                        {deletingId === char.id ? '⚠️ OK?' : '🗑️'}
-                                    </button>
-                                </li>
-                            );
-                        })}
-                        </ul>
-                    )}
-                </div>
-
-                <div className="upload-section">
-                    <input
-                        type="file"
-                        ref={fileInputRef}
-                        onChange={handleFileChange}
-                        accept=".json"
-                        style={{ display: 'none' }}
-                    />
-                    <button
-                        onClick={triggerFileInput}
-                        className="upload-btn"
-                    >
-                        ➕ Subir JSON
-                    </button>
-                    {error && (
-                        <div className="error-msg">
-                            {error}
-                        </div>
-                    )}
-                </div>
-
-                {/* Web Characters Section */}
-                <div
-                    onClick={() => setShowWebCharacters(!showWebCharacters)}
-                    className={`web-section-toggle ${showWebCharacters ? 'open' : ''}`}
-                >
-                    <div>
-                        <h3 className="web-section-title">Fichas de la Web</h3>
-                        <div className="web-section-subtitle">
-                            {sortedWebChars.length} oficiales
-                        </div>
-                    </div>
-                    <span className={`toggle-icon ${showWebCharacters ? 'open' : ''}`}>
-                        ▼
-                    </span>
-                </div>
-
-                {showWebCharacters && (
-                    <div className="web-list">
-                        {sortedWebChars.length === 0 ? (
-                            <div className="empty-list-msg">
-                                Cargando fichas...
-                            </div>
-                        ) : (
-                            <ul className="char-list">
-                                {sortedWebChars.map(char => {
-                                    const displayName = getCharacterDisplayName(char.data);
-                                    const iconUrl = normalizeCharacterIconUrl(char.data?.icon);
-
-                                    return (
-                                        <li
-                                            key={char.id}
-                                            onClick={() => setSelectedId(char.id)}
-                                            className={`web-list-item ${selectedId === char.id ? 'active' : ''}`}
-                                        >
-                                            <div className={`char-avatar web`}>
-                                                {iconUrl ? (
-                                                    <img
-                                                        src={iconUrl}
-                                                        alt={displayName}
-                                                    />
-                                                ) : (
-                                                    getInitials(displayName)
-                                                )}
-                                            </div>
-                                        <div className="list-item-info">
-                                            <div className="web-char-name">
-                                                {char.data?.alias ? (
-                                                    <>
-                                                        {char.data.alias}
-                                                        {char.data.name && <div className="secondary-name">{char.data.name}</div>}
-                                                    </>
-                                                ) : (
-                                                    char.data?.name || '(Sin nombre)'
-                                                )}
-                                            </div>
-                                            <div className="web-char-details">
-                                                Nivel {char.data?.level || 1}
-                                            </div>
-                                        </div>
-                                        <span title="Ficha Oficial" className="official-badge">🌐</span>
-                                    </li>
-                                );
-                            })}
-                            </ul>
-                        )}
-                    </div>
-                )}
-
-            </div>
-
-            {/* Main Content */}
-            <div className="viewer-content">
-                {selectedCharacter ? (
-                    <div className="content-card">
-                        <div className="content-header">
-                            <h2 className="content-title">
-                                {getCharacterDisplayName(selectedCharacter.data)}
-                                {selectedCharacter.data?.alias && selectedCharacter.data?.name && (
-                                    <div className="content-subtitle">
-                                        {selectedCharacter.data.name}
-                                    </div>
-                                )}
-                            </h2>
-                            <span className="content-source-badge">
-                                {selectedCharacter.source === 'web'
-                                    ? '🌐 Ficha Oficial de la Web'
-                                    : `Añadido: ${new Date(selectedCharacter.addedAt).toLocaleDateString()}`}
-                            </span>
-                        </div>
-
-                        <div className="character-summary">
-                            <div className="summary-header">
-                                <h4 className="summary-title">Resumen de Ficha</h4>
-                                <CharacterSheet
-                                    character={adaptWebCharacter(selectedCharacter.data)}
-                                    totalPCs={selectedCharacter.data.totalCost}
-                                    renderTrigger={(open) => (
-                                        <button onClick={open} className="expand-summary-btn" title="Ver ficha completa">
-                                            🔍 Ficha Completa
-                                        </button>
-                                    )}
-                                />
-                            </div>
-                            <div className="summary-grid">
-                                <div>
-                                    <strong>Nivel:</strong> {selectedCharacter.data?.level || 1}
-                                </div>
-                                <div>
-                                    <strong>Alias:</strong> {selectedCharacter.data?.alias || '-'}
-                                </div>
-                                <div>
-                                    <strong>Nombre:</strong> {selectedCharacter.data?.name || '-'}
-                                </div>
-                                <div>
-                                    <strong>Puntos de Vida:</strong> {getStatDisplayValue(selectedCharacter.data?.combatstats?.["Puntos de Vida"])}
-                                </div>
-                                <div>
-                                    <strong>Equilibrio Mental:</strong> {getStatDisplayValue(selectedCharacter.data?.combatstats?.["Equilibrio Mental"])}
-                                </div>
-                                <div>
-                                    <strong>Origen:</strong> {selectedCharacter.data?.origin?.items?.[0] ? Object.keys(selectedCharacter.data.origin.items[0])[0] : 'Desconocido'}
-                                </div>
-                                {selectedCharacter.data?.meta?.version && (
-                                    <div>
-                                        <strong>Versión Wizard:</strong> <span className="version-badge">{selectedCharacter.data.meta.version}</span>
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-
-                        <div className="viewer-actions">
-                            <button
-                                onClick={() => {
-                                    try {
-                                        localStorage.setItem('shi_tpt_character', JSON.stringify(adaptWebCharacter(selectedCharacter.data)));
-                                        window.open('/recursos/tactic-player-terminal', 'shi_tpt_terminal');
-                                    } catch (error) {
-                                        Logger.error('Error sending character to terminal:', error);
-                                        alert('Error al enviar el personaje al terminal');
-                                    }
-                                }}
-                                className="viewer-button btn-primary"
-                            >
-                                🎮 Abrir en SHI TPT
-                            </button>
-                            <button
-                                onClick={() => {
-                                    try {
-                                        pushCharacterToTmt(
-                                            adaptWebCharacter(selectedCharacter.data),
-                                            'pj'
-                                        );
-                                        window.open('/recursos/tactic-master-terminal', 'shi_tmt_terminal');
-                                    } catch (error) {
-                                        Logger.error('Error sending character to TMT:', error);
-                                        alert('Error al enviar el personaje al TMT');
-                                    }
-                                }}
-                                className="viewer-button btn-primary"
-                            >
-                                🎯 Abrir en SHI TMT
-                            </button>
-                            <button
-                                onClick={downloadJson}
-                                className="viewer-button download-btn"
-                                title="Descargar ficha como JSON"
-                            >
-                                ⬇️ Descargar JSON
-                            </button>
-
-                            <button
-                                onClick={handleEditInWizard}
-                                className="viewer-button edit-wizard-btn"
-                                title="Abrir en el Generador"
-                            >
-                                🛠️ Editar en Wizard
-                            </button>
-                        </div>
-                    </div>
-                ) : (
-                    <div className="empty-viewer">
-                        <div className="empty-icon">👈</div>
-                        <h3 className="empty-title">Selecciona un personaje</h3>
-                        <p className="empty-text">
-                            Selecciona una ficha oficial de la web o importa tus propios archivos JSON.
-                        </p>
-                    </div>
-                )}
-            </div>
+            <ViewerContent
+                selectedCharacter={selectedCharacter}
+                onEditInWizard={handleEditInWizard}
+                onDownloadJson={downloadJson}
+            />
         </div>
     );
 }
