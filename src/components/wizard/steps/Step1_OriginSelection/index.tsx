@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { ORIGIN_CATEGORIES } from '../../../../data/originDefinitions';
 import { WizardSection } from '../../shared/layout/WizardSection';
-import { stepPageTitleStyle, stepPageSubtitleStyle } from '../../shared/layout/stepStyles';
+import type { BaseStepProps } from '../../../../types/character';
 
-interface Step1Props {
-    data: any;
-    onChange: (updates: any) => void;
-    onShowHelp?: () => void;
-}
+export type Step1Props = BaseStepProps;
 
 const ORIGINS = [
     { id: 'divinos', name: 'Divino', logo: '/logos/divinos.png', categoryKey: 'Divino' },

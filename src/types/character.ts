@@ -278,6 +278,12 @@ export interface CharacterData {
     [key: string]: any;
 }
 
+export interface BaseStepProps {
+    data: CharacterData;
+    onChange: (updates: Partial<CharacterData> | Record<string, any>) => void;
+    onShowHelp?: () => void;
+}
+
 export interface CharacterOriginFlags {
     // Primary Origins
     isGuardian: boolean;

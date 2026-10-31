@@ -11,14 +11,11 @@ import {
     getWerewolfSubtypeConfig,
     getActivePowerTransformations
 } from '../../../../data/werewolfOptions';
+import type { BaseStepProps } from '../../../../types/character';
 import '../../shared/layout/WizardStep.css';
 import './Step2_Characteristics.css';
 
-interface Step2Props {
-    data: any;
-    onChange: (updates: any) => void;
-    onShowHelp?: () => void;
-}
+export type Step2Props = BaseStepProps;
 
 export default function Step2_Characteristics({ data, onChange, onShowHelp }: Step2Props) {
     const [activeFormTab, setActiveFormTab] = useState<'base' | string>('base');

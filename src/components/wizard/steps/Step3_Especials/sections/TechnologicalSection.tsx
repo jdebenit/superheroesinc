@@ -7,7 +7,7 @@ import { CostBadge } from '../../../shared/ui/CostBadge';
 import { SectionHeaderBadge } from '../../../shared/ui/SectionHeaderBadge';
 
 interface TechnologicalSectionProps {
-    techParams: { incomeSource: string } | null;
+    techParams: { incomeSource?: string; [key: string]: any } | null;
     onChange: (params: { incomeSource: string }) => void;
 }
 

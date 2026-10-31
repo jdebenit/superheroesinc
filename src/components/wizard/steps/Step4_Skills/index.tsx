@@ -3,17 +3,12 @@ import { WizardSection } from '../../shared/layout/WizardSection';
 import { GeneralSkillsSection } from './sections/GeneralSkillsSection';
 import { SelectedSkillsSection } from './sections/SelectedSkillsSection';
 import { AvailableSkillsSection } from './sections/AvailableSkillsSection';
-import { stepPageTitleStyle, stepPageSubtitleStyle } from '../../shared/layout/stepStyles';
 import { useStep4Logic } from './useStep4Logic';
+import type { BaseStepProps } from '../../../../types/character';
 import '../../shared/layout/WizardStep.css';
 import './Step4_Skills.css';
 
-
-interface Step4Props {
-    data: any;
-    onChange: (updates: any) => void;
-    onShowHelp?: () => void;
-}
+export type Step4Props = BaseStepProps;
 
 export default function Step4_GeneralSkills({ data, onChange, onShowHelp }: Step4Props) {
     const {

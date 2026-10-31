@@ -2,10 +2,9 @@ import React from 'react';
 import { WizardSection } from '../../../shared/layout/WizardSection';
 import { CostBadge } from '../../../shared/ui/CostBadge';
 import { SectionHeaderBadge } from '../../../shared/ui/SectionHeaderBadge';
+import type { ParahumanoParams } from '../../../../../types/character';
 
-export interface ParahumanoParams {
-    isHybridWithHuman: boolean;
-}
+export type { ParahumanoParams };
 
 interface ParahumanoSectionProps {
     parahumanoParams: ParahumanoParams;

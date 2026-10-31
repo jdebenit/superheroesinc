@@ -11,31 +11,12 @@ import { CostBadge } from '../../shared/ui/CostBadge';
 import { SectionHeaderBadge } from '../../shared/ui/SectionHeaderBadge';
 import { StatItem } from '../../shared/ui/StatItem';
 import { useStep6Logic } from './useStep6Logic';
+import type { BaseStepProps } from '../../../../types/character';
 import '../../shared/layout/WizardStep.css';
 import './Step6_Details.css';
 
-interface Step6Props {
-    data: {
-        attributes: { values: { [key: string]: number } };
-        origin?: any;
-        name: string;
-        alias: string;
-        profession?: string;
-        sexualIdentity?: string;
-        notes: string;
-        equipment: { items: any[] };
-        varios?: { items: any[] };
-        weapons: { items: any[] };
-        artifacts: { items: any[] };
-        magicObjects: { items: any[] };
-        vehicles: { items: any[] };
-        skills?: any;
-        combatstats?: Record<string, any>;
-        otherstats?: Record<string, any>;
-    };
-    onChange: (updates: any) => void;
+export interface Step6Props extends BaseStepProps {
     totalPCs?: string | number;
-    onShowHelp?: () => void;
 }
 
 export default function Step6_Details({ data, onChange, totalPCs, onShowHelp }: Step6Props) {

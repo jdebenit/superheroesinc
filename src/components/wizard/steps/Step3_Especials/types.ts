@@ -1,12 +1,9 @@
 import type { Power, PowerType } from '../../../../data/powers';
 import type { Spell } from '../../../../data/spells';
+import type { BaseStepProps } from '../../../../types/character';
 
-export interface Step3Props {
-    data: any;
-    // data.malditoParams, data.enteParams, etc are assumed dynamic
-    onChange: (updates: any) => void;
+export interface Step3Props extends BaseStepProps {
     onShowToast?: (message: string, type?: 'success' | 'error' | 'info') => void;
-    onShowHelp?: () => void;
 }
 
 

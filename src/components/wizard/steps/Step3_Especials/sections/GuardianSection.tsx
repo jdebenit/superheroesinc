@@ -9,13 +9,9 @@ import { WizardSection } from '../../../shared/layout/WizardSection';
 import { FormSelect } from '../../../shared/forms/FormSelect';
 import { CostBadge } from '../../../shared/ui/CostBadge';
 import { SectionHeaderBadge } from '../../../shared/ui/SectionHeaderBadge';
+import type { GuardianParams } from '../../../../../types/character';
 
-export interface GuardianParams {
-    quality: string | null;
-    objectType: string | null;
-    feature: string | null;
-    transformation: string | null;
-}
+export type { GuardianParams };
 
 interface GuardianSectionProps {
     guardianParams: GuardianParams;

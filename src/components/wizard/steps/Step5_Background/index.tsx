@@ -7,14 +7,11 @@ import { WizardRange } from '../../shared/forms/WizardRange';
 import { StatusSelectCard } from '../../shared/forms/StatusSelectCard';
 import { DynamicList } from '../../shared/layout/DynamicList';
 import { useStep5Logic } from './useStep5Logic';
+import type { BaseStepProps } from '../../../../types/character';
 import '../../shared/layout/WizardStep.css';
 import './Step5_Background.css';
 
-interface Step5Props {
-    data: any;
-    onChange: (updates: any) => void;
-    onShowHelp?: () => void;
-}
+export type Step5Props = BaseStepProps;
 
 export default function Step5_Background({ data, onChange, onShowHelp }: Step5Props) {
     const {
