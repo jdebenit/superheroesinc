@@ -8,15 +8,12 @@ import { useModal } from './hooks/useModal';
 import { ActionButtons } from './common/ActionButtons';
 import { LevelHistoryModal } from './modals/LevelHistoryModal';
 import {
-    hasHombreLobo,
-    buildWerewolfTransitionForm,
-    getActivePowerTransformations,
-    buildPowerTransformationForm,
-    getPowerTransformationConfig,
+    syncCharacterTransformations,
     getCharacterForActiveForm,
+    getPowerTransformationConfig,
     WEREWOLF_TRANSITION_FORM_ID,
     type CharacterForm
-} from '../../data/werewolfOptions';
+} from '../../utils/calculations/formCalculations';
 
 // Section Components
 import { SheetHeader } from './sections/SheetHeader';
@@ -74,21 +71,8 @@ export default function CharacterSheet({
 
     // Ensure forms array includes werewolf transition form and any active power transformation forms
     const availableForms: CharacterForm[] = useMemo(() => {
-        const formsList: CharacterForm[] = Array.isArray(character?.forms) ? [...character.forms] : [];
-        if (hasHombreLobo(character) && !formsList.some(f => f.id === WEREWOLF_TRANSITION_FORM_ID)) {
-            const sub = character?.werewolfParams?.subtype || 'hibrido';
-            const vol = Number(character?.attributes?.values?.Voluntad) || 40;
-            formsList.unshift(buildWerewolfTransitionForm(sub, vol, null, character?.attributes?.breakdown));
-        }
-
-        const activePowerConfigs = getActivePowerTransformations(character);
-        activePowerConfigs.forEach(cfg => {
-            if (!formsList.some(f => f.id === cfg.formId)) {
-                formsList.push(buildPowerTransformationForm(cfg, character?.attributes?.breakdown, character?.attributes?.values));
-            }
-        });
-
-        return formsList;
+        const synced = syncCharacterTransformations(character);
+        return (synced && synced.forms) || character?.forms || [];
     }, [character]);
 
     const effectiveFormId = useMemo(() => {

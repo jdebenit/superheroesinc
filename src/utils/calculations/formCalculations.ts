@@ -10,6 +10,17 @@ import {
     type PowerTransformationConfig,
     type CharacterForm
 } from '../../data/werewolfOptions';
+
+export {
+    WEREWOLF_SUBTYPES,
+    POWER_TRANSFORMATIONS,
+    TRANSITION_CHARACTERISTICS_ORDER,
+    WEREWOLF_TRANSITION_FORM_ID,
+    type WerewolfSubtypeId,
+    type WerewolfSubtypeConfig,
+    type PowerTransformationConfig,
+    type CharacterForm
+};
 import {
     calculateGeneralSkillValues,
     calculateSpecialSkillValues,

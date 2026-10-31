@@ -23,8 +23,8 @@ export const useCharacterSheetData = (character: any) => {
     const specialSkillsData = calculateSpecialSkillValues(
         character.attributes?.values || {},
         character.origin?.items || [],
-        character.skills?.learning?.selected || {},
-        character.skills?.learning?.specified || {}
+        character.skills?.selected || character.skills?.learning?.selected || {},
+        character.skills?.specified || character.skills?.learning?.specified || {}
     );
 
     // Format stats for display
