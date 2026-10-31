@@ -1,5 +1,6 @@
 import { initialCharacterState } from '../data/wizardConfig';
 import { syncCharacterTransformations } from './calculations/formCalculations';
+import { syncOriginAutoPowers, syncPowerModsToAttributes } from './calculations/powerCalculations';
 import { mergeWithDefaults } from './dataCleaner';
 import type { CharacterData } from '../types/character';
 
@@ -22,11 +23,45 @@ export type CharacterAction =
     | { type: 'SYNC_TRANSFORMATIONS' };
 
 /**
- * Función pura que sincroniza las transformaciones sobre un nuevo estado si hubo cambios relevantes.
+ * Función pura que sincroniza de forma determinista y atómica:
+ * 1. Poderes innatos otorgados automáticamente por el origen/subtipo (Atlante, Troll, Tes-khar, Hadas, etc.)
+ * 2. Modificadores de características otorgados por poderes (powerMod en breakdown y values)
+ * 3. Formas y transformaciones derivadas (Hombre Lobo, Blindaje Natural, etc.)
  */
-function withTransformationsSync(state: any): any {
-    const patch = syncCharacterTransformations(state);
-    return patch ? { ...state, ...patch } : state;
+export function withTransformationsSync(state: CharacterData): CharacterData {
+    let current = state;
+
+    // 1. Sincronización de poderes innatos de origen
+    const updatedPowers = syncOriginAutoPowers(current);
+    if (updatedPowers) {
+        current = {
+            ...current,
+            powers: {
+                ...(current.powers || {}),
+                selected: updatedPowers
+            }
+        };
+    }
+
+    // 2. Sincronización de modificadores de poderes a características
+    const updatedAttributes = syncPowerModsToAttributes(current);
+    if (updatedAttributes) {
+        current = {
+            ...current,
+            attributes: updatedAttributes as any
+        };
+    }
+
+    // 3. Sincronización de transformaciones y formas alternativas (Hombre Lobo, etc.)
+    const formPatch = syncCharacterTransformations(current);
+    if (formPatch) {
+        current = {
+            ...current,
+            ...formPatch
+        };
+    }
+
+    return current;
 }
 
 /**

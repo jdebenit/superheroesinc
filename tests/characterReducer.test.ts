@@ -133,4 +133,42 @@ describe('characterReducer', () => {
         expect(state.attributes?.manualBonuses).toBeDefined();
         expect(state.attributes?.manualBonuses?.Fuerza).toBe(0);
     });
+
+    it('handles SET_ORIGINS and automatically synchronizes innate origin powers synchronously', () => {
+        const state = characterReducer(initialCharacterState as any, {
+            type: 'SET_ORIGINS',
+            payload: [
+                { 'Parahumano': ['Atlante'] }
+            ]
+        });
+
+        expect(state.origin.items).toHaveLength(1);
+        expect(state.powers?.selected).toBeDefined();
+
+        const powerIds = state.powers.selected.map((p: any) => `${p.id}${p.selectedOption ? ':' + p.selectedOption : ''}`);
+        expect(powerIds).toContain('control_del_agua');
+        expect(powerIds).toContain('superhabilidad:Idioma nativo');
+        expect(powerIds).toContain('superhabilidad:Nadar');
+        expect(powerIds).toContain('empatia_animal');
+    });
+
+    it('handles UPDATE_POWERS and automatically updates attributes with power characteristic mods (powerMod)', () => {
+        const state = characterReducer(initialCharacterState as any, {
+            type: 'UPDATE_POWERS',
+            payload: {
+                selected: [
+                    {
+                        id: 'superfuerza',
+                        origin: 'Mutante',
+                        powerMod: 40
+                    }
+                ]
+            }
+        });
+
+        expect(state.powers.selected).toHaveLength(1);
+        expect(state.attributes?.breakdown?.fuerza.powerMod).toBe(40);
+        // Base de fuerza es 40 + 40 = 80
+        expect(state.attributes?.values?.Fuerza).toBe(80);
+    });
 });
