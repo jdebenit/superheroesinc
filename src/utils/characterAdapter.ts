@@ -3,6 +3,7 @@ import { GENERAL_SKILLS } from '../data/generalSkills';
 import { hasHombreLobo, syncWerewolfState } from '../data/werewolfOptions';
 import { normalizeCharacterPowers } from './calculations/powerCalculations';
 import { normalizeCharacterSpells } from './calculations/magicCalculations';
+export { validateAndSanitizeCharacter, type CharacterValidationResult } from './characterValidation';
 
 /**
  * Adapt a character loaded from the web (JSON) to the structure expected by the Character Wizard/Viewer.

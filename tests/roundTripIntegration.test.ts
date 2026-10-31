@@ -135,10 +135,10 @@ describe('Integración Round-Trip (Wizard -> JSON -> adaptWebCharacter -> Sheet)
         const reimportedTotalPCs = calculateTotalCharacterPCs(reimported);
 
         expect(reimportedTotalPCs).toBe(originalTotalPCs);
-        expect(reimportedBreakdown.originCost).toBe(originalBreakdown.originCost);
-        expect(reimportedBreakdown.attributesCost).toBe(originalBreakdown.attributesCost);
-        expect(reimportedBreakdown.powersCost).toBe(originalBreakdown.powersCost);
-        expect(reimportedBreakdown.formsCost).toBe(originalBreakdown.formsCost);
+        expect(reimportedBreakdown.origin).toBe(originalBreakdown.origin);
+        expect(reimportedBreakdown.characteristics).toBe(originalBreakdown.characteristics);
+        expect(reimportedBreakdown.powers).toBe(originalBreakdown.powers);
+        expect(reimportedBreakdown.forms).toBe(originalBreakdown.forms);
 
         // 5. Verificación de cálculo en Sheet en ambas formas (Humana y Transición)
         const syncedPatch = syncCharacterTransformations(reimported);
@@ -209,9 +209,9 @@ describe('Integración Round-Trip (Wizard -> JSON -> adaptWebCharacter -> Sheet)
         const reimportedBreakdown = calculateCharacterPCBreakdown(reimported);
 
         expect(reimportedTotalPCs).toBe(originalTotalPCs);
-        expect(reimportedBreakdown.spellsCost).toBe(originalBreakdown.spellsCost);
-        expect(reimportedBreakdown.originCost).toBe(originalBreakdown.originCost);
-        expect(reimportedBreakdown.attributesCost).toBe(originalBreakdown.attributesCost);
+        expect(reimportedBreakdown.magic).toBe(originalBreakdown.magic);
+        expect(reimportedBreakdown.origin).toBe(originalBreakdown.origin);
+        expect(reimportedBreakdown.characteristics).toBe(originalBreakdown.characteristics);
         expect(reimported.spells.selected).toHaveLength(2);
         expect(reimported.spells.emFormula.divisor).toBe(4);
 
@@ -272,8 +272,8 @@ describe('Integración Round-Trip (Wizard -> JSON -> adaptWebCharacter -> Sheet)
         const reimportedBreakdown = calculateCharacterPCBreakdown(reimported);
 
         expect(reimportedTotal).toBe(originalTotal);
-        expect(reimportedBreakdown.techCost).toBe(originalBreakdown.techCost);
-        expect(reimportedBreakdown.attributesCost).toBe(originalBreakdown.attributesCost);
+        expect(reimportedBreakdown.techAndEquipment).toBe(originalBreakdown.techAndEquipment);
+        expect(reimportedBreakdown.characteristics).toBe(originalBreakdown.characteristics);
         expect(reimported.techModules).toHaveLength(2);
         expect(reimported.cyborgImplants).toHaveLength(1);
 

@@ -12,7 +12,7 @@ import {
     initialCharacterState
 } from '../../data/wizardConfig';
 import { mergeWithDefaults } from '../../utils/dataCleaner';
-import { adaptWebCharacter } from '../../utils/characterAdapter';
+import { adaptWebCharacter, validateAndSanitizeCharacter } from '../../utils/characterAdapter';
 import { useCharacterCalculations } from '../../hooks/wizard/useCharacterCalculations';
 import { syncCharacterTransformations } from '../../utils/calculations/formCalculations';
 import './CharacterWizard.css';
@@ -202,19 +202,27 @@ export default function CharacterWizard() {
 
             try {
                 const text = await file.text();
-                const rawImport = JSON.parse(text);
-
-                // Adapt the imported raw JSON to the wizard state format (idempotent for wizard format)
-                const adaptedImport = adaptWebCharacter(rawImport);
-
-                // Use mergeWithDefaults to ensure we have a full state even if importing a "clean" JSON
-                const importedCharacter = mergeWithDefaults(adaptedImport, initialCharacterState);
-
-                // Validate that it's a character JSON (check for key structure after merge)
-                if (!importedCharacter.name || !importedCharacter.attributes) {
-                    showToast('❌ El archivo JSON no parece ser un personaje válido.', 'error');
+                let rawImport: any;
+                try {
+                    rawImport = JSON.parse(text);
+                } catch {
+                    showToast('❌ El archivo no es un JSON válido.', 'error');
                     return;
                 }
+
+                // Validar y sanear estructuralmente la ficha
+                const validation = validateAndSanitizeCharacter(rawImport, file.name);
+                if (!validation.isValid || !validation.character) {
+                    showToast(`❌ ${validation.errors[0] || 'El archivo JSON no contiene un personaje válido.'}`, 'error');
+                    return;
+                }
+
+                if (validation.warnings.length > 0) {
+                    Logger.warn('⚠️ Advertencias al importar personaje:', validation.warnings);
+                }
+
+                // Asegurar completitud de estado mediante mergeWithDefaults
+                const importedCharacter = mergeWithDefaults(validation.character, initialCharacterState);
 
                 // Load the character
                 setCharacter(importedCharacter);

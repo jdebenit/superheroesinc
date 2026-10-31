@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import CharacterSheet from '../character/CharacterSheet';
-import { adaptWebCharacter } from '../../utils/characterAdapter';
+import { adaptWebCharacter, validateAndSanitizeCharacter } from '../../utils/characterAdapter';
 import { useJsonExport } from '../../hooks/useJsonExport';
 import { pushCharacterToTmt } from '../terminal/utils/tmtStorage';
 import { initialCharacterState } from '../../data/wizardConfig';
@@ -108,26 +108,18 @@ export default function CharacterViewer({ webCharacters = [] }: CharacterViewerP
 
             Logger.info("JSON parseado:", parsed);
 
-            // Minimal validation - just check if it's an object
-            if (!parsed || typeof parsed !== 'object') {
-                throw new Error("El archivo no es un objeto válido.");
+            // Validación y saneamiento estructural
+            const validation = validateAndSanitizeCharacter(parsed, file.name);
+            if (!validation.isValid || !validation.character) {
+                throw new Error(validation.errors[0] || "El archivo no contiene un personaje válido.");
             }
 
-            // Fallback for missing attributes OR skills
-            if (!parsed.attributes) {
-                parsed.attributes = { values: {} };
-            }
-            if (!parsed.skills) {
-                parsed.skills = { items: [] };
-            }
-
-            // Fallback for missing name
-            if (!parsed.name && !parsed.alias) {
-                parsed.name = file.name.replace(/\.json$/i, '') || "Sin Nombre";
+            if (validation.warnings.length > 0) {
+                Logger.warn("Advertencias al validar personaje:", validation.warnings);
             }
 
             // CRITICAL: Merge with defaults to avoid "blank" characters if the JSON was too clean
-            const fullData = mergeWithDefaults(parsed, initialCharacterState);
+            const fullData = mergeWithDefaults(validation.character, initialCharacterState);
 
             setError(null);
             Logger.info("Validación superada. Personaje procesado.");
