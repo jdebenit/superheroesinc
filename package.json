@@ -14,21 +14,21 @@
     "prepare": "git config core.hooksPath .githooks"
   },
   "dependencies": {
-    "@astrojs/react": "^5.0.5",
-    "@astrojs/rss": "^4.0.15",
-    "@astrojs/sitemap": "^3.7.0",
-    "astro": "^6.3.7",
-    "markdown-it": "^14.1.0",
+    "@astrojs/react": "^5.0.7",
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^6.4.8",
+    "markdown-it": "^14.3.3",
     "pdf-lib": "^1.17.1",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
     "react-vertical-timeline-component": "^4.0.0"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.10",
-    "@types/markdown-it": "^14.1.2",
-    "@types/react": "^19.2.7",
-    "@types/react-dom": "^19.2.3",
+    "@astrojs/check": "^0.9.12",
+    "@types/markdown-it": "^14.2.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "@types/react-vertical-timeline-component": "^3.3.6",
     "typescript": "^6.0.3",
     "vitest": "^5.0.5"
