@@ -1,6 +1,7 @@
 import { SPELLS, type Spell } from '../../data/spells';
 import { POWERS } from '../../data/powers';
 import { hasSubtype } from './originFlags';
+import { getCharacteristicValue } from './powerCalculations';
 
 /**
  * Normalizes a spell ID or name for case/accent/symbol-insensitive comparison.
@@ -118,12 +119,6 @@ export const normalizeCharacterSpells = (
     return normalized;
 };
 
-/**
- * Gets the value of a characteristic from character data.
- */
-export const getCharacteristicValue = (data: any, charName: string): number => {
-    return data?.attributes?.values?.[charName] || 0;
-};
 
 /**
  * Calculates Magical Energy (EM) based on characteristics, power modifiers, Semidemonio bonus, and level.

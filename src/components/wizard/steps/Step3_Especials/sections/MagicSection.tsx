@@ -2,7 +2,7 @@ import React from 'react';
 import { SPELLS, type Spell } from '../../../../../data/spells';
 import { calculateEM, hasSubtype, getCharacterOriginFlags } from '../utils';
 import type { SelectedPower, SelectedSpell } from '../types';
-import type { CharacterOriginFlags } from '../../../../types/character';
+import type { CharacterOriginFlags } from '../../../../../types/character';
 import { WizardSection } from '../../../shared/layout/WizardSection';
 import { DeleteRowButton } from '../../../shared/ui/DeleteRowButton';
 import { CostBadge } from '../../../shared/ui/CostBadge';

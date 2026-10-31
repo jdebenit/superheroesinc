@@ -1,7 +1,7 @@
 import React from 'react';
 import PowerRow from './PowerRow';
 import type { SelectedPower } from '../types';
-import type { CharacterOriginFlags } from '../../../../types/character';
+import type { CharacterOriginFlags } from '../../../../../types/character';
 import { getCharacterOriginFlags } from '../utils';
 import { WizardSection } from '../../../shared/layout/WizardSection';
 
