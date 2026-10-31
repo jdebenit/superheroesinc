@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import CharacterSheet from '../character/CharacterSheet';
 import Step1_OriginSelection from './steps/Step1_OriginSelection/index';
 import Step2_Characteristics from './steps/Step2_Characteristics/index';
@@ -7,14 +7,10 @@ import Step4_Skills from './steps/Step4_Skills/index';
 import Step5_Background from './steps/Step5_Background/index';
 import Step6_Details from './steps/Step6_Details/index';
 import Step7_Evolution from './steps/Step7_Evolution/index';
-import {
-    STEPS,
-    initialCharacterState
-} from '../../data/wizardConfig';
-import { mergeWithDefaults } from '../../utils/dataCleaner';
-import { adaptWebCharacter, validateAndSanitizeCharacter } from '../../utils/characterAdapter';
+import { STEPS } from '../../data/wizardConfig';
+import { validateAndSanitizeCharacter } from '../../utils/characterAdapter';
 import { useCharacterCalculations } from '../../hooks/wizard/useCharacterCalculations';
-import { syncCharacterTransformations } from '../../utils/calculations/formCalculations';
+import { useCharacterState } from '../../hooks/wizard/useCharacterState';
 import './CharacterWizard.css';
 
 import { WizardHelpModal } from './shared/ui/WizardHelpModal';
@@ -42,90 +38,14 @@ export default function CharacterWizard() {
         setTimeout(() => setToast(null), 3000);
     }, []);
 
-    // Initialize with default state to prevent hydration mismatch
-    const [character, setCharacter] = useState(initialCharacterState);
-
-    // Load character from localStorage on mount (Client-side only)
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            try {
-                const saved = localStorage.getItem('characterWizardState');
-                if (saved) {
-                    const parsed = JSON.parse(saved);
-
-                    // Merge with defaults to ensure full structure and handle new fields
-                    const validated = mergeWithDefaults(parsed, initialCharacterState);
-
-                    // MIGRATION: Ensure attributes have manual bonuses if missing (old saves)
-                    if (validated.attributes && !validated.attributes.manualBonuses) {
-                        validated.attributes.manualBonuses = {
-                            Fuerza: 0, Agilidad: 0, Constitución: 0,
-                            Inteligencia: 0, Percepción: 0, Voluntad: 0, Apariencia: 0
-                        };
-                    }
-
-                    Logger.log('✅ Loaded character from localStorage:', validated);
-                    setCharacter(validated);
-                }
-            } catch (e) {
-                Logger.error('❌ Error loading character from localStorage:', e);
-            }
-        }
-    }, []);
-
-    // Save character to localStorage whenever it changes
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            try {
-                localStorage.setItem('characterWizardState', JSON.stringify(character));
-                Logger.log('💾 Saved character to localStorage');
-            } catch (e) {
-                Logger.error('❌ Error saving to localStorage:', e);
-            }
-        }
-    }, [character]);
-
-    // Ensure metadata is always up to date with current version
-    useEffect(() => {
-        setCharacter((prev: any) => {
-            const currentMeta = prev.meta || {};
-            const newMeta = {
-                ...currentMeta,
-                version: APP_VERSIONS.WIZARD,
-                generator: `SHI Wizard`
-            };
-
-            // Avoid infinite loops if already matches
-            if (currentMeta.version === newMeta.version && currentMeta.generator === newMeta.generator) {
-                return prev;
-            }
-
-            Logger.log('🔄 Updating Character Metadata:', newMeta);
-            return {
-                ...prev,
-                meta: newMeta
-            };
-        });
-    }, []);
-
-
-
-    // Keep Hombre Lobo state and Power Transformations synchronized across all steps
-    useEffect(() => {
-        const updates = syncCharacterTransformations(character);
-        if (updates) {
-            setCharacter((prev: any) => ({
-                ...prev,
-                ...updates
-            }));
-        }
-    }, [
-        JSON.stringify(character.origin?.items),
-        character.werewolfParams?.subtype,
-        character.attributes?.values?.Voluntad,
-        JSON.stringify(character.attributes?.breakdown),
-        JSON.stringify(character.powers?.selected)
-    ]);
+    // Centralized Character State via Reducer & Auto-sync Hook
+    const {
+        character,
+        updateCharacter,
+        handleStepChange,
+        loadCharacter,
+        resetCharacter
+    } = useCharacterState();
 
     // Calculate total PCs using custom hook
     const { totalPCs } = useCharacterCalculations(character);
@@ -161,29 +81,12 @@ export default function CharacterWizard() {
         goToStep(stepId);
     };
 
-    const handleStepChange = (field: string, value: any) => {
-        Logger.log('🔄 handleStepChange:', field, value);
-        setCharacter((prev: any) => {
-            const newState = {
-                ...prev,
-                [field]: value
-            };
-            Logger.log('📝 New State:', newState);
-            return newState;
-        });
-    };
-
     const handleReset = () => {
         setConfirmDialog({
             message: '¿Estás seguro de que quieres reiniciar toda la creación del personaje? Esta acción no se puede deshacer.',
             onConfirm: () => {
-                setCharacter(initialCharacterState);
+                resetCharacter();
                 setCurrentStep(1);
-                // Clear localStorage
-                if (typeof window !== 'undefined') {
-                    localStorage.removeItem('characterWizardState');
-                    Logger.log('🗑️ Cleared localStorage');
-                }
                 setConfirmDialog(null);
                 showToast('Personaje reiniciado.', 'success');
             }
@@ -221,20 +124,12 @@ export default function CharacterWizard() {
                     Logger.warn('⚠️ Advertencias al importar personaje:', validation.warnings);
                 }
 
-                // Asegurar completitud de estado mediante mergeWithDefaults
-                const importedCharacter = mergeWithDefaults(validation.character, initialCharacterState);
-
-                // Load the character
-                setCharacter(importedCharacter);
+                // Load the character (reducer automatically handles defaults, migrations and transformation sync)
+                loadCharacter(validation.character);
                 setCurrentStep(1);
 
-                // Save to localStorage
-                if (typeof window !== 'undefined') {
-                    localStorage.setItem('characterWizardState', JSON.stringify(importedCharacter));
-                }
-
-                showToast(`Personaje "${importedCharacter.name}" cargado correctamente!`, 'success');
-                Logger.log('📥 Imported character:', importedCharacter);
+                showToast(`Personaje "${validation.character.name}" cargado correctamente!`, 'success');
+                Logger.log('📥 Imported character:', validation.character);
             } catch (error) {
                 Logger.error('Error importing JSON:', error);
                 showToast('Error al leer el archivo JSON. Asegúrate de que es un archivo válido.', 'error');
@@ -242,10 +137,6 @@ export default function CharacterWizard() {
         };
 
         input.click();
-    };
-
-    const updateCharacter = (updates: any) => {
-        setCharacter(prev => ({ ...prev, ...updates }));
     };
 
     const renderStepContent = () => {
