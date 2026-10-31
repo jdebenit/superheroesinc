@@ -9,8 +9,8 @@ export interface Column<T> {
 }
 
 interface DataTableProps<T> {
-    columns: Column<T>[];
-    data: T[];
+    columns: readonly Column<T>[];
+    data: readonly T[];
     emptyState?: ReactNode;
     headerColor?: string; // Hex or css var
     rowKey: (item: T, index: number) => string | number;

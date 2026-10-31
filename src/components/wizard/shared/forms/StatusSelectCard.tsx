@@ -12,7 +12,7 @@ interface OptionType {
 
 interface StatusSelectCardProps {
     title: string;
-    options: OptionType[];
+    options: readonly OptionType[];
     currentValue: string | undefined;
     field: string;
     currentObj: OptionType;

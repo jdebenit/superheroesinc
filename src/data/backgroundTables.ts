@@ -6,7 +6,7 @@ export interface BackgroundOption {
     effect?: string;
 }
 
-export const ECONOMIC_STATUS: BackgroundOption[] = [
+export const ECONOMIC_STATUS: readonly BackgroundOption[] = [
     {
         id: 'mendigo',
         label: 'Mendigo',
@@ -58,7 +58,7 @@ export const ECONOMIC_STATUS: BackgroundOption[] = [
     },
 ];
 
-export const LEGAL_STATUS: BackgroundOption[] = [
+export const LEGAL_STATUS: readonly BackgroundOption[] = [
     {
         id: 'sin_antecedentes',
         label: 'Sin antecedentes',
@@ -91,7 +91,7 @@ export const LEGAL_STATUS: BackgroundOption[] = [
     }
 ];
 
-export const SOCIAL_STATUS: BackgroundOption[] = [
+export const SOCIAL_STATUS: readonly BackgroundOption[] = [
     {
         id: 'supervillano',
         label: 'Supervillano',
@@ -124,7 +124,7 @@ export const SOCIAL_STATUS: BackgroundOption[] = [
     }
 ];
 
-export const FRIENDS_AND_ASSOCIATES: BackgroundOption[] = [
+export const FRIENDS_AND_ASSOCIATES: readonly BackgroundOption[] = [
     {
         id: 'solitario',
         label: 'Solitario',
@@ -163,7 +163,7 @@ export const FRIENDS_AND_ASSOCIATES: BackgroundOption[] = [
     }
 ];
 
-export const BASE_COVERAGE: BackgroundOption[] = [
+export const BASE_COVERAGE: readonly BackgroundOption[] = [
     {
         id: 'no_base',
         label: 'Sin base',

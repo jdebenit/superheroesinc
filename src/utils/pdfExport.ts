@@ -71,7 +71,7 @@ export async function generateCharacterSheetPDF(
     const generalSkillsData = preCalculatedData?.generalSkillsData || { skills: {} };
 
     // Lookup functions for background
-    const getLabel = (list: any[], id: string) => list.find(i => i.id === id)?.label || id;
+    const getLabel = (list: readonly any[], id: string) => list.find(i => i.id === id)?.label || id;
     const effectiveBg = getEffectiveBackground(character.background, character.level, character.modPerLevel);
 
     // 3. Mapear campos

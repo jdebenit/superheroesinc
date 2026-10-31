@@ -1,4 +1,4 @@
-import type { CyborgImplant } from '../data/cyborgImplantConfigs';
+import type { CyborgImplant } from '../data/technologicalData';
 import type { WerewolfSubtypeId } from '../data/werewolfOptions';
 
 export type CharacteristicId =

@@ -20,7 +20,7 @@ export const LevelHistoryModal: React.FC<LevelHistoryModalProps> = ({ character,
         .filter(n => !isNaN(n) && n > 1)
         .sort((a, b) => a - b);
 
-    const getBgLabel = (list: any[], id: string) => {
+    const getBgLabel = (list: readonly any[], id: string) => {
         return list.find(item => item.id === id)?.label || id;
     };
 

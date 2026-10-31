@@ -1,27 +1,34 @@
 import { SEQUELS } from './sequels';
 
 // ── ENTE (Sobrenatural) ─────────────────────────────────────────────────────
-export const ENTE_FORMS = [
+export interface OriginOptionItem {
+    id: string;
+    label: string;
+    cost: number;
+    description?: string;
+}
+
+export const ENTE_FORMS: readonly OriginOptionItem[] = [
     { id: 'humanoid', label: 'Humanoide', cost: 1, description: 'Aspecto humanoide en el plano' },
     { id: 'animal_major', label: 'Animal mayor', cost: 0, description: 'Oso, ciervo, toro...' },
     { id: 'animal_minor', label: 'Animal menor', cost: -1, description: 'Perro, gato, zorro...' }
 ];
 
-export const ENTE_EFFECTS = [
+export const ENTE_EFFECTS: readonly OriginOptionItem[] = [
     { id: 'hidden', label: 'Fácil ocultación', cost: 2, description: 'Ojos con brillo, mechones de pelo de otro color...' },
     { id: 'evident', label: 'Más evidentes', cost: 1, description: 'Cola, cuernos, pelaje de otro color llamativo...' },
     { id: 'obvious', label: 'Difíciles de ocultar', cost: 0, description: 'Emite vapor, alas, múltiples apéndices, aura brillante...' }
 ];
 
 // ── POSEÍDO (Sobrenatural) ──────────────────────────────────────────────────
-export const POSEIDO_FORMS = [
+export const POSEIDO_FORMS: readonly OriginOptionItem[] = [
     { id: 'humano', label: 'Humano', cost: 3, description: 'Apariencia completamente humana.' },
     { id: 'cambia_forma', label: 'Cambia de forma', cost: 0, description: 'Puede alternar entre forma humana y otra forma.' },
     { id: 'no_humana', label: 'Forma no humana', cost: -3, description: 'Apariencia monstruosa o extraña permanentemente. (Descuento de 3 PC)' },
 ];
 
 // ── MALDITO (Sobrenatural) ──────────────────────────────────────────────────
-export const MALDITO_MAGNITUDE = [
+export const MALDITO_MAGNITUDE: readonly OriginOptionItem[] = [
     { id: 'use_power', label: 'Consecuencias al usar poder', description: 'Cada vez que usa su poder alguien sufre al completo las consecuencias de este. Ejemplo: teletransporta a otro al azar.', cost: 0 },
     { id: 'own_consequences', label: 'Sufre consecuencias propias', description: 'Puede sufrir las consecuencias de su propio poder. Ejemplo: si domina a alguien, cualquiera puede ordenarle a él.', cost: 0 },
     { id: 'hard_to_hide', label: 'Difíciles de ocultar', description: 'Emite vapor, alas, múltiples apéndices, tiene un aura brillante, etc.', cost: 2 },
@@ -33,7 +40,7 @@ export const MALDITO_MAGNITUDE = [
     { id: 'marked', label: 'Marca reconocible', description: 'Marca visible (ojo negro, marca en pecho). Alguien con Magia/Ocultismo puede detectar que está maldito.', cost: 5 },
 ];
 
-export const MALDITO_SOURCE = [
+export const MALDITO_SOURCE: readonly { id: string; label: string; description: string }[] = [
     { id: 'family_burden', label: 'Carga familiar', description: 'Su familia siempre ha sido portadora de la maldición.' },
     { id: 'arcane_curse', label: 'Hechizo Arcano', description: 'Un arcano lanzó un hechizo con rango de Maestría en "Maldecir" sobre él.' },
     { id: 'contagion', label: 'Contagio', description: 'Otro maldito le contagió la maldición.' },
@@ -48,7 +55,7 @@ export const MALDITO_DATA = {
 };
 
 // ── ALTERADO ────────────────────────────────────────────────────────────────
-export const ALTERADO_AGENTS = [
+export const ALTERADO_AGENTS: readonly { id: string; label: string; cost: number }[] = [
     { id: 'nuclear', label: 'Energía nuclear', cost: 0 },
     { id: 'electromagnetic', label: 'Accidente con energía electromagnética', cost: 0 },
     { id: 'space_energy', label: 'Energía espacial desconocida', cost: 0 },

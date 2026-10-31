@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { useMagicSectionLogic } from '../src/components/wizard/steps/Step3_Especials/hooks/useMagicSectionLogic';
-import { calculateOriginCost } from '../src/data/originCosts';
+import { calculateOriginCost } from '../src/utils/calculations/originCalculations';
 import { SPECIAL_SKILLS, isSkillAllowed, hasConocimientoEsferas } from '../src/data/specialSkills';
 import {
     WEREWOLF_SUBTYPES,

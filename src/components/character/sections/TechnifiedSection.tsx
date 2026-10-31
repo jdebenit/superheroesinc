@@ -1,7 +1,10 @@
 import React from 'react';
-import { EXOSKELETON_ARMOR_CONFIGS } from '../../../data/exoskeletonArmorConfigs';
-import { TECHNOSUIT_STRENGTH_CONFIGS } from '../../../data/technoSuitStrengthConfigs';
-import { CYBORG_IMPLANT_STATS, CYBORG_IMPLANT_STRENGTHS } from '../../../data/cyborgImplantConfigs';
+import {
+    EXOSKELETON_ARMOR_CONFIGS,
+    TECHNOSUIT_STRENGTH_CONFIGS,
+    CYBORG_IMPLANT_STATS,
+    CYBORG_IMPLANT_STRENGTHS
+} from '../../../data/technologicalData';
 
 interface TechnifiedSectionProps {
     character: any;

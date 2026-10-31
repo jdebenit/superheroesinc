@@ -1,5 +1,11 @@
+export interface DivineFocusOption {
+    id: string;
+    label: string;
+    description: string;
+    cost: number;
+}
 
-export const DIVINE_FOCUS_OPTIONS = [
+export const DIVINE_FOCUS_OPTIONS: readonly DivineFocusOption[] = [
     {
         id: 'no_focus',
         label: 'No necesita foco',
@@ -18,4 +24,6 @@ export const DIVINE_FOCUS_OPTIONS = [
         description: 'Imprescindible para usar cualquier poder.',
         cost: 0
     }
-];
+] as const;
+
+export type DivineFocusId = typeof DIVINE_FOCUS_OPTIONS[number]['id'];

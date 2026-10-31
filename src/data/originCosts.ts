@@ -1,7 +1,6 @@
-import Logger from '../utils/Logger';
-
 /**
- * Costes en Puntos de Coste (PCs) para cada origen y subtipo
+ * Costes en Puntos de Coste (PCs) para cada origen y subtipo.
+ * Tabla pura y declarativa de reglas.
  */
 
 export interface OriginCosts {
@@ -137,63 +136,3 @@ export const ORIGIN_COSTS: { [key: string]: OriginCosts } = {
         }
     }
 };
-
-/**
- * Calcula el coste total en PCs basado en los orígenes seleccionados
- */
-export function calculateOriginCost(originItems: any[]): number {
-    let totalCost = 0;
-
-    if (!originItems || originItems.length === 0) {
-        return 0;
-    }
-
-    originItems.forEach((item: any) => {
-        // El item puede ser un objeto con el nombre del origen como key
-        const originName = Object.keys(item)[0];
-        const subtypesList = item[originName] || [];
-
-        Logger.log("Processing origin:", originName, "with subtypes:", subtypesList);
-
-        // Buscar en ORIGIN_COSTS
-        let found = false;
-
-        // Caso 1: Es un origen directo (Vigilante, Guardián, etc.)
-        if (ORIGIN_COSTS[originName]) {
-            const costData = ORIGIN_COSTS[originName];
-            totalCost += costData.base || 0;
-            Logger.log(`  Added base cost for ${originName}: ${costData.base || 0}`);
-            found = true;
-
-            // Si tiene subtipos, sumar sus costes
-            if (costData.subtypes && subtypesList.length > 0) {
-                subtypesList.forEach((subtypeName: string) => {
-                    const subtypeCost = costData.subtypes![subtypeName] || 0;
-                    totalCost += subtypeCost;
-                    Logger.log(`  Added subtype cost for ${subtypeName}: ${subtypeCost}`);
-                });
-            }
-        }
-
-        // Caso 2: Es un subtipo de una categoría (Dios, Semidios, etc.)
-        if (!found) {
-            for (const categoryName in ORIGIN_COSTS) {
-                const categoryData = ORIGIN_COSTS[categoryName];
-                if (categoryData.subtypes && categoryData.subtypes[originName]) {
-                    const subtypeCost = categoryData.subtypes[originName];
-                    totalCost += subtypeCost;
-                    Logger.log(`  Added cost for ${originName} (subtipo de ${categoryName}): ${subtypeCost}`);
-                    found = true;
-                    break;
-                }
-            }
-        }
-
-        if (!found) {
-            Logger.warn(`No cost found for origin: ${originName}`);
-        }
-    });
-
-    Logger.log("Total cost:", totalCost);
-    return totalCost;
-}

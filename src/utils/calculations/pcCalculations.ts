@@ -1,5 +1,5 @@
-import { forEachOriginAndSubtype } from './originCalculations';
-import { calculateOriginCost } from '../../data/originCosts';
+import { forEachOriginAndSubtype, calculateOriginCost } from './originCalculations';
+
 import { calculateGeneralSkillValues, calculateSpecialSkillsPCWithInt } from './skillCalculations';
 import {
     ECONOMIC_STATUS,
@@ -8,14 +8,18 @@ import {
     FRIENDS_AND_ASSOCIATES,
     BASE_COVERAGE
 } from '../../data/backgroundTables';
-import { EXOSKELETON_CONFIGS } from '../../data/exoskeletonConfigs';
-import { EXOSKELETON_ARMOR_CONFIGS } from '../../data/exoskeletonArmorConfigs';
-import { TECHNOSUIT_STRENGTH_CONFIGS } from '../../data/technoSuitStrengthConfigs';
-import { INCOME_SOURCES } from '../../data/technologicalOptions';
+import {
+    INCOME_SOURCES,
+    EXOSKELETON_CONFIGS,
+    EXOSKELETON_ARMOR_CONFIGS,
+    TECHNOSUIT_STRENGTH_CONFIGS,
+    CYBORG_IMPLANT_STATS,
+    CYBORG_IMPLANT_STRENGTHS,
+    type CyborgImplant
+} from '../../data/technologicalData';
 import { SEQUELS } from '../../data/sequels';
 import { GUARDIAN_QUALITIES } from '../../data/guardianOptions';
 import { DIVINE_FOCUS_OPTIONS } from '../../data/divineOptions';
-import { CYBORG_IMPLANT_STATS, CYBORG_IMPLANT_STRENGTHS, type CyborgImplant } from '../../data/cyborgImplantConfigs';
 import { hasHombreLobo, getWerewolfSubtypeConfig, WEREWOLF_TRANSITION_FORM_ID } from '../../data/werewolfOptions';
 import {
     ENTE_FORMS,

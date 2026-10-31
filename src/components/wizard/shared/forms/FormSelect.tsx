@@ -12,7 +12,7 @@ export interface FormSelectProps {
     label: string;
     value: string;
     onChange: (value: string) => void;
-    options: FormSelectOption[];
+    options: readonly FormSelectOption[];
     placeholder?: string;
     labelColor?: string;
     showDescription?: boolean;

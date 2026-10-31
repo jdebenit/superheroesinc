@@ -4,11 +4,14 @@ import {
     calculateTotalCharacterPCs
 } from '../src/utils/calculations/pcCalculations';
 import { buildWerewolfTransitionForm } from '../src/data/werewolfOptions';
-import { EXOSKELETON_CONFIGS } from '../src/data/exoskeletonConfigs';
-import { EXOSKELETON_ARMOR_CONFIGS } from '../src/data/exoskeletonArmorConfigs';
-import { TECHNOSUIT_STRENGTH_CONFIGS } from '../src/data/technoSuitStrengthConfigs';
-import { CYBORG_IMPLANT_STATS, CYBORG_IMPLANT_STRENGTHS } from '../src/data/cyborgImplantConfigs';
-import { INCOME_SOURCES } from '../src/data/technologicalOptions';
+import {
+    EXOSKELETON_CONFIGS,
+    EXOSKELETON_ARMOR_CONFIGS,
+    TECHNOSUIT_STRENGTH_CONFIGS,
+    CYBORG_IMPLANT_STATS,
+    CYBORG_IMPLANT_STRENGTHS,
+    INCOME_SOURCES
+} from '../src/data/technologicalData';
 import { SEQUELS } from '../src/data/sequels';
 import { GUARDIAN_QUALITIES } from '../src/data/guardianOptions';
 import { DIVINE_FOCUS_OPTIONS } from '../src/data/divineOptions';

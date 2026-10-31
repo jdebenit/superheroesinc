@@ -12,7 +12,7 @@ export interface RadioSelectColumn<T> {
 
 interface RadioSelectTableProps<T extends { id: string }> {
     columns: RadioSelectColumn<T>[];
-    rows: T[];
+    rows: readonly T[];
     selectedId: string | null;
     onSelect: (id: string | null) => void;
 }
