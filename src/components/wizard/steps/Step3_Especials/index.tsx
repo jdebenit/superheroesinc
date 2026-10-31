@@ -38,6 +38,9 @@ export default function Step3_Especials({ data, onChange, onShowToast, onShowHel
         // State
         modalOpen, setModalOpen, modalType, modalOriginFilter,
 
+        // Origin Flags
+        originFlags,
+
         // Flags
         isGuardianChar, isMalditoChar, isParahumano, isParahumanoHybrid,
         isMago, isDotado, isHibrido, isTerrano, isPoseido, isElfoMagico,
@@ -259,35 +262,8 @@ export default function Step3_Especials({ data, onChange, onShowToast, onShowHel
                 onUpdateOption={updatePowerOption}
                 onUpdateCustomizations={updatePowerCustomizations}
                 onRemove={removePower}
-                isGuardian={isGuardianChar}
-                isAlterado={isAlterado || isParahumanoHybrid}
-                isVampiro={isVampiro}
-                isHombreLobo={isHombreLobo}
+                originFlags={originFlags}
                 werewolfSubtype={data.werewolfParams?.subtype}
-                isSemidemonio={isSemidemonio}
-                isMaldito={isMalditoChar}
-                isEnte={isEnte}
-                isThals={isThals}
-                isDivino={isDivino}
-                isTerrano={isTerrano}
-                isDotado={isDotado}
-                isCosmico={isCosmico}
-                isMutante={isMutante}
-                isTesKhar={isTesKhar}
-                isAtlante={isAtlante}
-                isParahumanoHybrid={isParahumanoHybrid}
-                isTroll={isTroll}
-                isPoseido={isPoseido}
-                isEnano={isEnano}
-                isGrifo={isGrifo}
-                isElfoFisico={isElfoFisico}
-                isElfoPsiquico={isElfoPsiquico}
-                isHadaEter={isHadaEter}
-                isHadaAire={isHadaAire}
-                isHadaFuego={isHadaFuego}
-                isHadaAgua={isHadaAgua}
-                isHadaTierra={isHadaTierra}
-                isHibrido={isHibrido}
             />
 
             {hasEM && (
@@ -296,15 +272,7 @@ export default function Step3_Especials({ data, onChange, onShowToast, onShowHel
                     selectedSpells={selectedSpells}
                     selectedPowers={selectedPowers}
                     emFormula={emFormula}
-                    hasEMFormula={hasEMFormula}
-                    isMago={isMago}
-                    isDotado={isDotado}
-                    isHibrido={isHibrido}
-                    isTerrano={isTerrano}
-                    isPoseido={isPoseido}
-                    isElfoMagico={isElfoMagico}
-                    isHadaEter={isHadaEter}
-                    isLiberado={isLiberado}
+                    originFlags={originFlags}
                     onOpenSpellModal={() => openModal('spells')}
                     onUpdateEMFormula={updateEMFormula}
                     onUpdateSpellRank={updateSpellRank}

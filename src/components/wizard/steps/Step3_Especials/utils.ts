@@ -3,7 +3,8 @@ export {
     hasSubtype,
     isGuardian,
     isMaldito,
-    getVigilanteSpecialties
+    getVigilanteSpecialties,
+    getCharacterOriginFlags
 } from '../../../../utils/calculations/originFlags';
 
 export {

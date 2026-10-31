@@ -10,7 +10,12 @@ import {
     type PowerTransformationConfig,
     type CharacterForm
 } from '../../data/werewolfOptions';
-import { calculateGeneralSkillValues, calculateSpecialSkillValues } from './skillCalculations';
+import {
+    calculateGeneralSkillValues,
+    calculateSpecialSkillValues,
+    formatGeneralSkillItems,
+    formatSpecialSkillItems
+} from './skillCalculations';
 import { calculateDerivedStats, formatDerivedStats, applyStatsOverrides } from './derivedStatsCalculations';
 
 export function getWerewolfSubtypeConfig(subtype?: string | null): WerewolfSubtypeConfig {
@@ -442,49 +447,14 @@ export function getCharacterForActiveForm(character: any, activeFormId: string):
     );
 
     const nativeLanguage = character.skills?.nativeLanguage || '';
-    const generalItems = Object.keys(finalFormGeneral.skills).map(id => {
-        const skillDef = GENERAL_SKILLS.find(s => s.id === id);
-        const val = finalFormGeneral.skills[id];
-        let name = skillDef?.name || id;
-        if (id === 'idioma' && nativeLanguage) {
-            name = `${name} (${nativeLanguage})`;
-        }
-        return {
-            name,
-            math: skillDef?.formulaText || '',
-            value: `${val.total}%`
-        };
-    });
+    const generalItems = formatGeneralSkillItems(finalFormGeneral.skills, nativeLanguage);
 
     let specialItems = character.skills?.specialItems || [];
     const selected = character.skills?.selected || {};
     const specified = character.skills?.specified || {};
     if (Object.keys(selected).length > 0 || Object.keys(specified).length > 0) {
         const formSpecial = calculateSpecialSkillValues(formAttrs, origins, selected, specified);
-        const stdFormatted = Object.keys(selected).map(skillId => {
-            const skillDef = SPECIAL_SKILLS.find(s => s.id === skillId);
-            const val = formSpecial.standard[skillId];
-            if (!val) return null;
-            return {
-                name: skillDef?.name || skillId,
-                math: skillDef?.formulaText || '',
-                value: `${val.total}%`
-            };
-        }).filter(Boolean);
-
-        const specFormatted = Object.keys(specified).map(uniqueId => {
-            const spec = specified[uniqueId];
-            const skillDef = SPECIAL_SKILLS.find(s => s.id === spec.skillId);
-            const val = formSpecial.specified[uniqueId];
-            if (!val) return null;
-            return {
-                name: `${skillDef?.name}: ${spec.specification}`,
-                math: skillDef?.formulaText || '',
-                value: `${val.total}%`
-            };
-        }).filter(Boolean);
-
-        specialItems = [...stdFormatted, ...specFormatted];
+        specialItems = formatSpecialSkillItems(selected, formSpecial.standard, specified, formSpecial.specified);
     }
 
     const updatedSkills = {

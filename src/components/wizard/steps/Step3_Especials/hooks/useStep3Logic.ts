@@ -12,7 +12,8 @@ import {
     calculateEM,
     isGuardian,
     isMaldito,
-    getPowerPenalty
+    getPowerPenalty,
+    getCharacterOriginFlags
 } from '../utils';
 import { getEMFormulaOptions } from '../../../../../utils/calculations/magicCalculations';
 import type { SelectedPower, SelectedSpell, TechModule, ModalType } from '../types';
@@ -23,65 +24,69 @@ export function useStep3Logic(data: any, onChange: (updates: any) => void, onSho
     const [modalType, setModalType] = useState<ModalType>(null);
     const [modalOriginFilter, setModalOriginFilter] = useState<string | null>(null);
 
-    // Initial derived flags
-    const isGuardianChar = isGuardian(data);
-    const isMalditoChar = isMaldito(data);
-    const isParahumano = hasOrigin(data, 'Parahumano');
-    const isParahumanoHybrid = isParahumano && (data.parahumanoParams?.isHybridWithHuman === true);
+    // Centralized origin flags
+    const originFlags = useMemo(() => getCharacterOriginFlags(data), [
+        data.origin?.items,
+        data.origins,
+        data.parahumanoParams,
+        data.liberadoParams,
+        data.werewolfParams
+    ]);
 
-    // Subtype flags
-    const isMago = hasSubtype(data, 'Arcano', 'Mago');
-    const isDotado = hasSubtype(data, 'Arcano', 'Dotado');
-    const isHibrido = hasSubtype(data, 'Arcano', 'Híbrido mitológico');
-    const isTerrano = hasSubtype(data, 'Arcano', 'Terrano');
-    const isPoseido = hasSubtype(data, 'Sobrenatural', 'Poseído');
-    const isElfoMagico = hasSubtype(data, 'Arcano', 'Elfo Mágico');
-    const isHadaEter = hasSubtype(data, 'Arcano', 'Hada Eter');
-    const isHadaAire = hasSubtype(data, 'Arcano', 'Hada Aire');
-    const isHadaFuego = hasSubtype(data, 'Arcano', 'Hada Fuego');
-    const isHadaAgua = hasSubtype(data, 'Arcano', 'Hada Agua');
-    const isHadaTierra = hasSubtype(data, 'Arcano', 'Hada Tierra');
-    const isGrifo = hasSubtype(data, 'Arcano', 'Grifo');
-    const isElfoFisico = hasSubtype(data, 'Arcano', 'Elfo Físico');
-    const isVampiro = hasSubtype(data, 'Sobrenatural', 'Vampiro');
-    const isHombreLobo = hasSubtype(data, 'Sobrenatural', 'Hombre Lobo');
-    const isSemidemonio = hasSubtype(data, 'Sobrenatural', 'Semidemonio');
-    const isEnte = hasSubtype(data, 'Sobrenatural', 'Ente');
-    const isThals = hasSubtype(data, 'Parahumano', 'Thals');
-    const isDios = hasSubtype(data, 'Divino', 'Dios');
-    const isDiosMenor = hasSubtype(data, 'Divino', 'Dios menor');
-    const isSemidios = hasSubtype(data, 'Divino', 'Semidios');
-    const isDivino = isDios || isDiosMenor || isSemidios;
-    const isCosmico = hasOrigin(data, 'Cósmico');
-    const isMutante = hasOrigin(data, 'Mutante');
-    const isVigilante = hasOrigin(data, 'Vigilante');
-    const isTroll = hasSubtype(data, 'Arcano', 'Troll');
-    const isMinotauro = hasSubtype(data, 'Arcano', 'Minotauro');
-    const isEnano = hasSubtype(data, 'Arcano', 'Enano');
-    const isElfoPsiquico = hasSubtype(data, 'Arcano', 'Elfo Psíquico');
-    const isTesKhar = hasSubtype(data, 'Parahumano', 'Tes-khar');
-    const isAtlante = hasSubtype(data, 'Parahumano', 'Atlante');
-    const isLiberadoEntropia = hasSubtype(data, 'Sobrenatural', 'Liberado de Entropía');
-    const isLiberadoUnidad = hasSubtype(data, 'Sobrenatural', 'Liberado de Unidad');
-    const isLiberadoEquidad = hasSubtype(data, 'Sobrenatural', 'Liberado de Equidad');
-    const isLiberado = isLiberadoEntropia || isLiberadoUnidad || isLiberadoEquidad;
-    const isAlterado = hasOrigin(data, 'Alterado');
-    const hasConocimientoEsferas = isLiberado && (Array.isArray(data.liberadoParams?.gifts) ? data.liberadoParams.gifts.includes('conocimiento_esferas') : data.liberadoParams?.gift === 'conocimiento_esferas');
-
-    const activeLiberados = useMemo(() => [
-        isLiberadoEntropia ? 'Liberado de Entropía' : null,
-        isLiberadoUnidad ? 'Liberado de Unidad' : null,
-        isLiberadoEquidad ? 'Liberado de Equidad' : null
-    ].filter(Boolean) as string[], [isLiberadoEntropia, isLiberadoUnidad, isLiberadoEquidad]);
-
-    // Technological
-    const isTecnologico = hasOrigin(data, 'Tecnológico');
-    const isTecnoarmadura = hasSubtype(data, 'Tecnológico', 'Tecnoarmadura');
-    const isCyborg = hasSubtype(data, 'Tecnológico', 'Cyborg');
-    const isTecnovehiculo = hasSubtype(data, 'Tecnológico', 'Tecnovehículo');
-    const isExoskeleton = hasSubtype(data, 'Tecnológico', 'Exoesqueleto Energético');
-    const isInventor = hasSubtype(data, 'Tecnológico', 'Inventor o forjador');
-    const isTechnological = isTecnoarmadura || isCyborg || isTecnovehiculo || isInventor;
+    const {
+        isGuardian: isGuardianChar,
+        isMaldito: isMalditoChar,
+        isParahumano,
+        isParahumanoHybrid,
+        isMago,
+        isDotado,
+        isHibrido,
+        isTerrano,
+        isPoseido,
+        isElfoMagico,
+        isHadaEter,
+        isHadaAire,
+        isHadaFuego,
+        isHadaAgua,
+        isHadaTierra,
+        isGrifo,
+        isElfoFisico,
+        isVampiro,
+        isHombreLobo,
+        isSemidemonio,
+        isEnte,
+        isThals,
+        isDios,
+        isDiosMenor,
+        isSemidios,
+        isDivino,
+        isCosmico,
+        isMutante,
+        isVigilante,
+        isTroll,
+        isMinotauro,
+        isEnano,
+        isElfoPsiquico,
+        isTesKhar,
+        isAtlante,
+        isLiberadoEntropia,
+        isLiberadoUnidad,
+        isLiberadoEquidad,
+        isLiberado,
+        activeLiberados,
+        isAlterado,
+        isTecnologico,
+        isTecnoarmadura,
+        isCyborg,
+        isTecnovehiculo,
+        isExoskeleton,
+        isInventor,
+        isTechnological,
+        hasBaseEMOrigin,
+        hasEMFormula,
+        hasEM,
+        hasAnyOrigin
+    } = originFlags;
 
     // Selections
     const selectedPowers: SelectedPower[] = useMemo(() => {
@@ -122,20 +127,11 @@ export function useStep3Logic(data: any, onChange: (updates: any) => void, onSho
     }, [data, onChange, isLiberado]);
 
     // EM Logic
-    const hasBaseEMOrigin = isMago || isElfoMagico || isHadaEter || isDotado || isHibrido || isTerrano || isPoseido;
     const rawEmFormula = data.spells?.emFormula || (isPoseido && !isDotado && !isHibrido && !isTerrano ? { divisor: 0, pcCost: 0 } : { divisor: 4, pcCost: 0 });
     let emFormula = rawEmFormula;
     if (isMago || isElfoMagico) emFormula = { divisor: 1, pcCost: 0 };
     else if (isHadaEter) emFormula = { divisor: 2, pcCost: 0 };
     else if (!hasBaseEMOrigin && isLiberado) emFormula = { divisor: 0, pcCost: 0 };
-
-    const hasEMFormula = !isMago && !isElfoMagico && !isHadaEter && (isDotado || isHibrido || isTerrano || isPoseido);
-    const hasEM = hasBaseEMOrigin || isLiberado;
-
-    const hasAnyOrigin = isGuardianChar || isAlterado || hasEM || isVampiro || isSemidemonio || isMalditoChar ||
-        isEnte || isThals || isDivino || isCosmico || isMutante || isVigilante || isTechnological || isExoskeleton ||
-        isTesKhar || isAtlante || isParahumano || isTroll || isMinotauro || isPoseido || isEnano || isGrifo ||
-        isElfoFisico || isElfoPsiquico || isHadaEter || isHadaAire || isHadaFuego || isHadaAgua || isHadaTierra || isLiberado || isHombreLobo;
 
     // Auto-effects for EM and Powers
     useEffect(() => {
@@ -283,6 +279,9 @@ export function useStep3Logic(data: any, onChange: (updates: any) => void, onSho
     return {
         // State
         modalOpen, setModalOpen, modalType, modalOriginFilter,
+
+        // Origin Flags
+        originFlags,
 
         // Flags
         isGuardianChar, isMalditoChar, isParahumano, isParahumanoHybrid,

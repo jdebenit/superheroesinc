@@ -1,7 +1,15 @@
 import { useState, useEffect, useMemo } from 'react';
 import { GENERAL_SKILLS } from '../../../../data/generalSkills';
 import { SPECIAL_SKILLS, getSkillsByCategory } from '../../../../data/specialSkills';
-import { calculateGeneralSkillValues, calculateSpecialSkillsPCWithInt, calculateSpecialSkillValues } from '../../../../utils/characterCalculations';
+import {
+    calculateGeneralSkillValues,
+    calculateSpecialSkillsPCWithInt,
+    calculateSpecialSkillValues,
+    formatGeneralSkillItems,
+    formatSpecialSkillItems,
+    hasLiberadoOrigin,
+    hasSubtype
+} from '../../../../utils/characterCalculations';
 import { useSkillAutoEffects } from '../../../../hooks/wizard/useCharacterAutoEffects';
 
 export const useStep4Logic = (data: any, onChange: (updates: any) => void) => {
@@ -53,66 +61,23 @@ export const useStep4Logic = (data: any, onChange: (updates: any) => void) => {
 
     // Check if Liberado origin is present
     const isLiberado = useMemo(() => {
-        if (!data.origin?.items?.length) return false;
-        return data.origin.items.some((item: any) => {
-            const originName = Object.keys(item)[0];
-            const content = item[originName];
-            return Array.isArray(content) && content.some((s: string) => s.startsWith('Liberado'));
-        });
+        return hasLiberadoOrigin(data.origin?.items || []);
     }, [data.origin?.items]);
 
     // Check if Heraldo Cosmico available for General Skills section
     const isHeraldoCosmico = useMemo(() => {
-        return data.origin?.items?.some((o: any) => {
-            const originName = Object.keys(o)[0];
-            const content = o[originName] as string[];
-            return content && content.includes('Heraldo Cósmico');
-        });
+        return hasSubtype(data, 'Cósmico', 'Heraldo Cósmico');
     }, [data.origin?.items]);
 
     // Save to parent whenever data changes
     useEffect(() => {
-        // Format items for final data (General)
-        const generalItems = Object.keys(skillValues).map(id => {
-            const skillDef = GENERAL_SKILLS.find(s => s.id === id);
-            const val = skillValues[id];
-
-            let name = skillDef?.name || id;
-            if (id === 'idioma' && nativeLanguage) {
-                name = `${name} (${nativeLanguage})`;
-            }
-
-            return {
-                name: name,
-                math: skillDef?.formulaText || '',
-                value: `${val.total}%`
-            };
-        });
-
-        const specialStandardItemsFormatted = Object.keys(selectedSkills).map(skillId => {
-            const skillDef = SPECIAL_SKILLS.find(s => s.id === skillId);
-            const val = standardSpecialSkills[skillId];
-            if (!val) return null;
-            return {
-                name: skillDef?.name || skillId,
-                math: skillDef?.formulaText || '',
-                value: `${val.total}%`
-            };
-        }).filter(Boolean);
-
-        const specialSpecifiedItemsFormatted = Object.keys(specifiedSkills).map(uniqueId => {
-            const spec = specifiedSkills[uniqueId];
-            const skillDef = SPECIAL_SKILLS.find(s => s.id === spec.skillId);
-            const val = specifiedSpecialSkills[uniqueId];
-            if (!val) return null;
-            return {
-                name: `${skillDef?.name}: ${spec.specification}`,
-                math: skillDef?.formulaText || '',
-                value: `${val.total}%`
-            };
-        }).filter(Boolean);
-
-        const allSpecialItems = [...specialStandardItemsFormatted, ...specialSpecifiedItemsFormatted];
+        const generalItems = formatGeneralSkillItems(skillValues, nativeLanguage);
+        const allSpecialItems = formatSpecialSkillItems(
+            selectedSkills,
+            standardSpecialSkills,
+            specifiedSkills,
+            specifiedSpecialSkills
+        );
 
         const newSkillsData = {
             generalManualMods: manualMods,

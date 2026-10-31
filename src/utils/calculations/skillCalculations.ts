@@ -1,6 +1,7 @@
 import { GENERAL_SKILLS } from '../../data/generalSkills';
 import { SPECIAL_SKILLS } from '../../data/specialSkills';
 import { ORIGIN_SKILL_MODIFIERS } from '../../data/skillModifiers';
+import type { SkillDisplayItem } from '../../types/character';
 import Logger from '../Logger';
 
 /**
@@ -504,24 +505,27 @@ export function calculateSpecialSkillsPCWithInt(
 }
 
 /**
- * Calcula el valor base de una habilidad basado en una fórmula de atributos
- * Compatible con la llamada desde CharacterSheet (attributes, origins, formula)
+ * Calcula el valor base de una habilidad basado en una fórmula de atributos.
+ * Soporta tanto `(characteristics, origins, formula)` como `(dataOrCharacteristics, formula)`.
  */
 export function calculateSkillBase(
-    characteristics: { [key: string]: number },
-    _origins: any[] | undefined,
-    formula: string
+    characteristicsOrData: { [key: string]: any },
+    originsOrFormula: any[] | string | undefined,
+    maybeFormula?: string
 ): number {
+    const formula = typeof originsOrFormula === 'string' ? originsOrFormula : (maybeFormula || '');
     if (!formula) return 0;
+
+    const rawAttrs = characteristicsOrData?.attributes?.values || characteristicsOrData || {};
 
     const stats: { [key: string]: number } = {
         fuerza: 0, constitucion: 0, agilidad: 0, inteligencia: 0,
         percepcion: 0, apariencia: 0, voluntad: 0
     };
-    if (characteristics) {
-        Object.keys(characteristics).forEach(key => {
+    if (rawAttrs) {
+        Object.keys(rawAttrs).forEach(key => {
             const normalizedKey = key.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-            stats[normalizedKey] = Number(characteristics[key]) || 0;
+            stats[normalizedKey] = Number(rawAttrs[key]) || 0;
         });
     }
 
@@ -539,4 +543,61 @@ export function calculateSkillBase(
     } catch (e) {
         return 0;
     }
+}
+
+/**
+ * Formatea los ítems de habilidades generales para visualización y persistencia (`skills.generalItems`).
+ */
+export function formatGeneralSkillItems(
+    skillValues: Record<string, { total: number; [key: string]: any }> = {},
+    nativeLanguage: string = ''
+): SkillDisplayItem[] {
+    return Object.keys(skillValues).map(id => {
+        const skillDef = GENERAL_SKILLS.find(s => s.id === id);
+        const val = skillValues[id];
+        let name = skillDef?.name || id;
+        if (id === 'idioma' && nativeLanguage) {
+            name = `${name} (${nativeLanguage})`;
+        }
+        return {
+            name,
+            math: skillDef?.formulaText || '',
+            value: `${val.total}%`
+        };
+    });
+}
+
+/**
+ * Formatea los ítems de habilidades de aprendizaje (estándar y especificadas) para visualización y persistencia (`skills.specialItems`).
+ */
+export function formatSpecialSkillItems(
+    selectedSkills: Record<string, any> = {},
+    standardSpecialSkills: Record<string, { total: number; [key: string]: any }> = {},
+    specifiedSkills: Record<string, { skillId: string; specification: string; [key: string]: any }> = {},
+    specifiedSpecialSkills: Record<string, { total: number; [key: string]: any }> = {}
+): SkillDisplayItem[] {
+    const stdFormatted = Object.keys(selectedSkills).map(skillId => {
+        const skillDef = SPECIAL_SKILLS.find(s => s.id === skillId);
+        const val = standardSpecialSkills[skillId];
+        if (!val) return null;
+        return {
+            name: skillDef?.name || skillId,
+            math: skillDef?.formulaText || '',
+            value: `${val.total}%`
+        };
+    }).filter((item): item is SkillDisplayItem => Boolean(item));
+
+    const specFormatted = Object.keys(specifiedSkills).map(uniqueId => {
+        const spec = specifiedSkills[uniqueId];
+        const skillDef = SPECIAL_SKILLS.find(s => s.id === spec.skillId);
+        const val = specifiedSpecialSkills[uniqueId];
+        if (!val) return null;
+        return {
+            name: `${skillDef?.name}: ${spec.specification}`,
+            math: skillDef?.formulaText || '',
+            value: `${val.total}%`
+        };
+    }).filter((item): item is SkillDisplayItem => Boolean(item));
+
+    return [...stdFormatted, ...specFormatted];
 }

@@ -1,7 +1,8 @@
 import React from 'react';
 import { SPELLS, type Spell } from '../../../../../data/spells';
-import { calculateEM, hasSubtype } from '../utils';
+import { calculateEM, hasSubtype, getCharacterOriginFlags } from '../utils';
 import type { SelectedPower, SelectedSpell } from '../types';
+import type { CharacterOriginFlags } from '../../../../types/character';
 import { WizardSection } from '../../../shared/layout/WizardSection';
 import { DeleteRowButton } from '../../../shared/ui/DeleteRowButton';
 import { CostBadge } from '../../../shared/ui/CostBadge';
@@ -17,11 +18,12 @@ interface MagicSectionProps {
     selectedSpells: Array<Spell & { rank: number; selectedOption?: string }>;
     selectedPowers: SelectedPower[];
     emFormula: { divisor: number; pcCost: number };
-    hasEMFormula: boolean;
-    isMago: boolean;
-    isDotado: boolean;
-    isHibrido: boolean;
-    isTerrano: boolean;
+    originFlags?: CharacterOriginFlags;
+    hasEMFormula?: boolean;
+    isMago?: boolean;
+    isDotado?: boolean;
+    isHibrido?: boolean;
+    isTerrano?: boolean;
     isPoseido?: boolean;
     isElfoMagico?: boolean;
     isHadaEter?: boolean;
@@ -37,29 +39,33 @@ interface MagicSectionProps {
     onRemoveMagicTableRoll?: (index: number) => void;
 }
 
-export default function MagicSection({
-    data,
-    selectedSpells,
-    selectedPowers,
-    emFormula,
-    hasEMFormula,
-    isMago,
-    isDotado,
-    isHibrido,
-    isTerrano,
-    isPoseido,
-    isElfoMagico,
-    isHadaEter,
-    isLiberado,
-    onOpenSpellModal,
-    onUpdateEMFormula,
-    onUpdateSpellRank,
-    onUpdateOption,
-    onRemoveSpell,
-    magicTableRolls = [],
-    onAddMagicTableRoll,
-    onRemoveMagicTableRoll,
-}: MagicSectionProps) {
+export default function MagicSection(props: MagicSectionProps) {
+    const {
+        data,
+        selectedSpells,
+        selectedPowers,
+        emFormula,
+        originFlags,
+        onOpenSpellModal,
+        onUpdateEMFormula,
+        onUpdateSpellRank,
+        onUpdateOption,
+        onRemoveSpell,
+        magicTableRolls = [],
+        onAddMagicTableRoll,
+        onRemoveMagicTableRoll,
+    } = props;
+
+    const flags = originFlags || getCharacterOriginFlags(data);
+    const hasEMFormula = props.hasEMFormula ?? flags.hasEMFormula;
+    const isMago = props.isMago ?? flags.isMago;
+    const isDotado = props.isDotado ?? flags.isDotado;
+    const isHibrido = props.isHibrido ?? flags.isHibrido;
+    const isTerrano = props.isTerrano ?? flags.isTerrano;
+    const isPoseido = props.isPoseido ?? flags.isPoseido;
+    const isElfoMagico = props.isElfoMagico ?? flags.isElfoMagico;
+    const isHadaEter = props.isHadaEter ?? flags.isHadaEter;
+    const isLiberado = props.isLiberado ?? flags.isLiberado;
     const {
         TERRANO_TABLE_OPTIONS,
         getRollLabel,

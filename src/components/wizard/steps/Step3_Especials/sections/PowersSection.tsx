@@ -1,6 +1,8 @@
 import React from 'react';
 import PowerRow from './PowerRow';
 import type { SelectedPower } from '../types';
+import type { CharacterOriginFlags } from '../../../../types/character';
+import { getCharacterOriginFlags } from '../utils';
 import { WizardSection } from '../../../shared/layout/WizardSection';
 
 import { PixelButton } from '../../../shared/ui/PixelButton';
@@ -17,19 +19,20 @@ interface PowersSectionProps {
     onUpdateOption: (index: number, option: string) => void;
     onUpdateCustomizations: (index: number, customizations: { id: string; description: string; cost: number }[]) => void;
     onRemove: (index: number) => void;
-    // Origin flags
-    isGuardian: boolean;
-    isAlterado: boolean;
-    isVampiro: boolean;
-    isSemidemonio: boolean;
-    isMaldito: boolean;
-    isEnte: boolean;
-    isThals: boolean;
-    isDivino: boolean;
-    isTerrano: boolean;
-    isDotado: boolean;
-    isCosmico: boolean;
-    isMutante: boolean;
+    originFlags?: CharacterOriginFlags;
+    // Optional origin flags for backwards compatibility
+    isGuardian?: boolean;
+    isAlterado?: boolean;
+    isVampiro?: boolean;
+    isSemidemonio?: boolean;
+    isMaldito?: boolean;
+    isEnte?: boolean;
+    isThals?: boolean;
+    isDivino?: boolean;
+    isTerrano?: boolean;
+    isDotado?: boolean;
+    isCosmico?: boolean;
+    isMutante?: boolean;
     isTesKhar?: boolean;
     isAtlante?: boolean;
     isParahumanoHybrid?: boolean;
@@ -49,46 +52,50 @@ interface PowersSectionProps {
     werewolfSubtype?: string;
 }
 
-export default function PowersSection({
-    data,
-    selectedPowers,
-    onOpenModal,
-    onUpdateRank,
-    onUpdateMod,
-    onUpdateSkillValue,
-    onUpdateOption,
-    onUpdateCustomizations,
-    onRemove,
-    isGuardian,
-    isAlterado,
-    isVampiro,
-    isSemidemonio,
-    isMaldito,
-    isEnte,
-    isThals,
-    isDivino,
-    isTerrano,
-    isDotado,
-    isCosmico,
-    isMutante,
-    isTesKhar,
-    isAtlante,
-    isParahumanoHybrid,
-    isTroll,
-    isPoseido,
-    isEnano,
-    isGrifo,
-    isElfoFisico,
-    isElfoPsiquico,
-    isHadaEter,
-    isHadaAire,
-    isHadaFuego,
-    isHadaAgua,
-    isHadaTierra,
-    isHibrido,
-    isHombreLobo,
-    werewolfSubtype
-}: PowersSectionProps) {
+export default function PowersSection(props: PowersSectionProps) {
+    const {
+        data,
+        selectedPowers,
+        onOpenModal,
+        onUpdateRank,
+        onUpdateMod,
+        onUpdateSkillValue,
+        onUpdateOption,
+        onUpdateCustomizations,
+        onRemove,
+        originFlags
+    } = props;
+
+    const flags = originFlags || getCharacterOriginFlags(data);
+    const isGuardian = props.isGuardian ?? flags.isGuardian;
+    const isAlterado = props.isAlterado ?? (flags.isAlterado || flags.isParahumanoHybrid);
+    const isVampiro = props.isVampiro ?? flags.isVampiro;
+    const isSemidemonio = props.isSemidemonio ?? flags.isSemidemonio;
+    const isMaldito = props.isMaldito ?? flags.isMaldito;
+    const isEnte = props.isEnte ?? flags.isEnte;
+    const isThals = props.isThals ?? flags.isThals;
+    const isDivino = props.isDivino ?? flags.isDivino;
+    const isTerrano = props.isTerrano ?? flags.isTerrano;
+    const isDotado = props.isDotado ?? flags.isDotado;
+    const isCosmico = props.isCosmico ?? flags.isCosmico;
+    const isMutante = props.isMutante ?? flags.isMutante;
+    const isTesKhar = props.isTesKhar ?? flags.isTesKhar;
+    const isAtlante = props.isAtlante ?? flags.isAtlante;
+    const isParahumanoHybrid = props.isParahumanoHybrid ?? flags.isParahumanoHybrid;
+    const isTroll = props.isTroll ?? flags.isTroll;
+    const isPoseido = props.isPoseido ?? flags.isPoseido;
+    const isEnano = props.isEnano ?? flags.isEnano;
+    const isGrifo = props.isGrifo ?? flags.isGrifo;
+    const isElfoFisico = props.isElfoFisico ?? flags.isElfoFisico;
+    const isElfoPsiquico = props.isElfoPsiquico ?? flags.isElfoPsiquico;
+    const isHadaEter = props.isHadaEter ?? flags.isHadaEter;
+    const isHadaAire = props.isHadaAire ?? flags.isHadaAire;
+    const isHadaFuego = props.isHadaFuego ?? flags.isHadaFuego;
+    const isHadaAgua = props.isHadaAgua ?? flags.isHadaAgua;
+    const isHadaTierra = props.isHadaTierra ?? flags.isHadaTierra;
+    const isHibrido = props.isHibrido ?? flags.isHibrido;
+    const isHombreLobo = props.isHombreLobo ?? flags.isHombreLobo;
+    const werewolfSubtype = props.werewolfSubtype ?? data?.werewolfParams?.subtype;
     const hasAnyPowerOrigin = isGuardian || isAlterado || isVampiro || isSemidemonio || isMaldito ||
         isEnte || isThals || isDivino || isTerrano || isDotado || isCosmico || isMutante || isTesKhar || isAtlante || isTroll || isPoseido || isEnano || isGrifo || isElfoFisico || isElfoPsiquico || isHadaEter || isHadaAire || isHadaFuego || isHadaAgua || isHadaTierra || isHibrido || isHombreLobo;
 
