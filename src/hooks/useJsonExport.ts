@@ -3,7 +3,8 @@ import { APP_VERSIONS } from '../data/appVersions';
 import { calculateDiff } from '../utils/dataCleaner';
 import { initialCharacterState } from '../data/wizardConfig';
 import { calculateDerivedStats, formatDerivedStats, applyStatsOverrides } from '../utils/characterCalculations';
-import { calculateEM, hasSubtype } from '../components/wizard/steps/Step3_Especials/utils';
+import { calculateEM } from '../utils/calculations/magicCalculations';
+import { hasSubtype } from '../utils/calculations/originFlags';
 import Logger from '../utils/Logger';
 
 /**

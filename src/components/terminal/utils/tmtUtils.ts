@@ -1,4 +1,5 @@
 import { type TmtCharacterEntry } from '../hooks/useTmtStore';
+import { getInitials, getCharacterDisplayName, getCharacterSubtitle } from '../../../utils/characterDisplay';
 
 export const INITIATIVE_MODS = [
     { label: 'Ninguno', value: 0 },
@@ -12,31 +13,21 @@ export const INITIATIVE_MODS = [
  * Get the first two characters of a name as initials.
  */
 export function initials(name: string): string {
-    return name
-        .split(' ')
-        .slice(0, 2)
-        .map((w) => w[0]?.toUpperCase() ?? '')
-        .join('');
+    return getInitials(name);
 }
 
 /**
  * Get the best display name for a character (alias > name > fallback).
  */
 export function charName(entry: TmtCharacterEntry): string {
-    return entry.characterData?.alias || entry.characterData?.name || '(Sin nombre)';
+    return getCharacterDisplayName(entry.characterData);
 }
 
 /**
  * Get a formatted subtitle for a character (Name · Level).
  */
 export function charSubtitle(entry: TmtCharacterEntry): string {
-    const alias = entry.characterData?.alias;
-    const name = entry.characterData?.name;
-    const level = entry.characterData?.level ?? entry.characterData?.meta?.level;
-    const parts: string[] = [];
-    if (alias && name) parts.push(name);
-    if (level) parts.push(`Nv. ${level}`);
-    return parts.join(' · ');
+    return getCharacterSubtitle(entry.characterData);
 }
 
 /**
