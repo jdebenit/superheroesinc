@@ -1,6 +1,7 @@
 import type { Step3Props } from './types';
 import './Step3_Especials.css';
 import { useStep3Logic } from './hooks/useStep3Logic';
+import { useOptionalWizardContext } from '../../shared/context/WizardContext';
 
 // Section Components
 import OriginSpecificSections from './sections/OriginSpecificSections';
@@ -15,6 +16,7 @@ import SelectionModal from './modals/SelectionModal';
 import MagicalBondsModal from './modals/MagicalBondsModal';
 
 export default function Step3_Especials({ data, onChange, onShowToast, onShowHelp }: Step3Props) {
+    const wizardContext = useOptionalWizardContext();
     const {
         modalOpen,
         setModalOpen,
@@ -72,8 +74,12 @@ export default function Step3_Especials({ data, onChange, onShowToast, onShowHel
                         </p>
                         <button
                             onClick={() => {
-                                const originTab = document.querySelector<HTMLButtonElement>('button[title="Origen"]');
-                                if (originTab) originTab.click();
+                                if (wizardContext) {
+                                    wizardContext.goToStep(1);
+                                } else {
+                                    const originTab = document.querySelector<HTMLButtonElement>('button[title="Origen"]');
+                                    if (originTab) originTab.click();
+                                }
                             }}
                             className="wizard-button primary wizard-flex-center wizard-gap-sm"
                         >

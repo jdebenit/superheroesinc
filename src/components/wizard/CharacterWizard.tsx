@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback, type ReactNode } from 'react';
+import { useState, useRef, useCallback, useMemo, type ReactNode } from 'react';
 import Step1_OriginSelection from './steps/Step1_OriginSelection/index';
 import Step2_Characteristics from './steps/Step2_Characteristics/index';
 import Step3_Especials from './steps/Step3_Especials/index';
@@ -17,6 +17,7 @@ import { WIZARD_HELP } from '../../data/wizardHelp';
 import { WizardToast, WizardConfirm, type ToastType } from './shared/layout/WizardDialogs';
 import { WizardHeader } from './shared/layout/WizardHeader';
 import { WizardFooter } from './shared/layout/WizardFooter';
+import { WizardProvider, type WizardContextValue } from './shared/context/WizardContext';
 import type { CharacterData } from '../../types/character';
 
 interface StepRendererContext {
@@ -120,6 +121,17 @@ export default function CharacterWizard() {
 
     const openHelp = useCallback(() => setShowHelp(true), []);
 
+    const wizardContextValue = useMemo<WizardContextValue>(() => ({
+        character,
+        updateCharacter,
+        totalPCs,
+        currentStep,
+        goToStep,
+        openHelp,
+        showToast,
+        askConfirm
+    }), [character, updateCharacter, totalPCs, currentStep, goToStep, openHelp, showToast, askConfirm]);
+
     const renderStepContent = () => {
         const renderer = STEP_RENDERERS[currentStep];
         if (renderer) {
@@ -145,49 +157,51 @@ export default function CharacterWizard() {
     };
 
     return (
-        <div className="wizard-app">
-            <WizardHeader
-                currentStep={currentStep}
-                character={character}
-                totalPCs={totalPCs}
-                onStepClick={goToStep}
-                onImportJSON={handleImportJSON}
-                onReset={handleReset}
-                onShowToast={showToast}
-            />
+        <WizardProvider value={wizardContextValue}>
+            <div className="wizard-app">
+                <WizardHeader
+                    currentStep={currentStep}
+                    character={character}
+                    totalPCs={totalPCs}
+                    onStepClick={goToStep}
+                    onImportJSON={handleImportJSON}
+                    onReset={handleReset}
+                    onShowToast={showToast}
+                />
 
-            <div className="wizard-content" role="tabpanel" ref={contentRef}>
-                {renderStepContent()}
+                <div className="wizard-content" role="tabpanel" ref={contentRef}>
+                    {renderStepContent()}
+                </div>
+
+                <WizardFooter
+                    currentStep={currentStep}
+                    onPrevious={handlePrevious}
+                    onNext={handleNext}
+                    onFinish={handleFinish}
+                />
+
+                <WizardHelpModal
+                    isOpen={showHelp}
+                    onClose={() => setShowHelp(false)}
+                    content={WIZARD_HELP[currentStep]}
+                />
+
+                {toast && (
+                    <WizardToast
+                        message={toast.message}
+                        type={toast.type}
+                        onClose={() => setToast(null)}
+                    />
+                )}
+
+                {confirmDialog && (
+                    <WizardConfirm
+                        message={confirmDialog.message}
+                        onConfirm={confirmDialog.onConfirm}
+                        onCancel={() => setConfirmDialog(null)}
+                    />
+                )}
             </div>
-
-            <WizardFooter
-                currentStep={currentStep}
-                onPrevious={handlePrevious}
-                onNext={handleNext}
-                onFinish={handleFinish}
-            />
-
-            <WizardHelpModal
-                isOpen={showHelp}
-                onClose={() => setShowHelp(false)}
-                content={WIZARD_HELP[currentStep]}
-            />
-
-            {toast && (
-                <WizardToast
-                    message={toast.message}
-                    type={toast.type}
-                    onClose={() => setToast(null)}
-                />
-            )}
-
-            {confirmDialog && (
-                <WizardConfirm
-                    message={confirmDialog.message}
-                    onConfirm={confirmDialog.onConfirm}
-                    onCancel={() => setConfirmDialog(null)}
-                />
-            )}
-        </div>
+        </WizardProvider>
     );
 }
