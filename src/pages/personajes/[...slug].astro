@@ -1,40 +1,73 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { getCollection, getEntry, render } from "astro:content";
+import { getCollection, render } from "astro:content";
 import CharacterSheet from "../../components/character/CharacterSheet";
 import ShareButtons from "../../components/ShareButtons.astro";
 import { adaptWebCharacter } from "../../utils/characterAdapter";
+import {
+    buildRpgDataLookup,
+    resolveCharacterGroups,
+    resolveRealityUrl,
+    resolveRpgData,
+} from "../../utils/loreResolver";
 
 export async function getStaticPaths() {
-    const characters = await getCollection("characters");
+    const [characters, allLoreEntries, allRpgEntries] = await Promise.all([
+        getCollection("characters"),
+        getCollection("lore"),
+        getCollection("rpg"),
+    ]);
 
-    return characters.map((entry) => ({
-        params: { slug: entry.id },
-        props: { entry },
-    }));
+    const sortedChars = [...characters].sort((a, b) =>
+        (a.data.alias || a.data.name).localeCompare(
+            b.data.alias || b.data.name,
+        ),
+    );
+    const rpgLookup = buildRpgDataLookup(allRpgEntries);
+
+    return sortedChars.map((entry, index) => {
+        const prevChar = index > 0 ? sortedChars[index - 1] : null;
+        const nextChar =
+            index < sortedChars.length - 1 ? sortedChars[index + 1] : null;
+        const rpgData = resolveRpgData(entry.data.rpgId, rpgLookup);
+        const groupsData = resolveCharacterGroups(
+            entry.data.groups,
+            allLoreEntries,
+        );
+        const originRealityUrl = resolveRealityUrl(
+            entry.data.originReality,
+            allLoreEntries,
+        );
+        const actualRealityUrl = resolveRealityUrl(
+            entry.data.actualReality,
+            allLoreEntries,
+        );
+
+        return {
+            params: { slug: entry.id },
+            props: {
+                entry,
+                prevChar,
+                nextChar,
+                rpgData,
+                groupsData,
+                originRealityUrl,
+                actualRealityUrl,
+            },
+        };
+    });
 }
 
-const { entry } = Astro.props;
+const {
+    entry,
+    prevChar,
+    nextChar,
+    rpgData,
+    groupsData,
+    originRealityUrl,
+    actualRealityUrl,
+} = Astro.props;
 const { Content } = await render(entry);
-
-// Fetch RPG data if available
-let rpgData = null;
-if (entry.data.rpgId) {
-    const rpgEntry = await getEntry("rpg", entry.data.rpgId);
-    if (rpgEntry) {
-        rpgData = rpgEntry.data;
-    }
-}
-
-// Get all characters for navigation
-const allChars = (await getCollection("characters")).sort((a, b) =>
-    (a.data.alias || a.data.name).localeCompare(b.data.alias || b.data.name),
-);
-
-const currentIndex = allChars.findIndex((char) => char.id === entry.id);
-const prevChar = currentIndex > 0 ? allChars[currentIndex - 1] : null;
-const nextChar =
-    currentIndex < allChars.length - 1 ? allChars[currentIndex + 1] : null;
 
 const characterKeywords = [
     entry.data.alias || entry.data.name,
@@ -45,52 +78,6 @@ const characterKeywords = [
 ]
     .filter(Boolean)
     .join(", ");
-
-// Fetch groups for the character
-const charGroups = entry.data.groups || [];
-
-const allLoreEntries = await getCollection("lore");
-const normalizeSlug = (str: string) =>
-    str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "-").trim();
-
-const resolveRealityUrl = (realityName?: string) => {
-    if (!realityName) return null;
-    const norm = normalizeSlug(realityName);
-    const match = allLoreEntries.find(
-        (item) =>
-            item.data.category === "localizaciones" &&
-            (normalizeSlug(item.data.title) === norm || normalizeSlug(item.id.split("/").pop() || "") === norm)
-    );
-    if (!match) return null;
-    const slug = match.id.split("/").pop() || match.id;
-    return `/lore/${match.data.category}/${slug}`;
-};
-
-const originRealityUrl = resolveRealityUrl(entry.data.originReality);
-const actualRealityUrl = resolveRealityUrl(entry.data.actualReality);
-
-const groupsData: Array<{ title: string; url: string }> = [];
-if (charGroups.length > 0) {
-    const allGroups = allLoreEntries.filter(
-        (item) => item.data.category === "grupos" || item.data.category === "organizaciones"
-    );
-    for (const groupName of charGroups) {
-        const groupEntry = allGroups.find(
-            (g) => g.id.split("/").pop() === groupName
-        );
-        if (groupEntry) {
-            groupsData.push({
-                title: groupEntry.data.title,
-                url: `/lore/${groupEntry.data.category}/${groupName}`
-            });
-        } else {
-            groupsData.push({
-                title: groupName.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase()),
-                url: `/lore/grupos/${groupName}`
-            });
-        }
-    }
-}
 ---
 
 <Layout
@@ -98,6 +85,9 @@ if (charGroups.length > 0) {
     description={entry.data.description}
     keywords={characterKeywords}
     image={entry.data.image}
+    type="profile"
+    alias={entry.data.name !== entry.data.alias ? entry.data.name : entry.data.alias}
+    modifiedTime={entry.data.updatedDate?.toISOString()}
 >
     <article class="character-detail">
         <div class="breadcrumb">
@@ -283,7 +273,7 @@ if (charGroups.length > 0) {
                 {
                     rpgData && (
                         <CharacterSheet
-                            client:load
+                            client:visible
                             character={adaptWebCharacter(rpgData)}
                             mode="inline"
                         />

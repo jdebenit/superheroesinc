@@ -124,7 +124,7 @@ const { item, rpgDataMap = {}, readingTime } = Astro.props;
                                             </div>
                                             <div class="dialog-body">
                                                 <CharacterSheet
-                                                    client:load
+                                                    client:idle
                                                     character={adaptWebCharacter(
                                                         rpgDataMap[player.rpgId]
                                                     )}
@@ -209,7 +209,7 @@ const { item, rpgDataMap = {}, readingTime } = Astro.props;
                                             </div>
                                             <div class="dialog-body">
                                                 <CharacterSheet
-                                                    client:load
+                                                    client:idle
                                                     character={adaptWebCharacter(
                                                         rpgDataMap[npc.rpgId]
                                                     )}

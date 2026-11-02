@@ -5,7 +5,9 @@ interface Props {
     image?: string;
     type?: "website" | "article" | "profile";
     publishDate?: string;
+    modifiedDate?: string;
     author?: string;
+    alias?: string;
 }
 
 const {
@@ -14,7 +16,9 @@ const {
     image,
     type = "website",
     publishDate,
+    modifiedDate,
     author = "Superheroes INC.",
+    alias,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -54,7 +58,7 @@ schema["@graph"].push({
 
 // WebPage Schema
 schema["@graph"].push({
-    "@type": "WebPage",
+    "@type": type === "profile" ? "ProfilePage" : "WebPage",
     "@id": `${canonicalURL}#webpage`,
     url: canonicalURL,
     name: title,
@@ -64,6 +68,7 @@ schema["@graph"].push({
     },
     inLanguage: "es-ES",
     datePublished: publishDate,
+    dateModified: modifiedDate || publishDate,
     primaryImageOfPage: image
         ? {
               "@type": "ImageObject",
@@ -82,6 +87,7 @@ if (type === "article") {
         },
         headline: title,
         datePublished: publishDate,
+        dateModified: modifiedDate || publishDate,
         author: {
             "@type": "Person",
             name: author,
@@ -127,6 +133,7 @@ if (type === "profile") {
         "@type": "Person",
         "@id": `${canonicalURL}#person`,
         name: title,
+        alternateName: alias && alias !== title ? alias : undefined,
         description: description,
         image: image ? new URL(image, Astro.site).toString() : undefined,
         mainEntityOfPage: {

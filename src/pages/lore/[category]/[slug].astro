@@ -1,80 +1,71 @@
 ---
-import { getCollection, getEntry, render } from "astro:content";
+import { getCollection, render } from "astro:content";
 import Layout from "../../../layouts/Layout.astro";
 import CharacterSheet from "../../../components/character/CharacterSheet";
 import ActualPlayMetadata from "../../../components/ActualPlayMetadata.astro";
 import ReplayModeSelector from "../../../components/ReplayModeSelector.astro";
-import Logger from "../../../utils/Logger";
 import ShareButtons from "../../../components/ShareButtons.astro";
 import CharacterCard from "../../../components/CharacterCard";
 import { getReadingTime } from "../../../utils/readingTime";
 import { adaptWebCharacter } from "../../../utils/characterAdapter";
-
+import {
+  buildRpgDataLookup,
+  resolveGroupMembers,
+  resolveRpgData,
+} from "../../../utils/loreResolver";
 
 export async function getStaticPaths() {
-  const items = await getCollection("lore");
+  const [items, allCharacters, allRpgEntries] = await Promise.all([
+    getCollection("lore"),
+    getCollection("characters"),
+    getCollection("rpg"),
+  ]);
+
+  const rpgLookup = buildRpgDataLookup(allRpgEntries);
+
   return items.map((item) => {
     // Extract just the filename from the slug (e.g., "localizaciones/aqera" -> "aqera")
     const filename = item.id.split("/").pop() || item.id;
+    const rpgData = resolveRpgData(item.data.rpgId, rpgLookup);
+
+    const rpgDataMap: Record<string, any> = {};
+    if (item.data.category === "actual-plays") {
+      const participants = [
+        ...(item.data.players || []),
+        ...(item.data.npcs || []),
+      ];
+      for (const char of participants) {
+        if (char.rpgId && !rpgDataMap[char.rpgId]) {
+          const resolved = resolveRpgData(char.rpgId, rpgLookup);
+          if (resolved) {
+            rpgDataMap[char.rpgId] = resolved;
+          }
+        }
+      }
+    }
+
+    const groupMembers =
+      item.data.category === "grupos"
+        ? resolveGroupMembers(filename, allCharacters)
+        : [];
+
     return {
       params: { category: item.data.category, slug: filename },
-      props: item,
+      props: { item, rpgData, rpgDataMap, groupMembers },
     };
   });
 }
 
-const item = Astro.props;
+const { item, rpgData, rpgDataMap, groupMembers } = Astro.props;
 const { Content } = await render(item);
 const readingTime = getReadingTime(item.body);
-
-// Fetch RPG data if rpgId is present (for lore item itself)
-let rpgData = null;
-if (item.data.rpgId) {
-  try {
-    const rpgEntry = await getEntry("rpg", item.data.rpgId);
-    if (rpgEntry) {
-      rpgData = rpgEntry.data;
-    }
-  } catch (error) {
-    Logger.error(`Failed to load RPG data for ${item.data.rpgId}:`, error);
-  }
-}
-
-// Fetch RPG Map for Actual Plays (Players & NPCs)
-const rpgDataMap: Record<string, any> = {};
-if (item.data.category === "actual-plays") {
-  const allCharacters = [
-    ...(item.data.players || []),
-    ...(item.data.npcs || [])
-  ];
-
-  for (const char of allCharacters) {
-    if (char.rpgId && !rpgDataMap[char.rpgId]) {
-      try {
-        const normalizedId = char.rpgId.toLowerCase().replace(/[._\s]+/g, '-');
-        const entry = (await getEntry("rpg", char.rpgId)) || (await getEntry("rpg", normalizedId));
-        if (entry) {
-          rpgDataMap[char.rpgId] = entry.data;
-        }
-      } catch (e) {
-        Logger.error(`Error fetching RPG data for ${char.rpgId}:`, e);
-      }
-    }
-  }
-}
-
-// Fetch group members if category is groups
-const allCharactersForGroup = item.data.category === "grupos"
-  ? await getCollection("characters")
-  : [];
-const groupId = Astro.params.slug || "";
-const groupMembers = allCharactersForGroup.filter((char) => {
-  const charGroups = char.data.groups || [];
-  return charGroups.includes(groupId);
-}).sort((a, b) => (a.data.alias || a.data.name).localeCompare(b.data.alias || b.data.name));
 ---
 
-<Layout title={item.data.title}>
+<Layout
+  title={item.data.title}
+  description={item.data.description}
+  image={item.data.image}
+>
   <article class="lore-item-container">
     <div class="breadcrumb">
       <a href={`/lore/${item.data.category}`} class="back-link"
@@ -206,7 +197,7 @@ const groupMembers = allCharactersForGroup.filter((char) => {
           </div>
         )}
 
-        {rpgData && <CharacterSheet client:load character={adaptWebCharacter(rpgData)} mode="inline" />}
+        {rpgData && <CharacterSheet client:visible character={adaptWebCharacter(rpgData)} mode="inline" />}
 
         <ShareButtons title={item.data.title} url={Astro.url.href} />
       </main>

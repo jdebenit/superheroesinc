@@ -1,5 +1,6 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
+import { z } from 'astro/zod';
 
 const parseHistoricalDate = (val: string | Date) => {
     if (val instanceof Date) return val;
@@ -91,7 +92,7 @@ const timelineCollection = defineCollection({
 
 const rpgCollection = defineCollection({
     loader: glob({ pattern: '**/[^_]*.json', base: './src/content/rpg' }),
-    schema: z.object({
+    schema: z.looseObject({
         name: z.string().optional(),
         alias: z.string().optional(),
         totalCost: z.union([z.number(), z.string()]).optional(),
@@ -101,12 +102,12 @@ const rpgCollection = defineCollection({
             items: z.array(z.any()).optional().default([])
         }).optional(),
         other: z.array(z.string()).optional(),
-        attributes: z.object({
+        attributes: z.looseObject({
             cost: z.union([z.number(), z.string()]).optional(),
             values: z.record(z.string(), z.union([z.number(), z.string()]))
-        }).passthrough().optional(),
+        }).optional(),
         // Skills - support both old and new formats
-        skills: z.object({
+        skills: z.looseObject({
             cost: z.union([z.number(), z.string()]).optional(),
             items: z.array(z.any()).optional(), // Old format
             generalItems: z.array(z.any()).optional(), // New format
@@ -117,14 +118,14 @@ const rpgCollection = defineCollection({
                 selected: z.record(z.string(), z.any()).optional(),
                 specified: z.record(z.string(), z.any()).optional(),
             }).optional(),
-        }).passthrough().optional(),
+        }).optional(),
         specialskills: z.object({
             cost: z.union([z.number(), z.string()]).optional(),
             items: z.array(z.any()).optional().default([])
         }).optional(),
         profession: z.string().optional(),
         sexualIdentity: z.string().optional(),
-        background: z.object({
+        background: z.looseObject({
             cost: z.union([z.number(), z.string()]).optional(),
             items: z.array(z.any()).optional().default([]),
             prejudiceResistance: z.number().optional(),
@@ -132,22 +133,22 @@ const rpgCollection = defineCollection({
             legalStatus: z.string().optional(),
             socialStatus: z.string().optional(),
             friendsAndAssociates: z.string().optional(),
-        }).passthrough().optional(),
+        }).optional(),
         equipment: z.object({
             cost: z.union([z.number(), z.string()]).optional(),
             items: z.array(z.any()).optional().default([])
         }).optional(),
         // Powers - support both old and new formats
-        powers: z.object({
+        powers: z.looseObject({
             cost: z.union([z.number(), z.string()]).optional(),
             items: z.array(z.any()).optional(), // Old format
             selected: z.array(z.any()).optional(), // New format
-        }).passthrough().optional(),
-        spells: z.object({
+        }).optional(),
+        spells: z.looseObject({
             cost: z.union([z.number(), z.string()]).optional(),
             items: z.array(z.any()).optional(),
             selected: z.array(z.any()).optional(), // New format
-        }).passthrough().optional(),
+        }).optional(),
         weapons: z.object({
             cost: z.union([z.number(), z.string()]).optional(),
             items: z.array(z.any()).optional().default([])
@@ -178,15 +179,15 @@ const rpgCollection = defineCollection({
         traumas: z.record(z.string(), z.string()).optional(),
         icon: z.string().optional(),
         exoskeletonConfig: z.string().optional(),
-        meta: z.object({
+        meta: z.looseObject({
             version: z.string().optional(),
             generator: z.string().optional()
-        }).passthrough().optional(),
+        }).optional(),
         uiState: z.any().optional(),
         varios: z.object({
             items: z.array(z.any()).optional().default([])
         }).optional(),
-    }).passthrough(),
+    }),
 });
 
 const charactersCollection = defineCollection({

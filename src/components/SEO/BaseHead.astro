@@ -6,10 +6,11 @@ export interface Props {
 	description?: string;
 	keywords?: string;
 	image?: string;
-	type?: "website" | "article";
+	type?: "website" | "article" | "profile";
 	publishedTime?: string;
 	modifiedTime?: string;
 	author?: string;
+	alias?: string;
 }
 
 const {
@@ -21,6 +22,7 @@ const {
 	publishedTime,
 	modifiedTime,
 	author = "Superheroes INC.",
+	alias,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -109,9 +111,11 @@ const fullTitle = `${title} | Superheroes INC.`;
 	title={title}
 	description={description}
 	image={image}
-	type={type === "article" ? "article" : "website"}
+	type={type}
 	publishDate={publishedTime}
+	modifiedDate={modifiedTime}
 	author={author}
+	alias={alias}
 />
 
 <!-- GoatCounter Analytics -->
