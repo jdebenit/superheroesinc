@@ -1,4 +1,4 @@
-import React from 'react';
+
 import './WizardDialogs.css';
 
 export type ToastType = 'success' | 'error' | 'info';

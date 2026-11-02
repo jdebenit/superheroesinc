@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import {
     GUARDIAN_QUALITIES,
     GUARDIAN_OBJECTS,
@@ -7,7 +7,7 @@ import {
 } from '../../../../../data/guardianOptions';
 import { WizardSection } from '../../../shared/layout/WizardSection';
 import { FormSelect } from '../../../shared/forms/FormSelect';
-import { CostBadge } from '../../../shared/ui/CostBadge';
+
 import { SectionHeaderBadge } from '../../../shared/ui/SectionHeaderBadge';
 import type { GuardianParams } from '../../../../../types/character';
 

@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { WizardSection } from '../../../shared/layout/WizardSection';
 import { WizardField } from '../../../shared/forms/WizardField';
 import { InfoBox } from '../../../shared/ui/InfoBox';

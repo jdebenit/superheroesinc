@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { WizardSection } from '../../shared/layout/WizardSection';
 import { useStep6Logic } from './useStep6Logic';
 import type { BaseStepProps } from '../../../../types/character';

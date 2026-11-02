@@ -1,4 +1,4 @@
-import React from 'react';
+
 import '../TacticPlayerTerminal.css';
 
 export const CHI_MAX_BY_LEVEL: { [level: number]: number } = {

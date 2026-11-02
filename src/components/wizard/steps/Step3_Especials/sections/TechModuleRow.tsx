@@ -1,4 +1,4 @@
-import React from 'react';
+
 import type { TechModule } from '../types';
 import { TECH_MODULES } from '../../../../../data/techModules';
 import { CostBadge } from '../../../shared/ui/CostBadge';

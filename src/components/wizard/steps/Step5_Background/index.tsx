@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { ECONOMIC_STATUS, LEGAL_STATUS, SOCIAL_STATUS, FRIENDS_AND_ASSOCIATES, BASE_COVERAGE } from '../../../../data/backgroundTables';
 import { WizardSection } from '../../shared/layout/WizardSection';
 import { SectionHeaderBadge } from '../../shared/ui/SectionHeaderBadge';

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { adaptWebCharacter } from '../../../utils/characterAdapter';
+
 import Logger from '../../../utils/Logger';
 
 export interface CharacterData {

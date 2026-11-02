@@ -48,7 +48,7 @@ export const SkillRow: React.FC<SkillRowProps> = ({
     manualMod,
     total,
     isSpecial = false,
-    pcCost = 0,
+    pcCost: _pcCost = 0,
     calcPCCost = 0,
     totalPCCost = 0,
     isFree = false,

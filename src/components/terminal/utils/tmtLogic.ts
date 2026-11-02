@@ -1,5 +1,3 @@
-import { type TmtCharacterEntry } from '../hooks/tmtTypes';
-
 /**
  * Extracts maxHealth and maxMental from character data.
  * Handles both the legacy array format and the new object format.

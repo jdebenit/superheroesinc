@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { MAGICAL_BONDS } from '../../../../../data/magicalBonds';
 import '../Step3_Especials.css';
 

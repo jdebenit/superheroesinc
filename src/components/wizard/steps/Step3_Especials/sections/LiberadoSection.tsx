@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { WizardSection } from '../../../shared/layout/WizardSection';
 import { SectionHeaderBadge } from '../../../shared/ui/SectionHeaderBadge';
 import { CostBadge } from '../../../shared/ui/CostBadge';

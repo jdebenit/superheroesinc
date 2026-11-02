@@ -1,4 +1,4 @@
-import React from 'react';
+
 import PowerRow from './PowerRow';
 import type { SelectedPower } from '../types';
 import type { CharacterOriginFlags } from '../../../../../types/character';

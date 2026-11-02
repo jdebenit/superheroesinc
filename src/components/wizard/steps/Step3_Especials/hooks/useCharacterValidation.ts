@@ -1,4 +1,4 @@
-import { POWERS } from '../../../../../data/powers';
+
 import { hasSubtype } from '../utils';
 
 export function useCharacterValidation(data: any) {
@@ -11,8 +11,8 @@ export function useCharacterValidation(data: any) {
     const validatePowerSelection = (powerId: string, originFilter: string) => {
         // Terrano Restriction Logic
         if (isTerrano && originFilter === 'Guardian') {
-            const isAjeno = emFormula.divisor === 0;
-            const maxGuardianPowers = isAjeno ? 2 : 1;
+
+
 
             const isAlreadySelected = selectedPowers.some((p: any) => p.id === powerId && p.origin === 'Guardian');
 

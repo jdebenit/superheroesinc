@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './TacticMasterTerminal.css';
 import './CommonTerminal.css';
 import { APP_VERSIONS } from '../../data/appVersions';
@@ -20,7 +20,7 @@ export default function TacticMasterTerminal() {
         updateCharacterUsedActions, updateCharacterStat, updateActiveCombatGroups, toggleCharacterVisibility,
         deleteCharacterHistoryEntry, updateDetails, updateCombatState, resetAllActions, resetStore,
 
-        exportStore, importStore, reload
+        exportStore, importStore
     } = useTmtStore();
 
     useEffect(() => {

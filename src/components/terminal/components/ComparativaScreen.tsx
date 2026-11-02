@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { type TmtCharacterEntry, type TmtGroup } from '../hooks/useTmtStore';
 import { charName, initials } from '../utils/tmtUtils';
 import { POWERS } from '../../../data/powers';

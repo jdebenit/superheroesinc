@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+
 import '../TacticPlayerTerminal.css';
-import { GENERAL_SKILLS } from '../../../data/generalSkills';
-import { SPECIAL_SKILLS } from '../../../data/specialSkills';
+
+
 
 interface SkillItem {
     name: string;

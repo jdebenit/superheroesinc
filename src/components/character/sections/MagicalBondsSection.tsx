@@ -14,7 +14,7 @@ export const MagicalBondsSection: React.FC<MagicalBondsSectionProps> = ({ charac
                 <h4>Vinculaciones Mágicas</h4>
             </div>
             <ul className="clean-list">
-                {character.magicalBonds?.map((bondId: string, idx: number) => {
+                {character.magicalBonds?.map((bondId: string) => {
                     const bond = MAGICAL_BONDS.find(b => b.id === bondId);
                     if (!bond) return null;
                     return (

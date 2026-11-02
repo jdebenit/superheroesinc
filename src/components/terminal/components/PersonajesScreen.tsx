@@ -34,11 +34,11 @@ export default function PersonajesScreen({
     onToggleRole,
     onToggleGroup,
     onAddGroup,
-    onUpdateGroup,
+    onUpdateGroup: _onUpdateGroup,
     onDeleteGroup,
-    onImportStore,
-    onExportStore,
-    onResetStore
+    onImportStore: _onImportStore,
+    onExportStore: _onExportStore,
+    onResetStore: _onResetStore
 }: PersonajesScreenProps) {
     const [showGroupAdmin, setShowGroupAdmin] = useState(false);
     const [newGroupName, setNewGroupName] = useState('');

@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { TECHNOSUIT_STRENGTH_CONFIGS } from '../../../../../data/technoSuitStrengthConfigs';
 import type { TechnoSuitStrengthConfig } from '../../../../../data/technoSuitStrengthConfigs';
 import { WizardSection } from '../../../shared/layout/WizardSection';

@@ -47,7 +47,7 @@ function processFile(filePath) {
     const dateMatch = frontmatterRaw.match(/date:\s*([^\n]+)/);
     if (dateMatch) dateStr = dateMatch[1].trim();
 
-    let tags = [];
+
     const tagsMatch = frontmatterRaw.match(/tags:\s*\[(.*?)\]/);
     let originalTags = [];
     if (tagsMatch) {

@@ -1,8 +1,8 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { DIVINE_FOCUS_OPTIONS } from '../../../../../data/divineOptions';
 import { WizardSection } from '../../../shared/layout/WizardSection';
 import { FormSelect } from '../../../shared/forms/FormSelect';
-import { CostBadge } from '../../../shared/ui/CostBadge';
+
 import { SectionHeaderBadge } from '../../../shared/ui/SectionHeaderBadge';
 import { InfoBox } from '../../../shared/ui/InfoBox';
 

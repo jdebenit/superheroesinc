@@ -1,4 +1,4 @@
-import React from 'react';
+
 
 interface DetallesScreenProps {
     details: { name: string; description: string; notes: string };

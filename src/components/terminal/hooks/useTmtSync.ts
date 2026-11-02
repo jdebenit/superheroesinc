@@ -31,7 +31,7 @@ export function useTmtSync() {
 
         // Listen to BroadcastChannel (same-domain sync if storage event is not enough)
         const channel = new BroadcastChannel('shi_tmt_channel');
-        channel.onmessage = (event) => {
+        channel.onmessage = () => {
             // TMT sends SYNC_CHARACTER or generic updates
             loadTmtStore();
         };

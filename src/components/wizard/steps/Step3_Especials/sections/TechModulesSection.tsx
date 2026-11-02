@@ -1,4 +1,4 @@
-import React from 'react';
+
 import type { TechModule } from '../types';
 import { WizardSection } from '../../../shared/layout/WizardSection';
 

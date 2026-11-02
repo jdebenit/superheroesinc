@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import type { ModalType, ViewMode, TechTypeFilter } from '../types';
 import { getPowerPenalty } from '../utils';
 import '../Step3_Especials.css';
@@ -30,7 +30,7 @@ export default function SelectionModal({
     customPlaceholder,
     customTitle,
     characterData,
-    isMaldito
+    isMaldito: _isMaldito
 }: SelectionModalProps) {
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedTypeFilter, setSelectedTypeFilter] = useState<string>("Todos");

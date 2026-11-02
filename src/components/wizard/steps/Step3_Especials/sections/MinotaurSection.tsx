@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { ORIGIN_CATEGORIES } from '../../../../../data/originDefinitions';
 import { WizardSection } from '../../../shared/layout/WizardSection';
 import { InfoBox } from '../../../shared/ui/InfoBox';

@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { WizardSection } from '../../shared/layout/WizardSection';
 import { GeneralSkillsSection } from './sections/GeneralSkillsSection';
 import { SelectedSkillsSection } from './sections/SelectedSkillsSection';

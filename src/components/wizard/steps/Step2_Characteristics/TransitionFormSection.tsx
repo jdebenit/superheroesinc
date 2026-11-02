@@ -191,7 +191,7 @@ export const TransitionFormSection: React.FC<TransitionFormSectionProps> = ({
             )}
 
             <div className="step2-chars-grid">
-                {TRANSITION_CHARACTERISTICS_ORDER.map(({ id, key, abbr }) => {
+                {TRANSITION_CHARACTERISTICS_ORDER.map(({ id, abbr }) => {
                     const cfg = subtypeConfig.transitionStats[id];
                     const bd = transitionForm.attributes?.breakdown?.[id] || {
                         base: cfg.base,

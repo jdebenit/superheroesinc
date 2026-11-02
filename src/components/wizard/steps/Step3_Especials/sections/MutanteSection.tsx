@@ -1,9 +1,9 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import SequelsSelector from '../../../shared/forms/SequelsSelector';
 import { SEQUELS } from '../../../../../data/sequels';
 import { getMutantType } from '../utils';
 import { WizardSection } from '../../../shared/layout/WizardSection';
-import { CostBadge } from '../../../shared/ui/CostBadge';
+
 import { SectionHeaderBadge } from '../../../shared/ui/SectionHeaderBadge';
 import { InfoBox } from '../../../shared/ui/InfoBox';
 

@@ -1,4 +1,4 @@
-import React from 'react';
+
 import '../TacticPlayerTerminal.css';
 import Modal from './Modal';
 

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import SequelsSelector from '../../../shared/forms/SequelsSelector';
 import { SEQUELS } from '../../../../../data/sequels';
 import { WizardSection } from '../../../shared/layout/WizardSection';

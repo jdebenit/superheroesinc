@@ -22,7 +22,7 @@ const colorStyles: Record<BadgeColor, { bg: string; text: string; border: string
     gray: { bg: 'bg-gray-100', text: 'text-gray-800', border: 'border-gray-200' },
 };
 
-export const Badge: React.FC<BadgeProps> = ({ label, color = 'gray', className = '', variant = 'solid' }) => {
+export const Badge: React.FC<BadgeProps> = ({ label, color = 'gray', className = '', variant: _variant = 'solid' }) => {
     const styles = colorStyles[color];
     const baseClasses = "text-xs px-2 py-1 rounded-full font-bold inline-flex items-center justify-center";
 

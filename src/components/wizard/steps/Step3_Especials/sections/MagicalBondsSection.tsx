@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { MAGICAL_BONDS } from '../../../../../data/magicalBonds';
 import { DeleteRowButton } from '../../../shared/ui/DeleteRowButton';
 import { WizardSection } from '../../../shared/layout/WizardSection';

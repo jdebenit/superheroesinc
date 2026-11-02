@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { type TmtCharacterEntry, type TmtGroup, type HistoryEntry } from '../hooks/useTmtStore';
 import { getIniciativa, getBaseIniciativa } from '../utils/tmtUtils';
 import GroupFilterBar from './GroupFilterBar';

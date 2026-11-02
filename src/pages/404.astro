@@ -41,25 +41,25 @@ import Layout from "../layouts/Layout.astro";
     }
 
     .file-folder {
-        background-color: #f0e6d2;
+        background-color: var(--color-background);
         width: 100%;
         max-width: 600px;
         border-radius: 5px;
-        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+        box-shadow: var(--shadow-lg);
         position: relative;
-        border: 1px solid #d3c6a8;
+        border: 1px solid var(--color-border);
     }
 
     .folder-tab {
         position: absolute;
         top: -30px;
         left: 0;
-        background-color: #f0e6d2;
+        background-color: var(--color-background);
         padding: 5px 20px;
         border-radius: 5px 5px 0 0;
         font-weight: bold;
-        color: #5d4037;
-        border: 1px solid #d3c6a8;
+        color: var(--color-text-light);
+        border: 1px solid var(--color-border);
         border-bottom: none;
     }
 
@@ -75,8 +75,8 @@ import Layout from "../layouts/Layout.astro";
     }
 
     h1 {
-        font-family: "Courier New", monospace;
-        color: #333;
+        font-family: var(--font-heading);
+        color: var(--color-secondary);
         margin-bottom: 2rem;
         font-size: 2rem;
     }
@@ -88,8 +88,8 @@ import Layout from "../layouts/Layout.astro";
         transform: translate(-50%, -50%) rotate(-15deg);
         font-size: 4rem;
         font-weight: 900;
-        color: rgba(180, 0, 0, 0.3);
-        border: 5px solid rgba(180, 0, 0, 0.3);
+        color: rgba(196, 30, 58, 0.3);
+        border: 5px solid rgba(196, 30, 58, 0.3);
         padding: 0.5rem 2rem;
         text-transform: uppercase;
         pointer-events: none;
@@ -97,20 +97,20 @@ import Layout from "../layouts/Layout.astro";
     }
 
     p {
-        font-family: "Courier New", monospace;
+        font-family: var(--font-body);
         margin-bottom: 1.5rem;
         line-height: 1.6;
     }
 
     a {
-        color: #b71c1c;
+        color: var(--color-primary);
         font-weight: bold;
         text-decoration: none;
-        border-bottom: 2px solid #b71c1c;
+        border-bottom: 2px solid var(--color-primary);
     }
 
     a:hover {
-        background-color: rgba(183, 28, 28, 0.1);
+        background-color: rgba(196, 30, 58, 0.1);
     }
 
     .redacted-lines {
@@ -119,7 +119,7 @@ import Layout from "../layouts/Layout.astro";
 
     .line {
         height: 12px;
-        background-color: #333;
+        background-color: var(--color-secondary);
         margin-bottom: 10px;
         opacity: 0.8;
     }

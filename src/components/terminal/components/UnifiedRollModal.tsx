@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import '../TacticPlayerTerminal.css';
 import { SITUATIONS, DISTANCE_SITUATIONS, RANGES, COVERAGES } from '../../../data/combatData';
 import { calculateProbability, determineHitLocation } from '../../../utils/combatLogic';

@@ -1,5 +1,5 @@
 import { useEffect, useCallback, useReducer } from 'react';
-import { sanitizeStore, readFromStorage, writeToStorage, broadcastSync, TMT_STORAGE_KEY, buildEmptyStore } from '../utils/tmtStorage';
+import { sanitizeStore, readFromStorage, writeToStorage, TMT_STORAGE_KEY, buildEmptyStore } from '../utils/tmtStorage';
 import { tmtReducer, type TmtAction } from './tmtReducer';
 
 import { 

@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { WizardSection } from '../../../shared/layout/WizardSection';
 import { CostBadge } from '../../../shared/ui/CostBadge';
 import {

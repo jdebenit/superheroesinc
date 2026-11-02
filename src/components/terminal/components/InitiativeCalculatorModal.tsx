@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import '../TacticPlayerTerminal.css';
 import Modal from './Modal';
 

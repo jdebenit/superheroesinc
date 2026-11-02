@@ -5,10 +5,10 @@ import {
     type CyborgImplant
 } from '../../../../../data/cyborgImplantConfigs';
 import { WizardSection } from '../../../shared/layout/WizardSection';
-import { CostBadge } from '../../../shared/ui/CostBadge';
+
 import { SectionHeaderBadge } from '../../../shared/ui/SectionHeaderBadge';
 import { WizardField } from '../../../shared/forms/WizardField';
-import { FormSelect } from '../../../shared/forms/FormSelect';
+
 import CyborgImplantRow from './CyborgImplantRow';
 import { TableContainer } from '../../../shared/layout/TableContainer';
 import { EmptyState } from '../../../shared/ui/EmptyState';

@@ -1,6 +1,5 @@
-import React from 'react';
-import { type TmtCharacterEntry, type HistoryEntry } from '../hooks/useTmtStore';
-import { charName, initials, getIniciativa, getStatValue, openPlayerTerminal } from '../utils/tmtUtils';
+import { type TmtCharacterEntry } from '../hooks/useTmtStore';
+import { charName, initials, getStatValue, openPlayerTerminal } from '../utils/tmtUtils';
 
 
 interface CombatTableProps {
@@ -18,7 +17,7 @@ export default function CombatTable({
     currentTurn,
     onOpenEdit,
     onOpenHistory,
-    onToggleVisibility
+    onToggleVisibility: _onToggleVisibility
 }: CombatTableProps) {
 
 

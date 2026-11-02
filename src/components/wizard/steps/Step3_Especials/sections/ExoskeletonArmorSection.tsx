@@ -1,8 +1,8 @@
-import React from 'react';
+
 import { EXOSKELETON_ARMOR_CONFIGS } from '../../../../../data/exoskeletonArmorConfigs';
 import type { ExoskeletonArmorConfig } from '../../../../../data/exoskeletonArmorConfigs';
 import { WizardSection } from '../../../shared/layout/WizardSection';
-import { CostBadge } from '../../../shared/ui/CostBadge';
+
 import { SectionHeaderBadge } from '../../../shared/ui/SectionHeaderBadge';
 import { InfoBox } from '../../../shared/ui/InfoBox';
 import { RadioSelectTable } from '../../../shared/forms/RadioSelectTable';

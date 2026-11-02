@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { ARTIFACTS } from '../../../../../data/artifacts';
 import { MAGIC_OBJECTS } from '../../../../../data/magicObjects';
 import { WizardSection } from '../../../shared/layout/WizardSection';

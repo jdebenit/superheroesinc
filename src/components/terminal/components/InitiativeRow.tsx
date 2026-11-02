@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { type TmtCharacterEntry } from '../hooks/useTmtStore';
 import { initials, charName, getBaseIniciativa, getIniciativa, getAcciones, INITIATIVE_MODS, openPlayerTerminal } from '../utils/tmtUtils';
 

@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { type TmtCharacterEntry } from '../hooks/useTmtStore';
 import { initials, charName, getStatValue, openPlayerTerminal } from '../utils/tmtUtils';
 import MiniStatCard from './MiniStatCard';

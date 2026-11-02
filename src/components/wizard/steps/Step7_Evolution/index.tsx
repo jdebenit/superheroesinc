@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { WizardSection } from '../../shared/layout/WizardSection';
 import '../../shared/layout/WizardStep.css';
 import './Step7_Evolution.css';

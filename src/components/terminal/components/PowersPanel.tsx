@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import '../TacticPlayerTerminal.css';
 import UnifiedRollModal from './UnifiedRollModal';
 import { POWERS } from '../../../data/powers';

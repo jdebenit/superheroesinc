@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import '../TacticPlayerTerminal.css';
 import UnifiedRollModal from './UnifiedRollModal';
 import InitiativeCalculatorModal from './InitiativeCalculatorModal';
@@ -30,7 +30,7 @@ export default function OtherStatsPanel({ combatstats, otherstats, background }:
     const [showInitiativeCalculator, setShowInitiativeCalculator] = useState(false);
 
     // Dice Result State
-    const [diceResult, setDiceResult] = useState<{
+    const [_diceResult, _setDiceResult] = useState<{
         total: number;
         detail: string;
         originalDice: string;
