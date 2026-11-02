@@ -34,8 +34,12 @@ export const ORIGIN_CATEGORIES: { [key: string]: OriginCategory } = {
             "Heraldo Cósmico": ["Acceso a lista de poderes cósmicos", "+25 a la parada mental"]
         }
     },
+    "Guardián": {
+        name: "Guardián",
+        defaultEffects: ["Acceso a poderes de guardianes"]
+    },
     "Guardian": {
-        name: "Guardian",
+        name: "Guardián",
         defaultEffects: ["Acceso a poderes de guardianes"]
     },
     "Alterado": {
