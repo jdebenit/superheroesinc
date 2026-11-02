@@ -1,6 +1,6 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 const normalizeSearchText = (text: string) => text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-import { POWERS, type Power, type PowerType } from '../data/powers';
+import { POWERS } from '../data/powers';
 
 const ORIGINS = ["Todos", "Alterado", "Mutante", "Guardian", "Vampírico", "Cósmico", "Divino", "Thals", "Sobrenatural"];
 const POWER_TYPES = ["Todos", "Físico", "Psíquico", "Energético"];

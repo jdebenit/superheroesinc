@@ -77,6 +77,8 @@ const { item, rpgDataMap = {}, readingTime } = Astro.props;
                                             src={player.icon}
                                             alt={player.character}
                                             class="participant-icon"
+                                            loading="lazy"
+                                            decoding="async"
                                         />
                                     )}
                                     <div class="participant-info">
@@ -109,7 +111,10 @@ const { item, rpgDataMap = {}, readingTime } = Astro.props;
                                                 <div class="header-info">
                                                     <img
                                                         src={player.icon}
+                                                        alt={player.character}
                                                         class="dialog-icon"
+                                                        loading="lazy"
+                                                        decoding="async"
                                                     />
                                                     <span class="dialog-title">
                                                         {player.character}
@@ -165,6 +170,8 @@ const { item, rpgDataMap = {}, readingTime } = Astro.props;
                                             src={npc.icon}
                                             alt={npc.name}
                                             class="participant-icon"
+                                            loading="lazy"
+                                            decoding="async"
                                         />
                                     )}
                                     <div class="participant-info">
@@ -194,7 +201,10 @@ const { item, rpgDataMap = {}, readingTime } = Astro.props;
                                                 <div class="header-info">
                                                     <img
                                                         src={npc.icon}
+                                                        alt={npc.name}
                                                         class="dialog-icon"
+                                                        loading="lazy"
+                                                        decoding="async"
                                                     />
                                                     <span class="dialog-title">
                                                         {npc.name}
@@ -430,21 +440,6 @@ const { item, rpgDataMap = {}, readingTime } = Astro.props;
 
     .participant-card:hover .view-sheet-icon {
         opacity: 1;
-    }
-
-    .participant-info-row {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    .rpg-badge {
-        font-size: 0.65rem;
-        background: var(--color-secondary);
-        color: white;
-        padding: 1px 4px;
-        border-radius: 3px;
-        font-weight: bold;
     }
 
     /* Dialog/Modal Styles */

@@ -91,6 +91,7 @@ const readingTime = getReadingTime(item.body);
                 src={item.data.image}
                 alt={item.data.title}
                 class="lore-image"
+                decoding="async"
               />
             </div>
           )
@@ -410,25 +411,6 @@ const readingTime = getReadingTime(item.body);
     position: relative;
   }
 
-  /* Style for paragraphs starting with META: */
-  .lore-text :global(p:has(+ p):not(:has(strong)):not(:has(code)):not(:has(a))) {
-    /* This will be refined with JavaScript for better detection */
-  }
-
-  /* META content styling - italicized and slightly muted */
-  .lore-text :global(.meta-content) {
-    font-style: italic;
-    color: #666;
-    font-size: 0.95em;
-    display: block;
-    margin: 0.5rem 0;
-  }
-
-  /* NARR content styling - hidden by default */
-  .lore-text :global(.narr-content) {
-    display: none;
-  }
-
   /* Replay Mode Filtering - Based on data-type attributes */
   /* Using :global() to ensure styles apply to dynamically rendered content */
   
@@ -573,18 +555,6 @@ const readingTime = getReadingTime(item.body);
     color: #9966cc;
   }
 
-  /* META paragraph styling */
-  :global(.lore-text p[data-type="meta"]) {
-    font-style: italic;
-    color: #666;
-    font-size: 0.95em;
-    background: rgba(255, 235, 205, 0.3);
-    padding: 0.5rem 0.75rem;
-    border-left: 3px solid #ff9800;
-    border-radius: 4px;
-    margin: 0.75rem 0;
-  }
-
   /* Scene and Location badges */
   :global(.scene-badge),
   :global(.location-badge) {
@@ -701,6 +671,9 @@ const readingTime = getReadingTime(item.body);
     background: rgba(150, 150, 150, 0.1);
     padding: 0.5rem;
     border-left: 3px solid #999;
+    border-radius: 4px;
+    margin: 0.75rem 0;
+    color: #666;
     font-style: italic;
     font-size: 0.9rem;
   }

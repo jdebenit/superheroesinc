@@ -28,6 +28,7 @@ const isActiveLink = (href: string) => {
           class="logo-img"
           width="60"
           height="60"
+          decoding="async"
         />
         <span class="security-level">NIVEL 7</span>
       </a>
@@ -191,11 +192,6 @@ const isActiveLink = (href: string) => {
   .nav-link.active {
     border-bottom: 2px solid var(--color-primary);
     padding-bottom: 2px;
-  }
-
-  .nav-link:hover {
-    color: var(--color-primary);
-    background-color: rgba(0, 0, 0, 0.05);
   }
 
   .menu-toggle {

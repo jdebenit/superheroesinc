@@ -203,7 +203,7 @@ const allInitiationPosts = [
           <h2 class="section-title">Contenidos de Iniciación</h2>
           <div class="articles-grid">
             {allInitiationPosts.map((post) => (
-              <ComicCard {...post} client:load />
+              <ComicCard {...post} client:visible />
             ))}
           </div>
         </div>

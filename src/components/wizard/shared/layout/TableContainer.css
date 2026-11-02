@@ -26,13 +26,6 @@
     min-width: 150px;
 }
 
-.wizard-table-header-cell {
-    padding: var(--wiz-spacing-4);
-    text-align: center;
-    color: var(--wiz-color-gray-500);
-    white-space: nowrap;
-}
-
 /* Standardized header styles */
 .wizard-table-header-cell {
     padding: var(--wiz-spacing-4);

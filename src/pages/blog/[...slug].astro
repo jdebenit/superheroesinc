@@ -34,6 +34,7 @@ const readingTime = getReadingTime(post.body);
 						src={post.data.image}
 						alt={post.data.title}
 						class="post-image"
+						decoding="async"
 					/>
 				)
 			}
@@ -59,10 +60,7 @@ const readingTime = getReadingTime(post.body);
 			<Content />
 		</div>
 
-		<ShareButtons
-			title={post.data.title}
-			description={post.data.description}
-		/>
+		<ShareButtons title={post.data.title} />
 	</article>
 </Layout>
 

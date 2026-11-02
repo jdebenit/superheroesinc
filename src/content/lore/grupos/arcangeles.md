@@ -3,6 +3,7 @@ id: "arcangeles"
 title: "Arcángeles"
 description: "Los Arcángeles son el principal grupo de superhéroes de Paraíso."
 category: "grupos"
+image: "/lore/arcangeles.png"
 source: "Superhéroes INC. Tercera Edición"
 updatedDate: 2026-06-13
 ---

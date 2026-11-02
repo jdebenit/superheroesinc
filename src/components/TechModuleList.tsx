@@ -1,6 +1,6 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 const normalizeSearchText = (text: string) => text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-import { TECH_MODULES, type TechModuleDefinition } from '../data/techModules';
+import { TECH_MODULES } from '../data/techModules';
 
 const MODULE_TYPES = ["Todos", "General", "Mejora Interna"];
 

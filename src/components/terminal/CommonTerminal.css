@@ -97,6 +97,7 @@
 .reset-btn:hover,
 .terminal-btn-danger:hover {
     background: #b91c1c;
+    filter: brightness(0.95);
 }
 
 .terminal-btn-secondary,
@@ -125,10 +126,6 @@
 .tmt-add-btn:hover {
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     transform: translateY(-1px);
-}
-
-.terminal-btn-danger:hover {
-    filter: brightness(0.95);
 }
 
 /* ========================================

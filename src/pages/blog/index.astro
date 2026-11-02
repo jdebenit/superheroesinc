@@ -1,6 +1,5 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import ComicCard from "../../components/ComicCard";
 import BlogList from "../../components/BlogList";
 import { getCollection } from "astro:content";
 import { getReadingTime } from "../../utils/readingTime";
@@ -35,11 +34,5 @@ const posts = (await getCollection("blog"))
 		margin-bottom: 3rem;
 		color: var(--color-secondary);
 		text-shadow: 2px 2px 0px var(--color-primary);
-	}
-
-	.posts-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-		gap: 2rem;
 	}
 </style>

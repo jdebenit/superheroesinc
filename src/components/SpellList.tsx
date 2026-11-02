@@ -1,7 +1,7 @@
 
-import React, { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 const normalizeSearchText = (text: string) => text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-import { SPELLS, type Spell } from '../data/spells';
+import { SPELLS } from '../data/spells';
 import { SPELLS_DETAILS } from '../data/spells/index';
 
 export default function SpellList() {

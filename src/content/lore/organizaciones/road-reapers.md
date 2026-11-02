@@ -2,6 +2,7 @@
 title: "Road Reapers"
 description: "Banda de moteros criminales que opera en toda Europa, conocidos por su brutalidad y sus redes de tráfico ilícito."
 category: "organizaciones"
+image: "/lore/road-reapers.png"
 source: Partida Oficial - La Sombra del enroque
 updatedDate: 2025-12-04
 ---

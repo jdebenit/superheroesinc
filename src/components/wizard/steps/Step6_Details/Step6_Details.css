@@ -2,9 +2,6 @@
    Step 6 : Final Details
    ========================================================================= */
 
-/* .step6-container is now replaced by .wizard-step-container from shared styles */
-
-
 /* Identity Section */
 .step6-identity-grid {
     display: grid;
@@ -151,10 +148,10 @@
     border-radius: 10px;
     padding: 0.75rem;
     border: 1px solid #e2e8f0;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
-.step6-manual-stat-field :global(.wizard-field-label) {
+.step6-manual-stat-field .wizard-field-label {
     color: #ef4444; /* Force red label for combat stats when editing */
 }
 
@@ -163,13 +160,6 @@
     padding: 0.5rem 1rem;
     width: 100%;
 }
-
-@media (max-width: 768px) {
-    .step6-other-stats-container {
-        grid-template-columns: 1fr;
-    }
-}
-
 
 /* Shared Inventory Cards (Equipment, Vehicle, Artifacts, Magic Objects) */
 .inventory-card {
@@ -185,8 +175,6 @@
     gap: 0.5rem;
 }
 
-/* Grid definitions removed as they are now handled by WizardGrid component */
-
 /* Global Section Header Badge */
 .section-header-badge {
     display: flex;
@@ -195,45 +183,12 @@
 
 /* --- Responsive Adjustments --- */
 @media (max-width: 768px) {
-    .step6-container {
-        padding: 1rem;
+    .step6-other-stats-container {
+        grid-template-columns: 1fr;
     }
 
     .step6-identity-grid {
         grid-template-columns: 1fr;
         gap: 1rem;
-    }
-
-    .equipment-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .vehicle-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .vehicle-grid>*:first-child {
-        grid-column: 1 / -1;
-    }
-
-    .artifact-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .artifact-grid>*:first-child {
-        grid-column: 1 / -1;
-    }
-
-    .magic-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .weapon-row-top {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .weapon-row-top>*:first-child,
-    .weapon-row-top>*:last-child {
-        grid-column: 1 / -1;
     }
 }

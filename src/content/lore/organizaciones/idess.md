@@ -2,6 +2,7 @@
 title: "IDESS"
 description: "Multinacional dedicada al control, estudio y explotación encubierta de metahumanos. Responsable de desapariciones, lavado mental y experimentación ilegal."
 category: "organizaciones"
+image: "/lore/idess.png"
 source: "Superhéroes INC. Tercera Edición"
 updatedDate: 2025-11-26
 ---
