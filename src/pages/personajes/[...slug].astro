@@ -49,9 +49,31 @@ const characterKeywords = [
 // Fetch groups for the character
 const charGroups = entry.data.groups || [];
 
-const groupsData = [];
+const allLoreEntries = await getCollection("lore");
+const normalizeSlug = (str: string) =>
+    str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, "-").trim();
+
+const resolveRealityUrl = (realityName?: string) => {
+    if (!realityName) return null;
+    const norm = normalizeSlug(realityName);
+    const match = allLoreEntries.find(
+        (item) =>
+            item.data.category === "localizaciones" &&
+            (normalizeSlug(item.data.title) === norm || normalizeSlug(item.id.split("/").pop() || "") === norm)
+    );
+    if (!match) return null;
+    const slug = match.id.split("/").pop() || match.id;
+    return `/lore/${match.data.category}/${slug}`;
+};
+
+const originRealityUrl = resolveRealityUrl(entry.data.originReality);
+const actualRealityUrl = resolveRealityUrl(entry.data.actualReality);
+
+const groupsData: Array<{ title: string; url: string }> = [];
 if (charGroups.length > 0) {
-    const allGroups = await getCollection("lore", (item) => item.data.category === "grupos");
+    const allGroups = allLoreEntries.filter(
+        (item) => item.data.category === "grupos" || item.data.category === "organizaciones"
+    );
     for (const groupName of charGroups) {
         const groupEntry = allGroups.find(
             (g) => g.id.split("/").pop() === groupName
@@ -59,7 +81,7 @@ if (charGroups.length > 0) {
         if (groupEntry) {
             groupsData.push({
                 title: groupEntry.data.title,
-                url: `/lore/grupos/${groupName}`
+                url: `/lore/${groupEntry.data.category}/${groupName}`
             });
         } else {
             groupsData.push({
@@ -112,7 +134,13 @@ if (charGroups.length > 0) {
                         entry.data.originReality && (
                             <div class="metadata-item">
                                 <span class="label">Esfera de origen:</span>
-                                <span class="value">{entry.data.originReality}</span>
+                                <span class="value">
+                                    {originRealityUrl ? (
+                                        <a href={originRealityUrl}>{entry.data.originReality}</a>
+                                    ) : (
+                                        entry.data.originReality
+                                    )}
+                                </span>
                             </div>
                         )
                     }
@@ -120,7 +148,13 @@ if (charGroups.length > 0) {
                         entry.data.actualReality && (
                             <div class="metadata-item">
                                 <span class="label">Esfera actual:</span>
-                                <span class="value">{entry.data.actualReality}</span>
+                                <span class="value">
+                                    {actualRealityUrl ? (
+                                        <a href={actualRealityUrl}>{entry.data.actualReality}</a>
+                                    ) : (
+                                        entry.data.actualReality
+                                    )}
+                                </span>
                             </div>
                         )
                     }
@@ -161,6 +195,7 @@ if (charGroups.length > 0) {
                                             {index < groupsData.length - 1 && ", "}
                                         </>
                                     ))}
+    
                                 </span>
                             </div>
                         )
@@ -172,9 +207,18 @@ if (charGroups.length > 0) {
                         <div class="powers-section">
                             <h2>Poderes y Capacidades</h2>
                             <ul class="powers-list">
-                                {entry.data.powers.map((power) => (
-                                    <li>{power}</li>
-                                ))}
+                                {entry.data.powers.map((power) => {
+                                    const cleanPower = power.replace(/\s*\(.*?\)\s*/g, "").trim();
+                                    return (
+                                        <li>
+                                            <a href={`/recursos/poderes?q=${encodeURIComponent(cleanPower)}`} title={`Buscar "${cleanPower}" en el catálogo de poderes`}>
+                                                {power}
+                                            </a>
+                                        </li>
+                                    );
+                                })}
+
+
                             </ul>
                         </div>
                     )

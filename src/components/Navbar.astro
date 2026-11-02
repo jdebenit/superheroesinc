@@ -3,12 +3,19 @@ import Search from "../components/Search";
 
 const links = [
   { name: "Inicio", href: "/" },
+  { name: "Iniciación", href: "/iniciacion" },
   { name: "Blog", href: "/blog" },
   { name: "Archivo del Lore", href: "/lore" },
   { name: "Personajes", href: "/personajes" },
   { name: "Recursos", href: "/recursos" },
   { name: "Anexos", href: "/anexos-shi" },
 ];
+
+const currentPath = Astro.url.pathname;
+const isActiveLink = (href: string) => {
+  if (href === "/") return currentPath === "/";
+  return currentPath === href || currentPath.startsWith(`${href}/`);
+};
 ---
 
 <header class="navbar">
@@ -39,7 +46,11 @@ const links = [
           {
             links.map((link) => (
               <li>
-                <a href={link.href} class="nav-link">
+                <a
+                  href={link.href}
+                  class:list={["nav-link", { active: isActiveLink(link.href) }]}
+                  aria-current={isActiveLink(link.href) ? "page" : undefined}
+                >
                   [{link.name.toUpperCase()}]
                 </a>
               </li>
@@ -169,6 +180,17 @@ const links = [
     letter-spacing: 0.05em;
     transition: all 0.2s;
     position: relative;
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    color: var(--color-primary);
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  .nav-link.active {
+    border-bottom: 2px solid var(--color-primary);
+    padding-bottom: 2px;
   }
 
   .nav-link:hover {

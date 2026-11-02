@@ -10,7 +10,6 @@ updatedDate: 2025-11-26
 
 Su influencia es discreta pero profunda. Interviene en conflictos mágicos, protege artefactos peligrosos, rastrea entidades extraplanarias y actúa como freno cuando fuerzas arcanas —o quienes las manejan— ponen en riesgo el equilibrio del mundo.
 
-![La Alianza](https://via.placeholder.com/800x400?text=La+Alianza)
 
 ## Naturaleza y Propósito
 

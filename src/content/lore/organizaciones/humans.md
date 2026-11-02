@@ -10,7 +10,7 @@ updatedDate: 2025-11-26
 
 Su objetivo principal es **oponerse a la influencia, actividad y presencia de metahumanos** en la sociedad, especialmente aquellos de alto nivel o con capacidad para intervenir en política, seguridad o economía. No se presentan como terroristas en los documentos, pero su naturaleza “radical” y su alineación ideológica los vinculan con movimientos anti-metahumanos surgidos tras la TecnoGuerra y la aparición de Paraíso.
 
-![Humans](https://via.placeholder.com/800x400?text=Humans)
+
 
 ## Ideología y Motivaciones
 

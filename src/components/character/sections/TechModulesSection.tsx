@@ -25,7 +25,17 @@ export const TechModulesSection: React.FC<TechModulesSectionProps> = ({ techModu
                     return (
                         <li key={`${module.id}-${idx}`} className="tech-module-item">
                             <div className="tech-module-row">
-                                <span className="tech-module-name">{module.name}</span>
+                                <span className="tech-module-name">
+                                    <a
+                                        href={`/recursos/modulos-tecnologicos?q=${encodeURIComponent(definition?.name || module.name)}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="sheet-catalog-link"
+                                        title={`Ver "${definition?.name || module.name}" en el catálogo de módulos tecnológicos`}
+                                    >
+                                        {module.name}
+                                    </a>
+                                </span>
 
                                 <span className={`tech-type-tag ${type === 'Mejora Interna' ? 'tech-type-internal' : 'tech-type-external'}`}>
                                     {type}

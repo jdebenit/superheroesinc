@@ -26,7 +26,15 @@ export const PowersSection: React.FC<PowersSectionProps> = ({ character }) => {
                         <li key={`${power.id}-${idx}`} className="power-item">
                             <div className="power-row">
                                 <span className="power-name">
-                                    {powerData.name}
+                                    <a
+                                        href={`/recursos/poderes?q=${encodeURIComponent(powerData.name)}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="sheet-catalog-link"
+                                        title={`Ver "${powerData.name}" en el catálogo de poderes`}
+                                    >
+                                        {powerData.name}
+                                    </a>
                                     {power.selectedOption && (
                                         <span className="power-option">
                                             ({power.selectedOption})

@@ -152,8 +152,8 @@ const hidenresources = [
               <p>{resource.description}</p>
               <a
                 href={resource.link}
-                target="_blank"
-                rel="noopener noreferrer"
+                target={resource.link.startsWith("http") || resource.link.endsWith(".pdf") ? "_blank" : undefined}
+                rel={resource.link.startsWith("http") || resource.link.endsWith(".pdf") ? "noopener noreferrer" : undefined}
                 class="comic-button"
               >
                 {resource.link === "#" ? "Próximamente" : "ACCEDER"}
@@ -178,8 +178,8 @@ const hidenresources = [
               <p>{resource.description}</p>
               <a
                 href={resource.link}
-                target="_blank"
-                rel="noopener noreferrer"
+                target={resource.link.startsWith("http") || resource.link.endsWith(".pdf") ? "_blank" : undefined}
+                rel={resource.link.startsWith("http") || resource.link.endsWith(".pdf") ? "noopener noreferrer" : undefined}
                 class="comic-button"
               >
                 {resource.link === "#" ? "Próximamente" : "ACCEDER"}

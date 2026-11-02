@@ -10,7 +10,6 @@ updatedDate: 2025-11-26
 
 Su papel fue tan relevante que, aunque pocas veces aparecía en público, Zortek era en realidad el **auténtico músculo tecnológico** detrás de la defensa metahumana europea durante más de una década.
 
-![Zortek](https://via.placeholder.com/800x400?text=ZORTEK)
 
 ## Origen y Naturaleza
 

@@ -57,7 +57,15 @@ export const SpellsSection: React.FC<SpellsSectionProps> = ({ character }) => {
                             <DetailRow
                                 label={
                                     <span className="spell-name">
-                                        {spellData.name}
+                                        <a
+                                            href={`/recursos/hechizos?q=${encodeURIComponent(spellData.name)}`}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="sheet-catalog-link"
+                                            title={`Ver "${spellData.name}" en el catálogo de hechizos`}
+                                        >
+                                            {spellData.name}
+                                        </a>
                                         {spell.selectedOption && (
                                             <span className="spell-option">
                                                 ({spell.selectedOption})

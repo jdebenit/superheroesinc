@@ -11,7 +11,6 @@ Su presencia es especialmente destacada por un hecho:
 **Minos S.L.**, una compañía menor cuyo estatus también es desconocido, aparece catalogada explícitamente como *subsidiaria de Zelig*.  
 Esto sugiere que Zelig opera como un **conglomerado empresarial opaco**, con divisiones internas o filiales que podrían abarcar sectores sensibles.
 
-![Zelig](https://via.placeholder.com/800x400?text=ZELIG)
 
 ## Naturaleza y Perfil Corporativo
 
