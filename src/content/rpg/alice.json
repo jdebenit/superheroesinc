@@ -4,7 +4,8 @@
   "origin": {
     "items": [
       {
-        "Semidemonio": [
+        "Sobrenatural": [
+          "Semidemonio",
           "Sin límite en su percepción e intelecto.",
           "+20 a la parada mental"
         ]
@@ -100,19 +101,19 @@
     "selected": [
       {
         "id": "potenciar",
-        "origin": "Semidemonio",
+        "origin": "Sobrenatural",
         "rank": 81,
         "skillValue": 0
       },
       {
         "id": "vincular",
-        "origin": "Semidemonio",
+        "origin": "Sobrenatural",
         "rank": 81,
         "skillValue": 0
       },
       {
         "id": "traduccion_de_lenguas",
-        "origin": "Semidemonio",
+        "origin": "Sobrenatural",
         "rank": 81,
         "skillValue": 0
       }

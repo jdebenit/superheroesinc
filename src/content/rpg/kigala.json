@@ -4,7 +4,8 @@
   "origin": {
     "items": [
       {
-        "Dios": [
+        "Divino": [
+          "Dios",
           "-10 a la habilidad de Conocimientos generales",
           "-15 al uso de cualquier aparato tecnológico",
           "-25 al uso de armas cortas, armas largas y armas militares",
@@ -13,7 +14,9 @@
         ]
       },
       {
-        "Mago": [
+        "Arcano": [
+          "+20 a la parada mental",
+          "Mago",
           "Energia Mágica: 386"
         ]
       }

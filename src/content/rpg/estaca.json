@@ -4,7 +4,9 @@
   "origin": {
     "items": [
       {
-        "Vampiro": [
+        "Sobrenatural": [
+          "+20 a la parada mental",
+          "Vampiro",
           "Necesita, 20 PVs de sangre al día. Si no lo obtienen 2d10 de PV no recuperables hasta que se vuelva a alimentar",
           "Si esta hambriento -20 a tiradas de EQM y Voluntad",
           "+20 a la parada física"
@@ -101,13 +103,13 @@
     "selected": [
       {
         "id": "absorcion_de_vida",
-        "origin": "Vampiro",
+        "origin": "Sobrenatural",
         "rank": 21,
         "skillValue": 0
       },
       {
         "id": "invulnerabilidad",
-        "origin": "Vampiro",
+        "origin": "Sobrenatural",
         "rank": 81,
         "skillValue": 0
       }

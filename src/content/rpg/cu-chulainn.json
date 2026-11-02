@@ -8,11 +8,8 @@
           "Disponibilidad de armamento a dificultad reducida",
           "Recarga rápida",
           "Recuerdos dolorosos",
-          "Voluntad férrea"
-        ]
-      },
-      {
-        "Espadachín": [
+          "Voluntad férrea",
+          "Espadachín",
           "+20 Armas blancas",
           "+20 Combate cuerpo a cuerpo",
           "+20 Mod. de Impacto",
@@ -20,10 +17,11 @@
         ]
       },
       {
-        "Dotado": [
+        "Arcano": [
+          "+20 a la parada mental",
+          "Dotado",
           "Potencia de energía mágica 101",
-          "Ejecuta sus poderes con VOL/2",
-          "+20 a la parada mental"
+          "Ejecuta sus poderes con VOL/2"
         ]
       }
     ]

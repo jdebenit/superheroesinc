@@ -4,9 +4,10 @@
   "origin": {
     "items": [
       {
-        "Mago": [
-          "Energía mágica por vinculo con Demencia",
-          "+20 a la parada mental"
+        "Arcano": [
+          "+20 a la parada mental",
+          "Mago",
+          "Energía mágica por vinculo con Demencia"
         ]
       },
       {
@@ -145,13 +146,13 @@
     "selected": [
       {
         "id": "empatia_mental",
-        "origin": "Mago",
+        "origin": "Arcano",
         "rank": 100,
         "skillValue": 0
       },
       {
         "id": "superinteligencia",
-        "origin": "Mago",
+        "origin": "Arcano",
         "rank": 1,
         "skillValue": 0
       }

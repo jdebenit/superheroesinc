@@ -4,9 +4,10 @@
   "origin": {
     "items": [
       {
-        "Maldito": [
-          "Condenado a recorrer la Tierra hasta que sus buenas obras lete rediman.",
-          "+20 a la parada mental"
+        "Sobrenatural": [
+          "+20 a la parada mental",
+          "Maldito",
+          "Condenado a recorrer la Tierra hasta que sus buenas obras lete rediman."
         ]
       },
       {
@@ -217,7 +218,7 @@
     "selected": [
       {
         "id": "incremento_vital",
-        "origin": "Maldito",
+        "origin": "Sobrenatural",
         "rank": 100,
         "skillValue": 0
       }

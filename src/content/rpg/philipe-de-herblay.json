@@ -4,9 +4,10 @@
   "origin": {
     "items": [
       {
-        "Mago": [
-          "Energía mágica por legado familiar 296",
-          "+20 a la parada mental"
+        "Arcano": [
+          "+20 a la parada mental",
+          "Mago",
+          "Energía mágica por legado familiar 296"
         ]
       },
       {
@@ -148,7 +149,7 @@
     "selected": [
       {
         "id": "postcognicion",
-        "origin": "Mago",
+        "origin": "Arcano",
         "rank": 41,
         "skillValue": 0
       }

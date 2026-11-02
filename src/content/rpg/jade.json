@@ -4,9 +4,10 @@
   "origin": {
     "items": [
       {
-        "Maldito": [
-          "Porta el tatuaje de rosa negra, condenada a una existencia de caza eterna contra criaturas sobrenaturales.",
-          "+20 a la parada mental"
+        "Sobrenatural": [
+          "+20 a la parada mental",
+          "Maldito",
+          "Porta el tatuaje de rosa negra, condenada a una existencia de caza eterna contra criaturas sobrenaturales."
         ]
       }
     ]
@@ -190,13 +191,13 @@
     "selected": [
       {
         "id": "superpercepcion",
-        "origin": "Maldita",
+        "origin": "Sobrenatural",
         "rank": 1,
         "skillValue": 0
       },
       {
         "id": "superagilidad",
-        "origin": "Maldita",
+        "origin": "Sobrenatural",
         "rank": 1,
         "skillValue": 0
       }
