@@ -4,16 +4,14 @@
   "origin": {
     "items": [
       {
-        "Terrana": [
+        "Arcano": [
+          "+20 a la parada mental",
+          "Terrano",
           "Energía mágica por el vinculo con terra 84",
           "-10 a la habilidad de “Conocimientos",
           "-15 al uso de cualquier aparato tecnológico.",
           "-25 al uso de armas cortas, armas largas y armas militares.",
-          "+20 a la parada mental"
-        ]
-      },
-      {
-        "Dotada": [
+          "Dotado",
           "Potencia de energía mágica 168"
         ]
       }
@@ -116,7 +114,7 @@
     "selected": [
       {
         "id": "teleportacion",
-        "origin": "Terrana",
+        "origin": "Arcano",
         "rank": 100,
         "skillValue": 0
       }

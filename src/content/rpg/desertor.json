@@ -8,7 +8,10 @@
           "Disponibilidad de armamento a dificultad reducida",
           "Recarga rápida",
           "Recuerdos dolorosos",
-          "Voluntad férrea"
+          "Voluntad férrea",
+          "Fanático/Vengador",
+          "+20 habilidad a elección",
+          "-20 tiradas de EQM con violencia contra mujeres"
         ]
       },
       {
@@ -17,12 +20,6 @@
           "+20 Saltar/Trepar",
           "+30 Mod. de Impacto",
           "Acceso al uso del Chi"
-        ]
-      },
-      {
-        "Vengador": [
-          "+20 habilidad a elección",
-          "-20 tiradas de EQM con violencia contra mujeres"
         ]
       }
     ]

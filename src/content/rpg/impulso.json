@@ -4,8 +4,9 @@
   "origin": {
     "items": [
       {
-        "Elfo Mental": [
-          "+20 Parada mental"
+        "Arcano": [
+          "+20 a la parada mental",
+          "Elfo Psíquico"
         ]
       }
     ]
@@ -99,19 +100,19 @@
     "selected": [
       {
         "id": "telequinesis",
-        "origin": "Elfo Mental",
+        "origin": "Arcano",
         "rank": 21,
         "skillValue": 0
       },
       {
         "id": "campo_de_fuerza",
-        "origin": "Elfo Mental",
+        "origin": "Arcano",
         "rank": 1,
         "skillValue": 0
       },
       {
         "id": "telepatia",
-        "origin": "Elfo Mental",
+        "origin": "Arcano",
         "rank": 100,
         "skillValue": 0
       }
