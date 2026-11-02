@@ -15,6 +15,9 @@ Sitio web oficial del juego de rol **Superheroes INC. Tercera Edición**, constr
 
 ```
 /
+├── docs/                # Documentación técnica y contexto de arquitectura (Wizard / IA)
+│   ├── WIZARD_ARCHITECTURE.md
+│   └── wizard/
 ├── public/              # Archivos estáticos
 ├── src/
 │   ├── components/      # Componentes reutilizables
@@ -92,6 +95,7 @@ Descripción detallada...
 - **Colores**: Edita las variables CSS en `src/styles/global.css`
 - **Tipografía**: Configurada con Courier Prime para el tema de documentos clasificados
 - **Componentes**: Todos los componentes están en `src/components/`
+- **Arquitectura del Generador de Fichas (Wizard)**: Consulta [docs/WIZARD_ARCHITECTURE.md](./docs/WIZARD_ARCHITECTURE.md) para la guía técnica completa y contexto para IA.
 
 ## 📦 Tecnologías
 
