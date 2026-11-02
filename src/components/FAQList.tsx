@@ -109,7 +109,16 @@ export default function FAQList({ faqs }: FAQListProps) {
     }
   };
 
-  // Handle URL hash on mount
+  // Handle URL hash and query on mount
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const q = params.get('q') || params.get('search');
+      if (q && !searchTerm) {
+        setSearchTerm(q);
+      }
+    }
+  }, []);
   useEffect(() => {
     if (typeof window !== 'undefined' && window.location.hash) {
       const id = window.location.hash.substring(1);

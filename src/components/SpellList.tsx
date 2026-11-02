@@ -1,5 +1,6 @@
 
 import React, { useState, useMemo, useEffect } from 'react';
+const normalizeSearchText = (text: string) => text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 import { SPELLS, type Spell } from '../data/spells';
 import { SPELLS_DETAILS } from '../data/spells/index';
 
@@ -8,6 +9,14 @@ export default function SpellList() {
     const [viewMode, setViewMode] = useState<"grid" | "table">("grid");
     const [reqFilter, setReqFilter] = useState<'all' | 'with_req' | 'no_req'>('all');
     const [selectedSpell, setSelectedSpell] = useState<any>(null);
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const params = new URLSearchParams(window.location.search);
+            const q = params.get('q') || params.get('search');
+            if (q) setSearchTerm(q);
+        }
+    }, []);
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
@@ -27,7 +36,8 @@ export default function SpellList() {
 
     const filteredSpells = useMemo(() => {
         return SPELLS.filter(spell => {
-            const matchesSearch = spell.name.toLowerCase().includes(searchTerm.toLowerCase());
+            const normalizedQuery = normalizeSearchText(searchTerm);
+            const matchesSearch = !normalizedQuery || normalizeSearchText(spell.name).includes(normalizedQuery);
             const matchesReq =
                 reqFilter === 'all' ? true :
                     reqFilter === 'with_req' ? spell.hasRequirements :

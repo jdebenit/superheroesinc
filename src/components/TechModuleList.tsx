@@ -1,4 +1,5 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
+const normalizeSearchText = (text: string) => text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 import { TECH_MODULES, type TechModuleDefinition } from '../data/techModules';
 
 const MODULE_TYPES = ["Todos", "General", "Mejora Interna"];
@@ -7,6 +8,14 @@ export default function TechModuleList() {
     const [selectedTypes, setSelectedTypes] = useState<string[]>(["Todos"]);
     const [searchTerm, setSearchTerm] = useState("");
     const [viewMode, setViewMode] = useState<"grid" | "table">("grid");
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const params = new URLSearchParams(window.location.search);
+            const q = params.get('q') || params.get('search');
+            if (q) setSearchTerm(q);
+        }
+    }, []);
 
     const toggleType = (type: string) => {
         if (type === "Todos") {
@@ -39,7 +48,10 @@ export default function TechModuleList() {
             const matchesType = selectedTypes.includes("Todos") ||
                 selectedTypes.includes(type);
 
-            const matchesSearch = module.name.toLowerCase().includes(searchTerm.toLowerCase());
+            const normalizedQuery = normalizeSearchText(searchTerm);
+            const matchesSearch = !normalizedQuery ||
+                normalizeSearchText(module.name).includes(normalizedQuery) ||
+                (module.description ? normalizeSearchText(module.description).includes(normalizedQuery) : false);
 
             return matchesType && matchesSearch;
         });

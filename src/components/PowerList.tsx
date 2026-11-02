@@ -1,4 +1,5 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
+const normalizeSearchText = (text: string) => text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 import { POWERS, type Power, type PowerType } from '../data/powers';
 
 const ORIGINS = ["Todos", "Alterado", "Mutante", "Guardian", "Vampírico", "Cósmico", "Divino", "Thals", "Sobrenatural"];
@@ -10,6 +11,14 @@ export default function PowerList() {
   const [searchTerm, setSearchTerm] = useState("");
   const [showRangeTable, setShowRangeTable] = useState(false);
   const [viewMode, setViewMode] = useState<"grid" | "table">("grid");
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const q = params.get('q') || params.get('search');
+      if (q) setSearchTerm(q);
+    }
+  }, []);
 
   const toggleOrigin = (origin: string) => {
     if (origin === "Todos") {
@@ -69,7 +78,10 @@ export default function PowerList() {
       const matchesType = selectedTypes.includes("Todos") ||
         power.types.some(type => selectedTypes.includes(type));
 
-      const matchesSearch = power.name.toLowerCase().includes(searchTerm.toLowerCase());
+      const normalizedQuery = normalizeSearchText(searchTerm);
+      const matchesSearch = !normalizedQuery ||
+        normalizeSearchText(power.name).includes(normalizedQuery) ||
+        (power.description ? normalizeSearchText(power.description).includes(normalizedQuery) : false);
 
       return matchesOrigin && matchesType && matchesSearch;
     });
