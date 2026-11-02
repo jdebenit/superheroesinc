@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
-// Force rebuild
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Logger from '../utils/Logger';
+import './Search.css';
 
 interface SearchResult {
   title: string;
@@ -12,24 +12,51 @@ interface SearchResult {
   alias?: string;
 }
 
+interface NormalizedSearchResult extends SearchResult {
+  _normTitle: string;
+  _normDesc: string;
+  _normAlias: string;
+}
+
+function normalizeText(value: string = ''): string {
+  return value
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '');
+}
+
 const Search: React.FC = () => {
   const [query, setQuery] = useState('');
-  const [results, setResults] = useState<SearchResult[]>([]);
+  const [results, setResults] = useState<NormalizedSearchResult[]>([]);
   const [isOpen, setIsOpen] = useState(false);
-  const [searchIndex, setSearchIndex] = useState<SearchResult[]>([]);
+  const [searchIndex, setSearchIndex] = useState<NormalizedSearchResult[]>([]);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const searchRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const hasRequestedIndex = useRef(false);
 
-  // Load search index
-  useEffect(() => {
+  const ensureIndexLoaded = useCallback(() => {
+    if (hasRequestedIndex.current) return;
+    hasRequestedIndex.current = true;
+
     fetch('/search-index.json')
       .then(res => res.json())
-      .then(data => setSearchIndex(data))
-      .catch(err => Logger.error('Error loading search index:', err));
+      .then((data: SearchResult[]) => {
+        const preNormalized: NormalizedSearchResult[] = data.map(item => ({
+          ...item,
+          _normTitle: normalizeText(item.title),
+          _normDesc: normalizeText(item.description),
+          _normAlias: normalizeText(item.alias || ''),
+        }));
+        setSearchIndex(preNormalized);
+      })
+      .catch(err => {
+        hasRequestedIndex.current = false;
+        Logger.error('Error loading search index:', err);
+      });
   }, []);
 
-  // Close dropdown when clicking outside
+  // Close dropdown when clicking outside & handle global Ctrl+K / '/' shortcut
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
@@ -37,59 +64,82 @@ const Search: React.FC = () => {
       }
     };
 
+    const handleGlobalKeyDown = (event: KeyboardEvent) => {
+      const isCtrlK = (event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k';
+      const target = event.target as HTMLElement | null;
+      const isEditable =
+        target instanceof HTMLInputElement ||
+        target instanceof HTMLTextAreaElement ||
+        target instanceof HTMLSelectElement ||
+        Boolean(target?.isContentEditable);
+
+      if (isCtrlK || (event.key === '/' && !isEditable)) {
+        event.preventDefault();
+        ensureIndexLoaded();
+        inputRef.current?.focus();
+      }
+    };
+
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+    document.addEventListener('keydown', handleGlobalKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleGlobalKeyDown);
+    };
+  }, [ensureIndexLoaded]);
 
-  // Search function
-  const performSearch = (searchQuery: string) => {
-    if (!searchQuery.trim()) {
-      setResults([]);
-      setIsOpen(false);
-      return;
-    }
+  // Search function using pre-normalized index fields
+  const performSearch = useCallback(
+    (searchQuery: string) => {
+      if (!searchQuery.trim()) {
+        setResults([]);
+        setIsOpen(false);
+        return;
+      }
 
-    const normalizedQuery = searchQuery.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      const normalizedQuery = normalizeText(searchQuery.trim());
 
-    const filtered = searchIndex.filter(item => {
-      const normalizedTitle = item.title.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-      const normalizedDesc = item.description.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-      const normalizedAlias = item.alias?.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '') || '';
+      const filtered = searchIndex.filter(
+        item =>
+          item._normTitle.includes(normalizedQuery) ||
+          item._normDesc.includes(normalizedQuery) ||
+          item._normAlias.includes(normalizedQuery)
+      );
 
-      return normalizedTitle.includes(normalizedQuery) ||
-        normalizedDesc.includes(normalizedQuery) ||
-        normalizedAlias.includes(normalizedQuery);
-    });
+      // Sort by relevance (title matches first)
+      const sorted = filtered.sort((a, b) => {
+        const aInTitle = a._normTitle.includes(normalizedQuery);
+        const bInTitle = b._normTitle.includes(normalizedQuery);
 
-    // Sort by relevance (title matches first)
-    const sorted = filtered.sort((a, b) => {
-      const aTitle = a.title.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-      const bTitle = b.title.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        if (aInTitle && !bInTitle) return -1;
+        if (!aInTitle && bInTitle) return 1;
+        return 0;
+      });
 
-      const aInTitle = aTitle.includes(normalizedQuery);
-      const bInTitle = bTitle.includes(normalizedQuery);
-
-      if (aInTitle && !bInTitle) return -1;
-      if (!aInTitle && bInTitle) return 1;
-      return 0;
-    });
-
-    setResults(sorted.slice(0, 8)); // Limit to 8 results
-    setIsOpen(true);
-    setSelectedIndex(0);
-  };
+      setResults(sorted.slice(0, 8)); // Limit to 8 results
+      setIsOpen(true);
+      setSelectedIndex(0);
+    },
+    [searchIndex]
+  );
 
   // Handle input change with debounce
   useEffect(() => {
     const timer = setTimeout(() => {
       performSearch(query);
-    }, 200);
+    }, 150);
 
     return () => clearTimeout(timer);
-  }, [query, searchIndex]);
+  }, [query, performSearch]);
 
   // Keyboard navigation
   const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      setIsOpen(false);
+      inputRef.current?.blur();
+      return;
+    }
+
     if (!isOpen || results.length === 0) return;
 
     switch (e.key) {
@@ -107,26 +157,22 @@ const Search: React.FC = () => {
           window.location.href = results[selectedIndex].url;
         }
         break;
-      case 'Escape':
-        setIsOpen(false);
-        inputRef.current?.blur();
-        break;
     }
   };
 
   // Highlight matching text
-  const highlightText = (text: string, query: string) => {
-    if (!query.trim()) return text;
+  const highlightText = (text: string, searchQuery: string) => {
+    if (!searchQuery.trim()) return text;
 
-    const normalizedText = text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-    const normalizedQuery = query.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-    const index = normalizedText.toLowerCase().indexOf(normalizedQuery.toLowerCase());
+    const normalizedText = normalizeText(text);
+    const normalizedQuery = normalizeText(searchQuery);
+    const index = normalizedText.indexOf(normalizedQuery);
 
     if (index === -1) return text;
 
     const before = text.slice(0, index);
-    const match = text.slice(index, index + query.length);
-    const after = text.slice(index + query.length);
+    const match = text.slice(index, index + searchQuery.length);
+    const after = text.slice(index + searchQuery.length);
 
     return (
       <>
@@ -149,11 +195,23 @@ const Search: React.FC = () => {
           type="text"
           className="search-input"
           placeholder="Buscar..."
+          aria-label="Buscar en Superheroes INC."
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          onChange={(e) => {
+            ensureIndexLoaded();
+            setQuery(e.target.value);
+          }}
           onKeyDown={handleKeyDown}
-          onFocus={() => query && setIsOpen(true)}
+          onFocus={() => {
+            ensureIndexLoaded();
+            if (query) setIsOpen(true);
+          }}
         />
+        {!query && (
+          <kbd className="search-shortcut-hint" aria-hidden="true">
+            Ctrl K
+          </kbd>
+        )}
         {query && (
           <button
             className="search-clear"
@@ -193,166 +251,13 @@ const Search: React.FC = () => {
         </div>
       )}
 
-      {isOpen && query && results.length === 0 && (
+      {isOpen && query && searchIndex.length > 0 && results.length === 0 && (
         <div className="search-results">
           <div className="search-no-results">
             No se encontraron resultados para "{query}"
           </div>
         </div>
       )}
-
-      <style>{`
-        .search-container {
-          position: relative;
-          width: 100%;
-          max-width: 400px;
-        }
-
-        .search-input-wrapper {
-          position: relative;
-          display: flex;
-          align-items: center;
-        }
-
-        .search-icon {
-          position: absolute;
-          left: 12px;
-          color: #666;
-          pointer-events: none;
-        }
-
-        .search-input {
-          width: 100%;
-          padding: 0.75rem 2.5rem 0.75rem 2.75rem;
-          font-size: 0.95rem;
-          font-family: var(--font-body);
-          border: 2px solid var(--color-border);
-          border-radius: 8px;
-          background: white;
-          transition: all 0.2s ease;
-        }
-
-        .search-input:focus {
-          outline: none;
-          border-color: var(--color-primary);
-          box-shadow: 0 0 0 3px rgba(220, 0, 0, 0.1);
-        }
-
-        .search-clear {
-          position: absolute;
-          right: 12px;
-          width: 24px;
-          height: 24px;
-          border: none;
-          background: var(--color-accent);
-          color: white;
-          border-radius: 50%;
-          cursor: pointer;
-          font-size: 18px;
-          line-height: 1;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transition: background 0.2s ease;
-        }
-
-        .search-clear:hover {
-          background: var(--color-primary);
-        }
-
-        .search-results {
-          position: absolute;
-          top: calc(100% + 8px);
-          left: 0;
-          right: 0;
-          background: white;
-          border: 2px solid var(--color-border);
-          border-radius: 8px;
-          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-          max-height: 400px;
-          overflow-y: auto;
-          z-index: 1000;
-        }
-
-        .search-result-item {
-          display: block;
-          padding: 1rem;
-          border-bottom: 1px solid var(--color-border);
-          text-decoration: none;
-          color: inherit;
-          transition: background 0.15s ease;
-        }
-
-        .search-result-item:last-child {
-          border-bottom: none;
-        }
-
-        .search-result-item:hover,
-        .search-result-item.selected {
-          background: var(--color-background-alt);
-        }
-
-        .result-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: baseline;
-          gap: 1rem;
-          margin-bottom: 0.5rem;
-        }
-
-        .result-title {
-          font-size: 1rem;
-          font-weight: 700;
-          color: var(--color-secondary);
-        }
-
-        .result-category {
-          font-size: 0.75rem;
-          font-weight: 600;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-          color: var(--color-accent);
-          white-space: nowrap;
-        }
-
-        .result-description {
-          font-size: 0.875rem;
-          color: var(--color-text-light);
-          line-height: 1.4;
-          margin: 0;
-        }
-
-        .search-highlight {
-          background: rgba(220, 0, 0, 0.2);
-          color: var(--color-primary);
-          font-weight: 600;
-          padding: 0 2px;
-          border-radius: 2px;
-        }
-
-        .search-no-results {
-          padding: 2rem;
-          text-align: center;
-          color: var(--color-text-light);
-          font-size: 0.95rem;
-        }
-
-        @media (max-width: 768px) {
-          .search-container {
-            max-width: 100%;
-          }
-
-          .search-results {
-            max-height: 300px;
-          }
-
-          .result-header {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 0.25rem;
-          }
-        }
-      `}</style>
     </div>
   );
 };

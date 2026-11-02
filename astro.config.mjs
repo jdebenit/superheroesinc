@@ -7,6 +7,7 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://www.superheroes-inc.es',
+  prefetch: true,
   integrations: [
     react(),
     sitemap({
