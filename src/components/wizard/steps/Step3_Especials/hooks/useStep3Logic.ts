@@ -6,20 +6,18 @@ import { useCharacterAutoEffects } from '../../../../../hooks/wizard/useCharacte
 import { useCharacterValidation } from './useCharacterValidation';
 import { hasOtherSobrenaturalPowerOrigin } from '../../../../../data/werewolfOptions';
 import {
-    hasOrigin,
-    hasSubtype,
     getVigilanteSpecialties,
-    calculateEM,
-    isGuardian,
-    isMaldito,
     getPowerPenalty,
     getCharacterOriginFlags
 } from '../utils';
-import { syncMagicalEquilibrium } from '../../../../../utils/calculations/magicCalculations';
 import type { SelectedPower, SelectedSpell, TechModule, ModalType } from '../types';
-import type { CyborgImplant } from '../../../../../data/cyborgImplantConfigs';
+import type { ToastType } from '../../../shared/layout/WizardDialogs';
 
-export function useStep3Logic(data: any, onChange: (updates: any) => void, onShowToast?: (msg: string, type: 'error' | 'success') => void) {
+export function useStep3Logic(
+    data: any,
+    onChange: (updates: any) => void,
+    onShowToast?: (msg: string, type?: ToastType) => void
+) {
     const [modalOpen, setModalOpen] = useState(false);
     const [modalType, setModalType] = useState<ModalType>(null);
     const [modalOriginFilter, setModalOriginFilter] = useState<string | null>(null);
@@ -36,8 +34,6 @@ export function useStep3Logic(data: any, onChange: (updates: any) => void, onSho
     const {
         isGuardian: isGuardianChar,
         isMaldito: isMalditoChar,
-        isParahumano,
-        isParahumanoHybrid,
         isMago,
         isDotado,
         isHibrido,
@@ -45,47 +41,10 @@ export function useStep3Logic(data: any, onChange: (updates: any) => void, onSho
         isPoseido,
         isElfoMagico,
         isHadaEter,
-        isHadaAire,
-        isHadaFuego,
-        isHadaAgua,
-        isHadaTierra,
-        isGrifo,
-        isElfoFisico,
-        isVampiro,
-        isHombreLobo,
-        isSemidemonio,
-        isEnte,
-        isThals,
-        isDios,
-        isDiosMenor,
-        isSemidios,
         isDivino,
-        isCosmico,
-        isMutante,
-        isVigilante,
-        isTroll,
-        isMinotauro,
-        isEnano,
-        isElfoPsiquico,
-        isTesKhar,
-        isAtlante,
-        isLiberadoEntropia,
-        isLiberadoUnidad,
-        isLiberadoEquidad,
         isLiberado,
-        activeLiberados,
-        isAlterado,
         isTecnologico,
-        isTecnoarmadura,
-        isCyborg,
-        isTecnovehiculo,
-        isExoskeleton,
-        isInventor,
-        isTechnological,
-        hasBaseEMOrigin,
-        hasEMFormula,
-        hasEM,
-        hasAnyOrigin
+        hasBaseEMOrigin
     } = originFlags;
 
     // Selections
@@ -126,24 +85,13 @@ export function useStep3Logic(data: any, onChange: (updates: any) => void, onSho
         });
     }, [data, onChange, isLiberado]);
 
-    // EM Logic
+    // EM Formula for UI rendering (actual EM calculation is auto-synced by characterReducer)
     const rawEmFormula = data.spells?.emFormula || (isPoseido && !isDotado && !isHibrido && !isTerrano ? { divisor: 0, pcCost: 0 } : { divisor: 4, pcCost: 0 });
     let emFormula = rawEmFormula;
     if (isMago || isElfoMagico) emFormula = { divisor: 1, pcCost: 0 };
     else if (isHadaEter) emFormula = { divisor: 2, pcCost: 0 };
     else if (!hasBaseEMOrigin && isLiberado) emFormula = { divisor: 0, pcCost: 0 };
 
-    // Auto-effects for EM (delegated to pure syncMagicalEquilibrium)
-    useEffect(() => {
-        const updatedSpells = syncMagicalEquilibrium(data);
-        if (updatedSpells) {
-            onChange({
-                ...data,
-                spells: updatedSpells
-            });
-        }
-    }, [isPoseido, isDotado, isHibrido, isTerrano, isMago, isElfoMagico, isHadaEter, hasEMFormula, hasEM, hasBaseEMOrigin, rawEmFormula, data.attributes, data.level, selectedPowers]);
- 
     // Auto-initialize and cleanup techParams based on isTecnologico
     useEffect(() => {
         if (isTecnologico && !data.techParams) {
@@ -226,7 +174,6 @@ export function useStep3Logic(data: any, onChange: (updates: any) => void, onSho
                 if (modalOriginFilter === 'Ente') {
                     return p.origins.includes('Mutante') && p.types.some(t => t === 'Psíquico' || t === 'Energético');
                 }
-                // Divine cross-origin: show all powers that are NOT from Divino origin
                 if (modalOriginFilter === 'OtroDivino') {
                     return !p.origins.includes('Divino');
                 }
@@ -252,19 +199,11 @@ export function useStep3Logic(data: any, onChange: (updates: any) => void, onSho
         // State
         modalOpen, setModalOpen, modalType, modalOriginFilter,
 
-        // Origin Flags
+        // Origin Flags (structured + spread for backwards compatibility)
         originFlags,
-
-        // Flags
-        isGuardianChar, isMalditoChar, isParahumano, isParahumanoHybrid,
-        isMago, isDotado, isHibrido, isTerrano, isPoseido, isElfoMagico,
-        isHadaEter, isHadaAire, isHadaFuego, isHadaAgua, isHadaTierra,
-        isGrifo, isElfoFisico, isVampiro, isHombreLobo, isSemidemonio, isEnte, isThals,
-        isDios, isDiosMenor, isSemidios, isDivino, isCosmico, isMutante, isVigilante,
-        isTecnologico, isTecnoarmadura, isCyborg, isTecnovehiculo, isExoskeleton, isInventor, isTechnological,
-        isTesKhar, isAtlante, isTroll, isMinotauro, isEnano, isElfoPsiquico,
-        isLiberado, isLiberadoEntropia, isLiberadoUnidad, isLiberadoEquidad, activeLiberados,
-        isAlterado, hasAnyOrigin,
+        ...originFlags,
+        isGuardianChar,
+        isMalditoChar,
 
         // Data
         selectedPowers,
@@ -278,9 +217,6 @@ export function useStep3Logic(data: any, onChange: (updates: any) => void, onSho
         techModules,
         magicTableRolls,
         emFormula,
-        hasEMFormula,
-        hasEM,
-        hasBaseEMOrigin,
         vigilanteSpecialties: getVigilanteSpecialties(data),
         modalItems,
 

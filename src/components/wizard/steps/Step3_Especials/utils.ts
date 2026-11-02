@@ -1,3 +1,5 @@
+import { getCharacterOriginFlags } from '../../../../utils/calculations/originFlags';
+
 export {
     hasOrigin,
     hasSubtype,
@@ -6,6 +8,8 @@ export {
     getVigilanteSpecialties,
     getCharacterOriginFlags
 } from '../../../../utils/calculations/originFlags';
+
+export type CharacterOriginFlags = ReturnType<typeof getCharacterOriginFlags>;
 
 export {
     calculateEM

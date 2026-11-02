@@ -1,31 +1,12 @@
-import React from 'react';
 import type { Step3Props } from './types';
 import './Step3_Especials.css';
 import { useStep3Logic } from './hooks/useStep3Logic';
 
 // Section Components
-import VigilanteTraumasSection from './sections/VigilanteTraumasSection';
+import OriginSpecificSections from './sections/OriginSpecificSections';
 import MagicalBondsSection from './sections/MagicalBondsSection';
-import TechModulesSection from './sections/TechModulesSection';
 import PowersSection from './sections/PowersSection';
 import MagicSection from './sections/MagicSection';
-import ExoskeletonSection from './sections/ExoskeletonSection';
-import EnteSection from './sections/EnteSection';
-import MalditoSection from './sections/MalditoSection';
-import PoseidoSection from './sections/PoseidoSection';
-import AlteradoSection from './sections/AlteradoSection';
-import MutanteSection from './sections/MutanteSection';
-import GuardianSection from './sections/GuardianSection';
-import DivineSection from './sections/DivineSection';
-import TechnologicalSection from './sections/TechnologicalSection';
-import ExoskeletonArmorSection from './sections/ExoskeletonArmorSection';
-import TechnoSuitStrengthSection from './sections/TechnoSuitStrengthSection';
-import { CyborgSection } from './sections/CyborgSection';
-import ParahumanoSection from './sections/ParahumanoSection';
-import MinotaurSection from './sections/MinotaurSection';
-import HibridoSection from './sections/HibridoSection';
-import LiberadoSection from './sections/LiberadoSection';
-import WerewolfSection from './sections/WerewolfSection';
 import { WizardSection } from '../../shared/layout/WizardSection';
 import '../../shared/layout/WizardStep.css';
 
@@ -35,34 +16,19 @@ import MagicalBondsModal from './modals/MagicalBondsModal';
 
 export default function Step3_Especials({ data, onChange, onShowToast, onShowHelp }: Step3Props) {
     const {
-        // State
-        modalOpen, setModalOpen, modalType, modalOriginFilter,
-
-        // Origin Flags
+        modalOpen,
+        setModalOpen,
+        modalType,
+        modalOriginFilter,
         originFlags,
-
-        // Flags
-        isGuardianChar, isMalditoChar, isParahumano, isParahumanoHybrid,
-        isMago, isDotado, isHibrido, isTerrano, isPoseido, isElfoMagico,
-        isHadaEter, isHadaAire, isHadaFuego, isHadaAgua, isHadaTierra,
-        isGrifo, isElfoFisico, isVampiro, isHombreLobo, isSemidemonio, isEnte, isThals,
-        isDios, isDiosMenor, isSemidios, isDivino, isCosmico, isMutante, isVigilante,
-        isTecnologico, isTecnoarmadura, isCyborg, isTecnovehiculo, isExoskeleton, isTechnological,
-        isTesKhar, isAtlante, isTroll, isMinotauro, isEnano, isElfoPsiquico, isLiberado, activeLiberados, isAlterado, hasAnyOrigin,
-
-        // Data
         selectedPowers,
         selectedSpells,
         selectedSpellsWithRank,
         techModules,
         magicTableRolls,
         emFormula,
-        hasEMFormula,
-        hasEM,
         vigilanteSpecialties,
         modalItems,
-
-        // Handlers
         updateEMFormula,
         openModal,
         togglePowerSelection,
@@ -86,7 +52,7 @@ export default function Step3_Especials({ data, onChange, onShowToast, onShowHel
         toggleMagicalBond
     } = useStep3Logic(data, onChange, onShowToast);
 
-
+    const { hasAnyOrigin, hasEM, isMaldito, isMago } = originFlags;
 
     return (
         <div className="wizard-step-container">
@@ -117,140 +83,19 @@ export default function Step3_Especials({ data, onChange, onShowToast, onShowHel
                 )}
             </WizardSection>
 
-            {isParahumano && (
-                <ParahumanoSection
-                    parahumanoParams={data.parahumanoParams || { isHybridWithHuman: false }}
-                    onChange={onChange}
-                />
-            )}
-
-            {isEnte && (
-                <EnteSection
-                    enteParams={data.enteParams || { formType: null, visualEffect: null }}
-                    onChange={onChange}
-                />
-            )}
-
-            {isMalditoChar && (
-                <MalditoSection
-                    malditoParams={data.malditoParams || { magnitude: null, source: null }}
-                    onChange={onChange}
-                />
-            )}
-
-            {activeLiberados.map(subtype => (
-                <LiberadoSection
-                    key={subtype}
-                    subtype={subtype}
-                    liberadoParams={data.liberadoParams || { gift: 'none' }}
-                    chosenBonusCharacteristic={data.chosenCharacteristics?.[subtype] || data.chosenBonusCharacteristic}
-                    onChange={onChange}
-                    onShowToast={onShowToast}
-                />
-            ))}
-
-            {isHombreLobo && (
-                <WerewolfSection
-                    data={data}
-                    onChange={onChange}
-                />
-            )}
-
-            {isPoseido && (
-                <PoseidoSection
-                    poseidoParams={data.poseidoParams || { formType: null }}
-                    onChange={onChange}
-                />
-            )}
-
-            {isAlterado && (
-                <AlteradoSection
-                    alteradoParams={data.alteradoParams || { agent: null, sequels: [] }}
-                    onChange={onChange}
-                />
-            )}
-
-            {isMutante && (
-                <MutanteSection
-                    mutanteParams={data.mutanteParams || { sequels: [] }}
-                    onChange={onChange}
-                    data={data}
-                />
-            )}
-
-            {isHibrido && (
-                <HibridoSection
-                    hibridoParams={data.hibridoParams || { sequels: [] }}
-                    onChange={onChange}
-                />
-            )}
-
-            {isGuardianChar && (
-                <GuardianSection
-                    guardianParams={data.guardianParams || { quality: null, objectType: null, feature: null, transformation: null }}
-                    onChange={onChange}
-                />
-            )}
-
-            {(isDios || isDiosMenor) && (
-                <DivineSection
-                    divineParams={data.divineParams || { focus: null }}
-                    onChange={onChange}
-                />
-            )}
-
-            {isMinotauro && <MinotaurSection />}
-
-            <VigilanteTraumasSection
+            <OriginSpecificSections
+                data={data}
+                onChange={onChange}
+                onShowToast={onShowToast}
+                originFlags={originFlags}
                 vigilanteSpecialties={vigilanteSpecialties}
-                traumas={data.traumas || {}}
+                techModules={techModules}
+                onOpenTechModulesModal={() => openModal('techModules')}
+                onUpdateModuleLocation={updateModuleLocation}
+                onUpdateModuleCost={updateModuleCost}
+                onRemoveTechModule={removeTechModule}
                 onUpdateTrauma={updateTrauma}
             />
-
-            {isTecnologico && (
-                <TechnologicalSection
-                    techParams={data.techParams}
-                    onChange={(params) => onChange({ ...data, techParams: { ...(data.techParams || {}), ...params } })}
-                />
-            )}
-
-            {isExoskeleton && (
-                <ExoskeletonSection
-                    selectedConfig={data.exoskeletonConfig || null}
-                    onSelectConfig={(id) => onChange({ ...data, exoskeletonConfig: id })}
-                />
-            )}
-
-            {(isTecnoarmadura || isTecnovehiculo) && (
-                <ExoskeletonArmorSection
-                    selectedConfig={data.exoskeletonArmorConfig || null}
-                    onSelectConfig={(id) => onChange({ ...data, exoskeletonArmorConfig: id })}
-                />
-            )}
-
-            {isTecnoarmadura && (
-                <TechnoSuitStrengthSection
-                    selectedConfig={data.technoSuitStrengthConfig || null}
-                    onSelectConfig={(id) => onChange({ ...data, technoSuitStrengthConfig: id })}
-                />
-            )}
-
-            {isCyborg && (
-                <CyborgSection
-                    implants={data.cyborgImplants || []}
-                    onChange={(implants) => onChange({ ...data, cyborgImplants: implants })}
-                />
-            )}
-
-            {(isTecnoarmadura || isCyborg || isTecnovehiculo) && (
-                <TechModulesSection
-                    techModules={techModules}
-                    onOpenModal={() => openModal('techModules')}
-                    onUpdateLocation={updateModuleLocation}
-                    onUpdateCost={updateModuleCost}
-                    onRemove={removeTechModule}
-                />
-            )}
 
             <PowersSection
                 data={data}
@@ -302,7 +147,7 @@ export default function Step3_Especials({ data, onChange, onShowToast, onShowHel
                                 toggleTechModule
                     }
                     characterData={data}
-                    isMaldito={isMalditoChar}
+                    isMaldito={isMaldito}
                 />
             )}
 

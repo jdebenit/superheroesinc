@@ -1,5 +1,3 @@
-import type { Power, PowerType } from '../../../../data/powers';
-import type { Spell } from '../../../../data/spells';
 import type { BaseStepProps } from '../../../../types/character';
 
 export interface Step3Props extends BaseStepProps {
