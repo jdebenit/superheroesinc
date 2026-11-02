@@ -124,7 +124,7 @@ export const GET: APIRoute = async () => {
         }),
         ...POWERS.map(power => ({
             title: power.name,
-            description: `Coste: ${power.cost} PC · Orígenes: ${power.origins.join(', ')} · Tipos: ${power.types.join(', ')}${power.description ? ' — ' + stripMarkdown(power.description).slice(0, 140) : ''}`,
+            description: `Coste: ${power.cost} PC · Orígenes: ${power.origins.join(', ')} · Tipos: ${power.types.join(', ')}${power.options?.length ? ' · Opciones: ' + power.options.join(', ') : ''}`,
             url: `/recursos/poderes?q=${encodeURIComponent(power.name)}`,
             category: 'Poderes',
             type: 'power'

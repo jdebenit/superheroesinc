@@ -81,7 +81,7 @@ export default function PowerList() {
       const normalizedQuery = normalizeSearchText(searchTerm);
       const matchesSearch = !normalizedQuery ||
         normalizeSearchText(power.name).includes(normalizedQuery) ||
-        (power.description ? normalizeSearchText(power.description).includes(normalizedQuery) : false);
+        (power.options ? power.options.some(opt => normalizeSearchText(opt).includes(normalizedQuery)) : false);
 
       return matchesOrigin && matchesType && matchesSearch;
     });
