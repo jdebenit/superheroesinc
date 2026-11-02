@@ -171,4 +171,133 @@ describe('characterReducer', () => {
         // Base de fuerza es 40 + 40 = 80
         expect(state.attributes?.values?.Fuerza).toBe(80);
     });
+
+    it('handles UPDATE_ORIGIN_PARAMS and preserves changes', () => {
+        const state = characterReducer(initialCharacterState as any, {
+            type: 'UPDATE_ORIGIN_PARAMS',
+            payload: {
+                liberadoParams: { gift: 'comprension_senda' }
+            }
+        });
+        expect(state.liberadoParams?.gift).toBe('comprension_senda');
+    });
+
+    it('handles UPDATE_ATTRIBUTES with values, breakdown, manualBonuses and cost', () => {
+        const state = characterReducer(initialCharacterState as any, {
+            type: 'UPDATE_ATTRIBUTES',
+            payload: {
+                values: { Fuerza: 55 },
+                manualBonuses: { Fuerza: 10 },
+                cost: 15
+            }
+        });
+        expect(state.attributes.values.Fuerza).toBe(55);
+        expect(state.attributes.manualBonuses?.Fuerza).toBe(10);
+        expect(state.attributes.cost).toBe(15);
+    });
+
+    it('handles UPDATE_SKILLS', () => {
+        const state = characterReducer(initialCharacterState as any, {
+            type: 'UPDATE_SKILLS',
+            payload: {
+                selected: { armas_cortas: { isFree: true } }
+            }
+        });
+        expect(state.skills.selected.armas_cortas.isFree).toBe(true);
+    });
+
+    it('handles UPDATE_SPELLS', () => {
+        const state = characterReducer(initialCharacterState as any, {
+            type: 'UPDATE_SPELLS',
+            payload: {
+                selected: [{ id: 'bola_de_fuego', rank: 2 }],
+                emFormula: { divisor: 2, pcCost: 10 },
+                magicTableRolls: ['Grimorio Ancestral']
+            }
+        });
+        expect(state.spells.selected).toHaveLength(1);
+        expect(state.spells.emFormula?.divisor).toBe(2);
+        expect(state.magicTableRolls).toHaveLength(1);
+    });
+
+    it('handles UPDATE_TECH', () => {
+        const state = characterReducer(initialCharacterState as any, {
+            type: 'UPDATE_TECH',
+            payload: {
+                techModules: [{ id: 'radar', name: 'Radar Integrado', definitionId: 'radar', location: 'cabeza', pcCost: 2 }],
+                techParams: { energySource: 'Reactor de Fusión' },
+                exoskeletonConfig: 'Ligero',
+                cyborgImplants: [{ name: 'Ojo Biónico' }] as any
+            }
+        });
+        expect(state.techModules).toHaveLength(1);
+        expect(state.techParams?.energySource).toBe('Reactor de Fusión');
+        expect(state.exoskeletonConfig).toBe('Ligero');
+        expect(state.cyborgImplants).toHaveLength(1);
+    });
+
+    it('handles UPDATE_BACKGROUND', () => {
+        const state = characterReducer(initialCharacterState as any, {
+            type: 'UPDATE_BACKGROUND',
+            payload: {
+                socialStatus: 'Clase Alta',
+                economicStatus: 'Acomodado'
+            }
+        });
+        expect(state.background.socialStatus).toBe('Clase Alta');
+        expect(state.background.economicStatus).toBe('Acomodado');
+    });
+
+    it('handles UPDATE_EQUIPMENT', () => {
+        const state = characterReducer(initialCharacterState as any, {
+            type: 'UPDATE_EQUIPMENT',
+            payload: {
+                equipment: { items: [{ name: 'Ganzúa' }] },
+                weapons: { items: [{ name: 'Katana' }] },
+                artifacts: { items: [{ name: 'Amuleto' }] },
+                vehicles: { items: [{ name: 'Moto' }] },
+                varios: { items: ['Notas de equipo'] }
+            }
+        });
+        expect(state.equipment.items).toHaveLength(1);
+        expect(state.weapons.items).toHaveLength(1);
+        expect(state.artifacts.items).toHaveLength(1);
+        expect(state.vehicles.items).toHaveLength(1);
+        expect(state.varios.items).toHaveLength(1);
+    });
+
+    it('handles UPDATE_UI_STATE and SYNC_TRANSFORMATIONS', () => {
+        const stateWithUi = characterReducer(initialCharacterState as any, {
+            type: 'UPDATE_UI_STATE',
+            payload: { activeTab: 'stats' }
+        });
+        expect(stateWithUi.uiState?.activeTab).toBe('stats');
+
+        const stateSynced = characterReducer(stateWithUi, {
+            type: 'SYNC_TRANSFORMATIONS'
+        });
+        expect(stateSynced).toBeDefined();
+    });
+
+    it('handles edge cases (null payloads, unknown actions, default fallback)', () => {
+        // SET_CHARACTER con payload null
+        const stateSetNull = characterReducer(initialCharacterState as any, {
+            type: 'SET_CHARACTER',
+            payload: null
+        });
+        expect(stateSetNull).toBe(initialCharacterState);
+
+        // APPLY_PATCH con payload null o inválido
+        const statePatchNull = characterReducer(initialCharacterState as any, {
+            type: 'APPLY_PATCH',
+            payload: null as any
+        });
+        expect(statePatchNull).toBe(initialCharacterState);
+
+        // Acción desconocida (default)
+        const stateDefault = characterReducer(initialCharacterState as any, {
+            type: 'UNKNOWN_ACTION' as any
+        });
+        expect(stateDefault).toBe(initialCharacterState);
+    });
 });
