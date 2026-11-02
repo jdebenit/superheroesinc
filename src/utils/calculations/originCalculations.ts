@@ -450,3 +450,138 @@ export function calculateOriginCost(originItems: any[]): number {
     Logger.log("Total cost:", totalCost);
     return totalCost;
 }
+
+const CHAR_ID_TO_NAME: Array<{ id: string; name: string }> = [
+    { id: 'fuerza', name: 'Fuerza' },
+    { id: 'constitucion', name: 'Constitución' },
+    { id: 'agilidad', name: 'Agilidad' },
+    { id: 'inteligencia', name: 'Inteligencia' },
+    { id: 'percepcion', name: 'Percepción' },
+    { id: 'apariencia', name: 'Apariencia' },
+    { id: 'voluntad', name: 'Voluntad' }
+];
+
+const DEFAULT_BREAKDOWN_ITEM = { base: 40, originMod: 0, specialtyMod: 0, powerMod: 0, otherMod: 0 };
+
+/**
+ * Sincroniza de forma pura `attributes.breakdown` (`originMod`, `specialtyMod`, ajuste de límite en `base`)
+ * y `attributes.values` cuando cambian los orígenes, `chosenCharacteristics` o `liberadoParams`.
+ */
+export function syncOriginAttributes(nextState: any, prevState?: any): {
+    attributes: {
+        values: Record<string, number>;
+        breakdown: Record<string, { base: number; originMod: number; specialtyMod: number; powerMod: number; otherMod: number }>;
+    };
+    chosenCharacteristics: Record<string, string>;
+} | null {
+    const origins = nextState?.origin?.items || [];
+    const choosableEntries = getChoosableCharacteristics(origins);
+    const chosenCharacteristics: Record<string, string> = { ...(nextState?.chosenCharacteristics || {}) };
+
+    if (nextState?.chosenBonusCharacteristic && choosableEntries.length > 0 && !chosenCharacteristics[choosableEntries[0].originKey]) {
+        chosenCharacteristics[choosableEntries[0].originKey] = nextState.chosenBonusCharacteristic;
+    }
+
+    const originMods = calculateOriginModifiers(origins, chosenCharacteristics);
+    const specialtyMods = calculateSpecialtyModifiers(origins);
+
+    const oldOrigins = prevState ? (prevState?.origin?.items || []) : origins;
+    const oldChosen: Record<string, string> = prevState ? { ...(prevState?.chosenCharacteristics || {}) } : chosenCharacteristics;
+    if (prevState?.chosenBonusCharacteristic) {
+        const oldChoosable = getChoosableCharacteristics(oldOrigins);
+        if (oldChoosable.length > 0 && !oldChosen[oldChoosable[0].originKey]) {
+            oldChosen[oldChoosable[0].originKey] = prevState.chosenBonusCharacteristic;
+        }
+    }
+
+    const oldOriginMods = prevState ? calculateOriginModifiers(oldOrigins, oldChosen) : originMods;
+    const oldSpecialtyMods = prevState ? calculateSpecialtyModifiers(oldOrigins) : specialtyMods;
+
+    const rawBreakdown = nextState?.attributes?.breakdown || {};
+    const prevBreakdown: Record<string, { base: number; originMod: number; specialtyMod: number; powerMod: number; otherMod: number }> = {};
+    CHAR_ID_TO_NAME.forEach(({ id }) => {
+        const item = rawBreakdown[id] || DEFAULT_BREAKDOWN_ITEM;
+        prevBreakdown[id] = {
+            base: typeof item.base === 'number' ? item.base : 40,
+            originMod: typeof item.originMod === 'number' ? item.originMod : 0,
+            specialtyMod: typeof item.specialtyMod === 'number' ? item.specialtyMod : 0,
+            powerMod: typeof item.powerMod === 'number' ? item.powerMod : 0,
+            otherMod: typeof item.otherMod === 'number' ? item.otherMod : 0
+        };
+    });
+
+    const isDist = hasDistributablePoints(origins) || choosableEntries.length > 0;
+    const pInfo = isDist ? getDistributablePointsInfo(origins, prevBreakdown, chosenCharacteristics) : { total: 0, used: 0 };
+    const sInfo = hasSpecialtyDistributablePoints(origins) ? getSpecialtyDistributablePointsInfo(origins, prevBreakdown) : { total: 0, used: 0 };
+
+    const isManualOMAllowed = pInfo.total > 0;
+    const isManualSMAllowed = sInfo.total > 0;
+    const unlockManualMod = !!nextState?.uiState?.unlockManualCharacteristics;
+
+    const updatedBreakdown = { ...prevBreakdown };
+    const updatedValues: Record<string, number> = { ...(nextState?.attributes?.values || {}) };
+    let hasChanges = false;
+
+    CHAR_ID_TO_NAME.forEach(({ id: key, name }) => {
+        const current = updatedBreakdown[key];
+        const newOM = originMods[key] || 0;
+        const oldOM = oldOriginMods[key] || 0;
+        const newSM = specialtyMods[key] || 0;
+        const oldSM = oldSpecialtyMods[key] || 0;
+
+        const prevManualOM = isManualOMAllowed ? Math.max(0, current.originMod - oldOM) : 0;
+        const prevManualSM = isManualSMAllowed ? Math.max(0, current.specialtyMod - oldSM) : 0;
+
+        let targetBase = current.base;
+        let targetOM = newOM + prevManualOM;
+        let targetSM = newSM + prevManualSM;
+
+        const limits = calculateLimits(origins, key, chosenCharacteristics, nextState?.liberadoParams);
+        const projectedTotal = targetBase + targetOM + targetSM + current.powerMod + (current.otherMod || 0);
+        if (projectedTotal > limits.max && !unlockManualMod && current.powerMod === 0) {
+            const excess = projectedTotal - limits.max;
+            const reduceOM = Math.min(targetOM, excess);
+            targetOM -= reduceOM;
+            const remainingExcess = excess - reduceOM;
+            if (remainingExcess > 0) {
+                targetBase = Math.max(0, targetBase - remainingExcess);
+            }
+        }
+
+        if (current.base !== targetBase || current.originMod !== targetOM || current.specialtyMod !== targetSM) {
+            updatedBreakdown[key] = {
+                ...current,
+                base: targetBase,
+                originMod: targetOM,
+                specialtyMod: targetSM
+            };
+            hasChanges = true;
+        }
+
+        const total = updatedBreakdown[key].base +
+            updatedBreakdown[key].originMod +
+            updatedBreakdown[key].specialtyMod +
+            updatedBreakdown[key].powerMod +
+            (updatedBreakdown[key].otherMod || 0);
+
+        if (updatedValues[name] !== total) {
+            updatedValues[name] = total;
+            hasChanges = true;
+        }
+    });
+
+    if (JSON.stringify(nextState?.chosenCharacteristics || {}) !== JSON.stringify(chosenCharacteristics)) {
+        hasChanges = true;
+    }
+
+    if (!hasChanges) return null;
+
+    return {
+        attributes: {
+            ...(nextState?.attributes || {}),
+            values: updatedValues,
+            breakdown: updatedBreakdown
+        },
+        chosenCharacteristics
+    };
+}

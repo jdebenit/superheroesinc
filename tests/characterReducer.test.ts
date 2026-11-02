@@ -400,4 +400,23 @@ describe('characterReducer', () => {
         const empty = buildManualStatUpdate(currentStat, null, '   ');
         expect(empty).toEqual({ formula: 'CON', base: 60, total: 60, personalizado: '' });
     });
+
+    it('sincroniza automáticamente originMod, poderes innatos y listas formateadas de habilidades desde el Paso 1 (Mejoras 1 y 2)', () => {
+        // Seleccionar Parahumano -> Atlante y Vigilante -> Artista Marcial en el Paso 1 sin pisar los Pasos 2, 3 ni 4
+        const state = characterReducer(initialCharacterState as any, {
+            type: 'SET_ORIGINS',
+            payload: [{ Parahumano: ['Atlante'] }, { Vigilante: ['Artista Marcial'] }]
+        });
+
+        // 1. Atributos actualizados con bonos de origen Atlante (+20 Fuerza, +20 Constitución)
+        expect(state.attributes.breakdown?.fuerza.originMod).toBeGreaterThan(0);
+        expect(state.attributes.values.Fuerza).toBe(40 + (state.attributes.breakdown?.fuerza.originMod || 0));
+
+        // 2. Poderes innatos de Atlante añadidos automáticamente
+        expect(state.powers.selected.some((p: any) => p.id === 'control_del_agua')).toBe(true);
+
+        // 3. Listas formateadas generalItems y specialItems generadas automáticamente
+        expect(state.skills.generalItems.length).toBeGreaterThan(0);
+        expect(state.skills.specialItems.length).toBeGreaterThan(0);
+    });
 });

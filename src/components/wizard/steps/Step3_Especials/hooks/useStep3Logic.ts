@@ -2,7 +2,6 @@ import { useState, useMemo, useEffect, useCallback } from 'react';
 import { POWERS } from '../../../../../data/powers';
 import { SPELLS, type Spell } from '../../../../../data/spells';
 import { TECH_MODULES } from '../../../../../data/techModules';
-import { useCharacterAutoEffects } from '../../../../../hooks/wizard/useCharacterAutoEffects';
 import { useCharacterValidation } from './useCharacterValidation';
 import { hasOtherSobrenaturalPowerOrigin } from '../../../../../data/werewolfOptions';
 import {
@@ -61,8 +60,7 @@ export function useStep3Logic(
     const techModules: TechModule[] = data.techModules || [];
     const magicTableRolls: string[] = data.magicTableRolls || [];
 
-    // Hooks
-    useCharacterAutoEffects(data, onChange);
+    // Validation Hook
     const { validatePowerSelection, validateMagicTableRoll } = useCharacterValidation(data);
 
     // Helpers

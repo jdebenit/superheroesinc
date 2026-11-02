@@ -1,7 +1,8 @@
 import { initialCharacterState } from '../data/wizardConfig';
 import { syncCharacterTransformations } from './calculations/formCalculations';
+import { syncOriginAttributes } from './calculations/originCalculations';
 import { syncOriginAutoPowers, syncPowerModsToAttributes } from './calculations/powerCalculations';
-import { syncOriginSkills } from './calculations/skillCalculations';
+import { syncOriginSkills, syncSkillFormattedItems } from './calculations/skillCalculations';
 import { syncMagicalEquilibrium } from './calculations/magicCalculations';
 import { syncDerivedStats } from './calculations/derivedStatsCalculations';
 import { mergeWithDefaults } from './dataCleaner';
@@ -27,15 +28,34 @@ export type CharacterAction =
 
 /**
  * Función pura que sincroniza de forma determinista y atómica:
+ * 0. Modificadores de características por origen/especialidad (`originMod`, `specialtyMod` y límites)
  * 1. Poderes innatos otorgados automáticamente por el origen/subtipo (Atlante, Troll, Tes-khar, Hadas, etc.)
  * 2. Modificadores de características otorgados por poderes (powerMod en breakdown y values)
- * 3. Habilidades de aprendizaje gratuitas, obligatorias (Vigilante) y limpieza de restringidas
+ * 3. Habilidades de aprendizaje gratuitas, obligatorias (Vigilante), limpieza de restringidas y listas formateadas
  * 4. Fórmula de Equilibrio Mágico (emFormula) y EM calculada (calculatedEM)
  * 5. Formas y transformaciones derivadas (Hombre Lobo, Blindaje Natural, etc.)
  * 6. Estadísticas derivadas de combate y generales (combatstats y otherstats)
  */
-export function withTransformationsSync(state: CharacterData): CharacterData {
+export function withTransformationsSync(state: CharacterData, prevState?: CharacterData): CharacterData {
     let current = state;
+
+    // 0. Sincronización de modificadores de características por origen/especialidad cuando cambian orígenes o bonos elegidos
+    const originsChanged = !prevState ||
+        prevState.origin !== current.origin ||
+        prevState.chosenCharacteristics !== current.chosenCharacteristics ||
+        prevState.chosenBonusCharacteristic !== current.chosenBonusCharacteristic ||
+        prevState.liberadoParams !== current.liberadoParams;
+
+    if (originsChanged && prevState) {
+        const originAttrPatch = syncOriginAttributes(current, prevState);
+        if (originAttrPatch) {
+            current = {
+                ...current,
+                attributes: originAttrPatch.attributes as any,
+                chosenCharacteristics: originAttrPatch.chosenCharacteristics
+            };
+        }
+    }
 
     // 1. Sincronización de poderes innatos de origen
     const updatedPowers = syncOriginAutoPowers(current);
@@ -58,7 +78,7 @@ export function withTransformationsSync(state: CharacterData): CharacterData {
         };
     }
 
-    // 3. Sincronización de habilidades gratuitas, obligatorias y restringidas por origen
+    // 3. Sincronización de habilidades gratuitas, obligatorias y restringidas por origen + listas formateadas
     const updatedSkills = syncOriginSkills(current);
     if (updatedSkills) {
         current = {
@@ -67,6 +87,18 @@ export function withTransformationsSync(state: CharacterData): CharacterData {
                 ...(current.skills || {}),
                 selected: updatedSkills.selected,
                 specified: updatedSkills.specified
+            }
+        };
+    }
+
+    const updatedSkillItems = syncSkillFormattedItems(current);
+    if (updatedSkillItems) {
+        current = {
+            ...current,
+            skills: {
+                ...(current.skills || {}),
+                generalItems: updatedSkillItems.generalItems,
+                specialItems: updatedSkillItems.specialItems
             }
         };
     }
@@ -134,6 +166,8 @@ export function characterReducer(state: CharacterData, action: CharacterAction):
 
             // Si el patch altera orígenes, parámetros, poderes, atributos, habilidades, hechizos o nivel, sincronizar
             const touchesTransforms = 'origin' in patch ||
+                'chosenCharacteristics' in patch ||
+                'chosenBonusCharacteristic' in patch ||
                 'powers' in patch ||
                 'werewolfParams' in patch ||
                 'attributes' in patch ||
@@ -143,7 +177,7 @@ export function characterReducer(state: CharacterData, action: CharacterAction):
                 'level' in patch ||
                 'modPerLevel' in patch;
 
-            return touchesTransforms ? withTransformationsSync(next) : next;
+            return touchesTransforms ? withTransformationsSync(next, state) : next;
         }
 
         case 'UPDATE_IDENTITY': {
@@ -159,7 +193,7 @@ export function characterReducer(state: CharacterData, action: CharacterAction):
                 level: action.payload.level,
                 modPerLevel: action.payload.modPerLevel !== undefined ? action.payload.modPerLevel : state.modPerLevel
             };
-            return withTransformationsSync(next);
+            return withTransformationsSync(next, state);
         }
 
         case 'SET_ORIGINS': {
@@ -170,7 +204,7 @@ export function characterReducer(state: CharacterData, action: CharacterAction):
                     items: action.payload || []
                 }
             };
-            return withTransformationsSync(next);
+            return withTransformationsSync(next, state);
         }
 
         case 'UPDATE_ORIGIN_PARAMS': {
@@ -178,7 +212,7 @@ export function characterReducer(state: CharacterData, action: CharacterAction):
                 ...state,
                 ...action.payload
             };
-            return withTransformationsSync(next);
+            return withTransformationsSync(next, state);
         }
 
         case 'UPDATE_ATTRIBUTES': {
@@ -192,7 +226,7 @@ export function characterReducer(state: CharacterData, action: CharacterAction):
                     cost: action.payload.cost !== undefined ? action.payload.cost : state.attributes.cost
                 }
             };
-            return withTransformationsSync(next);
+            return withTransformationsSync(next, state);
         }
 
         case 'UPDATE_SKILLS': {
@@ -203,7 +237,7 @@ export function characterReducer(state: CharacterData, action: CharacterAction):
                     ...action.payload
                 }
             };
-            return withTransformationsSync(next);
+            return withTransformationsSync(next, state);
         }
 
         case 'UPDATE_POWERS': {
@@ -214,7 +248,7 @@ export function characterReducer(state: CharacterData, action: CharacterAction):
                     selected: action.payload.selected || []
                 }
             };
-            return withTransformationsSync(next);
+            return withTransformationsSync(next, state);
         }
 
         case 'UPDATE_SPELLS': {
@@ -227,7 +261,7 @@ export function characterReducer(state: CharacterData, action: CharacterAction):
                 },
                 ...(action.payload.magicTableRolls !== undefined ? { magicTableRolls: action.payload.magicTableRolls } : {})
             };
-            return withTransformationsSync(next);
+            return withTransformationsSync(next, state);
         }
 
         case 'UPDATE_TECH': {

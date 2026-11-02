@@ -723,3 +723,53 @@ export function syncOriginSkills(data: any): {
 
     return hasChanges ? { selected: newSelected, specified: newSpecified } : null;
 }
+
+/**
+ * Sincroniza de forma pura las listas formateadas `generalItems` y `specialItems`
+ * en función de los atributos actuales, orígenes y habilidades seleccionadas/modificadas.
+ */
+export function syncSkillFormattedItems(data: any): {
+    generalItems: SkillDisplayItem[];
+    specialItems: SkillDisplayItem[];
+} | null {
+    const attrValues = data?.attributes?.values || {};
+    const originItems = data?.origin?.items || [];
+    const manualMods = data?.skills?.generalManualMods || {};
+    const manualBases = data?.skills?.manualBases || {};
+    const nativeLanguage = data?.skills?.nativeLanguage || '';
+    const selectedSkills = data?.skills?.selected || {};
+    const specifiedSkills = data?.skills?.specified || {};
+
+    const { skills: skillValues } = calculateGeneralSkillValues(
+        attrValues,
+        originItems,
+        manualMods,
+        manualBases
+    );
+    const { standard: standardSpecialSkills, specified: specifiedSpecialSkills } = calculateSpecialSkillValues(
+        attrValues,
+        originItems,
+        selectedSkills,
+        specifiedSkills
+    );
+
+    const generalItems = formatGeneralSkillItems(skillValues, nativeLanguage);
+    const specialItems = formatSpecialSkillItems(
+        selectedSkills,
+        standardSpecialSkills,
+        specifiedSkills,
+        specifiedSpecialSkills
+    );
+
+    const prevGeneral = data?.skills?.generalItems || [];
+    const prevSpecial = data?.skills?.specialItems || [];
+
+    if (
+        JSON.stringify(prevGeneral) !== JSON.stringify(generalItems) ||
+        JSON.stringify(prevSpecial) !== JSON.stringify(specialItems)
+    ) {
+        return { generalItems, specialItems };
+    }
+
+    return null;
+}
