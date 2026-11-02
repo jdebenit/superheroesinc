@@ -2,30 +2,29 @@ import React from 'react';
 import { SheetSection } from '../common/SheetSection';
 import { DetailRow } from '../common/DetailRow';
 import { applyLevelModsToSkillItems } from '../../../utils/characterCalculations';
-import Logger from '../../../utils/Logger';
 
 interface SkillsGeneralSectionProps {
     character: any;
+    items?: any[];
 }
 
-export const SkillsGeneralSection: React.FC<SkillsGeneralSectionProps> = ({ character }) => {
-    // Debug logging
-    Logger.log('SkillsGeneralSection - character:', character);
-    Logger.log('SkillsGeneralSection - skills:', character?.skills);
-    Logger.log('SkillsGeneralSection - generalItems:', character?.skills?.generalItems);
-
-    if (!character.skills || !character.skills.generalItems || character.skills.generalItems.length === 0) return null;
-
-    const items = applyLevelModsToSkillItems(
-        character.skills.generalItems,
-        character.level,
-        character.modPerLevel
+export const SkillsGeneralSection: React.FC<SkillsGeneralSectionProps> = ({ character, items: precalculatedItems }) => {
+    const resolvedItems = precalculatedItems || (
+        character?.skills?.generalItems?.length
+            ? applyLevelModsToSkillItems(
+                character.skills.generalItems,
+                character.level,
+                character.modPerLevel
+            )
+            : []
     );
+
+    if (!resolvedItems || resolvedItems.length === 0) return null;
 
     return (
         <SheetSection title="Habilidades Generales" className="skills-general">
             <ul className="clean-list">
-                {items.map((item: any, i: number) => (
+                {resolvedItems.map((item: any, i: number) => (
                     <li key={i} className="no-bullet-item skill-item">
                         <DetailRow
                             className="skill-row"

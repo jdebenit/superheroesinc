@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { type StatBreakdown } from '../../../utils/characterCalculations';
+import { StatBreakdownPanel } from '../common/StatBreakdownPanel';
 
-interface CombatStat {
+export interface CombatStat {
     label: string;
     value: string;
     breakdown?: StatBreakdown;
@@ -21,21 +22,6 @@ export const CombatSection: React.FC<CombatSectionProps> = ({ combatStats }) => 
             ...prev,
             [label]: !prev[label]
         }));
-    };
-
-    const renderModifierRecord = (mod: Record<string, number> | number) => {
-        if (typeof mod === 'number') return <span>{mod}</span>;
-        const entries = Object.entries(mod);
-        if (entries.length === 0) return <span>0</span>;
-        return (
-            <span className="stat-breakdown-sublist">
-                {entries.map(([k, v], idx) => (
-                    <span key={k} className="stat-breakdown-tag">
-                        {k}: {v >= 0 ? `+${v}` : v}{idx < entries.length - 1 ? ', ' : ''}
-                    </span>
-                ))}
-            </span>
-        );
     };
 
     return (
@@ -68,48 +54,10 @@ export const CombatSection: React.FC<CombatSectionProps> = ({ combatStats }) => 
                             </span>
 
                             {hasBreakdown && isExpanded && b && (
-                                <div className="stat-breakdown-panel combat-breakdown-panel" onClick={(e) => e.stopPropagation()}>
-                                    {b.formula && (
-                                        <div className="stat-breakdown-row">
-                                            <span className="stat-breakdown-key">Fórmula:</span>
-                                            <code className="stat-breakdown-formula">{b.formula}</code>
-                                        </div>
-                                    )}
-                                    {b.base !== undefined && (
-                                        <div className="stat-breakdown-row">
-                                            <span className="stat-breakdown-key">Base:</span>
-                                            <span className="stat-breakdown-val">{b.base}</span>
-                                        </div>
-                                    )}
-                                    {b.origen !== undefined && (
-                                        <div className="stat-breakdown-row">
-                                            <span className="stat-breakdown-key">Origen:</span>
-                                            <span className="stat-breakdown-val">{renderModifierRecord(b.origen)}</span>
-                                        </div>
-                                    )}
-                                    {b.habilidades !== undefined && (
-                                        <div className="stat-breakdown-row">
-                                            <span className="stat-breakdown-key">Habilidades:</span>
-                                            <span className="stat-breakdown-val">{renderModifierRecord(b.habilidades)}</span>
-                                        </div>
-                                    )}
-                                    {b.nivel !== undefined && (
-                                        <div className="stat-breakdown-row">
-                                            <span className="stat-breakdown-key">Nivel:</span>
-                                            <span className="stat-breakdown-val">{renderModifierRecord(b.nivel)}</span>
-                                        </div>
-                                    )}
-                                    <div className="stat-breakdown-row stat-breakdown-total-row">
-                                        <span className="stat-breakdown-key">Total:</span>
-                                        <span className="stat-breakdown-val">{b.total}</span>
-                                    </div>
-                                    {hasCustom && (
-                                        <div className="stat-breakdown-row stat-breakdown-custom-row">
-                                            <span className="stat-breakdown-key">Personalizado:</span>
-                                            <span className="stat-breakdown-val">{b.personalizado}</span>
-                                        </div>
-                                    )}
-                                </div>
+                                <StatBreakdownPanel
+                                    breakdown={b}
+                                    panelClassName="combat-breakdown-panel"
+                                />
                             )}
                         </div>
                     );

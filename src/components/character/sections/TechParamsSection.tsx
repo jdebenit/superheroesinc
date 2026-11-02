@@ -1,5 +1,6 @@
 import React from 'react';
 import { INCOME_SOURCES } from '../../../data/technologicalOptions';
+import { hasOrigin } from '../../../utils/calculations/originFlags';
 import { SheetSection } from '../common/SheetSection';
 
 interface TechParamsSectionProps {
@@ -7,8 +8,7 @@ interface TechParamsSectionProps {
 }
 
 export const TechParamsSection: React.FC<TechParamsSectionProps> = ({ character }) => {
-    const hasTechOrigin = character.origin?.items?.some((i: any) => Object.keys(i)[0] === 'Tecnológico');
-    if (!hasTechOrigin) return null;
+    if (!hasOrigin(character, 'Tecnológico')) return null;
 
     const incomeSourceId = character.techParams?.incomeSource;
     if (!incomeSourceId) return null;

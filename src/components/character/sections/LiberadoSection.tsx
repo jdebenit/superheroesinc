@@ -1,33 +1,14 @@
 import React from 'react';
 import { SheetSection } from '../common/SheetSection';
 import { getLiberadoConfig, getLiberadoDones } from '../../../data/originOptions';
+import { getActiveLiberadoSubtypes } from '../../../utils/calculations/originFlags';
 
 interface LiberadoSectionProps {
     character: any;
 }
 
 export const LiberadoSection: React.FC<LiberadoSectionProps> = ({ character }) => {
-    const origins = character.origin?.items || character.origins || [];
-    const liberadoSubtypes: string[] = [];
-
-    origins.forEach((item: any) => {
-        const originName = Object.keys(item)[0];
-        if (typeof originName === 'string' && originName.startsWith('Liberado')) {
-            if (!liberadoSubtypes.includes(originName)) {
-                liberadoSubtypes.push(originName);
-            }
-        }
-        const content = item[originName];
-        if (Array.isArray(content)) {
-            content.forEach((s: string) => {
-                if (typeof s === 'string' && s.startsWith('Liberado')) {
-                    if (!liberadoSubtypes.includes(s)) {
-                        liberadoSubtypes.push(s);
-                    }
-                }
-            });
-        }
-    });
+    const liberadoSubtypes = getActiveLiberadoSubtypes(character);
 
     if (liberadoSubtypes.length === 0) return null;
 

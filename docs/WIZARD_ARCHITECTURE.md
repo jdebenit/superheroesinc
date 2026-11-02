@@ -120,7 +120,24 @@ src/
 │       └── useCharacterAutoEffects.ts      # Wrappers de compatibilidad
 └── components/
     ├── character/
-    │   └── CharacterSheet.tsx              # Visor modal/completo de la ficha (consume adaptWebCharacter)
+    │   ├── CharacterSheet.tsx              # Orquestador declarativo del visor de ficha (modal e inline)
+    │   ├── hooks/
+    │   │   ├── useCharacterSheetData.ts    # Hook memoizado de Capa 4 (proyección de formas, stats, skills, PCs y datos PDF)
+    │   │   ├── usePdfExport.ts             # Exportación PDF consumiendo datos pre-calculados de useCharacterSheetData
+    │   │   └── useModal.ts                 # Gestión de estado del diálogo y pantalla completa
+    │   ├── common/
+    │   │   ├── SheetSection.tsx            # Contenedor estándar de sección de ficha
+    │   │   ├── DetailRow.tsx               # Fila clave-valor con línea punteada
+    │   │   ├── StatBreakdownPanel.tsx      # Panel desplegable unificado de desglose de estadísticas
+    │   │   ├── SequelsList.tsx             # Listado reutilizable de secuelas (Alterado, Mutante, Híbrido)
+    │   │   ├── InfoCard.tsx                # Tarjeta para armas, artefactos, vehículos y objetos mágicos
+    │   │   └── ActionButtons.tsx           # Botones de exportación JSON y PDF
+    │   └── sections/
+    │       ├── SheetHeader.tsx             # Cabecera con nombre, nivel, coste total de PCs y versión
+    │       ├── SheetFormSwitcher.tsx       # Selector de forma activa (Humana / Transición / Poderes)
+    │       ├── OriginSpecificSheetSections.tsx # Orquestador declarativo de secciones especiales por origen
+    │       ├── GearAndInventorySheetSections.tsx # Orquestador declarativo de inventario, armas, vehículos y notas
+    │       └── ...                         # Secciones puras de presentación (Origin, Attributes, Combat, Skills, Powers, Spells...)
     └── wizard/
         ├── CharacterWizard.tsx             # Orquestador principal + STEP_RENDERERS
         ├── shared/

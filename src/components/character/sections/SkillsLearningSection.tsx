@@ -5,21 +5,26 @@ import { applyLevelModsToSkillItems } from '../../../utils/characterCalculations
 
 interface SkillsLearningSectionProps {
     character: any;
+    items?: any[];
 }
 
-export const SkillsLearningSection: React.FC<SkillsLearningSectionProps> = ({ character }) => {
-    if (!character.skills || !character.skills.specialItems || character.skills.specialItems.length === 0) return null;
-
-    const items = applyLevelModsToSkillItems(
-        character.skills.specialItems,
-        character.level,
-        character.modPerLevel
+export const SkillsLearningSection: React.FC<SkillsLearningSectionProps> = ({ character, items: precalculatedItems }) => {
+    const resolvedItems = precalculatedItems || (
+        character?.skills?.specialItems?.length
+            ? applyLevelModsToSkillItems(
+                character.skills.specialItems,
+                character.level,
+                character.modPerLevel
+            )
+            : []
     );
+
+    if (!resolvedItems || resolvedItems.length === 0) return null;
 
     return (
         <SheetSection title="Habilidades de Aprendizaje" className="skills-learning">
             <ul className="clean-list">
-                {items.map((item: any, i: number) => (
+                {resolvedItems.map((item: any, i: number) => (
                     <li key={i} className="no-bullet-item skill-item">
                         <DetailRow
                             className="skill-row"

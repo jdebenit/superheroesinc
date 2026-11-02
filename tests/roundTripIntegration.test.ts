@@ -343,5 +343,13 @@ describe('Integración Round-Trip (Wizard -> JSON -> adaptWebCharacter -> Sheet)
             expect(current.skills.generalItems).toHaveLength(1);
             expect(current.skills.specialItems).toHaveLength(1);
         }
+
+        // Verificar que useCharacterSheetData resuelve automáticamente totalPCs, originFlags e ítems de habilidades
+        const sheetData = useCharacterSheetData(current, 'base');
+        expect(sheetData.resolvedTotalPCs).toBe(baselineTotalPCs);
+        expect(sheetData.originFlags.isMutante).toBe(true);
+        expect(sheetData.originFlags.isVigilante).toBe(true);
+        expect(sheetData.generalSkillItems.length).toBeGreaterThan(0);
+        expect(sheetData.specialSkillItems.length).toBeGreaterThan(0);
     });
 });

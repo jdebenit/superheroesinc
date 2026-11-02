@@ -1,4 +1,5 @@
 import React from 'react';
+import { TERRANO_TABLE_OPTIONS } from '../../../utils/calculations/magicCalculations';
 import { SheetSection } from '../common/SheetSection';
 import { InfoCard } from '../common/InfoCard';
 
@@ -37,23 +38,18 @@ export const MagicObjectsSection: React.FC<MagicObjectsSectionProps> = ({ magicO
                 <SheetSection title="Tabla de Objetos (Terrano)" className="magic-objects-terrano">
                     <div className="preview-section-grid">
                         {magicTableRolls.map((rollId: string, i: number) => {
-                            const options = [
-                                { id: '180_EM', label: 'Acceso a objetos de 180 EM', cost: '+1 PC' },
-                                { id: '120_EM', label: 'Acceso a objetos de 120 EM', cost: '+0 PC' },
-                                { id: '60_EM', label: 'Acceso a objetos de 60 EM', cost: '-1 PC' },
-                                { id: 'none', label: 'Ningún objeto', cost: '-2 PC' },
-                                { id: 'guardian_power', label: 'Acceso a Poder de Guardián', cost: '+2 PC' },
-                            ];
-                            const opt = options.find(o => o.id === rollId) || { label: rollId, cost: '' };
+                            const opt = TERRANO_TABLE_OPTIONS.find(o => o.id === rollId);
+                            const label = opt?.label || rollId;
+                            const costText = opt?.costText || '';
 
                             return (
                                 <InfoCard
                                     key={i}
-                                    title={opt.label}
+                                    title={label}
                                     theme="theme-magic-table magic-table-row"
                                 >
                                     <div className="magic-table-cost">
-                                        {opt.cost}
+                                        {costText}
                                     </div>
                                 </InfoCard>
                             );

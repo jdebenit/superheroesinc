@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { type StatBreakdown } from '../../../utils/characterCalculations';
 import { SheetSection } from '../common/SheetSection';
 import { DetailRow } from '../common/DetailRow';
+import { StatBreakdownPanel } from '../common/StatBreakdownPanel';
 
-interface OtherStat {
+export interface OtherStat {
     label: string;
     value: string;
     breakdown?: StatBreakdown;
@@ -23,22 +24,6 @@ export const OtherStatsSection: React.FC<OtherStatsSectionProps> = ({ otherStats
             ...prev,
             [label]: !prev[label]
         }));
-    };
-
-    const renderModifierRecord = (mod: Record<string, number> | number, isMaxOnly: boolean = false) => {
-        if (typeof mod === 'number') return <span>{mod}</span>;
-        const entries = Object.entries(mod);
-        if (entries.length === 0) return <span>0</span>;
-        return (
-            <span className="stat-breakdown-sublist">
-                {entries.map(([k, v], idx) => (
-                    <span key={k} className="stat-breakdown-tag">
-                        {k}: {v >= 0 ? `+${v}` : v}{idx < entries.length - 1 ? ', ' : ''}
-                    </span>
-                ))}
-                {isMaxOnly && entries.length > 1 && <span className="stat-breakdown-hint"> (se aplica el mayor)</span>}
-            </span>
-        );
     };
 
     return (
@@ -75,66 +60,11 @@ export const OtherStatsSection: React.FC<OtherStatsSectionProps> = ({ otherStats
                                 valueClassName=""
                             />
                             {hasBreakdown && isExpanded && b && (
-                                <div className="stat-breakdown-panel other-breakdown-panel" onClick={(e) => e.stopPropagation()}>
-                                    {b.formula && (
-                                        <div className="stat-breakdown-row">
-                                            <span className="stat-breakdown-key">Fórmula:</span>
-                                            <code className="stat-breakdown-formula">{b.formula}</code>
-                                        </div>
-                                    )}
-                                    {b.base !== undefined && (
-                                        <div className="stat-breakdown-row">
-                                            <span className="stat-breakdown-key">Base:</span>
-                                            <span className="stat-breakdown-val">{b.base}</span>
-                                        </div>
-                                    )}
-                                    {b.multiplicadorFuerza !== undefined && (
-                                        <div className="stat-breakdown-row">
-                                            <span className="stat-breakdown-key">Mult. Fuerza:</span>
-                                            <span className="stat-breakdown-val">x{b.multiplicadorFuerza}</span>
-                                        </div>
-                                    )}
-                                    {b.alto !== undefined && (
-                                        <div className="stat-breakdown-row">
-                                            <span className="stat-breakdown-key">Salto alto:</span>
-                                            <span className="stat-breakdown-val">{b.alto}</span>
-                                        </div>
-                                    )}
-                                    {b.largo !== undefined && (
-                                        <div className="stat-breakdown-row">
-                                            <span className="stat-breakdown-key">Salto largo:</span>
-                                            <span className="stat-breakdown-val">{b.largo}</span>
-                                        </div>
-                                    )}
-                                    {b.origen !== undefined && (
-                                        <div className="stat-breakdown-row">
-                                            <span className="stat-breakdown-key">Origen:</span>
-                                            <span className="stat-breakdown-val">{renderModifierRecord(b.origen, item.label === 'Modificador de impacto')}</span>
-                                        </div>
-                                    )}
-                                    {b.habilidades !== undefined && (
-                                        <div className="stat-breakdown-row">
-                                            <span className="stat-breakdown-key">Habilidades:</span>
-                                            <span className="stat-breakdown-val">{renderModifierRecord(b.habilidades)}</span>
-                                        </div>
-                                    )}
-                                    {b.nivel !== undefined && (
-                                        <div className="stat-breakdown-row">
-                                            <span className="stat-breakdown-key">Nivel:</span>
-                                            <span className="stat-breakdown-val">{renderModifierRecord(b.nivel)}</span>
-                                        </div>
-                                    )}
-                                    <div className="stat-breakdown-row stat-breakdown-total-row">
-                                        <span className="stat-breakdown-key">Total:</span>
-                                        <span className="stat-breakdown-val">{b.total}</span>
-                                    </div>
-                                    {hasCustom && (
-                                        <div className="stat-breakdown-row stat-breakdown-custom-row">
-                                            <span className="stat-breakdown-key">Personalizado:</span>
-                                            <span className="stat-breakdown-val">{b.personalizado}</span>
-                                        </div>
-                                    )}
-                                </div>
+                                <StatBreakdownPanel
+                                    breakdown={b}
+                                    panelClassName="other-breakdown-panel"
+                                    isImpactMod={item.label === 'Modificador de impacto'}
+                                />
                             )}
                         </li>
                     );

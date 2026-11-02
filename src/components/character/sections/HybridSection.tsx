@@ -1,5 +1,5 @@
 import React from 'react';
-import { hasSubtype } from '../../../components/wizard/steps/Step3_Especials/utils';
+import { getCharacterOriginFlags } from '../../../utils/calculations/originFlags';
 import { SheetSection } from '../common/SheetSection';
 import { DetailRow } from '../common/DetailRow';
 
@@ -8,11 +8,13 @@ interface HybridSectionProps {
 }
 
 export const HybridSection: React.FC<HybridSectionProps> = ({ character }) => {
+    const flags = getCharacterOriginFlags(character);
+
     if (
-        character.isParahumanoHybrid && (
-            hasSubtype(character, 'Parahumano', 'Thals') ||
-            hasSubtype(character, 'Parahumano', 'Tes-khar') ||
-            hasSubtype(character, 'Parahumano', 'Atlante')
+        flags.isParahumanoHybrid && (
+            flags.isThals ||
+            flags.isTesKhar ||
+            flags.isAtlante
         )
     ) {
         return (
