@@ -1,6 +1,8 @@
 import { GENERAL_SKILLS } from '../../data/generalSkills';
-import { SPECIAL_SKILLS } from '../../data/specialSkills';
+import { SPECIAL_SKILLS, isSkillAllowed } from '../../data/specialSkills';
 import { ORIGIN_SKILL_MODIFIERS } from '../../data/skillModifiers';
+import { getFreeSkillsForOrigins } from '../../data/freeOriginSkills';
+import { getRequiredSkillsForOrigins } from '../../data/requiredSpecialtySkills';
 import type { SkillDisplayItem } from '../../types/character';
 import Logger from '../Logger';
 
@@ -600,4 +602,124 @@ export function formatSpecialSkillItems(
     }).filter((item): item is SkillDisplayItem => Boolean(item));
 
     return [...stdFormatted, ...specFormatted];
+}
+
+/**
+ * Sincroniza de forma pura las habilidades de aprendizaje gratuitas de origen,
+ * las habilidades obligatorias de especialidades de Vigilante, y limpia las habilidades restringidas.
+ * Devuelve `{ selected, specified }` actualizado si hubo cambios, o `null` si no hubo cambios.
+ */
+export function syncOriginSkills(data: any): {
+    selected: Record<string, any>;
+    specified: Record<string, any>;
+} | null {
+    const originItems = data?.origin?.items || [];
+    const currentSelected = data?.skills?.selected || {};
+    const currentSpecified = data?.skills?.specified || {};
+
+    const freeSkillIds = getFreeSkillsForOrigins(originItems);
+    const requiredSkillIds = getRequiredSkillsForOrigins(originItems);
+
+    const newSelected: Record<string, any> = { ...currentSelected };
+    const newSpecified: Record<string, any> = { ...currentSpecified };
+    let hasChanges = false;
+
+    // 1. Auto-add free skills from origin
+    if (freeSkillIds.length > 0) {
+        freeSkillIds.forEach((skillId: string) => {
+            if (!newSelected[skillId]) {
+                newSelected[skillId] = { isFree: true, isRequired: false, manualMods: 0, manualBases: 0 };
+                hasChanges = true;
+            }
+        });
+    }
+
+    // 2. Cleanup: Remove isRequired from skills that are no longer required
+    Object.keys(newSelected).forEach(skillId => {
+        if (newSelected[skillId]?.isRequired && !requiredSkillIds.includes(skillId)) {
+            newSelected[skillId] = {
+                ...newSelected[skillId],
+                isRequired: false
+            };
+            hasChanges = true;
+        }
+    });
+
+    Object.keys(newSpecified).forEach(uniqueId => {
+        const skillId = newSpecified[uniqueId]?.skillId;
+        if (newSpecified[uniqueId]?.isRequired && !requiredSkillIds.includes(skillId)) {
+            newSpecified[uniqueId] = {
+                ...newSpecified[uniqueId],
+                isRequired: false
+            };
+            hasChanges = true;
+        }
+    });
+
+    // 3. Add: Ensure all currently required skills are marked as such
+    if (requiredSkillIds.length > 0) {
+        requiredSkillIds.forEach((skillId: string) => {
+            const skillDef = SPECIAL_SKILLS.find(s => s.id === skillId);
+
+            if (skillDef?.requiresSpecification) {
+                const existingInstances = Object.values(newSpecified).filter((s: any) => s.skillId === skillId);
+
+                if (existingInstances.length === 0) {
+                    const uniqueId = `${skillId}_required`;
+                    newSpecified[uniqueId] = {
+                        skillId,
+                        specification: '',
+                        isFree: false,
+                        isRequired: true,
+                        manualMods: 0,
+                        manualBases: 0
+                    };
+                    hasChanges = true;
+                } else {
+                    const hasRequiredInstance = existingInstances.some((s: any) => s.isRequired);
+                    if (!hasRequiredInstance) {
+                        const firstKey = Object.keys(newSpecified).find(key => newSpecified[key].skillId === skillId);
+                        if (firstKey) {
+                            newSpecified[firstKey] = {
+                                ...newSpecified[firstKey],
+                                isRequired: true
+                            };
+                            hasChanges = true;
+                        }
+                    }
+                }
+            } else {
+                if (!newSelected[skillId]) {
+                    newSelected[skillId] = { isFree: false, isRequired: true, manualMods: 0, manualBases: 0 };
+                    hasChanges = true;
+                } else if (!newSelected[skillId].isRequired) {
+                    newSelected[skillId] = {
+                        ...newSelected[skillId],
+                        isRequired: true
+                    };
+                    hasChanges = true;
+                }
+            }
+        });
+    }
+
+    // 4. Cleanup restricted skills when origin changes
+    Object.keys(newSelected).forEach(skillId => {
+        const skillDef = SPECIAL_SKILLS.find(s => s.id === skillId);
+        if (skillDef && !isSkillAllowed(skillDef, originItems, data)) {
+            delete newSelected[skillId];
+            hasChanges = true;
+        }
+    });
+
+    Object.keys(newSpecified).forEach(uniqueId => {
+        const skillId = newSpecified[uniqueId]?.skillId;
+        const skillDef = SPECIAL_SKILLS.find(s => s.id === skillId);
+        if (skillDef && !isSkillAllowed(skillDef, originItems, data)) {
+            delete newSpecified[uniqueId];
+            hasChanges = true;
+        }
+    });
+
+    return hasChanges ? { selected: newSelected, specified: newSpecified } : null;
 }

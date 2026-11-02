@@ -6,7 +6,8 @@
   ],
   "exclude": [
     "dist",
-    "tmp"
+    "tmp",
+    "coverage"
   ],
   "compilerOptions": {
     "jsx": "react-jsx",

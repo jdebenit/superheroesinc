@@ -922,3 +922,115 @@ export function applyStatsOverrides(baseStats: Record<string, any>, savedStats: 
     }
     return result;
 }
+
+export const BREAKDOWN_COMBAT_FIELDS = ['Iniciativa y Reflejos', 'Puntos de Vida', 'Equilibrio Mental'] as const;
+export const BREAKDOWN_STAT_FIELDS = [
+    'Inconsciencia',
+    'Resistencia a gases y venenos',
+    'Daño absorbido físico',
+    'Daño absorbido mental',
+    'Modificador de impacto',
+    'Parada Fisica',
+    'Parada mental',
+    'Salto (alto / largo)'
+] as const;
+
+/**
+ * Construye de forma pura el objeto de desglose con override `personalizado`
+ * cuando el usuario edita manualmente una estadística de combate o derivada en el Paso 6.
+ */
+export function buildManualStatUpdate(
+    current: any,
+    fallbackFormatted: any,
+    rawValue: string
+): any {
+    let baseObj: any = { base: 0, total: 0 };
+    const source = (current && typeof current === 'object')
+        ? current
+        : (fallbackFormatted && typeof fallbackFormatted === 'object' ? fallbackFormatted : null);
+
+    if (source) {
+        baseObj = {
+            ...(source.formula ? { formula: source.formula } : {}),
+            ...(source.base !== undefined ? { base: source.base } : {}),
+            ...(source.multiplicadorFuerza !== undefined ? { multiplicadorFuerza: source.multiplicadorFuerza } : {}),
+            ...(source.alto !== undefined ? { alto: source.alto } : {}),
+            ...(source.largo !== undefined ? { largo: source.largo } : {}),
+            ...(source.origen !== undefined ? { origen: source.origen } : {}),
+            ...(source.habilidades !== undefined ? { habilidades: source.habilidades } : {}),
+            ...(source.nivel !== undefined ? { nivel: source.nivel } : {}),
+            total: source.total ?? 0
+        };
+    }
+
+    const trimmed = rawValue.trim();
+    if (trimmed === '') {
+        return { ...baseObj, personalizado: '' };
+    }
+
+    const parsed = !isNaN(Number(trimmed)) ? Number(trimmed) : rawValue;
+    if (String(parsed) === String(baseObj.total)) {
+        return { ...baseObj };
+    }
+    return { ...baseObj, personalizado: parsed };
+}
+
+/**
+ * Sincroniza de forma pura las estadísticas de combate (`combatstats`) y otras estadísticas (`otherstats`)
+ * preservando cualquier override manual (`personalizado`) y respetando los bloqueos de `uiState`.
+ * Retorna `{ combatstats?, otherstats? }` si hubo cambios, o `null` si ya están sincronizadas.
+ */
+export function syncDerivedStats(character: any): {
+    combatstats?: Record<string, any>;
+    otherstats?: Record<string, any>;
+} | null {
+    if (!character || !character.attributes?.values) return null;
+
+    const unlockCombatStats = !!character.uiState?.unlockCombatStats;
+    const unlockOtherStats = !!character.uiState?.unlockOtherStats;
+
+    if (unlockCombatStats && unlockOtherStats) return null;
+
+    const stats = calculateDerivedStats(
+        character.attributes.values,
+        character.origin?.items,
+        character.skills,
+        character.level,
+        character.modPerLevel
+    );
+    const { combatStats: newCombat, otherStats: newOther } = formatDerivedStats(stats);
+
+    BREAKDOWN_COMBAT_FIELDS.forEach(statKey => {
+        const existingVal = character.combatstats?.[statKey];
+        if (existingVal !== undefined && existingVal !== null && newCombat[statKey]) {
+            newCombat[statKey] = applyStatBreakdownOverride(newCombat[statKey], existingVal);
+        }
+    });
+
+    BREAKDOWN_STAT_FIELDS.forEach(statKey => {
+        const existingVal = character.otherstats?.[statKey];
+        if (existingVal !== undefined && existingVal !== null && newOther[statKey]) {
+            newOther[statKey] = applyStatBreakdownOverride(newOther[statKey], existingVal);
+        }
+    });
+
+    const currentCombatStr = JSON.stringify(character.combatstats);
+    const nextCombatStr = JSON.stringify(newCombat);
+    const currentOtherStr = JSON.stringify(character.otherstats);
+    const nextOtherStr = JSON.stringify(newOther);
+
+    const updates: { combatstats?: Record<string, any>; otherstats?: Record<string, any> } = {};
+    let hasChanges = false;
+
+    if (!unlockCombatStats && currentCombatStr !== nextCombatStr) {
+        updates.combatstats = newCombat;
+        hasChanges = true;
+    }
+
+    if (!unlockOtherStats && currentOtherStr !== nextOtherStr) {
+        updates.otherstats = newOther;
+        hasChanges = true;
+    }
+
+    return hasChanges ? updates : null;
+}

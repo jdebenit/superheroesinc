@@ -15,7 +15,7 @@ import {
     getPowerPenalty,
     getCharacterOriginFlags
 } from '../utils';
-import { getEMFormulaOptions } from '../../../../../utils/calculations/magicCalculations';
+import { syncMagicalEquilibrium } from '../../../../../utils/calculations/magicCalculations';
 import type { SelectedPower, SelectedSpell, TechModule, ModalType } from '../types';
 import type { CyborgImplant } from '../../../../../data/cyborgImplantConfigs';
 
@@ -133,44 +133,16 @@ export function useStep3Logic(data: any, onChange: (updates: any) => void, onSho
     else if (isHadaEter) emFormula = { divisor: 2, pcCost: 0 };
     else if (!hasBaseEMOrigin && isLiberado) emFormula = { divisor: 0, pcCost: 0 };
 
-    // Auto-effects for EM and Powers
+    // Auto-effects for EM (delegated to pure syncMagicalEquilibrium)
     useEffect(() => {
-        if (isMago || isElfoMagico) {
-            if (rawEmFormula.divisor !== 1 || rawEmFormula.pcCost !== 0) updateEMFormula(1, 0);
-            return;
-        }
-        if (isHadaEter) {
-            if (rawEmFormula.divisor !== 2 || rawEmFormula.pcCost !== 0) updateEMFormula(2, 0);
-            return;
-        }
-        if (hasEMFormula) {
-            const validOptions = getEMFormulaOptions({ isDotado, isHibrido, isTerrano, isPoseido });
-            const currentId = `${rawEmFormula.divisor}|${rawEmFormula.pcCost}`;
-            if (validOptions.length > 0 && !validOptions.some(o => o.id === currentId)) {
-                const defaultOpt = validOptions.find(o => o.cost === 0) || validOptions[0];
-                const [div, cost] = defaultOpt.id.split('|').map(Number);
-                updateEMFormula(div, cost);
-            }
-        }
-    }, [isPoseido, isDotado, isHibrido, isTerrano, isMago, isElfoMagico, isHadaEter, hasEMFormula, rawEmFormula]);
-
-    useEffect(() => {
-        if (!hasEM) return;
-        const divisor = !hasBaseEMOrigin
-            ? 0
-            : (isMago || isElfoMagico)
-                ? 1
-                : isHadaEter
-                    ? 2
-                    : emFormula.divisor;
-        const calculated = divisor > 0 ? calculateEM(data, selectedPowers, divisor) : 0;
-        if (data.spells?.calculatedEM !== calculated) {
+        const updatedSpells = syncMagicalEquilibrium(data);
+        if (updatedSpells) {
             onChange({
                 ...data,
-                spells: { ...data.spells, calculatedEM: calculated }
+                spells: updatedSpells
             });
         }
-    }, [hasEM, hasBaseEMOrigin, isMago, isElfoMagico, isHadaEter, emFormula.divisor, data.attributes, data.level, selectedPowers]);
+    }, [isPoseido, isDotado, isHibrido, isTerrano, isMago, isElfoMagico, isHadaEter, hasEMFormula, hasEM, hasBaseEMOrigin, rawEmFormula, data.attributes, data.level, selectedPowers]);
  
     // Auto-initialize and cleanup techParams based on isTecnologico
     useEffect(() => {

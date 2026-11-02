@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { characterReducer } from '../src/utils/characterReducer';
 import { initialCharacterState } from '../src/data/wizardConfig';
 import { WEREWOLF_TRANSITION_FORM_ID, BLINDAJE_NATURAL_FORM_ID } from '../src/data/werewolfOptions';
+import { buildManualStatUpdate } from '../src/utils/characterCalculations';
 
 describe('characterReducer', () => {
     it('returns initial state if none provided', () => {
@@ -299,5 +300,104 @@ describe('characterReducer', () => {
             type: 'UNKNOWN_ACTION' as any
         });
         expect(stateDefault).toBe(initialCharacterState);
+    });
+
+    it('sincroniza automáticamente habilidades gratuitas y obligatorias al cambiar de origen (Punto 1)', () => {
+        const state = characterReducer(initialCharacterState as any, {
+            type: 'SET_ORIGINS',
+            payload: [
+                { 'Parahumano': ['Tes-khar'] },
+                { 'Vigilante': ['Artista Marcial', 'Arquero', 'Manipulador'] }
+            ]
+        });
+
+        // Tes-khar otorga trampas y farmacologia gratis
+        expect(state.skills.selected.trampas?.isFree).toBe(true);
+        expect(state.skills.selected.farmacologia?.isFree).toBe(true);
+
+        // Artista Marcial obliga a artes_marciales y Arquero a arcos
+        expect(state.skills.selected.artes_marciales?.isRequired).toBe(true);
+        expect(state.skills.selected.arcos?.isRequired).toBe(true);
+
+        // Manipulador obliga a otro_idioma (habilidad especificada)
+        const requiredLang = Object.values(state.skills.specified).find((s: any) => s.skillId === 'otro_idioma');
+        expect(requiredLang).toBeDefined();
+        expect(requiredLang?.isRequired).toBe(true);
+
+        // Si se quita el origen Vigilante:
+        // - artes_marciales se limpia por completo (es exclusiva de Artista Marcial)
+        // - arcos permanece pero con isRequired: false
+        const stateWithoutVigilante = characterReducer(state, {
+            type: 'SET_ORIGINS',
+            payload: [{ 'Parahumano': ['Tes-khar'] }]
+        });
+        expect(stateWithoutVigilante.skills.selected.artes_marciales).toBeUndefined();
+        expect(stateWithoutVigilante.skills.selected.arcos?.isRequired).toBe(false);
+    });
+
+    it('sincroniza automáticamente la fórmula de Equilibrio Mágico (emFormula) y calculatedEM al cambiar origen o atributos (Punto 1)', () => {
+        const state = characterReducer(initialCharacterState as any, {
+            type: 'SET_ORIGINS',
+            payload: [{ 'Arcano': ['Mago'] }]
+        });
+
+        // Mago tiene divisor 1 y coste 0
+        expect(state.spells.emFormula).toEqual({ divisor: 1, pcCost: 0 });
+        // Base INT(50) + PER(50) + VOL(50) en initialCharacterState = 150 (o 40*3 = 120)
+        const initialEM = state.spells.calculatedEM;
+        expect(initialEM).toBeGreaterThan(0);
+
+        // Si sube Inteligencia en +40, calculatedEM sube en +40 automáticamente
+        const updatedAttrs = characterReducer(state, {
+            type: 'UPDATE_ATTRIBUTES',
+            payload: {
+                values: { ...state.attributes.values, Inteligencia: 90 },
+                breakdown: {
+                    ...state.attributes.breakdown!,
+                    inteligencia: { ...state.attributes.breakdown!.inteligencia, base: 90 }
+                }
+            }
+        });
+        expect(updatedAttrs.spells.calculatedEM).toBeGreaterThan(initialEM!);
+    });
+
+    it('sincroniza automáticamente combatstats y otherstats al cambiar atributos o nivel (Punto 1)', () => {
+        const state = characterReducer(initialCharacterState as any, {
+            type: 'UPDATE_ATTRIBUTES',
+            payload: {
+                values: {
+                    ...initialCharacterState.attributes.values,
+                    Fuerza: 100,
+                    Constitución: 100
+                },
+                breakdown: {
+                    ...initialCharacterState.attributes.breakdown,
+                    fuerza: { base: 100, originMod: 0, specialtyMod: 0, powerMod: 0, otherMod: 0 },
+                    constitucion: { base: 100, originMod: 0, specialtyMod: 0, powerMod: 0, otherMod: 0 }
+                }
+            }
+        });
+
+        expect(state.combatstats).toBeDefined();
+        expect(state.otherstats).toBeDefined();
+        // Para Constitución 100, la tabla de CON asigna CON - 50 = 50 Puntos de Vida
+        expect(state.combatstats['Puntos de Vida']?.total).toBe(50);
+    });
+
+    it('buildManualStatUpdate unifica correctamente los overrides manuales de estadísticas (Punto 5)', () => {
+        const currentStat = { formula: 'CON', base: 60, total: 60 };
+
+        // Si el usuario introduce un valor distinto al total, añade personalizado
+        const custom = buildManualStatUpdate(currentStat, null, '85');
+        expect(custom).toEqual({ formula: 'CON', base: 60, total: 60, personalizado: 85 });
+
+        // Si el usuario introduce el mismo valor que el total calculado, elimina personalizado
+        const matching = buildManualStatUpdate(custom, null, '60');
+        expect(matching).toEqual({ formula: 'CON', base: 60, total: 60 });
+        expect(matching.personalizado).toBeUndefined();
+
+        // Si el usuario deja el campo vacío, guarda personalizado como cadena vacía
+        const empty = buildManualStatUpdate(currentStat, null, '   ');
+        expect(empty).toEqual({ formula: 'CON', base: 60, total: 60, personalizado: '' });
     });
 });

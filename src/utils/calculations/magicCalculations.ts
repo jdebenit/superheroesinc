@@ -1,6 +1,6 @@
 import { SPELLS, type Spell } from '../../data/spells';
 import { POWERS } from '../../data/powers';
-import { hasSubtype } from './originFlags';
+import { hasSubtype, getCharacterOriginFlags } from './originFlags';
 import { getCharacteristicValue } from './powerCalculations';
 
 /**
@@ -308,4 +308,79 @@ export const getEMFormulaOptions = ({
     }
 
     return Array.from(byId.values());
+};
+
+/**
+ * Sincroniza de forma pura y determinista la fórmula de Equilibrio Mágico (`emFormula`) y el
+ * valor calculado (`calculatedEM`) en base a los orígenes activos, atributos, poderes y nivel.
+ * Devuelve el nuevo objeto `spells` si hubo cambios, o `null` si ya está sincronizado.
+ */
+export const syncMagicalEquilibrium = (data: any): any | null => {
+    const flags = getCharacterOriginFlags(data);
+    const {
+        isMago,
+        isElfoMagico,
+        isHadaEter,
+        isDotado,
+        isHibrido,
+        isTerrano,
+        isPoseido,
+        isLiberado,
+        hasBaseEMOrigin,
+        hasEMFormula,
+        hasEM
+    } = flags;
+
+    if (!hasEM) return null;
+
+    const currentSpells = data.spells || { selected: [] };
+    const rawEmFormula = currentSpells.emFormula || (isPoseido && !isDotado && !isHibrido && !isTerrano ? { divisor: 0, pcCost: 0 } : { divisor: 4, pcCost: 0 });
+    let nextFormula = { ...rawEmFormula };
+    let nextSelected = currentSpells.selected || [];
+
+    if (isMago || isElfoMagico) {
+        nextFormula = { divisor: 1, pcCost: 0 };
+    } else if (isHadaEter) {
+        nextFormula = { divisor: 2, pcCost: 0 };
+    } else if (hasEMFormula) {
+        const validOptions = getEMFormulaOptions({ isDotado, isHibrido, isTerrano, isPoseido });
+        const currentId = `${rawEmFormula.divisor}|${rawEmFormula.pcCost}`;
+        if (validOptions.length > 0 && !validOptions.some(o => o.id === currentId)) {
+            const defaultOpt = validOptions.find(o => o.cost === 0) || validOptions[0];
+            const [div, cost] = defaultOpt.id.split('|').map(Number);
+            nextFormula = { divisor: div, pcCost: cost };
+            if (div === 0 && !isLiberado) {
+                nextSelected = [];
+            }
+        }
+    } else if (!hasBaseEMOrigin && isLiberado) {
+        nextFormula = { divisor: 0, pcCost: 0 };
+    }
+
+    const divisor = !hasBaseEMOrigin
+        ? 0
+        : (isMago || isElfoMagico)
+            ? 1
+            : isHadaEter
+                ? 2
+                : nextFormula.divisor;
+
+    const selectedPowers = Array.isArray(data.powers?.selected) ? data.powers.selected : [];
+    const calculated = divisor > 0 ? calculateEM(data, selectedPowers, divisor) : 0;
+
+    const formulaChanged = currentSpells.emFormula?.divisor !== nextFormula.divisor ||
+        currentSpells.emFormula?.pcCost !== nextFormula.pcCost;
+    const emChanged = currentSpells.calculatedEM !== calculated;
+    const selectedChanged = nextSelected !== (currentSpells.selected || []);
+
+    if (!formulaChanged && !emChanged && !selectedChanged) {
+        return null;
+    }
+
+    return {
+        ...currentSpells,
+        emFormula: nextFormula,
+        calculatedEM: calculated,
+        selected: nextSelected
+    };
 };

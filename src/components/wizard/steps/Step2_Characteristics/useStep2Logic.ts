@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { POWERS } from '../../../../data/powers';
 import {
     calculateOriginModifiers,
     calculateLimits,
@@ -10,7 +9,8 @@ import {
     hasSpecialtyDistributablePoints,
     getSpecialtyDistributablePointsInfo,
     calculateSpecialtyAllowedCharacteristics,
-    calculateCreationPoints
+    calculateCreationPoints,
+    syncPowerModsToAttributes
 } from '../../../../utils/characterCalculations';
 
 export const CHARACTERISTICS_CONFIG = [
@@ -145,58 +145,31 @@ export function useStep2Logic(data: any, onChange: (updates: any) => void) {
         prevSpecialtyModsRef.current = specialtyMods;
     }, [data.origin, chosenCharacteristics]);
 
-    // Update power modifiers
+    // Sync powerMod and otherMod from central attributes breakdown (using syncPowerModsToAttributes)
     useEffect(() => {
-        const selectedPowers = data.powers?.selected || [];
-        const powerMods: { [key: string]: number } = {};
-
-        selectedPowers.forEach((p: any) => {
-            const powerData = POWERS.find(pd => pd.id === p.id);
-            if (powerData?.characteristic) {
-                const charMap: Record<string, string> = {
-                    'FUE': 'fuerza', 'AGI': 'agilidad', 'CON': 'constitucion',
-                    'INT': 'inteligencia', 'PER': 'percepcion', 'APA': 'apariencia',
-                    'VOL': 'voluntad'
-                };
-                const charId = charMap[powerData.characteristic];
-                if (charId) {
-                    const mod = Number(p.powerMod) || 0;
-                    powerMods[charId] = (powerMods[charId] || 0) + mod;
-                }
-            }
-        });
+        const syncedAttrs = syncPowerModsToAttributes(data);
+        const sourceBreakdown = syncedAttrs?.breakdown || data.attributes?.breakdown;
+        if (!sourceBreakdown) return;
 
         setCharacteristics(prev => {
+            const newState = { ...prev };
             let hasChanges = false;
-            const updated = { ...prev };
-            Object.keys(updated).forEach(key => {
-                const newMod = powerMods[key] || 0;
-                if (updated[key].powerMod !== newMod) {
-                    updated[key] = { ...updated[key], powerMod: newMod };
+            Object.keys(sourceBreakdown).forEach(key => {
+                if (!newState[key]) return;
+                const powerModVal = sourceBreakdown[key].powerMod || 0;
+                const otherModVal = sourceBreakdown[key].otherMod || 0;
+                if (newState[key].powerMod !== powerModVal || newState[key].otherMod !== otherModVal) {
+                    newState[key] = {
+                        ...newState[key],
+                        powerMod: powerModVal,
+                        otherMod: otherModVal
+                    };
                     hasChanges = true;
                 }
             });
-            return hasChanges ? updated : prev;
+            return hasChanges ? newState : prev;
         });
-    }, [JSON.stringify(data.powers?.selected)]);
-
-    // Sync with otherMod from data
-    useEffect(() => {
-        if (data.attributes?.breakdown) {
-            setCharacteristics(prev => {
-                const newState = { ...prev };
-                let hasChanges = false;
-                Object.keys(data.attributes.breakdown).forEach(key => {
-                    const otherModVal = data.attributes.breakdown[key].otherMod || 0;
-                    if (newState[key].otherMod !== otherModVal) {
-                        newState[key] = { ...newState[key], otherMod: otherModVal };
-                        hasChanges = true;
-                    }
-                });
-                return hasChanges ? newState : prev;
-            });
-        }
-    }, [data.attributes?.breakdown]);
+    }, [JSON.stringify(data.powers?.selected), data.attributes?.breakdown]);
 
     // Push changes back to parent
     useEffect(() => {

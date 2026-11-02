@@ -1,6 +1,9 @@
 import { initialCharacterState } from '../data/wizardConfig';
 import { syncCharacterTransformations } from './calculations/formCalculations';
 import { syncOriginAutoPowers, syncPowerModsToAttributes } from './calculations/powerCalculations';
+import { syncOriginSkills } from './calculations/skillCalculations';
+import { syncMagicalEquilibrium } from './calculations/magicCalculations';
+import { syncDerivedStats } from './calculations/derivedStatsCalculations';
 import { mergeWithDefaults } from './dataCleaner';
 import type { CharacterData } from '../types/character';
 
@@ -26,7 +29,10 @@ export type CharacterAction =
  * Función pura que sincroniza de forma determinista y atómica:
  * 1. Poderes innatos otorgados automáticamente por el origen/subtipo (Atlante, Troll, Tes-khar, Hadas, etc.)
  * 2. Modificadores de características otorgados por poderes (powerMod en breakdown y values)
- * 3. Formas y transformaciones derivadas (Hombre Lobo, Blindaje Natural, etc.)
+ * 3. Habilidades de aprendizaje gratuitas, obligatorias (Vigilante) y limpieza de restringidas
+ * 4. Fórmula de Equilibrio Mágico (emFormula) y EM calculada (calculatedEM)
+ * 5. Formas y transformaciones derivadas (Hombre Lobo, Blindaje Natural, etc.)
+ * 6. Estadísticas derivadas de combate y generales (combatstats y otherstats)
  */
 export function withTransformationsSync(state: CharacterData): CharacterData {
     let current = state;
@@ -52,12 +58,43 @@ export function withTransformationsSync(state: CharacterData): CharacterData {
         };
     }
 
-    // 3. Sincronización de transformaciones y formas alternativas (Hombre Lobo, etc.)
+    // 3. Sincronización de habilidades gratuitas, obligatorias y restringidas por origen
+    const updatedSkills = syncOriginSkills(current);
+    if (updatedSkills) {
+        current = {
+            ...current,
+            skills: {
+                ...(current.skills || {}),
+                selected: updatedSkills.selected,
+                specified: updatedSkills.specified
+            }
+        };
+    }
+
+    // 4. Sincronización de Equilibrio Mágico (emFormula y calculatedEM)
+    const updatedSpells = syncMagicalEquilibrium(current);
+    if (updatedSpells) {
+        current = {
+            ...current,
+            spells: updatedSpells
+        };
+    }
+
+    // 5. Sincronización de transformaciones y formas alternativas (Hombre Lobo, etc.)
     const formPatch = syncCharacterTransformations(current);
     if (formPatch) {
         current = {
             ...current,
             ...formPatch
+        };
+    }
+
+    // 6. Sincronización de estadísticas derivadas (combatstats y otherstats)
+    const derivedPatch = syncDerivedStats(current);
+    if (derivedPatch) {
+        current = {
+            ...current,
+            ...derivedPatch
         };
     }
 
@@ -95,11 +132,16 @@ export function characterReducer(state: CharacterData, action: CharacterAction):
             if (!patch || typeof patch !== 'object') return state;
             const next = { ...state, ...patch };
 
-            // Si el patch altera orígenes, parámetros licántropos o poderes, sincronizar transformaciones
+            // Si el patch altera orígenes, parámetros, poderes, atributos, habilidades, hechizos o nivel, sincronizar
             const touchesTransforms = 'origin' in patch ||
                 'powers' in patch ||
                 'werewolfParams' in patch ||
-                'attributes' in patch;
+                'attributes' in patch ||
+                'liberadoParams' in patch ||
+                'skills' in patch ||
+                'spells' in patch ||
+                'level' in patch ||
+                'modPerLevel' in patch;
 
             return touchesTransforms ? withTransformationsSync(next) : next;
         }
@@ -112,11 +154,12 @@ export function characterReducer(state: CharacterData, action: CharacterAction):
         }
 
         case 'UPDATE_LEVEL': {
-            return {
+            const next = {
                 ...state,
                 level: action.payload.level,
                 modPerLevel: action.payload.modPerLevel !== undefined ? action.payload.modPerLevel : state.modPerLevel
             };
+            return withTransformationsSync(next);
         }
 
         case 'SET_ORIGINS': {
@@ -153,13 +196,14 @@ export function characterReducer(state: CharacterData, action: CharacterAction):
         }
 
         case 'UPDATE_SKILLS': {
-            return {
+            const next = {
                 ...state,
                 skills: {
                     ...state.skills,
                     ...action.payload
                 }
             };
+            return withTransformationsSync(next);
         }
 
         case 'UPDATE_POWERS': {
@@ -174,7 +218,7 @@ export function characterReducer(state: CharacterData, action: CharacterAction):
         }
 
         case 'UPDATE_SPELLS': {
-            return {
+            const next = {
                 ...state,
                 spells: {
                     ...state.spells,
@@ -183,6 +227,7 @@ export function characterReducer(state: CharacterData, action: CharacterAction):
                 },
                 ...(action.payload.magicTableRolls !== undefined ? { magicTableRolls: action.payload.magicTableRolls } : {})
             };
+            return withTransformationsSync(next);
         }
 
         case 'UPDATE_TECH': {

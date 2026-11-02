@@ -1,19 +1,14 @@
 import { useEffect, useCallback, useState } from 'react';
-import { calculateDerivedStats, formatDerivedStats, applyStatBreakdownOverride } from '../../../../utils/characterCalculations';
+import {
+    calculateDerivedStats,
+    formatDerivedStats,
+    BREAKDOWN_COMBAT_FIELDS,
+    BREAKDOWN_STAT_FIELDS,
+    buildManualStatUpdate,
+    syncDerivedStats
+} from '../../../../utils/characterCalculations';
 import { ARTIFACTS } from '../../../../data/artifacts';
 import { MAGIC_OBJECTS } from '../../../../data/magicObjects';
-
-const BREAKDOWN_COMBAT_FIELDS = ['Iniciativa y Reflejos', 'Puntos de Vida', 'Equilibrio Mental'];
-const BREAKDOWN_STAT_FIELDS = [
-    'Inconsciencia',
-    'Resistencia a gases y venenos',
-    'Daño absorbido físico',
-    'Daño absorbido mental',
-    'Modificador de impacto',
-    'Parada Fisica',
-    'Parada mental',
-    'Salto (alto / largo)'
-];
 
 export function useStep6Logic(data: any, onChange: (updates: any) => void) {
     const [unlockCombatStats, setUnlockCombatStats] = useState<boolean>(() => {
@@ -24,95 +19,48 @@ export function useStep6Logic(data: any, onChange: (updates: any) => void) {
         return !!data.uiState?.unlockOtherStats;
     });
 
-    // Derived Stats Effect
+    // Derived Stats Effect (delegated to pure syncDerivedStats)
     useEffect(() => {
-        // Only run if at least ONE section is locked
-        if (unlockCombatStats && unlockOtherStats) return;
-
-        const stats = calculateDerivedStats(data.attributes.values, data.origin?.items, data.skills, data.level, data.modPerLevel);
-        const { combatStats: newCombat, otherStats: newOther } = formatDerivedStats(stats);
-
-        // Preserve 'personalizado' in combat breakdown stats if already set
-        BREAKDOWN_COMBAT_FIELDS.forEach(statKey => {
-            const existingVal = data.combatstats?.[statKey];
-            if (existingVal !== undefined && existingVal !== null && newCombat[statKey]) {
-                newCombat[statKey] = applyStatBreakdownOverride(newCombat[statKey], existingVal);
+        const updates = syncDerivedStats({
+            ...data,
+            uiState: {
+                ...data.uiState,
+                unlockCombatStats,
+                unlockOtherStats
             }
         });
 
-        // Preserve 'personalizado' in other breakdown stats if already set
-        BREAKDOWN_STAT_FIELDS.forEach(statKey => {
-            const existingVal = data.otherstats?.[statKey];
-            if (existingVal !== undefined && existingVal !== null && newOther[statKey]) {
-                newOther[statKey] = applyStatBreakdownOverride(newOther[statKey], existingVal);
-            }
-        });
-
-        const currentCombatStr = JSON.stringify(data.combatstats);
-        const nextCombatStr = JSON.stringify(newCombat);
-        const currentOtherStr = JSON.stringify(data.otherstats);
-        const nextOtherStr = JSON.stringify(newOther);
-
-        const updates: any = {};
-        let hasChanges = false;
-
-        // Selective update for Combat Stats
-        if (!unlockCombatStats && currentCombatStr !== nextCombatStr) {
-            updates.combatstats = newCombat;
-            hasChanges = true;
-        }
-
-        // Selective update for Other Stats
-        if (!unlockOtherStats && currentOtherStr !== nextOtherStr) {
-            updates.otherstats = newOther;
-            hasChanges = true;
-        }
-
-        if (hasChanges) {
+        if (updates) {
             onChange(updates);
         }
-    }, [data.attributes.values, data.origin?.items, data.skills, data.level, data.modPerLevel, data.combatstats, data.otherstats, onChange, unlockCombatStats, unlockOtherStats]);
+    }, [
+        data.attributes?.values,
+        data.origin?.items,
+        data.skills,
+        data.level,
+        data.modPerLevel,
+        data.combatstats,
+        data.otherstats,
+        onChange,
+        unlockCombatStats,
+        unlockOtherStats
+    ]);
 
     // Identity Handlers
     const updateField = useCallback((field: string, value: string) => {
         onChange({ [field]: value });
     }, [onChange]);
 
-    // Manual Stat Handlers
+    // Manual Stat Handlers (unified via buildManualStatUpdate)
     const updateCombatStat = useCallback((field: string, value: string) => {
-        if (BREAKDOWN_COMBAT_FIELDS.includes(field)) {
+        if ((BREAKDOWN_COMBAT_FIELDS as readonly string[]).includes(field)) {
             const current = data.combatstats?.[field];
-            let baseObj: any = { base: 0, total: 0 };
-            if (current && typeof current === 'object') {
-                baseObj = {
-                    ...(current.formula ? { formula: current.formula } : {}),
-                    ...(current.base !== undefined ? { base: current.base } : {}),
-                    ...(current.origen !== undefined ? { origen: current.origen } : {}),
-                    ...(current.habilidades !== undefined ? { habilidades: current.habilidades } : {}),
-                    ...(current.nivel !== undefined ? { nivel: current.nivel } : {}),
-                    total: current.total ?? 0
-                };
-            } else {
+            let fallback: any = null;
+            if (!current || typeof current !== 'object') {
                 const stats = calculateDerivedStats(data.attributes.values, data.origin?.items, data.skills, data.level, data.modPerLevel);
-                const { combatStats: formattedCombat } = formatDerivedStats(stats);
-                if (formattedCombat[field] && typeof formattedCombat[field] === 'object') {
-                    baseObj = { ...formattedCombat[field] };
-                }
+                fallback = formatDerivedStats(stats).combatStats[field];
             }
-
-            const trimmed = value.trim();
-            let updatedBreakdown: any;
-            if (trimmed === '') {
-                updatedBreakdown = { ...baseObj, personalizado: '' };
-            } else {
-                const parsed = !isNaN(Number(trimmed)) ? Number(trimmed) : value;
-                if (String(parsed) === String(baseObj.total)) {
-                    updatedBreakdown = { ...baseObj };
-                } else {
-                    updatedBreakdown = { ...baseObj, personalizado: parsed };
-                }
-            }
-
+            const updatedBreakdown = buildManualStatUpdate(current, fallback, value);
             onChange({
                 combatstats: {
                     ...data.combatstats,
@@ -128,44 +76,17 @@ export function useStep6Logic(data: any, onChange: (updates: any) => void) {
                 [field]: value
             }
         });
-    }, [data.combatstats, data.attributes.values, data.origin?.items, data.skills, onChange]);
+    }, [data.combatstats, data.attributes?.values, data.origin?.items, data.skills, data.level, data.modPerLevel, onChange]);
 
     const updateOtherStat = useCallback((field: string, value: string) => {
-        if (BREAKDOWN_STAT_FIELDS.includes(field)) {
+        if ((BREAKDOWN_STAT_FIELDS as readonly string[]).includes(field)) {
             const current = data.otherstats?.[field];
-            let baseObj: any = { base: 0, total: 0 };
-            if (current && typeof current === 'object') {
-                baseObj = {
-                    ...(current.formula ? { formula: current.formula } : {}),
-                    ...(current.base !== undefined ? { base: current.base } : {}),
-                    ...(current.multiplicadorFuerza !== undefined ? { multiplicadorFuerza: current.multiplicadorFuerza } : {}),
-                    ...(current.alto !== undefined ? { alto: current.alto } : {}),
-                    ...(current.largo !== undefined ? { largo: current.largo } : {}),
-                    ...(current.origen !== undefined ? { origen: current.origen } : {}),
-                    ...(current.habilidades !== undefined ? { habilidades: current.habilidades } : {}),
-                    total: current.total ?? 0
-                };
-            } else {
-                const stats = calculateDerivedStats(data.attributes.values, data.origin?.items, data.skills);
-                const { otherStats: formattedOther } = formatDerivedStats(stats);
-                if (formattedOther[field] && typeof formattedOther[field] === 'object') {
-                    baseObj = { ...formattedOther[field] };
-                }
+            let fallback: any = null;
+            if (!current || typeof current !== 'object') {
+                const stats = calculateDerivedStats(data.attributes.values, data.origin?.items, data.skills, data.level, data.modPerLevel);
+                fallback = formatDerivedStats(stats).otherStats[field];
             }
-
-            const trimmed = value.trim();
-            let updatedBreakdown: any;
-            if (trimmed === '') {
-                updatedBreakdown = { ...baseObj, personalizado: '' };
-            } else {
-                const parsed = !isNaN(Number(trimmed)) ? Number(trimmed) : value;
-                if (String(parsed) === String(baseObj.total)) {
-                    updatedBreakdown = { ...baseObj };
-                } else {
-                    updatedBreakdown = { ...baseObj, personalizado: parsed };
-                }
-            }
-
+            const updatedBreakdown = buildManualStatUpdate(current, fallback, value);
             onChange({
                 otherstats: {
                     ...data.otherstats,
@@ -181,7 +102,7 @@ export function useStep6Logic(data: any, onChange: (updates: any) => void) {
                 [field]: value
             }
         });
-    }, [data.otherstats, data.attributes.values, data.origin?.items, data.skills, onChange]);
+    }, [data.otherstats, data.attributes?.values, data.origin?.items, data.skills, data.level, data.modPerLevel, onChange]);
 
     // Generic List Handlers
     const addItem = useCallback((key: string, initialItem: any) => {
